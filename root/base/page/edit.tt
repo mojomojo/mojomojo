@@ -23,10 +23,10 @@
 </p>
 [%END%]
   [%IF page ; %]
-  Edit | <a  href="[%base%]/page/upload/[%page.node%]">Upload</a>
+  Edit | <a  href="[%base%][%page.node%].upload">Upload</a>
   [%END%]
 <textarea id="content" name="content" style="width: 450px; height: 280px">
-[% c.req.params.content || page.content %]
+[% c.req.params.content || page.content %][%append%]
 </textarea>
 	<script language="JavaScript1.2">
 	setLiveboxUrl('[%base%].jsrpc/render');

@@ -11,7 +11,7 @@
     [% END %]
     [%ELSE; PROCESS page/rollback.tt;  %]
     | <a href="[% base %][%page.node%][%
-    UNLESS rev.revnum==page.revision.previous.revnum%]?rev=[% rev.revnum+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    UNLESS rev && rev.revnum==page.revision.previous.revnum%]?rev=[% rev.revnum+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
     ([%page.revision.revnum-rev.revnum%] more)
     </small>

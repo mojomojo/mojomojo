@@ -43,11 +43,11 @@ MojoMojo->action(
     '.static' => sub {
         my ( $self, $c ) = @_;
         $c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
-        if ($c->req->args->[0] =~ m/\.css$/) { 
-          $c->serve_static('text/css');
-        } else {
+#        if ($c->req->args->[0] =~ m/\.css$/) { 
+#          $c->serve_static('text/css');
+#        } else {
           $c->serve_static;
-        }
+#        }
     },
 
     '!end' => sub {

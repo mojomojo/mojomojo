@@ -5,7 +5,11 @@ use base 'Catalyst::Base';
 use IO::Scalar;
 use URI;
 use Time::Piece;
+use File::MimeInfo::Magic;
 my $class = 'MojoMojo::M::Core::Page';
+
+#For uploads
+$CGI::Simple::POST_MAX = 1048576000;
 
 MojoMojo->action(
   '!page/view' => sub {
@@ -65,22 +69,27 @@ MojoMojo->action(
       my ( $self, $c, $node ) = @_;
       $c->stash->{template} = 'page/print.tt';
       $c->forward('!page/view');
-  }, '!page/rss' => sub {
+  }, '!page/upload' => sub {
       my ( $self, $c, $node ) = @_;
-      $c->stash->{template} = 'page/rss.tt';
       $c->forward('!page/view');
-  }, '!page/atom' => sub {
-      my ( $self, $c, $node ) = @_;
-      $c->stash->{template} = 'page/atom.tt';
-      $c->forward('!page/view');
-  }, '!page/rss_full' => sub {
-      my ( $self, $c, $node ) = @_;
-      $c->stash->{template} = 'page/rss_full.tt';
-      $c->forward('!page/view');
-  }, '!page/highlight' => sub {
-      my ( $self, $c, $node ) = @_;
-      $c->stash->{template} = 'page/highlight.tt';
-      $c->forward('!page/view');
+      $c->stash->{template} = 'page/upload.tt';
+      my $page=$c->stash->{page};
+      if (my $file=$c->req->params->{file}) {
+          my $att=MojoMojo::M::Core::Attachment->create
+                  ({name=>$file,page=>$page});
+            
+          my $fh = $c->req->uploads->{$file}->{fh};
+          my $filename=$c->home."/uploads/".$att->id; 
+          open(NEW_FILE, ">$filename") or
+                  die "Can't open $filename for writing: $!";
+          while ($fh->read(my $buf, 32768)) {
+              print NEW_FILE $buf;
+          }
+          close NEW_FILE;
+          $att->contenttype(mimetype($filename));
+          $att->size(-s $filename);
+          $att->update();
+      }
   } , '!page/tags' => sub {
       my ( $self, $c, $node ) = @_;
       $node=$class->get_page($node) unless ref $node;

@@ -4,37 +4,56 @@ use strict;
 use base 'Catalyst::Base';
 
 MojoMojo->action(
-  '.feeds' => sub {
-my ( $self, $c, $node ) = @_;
-$c->stash->{template} = 'feeds.tt';
+'.feeds' => sub {
+    my ( $self, $c, $node ) = @_;
+    $c->stash->{template} = 'feeds.tt';
 }, '.rss' => sub {
-my ( $self, $c, $node ) = @_;
-$c->stash->{template} = 'rss.tt';
+    my ( $self, $c, $node ) = @_;
+    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
+    $c->stash->{template} = 'rss.tt';
 }, '.rss_full' => sub {
-my ( $self, $c, $node ) = @_;
-$c->stash->{template} = 'rss_full.tt';
+    my ( $self, $c, $node ) = @_;
+    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
+    $c->stash->{template} = 'rss_full.tt';
 }, '.atom' => sub {
-my ( $self, $c, $node ) = @_;
-$c->stash->{template} = 'atom.tt';
-}
-
-);
+    my ( $self, $c, $node ) = @_;
+    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
+    $c->stash->{template} = 'atom.tt';
+}, '!page/rss' => sub {
+      my ( $self, $c, $node ) = @_;
+      $c->stash->{template} = 'page/rss.tt';
+      $c->forward('!page/view');
+  }, '!page/atom' => sub {
+      my ( $self, $c, $node ) = @_;
+      $c->stash->{template} = 'page/atom.tt';
+      $c->forward('!page/view');
+  }, '!page/rss_full' => sub {
+      my ( $self, $c, $node ) = @_;
+      $c->stash->{template} = 'page/rss_full.tt';
+      $c->forward('!page/view');
+  }, '!page/highlight' => sub {
+      my ( $self, $c, $node ) = @_;
+      $c->stash->{template} = 'page/highlight.tt';
+      $c->forward('!page/view');
+});
 
 =head1 NAME
 
-MojoMojo::C::Feeds - A Component
+MojoMojo::C::Feeds - Controller for RSS feeds.
 
 =head1 SYNOPSIS
 
-    Very simple to use
+    .feeds, .rss, .rss_full, .atom, 
+    MyPage.rss, MyPage.atom 
 
 =head1 DESCRIPTION
 
-Very nice component.
+This controller provides RSS and Atom syndication of the MojoMojo
+Wiki
 
 =head1 AUTHOR
 
-Clever guy
+Marcus Ramberg <marcus@thefeed.no>
 
 =head1 LICENSE
 

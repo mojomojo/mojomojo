@@ -53,8 +53,8 @@ CREATE TABLE attachment (
     id INTEGER PRIMARY KEY,
     page int REFERENCES page,
     name varchar(100),
-    contenttype varchar(100),
-    content text
+    size int,
+    contenttype varchar(100)
 );
 
 CREATE TABLE journal (
