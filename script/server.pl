@@ -1,4 +1,5 @@
-#!/usr/bin/perl -w
+#!/netbsd-pkgsrc/pkg/bin/perl -w
+## #!/usr/bin/perl -w
 
 BEGIN { $ENV{CATALYST_ENGINE} = 'HTTP' }
 
@@ -7,6 +8,7 @@ use Getopt::Long;
 use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
+use lib '/home/naughton/Catalyst/trunk/catalyst/Catalyst/lib';
 use MojoMojo;
 
 my $help = 0;

@@ -13,7 +13,7 @@ MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::User',
                     user_field     => 'login',
                     password_field => 'pass'});
-   
+
 MojoMojo->config ( no_url_rewrite=>1 );
 MojoMojo->setup();
 
@@ -48,7 +48,7 @@ default action - serve the home node
 sub default : Private {
     my ( $self, $c ) = @_;
     warn "called with ". join(" ",@_);
-    $c->req->args([$c->pref('home_node')]);
+    #$c->req->args([$c->pref('home_node')]);
     $c->forward( "/page/view" );
 }
 
@@ -140,34 +140,44 @@ sub expand_wikiword {
 
 =item  wikiword wikiword [base]
 
-format a wikiword as a link, or as a wanted page as appropriate.
-If base is included, it will be use to form the link, otherwise
-it will be relative.
+Format a wikiword as a link or as a wanted page, as appropriate.
+Note that MojoMojo's hierarchical namespaces require either base
+or an absolute path in order to determine page existence.
 
 =cut
 
 sub wikiword {
     my ( $c, $word, $base ) = @_;
     my $formatted = $c->expand_wikiword($word);
-    if ( MojoMojo::M::Core::Page->search( node => $word )->next ) {
-        if ($base) {
-            return
-qq{<a class="existingWikiWord" href="$base$word">$formatted</a> };
-        }
-        else {
-            return qq{<a class="existingWikiWord" href="$word">$formatted</a> };
-        }
+    my $path_string;
+    if ($word =~ /^\//)
+    {
+	$path_string = $word;
     }
-    else {
-        if ($base) {
-            return
-qq{<span class="newWikiWord">$formatted<a href="$base$word">?</a></span>};
-        }
-        else {
-            return
-qq{<span class="newWikiWord">$formatted<a href="$word">?</a></span>};
-        }
+    elsif ($base)
+    {
+	my $parent_path = $base;
+	$parent_path =~ s/^(.*\/\/.*)(\/.*)$/$2/;
+	$path_string = $parent_path . '/' . $word;
     }
+    if ($path_string)
+    {
+	my ($path, $proto_pages) = MojoMojo::M::Core::Page->get_path( $path_string );
+         # use the normalized path string returned by get_path:
+	if ($proto_pages)
+	{
+	    my $proto_page = pop @$proto_pages;
+             $path_string = $proto_page->{path_string};
+	}
+	else
+	{
+	    my $page = pop @$path;
+	    $path_string = $page->path_string;
+             return qq{<a class="existingWikiWord" href="$path_string">$formatted</a> };
+	}
+    }
+    $path_string ||= $word;
+    return qq{<span class="newWikiWord">$formatted<a href="$path_string">?</a></span>};
 }
 
 =item pref key [value]
@@ -220,7 +230,7 @@ be made in the current user's home directory.
 
 =cut
 
-sub home { 
+sub home {
     my ($class,$home)=@_;
     # Set a new home
     return $class->config(home=>$home) if $home;   

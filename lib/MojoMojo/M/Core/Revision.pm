@@ -6,24 +6,12 @@ use Time::Piece;
 use utf8;
 
 __PACKAGE__->has_a(
-    updated => 'Time::Piece',
+    modified_date => 'Time::Piece',
     inflate => sub {
   Time::Piece->strptime( shift, "%Y-%m-%dT%H:%M:%S" );
     },
     deflate => 'datetime'
 );
-
-sub archive {
-    my ( $self, $page ) = @_;
-    $self->create(
-	{
-	    page    => $page->id,
-	    content => $page->content,
-	    updated => $page->updated,
-	    user    => $page->user
-	}
-    );
-}
 
 sub formatted_diff {
     return MojoMojo::M::Core::Page::formatted_diff(@_);
@@ -32,13 +20,5 @@ sub formatted_diff {
 sub formatted_content {
     return MojoMojo::M::Core::Page::formatted_content(@_);
 }
-sub node      { shift->page->node; }
-
-sub content_utf8 { 
-    my $self    = shift;
-    my $content = $self->content;
-    utf8::decode($content);
-    return $content;
-    }
 
 1;

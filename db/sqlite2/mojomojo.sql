@@ -1,19 +1,39 @@
-CREATE TABLE page (
-    id  INTEGER PRIMARY KEY,
-    owner INTEGER REFERENCES user,
-    node VARCHAR(30),
-    revision INTEGER REFERENCES revision,
-    read text, write text, admin text
+CREATE TABLE content (
+    id INTEGER PRIMARY KEY,
+    modified_by INTEGER REFERENCES user,
+    modified_date VARCHAR(100),
+    type VARCHAR(200),
+    content TEXT
 );
 
 CREATE TABLE revision (
-    id INTEGER PRIMARY KEY,
-    revnum INTEGER,
-    page INTEGER REFERENCES page,
-    user INTEGER REFERENCES user,
-    previous INTEGER REFERENCES revision,
-    content TEXT,
-    updated varchar(100)
+    id INTEGER,
+    version INTEGER,
+    parent INTEGER,
+    parent_version INTEGER,
+    depth INTEGER,
+    name VARCHAR(200),
+    name_orig VARCHAR(200),
+    owner INTEGER REFERENCES user,
+    modified_by INTEGER REFERENCES user,
+    modified_date VARCHAR(100),
+    content INTEGER REFERENCES content,
+    PRIMARY KEY (id, version),
+    FOREIGN KEY (parent, parent_version) REFERENCES revision
+);
+
+CREATE TABLE page (
+    id  INTEGER PRIMARY KEY,
+    version INTEGER,
+    parent INTEGER REFERENCES page,
+    depth INTEGER,
+    name VARCHAR(200),
+    name_orig VARCHAR(200),
+    owner INTEGER REFERENCES user,
+    modified_by INTEGER REFERENCES user,
+    modified_date VARCHAR(100),
+    content INTEGER REFERENCES content,
+    FOREIGN KEY (id, version) REFERENCES revision
 );
 
 CREATE TABLE link (
@@ -79,22 +99,7 @@ INSERT INTO user (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
 insert into user (login,name,pass) values ('marcus','Marcus Ramberg','secret');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('name','The Feed');
-INSERT INTO page (owner,node,revision) VALUES ( 1,'FrontPage',1);
-INSERT INTO page (owner,node,revision) VALUES ( 2,'marcus',2);
-INSERT INTO revision (page,user,revnum,content,updated) VALUES(1,1,1,'testing testing, hello, is this thing on?','1970-01-01T00:00:00');
-INSERT INTO revision (page,user,revnum,content,updated) VALUES(2,2,1,'h1. %{color:#555}marcus%
+INSERT INTO content (modified_by,modified_date,content) VALUES(1,'1970-01-01T00:00:00','testing testing, hello, is this thing on?');
+INSERT INTO revision (version,content,modified_by,modified_date) VALUES(1,1,1,'1970-01-01T00:00:00');
+INSERT INTO page (owner,name,content) VALUES ( 1,'FrontPage',1);
 
-!>http://thefeed.no/img/pixel_me.gif!
-This is my home. I like it here in cyberspace.
-
-I''ve got some stuff online. Wanna publish them with the RSS formatter later.
-
-* "some pictures.":http://thefeed.no/gallery/marcus
-* "books I''m reading":http://marcusramberg.tadalist.com/lists/public/5200
-* "stuff I want":http://marcusramberg.tadalist.com/lists/public/9629
-
-h2. About me
-
-I''m strange, I know. I guess you could say I''m a cyberpioneer :p I like to live my life online. I know there are many like me, but there are lots of other people out there too. 
-
-If your interest is professional, I have a [[/marcus/CV]]. If your interest is related to open source, I have a "development project site":http://dev.thefeed.no. I also host the "maypole.perl.org":http://maypole.perl.org site.','2005-03-11T01:03:44');

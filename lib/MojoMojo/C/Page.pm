@@ -48,17 +48,30 @@ sub view : Private {
 
     $c->stash->{template} ||= 'page/view.tt';
 
-    $node ||= $c->pref('home_node');
-    my $page = MojoMojo::M::Core::Page->get_page( $node );
-    return $c->forward('edit') unless $page && $page->revision;
+    #$node ||= $c->pref('home_node');
+    # We shouldn't need to do this: what's going on?????
+    $node = (defined $node ? '/' . $node : '/');
 
-    $c->form( optional => ['rev'] );
-    if ( my $rev = $c->form->valid('rev') ) {
-      $c->stash->{rev} = $page->get_revision($rev);
-        $c->stash->{template} = 'norevision.tt' unless
-            $c->stash->{rev};
-      }
-      $c->stash->{page} =  $page;
+    # change to use paths of pages:
+    #my $page = MojoMojo::M::Core::Page->get_page( $node );
+    my ($path, $proto_pages) = MojoMojo::M::Core::Page->get_page( $node );
+    my $depth = @$path - 1;
+    my $page = $path->[$depth];
+
+    # revisions not "fixed" yet, revisit later
+    #return $c->forward('edit') unless $page && $page->revision;
+    return $c->forward('edit') unless $page;
+
+    # revisions not "fixed" yet, revisit later
+#     $c->form( optional => ['rev'] );
+#     if ( my $rev = $c->form->valid('rev') ) {
+#       $c->stash->{rev} = $page->get_revision($rev);
+#       $c->stash->{template} = 'norevision.tt' unless
+#       $c->stash->{rev};
+#     }
+
+    $c->stash->{page} = $page;
+    $c->stash->{path} = $path;
 }
 
 =item edit
@@ -162,7 +175,7 @@ sub list : Path('/.list') {
     $c->stash->{wanted} = [ ];
     $c->stash->{tags} = [ MojoMojo::M::Core::Tag->search_most_used() ];
 }
-   
+
 sub recent : Path('/.recent') {
   my ( $self, $c, $tag ) = @_;
   return $c->forward('/tag/recent') if $tag;
