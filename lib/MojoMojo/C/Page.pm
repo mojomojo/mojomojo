@@ -17,24 +17,23 @@ MojoMojo->action(
         $c->form( optional => ['rev'] );
 
         $node ||= $c->pref('home_node');
-        my $page = MojoMojo::M::CDBI::Page->get_page( $node );
+        my $page = MojoMojo::M::Core::Page->get_page( $node );
         return $c->forward('!page/edit') unless $page;
-	warn "got something?!?";
 
         if ( my $rev = $c->form->valid('rev') ) {
             $c->stash->{rev} = abs $rev;
 
             my @revs = $page->revisions;
             if ( scalar @revs >= $rev ) {
-                $c->stash->{objects} = [ $revs[ $rev - 1 ], $revs[$rev] ];
-                $c->stash->{rev_nr} = $rev;
+                $c->stash->{pages} = [ $revs[ $rev - 1 ], $revs[$rev] ];
+                $c->stash->{rev} = $rev;
             }
             else { $c->stash->{template} = 'norevision.tt' }
 
         }
         else {
             $c->stash->{rev} = 0;
-            $c->stash->{pages} = [ $page, $page->revisions->next ];
+            $c->stash->{pages} = [ $page, $page->revision->previous ];
         }
 
     },
@@ -44,7 +43,7 @@ MojoMojo->action(
 
         $c->stash->{template} = 'page/edit.tt';
 
-        my $class = 'MojoMojo::M::CDBI::Page';
+        my $class = 'MojoMojo::M::Core::Page';
         my $page = $class->get_page( $node );
         $c->stash->{page} = $page;
 
