@@ -32,8 +32,8 @@
     </span>
   [% END %]
   <small>
-    | Views: <a href="[%base%]page/print/[%item.node%]">Print</a>
-      <a href="[%base%]page/rss/[%item.node%]">RSS</a>
+    | Views: <a href="[%base%][%item.node%].print">Print</a>
+      <a href="[%base%][%item.node%].rss">RSS</a>
 [%IF c.req.params.rev; PROCESS rollback; END %]
   </small>
 [% IF item.links_to.first ; %] 

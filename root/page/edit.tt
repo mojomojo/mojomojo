@@ -15,7 +15,7 @@
 [% PROCESS edithelp.tt %]
 
 
-<form id="editForm" action="[%base%]page/edit/[%c.req.args.first%]" method="post" onSubmit="cleanAuthorName();">
+<form id="editForm" action="[%base%][%c.req.args.first%].edit" method="post" onSubmit="cleanAuthorName();">
 <p>
 [% IF edit_error %]
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">

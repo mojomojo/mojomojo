@@ -17,7 +17,7 @@ MojoMojo->action(
     },
     'favicon.ico' => sub {
         my ( $self, $c ) = @_;
-        $c->forward('.static');
+        $c->serve_static;
     },
 
     '/^(\w+)\.(\w+)$/' => sub {
@@ -42,10 +42,9 @@ MojoMojo->action(
 
     '!end' => sub {
         my ( $self, $c ) = @_;
-        $c->forward('!view')
+        $c->forward('!page/view')
           unless $c->stash->{template} || $c->res->output;
         $c->forward('MojoMojo::V::TT') unless $c->res->output;
-	warn "here";
     },
 
 );
@@ -65,7 +64,7 @@ sub wikiword {
     if ( MojoMojo::M::CDBI::Page->search( node => $word )->next ) {
         if ($base) {
             return
-qq{<a class="existingWikiWord" href="$base/$word">$formatted</a> };
+qq{<a class="existingWikiWord" href="$base$word">$formatted</a> };
         }
         else {
             return qq{<a class="existingWikiWord" href="$word">$formatted</a> };
@@ -74,7 +73,7 @@ qq{<a class="existingWikiWord" href="$base/$word">$formatted</a> };
     else {
         if ($base) {
             return
-qq{<span class="newWikiWord">$formatted<a href="$base/page/view/$word">?</a></span>};
+qq{<span class="newWikiWord">$formatted<a href="$base$word">?</a></span>};
         }
         else {
             return

@@ -1,5 +1,6 @@
 [% SET item = pages.first %]
 [% PROCESS header.tt %]
+[%blah%]
 <h1 id="pageName">
 [% IF c.req.args.first == "FrontPage"; %]
    [% title || config.application_name || "MojoMojo" %] 

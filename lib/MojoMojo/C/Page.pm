@@ -12,13 +12,14 @@ MojoMojo->action(
     '!page/view' => sub {
         my ( $self, $c, $node ) = @_;
 
-        $c->stash->{template} = 'page/view.tt';
+        $c->stash->{template} ||= 'page/view.tt';
 
         $c->form( optional => ['rev'] );
 
         $node ||= $c->pref('home_node');
         my $page = MojoMojo::M::CDBI::Page->get_page( $node );
-        return $c->forward('?edit') unless $page;
+        return $c->forward('!page/edit') unless $page;
+	warn "got something?!?";
 
         if ( my $rev = $c->form->valid('rev') ) {
             $c->stash->{rev} = abs $rev;
@@ -58,7 +59,23 @@ MojoMojo->action(
 
         $c->forward('?view');
 
-    },
+    }, '!page/print' => sub {
+        my ( $self, $c, $node ) = @_;
+        $c->stash->{template} = 'page/print.tt';
+	$c->forward('!page/view');
+    }, '!page/rss' => sub {
+        my ( $self, $c, $node ) = @_;
+        $c->stash->{template} = 'page/rss.tt';
+	$c->forward('!page/view');
+    }, '!page/atom' => sub {
+        my ( $self, $c, $node ) = @_;
+        $c->stash->{template} = 'page/atom.tt';
+	$c->forward('!page/view');
+    }, '!page/rss' => sub {
+        my ( $self, $c, $node ) = @_;
+        $c->stash->{template} = 'page/rss_full.tt';
+	$c->forward('!page/view');
+    }
 
 );
 
