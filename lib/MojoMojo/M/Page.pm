@@ -28,11 +28,11 @@ __PACKAGE__->has_a(
     deflate => 'datetime'
 );
 __PACKAGE__->has_many(
-    links_to => [ 'MojoMojo::M::CDBI::Link' => 'from_page' ],
+    links_to => [ 'MojoMojo::M::Link' => 'from_page' ],
     "to_page"
 );
 __PACKAGE__->has_many(
-    links_from => [ 'MojoMojo::M::CDBI::Link' => 'to_page' ],
+    links_from => [ 'MojoMojo::M::Link' => 'to_page' ],
     "from_page"
 );
 

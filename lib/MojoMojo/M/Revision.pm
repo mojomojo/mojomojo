@@ -19,8 +19,8 @@ __PACKAGE__->has_a(
     },
     deflate => 'datetime'
 );
-MojoMojo::M::CDBI::Page->has_many(
-    revisions => "MojoMojo::M::CDBI::Revision",
+MojoMojo::M::Page->has_many(
+    revisions => "MojoMojo::M::Revision",
     { order_by => 'id desc' }
 );
 

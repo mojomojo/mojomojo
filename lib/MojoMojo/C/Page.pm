@@ -17,7 +17,7 @@ MojoMojo->action(
         $c->form( optional => ['rev'] );
 
         $node ||= $c->prefs('home_page');
-        my $page = MojoMojo::M::CDBI::Page->search_where( node => $node )->next;
+        my $page = MojoMojo::M::Page->get_page( $node );
         return $c->forward('?edit') unless $page;
 
         if ( my $rev = $c->form->valid('rev') ) {
@@ -43,8 +43,8 @@ MojoMojo->action(
 
         $c->stash->{template} = 'page/edit.tt';
 
-        my $class = 'MojoMojo::M::CDBI::Page';
-        my $page = $class->search_where( node => $node )->next;
+        my $class = 'MojoMojo::M::Page';
+        my $page = $class->get_page( $node );
         $c->stash->{page} = $page;
 
         $c->req->params->{node} ||= $node;

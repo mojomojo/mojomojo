@@ -4,14 +4,15 @@ use strict;
 use utf8;
 use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static/;
 use YAML ();
-use Module::Pluggable::Ordered search_path => [qw/MojoMojo::Formatter/], require => 1;
+use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 
 MojoMojo->config( YAML::LoadFile('/home/marcus/MojoMojo/mojomojo.yml') );
 
 MojoMojo->action(
 
-    '!default' => sub {
+    '.static' => sub {
         my ( $self, $c ) = @_;
+	$c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
         $c->serve_static;
     },
 
@@ -41,7 +42,7 @@ sub expand_wikiword {
 sub wikiword {
     my ( $c, $word, $base ) = @_;
     my $formatted = $c->expand_wikiword($word);
-    if ( MojoMojo::Page->search( node => $word )->next ) {
+    if ( MojoMojo::M::Page->search( node => $word )->next ) {
         if ($base) {
             return
 qq{<a class="existingWikiWord" href="$base/page/view/$word">$formatted</a> };
@@ -65,7 +66,7 @@ qq{<span class="newWikiWord">$formatted<a href="$word">?</a></span>};
 sub pref {
     my ( $c, $setting, $value ) = @_;
     $setting =
-      MojoMojo::M::CDBI::Preference->find_or_create( { prefkey => $setting } );
+      MojoMojo::M::Preference->find_or_create( { prefkey => $setting } );
     if ( defined $value ) {
         $setting->prefvalue($value);
         $setting->update();
@@ -76,4 +77,5 @@ sub pref {
 
 sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
 
+sub Catalyst::Log::info {}
 1;

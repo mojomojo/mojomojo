@@ -1,6 +1,9 @@
 package MojoMojo::M::Tag;
+use strict;
+
 __PACKAGE__->columns(TEMP=>qw/refcount/);
 __PACKAGE__->columns(Stringify=>qw/tag/);
+
 
 __PACKAGE__->set_sql('most_used'=> qq[
 SELECT tag, count(tag) AS refcount 
@@ -15,7 +18,7 @@ GROUP BY tag ORDER by REFCOUNT DESC LIMIT 10
 });
 
 sub related_to {
-    ($self,$tag) = @_;
+    my ($self,$tag) = @_;
     $tag ||= $self->tag;
     return $self->search_related_tags($tag,$tag);
 }
