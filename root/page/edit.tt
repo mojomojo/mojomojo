@@ -3,7 +3,7 @@
   <small>
             [%
               title || config.application_name ||
-                "Mitiki"
+                "MojoMojo"
             %]
   </small><br/>
   [%IF page ; %]

@@ -21,7 +21,7 @@ MojoMojo->action(
         $c->forward('MojoMojo::V::TT') unless $c->res->output;
     },
 
-    '!default' => sub {
+    'index' => sub {
         my ( $self, $c ) = @_;
         $c->res->redirect( $c->req->base . 'page/view/FrontPage' );
     },
