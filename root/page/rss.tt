@@ -1,0 +1,21 @@
+[%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+	<title>[% config.application_name || "MojoMojo" %]</title>
+	<link>[%base%][%c.pref('home_node')</link>
+	<description>A MojoMojo wiki</description>
+	<language>en-us</language>
+	<ttl>40</ttl>
+[%FOR item=pages..list; %]
+    <item>
+      <title>[%c.expand_wikiword(item.node)%]
+[%IF item.isa('Mitiki::M::CDBI::Revision')%] Revision from [%item.updated.datetime%][%END%]
+     </title>
+      <pubDate>[%item.updated.strftime%]</pubDate>
+      <guid>[%base%][%item.node%]</guid>
+      <link>[%base%][%item.node%]</link>
+      <dc:creator>[%item.user.login%]</dc:creator>
+    </item>
+[%END%]
+  </channel>
+</rss> 
