@@ -1,6 +1,6 @@
 [% IF template.name == "page/view.tt" %]
 <div class="navigation">
-    [% IF (!rev_nr) %]
+    [% IF (!rev) %]
     <a href="[% base %]page/edit/[% item.node %]" class="navlink" accesskey="E">Edit Page</a>
     [% IF c.req.args.first == "FrontPage" %]
     | <a href="[% base %]preference/edit" class="navlink">Edit Settings</a>
@@ -11,14 +11,14 @@
     [% END %]
     [% ELSE %]
     | <a href="[% base %]page/view/[%item.node%][%
-    IF rev_nr>1%]?rev=[% c.req.params.rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    IF rev>1%]?rev=[% c.req.params.rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
-    ([%rev_nr%] more)
+    ([%rev%] more)
     </small>
-    [%IF item.revisions.size-rev_nr%]
+    [%IF item.revisions.size-rev%]
     | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
     <small>
-    ([%item.revisions.size-rev_nr%] more)
+    ([%item.revisions.size-rev%] more)
     </small>
     [%END%]
     | <a href="[% base %]page/view/[%item.node%]" class="navlink" accesskey="C">See current</a> 

@@ -4,13 +4,11 @@
         <title>
 	[% IF item %] [%c.expand_wikiword(item.node)%] in [%END%]
             [%
-              title || config.name ||
+               c.pref('name') ||
                 "A poorly configured MojoMojo Installation"
             %]
         </title>
-        <meta http-equiv="Content-Type" content="text/html; charset=[% 
-	    request.document_encoding
-	%]"/>
+        <meta http-equiv="Content-Type" content="text/html; charset="utf-8"/>
         <link title="main stylesheet" href="[% base %].static/mojomojo.css" type="text/css" 
                 rel="stylesheet"/>
         <link title="pod stylesheet" href="[% base %].static/pod.css" type="text/css" 
