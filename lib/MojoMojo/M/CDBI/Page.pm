@@ -2,6 +2,7 @@ package MojoMojo::M::CDBI::Page;
 
 use strict;
 use Time::Piece;
+use Algorithm::Diff;
 
 __PACKAGE__->columns( Essential => qw/user node updated/ );
 __PACKAGE__->columns( TEMP      => 'content_utf8' );
@@ -26,5 +27,55 @@ __PACKAGE__->has_many(
     links_from => [ 'MojoMojo::M::CDBI::Link' => 'to_page' ],
     "from_page"
 );
+
+sub formatted_content {
+    my ( $self,$base, $content ) = @_;
+    $content ||= $self->content_utf8;
+    MojoMojo->call_plugins("format_content", \$content, $base) if ($content);
+    return $content;
+}
+
+sub formatted_diff {
+    my ( $self,$base,$to ) = @_;
+    my $this=[ split /\n/, $self->content_utf8() ];
+    my $prev=[ split /\n/, $to->content_utf8()   ];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    for my $line (@diff) {
+      if    ($$line[0] eq "+") { 
+	$diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
+      elsif ($$line[0] eq "-") {
+	$diff .= qq(<del class="diffdel">).$$line[1]."</del>" }
+      elsif ($$line[0] eq "c") {
+	$diff .= qq(<del class="diffdel">).$$line[1]."</del>"; 
+	$diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
+      elsif ($$line[0] eq "u") { $diff .=  $$line[1] }
+      else{ $diff .= "Unknown operator ".$$line[0] }
+    }
+    return $self->formatted_content($base,$diff);
+}
+
+sub get_page {
+    my ( $self,$page )=@_;
+    return $self->search_where(node=>$page)->next();
+}
+
+sub orphans {
+    grep {$_->links_to->count == 0 }
+	      __PACKAGE__->retrieve_all_sorted_by("node");
+}
+
+sub wikiwords {
+    my $self=shift;
+    my $content  = $self->content;
+    my @links;
+    while ( $content =~ m/(?<![\?\\\/])(\b[A-Z][a-z]+[A-Z]\w*)/g ) {
+      push @links, $1;
+    }
+    while ( $content =~ m{\[\[\s*([^\]]+)\s*\]\]}g) {
+      push @links,MojoMojo->fixw( $1 );
+    }
+    return @links;
+}
 
 1;

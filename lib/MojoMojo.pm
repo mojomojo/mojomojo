@@ -4,6 +4,7 @@ use strict;
 use utf8;
 use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static/;
 use YAML ();
+use Module::Pluggable::Ordered search_path => [qw/MojoMojo::Formatter/], require => 1;
 
 MojoMojo->config( YAML::LoadFile('/home/marcus/MojoMojo/mojomojo.yml') );
 
@@ -27,6 +28,8 @@ MojoMojo->action(
     },
 
 );
+
+MojoMojo->plugins;
 
 sub expand_wikiword {
     my ( $c, $word ) = @_;
