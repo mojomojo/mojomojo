@@ -2,8 +2,8 @@ CREATE TABLE page (
     id  INTEGER PRIMARY KEY,
     owner INTEGER REFERENCES user,
     node VARCHAR(30),
-    revision INTEGER REFERENCES revision
-    updated varchar(100),
+    revision INTEGER REFERENCES revision,
+    prevrev INTEGER REFERENCES revision,
     read text, write text, admin text
 );
 
@@ -57,5 +57,5 @@ CREATE TABLE attachment (
 );
 
 INSERT INTO user (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
-INSERT INTO page (user,node,content,updated) VALUES ( 1,'FrontPage','testing
-testing, hello, is this thing on?','1970-01-01T00:00:00');
+INSERT INTO page (owner,node,revision) VALUES ( 1,'FrontPage',1);
+INSERT INTO revision (page,user,content,updated) VALUES(1,1, 'testing testing, hello, is this thing on?','1970-01-01T00:00:00');
