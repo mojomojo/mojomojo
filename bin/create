@@ -3,103 +3,16 @@
 use strict;
 use Getopt::Long;
 use Pod::Usage;
-use FindBin;
-use File::Spec;
-use File::Path;
-use IO::File;
+use Catalyst::Helper;
 
 my $help = 0;
 
-GetOptions( 'help|?' => \$help );
+GetOptions( 'help|?' => $help );
 
-pod2usage(1) if ( $help
-    || !$ARGV[1]
-    || $ARGV[1] =~ /[^\w\:]/
-    || !$ARGV[0] =~ /^model|m|view|v|controller|c$/i );
+pod2usage(1) if ( $help || !$ARGV[1] );
 
-my $type = $ARGV[0];
-my $name = $ARGV[1];
-
-$type = 'M' if $type =~ /model|m/i;
-$type = 'V' if $type =~ /view|v/i;
-$type = 'C' if $type =~ /controller|c/i;
-
-my $path = File::Spec->catdir( $FindBin::Bin, '..', 'lib', 'Homer', $type );
-my $file = $name;
-if ( $name =~ /:/ ) {
-    my @path = split /::/, $name;
-    $file = pop @path;
-    $path = File::Spec->catdir( $path, @path );
-    mkpath $path unless -d $path;
-}
-
-my $action = '';
-$action = <<"FEO" if $type eq 'C';
-
-Homer->action(
-
-    '!?default' => sub {
-        my ( \$self, \$c ) = \@_;
-        \$c->res->output('Congratulations, Homer is on Catalyst!');
-    },
-
-);
-
-FEO
-
-$file = File::Spec->catfile( $path, $file );
-my $comp = IO::File->new("> $file.pm");
-print $comp <<"FEO";
-package Homer::$type\::$name;
-
-use strict;
-use base 'Catalyst::Base';
-$action
-=head1 NAME
-
-Homer::$type\::$name - A Component
-
-=head1 SYNOPSIS
-
-    Very simple to use
-
-=head1 DESCRIPTION
-
-A very nice component.
-
-=head1 AUTHOR
-
-A clever guy
-
-=head1 LICENSE
-
-This library is free software . You can redistribute it and/or modify it under
-the same terms as perl itself.
-
-=cut
-
-1;
-FEO
-
-my $t = File::Spec->catdir( $FindBin::Bin, '..', 't');
-my $num = '01';
-for my $i (<$t/*.t>) {
-    $i =~ /(\d+)/;
-    my $j = $1 || $num;
-    $num = $j if $j > $num;
-}
-$num++;
-$num = sprintf '%02d', $num;
-my $n = $name;
-$n =~ s/::/_/g;
-my $tn = lc($num . $type . '_'. $n);
-my $test = IO::File->new("> $t/$tn.t");
-print $test <<"FEO";
-use Test::More tests => 2;
-
-use_ok('Homer');
-use_ok('Homer::$type\::$name');
-FEO
+my $helper = Catalyst::Helper->new;
+pod2usage(1) unless $helper->mk_component( 'MojoMojo', @ARGV );
 
 1;
 __END__
@@ -110,22 +23,31 @@ create - Create a new Catalyst Component
 
 =head1 SYNOPSIS
 
-create [options] model|view|controller name
+create [options] model|view|controller name [helper] [options]
 
  Options:
    -help    display this help and exits
+
+ Examples:
+   perl create controller My::Controller
+   perl create view My::View
+   perl create view MyView TT
+   perl create view TT TT
+   perl create model My::Model
+   perl create model SomeDB CDBI dbi:SQLite:/tmp/my.db
+   perl create model AnotherDB CDBI dbi:Pg:dbname=foo root 4321
+
+ See also:
+   perldoc Catalyst::Manual
+   perldoc Catalyst::Manual::Intro
 
 =head1 DESCRIPTION
 
 Create a new Catalyst Component.
 
-=head2 EXAMPLE
-
-    bin/create controller MyController
-
 =head1 AUTHOR
 
-Sebastian Riedel Sebastian Riedel, C<sri@oook.de>
+Sebastian Riedel, C<sri@oook.de>
 
 =head1 COPYRIGHT
 
