@@ -2,7 +2,7 @@
 [% PROCESS header.tt %]
 <h1 id="pageName">
 [% IF c.req.args.first == "FrontPage"; %]
-   [% c.pref('wiki_name') ||  "MojoMojo" %] 
+   [% c.pref('name') ||  "MojoMojo" %] 
 [% ELSE %]
   <small> [% c.pref("title") || "MojoMojo" %] </small>
   <br/>[%c.expand_wikiword(item.node)%] [%IF c.req.params.rev %]

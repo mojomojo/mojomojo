@@ -5,7 +5,7 @@
     [% IF c.req.args.first == "FrontPage" %]
     | <a href="[% base %]preference/edit" class="navlink">Edit Settings</a>
     [% END %]
- [% IF item.revisions && (item.revisions.size+rev)>0%] 
+ [% IF item.revision.previous && (item.revisions.size+rev)>0%] 
     | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
     ([%item.revisions.size%] revision[%IF item.revisions.size>1;"s";END%])</small>
     [% END %]
