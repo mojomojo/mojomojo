@@ -1,0 +1,4 @@
+--- #YAML:1.0
+name: 'MojoMojo'
+root: '/home/marcus/MojoMojo/root'
+dsn: 'dbi:SQLite2:/home/marcus/MojoMojo/db/mojomojo.db'

@@ -1,0 +1,71 @@
+[% IF template.name == "page/view.tt" %]
+<div class="navigation">
+    [% IF (!rev_nr) %]
+    <a href="[% base %]page/edit/[% item.node %]" class="navlink" accesskey="E">Edit Page</a>
+    [% IF c.req.args.first == "FrontPage" %]
+    | <a href="[% base %]preference/edit" class="navlink">Edit Settings</a>
+    [% END %]
+ [% IF item.revisions && (item.revisions.size+rev)>0%] 
+    | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
+    ([%item.revisions.size%] revision[%IF item.revisions.size>1;"s";END%])</small>
+    [% END %]
+    [% ELSE %]
+    | <a href="[% base %]page/view/[%item.node%][%
+    IF rev_nr>1%]?rev=[% c.req.params.rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    <small>
+    ([%rev_nr%] more)
+    </small>
+    [%IF item.revisions.size-rev_nr%]
+    | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
+    <small>
+    ([%item.revisions.size-rev_nr%] more)
+    </small>
+    [%END%]
+    | <a href="[% base %]page/view/[%item.node%]" class="navlink" accesskey="C">See current</a> 
+ [% END %] 
+  [% IF objects.last %]
+    <span id="show_changes">
+      | <a href="" onClick="toggleChanges(); return false;">See changes</a>
+    </span>
+    <span id="hide_changes" style="display: none">
+      | <a href="#" onClick="toggleChanges(); return false;">Hide changes</a>
+    </span>
+  [% END %]
+  <small>
+    | Views: <a href="[%base%]page/print/[%item.node%]">Print</a>
+      <a href="[%base%]page/rss/[%item.node%]">RSS</a>
+[%IF c.req.params.rev; PROCESS rollback; END %]
+  </small>
+[% IF item.links_to.first ; %] 
+    <small>
+      | Linked from:
+[% FOR linkitem = item.links_to %] 
+    <a class="existingWikiWord" href="[%base%]page/view/[%linkitem.node%]">[%c.req.expand_wikiword(linkitem.node)%]</a>
+[% END %]
+    </small>
+[% END %]  
+[% IF item.tags %]
+<small>
+| tags: [% FOR tag IN item.tags %]
+<a href="[%base%]tag/list/[%tag%]">[%tag%]</a> 
+[%END%]
+</small>
+[% END %]
+</div>
+
+<script language="Javascript" type="text/javascript">
+  function toggleChanges() {
+    if (document.getElementById("changes").style.display == "none") {
+      document.getElementById("changes").style.display  = "block";
+      document.getElementById("revision").style.display = "none";
+      document.getElementById("show_changes").style.display  = "none";
+      document.getElementById("hide_changes").style.display = "inline";
+    } else {
+      document.getElementById("changes").style.display  = "none";
+      document.getElementById("revision").style.display = "block";
+      document.getElementById("show_changes").style.display  = "inline";
+      document.getElementById("hide_changes").style.display = "none";
+    }
+  }
+</script>
+[%END%]

@@ -1,0 +1,29 @@
+<form id="navigationForm" class="navigation" action="[%base%]page/do_search" method="get" style="font-size: 10px">  
+  
+  [% IF request.args.first == request.pref("home_node") ; %]
+  <b class="navOn" title="Home, Sweet Home" >Home Page</b> | 
+  [% ELSE %]
+  <a href="[%base%]page/view/[%request.pref("home_node")%]" title="Home, Sweet Home" accesskey="H">Home Page</a> | 
+  [% END; IF request.table=='page' && request.action=='list' %]
+  <b class="navOn" title="Alphabetically sorted list of pages">All Pages</b> | 
+  [% ELSE %]
+  <a href="[%base%]page/list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
+  [% END; IF request.table=='page' && request.action=='recent' %]
+  <b class="navOn" title="Pages sorted by when they were last changed">Recently Revised</b> | 
+  [% ELSE %]
+  <a href="[%base%]page/recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
+  [% END; IF request.table=='user' && request.action=='list' %]
+  <b class="navOn" title="Who wrote what" accesskey="">Authors</b> | 
+  [%ELSE%]
+  <a href="[%base%]user/list" title="Who wrote what" accesskey="">Authors</a> | 
+  [% END; IF request.template=='feeds' %]
+  <b class="navOn" title="Subscribe to changes by RSS">Feeds</b> | 
+  [%ELSE%]
+  <a href="[%base%]feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
+  [% END; IF request.table=='page' && request.action=='export' %]
+  <b class="navOn" title="Download a zip with all the pages in this wiki">Export</b> | 
+  [%ELSE%]
+  <a href="[%base%]page/export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
+  [%END %]
+  <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onClick="this.value == 'Search' ? this.value = '' : true"/>
+</form>

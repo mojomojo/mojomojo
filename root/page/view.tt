@@ -1,0 +1,34 @@
+[% SET item = pages.first %]
+[% PROCESS header.tt %]
+<h1 id="pageName">
+[% IF c.req.args.first == "FrontPage"; %]
+   [% title || config.application_name || "Mitiki" %] 
+[% ELSE %]
+  <small> [% c.pref("title") || config.application_name || "Mitiki" %] </small>
+  <br/>[%c.expand_wikiword(item.node)%] [%IF c.req.params.rev %]
+  (Revision #[%c.req.params.rev%])[%END%]
+[% END %]
+</h1>
+[% PROCESS navbar.tt %]
+<div id="revision">
+[% item.formatted_content(base) %]
+[% item.content %]
+</div>
+<div id="changes" style="display: none">
+  <p style="background: #eee; padding: 3px; border: 1px solid silver">
+    <small>
+      Showing changes from previous revision.
+      <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
+    </small>
+  </p>
+[% IF pages.last %]
+[% item.formatted_diff(base,pages.last); %]
+[% END %]
+</div>
+<div class="byline">
+  Revised on [% item.updated.cdate %]
+    by [% c.wikiword(item.user.login,base) %]
+</div>
+
+[% PROCESS page/bottomnav.tt %]
+[% PROCESS footer.tt %]

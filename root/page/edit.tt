@@ -1,0 +1,54 @@
+[% PROCESS header.tt %]
+<h1 id="pageName">
+  <small>
+            [%
+              title || config.application_name ||
+                "Mitiki"
+            %]
+  </small><br/>
+  [%IF page ; %]
+  Editing [%c.expand_wikiword(page.node)%]
+  [%ELSE%]
+  Creating [%c.args.first%]
+  [%END%]
+  </h1>
+[% PROCESS edithelp.tt %]
+
+
+<form id="editForm" action="[%base%]page/edit/[%c.req.args.first%]" method="post" onSubmit="cleanAuthorName();">
+<p>
+[% IF edit_error %]
+<p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
+    <small>[%edit_error%]</small>
+</p>
+[%END%]
+  [%IF page ; %]
+  Edit | <a  href="[%base%]/page/upload/[%page.node%]">Upload</a>
+  [%END%]
+<textarea name="content" style="width: 450px; height: 480px">
+[% c.req.params.content || page.content %]
+</textarea>
+
+<br/>tags: <input type="text" name="tags" value ="[%c.req.params.tags || page.tags.join(" ") %]" style="width: 400px;"/>
+</p>
+<p>
+    <input type="submit" value="[% IF page ; "Edit"; ELSE; "Create"; END%]"/> as 
+    [%IF c.req.user %]
+    [% c.wikiword(request.user.login)%] 
+    (<a href="[%base%]/user/logout">forget me</a>)
+    [%ELSE %]
+    <input type="text" name="user" id="authorName" value="[% c.req.user || c.req.params.user || "AnonymousCoward"%]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
+    <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).
+    [%END%]
+</p>
+</form>
+
+<script language="JavaScript" type="text/javascript">
+function cleanAuthorName() {
+  if (document.getElementById('authorName').value == "") {
+    document.getElementById('authorName').value = 'AnonymousCoward';
+  }
+}
+</script>
+
+[% PROCESS footer.tt %]

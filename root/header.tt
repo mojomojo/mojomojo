@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>
+	[% IF item %] [%c.expand_wikiword(item.node)%] in [%END%]
+            [%
+              title || config.name ||
+                "A poorly configured MojoMojo Installation"
+            %]
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=[% 
+	    request.document_encoding
+	%]"/>
+        <link title="main stylesheet" href="[% base %]/static/mojomojo.css" type="text/css" 
+                rel="stylesheet"/>
+        <link title="pod stylesheet" href="[% base %]/static/pod.css" type="text/css" 
+                rel="stylesheet"/>
+	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%]/page/atom" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%]/page/rss" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/page/rss_full" />
+<link rel="shortcut icon" href="[%base%]/static/favicon.ico"/>
+   </head>
+
+    [% IF item && item.can("node") %] 
+    <body ondblclick="location.href='[%base%]/page/edit/[% item.node %]'">
+    [% ELSE %]
+    <body>
+    [% END %]
+        <div id="Container">
+	  <div id="Content">
