@@ -1,4 +1,4 @@
-package MojoMojo::M::CDBI::Revision;
+package MojoMojo::M::Revision;
 
 use strict;
 use base 'Catalyst::Base';

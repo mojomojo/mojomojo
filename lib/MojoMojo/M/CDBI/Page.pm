@@ -1,4 +1,4 @@
-package MojoMojo::M::CDBI::Page;
+package MojoMojo::M::Page;
 
 use strict;
 use Time::Piece;
@@ -35,6 +35,15 @@ __PACKAGE__->has_many(
     links_from => [ 'MojoMojo::M::CDBI::Link' => 'to_page' ],
     "from_page"
 );
+
+__PACKAGE__->set_sql('by_tag' => qq{
+SELECT page.id as id,node,updated,user 
+FROM page,tag WHERE page.id=tag.page AND tag=? ORDER BY node
+});
+__PACKAGE__->set_sql('by_tag_and_date' => qq{
+SELECT page.id as id,node,updated,user 
+FROM page,tag WHERE page.id=tag.page AND tag=? ORDER BY page.updated
+});
 
 sub formatted_content {
     my ( $self,$base, $content ) = @_;
