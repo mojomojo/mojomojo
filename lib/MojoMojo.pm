@@ -18,14 +18,30 @@ MojoMojo->action(
 
     '!end' => sub {
         my ( $self, $c ) = @_;
-        $c->forward('index')
+        $c->forward('!view')
           unless $c->stash->{template} || $c->res->output;
         $c->forward('MojoMojo::V::TT') unless $c->res->output;
     },
 
-    'index' => sub {
+    'favicon.ico' => sub {
         my ( $self, $c ) = @_;
-        $c->res->redirect( $c->req->base . 'page/view/FrontPage' );
+        $c->forward('.static');
+    },
+
+    '/^(\w+)\.(\w+)$/' => sub {
+        my ( $self, $c ) = @_;
+    	my ($page,$action) = @{ $c->request->snippets };
+	warn "action is".$action;
+        my ( $self, $c ) = @_;
+	$c->req->args([$page]);
+        $c->forward( "!page/$action" );
+    },
+    '/^(\w+)$/' => sub {
+        my ( $self, $c ) = @_;
+    	my ($page) = @{ $c->request->snippets };
+        my ( $self, $c ) = @_;
+	$c->req->args([$page]);
+        $c->forward( "!page/view" );
     },
 
 );

@@ -9,7 +9,7 @@ use URI;
 
 MojoMojo->action(
 
-    '?view' => sub {
+    '!page/view' => sub {
         my ( $self, $c, $node ) = @_;
 
         $c->stash->{template} = 'page/view.tt';
@@ -38,7 +38,7 @@ MojoMojo->action(
 
     },
 
-    '?edit' => sub {
+    '!page/edit' => sub {
         my ( $self, $c, $node ) = @_;
 
         $c->stash->{template} = 'page/edit.tt';
