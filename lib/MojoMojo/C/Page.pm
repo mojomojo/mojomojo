@@ -18,7 +18,7 @@ MojoMojo->action(
 
     $node ||= $c->pref('home_node');
     my $page = MojoMojo::M::Core::Page->get_page( $node );
-    return $c->forward('!page/edit') unless $page;
+    return $c->forward('!page/edit') unless $page && $page->revision;
 
     $c->form( optional => ['rev'] );
     if ( my $rev = $c->form->valid('rev') ) {
