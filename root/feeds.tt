@@ -1,0 +1,16 @@
+[% PROCESS header.tt %]
+<h1 id="pageName">
+  <small> [% c.pref('name')|| "MojoMojo" %] </small>
+  <br/>Feeds
+</h1>
+[% PROCESS navbar.tt %]
+<p>You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page.</p> 
+
+<ul id="feedsList">
+  <li><a href="[%base%].rss_full">Full content (RSS 2.0)</a></li>
+  <li><a href="[%base%].rss">Headlines (RSS 2.0)</a></li>
+  <li><a href="[%base%].atom">Full content (Atom 0.3)</a></li>
+</ul>
+
+
+[% PROCESS footer.tt %]
