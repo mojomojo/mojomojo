@@ -34,7 +34,7 @@ FROM page,tag,revision WHERE revision.id=page.revision AND page.id=tag.page AND 
 __PACKAGE__->set_sql('recent' => qq{
 SELECT DISTINCT node, page.id as id,revision.updated,owner 
 FROM page,revision WHERE revision.id=page.revision 
-ORDER BY revision.updated
+ORDER BY revision.updated DESC
 });
 
 sub content_utf8 { $_[0]->revision && $_[0]->revision->content_utf8; }
