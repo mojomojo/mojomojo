@@ -16,10 +16,10 @@ MojoMojo->action(
         $c->res->output($output);
     }, '.jsrpc/diff' => sub {
         my ( $self, $c, $revision ) = @_;
-        my $page= MojoMojo::M::Core::Revision->retrieve($revision);
-        if ($revision->parent) {
+        $revision= MojoMojo::M::Core::Revision->retrieve($revision);
+        if (my $previous=$revision->previous) {
         $c->res->output($revision->formatted_diff($c->req->base,
-                                                  $revision->parent));
+                                                  $previous));
         } else {
         $c->res->output("This is the first revision!");
       }

@@ -13,57 +13,53 @@ MojoMojo->action(
 
     $c->stash->{template} ||= 'page/view.tt';
 
-
     $node ||= $c->pref('home_node');
     my $page = MojoMojo::M::Core::Page->get_page( $node );
     return $c->forward('!page/edit') unless $page && $page->revision;
 
     $c->form( optional => ['rev'] );
     if ( my $rev = $c->form->valid('rev') ) {
-      $c->stash->{rev} = abs $rev;
-
-      my @revs = $page->revisions;
-      if ( scalar @revs >= $rev ) {
-        $c->stash->{page} =  $revs[ $rev - 1 ];
-        $c->stash->{rev} = $rev;
-      } else { 
-        $c->stash->{template} = 'norevision.tt';
+      $c->stash->{rev} = $page->get_revision($rev);
+        $c->stash->{template} = 'norevision.tt' unless
+            $c->stash->{rev};
       }
-    } else {
-      $c->stash->{rev} = 0;
       $c->stash->{page} =  $page;
-    }
   }, '!page/edit' => sub {
-    my ( $self, $c, $node ) = @_;
+      my ( $self, $c, $node ) = @_;
 
-    $c->stash->{template} = 'page/edit.tt';
-    $c->forward('.login') if $c->req->params->{login} && 
+      $c->stash->{template} = 'page/edit.tt';
+      $c->forward('.login') if $c->req->params->{login} && 
                              ! $c->req->{user};
 
-    my $editor = $c->req->{user_id} || 0;
+      my $editor = $c->req->{user_id} || 0;
 
-    my $page   = $class->get_page( $node );
-    unless ($page) {
-      $c->form( optional => [qw/read write admin/],
-                defaults => { owner=>$editor,
-                              node=>$node});
-      $page=$class->create_from_form( $c->form );
-    }
+      my $page   = $class->get_page( $node );
+      unless ($page) {
+          $c->form( optional => [qw/read write admin/],
+                    defaults => { owner=>$editor,
+                                  node=>$node});
+          $page=$class->create_from_form( $c->form );
+      }
 
-    $c->form(required => [qw/content/],
-             defaults=> { page=>$page,
-                         updated=>localtime->datetime,
-                         user=>$editor,
-                         previous=>$page->revision});
-    if ( $c->form->has_missing || $c->form->has_invalid ) {
-      $c->stash->{page}=$page;
-      return;
-    }
-    my $rev = MojoMojo::M::Core::Revision->create_from_form(
-              $c->form );
-    $page->revision($rev);
-    $page->update;
-    $c->res->redirect($c->req->base.$node.'.highlight');
+      $c->form(required => [qw/content/],
+               defaults=> { page=>$page,
+                            updated=>localtime->datetime,
+                            user=>$editor,
+                            previous=>$page->revision,
+                            revnum=>($page->revision ?
+                                     $page->revision->revnum+1 :
+                                     1)
+                            }
+              );
+      if ( $c->form->has_missing || $c->form->has_invalid ) {
+          $c->stash->{page}=$page;
+          return;
+      }
+      my $rev = MojoMojo::M::Core::Revision->create_from_form(
+                $c->form );
+      $page->revision($rev);
+      $page->update;
+      $c->res->redirect($c->req->base.$node.'.highlight');
 
   }, '!page/print' => sub {
       my ( $self, $c, $node ) = @_;
@@ -77,7 +73,7 @@ MojoMojo->action(
       my ( $self, $c, $node ) = @_;
       $c->stash->{template} = 'page/atom.tt';
       $c->forward('!page/view');
-  }, '!page/rss' => sub {
+  }, '!page/rss_full' => sub {
       my ( $self, $c, $node ) = @_;
       $c->stash->{template} = 'page/rss_full.tt';
       $c->forward('!page/view');
@@ -99,6 +95,7 @@ MojoMojo->action(
       return $c->forward('!tag/list') if $tag;
       $c->stash->{template} = 'page/list.tt';
       $c->stash->{pages} = [ $class->retrieve_all_sorted_by('node') ];
+      # FIXME - real data here please
       $c->stash->{orphans} = [ ];
       $c->stash->{wanted} = [ ];
       $c->stash->{tags} = [ MojoMojo::M::Core::Tag->search_most_used() ];
@@ -107,6 +104,9 @@ MojoMojo->action(
       my ( $self, $c, $tag ) = @_;
       return $c->forward('!tag/recent') if $tag;
       $c->stash->{template} = 'page/recent.tt';
+      $c->stash->{tags}   = [MojoMojo::M::Core::Tag->search_most_used];
+	    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
+      # FIXME - needs to be populated even without tags
    });
 
 1;

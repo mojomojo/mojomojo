@@ -1,35 +1,30 @@
-[%PROCESS header %]
+[%PROCESS header.tt %]
 [% SET now=objects.first.updated.dmy('.'); %]
 <h1 id="pageName">
   <small> [% title || config.application_name || "Mitiki" %] </small>
   <br/>Recent Pages
 </h1>
-[%PROCESS navbar %]
+[%PROCESS navbar.tt %]
 <div id="categories">
   <strong>tags</strong>: <small>
-  [%USE tagclass=Class("Mitiki::Tag") %]
-  [%FOREACH tag IN tagclass.search_most_used %]
-  [%IF tag.tag==activetag%]
-  <b>[%tag.tag%]</b>
-  [%ELSE%]
-  <a href="[%base%]/tag/recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
-  [%END%]
+  [%FOREACH tag IN tags %]
+  <a href="[%base%].recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
   [%END%]</small>
 </div>
 <b>[% now %]</b>
 <ul>
-[% FOR item=objects.list %]
+[% FOR item=pages.list %]
 [%IF now != item.updated.dmy('.');%]
   [%SET now=item.updated.dmy('.'); %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[%base%]/page/view/[%item.node%]">[%request.expand_wikiword(item.node)%]</a>
+    <a href="[%base%][%item.node%]">[%c.expand_wikiword(item.node)%]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by [% request.wikiword(item.user.login,base) %]
+      by [% c.wikiword(item.revision.user.login,base) %]
       at [%item.updated.hms(":")%]
     </div>
   </li>
 [%END%]
 </ul>
-[%PROCESS footer%]
+[%PROCESS footer.tt%]

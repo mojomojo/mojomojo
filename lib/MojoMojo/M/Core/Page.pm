@@ -31,6 +31,11 @@ __PACKAGE__->set_sql('by_tag_and_date' => qq{
 SELECT DISTINCT node, page.id as id,revision.updated,owner 
 FROM page,tag,revision WHERE revision.id=page.revision AND page.id=tag.page AND tag=? ORDER BY revision.updated
 });
+__PACKAGE__->set_sql('recent' => qq{
+SELECT DISTINCT node, page.id as id,revision.updated,owner 
+FROM page,revision WHERE revision.id=page.revision 
+ORDER BY revision.updated
+});
 
 sub content_utf8 { $_[0]->revision && $_[0]->revision->content_utf8; }
 sub content { $_[0]->revision && $_[0]->revision->content; }
@@ -44,8 +49,8 @@ sub formatted_content {
 
 sub formatted_diff {
     my ( $self,$base,$to ) = @_;
-    my $this=[ split /\n/, $self->content_utf8() ];
-    my $prev=[ split /\n/, $to->content_utf8()   ];
+    my $this=[ split /\n/, $self->formatted_content($base) ];
+    my $prev=[ split /\n/, $to->formatted_content($base)   ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
@@ -59,7 +64,7 @@ sub formatted_diff {
       elsif ($$line[0] eq "u") { $diff .=  $$line[1] }
       else{ $diff .= "Unknown operator ".$$line[0] }
     }
-    return $self->formatted_content($base,$diff);
+    return $diff;
 }
 
 sub highlight {
@@ -83,6 +88,13 @@ sub highlight {
 sub get_page {
     my ( $self,$page )=@_;
     return $self->search_where(node=>$page)->next();
+}
+
+sub get_revision {
+    my ( $self,$revnum)=@_;
+    return MojoMojo::M::Core::Revision->search_where(
+              page=>$self, 
+              revnum=>$revnum)->next();
 }
 
 sub orphans {

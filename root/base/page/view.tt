@@ -9,7 +9,9 @@
 </h1>
 [% PROCESS navbar.tt %]
 <div id="revision">
-[% page.formatted_content(base) %]
+[% ( rev ? 
+     rev.formatted_content(base) :
+     page.formatted_content(base) ) %]
 </div>
 <div id="changes" style="display: none">
   <p style="background: #eee; padding: 3px; border: 1px solid silver">
