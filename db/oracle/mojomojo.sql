@@ -33,7 +33,7 @@ create table Node
  expiration_date date default null,
  short_descr     varchar2(300),
  long_descr      varchar2(2000),
- mime_type	    varchar2(100) /*not null*/,
+ mime_type	 varchar2(100) /*not null*/,
  content         clob,
  primary key (node_id),
  foreign key (parent_id) references Node,
