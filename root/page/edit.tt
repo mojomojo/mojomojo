@@ -9,7 +9,7 @@
   [%IF page ; %]
   Editing [%c.expand_wikiword(page.node)%]
   [%ELSE%]
-  Creating [%c.args.first%]
+  Creating [%c.req.params.node%]
   [%END%]
   </h1>
 [% PROCESS edithelp.tt %]

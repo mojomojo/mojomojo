@@ -1,5 +1,5 @@
 	</div>
       </div>
-      <img src="[% base %]catalyst.png"/>
+      <img src="[% base %].static/catalyst.png"/>
     </body>
 </html>

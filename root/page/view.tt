@@ -12,7 +12,6 @@
 [% PROCESS navbar.tt %]
 <div id="revision">
 [% item.formatted_content(base) %]
-[% item.content %]
 </div>
 <div id="changes" style="display: none">
   <p style="background: #eee; padding: 3px; border: 1px solid silver">

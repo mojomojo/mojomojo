@@ -11,18 +11,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=[% 
 	    request.document_encoding
 	%]"/>
-        <link title="main stylesheet" href="[% base %]/mojomojo.css" type="text/css" 
+        <link title="main stylesheet" href="[% base %].static/mojomojo.css" type="text/css" 
                 rel="stylesheet"/>
-        <link title="pod stylesheet" href="[% base %]/pod.css" type="text/css" 
+        <link title="pod stylesheet" href="[% base %].static/pod.css" type="text/css" 
                 rel="stylesheet"/>
-	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%]/page/atom" />
-<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%]/page/rss" />
-<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/page/rss_full" />
-<link rel="shortcut icon" href="[%base%]/static/favicon.ico"/>
+	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%].atom" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%].rss" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%].rss_full" />
+<link rel="shortcut icon" href="[%base%]/.static/favicon.ico"/>
    </head>
 
     [% IF item && item.can("node") %] 
-    <body ondblclick="location.href='[%base%]/page/edit/[% item.node %]'">
+    <body ondblclick="location.href='[%base%]/[% item.node %].edit'">
     [% ELSE %]
     <body>
     [% END %]
