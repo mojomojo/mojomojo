@@ -1,8 +1,8 @@
 CREATE TABLE page (
     id  INTEGER PRIMARY KEY,
-    user INTEGER REFERENCES user,
+    owner INTEGER REFERENCES user,
     node VARCHAR(30),
-    content TEXT,
+    revision INTEGER REFERENCES revision
     updated varchar(100),
     read text, write text, admin text
 );
