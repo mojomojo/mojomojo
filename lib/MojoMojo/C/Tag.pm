@@ -12,16 +12,16 @@ MojoMojo->action(
 
 	return unless $tag;
 	$c->stash->{tag} = $tag;
-	$c->stash->{pages} = MojoMojo::M::Page->search_by_tag($tag);
-	$c->stash->{related} = MojoMojo::M::Tag->related_to($tag)
+	$c->stash->{pages} = MojoMojo::M::CDBI::Page->search_by_tag($tag);
+	$c->stash->{related} = MojoMojo::M::CDBI::Tag->related_to($tag)
     },
     '?recent' => sub {
         my ($self,$c,$tag) = @_;
 	$c->stash->{template} = 'tag/recent.tt';
 	return unless $tag;
 	$c->stash->{tag}   = $tag;
-	$c->stash->{pages} = MojoMojo::M::Page->search_by_tag_and_date($tag);
-	$c->stash->{related} = MojoMojo::M::Tag->related_to($tag)
+	$c->stash->{pages} = MojoMojo::M::CDBI::Page->search_by_tag_and_date($tag);
+	$c->stash->{related} = MojoMojo::M::CDBI::Tag->related_to($tag)
     }
 );
     

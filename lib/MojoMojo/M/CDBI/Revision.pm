@@ -1,4 +1,4 @@
-package MojoMojo::M::Revision;
+package MojoMojo::M::CDBI::Revision;
 
 use strict;
 use base 'Catalyst::Base';
@@ -19,8 +19,8 @@ __PACKAGE__->has_a(
     },
     deflate => 'datetime'
 );
-MojoMojo::M::Page->has_many(
-    revisions => "MojoMojo::M::Revision",
+MojoMojo::M::CDBI::Page->has_many(
+    revisions => "MojoMojo::M::CDBI::Revision",
     { order_by => 'id desc' }
 );
 

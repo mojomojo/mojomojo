@@ -1,4 +1,4 @@
-package MojoMojo::M::Tag;
+package MojoMojo::M::CDBI::Tag;
 use strict;
 
 __PACKAGE__->columns(TEMP=>qw/refcount/);

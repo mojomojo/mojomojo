@@ -5,7 +5,7 @@ use base 'Catalyst::Model::CDBI';
 
 __PACKAGE__->config(
     dsn                => MojoMojo->config->{dsn},
-    namespace          => 'MojoMojo::M',
+    namespace          => 'MojoMojo::M::CDBI',
     additional_classes => [
         qw/Class::DBI::AbstractSearch Class::DBI::Plugin::RetrieveAll
           Class::DBI::FromForm/

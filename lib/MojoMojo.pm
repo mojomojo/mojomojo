@@ -42,7 +42,7 @@ sub expand_wikiword {
 sub wikiword {
     my ( $c, $word, $base ) = @_;
     my $formatted = $c->expand_wikiword($word);
-    if ( MojoMojo::M::Page->search( node => $word )->next ) {
+    if ( MojoMojo::M::CDBI::Page->search( node => $word )->next ) {
         if ($base) {
             return
 qq{<a class="existingWikiWord" href="$base/page/view/$word">$formatted</a> };
@@ -66,7 +66,7 @@ qq{<span class="newWikiWord">$formatted<a href="$word">?</a></span>};
 sub pref {
     my ( $c, $setting, $value ) = @_;
     $setting =
-      MojoMojo::M::Preference->find_or_create( { prefkey => $setting } );
+      MojoMojo::M::CDBI::Preference->find_or_create( { prefkey => $setting } );
     if ( defined $value ) {
         $setting->prefvalue($value);
         $setting->update();
