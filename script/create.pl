@@ -9,7 +9,7 @@ my $help = 0;
 
 GetOptions( 'help|?' => $help );
 
-pod2usage(1) if ( $help || !$ARGV[1] );
+pod2usage(1) if ( $help || !$ARGV[0] );
 
 my $helper = Catalyst::Helper->new;
 pod2usage(1) unless $helper->mk_component( 'MojoMojo', @ARGV );
@@ -36,6 +36,7 @@ create.pl [options] model|view|controller name [helper] [options]
    create.pl model My::Model
    create.pl model SomeDB CDBI dbi:SQLite:/tmp/my.db
    create.pl model AnotherDB CDBI dbi:Pg:dbname=foo root 4321
+   create.pl Ajax
 
  See also:
    perldoc Catalyst::Manual

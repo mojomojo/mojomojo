@@ -1,11 +1,13 @@
 #!/usr/bin/perl -w
 
+BEGIN { $ENV{CATALYST_ENGINE} = 'HTTP' }
+
 use strict;
 use Getopt::Long;
 use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-use Catalyst::Test 'MojoMojo';
+use MojoMojo;
 
 my $help = 0;
 my $port = 3000;
@@ -14,7 +16,7 @@ GetOptions( 'help|?' => \$help, 'port=s' => \$port );
 
 pod2usage(1) if $help;
 
-Catalyst::Test::server($port);
+MojoMojo->run($port);
 
 1;
 __END__

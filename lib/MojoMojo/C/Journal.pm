@@ -3,14 +3,10 @@ package MojoMojo::C::Journal;
 use strict;
 use base 'Catalyst::Base';
 
-MojoMojo->action(
-
-    '!?default' => sub {
+sub default : Private {
         my ( $self, $c ) = @_;
         $c->res->output('Congratulations, MojoMojo::C::Journal is on Catalyst!');
-    },
-
-);
+}
 
 =head1 NAME
 
