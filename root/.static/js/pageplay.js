@@ -1,5 +1,20 @@
-/* pageplay - plays with elements on your page */
-/* By Peter Cooper */
+/* util.js - baseic utils for your ajax app */
+/* Based on pageplay.js by Peter Cooper */
+/* By Marcus Ramberg */
+
+function registerAction(id,action,functionName) {
+    var element=gId(id);
+    if (element) {
+        try { 
+            gId(id).addEventListener($action, functionName, false);
+        } catch(e) { }
+        try { 
+            element.attachEvent('on'+action, functionName, false);
+        } catch(e) { 
+          eval('gId(id).on'+action'='+functionName);
+        }
+    }
+}
 
 function toggleVisibility(id) {
    	if (document.getElementById(id).style.display == 'block') {

@@ -6,7 +6,11 @@ var liveboxOutput = '';
 var p;
 
 function liveBox(id,output) {
-	liveboxOutput=output;
+    liveboxOutput=output;
+    liveboxid = id;
+    registerAction(id,"focus",liveBoxStart);
+    registerAction(id,"blur",liveBoxEnd);
+        /*
         try { 
 	        gId(id).addEventListener("blur", liveBoxEnd, false);
 	} catch(e) { }
@@ -19,7 +23,7 @@ function liveBox(id,output) {
         try { 
 		gId(id).attachEvent("onfocus", liveBoxStart, false);
 	} catch(e) { gId(id).onfocus=liveBoxStart}
-        liveboxid = id;
+ */ 
 }
 
 function setLiveboxUrl(url) {
