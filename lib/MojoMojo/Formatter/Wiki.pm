@@ -11,6 +11,6 @@ sub format_content {
 	         {$1}g;
     # do explicit links, replace spaces with +
     $$content =~ s{\[\[\s*([^\]]+)\s*\]\]}
-		 {MojoMojo->wikiword(MojoMjo->fixw($1),$base)}ge;
+		 {MojoMojo->wikiword(MojoMojo->fixw($1),$base)}ge;
 }
 1;

@@ -25,10 +25,17 @@
   [%IF page ; %]
   Edit | <a  href="[%base%]/page/upload/[%page.node%]">Upload</a>
   [%END%]
-<textarea name="content" style="width: 450px; height: 480px">
+<textarea id="content" name="content" style="width: 450px; height: 280px">
 [% c.req.params.content || page.content %]
 </textarea>
+	<script language="JavaScript1.2">
+	setLiveboxUrl('[%base%].jsrpc/render');
+	liveBox('content','preview');
+	</script>
 
+<p style="clear:left"><b>Preview</b><p>
+<div style="clear:left;width:450;" id="preview">
+</div>
 <br/>tags: <input type="text" name="tags" value ="[%c.req.params.tags || page.tags.join(" ") %]" style="width: 400px;"/>
 </p>
 <p>
