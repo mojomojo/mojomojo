@@ -3,13 +3,14 @@ CREATE TABLE page (
     user INTEGER REFERENCES user,
     node VARCHAR(30),
     content TEXT,
-    updated varchar(100)
+    updated varchar(100),
+    read text, write text, admin text
 );
 
 CREATE TABLE revision (
     id INTEGER PRIMARY KEY,
     page INTEGER,
-    user INTEGER REFERENCES uer,
+    user INTEGER REFERENCES user,
     content TEXT,
     updated varchar(100)
 );
@@ -17,7 +18,8 @@ CREATE TABLE revision (
 CREATE TABLE link (
     id INTEGER PRIMARY KEY,
     from_page INTEGER,
-    to_page INTEGER);
+    to_page INTEGER
+);
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY,
@@ -33,6 +35,7 @@ CREATE TABLE wanted_page (
     page int REFERENCES page,
     node varchar(100)
 );
+
 CREATE TABLE preference (
     prefkey varchar(100) PRIMARY KEY,
     prefvalue varchar(100)
@@ -40,6 +43,7 @@ CREATE TABLE preference (
 
 CREATE TABLE tag (
     id INTEGER PRIMARY KEY,
+    user int REFERENCES user,
     page int REFERENCES page,
     tag varchar(100)
 );

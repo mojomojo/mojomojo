@@ -14,6 +14,14 @@ __PACKAGE__->add_trigger(
         $self->content_utf8($content);
     }
 );
+__PACKAGE__->add_trigger(
+    after_set_content => sub {
+       my $self =shift;
+       $self->updated(localtime->datetime);
+       $self->update();
+    }
+);
+
 __PACKAGE__->has_a(
     updated => 'Time::Piece',
     inflate => sub { Time::Piece->strptime( shift, "%FT%H:%M:%S" ) },
