@@ -34,6 +34,7 @@ function xmlHTTPAsyncRequest( url, method, data, callback ) {
     if (req) {
         eval ( 'req.onreadystatechange = ' + callback + ';' );
         req.open( method, url, true );
+        req.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
         req.send(data);
         return req
     }

@@ -23,7 +23,7 @@
 </p>
 [%END%]
   [%IF page ; %]
-  Edit | <a  href="[%base%][%page.node%].upload">Upload</a>
+  Edit | <a  href="[%base%][%page.node%].attachments">Upload</a>
   [%END%]
 <textarea id="content" name="content" style="width: 450px; height: 280px">
 [% c.req.params.content || page.content %][%append%]

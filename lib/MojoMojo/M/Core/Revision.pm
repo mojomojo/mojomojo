@@ -8,7 +8,7 @@ use utf8;
 __PACKAGE__->has_a(
     updated => 'Time::Piece',
     inflate => sub {
-	Time::Piece->strptime( shift, "%FT%H:%M:%S" );
+  Time::Piece->strptime( shift, "%Y-%m-%dT%H:%M:%S" );
     },
     deflate => 'datetime'
 );
