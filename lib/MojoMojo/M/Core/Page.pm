@@ -4,7 +4,7 @@ use strict;
 use Time::Piece;
 use Algorithm::Diff;
 
-__PACKAGE__->columns( Essential => qw/user node updated/ );
+__PACKAGE__->columns( Essential => qw/owner node/ );
 __PACKAGE__->columns( TEMP      => 'content_utf8' );
 __PACKAGE__->add_trigger(
     select => sub {
@@ -22,11 +22,11 @@ __PACKAGE__->add_trigger(
     }
 );
 
-__PACKAGE__->has_a(
-    updated => 'Time::Piece',
-    inflate => sub { Time::Piece->strptime( shift, "%FT%H:%M:%S" ) },
-    deflate => 'datetime'
-);
+#__PACKAGE__->has_a(
+#    updated => 'Time::Piece',
+#    inflate => sub { Time::Piece->strptime( shift, "%FT%H:%M:%S" ) },
+#    deflate => 'datetime'
+#);
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
     "to_page"
@@ -37,15 +37,16 @@ __PACKAGE__->has_many(
 );
 
 __PACKAGE__->set_sql('by_tag' => qq{
-SELECT page.id as id,node,updated,user 
-FROM page,tag WHERE page.id=tag.page AND tag=? ORDER BY node
+SELECT page.id as id,node,revision.updated,owner 
+FROM page,tag WHERE page.revision=revision.id AND page.id=tag.page AND tag=? ORDER BY node
 });
 __PACKAGE__->set_sql('by_tag_and_date' => qq{
-SELECT page.id as id,node,updated,user 
-FROM page,tag WHERE page.id=tag.page AND tag=? ORDER BY page.updated
+SELECT page.id as id,node,revison.updated,owner 
+FROM page,tag WHERE revision.id=page.revision AND page.id=tag.page AND tag=? ORDER BY revision.updated
 });
 
 sub content { $_[0]->revision->content; }
+sub updated { $_[0]->revision->updated; }
 sub formatted_content {
     my ( $self,$base, $content ) = @_;
     $content ||= $self->content_utf8;

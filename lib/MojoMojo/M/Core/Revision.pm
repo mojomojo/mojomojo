@@ -19,10 +19,6 @@ __PACKAGE__->has_a(
     },
     deflate => 'datetime'
 );
-MojoMojo::M::Core::Page->has_many(
-    revisions => "MojoMojo::M::Core::Revision",
-    { order_by => 'id desc' }
-);
 
 sub archive {
     my ( $self, $page ) = @_;
