@@ -1,20 +1,20 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-	<title>[% config.application_name || "Mitiki" %]</title>
-	<link>[%base%]/page/view/FrontPage</link>
-	<description>A Mitiki wiki</description>
+	<title>[% config.application_name || "MojoMojo" %]</title>
+	<link>[%base%]FrontPage</link>
+	<description>A MojoMojo wiki</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
-[%FOR item=objects.list; %]
-    <item>
-      <title>[%request.expand_wikiword(item.node)%]</title>
-      <description>[%FILTER html%][% item.formatted_content%][%END%]</description>    
-      <pubDate>[%item.updated.strftime%]</pubDate>
-      <guid>[%base%]page/view/[%item.node%]</guid>
-      <link>[%base%]page/view/[%item.node%]</link>
-      <dc:creator>[%item.user.login%]</dc:creator>
-    </item>
+[%FOR page=objects.list; %]
+    <page>
+      <title>[%request.expand_wikiword(page.node)%]</title>
+      <description>[%FILTER html%][% page.formatted_content%][%END%]</description>    
+      <pubDate>[%page.updated.strftime%]</pubDate>
+      <guid>[%base%][%page.node%]</guid>
+      <link>[%base%][%page.node%]</link>
+      <dc:creator>[%page.user.login%]</dc:creator>
+    </page>
 [%END%]
   </channel>
 </rss> 

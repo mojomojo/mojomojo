@@ -2,18 +2,24 @@ package MojoMojo;
 
 use strict;
 use utf8;
-use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest/;
+use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI/;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
 
+#MojoMojo->prepare_home();
+#MojoMojo->config( YAML::LoadFile(MojoMojo->home().'/mojomojo.yml') );
 MojoMojo->config( YAML::LoadFile('/home/marcus/MojoMojo/mojomojo.yml') );
+MojoMojo->config( authentication => {
+                    user_class     => 'MojoMojo::M::Core::User',
+                    user_field     => 'login',
+                    password_field => 'pass'});
 
 MojoMojo->action(
 
     '!default' => sub {
         my ( $self, $c ) = @_;
-	$c->req->args([$self->pref('home_node')]);
+        $c->req->args([$self->pref('home_node')]);
         $c->forward( "!page/view" );
     },
     'favicon.ico' => sub {
@@ -92,8 +98,73 @@ sub pref {
     }
     return ( defined $setting->prefvalue() ? $setting->prefvalue : "");
 }
+sub prepare_home {
+    my $self=shift;
+    my $home=$self->home;
+    return unless $home;
+    return if -f $home.'/mojomojo.yml';
+    for (qw( db uploads logs root )) {
+        mkdir $home.'/'.$_ unless -w $home.'/'.$_;
+    }
+    YAML::WriteFile($home.'/mojomojo.yml',{
+      name => 'MojoMojo',
+      root => $home.'/root',
+      dsn => 'dbi:SQLite2:'.$home.'db/mojomojo.db'});
+}
+
+sub home { 
+    my ($self,$home)=@_;
+    return $self->{home}=$home if $home;   # Set a new home
+    return $self->{home} if $self->{home}; # Has a home;
+    if (-w $ENV{MOJOMOJO_HOME}) {
+      $self->{home}=$ENV{MOJOMOJO_HOME};
+    } elsif ( -w $ENV{HOME} ) {
+    # got writeable home, so we'll try to store it there
+      if (-w $ENV{HOME} ."/Library/Application Support") {
+      # Mac style
+	      $self->{home}=$ENV{HOME}."/Library/Application Support/MojoMojo";
+	} else {
+	   # Unix Style
+	   $self->{home}=$ENV{HOME}."/.mojomojo";
+	}
+	mkdir $self->{home} unless -w $self->{home};
+    } else {
+  die "Can't find a a place to write my settings. ".
+      "Perhaps you need to set the MOJOMOJO_HOME ENV variable?";
+    }
+    return $self->{home};
+}
 
 sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
 
 sub Catalyst::Log::info {}
+
 1;
+
+=head1 MojoMojo - A fancy wiki, powered by Catalyst
+
+=head1 SYNOPSIS
+
+  # on the command line 
+  ./bin/server.pl
+
+  # In apache conf
+  <Location /mojomojo>
+    SetHandler perl-script
+    PerlHandler MojoMojo
+  </Location>
+
+=head1 DESCRIPTION
+
+A fancy wiki, powered by Catalyst.
+
+=head1 AUTHOR
+
+Marcus Ramberg C<marcus@thefeed.no>
+
+=head1 LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
+

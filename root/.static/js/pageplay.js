@@ -52,6 +52,47 @@ function toggleCheckBox(id) {
 }
 
 
+/* Code to handle clicks and doubleclick. */
+ var dcTime=250;    // doubleclick time
+ var dcDelay=100;   // no clicks after doubleclick
+ var dcAt=0;        // time of doubleclick
+ var savEvent=null; // save Event for handling doClick().
+ var savEvtTime=0;  // save time of click event.
+ var savTO=null;    // handle of click setTimeOut
+ 
+ function showMe(form, txt) {
+   document.forms[form].elements[0].value += txt;
+ }
+ 
+function hadDoubleClick() {
+  var d = new Date();
+  var now = d.getTime();
+  showMe(1, "Checking DC (" + now + " - " + dcAt);
+  if ((now - dcAt) < dcDelay) {
+    showMe(1, "*hadDC*");
+    return true;
+  }
+  showMe(1, " OK ");
+  return false;
+}
 
-
+function handleWisely(which) {
+  showMe(1, which + " fired...");
+  switch (which) {
+    case "click": 
+      // If we've just had a doubleclick then ignore it
+      if (hadDoubleClick()) return false;
+        
+      // Otherwise set timer to act.  It may be preempted by a doubleclick.
+      savEvent = which;
+      d = new Date();
+      savEvtTime = d.getTime();
+      savTO = setTimeout("doClick(savEvent)", dcTime);
+      break;
+    case "dblclick":
+      doDoubleClick(which);
+      break;
+    default:
+  }
+}
 

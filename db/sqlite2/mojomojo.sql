@@ -57,6 +57,7 @@ CREATE TABLE attachment (
 );
 
 INSERT INTO user (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
+insert into user (login,name,pass) values ('marcus','Marcus Ramberg','secret');
 INSERT INTO page (owner,node,revision) VALUES ( 1,'FrontPage',1);
 INSERT INTO revision (page,user,content,updated) VALUES(1,1, 'testing testing, hello, is this thing on?','1970-01-01T00:00:00');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');

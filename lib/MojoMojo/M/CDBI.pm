@@ -3,6 +3,7 @@ package MojoMojo::M::CDBI;
 use strict;
 use base 'Catalyst::Model::CDBI';
 
+die "No DSN defined" unless MojoMojo->config->{dsn};
 __PACKAGE__->config(
     dsn                => MojoMojo->config->{dsn},
     namespace          => 'MojoMojo::M::Core',

@@ -1,27 +1,28 @@
-package MojoMojo::C::Page;
+        package MojoMojo::C::Page;
 
-use strict;
-use base 'Catalyst::Base';
-use Algorithm::Diff;
-use Archive::Zip;
-use IO::Scalar;
-use URI;
+        use strict;
+        use base 'Catalyst::Base';
+        use Algorithm::Diff;
+        use Archive::Zip;
+        use IO::Scalar;
+        use URI;
+        my $class = 'MojoMojo::M::Core::Page';
 
-MojoMojo->action(
+        MojoMojo->action(
 
-    '!page/view' => sub {
-        my ( $self, $c, $node ) = @_;
+            '!page/view' => sub {
+                my ( $self, $c, $node ) = @_;
 
-        $c->stash->{template} ||= 'page/view.tt';
+                $c->stash->{template} ||= 'page/view.tt';
 
-        $c->form( optional => ['rev'] );
+                $c->form( optional => ['rev'] );
 
-        $node ||= $c->pref('home_node');
-        my $page = MojoMojo::M::Core::Page->get_page( $node );
-        return $c->forward('!page/edit') unless $page;
+                $node ||= $c->pref('home_node');
+                my $page = MojoMojo::M::Core::Page->get_page( $node );
+                return $c->forward('!page/edit') unless $page;
 
-        if ( my $rev = $c->form->valid('rev') ) {
-            $c->stash->{rev} = abs $rev;
+                if ( my $rev = $c->form->valid('rev') ) {
+                    $c->stash->{rev} = abs $rev;
 
             my @revs = $page->revisions;
             if ( scalar @revs >= $rev ) {
@@ -43,12 +44,12 @@ MojoMojo->action(
 
         $c->stash->{template} = 'page/edit.tt';
 
-        my $class = 'MojoMojo::M::Core::Page';
         my $page = $class->get_page( $node );
         $c->stash->{page} = $page;
 
         $c->req->params->{node} ||= $node;
-        $c->form( optional => ['tags'], required => [qw/node content/] );
+        $c->form( optional => [qw/read write admin/],
+				          required => [qw/node/] );
 
         return if ( $c->form->has_missing || $c->form->has_invalid );
 
@@ -61,19 +62,26 @@ MojoMojo->action(
     }, '!page/print' => sub {
         my ( $self, $c, $node ) = @_;
         $c->stash->{template} = 'page/print.tt';
-	$c->forward('!page/view');
+        $c->forward('!page/view');
     }, '!page/rss' => sub {
         my ( $self, $c, $node ) = @_;
         $c->stash->{template} = 'page/rss.tt';
-	$c->forward('!page/view');
+        $c->forward('!page/view');
     }, '!page/atom' => sub {
         my ( $self, $c, $node ) = @_;
         $c->stash->{template} = 'page/atom.tt';
-	$c->forward('!page/view');
+        $c->forward('!page/view');
     }, '!page/rss' => sub {
         my ( $self, $c, $node ) = @_;
         $c->stash->{template} = 'page/rss_full.tt';
-	$c->forward('!page/view');
+        $c->forward('!page/view');
+    } , '!page/tags' => sub {
+        my ( $self, $c, $node ) = @_;
+        $node=$class->get_page($node) unless ref $node;
+        $c->stash->{template} = 'page/tags.tt';
+        $c->stash->{tags} = $node->tags;
+        $c->stash->{my_tags} = $node->tags($c->req->{user});
+        $c->forward('!page/view');
     }
 
 );

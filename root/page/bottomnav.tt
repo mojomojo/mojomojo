@@ -44,20 +44,23 @@
 [% END %]
     </small>
 [% END %]  
-[% IF page.tags %]
-<small>
-| tags: [% FOR tag IN page.tags %]
-<a href="[%base%].list/[%tag%]">[%tag%]</a> 
-[%END%]
-</small>
-[% END %]
 </div>
 
+<div class="tagedit">
+<input id="taginput" type="text" name="tag" width="5">
+</div>
+<div class="tags">
+<small>
+[%  c.subreq('!page/tags',page.node) %]
+</small>
+<br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
+</div>
 <script language="Javascript" type="text/javascript">
+  var base='[%base%]';
   var diff='';
   function toggleChanges() {
 	  if (!diff) {
-			diff=xmlHTTPRequest('[%base%].jsrpc/diff[%page.revision%]');
+			diff=xmlHTTPRequest('[%base%].jsrpc/diff/[%page.revision%]');
 		}
     if (document.getElementById("changes").style.display == "none") {
       document.getElementById("changes").style.display  = "block";
@@ -73,3 +76,4 @@
   }
 </script>
 [%END%]
+<script type="text/javascript" language="JavaScript" src="[%base%].static/js/tagedit.js"></script>

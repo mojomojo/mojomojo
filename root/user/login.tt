@@ -1,0 +1,15 @@
+[% PROCESS header.tt %]
+<h1 id="pageName">
+  <small> [% c.pref('name')|| "MojoMojo" %] </small>
+  <br/>Export
+</h1>
+[% PROCESS navbar.tt %]
+<h3>[%message%]</h3>
+<form action="[%base%].login" method="POST">
+<label for="login">login:</label>
+<input type="text" name="login"/>
+<label for="pass">password:</label>
+<input type="password" name="pass"/>
+<input type="submit" value="log in"/>
+</form>
+[% PROCESS footer.tt %]

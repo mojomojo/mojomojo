@@ -3,6 +3,7 @@
 <script type="text/javascript" language="JavaScript" src="[%base%].static/js/xmlhttp.js"></script>
 <script type="text/javascript" language="JavaScript" src="[%base%].static/js/pageplay.js"></script>
 <script type="text/javascript" language="JavaScript" src="[%base%].static/js/livebox.js"></script>
+<script type="text/javascript" language="JavaScript" src="[%base%].static/js/getElementsBySelector.js"></script>
     <head>
         <title>
 	[% IF item %] [%c.expand_wikiword(item.node)%] in [%END%]

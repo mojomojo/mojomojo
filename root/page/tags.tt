@@ -1,0 +1,14 @@
+<span id="tags">
+<b>popular tags : </b>
+<a class="tag" title="30" href="javascript:void(0)">perl</a>
+<a class="tag" title="20" href="javascript:void(0)">rocks</a>
+[% FOR tag IN page.tags() %]
+<a href="javascript:">[%tag%]</a> 
+[%END%]
+&nbsp;&nbsp;&nbsp;<b>my tags : </b>
+<a class="tag"  href="javascript:void(0)">initial</a>
+<a class="tag" href="javascript:void(0)">placement</a>
+[% FOR tag IN page.tags %]
+<a href="[%base%].list/[%tag%]">[%tag%]</a> 
+[%END%]
+</span>
