@@ -10,6 +10,30 @@ MojoMojo->config( YAML::LoadFile('/home/marcus/MojoMojo/mojomojo.yml') );
 
 MojoMojo->action(
 
+    '!default' => sub {
+        my ( $self, $c ) = @_;
+	$c->req->args([$self->pref('home_node')]);
+        $c->forward( "!page/view" );
+    },
+    'favicon.ico' => sub {
+        my ( $self, $c ) = @_;
+        $c->forward('.static');
+    },
+
+    '/^(\w+)\.(\w+)$/' => sub {
+        my ( $self, $c ) = @_;
+    	my ($page,$action) = @{ $c->request->snippets };
+        my ( $self, $c ) = @_;
+	$c->req->args([$page]);
+        $c->forward( "!page/$action" );
+    },
+    '/^(\w+)$/' => sub {
+        my ( $self, $c ) = @_;
+    	my ($page) = @{ $c->request->snippets };
+        my ( $self, $c ) = @_;
+	$c->req->args([$page]);
+        $c->forward( "!page/view" );
+    },
     '.static' => sub {
         my ( $self, $c ) = @_;
 	$c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
@@ -21,27 +45,7 @@ MojoMojo->action(
         $c->forward('!view')
           unless $c->stash->{template} || $c->res->output;
         $c->forward('MojoMojo::V::TT') unless $c->res->output;
-    },
-
-    'favicon.ico' => sub {
-        my ( $self, $c ) = @_;
-        $c->forward('.static');
-    },
-
-    '/^(\w+)\.(\w+)$/' => sub {
-        my ( $self, $c ) = @_;
-    	my ($page,$action) = @{ $c->request->snippets };
-	warn "action is".$action;
-        my ( $self, $c ) = @_;
-	$c->req->args([$page]);
-        $c->forward( "!page/$action" );
-    },
-    '/^(\w+)$/' => sub {
-        my ( $self, $c ) = @_;
-    	my ($page) = @{ $c->request->snippets };
-        my ( $self, $c ) = @_;
-	$c->req->args([$page]);
-        $c->forward( "!page/view" );
+	warn "here";
     },
 
 );
@@ -61,7 +65,7 @@ sub wikiword {
     if ( MojoMojo::M::CDBI::Page->search( node => $word )->next ) {
         if ($base) {
             return
-qq{<a class="existingWikiWord" href="$base/page/view/$word">$formatted</a> };
+qq{<a class="existingWikiWord" href="$base/$word">$formatted</a> };
         }
         else {
             return qq{<a class="existingWikiWord" href="$word">$formatted</a> };

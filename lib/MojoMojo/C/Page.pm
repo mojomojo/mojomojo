@@ -16,7 +16,7 @@ MojoMojo->action(
 
         $c->form( optional => ['rev'] );
 
-        $node ||= $c->prefs('home_page');
+        $node ||= $c->pref('home_node');
         my $page = MojoMojo::M::CDBI::Page->get_page( $node );
         return $c->forward('?edit') unless $page;
 
