@@ -1,0 +1,15 @@
+[% PROCESS header.tt %]
+<h1 id="pageName">
+  <small> [% c.pref('name')|| "MojoMojo" %] </small>
+  <br/>Export
+</h1>
+[% PROCESS navbar.tt %]
+
+<p>You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki).</p> 
+
+<ul id="feedsList">
+  <li><a href="[%base%].html.zip">HTML</a></li>
+  <li><a href="[%base%].export.zip">Markup (textile)</a></li>
+</ul>
+
+[% PROCESS footer.tt %]
