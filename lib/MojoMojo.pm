@@ -7,13 +7,13 @@ use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
 
-#MojoMojo->prepare_home();
-#MojoMojo->config( YAML::LoadFile(MojoMojo->home().'/mojomojo.yml') );
-MojoMojo->config( YAML::LoadFile('/home/marcus/MojoMojo/mojomojo.yml') );
+MojoMojo->prepare_home();
+MojoMojo->config( YAML::LoadFile(MojoMojo->home().'/mojomojo.yml') );
 MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::User',
                     user_field     => 'login',
                     password_field => 'pass'});
+MojoMojo->config ( no_url_rewrite=>1 );
 
 MojoMojo->action(
 
@@ -29,19 +29,19 @@ MojoMojo->action(
 
     '/^(\w+)\.(\w+)$/' => sub {
         my ( $self, $c ) = @_;
-    	my ($page,$action) = @{ $c->request->snippets };
-		$c->req->args([$page]);
+        my ($page,$action) = @{ $c->request->snippets };
+        $c->req->args([$page]);
         $c->forward( "!page/$action" );
     },
     '/^(\w+)$/' => sub {
         my ( $self, $c ) = @_;
-    	my ($page) = @{ $c->request->snippets };
-	$c->req->args([$page]);
+        my ($page) = @{ $c->request->snippets };
+        $c->req->args([$page]);
         $c->forward( "!page/view" );
     },
     '.static' => sub {
         my ( $self, $c ) = @_;
-	$c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
+        $c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
         $c->serve_static;
     },
 
@@ -50,6 +50,7 @@ MojoMojo->action(
         $c->forward('!page/view')
           unless $c->stash->{template} || $c->res->output;
         $c->forward('MojoMojo::V::TT') unless $c->res->output;
+        die if $c->req->params->{die};
     },
 
 );
@@ -106,33 +107,34 @@ sub prepare_home {
     for (qw( db uploads logs root )) {
         mkdir $home.'/'.$_ unless -w $home.'/'.$_;
     }
-    YAML::WriteFile($home.'/mojomojo.yml',{
+    YAML::DumpFile($home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite2:'.$home.'db/mojomojo.db'});
+      dsn => 'dbi:SQLite2:'.$home.'/db/mojomojo.db'});
 }
 
 sub home { 
-    my ($self,$home)=@_;
-    return $self->{home}=$home if $home;   # Set a new home
-    return $self->{home} if $self->{home}; # Has a home;
-    if (-w $ENV{MOJOMOJO_HOME}) {
-      $self->{home}=$ENV{MOJOMOJO_HOME};
-    } elsif ( -w $ENV{HOME} ) {
-    # got writeable home, so we'll try to store it there
-      if (-w $ENV{HOME} ."/Library/Application Support") {
-      # Mac style
-	      $self->{home}=$ENV{HOME}."/Library/Application Support/MojoMojo";
-	} else {
-	   # Unix Style
-	   $self->{home}=$ENV{HOME}."/.mojomojo";
-	}
-	mkdir $self->{home} unless -w $self->{home};
+  my ($class,$home)=@_;
+  return $class->config(home=>$home) if $home;   # Set a new home
+  return $class->config->{home} if $class->config->{home}; # Has a home;
+  if ($ENV{MOJOMOJO_HOME} && -w $ENV{MOJOMOJO_HOME}) {
+    $class->config(home=>$ENV{MOJOMOJO_HOME});
+  } elsif ( -w $ENV{HOME} ) {
+  # got writeable home, so we'll try to store it there
+    if (-w $ENV{HOME} ."/Library/Application Support") {
+    # Mac style
+      $class->config(home=>$ENV{HOME}."/Library/Application Support/MojoMojo");
     } else {
-  die "Can't find a a place to write my settings. ".
-      "Perhaps you need to set the MOJOMOJO_HOME ENV variable?";
+    # Unix Style
+      $class->config(home=>$ENV{HOME}."/.mojomojo");
     }
-    return $self->{home};
+    mkdir $class->config->{home} unless 
+       -w $class->config->{home};
+  } else {
+    die "Can't find a a place to write my settings. ".
+    "Perhaps you need to set the MOJOMOJO_HOME ENV variable?";
+  }
+  return $class->config->{home};
 }
 
 sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }

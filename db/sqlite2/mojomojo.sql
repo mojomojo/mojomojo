@@ -8,7 +8,7 @@ CREATE TABLE page (
 
 CREATE TABLE revision (
     id INTEGER PRIMARY KEY,
-    page INTEGER,
+    page INTEGER REFERENCES page,
     user INTEGER REFERENCES user,
     previous INTEGER REFERENCES revision,
     content TEXT,

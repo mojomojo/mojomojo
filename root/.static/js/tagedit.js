@@ -17,28 +17,28 @@ if (taginput) {
 var tags=document.getElementsBySelector('.tag')
 for (i = 0; i != tags.length; i++) {
     try { 
-		  tags[i].attachEvent("ondblclick", handleWisely, false);
-	} catch(e) { tags[i].ondblclick=handleWisely}
+              tags[i].attachEvent("ondblclick", handleWisely, false);
+          } catch(e) { tags[i].ondblclick=handleWisely}
     try { 
               tags[i].attachEvent("onclick", handleWisely, false);
           } catch(e) { tags[i].onclick=handleWisely}
-        }
+}
 
-        function tagGetFocus() {
-          taginput.style.backgroundColor='CCCCCC';
-        }
+function tagGetFocus() {
+  taginput.style.backgroundColor='CCCCCC';
+}
 
-        function tagBlur() {
-          taginput.style.backgroundColor='999999';
-        }
+function tagBlur() {
+  taginput.style.backgroundColor='999999';
+}
 
-        function submitenter(event) {
-        var keycode;
-        keycode = event.keyCode;
+function submitenter(event) {
+var keycode;
+keycode = event.keyCode;
 
-        if (keycode == 13) {
-           gId('mytags').innerHTML += ' '+taginput.value;
-           gId('tags').innerHTML=xmlHTTPRequest(base+'.jsrpc/tag/'+taginput.value);
+if (keycode == 13) {
+   var url=base+'.jsrpc/tag/'+taginput.value+'/'+node;
+   gId('tags').innerHTML=xmlHTTPRequest(url);
    taginput.value='';
    return false;
    } else { return true; }
@@ -71,9 +71,8 @@ function handleWisely(event) {
       if (hadDoubleClick()) return false;
         
       // Otherwise set timer to act.  It may be preempted by a doubleclick.
-      savEvent = which;
       d = new Date();
-      savEvtTime = d.getTime();
+      savEvent=event;
       savTO = setTimeout("goto_tag(savEvent)", dcTime);
       break;
     case "dblclick":
@@ -85,16 +84,18 @@ function handleWisely(event) {
 
 
 function mark_tag(event) {
- var node=event.target;
- if (node.title) {
-   gId('tags').innerHTML=xmlHTTPRequest(base+'.jsrpc/tag/'+node.innerHTML);
+ var tag=event.target;
+ if (tag.title) {
+   url=base+'.jsrpc/tag/'+tag.innerHTML+'/'+node;
+   gId('tags').innerHTML=xmlHTTPRequest(url)
  } else {
-	 gId('taginput').vaue="node.innerHTML";
-   gId('tags').innerHTML=xmlHTTPRequest(base+'.jsrpc/untag/'+node.innerHTML);
+   gId('taginput').value=tag.innerHTML;
+   url= base+'.jsrpc/untag/'+tag.innerHTML+'/'+node;
+   gId('tags').innerHTML=xmlHTTPRequest(url);
  }
 }
 
 function goto_tag(event) {
- document.location=base+'.recent/'+event.target.innerHTML');
+ document.location=base+'.recent/'+event.target.innerHTML;
 }
 

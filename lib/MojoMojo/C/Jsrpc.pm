@@ -4,11 +4,15 @@ use strict;
 use base 'Catalyst::Base';
 
 MojoMojo->action(
-
     '.jsrpc/render' => sub {
         my ( $self, $c ) = @_;
-        my $output= MojoMojo::M::Core::Page->
-                    formatted_content($c->req->base,$c->req->params->{content});
+        my $output="Please enter something";
+        if ($c->req->params->{content} &&
+            $c->req->params->{content} =~/(\S+)/) {
+          $output= MojoMojo::M::Core::Page->
+                      formatted_content($c->req->base,
+                      $c->req->params->{content});
+        }
         $c->res->output($output);
     }, '.jsrpc/diff' => sub {
         my ( $self, $c, $revision ) = @_;
@@ -22,7 +26,13 @@ MojoMojo->action(
     }, '.jsrpc/tag' => sub {
         my ( $self, $c, $tag, $node ) = @_;
         $node = MojoMojo::M::Core::Page->get_page($node);
-        $node->add_to_tags({tag=>$tag,user=>$c->req->{user}}) if $node;
+        unless (MojoMojo::M::Core::Tag->search(page=>$node,
+                                            user=>$c->req->{user_id},
+                                            tag=>$tag)->next()) {
+          $node->add_to_tags({tag=>$tag,
+                              user=>$c->req->{user_id}}) 
+                              if $node;
+        }
         $c->req->args([$node]);
         $c->forward('!page/tags');
 
@@ -30,12 +40,12 @@ MojoMojo->action(
         my ( $self, $c, $tag, $node ) = @_;
         $node = MojoMojo::M::Core::Page->get_page($node);
         $tag=MojoMojo::M::Core::Tag->search(page=>$node,
-                                            user=>$c->req->{user},
+                                            user=>$c->req->{user_id},
                                             tag=>$tag)->next();
-        $tag->delete(); if $tag;
+        $tag->delete() if $tag;
+        $c->req->args([$node]);
         $c->forward('!page/tags');
     }
-    
 );
 
 =head1 NAME

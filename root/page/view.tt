@@ -23,7 +23,7 @@
 </div>
 <div class="byline">
   Revised on [% page.updated.cdate %]
-    by [% c.wikiword(page.user.login,base) %]
+    by [% c.wikiword(page.revision.user.login,base) %]
 </div>
 
 [% PROCESS page/bottomnav.tt %]

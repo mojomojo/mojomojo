@@ -7,7 +7,7 @@ MojoMojo->action(
 
     '.logout' => sub {
         my ( $self, $c ) = @_;
-        $c->logout;
+        $c->session_logout;
         $c->forward('!default');
     },
     '.login' => sub {
@@ -17,7 +17,8 @@ MojoMojo->action(
             $c->session_login($c->req->params->{login},
                               $c->req->params->{pass} );
             if ($c->req->{user}) {
-              $c->forward('!default');
+              $c->forward('!default') unless $c->stash->{template};
+              return;
             } else {
               $c->stash->{message}='could not authenticate that login.';
             }

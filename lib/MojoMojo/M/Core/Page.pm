@@ -45,8 +45,8 @@ SELECT page.id as id,node,revison.updated,owner
 FROM page,tag WHERE revision.id=page.revision AND page.id=tag.page AND tag=? ORDER BY revision.updated
 });
 
-sub content { $_[0]->revision->content; }
-sub updated { $_[0]->revision->updated; }
+sub content { $_[0]->revision && $_[0]->revision->content; }
+sub updated { $_[0]->revision && $_[0]->revision->updated; }
 sub formatted_content {
     my ( $self,$base, $content ) = @_;
     $content ||= $self->content_utf8;
@@ -97,4 +97,15 @@ sub wikiwords {
     return @links;
 }
 
+sub others_tags {
+  my ($self,$user)=@_;
+  my $tags=MojoMojo::M::Core::Tag->search_others_tags($self,$user);
+  return $tags;
+}
+
+sub user_tags {
+  my ($self,$user)=@_;
+  my $tags=MojoMojo::M::Core::Tag->search(user=>$user,page=>$self);
+  return $tags;
+}
 1;

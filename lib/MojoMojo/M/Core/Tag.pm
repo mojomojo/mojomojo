@@ -1,7 +1,7 @@
 package MojoMojo::M::Core::Tag;
 use strict;
 
-__PACKAGE__->columns(TEMP=>qw/refcount/);
+__PACKAGE__->columns(TEMP=>qw/refcount pagecount/);
 __PACKAGE__->columns(Stringify=>qw/tag/);
 
 
@@ -16,6 +16,10 @@ SELECT  tag,count(tag) as refcount
 FROM tag WHERE page IN (select page from tag where tag=?) and tag != ?
 GROUP BY tag ORDER by REFCOUNT DESC LIMIT 10
 });
+__PACKAGE__->set_sql('others_tags' => qq{
+SELECT  tag,count(tag) as pagecount from tag WHERE page=? and user != ? GROUP BY tag order by pagecount
+});
+
 
 sub related_to {
     my ($self,$tag) = @_;

@@ -34,7 +34,7 @@
   <small>
     | Views: <a href="[%base%][%page.node%].print">Print</a>
       <a href="[%base%][%page.node%].rss">RSS</a>
-[%IF c.req.params.rev; PROCESS rollback; END %]
+[%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
   </small>
 [% IF page.links_to.first ; %] 
     <small>
@@ -57,6 +57,7 @@
 </div>
 <script language="Javascript" type="text/javascript">
   var base='[%base%]';
+  var node='[%page.node%]';
   var diff='';
   function toggleChanges() {
 	  if (!diff) {

@@ -15,10 +15,10 @@ function liveBox(id,output) {
 	} catch(e) { }
         try { 
 	        gId(id).attachEvent("onblur", liveBoxEnd, false); 
-	} catch(e) { }
+	} catch(e) { gId(id).onblur=liveBoxEnd}
         try { 
 		gId(id).attachEvent("onfocus", liveBoxStart, false);
-	} catch(e) { }
+	} catch(e) { gId(id).onfocus=liveBoxStart}
         liveboxid = id;
 }
 
@@ -51,7 +51,7 @@ function liveBoxDo() {
                 setTimeout('liveBoxDo()', 1200);
         }
         if (gId(liveboxid).value != liveboxwas) {
-                liveboxwas = gId(liveboxid).value;
-                p = xmlHTTPAsyncRequest(liveboxUrl, 'POST' ,'content='+liveboxwas ,'doStuff');
+          liveboxwas = gId(liveboxid).value;
+          p = xmlHTTPAsyncRequest(liveboxUrl, 'POST' ,'content='+liveboxwas ,'doStuff');
         }
 }

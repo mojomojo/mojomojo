@@ -1,0 +1,4 @@
+<form id="editForm" action="[%base%][%page%].rollback" method="post">
+<input type="hidden" name="revision" value="[%rev%]"/>
+<input type="submit" value="Roll back"/>
+</form>
