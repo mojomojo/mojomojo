@@ -1,0 +1,49 @@
+#!/usr/bin/perl -w
+
+use strict;
+use Getopt::Long;
+use Pod::Usage;
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+use Catalyst::Test qw/MojoMojo/;
+
+my $help = 0;
+my $port = 3000;
+
+GetOptions( 'help|?' => \$help, 'port=s' => \$port );
+
+pod2usage(1) if $help;
+
+Catalyst::Test::server($port);
+
+1;
+__END__
+
+=head1 NAME
+
+server - Catalyst Testserver
+
+=head1 SYNOPSIS
+
+server [options]
+
+ Options:
+   -help    display this help and exits
+   -port    port
+
+=head1 DESCRIPTION
+
+Run a Catalyst Testserver for this application.
+
+=head1 AUTHOR
+
+Sebastian Riedel Sebastian Riedel, C<sri@oook.de>
+
+=head1 COPYRIGHT
+
+Copyright 2004 Sebastian Riedel. All rights reserved.
+
+This library is free software. You can redistribute it and/or modify it under
+the same terms as perl itself.
+
+=cut
