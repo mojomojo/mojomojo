@@ -17,7 +17,9 @@ function xmlHTTPRequest( url, method, data ) {
     req = xmlHTTPRequestObject();
     if (req) {
         req.open( method, url, false );
-        req.send(data);
+        try {
+          req.send(data);
+        } catch(e) {}
         return req.responseText;
     }
 

@@ -1,10 +1,13 @@
 <span id="tags">
 <b>popular tags : </b>
-[% WHILE (tag=tags.next) %]
-<a class="tag" title="[%tag.pagecount%]" href="javascript:void(0)">[%tag%]</a> 
+[% FOREACH othertag IN others_tags %]
+[% SET tagmatch=' ' _ othertag.tag _ ' ' %]
+[% NEXT IF taglist.match(tagmatch) %]
+<a class="tag" title="[%othertag.pagecount%]" href="javascript:void(0)"
+>[%othertag.tag%]</a> 
 [%END%]
 &nbsp;&nbsp;&nbsp;<b>my tags : </b>
-[% WHILE (tag=my_tags.next) %]
-<a class="tag" href="javascript:void(0)">[%tag%]</a> 
+[% FOREACH tag IN tags %]
+<a class="tag" href="javascript:void(0)">[%tag.tag%]</a> 
 [%END%]
 </span>

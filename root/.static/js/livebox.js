@@ -10,20 +10,6 @@ function liveBox(id,output) {
     liveboxid = id;
     registerAction(id,"focus",liveBoxStart);
     registerAction(id,"blur",liveBoxEnd);
-        /*
-        try { 
-	        gId(id).addEventListener("blur", liveBoxEnd, false);
-	} catch(e) { }
-        try { 
-	        gId(id).addEventListener("focus", liveBoxStart, false);
-	} catch(e) { }
-        try { 
-	        gId(id).attachEvent("onblur", liveBoxEnd, false); 
-	} catch(e) { gId(id).onblur=liveBoxEnd}
-        try { 
-		gId(id).attachEvent("onfocus", liveBoxStart, false);
-	} catch(e) { gId(id).onfocus=liveBoxStart}
- */ 
 }
 
 function setLiveboxUrl(url) {
@@ -43,6 +29,8 @@ function doStuff() {
 	if (req.readyState == 4 && req.status != 200) {
 		/* We get here if an error occurs, like a 403, 404, 500, etc */
 		/* p.statusText will hold a human readable answer, or use p.status */
+		gId(liveboxOutput).innerHTML = req.statusText;
+    return;
 	}
         if (req.readyState == 4 && req.status == 200) {
 		/* We get here if things went well */
