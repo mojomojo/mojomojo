@@ -3,7 +3,6 @@ CREATE TABLE page (
     owner INTEGER REFERENCES user,
     node VARCHAR(30),
     revision INTEGER REFERENCES revision,
-    prevrev INTEGER REFERENCES revision,
     read text, write text, admin text
 );
 
@@ -11,6 +10,7 @@ CREATE TABLE revision (
     id INTEGER PRIMARY KEY,
     page INTEGER,
     user INTEGER REFERENCES user,
+    previous INTEGER REFERENCES revision,
     content TEXT,
     updated varchar(100)
 );
@@ -59,3 +59,5 @@ CREATE TABLE attachment (
 INSERT INTO user (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
 INSERT INTO page (owner,node,revision) VALUES ( 1,'FrontPage',1);
 INSERT INTO revision (page,user,content,updated) VALUES(1,1, 'testing testing, hello, is this thing on?','1970-01-01T00:00:00');
+INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');
+INSERT INTO preference (prefkey, prefvalue) VALUES ('name','The Feed');
