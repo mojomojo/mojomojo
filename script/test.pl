@@ -5,31 +5,36 @@ use Getopt::Long;
 use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-use Catalyst::Test 'MojoMojo';
 
 my $help = 0;
-my $port = 3000;
 
-GetOptions( 'help|?' => \$help, 'port=s' => \$port );
+GetOptions( 'help|?' => \$help );
 
-pod2usage(1) if $help;
+pod2usage(1) if ( $help || !$ARGV[0] );
 
-Catalyst::Test::server($port);
+require Catalyst::Test;
+import Catalyst::Test 'MojoMojo';
+
+print get($ARGV[0]) . "
+";
 
 1;
 __END__
 
 =head1 NAME
 
-server - Catalyst Testserver
+test - Catalyst Test
 
 =head1 SYNOPSIS
 
-server [options]
+test.pl [options] uri
 
  Options:
    -help    display this help and exits
-   -port    port (defaults to 3000)
+
+ Examples:
+   test.pl http://localhost/some_action
+   test.pl /some_action
 
  See also:
    perldoc Catalyst::Manual
@@ -37,7 +42,7 @@ server [options]
 
 =head1 DESCRIPTION
 
-Run a Catalyst Testserver for this application.
+Run a Catalyst action from the comand line.
 
 =head1 AUTHOR
 

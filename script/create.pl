@@ -23,19 +23,19 @@ create - Create a new Catalyst Component
 
 =head1 SYNOPSIS
 
-create [options] model|view|controller name [helper] [options]
+create.pl [options] model|view|controller name [helper] [options]
 
  Options:
    -help    display this help and exits
 
  Examples:
-   perl create controller My::Controller
-   perl create view My::View
-   perl create view MyView TT
-   perl create view TT TT
-   perl create model My::Model
-   perl create model SomeDB CDBI dbi:SQLite:/tmp/my.db
-   perl create model AnotherDB CDBI dbi:Pg:dbname=foo root 4321
+   create.pl controller My::Controller
+   create.pl view My::View
+   create.pl view MyView TT
+   create.pl view TT TT
+   create.pl model My::Model
+   create.pl model SomeDB CDBI dbi:SQLite:/tmp/my.db
+   create.pl model AnotherDB CDBI dbi:Pg:dbname=foo root 4321
 
  See also:
    perldoc Catalyst::Manual
