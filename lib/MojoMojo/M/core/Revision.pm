@@ -1,4 +1,4 @@
-package MojoMojo::M::CDBI::Revision;
+package MojoMojo::M::Core::Revision;
 
 use strict;
 use base 'Catalyst::Base';
@@ -19,8 +19,8 @@ __PACKAGE__->has_a(
     },
     deflate => 'datetime'
 );
-MojoMojo::M::CDBI::Page->has_many(
-    revisions => "MojoMojo::M::CDBI::Revision",
+MojoMojo::M::Core::Page->has_many(
+    revisions => "MojoMojo::M::Core::Revision",
     { order_by => 'id desc' }
 );
 
@@ -37,11 +37,11 @@ sub archive {
 }
 
 sub formatted_diff {
-    return MojoMojo::Page::formatted_diff(@_);
+    return MojoMojo::M::Core::Page::formatted_diff(@_);
 }
 
 sub formatted_content {
-    return MojoMojo::Page::formatted_content(@_);
+    return MojoMojo::M::Core::Page::formatted_content(@_);
 }
 sub node      { shift->page->node; }
 

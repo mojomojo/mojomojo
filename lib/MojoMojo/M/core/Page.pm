@@ -1,4 +1,4 @@
-package MojoMojo::M::CDBI::Page;
+package MojoMojo::M::Core::Page;
 
 use strict;
 use Time::Piece;
@@ -28,11 +28,11 @@ __PACKAGE__->has_a(
     deflate => 'datetime'
 );
 __PACKAGE__->has_many(
-    links_to => [ 'MojoMojo::M::CDBI::Link' => 'from_page' ],
+    links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
     "to_page"
 );
 __PACKAGE__->has_many(
-    links_from => [ 'MojoMojo::M::CDBI::Link' => 'to_page' ],
+    links_from => [ 'MojoMojo::M::Core::Link' => 'to_page' ],
     "from_page"
 );
 
@@ -45,6 +45,7 @@ SELECT page.id as id,node,updated,user
 FROM page,tag WHERE page.id=tag.page AND tag=? ORDER BY page.updated
 });
 
+sub content { $_[0]->revision->content; }
 sub formatted_content {
     my ( $self,$base, $content ) = @_;
     $content ||= $self->content_utf8;
