@@ -13,6 +13,7 @@ MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::User',
                     user_field     => 'login',
                     password_field => 'pass'});
+   
 MojoMojo->config ( no_url_rewrite=>1 );
 
 MojoMojo->action(
@@ -27,13 +28,13 @@ MojoMojo->action(
         $c->serve_static;
     },
 
-    '/^(\w+)\.(\w+)$/' => sub {
+    '/^(\w[\w\/]+)\.(\w+)$/' => sub {
         my ( $self, $c ) = @_;
         my ($page,$action) = @{ $c->request->snippets };
         $c->req->args([$page]);
         $c->forward( "!page/$action" );
     },
-    '/^(\w+)$/' => sub {
+    '/^(\w[\w\/]+)$/' => sub {
         my ( $self, $c ) = @_;
         my ($page) = @{ $c->request->snippets };
         $c->req->args([$page]);

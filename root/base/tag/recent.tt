@@ -1,0 +1,34 @@
+[%PROCESS header.tt %]
+[% SET now=pages.first.updated.dmy('.'); %]
+<h1 id="pageName">
+  <small> [% title || config.application_name || "Mitiki" %] </small>
+  <br/>Recent Pages
+</h1>
+[%PROCESS navbar.tt %]
+<div id="categories">
+  <strong>tags</strong>: <small>
+  [%FOREACH tag IN tags.list %]
+  [%IF tag.tag==activetag%]
+  <b>[%tag.tag%]</b>
+  [%ELSE%]
+  <a href="[%base%].recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
+  [%END%]
+  [%END%]</small>
+</div>
+<b>[% now %]</b>
+<ul>
+[% FOR item=pages.list %]
+[%IF now != item.updated.dmy('.');%]
+  [%SET now=item.updated.dmy('.'); %]
+  </ul><b>[% now %]</b><ul>
+[% END %]
+ <li>
+    <a href="[%base%][%item.node%]">[%c.expand_wikiword(item.node)%]</a>
+    <div class="byline" style="margin-bottom: 0px">
+      by <a class="existingWikiWord" href="[%base%][%item.revision.user.login%]">[%item.revision.user.name%]</a>
+      at [%item.updated.hms(':')%]
+    </div>
+  </li>
+[%END%]
+</ul>
+[%PROCESS footer.tt%]

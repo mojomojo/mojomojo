@@ -3,17 +3,9 @@ package MojoMojo::M::Core::Page;
 use strict;
 use Time::Piece;
 use Algorithm::Diff;
+use Data::Dumper;
 
 __PACKAGE__->columns( Essential => qw/owner node/ );
-__PACKAGE__->columns( TEMP      => 'content_utf8' );
-__PACKAGE__->add_trigger(
-    select => sub {
-        my $self    = shift;
-        my $content = $self->content;
-        utf8::decode($content);
-        $self->content_utf8($content);
-    }
-);
 __PACKAGE__->add_trigger(
     after_set_content => sub {
        my $self =shift;
@@ -22,11 +14,6 @@ __PACKAGE__->add_trigger(
     }
 );
 
-#__PACKAGE__->has_a(
-#    updated => 'Time::Piece',
-#    inflate => sub { Time::Piece->strptime( shift, "%FT%H:%M:%S" ) },
-#    deflate => 'datetime'
-#);
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
     "to_page"
@@ -37,14 +24,15 @@ __PACKAGE__->has_many(
 );
 
 __PACKAGE__->set_sql('by_tag' => qq{
-SELECT page.id as id,node,revision.updated,owner 
-FROM page,tag WHERE page.revision=revision.id AND page.id=tag.page AND tag=? ORDER BY node
+SELECT DISTINCT node, page.id as id,revision.updated,owner 
+FROM page,tag,revision WHERE page.revision=revision.id AND page.id=tag.page AND tag=? ORDER BY node
 });
 __PACKAGE__->set_sql('by_tag_and_date' => qq{
-SELECT page.id as id,node,revison.updated,owner 
-FROM page,tag WHERE revision.id=page.revision AND page.id=tag.page AND tag=? ORDER BY revision.updated
+SELECT DISTINCT node, page.id as id,revision.updated,owner 
+FROM page,tag,revision WHERE revision.id=page.revision AND page.id=tag.page AND tag=? ORDER BY revision.updated
 });
 
+sub content_utf8 { $_[0]->revision && $_[0]->revision->content_utf8; }
 sub content { $_[0]->revision && $_[0]->revision->content; }
 sub updated { $_[0]->revision && $_[0]->revision->updated; }
 sub formatted_content {
@@ -74,6 +62,24 @@ sub formatted_diff {
     return $self->formatted_content($base,$diff);
 }
 
+sub highlight {
+    my ( $self,$base, ) = @_;
+    my $this=[ split /\n/, $self->formatted_content($base) ];
+    my $prev=[ split /\n/, $self->revision->previous->formatted_content($base)];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    my $hi=0;
+    for my $line (@diff) {
+      $hi++;
+      if    ($$line[0] eq "+") { 
+	$diff .= qq(<div id="hi$hi" class="fade">).$$line[2]."</div>" }
+      elsif ($$line[0] eq "c") {
+	$diff .= qq(<div id="hi$hi"class="fade">).$$line[2]."</div>" }
+      else { $diff .=  $$line[1] }
+    }
+    return $diff;
+}
+
 sub get_page {
     my ( $self,$page )=@_;
     return $self->search_where(node=>$page)->next();
@@ -99,13 +105,13 @@ sub wikiwords {
 
 sub others_tags {
   my ($self,$user)=@_;
-  my $tags=MojoMojo::M::Core::Tag->search_others_tags($self,$user);
-  return $tags;
+  my (@tags)=MojoMojo::M::Core::Tag->search_others_tags($self->id,$user);
+  return @tags;
 }
 
 sub user_tags {
   my ($self,$user)=@_;
-  my $tags=MojoMojo::M::Core::Tag->search(user=>$user,page=>$self);
-  return $tags;
+  my (@tags)=MojoMojo::M::Core::Tag->search(user=>$user,page=>$self);
+  return @tags;
 }
 1;

@@ -2,8 +2,6 @@ package MojoMojo::C::Page;
 
 use strict;
 use base 'Catalyst::Base';
-use Algorithm::Diff;
-use Archive::Zip;
 use IO::Scalar;
 use URI;
 use Time::Piece;
@@ -65,8 +63,7 @@ MojoMojo->action(
               $c->form );
     $page->revision($rev);
     $page->update;
-    $c->req->args([$page]);
-    $c->res->redirect($c->req->base.$node);
+    $c->res->redirect($c->req->base.$node.'.highlight');
 
   }, '!page/print' => sub {
       my ( $self, $c, $node ) = @_;
@@ -84,12 +81,32 @@ MojoMojo->action(
       my ( $self, $c, $node ) = @_;
       $c->stash->{template} = 'page/rss_full.tt';
       $c->forward('!page/view');
+  }, '!page/highlight' => sub {
+      my ( $self, $c, $node ) = @_;
+      $c->stash->{template} = 'page/highlight.tt';
+      $c->forward('!page/view');
   } , '!page/tags' => sub {
       my ( $self, $c, $node ) = @_;
       $node=$class->get_page($node) unless ref $node;
       $c->stash->{template} = 'page/tags.tt';
-      $c->stash->{tags} = $node->others_tags($c->req->{user_id});
-      $c->stash->{my_tags} = $node->user_tags($c->req->{user_id});
-  });
+      my @tags = $node->others_tags($c->req->{user_id});
+      $c->stash->{others_tags} = [@tags];
+      @tags =$node->user_tags($c->req->{user_id});
+      $c->stash->{taglist} = ' '.join(' ',map {$_->tag} @tags).' ' ;
+      $c->stash->{tags} =  [@tags];
+   }, '.list' => sub {
+      my ( $self, $c, $tag ) = @_;
+      return $c->forward('!tag/list') if $tag;
+      $c->stash->{template} = 'page/list.tt';
+      $c->stash->{pages} = [ $class->retrieve_all_sorted_by('node') ];
+      $c->stash->{orphans} = [ ];
+      $c->stash->{wanted} = [ ];
+      $c->stash->{tags} = [ MojoMojo::M::Core::Tag->search_most_used() ];
+   
+   }, '.recent' => sub {
+      my ( $self, $c, $tag ) = @_;
+      return $c->forward('!tag/recent') if $tag;
+      $c->stash->{template} = 'page/recent.tt';
+   });
 
 1;

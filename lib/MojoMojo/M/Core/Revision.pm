@@ -2,16 +2,9 @@ package MojoMojo::M::Core::Revision;
 
 use strict;
 use base 'Catalyst::Base';
+use Time::Piece;
+use utf8;
 
-__PACKAGE__->columns( TEMP => 'content_utf8' );
-__PACKAGE__->add_trigger(
-    select => sub {
-	my $self    = shift;
-	my $content = $self->content;
-	utf8::decode($content);
-	$self->content_utf8($content);
-    }
-);
 __PACKAGE__->has_a(
     updated => 'Time::Piece',
     inflate => sub {
@@ -40,5 +33,12 @@ sub formatted_content {
     return MojoMojo::M::Core::Page::formatted_content(@_);
 }
 sub node      { shift->page->node; }
+
+sub content_utf8 { 
+    my $self    = shift;
+    my $content = $self->content;
+    utf8::decode($content);
+    return $content;
+    }
 
 1;

@@ -2,6 +2,7 @@ package MojoMojo::C::Export;
 use strict;
 use base 'Catalyst::Base';
 use Time::Piece;
+use Archive::Zip;
 
 my $model='MojoMojo::M::Core::Page';
 
