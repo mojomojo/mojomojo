@@ -25,7 +25,7 @@ MojoMojo->action(
 
             my @revs = $page->revisions;
             if ( scalar @revs >= $rev ) {
-                $c->stash->{pages} = [ $revs[ $rev - 1 ], $revs[$rev] ];
+                $c->stash->{page} =  $revs[ $rev - 1 ];
                 $c->stash->{rev} = $rev;
             }
             else { $c->stash->{template} = 'norevision.tt' }
@@ -33,7 +33,7 @@ MojoMojo->action(
         }
         else {
             $c->stash->{rev} = 0;
-            $c->stash->{pages} = [ $page, $page->revision->previous ];
+            $c->stash->{page} =  $page;
         }
 
     },

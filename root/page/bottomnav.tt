@@ -1,27 +1,27 @@
 [% IF template.name == "page/view.tt" %]
 <div class="navigation">
     [% IF (!rev) %]
-    <a href="[% base %]page/edit/[% item.node %]" class="navlink" accesskey="E">Edit Page</a>
-    [% IF c.req.args.first == "FrontPage" %]
-    | <a href="[% base %]preference/edit" class="navlink">Edit Settings</a>
+    <a href="[% base %][% page.node %].edit" class="navlink" accesskey="E">Edit Page</a>
+    [% IF page.node == $c.pref('home_node') %]
+    | <a href="[% base %].pref" class="navlink">Edit Settings</a>
     [% END %]
- [% IF item.revision.previous && (item.revisions.size+rev)>0%] 
-    | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
-    ([%item.revisions.size%] revision[%IF item.revisions.size>1;"s";END%])</small>
+ [% IF page.revision.previous && (page.revisions.size+rev)>0%] 
+    | <a href="[% base %][%page.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
+    ([%page.revisions.size%] revision[%IF page.revisions.size>1;"s";END%])</small>
     [% END %]
     [% ELSE %]
-    | <a href="[% base %]page/view/[%item.node%][%
-    IF rev>1%]?rev=[% c.req.params.rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    | <a href="[% base %][%page.node%][%
+    IF page.revision.revisions.next%]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
     ([%rev%] more)
     </small>
-    [%IF item.revisions.size-rev%]
-    | <a href="[% base %]page/view/[%item.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
+    [%IF page.revision.parent%]
+    | <a href="[% base %][%page.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
     <small>
-    ([%item.revisions.size-rev%] more)
+    ([%page.revisions.size-rev%] more)
     </small>
     [%END%]
-    | <a href="[% base %]page/view/[%item.node%]" class="navlink" accesskey="C">See current</a> 
+    | <a href="[% base %][%page.node%]" class="navlink" accesskey="C">See current</a> 
  [% END %] 
   [% IF objects.last %]
     <span id="show_changes">
@@ -32,29 +32,33 @@
     </span>
   [% END %]
   <small>
-    | Views: <a href="[%base%][%item.node%].print">Print</a>
-      <a href="[%base%][%item.node%].rss">RSS</a>
+    | Views: <a href="[%base%][%page.node%].print">Print</a>
+      <a href="[%base%][%page.node%].rss">RSS</a>
 [%IF c.req.params.rev; PROCESS rollback; END %]
   </small>
-[% IF item.links_to.first ; %] 
+[% IF page.links_to.first ; %] 
     <small>
       | Linked from:
-[% FOR linkitem = item.links_to %] 
-    <a class="existingWikiWord" href="[%base%]page/view/[%linkitem.node%]">[%c.req.expand_wikiword(linkitem.node)%]</a>
+[% FOR linkitem = page.links_to %] 
+    <a class="existingWikiWord" href="[%base%][%linkitem.node%]">[%c.expand_wikiword(linkitem.node)%]</a>
 [% END %]
     </small>
 [% END %]  
-[% IF item.tags %]
+[% IF page.tags %]
 <small>
-| tags: [% FOR tag IN item.tags %]
-<a href="[%base%]tag/list/[%tag%]">[%tag%]</a> 
+| tags: [% FOR tag IN page.tags %]
+<a href="[%base%].list/[%tag%]">[%tag%]</a> 
 [%END%]
 </small>
 [% END %]
 </div>
 
 <script language="Javascript" type="text/javascript">
+  var diff='';
   function toggleChanges() {
+	  if (!diff) {
+			diff=xmlHTTPRequest('[%base%].jsrpc/diff[%page.revision%]');
+		}
     if (document.getElementById("changes").style.display == "none") {
       document.getElementById("changes").style.display  = "block";
       document.getElementById("revision").style.display = "none";

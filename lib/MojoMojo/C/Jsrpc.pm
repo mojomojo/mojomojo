@@ -12,7 +12,16 @@ MojoMojo->action(
         $c->res->output($output);
 				warn($c->res->output);
     },
-
+		'.jsrpc/diff' => sub {
+        my ( $self, $c, $revision ) = @_;
+				my $page= MojoMojo::M::Core::Revision->retrieve($revision);
+				if ($revision->parent) {
+				$c->res->output($revision->formatted_diff($c->req->base,
+																									$revision->parent);
+				} else {
+				$c->res->output("This is the first revision!");
+				}
+		}
 );
 
 =head1 NAME
