@@ -1,15 +1,30 @@
 package MojoMojo::M::Core::Page;
 
+=head1 NAME
+
+MojoMojo::M::Core::Page - Page model
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+This class models only "live" MojoMojo pages. Revisions (page histories)
+are accessible via Page objects, however.
+
+=cut
+
+
+
 use strict;
 use Time::Piece;
 use Algorithm::Diff;
 
-__PACKAGE__->columns( Essential => qw/owner name name_orig parent depth/ );
+__PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP => qw/path_string/ );
 __PACKAGE__->add_trigger(
     after_set_content => sub {
        my $self =shift;
-       $self->modified_date(localtime->datetime);
+       $self->created(localtime->datetime);
        $self->update();
     }
 );
@@ -23,34 +38,39 @@ __PACKAGE__->has_many(
     "from_page"
 );
 
+=head1 METHODS
+
+=over 4
+
+=item search_by_tag
+
+=cut
+
 __PACKAGE__->set_sql('by_tag' => qq{
-SELECT DISTINCT name, page.id as id,content.modified_date,content.modified_by
-FROM page,tag,content WHERE page.content=content.id AND page.id=tag.page AND tag=? ORDER BY name
+SELECT DISTINCT name, page.id as id, content.created, content.creator
+FROM page, tag, content WHERE page.content=content.id AND page.id=tag.page AND tag=? ORDER BY name
 });
 __PACKAGE__->set_sql('by_tag_and_date' => qq{
-SELECT DISTINCT name, page.id as id,content.modified_date,content.modified_by
-FROM page,tag,content WHERE content.id=page.content AND page.id=tag.page AND tag=? ORDER BY content.modified_by
+SELECT DISTINCT name, page.id as id, content.created, content.creator
+FROM page, tag, content WHERE content.id=page.content AND page.id=tag.page AND tag=? ORDER BY content.created
 });
+
+# FIX: this one needs work...
 __PACKAGE__->set_sql('recent' => qq{
-SELECT DISTINCT node, page.id as id,revision.updated,owner 
-FROM page,revision WHERE revision.id=page.revision 
+SELECT DISTINCT node, page.id as id,revision. updated, owner
+FROM page,revision WHERE revision.id=page.revision
 ORDER BY revision.updated DESC
 });
 
-sub content_utf8 { $_[0]->content && $_[0]->content->content_utf8; }
-sub content_raw { $_[0]->content && $_[0]->content->content; }
-sub updated { $_[0]->content && $_[0]->content->modified_date; }
-sub formatted_content {
-    my ( $self,$base, $content ) = @_;
-    $content ||= $self->content_utf8;
-    MojoMojo->call_plugins("format_content", \$content, $base) if ($content);
-    return $content;
-}
+# do we need these  ???
+sub content_raw { $_[0]->content && $_[0]->content->body; }
+sub updated { $_[0]->content && $_[0]->content->created; }
 
+# should this go to Revision.pm ???
 sub formatted_diff {
     my ( $self,$base,$to ) = @_;
-    my $this=[ split /\n/, $self->formatted_content($base) ];
-    my $prev=[ split /\n/, $to->formatted_content($base)   ];
+    my $this=[ split /\n/, $self->content->formatted($base) ];
+    my $prev=[ split /\n/, $to->content->formatted($base)   ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
@@ -67,10 +87,11 @@ sub formatted_diff {
     return $diff;
 }
 
+# should this go to Revision.pm ???
 sub highlight {
     my ( $self,$base, ) = @_;
-    my $this=[ split /\n/, $self->formatted_content($base) ];
-    my $prev=[ split /\n/, $self->revision->previous->formatted_content($base)];
+    my $this=[ split /\n/, $self->content->formatted($base) ];
+    my $prev=[ split /\n/, $self->revision->previous->content->formatted($base)];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     my $hi=0;
@@ -85,12 +106,56 @@ sub highlight {
     return $diff;
 }
 
+=item get_page
+
+May be defunct. See get_path below.
+
+=cut
+
 sub get_page {
     my ( $self,$page )=@_;
     #return $self->search_where(name=>$page)->next();
     my ($path, $proto_pages) = $self->get_path( $page );
     return ($path, $proto_pages);
 }
+
+=item get_path
+
+Accepts a path_string in url/unix directory format, e.g. "/page1/page2".
+Paths are assumed to be absolute, so a leading slash (/) is not required.
+Returns an array of any pages that exist in the path, starting with "/",
+and an additional array of "proto page" hahses for any pages at the end
+of the path that do not exist. All paths include the root (/), which must
+exist, so a path of at least one element will always be returned. The "proto
+page" hash keys are:
+
+=over
+
+=item 4
+
+=item name_orig
+
+The page name submitted by the user, with minor cleaning, e.g. leading and trailing
+spaces trimmed.
+
+=item name
+
+The normalized page name, all lower case, with spaces replaced by underscores (_).
+
+=item path_string
+
+The partial, absolute path to the current page.
+
+=item depth
+
+The depth in the page hierarchy, or generation, of the current page.
+
+=back
+
+Notice that these fields all exist in the page objects, also. All are page table columns,
+with the exception of path_string, which is a Class::DBI TEMP column.
+
+=cut
 
 sub get_path {
     my ($self, $path_string) = @_;
@@ -156,8 +221,11 @@ sub parse_path_string {
 
     # Remove leading and trailing slashes to make
     # split happy. We'll add the root (/) back later...
-    die "Page path must be absolute"
-        unless $path_string =~ s/^(\/)+//;
+    ## We don't die on this anymore. Not sure yet
+    ## whether or not this is a good thing...
+    ##die "Page path must be absolute"
+    ##    unless $path_string =~ s/^(\/)+//;
+    $path_string =~ s/^(\/)+//;
     $path_string =~ s/(\/)+$//;
 
     my @proto_pages = map { {name_orig => $_} } (split /\/+/, $path_string);
@@ -174,6 +242,7 @@ sub parse_path_string {
         $_->{depth} = $depth;
         $depth++;
     }
+    # assume that all paths are absolute:
     unshift @proto_pages, { name => '/', name_orig => '/', path_string => '/', depth => 0 };
 
     return @proto_pages;
@@ -195,6 +264,17 @@ sub normalize_name
 
 } # end sub normalize_name
 
+sub revision
+{
+    my ($self) = @_;
+    return MojoMojo::M::Core::Revision->retrieve
+    (
+     page    => $self->id,
+     version => $self->version
+    );
+}
+
+# This is probably defunct in favor of "revision" above...
 sub get_revision {
     my ( $self,$revnum)=@_;
     return MojoMojo::M::Core::Revision->search_where(

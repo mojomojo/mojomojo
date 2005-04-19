@@ -6,7 +6,9 @@ use IO::Scalar;
 use URI;
 use Time::Piece;
 use File::MimeInfo::Magic;
-my $class = 'MojoMojo::M::Core::Page';
+my $m_base = 'MojoMojo::M::Core::';
+my $m_page_class = $m_base . 'Page';
+my $m_rev_class = $m_base . 'Revision';
 
 #For uploads
 $CGI::Simple::POST_MAX = 1048576000;
@@ -23,9 +25,8 @@ This controller is the main juice of MojoMojo. it handles all the
 actions related to wiki pages. actions are redispatched to this
 controller based on a Regex controller in the main MojoMojo class.
 
-every private action here expects to have a node in args. They
-can be called with urls like /MyNode.action .
-
+Every private action here expects to have a page path in args. They
+can be called with urls like "/page1/page2.action".
 
 =head1 ACTIONS
 
@@ -44,23 +45,25 @@ load the provided revision instead.
 =cut
 
 sub view : Private {
-    my ( $self, $c, $node ) = @_;
+    my ( $self, $c, $path_string ) = @_;
 
-    $c->stash->{template} ||= 'page/view.tt';
+    my $stash = $c->stash;
+    $stash->{template} ||= 'page/view.tt';
 
-    #$node ||= $c->pref('home_node');
-    # We shouldn't need to do this: what's going on?????
-    $node = (defined $node ? '/' . $node : '/');
+    my ($path, $proto_pages) = @$stash{qw/ path proto_pages /};
+    # we should always have a path of at least "/". if we don't,
+    # we must not have had these structures in the stash
+    unless ($path)
+    {
+        ($path, $proto_pages) = $m_page_class->get_path( $path_string );
+        @$stash{qw/ path proto_pages /} = ($path, $proto_pages);
+    }
+    # WARNING! there may be potential for an infinite loop here,
+    # bouncing back and forth between "edit" and "view"
+    return $c->forward('edit') if @$proto_pages;
 
-    # change to use paths of pages:
-    #my $page = MojoMojo::M::Core::Page->get_page( $node );
-    my ($path, $proto_pages) = MojoMojo::M::Core::Page->get_page( $node );
     my $depth = @$path - 1;
-    my $page = $path->[$depth];
-
-    # revisions not "fixed" yet, revisit later
-    #return $c->forward('edit') unless $page && $page->revision;
-    return $c->forward('edit') unless $page;
+    $stash->{page} = $path->[$depth];
 
     # revisions not "fixed" yet, revisit later
 #     $c->form( optional => ['rev'] );
@@ -70,8 +73,6 @@ sub view : Private {
 #       $c->stash->{rev};
 #     }
 
-    $c->stash->{page} = $page;
-    $c->stash->{path} = $path;
 }
 
 =item edit
@@ -83,42 +84,112 @@ after saving, it will forward to the highlight action.
 =cut
 
 sub edit : Private {
-      my ( $self, $c, $node ) = @_;
+    my ( $self, $c, $path_string ) = @_;
 
-      $c->stash->{template} = 'page/edit.tt';
-      $c->forward('/user/login') if $c->req->params->{login} && 
+    my $stash = $c->stash;
+    $stash->{template} = 'page/edit.tt';
+    $c->forward('/user/login') if $c->req->params->{login} &&
                              ! $c->req->{user};
 
-      my $editor = $c->req->{user_id} || 0;
+    my $user = $c->req->{user_id} || 0;
 
-      my $page   = $class->get_page( $node );
-      unless ($page) {
-          $c->form( optional => [qw/read write admin/],
-                    defaults => { owner=>$editor,
-                                  node=>$node});
-          $page=$class->create_from_form( $c->form );
-      }
+## scenarios
 
-      $c->form(required => [qw/content/],
-               defaults=> { page=>$page,
-                            updated=>localtime->datetime,
-                            user=>$editor,
-                            previous=>$page->revision,
-                            revnum=>($page->revision ?
-                                     $page->revision->revnum+1 :
-                                     1)
-                            }
-              );
+# * In all of these scenarios, we will have full path from the
+# request url!!! Do we need to worry about it?
+
+# * We may want to re-check the path anyway, so maybe this is a moot point...
+
+# 1. user forwarded from view (or some other action) because page doesn't exist
+#    - will already have searched for page in this case, which
+#      we can put in stash and/or session
+#    - * this is the only scenario in which we will have already gotten
+#       path on server side
+
+# 2. user submitted form with missing data
+#    - we should be able to get path from form data; need
+#      to store page id's with path somehow?
+#    - or can we get it from session?
+
+# 3. user entered /some_page.edit in the address bar
+#    - need to get path from db
+
+# 4. user clicked on the "Edit" button of some_page
+#    - just like with a form submission (maybe this should
+#      be a form submission?), we should be able to get
+#      path id's from params
+
+    my ($path, $proto_pages) = @$stash{qw/ path proto_pages /};
+    # we should always have a path of at least "/". if we don't,
+    # we must not have had these structures in the stash
+    unless ($path)
+    {
+        ($path, $proto_pages) = $m_page_class->get_path( $path_string );
+    }
+    # the page we're editing is at the end of the path
+    my $page = ( @$proto_pages > 0 ? $proto_pages->[@$proto_pages - 1] : $path->[@$path -1] );
+    # this should never happen!
+    die "Cannot determine what page to edit for path string: $path_string" unless $page;
+    @$stash{qw/ path proto_pages /} = ($path, $proto_pages);
+
+## We actually don't need this whole block...
+      # This needs to be fixed to deal with path strings:
+#       if ($proto_page)
+#       {
+#           $c->form
+#           (
+#            optional => [qw/read write admin/],
+#            defaults =>
+#            {
+#             #owner=>$editor, # permissions still in flux...
+#             creator => $creator,
+#            }
+#           );
+#           # We no longer create a page before displaying
+#           # the edit form:
+# 	 #$page=$m_class->create_from_form( $c->form );
+#       }
+
+      $c->form
+      (
+       # may need to add more required fields...
+       required => [qw/content/],
+       defaults=>
+       {
+        # don't think we need this, even
+        #page     => $page || $proto_page,
+        # we'll set created in the model
+        #created  => localtime->datetime,
+        #user     => $editor, # ???
+        creator   => $user,
+        # don't think we need "previous"
+        #previous => ($page ? $page->revision : undef),
+        # don't think we need version, etiher
+        #version  => ($page ? $page->version + 1 : 1),
+       }
+      );
+      # if we have missing or invalid fields, display the edit form.
+      # this will always happen on the initial request
       if ( $c->form->has_missing || $c->form->has_invalid ) {
-          $c->stash->{page}=$page;
-          return;
+           $stash->{revision} = $m_rev_class->create_proto( $page );
+           $stash->{revision}->{creator} = $user;
+	  return;
       }
-      my $rev = MojoMojo::M::Core::Revision->create_from_form(
-                $c->form );
-      $page->revision($rev);
-      $page->update;
-      $c->res->redirect($c->req->base.$node.'.highlight');
-
+      # ...else, update the page and redirect to highlight, which will forward to view:
+      #my $revision = MojoMojo::M::Core::Revision->create_from_form( $c->form );
+      #$page->version( $revision->version );
+      #$page->update;
+      my $valid = $c->form->valid;
+      my $unknown = $c->form->unknown;
+      # not implemented yet!
+      $m_rev_class->release_new
+      (
+       proto_rev   => { %$valid, %$unknown },
+       # these are needed in case there are any proto pages
+       path        => $path,
+       proto_pages => $proto_pages,
+      );
+      $c->res->redirect($c->req->base.$path_string.'.highlight');
 }
 
 =item print
@@ -157,7 +228,7 @@ sub  attachments : Private {
 }  
 sub tags : Private {
       my ( $self, $c, $node ) = @_;
-      $node=$class->get_page($node) unless ref $node;
+      $node=$m_page_class->get_page($node) unless ref $node;
       $c->stash->{template} = 'page/tags.tt';
       my @tags = $node->others_tags($c->req->{user_id});
       $c->stash->{others_tags} = [@tags];
@@ -169,7 +240,7 @@ sub list : Path('/.list') {
       my ( $self, $c, $tag ) = @_;
       return $c->forward('/tag/list') if $tag;
       $c->stash->{template} = 'page/list.tt';
-      $c->stash->{pages} = [ $class->retrieve_all_sorted_by('node') ];
+      $c->stash->{pages} = [ $m_page_class->retrieve_all_sorted_by('node') ];
       # FIXME - real data here please
     $c->stash->{orphans} = [ ];
     $c->stash->{wanted} = [ ];

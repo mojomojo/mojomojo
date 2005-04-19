@@ -19,7 +19,8 @@
 </h1>
 [% PROCESS navbar.tt %]
 <div id="revision">
-[% page.formatted_content(base) %]
+[% content = page.content %]
+[% content.formatted(base) %]
 </div>
 <div id="changes" style="display: none">
   <p style="background: #eee; padding: 3px; border: 1px solid silver">
@@ -31,8 +32,9 @@
 	<div id="diff"></div>
 </div>
 <div class="byline">
-  Revised on [% page.updated.cdate %]
-    by [% c.wikiword(page.revision.user.login,base) %]
+  Revised on [% content.created %]
+    by [% c.wikiword(content.creator.login,base) %]<br />
+  Session: [% session_name %]
 </div>
 
 [% PROCESS page/bottomnav.tt %]

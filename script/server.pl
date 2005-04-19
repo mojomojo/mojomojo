@@ -7,8 +7,6 @@ use Getopt::Long;
 use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-#use lib '/home/naughton/Catalyst/trunk/catalyst/Catalyst/lib';
-use lib '/home/naughton/Catalyst/trunk/trunk/Catalyst/lib';
 use MojoMojo;
 
 my $help = 0;

@@ -1,51 +1,54 @@
 [% PROCESS header.tt %]
 <h1 id="pageName">
-  <small>
-            [%
-              title || config.application_name ||
-                "MojoMojo"
-            %]
-  </small><br/>
-  [%IF page ; %]
-  Editing [%c.expand_wikiword(page.node)%]
-  [%ELSE%]
-  Creating [%c.req.args.first%]
-  [%END%]
-  </h1>
+ <small>
+  [% title || config.application_name || "MojoMojo" %]
+ </small><br/>
+ [% IF revision #; %]
+ Editing [% c.expand_wikiword(revision.name_orig) %]
+ [% ELSE %]
+ Creating [% c.req.args.first %]
+ [% END %]
+</h1>
 [% PROCESS edithelp.tt %]
 
+<form id="editForm" action="[% base %][% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
 
-<form id="editForm" action="[%base%][%c.req.args.first%].edit" method="post" onSubmit="cleanAuthorName();">
-<p>
-[% IF edit_error %]
-<p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
-    <small>[%edit_error%]</small>
-</p>
-[%END%]
-  [%IF page ; %]
-  Edit | <a  href="[%base%][%page.node%].attachments">Upload</a>
-  [%END%]
-<textarea id="content" name="content" style="width: 450px; height: 280px">
-[% c.req.params.content || page.content %][%append%]
-</textarea>
-	<script language="JavaScript1.2">
-	setLiveboxUrl('[%base%].jsrpc/render');
-	liveBox('content','preview');
-	</script>
+ [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path_string'] %]
+ <input type="hidden" name="[% column %]" value="[% revision.$column %]" />
+ [% END %]
 
-<p style="clear:left"><b>Preview</b><p>
-<div style="clear:left;width:450;" id="preview">
-</div>
-<p>
-    <input type="submit" value="[% IF page ; "Edit"; ELSE; "Create"; END%]"/> as 
-    [%IF c.req.user %]
-    [% c.wikiword(c.req.user)%] 
-    (<a href="[%base%].logout">forget me</a>)
-    [%ELSE %]
-    <input type="text" name="login" id="authorName" value="[% c.req.user || c.req.params.user || "AnonymousCoward"%]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
-    <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).
-    [%END%]
-</p>
+ [% IF edit_error %]
+ <p style="background: #eee; padding: 3px; border: 1px solid silver; width: 440px">
+  <small>[% edit_error %]</small>
+ </p>
+ [% END %]
+ [% IF revision ; %]
+ <p>Edit | <a  href="[% base %]/page/upload/[% revision.name %]">Upload</a></p> <!-- revision.name is probably wrong here... -->
+ [% END %]
+ <!-- Is this necessary??? -->
+ [% UNLESS c.req.params.content %][% c.req.params.content = revision.content.body %][% END %]
+ <textarea id="content" name="content" style="width: 450px; height: 280px">
+  [% c.req.params.content %]
+ </textarea>
+
+ <script language="JavaScript1.2">
+  setLiveboxUrl('[% base %].jsrpc/render');
+  liveBox('content','preview');
+ </script>
+
+ <p style="clear:left"><b>Preview</b></p>
+ <div style="clear:left;width:450;" id="preview">
+ </div>
+ <p>
+  <input type="submit" value="[% IF page ; "Edit"; ELSE; "Create"; END %]"/> as 
+  [% IF c.req.user %]
+  [% c.wikiword(c.req.user) %] 
+  (<a href="[% base %].logout">forget me</a>)
+  [% ELSE %]
+  <input type="text" name="creator" id="authorName" value="[% revision.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
+  <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).
+  [% END %]
+ </p>
 </form>
 
 <script language="JavaScript" type="text/javascript">

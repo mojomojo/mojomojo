@@ -1,30 +1,30 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 <div class="navigation">
     [% IF (!rev) %]
-    <a href="[% base %][% page.node %].edit" class="navlink" accesskey="E">Edit Page</a>
+    <!-- <a href="[% base %][% page.path_string %].edit" class="navlink" accesskey="E">Edit Page</a> -->
+    <a href="[% page.path_string %].edit" class="navlink" accesskey="E">Edit Page</a>
     [% IF page.node == $c.pref('home_node') %]
     | <a href="[% base %].pref" class="navlink">Edit Settings</a>
     [% END %]
- [% IF page.revision.previous %] 
-    | <a href="[% base %][%page.node%]?rev=[% page.revision.previous.revnum %]" class="navlink" accesskey="R">Back in time</a> 
-    ([%page.revision.revnum%] revision[%IF page.revision.revnum>1;"s";END%])</small>
+ [% IF page.revision.previous && (page.revisions.size+rev)>0%] 
+    | <a href="[% base %][%page.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
+    ([%page.revisions.size%] revision[%IF page.revisions.size>1;"s";END%])</small>
     [% END %]
-    [%ELSE; PROCESS page/rollback.tt;  %]
+    [% ELSE %]
     | <a href="[% base %][%page.node%][%
-    UNLESS rev && rev.revnum==page.revision.previous.revnum%]?rev=[% rev.revnum+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    IF page.revision.revisions.next%]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
-    ([%page.revision.revnum-rev.revnum%] more)
+    ([%rev%] more)
     </small>
-    [%IF rev.previous%]
-    | <a href="[% base %][%page.node%]?rev=[% rev.previous.revnum %]" class="navlink" accesskey="R">Back in time</a> 
+    [%IF page.revision.parent%]
+    | <a href="[% base %][%page.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
     <small>
-    ([%rev.previous.revnum%] more)
+    ([%page.revisions.size-rev%] more)
     </small>
     [%END%]
     | <a href="[% base %][%page.node%]" class="navlink" accesskey="C">See current</a> 
  [% END %] 
-  [% IF (rev && rev.previous) ||
-        (!rev && page.revision.previous) %]
+  [% IF objects.last %]
     <span id="show_changes">
       | <a href="" onClick="toggleChanges(); return false;">See changes</a>
     </span>
@@ -35,6 +35,7 @@
   <small>
     | Views: <a href="[%base%][%page.node%].print">Print</a>
       <a href="[%base%][%page.node%].rss">RSS</a>
+[%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
   </small>
 [% IF page.links_to.first ; %] 
     <small>
@@ -52,7 +53,7 @@
 </div>
 <div class="tags">
 <small>
-[%  c.subreq('/page/tags',page.node) %]
+[%  c.subreq('!page/tags',page.node) %]
 </small>
 <br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
 </div>
@@ -60,16 +61,11 @@
 <script language="Javascript" type="text/javascript">
   var base='[%base%]';
   var node='[%page.node%]';
+  var diff='';
   function toggleChanges() {
-	  if (! gId('diff').value) {
-      
-      [% IF rev %]
-			gId('diff').innerHTML=xmlHTTPRequest('[%base%].jsrpc/diff/[%rev%]');
-      [% ELSE %]
-			gId('diff').innerHTML=xmlHTTPRequest('[%base%].jsrpc/diff/[%page.revision%]');
-      [% END %]
-		} else {
-    }
+	  if (!diff) {
+			diff=xmlHTTPRequest('[%base%].jsrpc/diff/[%page.revision%]');
+		}
     if (document.getElementById("changes").style.display == "none") {
       document.getElementById("changes").style.display  = "block";
       document.getElementById("revision").style.display = "none";
@@ -83,5 +79,5 @@
     }
   }
 </script>
-[%END%]
+[% END %]
 <script type="text/javascript" language="JavaScript" src="[%base%].static/js/tagedit.js"></script>

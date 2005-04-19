@@ -1,105 +1,207 @@
-CREATE TABLE content (
-    id INTEGER PRIMARY KEY,
-    modified_by INTEGER REFERENCES user,
-    modified_date VARCHAR(100),
-    type VARCHAR(200),
-    content TEXT
+-- changed "user" to "person" because "user"
+-- is a reserved word in Oracle. 8-(
+CREATE TABLE person (
+ id         INTEGER PRIMARY KEY,
+ active     INTEGER, -- boolean
+ login      VARCHAR(100),
+ name       VARCHAR(100),
+ pass       VARCHAR(100)
+ --, can_lock   INT -- should can_* be in this table?
+ --, can_upload INT 
 );
 
+-- * page-content tree * --
+
+-- In this tree, the page records are edges and the content
+-- records are nodes. Separating pages-edges from content-nodes
+-- has several benefits:
+
+-- * fast reads-searches: most page listings (e.g. nav lists)
+--   don't need content. searches should be faster and more
+--   efficient without bulky content in the page table. this
+--   may make writes a little slower, but reads will far
+--   outnumber writes
+
+-- * the page tree structure can change independently of
+--   content, and vice versa. for example, this prevents
+--   duplicating content every time a page name or parent
+--   changes
+
+-- * we can avoid unnecessary diffs between pages when
+--   they both point to the same content record
+
+-- content:
+-- although this table will be large, almost all searching will be
+-- done on page records, which have content fks. therefore 
+-- retrieval should be fast: we'll always have content pks.
+-- also note that content records themselves are not versioned,
+-- and generally have no context at all outside of references from
+-- other tables (see the revision table below)
+
+CREATE TABLE content (
+ id       INTEGER PRIMARY KEY,
+ creator  INTEGER REFERENCES person,
+ created  VARCHAR(100),
+ type     VARCHAR(200),
+ abstract VARCHAR(4000),
+ comments VARCHAR(4000),
+ body     TEXT
+);
+
+-- * page-revision * --
+
+-- we further separate pages from revisions (page versions).
+-- the page table contains only "live" pages, which also has
+-- several benefits:
+
+-- * we can use single-column pks. most page metadata
+-- can be left out of the page table. all this should
+-- make for even faster reads
+
+-- * we can enforce the constraint that all children of 
+--   a parent page must have unique names
+
+-- also, we could have made the page name the pk,
+-- but then, for page renames, all child records would
+-- have to be updated. therefore, we define a separate
+-- page id instead 
+
 CREATE TABLE revision (
-    id INTEGER,
-    version INTEGER,
-    parent INTEGER,
-    parent_version INTEGER,
-    depth INTEGER,
-    name VARCHAR(200),
-    name_orig VARCHAR(200),
-    owner INTEGER REFERENCES user,
-    modified_by INTEGER REFERENCES user,
-    modified_date VARCHAR(100),
-    content INTEGER REFERENCES content,
-    PRIMARY KEY (id, version),
-    FOREIGN KEY (parent, parent_version) REFERENCES revision
+ page           INTEGER,
+ version        INTEGER,
+ parent         INTEGER,
+ parent_version INTEGER,
+ name           VARCHAR(200),
+ name_orig      VARCHAR(200),
+ depth          INTEGER,
+ creator        INTEGER REFERENCES person,
+ created        VARCHAR(100),
+ status         VARCHAR(20), -- released, removed, ...
+ release_date   VARCHAR(100),
+ remove_date    VARCHAR(100),
+ comments       VARCHAR(4000),
+ content        INTEGER REFERENCES content,
+ PRIMARY KEY (page, version),
+ FOREIGN KEY (parent, parent_version) REFERENCES page_version (page, version)
 );
 
 CREATE TABLE page (
-    id  INTEGER PRIMARY KEY,
-    version INTEGER,
-    parent INTEGER REFERENCES page,
-    depth INTEGER,
-    name VARCHAR(200),
-    name_orig VARCHAR(200),
-    owner INTEGER REFERENCES user,
-    modified_by INTEGER REFERENCES user,
-    modified_date VARCHAR(100),
-    content INTEGER REFERENCES content,
-    FOREIGN KEY (id, version) REFERENCES revision
+ id        INTEGER PRIMARY KEY,
+ version   INTEGER,
+ parent    INTEGER REFERENCES page,
+ name      VARCHAR(200),
+ name_orig VARCHAR(200),
+ depth     INTEGER,
+ creator   INTEGER REFERENCES person,
+ created   VARCHAR(100),
+ content   INTEGER REFERENCES content,
+ FOREIGN KEY (id, version) REFERENCES revision (page, version)
 );
+
+-- all children of a parent must have unique names:
+CREATE UNIQUE INDEX page_unique_child_index ON page (parent, name);
+
+-- we resolve paths by searching on page name and depth, so:
+CREATE INDEX page_depth_index ON page (depth, name);
+
+
+-- * roles * --
+
+-- currently unused
+
+-- notice that all role tables and references are
+-- now completely separate from the page-related
+-- tables. that way we can allow for multiple
+-- ownership and access plugins, role-based, 
+-- tag-based, something completely different...
+-- ...or even no access restrictions at all,
+-- for people who want a traditional, wide-open wiki
+
+CREATE TABLE role (
+ id     INTEGER PRIMARY KEY,
+ name   VARCHAR(200) UNIQUE NOT NULL,
+ active INTEGER DEFAULT 1 NOT NULL -- boolean
+);
+ 
+CREATE TABLE role_member (
+ role   INTEGER REFERENCES role,
+ person INTEGER REFERENCES person,
+ admin  INTEGER DEFAULT 0 NOT NULL, -- only admin members or "admin" role can add and remove members
+ PRIMARY KEY (role, person)
+); 
+
+-- role_privilege is a relationship talbe.
+-- with cascading deletes, if a page is deleted, the 
+-- privilege is deleted. restores of deleted pages must
+-- be done by someone with write privilege for the parent,
+-- or the parent's parent, and so on, up to whatever 
+-- depth in the path a parent page still exists
+
+CREATE TABLE role_privilege (
+ page      INTEGER REFERENCES page,
+ role      INTEGER REFERENCES role,
+ privilege VARCHAR(20), -- read, write, owner, ...
+ PRIMARY KEY (page, role, privilege)
+); 
+
+-- * end of role tables so far
 
 CREATE TABLE link (
-    id INTEGER PRIMARY KEY,
-    from_page INTEGER,
-    to_page INTEGER
-);
-
-CREATE TABLE user (
-    id INTEGER PRIMARY KEY,
-    login VARCHAR(100),
-    name VARCHAR(100),
-    pass VARCHAR(100),
-    can_lock INT,
-    can_upload INT 
+    id        INTEGER PRIMARY KEY,
+    from_page INTEGER REFERENCES page,
+    to_page   INTEGER REFERENCES page
 );
 
 CREATE TABLE wanted_page (
-    id INTEGER PRIMARY KEY,
-    page int REFERENCES page,
-    node varchar(100)
+    id        INTEGER PRIMARY KEY,
+    from_page INTEGER REFERENCES page,
+    to_path   VARCHAR(4000)
 );
 
 CREATE TABLE preference (
-    prefkey varchar(100) PRIMARY KEY,
-    prefvalue varchar(100)
+    prefkey   VARCHAR(100) PRIMARY KEY,
+    prefvalue VARCHAR(100)
 );
 
 CREATE TABLE tag (
-    id INTEGER PRIMARY KEY,
-    user int REFERENCES user,
-    page int REFERENCES page,
-    tag varchar(100)
+    id     INTEGER PRIMARY KEY,
+    person INTEGER REFERENCES person,
+    page   INTEGER REFERENCES page,
+    tag    VARCHAR(100)
 );
 
 CREATE TABLE attachment (
-    id INTEGER PRIMARY KEY,
-    page int REFERENCES page,
-    name varchar(100),
-    size int,
-    contenttype varchar(100)
+    id          INTEGER PRIMARY KEY,
+    page        INTEGER REFERENCES page,
+    name        VARCHAR(100),
+    size        INTEGER,
+    contenttype VARCHAR(100)
 );
 
 CREATE TABLE journal (
-    pageid INTEGER PRIMARY KEY REFERENCES page,
-    name varchar(100),
-    dateformat varchar(20) DEFAULT '%F',
-    defaultlocation varchar(100)
+    pageid          INTEGER PRIMARY KEY REFERENCES page,
+    name            VARCHAR(100),
+    dateformat      VARCHAR(20) DEFAULT '%F',
+    defaultlocation VARCHAR(100)
 );
 
 CREATE TABLE entry (
-    id INTEGER PRIMARY KEY,
-    journal int REFERENCES journal,
-    author int REFERENCES user,
-    title varchar(150),
-    content TEXT,
-    posted varchar(100),
-    location varchar(100)
+    id       INTEGER PRIMARY KEY,
+    journal  INT REFERENCES journal,
+    author   INT REFERENCES person,
+    title    VARCHAR(150),
+    content  TEXT,
+    posted   VARCHAR(100),
+    location VARCHAR(100)
 );
 
+-- This needs to be fixed to work with latest schema
 
-INSERT INTO user (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
-insert into user (login,name,pass) values ('marcus','Marcus Ramberg','secret');
-INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');
-INSERT INTO preference (prefkey, prefvalue) VALUES ('name','The Feed');
-INSERT INTO content (modified_by,modified_date,content) VALUES(1,'1970-01-01T00:00:00','testing testing, hello, is this thing on?');
-INSERT INTO revision (version,content,modified_by,modified_date) VALUES(1,1,1,'1970-01-01T00:00:00');
-INSERT INTO page (owner,name,content) VALUES ( 1,'FrontPage',1);
+-- INSERT INTO person (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
+-- insert into person (login,name,pass) values ('marcus','Marcus Ramberg','secret');
+-- INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');
+-- INSERT INTO preference (prefkey, prefvalue) VALUES ('name','The Feed');
+-- INSERT INTO content (modified_by,modified_date,content) VALUES(1,'1970-01-01T00:00:00','testing testing, hello, is this thing on?');
+-- INSERT INTO revision (version,content,modified_by,modified_date) VALUES(1,1,1,'1970-01-01T00:00:00');
+-- INSERT INTO page (owner,name,content) VALUES ( 1,'FrontPage',1);
 

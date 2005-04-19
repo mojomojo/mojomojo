@@ -1,76 +1,79 @@
 create table Person
 (
- person_id varchar2(30) primary key, 
+ id varchar2(30) primary key, 
  active    smallint default 1 not null /* fake boolean */
 );
 
 create table Role
 (
- role_id integer primary key,
+ id integer primary key,
  name    varchar2(200) unique not null,
  active  smallint default 1 not null /* fake boolean */
 );
 
 create sequence RoleIdSeq start with 1;
 
+create table Content (
+ id          integer primary key,
+ author      integer,
+ updated     date not null,
+ type        varchar2(200),
+ abstract    varchar2(4000),
+ body        blob,
+ foreign key (author) references Person
+);
+
+-- Includes approval_status so that we don't need
+-- to re-calculate it for every query.
+
+create table Revision
+(
+ id              integer not null,
+ version         integer default 1 not null,
+ parent          integer null,
+ parent_version  integer /*not null*/,
+ name            varchar2(200),
+ name_orig       varchar2(200),
+ depth           integer /*not null*/,
+ owner           integer not null,
+ agent           varchar2(8) not null,
+ updated         date default null,
+ publish_date    date default null,
+ expire_date     date default null,
+ approval        varchar2(10),
+ content         integer null,
+ primary key (id, version),
+ foreign key (parent_id, parent_version) references Revision(id, version),
+ foreign key (owner) references Role,
+ foreign key (agent) references Person,
+ foreign key (content) references Content
+);
+
 -- For performance reasons, we denormalized current,
 -- approved versions into this separate table.
 -- (Maybe create a view instead? May be too slow for full-text search.)
 -- Note: Names of a node's children must be unique!!!
 
-create table Node
+create table Page
 (
- node_id         integer not null,
- parent_id       integer null,
- name            varchar2(200),
- search_name     varchar2(200),
- depth           integer /*not null*/,
- version         integer default 1 not null,
- owner_role_id   integer not null,
- modified_by     varchar2(8) not null,
- modified_date   date not null,
- release_date    date /*not null*/,
- expiration_date date default null,
- short_descr     varchar2(300),
- long_descr      varchar2(2000),
- mime_type	 varchar2(100) /*not null*/,
- content         clob,
- primary key (node_id),
- foreign key (parent_id) references Node,
- foreign key (owner_role_id) references Role,
- foreign key (modified_by) references Person
+ id           integer primary key,
+ version      integer default 1 not null,
+ parent       integer null,
+ name         varchar2(200),
+ name_orig    varchar2(200),
+ depth        integer /*not null*/,
+ owner        integer not null,
+ agent        varchar2(8) not null,
+ updated      date not null,
+ content      integer null,
+ foreign key (parent_id) references Page,
+ foreign key (owner) references Role,
+ foreign key (modified_by) references Person,
+ foreign key (content) references Content,
+ foreign key (id, version) references Revision
 );
 
 create sequence NodeIdSeq start with 1;
-
--- Includes approval_status so that we don't need
--- to re-calculate it for every query.
-
-create table NodeVersion
-(
- node_id         integer not null,
- parent_id       integer null,
- parent_version  integer /*not null*/,
- name            varchar2(200),
- search_name     varchar2(200),
- depth           integer /*not null*/,
- version         integer default 1 not null,
- owner_role_id   integer not null,
- modified_by     varchar2(8) not null,
- modified_date   date default null,
- release_date    date default null,
- expiration_date date default null,
- approval_status varchar2(10),
- comments        varchar2(2000) default null,
- short_descr     varchar2(300),
- long_descr      varchar2(2000),
- mime_type       varchar2(100) /*not null*/,
- content         clob,
- primary key (node_id, version),
- foreign key (parent_id,parent_version) references NodeVersion(node_id, version),
- foreign key (owner_role_id) references Role,
- foreign key (modified_by) references Person
-);
 
 -- Refers only to current, approved nodes. If link_to node does
 -- not exist, link_to_id will be null and link_to_path must not be null.
@@ -116,22 +119,17 @@ create table RoleMember
  primary key (role_id,person_id)
 );
 
-create table RoleNodeRights
+create table RoleRights
 (
- role_id          integer,
- node_id          integer,
- node_version     integer,
- read_node        smallint default 0 not null,
- modify_node      smallint default 0 not null,
- create_node      smallint default 0 not null,
- rename_node      smallint default 0 not null,
- delete_node      smallint default 0 not null,
- admin_node       smallint default 0 not null,
- approve_node     smallint default 0 not null,
- approval_priority integer,
- foreign key (role_id) references Role,
- foreign key (node_id,node_version) references NodeVersion(node_id,version),
- primary key (role_id,node_id)
+ role         integer,
+ page_id      integer,
+ page_version integer,
+ read         smallint default 0 not null,
+ write        smallint default 0 not null,
+ admin        smallint default 0 not null,
+ foreign key (role) references Role,
+ foreign key (page_id,page_version) references Revision(id,version),
+ primary key (role,page_id,page_version)
 );
 
 -- Only possible sequences are: 'submitted'-'rejected'?-'approved'

@@ -48,11 +48,11 @@ default action - serve the home node
 sub default : Private {
     my ( $self, $c ) = @_;
     warn "called with ". join(" ",@_);
-    #$c->req->args([$c->pref('home_node')]);
+    $c->req->args( ['/'] );
     $c->forward( "/page/view" );
 }
 
-=item favicon 
+=item favicon
 
 serve favicon.ico statically.
 
@@ -69,7 +69,7 @@ regex to handle node requests. Will forward to requested action.
 
 =cut
 
-sub pageaction : Regex(^(\w[\w\/]+)\.(\w+)$) {
+sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
     my ( $self, $c ) = @_;
     my ($page,$action) = @{ $c->request->snippets };
     $c->req->args([$page]);
