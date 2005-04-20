@@ -11,7 +11,11 @@
 </h1>
 [% PROCESS edithelp.tt %]
 
+[%IF c.req.args.first == '/' %]
+<form id="editForm" action="[% base %].edit" method="post" onSubmit="cleanAuthorName();">
+[% ELSE %]
 <form id="editForm" action="[% base %][% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
+[% END %]
 
  [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path_string'] %]
  <input type="hidden" name="[% column %]" value="[% revision.$column %]" />
