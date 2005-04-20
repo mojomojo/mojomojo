@@ -6,30 +6,30 @@ use Time::Piece;
 use utf8;
 
 __PACKAGE__->has_a(
-    modified_date => 'Time::Piece',
+    created => 'Time::Piece',
     inflate => sub {
 	Time::Piece->strptime( shift, "%FT%H:%M:%S" );
     },
     deflate => 'datetime'
 );
 
+# this is in Page.pm now, but should probably go to Revision.pm ...
 sub formatted_diff {
-    return MojoMojo::M::Core::Revision::formatted_diff(@_);
+    return MojoMojo::M::Core::Page::formatted_diff(@_);
 }
 
 sub formatted {
-    my ( $self,$base, $content ) = @_;
-    $content ||= $self->content_utf8;
+    my ($self, $base, $content) = @_;
+    $content ||= $self->utf8;
     MojoMojo->call_plugins("format_content", \$content, $base) if ($content);
     return $content;
 }
 
-
-sub content_utf8 {
+sub utf8 {
     my $self    = shift;
-    my $content = $self->content;
-    utf8::decode($content);
-    return $content;
+    my $body = $self->body;
+    utf8::decode($body);
+    return $body;
     }
 
 1;
