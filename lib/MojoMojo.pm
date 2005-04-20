@@ -8,7 +8,7 @@ use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
 
 MojoMojo->prepare_home();
-MojoMojo->config( YAML::LoadFile(MojoMojo->home().'/mojomojo.yml') );
+MojoMojo->config( YAML::LoadFile(MojoMojo->config->{home}.'/mojomojo.yml') );
 MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::User',
                     user_field     => 'login',
@@ -211,7 +211,7 @@ as apropriate, write config, create database, extract templates.
 
 sub prepare_home {
     my $self=shift;
-    my $home=$self->home;
+    my $home=$self->config->{home};
     return unless $home;
     return if -f $home.'/mojomojo.yml';
     for (qw( db uploads logs root )) {
@@ -220,42 +220,7 @@ sub prepare_home {
     YAML::DumpFile($home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite2:'.$home.'/db/mojomojo.db'});
-}
-
-=item home [home]
-
-set or return your home. unless you set a explicit home, it will
-be derived from $ENV{MOJOMO_HOME}, or failing that, a homedir will 
-be made in the current user's home directory.
-
-=cut
-
-sub home {
-    my ($class,$home)=@_;
-    # Set a new home
-    return $class->config(home=>$home) if $home;   
-    # Has a home;
-    return $class->config->{home} if $class->config->{home}; 
-    if ($ENV{MOJOMOJO_HOME} && -w $ENV{MOJOMOJO_HOME}) {
-        $class->config(home=>$ENV{MOJOMOJO_HOME});
-    } elsif ( -w $ENV{HOME} ) {
-        # got writeable home, so we'll try to store it there
-        if (-w $ENV{HOME} ."/Library/Application Support") {
-            # Mac style
-            $class->config(home=>$ENV{HOME}.
-                           "/Library/Application Support/MojoMojo");
-        } else {
-            # Unix Style
-            $class->config(home=>$ENV{HOME}."/.mojomojo");
-        }
-            mkdir $class->config->{home} unless 
-             -w $class->config->{home};
-        } else {
-            die "Can't find a a place to write my settings. ".
-          "Perhaps you need to set the MOJOMOJO_HOME ENV variable?";
-        }
-    return $class->config->{home};
+      dsn => 'dbi:SQLite2:'.$home.'/db/sqlite2/mojomojo.db'});
 }
 
 =item fixw word
