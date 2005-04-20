@@ -65,7 +65,8 @@ sub favicon : Path('/favicon.ico') {
 
 =item pageaction
 
-regex to handle node requests. Will forward to requested action.
+regex to handle requests for actions on nodes. Will forward to 
+requested action in the page controller.
 
 =cut
 
@@ -277,6 +278,7 @@ sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@thefeed.no>
+David Naughton C<naughton@umn.edu>
 
 =head1 LICENSE
 
