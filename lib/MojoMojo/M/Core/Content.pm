@@ -14,12 +14,16 @@ __PACKAGE__->has_a(
 );
 
 sub formatted_diff {
-    return MojoMojo::M::Core::Page::formatted_diff(@_);
+    return MojoMojo::M::Core::Revision::formatted_diff(@_);
 }
 
-sub formatted_content {
-    return MojoMojo::M::Core::Page::formatted_content(@_);
+sub formatted {
+    my ( $self,$base, $content ) = @_;
+    $content ||= $self->content_utf8;
+    MojoMojo->call_plugins("format_content", \$content, $base) if ($content);
+    return $content;
 }
+
 
 sub content_utf8 {
     my $self    = shift;
