@@ -10,7 +10,7 @@ our $VERSION='0.05';
 MojoMojo->prepare_home();
 MojoMojo->config( YAML::LoadFile(MojoMojo->config->{home}.'/mojomojo.yml') );
 MojoMojo->config( authentication => {
-                    user_class     => 'MojoMojo::M::Core::User',
+                    user_class     => 'MojoMojo::M::Core::Person',
                     user_field     => 'login',
                     password_field => 'pass'});
 

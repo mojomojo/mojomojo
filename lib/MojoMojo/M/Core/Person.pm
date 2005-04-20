@@ -1,4 +1,4 @@
-package MojoMojo::M::Core::User;
+package MojoMojo::M::Core::Person;
 
 
 sub get_user {
