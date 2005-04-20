@@ -20,7 +20,6 @@ sub formatted_diff {
 
 # this should be removed; don't know if it will even work
 sub formatted_content {
-    #return MojoMojo::M::Core::Page::formatted_content(@_);
     return MojoMojo::M::Core::Content->formatted(@_);
 }
 
@@ -69,11 +68,11 @@ sub release_new
 	    $parent ||= $path->[@$path - 1];
              # since SQLite doesn't support sequences, just cheat
              # for now and get the next id by creating a page record
-	    my $page = MojoMojo::M::Core::Page->create({ parent => $parent->id });
+	    my $page = MojoMojo::M::Core::Page->create({ parent => $parent });
              my %rev_data = map { $_ => $proto_page->{$_} } @columns;
 
 	    #@rev_data{qw/ page parent parent_version /} = ( $page->id, $page->parent->id, $page->parent->version );
-             @rev_data{qw/ page version parent parent_version /} = ( $page->id, 1, $page->parent->id, $page->parent->version );
+             @rev_data{qw/ page version parent parent_version /} = ( $page, 1, $page->parent, ($page->parent ? $page->parent->version : undef) );
 
              # set content to undef:
 	    #my $content = MojoMojo::M::Core::Content->create({ creator => 1, body => $rev_data{content} });
@@ -114,7 +113,7 @@ sub release_new
 	    $parent = $path->[@$path - 2];
              $page = $last_page;
 	}
-         elsif ($proto_rev->{depth} == ($last_page->depth + 1) && $proto_rev->{page} eq undef)
+         elsif ($proto_rev->{depth} == (($last_page? $last_page->depth :-1) + 1) && $proto_rev->{page} eq undef)
 	{
              # we're creating a new page
 	    $parent = $last_page;
@@ -127,11 +126,12 @@ sub release_new
     }
     unless ($page)
     {
-	$page = MojoMojo::M::Core::Page->create({ parent => $parent->id });
+	$page = MojoMojo::M::Core::Page->create({ parent => $parent });
     }
     my %rev_data = map { $_ => $proto_rev->{$_} } @columns;
     #@rev_data{qw/ page parent parent_version /} = ( $page->id, $page->parent->id, $page->parent->version );
-    @rev_data{qw/ page parent parent_version /} = ( $page->id, $parent->id, $parent->version );
+    @rev_data{qw/ page parent parent_version /} = 
+             ( $page, $parent, ($parent ? $parent->version : undef) );
     my $content = MojoMojo::M::Core::Content->create({ creator => 1, body => $rev_data{content} });
     $rev_data{content} = $content->id;
     my $revision = __PACKAGE__->create( \%rev_data );
