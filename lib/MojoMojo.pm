@@ -116,7 +116,7 @@ sub end : Private {
     my ( $self, $c ) = @_;
     $c->forward('/page/view')
       unless $c->stash->{template} || $c->res->output;
-    $c->forward('MojoMojo::V::TT') unless $c->res->output;
+    $c->forward('MojoMojo::V::TT') unless $c->res->body;
     die if $c->req->params->{die};
 }
 

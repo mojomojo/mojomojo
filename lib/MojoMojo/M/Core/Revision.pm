@@ -37,7 +37,7 @@ sub create_proto
         # assume page is a simple "proto page" hashref
         %proto_rev = map { $_ => $page->{$_} } @columns;
         $proto_rev{version} = 1;
-        $proto_rev{path_string} = $page->{path_string};
+        $proto_rev{path} = $page->{path};
     }
     else
     {
@@ -45,7 +45,7 @@ sub create_proto
         %proto_rev = map { $_ => $revision->$_ } @columns;
         @proto_rev{qw/ creator created /} = (undef) x 2;
         $proto_rev{version}++;
-        $proto_rev{path_string} = $page->path_string;
+        $proto_rev{path} = $page->path;
     }
     return \%proto_rev;
 }
@@ -121,7 +121,7 @@ sub release_new
          else
 	{
 	    # something is seriously wrong
-             die "Cannot determine what page to create for proto rev page " . $proto_rev->{path_string};
+             die "Cannot determine what page to create for proto rev page " . $proto_rev->{path};
 	}
     }
     unless ($page)

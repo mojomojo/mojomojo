@@ -199,15 +199,15 @@ this action is the same as the view action, with another template
 =cut
 
 sub print : Private {
-      my ( $self, $c, $node ) = @_;
+      my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/print.tt';
       $c->forward('view');
 }
 
 sub  attachments : Private {
-      my ( $self, $c, $node ) = @_;
-      $c->forward('view');
+      my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/attachments.tt';
+      $c->forward('view');
       my $page=$c->stash->{page};
       if (my $file=$c->req->params->{file}) {
           my $att=MojoMojo::M::Core::Attachment->create
@@ -227,12 +227,13 @@ sub  attachments : Private {
       }
 }  
 sub tags : Private {
-      my ( $self, $c, $node ) = @_;
-      $node=$m_page_class->get_page($node) unless ref $node;
+      my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/tags.tt';
-      my @tags = $node->others_tags($c->req->{user_id});
+      $c->forward('view');
+      $page=$c->stash->{page};
+      my @tags = $page->others_tags($c->req->{user_id});
       $c->stash->{others_tags} = [@tags];
-      @tags =$node->user_tags($c->req->{user_id});
+      @tags =$page->user_tags($c->req->{user_id});
       $c->stash->{taglist} = ' '.join(' ',map {$_->tag} @tags).' ' ;
       $c->stash->{tags} =  [@tags];
 } 
@@ -240,7 +241,7 @@ sub list : Path('/.list') {
       my ( $self, $c, $tag ) = @_;
       return $c->forward('/tag/list') if $tag;
       $c->stash->{template} = 'page/list.tt';
-      $c->stash->{pages} = [ $m_page_class->retrieve_all_sorted_by('node') ];
+      $c->stash->{pages} = [ $m_page_class->retrieve_all_sorted_by('name') ];
       # FIXME - real data here please
     $c->stash->{orphans} = [ ];
     $c->stash->{wanted} = [ ];
@@ -263,25 +264,25 @@ this action is the same as the view action, with another template
 =cut
 
 sub rss : Private {
-  my ( $self, $c, $node ) = @_;
+  my ( $self, $c, $page ) = @_;
   $c->stash->{template} = 'page/rss.tt';
   $c->forward('view');
 }
 
 sub atom : Private {
-   my ( $self, $c, $node ) = @_;
+   my ( $self, $c, $page ) = @_;
    $c->stash->{template} = 'page/atom.tt';
    $c->forward('view');
 } 
 
 sub rss_full : Private  {
-   my ( $self, $c, $node ) = @_;
+   my ( $self, $c, $page ) = @_;
    $c->stash->{template} = 'page/rss_full.tt';
    $c->forward('view');
 }
 
 sub highlight : Private {
-   my ( $self, $c, $node ) = @_;
+   my ( $self, $c, $page ) = @_;
    $c->stash->{template} = 'page/highlight.tt';
    $c->forward('view');
 }

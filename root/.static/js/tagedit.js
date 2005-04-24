@@ -24,7 +24,7 @@ function submitenter(event) {
     keycode = event.keyCode;
 
     if (keycode == 13) {
-        var url=base+'.jsrpc/tag/'+gId('taginput').value+'/'+node;
+        var url=base+'.jsrpc/tag/'+gId('taginput').value+'/'+page;
         gId('tags').innerHTML=xmlHTTPRequest(url);
         var tags=document.getElementsBySelector('.tag')
         for (i = 0; i != tags.length; i++) {
@@ -79,7 +79,7 @@ function handleWisely(event) {
 function mark_tag(event) {
     var tag=event.target;
     if (tag.title) {
-        url=base+'.jsrpc/tag/'+tag.innerHTML+'/'+node;
+        url=base+'.jsrpc/tag/page+'/'+'+tag.innerHTML;
         gId('tags').innerHTML=xmlHTTPRequest(url)
         var tags=document.getElementsBySelector('.tag')
         for (i = 0; i != tags.length; i++) {
@@ -88,7 +88,7 @@ function mark_tag(event) {
         }
     } else {
         dblClicked=1;
-        url= base+'.jsrpc/untag/'+tag.innerHTML+'/'+node;
+        url= base+'.jsrpc/untag/'+page+'/'+tag.innerHTML;
         gId('tags').innerHTML=xmlHTTPRequest(url);
         gId('taginput').value=tag.innerHTML;
         var tags=document.getElementsBySelector('.tag')

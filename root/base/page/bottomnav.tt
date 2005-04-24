@@ -1,28 +1,28 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 <div class="navigation">
     [% IF (!rev) %]
-    <!-- <a href="[% base %][% page.path_string %].edit" class="navlink" accesskey="E">Edit Page</a> -->
-    <a href="[% page.path_string %].edit" class="navlink" accesskey="E">Edit Page</a>
-    [% IF page.node == $c.pref('home_node') %]
+    <!-- <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a> -->
+    <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
+    [% IF page.name == $c.pref('home_node') %]
     | <a href="[% base %].pref" class="navlink">Edit Settings</a>
     [% END %]
  [% IF page.revision.previous && (page.revisions.size+rev)>0%] 
-    | <a href="[% base %][%page.node%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
+    | <a href="[% base _ page.path%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
     ([%page.revisions.size%] revision[%IF page.revisions.size>1;"s";END%])</small>
     [% END %]
     [% ELSE %]
-    | <a href="[% base %][%page.node%][%
+    | <a href="[% base _ page.path%][%
     IF page.revision.revisions.next%]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
     ([%rev%] more)
     </small>
     [%IF page.revision.parent%]
-    | <a href="[% base %][%page.node%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
+    | <a href="[% base _ page.path%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
     <small>
     ([%page.revisions.size-rev%] more)
     </small>
     [%END%]
-    | <a href="[% base %][%page.node%]" class="navlink" accesskey="C">See current</a> 
+    | <a href="[% base _ page.path%]" class="navlink" accesskey="C">See current</a> 
  [% END %] 
   [% IF objects.last %]
     <span id="show_changes">
@@ -33,15 +33,15 @@
     </span>
   [% END %]
   <small>
-    | Views: <a href="[%base%][%page.node%].print">Print</a>
-      <a href="[%base%][%page.node%].rss">RSS</a>
+    | Views: <a href="[%base _ page.path%].print">Print</a>
+      <a href="[%base _ page.path%].rss">RSS</a>
 [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
   </small>
 [% IF page.links_to.first ; %] 
     <small>
       | Linked from:
 [% FOR linkitem = page.links_to %] 
-    <a class="existingWikiWord" href="[%base%][%linkitem.node%]">[%c.expand_wikiword(linkitem.node)%]</a>
+    <a class="existingWikiWord" href="[%base%][%linkitem.name%]">[%c.expand_wikiword(linkitem.path)%]</a>
 [% END %]
     </small>
 [% END %]  
@@ -53,14 +53,15 @@
 </div>
 <div class="tags">
 <small>
-[%  c.subreq('!page/tags',page.node) %]
+[% SET pagelink=page.path _ ".tags" %]
+[%  c.subreq(pagelink ) %]
 </small>
 <br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
 </div>
 [% END %]
 <script language="Javascript" type="text/javascript">
   var base='[%base%]';
-  var node='[%page.node%]';
+  var page='[%page.path%]';
   var diff='';
   function toggleChanges() {
 	  if (!diff) {

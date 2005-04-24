@@ -17,7 +17,7 @@ FROM tag WHERE page IN (select page from tag where tag=?) and tag != ?
 GROUP BY tag ORDER by REFCOUNT DESC LIMIT 10
 });
 __PACKAGE__->set_sql('others_tags' => qq{
-SELECT  id,tag,count(tag) as pagecount from tag WHERE page=? and user != ? GROUP BY tag order by pagecount
+SELECT  id,tag,count(tag) as pagecount from tag WHERE page=? and person != ? GROUP BY tag order by pagecount
 });
 
 

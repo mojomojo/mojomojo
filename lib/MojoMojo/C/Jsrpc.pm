@@ -59,39 +59,39 @@ sub diff : Path('/.jsrpc/diff') {
 
 =item tag (/.jsrpc/tag)
 
-add a tag to a node. return list of yours and popular tags.
+add a tag to a page. return list of yours and popular tags.
 
 =cut
 
 sub tag : Path('/.jsrpc/tag') {
-        my ( $self, $c, $tag, $node ) = @_;
-        $node = MojoMojo::M::Core::Page->get_page($node);
-        unless (MojoMojo::M::Core::Tag->search(page=>$node,
-                                            user=>$c->req->{user_id},
+        my ( $self, $c, $page, $tag ) = @_;
+        $page = MojoMojo::M::Core::Page->get_page($page);
+        unless (MojoMojo::M::Core::Tag->search(page=>$page,
+                                            person=>$c->req->{user_id},
                                             tag=>$tag)->next()) {
-          $node->add_to_tags({tag=>$tag,
-                              user=>$c->req->{user_id}}) 
-                              if $node;
+          $page->add_to_tags({tag=>$tag,
+                              person=>$c->req->{user_id}}) 
+                              if $page;
         }
-        $c->req->args([$node]);
+        $c->req->args([$page]);
         $c->forward('/page/tags');
 
 }
 
 =item untag (/.jsrpc/untag)
 
-remove a tag to a node. return list of yours and popular tags.
+remove a tag to a page. return list of yours and popular tags.
 
 =cut
 
 sub untag : Path('/.jsrpc/untag') {
-        my ( $self, $c, $tag, $node ) = @_;
-        $node = MojoMojo::M::Core::Page->get_page($node);
-        $tag=MojoMojo::M::Core::Tag->search(page=>$node,
-                                            user=>$c->req->{user_id},
+        my ( $self, $c, $page,$tag ) = @_;
+        $page = MojoMojo::M::Core::Page->get_page($page);
+        $tag=MojoMojo::M::Core::Tag->search(page=>$page,
+                                            person=>$c->req->{user_id},
                                             tag=>$tag)->next();
         $tag->delete() if $tag;
-        $c->req->args([$node]);
+        $c->req->args([$page]);
         $c->forward('/page/tags');
     }
 

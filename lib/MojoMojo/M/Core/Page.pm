@@ -20,7 +20,7 @@ use Time::Piece;
 use Algorithm::Diff;
 
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
-__PACKAGE__->columns( TEMP => qw/path_string/ );
+__PACKAGE__->columns( TEMP => qw/path/ );
 __PACKAGE__->add_trigger(
     after_set_content => sub {
        my $self =shift;
@@ -121,7 +121,7 @@ sub get_page {
 
 =item get_path
 
-Accepts a path_string in url/unix directory format, e.g. "/page1/page2".
+Accepts a path in url/unix directory format, e.g. "/page1/page2".
 Paths are assumed to be absolute, so a leading slash (/) is not required.
 Returns an array of any pages that exist in the path, starting with "/",
 and an additional array of "proto page" hahses for any pages at the end
@@ -142,7 +142,7 @@ spaces trimmed.
 
 The normalized page name, all lower case, with spaces replaced by underscores (_).
 
-=item path_string
+=item path
 
 The partial, absolute path to the current page.
 
@@ -153,14 +153,14 @@ The depth in the page hierarchy, or generation, of the current page.
 =back
 
 Notice that these fields all exist in the page objects, also. All are page table columns,
-with the exception of path_string, which is a Class::DBI TEMP column.
+with the exception of path, which is a Class::DBI TEMP column.
 
 =cut
 
 sub get_path {
-    my ($self, $path_string) = @_;
+    my ($self, $path) = @_;
 
-    my @proto_pages = $self->parse_path_string( $path_string );
+    my @proto_pages = $self->parse_path( $path );
 
     my $depth = @proto_pages - 1; # depth starts at 0
     my $query_name = "get_path_depth_$depth";
@@ -204,7 +204,7 @@ sub resolve_path {
             next unless $page->parent == $parent->id;
         }
         my $proto_page = shift @{$proto_pages};
-        $page->path_string( $proto_page->{path_string} );
+        $page->path( $proto_page->{path} );
         push @{$path}, $page;
         return 1 if
              ( $current_depth == $final_depth ||
@@ -216,21 +216,21 @@ sub resolve_path {
 
 } # end sub resolve_path
 
-sub parse_path_string {
-    my ($self, $path_string) = @_;
+sub parse_path {
+    my ($self, $path) = @_;
 
     # Remove leading and trailing slashes to make
     # split happy. We'll add the root (/) back later...
     ## We don't die on this anymore. Not sure yet
     ## whether or not this is a good thing...
     ##die "Page path must be absolute"
-    ##    unless $path_string =~ s/^(\/)+//;
-    $path_string =~ s/^(\/)+//;
-    $path_string =~ s/(\/)+$//;
+    ##    unless $path =~ s/^(\/)+//;
+    $path =~ s/^(\/)+//;
+    $path =~ s/(\/)+$//;
 
-    my @proto_pages = map { {name_orig => $_} } (split /\/+/, $path_string);
-    if (@proto_pages == 0 && $path_string =~ /\S/) {
-	@proto_pages = ($path_string);
+    my @proto_pages = map { {name_orig => $_} } (split /\/+/, $path);
+    if (@proto_pages == 0 && $path =~ /\S/) {
+	@proto_pages = ($path);
     }
 
     my $depth = 1;
@@ -238,16 +238,16 @@ sub parse_path_string {
     for (@proto_pages) {
         ($_->{name_orig}, $_->{name}) = $self->normalize_name( $_->{name_orig} );
         $page_path .= '/' . $_->{name};
-        $_->{path_string} = $page_path;
+        $_->{path} = $page_path;
         $_->{depth} = $depth;
         $depth++;
     }
     # assume that all paths are absolute:
-    unshift @proto_pages, { name => '/', name_orig => '/', path_string => '/', depth => 0 };
+    unshift @proto_pages, { name => '/', name_orig => '/', path => '/', depth => 0 };
 
     return @proto_pages;
 
-} # end sub parse_path_string
+} # end sub parse_path
 
 sub normalize_name
 {
@@ -308,7 +308,7 @@ sub others_tags {
 
 sub user_tags {
   my ($self,$user)=@_;
-  my (@tags)=MojoMojo::M::Core::Tag->search(user=>$user,page=>$self);
+  my (@tags)=MojoMojo::M::Core::Tag->search(person=>$user,page=>$self);
   return @tags;
 }
 1;
