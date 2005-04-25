@@ -17,7 +17,7 @@
 <form id="editForm" action="[% base %]/[% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
 [% END %]
 
- [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path_string'] %]
+ [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% revision.$column %]" />
  [% END %]
 

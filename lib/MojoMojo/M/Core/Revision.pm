@@ -53,7 +53,7 @@ sub create_proto
 sub release_new
 {
     my ($class, %args) = @_;
-    my ($proto_rev, $path, $proto_pages) = @args{qw/ proto_rev path proto_pages /};
+    my ($proto_rev, $path_pages, $proto_pages) = @args{qw/ proto_rev path_pages proto_pages /};
     my @columns = __PACKAGE__->columns;
 
     my $parent;
@@ -65,7 +65,7 @@ sub release_new
 	pop @$proto_pages;
 	for my $proto_page (@$proto_pages)
 	{
-	    $parent ||= $path->[@$path - 1];
+	    $parent ||= $path_pages->[@$path_pages - 1];
              # since SQLite doesn't support sequences, just cheat
              # for now and get the next id by creating a page record
 	    my $page = MojoMojo::M::Core::Page->create({ parent => $parent });
@@ -96,21 +96,21 @@ sub release_new
 		$page->$_( $revision->$_ );
 	    }
              $page->update;
-             push @$path, $page;
+             push @$path_pages, $page;
              $parent = $page;
 	}
     }
-    # Now the last page in the path may be the parent or the previous version
+    # Now the last page in path pages may be the parent or the previous version
     # of the page we're updating. We should be able to determine this by checking
     # for a "page" page id in the proto rev. May need stronger checking later...
-    my $last_page = $path->[@$path - 1];
+    my $last_page = $path_pages->[@$path_pages - 1];
     my $page;
     unless ($parent)
     {
          if (defined $proto_rev->{page} && $proto_rev->{page} == $last_page->id)
 	{
              # we're revising an existing page
-	    $parent = $path->[@$path - 2];
+	    $parent = $path_pages->[@$path_pages - 2];
              $page = $last_page;
 	}
          elsif ($proto_rev->{depth} == (($last_page? $last_page->depth :-1) + 1) && $proto_rev->{page} eq undef)

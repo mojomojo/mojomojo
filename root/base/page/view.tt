@@ -3,7 +3,7 @@
 [%# IF c.req.args.first == "FrontPage"; %]
 [%# ELSE %]
   <small> 
-   [% FOREACH page IN path %]
+   [% FOREACH page IN path_pages %]
      [% IF loop.first %]
        <a href="[% base %][% page.path %]">[% c.pref("name") || "MojoMojo" %]</a>
      [% ELSE %]
@@ -33,7 +33,7 @@
 </div>
 <div class="byline">
   Revised on [% content.created %]
-    by [% c.wikiword(content.creator.login,base) %]<br />
+    by [% c.wikiword(content.creator.login, base) %]<br />
 </div>
 
 [% PROCESS page/bottomnav.tt %]

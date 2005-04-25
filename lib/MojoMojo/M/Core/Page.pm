@@ -119,7 +119,7 @@ sub get_page {
     return pop @$path;
 }
 
-=item get_path
+=item path_pages
 
 Accepts a path in url/unix directory format, e.g. "/page1/page2".
 Paths are assumed to be absolute, so a leading slash (/) is not required.
@@ -157,7 +157,7 @@ with the exception of path, which is a Class::DBI TEMP column.
 
 =cut
 
-sub get_path {
+sub path_pages {
     my ($self, $path) = @_;
 
     my @proto_pages = $self->parse_path( $path );
@@ -178,34 +178,34 @@ sub get_path {
         push @{$query_pages[ $_->depth ]}, $_;
     }
 
-    my @path;
+    my @path_pages;
     my $resolved = $self->resolve_path
 	(
-	 path          => \@path,
+	 path_pages    => \@path_pages,
 	 proto_pages   => \@proto_pages,
 	 query_pages   => \@query_pages,
 	 current_depth => 0,
 	 final_depth   => $depth,
 	);
-    return (\@path, \@proto_pages);
+    return (\@path_pages, \@proto_pages);
 
 } # end sub get_path
 
 sub resolve_path {
     my ($self, %args) = @_;
 
-    my ($path, $proto_pages, $query_pages, $current_depth, $final_depth) =
-        @args{qw/ path proto_pages query_pages current_depth final_depth/};
+    my ($path_pages, $proto_pages, $query_pages, $current_depth, $final_depth) =
+        @args{qw/ path_pages proto_pages query_pages current_depth final_depth/};
 
     while ( my $page = shift @{$query_pages->[$current_depth]} )
     {
         unless ($current_depth == 0) {
-            my $parent = $path->[ $current_depth - 1 ];
+            my $parent = $path_pages->[ $current_depth - 1 ];
             next unless $page->parent == $parent->id;
         }
         my $proto_page = shift @{$proto_pages};
         $page->path( $proto_page->{path} );
-        push @{$path}, $page;
+        push @{$path_pages}, $page;
         return 1 if
              ( $current_depth == $final_depth ||
                # must pre-icrement for this to work when current_depth == 0
@@ -221,12 +221,8 @@ sub parse_path {
 
     # Remove leading and trailing slashes to make
     # split happy. We'll add the root (/) back later...
-    ## We don't die on this anymore. Not sure yet
-    ## whether or not this is a good thing...
-    ##die "Page path must be absolute"
-    ##    unless $path =~ s/^(\/)+//;
-    $path =~ s/^(\/)+//;
-    $path =~ s/(\/)+$//;
+    $path =~ s/^[\/]+//;
+    $path =~ s/[\/]+$//;
 
     my @proto_pages = map { {name_orig => $_} } (split /\/+/, $path);
     if (@proto_pages == 0 && $path =~ /\S/) {

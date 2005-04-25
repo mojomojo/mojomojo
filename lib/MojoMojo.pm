@@ -32,7 +32,7 @@ MojoMojo->setup();
 
 =head1 DESCRIPTION
 
-A wiki-based community software,
+Wiki-based community software,
 powered by Catalyst.
 
 =head1 ACTIONS
@@ -139,46 +139,35 @@ sub expand_wikiword {
     return $word;
 }
 
-=item  wikiword wikiword [base]
+=item  wikiword wikiword base
 
 Format a wikiword as a link or as a wanted page, as appropriate.
-Note that MojoMojo's hierarchical namespaces require either base
-or an absolute path in order to determine page existence.
 
 =cut
 
 sub wikiword {
     my ( $c, $word, $base ) = @_;
     my $formatted = $c->expand_wikiword($word);
-    my $path_string;
-    if ($word =~ /^\//)
+    # make sure that base url has no trailing slash, since
+    # the page path will have a leading slash
+    my $url = $base;
+    $url =~ s/[\/]+$//;
+
+    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
+    # use the normalized path string returned by path_pages:
+    if (@$proto_pages)
     {
-	$path_string = $word;
+	my $proto_page = pop @$proto_pages;
+	$url .= $proto_page->{path};
     }
-    elsif ($base)
+    else
     {
-	my $parent_path = $base;
-	$parent_path =~ s/^(.*\/\/.*)(\/.*)$/$2/;
-	$path_string = $parent_path . '/' . $word;
+	my $page = pop @$path_pages;
+	$url .= $page->path;
+	return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
-    if ($path_string)
-    {
-	my ($path, $proto_pages) = MojoMojo::M::Core::Page->get_path( $path_string );
-         # use the normalized path string returned by get_path:
-	if ($proto_pages)
-	{
-	    my $proto_page = pop @$proto_pages;
-             $path_string = $proto_page->{path_string};
-	}
-	else
-	{
-	    my $page = pop @$path;
-	    $path_string = $page->path_string;
-             return qq{<a class="existingWikiWord" href="$path_string">$formatted</a> };
-	}
-    }
-    $path_string ||= $word;
-    return qq{<span class="newWikiWord">$formatted<a href="$path_string">?</a></span>};
+
+    return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
 }
 
 =item pref key [value]
@@ -190,7 +179,7 @@ then return the current setting.
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
-    $setting = MojoMojo::M::Core::Preference->find_or_create( 
+    $setting = MojoMojo::M::Core::Preference->find_or_create(
                                     { prefkey => $setting } );
     if ( defined $value ) {
         $setting->prefvalue($value);

@@ -45,25 +45,25 @@ load the provided revision instead.
 =cut
 
 sub view : Private {
-    my ( $self, $c, $path_string ) = @_;
+    my ( $self, $c, $path ) = @_;
 
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
-    my ($path, $proto_pages) = @$stash{qw/ path proto_pages /};
-    # we should always have a path of at least "/". if we don't,
+    my ($path_pages, $proto_pages) = @$stash{qw/ path_pages proto_pages /};
+    # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
-    unless ($path)
+    unless ($path_pages)
     {
-        ($path, $proto_pages) = $m_page_class->get_path( $path_string );
-        @$stash{qw/ path proto_pages /} = ($path, $proto_pages);
+        ($path_pages, $proto_pages) = $m_page_class->path_pages( $path );
+        @$stash{qw/ path_pages proto_pages /} = ($path_pages, $proto_pages);
     }
     # WARNING! there may be potential for an infinite loop here,
     # bouncing back and forth between "edit" and "view"
     return $c->forward('edit') if @$proto_pages;
 
-    my $depth = @$path - 1;
-    $stash->{page} = $path->[$depth];
+    my $depth = @$path_pages - 1;
+    $stash->{page} = $path_pages->[$depth];
 
     # revisions not "fixed" yet, revisit later
 #     $c->form( optional => ['rev'] );
@@ -84,7 +84,7 @@ after saving, it will forward to the highlight action.
 =cut
 
 sub edit : Private {
-    my ( $self, $c, $path_string ) = @_;
+    my ( $self, $c, $path ) = @_;
 
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
@@ -119,18 +119,18 @@ sub edit : Private {
 #      be a form submission?), we should be able to get
 #      path id's from params
 
-    my ($path, $proto_pages) = @$stash{qw/ path proto_pages /};
-    # we should always have a path of at least "/". if we don't,
+    my ($path_pages, $proto_pages) = @$stash{qw/ path_pages proto_pages /};
+    # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
-    unless ($path)
+    unless ($path_pages)
     {
-        ($path, $proto_pages) = $m_page_class->get_path( $path_string );
+        ($path_pages, $proto_pages) = $m_page_class->path_pages( $path );
     }
     # the page we're editing is at the end of the path
-    my $page = ( @$proto_pages > 0 ? $proto_pages->[@$proto_pages - 1] : $path->[@$path -1] );
+    my $page = ( @$proto_pages > 0 ? $proto_pages->[@$proto_pages - 1] : $path_pages->[@$path_pages -1] );
     # this should never happen!
-    die "Cannot determine what page to edit for path string: $path_string" unless $page;
-    @$stash{qw/ path proto_pages /} = ($path, $proto_pages);
+    die "Cannot determine what page to edit for path: $path" unless $page;
+    @$stash{qw/ path_pages proto_pages /} = ($path_pages, $proto_pages);
 
 ## We actually don't need this whole block...
       # This needs to be fixed to deal with path strings:
@@ -186,10 +186,10 @@ sub edit : Private {
       (
        proto_rev   => { %$valid, %$unknown },
        # these are needed in case there are any proto pages
-       path        => $path,
+       path_pages  => $path_pages,
        proto_pages => $proto_pages,
       );
-      $c->res->redirect($c->req->base.$path_string.'.highlight');
+      $c->res->redirect( $c->req->base . $path . '.highlight' );
 }
 
 =item print
@@ -212,7 +212,7 @@ sub  attachments : Private {
       if (my $file=$c->req->params->{file}) {
           my $att=MojoMojo::M::Core::Attachment->create
                   ({name=>$file,page=>$page});
-            
+
           my $fh = $c->req->uploads->{$file}->{fh};
           my $filename=$c->home."/uploads/".$att->id; 
           open(NEW_FILE, ">$filename") or
@@ -225,7 +225,7 @@ sub  attachments : Private {
           $att->size(-s $filename);
           $att->update();
       }
-}  
+}
 sub tags : Private {
       my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/tags.tt';
@@ -238,7 +238,7 @@ sub tags : Private {
       @tags =$page->user_tags($c->req->{user_id});
       $c->stash->{taglist} = ' '.join(' ',map {$_->tag} @tags).' ' ;
       $c->stash->{tags} =  [@tags];
-} 
+}
 sub list : Path('/.list') {
       my ( $self, $c, $tag ) = @_;
       return $c->forward('/tag/list') if $tag;
@@ -275,7 +275,7 @@ sub atom : Private {
    my ( $self, $c, $page ) = @_;
    $c->stash->{template} = 'page/atom.tt';
    $c->forward('view');
-} 
+}
 
 sub rss_full : Private  {
    my ( $self, $c, $page ) = @_;
