@@ -24,7 +24,7 @@ function submitenter(event) {
     keycode = event.keyCode;
 
     if (keycode == 13) {
-        var url=base+'.jsrpc/tag/'+gId('taginput').value+'/'+page;
+        var url=base+'.jsrpc/tag/'+page+'/'+gId('taginput').value;
         gId('tags').innerHTML=xmlHTTPRequest(url);
         var tags=document.getElementsBySelector('.tag')
         for (i = 0; i != tags.length; i++) {
@@ -79,7 +79,7 @@ function handleWisely(event) {
 function mark_tag(event) {
     var tag=event.target;
     if (tag.title) {
-        url=base+'.jsrpc/tag/page+'/'+'+tag.innerHTML;
+        url=base+'.jsrpc/tag/'+page+'/'+tag.innerHTML;
         gId('tags').innerHTML=xmlHTTPRequest(url)
         var tags=document.getElementsBySelector('.tag')
         for (i = 0; i != tags.length; i++) {

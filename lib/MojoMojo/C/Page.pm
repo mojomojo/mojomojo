@@ -208,7 +208,7 @@ sub  attachments : Private {
       my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/attachments.tt';
       $c->forward('view');
-      my $page=$c->stash->{page};
+      $page=$c->stash->{page};
       if (my $file=$c->req->params->{file}) {
           my $att=MojoMojo::M::Core::Attachment->create
                   ({name=>$file,page=>$page});
@@ -229,8 +229,10 @@ sub  attachments : Private {
 sub tags : Private {
       my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/tags.tt';
-      $c->forward('view');
-      $page=$c->stash->{page};
+      unless (ref $page) {
+        $c->forward('view');
+        $page=$c->stash->{page};
+      }
       my @tags = $page->others_tags($c->req->{user_id});
       $c->stash->{others_tags} = [@tags];
       @tags =$page->user_tags($c->req->{user_id});

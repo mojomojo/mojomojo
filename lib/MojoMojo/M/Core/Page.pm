@@ -108,15 +108,15 @@ sub highlight {
 
 =item get_page
 
-May be defunct. See get_path below.
+returns the actual page object for a path
 
 =cut
 
 sub get_page {
-    my ( $self,$page )=@_;
+    my ( $self,$pagepath )=@_;
     #return $self->search_where(name=>$page)->next();
-    my ($path, $proto_pages) = $self->get_path( $page );
-    return ($path, $proto_pages);
+    my ($path, $proto_pages) = $self->get_path( $pagepath);
+    return pop @$path;
 }
 
 =item get_path

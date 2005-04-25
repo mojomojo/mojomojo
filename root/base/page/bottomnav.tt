@@ -60,8 +60,8 @@
 </div>
 [% END %]
 <script language="Javascript" type="text/javascript">
-  var base='[%base%]';
-  var page='[%page.path%]';
+  var base='[%base%]/';
+  var page='[%page.id%]';
   var diff='';
   function toggleChanges() {
 	  if (!diff) {

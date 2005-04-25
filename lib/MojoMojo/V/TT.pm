@@ -39,7 +39,7 @@ sub process {
     my $base = $c->req->base;
     $base =~ s/[\/]+$//g;
     $c->stash->{base} = $base;
-    $self->NEXT::process( $c );
+    $self->SUPER::process( $c );
 }
 
 1;

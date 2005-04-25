@@ -65,7 +65,8 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Path('/.jsrpc/tag') {
         my ( $self, $c, $page, $tag ) = @_;
-        $page = MojoMojo::M::Core::Page->get_page($page);
+        $page = MojoMojo::M::Core::Page->retrieve($page);
+        $c->log->_dump($page);
         unless (MojoMojo::M::Core::Tag->search(page=>$page,
                                             person=>$c->req->{user_id},
                                             tag=>$tag)->next()) {
@@ -86,7 +87,7 @@ remove a tag to a page. return list of yours and popular tags.
 
 sub untag : Path('/.jsrpc/untag') {
         my ( $self, $c, $page,$tag ) = @_;
-        $page = MojoMojo::M::Core::Page->get_page($page);
+        ($page) = MojoMojo::M::Core::Page->retrieve($page);
         $tag=MojoMojo::M::Core::Tag->search(page=>$page,
                                             person=>$c->req->{user_id},
                                             tag=>$tag)->next();
