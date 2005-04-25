@@ -238,6 +238,27 @@ sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
 
 =back
 
+=head2 OVERRIDDEN METHODS
+
+=over 4
+
+=item prepare_path
+
+strip last char from $c->req->path;
+
+=cut
+
+sub prepare_path {
+    my $c = shift;
+    $c->NEXT::prepare_path;
+    my $path=$c->req->base;
+    $path =~s|/+$||;
+    $c->log->debug('Path is:'.$path);
+    $c->req->base($path);
+}
+
+=back
+
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@thefeed.no>
