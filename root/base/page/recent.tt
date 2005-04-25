@@ -1,28 +1,28 @@
 [%PROCESS header.tt %]
-[% SET now=objects.first.updated.dmy('.'); %]
+[% SET now = objects.first.updated.dmy('.'); %]
 <h1 id="pageName">
-  <small> [% title || config.application_name || "Mitiki" %] </small>
+  <small> [% title || config.application_name || "MojoMojo" %] </small>
   <br/>Recent Pages
 </h1>
 [%PROCESS navbar.tt %]
 <div id="categories">
   <strong>tags</strong>: <small>
   [%FOREACH tag IN tags %]
-  <a href="[%base%].recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
+  <a href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
   [%END%]</small>
 </div>
 <b>[% now %]</b>
 <ul>
-[% FOR item=pages.list %]
-[%IF now != item.updated.dmy('.');%]
-  [%SET now=item.updated.dmy('.'); %]
+[% FOR page = pages.list %]
+[%IF now != page.content.created.dmy('.');%]
+  [%SET now = page.content.created.dmy('.'); %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[%base%][%item.node%]">[%c.expand_wikiword(item.node)%]</a>
+    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.path) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by [% c.wikiword(item.revision.user.login,base) %]
-      at [%item.updated.hms(":")%]
+      by [% c.wikiword(page.content.creator.login,base) %]
+      at [% page.content.created.hms(":") %]
     </div>
   </li>
 [%END%]

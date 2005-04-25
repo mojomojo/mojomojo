@@ -21,7 +21,7 @@ MojoMojo->setup();
 
 =head1 SYNOPSIS
 
-  # on the command line 
+  # on the command line
   ./bin/server.pl
 
   # In apache conf
@@ -235,8 +235,6 @@ sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
 #sub Catalyst::Log::info {}
 
 1;
-
-
 
 =back
 

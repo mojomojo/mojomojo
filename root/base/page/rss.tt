@@ -6,15 +6,15 @@
 	<description>A MojoMojo wiki</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
-[%FOR item=pages..list; %]
+[%FOR page = pages.list; %]
     <item>
-      <title>[%c.expand_wikiword(item.node)%]
-[%IF item.isa('Mitiki::M::CDBI::Revision')%] Revision from [%item.updated.datetime%][%END%]
+      <title>[% c.expand_wikiword( page.name_orig ) %]
+[%IF page.isa('MojoMojo::M::CDBI::Revision')%] Revision from [% page.content.created.datetime %][% END %]
      </title>
-      <pubDate>[%item.updated.strftime%]</pubDate>
-      <guid>[%base%][%item.node%]</guid>
-      <link>[%base%][%item.node%]</link>
-      <dc:creator>[%item.user.login%]</dc:creator>
+      <pubDate>[% page.content.created.strftime %]</pubDate>
+      <guid>[% base %][% page.path %]</guid>
+      <link>[% base %][% page.path %]</link>
+      <dc:creator>[% page.content.creator.login %]</dc:creator>
     </item>
 [%END%]
   </channel>

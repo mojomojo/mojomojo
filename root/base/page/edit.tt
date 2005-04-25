@@ -12,9 +12,9 @@
 [% PROCESS edithelp.tt %]
 
 [%IF c.req.args.first == '/' %]
-<form id="editForm" action="[% base %].edit" method="post" onSubmit="cleanAuthorName();">
+<form id="editForm" action="[% base %]/.edit" method="post" onSubmit="cleanAuthorName();">
 [% ELSE %]
-<form id="editForm" action="[% base %][% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
+<form id="editForm" action="[% base %]/[% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
 [% END %]
 
  [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path_string'] %]
@@ -27,7 +27,7 @@
  </p>
  [% END %]
  [% IF revision ; %]
- <p>Edit | <a  href="[% base %]/page/upload/[% revision.name %]">Upload</a></p> <!-- revision.name is probably wrong here... -->
+ <p>Edit | <a  href="[% base %][% revision.path %].upload">Upload</a></p> <!-- revision.name is probably wrong here... -->
  [% END %]
  <!-- Is this necessary??? -->
  [% UNLESS c.req.params.content %][% c.req.params.content = revision.content.body %][% END %]
@@ -36,7 +36,7 @@
  </textarea>
 
  <script language="JavaScript1.2">
-  setLiveboxUrl('[% base %].jsrpc/render');
+  setLiveboxUrl('[% base %]/.jsrpc/render');
   liveBox('content','preview');
  </script>
 
@@ -44,10 +44,10 @@
  <div style="clear:left;width:450;" id="preview">
  </div>
  <p>
-  <input type="submit" value="[% IF page ; "Edit"; ELSE; "Create"; END %]"/> as 
+  <input type="submit" value="[% IF revision.version > 1; "Edit"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
   [% c.wikiword(c.req.user) %] 
-  (<a href="[% base %].logout">forget me</a>)
+  (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
   <input type="text" name="creator" id="authorName" value="[% revision.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
   <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).

@@ -4,29 +4,29 @@
               title || config.application_name ||
                 "A poorly configured MojoMojo Installation"
             %]</title>
-<link rel="alternate" type="text/html" href="[%base%]" />
-<modified>[%pages.last.updated.datetime%]-00:00</modified>
+<link rel="alternate" type="text/html" href="[% base %]" />
+<modified>[% pages.last.updated.datetime %]-00:00</modified>
 <tagline>A mojomojo wiki</tagline>
 <id>tag:[%c.req.host%],[%pages.last.updated.year%]:[%c.req.path%]/page/view/[%c.pref('home_node')%]</id>
 <generator url="[%base%]" version="0.1">[% title || "A poorly configured MojoMojo Installation"%]</generator>
 <copyright>Copyright (c) [%pages.last.update.year%] [%c.pref('admin_user')%]</copyright>
-[% FOR item=pages.list; %]
+[% FOR page = pages.list; %]
 <entry>
-<title>[%item.node%]</title>
-<link rel="alternate" type="text/html" href="[%base%][%item.node%]" />
-<modified>[%item.updated.datetime%]-00:00</modified>
-<issued>[%IF item.revisions%][%item.revisions.last.updated.datetime%][%
-	ELSE%][%item.updated.datetime%][%END%]-00:00</issued>
-<id>tag:[%base_obj.host%],[%objects.last.updated.year%]:[%base_obj.path%]/page/view/[%item.node%]</id>
-<created>[%IF item.revisions%][% item.revisions.last.updated.datetime%][%
-	ELSE%][%item.updated.datetime%][%END%]-00:00</created>
-<summary type="text/plain">[% item.content_utf8 %]</summary>
+<title>[% page.name %]</title>
+<link rel="alternate" type="text/html" href="[% base %][% page.path %]" />
+<modified>[% page.content.created.datetime %]-00:00</modified>
+<issued>[%IF page.revisions %][% page.revisions.last.updated.datetime %][%
+	ELSE %][% page.content.created.datetime %][% END %]-00:00</issued>
+<id>tag:[% base_obj.host %],[% objects.last.updated.year %]:[% base_obj.path %][% page.path %]</id>
+<created>[% IF page.revisions %][% page.revisions.last.updated.datetime %][%
+	ELSE %][% page.content.created.datetime %][% END %]-00:00</created>
+<summary type="text/plain">[% page.content.utf8 %]</summary>
 <author>
-<name>[%c.expand_wikiword(item.user.login)%]</name>
-<url>[%base%]page/view/[%item.user.login%]</url>
+<name>[%c.expand_wikiword(page.content.creator.login)%]</name>
+<url>[%base%][% page.content.creator.login %]</url>
 </author>
-<content type="text/html" mode="escaped" xml:lang="en" xml:base="[%base%]">
-<![CDATA[[%item.formatted_content%] ]]></content>
+<content type="text/html" mode="escaped" xml:lang="en" xml:base="[% base %]">
+<![CDATA[[% page.content.formatted %] ]]></content>
 </entry>
 [%END%]
 </feed>

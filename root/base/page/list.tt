@@ -7,7 +7,7 @@
 <div id="categories">
   <strong>tags</strong>: 
   [%FOREACH tag IN tags.list %]
-  <a href="[%base%].list/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
+  <a href="[%base%]/.list/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
   [%END%]
 </div>
 <div id="allPages" style="float: left; width: 280px; margin-right: 30px">
@@ -16,8 +16,8 @@
           <br/><small style="font-size: 12px"><i>All pages in the wiki listed alphabetically</i></small>
  </h2>
 <ul>
-[%FOR item = pages.list %]
-    <li>[%c.wikiword(item.node,base)%]</li>
+[%FOR page = pages.list %]
+    <li>[% c.wikiword(page.path, base) %]</li>
 [%END%]
 </ul>
 </div>
@@ -28,16 +28,16 @@
   </h2>
 
   <ul style="margin-bottom: 10px">
-[%FOR item = wanted.list %]
-    <li>[%c.wikiword(item.node,base)%] wanted by [%c.wikiword(item.page.node,base)%]</li>
+[%FOR wanted = wanted.list %]
+    <li>[%c.wikiword(wanted.to_path,base)%] wanted by [%c.wikiword(wanted.from_page.path,base)%]</li>
 [%END%]
   </ul>	    
   <h2> Orphaned Pages
      <br/><small style="font-size: 12px"><i>Pages in the web that no other page reference</i></small>
   </h2>
     <ul style="margin-bottom: 35px">
-[%FOR item = orphans.list %]
-    <li><a href="[%base%]/page/view/[%item.node%]">[%c.expand_wikiword(item.node,base)%]</a></li>
+[%FOR orphan = orphans.list %]
+    <li><a href="[% base %][% orphan.path %]">[%c.expand_wikiword(orphan.path,base)%]</a></li>
 [%END%]
     </ul>
 </div>

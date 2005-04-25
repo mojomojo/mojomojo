@@ -1,4 +1,4 @@
-<form id="navigationForm" class="navigation" action="[%base%]page/do_search" method="get" style="font-size: 10px">  
+<form id="navigationForm" class="navigation" action="[%base%]/page/do_search" method="get" style="font-size: 10px">  
   
   [% IF c.page.node == c.pref("home_node") ; %]
   <b class="navOn" title="Home, Sweet Home" >Home Page</b> | 
@@ -6,31 +6,31 @@
   <a href="[%base%][%c.pref("home_node")%]" title="Home, Sweet Home" accesskey="H">Home Page</a> | 
   [% END %]
   [% IF (c.req.user) ;%]
-  <a href="[%base%][%c.req.user%]">[%c.fixw(c.req.user)%]</a> | 
-  <a href="[%base%].logout" title="Get in there" accesskey="L">Log Out</a> | 
+  <a href="[%base%]/[%c.req.user%]">[%c.fixw(c.req.user)%]</a> | 
+  <a href="[%base%]/.logout" title="Get in there" accesskey="L">Log Out</a> | 
   [% ELSE %]
-  <a href="[%base%].login" title="Get in there" accesskey="L">Log In</a> | 
+  <a href="[%base%]/.login" title="Get in there" accesskey="L">Log In</a> | 
   [% END %]
   [% IF c.req.action == '.list' %]
   <b class="navOn" title="Alphabetically sorted list of pages">All Pages</b> | 
   [% ELSE %]
-  <a href="[%base%].list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
+  <a href="[%base%]/.list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
   [% END; IF c.req.action=='.recent' %]
   <b class="navOn" title="Pages sorted by when they were last changed">Recently Revised</b> | 
   [% ELSE %]
-  <a href="[%base%].recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
+  <a href="[%base%]/.recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
   [% END; IF c.req.action=='.users' %]
   <b class="navOn" title="Who wrote what" accesskey="">Authors</b> | 
   [%ELSE%]
-  <a href="[%base%].users" title="Who wrote what" accesskey="">Authors</a> | 
+  <a href="[%base%]/.users" title="Who wrote what" accesskey="">Authors</a> | 
   [% END; IF template=='feeds.tt' %]
   <b class="navOn" title="Subscribe to changes by RSS">Feeds</b> | 
   [%ELSE%]
-  <a href="[%base%].feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
+  <a href="[%base%]/.feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
   [% END; IF c.req.action =='.export' %]
   <b class="navOn" title="Download a zip with all the pages in this wiki">Export</b> | 
   [%ELSE%]
-  <a href="[%base%].export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
+  <a href="[%base%]/.export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onClick="this.value == 'Search' ? this.value = '' : true"/>
 </form>

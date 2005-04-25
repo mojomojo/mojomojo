@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
 	<title>[% config.application_name || "MojoMojo" %]</title>
-	<link>[%base%]FrontPage</link>
+	<link>[%base%]</link>
 	<description>A MojoMojo wiki</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
 [%FOR page=objects.list; %]
     <page>
-      <title>[%request.expand_wikiword(page.node)%]</title>
-      <description>[%FILTER html%][% page.formatted_content%][%END%]</description>    
-      <pubDate>[%page.updated.strftime%]</pubDate>
-      <guid>[%base%][%page.node%]</guid>
-      <link>[%base%][%page.node%]</link>
-      <dc:creator>[%page.user.login%]</dc:creator>
+      <title>[% request.expand_wikiword(page.path) %]</title>
+      <description>[% FILTER html %][% page.content.formatted %][% END %]</description>    
+      <pubDate>[% page.content.created.strftime %]</pubDate>
+      <guid>[% base %][% page.path %]</guid>
+      <link>[% base %][% page.path %]</link>
+      <dc:creator>[% page.content.creator.login %]</dc:creator>
     </page>
 [%END%]
   </channel>

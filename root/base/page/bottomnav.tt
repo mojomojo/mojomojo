@@ -4,25 +4,25 @@
     <!-- <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a> -->
     <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
     [% IF page.name == $c.pref('home_node') %]
-    | <a href="[% base %].pref" class="navlink">Edit Settings</a>
+    | <a href="[% base %]/.pref" class="navlink">Edit Settings</a>
     [% END %]
  [% IF page.revision.previous && (page.revisions.size+rev)>0%] 
-    | <a href="[% base _ page.path%]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
+    | <a href="[% base _ page.path %]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
     ([%page.revisions.size%] revision[%IF page.revisions.size>1;"s";END%])</small>
     [% END %]
     [% ELSE %]
-    | <a href="[% base _ page.path%][%
-    IF page.revision.revisions.next%]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
+    | <a href="[% base _ page.path %][%
+    IF page.revision.revisions.next %]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
     <small>
     ([%rev%] more)
     </small>
     [%IF page.revision.parent%]
-    | <a href="[% base _ page.path%]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
+    | <a href="[% base _ page.path %]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
     <small>
     ([%page.revisions.size-rev%] more)
     </small>
     [%END%]
-    | <a href="[% base _ page.path%]" class="navlink" accesskey="C">See current</a> 
+    | <a href="[% base _ page.path %]" class="navlink" accesskey="C">See current</a> 
  [% END %] 
   [% IF objects.last %]
     <span id="show_changes">
@@ -65,7 +65,7 @@
   var diff='';
   function toggleChanges() {
 	  if (!diff) {
-			diff=xmlHTTPRequest('[%base%].jsrpc/diff/[%page.revision%]');
+			diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[%page.revision%]');
 		}
     if (document.getElementById("changes").style.display == "none") {
       document.getElementById("changes").style.display  = "block";
@@ -81,4 +81,4 @@
   }
 </script>
 [% END %]
-<script type="text/javascript" language="JavaScript" src="[%base%].static/js/tagedit.js"></script>
+<script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/tagedit.js"></script>
