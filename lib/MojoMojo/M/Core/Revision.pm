@@ -130,8 +130,9 @@ sub release_new
     }
     my %rev_data = map { $_ => $proto_rev->{$_} } @columns;
     #@rev_data{qw/ page parent parent_version /} = ( $page->id, $page->parent->id, $page->parent->version );
-    @rev_data{qw/ page parent parent_version /} = 
+    @rev_data{qw/ page parent parent_version /} =
              ( $page, $parent, ($parent ? $parent->version : undef) );
+    # FIX: creator => 1 is an ugly hack
     my $content = MojoMojo::M::Core::Content->create({ creator => 1, body => $rev_data{content} });
     $rev_data{content} = $content->id;
     my $revision = __PACKAGE__->create( \%rev_data );

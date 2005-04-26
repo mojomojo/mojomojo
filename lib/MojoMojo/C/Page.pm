@@ -88,43 +88,42 @@ sub edit : Private {
 
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
-    $c->forward('/user/login') if $c->req->params->{login} &&
-                             ! $c->req->{user};
+    $c->forward('/user/login') if $c->req->params->{login} && ! $c->req->{user};
 
     my $user = $c->req->{user_id} || 0;
 
-## scenarios
+    ## scenarios
 
-# * In all of these scenarios, we will have full path from the
-# request url!!! Do we need to worry about it?
+    # * In all of these scenarios, we will have full path from the
+    # request url!!! Do we need to worry about it?
 
-# * We may want to re-check the path anyway, so maybe this is a moot point...
+    # * We may want to re-check the path anyway, so maybe this is a moot point...
 
-# 1. user forwarded from view (or some other action) because page doesn't exist
-#    - will already have searched for page in this case, which
-#      we can put in stash and/or session
-#    - * this is the only scenario in which we will have already gotten
-#       path on server side
+    # 1. user forwarded from view (or some other action) because page doesn't exist
+    #    - will already have searched for page in this case, which
+    #      we can put in stash and/or session
+    #    - * this is the only scenario in which we will have already gotten
+    #       path on server side
 
-# 2. user submitted form with missing data
-#    - we should be able to get path from form data; need
-#      to store page id's with path somehow?
-#    - or can we get it from session?
+    # 2. user submitted form with missing data
+    #    - we should be able to get path from form data; need
+    #      to store page id's with path somehow?
+    #    - or can we get it from session?
 
-# 3. user entered /some_page.edit in the address bar
-#    - need to get path from db
+    # 3. user entered /some_page.edit in the address bar
+    #    - need to get path from db
 
-# 4. user clicked on the "Edit" button of some_page
-#    - just like with a form submission (maybe this should
-#      be a form submission?), we should be able to get
-#      path id's from params
+    # 4. user clicked on the "Edit" button of some_page
+    #    - just like with a form submission (maybe this should
+    #      be a form submission?), we should be able to get
+    #      path id's from params
 
     my ($path_pages, $proto_pages) = @$stash{qw/ path_pages proto_pages /};
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
     unless ($path_pages)
     {
-        ($path_pages, $proto_pages) = $m_page_class->path_pages( $path );
+	($path_pages, $proto_pages) = $m_page_class->path_pages( $path );
     }
     # the page we're editing is at the end of the path
     my $page = ( @$proto_pages > 0 ? $proto_pages->[@$proto_pages - 1] : $path_pages->[@$path_pages -1] );
@@ -132,64 +131,76 @@ sub edit : Private {
     die "Cannot determine what page to edit for path: $path" unless $page;
     @$stash{qw/ path_pages proto_pages /} = ($path_pages, $proto_pages);
 
-## We actually don't need this whole block...
-      # This needs to be fixed to deal with path strings:
-#       if ($proto_page)
-#       {
-#           $c->form
-#           (
-#            optional => [qw/read write admin/],
-#            defaults =>
-#            {
-#             #owner=>$editor, # permissions still in flux...
-#             creator => $creator,
-#            }
-#           );
-#           # We no longer create a page before displaying
-#           # the edit form:
-# 	 #$page=$m_class->create_from_form( $c->form );
-#       }
+    ## We actually don't need this whole block...
+    # This needs to be fixed to deal with path strings:
+    #       if ($proto_page)
+    #       {
+    #           $c->form
+    #           (
+    #            optional => [qw/read write admin/],
+    #            defaults =>
+    #            {
+    #             #owner=>$editor, # permissions still in flux...
+    #             creator => $creator,
+    #            }
+    #           );
+    #           # We no longer create a page before displaying
+    #           # the edit form:
+    # 	 #$page=$m_class->create_from_form( $c->form );
+    #       }
 
-      $c->form
-      (
-       # may need to add more required fields...
-       required => [qw/content/],
-       defaults=>
-       {
-        # don't think we need this, even
-        #page     => $page || $proto_page,
-        # we'll set created in the model
-        #created  => localtime->datetime,
-        #user     => $editor, # ???
-        creator   => $user,
-        # don't think we need "previous"
-        #previous => ($page ? $page->revision : undef),
-        # don't think we need version, etiher
-        #version  => ($page ? $page->version + 1 : 1),
-       }
-      );
-      # if we have missing or invalid fields, display the edit form.
-      # this will always happen on the initial request
-      if ( $c->form->has_missing || $c->form->has_invalid ) {
-           $stash->{revision} = $m_rev_class->create_proto( $page );
-           $stash->{revision}->{creator} = $user;
-	  return;
-      }
-      # ...else, update the page and redirect to highlight, which will forward to view:
-      #my $revision = MojoMojo::M::Core::Revision->create_from_form( $c->form );
-      #$page->version( $revision->version );
-      #$page->update;
-      my $valid = $c->form->valid;
-      my $unknown = $c->form->unknown;
-      # not implemented yet!
-      $m_rev_class->release_new
-      (
-       proto_rev   => { %$valid, %$unknown },
-       # these are needed in case there are any proto pages
-       path_pages  => $path_pages,
-       proto_pages => $proto_pages,
-      );
-      $c->res->redirect( $c->req->base . $path . '.highlight' );
+    $c->form
+	(
+	 # may need to add more required fields...
+	 required => [qw/content/],
+	 defaults=>
+	 {
+	  # don't think we need this, even
+	  #page     => $page || $proto_page,
+	  # we'll set created in the model
+	  #created  => localtime->datetime,
+	  #user     => $editor, # ???
+	  creator   => $user,
+	  # don't think we need "previous"
+	  #previous => ($page ? $page->revision : undef),
+	  # don't think we need version, etiher
+	  #version  => ($page ? $page->version + 1 : 1),
+	 }
+	);
+    # if we have missing or invalid fields, display the edit form.
+    # this will always happen on the initial request
+    if ( $c->form->has_missing || $c->form->has_invalid )
+    {
+	$stash->{revision} = $m_rev_class->create_proto( $page );
+	$stash->{revision}->{creator} = $user;
+	return;
+    }
+    # ...else, update the page and redirect to highlight, which will forward to view:
+    #my $revision = MojoMojo::M::Core::Revision->create_from_form( $c->form );
+    #$page->version( $revision->version );
+    #$page->update;
+    my $valid = $c->form->valid;
+    my $unknown = $c->form->unknown;
+    # not implemented yet!
+    $m_rev_class->release_new
+	(
+	 proto_rev   => { %$valid, %$unknown },
+	 # these are needed in case there are any proto pages
+	 path_pages  => $path_pages,
+	 proto_pages => $proto_pages,
+	);
+    # This is another ugly hack that needs to be fixed,
+    # especially if we ever support relative links of
+    # the form "./" and/or "../". Hmm... actually, we
+    # just need to make sure that paths never start with
+    # those relative operators, since base never has a
+    # trailing slash anymore. Also, paths starting with
+    # "../" would make no sense, anyway.
+    unless ($path =~ /^\//)
+    {
+	$path = '/' . $path;
+    }
+    $c->res->redirect( $c->req->base . $path . '.highlight' );
 }
 
 =item print
