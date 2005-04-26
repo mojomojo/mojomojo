@@ -1,0 +1,11 @@
+<div id="breadcrumbs">
+ <small> 
+ [% FOREACH page IN path_pages %]
+  [% IF loop.first %]
+  <a href="[% base %][% page.path %]">[% c.pref("name") || "MojoMojo" %]</a>
+  [% ELSE %]
+  / <a href="[% base %][% page.path %]">[% page.name_orig %]</a>
+  [% END %]
+ [% END %]
+ </small>
+</div>

@@ -1,10 +1,4 @@
 <form id="navigationForm" class="navigation" action="[%base%]/page/do_search" method="get" style="font-size: 10px">  
-  
-  [% IF c.page.node == c.pref("home_node") ; %]
-  <b class="navOn" title="Home, Sweet Home" >Home Page</b> | 
-  [% ELSE %]
-  <a href="[%base%][%c.pref("home_node")%]" title="Home, Sweet Home" accesskey="H">Home Page</a> | 
-  [% END %]
   [% IF (c.req.user) ;%]
   <a href="[%base%]/[%c.req.user%]">[%c.fixw(c.req.user)%]</a> | 
   <a href="[%base%]/.logout" title="Get in there" accesskey="L">Log Out</a> | 

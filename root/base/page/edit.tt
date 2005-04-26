@@ -1,13 +1,12 @@
 [% PROCESS header.tt %]
+[% PROCESS breadcrumbs.tt %]
 <h1 id="pageName">
- <small>
-  [% title || config.application_name || "MojoMojo" %]
- </small><br/>
- [% IF revision #; %]
- Editing [% c.expand_wikiword(revision.name_orig) %]
- [% ELSE %]
- Creating [% c.req.args.first %]
- [% END %]
+[% IF revision.content %]Editing[% ELSE %]Creating[% END %]
+[% IF revision.name == "/" %]
+ [% c.pref("name") || "MojoMojo" %] Home (/)
+[% ELSE %]
+ [% c.expand_wikiword(revision.name_orig) %]
+[% END %]
 </h1>
 [% PROCESS edithelp.tt %]
 
