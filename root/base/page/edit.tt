@@ -1,11 +1,11 @@
 [% PROCESS header.tt %]
 [% PROCESS breadcrumbs.tt %]
 <h1 id="pageName">
-[% IF revision.content %]Editing[% ELSE %]Creating[% END %]
-[% IF revision.name == "/" %]
+[% IF page.content_version %]Editing[% ELSE %]Creating[% END %]
+[% IF page.name == "/" %]
  [% c.pref("name") || "MojoMojo" %] Home (/)
 [% ELSE %]
- [% c.expand_wikiword(revision.name_orig) %]
+ [% c.expand_wikiword(page.name_orig) %]
 [% END %]
 </h1>
 [% PROCESS edithelp.tt %]
@@ -16,39 +16,40 @@
 <form id="editForm" action="[% base %]/[% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
 [% END %]
 
- [% FOREACH column IN ['page','version','parent','parent_version','depth','name','name_orig','path'] %]
- <input type="hidden" name="[% column %]" value="[% revision.$column %]" />
+ [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
+ <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
+ <input type="hidden" name="version" value="[% content.version %]" />
 
  [% IF edit_error %]
  <p style="background: #eee; padding: 3px; border: 1px solid silver; width: 440px">
   <small>[% edit_error %]</small>
  </p>
  [% END %]
- [% IF revision ; %]
- <p>Edit | <a  href="[% base %][% revision.path %].upload">Upload</a></p> <!-- revision.name is probably wrong here... -->
+ [% IF page ; %] <!-- "IF page" is probably wrong here. maybe we want to know whether or not page exists? -->
+ <p>Edit | <a  href="[% base %][% page.path %].upload">Upload</a></p>
  [% END %]
  <!-- Is this necessary??? -->
- [% UNLESS c.req.params.content %][% c.req.params.content = revision.content.body %][% END %]
- <textarea id="content" name="content" style="width: 450px; height: 280px">
-  [% c.req.params.content %]
+ [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
+ <textarea id="body" name="body" style="width: 450px; height: 280px">
+  [% c.req.params.body %]
  </textarea>
 
  <script language="JavaScript1.2">
   setLiveboxUrl('[% base %]/.jsrpc/render');
-  liveBox('content','preview');
+  liveBox('body','preview');
  </script>
 
  <p style="clear:left"><b>Preview</b></p>
  <div style="clear:left;width:450;" id="preview">
  </div>
  <p>
-  <input type="submit" value="[% IF revision.version > 1; "Edit"; ELSE; "Create"; END %]"/> as 
+  <input type="submit" value="[% IF content.version > 1; "Edit"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
   [% c.wikiword(c.req.user) %] 
   (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
-  <input type="text" name="creator" id="authorName" value="[% revision.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
+  <input type="text" name="creator" id="authorName" value="[% content.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
   <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).
   [% END %]
  </p>

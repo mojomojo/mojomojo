@@ -8,12 +8,9 @@ MojoMojo::M::Core::Page - Page model
 
 =head1 DESCRIPTION
 
-This class models only "live" MojoMojo pages. Revisions (page histories)
-are accessible via Page objects, however.
+This class models only "live" MojoMojo pages.
 
 =cut
-
-
 
 use strict;
 use Time::Piece;
@@ -48,11 +45,11 @@ __PACKAGE__->has_many(
 
 __PACKAGE__->set_sql('by_tag' => qq{
 SELECT DISTINCT name, page.id as id, content.created, content.creator
-FROM page, tag, content WHERE page.content=content.id AND page.id=tag.page AND tag=? ORDER BY name
+FROM page, tag, content WHERE page.id=content.page AND page.content_version=content.version AND page.id=tag.page AND tag=? ORDER BY name
 });
 __PACKAGE__->set_sql('by_tag_and_date' => qq{
 SELECT DISTINCT name, page.id as id, content.created, content.creator
-FROM page, tag, content WHERE content.id=page.content AND page.id=tag.page AND tag=? ORDER BY content.created
+FROM page, tag, content WHERE page.id=content.page AND page.content_version=content.version AND page.id=tag.page AND tag=? ORDER BY content.created
 });
 
 # FIX: this one needs work...
@@ -66,7 +63,6 @@ ORDER BY revision.updated DESC
 sub content_raw { $_[0]->content && $_[0]->content->body; }
 sub updated { $_[0]->content && $_[0]->content->created; }
 
-# should this go to Revision.pm ???
 sub formatted_diff {
     my ( $self,$base,$to ) = @_;
     my $this=[ split /\n/, $self->content->formatted($base) ];
@@ -87,11 +83,14 @@ sub formatted_diff {
     return $diff;
 }
 
-# should this go to Revision.pm ???
 sub highlight {
-    my ( $self,$base, ) = @_;
-    my $this=[ split /\n/, $self->content->formatted($base) ];
-    my $prev=[ split /\n/, $self->revision->previous->content->formatted($base)];
+    my ($self, $base) = @_;
+    my $this_content = $self->content->formatted($base);
+    # FIX: This may return undef. What do we do then????
+    my $previous_content =
+	(defined  $self->content->previous ? $self->content->previous->formatted($base) : $this_content);
+    my $this=[ split /\n/, $this_content ];
+    my $prev=[ split /\n/, $previous_content ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     my $hi=0;
@@ -115,8 +114,8 @@ returns the actual page object for a path
 sub get_page {
     my ( $self,$pagepath )=@_;
     #return $self->search_where(name=>$page)->next();
-    my ($path, $proto_pages) = $self->get_path( $pagepath);
-    return pop @$path;
+    my ($path_pages, $proto_pages) = $self->path_pages( $pagepath);
+    return pop @$path_pages;
 }
 
 =item path_pages
@@ -260,22 +259,50 @@ sub normalize_name
 
 } # end sub normalize_name
 
-sub revision
+# create a proto page, would could be
+# the basis for a new page
+# sub create_proto
+# {
+#     my ($class, $page) = @_;
+#     my %proto_rev;
+#     my @columns = __PACKAGE__->columns;
+#     eval { $page->isa('MojoMojo::M::Core::Page') };
+#     if ($@)
+#     {
+#         # assume page is a simple "proto page" hashref
+#         %proto_rev = map { $_ => $page->{$_} } @columns;
+#         $proto_rev{version} = 1;
+#         $proto_rev{path} = $page->{path};
+#     }
+#     else
+#     {
+#         my $revision = $page->revision;
+#         %proto_rev = map { $_ => $revision->$_ } @columns;
+#         @proto_rev{qw/ creator created /} = (undef) x 2;
+#         $proto_rev{version}++;
+#         $proto_rev{path} = $page->path;
+#     }
+#     return \%proto_rev;
+# }
+
+sub content
 {
     my ($self) = @_;
-    return MojoMojo::M::Core::Revision->retrieve
+    return MojoMojo::M::Core::Content->retrieve
     (
      page    => $self->id,
-     version => $self->version
+     version => $self->content_version,
     );
 }
 
-# This is probably defunct in favor of "revision" above...
-sub get_revision {
-    my ( $self,$revnum)=@_;
-    return MojoMojo::M::Core::Revision->search_where(
-              page=>$self, 
-              revnum=>$revnum)->next();
+sub page_version
+{
+    my ($self) = @_;
+    return MojoMojo::M::Core::PageVersion->retrieve
+    (
+     page    => $self->id,
+     version => $self->version,
+    );
 }
 
 sub orphans {
@@ -307,4 +334,73 @@ sub user_tags {
   my (@tags)=MojoMojo::M::Core::Tag->search(person=>$user,page=>$self);
   return @tags;
 }
+
+# update_content: this whole method may need work to deal with workflow.
+# maybe it can't even be called if the site uses workflow...
+# may need fixing for better conflict handling, too. maybe use a transaction?
+
+sub update_content
+{
+    my ($self, %args) = @_;
+    my $content_version;
+    if ($args{version})
+    {
+	$content_version = $args{version};
+	my $existing_version =
+	    MojoMojo::M::Core::Content->retrieve( page => $self->id, version => $content_version + 1 );
+	die "Content update conflict" if $existing_version;
+    }
+    elsif ($self->content_version eq undef)
+    {
+	$content_version = 1;
+    }
+    else
+    {
+	# should we ever get here???
+	die "Error in calculating content version";
+    }
+    my %content_data = map { $_ => $args{$_} } MojoMojo::M::Core::Content->columns;
+    @content_data{ qw/page version/ } = ($self->id, $content_version);
+    my $content = MojoMojo::M::Core::Content->create( \%content_data );
+    $self->content_version( $content->version );
+    $self->update;
+    $self->page_version->content_version_last( $content_version );
+    $self->page_version->update;
+
+} # end sub update_content
+
+sub create_path_pages
+{
+    my ($class, %args) = @_;
+    my ($path_pages, $proto_pages) = @args{ qw/path_pages proto_pages/ };
+    my @version_columns = MojoMojo::M::Core::PageVersion->columns;
+
+    my $parent = $path_pages->[@$path_pages - 1];
+    # create the missing parent pages
+    for my $proto_page (@$proto_pages)
+    {
+	# since SQLite doesn't support sequences, just cheat
+	# for now and get the next id by creating a page record
+	my $page = __PACKAGE__->create({ parent => $parent });
+	my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
+
+	# FIX: Ugly hack: set creator to 1 for now
+	@version_data{qw/ page version parent parent_version creator /}
+	    = ( $page, 1, $page->parent, ($page->parent ? $page->parent->version : undef), 1);
+
+	my $page_version = MojoMojo::M::Core::PageVersion->create( \%version_data );
+	for ( $page->columns )
+	{
+	    next if $_ eq 'id'; # page already exists
+             next if $_ eq 'content_version'; # no content yet
+	    $page->$_( $page_version->$_ );
+	}
+	$page->update;
+	push @$path_pages, $page;
+	$parent = $page;
+    }
+    return $path_pages;
+
+} # end sub create_path_pages
+
 1;

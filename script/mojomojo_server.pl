@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
 BEGIN { 
-    $ENV{CATALYST_ENGINE} = 'HTTP';
-    $ENV{CATALYST_SCRIPT_GEN} = 3;
+    $ENV{CATALYST_ENGINE} ||= 'HTTP';
+    $ENV{CATALYST_SCRIPT_GEN} = 4;
 }  
 
 use strict;

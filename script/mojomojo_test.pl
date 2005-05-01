@@ -1,6 +1,6 @@
-#!/usr/bin/perl -w
+#!/netbsd-pkgsrc/pkg/bin/perl -w
 
-BEGIN { $ENV{CATALYST_ENGINE} = 'Test' }
+BEGIN { $ENV{CATALYST_ENGINE} ||= 'Test' }
 
 use strict;
 use Getopt::Long;

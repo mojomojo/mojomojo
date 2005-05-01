@@ -27,30 +27,32 @@ CREATE TABLE person (
 --   duplicating content every time a page name or parent
 --   changes
 
--- * we can avoid unnecessary diffs between pages when
---   they both point to the same content record
-
 -- content:
 -- although this table will be large, almost all searching will be
 -- done on page records, which have content fks. therefore 
 -- retrieval should be fast: we'll always have content pks.
--- also note that content records themselves are not versioned,
--- and generally have no context at all outside of references from
--- other tables (see the revision table below)
+-- also note that content records are versioned separately from
+-- the page tree structure. that way we don't have to perform
+-- version updates on whole subtrees when only the content changes
 
 CREATE TABLE content (
- id       INTEGER PRIMARY KEY,
- creator  INTEGER REFERENCES person,
- created  VARCHAR(100),
- type     VARCHAR(200),
- abstract VARCHAR(4000),
- comments VARCHAR(4000),
- body     TEXT
+ page         INTEGER,
+ version      INTEGER,
+ creator      INTEGER REFERENCES person,
+ created      VARCHAR(100),
+ status       VARCHAR(20), -- released, removed, ...
+ release_date VARCHAR(100),
+ remove_date  VARCHAR(100),
+ type         VARCHAR(200),
+ abstract     VARCHAR(4000),
+ comments     VARCHAR(4000),
+ body         TEXT,
+ PRIMARY KEY (page, version)
 );
 
--- * page-revision * --
+-- * page-page_version * --
 
--- we further separate pages from revisions (page versions).
+-- we further separate pages from page versions.
 -- the page table contains only "live" pages, which also has
 -- several benefits:
 
@@ -63,39 +65,45 @@ CREATE TABLE content (
 
 -- also, we could have made the page name the pk,
 -- but then, for page renames, all child records would
--- have to be updated. therefore, we define a separate
--- page id instead 
+-- have to be updated with the new name. therefore,
+-- we define a separate page id instead 
 
-CREATE TABLE revision (
- page           INTEGER,
- version        INTEGER,
- parent         INTEGER,
- parent_version INTEGER,
- name           VARCHAR(200),
- name_orig      VARCHAR(200),
- depth          INTEGER,
- creator        INTEGER REFERENCES person,
- created        VARCHAR(100),
- status         VARCHAR(20), -- released, removed, ...
- release_date   VARCHAR(100),
- remove_date    VARCHAR(100),
- comments       VARCHAR(4000),
- content        INTEGER REFERENCES content,
+-- also, the content fks really only exist in the table
+-- to record the content version at the time of the
+-- page structure change
+
+CREATE TABLE page_version (
+ page            INTEGER,
+ version         INTEGER,
+ parent          INTEGER,
+ parent_version  INTEGER,
+ name            VARCHAR(200),
+ name_orig       VARCHAR(200),
+ depth           INTEGER,
+ creator         INTEGER REFERENCES person,
+ created         VARCHAR(100),
+ status          VARCHAR(20), -- released, removed, ...
+ release_date    VARCHAR(100),
+ remove_date     VARCHAR(100),
+ comments        VARCHAR(4000),
+ content_version_first INTEGER,
+ content_version_last  INTEGER,
  PRIMARY KEY (page, version),
+ FOREIGN KEY (page, content_version_first) REFERENCES content (page, version),
+ FOREIGN KEY (page, content_version_last) REFERENCES content (page, version),
  FOREIGN KEY (parent, parent_version) REFERENCES page_version (page, version)
 );
 
 CREATE TABLE page (
- id        INTEGER PRIMARY KEY,
- version   INTEGER,
- parent    INTEGER REFERENCES page,
- name      VARCHAR(200),
- name_orig VARCHAR(200),
- depth     INTEGER,
- creator   INTEGER REFERENCES person,
- created   VARCHAR(100),
- content   INTEGER REFERENCES content,
- FOREIGN KEY (id, version) REFERENCES revision (page, version)
+ id              INTEGER PRIMARY KEY,
+ version         INTEGER,
+ parent          INTEGER REFERENCES page,
+ name            VARCHAR(200),
+ name_orig       VARCHAR(200),
+ depth           INTEGER,
+ content_version INTEGER,
+ FOREIGN KEY (id, content_version) REFERENCES content (page, version),
+ FOREIGN KEY (id, version) REFERENCES page_version (page, version)
 );
 
 -- all children of a parent must have unique names:
@@ -197,11 +205,22 @@ CREATE TABLE entry (
 
 -- This needs to be fixed to work with latest schema
 
--- INSERT INTO person (login, name) VALUES ('AnonymousCoward','Anonymous Coward');
--- insert into person (login,name,pass) values ('marcus','Marcus Ramberg','secret');
--- INSERT INTO preference (prefkey, prefvalue) VALUES ('home_node','FrontPage');
--- INSERT INTO preference (prefkey, prefvalue) VALUES ('name','The Feed');
--- INSERT INTO content (modified_by,modified_date,content) VALUES(1,'1970-01-01T00:00:00','testing testing, hello, is this thing on?');
--- INSERT INTO revision (version,content,modified_by,modified_date) VALUES(1,1,1,'1970-01-01T00:00:00');
--- INSERT INTO page (owner,name,content) VALUES ( 1,'FrontPage',1);
-
+INSERT INTO person (login, name, active) VALUES ('AnonymousCoward','Anonymous Coward',1);
+INSERT INTO person (login, name, active, pass) VALUES ('marcus','Marcus Ramberg',1,'secret');
+INSERT INTO preference (prefkey, prefvalue) VALUES ('name','MojoMojo');
+INSERT INTO page_version
+(
+ page,
+ version,
+ parent,
+ parent_version,
+ name,
+ name_orig,
+ depth,
+ content_version_first,
+ content_version_last,
+ creator,
+ created)
+VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,'1970-01-01T00:00:00');
+INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,'1970-01-01T00:00:00','Welcome to MojoMojo!');
+INSERT INTO page (id,version,parent,name,name_orig,depth,content_version) VALUES (1,1,NULL,'/','/',0,1);

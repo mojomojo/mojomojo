@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/netbsd-pkgsrc/pkg/bin/perl -w
 
 use strict;
 use Getopt::Long;

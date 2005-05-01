@@ -1,5 +1,5 @@
-#!/usr/bin/perl -w
-BEGIN { $ENV{CATALYST_ENGINE} = 'CGI' }
+#!/netbsd-pkgsrc/pkg/bin/perl -w
+BEGIN { $ENV{CATALYST_ENGINE} ||= 'CGI' }
 
 use strict;
 use FindBin;
