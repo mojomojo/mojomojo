@@ -63,16 +63,24 @@ sub view : Private {
     # bouncing back and forth between "edit" and "view"
     return $c->forward('edit') if @$proto_pages;
 
-    my $depth = @$path_pages - 1;
-    $stash->{page} = $path_pages->[$depth];
+    my $page = $path_pages->[@$path_pages - 1];
+    $stash->{page} = $page;
 
-    # revisions not "fixed" yet, revisit later
-#     $c->form( optional => ['rev'] );
-#     if ( my $rev = $c->form->valid('rev') ) {
-#       $c->stash->{rev} = $page->get_revision($rev);
-#       $c->stash->{template} = 'norevision.tt' unless
-#       $c->stash->{rev};
-#     }
+    my $content;
+    # This form/rev stuff doesn't seem to work...
+    #$c->form( optional => ['rev'] );
+    #if (my $rev = $c->form->valid('rev') && defined $page->content_version) {
+    my $rev = $c->req->params->{rev};
+    if ($rev && defined $page->content_version) {
+        $content = MojoMojo::M::Core::Content->retrieve( page => $page->id, version => $rev );
+	$stash->{rev} = (defined $content ? $content->version : undef);
+	$stash->{template} = 'norevision.tt' unless $stash->{rev};
+    }
+    else
+    {
+	$content = $page->content;
+    }
+    $stash->{content} = $content;
 
 }
 
@@ -167,7 +175,7 @@ sub print : Private {
       $c->forward('view');
 }
 
-sub  attachments : Private {
+sub attachments : Private {
       my ( $self, $c, $page ) = @_;
       $c->stash->{template} = 'page/attachments.tt';
       $c->forward('view');

@@ -96,7 +96,7 @@ sub highlight {
     my $hi=0;
     for my $line (@diff) {
       $hi++;
-      if    ($$line[0] eq "+") { 
+      if    ($$line[0] eq "+") {
 	$diff .= qq(<div id="hi$hi" class="fade">).$$line[2]."</div>" }
       elsif ($$line[0] eq "c") {
 	$diff .= qq(<div id="hi$hi"class="fade">).$$line[2]."</div>" }

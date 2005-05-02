@@ -1,62 +1,62 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 <div class="navigation">
-    [% IF (!rev) %]
-    <!-- <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a> -->
-    <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
-    [% IF page.name == $c.pref('home_node') %]
-    | <a href="[% base %]/.pref" class="navlink">Edit Settings</a>
-    [% END %]
- [% IF page.revision.previous && (page.revisions.size+rev)>0%] 
-    | <a href="[% base _ page.path %]?rev=[% -1 + rev %]" class="navlink" accesskey="R">Back in time</a> 
-    ([%page.revisions.size%] revision[%IF page.revisions.size>1;"s";END%])</small>
-    [% END %]
-    [% ELSE %]
-    | <a href="[% base _ page.path %][%
-    IF page.revision.revisions.next %]?rev=[% rev+1 %][%END%]" class="navlink" accesskey="R">Forward in time</a> 
-    <small>
-    ([%rev%] more)
-    </small>
-    [%IF page.revision.parent%]
-    | <a href="[% base _ page.path %]?rev=[% -1 + c.req.params.rev %]" class="navlink" accesskey="R">Back in time</a> 
-    <small>
-    ([%page.revisions.size-rev%] more)
-    </small>
-    [%END%]
-    | <a href="[% base _ page.path %]" class="navlink" accesskey="C">See current</a> 
- [% END %] 
-  [% IF objects.last %]
-    <span id="show_changes">
-      | <a href="" onClick="toggleChanges(); return false;">See changes</a>
-    </span>
-    <span id="hide_changes" style="display: none">
-      | <a href="#" onClick="toggleChanges(); return false;">Hide changes</a>
-    </span>
-  [% END %]
-  <small>
-    | Views: <a href="[%base _ page.path%].print">Print</a>
-      <a href="[%base _ page.path%].rss">RSS</a>
-[%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
-  </small>
-[% IF page.links_to.first ; %] 
-    <small>
-      | Linked from:
-[% FOR linkitem = page.links_to %] 
-    <a class="existingWikiWord" href="[%base%][%linkitem.name%]">[%c.expand_wikiword(linkitem.path)%]</a>
+[% IF (!rev) %]
+ <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
+ [% IF page.name == $c.pref('home_node') %]
+ | <a href="[% base %]/.pref" class="navlink">Edit Settings</a>
+ [% END %]
+ [% IF page.content_version && page.content_version > 1 %] 
+ | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" class="navlink" accesskey="R">Back in time</a> 
+ ([% page.content_version %] revision[% IF page.content_version > 1; "s" ; END %])</small>
+ [% END %]
+[% ELSE %]
+ [% IF rev == page.content_version %]
+ <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
+ [% ELSIF rev < page.content_version %]
+ <a href="[% base _ page.path %]?rev=[% rev + 1 %]" class="navlink" accesskey="R">Forward in time</a> 
+ <small>([% page.content_version - rev %] more)</small>
+ [% END %]
+ [% IF rev > 1 %]
+ | <a href="[% base _ page.path %]?rev=[% rev - 1 %]" class="navlink" accesskey="R">Back in time</a> 
+ <small>([% rev - 1 %] more)</small>
+ [%END%]
+ [% UNLESS rev == page.content_version %]
+ | <a href="[% base _ page.path %]" class="navlink" accesskey="C">Latest Revision</a>
+ [% END %]
+[% END %] 
+[% IF objects.last %]
+ <span id="show_changes">
+  | <a href="" onClick="toggleChanges(); return false;">See changes</a>
+ </span>
+ <span id="hide_changes" style="display: none">
+  | <a href="#" onClick="toggleChanges(); return false;">Hide changes</a>
+ </span>
 [% END %]
-    </small>
+ <small>
+  | Views: <a href="[%base _ page.path%].print">Print</a>
+  <a href="[%base _ page.path%].rss">RSS</a>
+  [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
+ </small>
+[% IF page.links_to.first ; %] 
+ <small>
+  | Linked from:
+  [% FOR linkitem = page.links_to %] 
+   <a class="existingWikiWord" href="[%base%][%linkitem.name%]">[%c.expand_wikiword(linkitem.path)%]</a>
+  [% END %]
+ </small>
 [% END %]  
 </div>
 
 [% IF c.req.user ; %]
 <div class="tagedit">
-<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+ <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 </div>
 <div class="tags">
-<small>
-[% SET pagelink=page.path _ ".tags" %]
-[%  c.subreq(pagelink ) %]
-</small>
-<br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
+ <small>
+ [% SET pagelink=page.path _ ".tags" %]
+ [%  c.subreq(pagelink ) %]
+ </small>
+ <br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
 </div>
 [% END %]
 <script language="Javascript" type="text/javascript">
