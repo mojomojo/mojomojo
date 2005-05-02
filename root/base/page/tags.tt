@@ -3,11 +3,15 @@
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch=' ' _ othertag.tag _ ' ' %]
 [% NEXT IF taglist.match(tagmatch) %]
-<a class="tag" title="[%othertag.pagecount%]" href="javascript:void(0)"
->[%othertag.tag%]</a> 
+[% url = base _ '/.jsrpc/tag/' _ page.id _ '/' _ othertag.tag %]
+[%c.prototype.link_to_remote('+', { update => 'tags', url=>url })%] 
+<a class="tag" title="[%othertag.pagecount%]" 
+href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
 [%END%]
 &nbsp;&nbsp;&nbsp;<b>my tags : </b>
 [% FOREACH tag IN tags %]
-<a class="tag" href="javascript:void(0)">[%tag.tag%]</a> 
+[% url = $base _ '/.jsrpc/untag/' _ page.id _ '/' _ tag.tag %]
+[%c.prototype.link_to_remote('!', { update => 'tags', url=>url })%] 
+<a class="tag" href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 </span>

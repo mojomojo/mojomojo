@@ -57,6 +57,18 @@ sub diff : Path('/.jsrpc/diff') {
       }
 }
 
+=item submittag (/.jsrpc/submittag)
+
+Add a path through submit
+
+=cut
+
+sub submittag : Path('/.jsrpc/submittag') {
+    my ( $self, $c, $page ) = @_;
+    $c->req->args([$page,$c->req->params->{tag}]);
+    $c->forward('/jsrpc/tag');
+}
+
 =item tag (/.jsrpc/tag)
 
 add a tag to a page. return list of yours and popular tags.

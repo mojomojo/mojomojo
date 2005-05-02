@@ -2,7 +2,7 @@ package MojoMojo;
 
 use strict;
 use utf8;
-use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI/;
+use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI Prototype/;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';

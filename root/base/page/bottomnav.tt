@@ -49,19 +49,18 @@
 
 [% IF c.req.user ; %]
 <div class="tagedit">
- <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+[% url = base _ '/.jsrpc/submittag/' _ page.id %]
+[%c.prototype.form_remote_tag({ update => 'tags', url=>url })%] 
+<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+<input type="submit" name="add" value="add"> 
+</form>
 </div>
 <div class="tags">
- <small>
- [% SET pagelink=page.path _ ".tags" %]
- [%  c.subreq(pagelink ) %]
- </small>
- <br/><small><em>doubleclick a popular tag to use it, double click your tag to edit it.</em></small>
+[% SET pagelink=page.path _ ".tags" %]
+[%  c.subreq(pagelink ) %]
 </div>
 [% END %]
 <script language="Javascript" type="text/javascript">
-  var base='[%base%]/';
-  var page='[%page.id%]';
   var diff='';
   function toggleChanges() {
 	  if (!diff) {
@@ -81,4 +80,3 @@
   }
 </script>
 [% END %]
-<script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/tagedit.js"></script>

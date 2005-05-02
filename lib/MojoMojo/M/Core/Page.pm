@@ -71,12 +71,12 @@ sub formatted_diff {
     my $diff;
     for my $line (@diff) {
       if    ($$line[0] eq "+") { 
-	$diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
+  $diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
       elsif ($$line[0] eq "-") {
-	$diff .= qq(<del class="diffdel">).$$line[1]."</del>" }
+  $diff .= qq(<del class="diffdel">).$$line[1]."</del>" }
       elsif ($$line[0] eq "c") {
-	$diff .= qq(<del class="diffdel">).$$line[1]."</del>"; 
-	$diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
+  $diff .= qq(<del class="diffdel">).$$line[1]."</del>"; 
+  $diff .= qq(<ins class="diffins">).$$line[2]."</ins>" }
       elsif ($$line[0] eq "u") { $diff .=  $$line[1] }
       else{ $diff .= "Unknown operator ".$$line[0] }
     }
@@ -121,12 +121,13 @@ sub get_page {
 =item path_pages
 
 Accepts a path in url/unix directory format, e.g. "/page1/page2".
-Paths are assumed to be absolute, so a leading slash (/) is not required.
+Paths are assumed to be absolute, so a leading slash (/) is not 
+required.
 Returns an array of any pages that exist in the path, starting with "/",
 and an additional array of "proto page" hahses for any pages at the end
-of the path that do not exist. All paths include the root (/), which must
-exist, so a path of at least one element will always be returned. The "proto
-page" hash keys are:
+of the path that do not exist. All paths include the root (/), which 
+must exist, so a path of at least one element will always be returned. 
+The "proto page" hash keys are:
 
 =over
 
@@ -134,12 +135,14 @@ page" hash keys are:
 
 =item name_orig
 
-The page name submitted by the user, with minor cleaning, e.g. leading and trailing
+The page name submitted by the user, with minor cleaning, e.g. leading
+and trailing
 spaces trimmed.
 
 =item name
 
-The normalized page name, all lower case, with spaces replaced by underscores (_).
+The normalized page name, all lower case, with spaces replaced by 
+underscores (_).
 
 =item path
 
@@ -307,7 +310,7 @@ sub page_version
 
 sub orphans {
     grep {$_->links_to->count == 0 }
-	      __PACKAGE__->retrieve_all_sorted_by("name");
+        __PACKAGE__->retrieve_all_sorted_by("name");
 }
 
 sub wikiwords {

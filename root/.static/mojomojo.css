@@ -223,6 +223,10 @@ ol.setup li {
   float: right;
 }
 
+.tags a {
+  text-decoration: none;
+}
+
 .tagedit {
   float: right;
 }

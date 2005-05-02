@@ -1,3 +1,5 @@
 [%PROCESS header.tt%]
-No such revision found.
+<div><img style="float:left;" src="/.static/shrinkenhead.jpg">
+<h1>No such page/revision found.</h1>
+<p>please go directly back to <a href="[%base%]/">start</a>. Do not collect 200$ if you pass prison.</a></p>
 [%PROCESS footer.tt%]

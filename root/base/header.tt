@@ -4,6 +4,7 @@
 <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/xmlhttp.js"></script>
 <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/livebox.js"></script>
 <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/getElementsBySelector.js"></script>
+<script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/prototype.js"></script>
     <head>
         <title>
 	[% IF page %] [% c.expand_wikiword(page.name_orig) %] in [% END %]
