@@ -6,8 +6,6 @@ CREATE TABLE person (
  login      VARCHAR(100),
  name       VARCHAR(100),
  pass       VARCHAR(100)
- --, can_lock   INT -- should can_* be in this table?
- --, can_upload INT 
 );
 
 -- * page-content tree * --

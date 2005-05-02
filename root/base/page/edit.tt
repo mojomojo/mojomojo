@@ -34,6 +34,12 @@
  <textarea id="body" name="body" style="width: 450px; height: 280px">
   [% c.req.params.body %]
  </textarea>
+ [% url= base _ '/.jsrpc/render' %]
+ [%c.prototype.observe_field ( 'body', {
+  url     => url
+  with    => "'content='+value",
+  update  => 'preview'
+  })%]
 
  <script language="JavaScript1.2">
   setLiveboxUrl('[% base %]/.jsrpc/render');
