@@ -233,7 +233,7 @@ sub prepare_search_index {
 
     my $p = MojoMojo::Search::Plucene->open($index);
     
-    $self->log->debug( "Initializing Plucene search index..." ) if $self->debug;
+    $self->log->info( "Initializing Plucene search index..." ) if $self->debug;
     # loop through all latest-version pages
     my $count = 0;
     my $it = MojoMojo::M::Core::Page->retrieve_all;
@@ -267,7 +267,7 @@ sub prepare_search_index {
     
     $p->optimize;
 
-    $self->log->debug( "Indexed $count pages" ) if $self->debug;
+    $self->log->info( "Indexed $count pages" ) if $self->debug;
 }
     
 

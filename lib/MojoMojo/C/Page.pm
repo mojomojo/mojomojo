@@ -6,6 +6,8 @@ use IO::Scalar;
 use URI;
 use Time::Piece;
 use File::MimeInfo::Magic;
+use Text::Context;
+use HTML::Strip;
 my $m_base          = 'MojoMojo::M::Core::';
 my $m_page_class    = $m_base . 'Page';
 my $m_content_class = $m_base . 'Content';
@@ -165,6 +167,59 @@ sub edit : Private {
     $c->res->redirect( $c->req->base . $path . '.highlight' );
 
 }    # end sub edit
+
+=item search
+
+This action is called as .search on the current page when the user 
+performs a search.  The user can choose whether or not to search
+the entire site or a subtree starting from the current page.
+
+=cut
+
+sub search : Private {
+    my ( $self, $c, $path ) = @_;
+    
+    my $stash = $c->stash;
+    $stash->{template} = 'page/search.tt';
+
+    my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
+
+    # we should always have at least "/" in path pages. if we don't,
+    # we must not have had these structures in the stash
+    unless ($path_pages) {
+        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
+        @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
+    }
+
+    my $page = $path_pages->[ @$path_pages - 1 ];
+    $stash->{page} = $page;
+
+    my $q = $c->req->params->{query};
+    $stash->{query} = $q;
+    
+    my $p = MojoMojo::Search::Plucene->open( MojoMojo->config->{home} . "/plucene" );
+    my @results = ();
+    my $strip = HTML::Strip->new;
+    # XXX: Paginate this
+    # XXX: Handle subpage searches
+    foreach my $key ( $p->search( $q ) ) {
+        my $page = $m_page_class->get_page( $key );
+        # add a snippet of text containing the search query
+        # XXX: Need to format this so it doesn't contain HTML
+        my $content = $strip->parse( $page->content->formatted );
+        $strip->eof;
+        my $snippet = Text::Context->new( $content, split(/ /, $q) );
+        my $result = {
+            snippet => $snippet->as_html,
+            page => $page,
+        };
+        push @results, $result;
+    }
+    if ( scalar @results ) {
+        $c->stash->{results} = \@results;
+        $c->stash->{result_count} = scalar @results;
+    }
+}
 
 =item print
 

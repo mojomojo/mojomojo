@@ -1,0 +1,44 @@
+[% PROCESS header.tt %]
+
+[% 
+IF page.name == "/";
+    SET page_title = c.pref("name") || "MojoMojo";
+ELSE;
+    SET page_title = c.expand_wikiword(page.name_orig);
+END; 
+%]
+
+<h1 id="pageName">
+  <small> [% title || config.application_name || "MojoMojo" %] </small>
+  <br/>Search Results
+</h1>
+[%PROCESS navbar.tt %]
+<div id="search">
+    <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
+        Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
+        <input type="radio" name="search_type" value="all" [% IF search_type != "subtree" %]checked="checked"[% END %] /> Search entire site 
+        <input type="radio" name="search_type" value="subtree" [% IF search_type == "subtree" %]checked="checked"[% END %] /> Search within [% page_title %]
+    </form>
+</div>
+
+<hr />
+
+[% IF result_count %]
+<h3>[% result_count %] result[% IF result_count > 1 %]s[% END %] found.</h3>
+[% END %]
+
+<ul>
+[% FOR result = results %]
+ <li>
+    <a href="[% base %][% result.page.path %]">[% c.expand_wikiword(result.page.name) %]</a>
+    <div class="byline" style="margin-bottom: 0px">
+      by [% c.wikiword(result.page.page_version.creator.login,base) %]
+      at [% result.page.version.created.hms(":") %]
+    </div>
+    <div class="snippet">
+      [% result.snippet %]
+    </div>
+  </li>
+[%END%]
+</ul>
+[% PROCESS footer.tt %]

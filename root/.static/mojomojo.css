@@ -261,3 +261,8 @@ ol.setup li {
   color: #fff; 
   background-color:#ab0b0b; 
 }
+
+/* highlighted keywords in search results */
+.quoted {
+  font-weight: bold;
+}
