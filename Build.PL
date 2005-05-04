@@ -18,6 +18,7 @@ my $build = Catalyst::Build->new(
      'Catalyst::Plugin::Static' => '0.07',
      'Catalyst::Plugin::SubRequest' => '0.04',
      'Catalyst::View::TT' => '0.11',
+     'Catalyst::Model::CDBI' => '0.08',
      'Class::DBI::SQLite' => '0.09',
      'Class::DBI::Loader' => '0.19',
      'Class::DBI::AbstractSearch' => '0.05',
