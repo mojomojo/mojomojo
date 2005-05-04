@@ -9,7 +9,16 @@ my $build = Catalyst::Build->new(
     {
      'Algorithm::Diff' => '1.1901',
      'Archive::Zip' => '1.14',
-     Catalyst => '5.20',
+
+     # We are developing MojoMojo on Catalyst trunk,
+     # so relying on the version number below may be
+     # problematic. We recommend installing the latest
+     # Catalyst from svn. In particular, some revisions
+     # prior to Catalyst revision 556 are known to 
+     # break MojoMojo.
+     
+     'Catalyst' => '5.20',
+
      'Catalyst::Plugin::Authentication::CDBI' => '0.07',
      'Catalyst::Plugin::FillInForm' => '0.04',
      'Catalyst::Plugin::FormValidator' => '0.02',
