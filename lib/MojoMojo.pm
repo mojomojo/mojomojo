@@ -3,6 +3,7 @@ package MojoMojo;
 use strict;
 use utf8;
 use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI Prototype/;
+use MojoMojo::Search::Plucene;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
@@ -16,6 +17,7 @@ MojoMojo->config( authentication => {
 
 MojoMojo->config ( no_url_rewrite=>1 );
 MojoMojo->setup();
+MojoMojo->prepare_search_index();
 
 =head1 MojoMojo - A fancy wiki, powered by Catalyst
 
@@ -157,14 +159,14 @@ sub wikiword {
     # use the normalized path string returned by path_pages:
     if (@$proto_pages)
     {
-	my $proto_page = pop @$proto_pages;
-	$url .= $proto_page->{path};
+        my $proto_page = pop @$proto_pages;
+        $url .= $proto_page->{path};
     }
     else
     {
-	my $page = pop @$path_pages;
-	$url .= $page->path;
-	return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
+        my $page = pop @$path_pages;
+        $url .= $page->path;
+        return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
 
     return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
@@ -211,6 +213,30 @@ sub prepare_home {
       root => $home.'/root',
       dsn => 'dbi:SQLite2:'.$home.'/db/sqlite2/mojomojo.db'});
 }
+
+=item prepare_search_index
+
+Create a new Plucene search index from all pages in the database.
+Will do nothing if the index already exists.
+
+=cut
+
+sub prepare_search_index {
+    my $self = shift;
+    my $index = $self->config->{home} . "/plucene";
+    return if (-e $index . "/segments");
+    
+    my $p = MojoMojo::Search::Plucene->open($index);
+    
+    $self->log->debug( "Initializing Plucene search index..." ) if $self->debug;
+    # loop through all latest-version pages
+    my $it = MojoMojo::M::Core::Page->retrieve_all;
+    while ( my $page = $it->next ) {
+        my $content = $page->content;
+        # XXX: index stuff here :)
+    }
+}
+    
 
 =item fixw word
 
