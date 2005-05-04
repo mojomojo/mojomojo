@@ -39,6 +39,7 @@ my $build = Catalyst::Build->new(
      'LWP::Simple' => 0,
      'Module::Pluggable::Ordered' => '1.4',
      'Plucene::Simple' => '1.04',
+     'Plucene::Plugin::Analyzer::SnowballAnalyzer' => '1.1',
      'Pod::Simple::HTML' => '3.01',
      'Pod::Tree' => '1.11',
      'Text::Emoticon::MSN' => '0.01',

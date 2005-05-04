@@ -426,4 +426,31 @@ sub create_path_pages {
 
 }    # end sub create_path_pages
 
+=item full_path
+
+Returns the complete path for the current page, i.e.:
+/foo/bar
+
+=cut
+
+sub full_path {
+    my $self = shift;
+    my $page = $self;
+        
+    my $depth = $page->depth;
+    return "/" if ($page->name eq "/");
+    return $page->path if $page->path;
+    return "/" . $page->name unless ($depth > 1);
+    
+    my $path = $page->name;
+    while ( my $parent = $page->parent ) {
+        last if $parent->name eq "/";
+        $path = $parent->name . "/" . $path;
+        $page = $parent;
+    }
+    
+    $page->path( "/" . $path );
+    return "/" . $path;
+}
+
 1;

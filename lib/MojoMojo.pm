@@ -226,15 +226,48 @@ sub prepare_search_index {
     my $index = $self->config->{home} . "/plucene";
     return if (-e $index . "/segments");
     
+    # Plucene::Simple doesn't seem to tell Plucene to create a new index properly,
+    # so we have to create a new segments file ourselves
+    open SEGMENTS, ">$index/segments";
+    close SEGMENTS;
+
     my $p = MojoMojo::Search::Plucene->open($index);
     
     $self->log->debug( "Initializing Plucene search index..." ) if $self->debug;
     # loop through all latest-version pages
+    my $count = 0;
     my $it = MojoMojo::M::Core::Page->retrieve_all;
     while ( my $page = $it->next ) {
-        my $content = $page->content;
-        # XXX: index stuff here :)
+        if ( my $content = $page->content ) {
+            my $key = $page->full_path;
+
+            $p->delete_document($key) if ($p->indexed($key));
+
+            # Q: should we be indexing the abstract, comments, and tags?           
+            my $text = $content->body;
+            $text .= " " . $content->abstract if ($content->abstract);
+            $text .= " " . $content->comments if ($content->comments);
+            
+            my %data = (
+                $key => {
+                    _author => $content->creator->login,
+                    date => ($content->created) ? $content->created->ymd : "",
+                    tags => join (" ", map { $_->tag } $page->tags ),
+                    text => $text,
+                },
+            );
+            {
+                # This throws some warnings...
+                local $^W = 0;
+                $p->add( %data );
+            }
+            $count++;
+        }
     }
+    
+    $p->optimize;
+
+    $self->log->debug( "Indexed $count pages" ) if $self->debug;
 }
     
 
