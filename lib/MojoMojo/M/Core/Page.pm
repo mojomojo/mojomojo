@@ -54,9 +54,10 @@ FROM page, tag, content WHERE page.id=content.page AND page.content_version=cont
 
 # FIX: this one needs work...
 __PACKAGE__->set_sql('recent' => qq{
-SELECT DISTINCT node, page.id as id,revision. updated, owner
-FROM page,revision WHERE revision.id=page.revision
-ORDER BY revision.updated DESC
+SELECT DISTINCT page.name, page.id as id,page_version.release_date, 
+creator
+FROM page,page_version WHERE page_version.page=page.id
+ORDER BY page_version.release_date DESC
 });
 
 # do we need these  ???
@@ -288,8 +289,7 @@ sub normalize_name
 #     return \%proto_rev;
 # }
 
-sub content
-{
+sub content {
     my ($self) = @_;
     return MojoMojo::M::Core::Content->retrieve
     (
@@ -297,9 +297,7 @@ sub content
      version => $self->content_version,
     );
 }
-
-sub page_version
-{
+sub page_version {
     my ($self) = @_;
     return MojoMojo::M::Core::PageVersion->retrieve
     (

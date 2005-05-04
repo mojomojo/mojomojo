@@ -41,11 +41,6 @@
   update  => 'preview'
   })%]
 
- <script language="JavaScript1.2">
-  setLiveboxUrl('[% base %]/.jsrpc/render');
-  liveBox('body','preview');
- </script>
-
  <p style="clear:left"><b>Preview</b></p>
  <div style="clear:left;width:450;" id="preview">
  </div>

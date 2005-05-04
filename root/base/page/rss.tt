@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
 	<title>[% config.application_name || "MojoMojo" %]</title>
-	<link>[%base%][%c.pref('home_node')</link>
+	<link>[%base%]/</link>
 	<description>A MojoMojo wiki</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
 [%FOR page = pages.list; %]
     <item>
       <title>[% c.expand_wikiword( page.name_orig ) %]
-[%IF page.isa('MojoMojo::M::CDBI::Revision')%] Revision from [% page.content.created.datetime %][% END %]
+[%IF page.isa('MojoMojo::M::CDBI::PageRevision')%] Revision from [% page.content.created.datetime %][% END %]
      </title>
       <pubDate>[% page.content.created.strftime %]</pubDate>
       <guid>[% base %][% page.path %]</guid>

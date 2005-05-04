@@ -5,13 +5,25 @@
 [% NEXT IF taglist.match(tagmatch) %]
 [% url = base _ '/.jsrpc/tag/' _ page.id _ '/' _ othertag.tag %]
 [%c.prototype.link_to_remote('+', { update => 'tags', url=>url })%] 
+[%IF othertag.tag == highlight %]
+<a id="fadetag" class="tag" title="[%othertag.pagecount%]" 
+[%ELSE%]
 <a class="tag" title="[%othertag.pagecount%]" 
+[%END%]
 href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
 [%END%]
 &nbsp;&nbsp;&nbsp;<b>my tags : </b>
 [% FOREACH tag IN tags %]
 [% url = $base _ '/.jsrpc/untag/' _ page.id _ '/' _ tag.tag %]
 [%c.prototype.link_to_remote('!', { update => 'tags', url=>url })%] 
-<a class="tag" href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
+[%IF tag.tag == highlight %]
+<a id="fadetag" class="tag" 
+[%ELSE%]
+<a class="tag" 
+[%END%]
+href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 </span>
+<script language="Javascript" type="text/javascript">
+Effect.Fade(gId('fadetag'));
+</script>

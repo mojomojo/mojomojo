@@ -4,7 +4,7 @@ use base 'Catalyst::Base';
 use Time::Piece;
 use Archive::Zip;
 
-my $model='MojoMojo::M::Core::Page';
+my $model = 'MojoMojo::M::Core::Page';
 
 =head1 NAME
 
@@ -33,8 +33,8 @@ This action just shows an overview of the export features.
 =cut
 
 sub index : Path('/.export') {
-        my ( $self, $c ) = @_;
-        $c->stash->{template} ='export.tt'
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'export.tt';
 }
 
 =item raw (/.export.zip)
@@ -46,19 +46,22 @@ for all the nodes of the wiki.
 
 sub raw : Path('/.export.zip') {
     my ( $self, $c ) = @_;
-    my @pages=$model->retrieve_all_sorted_by("node");
-    my $archive=Archive::Zip->new();
-    my $prefix=$c->fixw($c->pref('name')).
-        "-export-".localtime->ymd('-').'-'.localtime->hms('-');
+    my @pages   = $model->retrieve_all_sorted_by("node");
+    my $archive = Archive::Zip->new();
+    my $prefix  =
+        $c->fixw( $c->pref('name') )
+      . "-export-"
+      . localtime->ymd('-') . '-'
+      . localtime->hms('-');
     $archive->addDirectory("$prefix/");
     for my $page (@pages) {
-        $archive->addString($page->content, $prefix."/".$page->node);
+        $archive->addString( $page->content, $prefix . "/" . $page->node );
     }
-    my $fh=IO::Scalar->new(\$c->res->{output});
+    my $fh = IO::Scalar->new( \$c->res->{output} );
     $archive->writeToFileHandle($fh);
-    $c->res->headers->header("Content-Type" => 'archive/zip');
-    $c->res->headers->header("Content-Disposition" =>
-       "attachment; filename=$prefix.zip");
+    $c->res->headers->header( "Content-Type" => 'archive/zip' );
+    $c->res->headers->header(
+        "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
 
 =item html (/.html.zip)
@@ -69,25 +72,29 @@ versions of all the nodes of the wiki.
 =cut
 
 sub html : Path('/.html.zip') {
-        my ( $self, $c ) = @_;
-        my @pages=$model->retrieve_all_sorted_by("node");
-        my $archive=Archive::Zip->new();
-        my $prefix=$c->fixw($c->pref('name')).
-        "-html-".localtime->ymd('-').'-'.localtime->hms('-');
-        $archive->addDirectory("$prefix/");
-        my $home=$c->pref("home_node");
-        $archive->addString(qq{ <html><head>
+    my ( $self, $c ) = @_;
+    my @pages   = $model->retrieve_all_sorted_by("node");
+    my $archive = Archive::Zip->new();
+    my $prefix  =
+        $c->fixw( $c->pref('name') ) . "-html-"
+      . localtime->ymd('-') . '-'
+      . localtime->hms('-');
+    $archive->addDirectory("$prefix/");
+    my $home = $c->pref("home_node");
+    $archive->addString(
+        qq{ <html><head>
   <META HTTP-EQUIV="Refresh" CONTENT="0;URL=$home">
-    </head></html>},$prefix."/index.html");
-        for my $page (@pages) {
-          $archive->addString($c->subreq("!page/print",$page->node),
-                              $prefix."/".$page->node);
-        }
-    my $fh=IO::Scalar->new(\$c->res->{output});
+    </head></html>}, $prefix . "/index.html"
+    );
+    for my $page (@pages) {
+        $archive->addString( $c->subreq( "!page/print", $page->node ),
+            $prefix . "/" . $page->node );
+    }
+    my $fh = IO::Scalar->new( \$c->res->{output} );
     $archive->writeToFileHandle($fh);
-    $c->res->headers->header("Content-Type" => 'archive/zip');
-    $c->res->headers->header("Content-Disposition" =>
-       "attachment; filename=$prefix.zip");
+    $c->res->headers->header( "Content-Type" => 'archive/zip' );
+    $c->res->headers->header(
+        "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
 
 1;

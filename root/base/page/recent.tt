@@ -14,15 +14,15 @@
 <b>[% now %]</b>
 <ul>
 [% FOR page = pages.list %]
-[%IF now != page.content.created.dmy('.');%]
-  [%SET now = page.content.created.dmy('.'); %]
+[%IF now != page.page_version.release_date.dmy('.');%]
+  [%SET now = page.page_version.release_date.dmy('.'); %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.path) %]</a>
+    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by [% c.wikiword(page.content.creator.login,base) %]
-      at [% page.content.created.hms(":") %]
+      by [% c.wikiword(page.page_version.creator.login,base) %]
+      at [% page.version.created.hms(":") %]
     </div>
   </li>
 [%END%]

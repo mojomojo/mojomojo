@@ -32,22 +32,27 @@ an attachment id.
 
 =cut
 
-sub index : Path('/.attachment') {
-    my ( $self, $c, $att, $action ) = @_;
-    $c->stash->{att}=MojoMojo::M::Core::Attachment->retrieve($att);
-    if ($action) {
-        $c->forward("/attachment/$action");
-    } 
-    unless ($c->res->output || $c->stash->{template}) {
-        $c->res->output(scalar(read_file($c->home().
-                        "/uploads/".$c->stash->{att}->id)));
-        $c->res->headers->header('content-type',
-                                 $c->stash->{att}->contenttype);
-        $c->res->headers->header("Content-Disposition" =>
-                  "inline; filename=".
-                  $c->stash->{att}->name);
-    }
-}
+        sub index : Path('/.attachment') {
+            my ( $self, $c, $att, $action ) = @_;
+            $c->stash->{att} = MojoMojo::M::Core::Attachment->retrieve($att);
+            if ($action) {
+                $c->forward("/attachment/$action");
+            }
+            unless ( $c->res->output || $c->stash->{template} ) {
+                $c->res->output(
+                    scalar(
+                        read_file(
+                            $c->home() . "/uploads/" . $c->stash->{att}->id
+                        )
+                    )
+                );
+                $c->res->headers->header( 'content-type',
+                    $c->stash->{att}->contenttype );
+                $c->res->headers->header(
+                    "Content-Disposition" => "inline; filename="
+                      . $c->stash->{att}->name );
+            }
+        }
 
 =item download
 
@@ -56,16 +61,21 @@ content-disposition.
 
 =cut
 
-sub  download : Private {
-    my ( $self, $c, $att, $action ) = @_;
-    $c->res->output(scalar(read_file($c->home().
-                    "/uploads/".$c->stash->{att}->id)));
-    $c->res->headers->header('content-type',
-                             $c->stash->{att}->contenttype);
-    $c->res->headers->header("Content-Disposition" =>
-              "attachment; filename=".
-              $c->stash->{att}->name);
-} 
+        sub download : Private {
+            my ( $self, $c, $att, $action ) = @_;
+            $c->res->output(
+                scalar(
+                    read_file(
+                        $c->home() . "/uploads/" . $c->stash->{att}->id
+                    )
+                )
+            );
+            $c->res->headers->header( 'content-type',
+                $c->stash->{att}->contenttype );
+            $c->res->headers->header(
+                "Content-Disposition" => "attachment; filename="
+                  . $c->stash->{att}->name );
+        }
 
 =item delete
 
@@ -74,12 +84,12 @@ file system.
 
 =cut
 
-sub delete : Private {
-    my ( $self, $c, $att, $action ) = @_;
-    $c->req->args([$c->stash->{att}->page->node]);
-    $c->stash->{att}->delete();
-    $c->forward('/page/upload');
-}
+        sub delete : Private {
+            my ( $self, $c, $att, $action ) = @_;
+            $c->req->args( [ $c->stash->{att}->page->node ] );
+            $c->stash->{att}->delete();
+            $c->forward('/page/upload');
+        }
 
 =item insert
 
@@ -89,14 +99,16 @@ mime-type
 
 =cut
 
-sub insert : Private {
-    my ( $self, $c, $att, $action ) = @_;
-    $c->req->args([$c->stash->{att}->page->node]);
-    $c->stash->{append}="\n\n\"".$c->stash->{att}->name."\":".
-                        $c->req->base.".attachment/".
-                        $c->stash->{att};
-    $c->forward('/page/edit');
-}
+        sub insert : Private {
+            my ( $self, $c, $att, $action ) = @_;
+            $c->req->args( [ $c->stash->{att}->page->node ] );
+            $c->stash->{append} = "\n\n\""
+              . $c->stash->{att}->name . "\":"
+              . $c->req->base
+              . ".attachment/"
+              . $c->stash->{att};
+            $c->forward('/page/edit');
+        }
 
 =back 
 
@@ -111,4 +123,4 @@ it under the same terms as perl itself.
 
 =cut
 
-1;
+        1;

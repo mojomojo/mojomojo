@@ -41,9 +41,9 @@ changed/added nodes.
 
 sub rss : Path('/.rss') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
-    $c->stash->{template} = 'rss.tt';
-} 
+    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{template} = 'page/rss.tt';
+}
 
 =item rss_full (/.rss_full)
 
@@ -54,9 +54,9 @@ changed/added nodes.
 
 sub rss_full : Path('/.rss_full') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
-    $c->stash->{template} = 'rss_full.tt';
-} 
+    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{template} = 'page/rss_full.tt';
+}
 
 =item atom (/.rss_full)
 
@@ -67,8 +67,8 @@ changed/added nodes.
 
 sub atom : Path('/.atom') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}  = [MojoMojo::M::Core::Page->search_recent];
-    $c->stash->{template} = 'atom.tt';
+    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{template} = 'page/atom.tt';
 }
 
 =head1 AUTHOR

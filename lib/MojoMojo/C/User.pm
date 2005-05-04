@@ -23,7 +23,6 @@ deletes this users cookie, and clears his session.
 
 =cut
 
-
 sub logout : Path('/.logout') {
     my ( $self, $c ) = @_;
     $c->session_logout;
@@ -39,15 +38,15 @@ screen otherwise.
 
 sub login : Path('/.login') {
     my ( $self, $c ) = @_;
-    $c->stash->{message}='please enter username & password';
-    if ($c->req->params->{login}) {
-        $c->session_login($c->req->params->{login},
-                          $c->req->params->{pass} );
-        if ($c->req->{user}) {
-          $c->forward('/default') unless $c->stash->{template};
-          return;
-        } else {
-          $c->stash->{message}='could not authenticate that login.';
+    $c->stash->{message} = 'please enter username & password';
+    if ( $c->req->params->{login} ) {
+        $c->session_login( $c->req->params->{login}, $c->req->params->{pass} );
+        if ( $c->req->{user} ) {
+            $c->forward('/default') unless $c->stash->{template};
+            return;
+        }
+        else {
+            $c->stash->{message} = 'could not authenticate that login.';
         }
     }
     $c->stash->{template} = "user/login.tt";

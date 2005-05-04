@@ -37,9 +37,9 @@ sub list : Private {
     return unless $tag;
 
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}   = [MojoMojo::M::Core::Tag->search_most_used] ;
-    $c->stash->{pages} = [MojoMojo::M::Core::Page->search_by_tag($tag)];
-    $c->stash->{related} = [MojoMojo::M::Core::Tag->related_to($tag)];
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
+    $c->stash->{pages}     = [ MojoMojo::M::Core::Page->search_by_tag($tag) ];
+    $c->stash->{related}   = [ MojoMojo::M::Core::Tag->related_to($tag) ];
 }
 
 =item recent
@@ -51,14 +51,15 @@ to a certain tag.
 =cut
 
 sub recent : Private {
-    my ($self,$c,$tag) = @_;
+    my ( $self, $c, $tag ) = @_;
     $c->stash->{template} = 'tag/recent.tt';
     return unless $tag;
-    $c->stash->{activetag}   = $tag;
-    $c->stash->{tags}   = [MojoMojo::M::Core::Tag->search_most_used] ;
-    $c->stash->{pages} = [MojoMojo::M::Core::Page->search_by_tag_and_date($tag)];
+    $c->stash->{activetag} = $tag;
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
+    $c->stash->{pages}     =
+      [ MojoMojo::M::Core::Page->search_by_tag_and_date($tag) ];
 }
-    
+
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
