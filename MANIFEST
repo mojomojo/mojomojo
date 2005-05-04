@@ -1,7 +1,5 @@
 db/oracle/mojomojo.sql
-db/sqlite2/dbdump.sql
 db/sqlite2/mojomojo.db
-db/sqlite2/mojomojo.db.orig
 db/sqlite2/mojomojo.sql
 lib/MojoMojo.pm
 lib/MojoMojo/AppData.pm
@@ -28,8 +26,6 @@ lib/Text/Textile2.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
-MojoMojo-0.05.tar.gz
-mojomojo.yml
 root/.static/catalyst.png
 root/.static/emote/47_47.gif
 root/.static/emote/48_48.gif
@@ -136,13 +132,11 @@ root/base/tag/list.tt
 root/base/tag/recent.tt
 root/base/user/login.tt
 root/favicon.ico
-script/cgi.pl
-script/create.pl
-script/fcgi.pl
-script/nph-cgi.pl
-script/packer.pl
-script/server.pl
-script/test.pl
+script/mojomojo_cgi.pl
+script/mojomojo_create.pl
+script/mojomojo_fcgi.pl
+script/mojomojo_server.pl
+script/mojomojo_test.pl
 t/01app.t
 t/02pod.t
 t/03podcoverage.t
