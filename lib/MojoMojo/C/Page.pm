@@ -211,6 +211,7 @@ sub search : Private {
     # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
     foreach my $key ( $p->search( $q ) ) {
         # skip results outside of this subtree
+        # XXX: Find some way to do this within the search query itself for better performance
         if ($search_type eq "subtree") {
             my $full_path = $page->full_path;
             if ( $key !~ /^$full_path/ ) {
