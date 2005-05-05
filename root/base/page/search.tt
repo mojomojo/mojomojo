@@ -27,7 +27,7 @@ END;
 
 [% IF result_count > 0 %]
 <h3>[% result_count %] result[% IF result_count > 1 %]s[% END %] found within [% IF search_type == "subtree"; page_title; ELSE %]entire site[% END %].</h3>
-[% ElSE %]
+[% ELSIF !result_count %]
 <h3>No results found.</h3>
 [% END %]
 
