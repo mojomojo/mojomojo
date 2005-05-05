@@ -153,6 +153,10 @@ sub edit : Private {
         $page = $path_pages->[ @$path_pages - 1 ];
     }
     $page->update_content( %$valid, %$unknown );
+    
+    # update the search index with the new content
+    my $p = MojoMojo::Search::Plucene->open( $c->config->{home} . "/plucene" );
+    $p->update_index( $page );
 
     # This is another ugly hack that needs to be fixed,
     # especially if we ever support relative links of
@@ -202,10 +206,10 @@ sub search : Private {
     my $strip = HTML::Strip->new;
     # XXX: Paginate this
     # XXX: Handle subpage searches
+    # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
     foreach my $key ( $p->search( $q ) ) {
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query
-        # XXX: Need to format this so it doesn't contain HTML
         my $content = $strip->parse( $page->content->formatted );
         $strip->eof;
         my $snippet = Text::Context->new( $content, split(/ /, $q) );

@@ -5,7 +5,6 @@ use base 'Plucene::Simple';
 use Plucene::Plugin::Analyzer::SnowballAnalyzer;
 
 # TODO:
-# Use Text::Context to display text snippets from search results
 # I can't find a way to index the path data such that we can search only a subsection of
 #   the path tree.  For now, we can simply get all search results and ignore those that don't
 #   have a key that matches the path we are looking for.
@@ -34,7 +33,30 @@ sub update_index {
     my ($self, $page) = @_;
     return undef unless ($page);
     
-    # XXX: TODO
+    my $content = $page->content;
+    my $key = $page->full_path;
+    
+    $self->delete_document($key) if ($self->indexed($key));
+
+    # Q: should we be indexing the abstract, comments, and tags?           
+    my $text = $content->body;
+    $text .= " " . $content->abstract if ($content->abstract);
+    $text .= " " . $content->comments if ($content->comments);
+    
+    my %data = (
+        $key => {
+            _author => $content->creator->login,
+            date => ($content->created) ? $content->created->ymd : "",
+            tags => join (" ", map { $_->tag } $page->tags ),
+            text => $text,
+        },
+    );
+    {
+        # This throws some warnings...
+        local $^W = 0;
+        $self->add( %data );
+    }
+    return 1;
 }
 
 1;
