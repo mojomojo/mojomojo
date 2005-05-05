@@ -1,5 +1,7 @@
 [% PROCESS header.tt %]
 
+[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
+
 [% 
 IF page.name == "/";
     SET page_title = c.pref("name") || "MojoMojo";
@@ -23,8 +25,10 @@ END;
 
 <hr />
 
-[% IF result_count %]
-<h3>[% result_count %] result[% IF result_count > 1 %]s[% END %] found.</h3>
+[% IF result_count > 0 %]
+<h3>[% result_count %] result[% IF result_count > 1 %]s[% END %] found within [% IF search_type == "subtree"; page_title; ELSE %]entire site[% END %].</h3>
+[% ElSE %]
+<h3>No results found.</h3>
 [% END %]
 
 <ul>

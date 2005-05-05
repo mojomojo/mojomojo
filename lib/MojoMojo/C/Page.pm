@@ -199,7 +199,9 @@ sub search : Private {
     $stash->{page} = $page;
 
     my $q = $c->req->params->{query};
+    my $search_type = $c->req->params->{search_type} || "all";
     $stash->{query} = $q;
+    $stash->{search_type} = $search_type;
     
     my $p = MojoMojo::Search::Plucene->open( MojoMojo->config->{home} . "/plucene" );
     my @results = ();
@@ -208,6 +210,14 @@ sub search : Private {
     # XXX: Handle subpage searches
     # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
     foreach my $key ( $p->search( $q ) ) {
+        # skip results outside of this subtree
+        if ($search_type eq "subtree") {
+            my $full_path = $page->full_path;
+            if ( $key !~ /^$full_path/ ) {
+                next;
+            }
+        }
+        
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query
         my $content = $strip->parse( $page->content->formatted );
