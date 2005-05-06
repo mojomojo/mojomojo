@@ -114,7 +114,7 @@ sub highlight {
         }
         elsif ( $$line[0] eq "c" ) {
             $diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
-        }
+        } elsif ( $$line[0] eq "-" ) { }
         else { $diff .= $$line[1] }
     }
     return $diff;
