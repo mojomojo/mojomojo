@@ -23,10 +23,10 @@
 <link rel="shortcut icon" href="[%base%]/.static/favicon.ico"/>
    </head>
 
-    [% IF page && page.can("path") %] 
-    <body ondblclick="location.href='[%base%][% page.path %].edit'">
-    [% ELSE %]
-    <body>
-    [% END %]
+    <body
+    [% IF template.name=='page/view.tt' %] 
+    ondblclick="location.href='[%base%][% page.path %].edit'"
+    [% END %]>
         <div id="Container">
 	  <div id="Content">
+    [%template.title%]
