@@ -284,11 +284,15 @@ sub tags : Private {
         $c->stash->{page} = $page;
     }
     die $page . " not found" unless ref $page;
+    if ($c->req->{user_id}) {
     my @tags = $page->others_tags( $c->req->{user_id} );
     $c->stash->{others_tags} = [@tags];
     @tags                    = $page->user_tags( $c->req->{user_id} );
     $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
     $c->stash->{tags}        = [@tags];
+    } else {
+      $c->stash->{others_tags}      = [ $page->tags ];
+    }
 }
 
 sub list : Path('/.list') {
