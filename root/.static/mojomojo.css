@@ -266,3 +266,19 @@ ol.setup li {
 .quoted {
   font-weight: bold;
 }
+
+/* pagination links */
+div.pager {
+    font-size: small;
+    text-align: center;
+}
+
+div.pager ul { 
+    list-style: none;
+}   
+
+div.pager ul li { 
+    display: inline;
+    padding: 0 2px;
+    white-space: nowrap;
+}

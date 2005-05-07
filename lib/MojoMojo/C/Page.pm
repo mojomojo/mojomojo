@@ -8,6 +8,7 @@ use Time::Piece;
 use File::MimeInfo::Magic;
 use Text::Context;
 use HTML::Strip;
+use Data::Page;
 my $m_base          = 'MojoMojo::M::Core::';
 my $m_page_class    = $m_base . 'Page';
 my $m_content_class = $m_base . 'Content';
@@ -183,6 +184,9 @@ the entire site or a subtree starting from the current page.
 sub search : Private {
     my ( $self, $c, $path ) = @_;
     
+    # number of search results to show per page
+    my $results_per_page = 10;
+    
     my $stash = $c->stash;
     $stash->{template} = 'page/search.tt';
 
@@ -204,11 +208,12 @@ sub search : Private {
     $stash->{search_type} = $search_type;
     
     my $p = MojoMojo::Search::Plucene->open( MojoMojo->config->{home} . "/plucene" );
-    my @results = ();
+    
     my $strip = HTML::Strip->new;
-    # XXX: Paginate this
-    # XXX: Handle subpage searches
-    # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
+    
+    # XXX: Cache search results.  This will require creating a new data structure since it's
+    #      not safe to cache $page objects.
+    my $results = [];
     foreach my $key ( $p->search( $q ) ) {
         # skip results outside of this subtree
         # XXX: Find some way to do this within the search query itself for better performance
@@ -223,16 +228,36 @@ sub search : Private {
         # add a snippet of text containing the search query
         my $content = $strip->parse( $page->content->formatted );
         $strip->eof;
+        
+        # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
         my $snippet = Text::Context->new( $content, split(/ /, $q) );
+        
         my $result = {
             snippet => $snippet->as_html,
             page => $page,
         };
-        push @results, $result;
+        push @$results, $result;
     }
-    if ( scalar @results ) {
-        $c->stash->{results} = \@results;
-        $c->stash->{result_count} = scalar @results;
+    
+    my $result_count = scalar @$results;
+    if ( $result_count ) {
+        # Paginate the results
+        # This is done even with even 1 page of results so the template doesn't need to do two separate things
+        my $pager = Data::Page->new;
+        $pager->total_entries( $result_count );
+        $pager->entries_per_page( $results_per_page );
+        $pager->current_page( $c->req->params->{p} || 1 );
+        
+        if ( $result_count > $results_per_page ) {                    
+            # trim down the results to just this page
+            @$results = $pager->splice( $results );
+        }
+        
+        $c->stash->{pager} = $pager;
+        my $last_page = ( $pager->last_page > 10 ) ? 10 : $pager->last_page;
+        $c->stash->{pages_to_link} = [ 1 .. $last_page ];
+        $c->stash->{results} = $results;
+        $c->stash->{result_count} = $result_count;
     }
 }
 
