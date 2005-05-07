@@ -214,15 +214,24 @@ sub search : Private {
     # XXX: Cache search results.  This will require creating a new data structure since it's
     #      not safe to cache $page objects.
     my $results = [];
+    
+    # for subtree searches, add the path info to the query, replacing slashes with X
+    my $real_query = $q;    # this is for context matching later
+    if ( $search_type eq "subtree" ) {
+        my $fixed_path = $page->full_path;
+        $fixed_path =~ s/\//X/g;
+        $q = "_path:$fixed_path* AND " . $q;
+    }
+    
     foreach my $key ( $p->search( $q ) ) {
         # skip results outside of this subtree
-        # XXX: Find some way to do this within the search query itself for better performance
-        if ($search_type eq "subtree") {
-            my $full_path = $page->full_path;
-            if ( $key !~ /^$full_path/ ) {
-                next;
-            }
-        }
+        # XXX: Remove this code if the new _path query seems to work OK
+#        if ($search_type eq "subtree") {
+#            my $full_path = $page->full_path;
+#            if ( $key !~ /^$full_path/ ) {
+#                next;
+#            }
+#        }
         
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query
@@ -230,7 +239,7 @@ sub search : Private {
         $strip->eof;
         
         # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
-        my $snippet = Text::Context->new( $content, split(/ /, $q) );
+        my $snippet = Text::Context->new( $content, split(/ /, $real_query) );
         
         my $result = {
             snippet => $snippet->as_html,

@@ -248,9 +248,13 @@ sub prepare_search_index {
             $text .= " " . $content->abstract if ($content->abstract);
             $text .= " " . $content->comments if ($content->comments);
             
+            # translate the path into plain text so we can use it in the search query later
+            my $fixed_path = $key;
+            $fixed_path =~ s/\//X/g;
             my %data = (
                 $key => {
                     _author => $content->creator->login,
+                    _path => $fixed_path,
                     date => ($content->created) ? $content->created->ymd : "",
                     tags => join (" ", map { $_->tag } $page->tags ),
                     text => $text,
