@@ -238,35 +238,8 @@ sub prepare_search_index {
     my $count = 0;
     my $it = MojoMojo::M::Core::Page->retrieve_all;
     while ( my $page = $it->next ) {
-        if ( my $content = $page->content ) {
-            my $key = $page->full_path;
-
-            $p->delete_document($key) if ($p->indexed($key));
-
-            # Q: should we be indexing the abstract, comments, and tags?           
-            my $text = $content->body;
-            $text .= " " . $content->abstract if ($content->abstract);
-            $text .= " " . $content->comments if ($content->comments);
-            
-            # translate the path into plain text so we can use it in the search query later
-            my $fixed_path = $key;
-            $fixed_path =~ s/\//X/g;
-            my %data = (
-                $key => {
-                    _author => $content->creator->login,
-                    _path => $fixed_path,
-                    date => ($content->created) ? $content->created->ymd : "",
-                    tags => join (" ", map { $_->tag } $page->tags ),
-                    text => $text,
-                },
-            );
-            {
-                # This throws some warnings...
-                local $^W = 0;
-                $p->add( %data );
-            }
-            $count++;
-        }
+        $p->update_index( $page );
+        $count++;
     }
     
     $p->optimize;

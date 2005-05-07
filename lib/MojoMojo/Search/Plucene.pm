@@ -31,7 +31,7 @@ sub _writer {
 # updates the search index when page data changes
 sub update_index {
     my ($self, $page) = @_;
-    return undef unless ($page);
+    return undef unless ($page && $page->content);
     
     my $content = $page->content;
     my $key = $page->full_path;
@@ -43,9 +43,14 @@ sub update_index {
     $text .= " " . $content->abstract if ($content->abstract);
     $text .= " " . $content->comments if ($content->comments);
     
+    # translate the path into plain text so we can use it in the search query later
+    my $fixed_path = $key;
+    $fixed_path =~ s/\//X/g;
+    
     my %data = (
         $key => {
             _author => $content->creator->login,
+            _path => $fixed_path,
             date => ($content->created) ? $content->created->ymd : "",
             tags => join (" ", map { $_->tag } $page->tags ),
             text => $text,
