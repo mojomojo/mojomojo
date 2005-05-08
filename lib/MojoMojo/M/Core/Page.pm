@@ -18,14 +18,6 @@ use Algorithm::Diff;
 
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
-__PACKAGE__->add_trigger(
-    after_set_content => sub {
-        my $self = shift;
-        $self->created( localtime->datetime );
-        $self->update();
-    }
-);
-
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
     "to_page"

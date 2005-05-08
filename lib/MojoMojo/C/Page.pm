@@ -100,11 +100,14 @@ after saving, it will forward to the highlight action.
 sub edit : Private {
     my ( $self, $c, $path ) = @_;
 
+    # Set up the basics. Log in if there's auser.
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
+    $c->req->params->{login}=$c->req->params->{creator};
     $c->forward('/user/login') if $c->req->params->{login} && !$c->req->{user};
 
     my $user = $c->req->{user_id} || 0;
+    $c->log->info("user is $user");
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
@@ -129,7 +132,8 @@ sub edit : Private {
 
         # may need to add more required fields...
         required => [qw/body/],
-        defaults => { creator => $user, }
+        defaults => { creator => $user, 
+                  }
     );
 
     # if we have missing or invalid fields, display the edit form.
@@ -141,6 +145,10 @@ sub edit : Private {
         return;
     }
 
+    if ($user == 0 && ! $c->pref('anonymous_user')) {
+      $c->stash->{edit_error}='Anonymous Edit disabled';
+      return;
+    }
   # else, update the page and redirect to highlight, which will forward to view:
     my $valid   = $c->form->valid;
     my $unknown = $c->form->unknown;
@@ -318,7 +326,7 @@ sub tags : Private {
         $c->stash->{page} = $page;
     }
     die $page . " not found" unless ref $page;
-    if ($c->req->{user_id}) {
+    if ($c->req->{user}) {
     my @tags = $page->others_tags( $c->req->{user_id} );
     $c->stash->{others_tags} = [@tags];
     @tags                    = $page->user_tags( $c->req->{user_id} );

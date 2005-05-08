@@ -1,5 +1,6 @@
 package MojoMojo;
 
+require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
 use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI Prototype/;
