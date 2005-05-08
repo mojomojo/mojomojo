@@ -18,12 +18,12 @@
 <b>[% now %]</b>
 <ul>
 [% FOR page = pages.list %]
-[%IF now != page.created.dmy('.');%]
-  [%SET now = page.created.dmy('.'); %]
+[%IF now != page.content.created.dmy('.');%]
+  [%SET now = page.content.created.dmy('.'); %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% base %][% page.path %]">[%c.expand_wikiword(page.path)%]</a>
+    <a href="[% base %][% page.path %]">[%c.expand_wikiword(page.name)%]</a>
     <div class="byline" style="margin-bottom: 0px">
       by <a class="existingWikiWord" href="[% base %][% page.content.creator.login %]">[% page.content.creator.name%]</a>
       at [% page.content.created.hms(':') %]
