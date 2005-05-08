@@ -17,7 +17,8 @@
  </h2>
 <ul>
 [%FOR page = pages.list %]
-    <li>[% c.wikiword(page.path, base) %]</li>
+    [% NEXT UNLESS page.name %]
+    <li>[% c.wikiword(page.full_path, base) %]</li>
 [%END%]
 </ul>
 </div>
