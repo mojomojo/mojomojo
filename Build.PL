@@ -35,6 +35,7 @@ my $build = Catalyst::Build->new(
      'Class::DBI::AbstractSearch' => '0.05',
      'Class::DBI::FromForm' => '0.01',
      'Class::DBI::Plugin::RetrieveAll' => '1.01',
+	 'DBD::SQLite' => '1.08',
      'Data::Page' => '2.00',
      'File::MimeInfo' => '0.11',
      'File::Slurp' => '9999.07',
