@@ -23,20 +23,21 @@ __PACKAGE__->columns( TEMP      => qw/path/ );
 __PACKAGE__->add_trigger( select => sub {
      my $self = shift;
      return if (defined $self->path);
+     return unless ($self->name);
      if ($self->name eq '/') {
-	 $self->path( '/' );
-	 return;
+         $self->path( '/' );
+         return;
      }
-     unless ($self->depth > 1) {
-	 $self->path( '/' . $self->name );
-	 return;
+     unless ($self->depth && $self->depth > 1) {
+         $self->path( '/' . $self->name );
+         return;
      }
      my $path = $self->name;
      my $page = $self;
      while ( my $parent = $page->parent ) {
-	 last if $parent->name eq '/';
-	 $path = $parent->name . '/' . $path;
-	 $page = $parent;
+         last if $parent->name eq '/';
+         $path = $parent->name . '/' . $path;
+         $page = $parent;
      }
      $self->path( '/' . $path );
 });
