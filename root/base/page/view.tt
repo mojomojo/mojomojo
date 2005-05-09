@@ -23,7 +23,7 @@
 </div>
 <div class="byline">
   Revised on [% content.created %]
-    by [% c.wikiword(content.creator.login, base) %]<br />
+    by [% c.wikiword(content.creator.link, base) %]<br />
 </div>
 
 [% PROCESS page/bottomnav.tt %]

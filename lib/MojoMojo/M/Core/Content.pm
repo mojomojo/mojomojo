@@ -6,7 +6,7 @@ use Time::Piece;
 use utf8;
 
 __PACKAGE__->add_trigger(
-    after_set_content => sub {
+    before_set_content => sub {
         my $self = shift;
         $self->created( localtime->datetime );
         $self->update();

@@ -5,4 +5,9 @@ sub get_user {
     return __PACKAGE__->search( login => $user )->next;
 }
 
+sub link {
+   my ($self) = @_;
+   return "/".$self->login;
+}
+
 1;

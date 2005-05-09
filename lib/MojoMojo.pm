@@ -3,7 +3,8 @@ package MojoMojo;
 require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
-use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static SubRequest Authentication::CDBI Prototype/;
+use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap Static 
+                SubRequest Authentication::CDBI Prototype Singleton/;
 use MojoMojo::Search::Plucene;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
@@ -35,7 +36,7 @@ MojoMojo->prepare_search_index();
 
 =head1 DESCRIPTION
 
-Wiki-based community software,
+iki-based community software,
 powered by Catalyst.
 
 =head1 ACTIONS
@@ -150,22 +151,27 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 
 sub wikiword {
     my ( $c, $word, $base ) = @_;
-    my $formatted = $c->expand_wikiword($word);
+    $c=MojoMojo->context unless ref $c;
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
+    $url .= $c->stash->{page}->path if($c->stash->{page} && 
+                                       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
+                                       $word !~ m|^/|) ;
     $url =~ s/[\/]+$//;
-
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
     # use the normalized path string returned by path_pages:
+    my $formatted ;
     if (@$proto_pages)
     {
         my $proto_page = pop @$proto_pages;
+        $formatted = $c->expand_wikiword($proto_page->{name});
         $url .= $proto_page->{path};
     }
     else
     {
         my $page = pop @$path_pages;
+        $formatted = $c->expand_wikiword($page->name);
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
@@ -212,7 +218,7 @@ sub prepare_home {
     YAML::DumpFile($home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite2:'.$home.'/db/sqlite2/mojomojo.db'});
+      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'});
 }
 
 =item prepare_search_index

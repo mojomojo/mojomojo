@@ -21,7 +21,7 @@
  <li>
     <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by [% c.wikiword(page.page_version.creator.login,base) %]
+      by [% c.wikiword(page.page_version.creator.link,base) %]
       at [% page.version.created.hms(":") %]
     </div>
   </li>

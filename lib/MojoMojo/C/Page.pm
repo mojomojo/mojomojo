@@ -104,7 +104,7 @@ sub edit : Private {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
     $c->req->params->{login}=$c->req->params->{creator};
-    $c->forward('/user/login') if $c->req->params->{login} && !$c->req->{user};
+    $c->forward('/user/login') if $c->req->params->{password} && !$c->req->{user};
 
     my $user = $c->req->{user_id} || 0;
     $c->log->info("user is $user");
