@@ -1,6 +1,6 @@
 	</div>
       </div>
-      <img src="[% base %]/.static/catalyst.png"/>
+      <img src="[% base %]/.static/catalyst.png" alt="Powered by Catalyst" title="Powered by Catalyst" />
 <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/fat.js"></script>
     </body>
 </html>
