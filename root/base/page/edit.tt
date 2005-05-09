@@ -52,7 +52,7 @@
   [% c.wikiword(link) %] 
   (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
-  <input type="text" name="creator" id="authorName" value="[% content.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
+  <input type="text" name="creator" id="authorName" value="[% content.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onclick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
   <input type="password" name="pass" id="userAuth"/><br/> (Leave second blank if you don't want a password).
   [% END %]
  </p>

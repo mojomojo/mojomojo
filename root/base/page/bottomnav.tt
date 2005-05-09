@@ -26,10 +26,10 @@
 [% END %] 
 [% IF objects.last %]
  <span id="show_changes">
-  | <a href="" onClick="toggleChanges(); return false;">See changes</a>
+  | <a href="" onclick="toggleChanges(); return false;">See changes</a>
  </span>
  <span id="hide_changes" style="display: none">
-  | <a href="#" onClick="toggleChanges(); return false;">Hide changes</a>
+  | <a href="#" onclick="toggleChanges(); return false;">Hide changes</a>
  </span>
 [% END %]
  <small>

@@ -26,5 +26,5 @@
   [%ELSE%]
   <a href="[%base%]/.export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
   [%END %]
-  <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onClick="this.value == 'Search' ? this.value = '' : true"/>
+  <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 </form>
