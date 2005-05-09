@@ -27,7 +27,7 @@
   <small>[% message %]</small>
  </p>
  [% END %]
- [% IF page ; %] <!-- "IF page" is probably wrong here. maybe we want to know whether or not page exists? -->
+ [% IF page.content_version ; %] 
  <p>Edit | <a  href="[% base %][% page.path %].upload">Upload</a></p>
  [% END %]
  [%# FIXME: Should be moved to the controller %]

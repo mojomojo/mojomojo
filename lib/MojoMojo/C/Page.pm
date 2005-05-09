@@ -150,7 +150,7 @@ sub edit : Private {
     }
 
     if ($user == 0 && ! $c->pref('anonymous_user')) {
-      $c->stash->{message}='Anonymous Edit disabled';
+      $c->stash->{message} ||= 'Anonymous Edit disabled';
       return;
     }
   # else, update the page and redirect to highlight, which will forward to view:

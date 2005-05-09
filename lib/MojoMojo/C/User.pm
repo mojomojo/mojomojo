@@ -17,7 +17,7 @@ This controller allows user to Log In and Log out.
 
 =over 4
 
-=item logout
+=item logout (/.logout)
 
 deletes this users cookie, and clears his session.
 
@@ -29,7 +29,7 @@ sub logout : Path('/.logout') {
     $c->forward('/default');
 }
 
-=item login
+=item login (/.login)
 
 authorize a user through login/pass params, or display login
 screen otherwise.
@@ -51,6 +51,20 @@ sub login : Path('/.login') {
     }
     $c->stash->{template} ||= "user/login.tt";
 }
+
+=item users (/.users)
+
+Show a list of the active users with a link to their page.
+
+=cut
+
+sub users : Path('/.users') { 
+  my ( $self, $c ) = @_;
+  $c->stash->{users}=MojoMojo::M::Core::Person->retrieve_all();
+  $c->stash->{template} = 'user/list.tt'
+}
+
+=back
 
 =head1 AUTHOR
 
