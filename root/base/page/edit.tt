@@ -8,6 +8,7 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
 </h1>
+
 [% PROCESS edithelp.tt %]
 
 [%IF c.req.args.first == '/' %]

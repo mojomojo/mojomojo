@@ -162,7 +162,7 @@ sub edit : Private {
         $page = $path_pages->[ @$path_pages - 1 ];
     }
     $page->update_content( %$valid, %$unknown );
-    
+
     # update the search index with the new content
     my $p = MojoMojo::Search::Plucene->open( $c->config->{home} . "/plucene" );
     $p->update_index( $page );
@@ -191,10 +191,10 @@ the entire site or a subtree starting from the current page.
 
 sub search : Private {
     my ( $self, $c, $path ) = @_;
-    
+
     # number of search results to show per page
     my $results_per_page = 10;
-    
+
     my $stash = $c->stash;
     $stash->{template} = 'page/search.tt';
 
@@ -214,48 +214,48 @@ sub search : Private {
     my $search_type = $c->req->params->{search_type} || "all";
     $stash->{query} = $q;
     $stash->{search_type} = $search_type;
-    
+
     my $p = MojoMojo::Search::Plucene->open( MojoMojo->config->{home} . "/plucene" );
-    
+
     my $strip = HTML::Strip->new;
-    
+
     # XXX: Cache search results.  This will require creating a new data structure since it's
     #      not safe to cache $page objects.
     my $results = [];
-    
+
     # for subtree searches, add the path info to the query, replacing slashes with X
     my $real_query = $q;    # this is for context matching later
     if ( $search_type eq "subtree" ) {
-        my $fixed_path = $page->full_path;
+        my $fixed_path = $page->path;
         $fixed_path =~ s/\//X/g;
         $q = "_path:$fixed_path* AND " . $q;
     }
-    
+
     foreach my $key ( $p->search( $q ) ) {
         # skip results outside of this subtree
         # XXX: Remove this code if the new _path query seems to work OK
 #        if ($search_type eq "subtree") {
-#            my $full_path = $page->full_path;
-#            if ( $key !~ /^$full_path/ ) {
+#            my $path = $page->path;
+#            if ( $key !~ /^$path/ ) {
 #                next;
 #            }
 #        }
-        
+
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query
         my $content = $strip->parse( $page->content->formatted );
         $strip->eof;
-        
+
         # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
         my $snippet = Text::Context->new( $content, split(/ /, $real_query) );
-        
+
         my $result = {
             snippet => $snippet->as_html,
             page => $page,
         };
         push @$results, $result;
     }
-    
+
     my $result_count = scalar @$results;
     if ( $result_count ) {
         # Paginate the results
@@ -264,12 +264,12 @@ sub search : Private {
         $pager->total_entries( $result_count );
         $pager->entries_per_page( $results_per_page );
         $pager->current_page( $c->req->params->{p} || 1 );
-        
-        if ( $result_count > $results_per_page ) {                    
+
+        if ( $result_count > $results_per_page ) {
             # trim down the results to just this page
             @$results = $pager->splice( $results );
         }
-        
+
         $c->stash->{pager} = $pager;
         my $last_page = ( $pager->last_page > 10 ) ? 10 : $pager->last_page;
         $c->stash->{pages_to_link} = [ 1 .. $last_page ];

@@ -32,21 +32,21 @@ sub _writer {
 sub update_index {
     my ($self, $page) = @_;
     return undef unless ($page && $page->content);
-    
+
     my $content = $page->content;
-    my $key = $page->full_path;
-    
+    my $key = $page->path;
+
     $self->delete_document($key) if ($self->indexed($key));
 
-    # Q: should we be indexing the abstract, comments, and tags?           
+    # Q: should we be indexing the abstract, comments, and tags?
     my $text = $content->body;
     $text .= " " . $content->abstract if ($content->abstract);
     $text .= " " . $content->comments if ($content->comments);
-    
+
     # translate the path into plain text so we can use it in the search query later
     my $fixed_path = $key;
     $fixed_path =~ s/\//X/g;
-    
+
     my %data = (
         $key => {
             _author => $content->creator->login,
