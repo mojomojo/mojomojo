@@ -36,7 +36,7 @@ MojoMojo->prepare_search_index();
 
 =head1 DESCRIPTION
 
-iki-based community software,
+Wiki-based community software,
 powered by Catalyst.
 
 =head1 ACTIONS
@@ -155,9 +155,10 @@ sub wikiword {
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
-    $word = $c->stash->{page}->path."/$word" if($c->stash->{page} && 
+    $word = URI->new_abs( $word, $c->stash->{page}->path."/" ) if($c->stash->{page} && 
                                        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
-                                       $word !~ m|^/|) ;
+                                      $word !~ m|^/|) ;
+    $c->log->debug("and the word is $word");
     $url =~ s/[\/]+$//;
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
     # use the normalized path string returned by path_pages:
