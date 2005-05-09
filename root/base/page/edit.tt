@@ -48,7 +48,8 @@
  <p>
   <input type="submit" value="[% IF content.version > 1; "Edit"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
-  [% c.wikiword(c.req.user) %] 
+  [% link = "/" _ c.req.user %]
+  [% c.wikiword(link) %] 
   (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
   <input type="text" name="creator" id="authorName" value="[% content.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onClick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>

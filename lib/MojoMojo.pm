@@ -155,7 +155,7 @@ sub wikiword {
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
-    $url .= $c->stash->{page}->path if($c->stash->{page} && 
+    $word = $c->stash->{page}->path."/$word" if($c->stash->{page} && 
                                        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
                                        $word !~ m|^/|) ;
     $url =~ s/[\/]+$//;
