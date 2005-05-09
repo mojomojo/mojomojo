@@ -22,15 +22,15 @@
  [% END %]
  <input type="hidden" name="version" value="[% content.version %]" />
 
- [% IF edit_error %]
+ [% IF message %]
  <p style="background: #eee; padding: 3px; border: 1px solid silver; width: 440px">
-  <small>[% edit_error %]</small>
+  <small>[% message %]</small>
  </p>
  [% END %]
  [% IF page ; %] <!-- "IF page" is probably wrong here. maybe we want to know whether or not page exists? -->
  <p>Edit | <a  href="[% base %][% page.path %].upload">Upload</a></p>
  [% END %]
- <!-- Is this necessary??? -->
+ [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
  <textarea id="body" name="body" style="width: 450px; height: 280px">
   [% c.req.params.body %]

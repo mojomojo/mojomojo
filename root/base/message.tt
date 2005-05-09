@@ -1,5 +1,5 @@
 [%PROCESS header.tt%]
 <div><img src="/.static/shrinkenhead.jpg">
-<h1>No such page/revision found.</h1>
+<h1>[%message%].</h1>
 <p> Go directly to <a href="[%base%]/">start</a>, do not pass prison, do not collect $ 200...</p>
 [%PROCESS footer.tt%]

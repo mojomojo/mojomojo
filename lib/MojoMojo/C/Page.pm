@@ -80,7 +80,10 @@ sub view : Private {
             version => $rev
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
-        $stash->{template} = 'norevision.tt' unless $stash->{rev};
+        unless( $stash->{rev} ) {
+              $stash->{message} = 'No such revision for '.$page->name;
+              $stash->{template} = 'message.tt';
+        }
     }
     else {
         $content = $page->content;
@@ -104,7 +107,8 @@ sub edit : Private {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
     $c->req->params->{login}=$c->req->params->{creator};
-    $c->forward('/user/login') if $c->req->params->{password} && !$c->req->{user};
+    $c->forward('/user/login') if $c->req->params->{pass} && 
+                                 ! $c->req->{user_id};
 
     my $user = $c->req->{user_id} || 0;
     $c->log->info("user is $user");
@@ -146,7 +150,7 @@ sub edit : Private {
     }
 
     if ($user == 0 && ! $c->pref('anonymous_user')) {
-      $c->stash->{edit_error}='Anonymous Edit disabled';
+      $c->stash->{message}='Anonymous Edit disabled';
       return;
     }
   # else, update the page and redirect to highlight, which will forward to view:

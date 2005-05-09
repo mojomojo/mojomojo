@@ -49,7 +49,7 @@ sub login : Path('/.login') {
             $c->stash->{message} = 'could not authenticate that login.';
         }
     }
-    $c->stash->{template} = "user/login.tt";
+    $c->stash->{template} ||= "user/login.tt";
 }
 
 =head1 AUTHOR
