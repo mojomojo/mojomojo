@@ -219,7 +219,7 @@ sub prepare_home {
     YAML::DumpFile($home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'});
+      dsn => 'dbi:SQLite:'.$home.'/db/sqlite2/mojomojo.db'});
 }
 
 =item prepare_search_index
@@ -292,10 +292,11 @@ sub prepare_path {
 
 =back
 
-=head1 AUTHOR
+=head1 AUTHORS
 
 Marcus Ramberg C<marcus@thefeed.no>
 David Naughton C<naughton@umn.edu>
+Andy Grundman C<andy@hybridized.org>
 
 =head1 LICENSE
 
