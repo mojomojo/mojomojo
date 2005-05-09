@@ -14,15 +14,15 @@
                 "A poorly configured MojoMojo Installation"
             %]
     </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link title="main stylesheet" href="[% base %]/.static/mojomojo.css" type="text/css" 
-            rel="stylesheet"/>
+            rel="stylesheet" />
     <link title="pod stylesheet" href="[% base %]/.static/pod.css" type="text/css" 
-            rel="stylesheet"/>
+            rel="stylesheet" />
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%]/.atom" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%]/.rss" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/.rss_full" />
-    <link rel="shortcut icon" href="[%base%]/.static/favicon.ico"/>
+    <link rel="shortcut icon" href="[%base%]/.static/favicon.ico" />
 </head>
 
 <body

@@ -7,7 +7,7 @@
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
  | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" class="navlink" accesskey="R">Back in time</a> 
- ([% page.content_version %] revision[% IF page.content_version > 1; "s" ; END %])</small>
+ ([% page.content_version %] revision[% IF page.content_version > 1; "s" ; END %])
  [% END %]
 [% ELSE %]
  [% IF rev == page.content_version %]
