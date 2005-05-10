@@ -157,8 +157,9 @@ sub wikiword {
     my ( $c, $word, $base ) = @_;
     $c=MojoMojo->context unless ref $c;
     
-    # keep the original wikiword for display
+    # keep the original wikiword for display, stripping leading slashes
     my $orig_word = $word;
+    $orig_word =~ s/.*\///;
     
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
