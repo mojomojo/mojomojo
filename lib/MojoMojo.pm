@@ -171,13 +171,13 @@ sub wikiword {
     if (@$proto_pages)
     {
         my $proto_page = pop @$proto_pages;
-        $formatted = $c->expand_wikiword($proto_page->{name});
+        $formatted = $c->expand_wikiword($proto_page->{name_orig});
         $url .= $proto_page->{path};
     }
     else
     {
         my $page = pop @$path_pages;
-        $formatted = $c->expand_wikiword($page->name);
+        $formatted = $c->expand_wikiword($page->name_orig);
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
