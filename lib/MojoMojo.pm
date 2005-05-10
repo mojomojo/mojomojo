@@ -157,6 +157,10 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 sub wikiword {
     my ( $c, $word, $base ) = @_;
     $c=MojoMojo->context unless ref $c;
+    
+    # keep the original wikiword for display
+    my $orig_word = $word;
+    
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
@@ -171,13 +175,13 @@ sub wikiword {
     if (@$proto_pages)
     {
         my $proto_page = pop @$proto_pages;
-        $formatted = $c->expand_wikiword($proto_page->{name_orig});
+        $formatted = $c->expand_wikiword($orig_word);
         $url .= $proto_page->{path};
     }
     else
     {
         my $page = pop @$path_pages;
-        $formatted = $c->expand_wikiword($page->name_orig);
+        $formatted = $c->expand_wikiword($orig_word);
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
