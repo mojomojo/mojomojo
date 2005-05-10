@@ -88,8 +88,8 @@ sub updated     { $_[0]->content && $_[0]->content->created; }
 
 sub formatted_diff {
     my ( $self, $base, $to ) = @_;
-    my $this = [ split /\n/, $self->content->formatted($base) ];
-    my $prev = [ split /\n/, $to->content->formatted($base) ];
+    my $this = [ split /\n/, $self->formatted($base) ];
+    my $prev = [ split /\n/, $to->formatted($base) ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {

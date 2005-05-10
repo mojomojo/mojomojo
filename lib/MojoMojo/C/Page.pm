@@ -305,13 +305,13 @@ sub attachments : Private {
             { name => $file, page => $page } );
 
         my $fh       = $c->req->uploads->{$file}->{fh};
-        my $filename = $c->home . "/uploads/" . $att->id;
-        open( NEW_FILE, ">$filename" )
-          or die "Can't open $filename for writing: $!";
-        while ( $fh->read( my $buf, 32768 ) ) {
-            print NEW_FILE $buf;
+        my $filename = $c->config->{home} . "/uploads/" . $att->id;
+        my $upload=$c->request->upload('file');
+        unless (  $upload->link_to($filename) || 
+                  $upload->copy_to($filename) ) {
+          $c->stash->{template}='message.tt';
+          $c->stash->{message}= "Can't open $filename for writing.";
         }
-        close NEW_FILE;
         $att->contenttype( mimetype($filename) );
         $att->size( -s $filename );
         $att->update();

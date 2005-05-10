@@ -46,8 +46,11 @@ and diffs it against the previous version.
 =cut
 
 sub diff : Path('/.jsrpc/diff') {
-    my ( $self, $c, $revision ) = @_;
-    $revision = MojoMojo::M::Core::Revision->retrieve($revision);
+    my ( $self, $c, $page, $revision ) = @_;
+    $revision = MojoMojo::M::Core::Content->retrieve(
+        page=> $page, 
+        version => $revision
+    );
     if ( my $previous = $revision->previous ) {
         $c->res->output(
             $revision->formatted_diff( $c->req->base, $previous ) );

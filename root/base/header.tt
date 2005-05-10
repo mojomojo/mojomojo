@@ -25,10 +25,7 @@
     <link rel="shortcut icon" href="[%base%]/.static/favicon.ico" />
 </head>
 
-<body
-    [% IF template.name=='page/view.tt' %] 
-    ondblclick="location.href='[%base%][% page.path %].edit'"
-    [% END %]>
+<body>
     <div id="Container">
         <div id="Content">
         [%template.title%]

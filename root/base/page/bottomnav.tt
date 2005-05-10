@@ -24,7 +24,8 @@
  | <a href="[% base _ page.path %]" class="navlink" accesskey="C">Latest Revision</a>
  [% END %]
 [% END %] 
-[% IF objects.last %]
+ [%# IF rev > 1 %]
+ [% IF page.content_version && page.content_version > 1 %] 
  <span id="show_changes">
   | <a href="" onclick="toggleChanges(); return false;">See changes</a>
  </span>
@@ -67,9 +68,10 @@
 <script language="Javascript" type="text/javascript">
   var diff='';
   function toggleChanges() {
-	  if (!diff) {
-			diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[%page.revision%]');
-		}
+    if (!diff) {
+      diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[% page.content _'/' _ page.content.content_version%]');
+      document.getElementById('diff').innerHTML=diff;
+    }
     if (document.getElementById("changes").style.display == "none") {
       document.getElementById("changes").style.display  = "block";
       document.getElementById("revision").style.display = "none";

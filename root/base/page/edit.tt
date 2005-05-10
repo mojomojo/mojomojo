@@ -28,13 +28,14 @@
  </p>
  [% END %]
  [% IF page.content_version ; %] 
- <p>Edit | <a  href="[% base %][% page.path %].upload">Upload</a></p>
+ <p>Edit | <a  href="[% base %][% page.path %].attachments">Upload</a></p>
  [% END %]
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
- <textarea id="body" name="body" style="width: 450px; height: 280px">
-  [% c.req.params.body %]
- </textarea>
+<textarea id="body" name="body" style="width: 450px; height: 280px">
+[% c.req.params.body %]
+[% append %]
+</textarea>
  [% url= base _ '/.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
   url     => url

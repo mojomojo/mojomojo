@@ -42,7 +42,7 @@ sub index : Path('/.attachment') {
         $c->res->output(
             scalar(
                 read_file(
-                    $c->home() . "/uploads/" . $c->stash->{att}->id
+                    $c->config->{home}. "/uploads/" . $c->stash->{att}->id
                 )
             )
         );
@@ -66,7 +66,8 @@ sub download : Private {
     $c->res->output(
         scalar(
             read_file(
-                $c->home() . "/uploads/" . $c->stash->{att}->id
+                $c->config->{home} . "/uploads/" . 
+                $c->stash->{att}->id
             )
         )
     );
@@ -86,9 +87,9 @@ file system.
 
 sub delete : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $c->req->args( [ $c->stash->{att}->page->node ] );
+    $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->stash->{att}->delete();
-    $c->forward('/page/upload');
+    $c->forward('/page/attachments');
 }
 
 =item insert
@@ -101,11 +102,11 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $c->req->args( [ $c->stash->{att}->page->node ] );
+    $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->stash->{append} = "\n\n\""
       . $c->stash->{att}->name . "\":"
       . $c->req->base
-      . ".attachment/"
+      . "/.attachment/"
       . $c->stash->{att};
     $c->forward('/page/edit');
 }

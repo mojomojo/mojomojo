@@ -3,8 +3,8 @@ package MojoMojo;
 require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
-use Catalyst qw/-Debug FormValidator FillInForm Session::FastMmap 
-                Static SubRequest Authentication::CDBI Prototype 
+use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
+                SubRequest Authentication::CDBI Prototype 
                 Singleton Unicode/;
 use MojoMojo::Search::Plucene;
 use YAML ();
@@ -121,7 +121,6 @@ sub end : Private {
     my ( $self, $c ) = @_;
     return 1 if $c->response->status =~ /^3\d\d$/;
     return 1 if $c->response->body;
-    $c->log->info('body is '.length ($c->response->body));
     unless ( $c->response->content_type ) {
        $c->response->content_type('text/html; charset=utf-8');
     }
@@ -167,7 +166,6 @@ sub wikiword {
     $word = URI->new_abs( $word, $c->stash->{page}->path."/" ) if($c->stash->{page} && 
                                        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
                                       $word !~ m|^/|) ;
-    $c->log->debug("and the word is $word");
     $url =~ s/[\/]+$//;
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
     # use the normalized path string returned by path_pages:
