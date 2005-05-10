@@ -119,9 +119,13 @@ show a debug screen.
 
 sub end : Private {
     my ( $self, $c ) = @_;
-    $c->forward('/page/view')
-      unless $c->stash->{template} || $c->res->output;
-    $c->forward('MojoMojo::V::TT') unless $c->res->body;
+    return 1 if $c->response->status =~ /^3\d\d$/;
+    return 1 if $c->response->body;
+    $c->log->info('body is '.length ($c->response->body));
+    unless ( $c->response->content_type ) {
+       $c->response->content_type('text/html; charset=utf-8');
+    }
+    $c->forward('MojoMojo::V::TT');
     die if $c->req->params->{die};
 }
 

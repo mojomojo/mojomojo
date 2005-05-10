@@ -329,7 +329,7 @@ sub tags : Private {
     else {
         $c->stash->{page} = $page;
     }
-    die $page . " not found" unless ref $page;
+    die '"'.$page .'" not found' unless ref $page;
     if ($c->req->{user}) {
     my @tags = $page->others_tags( $c->req->{user_id} );
     $c->stash->{others_tags} = [@tags];

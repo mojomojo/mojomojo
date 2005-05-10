@@ -46,7 +46,7 @@ for all the nodes of the wiki.
 
 sub raw : Path('/.export.zip') {
     my ( $self, $c ) = @_;
-    my @pages   = $model->retrieve_all_sorted_by("node");
+    my @pages   = $model->retrieve_all_sorted_by("name");
     my $archive = Archive::Zip->new();
     my $prefix  =
         $c->fixw( $c->pref('name') )
@@ -55,9 +55,11 @@ sub raw : Path('/.export.zip') {
       . localtime->hms('-');
     $archive->addDirectory("$prefix/");
     for my $page (@pages) {
-        $archive->addString( $page->content, $prefix . "/" . $page->node );
+        next unless $page->content; 
+        $archive->addString( $page->content->body, $prefix .  $page->path .($page->path eq '/' ? '' : '/').'index' );
+        $c->log->debug('Adding :'.$page->path.($page->path eq '/' ? '' : '/').'index' );
     }
-    my $fh = IO::Scalar->new( \$c->res->{output} );
+    my $fh = IO::Scalar->new( \$c->res->{body} );
     $archive->writeToFileHandle($fh);
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header(
@@ -73,7 +75,7 @@ versions of all the nodes of the wiki.
 
 sub html : Path('/.html.zip') {
     my ( $self, $c ) = @_;
-    my @pages   = $model->retrieve_all_sorted_by("node");
+    my @pages   = $model->retrieve_all_sorted_by("name");
     my $archive = Archive::Zip->new();
     my $prefix  =
         $c->fixw( $c->pref('name') ) . "-html-"
@@ -81,16 +83,12 @@ sub html : Path('/.html.zip') {
       . localtime->hms('-');
     $archive->addDirectory("$prefix/");
     my $home = $c->pref("home_node");
-    $archive->addString(
-        qq{ <html><head>
-  <META HTTP-EQUIV="Refresh" CONTENT="0;URL=$home">
-    </head></html>}, $prefix . "/index.html"
-    );
     for my $page (@pages) {
-        $archive->addString( $c->subreq( "!page/print", $page->node ),
-            $prefix . "/" . $page->node );
+        $c->log->debug('Rendering '.$page->path);
+        $archive->addString( $c->subreq( $page->path .'.print' ),
+            $prefix . $page->path ."/index.html" );
     }
-    my $fh = IO::Scalar->new( \$c->res->{output} );
+    my $fh = IO::Scalar->new( \$c->res->{body} );
     $archive->writeToFileHandle($fh);
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header(
