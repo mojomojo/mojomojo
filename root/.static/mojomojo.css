@@ -242,6 +242,15 @@ ol.setup li {
   margin-left: 10px;
 }
 
+.newWikiWord {
+  background-color: #ddf;
+}
+
+.newWikiWord a {
+  vertical-align: super;
+  font-size: 0.8em;
+}
+
 #breadcrumbs {
   color: green;
   line-height: 10px;
