@@ -389,7 +389,7 @@ sub rss_full : Private {
 
 sub highlight : Private {
     my ( $self, $c, $page ) = @_;
-    $c->stash->{template} = 'page/highlight.tt';
+    $c->stash->{render} =  'highlight';
     $c->forward('view');
 }
 

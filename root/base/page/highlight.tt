@@ -2,7 +2,7 @@
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 <h1 id="pageName">
 [% IF page.name == "/" %]
- [% c.pref("name") || "MojoMojo" %]
+ [% <a href="[%base%]/">[%c.pref("name") || "MojoMojo" %]</a>
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]

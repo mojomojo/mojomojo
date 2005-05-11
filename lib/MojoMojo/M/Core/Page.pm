@@ -13,8 +13,8 @@ This class models only "live" MojoMojo pages.
 =cut
 
 use strict;
-use Time::Piece;
 use Algorithm::Diff;
+use DateTime;
 
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
@@ -41,6 +41,7 @@ __PACKAGE__->add_trigger( select => sub {
      }
      $self->path( '/' . $path );
 });
+
 
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
@@ -72,7 +73,6 @@ FROM page, tag, content WHERE page.id=content.page AND page.content_version=cont
 }
 );
 
-# FIX: this one needs work...
 __PACKAGE__->set_sql(
     'recent' => qq{
 SELECT DISTINCT page.name, page.id as id,page_version.release_date, 
@@ -82,59 +82,6 @@ ORDER BY page_version.release_date DESC
 }
 );
 
-# do we need these  ???
-sub content_raw { $_[0]->content && $_[0]->content->body; }
-sub updated     { $_[0]->content && $_[0]->content->created; }
-
-sub formatted_diff {
-    my ( $self, $base, $to ) = @_;
-    my $this = [ split /\n/, $self->formatted($base) ];
-    my $prev = [ split /\n/, $to->formatted($base) ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
-    my $diff;
-    for my $line (@diff) {
-        if ( $$line[0] eq "+" ) {
-            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
-        }
-        elsif ( $$line[0] eq "-" ) {
-            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
-        }
-        elsif ( $$line[0] eq "c" ) {
-            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
-            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
-        }
-        elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
-        else { $diff .= "Unknown operator " . $$line[0] }
-    }
-    return $diff;
-}
-
-sub highlight {
-    my ( $self, $base ) = @_;
-    my $this_content = $self->content->formatted($base);
-
-    # FIX: This may return undef. What do we do then????
-    my $previous_content = (
-        defined $self->content->previous
-        ? $self->content->previous->formatted($base)
-        : $this_content );
-    my $this = [ split /\n/,                  $this_content ];
-    my $prev = [ split /\n/,                  $previous_content ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
-    my $diff;
-    my $hi = 0;
-    for my $line (@diff) {
-        $hi++;
-        if ( $$line[0] eq "+" ) {
-            $diff .= qq(<div id="hi$hi" class="fade">) . $$line[2] . "</div>";
-        }
-        elsif ( $$line[0] eq "c" ) {
-            $diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
-        } elsif ( $$line[0] eq "-" ) { }
-        else { $diff .= $$line[1] }
-    }
-    return $diff;
-}
 
 =item get_page
 
@@ -398,6 +345,7 @@ sub update_content {
     my %content_data =
       map { $_ => $args{$_} } MojoMojo::M::Core::Content->columns;
     @content_data{qw/page version/} = ( $self->id, $content_version );
+    $content_data{created}=DateTime->now();
     my $content = MojoMojo::M::Core::Content->create( \%content_data );
     $self->content_version( $content->version );
     $self->update;

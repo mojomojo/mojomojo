@@ -2,21 +2,21 @@ package MojoMojo::M::Core::PageVersion;
 
 use strict;
 use base 'Catalyst::Base';
-use Time::Piece;
+use DateTime;
 use utf8;
 
 __PACKAGE__->has_a(
-    remove_date => 'Time::Piece',
+    remove_date => 'DateTime',
     inflate     => sub {
-        Time::Piece->strptime( shift, "%Y-%m-%dT%H:%M:%S" );
+          DateTime->from_epoch(epoch=>shift);
     },
-    deflate => 'datetime'
+    deflate => 'epoch'
 );
 
 __PACKAGE__->has_a(
     release_date => 'Time::Piece',
     inflate      => sub {
-        Time::Piece->strptime( shift, "%Y-%m-%dT%H:%M:%S" );
+          DateTime->from_epoch(epoch=>shift);
     },
     deflate => 'datetime'
 );

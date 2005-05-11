@@ -47,7 +47,7 @@
  <div style="clear:left;width:450;" id="preview">
  </div>
  <p>
-  <input type="submit" value="[% IF content.version > 1; "Edit"; ELSE; "Create"; END %]"/> as 
+  <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
   [% link = "/" _ c.req.user %]
   [% c.wikiword(link) %] 

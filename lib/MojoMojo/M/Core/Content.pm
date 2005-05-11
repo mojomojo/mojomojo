@@ -2,27 +2,66 @@ package MojoMojo::M::Core::Content;
 
 use strict;
 use base 'Catalyst::Base';
-use Time::Piece;
+use DateTime;
 use utf8;
 
-__PACKAGE__->add_trigger(
-    before_set_content => sub {
-        my $self = shift;
-        $self->created( localtime->datetime );
-        $self->update();
-    }
-);
 __PACKAGE__->has_a(
-    created => 'Time::Piece',
+    created => 'DateTime',
     inflate => sub {
-        Time::Piece->strptime( shift, "%FT%H:%M:%S" );
+        DateTime->from_epoch(epoch=>shift);
     },
-    deflate => 'datetime'
+    deflate => 'epoch'
 );
 
-# this is in Page.pm now, but maybe should go here...?
+sub highlight {
+    my ( $self, $base ) = @_;
+    my $this_content = $self->formatted($base);
+
+    # FIXME: This may return undef. What do we do then?
+    my $previous_content = (
+        defined $self->previous
+        ? $self->previous->formatted($base)
+        : $this_content );
+    my $this = [ split /\n/,                  $this_content ];
+    my $prev = [ split /\n/,                  $previous_content ];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    my $hi = 0;
+    for my $line (@diff) {
+        $hi++;
+        if ( $$line[0] eq "+" ) {
+            $diff .= qq(<div id="hi$hi" class="fade">) . $$line[2] . "</div>";
+        }
+        elsif ( $$line[0] eq "c" ) {
+            $diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
+        } elsif ( $$line[0] eq "-" ) { }
+        else { $diff .= $$line[1] }
+    }
+    return $diff;
+}
+
+
 sub formatted_diff {
-    return MojoMojo::M::Core::Page::formatted_diff(@_);
+    my ( $self, $base, $to ) = @_;
+    my $this = [ split /\n/, $self->formatted($base) ];
+    my $prev = [ split /\n/, $to->formatted($base) ];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    for my $line (@diff) {
+        if ( $$line[0] eq "+" ) {
+            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
+        }
+        elsif ( $$line[0] eq "-" ) {
+            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
+        }
+        elsif ( $$line[0] eq "c" ) {
+            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
+            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
+        }
+        elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
+        else { $diff .= "Unknown operator " . $$line[0] }
+    }
+    return $diff;
 }
 
 sub formatted {
