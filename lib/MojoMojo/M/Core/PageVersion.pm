@@ -14,7 +14,7 @@ __PACKAGE__->has_a(
 );
 
 __PACKAGE__->has_a(
-    release_date => 'Time::Piece',
+    release_date => 'DateTime',
     inflate      => sub {
           DateTime->from_epoch(epoch=>shift);
     },
