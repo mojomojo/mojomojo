@@ -34,6 +34,8 @@ an attachment id.
 
 sub index : Path('/.attachment') {
     my ( $self, $c, $att, $action ) = @_;
+
+    
     $c->stash->{att} = MojoMojo::M::Core::Attachment->retrieve($att);
     if ($action) {
         $c->forward("/attachment/$action");
@@ -87,6 +89,7 @@ file system.
 
 sub delete : Private {
     my ( $self, $c, $att, $action ) = @_;
+    return $c->forward('/user/login') unless $c->req->{user};
     $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->stash->{att}->delete();
     $c->forward('/page/attachments');
@@ -102,6 +105,7 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att, $action ) = @_;
+    return $c->forward('/user/login') unless $c->req->{user};
     $c->stash->{att}->page->set_path();
     $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->log->info('path is'.$c->stash->{att}->page->path);
