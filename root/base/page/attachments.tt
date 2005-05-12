@@ -2,10 +2,10 @@
 
 <h1 id="pageName">
   <small> [% c.pref("name") || "MojoMojo" %] </small> <br/>
-  Attachments for [%page.node%]
+  Attachments for [%page.name%]
   </h1>
-[% PROCESS navbar.tt %]
-<form action="[%base%]/[%page.node%].attachments" enctype="multipart/form-data" method="post">
+ <p><a  href="[% base %][% page.path %].edit">Edit</a> | Upload</p>
+<form action="[%base%][%page.path%].attachments" enctype="multipart/form-data" method="post">
 <p> Please select a file to attach to this page.</p>
 <input type="file" name="file">
 <input type="submit">

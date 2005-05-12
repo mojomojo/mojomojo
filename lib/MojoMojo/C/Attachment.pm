@@ -102,7 +102,9 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att, $action ) = @_;
+    $c->stash->{att}->page->set_path();
     $c->req->args( [ $c->stash->{att}->page->path ] );
+    $c->log->info('path is'.$c->stash->{att}->page->path);
     $c->stash->{append} = "\n\n\""
       . $c->stash->{att}->name . "\":"
       . $c->req->base

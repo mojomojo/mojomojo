@@ -20,27 +20,7 @@ __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
 
 # automatically set the path TEMP column on select:
-__PACKAGE__->add_trigger( select => sub {
-     my $self = shift;
-     return if (defined $self->path);
-     return unless ($self->name);
-     if ($self->name eq '/') {
-         $self->path( '/' );
-         return;
-     }
-     unless ($self->depth && $self->depth > 1) {
-         $self->path( '/' . $self->name );
-         return;
-     }
-     my $path = $self->name;
-     my $page = $self;
-     while ( my $parent = $page->parent ) {
-         last if $parent->name eq '/';
-         $path = $parent->name . '/' . $path;
-         $page = $parent;
-     }
-     $self->path( '/' . $path );
-});
+__PACKAGE__->add_trigger( select => \&set_path);
 
 
 __PACKAGE__->has_many(
@@ -81,6 +61,27 @@ FROM page,page_version WHERE page_version.page=page.id
 ORDER BY page_version.release_date DESC
 }
 );
+sub set_path {
+     my $self = shift;
+     return if (defined $self->path);
+     return unless ($self->name);
+     if ($self->name eq '/') {
+         $self->path( '/' );
+         return;
+     }
+     unless ($self->depth && $self->depth > 1) {
+         $self->path( '/' . $self->name );
+         return;
+     }
+     my $path = $self->name;
+     my $page = $self;
+     while ( my $parent = $page->parent ) {
+         last if $parent->name eq '/';
+         $path = $parent->name . '/' . $path;
+         $page = $parent;
+     }
+     $self->path( '/' . $path );
+}
 
 
 =item get_page
