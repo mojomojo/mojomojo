@@ -10,8 +10,8 @@
 </div>
 
 <div class="byline">
-  Revised on [% page.content.created.cdate %]
-    by [% c.wikiword(page.content.creator.login,base) %]
+  Revised on [% content.created.ymd %] at [% content.created.hms %]
+    by [% content.creator.name %]
 </div>
 
 [% PROCESS footer.tt %]

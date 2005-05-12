@@ -5,7 +5,8 @@ CREATE TABLE person (
  active     INTEGER, -- boolean
  login      VARCHAR(100),
  name       VARCHAR(100),
- pass       VARCHAR(100)
+ pass       VARCHAR(100),
+ timezone   VARCHAR(100)
 );
 
 -- * page-content tree * --

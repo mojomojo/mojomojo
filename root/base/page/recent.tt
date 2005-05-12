@@ -1,5 +1,5 @@
 [%PROCESS header.tt %]
-[% SET now = objects.first.content.created.dmy('.'); %]
+[% SET now = objects.first.content.created.ymd; %]
 <h1 id="pageName">
   <small> [% title || config.application_name || "MojoMojo" %] </small>
   <br/>Recent Pages
@@ -14,8 +14,8 @@
 <b>[% now %]</b>
 <ul>
 [% FOR page = pages.list %]
-[%IF now != page.content.created.dmy('.');%]
-  [%SET now = page.content.created.dmy('.'); %]
+[%IF now != page.content.created.ymd;%]
+  [%SET now = page.content.created.ymd; %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>

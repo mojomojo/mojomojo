@@ -338,8 +338,7 @@ sub update_content {
         $content_version = 1;
     }
     else {
-
-        # should we ever get here???
+        # Something went wrong.
         die "Error in calculating content version";
     }
     my %content_data =

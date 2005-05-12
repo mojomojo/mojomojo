@@ -26,8 +26,9 @@
 	<div id="diff"></div>
 </div>
 <div class="byline">
-  Revised on [% content.created %]
-    by [% c.wikiword(content.creator.link, base) %]<br />
+  <acronym title="Revised on [% content.created.ymd %] at [% content.created.hms %] by [% content.creator.name %]">
+    Last Revised</acronym> by [% c.wikiword(content.creator.link, base) %]
+    <br />
 </div>
 
 [% PROCESS page/bottomnav.tt %]

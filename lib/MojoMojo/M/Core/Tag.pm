@@ -25,6 +25,11 @@ SELECT  id,tag,count(tag) as pagecount from tag WHERE page=? and person != ? GRO
 }
 );
 
+sub normalize_column_values {
+  my ($self,$data) = @_;
+  $data->{tag} =~ s/[^\w]//g;
+}
+
 sub related_to {
     my ( $self, $tag ) = @_;
     $tag ||= $self->tag;
