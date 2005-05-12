@@ -105,7 +105,6 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att, $action ) = @_;
-    return $c->forward('/user/login') unless $c->req->{user};
     $c->stash->{att}->page->set_path();
     $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->log->info('path is'.$c->stash->{att}->page->path);

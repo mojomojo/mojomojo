@@ -300,6 +300,7 @@ sub attachments : Private {
     $c->forward('view');
     $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
+      return $c->forward('/user/login') unless $c->req->{user};
         my $att =
           MojoMojo::M::Core::Attachment->create(
             { name => $file, page => $page } );
