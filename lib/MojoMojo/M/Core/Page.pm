@@ -22,7 +22,6 @@ __PACKAGE__->columns( TEMP      => qw/path/ );
 # automatically set the path TEMP column on select:
 __PACKAGE__->add_trigger( select => \&set_path);
 
-
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
     "to_page"
@@ -61,6 +60,49 @@ FROM page,page_version WHERE page_version.page=page.id
 ORDER BY page_version.release_date DESC
 }
 );
+
+__PACKAGE__->set_sql(
+    'path_pages_by_id' => qq{
+SELECT path_page.*
+FROM __TABLE__ AS start_page, __TABLE__ AS path_page, __TABLE__ AS end_page
+WHERE start_page.lft = 1 AND end_page.id = ?
+ AND path_page.lft BETWEEN start_page.lft AND start_page.rgt
+ AND end_page.lft  BETWEEN path_page.lft AND path_page.rgt
+ORDER BY path_page.lft
+}
+);
+
+=item open_gap
+
+Opens a gap in the nested set numbers to allow the inserting
+of new pages into the tree. Since nested sets number each node
+twice, the size of the gap is always twice the number of new
+pages. Also, since nested sets number the nodes from left to
+right, we determine what nodes to re-number according to the
+C<rgt> column of the parent of the top-most new node.
+
+=cut
+
+__PACKAGE__->set_sql(
+    'open_gap' => qq{
+UPDATE __TABLE__
+SET
+rgt = rgt + ?,
+lft = CASE
+ WHEN lft > ? THEN lft + ?
+ ELSE lft
+END
+WHERE rgt >= ?
+}
+);
+
+sub open_gap {
+    my ($class, $parent, $new_page_count) = @_;
+    my ($gap_increment, $parent_rgt) = ($new_page_count * 2, $parent->rgt);
+    my $sth = $class->sql_open_gap;
+    $sth->execute( $gap_increment, $parent_rgt, $gap_increment, $parent_rgt );
+}
+
 sub set_path {
      my $self = shift;
      return if (defined $self->path);
@@ -82,7 +124,6 @@ sub set_path {
      }
      $self->path( '/' . $path );
 }
-
 
 =item get_page
 
@@ -140,7 +181,20 @@ with the exception of path, which is a Class::DBI TEMP column.
 =cut
 
 sub path_pages {
-    my ( $self, $path ) = @_;
+    my ( $self, $path, $id ) = @_;
+
+    # avoid recursive path resolution, if possible:
+    my @path_pages;
+    if ($path eq '/')
+    {
+	@path_pages = $self->search( lft => 1 );
+    }
+    elsif ($id)
+    {
+        # this only works if depth is at least 1
+        @path_pages = $self->search_path_pages_by_id( $id );
+    }
+    return (\@path_pages, []) if (@path_pages > 0);
 
     my @proto_pages = $self->parse_path($path);
 
@@ -161,7 +215,6 @@ sub path_pages {
         push @{ $query_pages[ $_->depth ] }, $_;
     }
 
-    my @path_pages;
     my $resolved = $self->resolve_path(
         path_pages    => \@path_pages,
         proto_pages   => \@proto_pages,
@@ -171,7 +224,7 @@ sub path_pages {
     );
     return ( \@path_pages, \@proto_pages );
 
-}    # end sub get_path
+} # end sub get_path
 
 sub resolve_path {
     my ( $self, %args ) = @_;
@@ -199,7 +252,7 @@ sub resolve_path {
     }
     return 0;
 
-}    # end sub resolve_path
+} # end sub resolve_path
 
 sub parse_path {
     my ( $self, $path ) = @_;
@@ -231,7 +284,7 @@ sub parse_path {
 
     return @proto_pages;
 
-}    # end sub parse_path
+} # end sub parse_path
 
 sub normalize_name {
     my ( $self, $name_orig ) = @_;
@@ -245,7 +298,7 @@ sub normalize_name {
     $name = lc($name);
     return ( $name_orig, $name );
 
-}    # end sub normalize_name
+} # end sub normalize_name
 
 # create a proto page, would could be
 # the basis for a new page
@@ -352,16 +405,27 @@ sub update_content {
     $self->page_version->content_version_last($content_version);
     $self->page_version->update;
 
-}    # end sub update_content
+} # end sub update_content
 
 sub create_path_pages {
     my ( $class,      %args )        = @_;
     my ( $path_pages, $proto_pages ) = @args{qw/path_pages proto_pages/};
+
+    # find the deepest existing page in the path, and save
+    # some of its data for later use
+    my $parent = $path_pages->[ @$path_pages - 1 ];
+    my %original_ancestor = ( id => $parent->id, rgt => $parent->rgt );
+
+    # open a gap in the nested set numbers to accommodate the new pages
+    $class->open_gap( $parent, scalar @$proto_pages );
+
+    # clear the cache and get the new nested set numbers for the parent
+    $parent->remove_from_object_index;
+    $parent = $class->retrieve( $original_ancestor{id} );
+
     my @version_columns = MojoMojo::M::Core::PageVersion->columns;
 
-    my $parent = $path_pages->[ @$path_pages - 1 ];
-
-    # create the missing parent pages
+    # create all missing pages in the path
     for my $proto_page (@$proto_pages) {
 
         # since SQLite doesn't support sequences, just cheat
@@ -370,9 +434,21 @@ sub create_path_pages {
         my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
 
         # FIX: Ugly hack: set creator to 1 for now
-        @version_data{qw/ page version parent parent_version creator /} = (
-            $page, 1, $page->parent,
-            ( $page->parent ? $page->parent->version : undef ), 1
+        @version_data{qw/ page version parent parent_version creator lft rgt /} = (
+            $page,
+            1,
+            $page->parent,
+            # why this? we should always have a parent...
+            ( $page->parent ? $page->parent->version : undef ),
+            1,
+            # we always create the first page as a right child,
+            # so if this is the first new page, its left number
+            # will be the same as the parent's old right number
+            ($parent->id == $original_ancestor{id}
+             ? $original_ancestor{rgt}
+             : $parent->lft + 1
+            ),
+            ($parent->rgt - 1),
         );
 
         my $page_version =
@@ -388,6 +464,6 @@ sub create_path_pages {
     }
     return $path_pages;
 
-}    # end sub create_path_pages
+} # end sub create_path_pages
 
 1;

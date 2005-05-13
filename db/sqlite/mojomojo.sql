@@ -79,6 +79,8 @@ CREATE TABLE page_version (
  name            VARCHAR(200),
  name_orig       VARCHAR(200),
  depth           INTEGER,
+ lft             INTEGER,
+ rgt             INTEGER,
  creator         INTEGER REFERENCES person,
  created         VARCHAR(100),
  status          VARCHAR(20), -- released, removed, ...
@@ -100,6 +102,8 @@ CREATE TABLE page (
  name            VARCHAR(200),
  name_orig       VARCHAR(200),
  depth           INTEGER,
+ lft             INTEGER,
+ rgt             INTEGER,
  content_version INTEGER,
  FOREIGN KEY (id, content_version) REFERENCES content (page, version),
  FOREIGN KEY (id, version) REFERENCES page_version (page, version)
@@ -108,9 +112,12 @@ CREATE TABLE page (
 -- all children of a parent must have unique names:
 CREATE UNIQUE INDEX page_unique_child_index ON page (parent, name);
 
--- we resolve paths by searching on page name and depth, so:
+-- we resolve paths by searching on page name and depth:
 CREATE INDEX page_depth_index ON page (depth, name);
 
+-- we also resolve paths with nested sets:
+CREATE INDEX page_lft_index ON page (lft);
+CREATE INDEX page_rgt_index ON page (rgt);
 
 -- * roles * --
 

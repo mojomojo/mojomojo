@@ -54,12 +54,13 @@ sub view : Private {
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
-    my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
+    my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
     unless ($path_pages) {
-        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
+        $id = $c->req->params->{id};
+        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path, $id);
         @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
     }
 
@@ -136,8 +137,7 @@ sub edit : Private {
 
         # may need to add more required fields...
         required => [qw/body/],
-        defaults => { creator => $user, 
-                  }
+        defaults => { creator => $user, }
     );
 
     # if we have missing or invalid fields, display the edit form.
@@ -183,7 +183,7 @@ sub edit : Private {
     }
     $c->res->redirect( $c->req->base . $path . '.highlight' );
 
-}    # end sub edit
+} # end sub edit
 
 =item search
 
