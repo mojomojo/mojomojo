@@ -81,6 +81,9 @@ pages. Also, since nested sets number the nodes from left to
 right, we determine what nodes to re-number according to the
 C<rgt> column of the parent of the top-most new node.
 
+Returns a new parent object that is updated with the new C<lft>
+C<rgt> nested set numbers.
+
 =cut
 
 __PACKAGE__->set_sql(
@@ -98,9 +101,18 @@ WHERE rgt >= ?
 
 sub open_gap {
     my ($class, $parent, $new_page_count) = @_;
-    my ($gap_increment, $parent_rgt) = ($new_page_count * 2, $parent->rgt);
+    my ($gap_increment, $parent_rgt, $parent_id)
+        = ($new_page_count * 2, $parent->rgt, $parent->id);
     my $sth = $class->sql_open_gap;
     $sth->execute( $gap_increment, $parent_rgt, $gap_increment, $parent_rgt );
+
+    # allow more than one copy of this object in memory.
+    # do we really want to do this? if so, when and why???
+    $parent->remove_from_object_index;
+
+    # get the new nested set numbers for the parent
+    $parent = $class->retrieve( $parent_id );
+    return $parent;
 }
 
 sub set_path {
@@ -417,11 +429,7 @@ sub create_path_pages {
     my %original_ancestor = ( id => $parent->id, rgt => $parent->rgt );
 
     # open a gap in the nested set numbers to accommodate the new pages
-    $class->open_gap( $parent, scalar @$proto_pages );
-
-    # clear the cache and get the new nested set numbers for the parent
-    $parent->remove_from_object_index;
-    $parent = $class->retrieve( $original_ancestor{id} );
+    $parent = $class->open_gap( $parent, scalar @$proto_pages );
 
     my @version_columns = MojoMojo::M::Core::PageVersion->columns;
 
