@@ -434,30 +434,33 @@ sub create_path_pages {
         my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
 
         # FIX: Ugly hack: set creator to 1 for now
-        @version_data{qw/ page version parent parent_version creator lft rgt /} = (
+        @version_data{qw/ page version parent parent_version creator /} = (
             $page,
             1,
             $page->parent,
             # why this? we should always have a parent...
             ( $page->parent ? $page->parent->version : undef ),
             1,
-            # we always create the first page as a right child,
-            # so if this is the first new page, its left number
-            # will be the same as the parent's old right number
-            ($parent->id == $original_ancestor{id}
-             ? $original_ancestor{rgt}
-             : $parent->lft + 1
-            ),
-            ($parent->rgt - 1),
         );
 
         my $page_version =
           MojoMojo::M::Core::PageVersion->create( \%version_data );
         for ( $page->columns ) {
-            next if $_ eq 'id';                 # page already exists
-            next if $_ eq 'content_version';    # no content yet
+            next if $_ eq 'id'; # page already exists
+            next if $_ eq 'content_version'; # no content yet
+            next unless $page_version->can( $_ );
             $page->$_( $page_version->$_ );
         }
+        # set the nested set columns:
+        ## we always create the first page as a right child,
+        ## so if this is the first new page, its left number
+        ## will be the same as the parent's old right number
+        $page->lft(
+            $parent->id == $original_ancestor{id}
+            ? $original_ancestor{rgt}
+            : $parent->lft + 1
+        );
+        $page->rgt( $parent->rgt - 1 );
         $page->update;
         push @$path_pages, $page;
         $parent = $page;
