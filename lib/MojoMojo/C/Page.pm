@@ -162,6 +162,7 @@ sub edit : Private {
         $path_pages = $m_page_class->create_path_pages(
             path_pages  => $path_pages,
             proto_pages => $proto_pages,
+            creator     => $user,
         );
         $page = $path_pages->[ @$path_pages - 1 ];
     }

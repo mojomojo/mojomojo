@@ -18,8 +18,18 @@ __PACKAGE__->has_a(
     inflate      => sub {
           DateTime->from_epoch(epoch=>shift);
     },
-    deflate => 'datetime'
+    deflate => 'epoch'
 );
+
+__PACKAGE__->has_a(
+    created => 'DateTime',
+    inflate => sub {
+        DateTime->from_epoch(epoch=>shift);
+    },
+    deflate => 'epoch'
+);
+
+__PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
 # this should probably be re-defined here...
 sub formatted_diff {

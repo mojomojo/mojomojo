@@ -13,6 +13,24 @@ __PACKAGE__->has_a(
     deflate => 'epoch'
 );
 
+__PACKAGE__->has_a(
+    remove_date => 'DateTime',
+    inflate     => sub {
+          DateTime->from_epoch(epoch=>shift);
+    },
+    deflate => 'epoch'
+);
+
+__PACKAGE__->has_a(
+    release_date => 'DateTime',
+    inflate      => sub {
+          DateTime->from_epoch(epoch=>shift);
+    },
+    deflate => 'epoch'
+);
+
+__PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
+
 sub highlight {
     my ( $self, $base ) = @_;
     my $this_content = $self->formatted($base);

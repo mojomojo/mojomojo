@@ -392,6 +392,9 @@ sub user_tags {
 sub update_content {
     my ( $self, %args ) = @_;
     my $content_version;
+
+    # FIX: don't think this needs to be so complicated.
+    # should be able to just catch exceptions upon insert
     if ( $args{version} ) {
         $content_version = $args{version};
         my $existing_version = MojoMojo::M::Core::Content->retrieve(
@@ -409,19 +412,33 @@ sub update_content {
     }
     my %content_data =
       map { $_ => $args{$_} } MojoMojo::M::Core::Content->columns;
-    @content_data{qw/page version/} = ( $self->id, $content_version );
-    $content_data{created}=DateTime->now();
+    my $now = DateTime->now;
+    @content_data{qw/page version status release_date/} =
+	($self->id,
+         $content_version,
+         'released',
+         $now,
+	);
     my $content = MojoMojo::M::Core::Content->create( \%content_data );
     $self->content_version( $content->version );
     $self->update;
+    $self->page_version->content_version_first( $content_version )
+	unless defined $self->page_version->content_version_first;
     $self->page_version->content_version_last($content_version);
     $self->page_version->update;
+
+    if (my $previous_content = $content->previous) {
+        $previous_content->remove_date( $now );
+	$previous_content->status( 'removed' );
+	$previous_content->comments( "Replaced by version $content_version." );
+        $previous_content->update;
+    }
 
 } # end sub update_content
 
 sub create_path_pages {
     my ( $class,      %args )        = @_;
-    my ( $path_pages, $proto_pages ) = @args{qw/path_pages proto_pages/};
+    my ( $path_pages, $proto_pages, $creator ) = @args{qw/path_pages proto_pages creator/};
 
     # find the deepest existing page in the path, and save
     # some of its data for later use
@@ -441,14 +458,15 @@ sub create_path_pages {
         my $page = __PACKAGE__->create( { parent => $parent } );
         my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
 
-        # FIX: Ugly hack: set creator to 1 for now
-        @version_data{qw/ page version parent parent_version creator /} = (
+        @version_data{qw/page version parent parent_version creator status release_date/} = (
             $page,
             1,
             $page->parent,
             # why this? we should always have a parent...
             ( $page->parent ? $page->parent->version : undef ),
-            1,
+            $creator,
+            'released',
+            DateTime->now,
         );
 
         my $page_version =
