@@ -79,8 +79,6 @@ CREATE TABLE page_version (
  name            VARCHAR(200),
  name_orig       VARCHAR(200),
  depth           INTEGER,
- lft             INTEGER,
- rgt             INTEGER,
  creator         INTEGER REFERENCES person,
  created         VARCHAR(100),
  status          VARCHAR(20), -- released, removed, ...
@@ -94,6 +92,9 @@ CREATE TABLE page_version (
  FOREIGN KEY (page, content_version_last) REFERENCES content (page, version),
  FOREIGN KEY (parent, parent_version) REFERENCES page_version (page, version)
 );
+
+-- we resolve paths by searching on page name and depth:
+CREATE INDEX page_version_depth_index ON page_version (depth, name);
 
 CREATE TABLE page (
  id              INTEGER PRIMARY KEY,
@@ -227,6 +228,6 @@ INSERT INTO page_version
  content_version_last,
  creator,
  created)
-VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,'1970-01-01T00:00:00');
-INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,'1970-01-01T00:00:00','Welcome to MojoMojo!');
-INSERT INTO page (id,version,parent,name,name_orig,depth,content_version) VALUES (1,1,NULL,'/','/',0,1);
+VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,0);
+INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,'Welcome to MojoMojo!');
+INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (1,1,NULL,'/','/',0,1,2,1);

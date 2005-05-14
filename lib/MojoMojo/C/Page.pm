@@ -153,7 +153,7 @@ sub edit : Private {
       $c->stash->{message} ||= 'Anonymous Edit disabled';
       return;
     }
-  # else, update the page and redirect to highlight, which will forward to view:
+    # else, update the page and redirect to highlight, which will forward to view:
     my $valid   = $c->form->valid;
     my $unknown = $c->form->unknown;
 

@@ -97,10 +97,11 @@ sub create_proto {
     my ( $class, $page ) = @_;
     my %proto_content;
     my @columns = __PACKAGE__->columns;
-    eval { $page->isa('MojoMojo::M::Core::Page') };
+    eval { $page->isa('MojoMojo::M::Core::Page'); $page->content->isa('MojoMojo::M::Core::Content') };
     if ($@) {
 
-        # assume page is a simple "proto page" hashref
+        # assume page is a simple "proto page" hashref,
+        # or the page has no content yet
         %proto_content = map { $_ => undef } @columns;
         $proto_content{version} = 1;
     }
