@@ -51,7 +51,7 @@ mojomojo_create_db.pl -dsn <dsn-string> -sql <sql-filename> [options]
  sql-filename must be the name of a file containing sql statements to create a MojoMojo database
 
  Example:
-    mojomojo_create_db.pl -dsn dbi:SQLite2:mojomojo.db -sql mojomojo.sql
+    mojomojo_create_db.pl -dsn dbi:SQLite:mojomojo.db -sql mojomojo.sql
 
  See also:
     perldoc MojoMojo
