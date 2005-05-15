@@ -54,7 +54,7 @@ FROM page, tag, content WHERE page.id=content.page AND page.content_version=cont
 
 __PACKAGE__->set_sql(
     'recent' => qq{
-SELECT DISTINCT page.name, page.id as id,page_version.release_date, 
+SELECT DISTINCT page.name, page.id as id,page_version.release_date,
 creator
 FROM page,page_version WHERE page_version.page=page.id
 ORDER BY page_version.release_date DESC
@@ -86,8 +86,7 @@ C<rgt> nested set numbers.
 
 =cut
 
-__PACKAGE__->set_sql(
-    'open_gap' => qq{
+__PACKAGE__->set_sql('open_gap' => qq{
 UPDATE __TABLE__
 SET
 rgt = rgt + ?,
@@ -96,8 +95,7 @@ lft = CASE
  ELSE lft
 END
 WHERE rgt >= ?
-}
-);
+});
 
 sub open_gap {
     my ($class, $parent, $new_page_count) = @_;
@@ -113,6 +111,49 @@ sub open_gap {
     # get the new nested set numbers for the parent
     $parent = $class->retrieve( $parent_id );
     return $parent;
+}
+
+=item children
+
+  @children = $page->children;
+
+Returns a list of the page's immediate children, i.e. it does not return
+the entire subtree rooted by the page. In order to get the entire subtree,
+use L<descendants>.
+
+=cut
+
+__PACKAGE__->set_sql('children' => qq{
+ SELECT __ESSENTIAL__
+ FROM __TABLE__
+ WHERE parent = ?
+ ORDER BY name
+});
+
+sub children {
+    return $_[0]->search_children( $_[0]->id );
+}
+
+=item descendants
+
+  @descendants = $page->descendants;
+
+Returns the entire subtree of pages rooted by the page. In order to get
+only the immediate children, and not the entire subtree, use L<children>.
+
+=cut
+
+__PACKAGE__->set_sql('descendants' => qq{
+ SELECT __ESSENTIAL__
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant
+ WHERE ancestor.id = ?
+  AND descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt
+ ORDER BY descendant.lft
+});
+
+sub descendants {
+    return $_[0]->search_descendants( $_[0]->id );
 }
 
 sub set_path {
