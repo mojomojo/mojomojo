@@ -1,16 +1,16 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
         <title> [%
-              title || config.application_name ||
-                "A poorly configured MojoMojo Installation"
+              title || config.name || "A poorly configured MojoMojo Installation"
             %]</title>
 <link rel="alternate" type="text/html" href="[% base %]" />
 <modified>[% pages.last.updated.datetime %]-00:00</modified>
+<tagline>Recent changes in [%page.path%]</tagline>
 <tagline>A mojomojo wiki</tagline>
 <id>tag:[%c.req.host%],[%pages.last.updated.year%]:[%c.req.path%]/page/view/[%c.pref('home_node')%]</id>
-<generator url="[%base%]" version="0.1">[% title || "A poorly configured MojoMojo Installation"%]</generator>
+<generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
 <copyright>Copyright (c) [%pages.last.update.year%] [%c.pref('admin_user')%]</copyright>
-[% FOR page = pages.list; %]
+[%WHILE( page = pages.next )%]
 <entry>
 <title>[% page.name %]</title>
 <link rel="alternate" type="text/html" href="[% base %][% page.path %]" />
