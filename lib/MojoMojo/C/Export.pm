@@ -26,35 +26,26 @@ directory will contain a timestamp showing when the archive was made.
 
 =over 4
 
-=item index
-
-This action just shows an overview of the export features.
-
-=cut
-
-sub index : Path('/.export') {
-    my ( $self, $c ) = @_;
-    $c->stash->{template} = 'export.tt';
-}
-
-=item raw (/.export.zip)
+=item raw 
 
 This action will give you a zip file containing the raw wiki source
 for all the nodes of the wiki.
 
 =cut
 
-sub raw : Path('/.export.zip') {
+sub raw : Private {
     my ( $self, $c ) = @_;
-    my @pages   = $model->retrieve_all_sorted_by("name");
+    #my @pages   = $model->retrieve_all_sorted_by("name");
+    my $pages = $c->stash->{pages};
     my $archive = Archive::Zip->new();
     my $prefix  =
-        $c->fixw( $c->pref('name') )
+        $c->fixw( $c->pref('name') ) . "-"
+      . $c->stash->{page}->name 
       . "-export-"
       . localtime->ymd('-') . '-'
       . localtime->hms('-');
     $archive->addDirectory("$prefix/");
-    for my $page (@pages) {
+    while ( my $page =$pages->next ) {
         next unless $page->content; 
         $archive->addString( $page->content->body, $prefix .  $page->path .($page->path eq '/' ? '' : '/').'index' );
         $c->log->debug('Adding :'.$page->path.($page->path eq '/' ? '' : '/').'index' );
@@ -73,17 +64,20 @@ versions of all the nodes of the wiki.
 
 =cut
 
-sub html : Path('/.html.zip') {
+sub html : Private {
     my ( $self, $c ) = @_;
-    my @pages   = $model->retrieve_all_sorted_by("name");
+    #my @pages   = $model->retrieve_all_sorted_by("name");
+    my $pages = $c->stash->{pages};
     my $archive = Archive::Zip->new();
     my $prefix  =
-        $c->fixw( $c->pref('name') ) . "-html-"
+        $c->fixw( $c->pref('name') ) . "."
+      . $c->stash->{page}->name 
+        . "-html-"
       . localtime->ymd('-') . '-'
       . localtime->hms('-');
     $archive->addDirectory("$prefix/");
     my $home = $c->pref("home_node");
-    for my $page (@pages) {
+    while ( my $page =$pages->next ) {
         $c->log->debug('Rendering '.$page->path);
         $archive->addString( $c->subreq( $page->path .'.print' ),
             $prefix . $page->path ."/index.html" );

@@ -18,15 +18,15 @@ END;
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type != "subtree" %]checked="checked"[% END %] /> Search entire site 
-        <input type="radio" name="search_type" value="subtree" [% IF search_type == "subtree" %]checked="checked"[% END %] /> Search within [% page_title %]
+        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> Search entire site 
+        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> Search within [% page_title %]
     </form>
 </div>
 
 <hr />
 
 [% IF result_count > 0 %]
-<h3>Results [% pager.first %]-[% pager.last %] of [% pager.total_entries %] found within [% IF search_type == "subtree"; page_title; ELSE %]entire site[% END %].</h3>
+<h3>Results [% pager.first %]-[% pager.last %] of [% pager.total_entries %] found within [% IF search_type != "all"; page_title; ELSE %]entire site[% END %].</h3>
 [% ELSIF !result_count %]
 <h3>No results found.</h3>
 [% END %]

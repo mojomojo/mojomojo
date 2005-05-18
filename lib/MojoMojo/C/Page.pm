@@ -214,7 +214,7 @@ sub search : Private {
     $stash->{page} = $page;
 
     my $q = $c->req->params->{query};
-    my $search_type = $c->req->params->{search_type} || "all";
+    my $search_type = $c->req->params->{search_type} || "subtree";
     $stash->{query} = $q;
     $stash->{search_type} = $search_type;
 
@@ -222,7 +222,7 @@ sub search : Private {
 
     my $strip = HTML::Strip->new;
 
-    # XXX: Cache search results.  This will require creating a new data structure since it's
+    # FIXME: Cache search results.  This will require creating a new data structure since it's
     #      not safe to cache $page objects.
     my $results = [];
 
@@ -236,7 +236,7 @@ sub search : Private {
 
     foreach my $key ( $p->search( $q ) ) {
         # skip results outside of this subtree
-        # XXX: Remove this code if the new _path query seems to work OK
+        # FIXME: Remove this code if the new _path query seems to work OK
 #        if ($search_type eq "subtree") {
 #            my $path = $page->path;
 #            if ( $key !~ /^$path/ ) {
@@ -249,7 +249,7 @@ sub search : Private {
         my $content = $strip->parse( $page->content->formatted );
         $strip->eof;
 
-        # XXX: Bug? Some snippet text doesn't get displayed properly by Text::Context
+        # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
         my $snippet = Text::Context->new( $content, split(/ /, $real_query) );
 
         my $result = {
@@ -262,7 +262,8 @@ sub search : Private {
     my $result_count = scalar @$results;
     if ( $result_count ) {
         # Paginate the results
-        # This is done even with even 1 page of results so the template doesn't need to do two separate things
+        # This is done even with even 1 page of results so the template doesn't need to do
+        # two separate things
         my $pager = Data::Page->new;
         $pager->total_entries( $result_count );
         $pager->entries_per_page( $results_per_page );
@@ -371,28 +372,28 @@ sub recent : Private {
     # FIXME - needs to be populated even without tags
 }
 
-=item print
-
-this action is the same as the view action, with another template
-
-=cut
+sub feeds  : Private {
+    my ( $self, $c, $node ) = @_;
+    $c->forward('view');
+    $c->stash->{template} = 'feeds.tt';
+}
 
 sub rss : Private {
     my ( $self, $c, $page ) = @_;
+    $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
-    $c->forward('view');
 }
 
 sub atom : Private {
     my ( $self, $c, $page ) = @_;
+    $c->forward('recent');
     $c->stash->{template} = 'page/atom.tt';
-    $c->forward('view');
 }
 
 sub rss_full : Private {
     my ( $self, $c, $page ) = @_;
+    $c->forward('recent');
     $c->stash->{template} = 'page/rss_full.tt';
-    $c->forward('view');
 }
 
 sub highlight : Private {
@@ -400,6 +401,25 @@ sub highlight : Private {
     $c->stash->{render} =  'highlight';
     $c->forward('view');
 }
+
+sub export : Private {
+    my ( $self, $c, $page ) = @_;
+    $c->forward('view');
+    $c->stash->{template} = 'export.tt';
+}
+
+sub export_raw : Private {
+    my ( $self, $c, $page ) = @_;
+    $c->forward('list');
+    $c->forward('/export/raw');
+}
+
+sub export_html : Private {
+    my ( $self, $c, $page ) = @_;
+    $c->forward('list');
+    $c->forward('/export/html');
+}
+
 
 =head1 AUTHOR
 

@@ -3,6 +3,7 @@ package MojoMojo;
 require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
+use Carp qw/cluck/;
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
                 SubRequest Authentication::CDBI Prototype 
                 Singleton Unicode/;
@@ -52,7 +53,6 @@ default action - serve the home node
 
 sub default : Private {
     my ( $self, $c ) = @_;
-    warn "called with ". join(" ",@_);
     $c->req->args( ['/'] );
     $c->forward( "/page/view" );
 }
@@ -155,6 +155,7 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 
 sub wikiword {
     my ( $c, $word, $base ) = @_;
+    cluck( "No base for $word" ) unless $base;
     $c=MojoMojo->context unless ref $c;
     
     # keep the original wikiword for display, stripping leading slashes
@@ -294,7 +295,6 @@ sub prepare_path {
     $c->NEXT::prepare_path;
     my $path=$c->req->base;
     $path =~s|/+$||;
-    $c->log->debug('Path is:'.$path);
     $c->req->base($path);
 }
 

@@ -1,12 +1,12 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-	<title>[% config.application_name || "MojoMojo" %]</title>
+	<title>[% config.name || "MojoMojo" %]</title>
 	<link>[%base%]</link>
-	<description>A MojoMojo wiki</description>
+	<description>Recent changes in [%page.path%]</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
-[%FOR page=objects.list; %]
+[%WHILE( page = pages.next )%]
     <page>
       <title>[% request.expand_wikiword(page.path) %]</title>
       <description>[% FILTER html %][% page.content.formatted %][% END %]</description>    

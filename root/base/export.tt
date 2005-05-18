@@ -1,4 +1,5 @@
 [% PROCESS header.tt %]
+[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 <h1 id="pageName">
   <small> [% c.pref('name')|| "MojoMojo" %] </small>
   <br/>Export
@@ -8,8 +9,8 @@
 <p>You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki).</p> 
 
 <ul id="feedsList">
-  <li><a href="[%base%]/.html.zip">HTML</a></li>
-  <li><a href="[%base%]/.export.zip">Markup (textile)</a></li>
+  <li><a href="[%base%][%page.path%].export_html">HTML</a></li>
+  <li><a href="[%base%][$page.path%].export_raw">Markup (textile)</a></li>
 </ul>
 
 [% PROCESS footer.tt %]
