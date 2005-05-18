@@ -73,7 +73,6 @@ sub view : Private {
 
     my $content;
 
-    # This form/rev stuff doesn't seem to work...
     my $rev = $c->req->params->{rev};
     if ( $rev && defined $page->content_version ) {
         $content = MojoMojo::M::Core::Content->retrieve(
@@ -134,7 +133,6 @@ sub edit : Private {
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     $c->form(
-
         # may need to add more required fields...
         required => [qw/body/],
         defaults => { creator => $user, }
@@ -343,11 +341,15 @@ sub tags : Private {
     }
 }
 
-sub list : Path('/.list') {
-    my ( $self, $c, $tag ) = @_;
+sub list : Private {
+    my ( $self, $c, $page, $tag ) = @_;
+    unless ( ref $page ) {
+      $c->forward('view');
+      $page=$c->stash->{page};
+    }
     return $c->forward('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
-    $c->stash->{pages}    = [ $m_page_class->retrieve_all_sorted_by('name') ];
+    $c->stash->{pages}    =  $page->descendants ;
 
     # FIXME - real data here please
     $c->stash->{orphans} = [];
@@ -355,12 +357,16 @@ sub list : Path('/.list') {
     $c->stash->{tags}    = [ MojoMojo::M::Core::Tag->search_most_used() ];
 }
 
-sub recent : Path('/.recent') {
-    my ( $self, $c, $tag ) = @_;
+sub recent : Private {
+    my ( $self, $c, $page, $tag ) = @_;
+    unless ( ref $page ) {
+      $c->forward('view');
+      $page=$c->stash->{page};
+    }
     return $c->forward('/tag/recent') if $tag;
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
-    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{pages}    =  $page->descendants_by_date ;
 
     # FIXME - needs to be populated even without tags
 }

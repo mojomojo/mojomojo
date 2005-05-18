@@ -76,9 +76,9 @@ requested action in the page controller.
 =cut
 
 sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
-    my ( $self, $c ) = @_;
+    my ( $self, $c,@args ) = @_;
     my ($page,$action) = @{ $c->request->snippets };
-    $c->req->args([$page]);
+    $c->req->args([$page,@args]);
     $c->forward( "/page/$action" );
 }
 

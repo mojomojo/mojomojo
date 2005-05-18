@@ -41,7 +41,7 @@ changed/added nodes.
 
 sub rss : Path('/.rss') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{pages}  ||= [ MojoMojo::M::Core::Page->search_recent ];
     $c->stash->{template} = 'page/rss.tt';
 }
 
@@ -54,7 +54,7 @@ changed/added nodes.
 
 sub rss_full : Path('/.rss_full') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{pages}  ||= [ MojoMojo::M::Core::Page->search_recent ];
     $c->stash->{template} = 'page/rss_full.tt';
 }
 
@@ -67,7 +67,7 @@ changed/added nodes.
 
 sub atom : Path('/.atom') {
     my ( $self, $c, $node ) = @_;
-    $c->stash->{pages}    = [ MojoMojo::M::Core::Page->search_recent ];
+    $c->stash->{pages}   ||= [ MojoMojo::M::Core::Page->search_recent ];
     $c->stash->{template} = 'page/atom.tt';
 }
 

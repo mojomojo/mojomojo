@@ -1,4 +1,5 @@
 [% PROCESS header.tt %]
+[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 <h1 id="pageName">
   <small> [% c.pref("name") || "MojoMojo" %] </small>
   <br/>All Pages
@@ -21,7 +22,7 @@
 	  <a href="[% base %]/.recent/[%activetag%]">recent pages in [% activetag %]</a></small>
  </h2>
 <ul>
-[% FOR page IN pages.list %]
+[% WHILE ( page=pages.next) %]
     <li><a href="[% base %][% page.path %]">[%c.expand_wikiword(page.path)%]</a></li>
 [% END %]
 </ul>

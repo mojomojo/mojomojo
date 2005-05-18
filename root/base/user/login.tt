@@ -5,11 +5,14 @@
 </h1>
 [% PROCESS navbar.tt %]
 <h3>[%message%]</h3>
-<form action="[%base%]/.login" method="POST">
+<form id="loginForm" action="[%base%]/.login" method="POST">
 <label for="login">login:</label>
-<input type="text" name="login"/>
+<input id="loginField" type="text" name="login"/>
 <label for="pass">password:</label>
 <input type="password" name="pass"/>
 <input type="submit" value="log in"/>
 </form>
+<script language="JavaScript">
+gId('loginField').focus();
+</script>
 [% PROCESS footer.tt %]

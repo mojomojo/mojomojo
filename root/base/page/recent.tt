@@ -1,4 +1,5 @@
 [%PROCESS header.tt %]
+[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 [% SET now = objects.first.content.created.ymd; %]
 <h1 id="pageName">
   <small> [% title || config.application_name || "MojoMojo" %] </small>
@@ -8,12 +9,12 @@
 <div id="categories">
   <strong>tags</strong>: <small>
   [%FOREACH tag IN tags %]
-  <a href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
+  <a href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
   [%END%]</small>
 </div>
 <b>[% now %]</b>
 <ul>
-[% FOR page = pages.list %]
+[% WHILE (page=pages.next) %]
 [%IF now != page.content.created.ymd;%]
   [%SET now = page.content.created.ymd; %]
   </ul><b>[% now %]</b><ul>

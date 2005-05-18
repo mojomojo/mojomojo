@@ -3,7 +3,7 @@
   [% IF loop.first %]
   <a href="[% base _ page.path %]">[% c.pref("name") || "MojoMojo" %]</a>
   [% ELSE %]
-  / <a href="[% base _ page.path %]?id=[% page.id %]">[% page.name_orig %]</a>
+  / <a href="[% base _ page.path %]">[% page.name_orig %]</a>
   [% END %]
  [% END %]
  [% FOREACH page IN proto_pages %]

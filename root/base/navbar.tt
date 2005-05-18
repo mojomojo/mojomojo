@@ -8,11 +8,11 @@
   [% IF c.req.action == '.list' %]
   <b class="navOn" title="Alphabetically sorted list of pages">All Pages</b> | 
   [% ELSE %]
-  <a href="[%base%]/.list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
+  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
   [% END; IF c.req.action=='.recent' %]
   <b class="navOn" title="Pages sorted by when they were last changed">Recently Revised</b> | 
   [% ELSE %]
-  <a href="[%base%]/.recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
+  <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
   [% END; IF c.req.action=='.users' %]
   <b class="navOn" title="Who wrote what" accesskey="">Authors</b> | 
   [%ELSE%]
@@ -20,11 +20,11 @@
   [% END; IF template=='feeds.tt' %]
   <b class="navOn" title="Subscribe to changes by RSS">Feeds</b> | 
   [%ELSE%]
-  <a href="[%base%]/.feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
+  <a href="[%base%][%page.path%].feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
   [% END; IF c.req.action =='.export' %]
   <b class="navOn" title="Download a zip with all the pages in this wiki">Export</b> | 
   [%ELSE%]
-  <a href="[%base%]/.export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
+  <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 </form>

@@ -144,16 +144,74 @@ only the immediate children, and not the entire subtree, use L<children>.
 =cut
 
 __PACKAGE__->set_sql('descendants' => qq{
- SELECT __ESSENTIAL__
+ SELECT descendant.id,descendant.name,descendant.name_orig,
+        descendant.parent,descendant.depth
  FROM __TABLE__ as ancestor, __TABLE__ as descendant
  WHERE ancestor.id = ?
   AND descendant.lft > ancestor.lft
   AND descendant.rgt < ancestor.rgt
- ORDER BY descendant.lft
+ ORDER BY descendant.name
 });
 
 sub descendants {
     return $_[0]->search_descendants( $_[0]->id );
+}
+
+__PACKAGE__->set_sql('descendants_by_date' => qq{
+ SELECT descendant.id,descendant.name,descendant.name_orig,
+        descendant.parent,descendant.depth
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant,
+ page_version
+ WHERE ancestor.id = ?
+  AND descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt
+  AND page_version.page=descendant.id
+ ORDER BY page_version.release_date DESC
+});
+
+sub descendants_by_date {
+    return $_[0]->search_descendants_by_date( $_[0]->id );
+}
+=item tagged_descendants
+
+  @descendants = $page->tagged_descendants('mytag');
+
+Returns the subtree of pages rooted by the page with a given tag.
+
+=cut
+
+__PACKAGE__->set_sql('tagged_descendants' => qq{
+ SELECT descendant.id,descendant.name,descendant.name_orig,
+        descendant.parent,descendant.depth
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant,tag
+ WHERE ancestor.id = ?
+  AND descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt
+  AND descendant.id = tag.page
+  AND tag=?
+ ORDER BY descendant.name
+});
+
+sub tagged_descendants {
+    return $_[0]->search_tagged_descendants( $_[0]->id, $_[1] );
+}
+
+__PACKAGE__->set_sql('tagged_descendants_by_date' => qq{
+ SELECT descendant.id,descendant.name,descendant.name_orig,
+        descendant.parent,descendant.depth
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant,
+ tag, page_version
+ WHERE ancestor.id = ?
+  AND descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt
+  AND page_version.page=descendant.id
+  AND descendant.id = tag.page
+  AND tag=?
+ ORDER BY page_version.release_date DESC
+});
+
+sub tagged_descendants_by_date {
+    return $_[0]->search_descendants_by_date( $_[0]->id );
 }
 
 sub set_path {
