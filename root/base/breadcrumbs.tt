@@ -3,7 +3,11 @@
   [% IF loop.first %]
   <a href="[% base _ page.path %]">[% c.pref("name") || "MojoMojo" %]</a>
   [% ELSE %]
-  / <a href="[% base _ page.path %]">[% page.name_orig %]</a>
+  / <form action="[% base _ page.path %]" method="POST" style="display: inline">
+     <a href="[% base _ page.path %]" onclick="this.parentNode.id.value='[% page.id %]';
+        this.parentNode.submit(); return false;">[% page.name_orig %]</a>
+     <input type="hidden" name="id">
+    </form>
   [% END %]
  [% END %]
  [% FOREACH page IN proto_pages %]
