@@ -228,7 +228,7 @@ sub prepare_home {
     YAML::DumpFile($home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite:'.$home.'/db/sqlite2/mojomojo.db'});
+      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'});
 }
 
 =item prepare_search_index
