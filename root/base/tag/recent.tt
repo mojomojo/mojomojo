@@ -1,35 +1,35 @@
-[%PROCESS header.tt %]
+[% PROCESS header.tt %]
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 [% SET now=pages.first.updated.ymd; %]
 <h1 id="pageName">
   <small> [% title || config.application_name || "MojoMojo" %] </small>
   <br/>Recent Pages
 </h1>
-[%PROCESS navbar.tt %]
+[% PROCESS navbar.tt %]
 <div id="categories">
-  <strong>tags</strong>: <small>
-  [%FOREACH tag IN tags.list %]
-  [%IF tag.tag==activetag%]
-  <b>[%tag.tag%]</b>
-  [%ELSE%]
-  <a href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a> ([%tag.refcount%]) 
-  [%END%]
-  [%END%]</small>
+ <strong>tags</strong>: <small>
+ [% FOREACH tag IN tags.list %]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[% base %][% page.path %].recent/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
+ [% END %]</small>
 </div>
 <b>[% now %]</b>
 <ul>
-[% WHILE (page = pages.next) %]
-[%IF now != page.content.created.ymd;%]
-  [%SET now = page.content.created.ymd; %]
+[% FOREACH page IN pages %]
+[% IF now != page.content.created.ymd; %]
+  [% SET now = page.content.created.ymd; %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% base %][% page.path %]">[%c.expand_wikiword(page.name)%]</a>
+    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by <a class="existingWikiWord" href="[% base %][% page.content.creator.login %]">[% page.content.creator.name%]</a>
+      by <a class="existingWikiWord" href="[% base %][% page.content.creator.login %]">[% page.content.creator.name %]</a>
       at [% page.content.created.hms(':') %]
     </div>
   </li>
-[%END%]
+[% END %]
 </ul>
-[%PROCESS footer.tt%]
+[% PROCESS footer.tt %]

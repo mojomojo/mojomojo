@@ -19,7 +19,8 @@ use DateTime;
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
 
-# automatically set the path TEMP column on select:
+# automatically set the path TEMP column on select: deprecated
+# in favor of set_paths (NOT set_path)
 __PACKAGE__->add_trigger( select => \&set_path);
 
 __PACKAGE__->has_many(
@@ -71,6 +72,11 @@ WHERE start_page.lft = 1 AND end_page.id = ?
 ORDER BY path_page.lft
 }
 );
+
+sub path_pages_by_id {
+    my @pages = __PACKAGE__->search_path_pages_by_id( $_[1] );
+    return __PACKAGE__->set_paths( @pages );
+}
 
 =item open_gap
 
@@ -131,7 +137,8 @@ __PACKAGE__->set_sql('children' => qq{
 });
 
 sub children {
-    return $_[0]->search_children( $_[0]->id );
+    my @pages = $_[0]->search_children( $_[0]->id );
+    return __PACKAGE__->set_paths( @pages );
 }
 
 =item descendants
@@ -154,24 +161,30 @@ __PACKAGE__->set_sql('descendants' => qq{
 });
 
 sub descendants {
-    return $_[0]->search_descendants( $_[0]->id );
+     my @pages = $_[0]->search_descendants( $_[0]->id );
+     return __PACKAGE__->set_paths( @pages );
 }
 
 __PACKAGE__->set_sql('descendants_by_date' => qq{
- SELECT descendant.id,descendant.name,descendant.name_orig,
-        descendant.parent,descendant.depth
- FROM __TABLE__ as ancestor, __TABLE__ as descendant,
- page_version
- WHERE ancestor.id = ?
-  AND descendant.lft > ancestor.lft
-  AND descendant.rgt < ancestor.rgt
-  AND page_version.page=descendant.id
- ORDER BY page_version.release_date DESC
+ SELECT __ESSENTIAL__ FROM
+ (
+  SELECT descendant.id as id, descendant.name as name, descendant.name_orig as name_orig,
+         descendant.parent as parent ,descendant.depth as depth, content.created
+  FROM __TABLE__ as ancestor, __TABLE__ as descendant, content
+  WHERE ancestor.id = ?
+   AND descendant.lft > ancestor.lft
+   AND descendant.rgt < ancestor.rgt
+   AND content.page = descendant.id
+   AND content.version = descendant.content_version
+  ORDER BY content.created DESC
+ )
 });
 
 sub descendants_by_date {
-    return $_[0]->search_descendants_by_date( $_[0]->id );
+    my @pages = $_[0]->search_descendants_by_date( $_[0]->id );
+    return __PACKAGE__->set_paths( @pages );
 }
+
 =item tagged_descendants
 
   @descendants = $page->tagged_descendants('mytag');
@@ -193,25 +206,28 @@ __PACKAGE__->set_sql('tagged_descendants' => qq{
 });
 
 sub tagged_descendants {
-    return $_[0]->search_tagged_descendants( $_[0]->id, $_[1] );
+    my @pages = $_[0]->search_tagged_descendants( $_[0]->id, $_[1] );
+    return __PACKAGE__->set_paths( @pages );
 }
 
 __PACKAGE__->set_sql('tagged_descendants_by_date' => qq{
  SELECT descendant.id,descendant.name,descendant.name_orig,
         descendant.parent,descendant.depth
  FROM __TABLE__ as ancestor, __TABLE__ as descendant,
- tag, page_version
+ tag, content
  WHERE ancestor.id = ?
   AND descendant.lft > ancestor.lft
   AND descendant.rgt < ancestor.rgt
-  AND page_version.page=descendant.id
+  AND content.page = descendant.id
+  AND content.version = descendant.content_version
   AND descendant.id = tag.page
   AND tag=?
- ORDER BY page_version.release_date DESC
+ ORDER BY content.release_date DESC
 });
 
 sub tagged_descendants_by_date {
-    return $_[0]->search_descendants_by_date( $_[0]->id );
+    my @pages = $_[0]->search_tagged_descendants_by_date( $_[0]->id, $_[1] );
+    return __PACKAGE__->set_paths( @pages );
 }
 
 sub set_path {
@@ -235,6 +251,54 @@ sub set_path {
      }
      $self->path( '/' . $path );
 }
+
+=item set_paths
+
+  __PACKAGE__->set_paths( @pages );
+
+Sets the path TEMP columns for a path or a tree of pages.
+
+=cut
+
+sub set_paths
+{
+    my ($class, @pages) = @_;
+    my %pages = map { $_->id => $_ } @pages;
+
+    # Preserve the original sort order, because the pages
+    # passed in may have been sorted differently than we
+    # need them sorted to set paths:
+    my @lft_sorted_pages = sort { $a->lft <=> $b->lft } @pages;
+
+    # In some cases, e.g. retrieving descendants, we
+    # may not have passed in the root of the subtree:
+    unless ($lft_sorted_pages[0]->name eq '/')
+    {
+	my $parent = $lft_sorted_pages[0]->parent;
+        $pages{ $parent->id } = $parent;
+    }
+
+    # Sorting by the rgt column ensures that we always set
+    # paths for parents before their children, allowing us
+    # to avoid recursion.
+    for my $page (@lft_sorted_pages)
+    {
+	if ($page->name eq '/')
+	{
+	    $page->path('/');
+            next;
+	}
+	if ($page->depth == 1)
+	{
+	    $page->path( '/' . $page->name );
+	    next;
+	}
+	my $parent = $pages{ $page->parent->id };
+	$page->path( $parent->path . '/' . $page->name );
+    }
+    return @pages;
+
+} # end sub set_paths
 
 =item get_page
 
@@ -292,41 +356,42 @@ with the exception of path, which is a Class::DBI TEMP column.
 =cut
 
 sub path_pages {
-    my ( $self, $path, $id ) = @_;
+    my ( $class, $path, $id ) = @_;
 
     # avoid recursive path resolution, if possible:
     my @path_pages;
     if ($path eq '/')
     {
-	@path_pages = $self->search( lft => 1 );
+	@path_pages = $class->search( lft => 1 );
+        $path_pages[0]->path( '/' );
     }
     elsif ($id)
     {
         # this only works if depth is at least 1
-        @path_pages = $self->search_path_pages_by_id( $id );
+        @path_pages = $class->path_pages_by_id( $id );
     }
     return (\@path_pages, []) if (@path_pages > 0);
 
-    my @proto_pages = $self->parse_path($path);
+    my @proto_pages = $class->parse_path($path);
 
     my $depth      = @proto_pages - 1;          # depth starts at 0
     my $query_name = "get_path_depth_$depth";
 
-    unless ( __PACKAGE__->can($query_name) ) {
+    unless ( $class->can($query_name) ) {
         my $where = join ' OR ',
           ('( depth = ? AND name = ? )') x ( $depth + 1 );
-        __PACKAGE__->add_constructor( $query_name => $where );
+        $class->add_constructor( $query_name => $where );
     }
 
     # store query results by depth:
     my @bind = map { $_->{depth}, $_->{name} } @proto_pages;
     my @query_pages;
-    for ( __PACKAGE__->$query_name(@bind) ) {
+    for ( $class->$query_name(@bind) ) {
         $query_pages[ $_->depth ] ||= [];
         push @{ $query_pages[ $_->depth ] }, $_;
     }
 
-    my $resolved = $self->resolve_path(
+    my $resolved = $class->resolve_path(
         path_pages    => \@path_pages,
         proto_pages   => \@proto_pages,
         query_pages   => \@query_pages,
@@ -338,7 +403,7 @@ sub path_pages {
 } # end sub get_path
 
 sub resolve_path {
-    my ( $self, %args ) = @_;
+    my ( $class, %args ) = @_;
 
     my ( $path_pages, $proto_pages, $query_pages, $current_depth, $final_depth )
       = @args{qw/ path_pages proto_pages query_pages current_depth final_depth/
@@ -358,7 +423,7 @@ sub resolve_path {
             ||
 
             # must pre-icrement for this to work when current_depth == 0
-            ( ++$args{current_depth} && $self->resolve_path(%args) )
+            ( ++$args{current_depth} && $class->resolve_path(%args) )
           );
     }
     return 0;
@@ -366,7 +431,7 @@ sub resolve_path {
 } # end sub resolve_path
 
 sub parse_path {
-    my ( $self, $path ) = @_;
+    my ( $class, $path ) = @_;
 
     # Remove leading and trailing slashes to make
     # split happy. We'll add the root (/) back later...
@@ -382,7 +447,7 @@ sub parse_path {
     my $page_path = '';
     for (@proto_pages) {
         ( $_->{name_orig}, $_->{name} ) =
-          $self->normalize_name( $_->{name_orig} );
+          $class->normalize_name( $_->{name_orig} );
         $page_path .= '/' . $_->{name};
         $_->{path}  = $page_path;
         $_->{depth} = $depth;
@@ -398,7 +463,7 @@ sub parse_path {
 } # end sub parse_path
 
 sub normalize_name {
-    my ( $self, $name_orig ) = @_;
+    my ( $class, $name_orig ) = @_;
 
     $name_orig =~ s/^\s+//;
     $name_orig =~ s/\s+$//;

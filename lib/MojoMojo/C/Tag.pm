@@ -38,7 +38,7 @@ sub list : Private {
 
     $c->stash->{activetag} = $tag;
     $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
-    $c->stash->{pages}     = $c->stash->{page}->tagged_descendants($tag) ;
+    $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants($tag) ];
     $c->stash->{related}   = [ MojoMojo::M::Core::Tag->related_to($tag) ];
 }
 
@@ -56,7 +56,7 @@ sub recent : Private {
     return unless $tag;
     $c->stash->{activetag} = $tag;
     $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
-    $c->stash->{pages}     = $c->stash->{page}->tagged_descendants_by_date($tag);
+    $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
   
 }
 

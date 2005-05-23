@@ -350,7 +350,7 @@ sub list : Private {
     }
     return $c->forward('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
-    $c->stash->{pages}    =  $page->descendants ;
+    $c->stash->{pages}    =  [ $page->descendants ];
 
     # FIXME - real data here please
     $c->stash->{orphans} = [];
@@ -367,7 +367,7 @@ sub recent : Private {
     return $c->forward('/tag/recent') if $tag;
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
-    $c->stash->{pages}    =  $page->descendants_by_date ;
+    $c->stash->{pages}    = [ $page->descendants_by_date ];
 
     # FIXME - needs to be populated even without tags
 }
