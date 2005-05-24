@@ -291,7 +291,9 @@ sub set_paths {
          else {
 	    my @path_pages = $class->path_pages_by_id( $_->id );
              # store these in case they're parents of other pages
-	    for (@path_pages) { $pages{$_->id} => $_; }
+	    for my $path_page (@path_pages) {
+                 $pages{ $path_page->id } = $path_page;
+	    }
              # don't know if this is necessary, but just in case
              my $current_page = pop @path_pages;
              $_->path( $current_page->path );
