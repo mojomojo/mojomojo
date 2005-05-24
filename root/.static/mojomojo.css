@@ -165,7 +165,7 @@ ol.setup li {
   border-bottom:solid #888; 
   border-right:solid #888; 
   background: #ddd; 
-  z-index:0;
+  z-index:-1;
 }
 
 #TextileHelp table {
