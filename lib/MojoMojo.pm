@@ -274,7 +274,7 @@ Clean up explicit wiki words.
 sub fixw { 
   my ( $c, $w ) = @_;
   $w =~ s/\s/\_/g;
-          $w =~ s/[^\w\/]//g;
+          $w =~ s/[^\w\/\.]//g;
   return $w; 
 }
 
