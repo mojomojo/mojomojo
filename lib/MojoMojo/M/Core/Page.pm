@@ -36,46 +36,37 @@ __PACKAGE__->has_many(
 
 =over 4
 
-=item search_by_tag
+=item path_pages_by_id
+
+  @path_pages = __PACKAGE__->path_pages_by_id( $id );
+
+Returns all the pages in the path to a page, given that page's id.
 
 =cut
 
-__PACKAGE__->set_sql(
-    'by_tag' => qq{
-SELECT DISTINCT name, page.id as id, content.created, content.creator
-FROM page, tag, content WHERE page.id=content.page AND page.content_version=content.version AND page.id=tag.page AND tag=? ORDER BY name
-}
-);
-__PACKAGE__->set_sql(
-    'by_tag_and_date' => qq{
-SELECT DISTINCT name, page.id as id, content.created, content.creator
-FROM page, tag, content WHERE page.id=content.page AND page.content_version=content.version AND page.id=tag.page AND tag=? ORDER BY content.created
-}
-);
-
-__PACKAGE__->set_sql(
-    'recent' => qq{
-SELECT DISTINCT page.name, page.id as id,page_version.release_date,
-creator
-FROM page,page_version WHERE page_version.page=page.id
-ORDER BY page_version.release_date DESC
-}
-);
-
-__PACKAGE__->set_sql(
-    'path_pages_by_id' => qq{
-SELECT path_page.*
-FROM __TABLE__ AS start_page, __TABLE__ AS path_page, __TABLE__ AS end_page
-WHERE start_page.lft = 1 AND end_page.id = ?
- AND path_page.lft BETWEEN start_page.lft AND start_page.rgt
- AND end_page.lft  BETWEEN path_page.lft AND path_page.rgt
-ORDER BY path_page.lft
-}
-);
+__PACKAGE__->set_sql('path_pages_by_id' => qq{
+ SELECT path_page.*
+ FROM __TABLE__ AS start_page, __TABLE__ AS path_page, __TABLE__ AS end_page
+ WHERE start_page.lft = 1 AND end_page.id = ?
+  AND path_page.lft BETWEEN start_page.lft AND start_page.rgt
+  AND end_page.lft  BETWEEN path_page.lft AND path_page.rgt
+ ORDER BY path_page.lft
+});
 
 sub path_pages_by_id {
     my @pages = __PACKAGE__->search_path_pages_by_id( $_[1] );
-    return __PACKAGE__->set_paths( @pages );
+    my $path = '/';
+    for (@pages)
+    {
+        next if ($_->name eq '/');
+        if ($path eq '/')
+        {
+            $_->path( $path . $_->name );
+            next;
+        }
+        $_->path( $path . '/' . $_->name );
+    }
+    return @pages;
 }
 
 =item open_gap
@@ -93,14 +84,14 @@ C<rgt> nested set numbers.
 =cut
 
 __PACKAGE__->set_sql('open_gap' => qq{
-UPDATE __TABLE__
-SET
-rgt = rgt + ?,
-lft = CASE
- WHEN lft > ? THEN lft + ?
- ELSE lft
-END
-WHERE rgt >= ?
+ UPDATE __TABLE__
+ SET
+  rgt = rgt + ?,
+  lft = CASE
+  WHEN lft > ? THEN lft + ?
+  ELSE lft
+ END
+ WHERE rgt >= ?
 });
 
 sub open_gap {
@@ -176,7 +167,7 @@ __PACKAGE__->set_sql('descendants_by_date' => qq{
    AND descendant.rgt < ancestor.rgt
    AND content.page = descendant.id
    AND content.version = descendant.content_version
-  ORDER BY content.created DESC
+  ORDER BY content.release_date DESC
  )
 });
 
@@ -194,9 +185,9 @@ Returns the subtree of pages rooted by the page with a given tag.
 =cut
 
 __PACKAGE__->set_sql('tagged_descendants' => qq{
- SELECT descendant.id,descendant.name,descendant.name_orig,
-        descendant.parent,descendant.depth
- FROM __TABLE__ as ancestor, __TABLE__ as descendant,tag
+ SELECT descendant.id, descendant.name, descendant.name_orig,
+        descendant.parent, descendant.depth
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant, tag
  WHERE ancestor.id = ?
   AND descendant.lft > ancestor.lft
   AND descendant.rgt < ancestor.rgt
@@ -211,18 +202,20 @@ sub tagged_descendants {
 }
 
 __PACKAGE__->set_sql('tagged_descendants_by_date' => qq{
- SELECT descendant.id,descendant.name,descendant.name_orig,
-        descendant.parent,descendant.depth
- FROM __TABLE__ as ancestor, __TABLE__ as descendant,
- tag, content
- WHERE ancestor.id = ?
-  AND descendant.lft > ancestor.lft
-  AND descendant.rgt < ancestor.rgt
-  AND content.page = descendant.id
-  AND content.version = descendant.content_version
-  AND descendant.id = tag.page
-  AND tag=?
- ORDER BY content.release_date DESC
+ SELECT __ESSENTIAL__ FROM
+ (
+  SELECT descendant.id as id, descendant.name as name, descendant.name_orig as name_orig,
+         descendant.parent as parent, descendant.depth as depth
+  FROM __TABLE__ as ancestor, __TABLE__ as descendant, tag, content
+  WHERE ancestor.id = ?
+   AND descendant.lft > ancestor.lft
+   AND descendant.rgt < ancestor.rgt
+   AND descendant.id = tag.page
+   AND tag=?
+   AND content.page = descendant.id
+   AND content.version = descendant.content_version
+  ORDER BY content.release_date DESC
+ )
 });
 
 sub tagged_descendants_by_date {
@@ -256,13 +249,13 @@ sub set_path {
 
   __PACKAGE__->set_paths( @pages );
 
-Sets the path TEMP columns for a path or a tree of pages.
+Sets the path TEMP columns for multiple pages, either a subtree or a group of non-adjacent pages.
 
 =cut
 
-sub set_paths
-{
+sub set_paths {
     my ($class, @pages) = @_;
+    return () unless (scalar @pages >= 1);
     my %pages = map { $_->id => $_ } @pages;
 
     # Preserve the original sort order, because the pages
@@ -272,29 +265,37 @@ sub set_paths
 
     # In some cases, e.g. retrieving descendants, we
     # may not have passed in the root of the subtree:
-    unless ($lft_sorted_pages[0]->name eq '/')
-    {
-	my $parent = $lft_sorted_pages[0]->parent;
+    unless ($lft_sorted_pages[0]->name eq '/') {
+        my $parent = $lft_sorted_pages[0]->parent;
         $pages{ $parent->id } = $parent;
     }
 
     # Sorting by the rgt column ensures that we always set
     # paths for parents before their children, allowing us
     # to avoid recursion.
-    for my $page (@lft_sorted_pages)
-    {
-	if ($page->name eq '/')
-	{
-	    $page->path('/');
-            next;
+    for (@lft_sorted_pages) {
+	if ($_->name eq '/') {
+	    $_->path('/');
+             next;
 	}
-	if ($page->depth == 1)
-	{
-	    $page->path( '/' . $page->name );
+	if ($_->depth == 1) {
+	    $_->path( '/' . $_->name );
 	    next;
 	}
-	my $parent = $pages{ $page->parent->id };
-	$page->path( $parent->path . '/' . $page->name );
+	my $parent = $pages{ $_->parent->id };
+	if (ref $parent) {
+	    $_->path( $parent->path . '/' . $_->name );
+	}
+         # unless all pages were adjacent, i.e. a whole subtree,
+         # we still may not have the parent:
+         else {
+	    my @path_pages = $class->path_pages_by_id( $_->id );
+             # store these in case they're parents of other pages
+	    for (@path_pages) { $pages{$_->id} => $_; }
+             # don't know if this is necessary, but just in case
+             my $current_page = pop @path_pages;
+             $_->path( $current_page->path );
+	}
     }
     return @pages;
 
