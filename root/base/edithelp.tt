@@ -1,4 +1,4 @@
-<div id="TextileHelp" style="float: right; width: 250px; margin-top: 5px">
+<div id="TextileHelp">
 		<h3>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h3>
 
 		<table cellspacing="0" cellpadding="0">

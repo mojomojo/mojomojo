@@ -7,6 +7,7 @@ my $textile = Text::Textile2->new(flavor=>"xhtml1");
 sub format_content_order { 90 }
 sub format_content {
     my ($self,$content,$base)=@_;
+    my $c=MojoMojo->context;
     # Let textile handle the rest
     $$content= $textile->process( $$content );
 }

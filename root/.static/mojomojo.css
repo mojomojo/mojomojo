@@ -158,6 +158,16 @@ ol.setup li {
   background: lightgreen;
 }
 
+#TextileHelp {
+  position: absolute;
+  width: 250px; 
+  padding-top: 5px;
+  border-bottom:solid #888; 
+  border-right:solid #888; 
+  background: #ddd; 
+  z-index:0;
+}
+
 #TextileHelp table {
   margin-bottom: 0;
 }

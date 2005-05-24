@@ -9,8 +9,6 @@
 [% END %]
 </h1>
 
-[% PROCESS edithelp.tt %]
-
 [%IF c.req.args.first == '/' %]
 <form id="editForm" action="[% base %]/.edit" method="post" onSubmit="cleanAuthorName();">
 [% ELSE %]
@@ -32,12 +30,12 @@
  [% END %]
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
-<textarea id="body" name="body" style="width: 450px; height: 280px"
+<textarea id="body" name="body" style="height: 180px; width: 700px"
 >[% FILTER html %][% c.req.params.body %][% append %][%END%]</textarea>
  [% url= base _ '/.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
   url     => url
-  with    => "'content='+value",
+  with    => "'content='+escape(value)",
   update  => 'preview'
   })%]
 

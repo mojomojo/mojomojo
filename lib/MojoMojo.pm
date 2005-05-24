@@ -267,11 +267,16 @@ sub prepare_search_index {
 
 =item fixw word
 
-replace spaces in a given word with underscores.
+Clean up explicit wiki words.
 
 =cut
 
-sub fixw { my ( $c, $w ) = @_; $w =~ s/\s/\_/g; return $w; }
+sub fixw { 
+  my ( $c, $w ) = @_;
+  $w =~ s/\s/\_/g;
+          $w =~ s/[^\w\/]//g;
+  return $w; 
+}
 
 # Disable performance info
 #sub Catalyst::Log::info {}
