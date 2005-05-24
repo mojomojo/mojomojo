@@ -30,6 +30,11 @@
  [% END %]
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
+ <p style="clear:left"><b>Preview</b></p>
+ <div style="clear:left;width:730;overflow: auto; height: 290px;" id="preview">
+ Change something to see preview.
+ </div>
+ <p>
 <textarea id="body" name="body" style="height: 180px; width: 700px"
 >[% FILTER html %][% c.req.params.body %][% append %][%END%]</textarea>
  [% url= base _ '/.jsrpc/render' %]
@@ -39,10 +44,6 @@
   update  => 'preview'
   })%]
 
- <p style="clear:left"><b>Preview</b></p>
- <div style="clear:left;width:450;" id="preview">
- </div>
- <p>
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
   [% link = "/" _ c.req.user %]
