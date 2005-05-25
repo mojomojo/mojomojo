@@ -33,7 +33,7 @@ body {
 	margin: 0;
 	padding: 5px;
 	text-align: left;
-	border-top: 4px solid #ab0b0b;;
+	border-top: 4px solid #0b0bab;
 	float: left;
 }
 
@@ -61,7 +61,7 @@ h2 { font-size: 19px }
 h3 { font-size: 16px }
 
 h1#pageName {
-  color: #ab0b0b;
+  color: #0b0bab;
   margin: 5px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   line-height: 28px;
@@ -300,4 +300,18 @@ div.pager ul li {
     display: inline;
     padding: 0 2px;
     white-space: nowrap;
+}
+
+/* FIXME: should be moved to amazon plugin */
+
+div.amazon {
+    width:80%;
+    padding-left: 2em;
+    margin: 1em 4em 1em 4em;
+    border: 1px solid #ccc;
+    background: #eee;
+}
+
+div.amazon img {
+    margin: 1.2em;
 }
