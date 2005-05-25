@@ -233,8 +233,16 @@ ol.setup li {
   float: right;
 }
 
-.tags a {
+#tags a {
   text-decoration: none;
+}
+
+#tags .add a {
+  color: green;
+}
+
+#tags .remove a {
+  color: red;
 }
 
 .tagedit {
