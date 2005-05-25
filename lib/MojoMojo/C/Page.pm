@@ -59,8 +59,7 @@ sub view : Private {
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
     unless ($path_pages) {
-        $id = $c->req->params->{id};
-        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path, $id);
+        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
         @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
     }
 
