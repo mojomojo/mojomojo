@@ -1,0 +1,26 @@
+[%PROCESS header.tt%]
+<h1 id="pageName">[%c.pref('name')%]</h1>
+<p><small><a href="[%base%]/">back</a>
+<h1>Preferences</h1>
+<form method="post" action="[%base%]/.prefs">
+<dl>
+<dt>Name:</dd>
+<dd><input id="sitename"  type="text" value="[%c.pref('name')%]"/></dt>
+[% url = base _ "/.prefs/name" %]
+[% c.prototype.observe_field('sitename', {
+    url     => url,
+    with    => "'name='+value",
+    update  => "pageName"
+})%]
+<dt>Admins:</dt>
+<dd>
+<input id="admins"  type="text" value="[%admins%]"/><span id="adminstatus" class="statusmsg"></span><br/>
+(also includes [%c.req.user%]) </dd>
+[% url = base _ "/.prefs/admins" %]
+[% c.prototype.observe_field('admins', {
+    url     => url,
+    with    => "'admins='+value",
+    update  => "adminstatus"
+})%]
+</form>
+[%PROCESS footer.tt%]
