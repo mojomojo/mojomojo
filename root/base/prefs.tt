@@ -1,15 +1,15 @@
 [%PROCESS header.tt%]
 <h1 id="pageName">[%c.pref('name')%]</h1>
 <p><small><a href="[%base%]/">back</a>
-<h1>Preferences</h1>
-<form method="post" action="[%base%]/.prefs">
+<h1>Site Configuration</h1>
+<form action="javascript:return 0;">
 <dl>
 <dt>Name:</dd>
 <dd><input id="sitename"  type="text" value="[%c.pref('name')%]"/></dt>
 [% url = base _ "/.prefs/name" %]
 [% c.prototype.observe_field('sitename', {
     url     => url,
-    with    => "'name='+value",
+    with    => "'name='+escape(value)",
     update  => "pageName"
 })%]
 <dt>Admins:</dt>
@@ -19,7 +19,7 @@
 [% url = base _ "/.prefs/admins" %]
 [% c.prototype.observe_field('admins', {
     url     => url,
-    with    => "'admins='+value",
+    with    => "'admins='+escape(value)",
     update  => "adminstatus"
 })%]
 </form>
