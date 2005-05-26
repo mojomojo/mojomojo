@@ -4,13 +4,15 @@
   <br/>Export
 </h1>
 [% PROCESS navbar.tt %]
-<h3>[%message%]</h3>
 <form id="loginForm" action="[%base%]/.login" method="POST">
-<label for="login">login:</label>
-<input id="loginField" type="text" name="login"/>
-<label for="pass">password:</label>
-<input type="password" name="pass"/>
-<input type="submit" value="log in"/>
+<dl>
+<dd>[%message%]</dd>
+<dt>login:</dt>
+<dd><input id="loginField" type="text" name="login"/></dd>
+<dt>password:</dt>
+<dd><input type="password" name="pass"/></dd>
+<dd><input type="submit" value="log in"/></dd>
+</dl>
 </form>
 <script language="JavaScript">
 gId('loginField').focus();

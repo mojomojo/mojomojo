@@ -82,6 +82,9 @@ li { margin-bottom: 7px }
   color: #999;
 }
 
+#navigationForm {
+  font-size : 12px;
+}
 .navigation a:hover { color: #fff; background-color:#ab0b0b; }
 
 .navigation a {
@@ -325,8 +328,11 @@ div.amazon img {
     margin: 1.2em;
 }
 form dl {
-  margin: 10px 0 0 80px;
+ margin: 2em;
+ padding: 2em;
  font-family: sans-serif;
+ border: 1em solid #ccc;
+ float: left;
 }
 
 form dt {

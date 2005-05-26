@@ -80,8 +80,10 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Path('/.jsrpc/tag') {
     my ( $self, $c, $page, $tagname ) = @_;
+    ($tagname)= $tagname =~ m/(\w+)/;
     $page = MojoMojo::M::Core::Page->retrieve($page);
     unless (
+        ! $tagname ||
         MojoMojo::M::Core::Tag->search(
             page   => $page,
             person => $c->req->{user_id},

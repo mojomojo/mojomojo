@@ -1,6 +1,6 @@
 [%PROCESS header.tt%]
 <h1 id="pageName">[%c.pref('name')%]</h1>
-<p><small><a href="[%base%]/">back</a>
+<div class="navigation"><b class="navOn">configuration</b> | <a accesskey="B" href="[%base%]/">back</a> </div>
 <h1>Site Configuration</h1>
 <form action="javascript:return 0;">
 <dl>
