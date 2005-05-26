@@ -560,8 +560,9 @@ sub update_content {
     my ( $self, %args ) = @_;
     my $content_version;
 
-    # FIX: don't think this needs to be so complicated.
+    # FIXME: don't think this needs to be so complicated.
     # should be able to just catch exceptions upon insert
+    # Also, it gives an error on auth failures.
     if ( $args{version} ) {
         $content_version = $args{version};
         my $existing_version = MojoMojo::M::Core::Content->retrieve(

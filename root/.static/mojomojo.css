@@ -324,3 +324,32 @@ div.amazon {
 div.amazon img {
     margin: 1.2em;
 }
+form dl {
+  margin: 10px 0 0 80px;
+ font-family: sans-serif;
+}
+
+form dt {
+  float: left;
+  width: 80px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+form dd {
+  margin: 0 0 5px 90px;
+  font-size: 11px;
+  line-height: 24px;
+  color: #666;
+  margin-left: 80px;
+}
+
+form input {
+  font-size: 14px;
+}
+
+span.statusmsg {
+  color: #335577;
+  margin-left: 1em;
+  font-size: 1.5em;
+}

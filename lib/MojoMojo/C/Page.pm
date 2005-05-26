@@ -120,8 +120,8 @@ sub edit : Private {
         ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
     }
 
-    # the page we're editing is at the end of either path_pages or proto_pages,
-    # depending on whether or not the page already exists:
+    # the page we're editing is at the end of either path_pages or 
+    # proto_pages, # depending on whether or not the page already exists
     my $page =
       (   @$proto_pages > 0
         ? $proto_pages->[ @$proto_pages - 1 ]

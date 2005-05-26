@@ -2,8 +2,8 @@
 <div class="navigation">
 [% IF (!rev) %]
  <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
- [% IF page.name == $c.pref('home_node') %]
- | <a href="[% base %]/.pref" class="navlink">Edit Settings</a>
+ [% IF page.path == '/' %]
+ | <a href="[% base %]/.prefs" class="navlink">Edit Settings</a>
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
  | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" class="navlink" accesskey="R">Back in time</a> 
