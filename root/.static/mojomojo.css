@@ -162,6 +162,29 @@ ol.setup li {
   background: lightgreen;
 }
 
+p#message {
+ background: #eee; 
+ padding: 3px; 
+ border: 1px solid silver; 
+ width: 440px";
+}
+
+#previewHeading {
+ clear:left;
+}
+
+div#preview {
+ clear:left;
+ width:730;
+ overflow: auto; 
+ height: 290px;
+}
+
+textarea#body {
+ height: 180px; 
+ width: 700px;
+}
+
 #TextileHelp {
   position: absolute;
   width: 250px; 
