@@ -1,7 +1,7 @@
 [% PROCESS header.tt %]
 <h1 id="pageName">
   <small> [% c.pref('name')|| "MojoMojo" %] </small>
-  <br/>Export
+  <br/>Login
 </h1>
 [% PROCESS navbar.tt %]
 <form id="loginForm" action="[%base%]/.login" method="POST">

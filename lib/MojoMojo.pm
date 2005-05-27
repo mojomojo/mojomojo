@@ -82,6 +82,7 @@ sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
     $c->forward( "/page/$action" );
 }
 
+
 =item pageview
 
 regex to handle node requests. Will forward to view action.
@@ -165,9 +166,13 @@ sub wikiword {
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
-    $word = URI->new_abs( $word, $c->stash->{page}->path."/" ) if($c->stash->{page} && 
-                                       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
-                                      $word !~ m|^/|) ;
+    if($c->stash->{page} && 
+       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
+       $word !~ m|^/|) { 
+       $word = URI->new_abs( $word, $c->stash->{page}->path."/" ) 
+    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
+       $word = URI->new_abs( $word, $c->stash->{page_path}."/" ) 
+    }
     $url =~ s/[\/]+$//;
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
     # use the normalized path string returned by path_pages:
@@ -298,9 +303,19 @@ strip last char from $c->req->path;
 sub prepare_path {
     my $c = shift;
     $c->NEXT::prepare_path;
-    my $path=$c->req->base;
-    $path =~s|/+$||;
-    $c->req->base($path);
+    my $base=$c->req->base;
+    $base =~s|/+$||;
+    $c->req->base($base);
+    my ($path,$action);
+    $path=$c->req->path;
+#    my $index=index($path,'.');
+#    if ($index==-1) {
+#      $c->stash->{path}=$path;
+#      $c->req->path?('/view');
+#    } else {
+#      $c->
+#    }
+#    $c->req( 
 }
 
 =back

@@ -33,16 +33,17 @@
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
  <h3 id="previewHeading">Preview</h3>
 <div id="preview">
- Change something to see preview.
+[% page.content.formatted(base) %]
  </div>
  <p>
 <textarea id="body" name="body">
  [% FILTER html %][% c.req.params.body %][% append %][%END%]
 </textarea>
  [% url= base _ '/.jsrpc/render' %]
+ [% params = "'page=" _ page.path _ "&content='+escape(value)" %]
  [%c.prototype.observe_field ( 'body', {
-  url     => url
-  with    => "'content='+escape(value)",
+  url     => url,
+  with    => params,
   update  => 'preview'
   })%]
 

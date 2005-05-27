@@ -27,12 +27,13 @@ params->{content} and runs it through the formatter chain.
 sub render : Path('/.jsrpc/render') {
     my ( $self, $c ) = @_;
     my $output = "Please enter something";
+    $c->stash->{page_path}=$c->req->params->{page};
     if (   $c->req->params->{content}
         && $c->req->params->{content} =~ /(\S+)/ )
     {
         $output =
           MojoMojo::M::Core::Content->formatted( $c->req->base,
-            $c->req->params->{content},
+          $c->req->params->{content},
           );
     }
     $c->res->output($output);

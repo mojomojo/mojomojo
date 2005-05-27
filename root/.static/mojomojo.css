@@ -38,6 +38,11 @@ body {
 	float: left;
 }
 
+#Content img {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 /* LINKS */
 
 a { 
