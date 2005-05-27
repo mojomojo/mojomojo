@@ -8,7 +8,7 @@ sub format_content {
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
-      if ($line =~ m|^\=http\S+amazon\S+/-/([^/]+)/|) { 
+      if ($line =~ m{^\=http\S+amazon\S+/(?:-|ASIN)/([^/]+)/}) { 
             $$content.=$self->blurb($1);
       } else {
         $$content .=$line."\n";
