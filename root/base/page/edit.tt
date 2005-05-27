@@ -36,9 +36,9 @@
 [% page.content.formatted(base) %]
  </div>
  <p>
-<textarea id="body" name="body">
- [% FILTER html %][% c.req.params.body %][% append %][%END%]
-</textarea>
+<textarea id="body" name="body">[% 
+FILTER html %][% c.req.params.body %][% append %][%END
+%]</textarea>
  [% url= base _ '/.jsrpc/render' %]
  [% params = "'page=" _ page.path _ "&content='+escape(value)" %]
  [%c.prototype.observe_field ( 'body', {

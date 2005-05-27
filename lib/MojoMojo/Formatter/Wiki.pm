@@ -10,7 +10,7 @@ sub format_content {
     $$content =~ s{\\(\b[A-Z][a-z]+[A-Z]\w*)}
 	         {$1}g;
     # do explicit links, replace spaces with +
-    $$content =~ s{(?:\[\[|\(\()\s*([^\]\)]+)\s*(?:\]\|\)\)]}
+    $$content =~ s{(?:\[\[|\(\()\s*([^\]\)]+)\s*(?:\]\]|\)\))}
 		 {MojoMojo->wikiword(MojoMojo->fixw($1),$base)}ge;
 }
 1;

@@ -197,7 +197,7 @@ textarea#body {
   border-bottom:solid #888; 
   border-right:solid #888; 
   background: #ddd; 
-  z-index:-1;
+  z-index:1;
 }
 
 #TextileHelp table {
