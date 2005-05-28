@@ -1,9 +1,408 @@
-/* MojoMojo CSS for    version 0.1 revision 25   by Danijel Milicevic 2005      Table of content:   - Document structure   - Images and design tweaks   - Text styling   - Santa's little helpers and alike*//* DOCUMENT STRUCTURE */body {	margin:  0;	padding: 0;	background-color: #eee;	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	font-size: 12px;	line-height: 20px;	color: #555;	text-align: center;}#Container {	width: 740px;	margin: 0 auto;	text-align: center;}#Content {	background-color: #fff;	width: 740px;	margin: 0;	padding: 5px;	text-align: left;	border-top: 4px solid #0b0bab;	float: left;}#Content img {  margin-left: 1em;  margin-right: 1em;}/* LINKS */a { color: #577091;  text-decoration: underline;}a:visited { color: #273d661;}a:hover {   color: #fff;  background-color: #3d4863; }/* HEADLINES */h1, h2, h3 { color: #333; }h1 { font-size: 28px }h2 { font-size: 19px }h3 { font-size: 16px }h1#pageName {  color: #b64717;  margin: 5px 0px 0px 0px;  padding: 0px 0px 0px 0px;  line-height: 28px;}/* NAVIGATION */a.nav, a.nav:link, a.nav:visited { color: #577091; }a.nav:hover { color: #fff; background-color: #3d4863; }li { margin-bottom: 7px }.navigation {  margin-top: 5px;  font-size : 12px;  color: #999;}#navigationForm {  font-size : 12px;}.navigation a:hover { color: #fff; background-color:#ab0b0b; }.navigation a {  font-size: 11px;  color: black;  font-weight: bold;}.navigation small a {  font-weight: normal;  font-size: 11px;}  .navOn {  font-size: 11px;  color: gray;  font-weight: bold;  text-decoration: none;}.help {  font-family: verdana, arial, helvetica, sans-serif;  font-size: 11px;}.inputBox {  font-family: verdana, arial, helvetica, sans-serif;  font-size: 11px;  background-color: #eee;  padding: 5px;  margin-bottom: 20px;}blockquote {  display: block;  margin: 0px 0px 20px 0px;  padding: 0px 30px;  font-size:11px;  line-height:17px;  font-style: italic;  }pre {  background-color: #eee;  padding: 10px;  font-size: 11px;}ol.setup {  font-size: 19px;  font-family: georgia, verdana, sans-serif;  padding-left: 25px;}ol.setup li {  margin-bottom: 20px}.byline {  font-size: 10px;  font-style: italic;    margin-bottom: 10px;  color: #999;}.references {  font-size: 10px;}.diffdel {  background: pink;}.diffins {  background: lightgreen;}p#message { background: #eee;  padding: 3px;  border: 1px solid silver;  width: 440px";}#previewHeading { clear:left;}div#preview { clear:left; width:730; overflow: auto;  height: 290px;}textarea#body { height: 180px;  width: 700px;}#TextileHelp {  position: absolute;  width: 250px;   padding-top: 5px;  border-bottom:solid #888;   border-right:solid #888;   background: #ddd;   z-index:1;}#TextileHelp table {  margin-bottom: 0;}#TextileHelp table+h3 {  margin-top: 11px;}#TextileHelp table td {  font-size: 11px;  padding: 3px;  vertical-align: top;  border-top: 1px dotted #ccc;}#TextileHelp table td.arrow {  padding-right: 5px;  padding-left: 10px;  color: #999;}#TextileHelp table td.label {  font-weight: bold;  white-space: nowrap;  font-size: 10px;  padding-right: 15px;  color: #000;}#TextileHelp h3 {  font-size: 11px;  font-weight: bold;  font-weight: normal;  margin: 0 0 5px 0;  padding: 5px 0 0 0;}#TextileHelp p {  font-size: 10px;}.rightHandSide {  float: right;  width: 147px;  margin-left: 10px;  padding-left: 20px;  border-left: 1px dotted #ccc;}.rightHandSide p {  font-size: 10px;} .newsList {  margin-top: 20px;}.newsList p {  margin-bottom:30px;}.tags {  float: right;	font-size: 11px;	color: #919191;}#tags a {  text-decoration: none;
+/* MojoMojo CSS for 
+   version 0.1 revision 25
+   by Danijel Milicevic 2005
+   
+   Table of content:
+   - Document structure
+   - Images and design tweaks
+   - Text styling
+   - Santa's little helpers and alike
+*/
+
+/* DOCUMENT STRUCTURE */
+
+body {
+	margin:  0;
+	padding: 0;
+	background-color: #eee;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
-}#tags .add a {  color: green;	font-size: 13px;	line-height: 7px;}
+	line-height: 20px;
+	color: #555;
+	text-align: center;
+}
 
-#tags .add a:hover {  color: #003800;	font-size: 13px;	line-height: 7px;}#tags .remove a {  color: red;	font-size: 13px;}
+#Container {
+	width: 740px;
+	margin: 0 auto;
+	text-align: center;
+}
 
-#tags .remove a:hover {  color: #650000;	font-size: 13px;
+#Content {
+	background-color: #fff;
+	width: 740px;
+	margin: 0;
+	padding: 5px;
+	text-align: left;
+	border-top: 4px solid #0b0bab;
+	float: left;
+}
+
+#Content img {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+/* LINKS */
+
+a { 
+color: #577091;
+  text-decoration: underline;
+}
+
+a:visited { 
+color: #273d661;
+}
+
+a:hover { 
+  color: #fff; 
+ background-color: #3d4863; 
+}
+
+/* HEADLINES */
+
+h1, h2, h3 { color: #333; }
+h1 { font-size: 28px }
+h2 { font-size: 19px }
+h3 { font-size: 16px }
+
+h1#pageName {
+  color: #b64717;
+  margin: 5px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  line-height: 28px;
+}
+
+
+/* NAVIGATION */
+
+a.nav, a.nav:link, a.nav:visited { color: #577091; }
+a.nav:hover { color: #fff; background-color: #3d4863; }
+
+li { margin-bottom: 7px }
+
+.navigation {
+  margin-top: 5px;
+  font-size : 12px;
+  color: #999;
+}
+
+#navigationForm {
+  font-size : 12px;
+}
+.navigation a:hover { color: #fff; background-color:#ab0b0b; }
+
+.navigation a {
+  font-size: 11px;
+  color: black;
+  font-weight: bold;
+}
+
+.navigation small a {
+  font-weight: normal;
+  font-size: 11px;
+}
+  
+.navOn {
+  font-size: 11px;
+  color: gray;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.help {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+}
+
+.inputBox {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+  background-color: #eee;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+blockquote {
+  display: block;
+  margin: 0px 0px 20px 0px;
+  padding: 0px 30px;
+  font-size:11px;
+  line-height:17px;
+  font-style: italic;  
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+ol.setup {
+  font-size: 19px;
+  font-family: georgia, verdana, sans-serif;
+  padding-left: 25px;
+}
+
+ol.setup li {
+  margin-bottom: 20px
+}
+
+.byline {
+  font-size: 10px;
+  font-style: italic;  
+  margin-bottom: 10px;
+  color: #999;
+}
+
+.references {
+  font-size: 10px;
+}
+
+.diffdel {
+  background: pink;
+}
+
+.diffins {
+  background: lightgreen;
+}
+
+p#message {
+ background: #eee; 
+ padding: 3px; 
+ border: 1px solid silver; 
+ width: 440px";
+}
+
+#previewHeading {
+ clear:left;
+}
+
+div#preview {
+ clear:left;
+ width:730;
+ overflow: auto; 
+ height: 290px;
+}
+
+textarea#body {
+ height: 180px; 
+ width: 700px;
+}
+
+#TextileHelp {
+  position: absolute;
+  width: 250px; 
+  padding-top: 5px;
+  border-bottom:solid #888; 
+  border-right:solid #888; 
+  background: #ddd; 
+  z-index:1;
+}
+
+#TextileHelp table {
+  margin-bottom: 0;
+}
+
+#TextileHelp table+h3 {
+  margin-top: 11px;
+}
+
+#TextileHelp table td {
+  font-size: 11px;
+  padding: 3px;
+  vertical-align: top;
+  border-top: 1px dotted #ccc;
+}
+
+#TextileHelp table td.arrow {
+  padding-right: 5px;
+  padding-left: 10px;
+  color: #999;
+}
+
+#TextileHelp table td.label {
+  font-weight: bold;
+  white-space: nowrap;
+  font-size: 10px;
+  padding-right: 15px;
+  color: #000;
+}
+
+#TextileHelp h3 {
+  font-size: 11px;
+  font-weight: bold;
+  font-weight: normal;
+  margin: 0 0 5px 0;
+  padding: 5px 0 0 0;
+}
+
+#TextileHelp p {
+  font-size: 10px;
+}
+
+.rightHandSide {
+  float: right;
+  width: 147px;
+  margin-left: 10px;
+  padding-left: 20px;
+  border-left: 1px dotted #ccc;
+}
+
+.rightHandSide p {
+  font-size: 10px;
+}
+ 
+.newsList {
+  margin-top: 20px;
+}
+
+.newsList p {
+  margin-bottom:30px;
+}
+
+.tags {
+  float: right;
+	font-size: 11px;
+	color: #919191;
+}
+
+#tags a {
+  text-decoration: none;
+	font-size: 12px;
+}
+
+#tags .add a {
+  color: green;
+	font-size: 13px;
+	line-height: 7px;
+}
+
+#tags .add a:hover {
+  color: #003800;
+	font-size: 13px;
+	line-height: 7px;
+}
+
+#tags .remove a {
+  color: red;
+	font-size: 13px;
+}
+
+#tags .remove a:hover {
+  color: #650000;
+	font-size: 13px;
 	background: transparent;
-}.tagedit {  float: right;}.tagedit input {  font-size : 9pt;  font-weight : bold;  border-style : solid;  border-width : 1px;  border-color: #000000;  background-color: #999999;  width: 80px;  margin-left: 10px;}.newWikiWord {  background-color: #ddf;}.newWikiWord a {  vertical-align: super;  font-size: 0.8em;}#breadcrumbs {  color: green;  line-height: 10px;  font-size: 10px;  padding: 0px;}.protoPage a:link {  color: #ab0b0b;}.protoPage a:visited {   color: #666;}.protoPage a:hover {  color: #fff;   background-color:#ab0b0b; }/* highlighted keywords in search results */.quoted {  font-weight: bold;}/* pagination links */div.pager {    font-size: small;    text-align: center;}div.pager ul {     list-style: none;}   div.pager ul li {     display: inline;    padding: 0 2px;    white-space: nowrap;}/* FIXME: should be moved to amazon plugin */div.amazon {    width:80%;    padding-left: 2em;    margin: 1em 4em 1em 4em;    border: 1px solid #ccc;    background: #eee;}div.amazon img {    margin: 1.2em;}form dl { margin: 2em; padding: 2em; font-family: sans-serif; border: 1em solid #ccc; float: left;}form dt {  float: left;  width: 80px;  font-size: 14px;  line-height: 24px;}form dd {  margin: 0 0 5px 90px;  font-size: 11px;  line-height: 24px;  color: #666;  margin-left: 80px;}form input {  font-size: 14px;}span.statusmsg {  color: #335577;  margin-left: 1em;  font-size: 1.5em;}
+}
+
+.tagedit {
+  float: right;
+}
+
+.tagedit input {
+  font-size : 9pt;
+  font-weight : bold;
+  border-style : solid;
+  border-width : 1px;
+  border-color: #000000;
+  background-color: #999999;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.newWikiWord {
+  background-color: #ddf;
+}
+
+.newWikiWord a {
+  vertical-align: super;
+  font-size: 0.8em;
+}
+
+#breadcrumbs {
+  color: green;
+  line-height: 10px;
+  font-size: 10px;
+  padding: 0px;
+}
+
+.protoPage a:link {
+  color: #ab0b0b;
+}
+
+.protoPage a:visited { 
+  color: #666;
+}
+
+.protoPage a:hover {
+  color: #fff; 
+  background-color:#ab0b0b; 
+}
+
+/* highlighted keywords in search results */
+.quoted {
+  font-weight: bold;
+}
+
+/* pagination links */
+div.pager {
+    font-size: small;
+    text-align: center;
+}
+
+div.pager ul { 
+    list-style: none;
+}   
+
+div.pager ul li { 
+    display: inline;
+    padding: 0 2px;
+    white-space: nowrap;
+}
+
+/* FIXME: should be moved to amazon plugin */
+
+div.amazon {
+    width:80%;
+    padding-left: 2em;
+    margin: 1em 4em 1em 4em;
+    border: 1px solid #ccc;
+    background: #eee;
+}
+
+div.amazon img {
+    margin: 1.2em;
+}
+form dl {
+ margin: 2em;
+ padding: 2em;
+ font-family: sans-serif;
+ border: 1em solid #ccc;
+ float: left;
+}
+
+form dt {
+  float: left;
+  width: 80px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+form dd {
+  margin: 0 0 5px 90px;
+  font-size: 11px;
+  line-height: 24px;
+  color: #666;
+  margin-left: 80px;
+}
+
+form input {
+  font-size: 14px;
+}
+
+span.statusmsg {
+  color: #335577;
+  margin-left: 1em;
+  font-size: 1.5em;
+}
+
