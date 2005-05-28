@@ -263,6 +263,8 @@ textarea#body {
 
 .tags {
   float: right;
+	font-size: 11px;
+	color: #919191;
 }
 
 #tags a {
@@ -271,10 +273,12 @@ textarea#body {
 
 #tags .add a {
   color: green;
+	font-size: 12px;
 }
 
 #tags .remove a {
   color: red;
+	font-size: 12px;
 }
 
 .tagedit {
