@@ -274,11 +274,15 @@ textarea#body {
 #tags .add a {
   color: green;
 	font-size: 12px;
+	padding: 1px;
+	background: #dedede;
 }
 
 #tags .remove a {
   color: red;
 	font-size: 12px;
+	padding: 1px;
+	background: #dedede;
 }
 
 .tagedit {
