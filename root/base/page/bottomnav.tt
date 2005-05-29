@@ -62,7 +62,7 @@
 </div>
 [% END %]
 <div class="tags">
-[% SET pagelink=page.path _ ".tags" %]
+[% SET pagelink="/tags/" _ page.id %]
 [%  c.subreq(pagelink ) %]
 </div>
 <script language="Javascript" type="text/javascript">

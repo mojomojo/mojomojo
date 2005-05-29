@@ -32,7 +32,7 @@ an attachment id.
 
 =cut
 
-sub index : Path('/.attachment') {
+sub index : Path('/attachment') {
     my ( $self, $c, $att, $action ) = @_;
 
     

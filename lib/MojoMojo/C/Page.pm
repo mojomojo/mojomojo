@@ -48,7 +48,7 @@ load the provided revision instead.
 
 =cut
 
-sub view : Private {
+sub view : Global {
     my ( $self, $c, $path ) = @_;
 
     my $stash = $c->stash;
@@ -58,17 +58,10 @@ sub view : Private {
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
-    unless ($path_pages) {
-        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
-        @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
-    }
 
-    # WARNING! there may be potential for an infinite loop here,
-    # bouncing back and forth between "edit" and "view"
-    return $c->forward('edit') if @$proto_pages;
+    return $c->forward('edit') if $proto_pages && @$proto_pages;
 
-    my $page = $path_pages->[ @$path_pages - 1 ];
-    $stash->{page} = $page;
+    my $page= $stash->{page};
 
     my $content;
 
@@ -99,7 +92,7 @@ after saving, it will forward to the highlight action.
 
 =cut
 
-sub edit : Private {
+sub edit : Global {
     my ( $self, $c, $path ) = @_;
 
     # Set up the basics. Log in if there's a user.
@@ -193,7 +186,7 @@ the entire site or a subtree starting from the current page.
 
 =cut
 
-sub search : Private {
+sub search : Global {
     my ( $self, $c, $path ) = @_;
 
     # number of search results to show per page
@@ -289,16 +282,15 @@ this action is the same as the view action, with another template
 
 =cut
 
-sub print : Private {
+sub print : Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/print.tt';
     $c->forward('view');
 }
 
-sub attachments : Private {
+sub attachments : Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/attachments.tt';
-    $c->forward('view');
     $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
       return $c->forward('/user/login') unless $c->req->{user};
@@ -320,17 +312,14 @@ sub attachments : Private {
     }
 }
 
-sub tags : Private {
+sub tags : Global {
     my ( $self, $c, $page, $highlight ) = @_;
     $c->stash->{template}  = 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
-    unless ( ref $page ) {
-        $c->forward('view');
-        $page = $c->stash->{page};
-    }
-    else {
-        $c->stash->{page} = $page;
-    }
+    unless ( ref $c->stash->{page} ) {
+        $c->stash->{page}=MojoMojo::M::Core::Page->retrieve($page);
+    } 
+    $page = $c->stash->{page};
     die '"'.$page .'" not found' unless ref $page;
     if ($c->req->{user}) {
     my @tags = $page->others_tags( $c->req->{user_id} );
@@ -343,12 +332,9 @@ sub tags : Private {
     }
 }
 
-sub list : Private {
+sub list : Global {
     my ( $self, $c, $page, $tag ) = @_;
-    unless ( ref $page ) {
-      $c->forward('view');
-      $page=$c->stash->{page};
-    }
+    $page=$c->stash->{page};
     return $c->forward('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
     $c->stash->{pages}    =  [ $page->descendants ];
@@ -359,12 +345,9 @@ sub list : Private {
     $c->stash->{tags}    = [ MojoMojo::M::Core::Tag->search_most_used() ];
 }
 
-sub recent : Private {
+sub recent : Global {
     my ( $self, $c, $page, $tag ) = @_;
-    unless ( ref $page ) {
-      $c->forward('view');
-      $page=$c->stash->{page};
-    }
+    $page=$c->stash->{page};
     return $c->forward('/tag/recent') if $tag;
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
@@ -373,55 +356,41 @@ sub recent : Private {
     # FIXME - needs to be populated even without tags
 }
 
-sub feeds  : Private {
-    my ( $self, $c, $node ) = @_;
-    $c->forward('view');
+sub feeds  : Global {
+    my ( $self, $c ) = @_;
     $c->stash->{template} = 'feeds.tt';
 }
 
-sub rss : Private {
-    my ( $self, $c, $page ) = @_;
+sub rss : Global {
+    my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
 }
 
-sub atom : Private {
-    my ( $self, $c, $page ) = @_;
+sub atom : Global {
+    my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/atom.tt';
 }
 
-sub rss_full : Private {
-    my ( $self, $c, $page ) = @_;
+sub rss_full : Global {
+    my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/rss_full.tt';
 }
 
-sub highlight : Private {
-    my ( $self, $c, $page ) = @_;
+sub highlight : Global {
+    my ( $self, $c ) = @_;
     $c->stash->{render} =  'highlight';
     $c->forward('view');
 }
 
-sub export : Private {
-    my ( $self, $c, $page ) = @_;
-    $c->forward('view');
+sub export : Global {
+    my ( $self, $c ) = @_;
     $c->stash->{template} = 'export.tt';
 }
 
-sub export_raw : Private {
-    my ( $self, $c, $page ) = @_;
-    $c->forward('list');
-    $c->forward('/export/raw');
-}
-
-sub export_html : Private {
-    my ( $self, $c, $page ) = @_;
-    $c->forward('list');
-    $c->forward('/export/html');
-}
-
-sub rollback : Private {
+sub rollback : Global {
     my ( $self, $c, $page ) = @_;
     $c->forward('view');
     if ($c->stash->{rev}) {
@@ -431,10 +400,14 @@ sub rollback : Private {
     }
 }
 
-sub prefs : Private {
-    my ( $self, $c, $page ) = @_;
+sub prefs : Global {
+    my ( $self, $c ) = @_;
     $c->stash->{template}='user/prefs.tt';
-    $c->stash->{user}=MojoMojo::M::Core::Person->retrieve($c->req->{user_id});
+    $c->stash->{user}=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name);
+    unless ($c->stash->{user}) {
+      $c->stash->{message}='Cannot find that user';
+      $c->stash->{template}='message.tt';
+    };
 }
 
 

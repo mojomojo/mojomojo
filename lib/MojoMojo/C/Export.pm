@@ -33,9 +33,9 @@ for all the nodes of the wiki.
 
 =cut
 
-sub raw : Private {
+sub export_raw : Global {
     my ( $self, $c ) = @_;
-    #my @pages   = $model->retrieve_all_sorted_by("name");
+    $c->forward('list');
     my $pages = $c->stash->{pages};
     my $archive = Archive::Zip->new();
     my $prefix  =
@@ -64,9 +64,9 @@ versions of all the nodes of the wiki.
 
 =cut
 
-sub html : Private {
+sub export_html : Private {
     my ( $self, $c ) = @_;
-    #my @pages   = $model->retrieve_all_sorted_by("name");
+    $c->forward('list');
     my $pages = $c->stash->{pages};
     my $archive = Archive::Zip->new();
     my $prefix  =

@@ -45,6 +45,20 @@ powered by Catalyst.
 
 =over 4
 
+
+=item begin (builtin)
+
+=cut
+
+sub begin : Private {
+    my ( $self, $c ) = @_;
+    if ($c->stash->{path}) {
+        my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages($c->stash->{path});
+        @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
+      $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
+    }
+}
+
 =item default (global)
 
 default action - serve the home node
@@ -53,8 +67,10 @@ default action - serve the home node
 
 sub default : Private {
     my ( $self, $c ) = @_;
-    $c->req->args( ['/'] );
-    $c->forward( "/page/view" );
+    $c->stash->{message}="Couldn't find that page, jimmy";
+    $c->stash->{template} = 'message.tt';
+#    $c->req->args( ['/'] );
+#    $c->forward( "/page/view" );
 }
 
 =item favicon
@@ -63,8 +79,9 @@ serve favicon.ico statically.
 
 =cut
 
-sub favicon : Path('/favicon.ico') {
+sub ico : Global {
     my ( $self, $c ) = @_;
+    $c->req->path('/favicon.ico');
     $c->serve_static;
 }
 
@@ -75,12 +92,12 @@ requested action in the page controller.
 
 =cut
 
-sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
-    my ( $self, $c,@args ) = @_;
-    my ($page,$action) = @{ $c->request->snippets };
-    $c->req->args([$page,@args]);
-    $c->forward( "/page/$action" );
-}
+#sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
+#    my ( $self, $c,@args ) = @_;
+#    my ($page,$action) = @{ $c->request->snippets };
+#    $c->req->args([$page,@args]);
+#    $c->forward( "/page/$action" );
+#}
 
 
 =item pageview
@@ -89,12 +106,12 @@ regex to handle node requests. Will forward to view action.
 
 =cut
 
-sub pageview : Regex(^(\w[\w\/]+)$) {
-    my ( $self, $c ) = @_;
-    my ($page) = @{ $c->request->snippets };
-    $c->req->args([$page]);
-    $c->forward( "/page/view" );
-}
+#sub pageview : Regex(^(\w[\w\/]+)$) {
+#    my ( $self, $c ) = @_;
+#    my ($page) = @{ $c->request->snippets };
+#    $c->req->args([$page]);
+#    $c->forward( "/page/view" );
+#}
 
 =item static
 
@@ -102,13 +119,13 @@ serve all files under /.static in the root as static files.
 
 =cut
 
-sub static : Path('/.static') {
+sub static : Global {
     my ( $self, $c ) = @_;
     $c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
       $c->serve_static;
 }
 
-=item end (global)
+=item end (builtin)
 
 At the end of any request, forward to view unless there is a template
 or response. then render the template. If param 'die' is passed, 
@@ -155,7 +172,7 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 =cut
 
 sub wikiword {
-    my ( $c, $word, $base ) = @_;
+    my ( $c, $word, $base, $link_text ) = @_;
     cluck( "No base for $word" ) unless $base;
     $c=MojoMojo->context unless ref $c;
     
@@ -176,17 +193,15 @@ sub wikiword {
     $url =~ s/[\/]+$//;
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
     # use the normalized path string returned by path_pages:
-    my $formatted ;
+    my $formatted = $link_text || $c->expand_wikiword($orig_word);;
     if (@$proto_pages)
     {
         my $proto_page = pop @$proto_pages;
-        $formatted = $c->expand_wikiword($orig_word);
         $url .= $proto_page->{path};
     }
     else
     {
         my $page = pop @$path_pages;
-        $formatted = $c->expand_wikiword($orig_word);
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
@@ -308,14 +323,16 @@ sub prepare_path {
     $c->req->base($base);
     my ($path,$action);
     $path=$c->req->path;
-#    my $index=index($path,'.');
-#    if ($index==-1) {
-#      $c->stash->{path}=$path;
-#      $c->req->path?('/view');
-#    } else {
-#      $c->
-#    }
-#    $c->req( 
+    my $index=index($path,'.');
+    if ($index==-1) {
+      $c->stash->{path}=$path || '/';
+      $c->req->path('view');
+    } else {
+      $c->stash->{path}='/'.substr($path,0,$index);
+      $c->req->path(substr($path,$index+1));
+      $c->log->debug("stash:".$c->stash->{path});
+      $c->log->debug("req:".$c->req->path());
+    }
 }
 
 =back

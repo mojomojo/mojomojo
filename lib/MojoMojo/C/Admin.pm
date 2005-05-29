@@ -30,18 +30,17 @@ sub auto : Private {
         $c->log->info('admins are '.$admins);
         return 0;
     }
-    $c->log->info('user is '.$user);
     $admins =~s/$user//g;
     $c->stash->{admins} = $admins;
     return 1;
 }
 
-sub pref : Path('/.prefs') {
+sub settings : Global {
     my ( $self, $c ) = @_;
-    $c->stash->{template}='prefs.tt';
+    $c->stash->{template}='settings.tt';
 }
 
-sub pref_name : Path('/.prefs/name') {
+sub setting_name : Path('/settings/name') {
     my ( $self, $c ) = @_;
     $c->form(required=>'name');
     $c->pref('name',$c->form->valid('name'))
@@ -49,7 +48,7 @@ sub pref_name : Path('/.prefs/name') {
     $c->res->body($c->pref('name'));
 }
 
-sub pref_admins : Path('/.prefs/admins') {
+sub setting_admins : Path('/settings/admins') {
     my ( $self, $c ) = @_;
     $c->form(required=>'admins');
     unless ($c->form->has_missing ||$c->form->has_invalid) {

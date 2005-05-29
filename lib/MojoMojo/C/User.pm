@@ -23,7 +23,7 @@ deletes this users cookie, and clears his session.
 
 =cut
 
-sub logout : Path('/.logout') {
+sub logout : Global {
     my ( $self, $c ) = @_;
     $c->session_logout;
     $c->forward('/default');
@@ -36,13 +36,13 @@ screen otherwise.
 
 =cut
 
-sub login : Path('/.login') {
+sub login : Global {
     my ( $self, $c ) = @_;
     $c->stash->{message} = 'please enter username & password';
     if ( $c->req->params->{login} ) {
         $c->session_login( $c->req->params->{login}, $c->req->params->{pass} );
         if ( $c->req->{user} ) {
-            $c->forward('/default') unless $c->stash->{template};
+            $c->forward('/page/view') unless $c->stash->{template};
             return;
         }
         else {
@@ -58,7 +58,7 @@ Show a list of the active users with a link to their page.
 
 =cut
 
-sub users : Path('/.users') { 
+sub users : Global { 
   my ( $self, $c ) = @_;
   $c->stash->{users}=MojoMojo::M::Core::Person->retrieve_all();
   $c->stash->{template} = 'user/list.tt'

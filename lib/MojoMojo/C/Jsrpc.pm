@@ -24,7 +24,7 @@ params->{content} and runs it through the formatter chain.
 
 =cut
 
-sub render : Path('/.jsrpc/render') {
+sub render : Local {
     my ( $self, $c ) = @_;
     my $output = "Please enter something";
     $c->stash->{page_path}=$c->req->params->{page};
@@ -46,7 +46,7 @@ and diffs it against the previous version.
 
 =cut
 
-sub diff : Path('/.jsrpc/diff') {
+sub diff : Local {
     my ( $self, $c, $page, $revision ) = @_;
     $revision = MojoMojo::M::Core::Content->retrieve(
         page=> $page, 
@@ -67,7 +67,7 @@ Add a tag through form submit
 
 =cut
 
-sub submittag : Path('/.jsrpc/submittag') {
+sub submittag : Local {
     my ( $self, $c, $page ) = @_;
     $c->req->args( [ $page, $c->req->params->{tag} ] );
     $c->forward('/jsrpc/tag');
@@ -79,7 +79,7 @@ add a tag to a page. return list of yours and popular tags.
 
 =cut
 
-sub tag : Path('/.jsrpc/tag') {
+sub tag : Local {
     my ( $self, $c, $page, $tagname ) = @_;
     ($tagname)= $tagname =~ m/(\w+)/;
     $page = MojoMojo::M::Core::Page->retrieve($page);
@@ -102,7 +102,6 @@ sub tag : Path('/.jsrpc/tag') {
     }
     $c->req->args( [ $page, $tagname ] );
     $c->forward('/page/tags');
-
 }
 
 =item untag (/.jsrpc/untag)
@@ -111,7 +110,7 @@ remove a tag to a page. return list of yours and popular tags.
 
 =cut
 
-sub untag : Path('/.jsrpc/untag') {
+sub untag : Local {
     my ( $self, $c, $page, $tagname ) = @_;
     $page = MojoMojo::M::Core::Page->retrieve($page);
     die "Page " . $page . " not found" unless ref $page;
