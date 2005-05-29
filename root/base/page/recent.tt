@@ -2,7 +2,13 @@
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 [% SET now = objects.first.content.created.ymd; %]
 <h1 id="pageName">
-  <small> [% title || config.application_name || "MojoMojo" %] </small>
+  <small>
+[% IF page.name == "/" %]
+ [% c.pref("name") || "MojoMojo" %]
+[% ELSE %]
+ [% c.expand_wikiword(page.name_orig) %]
+[% END %]
+  </small>
   <br/>Recent Pages
 </h1>
 [% PROCESS navbar.tt %]

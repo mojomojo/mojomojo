@@ -19,7 +19,7 @@
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
- <input type="hidden" name="version" value="[% content.version %]" />
+         <input type="hidden" name="version" value="[% content.max_content_version %]" />
 
  [% IF message %]
  <p  id="message">
@@ -32,7 +32,7 @@
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
  <h3 id="previewHeading">Preview</h3>
-<div id="preview">
+<div id="content">
 [% page.content.formatted(base) %]
  </div>
  <p>
@@ -44,13 +44,13 @@ FILTER html %][% c.req.params.body %][% append %][%END
  [%c.prototype.observe_field ( 'body', {
   url     => url,
   with    => params,
-  update  => 'preview'
+  update  => 'content'
   })%]
 
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF c.req.user %]
   [% link = "/" _ c.req.user %]
-  [% c.wikiword(link) %] 
+  [% c.wikiword(link,base) %] 
   (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
   <input type="text" name="creator" id="authorName" value="[% content.creator || c.req.user || c.req.params.user || "AnonymousCoward" %]" onclick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>

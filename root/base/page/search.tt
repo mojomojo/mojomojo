@@ -11,7 +11,7 @@ END;
 %]
 
 <h1 id="pageName">
-  <small> [% title || config.application_name || "MojoMojo" %] </small>
+  <small> [% page_title %] </small>
   <br/>Search Results
 </h1>
 [%PROCESS navbar.tt %]
