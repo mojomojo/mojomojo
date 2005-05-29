@@ -29,8 +29,6 @@ __PACKAGE__->has_a(
     deflate => 'epoch'
 );
 
-
-
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
 sub highlight {
@@ -59,7 +57,6 @@ sub highlight {
     }
     return $diff;
 }
-
 
 sub formatted_diff {
     my ( $self, $base, $to ) = @_;
@@ -141,4 +138,4 @@ sub max_content_version {
     return $self->search_max_content($self->page)->select_val;
 }
 
-        1;
+1;

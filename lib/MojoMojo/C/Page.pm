@@ -141,6 +141,8 @@ sub edit : Private {
     # this will always happen on the initial request
     if ( $c->form->has_missing || $c->form->has_invalid ) {
         $stash->{page}    = $page;
+        # Note that this isn't a real Content object, just a proto object!!!
+        # It's just a hash, not blessed into the Content package.
         $stash->{content} = MojoMojo::M::Core::Content->create_proto($page);
         $stash->{content}->{creator} = $user;
         return;

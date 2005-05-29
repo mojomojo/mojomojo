@@ -19,7 +19,7 @@
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
-         <input type="hidden" name="version" value="[% content.max_content_version %]" />
+ <input type="hidden" name="version" value="[% content.version %]" />
 
  [% IF message %]
  <p  id="message">
