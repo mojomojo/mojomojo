@@ -5,13 +5,13 @@ preferences
 Choose your setting.
 [% PROCESS navbar.tt %]
 <div class="preferences" id="content">
+<h2>your account</h2>
 <div class="rightHandSide">
 <ul>
-<li>change password</li>
-<li>log out</li>
+<li><a href="[%base%][%page.path%].prefs/password">change password</a></li>
+<li><a href="[%base%]/.logout">log out</a></li>
 </ul>
 </div>
-<h2>your account</h2>
 <form id="accountForm" action="[%base%]/[%c.req.user%].prefs" method="POST">
 <dl>
 <dd>Change your preferences to update them.</dd>

@@ -26,7 +26,7 @@ deletes this users cookie, and clears his session.
 sub logout : Global {
     my ( $self, $c ) = @_;
     $c->session_logout;
-    $c->forward('/default');
+    $c->forward('/page/view');
 }
 
 =item login (/.login)
@@ -64,6 +64,42 @@ sub users : Global {
   $c->stash->{template} = 'user/list.tt'
 }
 
+=item prefs
+
+Main user preferences screen.
+
+=cut
+
+sub prefs : Global {
+    my ( $self, $c ) = @_;
+    $c->stash->{template}='user/prefs.tt';
+    $c->stash->{user}=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name);
+    unless ($c->stash->{user}) {
+      $c->stash->{message}='Cannot find that user';
+      $c->stash->{template}='message.tt';
+    };
+}
+
+sub password : Path('/prefs/password') {
+    my ( $self, $c ) = @_;
+    $c->forward('prefs');
+    return if $c->stash->{message};
+    $c->stash->{template}='user/password.tt';
+    $c->form(
+      required=>[qw/current pass again/]
+      );
+    unless ( $c->form->has_missing || $c->form->has_invalid ) {
+      if ($c->form->valid('again') ne $c->form->valid('pass')) {
+        $c->stash->{message}='Passwords did not match.';
+        return
+      }
+      #FIXME: need to verify current password.
+      $c->stash->{user}->pass($c->form->valid('pass'));
+      $c->stash->{user}->update();
+      $c->stash->{message}='Your password has been updated';
+    }
+    $c->stash->{message} ||= 'please fill out all fields';
+}
 =back
 
 =head1 AUTHOR

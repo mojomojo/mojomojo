@@ -400,15 +400,6 @@ sub rollback : Global {
     }
 }
 
-sub prefs : Global {
-    my ( $self, $c ) = @_;
-    $c->stash->{template}='user/prefs.tt';
-    $c->stash->{user}=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name);
-    unless ($c->stash->{user}) {
-      $c->stash->{message}='Cannot find that user';
-      $c->stash->{template}='message.tt';
-    };
-}
 
 
 =head1 AUTHOR
