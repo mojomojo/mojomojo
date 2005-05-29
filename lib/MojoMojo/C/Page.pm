@@ -102,7 +102,7 @@ after saving, it will forward to the highlight action.
 sub edit : Private {
     my ( $self, $c, $path ) = @_;
 
-    # Set up the basics. Log in if there's auser.
+    # Set up the basics. Log in if there's a user.
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
     $c->req->params->{login}=$c->req->params->{creator};
@@ -417,6 +417,22 @@ sub export_html : Private {
     my ( $self, $c, $page ) = @_;
     $c->forward('list');
     $c->forward('/export/html');
+}
+
+sub rollback : Private {
+    my ( $self, $c, $page ) = @_;
+    $c->forward('view');
+    if ($c->stash->{rev}) {
+      $c->stash->{page}->page_version($c->stash->{rev});
+      $c->stash->{page}->update;
+      undef $c->stash->{rev};
+    }
+}
+
+sub prefs : Private {
+    my ( $self, $c, $page ) = @_;
+    $c->stash->{template}='user/prefs.tt';
+    $c->stash->{user}=MojoMojo::M::Core::Person->retrieve($c->req->{user_id});
 }
 
 

@@ -29,6 +29,8 @@ __PACKAGE__->has_a(
     deflate => 'epoch'
 );
 
+
+
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
 sub highlight {
@@ -132,4 +134,11 @@ sub create_proto {
     return \%proto_content;
 }
 
-1;
+__PACKAGE__->set_sql(max_content=>'SELECT MAX(version) FROM __TABLE__ WHERE page=?');
+
+sub max_content_version {
+    my $self=shift;
+    return $self->search_max_content($self->page)->select_val;
+}
+
+        1;
