@@ -2,7 +2,7 @@ package MojoMojo::Formatter::RSS;
 
 use LWP::Simple;
 use XML::Feed;
-sub format_content_order { 5 }
+sub format_content_order { 4 }
 sub format_content {
     my ($self,$content,$base)=@_;
 
