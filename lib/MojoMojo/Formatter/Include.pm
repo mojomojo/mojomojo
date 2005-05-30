@@ -1,14 +1,14 @@
 package MojoMojo::Formatter::Include;
 
 use LWP::Simple;
-sub format_content_order { 5 }
+sub format_content_order { 6 }
 sub format_content {
     my ($self,$content,$base)=@_;
 
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
-	if ($line =~ m/^=include\s+(.+)$/) { 
+	if ($line =~ m/^=(http\:\/\/\S+)$/) { 
          		$$content.=MojoMojo::Formatter::Include->include($1);
 	} else {
 	    $$content .=$line."\n";	
