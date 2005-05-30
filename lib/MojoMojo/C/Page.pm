@@ -164,17 +164,7 @@ sub edit : Global {
     my $p = MojoMojo::Search::Plucene->open( $c->config->{home} . "/plucene" );
     $p->update_index( $page );
 
-    # This is another ugly hack that needs to be fixed,
-    # especially if we ever support relative links of
-    # the form "./" and/or "../". Hmm... actually, we
-    # just need to make sure that paths never start with
-    # those relative operators, since base never has a
-    # trailing slash anymore. Also, paths starting with
-    # "../" would make no sense, anyway.
-    unless ( $path =~ /^\// ) {
-        $path = '/' . $path;
-    }
-    $c->res->redirect( $c->req->base . $path . '.highlight' );
+    $c->res->redirect( $c->req->base . $page->path . '.highlight' );
 
 } # end sub edit
 
