@@ -10,11 +10,7 @@
 [% END %]
 </h1>
 
-[%IF c.req.args.first == '/' %]
-<form id="editForm" action="[% base %]/.edit" method="post" onSubmit="cleanAuthorName();">
-[% ELSE %]
-<form id="editForm" action="[% base %]/[% c.req.args.first %].edit" method="post" onSubmit="cleanAuthorName();">
-[% END %]
+<form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -27,11 +23,17 @@
  </p>
  [% END %]
  [% IF page.content_version ; %] 
+ <div class="navigation">
  <p>Edit | <a  href="[% base %][% page.path %].attachments">Upload</a></p>
+ </div>
+ <hr/>
  [% END %]
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
- <h3 id="previewHeading">Preview</h3>
+ <h3 class="navigation" id="previewHeading">
+ Preview | 
+ <a href="">Syntax</a>
+ </h3>
 <div id="content">
 [% page.content.formatted(base) %]
  </div>

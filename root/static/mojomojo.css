@@ -73,6 +73,12 @@ h1#pageName {
   line-height: 28px;
 }
 
+hr {
+  height: 1px;
+  border:0px;
+  width:100%;
+  border-bottom:1px solid #555;
+}
 
 /* NAVIGATION */
 
