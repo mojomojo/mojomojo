@@ -77,7 +77,7 @@ hr {
   height: 1px;
   border:0px;
   width:100%;
-  border-bottom:1px solid #555;
+  border-bottom:1px dashed #aaa;
 }
 
 /* NAVIGATION */
