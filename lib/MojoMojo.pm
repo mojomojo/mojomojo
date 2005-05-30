@@ -330,8 +330,6 @@ sub prepare_path {
     } else {
       $c->stash->{path}='/'.substr($path,0,$index);
       $c->req->path(substr($path,$index+1));
-      $c->log->debug("stash:".$c->stash->{path});
-      $c->log->debug("req:".$c->req->path());
     }
 }
 
