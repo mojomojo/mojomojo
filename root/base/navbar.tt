@@ -50,6 +50,5 @@
 <a href="[%base%][%page.path%].prefs">Preferences</a>
 [%END%]
     [% END %] 
-<hr/>
 </form>
 </div> 
