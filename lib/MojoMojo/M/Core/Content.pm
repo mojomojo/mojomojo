@@ -87,16 +87,9 @@ sub formatted_diff {
 
 sub formatted {
     my ( $self, $base, $content ) = @_;
-    $content ||= $self->utf8;
+    $content ||= $self->body;
     MojoMojo->call_plugins( "format_content", \$content, $base ) if ($content);
     return $content;
-}
-
-sub utf8 {
-    my $self = shift;
-    my $body = $self->body;
-    utf8::decode($body);
-    return $body;
 }
 
 sub previous {
@@ -140,6 +133,20 @@ sub max_version {
     my $max=$self->search_max_ver($self->page);
     return 0 unless $max->count;
     return $max->next->max_ver();
+}
+
+sub wikiwords {
+    my $self=shift;
+    my $content  = $self->content;
+    my @links;
+    while ( $content =~ m/
+    (?<![\?\\\/\[])(\b[A-Z][a-z]+[A-Z]\w*)/g) {
+      push @links, $1;
+    }
+    while ( $content =~ m{(?:\[\[|\(\()\s*([^\]\)|]+?)\s*(?:\|\s*([^\]\)]+?)\s*)?(?:\]\]|\)\))}g) {
+      push @links,MojoMojo->fixw( $1 );
+    }
+    return @links;
 }
 
 1;
