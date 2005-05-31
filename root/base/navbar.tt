@@ -1,4 +1,4 @@
-<form id="navigationForm" class="navigation" action="[% base %][% page.path;%].search" method="get" >  
+<div id="toplinks"><form action="[% base %][% page.path;%].search" method="get" >  
   [% IF (c.req.user.length) ;%]
     [% IF (c.req.user == page.name  AND template.name=="page/view.tt")%]
   <b class="navon">[%c.fixw(c.req.user)%]</b> | 
@@ -52,3 +52,4 @@
     [% END %] 
 <hr/>
 </form>
+</div> 

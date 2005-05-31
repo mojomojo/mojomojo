@@ -1,49 +1,86 @@
-/* MojoMojo CSS for 
-   version 0.1 revision 25
-   by Danijel Milicevic 2005
-   
-   Table of content:
-   - Document structure
-   - Images and design tweaks
-   - Text styling
-   - Santa's little helpers and alike
-*/
+/*<group=Document Structure>*/
 
-/* DOCUMENT STRUCTURE */
-
-body {
-	margin:  0;
-	padding: 0;
-	background-color: #eee;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	line-height: 20px;
-	color: #555;
-	text-align: center;
-}
-
-#Container {
-	width: 740px;
-	margin: 0 auto;
-	text-align: center;
-}
-
-#Content {
-	background-color: #fff;
-	width: 740px;
+Body {
+	background: #7D7C7A repeat-x url(gfx/background.jpg);
 	margin: 0;
-	padding: 5px;
-	text-align: left;
-	border-top: 4px solid #0b0bab;
-	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #626262;
 }
 
-#Content img {
-  margin-left: 1em;
-  margin-right: 1em;
+#container {
+	width: 750px;
+	position: absolute;	left: 50%;	margin-left: -375px;
+	height: 500px;
+	background: no-repeat url(gfx/swoshtop.jpg);
+	top: 10px;
+	display: block;
 }
 
-/* LINKS */
+#header {
+	background: url(gfx/header.jpg) White;
+	width: 750px;
+	height: 54px;
+	margin: 0;
+}
+
+#breadcrumbs {
+	background: #4E5662;
+	height: 12px;
+	font-size: 11px;
+	color: #e3e3e3;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	padding-left: 13px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+#toplinks {
+	background: #D7D6D4;
+	font-weight: bold;
+	font-size: 11px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 13px;
+	color: #000000;
+}
+
+#contents {
+	background: #ffffff;
+	padding: 13px;
+}
+
+#tags {
+	background: #ffffff;
+	padding: 13px;
+}
+
+#bottom {
+	height: 28px;
+	width: 750px;
+	background: url(gfx/backbottom.jpg) no-repeat;
+	padding-left: 13px;
+	color: #000000;
+	margin: 0;
+}
+	
+/*</group>*/
+/*<group=Headlines>*/
+
+#header h1 {
+	top: 14px;
+	left: 100px;
+	position: relative;
+	font-size: 30px;
+	color: #ffffff;
+	font-weight: bold;
+
+}
+	
+/*</group>*/
+
+/*<group=Links>*/
 
 a { 
 color: #577091;
@@ -59,28 +96,11 @@ a:hover {
  background-color: #3d4863; 
 }
 
-/* HEADLINES */
 
-h1, h2, h3 { color: #333; }
-h1 { font-size: 28px }
-h2 { font-size: 19px }
-h3 { font-size: 16px }
+	
+/*</group>*/
 
-h1#pageName {
-  color: #b64717;
-  margin: 5px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-  line-height: 28px;
-}
-
-hr {
-  height: 1px;
-  border:0px;
-  width:100%;
-  border-bottom:1px dashed #aaa;
-}
-
-/* NAVIGATION */
+/*<group=Navigation>*/
 
 a.nav, a.nav:link, a.nav:visited { color: #577091; }
 a.nav:hover { color: #fff; background-color: #3d4863; }
@@ -344,13 +364,19 @@ textarea#body {
   color: #fff; 
   background-color:#ab0b0b; 
 }
+	
+/*</group>*/
 
-/* highlighted keywords in search results */
+/*<group=Highlighted keywords in search>*/
+
 .quoted {
   font-weight: bold;
 }
+	
+/*</group>*/
 
-/* pagination links */
+/*<group=Pagination Links>*/
+
 div.pager {
     font-size: small;
     text-align: center;
@@ -365,8 +391,10 @@ div.pager ul li {
     padding: 0 2px;
     white-space: nowrap;
 }
+	
+/*</group>*/
 
-/* FIXME: should be moved to amazon plugin */
+/*<group=Amazon Plugin>*/
 
 div.amazon {
     width:80%;
@@ -411,4 +439,5 @@ span.statusmsg {
   margin-left: 1em;
   font-size: 1.5em;
 }
-
+	
+/*</group>*/
