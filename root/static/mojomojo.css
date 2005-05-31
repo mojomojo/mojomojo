@@ -217,8 +217,8 @@ textarea#body {
 }
 
 #TextileHelp {
-  position: absolute;
-  width: 250px; 
+  display:hidden;
+  width: 760px; 
   padding-top: 5px;
   border-bottom:solid #888; 
   border-right:solid #888; 
