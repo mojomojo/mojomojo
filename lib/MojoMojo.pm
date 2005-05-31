@@ -73,58 +73,6 @@ sub default : Private {
 #    $c->forward( "/page/view" );
 }
 
-=item favicon
-
-serve favicon.ico statically.
-
-=cut
-
-sub ico : Global {
-    my ( $self, $c ) = @_;
-    $c->req->path('/favicon.ico');
-    $c->serve_static;
-}
-
-=item pageaction
-
-regex to handle requests for actions on nodes. Will forward to 
-requested action in the page controller.
-
-=cut
-
-#sub pageaction : Regex(^([\w\/]*)\.(\w+)$) {
-#    my ( $self, $c,@args ) = @_;
-#    my ($page,$action) = @{ $c->request->snippets };
-#    $c->req->args([$page,@args]);
-#    $c->forward( "/page/$action" );
-#}
-
-
-=item pageview
-
-regex to handle node requests. Will forward to view action.
-
-=cut
-
-#sub pageview : Regex(^(\w[\w\/]+)$) {
-#    my ( $self, $c ) = @_;
-#    my ($page) = @{ $c->request->snippets };
-#    $c->req->args([$page]);
-#    $c->forward( "/page/view" );
-#}
-
-=item static
-
-serve all files under /.static in the root as static files.
-
-=cut
-
-sub static : Global {
-    my ( $self, $c ) = @_;
-    $c->res->headers->header( 'Cache-Control' => 'max-age=86400' );
-      $c->serve_static;
-}
-
 =item end (builtin)
 
 At the end of any request, forward to view unless there is a template
