@@ -184,9 +184,9 @@ p#message {
  clear:left;
 }
 
-div#preview {
+div.preview {
  clear:left;
- width:730;
+ width:728;
  overflow: auto; 
  height: 290px;
 }
