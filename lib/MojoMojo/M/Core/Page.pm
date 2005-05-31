@@ -558,47 +558,29 @@ sub user_tags {
 
 sub update_content {
     my ( $self, %args ) = @_;
-    my $content_version;
 
-    # FIXME: don't think this needs to be so complicated.
-    # should be able to just catch exceptions upon insert
-    # Also, it gives an error on auth failures.
-    if ( $args{version} ) {
-        $content_version = $args{version};
-        my $existing_version = MojoMojo::M::Core::Content->retrieve(
-            page    => $self->id,
-            version => $content_version + 1
-        );
-        die "Content update conflict" if $existing_version;
-    }
-    elsif ( $self->content_version eq undef ) {
-        $content_version = 1;
-    }
-    else {
-        # Something went wrong.
-        die "Error in calculating content version";
-    }
+    my $content_version = ($self->content ? $self->content->max_version() : 0) ;
     my %content_data =
       map { $_ => $args{$_} } MojoMojo::M::Core::Content->columns;
     my $now = DateTime->now;
     @content_data{qw/page version status release_date/} =
-	($self->id,
-         $content_version,
+      ($self->id,
+         $content_version+1,
          'released',
          $now,
-	);
+      );
     my $content = MojoMojo::M::Core::Content->create( \%content_data );
     $self->content_version( $content->version );
     $self->update;
     $self->page_version->content_version_first( $content_version )
-	unless defined $self->page_version->content_version_first;
+        unless defined $self->page_version->content_version_first;
     $self->page_version->content_version_last($content_version);
     $self->page_version->update;
 
     if (my $previous_content = $content->previous) {
         $previous_content->remove_date( $now );
-	$previous_content->status( 'removed' );
-	$previous_content->comments( "Replaced by version $content_version." );
+    $previous_content->status( 'removed' );
+    $previous_content->comments( "Replaced by version $content_version." );
         $previous_content->update;
     }
 

@@ -29,6 +29,10 @@ __PACKAGE__->has_a(
     deflate => 'epoch'
 );
 
+__PACKAGE__->set_sql(max_ver=>'SELECT MAX(version) as max_ver  FROM __TABLE__ WHERE page=?');
+
+__PACKAGE__->columns(TEMP=>qw/max_ver/);
+
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
 sub highlight {
@@ -131,11 +135,11 @@ sub create_proto {
     return \%proto_content;
 }
 
-__PACKAGE__->set_sql(max_content=>'SELECT MAX(version) FROM __TABLE__ WHERE page=?');
-
-sub max_content_version {
+sub max_version {
     my $self=shift;
-    return $self->search_max_content($self->page)->select_val;
+    my $max=$self->search_max_ver($self->page);
+    return 0 unless $max->count;
+    return $max->next->max_ver();
 }
 
 1;

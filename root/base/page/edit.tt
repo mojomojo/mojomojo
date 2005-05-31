@@ -15,7 +15,6 @@
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
- <input type="hidden" name="version" value="[% content.version %]" />
 
  [% IF message %]
  <p  id="message">
@@ -32,7 +31,7 @@
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
  <h3 class="navigation" id="previewHeading">
  Preview | 
- <a href="">Syntax</a>
+ <a href="">Show Syntax</a>
  </h3>
 <div id="content">
 [% page.content.formatted(base) %]
