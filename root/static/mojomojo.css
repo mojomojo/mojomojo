@@ -1,7 +1,7 @@
 /*<group=Document Structure>*/
 
 Body {
-	background: #7D7C7A repeat-x url(gfx/background.jpg);
+	background: #7D7C7A repeat-x url(/.static/gfx/background.jpg);
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #626262;
@@ -11,13 +11,13 @@ Body {
 	width: 750px;
 	position: absolute;	left: 50%;	margin-left: -375px;
 	height: 500px;
-	background: no-repeat url(gfx/swoshtop.jpg);
+	background: no-repeat url(/.static/gfx/swoshtop.jpg);
 	top: 10px;
 	display: block;
 }
 
 #header {
-	background: url(gfx/header.jpg) White;
+	background: url(/.static/gfx/header.jpg) White;
 	width: 750px;
 	height: 54px;
 	margin: 0;
@@ -46,12 +46,7 @@ Body {
 	color: #000000;
 }
 
-#contents {
-	background: #ffffff;
-	padding: 13px;
-}
-
-#tags {
+#content {
 	background: #ffffff;
 	padding: 13px;
 }
