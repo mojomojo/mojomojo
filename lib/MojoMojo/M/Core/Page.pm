@@ -312,7 +312,6 @@ returns the actual page object for a path
 sub get_page {
     my ( $self, $pagepath ) = @_;
 
-    #return $self->search_where(name=>$page)->next();
     my ( $path_pages, $proto_pages ) = $self->path_pages($pagepath);
     return pop @$path_pages;
 }
@@ -365,7 +364,7 @@ sub path_pages {
     my @path_pages;
     if ($path eq '/')
     {
-	@path_pages = $class->search( lft => 1 );
+        @path_pages = $class->search( lft => 1 );
         $path_pages[0]->path( '/' );
     }
     elsif ($id)
@@ -479,31 +478,6 @@ sub normalize_name {
 
 } # end sub normalize_name
 
-# create a proto page, would could be
-# the basis for a new page
-# sub create_proto
-# {
-#     my ($class, $page) = @_;
-#     my %proto_rev;
-#     my @columns = __PACKAGE__->columns;
-#     eval { $page->isa('MojoMojo::M::Core::Page') };
-#     if ($@)
-#     {
-#         # assume page is a simple "proto page" hashref
-#         %proto_rev = map { $_ => $page->{$_} } @columns;
-#         $proto_rev{version} = 1;
-#         $proto_rev{path} = $page->{path};
-#     }
-#     else
-#     {
-#         my $revision = $page->revision;
-#         %proto_rev = map { $_ => $revision->$_ } @columns;
-#         @proto_rev{qw/ creator created /} = (undef) x 2;
-#         $proto_rev{version}++;
-#         $proto_rev{path} = $page->path;
-#     }
-#     return \%proto_rev;
-# }
 
 sub content {
     my ($self) = @_;
