@@ -33,7 +33,7 @@
  Preview | 
  <a href="">Show Syntax</a>
  </h3>
-<div id="content">
+<div class="preview" id="content">
 [% page.content.formatted(base) %]
  </div>
  <p>
