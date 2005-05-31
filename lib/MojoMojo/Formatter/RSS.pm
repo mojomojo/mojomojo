@@ -3,18 +3,20 @@ package MojoMojo::Formatter::RSS;
 use LWP::Simple;
 use XML::Feed;
 sub format_content_order { 4 }
+
 sub format_content {
     my ($self,$content,$base)=@_;
-
     my @lines=split /\n/,$$content;
-    my $pod;$$content="";
+    undef $$content;
     foreach my $line (@lines) {
-	if ($line =~ m/^=(feed\:\/\/\S+)(\s+\d+)?$/) { 
-         		$$content.=MojoMojo::Formatter::RSS->include_rss($1,$2);
-	} else {
-	    $$content .=$line."\n";	
-	}
-    }
+                if ($line =~ m/^=(feed.+)(\s+\d+)?\s*$/) { 
+            $$content.=MojoMojo::Formatter::RSS->include_rss($1,$2);
+        } elsif ($line =~ m/^=feed/) {
+            $$content .= $line."did not match.\n";
+        } else {
+            $$content .=$line."\n";	
+        }
+   }   
 }
 
 sub include_rss {
