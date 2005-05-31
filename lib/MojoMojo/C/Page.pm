@@ -5,7 +5,6 @@ use base 'Catalyst::Base';
 use IO::Scalar;
 use URI;
 use Time::Piece;
-use File::MimeInfo::Magic;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
@@ -278,29 +277,6 @@ sub print : Global {
     $c->forward('view');
 }
 
-sub attachments : Global {
-    my ( $self, $c, $page ) = @_;
-    $c->stash->{template} = 'page/attachments.tt';
-    $page = $c->stash->{page};
-    if ( my $file = $c->req->params->{file} ) {
-      return $c->forward('/user/login') unless $c->req->{user};
-        my $att =
-          MojoMojo::M::Core::Attachment->create(
-            { name => $file, page => $page } );
-
-        my $fh       = $c->req->uploads->{$file}->{fh};
-        my $filename = $c->config->{home} . "/uploads/" . $att->id;
-        my $upload=$c->request->upload('file');
-        unless (  $upload->link_to($filename) || 
-                  $upload->copy_to($filename) ) {
-          $c->stash->{template}='message.tt';
-          $c->stash->{message}= "Can't open $filename for writing.";
-        }
-        $att->contenttype( mimetype($filename) );
-        $att->size( -s $filename );
-        $att->update();
-    }
-}
 
 sub tags : Global {
     my ( $self, $c, $page, $highlight ) = @_;
@@ -384,7 +360,7 @@ sub rollback : Global {
     my ( $self, $c, $page ) = @_;
     $c->forward('view');
     if ($c->stash->{rev}) {
-      $c->stash->{page}->page_version($c->stash->{rev});
+      $c->stash->{page}->content_version($c->stash->{rev});
       $c->stash->{page}->update;
       undef $c->stash->{rev};
     }
