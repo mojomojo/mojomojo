@@ -26,8 +26,6 @@
 </head>
 
 <body>
-[% IF template.name == 'page/edit.tt' %]
-[% PROCESS edithelp.tt %]
-[% END %]
+
     <div id="container">
         [%template.title%]
