@@ -130,6 +130,8 @@ a:hover {
 
 /*<group=Navigation>*/
 
+form { margin: 0;}
+
 a.nav, a.nav:link, a.nav:visited { color: #577091; }
 a.nav:hover { color: #fff; background-color: #3d4863; }
 
@@ -352,7 +354,7 @@ textarea#body {
   border-width : 1px;
   border-color: #000000;
   background-color: #999999;
-  width: 80px;
+  width: 40px;
   margin-left: 10px;
 }
 
@@ -419,10 +421,6 @@ div.amazon {
 
 div.amazon img {
     margin: 1.2em;
-}
-
-form {
-  margin:0px;
 }
 form dl {
  margin: 2em;
