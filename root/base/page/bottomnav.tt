@@ -41,27 +41,27 @@
 [% END %]
 <div class="bottomnav">
 [% IF (!rev) %]
- <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
+ <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
- | <a href="[% base %]/.settings" class="navlink">Edit Settings</a>
+ | <a href="[% base %]/.settings">Edit Settings</a>
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
- | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" class="navlink" accesskey="R">Back in time</a> 
+ | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
  ([% page.content_version %] revision[% IF page.content_version > 1; "s" ; END %])
  [% END %]
 [% ELSE %]
  [% IF rev == page.content_version %]
- <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
+ <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% ELSIF rev < page.content_version %]
- <a href="[% base _ page.path %]?rev=[% rev + 1 %]" class="navlink" accesskey="R">Forward in time</a> 
+ <a href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
  <small>([% page.content_version - rev %] more)</small>
  [% END %]
  [% IF rev > 1 %]
- | <a href="[% base _ page.path %]?rev=[% rev - 1 %]" class="navlink" accesskey="R">Back in time</a> 
+ | <a href="[% base _ page.path %]?rev=[% rev - 1 %]" accesskey="R">Back in time</a> 
  <small>([% rev - 1 %] more)</small>
  [%END%]
  [% UNLESS rev == page.content_version %]
- | <a href="[% base _ page.path %]" class="navlink" accesskey="C">Latest Revision</a>
+ | <a href="[% base _ page.path %]" accesskey="C">Latest Revision</a>
  [% END %]
 [% END %] 
  [%# IF rev > 1 %]
