@@ -84,27 +84,8 @@ Body {
 	
 /*</group>*/
 /*<group=Headlines>*/
-.login {
-	width: 250px;
-	height: 250px;
-	background: no-repeat url(/.static/gfx/loginbg.jpg) #f2f2f2;
-	margin-top: 10%;
-	
-	color: #000000;
-}
 
-.login h1 {
-	top: 14px;
-	left: 100px;
-	position: relative;
-	font-size: 30px;
-	color: #ffffff;
-	font-weight: bold;
-	width: 500px;
-	overflow: hidden;
-}
-
-.login text {
+.logintext {
 	top: 10px;
 	left: 20px;
 	position: relative;
