@@ -13,10 +13,7 @@
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
-</form>
-</div>
-[% END %]
-<script language="Javascript" type="text/javascript">
+</form><script language="Javascript" type="text/javascript">
   var diff='';
   function toggleChanges() {
     if (!diff) {
@@ -36,6 +33,9 @@
     }
   }
 </script>
+</div>
+[% END %]
+
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
 [% IF (!rev) %]
