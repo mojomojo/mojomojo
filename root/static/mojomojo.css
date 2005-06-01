@@ -54,6 +54,7 @@ Body {
 	background: #ffffff;
 	padding: 13px;
 	width: 724px;
+  overflow: hidden; 
 }
 
 #bottom {
@@ -179,6 +180,7 @@ ol.setup li {
   font-style: italic;  
   margin-bottom: 10px;
   color: #999;
+  clear: both;
 }
 
 .references {
