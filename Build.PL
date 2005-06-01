@@ -53,7 +53,10 @@ my $build = Catalyst::Build->new(
      'Time::Piece' => '1.08',
      URI => '1.35',
      YAML => '0.36',
-    },
+     Imager => '0',
+     'Catalyst::Model::CDBI::Sweet' => 0   
+     },
+
     create_makefile_pl => 'passthrough',
     script_files       => [ glob('script/*') ],
     test_files         => [ glob('t/*.t'), glob('t/*/*.t') ]
