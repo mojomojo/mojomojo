@@ -50,14 +50,24 @@ Body {
 	width: 737px;
 }
 
+#tags {
+	background: #fffdfa;
+	font-weight: bold;
+	font-size: 11px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 13px;
+	color: #919191;
+	width: 737px;
+}
+
 #content {
 	background: #ffffff;
 	padding: 13px;
 	width: 724px;
-  overflow: hidden; 
 }
 
-#bottom {
+#bottomnav {
 	height: 28px;
 	width: 750px;
 	background: url(gfx/backbottom.jpg) no-repeat;
@@ -180,7 +190,6 @@ ol.setup li {
   font-style: italic;  
   margin-bottom: 10px;
   color: #999;
-  clear: both;
 }
 
 .references {
@@ -287,12 +296,6 @@ textarea#body {
 
 .newsList p {
   margin-bottom:30px;
-}
-
-.tags {
-  float: right;
-	font-size: 11px;
-	color: #919191;
 }
 
 #tags a {
