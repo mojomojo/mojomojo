@@ -6,28 +6,28 @@
   <a href="[%base%]/[%c.req.user%]">[%c.fixw(c.req.user)%]</a> | 
   [%END%]
   [% ELSE %]
-  <a href="[%base%]/.login" title="Get in there" accesskey="L">Log In</a> | 
+  <a href="[%base%]/.login" title="Get in there" accesskey="L">log in</a> | 
   [% END %]
   [% IF template.name == 'page/list.tt' %]
-  <b class="navOn" title="Alphabetically sorted list of pages">All Pages</b> | 
+  <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
   [% ELSE %]
   <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
   [% END; IF template.name =='page/recent.tt' %]
-  <b class="navOn" title="Pages sorted by when they were last changed">Recently Revised</b> | 
+  <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
   [% ELSE %]
   <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
   [% END; IF c.req.action=='.users' %]
-  <b class="navOn" title="Who wrote what" accesskey="">Authors</b> | 
+  <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]
   [%#
-  <a href="<%base%>.users" title="Who wrote what" accesskey="">Authors</a> | 
+  <a href="<%base%>.users" title="Who wrote what" accesskey="">authors</a> | 
   %]
   [% END; IF template.name=='feeds.tt' %]
-  <b class="navOn" title="Subscribe to changes by RSS">Feeds</b> | 
+  <b class="navOn" title="Subscribe to changes by RSS">feeds</b> | 
   [%ELSE%]
-  <a href="[%base%][%page.path%].feeds" title="Subscribe to changes by RSS" accesskey="">Feeds</a> | 
+  <a href="[%base%][%page.path%].feeds" title="Subscribe to changes by RSS" accesskey="">feeds</a> | 
   [% END; IF template.name =='export.tt' %]
-  <b class="navOn" title="Download a zip with all the pages in this wiki">Export</b> | 
+  <b class="navOn" title="Download a zip with all the pages in this wiki">export</b> | 
   [%ELSE%]
   <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
   [%END %]
@@ -37,17 +37,17 @@
 [%IF (c.req.action=="view")%]
 <b class="navOn">Home Page</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%]">Home Page</a> | 
+<a href="[%base%][%page.path%]">home page</a> | 
 [%END%]
 [%IF (c.req.action=="profile")%]
 <b class="navOn">Profile</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%].profile">Profile</a> | 
+<a href="[%base%][%page.path%].profile">profile</a> | 
 [%END%]
 [%IF (c.req.action=="prefs")%]
-<b class="navOn">Preferences</b> 
+<b class="navOn">preferences</b> 
 [%ELSE%]
-<a href="[%base%][%page.path%].prefs">Preferences</a>
+<a href="[%base%][%page.path%].prefs">preferences</a>
 [%END%]
     [% END %] 
 </form>

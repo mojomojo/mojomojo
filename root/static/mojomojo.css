@@ -97,6 +97,16 @@ Body {
 
 /*<group=Links>*/
 
+#breadcrumbs a {
+	color: #e7e7e7;
+	text-decoration: none;
+}
+
+#breadcrumbs a:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+
 a { 
 color: #577091;
   text-decoration: underline;
