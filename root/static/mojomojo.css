@@ -19,7 +19,6 @@ Body {
 
 #header {
 	background: url(/.static/gfx/header.jpg) White;
-	width: 750px;
 	height: 54px;
 	margin: 0;
 }
@@ -35,7 +34,6 @@ Body {
 	padding-left: 13px;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	width: 737px;
 }
 
 #toplinks {
@@ -46,7 +44,6 @@ Body {
 	padding-bottom: 3px;
 	padding-left: 13px;
 	color: #000000;
-	width: 737px;
 }
 
 #tags {
@@ -57,20 +54,17 @@ Body {
 	padding-bottom: 3px;
 	padding-left: 13px;
 	color: #919191;
-	width: 737px;
 }
 
 #content {
   overflow: hidden;
 	background: #ffffff;
 	padding: 13px;
-	width: 724px;
 	overflow: hidden;
 }
 
 #bottomnav {
 	height: 28px;
-	width: 750px;
 	background: url(/.static/gfx/backbottom.jpg) no-repeat;
 	padding-left: 13px;
 	color: #000000;
