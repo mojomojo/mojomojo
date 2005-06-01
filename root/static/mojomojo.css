@@ -61,18 +61,6 @@ Body {
 	width: 737px;
 }
 
-#tags .right {
-	background: #fffdfa;
-	font-weight: bold;
-	font-size: 11px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	padding-left: 13px;
-	color: #919191;
-	width: 737px;
-	text-align: right;
-}
-
 #content {
 	background: #ffffff;
 	padding: 13px;

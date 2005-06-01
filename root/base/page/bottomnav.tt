@@ -6,7 +6,6 @@
 [%  c.subreq(pagelink ) %]
 
 
-<span id="right">
 [% url = base _ '/.jsrpc/submittag/' _ page.id %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
@@ -16,7 +15,7 @@
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
-</span>
+
 
 </div>
 <script language="Javascript" type="text/javascript">
