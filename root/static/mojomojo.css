@@ -71,6 +71,12 @@ Body {
 	margin: 0;
 	font-size: 12px;
 	font-weight: bold;
+	padding-top: 4px;
+}
+
+#addtag {
+	text-align: right;
+	background: #ffffff;
 }
 	
 /*</group>*/
