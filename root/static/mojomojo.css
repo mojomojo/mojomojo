@@ -49,6 +49,7 @@ Body {
 #content {
 	background: #ffffff;
 	padding: 13px;
+	width: 750px;
 }
 
 #bottom {
@@ -212,8 +213,8 @@ textarea#body {
 }
 
 #TextileHelp {
-  display:hidden;
-  width: 760px; 
+  position: absolute;
+  width: 250px; 
   padding-top: 5px;
   border-bottom:solid #888; 
   border-right:solid #888; 
@@ -338,13 +339,6 @@ textarea#body {
 .newWikiWord a {
   vertical-align: super;
   font-size: 0.8em;
-}
-
-#breadcrumbs {
-  color: green;
-  line-height: 10px;
-  font-size: 10px;
-  padding: 0px;
 }
 
 .protoPage a:link {
