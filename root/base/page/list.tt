@@ -5,7 +5,8 @@
 
 
 [% PROCESS navbar.tt %]
-  <small> [% c.pref("title") || "MojoMojo" %] </small>
+ <div id="container">
+ <small> [% c.pref("title") || "MojoMojo" %] </small>
   <br/>All Pages
 <div id="categories">
   <strong>tags</strong>: 
@@ -25,7 +26,7 @@
 [% END %]
 </ul>
 </div>
-<div style="float: left; width: 280px">
+<div id="wantedPages">
 
   <h2> Wanted Pages
       <br/><small style="font-size: 12px"><i>Not existing pages that other pages in the web reference</i></small>
@@ -44,6 +45,6 @@
     <li><a href="[% base %][% orphan.path %]">[%c.expand_wikiword(orphan.path,base)%]</a></li>
 [% END %]
     </ul>
-</div>
+</div></div>
         <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]

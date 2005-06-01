@@ -8,6 +8,12 @@
 	background: #ffffff;
 }
 
+#wantedPages {
+	float: left; 
+	width: 280px;
+	background: #ffffff;
+}
+
 Body {
 	background: #7D7C7A repeat-x url(/.static/gfx/background.jpg);
 	margin: 0;
