@@ -71,7 +71,11 @@ Body {
 	margin: 0;
 	font-size: 12px;
 	font-weight: bold;
-	padding-top: 4px;
+	padding-top: 6px;
+}
+
+#bottomnav input {
+	font-size: 10px;
 }
 
 #addtag {
