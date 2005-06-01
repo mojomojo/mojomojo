@@ -84,22 +84,31 @@ Body {
 	
 /*</group>*/
 /*<group=Headlines>*/
-#login {
+.login {
 	width: 250px;
 	height: 250px;
-	background: no-repeat url(/.static/gfx/loginbg.jpg);
+	background: no-repeat url(/.static/gfx/loginbg.jpg) #f2f2f2;
 	margin-top: 10%;
 	
-	color: #ffffff;
+	color: #000000;
 }
 
-#login h1 {
+.login h1 {
 	top: 14px;
 	left: 100px;
 	position: relative;
 	font-size: 30px;
 	color: #ffffff;
 	font-weight: bold;
+	width: 500px;
+	overflow: hidden;
+}
+
+.login text {
+	top: 10px;
+	left: 20px;
+	position: relative;
+	font-size: 12px;
 	width: 500px;
 	overflow: hidden;
 }
@@ -471,7 +480,7 @@ span.statusmsg {
 	
 /*</group>*/
 
-#login form input {
+.login form input {
   font-size: 14px;
 	width: 120px;
 }
