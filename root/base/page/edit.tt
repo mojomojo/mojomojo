@@ -1,15 +1,13 @@
 [% PROCESS header.tt %]
 
-[% PROCESS breadcrumbs.tt %]
-<h1 id="pageName">
-[% IF page.content_version %]Editing[% ELSE %]Creating[% END %]
+        <div id="header"><h1>[% IF page.content_version %]Editing[% ELSE %]Creating[% END %]
 [% IF page.name == "/" %]
  [% c.pref("name") || "MojoMojo" %] Home (/)
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
-[% END %]
-</h1>
-
+[% END %]</h1></div>
+[% PROCESS breadcrumbs.tt %]
+<div id="content">
 <form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
@@ -29,6 +27,7 @@
  [% END %]
  [%# FIXME: Should be moved to the controller %]
  [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
+ 
  <h3 class="navigation" id="previewHeading">
  Preview | 
  <a href="">Show Syntax</a>
@@ -67,5 +66,5 @@ function cleanAuthorName() {
   }
 }
 </script>
-
+</div>        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
