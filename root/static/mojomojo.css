@@ -323,13 +323,11 @@ textarea#body {
 #tags .add a {
   color: green;
 	font-size: 13px;
-	line-height: 7px;
 }
 
 #tags .add a:hover {
   color: #003800;
 	font-size: 13px;
-	line-height: 7px;
 }
 
 #tags .remove a {
@@ -347,7 +345,7 @@ textarea#body {
   float: right;
 }
 
-.tags input {
+.taginput {
   font-size : 9pt;
   font-weight : bold;
   border-style : solid;
