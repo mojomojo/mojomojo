@@ -1,10 +1,13 @@
 [% PROCESS header.tt %]
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
-<h1 id="pageName">
+ <div id="container">
+        <div id="header"><h1>All Pages</h1></div>
+
+
+
+[% PROCESS navbar.tt %]
   <small> [% c.pref("title") || "MojoMojo" %] </small>
   <br/>All Pages
-</h1>
-[% PROCESS navbar.tt %]
 <div id="categories">
   <strong>tags</strong>: 
   [% FOREACH tag IN tags.list %]
@@ -44,4 +47,6 @@
     </ul>
 </div>
 
+        </div>
+        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
