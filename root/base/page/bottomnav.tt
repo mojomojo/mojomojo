@@ -1,6 +1,9 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
+<div id="tags">
+[% SET pagelink="/tags/" _ page.id %]
+[%  c.subreq(pagelink ) %]
+</div>
 [% IF c.req.user ; %]
-[% END %]
 <div id="addtag">
 [% url = base _ '/.jsrpc/submittag/' _ page.id %]
 [%c.prototype.form_remote_tag({ 
@@ -12,12 +15,7 @@
 <input type="submit" name="add" value="add"> 
 </form>
 </div>
-<div id="tags">
-[% SET pagelink="/tags/" _ page.id %]
-[%  c.subreq(pagelink ) %]
-
-
-</div>
+[% END %]
 <script language="Javascript" type="text/javascript">
   var diff='';
   function toggleChanges() {
