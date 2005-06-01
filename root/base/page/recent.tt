@@ -2,7 +2,7 @@
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 [% SET now = objects.first.content.created.ymd; %]
         <div id="header"><h1>Recent pages</h1></div>
-        
+        [% PROCESS navbar.tt %]
         <div id="content">
   <small>
 [% IF page.name == "/" %]
@@ -13,7 +13,7 @@
   </small>
   <br/>Recent Pages
 </h1>
-[% PROCESS navbar.tt %]
+
 <div id="categories">
   <strong>tags</strong>: <small>
   [% FOREACH tag IN tags %]
