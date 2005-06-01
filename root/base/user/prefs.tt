@@ -1,10 +1,12 @@
 [% PROCESS header.tt %]
-<h1 id="pageName">
-preferences
-</h1>
-Choose your setting.
+
+        <div id="header"><h1>preferences</h1></div>
+
+
 [% PROCESS navbar.tt %]
 <div class="preferences" id="content">
+<h1>preferences
+Choose your setting.</h1>
 <h2>your account</h2>
 <div class="rightHandSide">
 <ul>
@@ -23,5 +25,5 @@ Choose your setting.
 <dd> <b>Status:</b> no change</dd>
 </dl>
 </form>
-</div>
+</div>  <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
