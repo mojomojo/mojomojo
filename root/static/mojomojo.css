@@ -4,6 +4,10 @@
 	background: #ffffff;
 }
 
+#allPages {
+	background: #ffffff;
+}
+
 Body {
 	background: #7D7C7A repeat-x url(/.static/gfx/background.jpg);
 	margin: 0;
