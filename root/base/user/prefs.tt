@@ -5,8 +5,6 @@
 
 [% PROCESS navbar.tt %]
 <div class="preferences" id="content">
-<h1>preferences
-Choose your setting.</h1>
 <h2>your account</h2>
 <div class="rightHandSide">
 <ul>
