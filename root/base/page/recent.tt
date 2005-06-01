@@ -1,7 +1,9 @@
 [% PROCESS header.tt %]
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 [% SET now = objects.first.content.created.ymd; %]
-<h1 id="pageName">
+        <div id="header"><h1>Recent pages</h1></div>
+        
+        <div id="content">
   <small>
 [% IF page.name == "/" %]
  [% c.pref("name") || "MojoMojo" %]
@@ -33,5 +35,6 @@
     </div>
   </li>
 [% END %]
-</ul>
+</ul></div>
+        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
