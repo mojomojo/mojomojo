@@ -1,6 +1,6 @@
 [% PROCESS header.tt %]
  <div id="header"><h1>Login</h1></div>
-        <div id="contents">
+        <div id="content">
         <form id="loginForm" action="[%base%]/.login" method="POST"><span id="logintext"> [%message%]</span>
 <dl>
 <dt>login:</dt>
@@ -11,7 +11,7 @@
 </dl>
 </form>
         </div>
-        <div id="bottom">
+        <div id="bottomnav">&nbsp;
    
        
 <script language="JavaScript">
