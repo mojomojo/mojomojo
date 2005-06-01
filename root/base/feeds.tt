@@ -1,10 +1,8 @@
 [% PROCESS header.tt %]
+
+        <div id="header"><h1>Feeds</h1></div>
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
-<h1 id="pageName">
-  <small> [% c.pref('name')|| "MojoMojo" %] </small>
-  <br/>Feeds
-</h1>
-[% PROCESS navbar.tt %]
+[% PROCESS navbar.tt %]<div id="content">
 <p>You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page.</p> 
 
 <ul id="feedsList">
@@ -12,6 +10,7 @@
   <li><a href="[%base%][%page.path%].rss">Headlines (RSS 2.0)</a></li>
   <li><a href="[%base%][%page.path%].atom">Full content (Atom 0.3)</a></li>
 </ul>
-
+</div>
+        <div id="bottomnav">&nbsp;
 
 [% PROCESS footer.tt %]
