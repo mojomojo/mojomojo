@@ -14,7 +14,7 @@ Body {
 	background: no-repeat url(/.static/gfx/swoshtop.jpg);
 	top: 10px;
 	display: block;
-	margin: 0;
+	margin-left: -375px;
 }
 
 #header {
