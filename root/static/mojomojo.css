@@ -422,6 +422,10 @@ div.amazon {
 div.amazon img {
     margin: 1.2em;
 }
+
+form {
+  margin:0px;
+}
 form dl {
  margin: 2em;
  padding: 1em;
