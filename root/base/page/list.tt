@@ -45,7 +45,5 @@
 [% END %]
     </ul>
 </div>
-
-        </div>
         <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
