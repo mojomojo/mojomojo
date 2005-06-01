@@ -47,20 +47,25 @@
  | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
  ([% page.content_version %] revision[% IF page.content_version > 1; "s" ; END %])
  [% END %]
+ [% IF  (page.content_version < page.content.max_version) %]
+ <a href="[% base _ page.path %]?rev=[% page.content_revision + 1 %]" accesskey="R">Forward in time</a> 
+ <small>([% page.content.max_version - page.content_version %] more)</small>
+ [%END%]
 [% ELSE %]
  [% IF rev == page.content_version %]
  <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [%END%]
- [% IF ( (rev < page.content.max_revision) || (!rev && (page.content_version < page.content.max_version))) %]
+ [%page.content_version%]
+ [% IF ((rev < page.content.max_version)) %]
  <a href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
- <small>([% page.content_version - rev %] more)</small>
+ <small>([% page.content.max_version - rev %] more)</small>
  [% END %]
  [% IF rev > 1 %]
  | <a href="[% base _ page.path %]?rev=[% rev - 1 %]" accesskey="R">Back in time</a> 
  <small>([% rev - 1 %] more)</small>
  [%END%]
  [% UNLESS rev == page.content_version %]
- | <a href="[% base _ page.path %]" accesskey="C">Latest Revision</a>
+ | <a href="[% base _ page.path %]" accesskey="C">Current Revision</a>
  [% END %]
 [% END %] 
  [%# IF rev > 1 %]
