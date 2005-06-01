@@ -77,15 +77,18 @@ Body {
 	background: #ffffff;
 	padding: 13px;
 	width: 724px;
+	overflow: hidden;
 }
 
 #bottomnav {
 	height: 28px;
 	width: 750px;
-	background: url(gfx/backbottom.jpg) no-repeat;
+	background: url(/.static/gfx/backbottom.jpg) no-repeat;
 	padding-left: 13px;
 	color: #000000;
 	margin: 0;
+	font-size: 12px;
+	font-weight: bold;
 }
 	
 /*</group>*/
