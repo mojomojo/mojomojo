@@ -1,11 +1,7 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 [% IF c.req.user ; %]
 [% END %]
-<div id="tags">
-[% SET pagelink="/tags/" _ page.id %]
-[%  c.subreq(pagelink ) %]
-
-
+<div id="addtag">
 [% url = base _ '/.jsrpc/submittag/' _ page.id %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
@@ -15,6 +11,10 @@
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
+</div>
+<div id="tags">
+[% SET pagelink="/tags/" _ page.id %]
+[%  c.subreq(pagelink ) %]
 
 
 </div>
@@ -39,7 +39,7 @@
   }
 </script>
 [% END %]
-<div id="bottomnav">
+<div id="bottomnav"><span id="bottomtext">
 [% IF (!rev) %]
  <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
@@ -85,7 +85,7 @@
    <a class="existingWikiWord" href="[%base%][%linkitem.name%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </small>
-[% END %]  
+[% END %]  </span>
 </div>
 
 
