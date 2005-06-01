@@ -1,7 +1,7 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 [% IF c.req.user ; %]
 [% END %]
-<div class="tags">
+<div id="tags">
 [% SET pagelink="/tags/" _ page.id %]
 [%  c.subreq(pagelink ) %]
 
@@ -39,7 +39,7 @@
   }
 </script>
 [% END %]
-<div class="bottomnav">
+<div id="bottomnav">
 [% IF (!rev) %]
  <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
