@@ -12,11 +12,11 @@
     update => 'tags', 
     url=>url,
     loading=>"gId('taginput').value='';"
-})%] </span>
+})%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
-
+</span>
 
 </div>
 <script language="Javascript" type="text/javascript">
