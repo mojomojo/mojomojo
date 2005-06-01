@@ -269,7 +269,6 @@ textarea#body {
 }
 
 #TextileHelp {
-  position: absolute;
   width: 250px; 
   padding-top: 5px;
   border-bottom:solid #888; 
