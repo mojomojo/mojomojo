@@ -5,7 +5,7 @@
 
 
 [% PROCESS navbar.tt %]
- <div id="container">
+ <div id="content">
  <small> [% c.pref("title") || "MojoMojo" %] </small>
   <br/>All Pages
 <div id="categories">
