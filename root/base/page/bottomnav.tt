@@ -1,5 +1,43 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div class="navigation">
+[% IF c.req.user ; %]
+<div class="tagedit">
+[% url = base _ '/.jsrpc/submittag/' _ page.id %]
+[%c.prototype.form_remote_tag({ 
+    update => 'tags', 
+    url=>url,
+    loading=>"gId('taginput').value='';"
+})%] 
+<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+<input type="submit" name="add" value="add"> 
+</form>
+</div>
+[% END %]
+<div class="tags">
+[% SET pagelink="/tags/" _ page.id %]
+[%  c.subreq(pagelink ) %]
+</div>
+<script language="Javascript" type="text/javascript">
+  var diff='';
+  function toggleChanges() {
+    if (!diff) {
+      diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[% page.content _'/' _ page.content.content_version%]');
+      document.getElementById('diff').innerHTML=diff;
+    }
+    if (document.getElementById("changes").style.display == "none") {
+      document.getElementById("changes").style.display  = "block";
+      document.getElementById("revision").style.display = "none";
+      document.getElementById("show_changes").style.display  = "none";
+      document.getElementById("hide_changes").style.display = "inline";
+    } else {
+      document.getElementById("changes").style.display  = "none";
+      document.getElementById("revision").style.display = "block";
+      document.getElementById("show_changes").style.display  = "inline";
+      document.getElementById("hide_changes").style.display = "none";
+    }
+  }
+</script>
+[% END %]
+<div class="bottomnav">
 [% IF (!rev) %]
  <a href="[% base _ page.path %].edit" class="navlink" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
@@ -48,41 +86,4 @@
 [% END %]  
 </div>
 
-[% IF c.req.user ; %]
-<div class="tagedit">
-[% url = base _ '/.jsrpc/submittag/' _ page.id %]
-[%c.prototype.form_remote_tag({ 
-    update => 'tags', 
-    url=>url,
-    loading=>"gId('taginput').value='';"
-})%] 
-<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
-<input type="submit" name="add" value="add"> 
-</form>
-</div>
-[% END %]
-<div class="tags">
-[% SET pagelink="/tags/" _ page.id %]
-[%  c.subreq(pagelink ) %]
-</div>
-<script language="Javascript" type="text/javascript">
-  var diff='';
-  function toggleChanges() {
-    if (!diff) {
-      diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[% page.content _'/' _ page.content.content_version%]');
-      document.getElementById('diff').innerHTML=diff;
-    }
-    if (document.getElementById("changes").style.display == "none") {
-      document.getElementById("changes").style.display  = "block";
-      document.getElementById("revision").style.display = "none";
-      document.getElementById("show_changes").style.display  = "none";
-      document.getElementById("hide_changes").style.display = "inline";
-    } else {
-      document.getElementById("changes").style.display  = "none";
-      document.getElementById("revision").style.display = "block";
-      document.getElementById("show_changes").style.display  = "inline";
-      document.getElementById("hide_changes").style.display = "none";
-    }
-  }
-</script>
-[% END %]
+

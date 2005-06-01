@@ -3,7 +3,7 @@
   [% IF loop.first %]
   <a href="[% base _ page.path %]">[% c.pref("name") || "MojoMojo" %]</a>
   [% ELSE %]
-  / <form action="[% base _ page.path %]" method="POST" style="display: inline">
+  / <form action="[% base _ page.path %]" method="POST">
      <a href="[% base _ page.path %]">[% page.name_orig %]</a>
      <input type="hidden" name="id">
     </form>
