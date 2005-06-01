@@ -50,7 +50,8 @@
 [% ELSE %]
  [% IF rev == page.content_version %]
  <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
- [% ELSIF rev < page.content_version %]
+ [%END%]
+ [% IF ( (rev < page.content.max_revision) || (!rev && (page.content_version < page.content.max_version))) %]
  <a href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
  <small>([% page.content_version - rev %] more)</small>
  [% END %]

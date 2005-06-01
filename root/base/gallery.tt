@@ -1,6 +1,20 @@
 [%PROCESS header.tt%]
+<div id="header"><h1>
+[% IF page.name == "/" %]
+ [% c.pref("name") || "MojoMojo" %]
+[% ELSE %]
+ [% c.expand_wikiword(page.name_orig) %]
+[% END %]
+gallery
+</h1></div>
+[% PROCESS breadcrumbs.tt %]
+[% PROCESS navbar.tt %]
+<div id="content">
+<div id="images">
 [%WHILE(picture=pictures.next)%]
 <img src="[%base%]/.attachment/[%picture.id%]/thumb"/>
 [%END%]
+</div>
+</div>
 
 [%PROCESS footer.tt%]

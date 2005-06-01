@@ -32,7 +32,7 @@
  Preview | 
  <a href="">Show Syntax</a>
  </h3>
-<div class="preview" id="content">
+<div class="preview" id="content_preview">
 [% page.content.formatted(base) %]
  </div>
  <p>
@@ -44,7 +44,7 @@ FILTER html %][% c.req.params.body %][% append %][%END
  [%c.prototype.observe_field ( 'body', {
   url     => url,
   with    => params,
-  update  => 'content'
+  update  => 'content_preview'
   })%]
 
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
