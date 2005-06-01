@@ -1,7 +1,7 @@
 [% PROCESS header.tt %]
-        <div class="login">
-        <h1>Login</h1>
-       <form id="loginForm" action="[%base%]/.login" method="POST"><span id="text"> [%message%]</span>
+ <div id="header"><h1>Login</h1></div>
+        <div id="contents">
+        <form id="loginForm" action="[%base%]/.login" method="POST"><span id="logintext"> [%message%]</span>
 <dl>
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
@@ -10,6 +10,10 @@
 <dd><input type="submit" value="log in"/></dd>
 </dl>
 </form>
+        </div>
+        <div id="bottom">
+   
+       
 <script language="JavaScript">
 gId('loginField').focus();
 </script>
