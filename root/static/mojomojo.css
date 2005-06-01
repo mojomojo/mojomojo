@@ -11,7 +11,6 @@ Body {
 	width: 750px;
 	position: absolute;	left: 50%;
 	height: 500px;
-	background: no-repeat url(/.static/gfx/swoshtop.jpg);
 	top: 10px;
 	display: block;
 	margin-left: -375px;

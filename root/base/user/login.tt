@@ -1,9 +1,8 @@
 [% PROCESS header.tt %]
         <div id="login">
         <h1>Login</h1>
-        <form id="loginForm" action="[%base%]/.login" method="POST">
-<dl>
-<dd>[%message%]</dd>
+       <form id="loginForm" action="[%base%]/.login" method="POST">
+<dl> [%message%]
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
 <dt>password:</dt>
