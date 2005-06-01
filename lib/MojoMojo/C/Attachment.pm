@@ -5,6 +5,7 @@ use base 'Catalyst::Base';
 use Archive::Zip qw(:ERROR_CODES);
 use File::MimeInfo::Magic;
 use File::Slurp;
+use Imager;
 
 =head1 NAME
 
@@ -130,6 +131,54 @@ sub download : Private {
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename="
           . $c->stash->{att}->name );
+}
+
+sub thumb : Private {
+    my ( $self, $c, $att, $action ) = @_;
+    $self->make_thumb($c->config->{home} . "/uploads/".
+                      $c->stash->{att}->id )
+      unless -f $c->config->{home} . "/uploads/" . 
+                $c->stash->{att}->id . ".thumb" ;
+    $c->res->output(
+        scalar(
+            read_file(
+                $c->config->{home} .   '/uploads/' . 
+                $c->stash->{att}->id . '.thumb'
+            )
+        )
+     );
+        $c->res->headers->header(
+            "Content-Disposition" => "inline; filename="
+              . $c->stash->{att}->name );
+}
+
+
+sub make_thumb {
+    my ($self,$file)=@_;
+    warn "loading $file";
+    my $img=Imager->new();
+    $img->open(file=>$file,type=>'jpeg') or die $img->errstr;
+    my $h=$img->getheight;
+    my $w=$img->getwidth;
+    my ($image,$result);
+    if ($h>$w) {
+        $image=$img->scale(xpixels=>100);
+            $h=$image->getheight;
+        $result =$image->crop(
+                          left=> int(($h-100)/2),
+                          top=>0,
+                          width=>100,
+                            height=>100);
+    } else {
+        $image=$img->scale(ypixels=>100);
+            $w=$image->getheight;
+        $result  =$image->crop(
+                            top=> int(($w-100)/2),
+                            left=>0,
+                            width=>100,
+                            height=>100);
+    }
+    $result->write(file=>$file.'.thumb',type=>'jpeg') or die $img->errstr;
 }
 
 =item delete

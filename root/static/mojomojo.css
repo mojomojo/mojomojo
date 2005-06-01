@@ -62,6 +62,7 @@ Body {
 }
 
 #content {
+  overflow: hidden;
 	background: #ffffff;
 	padding: 13px;
 	width: 724px;

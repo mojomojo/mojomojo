@@ -1,0 +1,6 @@
+[%PROCESS header.tt%]
+[%WHILE(picture=pictures.next)%]
+<img src="[%base%]/.attachment/[%picture.id%]/thumb"/>
+[%END%]
+
+[%PROCESS footer.tt%]
