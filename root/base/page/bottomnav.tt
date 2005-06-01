@@ -1,20 +1,23 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
 [% IF c.req.user ; %]
-<div class="tagedit">
+[% END %]
+<div class="tags">
+[% SET pagelink="/tags/" _ page.id %]
+[%  c.subreq(pagelink ) %]
+
+
+<span id="right">
 [% url = base _ '/.jsrpc/submittag/' _ page.id %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url,
     loading=>"gId('taginput').value='';"
-})%] 
+})%] </span>
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
-</div>
-[% END %]
-<div class="tags">
-[% SET pagelink="/tags/" _ page.id %]
-[%  c.subreq(pagelink ) %]
+
+
 </div>
 <script language="Javascript" type="text/javascript">
   var diff='';
