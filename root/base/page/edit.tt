@@ -8,7 +8,7 @@
 [% END %]</h1></div>
 [% PROCESS breadcrumbs.tt %]
 <div id="content"><div id="editHelp"> [% PROCESS edithelp.tt %]
-[% END %]</div>
+</div>
 <form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
