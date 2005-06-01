@@ -29,5 +29,5 @@
 [% IF template.name == 'page/edit.tt' %]
 [% PROCESS edithelp.tt %]
 [% END %]
-    <div id="Container">
+    <div id="container">
         [%template.title%]
