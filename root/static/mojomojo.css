@@ -93,8 +93,9 @@ Body {
 }
 
 #addtag {
-	text-align: right;
+	text-align: left;
 	background: #ffffff;
+	margin-left: 13px;
 }
 	
 /*</group>*/
@@ -496,5 +497,7 @@ span.statusmsg {
 .addbutton {
   border: 1px solid red:
   background: green;
+	font-size: 10px;
+	width: 80px;
 }
 
