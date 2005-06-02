@@ -1,6 +1,6 @@
 <span id="tags">
 [% IF tags %]
-&nbsp;&nbsp;&nbsp;<b>my tags : </b>
+<b>my tags : </b>
 [% FOREACH tag IN tags %]
 [% url = $base _ '/.jsrpc/untag/' _ page.id _ '/' _ tag.tag %]
 [<b class="remove">[%c.prototype.link_to_remote('&times;', { update => 'tags', url=>url })%]</b>]
@@ -12,6 +12,7 @@
 href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
+&nbsp;|&nbsp;
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch=' ' _ othertag.tag _ ' ' %]

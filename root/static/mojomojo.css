@@ -63,7 +63,6 @@ Body {
 	background: #fffdfa;
 	font-weight: bold;
 	font-size: 11px;
-	padding-left: 13px;
 	color: #919191;
 }
 
@@ -372,7 +371,7 @@ textarea#body {
   float: right;
 }
 
-.taginput {
+#taginput {
   font-size : 11pt;
   font-weight : bold;
   border-style : solid;
