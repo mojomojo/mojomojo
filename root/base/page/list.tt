@@ -2,7 +2,7 @@
         <div id="header"><h1>All Pages</h1></div>
 
 
-[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
+[% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
  <div id="content">
  <small> [% c.pref("title") || "MojoMojo" %] </small>
