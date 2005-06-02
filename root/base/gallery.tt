@@ -10,9 +10,10 @@ gallery
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">
+[% PROCESS gallery/pager.tt %]
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-<a  href="[%base%][%page.path%].gallery/photo/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/>
+<a  href="[%base%][%page.path%].p/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/></a>
 [%END%]
 </div>
 </div>

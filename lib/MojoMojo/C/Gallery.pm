@@ -2,6 +2,7 @@ package MojoMojo::C::Gallery;
 
 use strict;
 use base 'Catalyst::Base';
+use Carp qw/verbose/;
 
 =head1 NAME
 
@@ -24,14 +25,17 @@ Catalyst component.
 =cut
 
 sub default : Private {
-    my ( $self, $c, $page ) = @_;
+    my ( $self, $c, $action, $page) = @_;
     $c->stash->{template} = 'gallery.tt';
-    my ($pager);
-    my $iterator = MojoMojo::M::Core::Attachment->search(
+    #my ($pager);
+    #my $iterator = MojoMojo::M::Core::Attachment->search(
+    # oops, we have a column value named Page
+    $c->log->debug('page is '.$page);
+    my ($pager,$iterator) =MojoMojo::M::Core::Attachment->pager( 
              {contenttype=>  {-like=>'image/%'},
              page=>$c->stash->{page}->id},
              { page =>$page || 1,
-              rows => 20,
+              rows => 18,
             });
     $c->stash->{pictures} = $iterator;
     $c->stash->{pager} = $pager;
