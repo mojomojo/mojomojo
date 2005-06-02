@@ -24,6 +24,7 @@ my $build = Catalyst::Build->new(
      'Catalyst::Plugin::FormValidator' => '0.02',
      'Catalyst::Plugin::Prototype' => '0.01',
      'Catalyst::Plugin::Session::FastMmap' => '0.09',
+     'Catalyst::Plugin::Cache::FileCache'=>0,
      'Catalyst::Plugin::Singleton' => '0.02',
      'Catalyst::Plugin::Static' => '0.07',
      'Catalyst::Plugin::SubRequest' => '0.04',

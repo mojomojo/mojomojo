@@ -6,7 +6,7 @@ use utf8;
 use Carp qw/cluck/;
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
                 SubRequest Authentication::CDBI Prototype 
-                Singleton Unicode/;
+                Singleton Unicode Cache::FileCache/;
 use MojoMojo::Search::Plucene;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
@@ -20,6 +20,8 @@ MojoMojo->config( authentication => {
                     password_field => 'pass'});
 
 MojoMojo->config ( no_url_rewrite=>1 );
+MojoMojo->config( cache => { 
+                    storage=> MojoMojo->config->{home}.'/cache' });
 MojoMojo->setup();
 MojoMojo->prepare_search_index();
 
