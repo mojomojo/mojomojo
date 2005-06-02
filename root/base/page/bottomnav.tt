@@ -1,5 +1,5 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-
+<div id="showtag">Add tag</div>
 <div id="addtag">
 [% url = base _ '/.jsrpc/submittag/' _ page.id %]
 [%c.prototype.form_remote_tag({ 
