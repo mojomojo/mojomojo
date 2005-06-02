@@ -12,9 +12,9 @@ gallery
 <div id="content">
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-<img src="[%base%]/.attachment/[%picture.id%]/thumb"/>
+<a  href="[%base%][%page.path%].gallery/photo/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/>
 [%END%]
 </div>
 </div>
-
+        <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]

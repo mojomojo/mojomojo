@@ -1,0 +1,35 @@
+[%PROCESS header.tt%]
+<div id="header"><h1>
+[% IF page.name == "/" %]
+ [% c.pref("name") || "MojoMojo" %]
+[% ELSE %]
+ [% c.expand_wikiword(page.name_orig) %]
+[% END %]
+[%photo.name%]
+</h1></div>
+[% PROCESS breadcrumbs.tt %]
+[% PROCESS navbar.tt %]
+<div id="content">
+<div id="images">
+<img src="[%base%][%page.path%].attachment/[%photo.id%]/inline">
+</div>
+</div>
+        <div id="bottomnav">&nbsp;
+<div id="tags">
+[% SET pagelink="/tags/" _ page.id %]
+[%  c.subreq(pagelink ) %]
+</div>
+[% IF c.req.user ; %]
+<div id="addtag">
+[% url = base _ '/.jsrpc/submittag/' _ page.id %]
+[%c.prototype.form_remote_tag({ 
+    update => 'tags', 
+    url=>url,
+    loading=>"gId('taginput').value='';"
+})%] 
+<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+<input type="submit" name="add" value="add"> 
+</form>
+        [%END%]
+</div>
+[%PROCESS footer.tt%]
