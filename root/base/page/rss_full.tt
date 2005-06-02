@@ -9,7 +9,7 @@
 [%WHILE( page = pages.next )%]
     <page>
       <title>[% request.expand_wikiword(page.path) %]</title>
-      <description>[% FILTER html %][% page.content.formatted %][% END %]</description>    
+      <description>[% FILTER html %][% page.content.formatted(c) %][% END %]</description>    
       <pubDate>[% page.content.created.strftime %]</pubDate>
       <guid>[% base %][% page.path %]</guid>
       <link>[% base %][% page.path %]</link>

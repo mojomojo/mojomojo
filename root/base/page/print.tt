@@ -7,7 +7,7 @@
   (Revision #[%c.req.params.rev%])[%END%]
 </h1>
 <div id="revision">
-[% content.formatted(base) %]
+[% content.formatted(c) %]
 </div>
 
 <div class="byline">

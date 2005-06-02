@@ -4,7 +4,7 @@ use Net::Amazon;
 
 sub format_content_order { 5}
 sub format_content {
-    my ($self,$content,$base)=@_;
+    my ($self,$content,$c)=@_;
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {

@@ -26,7 +26,6 @@
  <hr/>
  [% END %]
  [%# FIXME: Should be moved to the controller %]
- [% UNLESS c.req.params.body %][% c.req.params.body = content.body %][% END %]
  
  <h3 class="navigation" id="previewHeading">
  Preview | 
@@ -34,17 +33,16 @@
  </h3>
 <div id="editHelp"> [% PROCESS edithelp.tt %] </div>
 <div class="preview" id="content_preview">
-[% page.content.formatted(base) %]
+[% page.content.formatted(c) %]
  </div>
  <p>
 <textarea id="body" name="body">[% 
 FILTER html %][% c.req.params.body %][% append %][%END
 %]</textarea>
- [% url= base _ '/.jsrpc/render' %]
- [% params = "'page=" _ page.path _ "&content='+escape(value)" %]
+ [% url= base _ page.path _ '/.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
   url     => url,
-  with    => params,
+  with    => params = "content='+escape(value)", 
   update  => 'content_preview'
   })%]
 

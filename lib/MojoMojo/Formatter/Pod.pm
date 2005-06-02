@@ -3,14 +3,14 @@ package MojoMojo::Formatter::Pod;
 use Pod::Tree::HTML;
 sub format_content_order { 10 }
 sub format_content {
-    my ($self,$content,$base)=@_;
+    my ($self,$content,$c)=@_;
 
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
    	if( $pod ) {
 		if ($line =~ m/^=pod\s*$/) { 
-         		$$content.=MojoMojo::Formatter::Pod->to_pod($pod);
+         		$$content.=MojoMojo::Formatter::Pod->to_pod($pod,$c->req->base);
 			$pod ="";
 		} else { $pod .=$line."\n"; }
 	} else {
@@ -48,7 +48,6 @@ sub new {
 
 sub do_link {
     my ($self,$token) = @_;
-    my $base="/mitiki";
     my $link = $token->attr('to');
     return $self->SUPER::do_link($token) unless $link =~ /^$WORD+$/;
     my $section = $token->attr('section');

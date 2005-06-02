@@ -14,9 +14,9 @@
 [% PROCESS navbar.tt %]
 <div id="content">
 [% IF render == 'highlight' %]
-[% content.highlight(base) %]
+[% content.highlight(c) %]
 [% ELSE %]
-[% content.formatted(base) %]
+[% content.formatted(c) %]
 [% END %]
 
 <div id="changes" style="display: none">

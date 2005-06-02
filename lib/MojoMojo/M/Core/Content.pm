@@ -36,13 +36,13 @@ __PACKAGE__->columns(TEMP=>qw/max_ver/);
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
 sub highlight {
-    my ( $self, $base ) = @_;
-    my $this_content = $self->formatted($base);
+    my ( $self, $c ) = @_;
+    my $this_content = $self->formatted($c);
 
     # FIXME: This may return undef. What do we do then?
     my $previous_content = (
         defined $self->previous
-        ? $self->previous->formatted($base)
+        ? $self->previous->formatted($c)
         : $this_content );
     my $this = [ split /\n/,                  $this_content ];
     my $prev = [ split /\n/,                  $previous_content ];
@@ -63,9 +63,9 @@ sub highlight {
 }
 
 sub formatted_diff {
-    my ( $self, $base, $to ) = @_;
-    my $this = [ split /\n/, $self->formatted($base) ];
-    my $prev = [ split /\n/, $to->formatted($base) ];
+    my ( $self, $c, $to ) = @_;
+    my $this = [ split /\n/, $self->formatted($c) ];
+    my $prev = [ split /\n/, $to->formatted($c) ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
@@ -86,9 +86,9 @@ sub formatted_diff {
 }
 
 sub formatted {
-    my ( $self, $base, $content ) = @_;
+    my ( $self, $c, $content ) = @_;
     $content ||= $self->body;
-    MojoMojo->call_plugins( "format_content", \$content, $base ) if ($content);
+    MojoMojo->call_plugins( "format_content", \$content, $c ) if ($content);
     return $content;
 }
 

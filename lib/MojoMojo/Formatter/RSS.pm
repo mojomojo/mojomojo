@@ -5,7 +5,7 @@ use XML::Feed;
 sub format_content_order { 4 }
 
 sub format_content {
-    my ($self,$content,$base)=@_;
+    my ($self,$content,$c)=@_;
     my @lines=split /\n/,$$content;
     undef $$content;
     foreach my $line (@lines) {
