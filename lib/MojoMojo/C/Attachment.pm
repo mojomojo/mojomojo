@@ -152,10 +152,39 @@ sub thumb : Private {
               . $c->stash->{att}->name );
 }
 
+sub inline : Private {
+    my ( $self, $c, $att, $action ) = @_;
+    $self->make_inline($c->config->{home} . "/uploads/".
+                      $c->stash->{att}->id )
+      unless -f $c->config->{home} . "/uploads/" . 
+                $c->stash->{att}->id . ".inline" ;
+    $c->res->output(
+        scalar(
+            read_file(
+                $c->config->{home} .   '/uploads/' . 
+                $c->stash->{att}->id . '.inline'
+            )
+        )
+     );
+        $c->res->headers->header(
+            "Content-Disposition" => "inline; filename="
+              . $c->stash->{att}->name );
+}
 
+
+
+sub make_inline {
+    my ($self,$file)=@_;
+    my $img=Imager->new();
+    $img->open(file=>$file,type=>'jpeg') or die $img->errstr;
+    my $h=$img->getheight;
+    my $w=$img->getwidth;
+    my ($image,$result);
+    $image=$img->scale(xpixels=>700);
+    $image->write(file=>$file.'.inline',type=>'jpeg') or die $img->errstr;
+}
 sub make_thumb {
     my ($self,$file)=@_;
-    warn "loading $file";
     my $img=Imager->new();
     $img->open(file=>$file,type=>'jpeg') or die $img->errstr;
     my $h=$img->getheight;
