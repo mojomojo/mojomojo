@@ -11,7 +11,7 @@
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">all Pages</a> | 
+  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">all pages</a> | 
   [% END; IF template.name =='page/recent.tt' %]
   <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
   [% ELSE %]
