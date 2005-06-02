@@ -1,7 +1,7 @@
 [% PROCESS header.tt %]
  <div id="header"><h1>Attachments for [%page.name%]</h1></div>
 
- <div id="navbar"><a  href="[% base %][% page.path %].edit">Edit</a> | Upload</div><div id="content">
+ <div id="toplinks"><a  href="[% base %][% page.path %].edit">Edit</a> | Upload</div><div id="content">
 <form action="[%base%][%page.path%].attachments" enctype="multipart/form-data" method="post">
 <p> Please select a file to attach to this page.</p>
 <input type="file" name="file">
