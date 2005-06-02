@@ -7,19 +7,12 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]</h1></div>
 [% PROCESS breadcrumbs.tt %]
-<<<<<<< .mine
-
  [% IF page.content_version ; %] 
  <div id="toplinks">
- <p>Edit | <a  href="[% base %][% page.path %].attachments">Upload</a></p>
+ Edit | <a  href="[% base %][% page.path %].attachments">Upload</a>
  </div>
  [% END %]
 
-<div id="content"><div id="editHelp"> [% PROCESS edithelp.tt %]
-</div>
-=======
-<div id="content">
->>>>>>> .r287
 <form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
@@ -33,11 +26,10 @@
  [% END %]
 
  
- [%# FIXME: Should be moved to the controller %]
  
  <h3 class="navigation" id="previewHeading">
  Preview | 
- <a href="">Show Syntax</a>
+ <a href="#" onclick="javascript:new Effect.Appear('editHelp');return false;">Show Syntax</a>
  </h3>
 <div id="editHelp"> [% PROCESS edithelp.tt %] </div>
 <div class="preview" id="content_preview">
@@ -50,7 +42,7 @@ FILTER html %][% c.req.params.body %][% append %][%END
  [% url= base _ page.path _ '/.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
   url     => url,
-  with    => params = "content='+escape(value)", 
+  with    => "'content='+escape(value)", 
   update  => 'content_preview'
   })%]
 

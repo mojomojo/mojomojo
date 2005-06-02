@@ -14,7 +14,6 @@
 <img src="[%base%][%page.path%].attachment/[%photo.id%]/inline">
 </div>
 </div>
-        <div id="bottomnav">&nbsp;
 <div id="tags">
 [% SET pagelink="/tags/" _ page.id %]
 [%  c.subreq(pagelink ) %]
@@ -30,6 +29,8 @@
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
-        [%END%]
+</div:>
+[%END%]
 </div>
+<div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]

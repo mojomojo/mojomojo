@@ -269,15 +269,15 @@ textarea#body {
 }
 
 #editHelp {
-  display:none;
+  opacity:0;
   position:absolute;
+  z-index:1;
 }
 
 #TextileHelp {
-  width: 722px; 
+  width: 700px; 
   background: #ddd; 
   border: 1px solid #aaa;
-  z-index:1;
   padding-bottom: 1em;
 }
 
