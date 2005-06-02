@@ -7,24 +7,32 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]</h1></div>
 [% PROCESS breadcrumbs.tt %]
+<<<<<<< .mine
+
+ [% IF page.content_version ; %] 
+ <div id="toplinks">
+ <p>Edit | <a  href="[% base %][% page.path %].attachments">Upload</a></p>
+ </div>
+ [% END %]
+
+<div id="content"><div id="editHelp"> [% PROCESS edithelp.tt %]
+</div>
+=======
 <div id="content">
+>>>>>>> .r287
 <form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
 
- [% IF message %]
+  [% IF message %]
  <p  id="message">
   <small>[% message %]</small>
  </p>
  [% END %]
- [% IF page.content_version ; %] 
- <div class="navigation">
- <p>Edit | <a  href="[% base %][% page.path %].attachments">Upload</a></p>
- </div>
- <hr/>
- [% END %]
+
+ 
  [%# FIXME: Should be moved to the controller %]
  
  <h3 class="navigation" id="previewHeading">
