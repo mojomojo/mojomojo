@@ -64,6 +64,7 @@ Body {
 	font-weight: bold;
 	font-size: 11px;
 	color: #919191;
+	padding-left: 13px;
 }
 
 #content {
@@ -372,14 +373,13 @@ textarea#body {
 }
 
 #taginput {
-  font-size : 11pt;
-  font-weight : bold;
+  font-size : 11px;
+  font-weight : normal;
   border-style : solid;
   border-width : 1px;
   border-color: #000000;
   background-color: #999999;
-  width: 40px;
-  margin-left: 10px;
+  width: 80px;
 }
 
 .newWikiWord {
