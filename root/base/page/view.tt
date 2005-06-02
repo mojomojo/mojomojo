@@ -7,7 +7,7 @@
 [% END %]
 </h1></div>
 
-[% IF page.name != "/" %
+[% UNLESS page.name == "/" %
 [% PROCESS breadcrumbs.tt %]
 [% END %]
 [%IF c.req.params.rev %](Revision [% c.req.params.rev %])
