@@ -265,20 +265,20 @@ div.preview {
 
 textarea#body {
  height: 180px; 
- width: 700px;
+ width: 722px;
 }
 
 #editHelp {
   display:none;
+  position:absolute;
 }
 
 #TextileHelp {
-  width: 250px; 
-  padding-top: 5px;
-  border-bottom:solid #888; 
-  border-right:solid #888; 
+  width: 722px; 
   background: #ddd; 
+  border: 1px solid #aaa;
   z-index:1;
+  padding-bottom: 1em;
 }
 
 #TextileHelp table {
@@ -487,8 +487,6 @@ span.statusmsg {
   background:transparent;
 }
 
-#images a {
-}
 
 .thumb {
   background: #ddd;

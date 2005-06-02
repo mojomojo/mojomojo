@@ -1,5 +1,16 @@
 <div id="TextileHelp">
-		<h3>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h3>
+		<h2>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h2>
+<div class="rightHandSide"> 
+    <h3>Wiki words</h3>
+<p>
+  Two or more uppercase words stuck together (camel case) or any phrase surrounded by doubble brackets is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.
+</p>
+<p>
+  Wiki words: <i>HomePage, ThreeWordsTogether, [[C++]], [[Let's play again!]]</i><br/>
+
+  Not wiki words: <i>IBM, School</i>
+</p>
+</div>
 
 		<table cellspacing="0" cellpadding="0">
 			<tr><td>_your text_</td><td class="arrow">-></td><td><em>your text</em></td></tr>
@@ -14,17 +25,6 @@
 
 			<tr><td>!imageURL!</td><td class="arrow">-></td><td>Image</td></tr>
     </table>
-    
-    <h3>Wiki words</h3>
-<p style="border-top: 1px dotted #ccc; margin-top: 0px">
-  Two or more uppercase words stuck together (camel case) or any phrase surrounded by doubble brackets is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.
-</p>
-<p>
-  Wiki words: <i>HomePage, ThreeWordsTogether, [[C++]], [[Let's play again!]]</i><br/>
-
-  Not wiki words: <i>IBM, School</i>
-</p>
-
 </div>
 
 <script language="JavaScript">
