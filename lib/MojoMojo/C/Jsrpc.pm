@@ -32,7 +32,7 @@ sub render : Local {
         && $c->req->params->{content} =~ /(\S+)/ )
     {
         $output =
-          MojoMojo::M::Core::Content->formatted( $c->req->base,
+          MojoMojo::M::Core::Content->formatted( $c,
           $c->req->params->{content},
           );
     }
