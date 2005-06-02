@@ -72,6 +72,9 @@ Body {
 #showtag {
 	background: white;
 	font-size: 11px;
+	padding-left: 13px;
+	padding-bottom: 5px;
+	padding-top: 5px;
 }
 
 #content {
