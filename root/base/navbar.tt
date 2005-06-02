@@ -11,11 +11,11 @@
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">All Pages</a> | 
+  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">all Pages</a> | 
   [% END; IF template.name =='page/recent.tt' %]
   <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">Recently Revised</a> | 
+  <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">recently revised</a> | 
   [% END; IF c.req.action=='.users' %]
   <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]
@@ -29,13 +29,13 @@
   [% END; IF template.name =='export.tt' %]
   <b class="navOn" title="Download a zip with all the pages in this wiki">export</b> | 
   [%ELSE%]
-  <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a> | 
+  <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
   [% IF (c.req.user AND  c.req.user.match(page.name) ) %]
 <br/>
 [%IF (c.req.action=="view")%]
-<b class="navOn">Home Page</b> | 
+<b class="navOn">home Page</b> | 
 [%ELSE%]
 <a href="[%base%][%page.path%]">home page</a> | 
 [%END%]
