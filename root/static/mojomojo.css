@@ -142,8 +142,7 @@ color: #273d661;
 }
 
 a:hover { 
-  color: #fff; 
- background-color: #3d4863; 
+  color: #22252e; 
 }
 
 
@@ -155,7 +154,7 @@ a:hover {
 form { margin: 0;}
 
 a.nav, a.nav:link, a.nav:visited { color: #577091; }
-a.nav:hover { color: #fff; background-color: #3d4863; }
+a.nav:hover { color: #121239; }
 
 li { margin-bottom: 7px }
 
@@ -168,7 +167,7 @@ li { margin-bottom: 7px }
 #navigationForm {
   font-size : 12px;
 }
-.navigation a:hover { color: #fff; background-color:#ab0b0b; }
+.navigation a:hover { color: #ab0b0b; }
 
 .navigation a {
   font-size: 11px;
