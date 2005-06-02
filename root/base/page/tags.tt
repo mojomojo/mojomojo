@@ -1,4 +1,17 @@
 <span id="tags">
+[% IF tags %]
+&nbsp;&nbsp;&nbsp;<b>my tags : </b>
+[% FOREACH tag IN tags %]
+[% url = $base _ '/.jsrpc/untag/' _ page.id _ '/' _ tag.tag %]
+[<b class="remove">[%c.prototype.link_to_remote('&times;', { update => 'tags', url=>url })%]</b>]
+[%IF tag.tag == highlight %]
+<a id="fadetag" class="tag" 
+[%ELSE%]
+<a class="tag" 
+[%END%]
+href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
+[%END%]
+[%END%]
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch=' ' _ othertag.tag _ ' ' %]
@@ -13,19 +26,6 @@
 <a class="tag" title="[%othertag.pagecount%]" 
 [%END%]
 href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
-[%END%]
-[% IF tags %]
-&nbsp;&nbsp;&nbsp;<b>my tags : </b>
-[% FOREACH tag IN tags %]
-[% url = $base _ '/.jsrpc/untag/' _ page.id _ '/' _ tag.tag %]
-[<b class="remove">[%c.prototype.link_to_remote('&times;', { update => 'tags', url=>url })%]</b>]
-[%IF tag.tag == highlight %]
-<a id="fadetag" class="tag" 
-[%ELSE%]
-<a class="tag" 
-[%END%]
-href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
-[%END%]
 [%END%]
 </span>
 <script language="Javascript" type="text/javascript">

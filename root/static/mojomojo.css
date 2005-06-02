@@ -63,8 +63,6 @@ Body {
 	background: #fffdfa;
 	font-weight: bold;
 	font-size: 11px;
-	padding-top: 3px;
-	padding-bottom: 3px;
 	padding-left: 13px;
 	color: #919191;
 }
@@ -95,7 +93,7 @@ Body {
 #addtag {
 	text-align: left;
 	background: #ffffff;
-	margin-left: 13px;
+	padding-left: 13px;
 }
 	
 /*</group>*/
