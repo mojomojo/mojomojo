@@ -94,7 +94,7 @@ sub edit : Global {
         # It's just a hash, not blessed into the Content package.
         $stash->{content} = MojoMojo::M::Core::Content->create_proto($page);
         $stash->{content}->{creator} = $user;
-        $c->req->params->{body} = $stash->{content}->body
+        $c->req->params->{body} = $stash->{content}->{body}
            unless $c->req->params->{body};
         return;
     }
