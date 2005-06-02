@@ -6,7 +6,10 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
 </h1></div>
+
+[% IF page.name != "/" %
 [% PROCESS breadcrumbs.tt %]
+[% END %]
 [%IF c.req.params.rev %](Revision [% c.req.params.rev %])
 [%IF c.req.params.rev > page.current_version %]
 <em>Rolled Back</em>
