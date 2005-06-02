@@ -269,6 +269,7 @@ textarea#body {
 }
 
 #editHelp {
+  display:none;
   opacity:0;
   position:absolute;
   z-index:1;
@@ -278,7 +279,8 @@ textarea#body {
   width: 700px; 
   background: #ddd; 
   border: 1px solid #aaa;
-  padding-bottom: 1em;
+  padding-bottom: 1.5em;
+  padding-top: 1em;
 }
 
 #TextileHelp table {
@@ -476,17 +478,26 @@ span.statusmsg {
   margin-left: 1em;
   font-size: 1.5em;
 }
-	
-/*</group>*/
 
 .login form input {
   font-size: 14px;
-	width: 120px;
+  width: 120px;
 }
+
+input {
+  border: 1px solid black;
+}
+
 #images a:hover  {
   background:transparent;
 }
 
+.addbutton {
+        margin-right: 0.5em;
+  border: 1px solid black;
+  background: white; 
+  color: green;
+}
 
 .thumb {
   background: #ddd;
@@ -494,10 +505,4 @@ span.statusmsg {
           margin: 8px;
 }
 
-.addbutton {
-  border: 1px solid red:
-  background: green;
-	font-size: 10px;
-	width: 80px;
-}
 

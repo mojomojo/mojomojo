@@ -29,5 +29,5 @@ href="/.recent/[%tag.tag%]">[%tag.tag%]</a>
 [%END%]
 </span>
 <script language="Javascript" type="text/javascript">
-Effect.Fade('fadetag');
+new Effect.Fade('fadetag');
 </script>

@@ -8,7 +8,7 @@
     loading=>"gId('taginput').value='';"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
-<input class="addbutton" type="submit" name="add" value="add"> 
+<input class="addbutton" type="button" name="add" value="+"> 
 </form>
 </div>
 <div id="tags">
