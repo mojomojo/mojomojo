@@ -102,6 +102,7 @@ Body {
 }
 
 #addtag {
+  display:none;
 	text-align: left;
 	background: #ffffff;
 	padding-left: 13px;
