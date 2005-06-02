@@ -69,6 +69,11 @@ Body {
 	padding-bottom: 5px;
 }
 
+#showtag {
+	background: white;
+	font-size: 11px;
+}
+
 #content {
   overflow: hidden;
 	background: #ffffff;
