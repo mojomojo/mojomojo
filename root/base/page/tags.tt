@@ -1,4 +1,4 @@
-<span id="tags">
+
 [% IF tags %]
 <b>my tags : </b>
 [% FOREACH tag IN tags %]
@@ -28,7 +28,6 @@ href="/.recent/[%tag.tag%]">[%tag.tag%]</a>
 [%END%]
 href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
 [%END%]
-</span>
 <script language="Javascript" type="text/javascript">
 new Effect.Fade('fadetag');
 </script>
