@@ -1,7 +1,7 @@
 [% PROCESS header.tt %]
 
         <div id="header"><h1>Feeds</h1></div>
-[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
+[% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]<div id="content">
 <p>You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page.</p> 
 
