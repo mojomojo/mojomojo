@@ -7,8 +7,7 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]</h1></div>
 [% PROCESS breadcrumbs.tt %]
-<div id="content"><div id="editHelp"> [% PROCESS edithelp.tt %]
-</div>
+<div id="content">
 <form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName();">
 
  [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
@@ -33,6 +32,7 @@
  Preview | 
  <a href="">Show Syntax</a>
  </h3>
+<div id="editHelp"> [% PROCESS edithelp.tt %] </div>
 <div class="preview" id="content_preview">
 [% page.content.formatted(base) %]
  </div>
