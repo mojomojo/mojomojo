@@ -496,8 +496,8 @@ input {
   border: 1px solid black;
 }
 
-#images a:hover  {
-  background:transparent;
+.thumb {
+  border: none;
 }
 
 .addbutton {
@@ -513,4 +513,11 @@ input {
           margin: 8px;
 }
 
+.imageinfo {
+  float:right;
+  padding:none ;
+  margin:none;
+  width: 150px;
+  min-height: 250px;
+}
 
