@@ -110,6 +110,86 @@ sub open_gap {
     return $parent;
 }
 
+=item rename
+
+  $page->rename( 'new name', $creator );
+
+Renames the page opon which it's called, and increments the version numbers
+of the page and all its descendants.
+
+=cut
+
+sub rename {
+    my ($self, $new_name_orig, $creator) = @_;
+    my ($old_name, $old_path, $old_page_version) = $self->get(qw/name path page_version/);
+    my ($new_name_orig, $new_name) = __PACKAGE__->normalize_name( $new_name_orig );
+    my $new_path = $self->parent->path . '/' . $new_name;
+
+    # will probably need to do somehting different here if/when we support workflow...
+    my $new_version_number = $self->version + 1;
+
+    my $new_page_version = $old_page_version->copy
+        ({
+	  page    => $self->id,
+          version => $new_version_number,
+	 });
+    my $now = DateTime->now;
+    my $content_version = $old_page_version->content_version_last;
+    $new_page_version->set
+	(
+	 name         => $new_name,
+	 name_orig    => $new_name_orig,
+	 creator      => $creator,
+         created      => $now,
+         release_date => $now,
+         comments     => "Changed name from $old_name to $new_name.",
+         content_version_first => $content_version,
+         content_version_last  => $content_version,
+	);
+    $new_page_version->update;
+
+    $old_page_version->status('removed');
+    $old_page_version->update;
+
+    $self->set
+        (
+	 name      => $new_name,
+         name_orig => $new_name_orig,
+         version   => $new_version_number,
+	);
+    $self->update;
+
+    # update version numbers of all descendants
+    for my $descendant ($self->descendants_by_lft)
+    {
+	my $old_descendant_version = $descendant->page_version;
+        my $new_version_number = $old_descendant_version->version + 1;
+	my $new_descendant_version = $old_descendant_version->copy
+            ({
+	      page    => $descendant->id,
+              version => $new_version_number,
+	     });
+	my $content_version = $old_descendant_version->content_version_last;
+	$new_descendant_version->set
+	    (
+	     creator      => $creator,
+	     created      => $now,
+	     release_date => $now,
+	     comments     => "Ancestor page path changed from $old_path to $new_path.",
+             parent_version        => $descendant->parent->version,
+	     content_version_first => $content_version,
+	     content_version_last  => $content_version,
+	    );
+	$new_descendant_version->update;
+
+	$old_descendant_version->status('removed');
+	$old_descendant_version->update;
+
+	$descendant->version( $new_version_number );
+        $descendant->update;
+    }
+}
+
 =item children
 
   @children = $page->children;
@@ -155,6 +235,41 @@ sub descendants {
      my @pages = $_[0]->search_descendants( $_[0]->id );
      return __PACKAGE__->set_paths( @pages );
 }
+
+=item descendants_by_lft
+
+  @descendants = $page->descendants_by_lft;
+
+Like L<descendants>, but returns pages sorted by the nested set C<lft>
+column, which means a depth-first, left-to-right order. This is often
+necessary for operations that must be performed on parents before being
+performed on their children.
+
+=cut
+
+__PACKAGE__->set_sql('descendants_by_lft' => qq{
+ SELECT descendant.id,descendant.name,descendant.name_orig,
+        descendant.parent,descendant.depth
+ FROM __TABLE__ as ancestor, __TABLE__ as descendant
+ WHERE ancestor.id = ?
+  AND descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt
+ ORDER BY descendant.lft
+});
+
+sub descendants_by_lft {
+     my @pages = $_[0]->search_descendants_by_lft( $_[0]->id );
+     return __PACKAGE__->set_paths( @pages );
+}
+
+=item descendants_by_date
+
+  @descendants = $page->descendants_by_date;
+
+Like L<descendants>, but returns pages sorted by the dates of their
+last content release dates.
+
+=cut
 
 __PACKAGE__->set_sql('descendants_by_date' => qq{
  SELECT __ESSENTIAL__ FROM
