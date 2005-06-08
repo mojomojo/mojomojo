@@ -12,10 +12,10 @@
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |
      [%attachment.size div 1024%]k |
-	   <a href="[%base%]/.attachment/[%attachment.id%]">view</a> |
-	   <a href="[%base%]/.attachment/[%attachment.id%]/download">download</a> |
-	   <a href="[%base%]/.attachment/[%attachment.id%]/insert">insert</a> |
-	   <a href="[%base%]/.attachment/[%attachment.id%]/delete">delete</a> |
+	   <a href="[%base%][%page.path%]/.attachment/[%attachment.id%]">view</a> |
+	   <a href="[%base%][%page.path%]/.attachment/[%attachment.id%]/download">download</a> |
+	   <a href="[%base%][%page.path%]/.attachment/[%attachment.id%]/insert">insert</a> |
+	   <a href="[%base%][%page.path%]/.attachment/[%attachment.id%]/delete">delete</a> |
     </small>
 </p>
 [% END %]
