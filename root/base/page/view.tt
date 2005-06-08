@@ -11,13 +11,16 @@
 [% PROCESS breadcrumbs.tt %]
 [% END %]
 [%IF c.req.params.rev %](Revision [% c.req.params.rev %])
-[%IF c.req.params.rev > page.current_version %]
-<em>Rolled Back</em>
+[%IF c.req.params.rev > page.content_version %]
+<em>Rolled Back (Current: [%page.content_version%])</em>
 [%END%][%END%]
 [% PROCESS navbar.tt %]
 <div id="content">
 [% IF render == 'highlight' %]
 [% content.highlight(c) %]
+<script language="Javascript" type="text/javascript">
+Fat.fade();
+</script>
 [% ELSE %]
 [% content.formatted(c) %]
 [% END %]
