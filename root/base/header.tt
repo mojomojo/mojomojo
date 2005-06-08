@@ -8,6 +8,7 @@
     <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/getElementsBySelector.js"></script>
     <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/prototype.js"></script>
     <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/effects2.js"></script>
+    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/fat.js"></script>
     <title>
 	[% IF page %] [% c.expand_wikiword(page.name_orig) %] in [% END %]
             [%
