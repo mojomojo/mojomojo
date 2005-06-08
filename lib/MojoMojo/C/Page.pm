@@ -195,14 +195,10 @@ sub print : Global {
 
 
 sub tags : Global {
-    my ( $self, $c, $page, $highlight ) = @_;
+    my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
-    unless ( ref $c->stash->{page} ) {
-        $c->stash->{page}=MojoMojo::M::Core::Page->retrieve($page);
-    } 
-    $page = $c->stash->{page};
-    die '"'.$page .'" not found' unless ref $page;
+    my $page = $c->stash->{page};
     if ($c->req->{user}) {
     my @tags = $page->others_tags( $c->req->{user_id} );
     $c->stash->{others_tags} = [@tags];
@@ -215,8 +211,8 @@ sub tags : Global {
 }
 
 sub list : Global {
-    my ( $self, $c, $page, $tag ) = @_;
-    $page=$c->stash->{page};
+    my ( $self, $c, $tag ) = @_;
+    my $page=$c->stash->{page};
     return $c->forward('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
     $c->stash->{pages}    =  [ $page->descendants ];
@@ -228,8 +224,8 @@ sub list : Global {
 }
 
 sub recent : Global {
-    my ( $self, $c, $page, $tag ) = @_;
-    $page=$c->stash->{page};
+    my ( $self, $c, $tag ) = @_;
+    my $page=$c->stash->{page};
     return $c->forward('/tag/recent') if $tag;
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
