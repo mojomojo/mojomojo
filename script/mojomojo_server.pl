@@ -1,15 +1,17 @@
 #!/usr/bin/perl -w
 
-BEGIN { 
-    $ENV{CATALYST_ENGINE} ||= 'HTTP';
-    $ENV{CATALYST_SCRIPT_GEN} = 4;
-}  
-
 use strict;
 use Getopt::Long;
 use Pod::Usage;
 use FindBin;
-use lib "$FindBin::Bin/../lib";
+use Path::Class;
+
+BEGIN { 
+    $ENV{CATALYST_ENGINE} ||= 'HTTP';
+    $ENV{CATALYST_SCRIPT_GEN} = 4;
+    use lib dir($FindBin::Bin)->parent->subdir('lib')->stringify;
+}  
+
 use MojoMojo;
 
 my $help = 0;
