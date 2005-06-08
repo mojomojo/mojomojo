@@ -1,7 +1,7 @@
 package MojoMojo::M::Core::Tag;
 use strict;
 
-__PACKAGE__->columns( TEMP      => qw/refcount pagecount/ );
+__PACKAGE__->columns( TEMP      => qw/refcount photocount pagecount/ );
 __PACKAGE__->columns( Stringify => qw/tag/ );
 
 __PACKAGE__->set_sql(
@@ -22,6 +22,12 @@ GROUP BY tag ORDER by REFCOUNT DESC LIMIT 10
 __PACKAGE__->set_sql(
     'others_tags' => qq{
 SELECT  id,tag,count(tag) as pagecount from tag WHERE page=? and person != ? GROUP BY tag order by pagecount
+}
+);
+
+__PACKAGE__->set_sql(
+    'others_photo_tags' => qq{
+SELECT  id,tag,count(tag) as photocount from tag WHERE photo=? and person != ? GROUP BY tag order by photocount
 }
 );
 
