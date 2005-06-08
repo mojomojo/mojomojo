@@ -21,7 +21,7 @@ MojoMojo->config( authentication => {
 
 MojoMojo->config ( no_url_rewrite=>1 );
 MojoMojo->config( cache => { 
-                    storage=> MojoMojo->config->{home}.'/cache' });
+                  storage=> MojoMojo->config->{home}.'/cache' });
 MojoMojo->setup();
 MojoMojo->prepare_search_index();
 
@@ -58,6 +58,11 @@ sub begin : Private {
         my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages($c->stash->{path});
         @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
       $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
+      $c->req->{user_id} && do {
+      $c->stash->{user}=MojoMojo::M::Core::Person->retrieve(
+                        $c->req->{user_id}
+                        );
+                        };
     }
 }
 
@@ -71,8 +76,6 @@ sub default : Private {
     my ( $self, $c ) = @_;
     $c->stash->{message}="Couldn't find that page, jimmy";
     $c->stash->{template} = 'message.tt';
-#    $c->req->args( ['/'] );
-#    $c->forward( "/page/view" );
 }
 
 =item end (builtin)
