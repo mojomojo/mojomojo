@@ -11,6 +11,9 @@ gallery
 [% PROCESS navbar.tt %]
 <div id="content">
 [% PROCESS gallery/pager.tt %]
+<div class="imageinfo">
+<small>Hoover over an image to get more info.</small>
+</div>
 <div id="images">
 [%WHILE(picture=pictures.next)%]
 <a  href="[%base%][%page.path%].p/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/></a>

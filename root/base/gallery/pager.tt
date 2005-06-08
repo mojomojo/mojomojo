@@ -5,7 +5,7 @@
 [%END%]
 [%UNLESS pager.current_page==pager.last_page%]
 <a href="[%base%][%page.path%].[%c.req.args.first%]/[%pager.next_page%]">&gt;</a>
-<a href="[%base%][%page.path%].[%c.req.args.last%]/[%pager.last_page%]">&#187;</a>
+<a href="[%base%][%page.path%].[%c.req.args.first%]/[%pager.last_page%]">&#187;</a>
 [%END%]
 </div>
 <p><em>Showing [%pager.entries_on_this_page%] ([%pager.first%]-[%pager.last%]) of [%pager.total_entries%] pictures in [%c.wikiword(page.path,base)%].</em></p>

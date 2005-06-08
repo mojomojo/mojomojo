@@ -46,6 +46,7 @@ CREATE TABLE content (
  abstract     VARCHAR(4000),
  comments     VARCHAR(4000),
  body         TEXT,
+ precompiled   TEXT,
  PRIMARY KEY (page, version)
 );
 
@@ -182,15 +183,31 @@ CREATE TABLE tag (
     id     INTEGER PRIMARY KEY,
     person INTEGER REFERENCES person,
     page   INTEGER REFERENCES page,
+    photo  INTEGER REFERENCES photo,
     tag    VARCHAR(100)
 );
 
 CREATE TABLE attachment (
     id          INTEGER PRIMARY KEY,
+    uploaded    INTEGER,
     page        INTEGER REFERENCES page,
     name        VARCHAR(100),
     size        INTEGER,
     contenttype VARCHAR(100)
+);
+
+CREATE TABLE photo (
+    id          INTEGER PRIMARY KEY,
+    title       TEXT,
+    description TEXT,
+    comments    TEXT,
+    camera      TEXT,
+    taken       INTEGER,
+    iso         INTEGER,
+    lens        TEXT, 
+    aperture    TEXT
+    height      INT,
+    width       INT 
 );
 
 CREATE TABLE journal (

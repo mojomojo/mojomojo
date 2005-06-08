@@ -3,7 +3,6 @@ package MojoMojo::C::Attachment;
 use strict;
 use base 'Catalyst::Base';
 use Archive::Zip qw(:ERROR_CODES);
-use File::MimeInfo::Magic;
 use File::Slurp;
 use Imager;
 
@@ -50,29 +49,24 @@ sub attachments : Global {
           }
           foreach my $member ($zip->members) {
             next if $member->isDirectory;
-              my $att =
-                 MojoMojo::M::Core::Attachment->create(
-                    { name => $member->fileName, page => $page } );
-              my $filename = $c->config->{home} . "/uploads/" . $att->id;
-              $member->extractToFileNamed($filename);
-              $att->contenttype( mimetype($filename) );
-              $att->size( -s $filename );
-              $att->update();
+            my $att = MojoMojo::M::Core::Attachment->
+                 create_from_file($page, $member->fileName,
+                 {$member->extractToFileNamed(shift)});
+            if (! $att) {
+              $c->stash->{template}='message.tt';
+              $c->stash->{message}= "Can't extract $member->fileName from zip.";
+            }
           }
        } else {
         my $att =
-          MojoMojo::M::Core::Attachment->create
-          ( { name => $file, page => $page } );
+          MojoMojo::M::Core::Attachment->create_from_file
+          ( $page, $file, sub { my $file=shift; warn "writing $upload to $file"; $upload->link_to($file) || 
+                           $upload->copy_to($file); } );
 
-        my $filename = $c->config->{home} . "/uploads/" . $att->id;
-        unless (  $upload->link_to($filename) || 
-                  $upload->copy_to($filename) ) {
+        if (! $att) {
           $c->stash->{template}='message.tt';
-          $c->stash->{message}= "Can't open $filename for writing.";
+          $c->stash->{message}= "Can't open $file for writing.";
         }
-        $att->contenttype( mimetype($filename) );
-        $att->size( -s $filename );
-        $att->update();
       }
     }
 }
@@ -94,18 +88,12 @@ sub index : Path('/attachment') {
         $c->forward("/attachment/$action");
     }
     unless ( $c->res->output || $c->stash->{template} ) {
-        $c->res->output(
-            scalar(
-                read_file(
-                    $c->config->{home}. "/uploads/" . $c->stash->{att}->id
-                )
-            )
-        );
-        $c->res->headers->header( 'content-type',
-            $c->stash->{att}->contenttype );
+        $att=$c->stash->{att};
+        $c->res->output( scalar( read_file( $att->filename)));
+        $c->res->headers->header( 'content-type', $att->contenttype );
         $c->res->headers->header(
-            "Content-Disposition" => "inline; filename="
-              . $c->stash->{att}->name );
+            "Content-Disposition" => "inline; filename=".$att->name 
+        );
     }
 }
 
@@ -119,12 +107,7 @@ content-disposition.
 sub download : Private {
     my ( $self, $c, $att, $action ) = @_;
     $c->res->output(
-        scalar(
-            read_file(
-                $c->config->{home} . "/uploads/" . 
-                $c->stash->{att}->id
-            )
-        )
+        scalar(read_file( $c->stash->{att}->filename))
     );
     $c->res->headers->header( 'content-type',
         $c->stash->{att}->contenttype );
@@ -135,40 +118,26 @@ sub download : Private {
 
 sub thumb : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $self->make_thumb($c->config->{home} . "/uploads/".
-                      $c->stash->{att}->id )
-      unless -f $c->config->{home} . "/uploads/" . 
-                $c->stash->{att}->id . ".thumb" ;
+    $self->make_thumb( $c->stash->{att}->filename )
+      unless -f $c->stash->{att}->filename . ".thumb" ;
     $c->res->output(
-        scalar(
-            read_file(
-                $c->config->{home} .   '/uploads/' . 
-                $c->stash->{att}->id . '.thumb'
-            )
-        )
-     );
-        $c->res->headers->header(
-            "Content-Disposition" => "inline; filename="
-              . $c->stash->{att}->name );
+        scalar(read_file($c->stash->{att}->filename. '.thumb'))
+    );
+    $c->res->headers->header(
+        "Content-Disposition" => "inline; filename="
+           . $c->stash->{att}->name );
 }
 
 sub inline : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $self->make_inline($c->config->{home} . "/uploads/".
-                      $c->stash->{att}->id )
-      unless -f $c->config->{home} . "/uploads/" . 
-                $c->stash->{att}->id . ".inline" ;
+    $self->make_inline($c->stash->{att}->filename )
+      unless -f $c->stash->{att}->filename . ".inline" ;
     $c->res->output(
-        scalar(
-            read_file(
-                $c->config->{home} .   '/uploads/' . 
-                $c->stash->{att}->id . '.inline'
-            )
-        )
+        scalar( read_file( $c->stash->{att}->filename . '.inline'))
      );
-        $c->res->headers->header(
-            "Content-Disposition" => "inline; filename="
-              . $c->stash->{att}->name );
+    $c->res->headers->header(
+        "Content-Disposition" => "inline; filename="
+        . $c->stash->{att}->name );
 }
 
 
@@ -220,7 +189,6 @@ file system.
 sub delete : Private {
     my ( $self, $c, $att, $action ) = @_;
     return $c->forward('/user/login') unless $c->req->{user};
-    $c->req->args( [ $c->stash->{att}->page->path ] );
     $c->stash->{att}->delete();
     $c->forward('/attachment/attachments');
 }
@@ -235,15 +203,12 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $c->stash->{att}->page->set_path();
-    $c->req->args( [ $c->stash->{att}->page->path ] );
-    $c->log->info('path is'.$c->stash->{att}->page->path);
     $c->stash->{append} = "\n\n\""
       . $c->stash->{att}->name . "\":"
       . $c->req->base
       . "/.attachment/"
       . $c->stash->{att};
-    $c->forward('/page/edit');
+    $c->forward('/pageadmin/edit');
 }
 
 =back 
