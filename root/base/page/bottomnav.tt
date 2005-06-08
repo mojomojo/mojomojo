@@ -1,19 +1,19 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div id="showtag"><a href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';return false;">add tag</a></div>
-<div id="addtag">
-[% url = base _ page.path _'/.jsrpc/submittag' %]
+<div id="showtag" class="showdiv"><a href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
+<div id="addtag" class="formdiv">
+[% url = base _ page.path _'.jsrpc/submittag' %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url,
-    loading=>"gId('taginput').value='';gId('addtag').style.display='none';gId('showtag').style.display='block';"
+    loading=>"gId('taginput').value='';gId('addtag').style.display='none';gId('showtag').style.display='block';",
+    complete=>"Fat.fade('.highlight');"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input class="addbutton" type="submit" name="add" value="+"> 
 </form>
 </div>
 <div id="tags">
-[% SET pagelink="/tags/" _ page.id %]
-[%  c.subreq(pagelink ) %]
+[%  c.subreq('/tags', 'page'=>page, pink=>'color' ) %]
 </div>
 [% IF c.req.user ; %]
 
@@ -93,5 +93,3 @@
  </small>
 [% END %]  </span>
 </div>
-
-

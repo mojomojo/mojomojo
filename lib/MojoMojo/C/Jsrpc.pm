@@ -69,7 +69,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $page ) = @_;
-    $c->req->args( [ $page, $c->req->params->{tag} ] );
+    $c->req->args( [ $c->req->params->{tag} ] );
     $c->forward('/jsrpc/tag');
 }
 
@@ -80,9 +80,9 @@ add a tag to a page. return list of yours and popular tags.
 =cut
 
 sub tag : Local {
-    my ( $self, $c, $page, $tagname ) = @_;
+    my ( $self, $c, $tagname ) = @_;
     ($tagname)= $tagname =~ m/(\w+)/;
-    $page = MojoMojo::M::Core::Page->retrieve($page);
+    my $page = $c->stash->{page};
     unless (
         ! $tagname ||
         MojoMojo::M::Core::Tag->search(
@@ -100,7 +100,7 @@ sub tag : Local {
           )
           if $page;
     }
-    $c->req->args( [ $page, $tagname ] );
+    $c->req->args( [  $tagname ] );
     $c->forward('/page/tags');
 }
 
@@ -111,8 +111,8 @@ remove a tag to a page. return list of yours and popular tags.
 =cut
 
 sub untag : Local {
-    my ( $self, $c, $page, $tagname ) = @_;
-    $page = MojoMojo::M::Core::Page->retrieve($page);
+    my ( $self, $c, $tagname ) = @_;
+    my $page = $c->stash->{page};
     die "Page " . $page . " not found" unless ref $page;
     my $tag = MojoMojo::M::Core::Tag->search(
         page   => $page,
@@ -120,7 +120,7 @@ sub untag : Local {
         tag    => $tagname
     )->next();
     $tag->delete() if $tag;
-    $c->req->args( [ $page, $tagname ] );
+    $c->req->args( [ $tagname ] );
     $c->forward('/page/tags');
 }
 
