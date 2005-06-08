@@ -122,7 +122,8 @@ of the page and all its descendants.
 sub rename {
     my ($self, $new_name_orig, $creator) = @_;
     my ($old_name, $old_path, $old_page_version) = $self->get(qw/name path page_version/);
-    my ($new_name_orig, $new_name) = __PACKAGE__->normalize_name( $new_name_orig );
+    my $new_name;
+    ($new_name_orig, $new_name) = __PACKAGE__->normalize_name( $new_name_orig );
     my $new_path = $self->parent->path . '/' . $new_name;
 
     # will probably need to do somehting different here if/when we support workflow...
