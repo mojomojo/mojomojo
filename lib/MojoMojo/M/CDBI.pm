@@ -10,8 +10,7 @@ __PACKAGE__->config(
     dsn                => MojoMojo->config->{dsn},
     namespace          => 'MojoMojo::M::Core',
     additional_classes => [
-        qw/Class::DBI::AbstractSearch Class::DBI::Plugin::RetrieveAll
-          Class::DBI::FromForm/
+        qw/Class::DBI::FromForm/
     ],
     relationships => 1
 );
@@ -25,6 +24,5 @@ sub new {
      }
      return $self;
 }
-
 
 1;
