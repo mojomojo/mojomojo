@@ -69,7 +69,7 @@ Body {
 	padding-bottom: 5px;
 }
 
-#showtag {
+.showdiv {
 	background: white;
 	font-size: 11px;
 	padding-left: 13px;
@@ -101,11 +101,12 @@ Body {
 	font-size: 10px;
 }
 
-#addtag {
+.formdiv {
   display:none;
 	text-align: left;
 	background: #ffffff;
 	padding-left: 13px;
+  padding-bottom: 5px;
 }
 	
 /*</group>*/
@@ -521,3 +522,20 @@ input {
   min-height: 250px;
 }
 
+
+/* Transparent forms */
+
+input.dual {
+    width: 500px;
+    border: 1px solid #fff;
+    margin:0.1em;
+    background: transparent;
+}
+
+input.dual:focus {
+    border: 1px solid #000;
+}
+
+.dualbutton {
+    display:none;
+}

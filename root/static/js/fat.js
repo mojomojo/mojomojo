@@ -11,6 +11,15 @@ var Fat = {
 		b = b.toString(16); if (b.length == 1) b = '0' + b;
 		return "#" + r + g + b;
 	},
+	fade : function ( selector)
+	{
+		var a = document.getElementsBySelector(selector);
+		for (var i = 0; i < a.length; i++) 
+		{
+			var o = a[i];
+		  if (o.id) Fat.fade_element(o.id,null,null,"#EAE");
+		}
+	},
 	fade_all : function ()
 	{
 		var a = document.getElementsByTagName("*");
@@ -84,9 +93,3 @@ var Fat = {
 		return c;
 	}
 }
-function startFade() 
-	{
-	Fat.fade_all();
-	}
-
-registerAction(window,'load',startFade);
