@@ -55,7 +55,7 @@ my $build = Catalyst::Build->new(
      URI => '1.35',
      YAML => '0.36',
      Imager => '0',
-     'Catalyst::Model::CDBI::Sweet' => 0   
+     'Catalyst::Model::CDBI::Sweet' => '0.02'  
      },
 
     create_makefile_pl => 'passthrough',
