@@ -32,13 +32,18 @@
   <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
-  [% IF (c.req.user AND  c.req.user.match(page.name) ) %]
 <br/>
 [%IF (c.req.action=="view")%]
-<b class="navOn">home Page</b> | 
+<b class="navOn">page</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%]">home page</a> | 
+<a href="[%base%][%page.path%]">page</a> | 
 [%END%]
+[%IF (pictures || photo)%]
+<b class="navOn">gallery</b> | 
+[%ELSE%]
+<a href="[%base%][%page.path%].gallery">gallery</a> | 
+[%END%]
+  [% IF (c.req.user AND  c.req.user.match(page.name) ) %]
 [%IF (c.req.action=="profile")%]
 <b class="navOn">Profile</b> | 
 [%ELSE%]
