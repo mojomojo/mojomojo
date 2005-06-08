@@ -32,6 +32,8 @@ Check that user is logged in and has rights to this page.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
+    $c->forward('/user/login') if $c->req->params->{pass} && 
+                                 ! $c->stash->{user};
     my $user = $c->req->{user};
     my $admins = $c->pref('admins');
     return 1 if $user && $admins =~m/\b$user\b/ ;
@@ -55,8 +57,6 @@ sub edit : Global {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
     $c->req->params->{login}=$c->req->params->{creator};
-    $c->forward('/user/login') if $c->req->params->{pass} && 
-                                 ! $c->req->{user_id};
 
     my $user = $c->req->{user_id} || 0;
     $c->log->info("user is $user");
