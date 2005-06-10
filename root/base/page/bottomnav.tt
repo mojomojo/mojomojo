@@ -22,7 +22,7 @@
   var diff='';
   function toggleChanges() {
     if (!diff) {
-      diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[% page.content _'/' _ page.content.content_version%]');
+      diff=xmlHTTPRequest('[%base%]/.jsrpc/diff/[% page.content _'/' _ page.content.version%]');
       document.getElementById('diff').innerHTML=diff;
     }
     if (document.getElementById("changes").style.display == "none") {
