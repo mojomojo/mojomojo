@@ -25,9 +25,6 @@
   <small>[% message %]</small>
  </p>
  [% END %]
-
- 
- 
  <h3 class="navigation" id="previewHeading">
  Preview | 
  <a href="#" onclick="javascript:toggleHelp();return false;">Syntax</a>
@@ -49,8 +46,7 @@ FILTER html %][% c.req.params.body %][% append %][%END
 
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF user.active %]
-  [% link = "/" _ c.req.user %]
-  [% c.wikiword(link,base) %] 
+  [% c.wikiword(user.link,base) %] 
   (<a href="[% base %]/.logout">forget me</a>)
   [% ELSE %]
   <input type="text" name="creator" id="authorName" value="[% content.creator || user || c.req.params.user || "AnonymousCoward" %]" onclick="this.value == 'AnonymousCoward' ? this.value = '' : true"/>
