@@ -1,0 +1,13 @@
+<div id="postForm">
+[% url = base _ page.path _ '.comment' %]
+[%c.prototype.form_remote_tag ({
+url => url
+update => 'comments'
+})%]
+<textarea id="comment" name="body">
+</textarea>
+<input type="submit" value="Post"/> as
+[% c.wikiword(user.link,base) %] 
+(<a href="[% base %]/.logout">forget me</a>)
+</form>
+</div>

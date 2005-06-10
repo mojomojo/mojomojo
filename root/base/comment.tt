@@ -1,0 +1,20 @@
+<h3> Comments</h3>
+[% WHILE ( comment = comments.next ) %]
+<div class="comment">
+<dl>
+<dt>poster</dt>
+<dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
+<dt>posted</dt>
+<dd>[%comment.posted%]</dd>
+<dt>comment</dt>
+<dd>[%comment.formatted%]</dd>
+</dl>
+</div>
+[%END%]
+<div id="postForm">
+[% IF user %]
+[%PROCESS comment/post.tt%]
+[%ELSE%]
+[%PROCESS comment/login.tt%]
+[%END%]
+</div>

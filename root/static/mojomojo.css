@@ -279,6 +279,11 @@ textarea#body {
  width: 722px;
 }
 
+textarea#comment {
+ height: 150px; 
+ width: 400px;
+}
+
 #editHelp {
   display:none;
   opacity:0;
@@ -538,4 +543,9 @@ input.dual:focus {
 
 .dualbutton {
     display:none;
+    margin:0.1em;
+}
+
+#title input,big {
+    font-size: 1.6em;
 }

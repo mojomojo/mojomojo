@@ -210,6 +210,16 @@ CREATE TABLE photo (
     width       INT 
 );
 
+CREATE TABLE comment (
+    id       INTEGER PRIMARY KEY,
+    poster   INT REFERENCES person,
+    page     INT REFERENCES page,
+    picture  INT REFERENCES photo,
+    posted   INT,
+    body     TEXT
+);
+
+
 CREATE TABLE journal (
     pageid          INTEGER PRIMARY KEY REFERENCES page,
     name            VARCHAR(100),
