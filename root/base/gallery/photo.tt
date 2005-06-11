@@ -5,7 +5,7 @@
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
-[%photo.name%]
+[%photo.title%]
 </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
