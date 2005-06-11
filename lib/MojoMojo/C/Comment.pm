@@ -48,7 +48,7 @@ sub default : Private {
 
 sub login : Local {
     my ( $self, $c ) = @_;
-    $c->forward->('/user/login');
+    $c->forward('/user/login');
     if ($c->stash->{message}) {
         $c->stash->{template}='comment/login.tt';
     } else {
