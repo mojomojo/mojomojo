@@ -15,6 +15,7 @@
 href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
+[%IF others_tags %]
 &nbsp;|&nbsp;
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
@@ -30,4 +31,5 @@ href="/.recent/[%tag.tag%]">[%tag.tag%]</a>
 <a class="tag" title="[%othertag.photocount%]" 
 [%END%]
 href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
+[%END%]
 [%END%]

@@ -1,0 +1,9 @@
+<h1> Exif Data</h1>
+
+<dl>
+<dt>Taken:</dt><dd>[%photo.taken.ymd('-')%] [%photo.taken.hms(':')%]</dd>
+<dt>Camera:</dt><dd>[%photo.camera || 'not specified'%]</dd>
+<dt>Lens:</dt><dd>[%photo.lens || 'not specified'%]</dd>
+<dt>ISO:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
+<dt>Aperture:</dt><dd>[%photo.aperture || 'not specified'%]</dd>
+</dl>

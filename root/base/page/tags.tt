@@ -16,6 +16,7 @@
 href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
+[% IF other_tags %]
 &nbsp;|&nbsp;
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
@@ -35,4 +36,5 @@ href="/.recent/[%tag.tag%]">[%tag.tag%]</a>
 <a class="tag" title="[%othertag.pagecount%]" 
 [%END%]
 href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
+[%END%]
 [%END%]

@@ -463,6 +463,7 @@ div.amazon {
 div.amazon img {
     margin: 1.2em;
 }
+
 form dl {
  margin: 13px;
  font-family: sans-serif;
@@ -553,3 +554,30 @@ input.dual:focus, textarea.dual:focus {
 #description textarea,small {
     font-size: 0.9em;
 }
+
+.exif {
+ background: #eee; 
+ padding: 3px; 
+ border: 1px solid silver; 
+ width: 440px;
+}
+
+dl {
+ margin: 13px;
+ font-family: sans-serif;
+}
+
+dt {
+  float: left;
+  width: 80px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+dd {
+  margin: 0 0 5px 90px;
+  font-size: 11px;
+  line-height: 24px;
+  margin-left: 80px;
+}
+

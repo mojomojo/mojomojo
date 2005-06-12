@@ -36,7 +36,12 @@
 [% IF photo.previous_by_taken({order_by=>'taken'})%]
 <a href="[%base%]/.p/[%photo.previous_by_taken({order_by=>'taken'})%]">&lt;</a>
 [%END%]
-<a href="#">(i)</a>
+<a href="#" onClick="toggleInfo();">(i)</a>
+<div id="hidden_info">
+<div class="exif">
+[%PROCESS gallery/photo_info.tt%]
+</div>
+</div>
 [% IF photo.next_by_taken({order_by=>'taken'})%]
 <a href="[%base%]/.p/[%photo.next_by_taken({order_by=>'taken'})%]">&gt;</a>
 [%END%]
