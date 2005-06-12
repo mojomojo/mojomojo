@@ -240,8 +240,9 @@ CREATE TABLE entry (
 -- This needs to be fixed to work with latest schema
 
 INSERT INTO person (login, name, active) VALUES ('AnonymousCoward','Anonymous Coward',1);
-INSERT INTO person (login, name, active, pass) VALUES ('marcus','Marcus Ramberg',1,'secret');
+INSERT INTO person (login, name, active, pass) VALUES ('admin','Enoch Root',1,'admin');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('name','MojoMojo');
+INSERT INTO preference (prefkey, prefvalue) VALUES ('admins','admin');
 INSERT INTO page_version
 (
  page,

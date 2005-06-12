@@ -28,7 +28,10 @@ open my $SQL, '<', $sql
 
 $/ = ';';
 
-$dbh->do($_) while (<$SQL>);
+while (<$SQL>) {
+    next unless $_ =~ /\S/;
+    $dbh->do($_) ;
+}
 
 1;
 __END__
