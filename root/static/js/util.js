@@ -66,4 +66,16 @@ function toggleCheckBox(id) {
     checkbox.checked = !checkbox.checked
 }
 
+var state=0;
+    function toggleInfo() {
+    state=!state;
+    var item=gId('hidden_info');
+    if (state) {
+      item.style.display='block'; 
+      item.style.opacity = 0.99999;
+      item.style.filter = "alpha(opacity:"+100+")";
+    } else {
+      new Effect2.Fade('hidden_info')
+    }
+  }
 

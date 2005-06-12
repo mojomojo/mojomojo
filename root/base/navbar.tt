@@ -38,10 +38,12 @@
 [%ELSE%]
 <a href="[%base%][%page.path%]">page</a> | 
 [%END%]
-[%IF (pictures || photo)%]
+[%IF (page.has_photos) %]
+[%IF (pictures )%]
 <b class="navOn">gallery</b> | 
 [%ELSE%]
 <a href="[%base%][%page.path%].gallery">gallery</a> | 
+[%END%]
 [%END%]
   [% IF (c.req.user AND  c.req.user.match(page.name) ) %]
 [%IF (c.req.action=="profile")%]

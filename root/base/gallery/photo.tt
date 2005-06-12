@@ -32,31 +32,40 @@
 [%ELSE%]   
 <div id="title" class="showdiv"><big><span id="titletext">[%photo.title%]</span></big></div>
 [%END%]
+<div class="navigation">
+[% IF photo.previous_by_taken({order_by=>'taken'})%]
+<a href="[%base%]/.p/[%photo.previous_by_taken({order_by=>'taken'})%]">&lt;</a>
+[%END%]
+<a href="#">(i)</a>
+[% IF photo.next_by_taken({order_by=>'taken'})%]
+<a href="[%base%]/.p/[%photo.next_by_taken({order_by=>'taken'})%]">&gt;</a>
+[%END%]
+</div>
 <div id="images">
-<img src="[%base%][%page.path%].attachment/[%photo.id%]/inline">
+<img width="700" src="[%base%][%page.path%].attachment/[%photo.id%]/inline">
 </div>
-<p>[%photo.description%]</p>
-</div>
-[% IF c.req.user ; %]
-<div id="showtag" class="showdiv"><a href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
-<div id="addtag" class="formdiv">
-[% url = base _ page.path _ '.gallery/submittag/' _ photo.id %]
+[% IF user %]
+<div id="description">
+[% url = base _ page.path _'.gallery/description/' _ photo %]
 [%c.prototype.form_remote_tag({ 
-    update => 'tags', 
-    url=>url
-    loading=>"gId('taginput').value='';"
-    complete=>"Fat.fade('.highlight');"
+    update => 'descmessage', 
+    url=>url,
+    loading=>"gId('photodesc').value=gId('descbox').value;",
+    complete=>"Fat.fade('.highlight')"
 })%] 
-<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
-<input type="submit" name="add" value="add"> 
+<input type="hidden" id="photodesc" value="[%photo.description%]">
+<textarea class="dual" id="descbox" value="[%photo.description%]" 
+       name="description" width="80" autocomplete="off"
+       onFocus="javascript:gId('descbutton').style.display='inline';gId('descmessage').innerHTML='<em>Click here to abort.</em>';this.select();"
+       onBlur="javascript:window.setTimeout(function() {gId('descbox').value=gId('photodesc').value;gId('descbutton').style.display='none';},500); gId('descmessage').innerHTML=''; ">
+[%photo.description || "Click here to write a description"%]
+</textarea>
+<input class="dualbutton" id="descbutton" type="submit" name="add" value="save"/> 
+<span class="highlight" id="descmessage"><em>Click the text to edit it.</em></span>
 </form>
 </div>
-[%ELSE%]
-<div class="showdiv">&nbsp;</div>
-<div id="addtag" class="formdiv">&nbsp;</div>
+[%ELSE%]   
+<div id="description" class="showdiv"><small><span id="desctext">[%photo.description%]</span></small></div>
 [%END%]
-<div id="tags">
-[%  c.subreq('/gallery/tags',photo=>photo) %]
 </div>
-<div id="bottomnav">&nbsp;
-[%PROCESS footer.tt%]
+[%PROCESS gallery/footer.tt%]

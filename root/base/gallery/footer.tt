@@ -1,0 +1,23 @@
+[% IF c.req.user ; %]
+<div id="showtag" class="showdiv"><a href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
+<div id="addtag" class="formdiv">
+[% url = base _ page.path _ '.gallery/submittag/' _ photo.id %]
+[%c.prototype.form_remote_tag({ 
+    update => 'tags', 
+    url=>url
+    loading=>"gId('taginput').value='';"
+    complete=>"Fat.fade('.highlight');"
+})%] 
+<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
+<input type="submit" name="add" value="add"> 
+</form>
+</div>
+[%ELSE%]
+<div class="showdiv">&nbsp;</div>
+<div id="addtag" class="formdiv">&nbsp;</div>
+[%END%]
+<div id="tags">
+[%  c.subreq('/gallery/tags',photo=>photo) %]
+</div>
+<div id="bottomnav">&nbsp;
+[%PROCESS footer.tt%]

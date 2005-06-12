@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Comment;
 
-sub format_content_order { 30 }
+sub format_content_order { 29 }
 
 sub format_content {
     my ($self,$content,$c)=@_;

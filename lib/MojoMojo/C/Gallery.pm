@@ -28,12 +28,12 @@ sub default : Private {
     $c->stash->{template} = 'gallery.tt';
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
-    my ($pager,$iterator) =MojoMojo::M::Core::Attachment->pager( 
-                     page=>$c->stash->{page},
+    my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
+                     'attachment.page'=>$c->stash->{page},
              { page =>$page || 1,
               rows => 12,
+              order_by => 'taken'
             });
-    $iterator->{_class}='MojoMojo::M::Core::Photo';
     $c->stash->{pictures} = $iterator;
     $c->stash->{pager} = $pager;
 }

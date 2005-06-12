@@ -284,7 +284,7 @@ textarea#comment {
  width: 400px;
 }
 
-#editHelp {
+#hidden_info {
   display:none;
   opacity:0;
   position:absolute;
@@ -530,14 +530,15 @@ input {
 
 /* Transparent forms */
 
-input.dual {
+input.dual,textarea.dual {
     width: 500px;
     border: 1px solid #fff;
     margin:0.1em;
     background: transparent;
+    vertical-align: top;
 }
 
-input.dual:focus {
+input.dual:focus, textarea.dual:focus {
     border: 1px solid #000;
 }
 
@@ -548,4 +549,7 @@ input.dual:focus {
 
 #title input,big {
     font-size: 1.6em;
+}
+#description textarea,small {
+    font-size: 0.9em;
 }

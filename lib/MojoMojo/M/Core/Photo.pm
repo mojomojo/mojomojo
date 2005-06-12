@@ -16,6 +16,8 @@ FROM __TABLE__,attachment
 wHERE __TABLE__.id=attachment.id AND attachment.page=? 
 
 
+__PACKAGE__->might_have('attachment' => 'MojoMojo::M::Core::Attachment', qw/uploaded/);
+
 sub create_from_attachment {
     my ($class,$attachment) = @_;
     my $self=$class->create({
@@ -23,10 +25,6 @@ sub create_from_attachment {
         name=>$attachment->name
     });
     my $image_info=Image::EXIF->new($self->filename);
-}
-
-sub attachment {
-  return MojoMojo::M::Core::Attachment->retrieve(shift->id);
 }
 
 sub others_tags {

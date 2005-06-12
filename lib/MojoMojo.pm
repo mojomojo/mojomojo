@@ -3,7 +3,19 @@ package MojoMojo;
 require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
-use Carp qw/cluck/;
+
+use Exception::Class (
+    'MojoException',
+    'ControllerException' =>
+    { isa => 'MojoException' },
+    'DatabaseException' =>
+    { isa => 'MojoException' },
+    'TemplateException' =>
+    { isa => 'MojoException' },
+    'Warning' =>
+    { isa => 'MojoException' }
+);
+
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
                 SubRequest Authentication::CDBI Prototype 
                 Singleton Unicode Cache::FileCache/;
@@ -97,9 +109,16 @@ sub end : Private {
     }
     $c->forward('MojoMojo::V::TT');
     die if $c->req->params->{die};
+    my @fatal;
+    foreach my $error (@{$c->error}) {
+      if (UNIVERSAL::isa($error,'Warning')) {
+          $c->log->debug($error->error, "\n", $@->trace->as_string, "\n");
+      } else { push @fatal,$error; }
+    }
+    $c->error(\@fatal);
+
 }
 
-MojoMojo->plugins();
 
 =head1 METHODS
 

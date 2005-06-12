@@ -7,7 +7,8 @@ sub get_user {
 
 sub link {
    my ($self) = @_;
-   return "/".$self->login;
+   
+   return "/".($self->login || '/no_login');
 }
 
 1;
