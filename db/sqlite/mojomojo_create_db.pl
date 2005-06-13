@@ -27,10 +27,10 @@ open my $SQL, '<', $sql
     or die "Cannot open sql file $sql: $!";
 
 $/ = ';';
-
 while (<$SQL>) {
-    next unless $_ =~ /\S/;
-    $dbh->do($_) ;
+    next unless /\S/;
+    eval { $dbh->do($_) };
+    die "Error executing statement [ $_ ]: $@" if $@;
 }
 
 1;

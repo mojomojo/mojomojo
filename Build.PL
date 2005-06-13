@@ -17,7 +17,7 @@ my $build = Catalyst::Build->new(
      # prior to Catalyst revision 556 are known to
      # break MojoMojo.
 
-     'Catalyst' => '5.20',
+     'Catalyst' => '5.24',
 
      'Catalyst::Plugin::Authentication::CDBI' => '0.08',
      'Catalyst::Plugin::FillInForm' => '0.04',
@@ -31,17 +31,21 @@ my $build = Catalyst::Build->new(
      'Catalyst::Plugin::Unicode' => '0.2',
      'Catalyst::View::TT' => '0.11',
      'Catalyst::Model::CDBI' => '0.08',
-     'Class::DBI::SQLite' => '0.09',
-     'Class::DBI::Loader' => '0.19',
      'Class::DBI::AbstractSearch' => '0.05',
+     'Class::DBI::Loader' => '0.19',
      'Class::DBI::FromForm' => '0.01',
      'Class::DBI::Plugin::RetrieveAll' => '1.01',
-	 'DBD::SQLite' => '1.08',
+     'Class::DBI::SQLite' => '0.09',
+     'Class::DBI::Sweet' => 0, # need latest from catalyst trunk for now
      'Data::Page' => '2.00',
      'DateTime' => '0.28',
+     'DBD::SQLite' => '1.08',
+     'Exception::Class' => 0,
      'File::MimeInfo' => '0.11',
      'File::Slurp' => '9999.07',
      'HTML::Strip' => '1.04',
+     'Image::EXIF' => 0,
+     'Imager' => 0,
      'IO::Scalar' => 0,
      'LWP::Simple' => 0,
      'Module::Pluggable::Ordered' => '1.4',
@@ -52,10 +56,8 @@ my $build = Catalyst::Build->new(
      'Text::Context' => '3.5',     
      'Text::Emoticon::MSN' => '0.02',
      'Time::Piece' => '1.08',
-     URI => '1.35',
-     YAML => '0.36',
-     Imager => '0',
-     'Catalyst::Model::CDBI::Sweet' => '0.02'  
+     'URI' => '1.35',
+     'YAML' => '0.36',
      },
 
     create_makefile_pl => 'passthrough',

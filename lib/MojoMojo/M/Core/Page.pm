@@ -735,8 +735,4 @@ sub create_path_pages {
 
 } # end sub create_path_pages
 
-sub has_photos {
-  return MojoMojo::M::Core::Photo->count('attachment.page'=>shift->id);
-}
-
 1;

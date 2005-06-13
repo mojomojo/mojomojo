@@ -67,14 +67,12 @@ powered by Catalyst.
 sub begin : Private {
     my ( $self, $c ) = @_;
     if ($c->stash->{path}) {
-        my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages($c->stash->{path});
+        my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages( $c->stash->{path} );
         @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
-      $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
-      $c->req->{user_id} && do {
-      $c->stash->{user}=MojoMojo::M::Core::Person->retrieve(
-                        $c->req->{user_id}
-                        );
-                        };
+        $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
+        $c->req->{user_id} && do {
+            $c->stash->{user} = MojoMojo::M::Core::Person->retrieve( $c->req->{user_id} );
+        };
     }
 }
 

@@ -193,20 +193,19 @@ sub print : Global {
     $c->forward('view');
 }
 
-
 sub tags : Global {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
     my $page = $c->stash->{page};
     if ($c->req->{user}) {
-    my @tags = $page->others_tags( $c->req->{user_id} );
-    $c->stash->{others_tags} = [@tags];
-    @tags                    = $page->user_tags( $c->req->{user_id} );
-    $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
-    $c->stash->{tags}        = [@tags];
+        my @tags = $page->others_tags( $c->req->{user_id} );
+        $c->stash->{others_tags} = [@tags];
+        @tags                    = $page->user_tags( $c->req->{user_id} );
+        $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
+        $c->stash->{tags}        = [@tags];
     } else {
-      $c->stash->{others_tags}      = [ $page->tags ];
+        $c->stash->{others_tags}      = [ $page->tags ];
     }
 }
 
