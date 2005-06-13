@@ -16,11 +16,13 @@
 href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
-[% IF other_tags %]
+[% IF others_tags && tags %]
 &nbsp;|&nbsp;
+[%END%]
+[% IF others_tags %]
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
-[% SET tagmatch=' ' _ othertag.tag _ ' ' %]
+[% SET tagmatch='\b' _ othertag.tag _ '\b' %]
 [% NEXT IF taglist.match(tagmatch) %]
 [% url = base _ page.path _ '.jsrpc/tag/' _ othertag.tag %]
 [% IF user.active %]
