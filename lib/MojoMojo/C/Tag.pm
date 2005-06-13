@@ -31,10 +31,10 @@ to a certain tag.
 =cut
 
 sub list : Private {
-    my ( $self, $c, $page, $tag ) = @_;
+    my ( $self, $c, $tag ) = @_;
 
-    $c->stash->{template} = 'tag/list.tt';
     return unless $tag;
+    $c->stash->{template} = 'page/list.tt';
 
     $c->stash->{activetag} = $tag;
     $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
@@ -51,8 +51,8 @@ to a certain tag.
 =cut
 
 sub recent : Private {
-    my ( $self, $c, $page, $tag ) = @_;
-    $c->stash->{template} = 'tag/recent.tt';
+    my ( $self, $c,  $tag ) = @_;
+    $c->stash->{template} = 'page/recent.tt';
     return unless $tag;
     $c->stash->{activetag} = $tag;
     $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
