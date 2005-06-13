@@ -127,9 +127,12 @@ Body {
 	font-size: 30px;
 	color: #ffffff;
 	font-weight: bold;
-
 }
-	
+
+#header h1 a {
+	color: #ffffff;
+}
+
 /*</group>*/
 
 /*<group=Links>*/
@@ -555,7 +558,7 @@ input.dual:focus, textarea.dual:focus {
     font-size: 0.9em;
 }
 
-.exif {
+.framedpopup {
  background: #eee; 
  padding: 3px; 
  border: 1px solid silver; 
