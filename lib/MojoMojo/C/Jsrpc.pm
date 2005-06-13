@@ -38,7 +38,20 @@ sub render : Local {
     $c->res->output($output);
 }
 
-=item diff (/.jsrpc/diff) 
+=item child_menu (/.jsrpc/child_menu?page_id=$page_id)
+
+Returns a list of children for the page given by the page_id parameter,
+formatted for inclusion in a vertical tree navigation menu.
+
+=cut
+
+sub child_menu : Local {
+    my ( $self, $c, $page_id ) = @_;
+    $c->stash->{parent_page} = MojoMojo::M::Core::Page->retrieve( $c->req->params->{page_id} );
+    $c->stash->{template} = 'child_menu.tt';
+}
+
+=item diff (/.jsrpc/diff)
 
 Loads diff on demand. takes an absolute revision number as arg,
 and diffs it against the previous version.
@@ -125,7 +138,7 @@ sub untag : Local {
 
 =head1 AUTHOR
 
-Marcus Ramberg <mramberg@cpan.org>
+Marcus Ramberg <mramberg@cpan.org>, David Naughton <naughton@cpan.org>
 
 =head1 LICENSE
 

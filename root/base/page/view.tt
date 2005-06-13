@@ -16,6 +16,9 @@
 [%END%][%END%]
 [% PROCESS navbar.tt %]
 <div id="content">
+
+[% PROCESS sidebar.tt %]
+
 [% IF render == 'highlight' %]
 [% content.highlight(c) %]
 <script language="Javascript" type="text/javascript">

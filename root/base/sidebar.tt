@@ -1,0 +1,26 @@
+<div id="sidebar" class="rightHandSide">
+
+<script type="text/javascript">
+
+function menuInsertChildren(node) {
+var nodeId, pageId;
+
+if (node.getAttribute("class") != "menuParentMissingChildren") return;
+
+nodeId = node.getAttribute("id");
+pageId = nodeId.replace("menupage", "");
+
+new Ajax.Updater(nodeId, "[% base %]/.jsrpc/child_menu", {parameters: 'page_id='+pageId, asynchronous: true, insertion: Insertion.Bottom});
+
+node.setAttribute("class", "menuParent");
+
+}
+
+</script>
+
+ <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] Home</a></li></ul>
+
+ [% PROCESS child_menu.tt parent_page = path_pages.0 %]
+  
+</div>
+

@@ -584,3 +584,98 @@ dd {
   margin-left: 80px;
 }
 
+/*<group=sidebar nav menu>*/
+
+/* code shamelessly stolen from Eric Meyer's http://meyerweb.com/eric/css/edge/menus/demo.html */
+/** with some slight modifications of colors, widths, etc. by Dave Naughton **/
+
+#sidebar ul {
+ padding: 0;
+ margin: 0;
+ border-bottom: 1px solid silver;
+ font: 1em sans-serif;
+}
+#sidebar ul li {
+ list-style-type: none;
+ border: 1px solid silver;
+ border-width: 1px 1px 0 3px;
+ position: relative;
+ margin: 0;
+ padding: 0;
+}
+#sidebar ul ul {display: none;}
+#sidebar ul li:hover > ul {
+ display: block;
+ position: absolute;
+ top: -1px;
+ left: 100%;
+}
+#sidebar li a {
+ display: block;
+ padding: 5px 7px;
+ text-decoration: none;
+ background: #FFF;
+}
+#sidebar li.menuParent, li.menuParentMissingChildren > a {
+ font-weight: bold;
+}
+
+#sidebar ul ul {width: 12em;}
+
+#sidebar {
+ position: absolute;
+ right: 0;
+ width: 10em;
+ margin: 0;
+ padding: 0;
+ font-family: Arial, sans-serif;
+}
+#sidebar > ul {
+ width: 11em;
+ margin-left: -1px;
+ font-size: 85%;
+}
+#sidebar ul {
+ border: 1px solid silver;
+ border-width: 0 0 0 1px;
+}
+#sidebar ul li {
+ border-width: 1px 0;
+ border-color: white;
+ padding: 0 0 0 5px;
+ line-height: 1.25em;
+}
+#sidebar ul ul {
+ border-width: 0 1px 1px 1px;
+ border-color: gray silver gray gray;
+}
+#sidebar ul ul li {
+ border-color: #FEFEFC;
+}
+#sidebar li > a {
+ background-color: transparent;
+ padding: 3px;
+}
+#sidebar li:hover {background-color: #ddf;}
+#sidebar li.menuParent:hover {
+ margin-left: -12.2em;
+ border: 1px solid gray;
+ background: #D7D6D4;
+}
+#sidebar li.menuParent:hover > a {
+ background: inherit;
+}
+#sidebar li.menuParent:hover > ul {
+ top: 1.75em;
+ left: -1px;
+ background: #FEFEFC;
+}
+
+/** Added by Dave Naughton **/
+ul#menuHome {
+ border-bottom: 1px solid silver;
+ font-weight: bold;
+}
+
+/* end of shamelessly stolen code */
+/*</group>*/
