@@ -75,7 +75,7 @@ var state=0;
       item.style.opacity = 0.99999;
       item.style.filter = "alpha(opacity:"+100+")";
     } else {
-      new Effect2.Fade('hidden_info')
+      new Effect2.Fade('hidden_info',{duration:0.3})
     }
   }
 
