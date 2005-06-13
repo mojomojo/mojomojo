@@ -200,12 +200,12 @@ CREATE TABLE photo (
     id          INTEGER PRIMARY KEY,
     title       TEXT,
     description TEXT,
-    comments    TEXT,
     camera      TEXT,
     taken       INTEGER,
     iso         INTEGER,
     lens        TEXT, 
-    aperture    TEXT
+    aperture    TEXT,
+    flash       TEXT,
     height      INT,
     width       INT 
 );
