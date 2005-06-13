@@ -1,17 +1,19 @@
-<h3> Comments</h3>
+[%IF comments %]
+<h3> [%comments.count%] Comment[% UNLESS comments.count == 1;"s";END%]</h3>
 [% WHILE ( comment = comments.next ) %]
 <div class="comment">
 <dl>
 <dt>poster</dt>
 <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
 <dt>posted</dt>
-<dd>[%comment.posted%]</dd>
+<dd>[%comment.posted.ymd%] [%comment.posted.hms%]</dd>
 <dt>comment</dt>
 <dd>[%comment.formatted%]</dd>
 </dl>
 </div>
-[%END%]
-<div id="postForm">
+[%END%][%END%]
+<p><small><a href="#" onClick="toggleInfo()">add a comment</a></small>
+<div id="hidden_info" class="framedpopup">
 [% IF user %]
 [%PROCESS comment/post.tt%]
 [%ELSE%]
