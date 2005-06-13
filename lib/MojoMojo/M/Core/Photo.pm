@@ -24,7 +24,6 @@ sub create_from_attachment {
         id=>$attachment->id,
         name=>$attachment->name
     });
-    my $image_info=Image::EXIF->new($self->filename);
 }
 
 sub others_tags {
@@ -46,9 +45,10 @@ sub extract_exif {
     $exif->file_name($att->filename);
     my $info=$exif->get_all_info();
     $self->camera($info->{camera}->{'Camera Model'});
-    $self->lens($info->{image}->{'Focal Lenght'});
+    $self->lens($info->{image}->{'Focal Length'});
     $self->iso($info->{image}->{'ISO Speed Rating'});
     $self->aperture($info->{image}->{'Lens Aperture'});
+    $self->description($info->{image}->{'ImageDescription'});
     $self->taken($self->exif2datetime($info->{image}->{'Image Created'}));
     $self->update();
 }
@@ -62,5 +62,16 @@ sub exif2datetime {
     return DateTime->new(year=>$y,month =>$M,   day=>$d,
                          hour=>$h,minute=>$m,second=>$s);
 }
+
+sub prev_by_tag {
+    my  ($self,$tag)=@_;
+    return $self->retrieve_previous('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
+}
+
+sub next_by_tag {
+    my  ($self,$tag)=@_;
+    return $self->retrieve_next('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
+}
+
 1;
 
