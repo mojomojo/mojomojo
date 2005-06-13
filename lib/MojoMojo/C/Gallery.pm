@@ -38,10 +38,45 @@ sub default : Private {
     $c->stash->{pager} = $pager;
 }
 
+sub by_tag : Local {
+    my ( $self, $c, $tag,$page) = @_;
+    $tag=MojoMojo::M::Core::Tag->search(tag=>$tag)->next;
+    $c->stash->{template} = 'gallery.tt';
+    $c->stash->{tag} = $tag->tag;
+    my $conditions = { 'tags.tag' => $tag->tag };
+    $$conditions{'attachment.page'} = [ map { $_->id  }
+          ($c->stash->{page}->descendants,$c->stash->{page})  ] 
+     unless length($c->stash->{page}->path) == 1;  # root
+    my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
+              $conditions,
+             { page =>$page || 1,
+              rows => 12,
+              order_by => 'taken DESC'
+            });
+    $c->stash->{pictures} = $iterator;
+    $c->stash->{pager} = $pager;
+}
+
 sub p : Global {
-    my ( $self, $c, $photo ) = @_;
-    $c->stash->{template}='gallery/photo.tt';
-    $c->stash->{photo}= MojoMojo::M::Core::Photo->retrieve($photo);
+    my ($self,$c,$photo)  = @_;
+    $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
+    $c->stash->{photo}    = $photo;
+    $c->forward('tags');
+    $c->stash->{template} ='gallery/photo.tt';
+    $c->stash->{next}     = $photo->retrieve_next({},{order_by=>'taken'});
+    $c->stash->{prev}     = $photo->retrieve_previous({},{order_by=>'taken'});
+    
+}
+
+sub p_by_tag : Global {
+    my ( $self, $c, $tag, $photo ) = @_;
+    $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
+    $c->stash->{photo}    = $photo;
+    $c->stash->{tag}      = $tag; 
+    $c->forward('tags');
+    $c->stash->{template} ='gallery/photo.tt';
+    $c->stash->{next}     = $photo->next_by_tag($tag);
+    $c->stash->{prev}     = $photo->prev_by_tag($tag);
 }
 
 =item submittag (/gallery/submittag)
@@ -111,7 +146,8 @@ sub tags : Local {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'gallery/tags.tt';
     $c->stash->{highlight} = $highlight;
-    my $photo=$c->stash->{photo};
+    my $photo=$c->stash->{photo}||$c->req->params->{photo};
+    $c->log->info('photo is '.$photo);
     $photo=MojoMojo::M::Core::Photo->retrieve($photo) unless ref $photo;
     $c->stash->{photo}=$photo;
     $c->log->info('user is '.$c->req->{user_id});
