@@ -225,8 +225,8 @@ sub list : Global {
 
 sub recent : Global {
     my ( $self, $c, $tag ) = @_;
-    my $page=$c->stash->{page};
     return $c->forward('/tag/recent') if $tag;
+    my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
     $c->stash->{pages}    = [ $page->descendants_by_date ];
