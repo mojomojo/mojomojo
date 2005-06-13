@@ -17,7 +17,7 @@
 <div id="addtag" class="formdiv">&nbsp;</div>
 [%END%]
 <div id="tags">
-[%  c.subreq('/gallery/tags',photo=>photo) %]
+[% PROCESS  gallery/tags.tt %]
 </div>
 <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]

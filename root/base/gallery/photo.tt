@@ -6,6 +6,8 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
 [%photo.title%]
+[%IF tag %]
+(<a href="[%base%][%path%].gallery/by_tag/[%tag%]">[%tag%]</a>)[%END%]
 </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
@@ -33,17 +35,15 @@
 <div id="title" class="showdiv"><big><span id="titletext">[%photo.title%]</span></big></div>
 [%END%]
 <div class="navigation">
-[% IF photo.previous_by_taken({order_by=>'taken'})%]
-<a href="[%base%]/.p/[%photo.previous_by_taken({order_by=>'taken'})%]">&lt;</a>
+[% IF prev %]
+<a href="[%base%]/.p[%IF tag%]_by_tag/[%tag%][%END%]/[%prev%]">&lt;</a>
 [%END%]
 <a href="#" onClick="toggleInfo();">(i)</a>
-<div id="hidden_info">
-<div class="exif">
+<div id="hidden_info" class="framedpopup">
 [%PROCESS gallery/photo_info.tt%]
 </div>
-</div>
-[% IF photo.next_by_taken({order_by=>'taken'})%]
-<a href="[%base%]/.p/[%photo.next_by_taken({order_by=>'taken'})%]">&gt;</a>
+[% IF next%]
+<a href="[%base%]/.p[%IF tag%]_by_tag/[%tag%][%END%]/[%next%]">&gt;</a>
 [%END%]
 </div>
 <div id="images">

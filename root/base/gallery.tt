@@ -5,7 +5,7 @@
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
-gallery
+gallery [%IF tag; %]([%tag%])[%END%]
 </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
@@ -16,7 +16,9 @@ gallery
 </div>
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-<a  href="[%base%][%page.path%].p/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/></a>
+<a  href="[%base%][%page.path%].p[%
+IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%
+base%]/.attachment/[%picture.id%]/thumb"/></a>
 [%END%]
 </div>
 </div>

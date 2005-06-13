@@ -12,16 +12,18 @@
 [%ELSE%]
 <a class="tag" 
 [%END%]
-href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
+href="/.gallery/by_tag/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
+[%END%]
+[%IF others_tags && tags%]
+&nbsp;|&nbsp;
 [%END%]
 [%IF others_tags %]
-&nbsp;|&nbsp;
 <b>popular tags : </b>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch=' ' _ othertag.tag _ ' ' %]
 [% NEXT IF taglist.match(tagmatch) %]
-[% url = base _ '/.gallery/tag/' _ photo.id _ '/' _ tag.tag %]
+[% url = base _ '/.gallery/by_tag/' _ photo.id _ '/' _ tag.tag %]
 [% IF c.user.active %]
 [<b class="add">[%c.prototype.link_to_remote('+', { update => 'tags', url=>url })%]</b>]
 [%END%]
@@ -30,6 +32,6 @@ href="/.recent/[%tag.tag%]">[%tag.tag%]</a>
 [%ELSE%]
 <a class="tag" title="[%othertag.photocount%]" 
 [%END%]
-href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
+href="[%base%]/.gallery/by_tag/[%othertag.tag%]" >[%othertag.tag%]</a> 
 [%END%]
 [%END%]
