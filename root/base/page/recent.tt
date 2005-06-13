@@ -6,19 +6,15 @@
         [% PROCESS navbar.tt %]
         <div id="content">
   <small>
-[% IF page.name == "/" %]
- [% c.pref("name") || "MojoMojo" %]
-[% ELSE %]
- [% c.expand_wikiword(page.name_orig) %]
-[% END %]
-  </small>
-  <br/>Recent Pages
-</h1>
 
 <div id="categories">
   <strong>tags</strong>: <small>
   [% FOREACH tag IN tags %]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
   <a href="[% base %][% page.path %].recent/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
   [% END %]</small>
 </div>
 <b>[% now %]</b>
