@@ -4,7 +4,7 @@ url => url,
 update => 'postForm'
 })%]
 <small>You have to log in to post a comment.
-(<a href="[%base%]/.register%]">register</a>)</small>
+(<a href="[%base%]/.register">register</a>)</small>
 </span>
 <dl>
 <dt>login:</dt>

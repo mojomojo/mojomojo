@@ -17,8 +17,8 @@ use Exception::Class (
 );
 
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
-                SubRequest Authentication::CDBI Prototype 
-                Singleton Unicode Cache::FileCache/;
+                SubRequest Authentication::CDBI Prototype  Email
+                Singleton Unicode Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
@@ -117,6 +117,14 @@ sub end : Private {
 
 }
 
+
+sub auto : Private {
+    my ($self,$c) = @_;
+    return 1 unless $c->stash->{user};
+    return 1 if $c->stash->{user}->active != -1;
+    return 1 if $c->req->action eq 'logout';
+    $c->stash->{template}='user/validate.tt';
+}
 
 =head1 METHODS
 

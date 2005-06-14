@@ -1,0 +1,30 @@
+[% PROCESS header.tt %]
+ <div id="header"><h1>New User Registration</h1></div>
+        <div id="content">
+        <form id="loginForm" action="[%base%]/.do_register" method="POST">
+        <span id="logintext">[%message%]</span><br/>
+        [% FOREACH field IN c.form.invalid %]
+        <b>[% field %] is invalid ([%c.form.invalid(field).join(', ')%])</b><br/>
+        [% END %]
+<dl>
+<dt>login:</dt>
+<dd><input id="loginField" type="text" name="login"/></dd>
+<dt>name:</dt>
+<dd><input type="text" name="name"/></dd>
+<dt>password:</dt>
+<dd><input type="password" name="pass"/></dd>
+<dt>repeat:</dt>
+<dd><input type="password" name="confirm"/></dd>
+<dt>email:</dt>
+<dd><input type="text" name="email"/></dd>
+<dd><input type="submit" value="register"/></dd>
+</dl>
+</form>
+        </div>
+        <div id="bottomnav">&nbsp;
+   
+       
+<script language="JavaScript">
+gId('loginField').focus();
+</script>
+[% PROCESS footer.tt %]

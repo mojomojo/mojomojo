@@ -3,6 +3,8 @@ package MojoMojo::C::User;
 use strict;
 use base 'Catalyst::Base';
 
+use Digest::MD5 qw/md5_hex/;
+
 =head1 NAME
 
 MojoMojo::C::User - Login/User Management Controller
@@ -100,6 +102,62 @@ sub password : Path('/prefs/password') {
     }
     $c->stash->{message} ||= 'please fill out all fields';
 }
+
+sub register : Global {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'user/register.tt';
+    $c->stash->{message}='Please fill in the following information to '.
+    'register. All fields are mandatory.';
+}
+
+sub do_register : Global {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'user/register.tt';
+    $c->form(required => [qw(login name pass confirm email)],
+             defaults  => { active => -1 }, 
+             constraints => MojoMojo::M::Core::Person->registration_profile);
+    if ($c->form->has_missing) {
+        $c->stash->{message}='You have to fill in all fields.'. 
+        'the following are missing: <b>'.
+        join(', ',$c->form->missing()).'</b>';
+    } elsif ($c->form->has_invalid) {
+        $c->stash->{message}='Some fields are invalid. Please '.
+                             'correct them and try again:';
+    } else {
+        my $user=MojoMojo::M::Core::Person->create_from_form($c->form);
+        $c->forward('/user/login');
+        $c->pref('entropy') || $c->pref('entropy',rand);
+        $c->email( header => [
+                From    => $c->form->valid('email'),
+                To      => $c->form->valid('email'),
+                Subject => '[MojoMojo] New User Validation'
+            ],
+            body => 'Hi. This is a mail to validate your email address, '.
+            $c->form->valid('name').'. To confirm, please click '.
+            "the url below:\n\n".$c->req->base.'/.validate/'.
+            $user->id.'/'.md5_hex$c->form->valid('email').$c->pref('entropy')
+        );
+        $c->stash->{template}='user/validate.tt';
+    }
+}    
+
+sub validate : Global {
+    my ($self,$c,$user,$check)=@_;
+    $user=MojoMojo::M::Core::Person->retrieve($user);
+    if($check = md5_hex($user->email.$c->pref('entropy'))) {
+        $user->active(0);
+        $user->update();
+        if ($c->stash->{user}) {
+            $c->req->forward($c->req->base.$c->stash->{user}->link);
+        } else {
+            $c->stash->{message}='Welcome, '.$user->name.' your email is validated. Please log in.';
+            $c->stash->{template}='user/login.tt';
+        }
+        return;
+    }
+    $c->stash->{template}='user/validate.tt';
+}
+
 =back
 
 =head1 AUTHOR

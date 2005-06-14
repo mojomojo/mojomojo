@@ -1,0 +1,7 @@
+[% PROCESS header.tt %]
+ <div id="header"><h1>Email Validation</h1></div>
+<div id="content">
+please click on the link in the email we sent you to validate
+your email, [%user.name%]. (The email was sent to ([%user.email%]).
+</div>
+[% PROCESS footer.tt %]
