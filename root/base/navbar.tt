@@ -1,9 +1,14 @@
 <div id="toplinks"><form action="[% base %][% page.path;%].search" method="get" >  
-  [% IF (c.req.user.length) ;%]
-    [% IF (c.req.user == page.name  AND template.name=="page/view.tt")%]
+  [% IF (user) %]
+    [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR
+                                         template.name.search('^user')))%]
   <b class="navon">[%c.fixw(c.req.user)%]</b> | 
   [%ELSE%]
-  <a href="[%base%]/[%c.req.user%]">[%c.fixw(c.req.user)%]</a> | 
+  [% IF user.active%]
+  <a href="[%base%]/[%c.req.user%]" title="Go to home page">[%c.fixw(c.req.user)%]</a> | 
+  [% ELSE %]
+  <a href="[%base%]/[%c.req.user%].prefs title="User Preferences">[%c.fixw(c.req.user)%]</a> | 
+  [% END %]
   [%END%]
   [% ELSE %]
   <a href="[%base%]/.login" title="Get in there" accesskey="L">log in</a> | 
@@ -33,28 +38,33 @@
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 <br/>
+[% IF user.active%]
 [%IF (c.req.action=="view")%]
 <b class="navOn">page</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%]">page</a> | 
+<a title="The Wikilicious page" href="[%base%][%page.path%]">page</a> | 
 [%END%]
 [%IF (page.has_photos) %]
 [%IF (pictures )%]
-<b class="navOn">gallery</b> | 
+<b "Myclass="navOn">gallery</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%].gallery">gallery</a> | 
+<a title="Photo Album" href="[%base%][%page.path%].gallery">gallery</a> | 
 [%END%]
 [%END%]
-  [% IF (c.req.user AND  c.req.user.match(page.name) ) %]
+[%END%]
+
+[% IF ( user.link == page.path OR user.link==proto_pages.first.path  OR 
+      ( user.is_admin AND user.get_user(page.name) ) ) %]
+
 [%IF (c.req.action=="profile")%]
 <b class="navOn">Profile</b> | 
 [%ELSE%]
-<a href="[%base%][%page.path%].profile">profile</a> | 
+<a title="User Profile" href="[%base%][%page.path%].profile">profile</a> | 
 [%END%]
 [%IF (c.req.action=="prefs")%]
 <b class="navOn">preferences</b> 
 [%ELSE%]
-<a href="[%base%][%page.path%].prefs">preferences</a>
+<a title="User Settings" href="[%base%][%page.path%].prefs">preferences</a>
 [%END%]
     [% END %] 
 </form>
