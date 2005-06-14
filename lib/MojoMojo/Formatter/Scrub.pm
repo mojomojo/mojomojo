@@ -1,7 +1,8 @@
 package MojoMojo::Formatter::Scrub;
 
 use HTML::Scrubber;
-    my @allow = qw[ div br hr b a ];
+use XML::Clean;
+    my @allow = qw[ p img em br hr b a div pre code];
 
     my @rules = (
         script => 0,
@@ -21,6 +22,7 @@ use HTML::Scrubber;
             'cite'        => '(?i-xsm:^(?!(?:java)?script))',
             'language'    => 0,
             'name'        => 1, # could be sneaky, but hey ;
+            'class'       => 1,
             'onblur'      => 0,
             'onchange'    => 0,
             'onclick'     => 0,
@@ -55,7 +57,7 @@ sub format_content_order { 1 }
 sub format_content {
     my ($self,$content,$c)=@_;
     $$content=$scrubber->scrub($$content); 
-    warn "Scrubbed";
+    $$content=XML::Clean::clean($$content);
 }
 
 1;
