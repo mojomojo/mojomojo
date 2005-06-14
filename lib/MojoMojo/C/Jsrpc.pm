@@ -66,7 +66,7 @@ sub diff : Local {
     );
     if ( my $previous = $revision->previous ) {
         $c->res->output(
-            $revision->formatted_diff( $c->req->base, $previous ) );
+            $revision->formatted_diff( $c, $previous ) );
     }
     else {
         $c->res->output("This is the first revision!");
