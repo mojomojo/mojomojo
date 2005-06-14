@@ -225,8 +225,10 @@ blockquote {
 }
 
 pre {
+  width:450px;
   background-color: #eee;
   padding: 10px;
+  margin-left: 3em;
   font-size: 11px;
 }
 
@@ -671,7 +673,6 @@ dd {
  background: #FEFEFC;
 }
 
-/** Added by Dave Naughton **/
 ul#menuHome {
  border-bottom: 1px solid silver;
  font-weight: bold;
