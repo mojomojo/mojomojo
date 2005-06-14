@@ -3,7 +3,7 @@
 
  <div id="toplinks"><a  href="[% base %][% page.path %].edit">Edit</a> | Upload</div><div id="content">
 <form action="[%base%][%page.path%].attachments" enctype="multipart/form-data" method="post">
-<p> Please select a file to attach to this page.</p>
+<p> Please select a file to attach to this page. To upload multiple files, put them in a zip.</p>
 <input type="file" name="file">
 <input type="submit">
 </form>
