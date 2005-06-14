@@ -5,6 +5,13 @@ sub get_user {
     return __PACKAGE__->search( login => $user )->next;
 }
 
+sub is_admin {  
+    my $self=shift;
+    my $admins = MojoMojo->pref('admins');
+    return 1 if my $user=$self->login  && $admins =~m/\b$user\b/ ;
+    return 0;
+}
+
 sub link {
    my ($self) = @_;
    
@@ -26,6 +33,7 @@ sub registration_profile {
                      name      => "Password doesn't match"}
    };
 }
+
 sub user_exists {
     return 0 if MojoMojo::M::Core::Person->get_user(shift);
     return 1;
@@ -34,6 +42,12 @@ sub user_exists {
 sub pass_matches {
     return 1 if ($_[0] eq $_[1]);
     return 0
+}
+
+sub valid_pass {
+    my ($self,$pass)=@_;
+    return 1 if $self->pass eq $pass;
+    return 0;
 }
 
 1;

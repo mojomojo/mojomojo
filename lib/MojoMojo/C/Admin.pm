@@ -22,15 +22,14 @@ Catalyst admin controller
 sub auto : Private {
     my ( $self, $c ) = @_;
     # FIXME - need to identify administrators
-    my $user = $c->req->{user};
-    my $admins = $c->pref('admins');
-    unless ( $user && $admins =~m/\b$user\b/ ) {
+    my $user = $c->stash->{user};
+    unless ( $user->is_admin ) {
         $c->stash->{message}='sorry bubba, gotta be admin';
         $c->stash->{template}='message.tt';
-        $c->log->info('admins are '.$admins);
         return 0;
     }
-    $admins =~s/$user//g;
+    my $admins = $c->pref('admins');
+    $admins =~ s/$user//g;
     $c->stash->{admins} = $admins;
     return 1;
 }
