@@ -516,6 +516,18 @@ sub path_pages {
         current_depth => 0,
         final_depth   => $depth,
     );
+
+    # If there are any proto pages, put the original
+    # page names back into the paths, so they will
+    # be preserved upon page creation:
+    if (@proto_pages)
+    {
+	my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
+	for (@proto_pages) {
+	    ($proto_path eq '/') || ($proto_path .= '/');
+	    $_->{path} = $proto_path . $_->{name_orig};
+	}
+    }
     return ( \@path_pages, \@proto_pages );
 
 } # end sub get_path

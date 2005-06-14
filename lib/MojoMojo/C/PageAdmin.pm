@@ -42,6 +42,7 @@ sub auto : Private {
     $c->stash->{message}='sorry bubba, you aint got no rights';
     return 0;
 }
+
 =item edit
 
 This action will display the edit form, then save the previous
