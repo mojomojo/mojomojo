@@ -58,7 +58,8 @@ sub view : Global {
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
 
-    return $c->forward('/pageadmin/edit') if $proto_pages && @$proto_pages;
+    return $c->forward('suggest')
+        if $proto_pages && @$proto_pages;
 
     my $page= $stash->{page};
 
@@ -92,27 +93,17 @@ the entire site or a subtree starting from the current page.
 =cut
 
 sub search : Global {
-    my ( $self, $c, $path ) = @_;
+    my ( $self, $c ) = @_;
+
+    my $stash=$c->stash;
 
     # number of search results to show per page
     my $results_per_page = 10;
 
-    my $stash = $c->stash;
+    my $page = $c->stash->{page};
     $stash->{template} = 'page/search.tt';
 
-    my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
-
-    # we should always have at least "/" in path pages. if we don't,
-    # we must not have had these structures in the stash
-    unless ($path_pages) {
-        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
-        @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
-    }
-
-    my $page = $path_pages->[ @$path_pages - 1 ];
-    $stash->{page} = $page;
-
-    my $q = $c->req->params->{query};
+    my $q = $c->req->params->{query} ||$c->stash->{query};
     my $search_type = $c->req->params->{search_type} || "subtree";
     $stash->{query} = $q;
     $stash->{search_type} = $search_type;
@@ -134,18 +125,10 @@ sub search : Global {
     }
 
     foreach my $key ( $p->search( $q ) ) {
-        # skip results outside of this subtree
-        # FIXME: Remove this code if the new _path query seems to work OK
-#        if ($search_type eq "subtree") {
-#            my $path = $page->path;
-#            if ( $key !~ /^$path/ ) {
-#                next;
-#            }
-#        }
 
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query
-        my $content = $strip->parse( $page->content->formatted );
+        my $content = $strip->parse( $page->content->formatted($c) );
         $strip->eof;
 
         # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
@@ -265,6 +248,18 @@ sub highlight : Global {
 sub export : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'export.tt';
+}
+
+sub suggest : Global {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'page/suggest.tt';
+    $c->res->status(404);
+}
+
+sub search_inline : Path('/search/inline') {
+    my ( $self, $c ) = @_;
+    $c->forward('search');
+    $c->stash->{template} = 'page/search_inline.tt';
 }
 
 
