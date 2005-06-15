@@ -8,11 +8,11 @@
 <h2>your account</h2>
 <div class="rightHandSide">
 <ul>
-<li><a href="[%base%][%page.path%].prefs/password">change password</a></li>
+<li><a href="[%base%][%page_user.link%].prefs/password">change password</a></li>
 <li><a href="[%base%]/.logout">log out</a></li>
 </ul>
 </div>
-<form id="accountForm" action="[%base%]/[%c.req.user%].prefs" method="POST">
+<form id="accountForm" action="[%base%][%page_user.link%][%c.req.user%].prefs" method="POST">
 <dl>
 <dd>Change your preferences to update them.</dd>
  <dt>login</dt>
