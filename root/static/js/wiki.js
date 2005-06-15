@@ -1,6 +1,6 @@
-function cleanAuthorName() {
+function cleanAuthorName(author) {
   if (document.getElementById('authorName').value == "") {
-    document.getElementById('authorName').value = 'AnonymousCoward';
+    document.getElementById('authorName').value = author;
   }
 }
 

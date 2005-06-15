@@ -32,11 +32,18 @@ Check that user is logged in and has rights to this page.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
+    $c->req->params->{login}=$c->req->params->{creator};
     $c->forward('/user/login') if $c->req->params->{pass} && 
                                  ! $c->stash->{user};
-    my $user = $c->req->{user};
-    return 1 if $user->is_admin;
-    return 1 if $user && $c->stash->{page}->path =~ m|^/$user\b|i; 
+    my $user = $c->stash->{user};
+    
+    # everyone can edit with anon mode enabled.
+    return 1 if $c->pref('anonymous_user');
+    if ( $user && $user->active ) {
+        # allow admins, and users editing their pages
+        return 1 if $user->is_admin;
+        return 1 if $c->stash->{page}->path =~ m|^/$user\b|i; 
+    }
     $c->stash->{template}='message.tt';
     $c->stash->{message}='sorry bubba, you aint got no rights';
     return 0;
@@ -56,10 +63,8 @@ sub edit : Global {
     # Set up the basics. Log in if there's a user.
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
-    $c->req->params->{login}=$c->req->params->{creator};
 
-    my $user = $c->req->{user_id} || 0;
-    $c->log->info("user is $user");
+    my $user = $c->req->{user_id} || 0; # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
