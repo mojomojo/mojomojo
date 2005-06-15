@@ -26,7 +26,7 @@ params->{content} and runs it through the formatter chain.
 
 sub render : Local {
     my ( $self, $c ) = @_;
-    my $output = "Please enter something";
+    my $output = "Please type something";
     if (   $c->req->params->{content}
         && $c->req->params->{content} =~ /(\S+)/ )
     {
