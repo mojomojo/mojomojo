@@ -19,8 +19,8 @@ sub format_content {
 
 sub include {
     my ($self,$c,$url)=@_;
-    my $content=URI::Fetch->($url,Cache=>$c->cache)->content;
-    return $content if defined $content;
+    my $res=URI::Fetch->fetch($url,Cache=>$c->cache);
+    return $res->content if defined $res;
     return "Could not retrieve $url .\n";
 }
 
