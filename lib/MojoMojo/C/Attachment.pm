@@ -118,7 +118,7 @@ sub download : Private {
 
 sub thumb : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $self->make_thumb( $c->stash->{att}->filename )
+    $att->make_thumb()
       unless -f $c->stash->{att}->filename . ".thumb" ;
     $c->res->output(
         scalar(read_file($c->stash->{att}->filename. '.thumb'))
@@ -127,57 +127,22 @@ sub thumb : Private {
         "Content-Disposition" => "inline; filename="
            . $c->stash->{att}->name );
 }
+=item  inline show inline attachment
+
+=cut
 
 sub inline : Private {
     my ( $self, $c, $att, $action ) = @_;
-    $self->make_inline($c->stash->{att}->filename )
-      unless -f $c->stash->{att}->filename . ".inline" ;
+    $att->make_inline
+      unless -f $att->filename . ".inline" ;
     $c->res->output(
-        scalar( read_file( $c->stash->{att}->filename . '.inline'))
+        scalar( read_file( $att->filename . '.inline'))
      );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename="
-        . $c->stash->{att}->name );
+        . $att->name );
 }
 
-
-
-sub make_inline {
-    my ($self,$file)=@_;
-    my $img=Imager->new();
-    $img->open(file=>$file,type=>'jpeg') or die $img->errstr;
-    my $h=$img->getheight;
-    my $w=$img->getwidth;
-    my ($image,$result);
-    $image=$img->scale(xpixels=>700);
-    $image->write(file=>$file.'.inline',type=>'jpeg') or die $img->errstr;
-}
-sub make_thumb {
-    my ($self,$file)=@_;
-    my $img=Imager->new();
-    $img->open(file=>$file,type=>'jpeg') or die $img->errstr;
-    my $h=$img->getheight;
-    my $w=$img->getwidth;
-    my ($image,$result);
-    if ($h>$w) {
-        $image=$img->scale(xpixels=>80);
-            $w=$image->getwidth;
-        $result =$image->crop(
-                          left=> int(($w-80)/2),
-                          top=>0,
-                          width=>80,
-                            height=>80);
-    } else {
-        $image=$img->scale(ypixels=>80);
-            $h=$image->getheight;
-        $result  =$image->crop(
-                            top=> int(($h-80)/2),
-                            left=>0,
-                            width=>80,
-                            height=>80);
-    }
-    $result->write(file=>$file.'.thumb',type=>'jpeg') or die $img->errstr;
-}
 
 =item delete
 
