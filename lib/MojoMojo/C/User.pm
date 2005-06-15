@@ -75,9 +75,15 @@ Main user preferences screen.
 sub prefs : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template}='user/prefs.tt';
-    $c->stash->{user}=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name);
-    unless ($c->stash->{user}) {
-      $c->stash->{message}='Cannot find that user';
+    my @proto=@{$c->stash->{proto_pages}};
+    $c->stash->{page_user}=MojoMojo::M::Core::Person->get_user(
+        $proto[0]->{name} || $c->stash->{page}->name 
+    );
+    unless ($c->stash->{page_user} && (
+        $c->stash->{page_user}->id eq $c->stash->{user}->id ||
+        $c->stash->{user}->is_admin())) {
+      $c->stash->{message}='Cannot find that user '.
+      $c->stash->{user}->is_admin;
       $c->stash->{template}='message.tt';
     };
 }
@@ -93,9 +99,12 @@ sub password : Path('/prefs/password') {
     unless ( $c->form->has_missing || $c->form->has_invalid ) {
       if ($c->form->valid('again') ne $c->form->valid('pass')) {
         $c->stash->{message}='Passwords did not match.';
-        return
+        return;
       }
-      #FIXME: need to verify current password.
+      unless ($c->stash->{user}->valid_pass($c->form->valid('pass'))) {
+        $c->stash->{message}='Invalid password.';
+        return;
+      }
       $c->stash->{user}->pass($c->form->valid('pass'));
       $c->stash->{user}->update();
       $c->stash->{message}='Your password has been updated';
@@ -148,7 +157,7 @@ sub validate : Global {
         $user->active(0);
         $user->update();
         if ($c->stash->{user}) {
-            $c->req->forward($c->req->base.$c->stash->{user}->link);
+            $c->res->redirect($c->req->base.$c->stash->{user}->link);
         } else {
             $c->stash->{message}='Welcome, '.$user->name.' your email is validated. Please log in.';
             $c->stash->{template}='user/login.tt';
