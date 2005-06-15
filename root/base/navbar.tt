@@ -5,9 +5,9 @@
   <b class="navon">[%c.fixw(c.req.user)%]</b> | 
   [%ELSE%]
   [% IF user.active%]
-  <a href="[%base%]/[%c.req.user%]" title="Go to home page">[%c.fixw(c.req.user)%]</a> | 
+  <a href="[%base%]/[%user.link%]" title="Go to home page">[%c.fixw(c.req.user)%]</a> | 
   [% ELSE %]
-  <a href="[%base%]/[%c.req.user%].prefs title="User Preferences">[%c.fixw(c.req.user)%]</a> | 
+  <a href="[%base%][%user.link%].prefs" title="User Preferences">[%c.fixw(c.req.user)%]</a> | 
   [% END %]
   [%END%]
   [% ELSE %]
