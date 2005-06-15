@@ -29,11 +29,11 @@ sub default : Private {
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
     my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
-                     'attachment.page'=>$c->stash->{page},
-             { page =>$page || 1,
-              rows => 12,
-              order_by => 'taken'
-            });
+        'attachment.page'=>$c->stash->{page}, {
+            page           =>$page || 1,
+            rows             => 12,
+            order_by => 'taken'
+        });
     $c->stash->{pictures} = $iterator;
     $c->stash->{pager} = $pager;
 }
@@ -44,15 +44,16 @@ sub by_tag : Local {
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{tag} = $tag->tag;
     my $conditions = { 'tags.tag' => $tag->tag };
-    $$conditions{'attachment.page'} = [ map { $_->id  }
-          ($c->stash->{page}->descendants,$c->stash->{page})  ] 
+    $$conditions{'attachment.page'} = [ 
+          map { $_->id  } ($c->stash->{page}->descendants,
+                           $c->stash->{page}) ] 
      unless length($c->stash->{page}->path) == 1;  # root
     my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
-              $conditions,
-             { page =>$page || 1,
-              rows => 12,
-              order_by => 'taken DESC'
-            });
+        $conditions, { 
+            page     => $page || 1,
+            rows     => 12,
+            order_by => 'taken DESC'
+        });
     $c->stash->{pictures} = $iterator;
     $c->stash->{pager} = $pager;
 }
@@ -62,9 +63,13 @@ sub p : Global {
     $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
     $c->stash->{photo}    = $photo;
     $c->forward('tags');
-    $c->stash->{template} ='gallery/photo.tt';
-    $c->stash->{next}     = $photo->retrieve_next({},{order_by=>'taken'});
-    $c->stash->{prev}     = $photo->retrieve_previous({},{order_by=>'taken'});
+    $c->stash->{template} = 'gallery/photo.tt';
+    $c->stash->{next}     = $photo->retrieve_next({
+        'attachment.page'=>$c->stash->{page}, 
+        },{order_by=>'taken'});
+    $c->stash->{prev}     = $photo->retrieve_previous({
+        'attachment.page'=>$c->stash->{page}, 
+        },{order_by=>'taken'});
     
 }
 
@@ -74,7 +79,7 @@ sub p_by_tag : Global {
     $c->stash->{photo}    = $photo;
     $c->stash->{tag}      = $tag; 
     $c->forward('tags');
-    $c->stash->{template} ='gallery/photo.tt';
+    $c->stash->{template} = 'gallery/photo.tt';
     $c->stash->{next}     = $photo->next_by_tag($tag);
     $c->stash->{prev}     = $photo->prev_by_tag($tag);
 }
