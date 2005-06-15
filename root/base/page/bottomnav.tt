@@ -1,5 +1,5 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div id="showtag" class="showdiv"><a href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
+<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
 <div id="addtag" class="formdiv">
 [% url = base _ page.path _'.jsrpc/submittag' %]
 [%c.prototype.form_remote_tag({ 
@@ -41,54 +41,51 @@
 
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
-[% IF (!rev) %]
- <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
+[% IF (!rev OR rev==page.content_version) %]
+ <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
- | <a href="[% base %]/.settings">Edit Settings</a>
+ | <a title="Change site settings" href="[% base %]/.settings">Edit Settings</a>
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
- | <a href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
+ | <a title="See previous revision" href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
  ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])
  [% END %]
  [% IF  (page.content_version < page.content.max_version) %]
- <a href="[% base _ page.path %]?rev=[% page.content_version + 1 %]" accesskey="R">Forward in time</a> 
+ <a title="See next revision" href="[% base _ page.path %]?rev=[% page.content_version + 1 %]" accesskey="R">Forward in time</a> 
  <small>([% page.content.max_version - page.content_version %] more)</small>
  [%END%]
 [% ELSE %]
- [% IF rev == page.content_version %]
- <a href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
- [%END%]
  [% IF ((rev < page.content.max_version)) %]
- <a href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
+ <a "title="See next revision" href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
  <small>([% page.content.max_version - rev %] more)</small>
  [% END %]
  [% IF rev > 1 %]
- | <a href="[% base _ page.path %]?rev=[% rev - 1 %]" accesskey="R">Back in time</a> 
+ | <a title="See previous revision" href="[% base _ page.path %]?rev=[% rev - 1 %]" accesskey="R">Back in time</a> 
  <small>([% rev - 1 %] more)</small>
  [%END%]
  [% UNLESS rev == page.content_version %]
- | <a href="[% base _ page.path %]" accesskey="C">Current Revision</a>
+ | <a title="Back to the page"href="[% base _ page.path %]" accesskey="C">Current Revision</a>
  [% END %]
 [% END %] 
  [%# IF rev > 1 %]
  [% IF page.content_version && page.content_version > 1 %] 
  <span id="show_changes">
-  | <a href="" onclick="toggleChanges(); return false;">See changes</a>
+  | <a title="Show differences from previous version" href="" onclick="toggleChanges(); return false;">See changes</a>
  </span>
  <span id="hide_changes" style="display: none">
-  | <a href="#" onclick="toggleChanges(); return false;">Hide changes</a>
+  | <a title="Show normal page" href="#" onclick="toggleChanges(); return false;">Hide changes</a>
  </span>
 [% END %]
  <small>
-  | Views: <a href="[%base _ page.path%].print">Print</a>
-  <a href="[%base _ page.path%].rss">RSS</a>
+  | Views: <a title="Format page for printing" href="[%base _ page.path%].print">Print</a>
+  <a title="Subscribe to page changes href="[%base _ page.path%].rss_changes">RSS</a>
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </small>
 [% IF page.links_to.first ; %] 
  <small>
   | Linked from:
   [% FOR linkitem = page.links_to %] 
-   <a class="existingWikiWord" href="[%base%][%linkitem.name%]">[%c.expand_wikiword(linkitem.path)%]</a>
+   <a class="existingWikiWord" title="[%linkitem.name_orig%] href="[%base%][%linkitem.path%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </small>
 [% END %]  </span>
