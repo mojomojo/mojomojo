@@ -6,8 +6,8 @@ function registerAction(element,action,functionName) {
     if (typeof(element) == "string") { element=gId(element) }
     if (element) {
         try { 
-            element.addEventListener($action, functionName, false);
-        } catch(e) { }
+            element.addEventListener(action, functionName, false);
+        } catch(e) { alert(e); }
         try { 
             element.attachEvent('on'+action, functionName, false);
         } catch(e) { 
@@ -67,15 +67,40 @@ function toggleCheckBox(id) {
 }
 
 var state=0;
-    function toggleInfo() {
+function toggleInfo() {
     state=!state;
     var item=gId('hidden_info');
     if (state) {
-      item.style.display='block'; 
-      item.style.opacity = 0.99999;
-      item.style.filter = "alpha(opacity:"+100+")";
+        item.style.display='block'; 
+        item.style.opacity = 0.99999;
+        item.style.filter = "alpha(opacity:"+100+")";
     } else {
-      new Effect2.Fade('hidden_info',{duration:0.3})
+        new Effect2.Fade('hidden_info',{duration:0.3})
     }
-  }
+}
 
+Form.Element.SmartObserver = Class.create();
+Form.Element.SmartObserver.prototype = {
+    initialize: function(element,delay,callback) {
+        this.delay = delay;
+        this.element = $(element);
+        this.callback = callback;
+        this.lastValue = this.getValue();
+
+        registerAction(this.element,'keyup',this.registerCallback.bind(this));
+    },
+    registerCallback: function() {
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(this.onTimerEvent.bind(this), this.delay*500);
+    },
+   onTimerEvent: function() {
+      var value = this.getValue();
+      if (this.lastValue != value) {
+          this.callback(this.element, value);
+          this.lastValue = value;
+      }
+    },
+  getValue: function() {
+      return Form.Element.getValue(this.element);
+  }
+}
