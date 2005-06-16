@@ -135,18 +135,18 @@ sub max_version {
     return $max->next->max_ver();
 }
 
-sub wikiwords {
-    my $self=shift;
-    my $content  = $self->content;
-    my @links;
-    while ( $content =~ m/
-    (?<![\?\\\/\[])(\b[A-Z][a-z]+[A-Z]\w*)/g) {
-      push @links, $1;
-    }
-    while ( $content =~ m{(?:\[\[|\(\()\s*([^\]\)|]+?)\s*(?:\|\s*([^\]\)]+?)\s*)?(?:\]\]|\)\))}g) {
-      push @links,MojoMojo->fixw( $1 );
-    }
-    return @links;
-}
+# sub wikiwords {
+#     my $self=shift;
+#     my $content  = $self->content;
+#     my @links;
+#     while ( $content =~ m/
+#     (?<![\?\\\/\[])(\b[A-Z][a-z]+[A-Z]\w*)/g) {
+#       push @links, $1;
+#     }
+#     while ( $content =~ m{(?:\[\[|\(\()\s*([^\]\)|]+?)\s*(?:\|\s*([^\]\)]+?)\s*)?(?:\]\]|\)\))}g) {
+#       push @links,MojoMojo->fixw( $1 );
+#     }
+#     return @links;
+# }
 
 1;

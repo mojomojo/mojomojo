@@ -152,38 +152,37 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 sub wikiword {
     my ( $c, $word, $base, $link_text ) = @_;
     cluck( "No base for $word" ) unless $base;
-    $c=MojoMojo->context unless ref $c;
-    
+    $c = MojoMojo->context unless ref $c;
+
     # keep the original wikiword for display, stripping leading slashes
     my $orig_word = $word;
     $orig_word =~ s/.*\///;
-    
+    my $formatted = $link_text || $c->expand_wikiword($orig_word);;
+
+    # convert relative paths to absolute paths
+    if($c->stash->{page} &&
+       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
+       $word !~ m|^/|) {
+       $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
+    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
+       $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
+    }
+
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
     my $url = $base;
-    if($c->stash->{page} && 
-       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
-       $word !~ m|^/|) { 
-       $word = URI->new_abs( $word, $c->stash->{page}->path."/" ) 
-    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
-       $word = URI->new_abs( $word, $c->stash->{page_path}."/" ) 
-    }
     $url =~ s/[\/]+$//;
-    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
+
     # use the normalized path string returned by path_pages:
-    my $formatted = $link_text || $c->expand_wikiword($orig_word);;
-    if (@$proto_pages)
-    {
+    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
+    if (@$proto_pages) {
         my $proto_page = pop @$proto_pages;
         $url .= $proto_page->{path};
-    }
-    else
-    {
+    } else {
         my $page = pop @$path_pages;
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
-
     return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
 }
 
@@ -269,11 +268,11 @@ Clean up explicit wiki words.
 
 =cut
 
-sub fixw { 
+sub fixw {
   my ( $c, $w ) = @_;
   $w =~ s/\s/\_/g;
-          $w =~ s/[^\w\/\.]//g;
-  return $w; 
+  $w =~ s/[^\w\/\.]//g;
+  return $w;
 }
 
 # Disable performance info

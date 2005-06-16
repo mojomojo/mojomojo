@@ -524,8 +524,9 @@ sub path_pages {
     {
 	my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
 	for (@proto_pages) {
-	    ($proto_path eq '/') || ($proto_path .= '/');
-	    $_->{path} = $proto_path . $_->{name_orig};
+	    ($proto_path =~ /\/$/) || ($proto_path .= '/');
+             $proto_path .= $_->{name_orig};
+	    $_->{path} = $proto_path;
 	}
     }
     return ( \@path_pages, \@proto_pages );
@@ -628,18 +629,18 @@ sub orphans {
       __PACKAGE__->retrieve_all_sorted_by("name");
 }
 
-sub wikiwords {
-    my $self    = shift;
-    my $content = $self->content;
-    my @links;
-    while ( $content =~ m/(?<![\?\\\/])(\b[A-Z][a-z]+[A-Z]\w*)/g ) {
-        push @links, $1;
-    }
-    while ( $content =~ m{\[\[\s*([^\]]+)\s*\]\]}g ) {
-        push @links, MojoMojo->fixw($1);
-    }
-    return @links;
-}
+# sub wikiwords {
+#     my $self    = shift;
+#     my $content = $self->content;
+#     my @links;
+#     while ( $content =~ m/(?<![\?\\\/])(\b[A-Z][a-z]+[A-Z]\w*)/g ) {
+#         push @links, $1;
+#     }
+#     while ( $content =~ m{\[\[\s*([^\]]+)\s*\]\]}g ) {
+#         push @links, MojoMojo->fixw($1);
+#     }
+#     return @links;
+# }
 
 sub others_tags {
     my ( $self, $user ) = @_;
