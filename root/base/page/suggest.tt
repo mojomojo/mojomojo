@@ -1,15 +1,33 @@
 [% PROCESS header.tt %]
 <div id="header"><h1>
-Not found: [%c.expand_wikiword(proto_pages.first.name_orig) %]
+Not found: [%c.expand_wikiword(proto_pages.last.name_orig) %]
 </h1></div>
 [% UNLESS (page.name == "/") ;%]
 [% PROCESS breadcrumbs.tt %]
 [% END %]
 [% PROCESS navbar.tt %]
 <div id="content">
-<p>This page does not exist. Do you want to 
-<a href="[%base%][%proto_pages.first.path%].edit">create it</a>?</p>
-<h2>Other suggestions</h2>
+<p>One or more pages in the requested path do not exist.</p>
+<h2>Existent Pages</h2>
+<p>
+ [% FOREACH page IN path_pages %]
+  [% IF loop.first %]
+  <a href="[% base _ page.path %]">[% c.pref("name") || "MojoMojo" %] Home</a>
+  [% ELSE %] / <a href="[% base _ page.path %]">[% page.name_orig %]</a>
+  [% END %]
+ [% END %] ...
+</p>
+<h2>Non-Existent Pages</h2>
+<p>
+ ...
+ [% FOREACH page IN proto_pages %]
+ / <a class="protoPage" href="[% base _ page.path %].edit">[% page.name_orig %]</a>
+ [% END %]
+</p>
+<p>
+ Click on any non-existent page to create it. Any missing pages above it will be created automatically.
+</p>
+<h2>Other Suggestions</h2>
 [%c.subreq('/search/inline',page=>path_pages.first,query=>proto_pages.first.name)%]
 </div>
 

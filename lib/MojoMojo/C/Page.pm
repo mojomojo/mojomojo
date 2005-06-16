@@ -61,7 +61,7 @@ sub view : Global {
     return $c->forward('suggest')
         if $proto_pages && @$proto_pages;
 
-    my $page= $stash->{page};
+    my $page = $stash->{page};
 
     my $content;
 
