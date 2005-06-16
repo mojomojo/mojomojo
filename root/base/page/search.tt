@@ -1,20 +1,13 @@
 [% PROCESS header.tt %]
-
-[% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
-
-[% 
-IF page.name == "/";
-    SET page_title = c.pref("name") || "MojoMojo";
-ELSE;
-    SET page_title = c.expand_wikiword(page.name_orig);
-END; 
-%]
-
+<div id="header">
 <h1 id="pageName">
   <small> [% page_title %] </small>
-  <br/>Search Results
+  Search Results
 </h1>
+</div>
+[% PROCESS breadcrumbs.tt %]
 [%PROCESS navbar.tt %]
+<div id="content">
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
@@ -62,5 +55,5 @@ END;
         </ul>
     </div>
 [% END %]
-
+</div>
 [% PROCESS footer.tt %]
