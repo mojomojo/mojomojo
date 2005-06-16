@@ -288,13 +288,21 @@ sub fixw {
 
 =item prepare_path
 
-strip last char from $c->req->path;
+We override this method to work around some of Catalyst's assumptions
+about dispatching. Since MojoMojo supports page namespaces
+(e.g. '/parent_page/child_page'), with page paths that
+always start with '/', we strip the trailing slash from $c->req->base.
+Also, since MojoMojo indicates actions by appending a '.$action' to
+the path (e.g. '/parent_page/child_page.edit'), we remove the page
+path and save it in $c->stash->{path} and reset $c->req->path to $action.
+We save the original uri in $c->stash->{pre_hacked_uri}.
 
 =cut
 
 sub prepare_path {
     my $c = shift;
     $c->NEXT::prepare_path;
+    $c->stash->{pre_hacked_uri} = $c->req->uri;
     my $base=$c->req->base;
     $base =~s|/+$||;
     $c->req->base($base);
