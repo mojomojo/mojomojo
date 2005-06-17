@@ -4,26 +4,25 @@
               title || config.name || "A poorly configured MojoMojo Installation"
             %]</title>
 <link rel="alternate" type="text/html" href="[% base %]" />
-<modified>[% pages.last.updated.datetime %]-00:00</modified>
+<modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline>Recent changes in [%page.path%]</tagline>
-<tagline>A mojomojo wiki</tagline>
-<id>tag:[%c.req.host%],[%pages.last.updated.year%]:[%c.req.path%]/page/view/[%c.pref('home_node')%]</id>
+<id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>
 <generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
 <copyright>Copyright (c) [%pages.last.update.year%] [%c.pref('admin_user')%]</copyright>
-[%WHILE( page = pages.next )%]
+[%FOREACH page IN pages %]
 <entry>
 <title>[% page.name %]</title>
 <link rel="alternate" type="text/html" href="[% base %][% page.path %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <issued>[%IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</issued>
-<id>tag:[% base_obj.host %],[% objects.last.updated.year %]:[% base_obj.path %][% page.path %]</id>
+<id>tag:[% c.base_uri.host %],[% page.content.created.ymd('-') %]:[% page.path %]</id>
 <created>[% IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</created>
 <summary type="text/plain">[% page.content.utf8 %]</summary>
 <author>
-<name>[%c.expand_wikiword(page.content.creator.login)%]</name>
-<url>[%base%][% page.content.creator.login %]</url>
+<name>[%page.content.creator.name%]</name>
+<url>[%base%][% page.content.creator.link %]</url>
 </author>
 <content type="text/html" mode="escaped" xml:lang="en" xml:base="[% base %]">
 <![CDATA[[% page.content.formatted(c) %] ]]></content>

@@ -225,17 +225,20 @@ sub rss : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
+    $c->res->content_type('application/rss+xml');
 }
 
 sub atom : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
+    $c->res->content_type('application/atom+xml');
     $c->stash->{template} = 'page/atom.tt';
 }
 
 sub rss_full : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
+    $c->res->content_type('application/rss+xml');
     $c->stash->{template} = 'page/rss_full.tt';
 }
 
