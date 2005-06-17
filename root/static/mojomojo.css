@@ -677,6 +677,13 @@ ul#menuHome {
  border-bottom: 1px solid silver;
  font-weight: bold;
 }
+.spinner {
+    float:right;
+    height:1em;
+}
+.spinner img {
+  display:none;
+}
 
 /* end of shamelessly stolen code */
 /*</group>*/
