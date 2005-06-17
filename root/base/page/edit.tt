@@ -36,8 +36,8 @@ FILTER html %][% c.req.params.body %][% append %][%END
   frequency => 0.5,
   with      => "'content='+escape(value)", 
   update    => 'content_preview'
-  loading   => "Toggle.display('editspinner')",
-  complete  => "Toggle.display('editspinner')",
+  loading   => "Element.show('editspinner')",
+  complete  => "Element.hide('editspinner')",
   })%]
 
  <div class="spinner"><img id="editspinner" src="[%base%]/.static/spinner.gif">&nbsp;</div>
