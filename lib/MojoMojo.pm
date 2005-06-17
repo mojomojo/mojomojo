@@ -310,9 +310,11 @@ sub prepare_path {
     $path=$c->req->path;
     my $index=index($path,'.');
     if ($index==-1) {
+      # no action found, default to view
       $c->stash->{path}=$path || '/';
       $c->req->path('view');
     } else {
+      # set path in stash, and set req.path to action
       $c->stash->{path}='/'.substr($path,0,$index);
       $c->req->path(substr($path,$index+1));
     }
