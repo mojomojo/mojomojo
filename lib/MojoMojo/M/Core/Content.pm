@@ -87,7 +87,7 @@ sub formatted_diff {
 
 sub formatted {
     my ( $self, $c, $content ) = @_;
-    $content ||= $self->body;
+    $content ||= $self->body_decoded;
     MojoMojo->call_plugins( "format_content", \$content, $c ) if ($content);
     return $content;
 }
@@ -133,6 +133,13 @@ sub max_version {
     my $max=$self->search_max_ver($self->page);
     return 0 unless $max->count;
     return $max->next->max_ver();
+}
+
+sub body_decoded {
+    my $self=shift;
+    my $body=$self->body;
+    utf8::decode($body);
+    return $body;
 }
 
 # sub wikiwords {
