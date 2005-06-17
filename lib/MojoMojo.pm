@@ -320,6 +320,11 @@ sub prepare_path {
     }
 }
 
+sub base_uri {
+  my $c=shift;
+  return URI->new($c->req->base);
+}
+
 =back
 
 =head1 AUTHORS
