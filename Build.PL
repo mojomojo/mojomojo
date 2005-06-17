@@ -40,6 +40,7 @@ my $build = Catalyst::Build->new(
      'Class::DBI::Sweet' => 0, # need latest from catalyst trunk for now
      'Data::Page' => '2.00',
      'DateTime' => '0.28',
+     'DateTime::Format::Mail' => 0,
      'DBD::SQLite' => '1.08',
      'Exception::Class' => 0,
      'File::MimeInfo' => '0.11',

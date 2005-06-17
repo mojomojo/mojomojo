@@ -3,6 +3,7 @@ package MojoMojo::M::Core::Content;
 use strict;
 use base 'Catalyst::Base';
 use DateTime;
+use DateTime::Format::Mail;
 use utf8;
 
 __PACKAGE__->has_a(
@@ -140,6 +141,11 @@ sub body_decoded {
     my $body=$self->body;
     utf8::decode($body);
     return $body;
+}
+
+sub pub_date {
+    my $self=shift;
+    return DateTime::Format::Mail->format_datetime($self->created);
 }
 
 # sub wikiwords {
