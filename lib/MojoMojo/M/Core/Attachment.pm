@@ -50,7 +50,7 @@ sub make_inline {
     $img->open(file=>$self->filename,type=>'jpeg') or die $img->errstr;
     my ($image,$result);
     $image=$img->scale(xpixels=>700);
-    $image->write(file=>$file.'.inline',type=>'jpeg') or die $img->errstr;
+    $image->write(file=>$self->filename.'.inline',type=>'jpeg') or die $img->errstr;
 }
 
 sub make_thumb {
@@ -77,7 +77,7 @@ sub make_thumb {
                             width=>80,
                             height=>80);
     }
-    $result->write(file=>$file.'.thumb',type=>'jpeg') or die $img->errstr;
+    $result->write(file=>$self->filename.'.thumb',type=>'jpeg') or die $img->errstr;
 }
 
 1;

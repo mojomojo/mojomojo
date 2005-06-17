@@ -79,16 +79,15 @@ an attachment id.
 
 =cut
 
-sub index : Path('/attachment') {
-    my ( $self, $c, $att, $action ) = @_;
+sub default : Private {
+    my ( $self, $c, $called,$att, $action ) = @_;
 
-    
-    $c->stash->{att} = MojoMojo::M::Core::Attachment->retrieve($att);
+    $att=MojoMojo::M::Core::Attachment->retrieve($att);
+    $c->req->args([ $att ]);
     if ($action) {
-        $c->forward("/attachment/$action");
+        $c->forward("$action");
     }
-    unless ( $c->res->output || $c->stash->{template} ) {
-        $att=$c->stash->{att};
+    unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
         $c->res->output( scalar( read_file( $att->filename)));
         $c->res->headers->header( 'content-type', $att->contenttype );
         $c->res->headers->header(
@@ -105,39 +104,43 @@ content-disposition.
 =cut
 
 sub download : Private {
-    my ( $self, $c, $att, $action ) = @_;
+    my ( $self, $c, $att ) = @_;
     $c->res->output(
-        scalar(read_file( $c->stash->{att}->filename))
+        scalar(read_file( $att->filename))
     );
     $c->res->headers->header( 'content-type',
-        $c->stash->{att}->contenttype );
+        $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename="
-          . $c->stash->{att}->name );
+          . $att->name );
 }
 
 sub thumb : Private {
-    my ( $self, $c, $att, $action ) = @_;
+    my ( $self, $c, $att ) = @_;
     $att->make_thumb()
-      unless -f $c->stash->{att}->filename . ".thumb" ;
+      unless -f $att->filename . ".thumb" ;
     $c->res->output(
-        scalar(read_file($c->stash->{att}->filename. '.thumb'))
+        scalar(read_file($att->filename. '.thumb'))
     );
+    $c->res->headers->header( 'content-type',
+        $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename="
-           . $c->stash->{att}->name );
+           . $att->name );
 }
 =item  inline show inline attachment
 
 =cut
 
 sub inline : Private {
-    my ( $self, $c, $att, $action ) = @_;
+    my ( $self, $c, $att ) = @_;
     $att->make_inline
       unless -f $att->filename . ".inline" ;
     $c->res->output(
         scalar( read_file( $att->filename . '.inline'))
      );
+    $c->res->headers->header( 'content-type',
+        $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename="
         . $att->name );
@@ -167,12 +170,12 @@ mime-type
 =cut
 
 sub insert : Private {
-    my ( $self, $c, $att, $action ) = @_;
+    my ( $self, $c, $att ) = @_;
     $c->stash->{append} = "\n\n\""
-      . $c->stash->{att}->name . "\":"
+      . $att->name . "\":"
       . $c->req->base
       . "/.attachment/"
-      . $c->stash->{att};
+      . $att;
     $c->forward('/pageadmin/edit');
 }
 
