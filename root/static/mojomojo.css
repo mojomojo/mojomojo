@@ -680,8 +680,9 @@ ul#menuHome {
 .spinner {
     float:right;
     height:1em;
+    border:1px solid red;
 }
-.spinner img {
+#editspinner {
   display:none;
 }
 
