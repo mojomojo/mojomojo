@@ -16,6 +16,6 @@
    
        
 <script language="JavaScript">
-gId('loginField').focus();
+Field.focus('loginField');
 </script>
 [% PROCESS footer.tt %]

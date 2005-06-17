@@ -25,6 +25,6 @@
    
        
 <script language="JavaScript">
-gId('loginField').focus();
+$('loginField').focus();
 </script>
 [% PROCESS footer.tt %]

@@ -19,14 +19,14 @@
 [%c.prototype.form_remote_tag({ 
     update => 'message', 
     url=>url,
-    loading=>"gId('phototitle').value=gId('titlebox').value;",
+    loading=>"$('phototitle').value=$('titlebox').value;",
     complete=>"Fat.fade('.highlight')"
 })%] 
 <input type="hidden" id="phototitle" value="[%photo.title%]">
 <input class="dual" id="titlebox" value="[%photo.title%]" type="text" 
        name="title" width="80" autocomplete="off"
-       onFocus="javascript:gId('titlebutton').style.display='inline';gId('message').innerHTML='<em>Click here to abort.</em>';"
-       onBlur="javascript:window.setTimeout(function() {gId('titlebox').value=gId('phototitle').value;gId('titlebutton').style.display='none';},500); gId('message').innerHTML=''; "/>
+       onFocus="javascript:$('titlebutton').style.display='inline';$('message').innerHTML='<em>Click here to abort.</em>';"
+       onBlur="javascript:window.setTimeout(function() {$('titlebox').value=$('phototitle').value;$('titlebutton').style.display='none';},500); $('message').innerHTML=''; "/>
 <input class="dualbutton" id="titlebutton" type="submit" name="add" value="save"/> 
 <span class="highlight" id="message"><em>Click title to edit it.</em></span>
 </form>
@@ -55,14 +55,14 @@
 [%c.prototype.form_remote_tag({ 
     update => 'descmessage', 
     url=>url,
-    loading=>"gId('photodesc').value=gId('descbox').value;",
+    loading=>"$('photodesc').value=$('descbox').value;",
     complete=>"Fat.fade('.highlight')"
 })%] 
 <input type="hidden" id="photodesc" value="[%photo.description%]">
 <textarea class="dual" id="descbox" value="[%photo.description%]" 
        name="description" width="80" autocomplete="off"
-       onFocus="javascript:gId('descbutton').style.display='inline';gId('descmessage').innerHTML='<em>Click here to abort.</em>';this.select();"
-       onBlur="javascript:window.setTimeout(function() {gId('descbox').value=gId('photodesc').value;gId('descbutton').style.display='none';},500); gId('descmessage').innerHTML=''; ">
+       onFocus="javascript:$('descbutton').style.display='inline';$('descmessage').innerHTML='<em>Click here to abort.</em>';this.select();"
+       onBlur="javascript:window.setTimeout(function() {$('descbox').value=$('photodesc').value;$('descbutton').style.display='none';},500); $('descmessage').innerHTML=''; ">
 [%photo.description || "Click here to write a description"%]
 </textarea>
 <input class="dualbutton" id="descbutton" type="submit" name="add" value="save"/> 

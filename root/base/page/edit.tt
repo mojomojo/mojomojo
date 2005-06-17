@@ -32,11 +32,15 @@ FILTER html %][% c.req.params.body %][% append %][%END
 %]</textarea>
  [% url= base _ page.path _ '.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
-  url     => url,
-  with    => "'content='+escape(value)", 
-  update  => 'content_preview'
+  url       => url,
+  frequency => 0.5,
+  with      => "'content='+escape(value)", 
+  update    => 'content_preview'
+  loading   => "Toggle.display('editspinner')",
+  complete  => "Toggle.display('editspinner')",
   })%]
 
+ <div class="spinner"><img id="editspinner" src="[%base%]/.static/spinner.gif">&nbsp;</div>
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF user.id %]
   [% c.wikiword(user.link,base) %] 

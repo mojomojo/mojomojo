@@ -1,11 +1,11 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:gId('addtag').style.display='block';gId('showtag').style.display='none';gId('taginput').focus();return false;">add tag</a></div>
+<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Toggle.display('addtag');Toggle.display('showtag');$('taginput').focus();return false;">add tag</a></div>
 <div id="addtag" class="formdiv">
 [% url = base _ page.path _'.jsrpc/submittag' %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url,
-    loading=>"gId('taginput').value='';gId('addtag').style.display='none';gId('showtag').style.display='block';",
+    loading=>"Toggle.display('taginput');Toggle.display('addtag');Toggle.display('showtag');",
     complete=>"Fat.fade('.highlight');"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
@@ -18,26 +18,6 @@
 [% IF c.req.user ; %]
 
 [% END %]
-<script language="Javascript" type="text/javascript">
-  var diff='';
-  function toggleChanges() {
-    if (!diff) {
-      diff=xmlHTTPRequest('[%base%][%path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]');
-      document.getElementById('diff').innerHTML=diff;
-    }
-    if (document.getElementById("changes").style.display == "none") {
-      document.getElementById("changes").style.display  = "block";
-      document.getElementById("revision").style.display = "none";
-      document.getElementById("show_changes").style.display  = "none";
-      document.getElementById("hide_changes").style.display = "inline";
-    } else {
-      document.getElementById("changes").style.display  = "none";
-      document.getElementById("revision").style.display = "block";
-      document.getElementById("show_changes").style.display  = "inline";
-      document.getElementById("hide_changes").style.display = "none";
-    }
-  }
-</script>
 
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
@@ -70,10 +50,10 @@
  [%# IF rev > 1 %]
  [% IF page.content_version && page.content_version > 1 %] 
  <span id="show_changes">
-  | <a title="Show differences from previous version" href="" onclick="toggleChanges(); return false;">See changes</a>
+  | <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%base%][%path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">See changes</a>
  </span>
  <span id="hide_changes" style="display: none">
-  | <a title="Show normal page" href="#" onclick="toggleChanges(); return false;">Hide changes</a>
+  | <a title="Show normal page" href="#" onclick="toggleChanges('[%base%][%path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">Hide changes</a>
  </span>
 [% END %]
  <small>
