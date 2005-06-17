@@ -44,6 +44,7 @@ my $build = Catalyst::Build->new(
      'Exception::Class' => 0,
      'File::MimeInfo' => '0.11',
      'File::Slurp' => '9999.07',
+     'HTML::Prototype::Useful' => '0.1',
      'HTML::Strip' => '1.04',
      'HTML::Scrubber' => 0,
      'Image::EXIF' => 0,
