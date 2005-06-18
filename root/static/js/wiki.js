@@ -4,6 +4,7 @@ function cleanAuthorName(author) {
   }
 }
 
+var state=0;
 function toggleInfo() {
     state=!state;
     var item=$('hidden_info');
