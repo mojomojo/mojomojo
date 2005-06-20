@@ -64,12 +64,12 @@ sub p : Global {
     $c->stash->{photo}    = $photo;
     $c->forward('tags');
     $c->stash->{template} = 'gallery/photo.tt';
-    $c->stash->{next}     = $photo->retrieve_next({
-        'attachment.page'=>$c->stash->{page}, 
-        },{order_by=>'taken'});
+    $c->stash->{next}     = $photo->retrieve_next(
+    { 'attachment.page'=>$photo->attachment->page },
+    {order_by=>'taken'})->next;
     $c->stash->{prev}     = $photo->retrieve_previous({
         'attachment.page'=>$c->stash->{page}, 
-        },{order_by=>'taken'});
+        },{order_by=>'taken'})->next;
     
 }
 
