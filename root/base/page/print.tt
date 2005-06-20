@@ -1,4 +1,5 @@
 [% PROCESS header.tt %]
+<div id="content">
 <h1 id="pageName">
   <small>
  [% c.pref("name") || "MojoMojo" %]
@@ -13,6 +14,7 @@
 <div class="byline">
   Revised on [% content.created.ymd %] at [% content.created.hms %]
     by [% content.creator.name %]
+</div>
 </div>
 
 [% PROCESS footer.tt %]
