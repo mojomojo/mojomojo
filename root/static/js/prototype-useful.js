@@ -1,5 +1,4 @@
 /* prototype-useful.js - Some useful additions for the prototype library */
-/* Some code from pageplay.js by Peter Cooper */
 /* By Marcus Ramberg */
 
 document.registerAction = function(element,action,functionName) {
