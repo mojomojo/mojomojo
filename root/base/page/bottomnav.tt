@@ -1,11 +1,11 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Toggle.display('addtag');Toggle.display('showtag');$('taginput').focus();return false;">add tag</a></div>
-<div id="addtag" class="formdiv">
+<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Field.focus('taginput');return false;">add tag</a></div>
+<div id="addtag" style="display:none;" class="formdiv">
 [% url = base _ page.path _'.jsrpc/submittag' %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url,
-    loading=>"Toggle.display('taginput');Toggle.display('addtag');Toggle.display('showtag');",
+    loading=>"Element.hide('addtag');Element.show('showtag');",
     complete=>"Fat.fade('.highlight');"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
@@ -58,7 +58,7 @@
 [% END %]
  <small>
   | Views: <a title="Format page for printing" href="[%base _ page.path%].print">Print</a>
-  <a title="Subscribe to page changes href="[%base _ page.path%].rss_changes">RSS</a>
+  <a title="Subscribe to page changes" href="[%base _ page.path%].rss_changes">RSS</a>
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </small>
 [% IF page.links_to.first ; %] 
@@ -68,5 +68,5 @@
    <a class="existingWikiWord" title="[%linkitem.name_orig%] href="[%base%][%linkitem.path%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </small>
-[% END %]  </span>
+</span>[% END %]
 </div>
