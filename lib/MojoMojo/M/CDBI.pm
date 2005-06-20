@@ -23,6 +23,8 @@ sub new {
          unshift @{ $subclass . '::ISA' }, 'Catalyst::Model::CDBI::Sweet';
      }
      return $self;
+      # uncomment this to get dbh traces
+#     ($self->loader->classes)[0]->db_Main()->trace(1);
 }
 
 1;
