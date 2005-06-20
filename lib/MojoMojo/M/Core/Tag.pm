@@ -1,6 +1,7 @@
 package MojoMojo::M::Core::Tag;
 use strict;
 
+__PACKAGE__->columns( Essential => qw/tag/);
 __PACKAGE__->columns( TEMP      => qw/refcount photocount pagecount/ );
 __PACKAGE__->columns( Stringify => qw/tag/ );
 

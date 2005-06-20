@@ -2,6 +2,8 @@ package MojoMojo::M::Core::Photo;
 
 use Image::EXIF;
 
+__PACKAGE__->columns(Essential=>qw/title description taken/);
+
 __PACKAGE__->has_a(
     taken => 'DateTime',
     inflate => sub {

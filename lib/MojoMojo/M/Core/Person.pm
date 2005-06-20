@@ -1,5 +1,7 @@
 package MojoMojo::M::Core::Person;
 
+
+__PACKAGE__->columns(Essential=>qw/login pass active/);
 sub get_user {
     my ( $class, $user ) = @_;
     return __PACKAGE__->search( login => $user )->next;
