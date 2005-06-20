@@ -53,8 +53,9 @@
 [%END%]
 [%END%]
 
-[% IF ( user.link == page.path OR user.link==proto_pages.first.path  OR 
-      ( user.is_admin AND user.get_user(page.name) ) ) %]
+[% IF ( user AND 
+      (user.link == page.path OR user.link==proto_pages.first.path  OR 
+      ( user.is_admin AND user.get_user(page.name) ) ) ) %]
 
 [%IF (c.req.action=="profile")%]
 <b class="navOn">Profile</b> | 
