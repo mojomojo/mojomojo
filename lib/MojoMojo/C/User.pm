@@ -28,6 +28,7 @@ deletes this users cookie, and clears his session.
 sub logout : Global {
     my ( $self, $c ) = @_;
     $c->session_logout;
+    undef $c->stash->{user};
     $c->forward('/page/view');
 }
 
