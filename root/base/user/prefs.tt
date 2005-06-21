@@ -1,8 +1,5 @@
 [% PROCESS header.tt %]
-
         <div id="header"><h1>preferences</h1></div>
-
-
 [% PROCESS navbar.tt %]
 <div class="preferences" id="content">
 <h2>your account</h2>
