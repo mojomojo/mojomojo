@@ -23,7 +23,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     # FIXME - need to identify administrators
     my $user = $c->stash->{user};
-    unless ( $user->is_admin ) {
+    unless ( $user && $user->is_admin ) {
         $c->stash->{message}='sorry bubba, gotta be admin';
         $c->stash->{template}='message.tt';
         return 0;
