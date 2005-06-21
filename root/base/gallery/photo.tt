@@ -4,8 +4,8 @@
  [% c.pref("name") || "MojoMojo" %]
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
-[% END %]
-[%photo.title%]
+[% END %] gallery -
+[%page.name%]
 [%IF tag %]
 (<a href="[%base%][%path%].gallery/by_tag/[%tag%]">[%tag%]</a>)[%END%]
 </h1></div>
@@ -36,17 +36,17 @@
 [%END%]
 <div class="navigation">
 [% IF prev %]
-<a href="[%base%]/.p[%IF tag%]_by_tag/[%tag%][%END%]/[%prev%]">&lt;</a>
+<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%prev%]">&lt;</a>
 [%END%]
 <a href="#" onClick="toggleInfo();">(i)</a>
 <div id="hidden_info" class="framedpopup">
 [%PROCESS gallery/photo_info.tt%]
 </div>
 [% IF next%]
-<a href="[%base%]/.p[%IF tag%]_by_tag/[%tag%][%END%]/[%next%]">&gt;</a>
+<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%next%]">&gt;</a>
 [%END%]
 </div>
-<div id="images">
+<div class="photo">
 <img width="700" src="[%base%][%page.path%].attachment/[%photo.id%]/inline">
 </div>
 [% IF user %]
