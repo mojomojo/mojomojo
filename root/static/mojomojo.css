@@ -23,7 +23,8 @@ Body {
 
 #container {
 	width: 750px;
-	position: absolute;	left: 50%;
+	position: absolute;
+  left: 50%;
 	height: 500px;
 	top: 10px;
 	display: block;
@@ -680,10 +681,6 @@ ul#menuHome {
 .spinner {
     float:right;
     height:1em;
-    border:1px solid red;
-}
-#editspinner {
-  display:none;
 }
 
 /* end of shamelessly stolen code */

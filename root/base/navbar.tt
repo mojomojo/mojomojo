@@ -38,7 +38,6 @@
   [%END %]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 <br/>
-[% IF user.active%]
 [%IF (c.req.action=="view")%]
 <b class="navOn">page</b> | 
 [%ELSE%]
@@ -49,7 +48,6 @@
 <b "Myclass="navOn">gallery</b> | 
 [%ELSE%]
 <a title="Photo Album" href="[%base%][%page.path%].gallery">gallery</a> | 
-[%END%]
 [%END%]
 [%END%]
 
