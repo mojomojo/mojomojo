@@ -3,6 +3,7 @@ package MojoMojo;
 require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
+use Path::Class 'file';
 
 use Exception::Class (
     'MojoException',
@@ -25,15 +26,15 @@ use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
 
 MojoMojo->prepare_home();
-MojoMojo->config( YAML::LoadFile(MojoMojo->config->{home}.'/mojomojo.yml') );
+MojoMojo->config( YAML::LoadFile( file( MojoMojo->config->{home},'/mojomojo.yml' ) ) );
 MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::Person',
                     user_field     => 'login',
-                    password_field => 'pass'});
+                    password_field => 'pass' } );
 
 MojoMojo->config ( no_url_rewrite=>1 );
 MojoMojo->config( cache => { 
-                  storage=> MojoMojo->config->{home}.'/cache' });
+                  storage=> MojoMojo->config->{home}.'/cache' } );
 MojoMojo->setup();
 MojoMojo->prepare_search_index();
 
@@ -66,7 +67,7 @@ powered by Catalyst.
 
 sub begin : Private {
     my ( $self, $c ) = @_;
-    if ($c->stash->{path}) {
+    if ( $c->stash->{path} ) {
         my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages( $c->stash->{path} );
         @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
@@ -83,8 +84,8 @@ default action - serve the home node
 =cut
 
 sub default : Private {
-    my ( $self, $c ) = @_;
-    $c->stash->{message}="Couldn't find that page, jimmy";
+    my ( $self, $c )      = @_;
+    $c->stash->{message}  = "Couldn't find that page, jimmy";
     $c->stash->{template} = 'message.tt';
 }
 
@@ -109,12 +110,13 @@ sub end : Private {
     die if $c->req->params->{die};
     my @fatal;
     foreach my $error (@{$c->error}) {
-      if (UNIVERSAL::isa($error,'Warning')) {
-          $c->log->debug($error->error, "\n", $@->trace->as_string, "\n");
-      } else { push @fatal,$error; }
+        if (UNIVERSAL::isa($error,'Warning')) {
+            $c->log->debug($error->error, "\n", $@->trace->as_string, "\n");
+        } else { 
+            push @fatal,$error; 
+        }
     }
     $c->error(\@fatal);
-
 }
 
 
@@ -161,17 +163,17 @@ sub wikiword {
 
     # convert relative paths to absolute paths
     if($c->stash->{page} &&
-       ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
-       $word !~ m|^/|) {
-       $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
+        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
+        $word !~ m|^/|) {
+        $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
     } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
-       $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
+        $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
     }
 
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
-    my $url = $base;
-    $url =~ s/[\/]+$//;
+    my $url =  $base;
+    $url    =~ s/[\/]+$//;
 
     # use the normalized path string returned by path_pages:
     my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
