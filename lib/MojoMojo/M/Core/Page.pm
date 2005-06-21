@@ -31,6 +31,13 @@ __PACKAGE__->has_many(
     links_from => [ 'MojoMojo::M::Core::Link' => 'to_page' ],
     "from_page"
 );
+MojoMojo::M::Core::Page->has_many( 'attachments' => 'MojoMojo::M::Core::Attachment' );
+MojoMojo::M::Core::Page->has_many( 'comments' => 'MojoMojo::M::Core::Comment' );
+MojoMojo::M::Core::Page->has_a( 'parent' => 'MojoMojo::M::Core::Page' );
+MojoMojo::M::Core::Page->has_many( 'children' => 'MojoMojo::M::Core::Page' );
+MojoMojo::M::Core::Page->has_many( 'roleprivileges' => 'MojoMojo::M::Core::RolePrivilege' );
+MojoMojo::M::Core::Page->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
+MojoMojo::M::Core::Page->has_many( 'wantedpages' => 'MojoMojo::M::Core::WantedPage' );
 
 =head1 METHODS
 
@@ -191,27 +198,7 @@ sub rename {
     }
 }
 
-=item children
 
-  @children = $page->children;
-
-Returns a list of the page's immediate children, i.e. it does not return
-the entire subtree rooted by the page. In order to get the entire subtree,
-use L<descendants>.
-
-=cut
-
-__PACKAGE__->set_sql('children' => qq{
- SELECT __ESSENTIAL__
- FROM __TABLE__
- WHERE parent = ?
- ORDER BY name
-});
-
-sub children {
-    my @pages = $_[0]->search_children( $_[0]->id );
-    return __PACKAGE__->set_paths( @pages );
-}
 
 =item descendants
 

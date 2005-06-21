@@ -1,6 +1,8 @@
 package MojoMojo::M::Core::Attachment;
 use File::MimeInfo::Magic;
 
+MojoMojo::M::Core::Attachment->has_a( 'page' => 'MojoMojo::M::Core::Page' );
+
 __PACKAGE__->columns(Essential=>qw/page name uploaded/);
 __PACKAGE__->has_a(
     uploaded => 'DateTime',

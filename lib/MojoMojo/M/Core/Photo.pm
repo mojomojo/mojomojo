@@ -11,6 +11,8 @@ __PACKAGE__->has_a(
     },
     deflate => 'epoch'
 );
+__PACKAGE__->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
+
 
 __PACKAGE__->set_sql('page', <<"");
 SELECT __ESSENTIAL__ 
@@ -19,6 +21,8 @@ wHERE __TABLE__.id=attachment.id AND attachment.page=?
 
 
 __PACKAGE__->might_have('attachment' => 'MojoMojo::M::Core::Attachment', qw/uploaded/);
+MojoMojo::M::Core::Photo->has_many( 'comments' => 'MojoMojo::M::Core::Comment' )
+;
 
 sub create_from_attachment {
     my ($class,$attachment) = @_;

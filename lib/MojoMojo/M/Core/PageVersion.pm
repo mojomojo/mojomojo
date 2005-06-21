@@ -28,6 +28,7 @@ __PACKAGE__->has_a(
     },
     deflate => 'epoch'
 );
+MojoMojo::M::Core::PageVersion->has_a( 'creator' => 'MojoMojo::M::Core::Person' );
 
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 

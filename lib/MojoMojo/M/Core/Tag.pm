@@ -5,6 +5,11 @@ __PACKAGE__->columns( Essential => qw/tag/);
 __PACKAGE__->columns( TEMP      => qw/refcount photocount pagecount/ );
 __PACKAGE__->columns( Stringify => qw/tag/ );
 
+MojoMojo::M::Core::Tag->has_a( 'person' => 'MojoMojo::M::Core::Person' );
+MojoMojo::M::Core::Tag->has_a( 'page' => 'MojoMojo::M::Core::Page' );
+MojoMojo::M::Core::Tag->has_a( 'photo' => 'MojoMojo::M::Core::Photo' );
+
+
 __PACKAGE__->set_sql(
     'most_used' => qq[
 SELECT tag, count(tag) AS refcount 

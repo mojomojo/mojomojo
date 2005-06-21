@@ -29,6 +29,8 @@ __PACKAGE__->has_a(
     },
     deflate => 'epoch'
 );
+MojoMojo::M::Core::Content->has_a( 'creator' => 'MojoMojo::M::Core::Person' );
+
 
 __PACKAGE__->set_sql(max_ver=>'SELECT MAX(version) as max_ver  FROM __TABLE__ WHERE page=?');
 

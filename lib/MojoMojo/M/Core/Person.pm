@@ -2,6 +2,13 @@ package MojoMojo::M::Core::Person;
 
 
 __PACKAGE__->columns(Essential=>qw/login pass active/);
+MojoMojo::M::Core::Person->has_many( 'comments' => 'MojoMojo::M::Core::Comment' );
+MojoMojo::M::Core::Person->has_many( 'contents' => 'MojoMojo::M::Core::Content' );
+MojoMojo::M::Core::Person->has_many( 'entries' => 'MojoMojo::M::Core::Entry' );
+MojoMojo::M::Core::Person->has_many( 'pageversions' => 'MojoMojo::M::Core::PageVersion' );
+MojoMojo::M::Core::Person->has_many( 'rolemembers' => 'MojoMojo::M::Core::RoleMember' );
+MojoMojo::M::Core::Person->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
+
 sub get_user {
     my ( $class, $user ) = @_;
     return __PACKAGE__->search( login => $user )->next;

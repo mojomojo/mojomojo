@@ -10,6 +10,12 @@ __PACKAGE__->has_a(
     },
     deflate => 'epoch'
 );
+MojoMojo::M::Core::Comment->has_a( 'poster' => 'MojoMojo::M::Core::Person' );
+MojoMojo::M::Core::Comment->has_a( 'page' => 'MojoMojo::M::Core::Page' );
+MojoMojo::M::Core::Comment->has_a( 'picture' => 'MojoMojo::M::Core::Photo' );
+
+
+
 
 
 sub formatted {

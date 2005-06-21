@@ -12,7 +12,6 @@ __PACKAGE__->config(
     additional_classes => [
         qw/Class::DBI::FromForm Class::DBI::Sweet::Topping/
     ],
-    relationships => 1
 );
 
 sub new {
