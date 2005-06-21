@@ -24,7 +24,7 @@
 [% IF (!rev OR rev==page.content_version) %]
  <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
  [% IF page.path == '/' %]
- | <a title="Change site settings" href="[% base %]/.settings">Edit Settings</a>
+ | <a title="Change site settings" href="[% base %]/.admin">Edit Settings</a>
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
  | <a title="See previous revision" href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
