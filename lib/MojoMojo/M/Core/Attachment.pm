@@ -63,18 +63,18 @@ sub make_thumb {
     my ($image,$result);
     if ($h>$w) {
         $image=$img->scale(xpixels=>80);
-            $w=$image->getwidth;
+            $h=$image->getheight;
         $result =$image->crop(
-                          left=> int(($w-80)/2),
-                          top=>0,
+                            top=> int(($h-80)/2),
+                            left=>0,
                           width=>80,
                             height=>80);
     } else {
         $image=$img->scale(ypixels=>80);
-            $h=$image->getheight;
+            $w=$image->getwidth;
         $result  =$image->crop(
-                            top=> int(($h-80)/2),
-                            left=>0,
+                          left=> int(($w-80)/2),
+                          top=>0,
                             width=>80,
                             height=>80);
     }
