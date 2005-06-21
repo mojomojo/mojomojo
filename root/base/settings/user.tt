@@ -1,0 +1,23 @@
+[%PROCESS header.tt%]
+<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
+<div id="toplinks">
+<a accesskey="C" href="[%base%]/.admin">configuration</a> |
+<b class="navOn">users</a> |
+<a accesskey="B" href="[%base%]/">back</a> </div>
+
+ <div id="content">
+ <h1>Users</h1>
+ <table>
+<th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
+[%WHILE (user=users.next) %]
+<tr>
+[%activeurl=base _ "/.admin/user/" _ user.id _ "/active"%]
+[%active=user.active || 0%]
+<td><span id="active[%user.id%]">[%c.prototype.link_to_remote(active ,{url=>activeurl,update=>"active$user"})%]</a></span></td>
+<td>[%user.login%]</td>
+<td>&nbsp;</td>
+<td>[%user.name%]</td>
+<td>[%user.email%]</td>
+</tr>
+[%END%]
+ </table

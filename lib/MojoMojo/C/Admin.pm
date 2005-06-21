@@ -34,7 +34,7 @@ sub auto : Private {
     return 1;
 }
 
-sub settings : Global {
+sub default: Private {
     my ( $self, $c ) = @_;
     $c->stash->{template}='settings.tt';
 }
@@ -59,6 +59,32 @@ sub setting_admins : Path('/settings/admins') {
       $c->res->body('Updated');
       $c->pref('admins',join(' ',@users,$c->req->{user}));
   }
+}
+
+sub user : Local {
+    my ( $self, $c, $user ) = @_;
+    $c->forward('update_user') if $user;
+    $c->stash->{template}='settings/user.tt';
+    my ($pager,$iterator) =MojoMojo::M::Core::Person->pager( 
+       {}, {
+            page           =>$c->req->param('page') || 1,
+            rows             => 20,
+            order_by => 'login'
+        });
+    $c->stash->{users} = $iterator;
+    $c->stash->{pager} = $pager;
+    if ($user) {
+        # FIXME: do something
+    }
+}
+
+sub update_user : Private {
+    my ( $self, $c, $user, $action ) = @_;
+    $user=MojoMojo::M::Core::Person->retrieve($user) || return;
+    if ($action eq 'active') {
+        $user->active(! $user->active);
+    }
+    $user->update;
 }
 
 =back

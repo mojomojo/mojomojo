@@ -1,8 +1,8 @@
 [%PROCESS header.tt%]
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
-       
-
-<div id="toplinks"><b class="navOn">configuration</b> | <a accesskey="B" href="[%base%]/">back</a> </div>
+<div id="toplinks"><b class="navOn">configuration</b> |
+<a accesskey="U" href="[%base%]/.admin/user">users</a> |
+<a accesskey="B" href="[%base%]/">back</a> </div>
  <div id="content">
  <h1>Site Configuration</h1>
 <form action="javascript:return 0;">
@@ -11,9 +11,12 @@
 <dd><input id="sitename"  type="text" value="[%c.pref('name')%]"/></dt>
 [% url = base _ "/.settings/name" %]
 [% c.prototype.observe_field('sitename', {
+    delay   => 0.5,
     url     => url,
     with    => "'name='+escape(value)",
-    update  => "pageName"
+    update  => "pageName",
+  loading   => "Element.show('editspinner')",
+  complete  => "Element.hide('editspinner')",
 })%]
 <dt>Admins:</dt>
 <dd>
@@ -23,9 +26,12 @@
 [% c.prototype.observe_field('admins', {
     url     => url,
     with    => "'admins='+escape(value)",
-    update  => "adminstatus"
+    update  => "adminstatus",
+  loading   => "Element.show('editspinner')",
+  complete  => "Element.hide('editspinner')",
 })%]
 </form>
+ <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]
