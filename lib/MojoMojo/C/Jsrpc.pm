@@ -2,6 +2,7 @@ package MojoMojo::C::Jsrpc;
 
 use strict;
 use base 'Catalyst::Base';
+use HTML::Entities;
 
 =head1 NAME
 
@@ -27,13 +28,9 @@ params->{content} and runs it through the formatter chain.
 sub render : Local {
     my ( $self, $c ) = @_;
     my $output = "Please type something";
-    if (   $c->req->params->{content}
-        && $c->req->params->{content} =~ /(\S+)/ )
-    {
-        $output =
-          MojoMojo::M::Core::Content->formatted( $c,
-          $c->req->params->{content},
-          );
+    my $input=decode_entities($c->req->params->{content});
+    if ( $input && $input =~ /(\S+)/ ) {
+        $output = MojoMojo::M::Core::Content->formatted( $c, $input );
     }
     $c->res->output($output);
 }
