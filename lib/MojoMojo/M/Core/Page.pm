@@ -21,7 +21,7 @@ __PACKAGE__->columns( TEMP      => qw/path/ );
 
 # automatically set the path TEMP column on select: deprecated
 # in favor of set_paths (NOT set_path)
-__PACKAGE__->add_trigger( select => \&set_path);
+#__PACKAGE__->add_trigger( select => \&set_path);
 
 __PACKAGE__->has_many(
     links_to => [ 'MojoMojo::M::Core::Link' => 'from_page' ],
@@ -649,7 +649,7 @@ sub user_tags {
 sub update_content {
     my ( $self, %args ) = @_;
 
-    my $content_version = ($self->content ? $self->content->max_version() : 0) ;
+    my $content_version = ($self->content ? $self->content->max_version() : undef) ;
     my %content_data =
       map { $_ => $args{$_} } MojoMojo::M::Core::Content->columns;
     my $now = DateTime->now;
@@ -672,6 +672,8 @@ sub update_content {
     $previous_content->status( 'removed' );
     $previous_content->comments( "Replaced by version $content_version." );
         $previous_content->update;
+    } else {
+        $self->set_paths($self) 
     }
 
 } # end sub update_content
