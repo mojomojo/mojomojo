@@ -9,7 +9,7 @@ CREATE TABLE person (
  pass       VARCHAR(100),
  timezone   VARCHAR(100),
  foaf       TEXT
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- * page-content tree * --
 
@@ -50,7 +50,7 @@ CREATE TABLE content (
  body         TEXT,
  precompiled   TEXT,
  PRIMARY KEY (page, version)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- * page-page_version * --
 
@@ -94,7 +94,7 @@ CREATE TABLE page_version (
  FOREIGN KEY (page, content_version_first) REFERENCES content (page, version),
  FOREIGN KEY (page, content_version_last) REFERENCES content (page, version),
  FOREIGN KEY (parent, parent_version) REFERENCES page_version (page, version)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- we resolve paths by searching on page name and depth:
 CREATE INDEX page_version_depth_index ON page_version (depth, name);
@@ -111,7 +111,7 @@ CREATE TABLE page (
  content_version INTEGER,
  FOREIGN KEY (id, content_version) REFERENCES content (page, version),
  FOREIGN KEY (id, version) REFERENCES page_version (page, version)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- all children of a parent must have unique names:
 CREATE UNIQUE INDEX page_unique_child_index ON page (parent, name);
@@ -139,14 +139,14 @@ CREATE TABLE role (
  id     INTEGER AUTO_INCREMENT PRIMARY KEY,
  name   VARCHAR(200) UNIQUE NOT NULL,
  active INTEGER DEFAULT 1 NOT NULL -- boolean
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
  
 CREATE TABLE role_member (
  role   INTEGER REFERENCES role,
  person INTEGER REFERENCES person,
  admin  INTEGER DEFAULT 0 NOT NULL, -- only admin members or "admin" role can add and remove members
  PRIMARY KEY (role, person)
-); 
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- role_privilege is a relationship talbe.
 -- with cascading deletes, if a page is deleted, the 
@@ -160,7 +160,7 @@ CREATE TABLE role_privilege (
  role      INTEGER REFERENCES role,
  privilege VARCHAR(20), -- read, write, owner, ...
  PRIMARY KEY (page, role, privilege)
-); 
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- * end of role tables so far
 
@@ -168,18 +168,18 @@ CREATE TABLE link (
     id        INTEGER AUTO_INCREMENT PRIMARY KEY,
     from_page INTEGER REFERENCES page,
     to_page   INTEGER REFERENCES page
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE wanted_page (
     id        INTEGER AUTO_INCREMENT PRIMARY KEY,
     from_page INTEGER REFERENCES page,
     to_path   TEXT
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE preference (
     prefkey   VARCHAR(100) PRIMARY KEY,
     prefvalue VARCHAR(100)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE tag (
     id     INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -187,7 +187,7 @@ CREATE TABLE tag (
     page   INTEGER REFERENCES page,
     photo  INTEGER REFERENCES photo,
     tag    VARCHAR(100)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE attachment (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -196,7 +196,7 @@ CREATE TABLE attachment (
     name        VARCHAR(100),
     size        INTEGER,
     contenttype VARCHAR(100)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE photo (
     id          INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -210,7 +210,7 @@ CREATE TABLE photo (
     flash       TEXT,
     height      INT,
     width       INT 
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE comment (
     id       INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -219,7 +219,7 @@ CREATE TABLE comment (
     picture  INT REFERENCES photo,
     posted   INT,
     body     TEXT
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 
 CREATE TABLE journal (
@@ -227,7 +227,7 @@ CREATE TABLE journal (
     name            VARCHAR(100),
     dateformat      VARCHAR(20) DEFAULT '%F',
     defaultlocation VARCHAR(100)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 CREATE TABLE entry (
     id       INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -237,7 +237,7 @@ CREATE TABLE entry (
     content  TEXT,
     posted   VARCHAR(100),
     location VARCHAR(100)
-);
+) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- This needs to be fixed to work with latest schema
 
@@ -245,6 +245,7 @@ INSERT INTO person (login, name, active) VALUES ('AnonymousCoward','Anonymous Co
 INSERT INTO person (login, name, active, pass) VALUES ('admin','Enoch Root',1,'admin');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('name','MojoMojo');
 INSERT INTO preference (prefkey, prefvalue) VALUES ('admins','admin');
+INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,'Welcome to MojoMojo!');
 INSERT INTO page_version
 (
  page,
@@ -259,5 +260,4 @@ INSERT INTO page_version
  creator,
  created)
 VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,0);
-INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,'Welcome to MojoMojo!');
 INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (1,1,NULL,'/','/',0,1,2,1);
