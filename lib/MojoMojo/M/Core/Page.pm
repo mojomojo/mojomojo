@@ -669,11 +669,11 @@ sub update_content {
 
     if (my $previous_content = $content->previous) {
         $previous_content->remove_date( $now );
-    $previous_content->status( 'removed' );
-    $previous_content->comments( "Replaced by version $content_version." );
+        $previous_content->status( 'removed' );
+        $previous_content->comments( "Replaced by version $content_version." );
         $previous_content->update;
     } else {
-        $self->set_paths($self) 
+        $self->set_paths($self);
     }
 
 } # end sub update_content
