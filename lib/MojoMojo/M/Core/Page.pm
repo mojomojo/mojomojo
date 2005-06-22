@@ -263,15 +263,15 @@ __PACKAGE__->set_sql('descendants_by_date' => qq{
  SELECT __ESSENTIAL__ FROM
  (
   SELECT descendant.id as id, descendant.name as name, descendant.name_orig as name_orig,
-         descendant.parent as parent ,descendant.depth as depth, content.created
-  FROM __TABLE__ as ancestor, __TABLE__ as descendant, content
+         descendant.parent as parent ,descendant.depth as depth, content.created as created
+  FROM __TABLE__ as ancestor, __TABLE__ as descendant, content as content
   WHERE ancestor.id = ?
    AND descendant.lft > ancestor.lft
    AND descendant.rgt < ancestor.rgt
    AND content.page = descendant.id
    AND content.version = descendant.content_version
   ORDER BY content.release_date DESC
- )
+ ) as pagesbydate
 });
 
 sub descendants_by_date {
@@ -318,7 +318,7 @@ __PACKAGE__->set_sql('tagged_descendants_by_date' => qq{
    AND content.page = descendant.id
    AND content.version = descendant.content_version
   ORDER BY content.release_date DESC
- )
+ ) as page
 });
 
 sub tagged_descendants_by_date {
