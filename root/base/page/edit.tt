@@ -28,7 +28,7 @@
  </div>
  <p>
 <textarea id="body" name="body">[% 
-FILTER html %][% c.req.params.body %][% append %][%END
+FILTER html %][% c.req.params.body %][%END
 %]</textarea>
  [% url= base _ page.path _ '.jsrpc/render' %]
  [%c.prototype.observe_field ( 'body', {
@@ -40,6 +40,9 @@ FILTER html %][% c.req.params.body %][% append %][%END
   complete  => "Element.hide('editspinner')",
   })%]
 
+<script type="text/javascript" language="JavaScript">
+$('body').value=$('body').value +'[%append%]';
+</script>
  <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF user.id %]
