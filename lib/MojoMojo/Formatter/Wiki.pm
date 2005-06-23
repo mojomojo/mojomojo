@@ -90,16 +90,16 @@ sub format_link {
 
     # keep the original wikiword for display, stripping leading slashes
     my $orig_word = $word;
-    $orig_word =~ s/.*\///;
-    my $formatted = $link_text || $class->expand_wikiword($orig_word);;
+    $orig_word =~ s/.*\/// unless $orig_word eq '/';
+    my $formatted = $link_text || $class->expand_wikiword($orig_word);
 
     # convert relative paths to absolute paths
     if($c->stash->{page} &&
         ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
         $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
+        $word = URI->new_abs( $word, $c->stash->{page}->path."/" );
     } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
+        $word = URI->new_abs( $word, $c->stash->{page_path}."/" );
     }
 
     # make sure that base url has no trailing slash, since
