@@ -47,12 +47,8 @@
 [%END%]
 </div>
 <div class="photo">
-<div class="photocontent">
 <a href="[%base%][%page.path%].attachment/[%photo.id%]" title="Click for hi-res version"
 ><img width="700" src="[%base%][%page.path%].attachment/[%photo.id%]/inline"></a>
-</div>
-<div class="phototop">&nbsp;</div>
-<div class="photoleft">&nbsp;</div>
 </div>
 [% IF user %]
 <div id="description">
