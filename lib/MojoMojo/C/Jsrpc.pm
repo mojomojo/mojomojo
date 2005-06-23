@@ -133,6 +133,12 @@ sub untag : Local {
     $c->forward('/page/tags');
 }
 
+sub imginfo : Local {
+    my ( $self, $c, $photo ) = @_;
+    $c->stash->{photo}=MojoMojo::M::Core::Photo->retrieve($photo);
+    $c->stash->{template}='gallery/imginfo.tt';
+}
+
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>, David Naughton <naughton@cpan.org>
