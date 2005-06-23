@@ -1,5 +1,6 @@
 [% PROCESS header.tt %]
  <div id="header"><h1>Attachments for [%page.name%]</h1></div>
+[%PROCESS breadcrumbs.tt %]
 
  <div id="toplinks"><a  href="[% base %][% page.path %].edit">Edit</a> | Upload</div><div id="content">
 <form action="[%base%][%page.path%].attachments" enctype="multipart/form-data" method="post">
