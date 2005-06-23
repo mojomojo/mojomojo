@@ -47,8 +47,8 @@ sub highlight {
         defined $self->previous
         ? $self->previous->formatted($c)
         : $this_content );
-    my $this = [ split /\n/,                  $this_content ];
-    my $prev = [ split /\n/,                  $previous_content ];
+    my $this = [ split /\n\n/,                  $this_content ];
+    my $prev = [ split /\n\n/,                  $previous_content ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     my $hi = 0;
@@ -67,20 +67,20 @@ sub highlight {
 
 sub formatted_diff {
     my ( $self, $c, $to ) = @_;
-    my $this = [ split /\n/, $self->formatted($c) ];
-    my $prev = [ split /\n/, $to->formatted($c) ];
+    my $this = [ split /\n\n/, $self->formatted($c) ];
+    my $prev = [ split /\n\n/, $to->formatted($c) ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
         if ( $$line[0] eq "+" ) {
-            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
+            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
         }
         elsif ( $$line[0] eq "-" ) {
-            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
+            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
         }
         elsif ( $$line[0] eq "c" ) {
-            $diff .= qq(<del class="diffdel">) . $$line[1] . "</del>";
-            $diff .= qq(<ins class="diffins">) . $$line[2] . "</ins>";
+            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
         }
         elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
         else { $diff .= "Unknown operator " . $$line[0] }
