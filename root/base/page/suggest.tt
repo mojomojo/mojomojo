@@ -2,9 +2,7 @@
 <div id="header"><h1>
 Not found: [%c.expand_wikiword(proto_pages.last.name_orig) %]
 </h1></div>
-[% UNLESS (page.name == "/") ;%]
 [% PROCESS breadcrumbs.tt %]
-[% END %]
 [% PROCESS navbar.tt %]
 <div id="content">
 <p>One or more pages in the requested path do not exist.</p>
