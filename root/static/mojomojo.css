@@ -256,6 +256,7 @@ ol.setup li {
 
 .diffdel {
   background: pink;
+  text-decoration: line-through;
 }
 
 .diffins {
@@ -688,19 +689,9 @@ ul#menuHome {
 }
 
 
-div.photo{
-    float:left;
-    padding:0 6px 6px 0;
-    background: url(gfx/dropshadow.png) no-repeat bottom right
-    border; 1px solid red;
-}
 div.photo img{
-    display:block;position:relative;
-    top: -6px;
-    left:-6px;
     margin: 1em;
     padding:5px;
-    background:#FFF;
     border:1px solid;border-color: #ccc #666 #666 #ccc
 }
 
