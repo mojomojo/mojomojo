@@ -1,0 +1,3 @@
+<h3>[%photo.title%]</h3>
+<p><small>[%photo.description%]</small></p>
+[% PROCESS gallery/photo_info.tt %]

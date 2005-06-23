@@ -1,4 +1,4 @@
-<h1> Exif Data</h1>
+<h3> Exif Data</h3>
 
 <dl>
 <dt>Taken:</dt><dd>[%photo.taken.ymd('-')%] [%photo.taken.hms(':')%]</dd>
