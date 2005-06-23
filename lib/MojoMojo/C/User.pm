@@ -45,6 +45,7 @@ sub login : Global {
     if ( $c->req->params->{login} ) {
         $c->session_login( $c->req->params->{login}, $c->req->params->{pass} );
         if ( $c->req->{user} ) {
+            $c->stash->{user}=MojoMojo::M::Core::Person->retrieve($c->req->{user_id});
             $c->forward('/page/view') unless $c->stash->{template};
             return;
         }
@@ -147,6 +148,7 @@ sub do_register : Global {
             "the url below:\n\n".$c->req->base.'/.validate/'.
             $user->id.'/'.md5_hex$c->form->valid('email').$c->pref('entropy')
         );
+        $c->stash->{user}=$user;
         $c->stash->{template}='user/validate.tt';
     }
 }    
