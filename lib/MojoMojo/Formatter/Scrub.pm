@@ -57,6 +57,9 @@ sub format_content_order { 1 }
 sub format_content {
     my ($self,$content,$c)=@_;
     $$content=$scrubber->scrub($$content); 
+    return 1;
+    #FIXME: XML::Clean doubles the first word in previews
+    # but makes sure all divs are matched.
     $$content=XML::Clean::clean($$content);
 }
 
