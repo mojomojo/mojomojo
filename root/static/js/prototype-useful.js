@@ -42,3 +42,24 @@ Form.Element.SmartObserver.prototype = {
   }
 }
 
+Element.HoverObserver = Class.create();
+Element.HoverObserver.prototype = {
+    initialize: function(element,delay,callback) {
+        this.delay = delay;
+        this.element = $(element);
+        this.callback = callback;
+
+        document.registerAction(this.element, 'mouseover', this.registerCallback.bind(this));
+        document.registerAction(this.element, 'mouseout', this.cancelCallback.bind(this));
+    },
+    registerCallback: function() {
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(this.onTimerEvent.bind(this), this.delay*1000);
+    },
+    cancelCallback: function() {
+        if (this.timer) clearTimeout(this.timer);
+    },
+   onTimerEvent: function() {
+      this.callback(this.element);
+    }
+}
