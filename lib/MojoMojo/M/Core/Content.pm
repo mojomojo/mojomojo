@@ -172,10 +172,6 @@ sub pub_date {
 
 sub store_links {
     my ($self) = @_;
-
-    my $status = $self->status;
-    print "store_links: status = $status.\n";
-
     return unless ($self->status eq 'released');
     my $content = $self->body_decoded;
     my $page = MojoMojo::M::Core::Page->retrieve( $self->page );

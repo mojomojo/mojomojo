@@ -139,7 +139,6 @@ sub find_links {
     for ($wikiword_regex, $explicit_regex) {
         while ($$content =~ /$_/g) {
             my $link = $1;
-            warn "found link $link.\n";
 	   # convert relative paths to absolute paths
 	   if ($link !~ m|^/|) {
 	       $link = URI->new_abs( $link, $page->path."/" );
