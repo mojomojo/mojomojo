@@ -37,6 +37,6 @@ href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a>
 [%ELSE%]
 <a class="tag" title="[%othertag.pagecount%]" 
 [%END%]
-href="[%base%]/.recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
+href="[%base%][%page.path%].recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
 [%END%]
 [%END%]
