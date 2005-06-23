@@ -9,14 +9,18 @@ gallery -
 [% PROCESS navbar.tt %]
 <div id="content">
 [% PROCESS gallery/pager.tt %]
-<div class="imageinfo">
+<div id="imageinfo" class="imageinfo">
 <small>Hoover over an image to get more info.</small>
 </div>
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-<a  href="[%base%][%page.path%].p[%
+<a  id="img_[%picture.id%]" href="[%base%][%page.path%].p[%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%
 base%]/.attachment/[%picture.id%]/thumb"/></a>
+[% SET imgurl=base _ '/.jsrpc/imginfo/'_ picture.id%]
+<script type="text/javascript" language="JavaScript">
+new Element.HoverObserver('img_[%picture.id%]',2,function() {[%c.prototype.remote_function({url=>imgurl,update=>'imageinfo'})%]});
+</script>
 [%END%]
 </div>
 </div>
