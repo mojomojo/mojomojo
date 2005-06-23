@@ -27,11 +27,10 @@ function toggleInfo() {
     }
 }
 
-var diff='';
 function toggleChanges(changeurl) {
-  if (!diff) {
-      diff=xmlHTTPRequest(changeurl);
-      $('diff').innerHTML=diff;
+  if (!$('diff').innerHTML) {
+      var req=new Ajax.Request( changeurl, {asynchronous: false});
+      $('diff').innerHTML=req.transport.responseText;
   }
   Toggle.display('changes');
   Toggle.display('current');
