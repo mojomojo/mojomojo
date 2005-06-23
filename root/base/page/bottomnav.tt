@@ -50,10 +50,10 @@
  [%# IF rev > 1 %]
  [% IF page.content_version && page.content_version > 1 %] 
  <span id="show_changes">
-  | <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%base%][%path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">See changes</a>
+  | <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%base%][%page.path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">See changes</a>
  </span>
  <span id="hide_changes" style="display: none">
-  | <a title="Show normal page" href="#" onclick="toggleChanges('[%base%][%path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">Hide changes</a>
+  | <a title="Show normal page" href="#" onclick="toggleChanges('[%base%][%page.path%].jsrpc/diff/[% page.content _'/' _ page.content.version%]'); return false;">Hide changes</a>
  </span>
 [% END %]
  <small>
