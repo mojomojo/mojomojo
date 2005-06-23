@@ -214,8 +214,8 @@ __PACKAGE__->set_sql('descendants' => qq{
         descendant.parent,descendant.depth
  FROM __TABLE__ as ancestor, __TABLE__ as descendant
  WHERE ancestor.id = ?
-  AND descendant.lft > ancestor.lft
-  AND descendant.rgt < ancestor.rgt
+  AND ((descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt) OR ancestor.id=descendant.id)
  ORDER BY descendant.name
 });
 
@@ -265,9 +265,9 @@ __PACKAGE__->set_sql('descendants_by_date' => qq{
   SELECT descendant.id as id, descendant.name as name, descendant.name_orig as name_orig,
          descendant.parent as parent ,descendant.depth as depth, content.created as created
   FROM __TABLE__ as ancestor, __TABLE__ as descendant, content as content
-  WHERE ancestor.id = ?
-   AND descendant.lft > ancestor.lft
-   AND descendant.rgt < ancestor.rgt
+  WHERE ancestor.id = ?  
+   AND ((descendant.lft > ancestor.lft
+   AND descendant.rgt < ancestor.rgt) OR ancestor.id=descendant.id)
    AND content.page = descendant.id
    AND content.version = descendant.content_version
   ORDER BY content.release_date DESC
