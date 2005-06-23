@@ -8,7 +8,7 @@
 
 <ul id="feedsList">
   <li><a href="[%base%][%page.path%].export_html">HTML</a></li>
-  <li><a href="[%base%][$page.path%].export_raw">Markup (textile)</a></li>
+  <li><a href="[%base%][%page.path%].export_raw">Markup (textile)</a></li>
 </ul>
 </div>
         <div id="bottomnav">&nbsp;
