@@ -13,8 +13,6 @@ my $m_page_class    = $m_base . 'Page';
 my $m_content_class = $m_base . 'Content';
 my $m_verison_class = $m_base . 'PageVersion';
 
-#For uploads
-$CGI::Simple::POST_MAX = 1048576000;
 
 =head1 NAME
 
