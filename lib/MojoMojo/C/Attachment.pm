@@ -171,12 +171,22 @@ mime-type
 
 sub insert : Private {
     my ( $self, $c, $att ) = @_;
-    $c->stash->{append} = "\n\n\""
-      . $att->name . "\":"
-      . $c->req->base
-      . "/.attachment/"
-      . $att;
-    $c->forward('/pageadmin/edit');
+    if ($att->contenttype =~ //) {
+        $c->stash->{append} = '\n\n<div class="photo">"!'
+            . $c->req->base 
+            . "/.attachment/"
+            . $att. ".thumb!\":"
+            . $c->req->base
+            . "/.attachment/"
+            . $att.'</div>';
+    } else {
+        $c->stash->{append} = '\n\n"'
+            . $att->name . "\":"
+            . $c->req->base
+            . "/.attachment/"
+            . $att;
+    }
+        $c->forward('/pageadmin/edit');
 }
 
 =back 
