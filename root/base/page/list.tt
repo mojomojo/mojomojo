@@ -26,17 +26,28 @@
 </div>
 <div id="wantedPages">
 
+  <h2> Backlinks
+      <br/><small style="font-size: 12px"><i>Other pages that link to this page.</i></small>
+  </h2>
+
+  <ul style="margin-bottom: 10px">
+[% FOR backlink = backlinks.list %]
+    <li>[%c.wikiword(backlink.from_page.path,base)%]</li>
+[% END %]
+  </ul>
+
   <h2> Wanted Pages
-      <br/><small style="font-size: 12px"><i>Not existing pages that other pages in the web reference</i></small>
+      <br/><small style="font-size: 12px"><i>Links to non-existent pages.</i></small>
   </h2>
 
   <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
     <li>[%c.wikiword(wanted.to_path,base)%] wanted by [%c.wikiword(wanted.from_page.path,base)%]</li>
 [% END %]
-  </ul>	    
+  </ul>
+	    
   <h2> Orphaned Pages
-     <br/><small style="font-size: 12px"><i>Pages in the web that no other page reference</i></small>
+     <br/><small style="font-size: 12px"><i>Pages to which no other pages link.</i></small>
   </h2>
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]

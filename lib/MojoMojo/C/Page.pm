@@ -198,9 +198,10 @@ sub list : Global {
     $c->stash->{pages}    =  [ $page->descendants ];
 
     # FIXME - real data here please
-    $c->stash->{orphans} = [];
-    $c->stash->{wanted}  = [];
-    $c->stash->{tags}    = [ MojoMojo::M::Core::Tag->search_most_used() ];
+    $c->stash->{orphans}   = [];
+    $c->stash->{backlinks} = [ MojoMojo::M::Core::Link->search( to_page => $page->id ) ];
+    $c->stash->{wanted}    = [ MojoMojo::M::Core::WantedPage->retrieve_all ];
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used() ];
 }
 
 sub recent : Global {

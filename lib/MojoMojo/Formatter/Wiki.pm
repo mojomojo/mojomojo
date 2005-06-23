@@ -127,4 +127,33 @@ sub expand_wikiword {
     return $word;
 }
 
+sub find_links {
+    my ($class, $content, $page) = @_;
+    my @linked_pages;
+    my @wanted_pages;
+    my $c = MojoMojo->context;
+
+    my $wikiword_regex = qr/$non_wikiword_check($wikiword)/x;
+    my $explicit_regex = qr/$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
+
+    for ($wikiword_regex, $explicit_regex) {
+        while ($$content =~ /$_/g) {
+            my $link = $1;
+            warn "found link $link.\n";
+	   # convert relative paths to absolute paths
+	   if ($link !~ m|^/|) {
+	       $link = URI->new_abs( $link, $page->path."/" );
+	   }
+	   # use the normalized path string returned by path_pages:
+	   my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $link );
+	   if (@$proto_pages) {
+	       push @wanted_pages, pop @$proto_pages;
+	   } else {
+	       push @linked_pages, pop @$path_pages;
+            }
+        }
+    }
+    return (\@linked_pages, \@wanted_pages);
+}
+
 1;

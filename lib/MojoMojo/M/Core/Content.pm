@@ -38,6 +38,10 @@ __PACKAGE__->columns(TEMP=>qw/max_ver/);
 
 __PACKAGE__->add_trigger( after_create => sub {$_[0]->created( DateTime->now ); $_[0]->update} );
 
+__PACKAGE__->add_trigger( after_create     => \&store_links );
+__PACKAGE__->add_trigger( after_update     => \&store_links );
+__PACKAGE__->add_trigger( after_set_status => \&store_links );
+
 sub highlight {
     my ( $self, $c ) = @_;
     my $this_content = $self->formatted($c);
@@ -165,3 +169,25 @@ sub pub_date {
 # }
 
 1;
+
+sub store_links {
+    my ($self) = @_;
+
+    my $status = $self->status;
+    print "store_links: status = $status.\n";
+
+    return unless ($self->status eq 'released');
+    my $content = $self->body_decoded;
+    my $page = MojoMojo::M::Core::Page->retrieve( $self->page );
+    my $page_id = $page->id;
+    my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
+    return unless (@$linked_pages || @$wanted_pages);
+    MojoMojo::M::Core::Link->search( from_page => $page->id )->delete_all;
+    MojoMojo::M::Core::WantedPage->search( from_page => $page->id )->delete_all;
+    for (@$linked_pages) {
+        my $link = MojoMojo::M::Core::Link->find_or_create({ from_page => $page_id, to_page => $_->id });
+    }
+    for (@$wanted_pages) {
+        my $wanted_page = MojoMojo::M::Core::WantedPage->find_or_create({ from_page => $page_id, to_path => $_->{path} });
+    }
+}
