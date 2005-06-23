@@ -17,7 +17,7 @@ use Exception::Class (
     { isa => 'MojoException' }
 );
 
-use Catalyst qw/-Debug FormValidator Session::FastMmap Static 
+use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
                 Singleton Unicode Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
@@ -139,10 +139,8 @@ Add spaces to wiki words as appropriate
 =cut
 
 sub expand_wikiword {
-    my ( $c, $word ) = @_;
-    $word =~ s/([a-z])([A-Z])/$1 $2/g;
-    $word =~ s/\_/ /g;
-    return $word;
+    my $c = shift;
+    return MojoMojo::Formatter::Wiki->expand_wikiword( @_ );
 }
 
 =item  wikiword wikiword base
@@ -152,40 +150,7 @@ Format a wikiword as a link or as a wanted page, as appropriate.
 =cut
 
 sub wikiword {
-    my ( $c, $word, $base, $link_text ) = @_;
-    cluck( "No base for $word" ) unless $base;
-    $c = MojoMojo->context unless ref $c;
-
-    # keep the original wikiword for display, stripping leading slashes
-    my $orig_word = $word;
-    $orig_word =~ s/.*\///;
-    my $formatted = $link_text || $c->expand_wikiword($orig_word);;
-
-    # convert relative paths to absolute paths
-    if($c->stash->{page} &&
-        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
-        $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
-    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
-    }
-
-    # make sure that base url has no trailing slash, since
-    # the page path will have a leading slash
-    my $url =  $base;
-    $url    =~ s/[\/]+$//;
-
-    # use the normalized path string returned by path_pages:
-    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
-    if (@$proto_pages) {
-        my $proto_page = pop @$proto_pages;
-        $url .= $proto_page->{path};
-    } else {
-        my $page = pop @$path_pages;
-        $url .= $page->path;
-        return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
-    }
-    return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
+    return MojoMojo::Formatter::Wiki->format_link( @_ );
 }
 
 =item pref key [value]
@@ -241,14 +206,14 @@ sub prepare_search_index {
     my $self = shift;
     my $index = $self->config->{home} . "/plucene";
     return if (-e $index . "/segments");
-    
+
     # Plucene::Simple doesn't seem to tell Plucene to create a new index properly,
     # so we have to create a new segments file ourselves
     open SEGMENTS, ">$index/segments";
     close SEGMENTS;
 
     my $p = MojoMojo::Search::Plucene->open($index);
-    
+
     $self->log->info( "Initializing Plucene search index..." ) if $self->debug;
     # loop through all latest-version pages
     my $count = 0;
@@ -257,12 +222,11 @@ sub prepare_search_index {
         $p->update_index( $page );
         $count++;
     }
-    
+
     $p->optimize;
 
     $self->log->info( "Indexed $count pages" ) if $self->debug;
 }
-    
 
 =item fixw word
 

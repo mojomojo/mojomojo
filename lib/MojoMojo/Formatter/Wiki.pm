@@ -1,5 +1,7 @@
 package MojoMojo::Formatter::Wiki;
 
+use URI;
+
 # explicit link regexes
 
 ## list of start-end delimiter pairs
@@ -54,33 +56,75 @@ my $non_wikiword_check = _generate_non_wikiword_check();
 
 sub format_content_order { 30 }
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class, $content, $c) = @_;
     # Extract wikiwords, avoiding escaped and part of urls
     $$content =~ s{
-                   $non_wikiword_check
-                   ($wikiword)
-                  }
-                  { MojoMojo->wikiword($1, $c->req->base) }gex;
+        $non_wikiword_check
+        ($wikiword)
+    }{ $class->format_link($c, $1, $c->req->base) }gex;
 
     # Remove escapes on escaped wikiwords. The escape means
     # that this wikiword is NOT a link to a wiki page.
-    $$content =~ s{$wikiword_escape($wikiword)}
-	         {$1}g;
+    $$content =~ s{$wikiword_escape($wikiword)}{$1}g;
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
-                   $explicit_start
-                   \s*
-                   ($explicit_path)
-                   \s*
-                   (?:
-                      $explicit_separator
-                      \s*
-                      ($explicit_text)
-                      \s*
-                   )?
-                   $explicit_end
-                  }
-                  { MojoMojo->wikiword($1, $c->req->base, $2) }gex;
+        $explicit_start
+        \s*
+        ($explicit_path)
+        \s*
+        (?:
+           $explicit_separator
+           \s*
+           ($explicit_text)
+           \s*
+        )?
+        $explicit_end
+    }{ $class->format_link($c, $1, $c->req->base, $2) }gex;
 }
+
+sub format_link {
+    my ($class, $c, $word, $base, $link_text) = @_;
+    die "No base for $word" unless $base;
+    $c = MojoMojo->context unless ref $c;
+
+    # keep the original wikiword for display, stripping leading slashes
+    my $orig_word = $word;
+    $orig_word =~ s/.*\///;
+    my $formatted = $link_text || $class->expand_wikiword($orig_word);;
+
+    # convert relative paths to absolute paths
+    if($c->stash->{page} &&
+        ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
+        $word !~ m|^/|) {
+        $word = URI->new_abs( $word, $c->stash->{page}->path."/" )
+    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
+        $word = URI->new_abs( $word, $c->stash->{page_path}."/" )
+    }
+
+    # make sure that base url has no trailing slash, since
+    # the page path will have a leading slash
+    my $url =  $base;
+    $url    =~ s/[\/]+$//;
+
+    # use the normalized path string returned by path_pages:
+    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
+    if (@$proto_pages) {
+        my $proto_page = pop @$proto_pages;
+        $url .= $proto_page->{path};
+    } else {
+        my $page = pop @$path_pages;
+        $url .= $page->path;
+        return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
+    }
+    return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
+}
+
+sub expand_wikiword {
+    my ($class, $word) = @_;
+    $word =~ s/([a-z])([A-Z])/$1 $2/g;
+    $word =~ s/\_/ /g;
+    return $word;
+}
+
 1;
