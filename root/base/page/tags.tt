@@ -13,7 +13,7 @@
 [%ELSE%]
 <a class="tag" 
 [%END%]
-href="/.recent/[%tag.tag%]">[%tag.tag%]</a> 
+href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
 [% IF others_tags && tags %]
