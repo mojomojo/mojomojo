@@ -375,6 +375,7 @@ textarea#comment {
 #tags .add a {
   color: green;
 	font-size: 13px;
+  vertical-align: middle;
 }
 
 #tags .add a:hover {
@@ -385,6 +386,7 @@ textarea#comment {
 #tags .remove a {
   color: red;
 	font-size: 13px;
+  vertical-align: middle;
 }
 
 #tags .remove a:hover {
