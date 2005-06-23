@@ -17,4 +17,5 @@
 </div>
 </div>
 
-[% PROCESS footer.tt %]
+</body>
+</html>
