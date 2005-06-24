@@ -90,10 +90,12 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Local {
     my ( $self, $c, $tagname ) = @_;
-    ($tagname)= $tagname =~ m/(\w+)/;
+    ($tagname)= $tagname =~ m/([\w\s]+)/;
     my $page = $c->stash->{page};
+    foreach my $tag (split m/\s/,$tagname) {
+    warn "found $tag";
     unless (
-        ! $tagname ||
+        ! $tag ||
         MojoMojo::M::Core::Tag->search(
             page   => $page,
             person => $c->req->{user_id},
@@ -103,11 +105,12 @@ sub tag : Local {
     {
         $page->add_to_tags(
             {
-                tag    => $tagname,
-                person => $c->req->{user_id}
+                tag    => $tag,
+                person => $c->stash->{user}->id
             }
           )
           if $page;
+    }
     }
     $c->req->args( [  $tagname ] );
     $c->forward('/page/tags');
