@@ -318,7 +318,7 @@ Effect2.Appear =	function(element) {
 	Effect2.SlideDown = function(element) {
 		  $(element).style.height   = '0px';
 		  $(element).style.overflow = 'hidden';
-		  $(element).childNodes[0].style.position = 'relative';
+		  $(element).firstChild.style.position = 'relative';
 		  Element.show(element);
 		  new Effect2.Scale(element, 100, 
 			 { scaleContent: false, 
@@ -334,7 +334,7 @@ Effect2.Appear =	function(element) {
 		
 		Effect2.SlideUp = function(element) {
 			  $(element).style.overflow = 'hidden';
-			  $(element).childNodes[0].style.position = 'relative';
+			  $(element).firstChild.style.position = 'relative';
 			  Element.show(element);
 			  new Effect2.Scale(element, 0, 
 				 { scaleContent: false, 

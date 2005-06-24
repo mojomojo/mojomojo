@@ -6,7 +6,7 @@ document.registerAction = function(element,action,functionName) {
     if (element) {
         try { 
             element.addEventListener(action, functionName, false);
-        } catch(e) { alert(e); }
+        } catch(e) { }
         try { 
             element.attachEvent('on'+action, functionName, false);
         } catch(e) { 
