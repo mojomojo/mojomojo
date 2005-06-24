@@ -2,8 +2,7 @@
  <div id="header"><h1>Login</h1></div>
  [%PROCESS breadcrumbs.tt%]
         <div id="content">
-        <form id="loginForm" action="[%base%]/.login" method="POST"><span id="logintext">[%message%]</span>
-        (or <a href="[%base%]/.register">register</a> instead)
+        <form id="loginForm" action="[%base%]/.login" method="POST">
 <dl>
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
@@ -12,6 +11,9 @@
 <dd><input type="submit" value="log in"/></dd>
 </dl>
 </form>
+<p class="end"><span id="logintext">[%message%]</span>
+        (or <a href="[%base%]/.register">register</a> instead)
+        </p>
         </div>
         <div id="bottomnav">&nbsp;
    
