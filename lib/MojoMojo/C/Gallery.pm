@@ -92,8 +92,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->req->args( [ $photo,$c->req->params->{tag} ] );
-    $c->forward('tag');
+    $c->forward('tag', [ $photo,$c->req->params->{tag} ]);
 }
 
 =item tag (/.jsrpc/tag)
@@ -123,8 +122,7 @@ sub tag : Local {
           if $photo;
     }
     $c->stash->{photo}=$photo;
-    $c->req->args( [ $tagname ] );
-    $c->forward('tags');
+    $c->forward( 'tags', [ $tagname ] );
 }
 
 =item untag (/.jsrpc/untag)
@@ -142,8 +140,7 @@ sub untag : Local {
     )->next();
     $tag->delete() if $tag;
     $c->stash->{photo}=$photo;
-    $c->req->args( [ $tagname ] );
-    $c->forward('tags');
+    $c->forward('tags', [ $tagname ]);
 }
 
 

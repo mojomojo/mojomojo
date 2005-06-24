@@ -78,8 +78,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $page ) = @_;
-    $c->req->args( [ $c->req->params->{tag} ] );
-    $c->forward('/jsrpc/tag');
+    $c->forward('/jsrpc/tag', [ $c->req->params->{tag} ] );
 }
 
 =item tag (/.jsrpc/tag)

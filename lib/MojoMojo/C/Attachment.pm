@@ -83,9 +83,8 @@ sub default : Private {
     my ( $self, $c, $called,$att, $action ) = @_;
 
     $att=MojoMojo::M::Core::Attachment->retrieve($att);
-    $c->req->args([ $att ]);
     if ($action) {
-        $c->forward("$action");
+        $c->forward("$action", [$att] );
     }
     unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
         $c->res->output( scalar( read_file( $att->filename)));
