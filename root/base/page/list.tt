@@ -54,6 +54,8 @@
     <li><a href="[% base %][% orphan.path %]">[%c.expand_wikiword(orphan.path,base)%]</a></li>
 [% END %]
     </ul>
-</div></div>
-        <div id="bottomnav">&nbsp;
+</div>
+<p class="end">&nbsp;</p>
+</div>
+        <div id="bottomnav">&nbsp;</div>
 [% PROCESS footer.tt %]
