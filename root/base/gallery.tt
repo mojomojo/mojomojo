@@ -14,13 +14,12 @@ gallery -
 </div>
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-<a  id="img_[%picture.id%]" href="[%base%][%page.path%].p[%
+[% imgid = 'img_' _ image.id %]
+<a  id="[%imgid%]" href="[%base%][%page.path%].p[%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%
 base%]/.attachment/[%picture.id%]/thumb"/></a>
-[% SET imgurl=base _ '/.jsrpc/imginfo/'_ picture.id%]
-<script type="text/javascript" language="JavaScript">
-new Element.HoverObserver('img_[%picture.id%]',2,function() {[%c.prototype.remote_function({url=>imgurl,update=>'imageinfo'})%]});
-</script>
+[% imgurl=base _ '/.jsrpc/imginfo/'_ picture.id%]
+[% c.prototype.observe_hover(imgid,{url=>imgurl,frequency=>2,update=>'imageinfo'});%]
 [%END%]
 </div>
 </div>
