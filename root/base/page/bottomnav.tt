@@ -1,11 +1,11 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Field.focus('taginput');return false;">add tag</a></div>
+<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
 <div id="addtag" style="display:none;" class="formdiv">
 [% url = base _ page.path _'.jsrpc/submittag' %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url,
-    loading=>"Element.hide('addtag');Element.show('showtag');",
+    loading=>"Element.hide('addtag');Element.show('showtag');\$('taginput').value=''",
     complete=>"Fat.fade('.highlight');"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
