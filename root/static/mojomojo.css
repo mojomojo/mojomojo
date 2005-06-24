@@ -697,4 +697,7 @@ div.photo img{
     border:1px solid;border-color: #ccc #666 #666 #ccc
 }
 
+.end {
+    clear:both;
+}
 
