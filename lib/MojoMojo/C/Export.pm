@@ -35,23 +35,27 @@ for all the nodes of the wiki.
 
 sub export_raw : Global {
     my ( $self, $c ) = @_;
-    $c->forward('list');
-    my $pages = $c->stash->{pages};
-    my $archive = Archive::Zip->new();
     my $prefix  =
         $c->fixw( $c->pref('name') ) . "-"
-      . $c->stash->{page}->name 
+      . $c->stash->{page}->path 
       . "-export-"
       . localtime->ymd('-') . '-'
-      . localtime->hms('-');
-    $archive->addDirectory("$prefix/");
-    while ( my $page =$pages->next ) {
-        next unless $page->content; 
-        $archive->addString( $page->content->body, $prefix .  $page->path .($page->path eq '/' ? '' : '/').'index' );
-        $c->log->debug('Adding :'.$page->path.($page->path eq '/' ? '' : '/').'index' );
+      . localtime->hour;
+    $prefix =~ s|/|_|g;
+    unless ($c->res->{body}=$c->cache->get($prefix)) {
+        $c->forward('/page/list');
+        my $pages = $c->stash->{pages};
+        my $archive = Archive::Zip->new();
+        $archive->addDirectory("$prefix/");
+        foreach my $page ( @$pages ) {
+            next unless $page->content; 
+            $archive->addString( $page->content->body, $prefix .  $page->path .($page->path eq '/' ? '' : '/').'index' );
+            $c->log->debug('Adding :'.$page->path.($page->path eq '/' ? '' : '/').'index' );
+        }
+        my $fh = IO::Scalar->new( \$c->res->{body} );
+        $archive->writeToFileHandle($fh);
+        $c->cache->set($prefix,$c->res->body);
     }
-    my $fh = IO::Scalar->new( \$c->res->{body} );
-    $archive->writeToFileHandle($fh);
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename=$prefix.zip" );
@@ -66,24 +70,28 @@ versions of all the nodes of the wiki.
 
 sub export_html : Private {
     my ( $self, $c ) = @_;
-    $c->forward('list');
-    my $pages = $c->stash->{pages};
-    my $archive = Archive::Zip->new();
     my $prefix  =
         $c->fixw( $c->pref('name') ) . "."
       . $c->stash->{page}->name 
         . "-html-"
       . localtime->ymd('-') . '-'
-      . localtime->hms('-');
-    $archive->addDirectory("$prefix/");
-    my $home = $c->pref("home_node");
-    while ( my $page =$pages->next ) {
-        $c->log->debug('Rendering '.$page->path);
-        $archive->addString( $c->subreq( $page->path .'.print' ),
-            $prefix . $page->path ."/index.html" );
+      . localtime->hour;
+    $prefix =~ s|/|_|g;
+    unless ($c->res->{body}=$c->cache->get($prefix)) {
+        $c->forward('/page/list');
+        my $pages = $c->stash->{pages};
+        my $archive = Archive::Zip->new();
+        $archive->addDirectory("$prefix/");
+        my $home = $c->pref("home_node");
+        foreach my $page ( @$pages ) {
+            $c->log->debug('Rendering '.$page->path);
+            $archive->addString( $c->subreq( $page->path .'.print' ),
+                $prefix . $page->path ."/index.html" );
+        }
+        my $fh = IO::Scalar->new( \$c->res->{body} );
+        $archive->writeToFileHandle($fh);
+        $c->cache->set($prefix,$c->res->body);
     }
-    my $fh = IO::Scalar->new( \$c->res->{body} );
-    $archive->writeToFileHandle($fh);
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename=$prefix.zip" );
