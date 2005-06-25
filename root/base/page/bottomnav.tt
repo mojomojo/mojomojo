@@ -15,15 +15,14 @@
 <div id="tags">
 [%  c.subreq('/tags', 'page'=>page, pink=>'color' ) %]
 </div>
-[% IF c.req.user ; %]
-
-[% END %]
-
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
-[% IF (!rev OR rev==page.content_version) %]
+[% IF ((!rev OR rev==page.content_version)
+       AND (c.pref('anonymous_user') OR
+            user.can_edit(page))
+       ) %]
  <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
- [% IF page.path == '/' %]
+ [% IF page.path == '/' && user.is_admin %]
  | <a title="Change site settings" href="[% base %]/.admin">Edit Settings</a>
  [% END %]
  [% IF page.content_version && page.content_version > 1 %] 
