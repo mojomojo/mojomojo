@@ -34,16 +34,11 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     $c->req->params->{login}=$c->req->params->{creator};
     $c->forward('/user/login') if $c->req->params->{pass} && 
-                                 ! $c->stash->{user};
-    my $user = $c->stash->{user};
-    
+                                ! $c->stash->{user};
     # everyone can edit with anon mode enabled.
-    return 1 if $c->pref('anonymous_user');
-    if ( $user && $user->active ) {
-        # allow admins, and users editing their pages
-        return 1 if $user->is_admin;
-        return 1 if $c->stash->{page}->path =~ m|^/$user\b|i; 
-    }
+    return 1 if MojoMojo->pref('anonymous_user');
+    my $user = $c->stash->{user};
+    return 1 if $user && $user->can_edit($c->stash->{page});
     $c->stash->{template}='message.tt';
     $c->stash->{message}='sorry bubba, you aint got no rights';
     return 0;
