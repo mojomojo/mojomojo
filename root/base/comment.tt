@@ -7,7 +7,9 @@
 <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
 <dt>posted</dt>
 <dd>[%comment.posted.ymd%] [%comment.posted.hms%]</dd>
-<dt>comment</dt>
+<dt>comment: 
+[%IF user.can_edit(page)%]
+[<b class="remove" <a href="[%base%][%path%].comment/remove/[%comment.id%]">&times;</a></b>][%END%]</dt>
 <dd>[%comment.formatted%]</dd>
 </dl>
 </div>
