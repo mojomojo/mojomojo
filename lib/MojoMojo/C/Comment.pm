@@ -56,6 +56,18 @@ sub login : Local {
     }
 }
 
+sub remove : Local {
+    my ( $self, $c, $comment ) = @_;
+    if ($comment=MojoMojo::M::Core::Comment->retrieve($comment)) {
+        if ( $comment->page->id == $c->stash->{page}->id &&
+             $c->stash->{user}->can_edit($comment->page)) {
+            $comment->delete();
+        }
+    }
+    $c->forward('/page/view');
+
+}
+
 =cut
 
 =back
