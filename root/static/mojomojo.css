@@ -367,14 +367,10 @@ textarea#comment {
   margin-bottom:30px;
 }
 
-#tags a {
-  text-decoration: none;
-	font-size: 12px;
-}
-
 .add a {
   color: green;
 	font-size: 13px;
+  text-decoration: none;
   vertical-align: middle;
 }
 
@@ -386,6 +382,7 @@ textarea#comment {
 .remove a {
   color: red;
 	font-size: 13px;
+  text-decoration: none;
   vertical-align: middle;
 }
 
