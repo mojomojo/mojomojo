@@ -372,24 +372,24 @@ textarea#comment {
 	font-size: 12px;
 }
 
-#tags .add a {
+.add a {
   color: green;
 	font-size: 13px;
   vertical-align: middle;
 }
 
-#tags .add a:hover {
+.add a:hover {
   color: #003800;
 	font-size: 13px;
 }
 
-#tags .remove a {
+.remove a {
   color: red;
 	font-size: 13px;
   vertical-align: middle;
 }
 
-#tags .remove a:hover {
+.remove a:hover {
   color: #650000;
 	font-size: 13px;
 	background: transparent;
