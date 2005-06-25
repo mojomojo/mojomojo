@@ -54,8 +54,18 @@ sub pass_matches {
 }
 
 sub valid_pass {
-    my ($self,$pass)=@_;
+    my ( $self,$pass )=@_;
     return 1 if $self->pass eq $pass;
+    return 0;
+}
+
+sub can_edit {
+    my ( $self, $page ) = @_;
+    return 0 unless $self->active;
+     # allow admins, and users editing their pages
+    return 1 if $self->is_admin;
+    $link=$self->link;
+    return 1 if $page->path =~ m|^$link\b|i; 
     return 0;
 }
 
