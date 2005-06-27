@@ -698,3 +698,6 @@ div.photo img{
     clear:both;
 }
 
+.inline p,dt,dd{
+    font-size: 0.7em;
+}

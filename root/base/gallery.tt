@@ -14,7 +14,7 @@ gallery -
 </div>
 <div id="images">
 [%WHILE(picture=pictures.next)%]
-[% imgid = 'img_' _ image.id %]
+[% imgid = 'img_' _ picture.id %]
 <a  id="[%imgid%]" href="[%base%][%page.path%].p[%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img class="thumb" width="80" height="80" src="[%
 base%]/.attachment/[%picture.id%]/thumb"/></a>
