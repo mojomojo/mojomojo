@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="[%base%]/.static/favicon.ico" />
 </head>
 
-<body>
+<body id="page">
 
     <div id="container">
         [%template.title%]
