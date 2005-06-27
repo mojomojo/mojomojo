@@ -28,38 +28,43 @@ sub auto : Private {
         $c->stash->{template}='message.tt';
         return 0;
     }
-    my $admins = $c->pref('admins');
-    $admins =~ s/$user//g;
-    $c->stash->{admins} = $admins;
     return 1;
 }
 
 sub default: Private {
     my ( $self, $c ) = @_;
+    my $admins = $c->pref('admins');
+    my $user = $c->stash->{user};
+    $admins =~ s/\b$user\b//g;
     $c->stash->{template}='settings.tt';
+    $c->stash->{admins} = $admins;
+    $c->stash->{anonymous_user} = $c->pref('anonymous_user');
 }
 
-sub setting_name : Path('/settings/name') {
+sub update : Local {
     my ( $self, $c ) = @_;
-    $c->form(required=>'name');
-    $c->pref('name',$c->form->valid('name'))
-      unless ($c->form->has_missing ||$c->form->has_invalid); 
-    $c->res->body($c->pref('name'));
+    $c->form( required => [qw/name admins/],
+              optional => [qw/anonymous_user/]
+            );
+    if ($c->form->has_missing) {
+        $c->res->body("Can't update, missing fields:".
+        join(', ',$c->form->missing()).'</b>');
+        return;
+    }
+    my @users =  split(m/\s+/,$c->form->valid('admins'));
+    foreach my $user ( @users ) {
+        unless (MojoMojo::M::Core::Person->get_user($user)) {
+            $c->res->body('Cant find admin user: '.$user);
+            return; 
+        }
+    }
+    $c->res->body('Updated');
+    $c->pref('admins',join(' ',@users,$c->req->{user}));
+    $c->pref('name',$c->form->valid('name'));
+    $c->pref('anonymous_user',$c->form->valid('anonymous_user'));
+    $c->res->body("Updated successfully.");
 }
 
-sub setting_admins : Path('/settings/admins') {
-    my ( $self, $c ) = @_;
-    $c->form(required=>'admins');
-    unless ($c->form->has_missing ||$c->form->has_invalid) {
-      my @users =  split(m/\s+/,$c->form->valid('admins'));
-      foreach my $user ( @users ) {
-        return $c->res->body('Not valid: '.$user)
-          unless (MojoMojo::M::Core::Person->get_user($user)); 
-      }
-      $c->res->body('Updated');
-      $c->pref('admins',join(' ',@users,$c->req->{user}));
-  }
-}
 
 sub user : Local {
     my ( $self, $c, $user ) = @_;

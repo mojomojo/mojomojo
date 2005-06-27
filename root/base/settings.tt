@@ -5,32 +5,28 @@
 <a accesskey="B" href="[%base%]/">back</a> </div>
  <div id="content">
  <h1>Site Configuration</h1>
-<form action="javascript:return 0;">
+<form id="adminform" action="javascript:return 0;">
 <dl>
 <dt>Name:</dd>
-<dd><input id="sitename"  type="text" value="[%c.pref('name')%]"/></dt>
+<dd><input id="sitename" name="name"  type="text" value="[%c.pref('name')%]"/></dt>
 [% url = base _ "/.settings/name" %]
-[% c.prototype.observe_field('sitename', {
-    delay   => 0.5,
-    url     => url,
-    with    => "'name='+escape(value)",
-    update  => "pageName",
-  loading   => "Element.show('editspinner')",
-  complete  => "Element.hide('editspinner')",
-})%]
 <dt>Admins:</dt>
 <dd>
-<input id="admins"  type="text" value="[%admins%]"/><span id="adminstatus" class="statusmsg"></span><br/>
+<input id="admins"  name="admins" type="text" value="[%admins%]"/>
 (also includes [%c.req.user%]) </dd>
-[% url = base _ "/.settings/admins" %]
-[% c.prototype.observe_field('admins', {
-    url     => url,
-    with    => "'admins='+escape(value)",
-    update  => "adminstatus",
-  loading   => "Element.show('editspinner')",
-  complete  => "Element.hide('editspinner')",
-})%]
+<dt>Anon. user</dt>
+<dd> <input id="anon"  name="anonymous_user" type="text" value="[%anonymous_user%]"/> ( blank to disable )</dd>
+</dd>
 </form>
+[% url = base _ "/.admin/update" %]
+[% c.prototype.observe_form('adminform', {
+    url     => url,
+    update  => "message",
+  loading   => "Element.show('editspinner')",
+  complete  => "Element.hide('editspinner');\$('pageName').innerHTML=\$('sitename').value",
+})%]
+<p id="message">[% status || 'No change' %]</p>
+<br/>
  <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;
