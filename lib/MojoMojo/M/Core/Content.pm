@@ -176,6 +176,7 @@ sub store_links {
     my $content = $self->body_decoded;
     my $page = MojoMojo::M::Core::Page->retrieve( $self->page );
     my $page_id = $page->id;
+    require MojoMojo::Formatter::Wiki;
     my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
     return unless (@$linked_pages || @$wanted_pages);
     MojoMojo::M::Core::Link->search( from_page => $page->id )->delete_all;
