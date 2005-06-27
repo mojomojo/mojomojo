@@ -13,18 +13,22 @@
 </form>
 </div>
 <div id="tags">
-[%  c.subreq('/tags', 'page'=>page, pink=>'color' ) %]
+[%  c.subreq('/tags', 'page'=>page ) %]
 </div>
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
-[% IF ((!rev OR rev==page.content_version)
-       AND (c.pref('anonymous_user') OR
-            user.can_edit(page))
-       ) %]
+[% IF (!rev OR rev==page.content_version) %]
+[% IF (c.pref('anonymous_user') OR user.can_edit(page)) %]
  <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
+[%END%]
  [% IF page.path == '/' && user.is_admin %]
  | <a title="Change site settings" href="[% base %]/.admin">Edit Settings</a>
  [% END %]
+ [% IF c.req.action=='info'%]
+ | <b title="Page meta information" class="navOn">Page Info</a>
+ [% ELSE %]
+ | <a title="Page meta information" href="[% base _ page.path %].info" accesskey="I">Page Info</a>
+ [% END%]
  [% IF page.content_version && page.content_version > 1 %] 
  | <a title="See previous revision" href="[% base _ page.path %]?rev=[% page.content_version - 1 %]" accesskey="R">Back in time</a> 
  ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])
@@ -34,7 +38,7 @@
  <small>([% page.content.max_version - page.content_version %] more)</small>
  [%END%]
 [% ELSE %]
- [% IF ((rev < page.content.max_version)) %]
+ [% IF (rev < page.content.max_version) %]
  <a "title="See next revision" href="[% base _ page.path %]?rev=[% rev + 1 %]" accesskey="R">Forward in time</a> 
  <small>([% page.content.max_version - rev %] more)</small>
  [% END %]
