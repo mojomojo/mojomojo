@@ -12,8 +12,8 @@
  </div>
  [% END %]
 <div id="content">
-<form id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName([%c.pref('anonymous_user')%]);">
- [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
+<form  enctype="multipart/form-data"
+accept-charset="utf-8" id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName([%c.pref('anonymous_user')%]);"> [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
 
@@ -34,7 +34,7 @@ FILTER html %][% c.req.params.body %][%END
  [%c.prototype.observe_field ( 'body', {
   url       => url,
   frequency => 1,
-  with      => "'content='+replaceString('&','%26',value)", 
+  with      => "'content='+value.replace(/&/g,'%26')", 
   update    => 'content_preview'
   loading   => "Element.show('editspinner')",
   complete  => "Element.hide('editspinner')",
