@@ -27,6 +27,5 @@ Not found: [%c.expand_wikiword(proto_pages.last.name_orig) %]
 </p>
 <h2>Other Suggestions</h2>
 [%c.subreq('/search/inline',page=>path_pages.first,query=>proto_pages.first.name)%]
-</div>
-
+</div> <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
