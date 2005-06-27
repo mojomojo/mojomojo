@@ -31,13 +31,14 @@ __PACKAGE__->has_many(
     links_from => [ 'MojoMojo::M::Core::Link' => 'to_page' ],
     "from_page"
 );
-MojoMojo::M::Core::Page->has_many( 'attachments' => 'MojoMojo::M::Core::Attachment' );
-MojoMojo::M::Core::Page->has_many( 'comments' => 'MojoMojo::M::Core::Comment' );
-MojoMojo::M::Core::Page->has_a( 'parent' => 'MojoMojo::M::Core::Page' );
-MojoMojo::M::Core::Page->has_many( 'children' => 'MojoMojo::M::Core::Page' );
-MojoMojo::M::Core::Page->has_many( 'roleprivileges' => 'MojoMojo::M::Core::RolePrivilege' );
-MojoMojo::M::Core::Page->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
-MojoMojo::M::Core::Page->has_many( 'wantedpages' => 'MojoMojo::M::Core::WantedPage' );
+__PACKAGE__->has_many( 'attachments' => 'MojoMojo::M::Core::Attachment' );
+__PACKAGE__->has_many( 'comments' => 'MojoMojo::M::Core::Comment' );
+__PACKAGE__->has_a( 'parent' => 'MojoMojo::M::Core::Page' );
+__PACKAGE__->has_many( 'children' => 'MojoMojo::M::Core::Page' );
+__PACKAGE__->has_many( 'roleprivileges' => 'MojoMojo::M::Core::RolePrivilege' );
+__PACKAGE__->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
+__PACKAGE__->has_many( 'wantedpages' => 'MojoMojo::M::Core::WantedPage' );
+__PACKAGE__->has_many( 'versions' => 'MojoMojo::M::Core::Content', {order_by=>'version'});
 
 =head1 METHODS
 
@@ -109,7 +110,7 @@ sub open_gap {
     $sth->execute( $gap_increment, $parent_rgt, $gap_increment, $parent_rgt );
 
     # allow more than one copy of this object in memory.
-    # do we really want to do this? if so, when and why???
+    # FIXME: do we really want to do this? if so, when and why?
     $parent->remove_from_object_index;
 
     # get the new nested set numbers for the parent
