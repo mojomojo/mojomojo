@@ -6,7 +6,6 @@
  [% c.expand_wikiword(page.name_orig) %]
 [% END %]
 </h1></div>
-
 [% PROCESS breadcrumbs.tt %]
 [%IF c.req.params.rev %](Revision [% c.req.params.rev %])
 [%IF c.req.params.rev > page.content_version %]
@@ -29,7 +28,7 @@ Fat.fade();
 </div>
 
 <div id="changes" style="display: none">
-  <p style="background: #eee; padding: 3px; border: 1px solid silver">
+  <p id="message">
     <small>
       Showing changes from previous revision.
       <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
