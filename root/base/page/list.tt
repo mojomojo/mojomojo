@@ -57,5 +57,5 @@
 </div>
 <p class="end">&nbsp;</p>
 </div>
-        <div id="bottomnav">&nbsp;</div>
+        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
