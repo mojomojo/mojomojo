@@ -189,13 +189,13 @@ sub prepare_home {
     my $home=$self->config->{home};
     return unless $home;
     return if -f $home.'/mojomojo.yml';
-    for (qw( db uploads logs root )) {
+    for ( qw( db uploads logs root ) ) {
         mkdir $home.'/'.$_ unless -w $home.'/'.$_;
     }
-    YAML::DumpFile($home.'/mojomojo.yml',{
+    YAML::DumpFile( $home.'/mojomojo.yml',{
       name => 'MojoMojo',
       root => $home.'/root',
-      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'});
+      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'} );
 }
 
 =item prepare_search_index
@@ -208,7 +208,7 @@ Will do nothing if the index already exists.
 sub prepare_search_index {
     my $self = shift;
     my $index = $self->config->{home} . "/plucene";
-    return if (-e $index . "/segments");
+    return if ( -e $index . "/segments" );
 
     # Plucene::Simple doesn't seem to tell Plucene to create a new index properly,
     # so we have to create a new segments file ourselves
@@ -288,6 +288,12 @@ sub prepare_path {
       $c->req->path(substr($path,$index+1));
     }
 }
+
+=item  base_uri 
+
+Return the base as an URI object.
+
+=cut
 
 sub base_uri {
   my $c=shift;
