@@ -19,8 +19,9 @@ use Exception::Class (
 
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
-                Singleton Unicode Cache::FileCache FillInForm/;
+                Singleton Unicode::Encoding Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
+
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
 our $VERSION='0.05';
@@ -35,6 +36,8 @@ MojoMojo->config( authentication => {
 MojoMojo->config ( no_url_rewrite=>1 );
 MojoMojo->config( cache => { 
                   storage=> MojoMojo->config->{home}.'/cache' } );
+MojoMojo->config( encoding => 'UTF-8' ); # A valid Encode encoding
+
 MojoMojo->setup();
 MojoMojo->prepare_search_index();
 
