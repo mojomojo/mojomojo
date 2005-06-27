@@ -264,6 +264,11 @@ sub search_inline : Path('/search/inline') {
     $c->stash->{template} = 'page/search_inline.tt';
 }
 
+sub info : Global {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'page/info.tt';
+}
+
 
 
 

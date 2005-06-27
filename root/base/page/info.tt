@@ -1,0 +1,33 @@
+[% PROCESS header.tt %]
+<div id="header"><h1> Page info for 
+[% IF page.name == "/" %]
+ [% c.pref("name") || "MojoMojo" %]
+[% ELSE %]
+ [% c.expand_wikiword(page.name_orig) %]
+[% END %]
+</h1></div>
+[%PROCESS breadcrumbs.tt%]
+[%PROCESS navbar.tt%]
+<div id="content">
+<p>
+<div class="rightHandSide">
+<b>Active version:</b> [%page.content_version%]<br/>
+<b>Content size:</b> [%page.content.body.length%] chars<br/>
+<b>Children:</b> [%page.children.size%]<br/>
+<b>Descendants:</b> [%page.descendants.size%]<br/>
+<b>Links to:</b> [%page.links_to.size||0%] pages<br/>
+<b>Links from:</b> [%page.links_from.size||0%] pages<br/>
+<b>Attachments:</b>[%page.attachments.size||0%]<br/>
+<b>Photos: </b> [%page.has_photos||0%]
+</p>
+</div>
+<h3>[%page.versions.size%] revisions</h3>
+<ol>
+[% FOREACH version IN page.versions %]
+<h4>
+<li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%base%][%version.creator.link%]">[%version.creator.name%]</a></li>
+[%END%]
+</ol>
+</h4>
+</div>        <div id="bottomnav">&nbsp;
+[% PROCESS footer.tt %]
