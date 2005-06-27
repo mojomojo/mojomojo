@@ -170,6 +170,19 @@ sub validate : Global {
     $c->stash->{template}='user/validate.tt';
 }
 
+sub profile : Global {
+    my ($self,$c)=@_;
+    my $page=$c->stash->{page};
+    my $user=MojoMojo::M::Core::Person->get_user($page->name);
+    if ( $user ) {
+          $c->stash->{profile}=$user;
+          $c->stash->{template}='user/profile.tt';
+    } else { 
+        $c->stash->{template}='message.tt';
+        $c->stash->{message}='User not found!';
+   }
+}
+
 =back
 
 =head1 AUTHOR
