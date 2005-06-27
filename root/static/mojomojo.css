@@ -265,7 +265,7 @@ ol.setup li {
 
 p#message {
  background: #eee; 
- padding: 3px; 
+ padding: 0.7em; 
  border: 1px solid silver; 
  width: 440px;
 }
