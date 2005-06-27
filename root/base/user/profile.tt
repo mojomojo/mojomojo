@@ -1,0 +1,3 @@
+[%PROCESS header.tt %]
+<h1>User profile not implemented yet.</h1>
+[%PROCESS footer.tt %]
