@@ -17,7 +17,8 @@ sub get_user {
 sub is_admin {  
     my $self=shift;
     my $admins = MojoMojo->pref('admins');
-    return 1 if my $user=$self->login  && $admins =~m/\b$user\b/ ;
+    my $user=$self->login;
+    return 1 if $user && $admins =~m/\b$user\b/ ;
     return 0;
 }
 
