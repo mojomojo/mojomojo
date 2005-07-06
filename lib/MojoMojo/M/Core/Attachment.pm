@@ -1,9 +1,26 @@
 package MojoMojo::M::Core::Attachment;
+
 use File::MimeInfo::Magic;
 
-MojoMojo::M::Core::Attachment->has_a( 'page' => 'MojoMojo::M::Core::Page' );
+=head1 NAME
+
+MojoMojo::M::Core::Attachment - Page attachments
+
+=head1 DESCRIPTION
+
+This class handles the business model for Page attachments.
+attachments are represented in the database by the 'attachment'
+table.
+
+=head1 METHODS
+
+=over 4
+
+=cut
 
 __PACKAGE__->columns(Essential=>qw/page name uploaded/);
+
+__PACKAGE__->has_a( 'page' => 'MojoMojo::M::Core::Page' );
 __PACKAGE__->has_a(
     uploaded => 'DateTime',
     inflate => sub {
@@ -12,12 +29,27 @@ __PACKAGE__->has_a(
     deflate => 'epoch'
 );
 
+=item filename
+
+returns a full path to the attachment on the filesystem. This function
+uses the MojoMojo config, so requires Catalyst to function.
+
+=cut
+
 sub filename {
     my $self=shift;
     my $c=MojoMojo->context;
     return "uploads/" . $self->id unless $c;
     return $c->config->{home} . "/uploads/" . $self->id;
 }
+
+=item create_from_file (page,filename,storage_callback)
+
+function to create an instance from a given file. Takes a filename,
+a page to attach to, and a storage callback. The storage-callback will
+be called with a full path to where the file should be stored
+
+=cut
 
 sub create_from_file {
   my ($class,$page,$filename, $storage_callback)=@_;
@@ -38,6 +70,11 @@ sub create_from_file {
   return $self;
 }
 
+=item make_photo
+
+analyzes the attachment, and makes a photo column based on the current 
+attachment. Should only be called with image/* mimetype attachments.
+=cut
 
 sub make_photo {
   my $self = shift;
@@ -47,6 +84,13 @@ sub make_photo {
   $photo->extract_exif($self) if $self->contenttype eq 'image/jpeg';
 }
 
+=item make_inline
+
+create a resized version of a photo suitable for inline usage
+FIXME: should this be moved to photo?
+
+=cut
+
 sub make_inline {
     my ($self)=shift;
     my $img=Imager->new();
@@ -55,6 +99,13 @@ sub make_inline {
     $image=$img->scale(xpixels=>700);
     $image->write(file=>$self->filename.'.inline',type=>'jpeg') or die $img->errstr;
 }
+
+
+=item make_thumb
+
+create a thumbnail version of a photo, for gallery views and linking to pages
+
+=cut
 
 sub make_thumb {
     my ($self)=shift;
@@ -82,5 +133,21 @@ sub make_thumb {
     }
     $result->write(file=>$self->filename.'.thumb',type=>'jpeg') or die $img->errstr;
 }
+
+=back 
+
+=head1 SEE ALSO
+
+L<Class::DBI::Sweet>, L<Catalyst>, L<MojoMojo>
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
 
 1;

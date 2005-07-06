@@ -33,7 +33,7 @@ can be called with urls like "/page1/page2.action".
 
 =over 4
 
-=item  view
+=item  view (.view)
 
 This is probably the most common action in MojoMojo. A lot of the 
 other actions redispatches to this one. It will prepare the stash 
@@ -82,7 +82,7 @@ sub view : Global {
 
 }
 
-=item search
+=item search (.search)
 
 This action is called as .search on the current page when the user 
 performs a search.  The user can choose whether or not to search
@@ -174,7 +174,11 @@ sub print : Global {
     $c->forward('view');
 }
 
-sub tags : Global {
+=item tags (.tags)
+
+=cut
+
+sub inline_tags : Global {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
@@ -190,6 +194,12 @@ sub tags : Global {
     }
 }
 
+=item list (.list)
+
+all nodes in this namespace
+
+=cut
+
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page=$c->stash->{page};
@@ -204,6 +214,12 @@ sub list : Global {
     $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used() ];
 }
 
+=item recent (.recent)
+
+recently changed nodes in this namespace.
+
+=cut
+
 sub recent : Global {
     my ( $self, $c, $tag ) = @_;
     return $c->forward('/tag/recent') if $tag;
@@ -215,10 +231,22 @@ sub recent : Global {
     # FIXME - needs to be populated even without tags
 }
 
+=item feeds (.feeds)
+
+overview of available feeds for this node.
+
+=cut
+
 sub feeds  : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'feeds.tt';
 }
+
+=item rss (.rss)
+
+RSS feed with headlines of recent nodes in this namespace.
+
+=cut
 
 sub rss : Global {
     my ( $self, $c ) = @_;
@@ -227,12 +255,25 @@ sub rss : Global {
     $c->res->content_type('application/rss+xml');
 }
 
+=item atom (.atom)
+
+Full content ATOM feed of recent nodes in this namespace.
+
+
+=cut
+
 sub atom : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->res->content_type('application/atom+xml');
     $c->stash->{template} = 'page/atom.tt';
 }
+
+=item rss_full (.rss_full) 
+
+Full content RSS feed of recent nodes in this namespace.
+
+=cut
 
 sub rss_full : Global {
     my ( $self, $c ) = @_;
@@ -241,16 +282,34 @@ sub rss_full : Global {
     $c->stash->{template} = 'page/rss_full.tt';
 }
 
+=item  highlight (.highlight)
+
+Highlight changes for save.
+
+=cut
+
 sub highlight : Global {
     my ( $self, $c ) = @_;
     $c->stash->{render} =  'highlight';
     $c->forward('view');
 }
 
+=item  export (.export)
+
+Page showing available export options.
+
+=cut
+
 sub export : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'export.tt';
 }
+
+=item suggest (.suggest)
+
+Page not found page, suggesting alternatives, and allowing you to create the page.
+
+=cut
 
 sub suggest : Global {
     my ( $self, $c ) = @_;
@@ -258,18 +317,30 @@ sub suggest : Global {
     $c->res->status(404);
 }
 
+=item search_inline (.search/inline)
+
+embedded search results in another page (for use with suggest).
+
+=cut
+
 sub search_inline : Path('/search/inline') {
     my ( $self, $c ) = @_;
     $c->forward('search');
     $c->stash->{template} = 'page/search_inline.tt';
 }
 
+=item info (.info)
+
+Display meta information about the current page.
+
+=cut
+
 sub info : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'page/info.tt';
 }
 
-
+=back
 
 
 =head1 AUTHOR

@@ -5,17 +5,6 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Exception::Class (
-    'MojoException',
-    'ControllerException' =>
-    { isa => 'MojoException' },
-    'DatabaseException' =>
-    { isa => 'MojoException' },
-    'TemplateException' =>
-    { isa => 'MojoException' },
-    'Warning' =>
-    { isa => 'MojoException' }
-);
 
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
@@ -111,15 +100,6 @@ sub end : Private {
     }
     $c->forward('MojoMojo::V::TT');
     die if $c->req->params->{die};
-    my @fatal;
-    foreach my $error (@{$c->error}) {
-        if (UNIVERSAL::isa($error,'Warning')) {
-            $c->log->debug($error->error, "\n", $@->trace->as_string, "\n");
-        } else { 
-            push @fatal,$error; 
-        }
-    }
-    $c->error(\@fatal);
 }
 
 

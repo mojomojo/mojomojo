@@ -17,11 +17,12 @@ Catalyst admin controller
 
 =item auto
 
+Only administrators should access functions in this controller
+
 =cut
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    # FIXME - need to identify administrators
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
         $c->stash->{message}='sorry bubba, gotta be admin';
@@ -31,24 +32,35 @@ sub auto : Private {
     return 1;
 }
 
-sub default: Private {
+=item  default ( /.admin )
+
+Show settings screen.
+
+=cut
+
+sub default : Private {
     my ( $self, $c ) = @_;
-    my $admins = $c->pref('admins');
-    my $user = $c->stash->{user};
-    $admins =~ s/\b$user\b//g;
-    $c->stash->{template}='settings.tt';
-    $c->stash->{admins} = $admins;
-    $c->stash->{anonymous_user} = $c->pref('anonymous_user');
+    my $admins =  $c->pref('admins');
+    my $user   =  $c->stash->{user};
+    $admins    =~ s/\b$user\b//g;
+    $c->stash->{template}       = 'settings.tt';
+    $c->stash->{admins}         = $admins;
+    $c->stash->{anonymous_user} = $c->pref( 'anonymous_user' );
 }
+
+=item update ( .admin/update )
+
+ajax saving of system settings.
+
+=cut
 
 sub update : Local {
     my ( $self, $c ) = @_;
     $c->form( required => [qw/name admins/],
-              optional => [qw/anonymous_user/]
-            );
-    if ($c->form->has_missing) {
-        $c->res->body("Can't update, missing fields:".
-        join(', ',$c->form->missing()).'</b>');
+              optional => [qw/anonymous_user/] );
+    if ( $c->form->has_missing ) {
+        $c->res->body( "Can't update, missing fields:" .
+        join( ', ', $c->form->missing()).'</b>' );
         return;
     }
     my @users =  split(m/\s+/,$c->form->valid('admins'));
@@ -59,12 +71,18 @@ sub update : Local {
         }
     }
     $c->res->body('Updated');
-    $c->pref('admins',join(' ',@users,$c->req->{user}));
-    $c->pref('name',$c->form->valid('name'));
-    $c->pref('anonymous_user',$c->form->valid('anonymous_user'));
-    $c->res->body("Updated successfully.");
+    $c->pref( 'admins',join(' ',@users,$c->req->{user}));
+    $c->pref( 'name',$c->form->valid('name'));
+    $c->pref( 'anonymous_user',$c->form->valid('anonymous_user'));
+
+    $c->res->body( "Updated successfully." );
 }
 
+=item user ( .admin/user )
+
+User listing with pager, for enabling/disabling users.
+
+=cut
 
 sub user : Local {
     my ( $self, $c, $user ) = @_;
@@ -78,10 +96,13 @@ sub user : Local {
         });
     $c->stash->{users} = $iterator;
     $c->stash->{pager} = $pager;
-    if ($user) {
-        # FIXME: do something
-    }
 }
+
+=item update_user ( *private*)
+
+Update user based on user listing.
+
+=cut
 
 sub update_user : Private {
     my ( $self, $c, $user, $action ) = @_;

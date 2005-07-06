@@ -175,17 +175,33 @@ sub store_links {
     my ($self) = @_;
     return unless ($self->status eq 'released');
     my $content = $self->body_decoded;
-    my $page = MojoMojo::M::Core::Page->retrieve( $self->page );
-    my $page_id = $page->id;
+    my $page = $self->page;
     require MojoMojo::Formatter::Wiki;
     my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
     return unless (@$linked_pages || @$wanted_pages);
-    MojoMojo::M::Core::Link->search( from_page => $page->id )->delete_all;
-    MojoMojo::M::Core::WantedPage->search( from_page => $page->id )->delete_all;
+    MojoMojo::M::Core::Link->search( from_page => $page )->delete_all;
+    MojoMojo::M::Core::WantedPage->search( from_page => $page )->delete_all;
     for (@$linked_pages) {
-        my $link = MojoMojo::M::Core::Link->find_or_create({ from_page => $page_id, to_page => $_->id });
+        my $link = MojoMojo::M::Core::Link->find_or_create({ from_page => $self->page, to_page => $_->id });
     }
     for (@$wanted_pages) {
-        my $wanted_page = MojoMojo::M::Core::WantedPage->find_or_create({ from_page => $page_id, to_path => $_->{path} });
+        my $wanted_page = MojoMojo::M::Core::WantedPage->find_or_create({ from_page => $page, to_path => $_->{path} });
     }
 }
+
+=head1 SEE ALSO
+
+L<Class::DBI::Sweet>, L<Catalyst>, L<MojoMojo>
+
+=head1 AUTHORS
+
+David Naughton C<naughton@umn.edu>
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
+
+1

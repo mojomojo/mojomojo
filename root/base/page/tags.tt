@@ -9,7 +9,7 @@
    complete=>"Fat.fade('.highlight');",
 })%]</b>]
 [%IF tag.tag == highlight %]
-<a id="tag_[%tag.tag%]" class="tag highlight" 
+<b id="tag_[%tag.tag%]" class="navOn" 
 [%ELSE%]
 <a class="tag" 
 [%END%]

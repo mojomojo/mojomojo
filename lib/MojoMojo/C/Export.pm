@@ -1,8 +1,10 @@
 package MojoMojo::C::Export;
+
 use strict;
 use base 'Catalyst::Base';
-use Time::Piece;
+
 use Archive::Zip;
+use Time::Piece;
 
 my $model = 'MojoMojo::M::Core::Page';
 
@@ -26,7 +28,7 @@ directory will contain a timestamp showing when the archive was made.
 
 =over 4
 
-=item raw 
+=item export_raw 
 
 This action will give you a zip file containing the raw wiki source
 for all the nodes of the wiki.
@@ -49,26 +51,29 @@ sub export_raw : Global {
         $archive->addDirectory("$prefix/");
         foreach my $page ( @$pages ) {
             next unless $page->content; 
-            $archive->addString( $page->content->body, $prefix .  $page->path .($page->path eq '/' ? '' : '/').'index' );
-            $c->log->debug('Adding :'.$page->path.($page->path eq '/' ? '' : '/').'index' );
+            $archive->addString( 
+                $page->content->body, $prefix .  
+                $page->path .($page->path eq '/' ? '' : '/').'index' 
+            );
         }
         my $fh = IO::Scalar->new( \$c->res->{body} );
-        $archive->writeToFileHandle($fh);
-        $c->cache->set($prefix,$c->res->body);
+        $archive->writeToFileHandle( $fh );
+        $c->cache->set( $prefix,$c->res->body );
     }
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header(
-        "Content-Disposition" => "attachment; filename=$prefix.zip" );
+        "Content-Disposition" => "attachment; filename=$prefix.zip" 
+    );
 }
 
-=item html (/.html.zip)
+=item html (/.export_html)
 
 This action will give you a zip file containing HTML formatted 
 versions of all the nodes of the wiki.
 
 =cut
 
-sub export_html : Private {
+sub export_html : Global {
     my ( $self, $c ) = @_;
     my $prefix  =
         $c->fixw( $c->pref('name') ) . "."
@@ -96,5 +101,16 @@ sub export_html : Private {
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg C<marcus@thefeed.no>
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.  
+
+=cut
 
 1;

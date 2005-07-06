@@ -5,7 +5,7 @@ use base 'Catalyst::Base';
 
 =head1 NAME
 
-MojoMojo::C::Gallery - Catalyst component
+MojoMojo::C::Gallery - Page gallery.
 
 =head1 SYNOPSIS
 
@@ -13,13 +13,16 @@ See L<MojoMojo>
 
 =head1 DESCRIPTION
 
-Catalyst component.
+Controller for page photo galleries.
+
 
 =head1 METHODS
 
 =over 4
 
-=item default
+=item default ( .gallery )
+
+Show a gallery page for the current node.
 
 =cut
 
@@ -29,48 +32,60 @@ sub default : Private {
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
     my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
-        'attachment.page'=>$c->stash->{page}, {
-            page           =>$page || 1,
-            rows             => 12,
-            order_by => 'taken'
-        });
+        'attachment.page'  =>$c->stash->{page}, 
+          { page           =>$page || 1,
+            rows           => 12,
+            order_by       => 'taken' }
+    );
     $c->stash->{pictures} = $iterator;
-    $c->stash->{pager} = $pager;
+    $c->stash->{pager}    = $pager;
 }
+
+=item by_tag ( .gallery/by_tag )
+
+show a gallery by a given tag. Will also show photos in the
+descendants of the page with the given tag.
+
+=cut
 
 sub by_tag : Local {
     my ( $self, $c, $tag,$page) = @_;
     $tag=MojoMojo::M::Core::Tag->search(tag=>$tag)->next;
     $c->stash->{template} = 'gallery.tt';
-    $c->stash->{tag} = $tag->tag;
-    my $conditions = { 'tags.tag' => $tag->tag };
+    $c->stash->{tag}      = $tag->tag;
+    my $conditions        = { 'tags.tag' => $tag->tag };
     $$conditions{'attachment.page'} = [ 
           map { $_->id  } ($c->stash->{page}->descendants,
                            $c->stash->{page}) ] 
-     unless length($c->stash->{page}->path) == 1;  # root
-    my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
+        unless length($c->stash->{page}->path) == 1;  # root
+    my ( $pager,$iterator ) =MojoMojo::M::Core::Photo->pager(
         $conditions, { 
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'
         });
     $c->stash->{pictures} = $iterator;
-    $c->stash->{pager} = $pager;
+    $c->stash->{pager}    = $pager;
 }
 
+=item p ( .p) 
+
+=cut
+
 sub p : Global {
-    my ($self,$c,$photo)  = @_;
-    $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
-    $c->stash->{photo}    = $photo;
-    $c->forward('tags');
-    $c->stash->{template} = 'gallery/photo.tt';
-    $c->stash->{next}     = $photo->retrieve_next(
-    { 'attachment.page'=>$photo->attachment->page },
-    {order_by=>'taken'})->next;
-    $c->stash->{prev}     = $photo->retrieve_previous({
-        'attachment.page'=>$c->stash->{page}, 
-        },{order_by=>'taken'})->next;
-    
+    my ( $self, $c, $photo)  = @_;
+    $photo                   = MojoMojo::M::Core::Photo->retrieve($photo);
+    $c->stash->{photo}       = $photo;
+    $c->forward( 'tags' );
+    $c->stash->{template}    =  'gallery/photo.tt';
+    $c->stash->{next}        =  $photo->retrieve_next(
+        { 'attachment.page'  => $photo->attachment->page },
+        {order_by            => 'taken' }
+    )->next;
+    $c->stash->{prev}        =  $photo->retrieve_previous( 
+        { 'attachment.page'  => $c->stash->{page}},
+        { order_by           => 'taken'}
+    )->next;
 }
 
 sub p_by_tag : Global {
@@ -78,7 +93,7 @@ sub p_by_tag : Global {
     $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
     $c->stash->{photo}    = $photo;
     $c->stash->{tag}      = $tag; 
-    $c->forward('tags');
+    $c->forward( 'tags' );
     $c->stash->{template} = 'gallery/photo.tt';
     $c->stash->{next}     = $photo->next_by_tag($tag);
     $c->stash->{prev}     = $photo->prev_by_tag($tag);
@@ -92,7 +107,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->forward('tag', [ $photo,$c->req->params->{tag} ]);
+    $c->forward( 'tag', [ $photo,$c->req->params->{tag} ] );
 }
 
 =item tag (/.jsrpc/tag)
@@ -103,29 +118,24 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Local {
     my ( $self, $c,$photo, $tagname ) = @_;
-    ($tagname)= $tagname =~ m/(\w+)/;
-    unless (
-        ! $tagname ||
+    ( $tagname ) = $tagname =~ m/(\w+)/;
+    unless ( ! $tagname ||
         MojoMojo::M::Core::Tag->search(
             photo   => $photo,
             person => $c->stash->{user},
             tag    => $tagname
-        )->next()
-      ) {
-        MojoMojo::M::Core::Tag->create(
-            {
+        )->next() ) {
+        MojoMojo::M::Core::Tag->create({
                 photo  => $photo,
                 tag    => $tagname,
                 person => $c->stash->{user}
-            }
-          )
-          if $photo;
+        }) if $photo;
     }
     $c->stash->{photo}=$photo;
     $c->forward( 'tags', [ $tagname ] );
 }
 
-=item untag (/.jsrpc/untag)
+=item untag (.gallery/untag)
 
 remove a tag to a page. return list of yours and popular tags.
 
@@ -143,6 +153,13 @@ sub untag : Local {
     $c->forward('tags', [ $tagname ]);
 }
 
+
+=item tags (.gallery/tags);
+
+make a list of yours and popular tags, or just popular ones if no
+user is logged in. 
+
+=cut
 
 sub tags : Local {
     my ( $self, $c, $highlight ) = @_;
@@ -164,6 +181,12 @@ sub tags : Local {
     }
 }
 
+=item description ( .gallery/description)
+
+Ajax method for updating picture descriptions inline.
+
+=cut
+
 sub description : Local { 
     my ( $self, $c, $photo ) = @_;
     $c->form(required=>[qw/description/]);
@@ -173,6 +196,12 @@ sub description : Local {
     }
       $c->res->body('<em>updated ok</em>');
 }
+
+=item title ( .gallery/title )
+
+Ajax method for updatingg picture titles inline.
+
+=cut
 
 sub title : Local { 
     my ( $self, $c, $photo ) = @_;

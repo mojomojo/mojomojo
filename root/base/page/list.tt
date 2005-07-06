@@ -9,7 +9,11 @@
 <div id="categories">
   <strong>tags</strong>: 
   [% FOREACH tag IN tags.list %]
-  <a href="[% base %][% page.path %].list/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[% base %][%page.path%].list/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
   [% END %]
 </div>
 <div id="allPages" style="float: left; width: 280px; margin-right: 30px">

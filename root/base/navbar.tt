@@ -21,6 +21,10 @@
   <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
   [% ELSE %]
   <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">recently revised</a> | 
+  [% END; IF c.req.action =='tags' %]
+  <b class="navOn" title="All tags in this path">tags</b> | 
+  [% ELSE %]
+  <a href="[%base%][%page.path%].tags" title="All tags in this path" accesskey="T">tags</a> | 
   [% END; IF c.req.action=='.users' %]
   <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]

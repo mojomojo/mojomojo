@@ -1,20 +1,18 @@
 package MojoMojo::M::Core::Page;
 
+use strict;
+use Algorithm::Diff;
+use DateTime;
+
 =head1 NAME
 
 MojoMojo::M::Core::Page - Page model
-
-=head1 SYNOPSIS
 
 =head1 DESCRIPTION
 
 This class models only "live" MojoMojo pages.
 
 =cut
-
-use strict;
-use Algorithm::Diff;
-use DateTime;
 
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
@@ -284,7 +282,7 @@ sub descendants_by_date {
 
   @descendants = $page->tagged_descendants('mytag');
 
-Returns the subtree of pages rooted by the page with a given tag.
+Returns the subtree of pages rooted by the page with a given tag ordered by name
 
 =cut
 
@@ -293,8 +291,8 @@ __PACKAGE__->set_sql('tagged_descendants' => qq{
         descendant.parent, descendant.depth
  FROM __TABLE__ as ancestor, __TABLE__ as descendant, tag
  WHERE ancestor.id = ?
-  AND descendant.lft > ancestor.lft
-  AND descendant.rgt < ancestor.rgt
+  AND ((descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt) OR ancestor.id=descendant.id)
   AND descendant.id = tag.page
   AND tag=?
  ORDER BY descendant.name
@@ -322,6 +320,13 @@ __PACKAGE__->set_sql('tagged_descendants_by_date' => qq{
  ) as page
 });
 
+=item tagged_descendants_by_date
+
+  @descendants = $page->tagged_descendants('mytag');
+
+Returns the subtree of pages rooted by the page with a given tag ordered by date, recent first.
+
+=cut
 sub tagged_descendants_by_date {
     my @pages = $_[0]->search_tagged_descendants_by_date( $_[0]->id, $_[1] );
     return __PACKAGE__->set_paths( @pages );
@@ -679,6 +684,12 @@ sub update_content {
 
 } # end sub update_content
 
+=item create_path_pages
+
+find or creates a list of path_pages
+
+=cut
+
 sub create_path_pages {
     my ( $class,      %args )        = @_;
     my ( $path_pages, $proto_pages, $creator ) = @args{qw/path_pages proto_pages creator/};
@@ -737,6 +748,13 @@ sub create_path_pages {
     return $path_pages;
 
 } # end sub create_path_pages
+
+
+=item has_photos
+
+return the number of photos attached to this page. use for galleries.
+
+=cut
 
 sub has_photos {
   my $self=shift;

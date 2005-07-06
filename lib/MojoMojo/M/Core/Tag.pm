@@ -10,10 +10,30 @@ MojoMojo::M::Core::Tag->has_a( 'page' => 'MojoMojo::M::Core::Page' );
 MojoMojo::M::Core::Tag->has_a( 'photo' => 'MojoMojo::M::Core::Photo' );
 
 
+__PACKAGE__->set_sql('path_tags' => qq{
+SELECT tag.tag as tag, count(tag) AS refcount 
+ FROM __TABLE__ 
+ WHERE tag.page IN (
+ select descendant.id
+ FROM page as ancestor, page as descendant
+ WHERE ancestor.id = ?
+  AND ((descendant.lft > ancestor.lft
+  AND descendant.rgt < ancestor.rgt) OR ancestor.id=descendant.id)
+ )
+ GROUP by tag
+ ORDER BY tag.tag
+});
+
+sub pathtags {
+    my ( $self,$page ) = @_;
+    return ($self->search_path_tags($page));
+}
+
 __PACKAGE__->set_sql(
     'most_used' => qq[
-SELECT tag, count(tag) AS refcount 
+SELECT __ESSENTIAL__, count(tag) AS refcount 
 FROM tag 
+WHERE page IS NOT NULL
 GROUP BY tag ORDER by REFCOUNT DESC LIMIT 10
 ]
 );

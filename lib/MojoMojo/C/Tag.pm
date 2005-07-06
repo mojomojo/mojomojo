@@ -2,6 +2,7 @@ package MojoMojo::C::Tag;
 
 use strict;
 use base 'Catalyst::Base';
+use HTML::TagCloud;
 
 =head1 NAME
 
@@ -45,7 +46,7 @@ sub list : Private {
 =item recent
 
 This is a private action, and is dispatched from /.recent when it's
-su:pplied with a tag argument. it will list recent pages belonging
+supplied with a tag argument. it will list recent pages belonging
 to a certain tag.
 
 =cut
@@ -59,6 +60,24 @@ sub recent : Private {
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
   
 }
+
+sub tags : Global {
+    my ($self, $c, $tag ) = @_;
+    my @descendants=$c->stash->{page}->descendants;
+    $c->stash->{tags}=[ 
+        MojoMojo::M::Core::Tag->pathtags($c->stash->{page}->id) 
+    ];
+    my $cloud=HTML::TagCloud->new();
+    foreach my $tag (@{$c->stash->{tags}}) {
+        $cloud->add($tag->tag,
+                    $c->req->base.$c->stash->{path}.'.list/'.$tag->tag,
+                    $tag->refcount);
+    }
+    $c->stash->{cloud}=$cloud;
+    $c->stash->{template}='tag/cloud.tt';
+}
+
+=back
 
 =head1 AUTHOR
 
