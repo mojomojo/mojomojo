@@ -117,7 +117,7 @@ sub format_link {
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
-    return qq{<span class="newWikiWord">$formatted<a href="$url">?</a></span>};
+    return qq{<span class="newWikiWord">$formatted<a href="$url.edit">?</a></span>};
 }
 
 sub expand_wikiword {
