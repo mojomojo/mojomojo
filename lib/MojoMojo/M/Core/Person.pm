@@ -125,4 +125,17 @@ sub can_edit {
     return 0;
 }
 
+=back
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+David Naughton C<naughton@umn.edu>
+
+=head1 LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
+
 1;
