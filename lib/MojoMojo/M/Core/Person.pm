@@ -66,7 +66,7 @@ sub can_edit {
      # allow admins, and users editing their pages
     return 1 if $self->is_admin;
     $link=$self->link;
-    return 1 if $page->path =~ m|^$link\b|i; 
+    return 1 if $page =~ m|^$link\b|i; 
     return 0;
 }
 
