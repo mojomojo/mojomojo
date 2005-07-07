@@ -38,7 +38,7 @@ sub auto : Private {
     # everyone can edit with anon mode enabled.
     return 1 if MojoMojo->pref('anonymous_user');
     my $user = $c->stash->{user};
-    return 1 if $user && $user->can_edit($c->stash->{page});
+    return 1 if $user && $user->can_edit($c->stash->{path});
     $c->stash->{template}='message.tt';
     $c->stash->{message}='sorry bubba, you aint got no rights';
     return 0;

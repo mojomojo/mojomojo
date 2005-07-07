@@ -34,7 +34,7 @@ auth controll for mojomojo
 sub auth : Private {
     my ( $self, $c ) = @_;
     return $c->forward('/user/login') unless $c->stash->{user};
-    return 1 if ($c->stash->{user}->can_edit($c->stash->{page}));
+    return 1 if ($c->stash->{user}->can_edit($c->stash->{path}));
 
     $c->stash->{template}='message.tt';
     $c->stash->{message}='sorry bubba, you aint got no rights';
