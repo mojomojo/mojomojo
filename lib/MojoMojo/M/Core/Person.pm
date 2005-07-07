@@ -1,5 +1,16 @@
 package MojoMojo::M::Core::Person;
 
+=head1 NAME
+
+MojoMojo::M::Core::Person - MojoMojo User class
+
+=head1 DESCRIPTION
+
+=head1 METHODS
+
+=over 4
+
+=cut
 
 __PACKAGE__->columns(Essential=>qw/login pass active/);
 MojoMojo::M::Core::Person->has_many( 'comments' => 'MojoMojo::M::Core::Comment' );
@@ -9,10 +20,22 @@ MojoMojo::M::Core::Person->has_many( 'pageversions' => 'MojoMojo::M::Core::PageV
 MojoMojo::M::Core::Person->has_many( 'rolemembers' => 'MojoMojo::M::Core::RoleMember' );
 MojoMojo::M::Core::Person->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
 
+=item get_user <user>
+
+Takes a username, returns a Person object.
+
+=cut
+
 sub get_user {
     my ( $class, $user ) = @_;
     return __PACKAGE__->search( login => $user )->next;
 }
+
+=item is_admin
+
+returns true if user is in admin list, false otherwise.
+
+=cut
 
 sub is_admin {  
     my $self=shift;
@@ -22,11 +45,23 @@ sub is_admin {
     return 0;
 }
 
+=item link
+
+Link to user page/profile.
+
+=cut
+
 sub link {
    my ($self) = @_;
-   
+   #FIXME: Link to profile here? 
    return "/".($self->login || '/no_login');
 }
+
+=item registration_profile
+
+returns a L<Data::FormValidator> profile for registration.
+
+=cut
 
 sub registration_profile { 
     return { 
@@ -34,7 +69,7 @@ sub registration_profile {
                     name       => 'Invalid format'},
          login =>[{ constraint => qr/^\w{3,10}$/,
                     name       => 'only letters, 3-10 chars'},
-                  { constraint => \&user_exists,
+                  { constraint => \&get_user,
                     name       => 'Username taken'}],
          name  => { constraint => qr/^\S+\s+\S+/,
                     name       => 'Full name please'},
@@ -44,21 +79,41 @@ sub registration_profile {
    };
 }
 
-sub user_exists {
-    return 0 if MojoMojo::M::Core::Person->get_user(shift);
-    return 1;
-}
+=item user_exists
+
+returns 1 if user exists, or 0 otherwise.
+
+=cut
+
+=item pass_matches <pass1> <pass2>
+
+Returns true if pass1 eq pass2. For
+validation
+
+=cut
 
 sub pass_matches {
     return 1 if ($_[0] eq $_[1]);
     return 0
 }
 
+=item  valid_pass <password>
+
+check password against database.
+
+=cut
+
 sub valid_pass {
     my ( $self,$pass )=@_;
     return 1 if $self->pass eq $pass;
     return 0;
 }
+
+=item can_edit <path>
+
+Checks if a user has rights to edit a given path.
+
+=cut
 
 sub can_edit {
     my ( $self, $page ) = @_;
