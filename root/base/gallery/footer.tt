@@ -1,11 +1,11 @@
-[% IF c.req.user ; %]
-<div id="showtag" class="showdiv"><a href="#" onclick="javascript:Toggle.display('addtag');Toggle.display('showtag');$('taginput').focus();return false;">add tag</a></div>
+[% IF user ; %]
+<div id="showtag" class="showdiv"><a href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
 <div id="addtag" class="formdiv" style="display:none;">
 [% url = base _ page.path _ '.gallery/submittag/' _ photo.id %]
 [%c.prototype.form_remote_tag({ 
     update => 'tags', 
     url=>url
-    loading=>"$('taginput').value='';"
+    loading=>"Element.hide('addtag');Element.show('showtag');\$('taginput').value=''",
     complete=>"Fat.fade('.highlight');"
 })%] 
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">

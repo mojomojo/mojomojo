@@ -19,14 +19,14 @@
 [%c.prototype.form_remote_tag({ 
     update => 'message', 
     url=>url,
-    loading=>"$('phototitle').value=$('titlebox').value;",
+    loading=>"$('phototitle').value=$('titlebox').value",
     complete=>"Fat.fade('.highlight')"
 })%] 
 <input type="hidden" id="phototitle" value="[%photo.title%]">
 <input class="dual" id="titlebox" value="[%photo.title%]" type="text" 
        name="title" width="80" autocomplete="off"
        onFocus="javascript:$('titlebutton').style.display='inline';$('message').innerHTML='<em>Click here to abort.</em>';"
-       onBlur="javascript:window.setTimeout(function() {$('titlebox').value=$('phototitle').value;$('titlebutton').style.display='none';},500); $('message').innerHTML=''; "/>
+       onBlur="javascript:window.setTimeout(function() {$('titlebox').value=$('phototitle').value;$('titlebutton').style.display='none';},1000); $('message').innerHTML=''; "/>
 <input class="dualbutton" id="titlebutton" type="submit" name="add" value="save"/> 
 <span class="highlight" id="message"><em>Click title to edit it.</em></span>
 </form>

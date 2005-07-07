@@ -20,7 +20,7 @@
 [% END %]
 <div id="bottomnav"><span id="bottomtext">
 [% IF (!rev OR rev==page.content_version) %]
-[% IF (c.pref('anonymous_user') OR user.can_edit(page)) %]
+[% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
  <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>
 [%END%]
  [% IF page.path == '/' && user.is_admin %]

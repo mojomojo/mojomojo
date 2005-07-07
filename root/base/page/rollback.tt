@@ -1,4 +1,4 @@
-[%IF user.can_edit(page)%]
+[%IF user.can_edit(page.path) && rev %]
 <form id="editForm" action="[% base %][% page.path %].rollback" method="post">
 <input type="hidden" name="rev" value="[% rev %]"/>
 <input type="submit" value="Roll back"/>
