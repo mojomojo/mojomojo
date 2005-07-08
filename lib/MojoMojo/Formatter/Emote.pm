@@ -2,7 +2,34 @@ package MojoMojo::Formatter::Emote;
 
 use Text::Emoticon::MSN;
 
+=head1 NAME
+
+MojoMojo::Formatter::Emote - MSN Smileys in your text.
+
+=head1 DESCRIPTION
+
+This formatter transforms the full range of MSN Smileys into
+bitmaps on your page, using L<Text::Emoticon::MSN>.
+
+=head1 METHODS
+
+=over 4
+
+=item format_content_order
+
+Format order can be 1-99. The Emote formatter runs on 95
+
+=cut
+
 sub format_content_order { 95 }
+
+=item format_content
+
+calls the formatter. Takes a ref to the content as well as the
+context object.
+
+=cut
+
 sub format_content {
     my ($self,$content,$c)=@_;
     my $emoticon = Text::Emoticon::MSN->new(
@@ -11,4 +38,19 @@ sub format_content {
     # Let textile handle the rest
     $$content= $emoticon->filter( $$content );
 }
+
+=item SEE ALSO
+
+L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Text::Emoticon::MSN>
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
+
 1;

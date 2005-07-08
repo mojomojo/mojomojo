@@ -6,6 +6,21 @@ use DateTime;
 use DateTime::Format::Mail;
 use utf8;
 
+=head1 NAME
+
+MojoMojo::M::Core::Content - Page content
+
+=head1 DESCRIPTION
+
+This class represents the actual content of a page, one row for
+each version.
+
+=head1 METHODS 
+
+=over 4
+
+=cut
+
 __PACKAGE__->has_a(
     created => 'DateTime',
     inflate => sub {
@@ -43,6 +58,13 @@ __PACKAGE__->add_trigger( after_create     => \&store_links );
 __PACKAGE__->add_trigger( after_update     => \&store_links );
 __PACKAGE__->add_trigger( after_set_status => \&store_links );
 
+=item highlight
+
+Highlight new lines in content compared to previous version
+using yellow fade.
+
+=cut
+
 sub highlight {
     my ( $self, $c ) = @_;
     my $this_content = $self->formatted($c);
@@ -70,6 +92,14 @@ sub highlight {
     return $diff;
 }
 
+=item formatted_diff <context> <old_content>
+
+Compare this content version to <old_content>, using
+Algorithm::Diff. Show added lines in with diffins css class
+and deleted with diffdel css class.
+
+=cut
+
 sub formatted_diff {
     my ( $self, $c, $to ) = @_;
     my $this = [ split /\n\n/, $self->formatted($c) ];
@@ -93,12 +123,25 @@ sub formatted_diff {
     return $diff;
 }
 
+=item formatted [<content>]
+
+Return content after being run through MojoMojo::Formatter::* , 
+either own content or passed <content>
+
+=cut
+
 sub formatted {
     my ( $self, $c, $content ) = @_;
     $content ||= $self->body_decoded;
     MojoMojo->call_plugins( "format_content", \$content, $c ) if ($content);
     return $content;
 }
+
+=item previous
+
+Return previous version of this content, or undef for first version.
+
+=cut
 
 sub previous {
     my ($self) = @_;
@@ -114,6 +157,12 @@ sub previous {
 
 # create_proto: create a "proto content version" that may
 # be the basis for a new revision
+
+=item create_proto <page>
+
+Create a content prototype object, as the basis for a new revision.
+
+=cut
 
 sub create_proto {
     my ( $class, $page ) = @_;
@@ -136,12 +185,24 @@ sub create_proto {
     return \%proto_content;
 }
 
+=item max_version 
+
+Return the highest numbered revision.
+
+=cut
+
 sub max_version {
     my $self=shift;
     my $max=$self->search_max_ver($self->page);
     return 0 unless $max->count;
     return $max->next->max_ver();
 }
+
+=item body_decoded
+
+Return content marked as utf8.
+
+=cut
 
 sub body_decoded {
     my $self=shift;
@@ -150,26 +211,23 @@ sub body_decoded {
     return $body;
 }
 
+=item  pub_date
+
+return publish date of this version in a format suitable for RSS 2.0
+
+=cut
+
 sub pub_date {
     my $self=shift;
     return DateTime::Format::Mail->format_datetime($self->created);
 }
 
-# sub wikiwords {
-#     my $self=shift;
-#     my $content  = $self->content;
-#     my @links;
-#     while ( $content =~ m/
-#     (?<![\?\\\/\[])(\b[A-Z][a-z]+[A-Z]\w*)/g) {
-#       push @links, $1;
-#     }
-#     while ( $content =~ m{(?:\[\[|\(\()\s*([^\]\)|]+?)\s*(?:\|\s*([^\]\)]+?)\s*)?(?:\]\]|\)\))}g) {
-#       push @links,MojoMojo->fixw( $1 );
-#     }
-#     return @links;
-# }
+=item store_links
 
-1;
+Extract and store all links and wanted paged from a given content
+version.
+
+=cut
 
 sub store_links {
     my ($self) = @_;
@@ -204,4 +262,4 @@ You may distribute this code under the same terms as Perl itself.
 
 =cut
 
-1
+1;

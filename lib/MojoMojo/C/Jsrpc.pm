@@ -133,7 +133,7 @@ sub untag : Local {
     )->next();
     $tag->delete() if $tag;
     $c->req->args( [ $tagname ] );
-    $c->forward('/page/tags');
+    $c->forward('/page/inline_tags');
 }
 
 =item imginfo (.jsrpc/imginfo)

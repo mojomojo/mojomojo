@@ -2,20 +2,55 @@ package MojoMojo::Formatter::Include;
 
 use LWP::Simple;
 use URI::Fetch;
+
+=head1 NAME
+
+MojoMojo::Formatter::Comment - Include comments on your page.
+
+=head1 DESCRIPTION
+
+Include files verbatim in your content, by writing =<url>.
+
+=head1 METHODS
+
+=over 4
+
+=item format_content_order
+
+Format order can be 1-99. The Comment formatter runs on 91
+
+=cut
+
 sub format_content_order { 6 }
+
+
+=item format_content
+
+calls the formatter. Takes a ref to the content as well as the
+context object.
+
+=cut
+
 sub format_content {
     my ($self,$content,$c)=@_;
 
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
-	if ($line =~ m/^=(http\:\/\/\S+)$/) { 
-         		$$content.=MojoMojo::Formatter::Include->include($c,$1);
-	} else {
-	    $$content .=$line."\n";	
-	}
+        if ($line =~ m/^=(http\:\/\/\S+)$/) { 
+            $$content.=MojoMojo::Formatter::Include->include($c,$1);
+        } else {
+            $$content .=$line."\n";	
+        }
     }
 }
+
+=item include <c> <url>
+
+returns the content of url. Will store a cached version in 
+$c->cache
+
+=cut
 
 sub include {
     my ($self,$c,$url)=@_;
@@ -24,6 +59,18 @@ sub include {
     return "Could not retrieve $url .\n";
 }
 
+=item SEE ALSO
 
+L<MojoMojo>,L<Module::Pluggable::Ordered>,L<URI::Fetch>
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
 
 1;

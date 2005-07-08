@@ -526,6 +526,28 @@ sub path_pages {
 
 } # end sub get_path
 
+=item resolve_path <%args>
+
+Takes the following args:
+
+=over 4
+
+=item path_pages
+
+=item proto_pages
+
+=item query_pages
+
+=item current_depth
+
+=item final_depth
+
+=back
+
+returns true if path can be resolved, or false otherwise.
+
+=cut
+
 sub resolve_path {
     my ( $class, %args ) = @_;
 
@@ -553,6 +575,12 @@ sub resolve_path {
     return 0;
 
 } # end sub resolve_path
+
+=item parse_path <path>
+
+Create prototype page objects for each level in a given path.
+
+=cut
 
 sub parse_path {
     my ( $class, $path ) = @_;
@@ -586,6 +614,13 @@ sub parse_path {
 
 } # end sub parse_path
 
+=item normalize_name <orig_name>
+
+Strip superfluos spaces, and convert the rest to _,
+and lowercase the result.
+
+=cut
+
 sub normalize_name {
     my ( $class, $name_orig ) = @_;
 
@@ -601,6 +636,12 @@ sub normalize_name {
 } # end sub normalize_name
 
 
+=item content
+
+Returns the currently active content object for this page.
+
+=cut
+
 sub content {
     my ($self) = @_;
     return MojoMojo::M::Core::Content->retrieve(
@@ -608,6 +649,14 @@ sub content {
         version => $self->content_version,
     );
 }
+
+
+=item page_version
+
+Returns the L<MojoMojo::M::Core::PageVersion> object for
+this Page object.
+
+=cut
 
 sub page_version {
     my ($self) = @_;
@@ -617,29 +666,34 @@ sub page_version {
     );
 }
 
+=item orphans
+
+Return all pages with no links to them.
+
+=cut
+
 sub orphans {
     grep { $_->links_to->count == 0 }
       __PACKAGE__->retrieve_all_sorted_by("name");
 }
 
-# sub wikiwords {
-#     my $self    = shift;
-#     my $content = $self->content;
-#     my @links;
-#     while ( $content =~ m/(?<![\?\\\/])(\b[A-Z][a-z]+[A-Z]\w*)/g ) {
-#         push @links, $1;
-#     }
-#     while ( $content =~ m{\[\[\s*([^\]]+)\s*\]\]}g ) {
-#         push @links, MojoMojo->fixw($1);
-#     }
-#     return @links;
-# }
+=item others_tags <user>
+
+Return popular tags for this page used by other people than <user>.
+
+=cut
 
 sub others_tags {
     my ( $self, $user ) = @_;
     my (@tags) = MojoMojo::M::Core::Tag->search_others_tags( $self->id, $user );
     return @tags;
 }
+
+=item user_tags <user>
+
+return this user's tags for this page.
+
+=cut
 
 sub user_tags {
     my ( $self, $user ) = @_;
@@ -651,6 +705,13 @@ sub user_tags {
 # update_content: this whole method may need work to deal with workflow.
 # maybe it can't even be called if the site uses workflow...
 # may need fixing for better conflict handling, too. maybe use a transaction?
+
+=item update_content <%args>
+
+Create a new content version for this page.
+
+args is each column of L<MojoMojo::M::Core::Content>.
+=cut
 
 sub update_content {
     my ( $self, %args ) = @_;
@@ -760,4 +821,17 @@ sub has_photos {
   my $self=shift;
   return MojoMojo::M::Core::Photo->count('attachment.page'=>$self);
 }
+
+=item AUTHORS
+
+David Naughton <naughton@umn.edu>
+Marcus Ramberg <mramberg@cpan.org>
+
+=item LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
+
+1;
 1;

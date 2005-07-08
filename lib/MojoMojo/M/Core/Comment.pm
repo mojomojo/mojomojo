@@ -11,6 +11,8 @@ MojoMojo::M::Core::Attachment - Page attachments
 
 This class represents comments, either attached to pages or pictures.
 
+=head1 METHODS
+
 =cut
 
 my $textile=Text::Textile2->new(

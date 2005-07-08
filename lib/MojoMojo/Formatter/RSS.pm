@@ -1,10 +1,41 @@
 package MojoMojo::Formatter::RSS;
 
 use LWP::Simple;
-
 use URI::Fetch;
 use XML::Feed;
+
+=head1 NAME
+
+MojoMojo::Formatter::RSS - Include rss feeds on your page.
+
+=head1 DESCRIPTION
+
+This formatter takes a feed in the format =feed://<url>, and 
+passes it through L<XML::Feed> to get a formatted feed suitable
+for inclusion in your page. It also caches them in the chosen 
+Catalyst Cache. By default it will render the first element in 
+the feed, but it can take a numeric parameter to choose number of
+elements.
+
+=head1 METHODS
+
+=over 4
+
+=item format_content_order
+
+Format order can be 1-99. The RSS formatter runs on 4
+
+=cut
+
+
 sub format_content_order { 4 }
+
+=item format_content
+
+calls the formatter. Takes a ref to the content as well as the
+context object.
+
+=cut
 
 sub format_content {
     my ($self,$content,$c)=@_;
@@ -19,6 +50,12 @@ sub format_content {
         }
    }   
 }
+
+=item include_rss  <c> <url> [<entries>]
+
+returns html formatted content for inclusion.
+
+=cut
 
 sub include_rss {
     my ($self,$c,$url,$entries)=@_;
@@ -40,6 +77,18 @@ sub include_rss {
     return $content;
 }
 
+=item SEE ALSO
 
+L<MojoMojo>,L<Module::Pluggable::Ordered>, L<XML::Feed>, L<URI::Fetch>
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
 
 1;

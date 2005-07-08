@@ -102,6 +102,12 @@ sub end : Private {
     die if $c->req->params->{die};
 }
 
+=item auto
+
+runs for all requests, checks if user is in need of validation, and 
+intercepts the request if so.
+
+=cut
 
 sub auto : Private {
     my ($self,$c) = @_;

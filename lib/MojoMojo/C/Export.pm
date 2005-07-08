@@ -66,7 +66,7 @@ sub export_raw : Global {
     );
 }
 
-=item html (/.export_html)
+=item export_html (/.export_html)
 
 This action will give you a zip file containing HTML formatted 
 versions of all the nodes of the wiki.

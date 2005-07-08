@@ -174,7 +174,9 @@ sub print : Global {
     $c->forward('view');
 }
 
-=item tags (.tags)
+=item inline_tags (.inline_tags)
+
+Tag list for the bottom of page views.
 
 =cut
 
@@ -211,7 +213,7 @@ sub list : Global {
     $c->stash->{orphans}   = [];
     $c->stash->{backlinks} = [ MojoMojo::M::Core::Link->search( to_page => $page->id ) ];
     $c->stash->{wanted}    = [ MojoMojo::M::Core::WantedPage->retrieve_all ];
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used() ];
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used() ];
 }
 
 =item recent (.recent)
@@ -225,7 +227,7 @@ sub recent : Global {
     return $c->forward('/tag/recent') if $tag;
     my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
-    $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->search_most_used ];
+    $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->most_used ];
     $c->stash->{pages}    = [ $page->descendants_by_date ];
 
     # FIXME - needs to be populated even without tags

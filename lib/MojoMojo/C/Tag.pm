@@ -38,7 +38,7 @@ sub list : Private {
     $c->stash->{template} = 'page/list.tt';
 
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants($tag) ];
     $c->stash->{related}   = [ MojoMojo::M::Core::Tag->related_to($tag) ];
 }
@@ -56,10 +56,16 @@ sub recent : Private {
     $c->stash->{template} = 'page/recent.tt';
     return unless $tag;
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->search_most_used ];
+    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
   
 }
+
+=item tags (/.tags)
+
+tag cloud for pages.
+
+=cut
 
 sub tags : Global {
     my ($self, $c, $tag ) = @_;

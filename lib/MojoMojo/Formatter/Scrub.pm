@@ -2,6 +2,30 @@ package MojoMojo::Formatter::Scrub;
 
 use HTML::Scrubber;
 use XML::Clean;
+
+
+=head1 NAME
+
+MojoMojo::Formatter::Scrub - Scrub user HTML
+1
+=head1 DESCRIPTION
+
+This formatter makes sure only a safe range of tags are 
+allowed, using L<HTML::Scrubber>; It also makes sure all tags
+are balaced, using L<XML::Clean>.
+
+=head1 METHODS
+
+=over 4
+
+=item format_content_order
+
+Format order can be 1-99. The Comment formatter runs on 1
+
+=cut
+
+sub format_content_order { 1 }
+
     my @allow = qw[ p img em br hr b a div pre code];
 
     my @rules = (
@@ -53,7 +77,14 @@ $scrubber->rules( @rules ); # key/value pairs
 $scrubber->default( @default );
 $scrubber->comment(1); # 1 allow, 0 deny
 
-sub format_content_order { 1 }
+
+=item format_content
+
+calls the formatter. Takes a ref to the content as well as the
+context object.
+
+=cut
+
 sub format_content {
     my ($self,$content,$c)=@_;
     $$content=$scrubber->scrub($$content); 
@@ -62,5 +93,19 @@ sub format_content {
     # but makes sure all divs are matched.
     $$content=XML::Clean::clean($$content);
 }
+
+=item SEE ALSO
+
+L<MojoMojo>,L<Module::Pluggable::Ordered>,L<XML::Clean>,L<HTML::Scrubber>
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
 
 1;

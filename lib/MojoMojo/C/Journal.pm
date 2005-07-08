@@ -3,14 +3,10 @@ package MojoMojo::C::Journal;
 use strict;
 use base 'Catalyst::Base';
 
-sub default : Private {
-    my ( $self, $c ) = @_;
-    $c->res->output('Congratulations, MojoMojo::C::Journal is on Catalyst!');
-}
 
 =head1 NAME
 
-MojoMojo::C::Journal - A Component
+MojoMojo::C::Journal - Journaling for MojoMojo?
 
 =head1 SYNOPSIS
 
@@ -18,7 +14,7 @@ MojoMojo::C::Journal - A Component
 
 =head1 DESCRIPTION
 
-Very nice component.
+This space is blank. Got any ideas? Sharkpool and Tequilla has been discussed.
 
 =head1 AUTHOR
 

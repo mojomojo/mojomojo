@@ -27,7 +27,7 @@ Overrides begin to avoid loading page objects.
 
 sub begin : Private { }
 
-=item favicon
+=item ico (/favicon.ico)
 
 serve favicon.ico statically.
 

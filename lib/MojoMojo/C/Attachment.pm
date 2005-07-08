@@ -90,7 +90,7 @@ sub attachments : Global {
     }
 }
 
-=item index
+=item default
 
 This action dispatches to the other private actions in this controller
 based on the second argument. the first argument is expected to be 
@@ -99,11 +99,11 @@ an attachment id.
 =cut
 
 sub default : Private {
-    my ( $self, $c, $called,$att, $action ) = @_;
+    my ( $self, $c, $called,$att, $action, @_ ) = @_;
 
     $att=MojoMojo::M::Core::Attachment->retrieve($att);
     if ($action) {
-        $c->forward("$action", [$att] );
+        $c->forward("$action", [$att,@_] );
     }
     unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
         $c->res->output( scalar( read_file( $att->filename)));
@@ -129,6 +129,12 @@ sub download : Private {
         "Content-Disposition" => "attachment; filename=" . $att->name 
     );
 }
+
+=item thumb
+
+thumb action for attachments. makes 100x100px thumbs
+
+=cut
 
 sub thumb : Private {
     my ( $self, $c, $att ) = @_;

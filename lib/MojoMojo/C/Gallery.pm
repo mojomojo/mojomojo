@@ -76,7 +76,7 @@ sub p : Global {
     my ( $self, $c, $photo)  = @_;
     $photo                   = MojoMojo::M::Core::Photo->retrieve($photo);
     $c->stash->{photo}       = $photo;
-    $c->forward( 'tags' );
+    $c->forward( 'inline_tags' );
     $c->stash->{template}    =  'gallery/photo.tt';
     $c->stash->{next}        =  $photo->retrieve_next(
         { 'attachment.page'  => $photo->attachment->page },
@@ -88,12 +88,18 @@ sub p : Global {
     )->next;
 }
 
+=item (/p_by_tag/\d+)
+
+show a picture in tag gallery.
+
+=cut
+
 sub p_by_tag : Global {
     my ( $self, $c, $tag, $photo ) = @_;
     $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
     $c->stash->{photo}    = $photo;
     $c->stash->{tag}      = $tag; 
-    $c->forward( 'tags' );
+    $c->forward( 'inline_tags' );
     $c->stash->{template} = 'gallery/photo.tt';
     $c->stash->{next}     = $photo->next_by_tag($tag);
     $c->stash->{prev}     = $photo->prev_by_tag($tag);
@@ -132,7 +138,7 @@ sub tag : Local {
         }) if $photo;
     }
     $c->stash->{photo}=$photo;
-    $c->forward( 'tags', [ $tagname ] );
+    $c->forward( 'inline_tags', [ $tagname ] );
 }
 
 =item untag (.gallery/untag)
@@ -150,18 +156,18 @@ sub untag : Local {
     )->next();
     $tag->delete() if $tag;
     $c->stash->{photo}=$photo;
-    $c->forward('tags', [ $tagname ]);
+    $c->forward('inline_tags', [ $tagname ]);
 }
 
 
-=item tags (.gallery/tags);
+=item inline_tags (.gallery/tags);
 
 make a list of yours and popular tags, or just popular ones if no
 user is logged in. 
 
 =cut
 
-sub tags : Local {
+sub inline_tags : Local {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'gallery/tags.tt';
     $c->stash->{highlight} = $highlight;

@@ -2,6 +2,30 @@ package MojoMojo::Formatter::Wiki;
 
 use URI;
 
+=head1 NAME
+
+MojoMojo::Formatter::Wiki - Handle interpage linking.
+
+=head1 DESCRIPTION
+
+This formatter handles Wiki links using the [[explicit]] and
+ImplicitLink syntax. It will also indicate missing links with 
+a question mark and a link to the edit page. In explicit mode, 
+you can prefix the wikiword with an namespace, just like in a
+normal url. For example: [[../marcus]] or [[/oslo/vacation]].
+
+=head1 METHODS
+
+=over 4
+
+=item format_content_order
+
+Format order can be 1-99. The Wiki formatter runs on 30
+
+=cut
+
+sub format_content_order { 30 }
+
 # explicit link regexes
 
 ## list of start-end delimiter pairs
@@ -54,7 +78,13 @@ sub _generate_non_wikiword_check {
 
 my $non_wikiword_check = _generate_non_wikiword_check();
 
-sub format_content_order { 30 }
+=item format_content
+
+calls the formatter. Takes a ref to the content as well as the
+context object.
+
+=cut
+
 sub format_content {
     my ($class, $content, $c) = @_;
     # Extract wikiwords, avoiding escaped and part of urls
@@ -83,7 +113,14 @@ sub format_content {
     }{ $class->format_link($c, $1, $c->req->base, $2) }gex;
 }
 
+=item format_link <c> <word> <base> [<link_text>]
+
+Format a wikiword as a link
+
+=cut
+
 sub format_link {
+    #FIXME: why both base and $c?
     my ($class, $c, $word, $base, $link_text) = @_;
     die "No base for $word" unless $base;
     $c = MojoMojo->context unless ref $c;
@@ -120,12 +157,26 @@ sub format_link {
     return qq{<span class="newWikiWord">$formatted<a href="$url.edit">?</a></span>};
 }
 
+=item expand_wikiword <word>
+
+Expand mixed case and _ with spaces.
+
+=cut
+
 sub expand_wikiword {
     my ($class, $word) = @_;
     $word =~ s/([a-z])([A-Z])/$1 $2/g;
     $word =~ s/\_/ /g;
     return $word;
 }
+
+=item find_links <content> <page>
+
+Find wiki links in content.
+
+Return a listref of linked and wanted pages.
+
+=cut
 
 sub find_links {
     my ($class, $content, $page) = @_;
@@ -154,5 +205,19 @@ sub find_links {
     }
     return (\@linked_pages, \@wanted_pages);
 }
+
+=item SEE ALSO
+
+L<MojoMojo>,L<Module::Pluggable::Ordered>
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
 
 1;

@@ -44,9 +44,10 @@ sub login : Global {
     $c->stash->{message} = 'please enter username & password';
     if ( $c->req->params->{login} ) {
         $c->session_login( $c->req->params->{login}, $c->req->params->{pass} );
-        if ( $c->req->{user} ) {
-            $c->stash->{user}=MojoMojo::M::Core::Person->retrieve($c->req->{user_id});
-            $c->forward('/page/view') unless $c->stash->{template};
+        if ( $c->stash->{user}=MojoMojo::M::Core::Person->get_user(
+                $c->req->{user} ) ) {
+            $c->res->redirect($c->stash->{user}->link) 
+                unless $c->stash->{template};
             return;
         }
         else {
@@ -90,6 +91,14 @@ sub prefs : Global {
     };
 }
 
+=item password (/prefs/passwordy
+
+Change password action.
+
+B<template:> user/password.tt
+
+=cut
+
 sub password : Path('/prefs/password') {
     my ( $self, $c ) = @_;
     $c->forward('prefs');
@@ -114,12 +123,28 @@ sub password : Path('/prefs/password') {
     $c->stash->{message} ||= 'please fill out all fields';
 }
 
+=item register (/.register)
+
+Show new user registration form.
+
+B<template:> user/register.tt
+
+=cut
+
 sub register : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message}='Please fill in the following information to '.
     'register. All fields are mandatory.';
 }
+
+=item do_register (/.register)
+
+New user registration processing.
+
+B<template:> user/password.tt /  user/validate.tt
+
+=cut
 
 sub do_register : Global {
     my ( $self, $c ) = @_;
@@ -153,6 +178,13 @@ sub do_register : Global {
     }
 }    
 
+=item validate (/.validate)
+
+Validation of user email. Will accept a md5_hex mailed to the user
+earlier. Non-validated users will only be able to log out.
+
+=cut
+
 sub validate : Global {
     my ($self,$c,$user,$check)=@_;
     $user=MojoMojo::M::Core::Person->retrieve($user);
@@ -170,6 +202,12 @@ sub validate : Global {
     $c->stash->{template}='user/validate.tt';
 }
 
+=item profile .profile
+
+Show user profile.
+
+=cut
+
 sub profile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
@@ -180,7 +218,7 @@ sub profile : Global {
     } else { 
         $c->stash->{template}='message.tt';
         $c->stash->{message}='User not found!';
-   }
+    }
 }
 
 =back

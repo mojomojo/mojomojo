@@ -4,6 +4,20 @@ use strict;
 use base 'Plucene::Simple';
 use Plucene::Plugin::Analyzer::SnowballAnalyzer;
 
+=head1 NAME
+
+MojoMojo::Search::Plucene - Plucene searching in MojoMojo
+
+=head1 DESCRIPTION
+
+Search MojoMojo content using the Plucene search engine.
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 # TODO:
 # I can't find a way to index the path data such that we can search only a subsection of
 #   the path tree.  For now, we can simply get all search results and ignore those that don't
@@ -27,6 +41,11 @@ sub _writer {
 		0
 	);
 }
+=item update_index <page>
+
+update the index for a given page.
+
+=cut
 
 # updates the search index when page data changes
 sub update_index {
@@ -39,6 +58,7 @@ sub update_index {
     $self->delete_document($key) if ($self->indexed($key));
 
     # Q: should we be indexing the abstract, comments, and tags?
+    # FIXME: Should index comments and tags at least.
     my $text = $content->body;
     $text .= " " . $content->abstract if ($content->abstract);
     $text .= " " . $content->comments if ($content->comments);
@@ -63,5 +83,20 @@ sub update_index {
     }
     return 1;
 }
+
+=item SEE ALSO
+
+L<MojoMojo>, L<Plucene>
+
+=item AUTHORS
+
+Andy Grundman C<andy@hybridized.org>
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 License
+
+This module is licensed under the same terms as Perl itself.
+
+=cut
 
 1;

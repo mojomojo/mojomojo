@@ -2,6 +2,17 @@ package MojoMojo::M::Core::Photo;
 
 use Image::EXIF;
 
+=head1 NAME
+
+MojoMojo::M::Core::Photo - Photo attributes of an Attachment
+
+=head1 DESCRIPTION
+
+This class contents Photo-specific information for 
+L<MojoMojo::M::Core::Attachment>.
+
+=cut
+
 __PACKAGE__->columns(Essential=>qw/title description taken/);
 
 __PACKAGE__->has_a(
@@ -14,6 +25,13 @@ __PACKAGE__->has_a(
 __PACKAGE__->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
 
 
+=item search_page <page>
+
+Returns all Photo objects for a given page.
+
+=cut
+
+#FIXME: Isn't this obsolete? ::Sweet can do joins.
 __PACKAGE__->set_sql('page', <<"");
 SELECT __ESSENTIAL__ 
 FROM __TABLE__,attachment 
@@ -24,6 +42,13 @@ __PACKAGE__->might_have('attachment' => 'MojoMojo::M::Core::Attachment', qw/uplo
 MojoMojo::M::Core::Photo->has_many( 'comments' => 'MojoMojo::M::Core::Comment' )
 ;
 
+=item create_from_attachment <attachments>
+
+Extracts image information from an attachment and creates a Photo
+object.
+
+=cut
+
 sub create_from_attachment {
     my ($class,$attachment) = @_;
     my $self=$class->create({
@@ -32,11 +57,23 @@ sub create_from_attachment {
     });
 }
 
+=item others_tags <user>
+
+Tags other users have given to this Photo.
+
+=cut
+
 sub others_tags {
     my ( $self, $user ) = @_;
     my (@tags) = MojoMojo::M::Core::Tag->search_others_photo_tags( $self->id, $user );
     return @tags;
 }
+
+=item user_tags <user>
+
+Tags this user have given to this photo.
+
+=cut
 
 sub user_tags {
     my ( $self, $user ) = @_;
@@ -44,6 +81,13 @@ sub user_tags {
       MojoMojo::M::Core::Tag->search( person => $user, photo => $self );
     return @tags;
 }
+
+=item extract_exif
+
+Extracts EXIF information from a given Attachment and
+populates the Photo object.
+
+=cut
 
 sub extract_exif {
     my ($self,$att)=@_;
@@ -59,6 +103,12 @@ sub extract_exif {
     $self->update();
 }
 
+=item exif2datetime datetime
+
+Creates a L<DateTime> object from a EXIF timestamp.
+
+=cut
+
 sub exif2datetime {
     my ($self,$datetime)=@_;
     return undef unless $datetime;
@@ -69,15 +119,38 @@ sub exif2datetime {
                          hour=>$h,minute=>$m,second=>$s);
 }
 
+=item prev_by_tag <tag>
+
+Return previous image when browsing by a given tag.
+
+=cut
+
 sub prev_by_tag {
     my  ($self,$tag)=@_;
     return $self->retrieve_previous('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
 }
 
+=item next_by_tag <tag>
+
+Return next image object after this when browsing by the given tag.
+
+=cut
+
+
 sub next_by_tag {
     my  ($self,$tag)=@_;
     return $self->retrieve_next('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
 }
+
+=item AUTHORS
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=item LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
+=cut
 
 1;
 
