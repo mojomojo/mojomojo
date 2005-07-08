@@ -701,3 +701,7 @@ div.photo img{
 .inline p,dt,dd{
     font-size: 0.7em;
 }
+
+acronym {
+  border-bottom: 1px dotted !important;
+}
