@@ -99,7 +99,7 @@ an attachment id.
 =cut
 
 sub default : Private {
-    my ( $self, $c, $called,$att, $action, @_ ) = @_;
+    my ( $self, $c, $called, $att, $action ) = @_;
 
     $att=MojoMojo::M::Core::Attachment->retrieve($att);
     if ($action) {

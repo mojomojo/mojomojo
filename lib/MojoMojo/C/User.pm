@@ -5,6 +5,8 @@ use base 'Catalyst::Base';
 
 use Digest::MD5 qw/md5_hex/;
 
+my $auth_class = MojoMojo->config->{auth_class};
+
 =head1 NAME
 
 MojoMojo::C::User - Login/User Management Controller
@@ -21,40 +23,24 @@ This controller allows user to Log In and Log out.
 
 =item logout (/.logout)
 
-deletes this users cookie, and clears his session.
+Executes the logout method provided by the user's auth plugin class.
 
 =cut
 
 sub logout : Global {
-    my ( $self, $c ) = @_;
-    $c->session_logout;
-    undef $c->stash->{user};
-    $c->forward('/page/view');
+    no strict 'refs';
+    &{ $auth_class . '::logout' }( @_ );
 }
 
 =item login (/.login)
 
-authorize a user through login/pass params, or display login
-screen otherwise.
+Executes the login method provided by the user's auth plugin class.
 
 =cut
 
 sub login : Global {
-    my ( $self, $c ) = @_;
-    $c->stash->{message} = 'please enter username & password';
-    if ( $c->req->params->{login} ) {
-        $c->session_login( $c->req->params->{login}, $c->req->params->{pass} );
-        if ( $c->stash->{user}=MojoMojo::M::Core::Person->get_user(
-                $c->req->{user} ) ) {
-            $c->res->redirect($c->stash->{user}->link) 
-                unless $c->stash->{template};
-            return;
-        }
-        else {
-            $c->stash->{message} = 'could not authenticate that login.';
-        }
-    }
-    $c->stash->{template} ||= "user/login.tt";
+    no strict 'refs';
+    &{ $auth_class . '::login' }( @_ );
 }
 
 =item users (/.users)
@@ -225,7 +211,7 @@ sub profile : Global {
 
 =head1 AUTHOR
 
-Marcus Ramberg <mramberg@cpan.org>
+David Naughton <naughton@cpan.org>, Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 

@@ -12,19 +12,24 @@ use Catalyst qw/-Debug FormValidator Session::FastMmap Static
 use MojoMojo::Search::Plucene;
 
 use YAML ();
-use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], require => 1;
+use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], except => qr/^MojoMojo::Plugin::/, require => 1;
+
 our $VERSION='0.05';
 
 MojoMojo->prepare_home();
 MojoMojo->config( YAML::LoadFile( file( MojoMojo->config->{home},'/mojomojo.yml' ) ) );
+
+MojoMojo->config->{auth_class} ||= 'MojoMojo::Plugin::DefaultAuth';
+my $auth_class = MojoMojo->config->{auth_class};
+eval "CORE::require $auth_class";
+die "Couldn't require $auth_class : $@" if $@;
 MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::Person',
                     user_field     => 'login',
                     password_field => 'pass' } );
 
 MojoMojo->config ( no_url_rewrite=>1 );
-MojoMojo->config( cache => { 
-                  storage=> MojoMojo->config->{home}.'/cache' } );
+MojoMojo->config( cache => { storage=> MojoMojo->config->{home}.'/cache' } );
 MojoMojo->config( encoding => 'UTF-8' ); # A valid Encode encoding
 
 MojoMojo->setup();

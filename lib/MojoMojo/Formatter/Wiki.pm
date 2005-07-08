@@ -127,7 +127,12 @@ sub format_link {
 
     # keep the original wikiword for display, stripping leading slashes
     my $orig_word = $word;
-    $orig_word =~ s/.*\/// unless $orig_word eq '/';
+    if ($orig_word =~ m|^ \s* /+ \s* $|x) {
+        $orig_word = '/';
+    }
+    else {
+        $orig_word =~ s/.*\///;
+    }
     my $formatted = $link_text || $class->expand_wikiword($orig_word);
 
     # convert relative paths to absolute paths

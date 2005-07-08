@@ -14,7 +14,7 @@
 [% PROCESS navbar.tt %]
 <div id="content">
 
-[%# PROCESS sidebar.tt %]
+[% # PROCESS sidebar.tt %]
 
 <div id="current">
 [% IF render == 'highlight' %]
