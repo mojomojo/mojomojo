@@ -40,11 +40,13 @@ sub format_content {
     $$content= Text::SmartyPants->process( $$content );
 }
 
-=item SEE ALSO
+=back 
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Text::Textile2>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 

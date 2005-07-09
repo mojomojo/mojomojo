@@ -247,6 +247,8 @@ sub store_links {
     }
 }
 
+=back
+
 =head1 SEE ALSO
 
 L<Class::DBI::Sweet>, L<Catalyst>, L<MojoMojo>

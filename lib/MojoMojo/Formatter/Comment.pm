@@ -50,15 +50,17 @@ sub show_comments {
            '</div>';
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 
-=head1 License
+=head1 LICENSE
 
 This module is licensed under the same terms as Perl itself.
 

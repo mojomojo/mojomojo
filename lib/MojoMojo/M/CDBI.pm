@@ -48,6 +48,8 @@ sub new {
 #     ($self->loader->classes)[0]->db_Main()->trace(1);
 }
 
+=back
+
 =head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>

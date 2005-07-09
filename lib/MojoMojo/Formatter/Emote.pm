@@ -39,11 +39,13 @@ sub format_content {
     $$content= $emoticon->filter( $$content );
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Text::Emoticon::MSN>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 

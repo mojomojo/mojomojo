@@ -77,11 +77,13 @@ sub include_rss {
     return $content;
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>, L<XML::Feed>, L<URI::Fetch>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 

@@ -59,11 +59,13 @@ sub include {
     return "Could not retrieve $url .\n";
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>,L<URI::Fetch>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 

@@ -19,6 +19,8 @@ These methods will be called indirectly through javascript functions.
 
 =head1 ACTIONS
 
+=over 4
+
 =item render (/.jsrpc/render)
 
 Edit uses this to get live preview. It gets some content in 

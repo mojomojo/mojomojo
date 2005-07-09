@@ -11,6 +11,10 @@ MojoMojo::M::Core::Photo - Photo attributes of an Attachment
 This class contents Photo-specific information for 
 L<MojoMojo::M::Core::Attachment>.
 
+=head1 METHODS
+
+=over 4
+
 =cut
 
 __PACKAGE__->columns(Essential=>qw/title description taken/);
@@ -142,11 +146,13 @@ sub next_by_tag {
     return $self->retrieve_next('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
 }
 
-=item AUTHORS
+=back
+
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 
-=item LICENSE
+=head1 LICENSE
 
 You may distribute this code under the same terms as Perl itself.
 

@@ -84,16 +84,18 @@ sub update_index {
     return 1;
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>, L<Plucene>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Andy Grundman C<andy@hybridized.org>
 Marcus Ramberg <mramberg@cpan.org>
 
-=head1 License
+=head1 LICENSE
 
 This module is licensed under the same terms as Perl itself.
 

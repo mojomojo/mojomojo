@@ -5,13 +5,18 @@ use base 'Catalyst::Base';
 use utf8;
 use DateTime;
 
+#FIXME: Need better docs
+
 =head1 NAME
 
-MojoMojo::M::Core::PageVersion - 
+MojoMojo::M::Core::PageVersion - Represents page versions
 
 
 =head1 DESCRIPTION
 
+Represents page versions
+
+=over 4
 =cut
 
 __PACKAGE__->has_a(
@@ -54,11 +59,14 @@ sub formatted_diff {
     return MojoMojo::M::Core::Page::formatted_diff(@_);
 }
 
-=item AUTHORS
+
+=back
+
+=head1 AUTHORS
 
 David Naughton <naughton@umn.edu>
 
-=item LICENSE
+=head1 LICENSE
 
 You may distribute this code under the same terms as Perl itself.
 

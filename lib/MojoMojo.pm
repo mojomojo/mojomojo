@@ -92,8 +92,6 @@ At the end of any request, forward to view unless there is a template
 or response. then render the template. If param 'die' is passed, 
 show a debug screen.
 
-=back
-
 =cut
 
 sub end : Private {
@@ -121,6 +119,8 @@ sub auto : Private {
     return 1 if $c->req->action eq 'logout';
     $c->stash->{template}='user/validate.tt';
 }
+
+=back
 
 =head1 METHODS
 

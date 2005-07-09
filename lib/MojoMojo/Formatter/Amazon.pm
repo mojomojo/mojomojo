@@ -144,7 +144,7 @@ sub Music {
 
 =back
 
-=item SEE ALSO
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Net::Amazon>
 
@@ -152,7 +152,7 @@ L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Net::Amazon>
 
 Marcus Ramberg <mramberg@cpan.org
 
-=head1 License
+=head1 LICENSE
 
 This module is licensed under the same terms as Perl itself.
 

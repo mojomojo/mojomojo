@@ -102,6 +102,8 @@ sub export_html : Global {
         "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
 
+=back
+
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@thefeed.no>

@@ -107,15 +107,17 @@ sub do_link {
     $self->{base} . "$link$section";
 }
 
-=item SEE ALSO
+=back
+
+=head1 SEE ALSO
 
 L<MojoMojo>,L<Module::Pluggable::Ordered>,L<POD::Tree::HTML>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 
-=head1 License
+=head1 LICENSE
 
 This module is licensed under the same terms as Perl itself.
 

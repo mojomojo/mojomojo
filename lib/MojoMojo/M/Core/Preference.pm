@@ -11,15 +11,15 @@ MojoMojo::M::Core::Preference - Preference settings.
 
 This class represents preference settings for MojoMojo.
 
-=item SEE ALSO
+=head1 SEE ALSO
 
 L<MojoMojo>, L<MojoMojo::M::CDBI>
 
-=item AUTHORS
+=head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
 
-=head1 License
+=head1 LICENSE
 
 This module is licensed under the same terms as Perl itself.
 
