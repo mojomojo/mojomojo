@@ -69,9 +69,8 @@ tag cloud for pages.
 
 sub tags : Global {
     my ($self, $c, $tag ) = @_;
-    my @descendants=$c->stash->{page}->descendants;
     $c->stash->{tags}=[ 
-        MojoMojo::M::Core::Tag->pathtags($c->stash->{page}->id) 
+        MojoMojo::M::Core::Tag->by_page($c->stash->{page}) 
     ];
     my $cloud=HTML::TagCloud->new();
     foreach my $tag (@{$c->stash->{tags}}) {

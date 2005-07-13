@@ -41,6 +41,7 @@ sub _writer {
 		0
 	);
 }
+
 =item update_index <page>
 
 update the index for a given page.

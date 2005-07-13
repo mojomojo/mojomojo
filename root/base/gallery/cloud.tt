@@ -1,0 +1,9 @@
+[% PROCESS header.tt %]
+        <div id="header"><h1>photo tags</h1></div>
+[% PROCESS breadcrumbs.tt %]
+[% PROCESS navbar.tt %]
+<div id="content">
+[%cloud.html_and_css(50)%]
+</div>
+        <div id="bottomnav">&nbsp;
+[% PROCESS footer.tt %]

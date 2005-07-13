@@ -40,16 +40,36 @@ SELECT tag.tag as tag, count(tag) AS refcount
  ORDER BY tag.tag
 });
 
-=item path_tags <page_id>
+=item by_page <page_id>
 
 return all tags ordered by tag name within a given page tree. 
 include tag count.
 
 =cut
 
-sub pathtags {
+sub by_page {
     my ( $self,$page ) = @_;
     return ($self->search_path_tags($page));
+}
+
+__PACKAGE__->set_sql('photo_tags' => qq{
+SELECT tag.tag as tag, count(tag) AS refcount 
+ FROM __TABLE__ 
+ WHERE tag.photo IS NOT NULL
+ GROUP by tag
+ ORDER BY tag.tag
+});
+
+=item by_photo
+
+return all tags for photos ordered by tag name.
+include tag count.
+
+=cut
+
+sub by_photo {
+    my $self = shift;
+    return ($self->search_photo_tags);
 }
 
 
@@ -99,9 +119,10 @@ SELECT  id,tag,count(tag) as photocount from tag WHERE photo=? and person != ? G
 }
 );
 
-=normalize_column_values
+=item normalize_column_values
 
-overriden so tags can only contain \w+
+overridden so tags can only contain \w+
+
 =cut
 
 sub normalize_column_values {

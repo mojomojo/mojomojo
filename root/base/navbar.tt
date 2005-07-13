@@ -24,7 +24,11 @@
   [% END; IF c.req.action =='tags' %]
   <b class="navOn" title="All tags in this path">tags</b> | 
   [% ELSE %]
+  [% IF (pictures OR photo) %]
+  <a href="[%base%][%page.path%].gallery/tags" title="All tags on photos" accesskey="T">tags</a> | 
+  [% ELSE %]
   <a href="[%base%][%page.path%].tags" title="All tags in this path" accesskey="T">tags</a> | 
+  [%END%]
   [% END; IF c.req.action=='.users' %]
   <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]

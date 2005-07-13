@@ -332,6 +332,12 @@ sub tagged_descendants_by_date {
     return __PACKAGE__->set_paths( @pages );
 }
 
+=item set_path
+
+B<DEPRECEATED>. Use set_paths instead.
+
+=cut
+
 sub set_path {
      my $self = shift;
      return if (defined $self->path);

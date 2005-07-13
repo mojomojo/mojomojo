@@ -1,3 +1,22 @@
 [%PROCESS header.tt %]
-<h1>User profile not implemented yet.</h1>
+<div id="header"><h1>
+User profile for [% person.name %]
+</h1></div>
+[% PROCESS breadcrumbs.tt %]
+[% PROCESS navbar.tt %]
+<div id="content">
+<dl>
+<dt>Name:</dt>
+<dd>[%person.name || "Name missing"%]</dd>
+<dt>Email:</dt>
+<dd>
+[% IF user.admin %]
+[%person.email%]
+[% ELSE %]
+*private*
+[% END %]
+</dd>
+</dl>
+</div>
+        <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt %]

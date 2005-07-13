@@ -219,6 +219,21 @@ sub title : Local {
       $c->res->body('<em>updated ok</em>');
 }
 
+
+sub tags : Local {
+    my ($self, $c, $tag ) = @_;
+    $c->stash->{tags}=[ MojoMojo::M::Core::Tag->by_photo ];
+    my $cloud=HTML::TagCloud->new();
+    foreach my $tag (@{$c->stash->{tags}}) {
+        $cloud->add($tag->tag,
+                    $c->req->base.$c->stash->{path}.'.p_by_tag/'.
+                    $tag->tag.'/'.$tag->photo,
+                    $tag->refcount);
+    }
+    $c->stash->{cloud}=$cloud;
+    $c->stash->{template}='gallery/cloud.tt';
+}
+
 =back
 
 =head1 AUTHOR

@@ -56,4 +56,5 @@
     </div>
 [% END %]
 </div>
+        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
