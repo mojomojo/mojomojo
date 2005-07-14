@@ -98,7 +98,7 @@ sub password : Path('/prefs/password') {
         $c->stash->{message}='Passwords did not match.';
         return;
       }
-      unless ($c->stash->{user}->valid_pass($c->form->valid('pass'))) {
+      unless ($c->stash->{user}->valid_pass($c->form->valid('current'))) {
         $c->stash->{message}='Invalid password.';
         return;
       }
