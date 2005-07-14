@@ -5,4 +5,5 @@
 your email, [%user.name%]. (The email was sent to ([%user.email%]).</p>
 <p>If you are unable to validate, please <a href="[%base%]/.logout">log out</a>.</p>
 </div>
+        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
