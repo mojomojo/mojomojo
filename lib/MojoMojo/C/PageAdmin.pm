@@ -114,15 +114,18 @@ sub edit : Global {
             proto_pages => $proto_pages,
             creator     => $user,
         );
+        MojoMojo::M::Core::Page->set_paths(@$path_pages);
         $page = $path_pages->[ @$path_pages - 1 ];
     }
     $page->update_content( %$valid, %$unknown );
+
 
     # update the search index with the new content
     my $p = MojoMojo::Search::Plucene->open( $c->config->{home} . "/plucene" );
     $p->update_index( $page );
 
-    $c->res->redirect( $c->req->base . $page->path . '.highlight' );
+
+    $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );
 
 } # end sub edit
 
