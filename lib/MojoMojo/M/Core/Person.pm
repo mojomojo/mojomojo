@@ -27,8 +27,17 @@ Takes a username, returns a Person object.
 =cut
 
 sub get_user {
-    my ( $class, $user ) = @_;
-    return __PACKAGE__->search( login => $user )->next;
+    my ( $class, $login) = @_;
+    $login ||=$class;
+    my $user= __PACKAGE__->search( login => $login )->next;
+    return $user ;
+}
+
+sub user_free {
+    my ( $class, $login) = @_;
+    $login ||=$class;
+    my $user= __PACKAGE__->get_user( $login );
+    return ( $user ? 0 : 1 ) ;
 }
 
 =item is_admin
@@ -38,9 +47,9 @@ returns true if user is in admin list, false otherwise.
 =cut
 
 sub is_admin {  
-    my $self=shift;
+    my $self   =shift;
     my $admins = MojoMojo->pref('admins');
-    my $user=$self->login;
+    my $user   = $self->login;
     return 1 if $user && $admins =~m/\b$user\b/ ;
     return 0;
 }
@@ -69,7 +78,7 @@ sub registration_profile {
                     name       => 'Invalid format'},
          login =>[{ constraint => qr/^\w{3,10}$/,
                     name       => 'only letters, 3-10 chars'},
-                  { constraint => \&get_user,
+                  { constraint => \&user_free,
                     name       => 'Username taken'}],
          name  => { constraint => qr/^\S+\s+\S+/,
                     name       => 'Full name please'},
