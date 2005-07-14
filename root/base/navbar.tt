@@ -44,6 +44,11 @@
   [%ELSE%]
   <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
   [%END %]
+  [% IF page.name =='about' %]
+  <b class="navOn" title="About this site">about</b> | 
+  [%ELSE%]
+  <a href="[%base%]/about" title="About this site" accesskey="A">about</a> | 
+  [%END%]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 <br/>
 [%IF (c.req.action=="view")%]
