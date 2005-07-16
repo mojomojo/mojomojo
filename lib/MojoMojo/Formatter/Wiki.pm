@@ -133,10 +133,13 @@ sub format_link {
     else {
         $orig_word =~ s/.*\///;
     }
+    $word =~ s/\s/_/g;
     my $formatted = $link_text || $class->expand_wikiword($orig_word);
+
 
     # convert relative paths to absolute paths
     if($c->stash->{page} &&
+        # drop spaces
         ref $c->stash->{page} eq 'MojoMojo::M::Core::Page' &&
         $word !~ m|^/|) {
         $word = URI->new_abs( $word, $c->stash->{page}->path."/" );
@@ -159,7 +162,7 @@ sub format_link {
         $url .= $page->path;
         return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
     }
-    return qq{<span class="newWikiWord">$formatted<a href="$url.edit">?</a></span>};
+    return qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
 }
 
 =item expand_wikiword <word>
