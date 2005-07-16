@@ -86,6 +86,7 @@ context object.
 =cut
 
 sub format_content {
+    return 0;
     my ($self,$content,$c)=@_;
     $$content=$scrubber->scrub($$content); 
     return 1;
