@@ -197,7 +197,7 @@ sub insert : Private {
         $c->stash->{append} = '\n\n<div class="photo">"!'
             . $c->req->base 
             . "/.attachment/"
-            . $att. ".thumb!\":"
+            . $att. "/thumb!\":"
             . $c->req->base
             . "/.attachment/"
             . $att.'</div>';
