@@ -66,13 +66,12 @@ sub prefs : Global {
     $c->stash->{template}='user/prefs.tt';
     my @proto=@{$c->stash->{proto_pages}};
     $c->stash->{page_user}=MojoMojo::M::Core::Person->get_user(
-        $proto[0]->{name} || $c->stash->{page}->name 
+        $proto[0]->{name} || $c->stash->{page}->name_orig 
     );
     unless ($c->stash->{page_user} && (
         $c->stash->{page_user}->id eq $c->stash->{user}->id ||
         $c->stash->{user}->is_admin())) {
-      $c->stash->{message}='Cannot find that user '.
-      $c->stash->{user}->is_admin;
+      $c->stash->{message}='Cannot find that user.';
       $c->stash->{template}='message.tt';
     };
 }
@@ -197,7 +196,7 @@ Show user profile.
 sub profile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
-    my $user=MojoMojo::M::Core::Person->get_user($page->name);
+    my $user=MojoMojo::M::Core::Person->get_user($page->name_orig);
     if ( $user ) {
           $c->stash->{profile}=$user;
           $c->stash->{template}='user/profile.tt';
