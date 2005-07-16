@@ -1,8 +1,8 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
-        <title> [%
-              title || config.name || "A poorly configured MojoMojo Installation"
-            %]</title>
+        <title> [ [%
+              title || c.pref('name') || config.name || "A poorly configured MojoMojo Installation"
+            %] ] - Full Content for [% page.name_orig %] </title>
 <link rel="alternate" type="text/html" href="[% base %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline>Recent changes in [%page.path%]</tagline>

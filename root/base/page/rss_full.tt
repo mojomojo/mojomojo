@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-	<title>[% config.name || "MojoMojo" %]</title>
+	<title>[ [% c.pref('name') || config.name || "MojoMojo" %]
+  ] Content for [% page.name_orig %].</title>
 	<link>[%base%]</link>
 	<description>Recent changes in [%page.path%]</description>
 	<language>en-us</language>
