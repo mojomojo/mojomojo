@@ -176,8 +176,8 @@ sub inline_tags : Local {
     $photo=MojoMojo::M::Core::Photo->retrieve($photo) unless ref $photo;
     $c->stash->{photo}=$photo;
     $c->log->info('user is '.$c->req->{user_id});
-    if ($c->req->{user}) {
-    my @tags = $photo->others_tags( $c->req->{user_id});
+    if ($c->stash->{user}) {
+    my @tags = $photo->others_tags( $c->stash->{user});
     $c->stash->{others_tags} = [@tags];
     @tags                    = $photo->user_tags( $c->stash->{user} );
     $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
@@ -226,7 +226,7 @@ sub tags : Local {
     my $cloud=HTML::TagCloud->new();
     foreach my $tag (@{$c->stash->{tags}}) {
         $cloud->add($tag->tag,
-                    $c->req->base.$c->stash->{path}.'.p_by_tag/'.
+                    $c->req->base.$c->stash->{path}.'.by_tag/'.
                     $tag->tag.'/'.$tag->photo,
                     $tag->refcount);
     }
