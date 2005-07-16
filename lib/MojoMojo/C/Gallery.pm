@@ -226,7 +226,7 @@ sub tags : Local {
     my $cloud=HTML::TagCloud->new();
     foreach my $tag (@{$c->stash->{tags}}) {
         $cloud->add($tag->tag,
-                    $c->req->base.$c->stash->{path}.'.by_tag/'.
+                    $c->req->base.$c->stash->{path}.'.gallery/by_tag/'.
                     $tag->tag.'/'.$tag->photo,
                     $tag->refcount);
     }
