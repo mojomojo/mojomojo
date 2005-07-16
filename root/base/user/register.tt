@@ -3,9 +3,6 @@
 [%PROCESS breadcrumbs.tt%]
         <div id="content">
         <form id="loginForm" action="[%base%]/.do_register" method="POST">
-        [% FOREACH field IN c.form.invalid %]
-        <b>[% field %] is invalid ([%c.form.invalid(field).join(', ')%])</b><br/>
-        [% END %]
 <dl>
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
@@ -21,6 +18,9 @@
 </dl>
 </form>
 <p class="end"><span id="logintext">[%message%]</span><br/>
+        [% FOREACH field IN c.form.invalid %]
+        <b>[% field %] is invalid ([%c.form.invalid(field).join(', ')%])</b><br/>
+        [% END %]
 </p>
         </div>
         <div id="bottomnav">&nbsp;
