@@ -24,7 +24,8 @@ accept-charset="utf-8" id="editForm" action="[% base %][% page.path %].edit" met
  </h3>
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
 <div class="preview" id="content_preview">
-[% page.content.formatted(c) %]
+[% page.content.formatted(c) ||
+"<i>To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.</i>" %]
  </div>
  <p>
 <textarea id="body" name="body">[% 
@@ -55,6 +56,8 @@ $('body').value=$('body').value +'[%append%]';
   [% END %]
  </p>
 </form>
+<script language="JavaScript">
+Field.focus('body');
 </script>
 </div>        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
