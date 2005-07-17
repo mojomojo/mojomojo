@@ -1,11 +1,9 @@
 [% PROCESS header.tt %]
-        <div id="header"><h1>All Pages</h1></div>
+        <div id="header"><h1>All Pages in [%page.path%]</h1></div>
 
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
  <div id="content">
- <small> [% c.pref("title") || "MojoMojo" %] </small>
-  <br/>All Pages
 <div id="categories">
   <strong>tags</strong>: 
   [% FOREACH tag IN tags.list %]
