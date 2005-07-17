@@ -13,7 +13,7 @@
 [%ELSE%]
 <a class="tag" 
 [%END%]
-href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a> 
+href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
 [% IF others_tags && tags %]
@@ -24,7 +24,7 @@ href="[%base%][%page.path%].recent/[%tag.tag%]">[%tag.tag%]</a>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
 [% NEXT IF taglist.match(tagmatch) %]
-[% url = base _ page.path _ '.jsrpc/tag/' _ othertag.tag %]
+[% url = base _ '/.jsrpc/tag/' _ othertag.tag %]
 [% IF user.active %]
 [<b class="add">[%c.prototype.link_to_remote('+', { 
     update => 'tags', 
