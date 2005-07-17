@@ -31,8 +31,9 @@ accept-charset="utf-8" id="editForm" action="[% base %][% page.path %].edit" met
 <textarea id="body" name="body">[% 
 FILTER html %][% c.req.params.body %][%END
 %]</textarea>
+ [%# value.replace(/\+/&#043a;%]
  [% url= base _ page.path _ '.jsrpc/render' %]
- [%c.prototype.observe_field ( 'body', {
+ [%c.prototype.lazy_observe_field ( 'body', {
   url       => url,
   frequency => 1,
   with      => "'content='+value.replace(/&/g,'%26')", 
