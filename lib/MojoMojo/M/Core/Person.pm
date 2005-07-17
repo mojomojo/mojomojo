@@ -63,7 +63,7 @@ Link to user page/profile.
 sub link {
    my ($self) = @_;
    #FIXME: Link to profile here? 
-   return "/".($self->login || '/no_login');
+   return lc "/".($self->login || '/no_login');
 }
 
 =item registration_profile
