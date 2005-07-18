@@ -55,17 +55,19 @@ sub attachments : Global {
     if ( my $file = $c->req->params->{file} ) {
         my $upload=$c->request->upload('file');
         if ( $upload->type eq 'application/zip' ) {
-            my $zip=Archive::Zip->new();
-            if ( ! $zip->readFromFileHandle( $upload->fh ) == AZ_OK ) {
+            my $zip;
+            $zip=Archive::Zip->new($upload->tempname);
+            if ( ! $zip ) {
                 $c->stash->{template} = 'message.tt';
-                $c->stash->{message}  = "Can't open zipfile for writing.";
+                $c->stash->{message}  = "Can't open zipfile for reading.";
                 return;
             }
             foreach my $member ($zip->members) {
                 next if $member->isDirectory;
                 my $att = MojoMojo::M::Core::Attachment->
                    create_from_file( $page, $member->fileName,
-                   {$member->extractToFileNamed(shift)});
+                   sub {my $file=shift;
+                    $member->extractToFileNamed($file)});
                 if (! $att ) {
                     $c->stash->{template}='message.tt';
                     $c->stash->{message}= "Can't extract ".
@@ -78,7 +80,6 @@ sub attachments : Global {
           MojoMojo::M::Core::Attachment->create_from_file ( $page, $file, 
               sub { 
                   my $file=shift; 
-                  warn "writing $upload to $file"; 
                   $upload->link_to($file) || $upload->copy_to($file);
               } );
 
@@ -175,9 +176,9 @@ file system.
 =cut
 
 sub delete : Private {
-    my ( $self, $c, $att, $action ) = @_;
+    my ( $self, $c, $att ) = @_;
     return unless $c->forward('auth');
-    $c->stash->{att}->delete();
+    $att->delete();
     $c->forward('/attachment/attachments');
 }
 
