@@ -23,7 +23,7 @@
             rel="stylesheet" />
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%][%path%].atom" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%][%path%].rss" />
-    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/[%path%]rss_full" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/[%path%].rss_full" />
     <link rel="shortcut icon" href="[%base%]/.static/favicon.ico" />
 </head>
 
