@@ -100,7 +100,6 @@ sub tag : Local {
     ( $tagname )= $tagname =~ m/([\w\s]+)/;
     my $page = $c->stash->{page};
     foreach my $tag ( split m/\s/,$tagname ) {
-        warn "found $tag";
         if ( $tag && !
             MojoMojo::M::Core::Tag->search(
                 page   => $page,

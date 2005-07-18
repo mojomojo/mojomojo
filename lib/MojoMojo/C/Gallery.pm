@@ -124,18 +124,20 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Local {
     my ( $self, $c,$photo, $tagname ) = @_;
-    ( $tagname ) = $tagname =~ m/(\w+)/;
-    unless ( ! $tagname ||
-        MojoMojo::M::Core::Tag->search(
-            photo   => $photo,
-            person => $c->stash->{user},
-            tag    => $tagname
-        )->next() ) {
-        MojoMojo::M::Core::Tag->create({
+    ( $tagname )= $tagname =~ m/([\w\s]+)/;
+    foreach my $tag ( split m/\s/,$tagname ) {
+        if (  $tag && !
+            MojoMojo::M::Core::Tag->search(
+                photo   => $photo,
+                person => $c->stash->{user},
+                tag    => $tag
+            )->next() ) {
+            MojoMojo::M::Core::Tag->create({
                 photo  => $photo,
-                tag    => $tagname,
+                tag    => $tag,
                 person => $c->stash->{user}
-        }) if $photo;
+            }) if $photo;
+        }
     }
     $c->stash->{photo}=$photo;
     $c->forward( 'inline_tags', [ $tagname ] );
