@@ -17,7 +17,7 @@ my $build = Catalyst::Build->new(
      # prior to Catalyst revision 556 are known to
      # break MojoMojo.
 
-     'Catalyst' => '5.24',
+     'Catalyst' => '5.30',
 
      'Catalyst::Model::CDBI' => '0.08',
      'Catalyst::Plugin::Authentication::CDBI' => '0.08',
@@ -64,6 +64,7 @@ my $build = Catalyst::Build->new(
      'URI' => '1.35',
      'XML::Clean' => 0,
      'YAML' => '0.36',
+     'Net::Amazon' => 0
      },
 
     create_makefile_pl => 'passthrough',
