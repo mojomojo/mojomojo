@@ -32,7 +32,7 @@ context object.
 sub format_content {
     my ($self,$content,$c)=@_;
     eval {
-    $$content =~ s{\<p\>\=comments\s*}
+    $$content =~ s{\<p\>\=comments\s*\<\/p\>}
                   {show_comments($c)}me;
     };
 }
