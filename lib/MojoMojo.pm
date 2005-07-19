@@ -5,11 +5,11 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
                 Singleton Unicode::Encoding Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
+use MojoMojo::Formatter::Wiki;
 
 use YAML ();
 use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], except => qr/^MojoMojo::Plugin::/, require => 1;
