@@ -98,6 +98,9 @@ sub end : Private {
     my ( $self, $c ) = @_;
     return 1 if $c->response->status =~ /^3\d\d$/;
     return 1 if $c->response->body;
+    if ($c->stash->{page}) {
+      $c->res->header('Last-Modified',$c->stash->{page}->content->pub_date);
+    }
     unless ( $c->response->content_type ) {
        $c->response->content_type('text/html; charset=utf-8');
     }
