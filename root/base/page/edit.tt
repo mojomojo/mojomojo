@@ -12,11 +12,6 @@
  </div>
  [% END %]
 <div id="content">
-<form  enctype="multipart/form-data"
-accept-charset="utf-8" id="editForm" action="[% base %][% page.path %].edit" method="post" onSubmit="cleanAuthorName([%c.pref('anonymous_user')%]);"> [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
- <input type="hidden" name="[% column %]" value="[% page.$column %]" />
- [% END %]
-
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
  <h3 class="navigation" id="previewHeading">
  Preview | 
@@ -28,6 +23,12 @@ accept-charset="utf-8" id="editForm" action="[% base %][% page.path %].edit" met
 "<i>To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.</i>" %]
  </div>
  <p>
+<form  accept-charset="UTF-8"
+id="editForm" action="[% base %][% page.path %].edit" method="post"> 
+[% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
+ <input type="hidden" name="[% column %]" value="[% page.$column %]" />
+ [% END %]
+
 <textarea id="body" name="body">[% 
 FILTER html %][% c.req.params.body %][%END
 %]</textarea>
@@ -44,8 +45,12 @@ FILTER html %][% c.req.params.body %][%END
 
 <script type="text/javascript" language="JavaScript">
 $('body').value=$('body').value +'[%append%]';
+Field.focus('body');
+[%IF c.pref('anonymous_user') %]
+document.registerAction('Submit','editForm',function() { return cleanAuthorName([%c.pref('anonymous_user')%])});
+[%END%]
 </script>
- <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
+ <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif"/>&nbsp;</div>
   <input type="submit" value="[% IF content.version > 1; "Save"; ELSE; "Create"; END %]"/> as 
   [% IF user.id %]
   [% c.wikiword(user.link,base) %] 
@@ -57,8 +62,5 @@ $('body').value=$('body').value +'[%append%]';
   [% END %]
  </p>
 </form>
-<script language="JavaScript">
-Field.focus('body');
-</script>
 </div>        <div id="bottomnav">&nbsp;
 [% PROCESS footer.tt %]
