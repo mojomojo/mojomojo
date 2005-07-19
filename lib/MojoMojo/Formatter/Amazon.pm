@@ -44,7 +44,7 @@ sub format_content {
       if ($line =~ m{^\=http\S+amazon\S+/(?:-|ASIN)/([^/]+)/(?:.+\s+(\w+))?}) { 
           my $item=$self->get($1);
           unless (ref($item)) {
-              $$content.=$item."\n";
+              $$content.=$line."\n";
               next;
           }
           if ($2) {
@@ -87,7 +87,7 @@ renders a small version of the formatter.
 sub small {
   my ($self,$property)=@_;
   return "!".$property->ImageUrlMedium.
-  '!:http://www.amazon.com/exec/obidos/ASIN/'.$id."/feed-20\n";
+  '!:http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n";
 }
 
 =item blurb <property>
@@ -102,10 +102,10 @@ sub blurb {
   my $method=ref $property; 
   $method =~ s/.*:://;
   return "<div class=\"amazon\">!<".$property->ImageUrlSmall.
-  '!:http://www.amazon.com/exec/obidos/ASIN/'.$id."/feed-20\n\n".
+  '!:http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
   "h1. ".$property->ProductName."\n\n".
   '"buy at amazon for '.$property->OurPrice.'":'.
-  'http://www.amazon.com/exec/obidos/ASIN/'.$id."/feed-20\n\n".
+  'http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
   ($method && $self->can($method) && $self->$method($property));
 }
 
