@@ -16,12 +16,14 @@
   [% END %]
   [% END %]</small>
 </div>
+<br/>
 <b>[% now %]</b>
-<ul>
+[% first=1 %]
 [% FOREACH page IN pages %]
 [% IF now != page.content.created.ymd; %]
+  [%IF first;first=0;ELSE%]</ul>[%END%]
   [% SET now = page.content.created.ymd; %]
-  </ul><b>[% now %]</b><ul>
+  <b>[% now %]</b><ul>
 [% END %]
  <li>
     <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>

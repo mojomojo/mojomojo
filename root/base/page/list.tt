@@ -32,30 +32,36 @@
       <br/><small style="font-size: 12px"><i>Other pages that link to this page.</i></small>
   </h2>
 
+[%IF backlinks.size%]
   <ul style="margin-bottom: 10px">
 [% FOR backlink = backlinks.list %]
     <li>[%c.wikiword(backlink.from_page.path,base)%]</li>
 [% END %]
   </ul>
+[%END%]
 
   <h2> Wanted Pages
       <br/><small style="font-size: 12px"><i>Links to non-existent pages.</i></small>
   </h2>
 
+[%IF wanted.size%]
   <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
     <li>[%c.wikiword(wanted.to_path,base)%] wanted by [%c.wikiword(wanted.from_page.path,base)%]</li>
 [% END %]
   </ul>
+[%END%]
 	    
   <h2> Orphaned Pages
      <br/><small style="font-size: 12px"><i>Pages to which no other pages link.</i></small>
   </h2>
+  [%IF orphans.size%]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
     <li><a href="[% base %][% orphan.path %]">[%c.expand_wikiword(orphan.path,base)%]</a></li>
 [% END %]
     </ul>
+  [%END%]
 </div>
 <p class="end">&nbsp;</p>
 </div>

@@ -18,7 +18,7 @@
 [%  c.subreq('/inline_tags', 'page'=>page ) %]
 </div>
 [% END %]
-<div id="bottomnav"><span id="bottomtext">
+<div id="bottomnav">
 [% IF (!rev OR rev==page.content_version) %]
 [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
  <a title="Change page content" href="[% base _ page.path %].edit" accesskey="E">Edit Page</a>

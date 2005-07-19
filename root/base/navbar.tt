@@ -1,4 +1,4 @@
-<div id="toplinks"><form action="[% base %][% page.path;%].search"/method="get" >  
+<div id="toplinks"><form action="[% base %][% page.path;%].search" method="get" >  
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR
                                          template.name.search('^user')))%]
@@ -58,7 +58,7 @@
 [%END%]
 [%IF (page.has_photos) %]
 [%IF (pictures )%]
-<b "Myclass="navOn">gallery</b> | 
+<b class="navOn">gallery</b> | 
 [%ELSE%]
 <a title="Photo Album" href="[%base%][%page.path%].gallery">gallery</a> | 
 [%END%]
