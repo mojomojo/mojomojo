@@ -34,7 +34,7 @@ sub format_content {
     my ($self,$content,$c)=@_;
     my $emoticon = Text::Emoticon::MSN->new(
       imgbase => $c->req->base.'/.static/emote',
-      strict => 1);
+      xhtml => 1, strict => 1);
     # Let textile handle the rest
     $$content= $emoticon->filter( $$content );
 }
