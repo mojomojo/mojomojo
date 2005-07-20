@@ -28,7 +28,8 @@ id="editForm" action="[% base %][% page.path %].edit" method="post">
 [% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
-
+[%PROCESS toolbar.tt%]
+ <br/>
 <textarea id="body" name="body">[% 
 FILTER html %][% c.req.params.body %][%END
 %]</textarea>
@@ -37,11 +38,12 @@ FILTER html %][% c.req.params.body %][%END
  [%c.prototype.lazy_observe_field ( 'body', {
   url       => url,
   frequency => 1,
-  with      => "'content='+value.replace(/&/g,'%26')", 
+  with      => "'content='+encodeAjax(value)", 
   update    => 'content_preview'
   loading   => "Element.show('editspinner')",
   complete  => "Element.hide('editspinner')",
   })%]
+<!--with      => "'content='+value.replace(/&/g,'%26')", -->
 
 <script type="text/javascript" language="JavaScript">
 $('body').value=$('body').value +'[%append%]';
