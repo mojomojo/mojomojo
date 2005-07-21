@@ -26,4 +26,4 @@
  src="[%base%]/.static/toolbar/hyperlink.png" title="External Link"/>
  <input type="image" style="border:none" onclick="insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');return false;"
  src="[%base%]/.static/toolbar/drawing.png" title="Picture"/>
- <em>&nbsp;Mark some text to apply the toolbar actions to that text</em>
+ <small>&nbsp;Mark some text to apply the toolbar actions to that text</small>
