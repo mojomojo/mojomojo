@@ -104,6 +104,11 @@ sub default : Private {
     my ( $self, $c, $called, $att, $action ) = @_;
 
     $att=MojoMojo::M::Core::Attachment->retrieve($att);
+    unless ($att) {
+        $c->stash->{template}='message.tt';
+        $c->stash->{message}= "Attachment not found.";
+        return ( $c->res->code(404) );
+    }
     if ($action) {
         $c->forward("$action", [$att,@_] );
     }
