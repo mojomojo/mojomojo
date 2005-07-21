@@ -1,7 +1,7 @@
 [% url = base _ page.path _ '.comment/login/' _ c.req.path %]
 [%c.prototype.form_remote_tag ({
 url => url,
-update => 'postForm'
+update => 'hidden_info'
 })%]
 <small>You have to log in to post a comment.
 (<a href="[%base%]/.register">register</a>)</small>
