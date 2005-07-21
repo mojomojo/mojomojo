@@ -8,7 +8,7 @@
 	<description>Recent changes in [%page.path%]</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
-[%FOREACH page in pages %]
+[%FOREACH page IN pages %]
     <item>
       <title>[% c.expand_wikiword( page.name_orig ) %]
 [%IF page.isa('MojoMojo::M::CDBI::PageRevision')%] Revision from [% page.content.created.datetime %][% END %]
