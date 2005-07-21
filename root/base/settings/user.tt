@@ -14,10 +14,10 @@
 [%activeurl=base _ "/.admin/user/" _ user.id _ "/active"%]
 [%active=user.active || 0%]
 <td><span id="active[%user.id%]">[%c.prototype.link_to_remote(active ,{url=>activeurl,update=>"active$user"})%]</a></span></td>
-<td>[%user.login%]</td>
+<td><a href="[%base%][%user.link%].profile">[%user.login%]</a></td>
 <td>&nbsp;</td>
 <td>[%user.name%]</td>
-<td>[%user.email%]</td>
+<td><a href="mailto:[%user.email%]">[%user.email||"no email address"%]</a></td>
 </tr>
 [%END%]
  </table
