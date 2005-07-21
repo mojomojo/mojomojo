@@ -48,8 +48,8 @@ FILTER html %][% c.req.params.body %][%END
 <script type="text/javascript" language="JavaScript">
 $('body').value=$('body').value +'[%append%]';
 Field.focus('body');
-[%IF c.pref('anonymous_user') %]
-document.registerAction('Submit','editForm',function() { return cleanAuthorName([%c.pref('anonymous_user')%])});
+[%UNLESS user %]
+document.registerAction('Submit','editForm',function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
 [%END%]
 </script>
  <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif"/>&nbsp;</div>
