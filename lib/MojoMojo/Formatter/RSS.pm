@@ -43,7 +43,7 @@ sub format_content {
     undef $$content;
     my $result;
     foreach my $line (@lines) {
-        if ($line =~ m/^=(feed.+)(\s+\d+)?\s*$/) { 
+        if ($line =~ m/^=(feed\:\/\/\S+)\s*(\d+)?\s*$/) { 
             $$content.=MojoMojo::Formatter::RSS->include_rss($c,$1,$2);
         } else {
             $$content .=$line."\n";	
