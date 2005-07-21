@@ -45,8 +45,10 @@ Redispatches a subrequest to L<MojoMojo::C::Comment>.
 
 sub show_comments {
     $c=shift;
+    my $view=($c->req->action eq 'view' ?  1 : 0 );
     return '<div id="comments">'.
-           $c->subreq("/comment",{page=>$c->stash->{page}}).
+           $c->subreq("/comment",{page=>$c->stash->{page},
+                                  add_link => $view }).
            '</div>';
 }
 
