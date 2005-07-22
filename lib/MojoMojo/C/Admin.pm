@@ -41,7 +41,7 @@ Show settings screen.
 sub default : Private {
     my ( $self, $c ) = @_;
     my $admins =  $c->pref('admins');
-    my $user   =  $c->stash->{user};
+    my $user   =  $c->stash->{user}->login;
     $admins    =~ s/\b$user\b//g;
     $c->stash->{template}       = 'settings.tt';
     $c->stash->{admins}         = $admins;
