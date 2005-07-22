@@ -5,7 +5,7 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/-Debug FormValidator Session::FastMmap Static
+use Catalyst qw/FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
                 Singleton Unicode::Encoding Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
@@ -96,16 +96,17 @@ show a debug screen.
 
 sub end : Private {
     my ( $self, $c ) = @_;
-    return 1 if $c->response->status =~ /^3\d\d$/;
-    return 1 if $c->response->body;
-    if ($c->stash->{page}) {
-        if ($c->req->action() eq 'edit') {
+# FIXME: need proper caching code. disable cache for now.
+#    return 1 if $c->response->status =~ /^3\d\d$/;
+#    return 1 if $c->response->body;
+#    if ($c->stash->{page}) {
+#        if ($c->req->action() eq 'edit') {
             $c->res->header('Cache-Control','no-cache');
-        } else {
-            $c->res->header('Last-Modified',
-                $c->stash->{page}->content->pub_date);
-        }
-    }
+#        } else {
+#            $c->res->header('Last-Modified',
+#                $c->stash->{page}->content->pub_date);
+#        }
+#    }
     unless ( $c->response->content_type ) {
        $c->response->content_type('text/html; charset=utf-8');
     }
