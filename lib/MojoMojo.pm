@@ -96,12 +96,14 @@ show a debug screen.
 
 sub end : Private {
     my ( $self, $c ) = @_;
+    return 1 if $c->response->status =~ /^3\d\d$/;
+    return 1 if $c->response->body;
 # FIXME: need proper caching code. disable cache for now.
-#    return 1 if $c->response->status =~ /^3\d\d$/;
-#    return 1 if $c->response->body;
 #    if ($c->stash->{page}) {
 #        if ($c->req->action() eq 'edit') {
-            $c->res->header('Cache-Control','no-cache');
+        if ($c->req->action ne 'static') {
+                $c->res->header('Cache-Control','no-cache');
+        }
 #        } else {
 #            $c->res->header('Last-Modified',
 #                $c->stash->{page}->content->pub_date);
