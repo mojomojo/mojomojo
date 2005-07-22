@@ -299,6 +299,19 @@ sub base_uri {
   return URI->new($c->req->base);
 }
 
+
+=item unicode 
+
+format for unicode template use.
+
+=cut
+
+sub unicode {
+    my ($c,$string)=@_;
+    utf8::decode($string);
+    return $string;
+}
+
 =back
 
 =head1 AUTHORS

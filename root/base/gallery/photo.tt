@@ -22,8 +22,8 @@
     loading=>"\$('phototitle').value=\$('titlebox').value;\$('titlebox').blur",
     complete=>"Fat.fade('.message')"
 })%] 
-<input type="hidden" id="phototitle" value="[%photo.title%]">
-<input class="dual" id="titlebox" value="[%photo.title%]" type="text" 
+<input type="hidden" id="phototitle" value="[%c.unicode(photo.title)%]">
+<input class="dual" id="titlebox" value="[%c.unicode(photo.title)%]" type="text" 
        name="title" width="80" autocomplete="off"
        onFocus="javascript:$('titlebutton').style.display='inline';$('message').innerHTML='<em>Click here to abort.</em>';"
        onBlur="javascript:window.setTimeout(function() {$('titlebox').value=$('phototitle').value;$('titlebutton').style.display='none';},1000); $('message').innerHTML=''; "/>
@@ -32,7 +32,7 @@
 </form>
 </div>
 [%ELSE%]   
-<div id="title" class="showdiv"><big><span id="titletext">[%photo.title%]</span></big></div>
+<div id="title" class="showdiv"><big><span id="titletext">[%c.unicode(photo.title)%]</span></big></div>
 [%END%]
 <div class="navigation">
 [% IF prev %]
@@ -59,12 +59,12 @@
     loading=>"\$('photodesc').value=\$('descbox').value;",
     complete=>"Fat.fade('#descmessage')"
 })%] 
-<input type="hidden" id="photodesc" value="[%photo.description%]">
-<textarea class="dual" id="descbox" value="[%photo.description%]" 
+<input type="hidden" id="photodesc" value="[%c.unicode(photo.description)%]">
+<textarea class="dual" id="descbox" value="[%c.unicode(photo.description)%]" 
        name="description" width="80" autocomplete="off"
        onFocus="javascript:$('descbutton').style.display='inline';$('descmessage').innerHTML='<em>Click here to abort.</em>';this.select();"
        onBlur="javascript:window.setTimeout(function() {$('descbox').value=$('photodesc').value;$('descbutton').style.display='none';},500); $('descmessage').innerHTML=''; ">
-[%photo.description || "Click here to write a description"%]
+[%c.unicode(photo.description) || "Click here to write a description"%]
 </textarea>
 <input class="dualbutton" id="descbutton" type="submit" name="add" value="save"/> 
 <span id="descmessage"><em>Click the text to edit it.</em></span>
