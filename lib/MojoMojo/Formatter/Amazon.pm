@@ -106,7 +106,8 @@ sub blurb {
   "h1. ".$property->ProductName."\n\n".
   '"buy at amazon for '.$property->OurPrice.'":'.
   'http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
-  ($method && $self->can($method) && $self->$method($property));
+  ($method && ($self->can($method) ? $self->$method($property) :"<br/>\n\n")).
+  "</div>";
 }
 
 =item DVD <property>
@@ -117,7 +118,7 @@ Product information suitable for DVD movies.
 
 sub DVD {
   my ($self,$property) = @_;
-  return "-- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n</div>";
+  return "-- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n";
 }
 
 =item Book <property>
@@ -128,7 +129,7 @@ Product information suitable for books.
 
 sub Book {
   my ($self,$property) = @_;
-  return " -- ??".join(',',$property->authors).'?? ('.$property->year .")\n\n</div>";
+  return " -- ??".join(',',$property->authors).'?? ('.$property->year .")\n\n";
 }
 
 =item Music <property>
@@ -139,7 +140,7 @@ Product information suitable for music cds.
 
 sub Music {
   my ($self,$property) = @_;
-  return " -- ??".join(',',$property->artists).'?? ('.$property->year .")\n\n</div>";
+  return " -- ??".join(',',$property->artists).'?? ('.$property->year .")\n\n";
 }
 
 =back
