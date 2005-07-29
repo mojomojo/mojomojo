@@ -33,7 +33,7 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
 
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
@@ -58,7 +58,7 @@ takes some POD documentation, and a base url, and renders it as HTML.
 =cut
 
 sub to_pod {
-    my ($self,$pod,$base)=@_;
+    my ($class,$pod,$base)=@_;
     require Pod::Simple::HTML;
     my $result;
     my $parser = MojoMojo::Formatter::Pod::Simple::HTML->new($base);

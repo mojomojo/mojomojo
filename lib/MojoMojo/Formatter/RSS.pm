@@ -38,13 +38,13 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
     my @lines=split /\n/,$$content;
     undef $$content;
     my $result;
     foreach my $line (@lines) {
         if ($line =~ m/^=(feed\:\/\/\S+)\s*(\d+)?\s*$/) { 
-            $$content.=MojoMojo::Formatter::RSS->include_rss($c,$1,$2);
+            $$content.=$class->include_rss($c,$1,$2);
         } else {
             $$content .=$line."\n";	
         }
@@ -58,7 +58,7 @@ returns html formatted content for inclusion.
 =cut
 
 sub include_rss {
-    my ($self,$c,$url,$entries)=@_;
+    my ($class,$c,$url,$entries)=@_;
     $entries ||= 1;
     $url =~ s/^feed/http/;
     my $result=URI::Fetch->fetch($url,Cache=>$c->cache)->content;

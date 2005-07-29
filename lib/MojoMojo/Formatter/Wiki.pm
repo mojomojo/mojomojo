@@ -86,7 +86,7 @@ context object.
 =cut
 
 sub format_content {
-    my ($class, $content, $c) = @_;
+    my ($class, $content, $c, $self) = @_;
     # Extract wikiwords, avoiding escaped and part of urls
     $$content =~ s{
         $non_wikiword_check

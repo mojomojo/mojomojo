@@ -34,7 +34,7 @@ context object.
 
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
     # Let textile handle the rest
     $$content= $textile->process( $$content );
     $$content= Text::SmartyPants->process( $$content );

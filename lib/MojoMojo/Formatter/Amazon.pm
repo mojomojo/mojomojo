@@ -37,21 +37,21 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
       if ($line =~ m{^\=http\S+amazon\S+/(?:-|ASIN)/([^/]+)/(?:.+\s+(\w+))?}) { 
-          my $item=$self->get($1);
+          my $item=$class->get($1);
           unless (ref($item)) {
               $$content.=$line."\n";
               next;
           }
           if ($2) {
-            next unless $self->can($2);
-            $$content.=$self->$2($item);
+            next unless $class->can($2);
+            $$content.=$class->$2($item);
           } else {
-            $$content.=$self->blurb($item);
+            $$content.=$class->blurb($item);
           }
       } else {
         $$content .=$line."\n";
@@ -68,7 +68,7 @@ based on the supplied ASIN number
 =cut
 
 sub get {
-  my ($self,$id)=@_;
+  my ($class,$id)=@_;
   #FIXME: devel token should be set in formatter config.
   my $amazon=Net::Amazon->new(token=>'D13HRR2OQKD1Y5');
   my $response=$amazon->search(asin=>$id);
@@ -85,7 +85,7 @@ renders a small version of the formatter.
 =cut
 
 sub small {
-  my ($self,$property)=@_;
+  my ($class,$property)=@_;
   return "!".$property->ImageUrlMedium.
   '!:http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n";
 }
@@ -98,7 +98,7 @@ such.
 =cut
 
 sub blurb {
-  my ($self,$property)=@_;
+  my ($class,$property)=@_;
   my $method=ref $property; 
   $method =~ s/.*:://;
   return "<div class=\"amazon\">!<".$property->ImageUrlSmall.
@@ -106,7 +106,7 @@ sub blurb {
   "h1. ".$property->ProductName."\n\n".
   '"buy at amazon for '.$property->OurPrice.'":'.
   'http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
-  ($method && ($self->can($method) ? $self->$method($property) :"<br/>\n\n")).
+  ($method && ($class->can($method) ? $self->$method($property) :"<br/>\n\n")).
   "</div>";
 }
 
@@ -117,7 +117,7 @@ Product information suitable for DVD movies.
 =cut
 
 sub DVD {
-  my ($self,$property) = @_;
+  my ($class,$property) = @_;
   return "-- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n";
 }
 
@@ -128,7 +128,7 @@ Product information suitable for books.
 =cut
 
 sub Book {
-  my ($self,$property) = @_;
+  my ($class,$property) = @_;
   return " -- ??".join(',',$property->authors).'?? ('.$property->year .")\n\n";
 }
 
@@ -139,7 +139,7 @@ Product information suitable for music cds.
 =cut
 
 sub Music {
-  my ($self,$property) = @_;
+  my ($class,$property) = @_;
   return " -- ??".join(',',$property->artists).'?? ('.$property->year .")\n\n";
 }
 

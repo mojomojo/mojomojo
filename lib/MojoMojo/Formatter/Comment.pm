@@ -30,10 +30,10 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c,$self) = @_;
     eval {
     $$content =~ s{\<p\>\=comments\s*\<\/p\>}
-                  {show_comments($c)}me;
+                  {show_comments($c,$self->page)}me;
     };
 }
 
@@ -44,10 +44,10 @@ Redispatches a subrequest to L<MojoMojo::C::Comment>.
 =cut
 
 sub show_comments {
-    $c=shift;
-    my $view=($c->req->action eq 'view' ?  1 : 0 );
+    my ( $c, $page ) = @_;
+    my $view=( $c->req->action eq 'view' ?  1 : 0 );
     return '<div id="comments">'.
-           $c->subreq("/comment",{page=>$c->stash->{page},
+           $c->subreq("/comment",{page=>$page,
                                   add_link => $view }).
            '</div>';
 }

@@ -31,7 +31,7 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
     my $emoticon = Text::Emoticon::MSN->new(
       imgbase => $c->req->base.'/.static/emote',
       xhtml => 1, strict => 1);

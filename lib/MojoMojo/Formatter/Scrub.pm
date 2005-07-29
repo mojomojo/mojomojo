@@ -87,7 +87,7 @@ context object.
 
 sub format_content {
     return 0;
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
     $$content=$scrubber->scrub($$content); 
     return 1;
     #FIXME: XML::Clean doubles the first word in previews

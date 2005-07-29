@@ -32,13 +32,13 @@ context object.
 =cut
 
 sub format_content {
-    my ($self,$content,$c)=@_;
+    my ($class,$content,$c)=@_;
 
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
         if ($line =~ m/^=(http\:\/\/\S+)$/) { 
-            $$content.=MojoMojo::Formatter::Include->include($c,$1);
+            $$content.=$class->include($c,$1);
         } else {
             $$content .=$line."\n";	
         }
@@ -53,7 +53,7 @@ $c->cache
 =cut
 
 sub include {
-    my ($self,$c,$url)=@_;
+    my ($class,$c,$url)=@_;
     my $res=URI::Fetch->fetch($url,Cache=>$c->cache);
     return $res->content if defined $res;
     return "Could not retrieve $url .\n";
