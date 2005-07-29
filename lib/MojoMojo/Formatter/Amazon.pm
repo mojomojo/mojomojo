@@ -106,7 +106,7 @@ sub blurb {
   "h1. ".$property->ProductName."\n\n".
   '"buy at amazon for '.$property->OurPrice.'":'.
   'http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
-  ($method && ($class->can($method) ? $self->$method($property) :"<br/>\n\n")).
+  ($method && ($class->can($method) ? $class->$method($property) :"<br/>\n\n")).
   "</div>";
 }
 
