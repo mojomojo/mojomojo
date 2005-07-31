@@ -1,17 +1,15 @@
 #!/usr/bin/perl -w
 
+BEGIN { 
+    $ENV{CATALYST_ENGINE} ||= 'HTTP';
+    $ENV{CATALYST_SCRIPT_GEN} = 4;
+}  
+
 use strict;
 use Getopt::Long;
 use Pod::Usage;
 use FindBin;
-use Path::Class;
-
-BEGIN { 
-    $ENV{CATALYST_ENGINE} ||= 'HTTP';
-    $ENV{CATALYST_SCRIPT_GEN} = 4;
-    use lib dir($FindBin::Bin)->parent->subdir('lib')->stringify;
-}  
-
+use lib "$FindBin::Bin/../lib";
 use MojoMojo;
 
 my $help = 0;
@@ -27,11 +25,11 @@ MojoMojo->run($port);
 
 =head1 NAME
 
-server - Catalyst Testserver
+mojomojo_server.pl - Catalyst Testserver
 
 =head1 SYNOPSIS
 
-server.pl [options]
+mojomojo_server.pl [options]
 
  Options:
    -? -help    display this help and exits
@@ -53,8 +51,7 @@ Sebastian Riedel, C<sri@oook.de>
 
 Copyright 2004 Sebastian Riedel. All rights reserved.
 
-This library is free software. You can redistribute it and/or modify 
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
-
