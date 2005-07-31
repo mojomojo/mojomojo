@@ -29,12 +29,10 @@
   [% ELSE %]
   <a href="[%base%][%page.path%].tags" title="All tags in this path" accesskey="T">tags</a> | 
   [%END%]
-  [% END; IF c.req.action=='.users' %]
+  [% END; IF c.req.action=='users' %]
   <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]
-  [%#
-  <a href="<%base%>.users" title="Who wrote what" accesskey="">authors</a> | 
-  %]
+  <a href="[%base%][%path%].users" title="Who wrote what" accesskey="">authors</a> | 
   [% END; IF template.name=='feeds.tt' %]
   <b class="navOn" title="Subscribe to changes by RSS">feeds</b> | 
   [%ELSE%]
