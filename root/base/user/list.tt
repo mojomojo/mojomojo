@@ -1,17 +1,22 @@
 [% PROCESS header.tt %]
-<h1 id="pageName">
+<div id="header"><h1>
   <small> [% title || config.application_name || "MojoMojo" %] </small>
-  <br/>Authors
+  Authors
 </h1>
+</div>
 [% PROCESS navbar.tt %]
+ <div id="content">
+[% PROCESS pager.tt %]
 <ul>
 [% WHILE (user=users.next) %]
 <li>[%c.wikiword(user.link,base)%]<br/>
 Last Changed 
 [% FOR changed = user.pages %]
-[%c.wikiword(changed.path,base)%]
+[%c.wikiword(Changed.path,base)%]
 [%END%]
 </li>
 [%END %]
 </ul>
+</div>
+<div class="content">
 [% PROCESS footer.tt %]

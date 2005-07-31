@@ -49,10 +49,16 @@ Show a list of the active users with a link to their page.
 
 =cut
 
-sub users : Global { 
-  my ( $self, $c ) = @_;
-  $c->stash->{users}=MojoMojo::M::Core::Person->retrieve_all();
-  $c->stash->{template} = 'user/list.tt'
+sub users : Global {
+   my ($elf,$c,$tag)  = @_;   
+   my ($p,$res) = MojoMojo::M::Core::Person->pager(
+      { active=>1 } , { 
+      page     => $c->req->param('page')||1,
+      rows     => 20,
+      order_by => 'login' } );
+   $c->stash->{users}=$res;
+   $c->stash->{pager}=$p;
+   $c->stash->{template}='user/list.tt';  
 }
 
 =item prefs
@@ -205,6 +211,8 @@ sub profile : Global {
         $c->stash->{message}='User not found!';
     }
 }
+
+
 
 =back
 
