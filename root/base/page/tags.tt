@@ -1,9 +1,8 @@
-
 [% IF tags %]
 <b>my tags : </b>
 [% FOREACH tag IN tags %]
 [% url = $base _ page.path _ '.jsrpc/untag/' _ tag.tag %]
-[<b class="remove">[%c.prototype.link_to_remote('&times;', { 
+[<b class="remove">[%c.prototype.link_to_remote('x', {
     update => 'tags', 
     url=>url 
    complete=>"Fat.fade('.highlight');",
