@@ -35,15 +35,16 @@
 <div id="title" class="showdiv"><big><span id="titletext">[%c.unicode(photo.title)%]</span></big></div>
 [%END%]
 <div class="navigation">
+<a name="nav">
 [% IF prev %]
-<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%prev%]">&lt;</a>
+<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%prev%]#nav">&lt;</a>
 [%END%]
 <a href="#" onClick="toggleInfo();">(i)</a>
 <div id="hidden_info" class="framedpopup">
 [%PROCESS gallery/photo_info.tt%]
 </div>
 [% IF next%]
-<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%next%]">&gt;</a>
+<a href="[%base%][%page.path%].p[%IF tag%]_by_tag/[%tag%][%END%]/[%next%]#nav">&gt;</a>
 [%END%]
 </div>
 <div class="photo">
