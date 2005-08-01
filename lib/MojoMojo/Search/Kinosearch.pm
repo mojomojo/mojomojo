@@ -1,7 +1,7 @@
 package MojoMojo::Search::Plucene;
 
 use strict;
-use base qw/Catalyst::Base Plucene::Simple/;
+use base 'Plucene::Simple';
 use Plucene::Plugin::Analyzer::SnowballAnalyzer;
 
 =head1 NAME
@@ -16,17 +16,7 @@ Search MojoMojo content using the Plucene search engine.
 
 =over 4
 
-=item new 
-
-Constructor
-
 =cut
-
-sub new {
-    my ( $self, $c ) = @_;
-    $self = $self->NEXT::new($c);
-    $self->prepare_search_index($c);
-}
 
 # TODO:
 # I can't find a way to index the path data such that we can search only a subsection of
@@ -35,21 +25,21 @@ sub new {
 
 # Not all analyzers are created equal...the SnowballAnalyzer appears to work the best
 sub _parsed_query {
-    my ($self, $query, $default) = @_;
-    my $parser = Plucene::QueryParser->new({
-      analyzer => Plucene::Plugin::Analyzer::SnowballAnalyzer->new(),
-      default  => $default
-    });
-    $parser->parse($query);
+	my ($self, $query, $default) = @_;
+	my $parser = Plucene::QueryParser->new({
+			analyzer => Plucene::Plugin::Analyzer::SnowballAnalyzer->new(),
+			default  => $default
+		});
+	$parser->parse($query);
 }
 
 sub _writer {
-    my $self = shift;
-    return Plucene::Index::Writer->new(
-      $self->_dir,
-      Plucene::Plugin::Analyzer::SnowballAnalyzer->new(),
-      0
-    );
+	my $self = shift;
+	return Plucene::Index::Writer->new(
+		$self->_dir,
+		Plucene::Plugin::Analyzer::SnowballAnalyzer->new(),
+		0
+	);
 }
 
 =item update_index <page>
@@ -93,39 +83,6 @@ sub update_index {
         $self->add( %data );
     }
     return 1;
-}
-
-=item prepare_search_index
-
-Create a new Plucene search index from all pages in the database.
-Will do nothing if the index already exists.
-
-=cut
-
-sub prepare_search_index {
-    my ( $self, $c ) = @_;
-    my $index = $c->config->{home} . "/plucene";
-    return if ( -e $index . "/segments" );
-
-    # Plucene::Simple doesn't seem to tell Plucene to create a new index properly,
-    # so we have to create a new segments file ourselves
-    open SEGMENTS, ">$index/segments";
-    close SEGMENTS;
-
-    my $p = $self->open($index);
-
-    $c->log->info( "Initializing Plucene search index..." ) if $c->debug;
-    # loop through all latest-version pages
-    my $count = 0;
-    my $it = MojoMojo::M::Core::Page->retrieve_all;
-    while ( my $page = $it->next ) {
-        $p->update_index( $page );
-        $count++;
-    }
-
-    $p->optimize;
-
-    $self->log->info( "Indexed $count pages" ) if $self->debug;
 }
 
 =back
