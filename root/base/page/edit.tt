@@ -25,7 +25,7 @@
  <p>
 <form  accept-charset="UTF-8"
 id="editForm" action="[% base %][% page.path %].edit" method="post"> 
-[% FOREACH column IN ['page','parent','depth','name','name_orig','path'] %]
+[% FOREACH column IN ['id','parent','depth','name','name_orig','path'] %]
  <input type="hidden" name="[% column %]" value="[% page.$column %]" />
  [% END %]
 [%PROCESS toolbar.tt%]

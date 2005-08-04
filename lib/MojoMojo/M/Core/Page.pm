@@ -728,7 +728,7 @@ sub update_content {
     my $now = DateTime->now;
     @content_data{qw/page version status release_date/} =
       ($self->id,
-         ($content_version ? $content_version+1 :0),
+         ($content_version ? $content_version + 1 : 1),
          'released',
          $now,
       );
