@@ -26,7 +26,7 @@ __PACKAGE__->config(
     dsn                => MojoMojo->config->{dsn},
     namespace          => 'MojoMojo::M::Core',
     additional_classes => [
-        qw/Class::DBI::FromForm Class::DBI::Sweet::Topping/
+        qw/Class::DBI::FromForm Class::DBI::Sweet::Topping Class::DBI::AsXML/
     ],
 );
 
