@@ -5,7 +5,7 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/FormValidator Session::FastMmap Static
+use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
                 Singleton Unicode::Encoding Cache::FileCache FillInForm/;
 use MojoMojo::Search::Plucene;
@@ -98,22 +98,23 @@ sub end : Private {
     my ( $self, $c ) = @_;
     return 1 if $c->response->status =~ /^3\d\d$/;
     return 1 if $c->response->body;
-# FIXME: need proper caching code. disable cache for now.
-#    if ($c->stash->{page}) {
-#        if ($c->req->action() eq 'edit') {
         if ($c->req->action ne 'static') {
                 $c->res->header('Cache-Control','no-cache');
         }
-#        } else {
-#            $c->res->header('Last-Modified',
-#                $c->stash->{page}->content->pub_date);
-#        }
-#    }
     unless ( $c->response->content_type ) {
        $c->response->content_type('text/html; charset=utf-8');
     }
-    $c->forward('MojoMojo::V::TT');
-    die if $c->req->params->{die};
+    if ( $c->request->param('rest') ) {
+	$c->stash->{template} = 'rest/'.$c->stash->{template};
+    }
+    $c->forward( 'MojoMojo::V::TT' );
+    unless ($c->res->body) {
+	$c->stash->{message}  = 'No data returned';
+	$c->stash->{template} = 'message.tt';
+	$c->res->status(404);
+
+    }
+    die "debubbah" if $c->debug() && $c->req->params->{die};
 }
 
 =item auto
