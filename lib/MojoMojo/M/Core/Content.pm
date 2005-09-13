@@ -133,6 +133,7 @@ either own content or passed <content>
 sub formatted {
     my ( $self, $c, $content ) = @_;
     $content ||= $self->body_decoded;
+    $c       ||= MojoMojo->instance();
     MojoMojo->call_plugins( "format_content", \$content, $c, $self ) if ($content);
     return $content;
 }
