@@ -564,7 +564,7 @@ sub resolve_path {
     while ( my $page = shift @{ $query_pages->[$current_depth] } ) {
         unless ( $current_depth == 0 ) {
             my $parent = $path_pages->[ $current_depth - 1 ];
-            next unless $page->parent == $parent->id;
+            next unless $page->parent && $page->parent->id == $parent->id;
         }
         my $proto_page = shift @{$proto_pages};
         $page->path( $proto_page->{path} );
@@ -828,6 +828,23 @@ sub has_photos {
   return MojoMojo::M::Core::Photo->count('attachment.page'=>$self);
 }
 
+=item for_rest
+
+=cut
+
+sub for_rest {
+    my $self = shift;
+    return $self->to_xml(
+	columns => {
+	    'MojoMojo::M::Core::Page' =>     [qw/id name_orig path content/],
+	    'MojoMojo::M::Core::Content' =>  [qw/version created creator formatted previous/]
+	    },
+	depth=>1
+    );
+}
+	    
+
+
 =item AUTHORS
 
 David Naughton <naughton@umn.edu>
@@ -839,5 +856,4 @@ You may distribute this code under the same terms as Perl itself.
 
 =cut
 
-1;
 1;
