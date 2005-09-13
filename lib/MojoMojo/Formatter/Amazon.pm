@@ -118,7 +118,7 @@ Product information suitable for DVD movies.
 
 sub DVD {
   my ($class,$property) = @_;
-  return "-- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n";
+  return " -- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n";
 }
 
 =item Book <property>
