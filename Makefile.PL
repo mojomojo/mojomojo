@@ -1,30 +1,87 @@
-    unless ( eval "use Module::Build::Compat 0.02; 1" ) {
-        print "This module requires Module::Build to install itself.\n";
+  use inc::Module::Install;
 
-        require ExtUtils::MakeMaker;
-        my $yn =
-          ExtUtils::MakeMaker::prompt( '  Install Module::Build now from CPAN?',            'y' );
+    name            ('MojoMojo');
+    abstract        ('the xmas wiki');
+    author          ('Marcus Ramberg <marcus@thefeed.no>');
+    version_from    ('lib/MojoMojo.pm');
+    include	    ('ExtUtils::AutoInstall');
+    license         ('perl');
 
-        unless ( $yn =~ /^y/i ) {
-            die " *** Cannot install without Module::Build.  Exiting ...\n";
-        }
+    requires        (
+     'Algorithm::Diff' => '1.1901',
+     'Archive::Zip' => '1.14',
 
-        require Cwd;
-        require File::Spec;
-        require CPAN;
+     # We are developing MojoMojo on Catalyst trunk,
+     # so relying on the version number below may be
+     # problematic. We recommend installing the latest
+     # Catalyst from svn. In particular, some revisions
+     # prior to Catalyst revision 556 are known to
+     # break MojoMojo.
 
-        # Save this 'cause CPAN will chdir all over the place.
-        my $cwd      = Cwd::cwd();
-        my $makefile = File::Spec->rel2abs($0);
+     'Catalyst' => '5.30',
 
-        CPAN::Shell->install('Module::Build::Compat')
-          or die " *** Cannot install without Module::Build.  Exiting ...\n";
+     'Catalyst::Model::CDBI::Sweet' => '0.01',
+     'Catalyst::Plugin::Authentication::CDBI' => '0.08',
+     'Catalyst::Plugin::Cache::FileCache'=>0,
+     'Catalyst::Plugin::Email' => 0,
+     'Catalyst::Plugin::FillInForm' => '0.04',
+     'Catalyst::Plugin::DefaultEnd' => '0.02',
+     'Catalyst::Plugin::FormValidator' => '0.02',
+     'Catalyst::Plugin::Prototype' => '0.01',
+     'Catalyst::Plugin::Session::FastMmap' => '0.09',
+     'Catalyst::Plugin::Singleton' => '0.02',
+     'Catalyst::Plugin::Static' => '0.07',
+     'Catalyst::Plugin::SubRequest' => '0.06',
+     'Catalyst::Plugin::Unicode::Encoding' => '0.1',
+     'Catalyst::View::TT' => '0.11',
+     'Class::DBI::AbstractSearch' => '0.05',
+     'Class::DBI::Loader' => '0.19',
+     'Class::DBI::FromForm' => '0.01',
+     'Class::DBI::Plugin::RetrieveAll' => '1.01',
+     'Class::DBI::SQLite' => '0.09',
+     'Class::DBI::Sweet' => 0, # need latest from catalyst trunk for now
+     'Data::Page' => '2.00',
+     'DateTime' => '0.28',
+     'DateTime::Format::Mail' => 0,
+     'DBD::SQLite' => '1.08',
+     'Exception::Class' => 0,
+     'File::MimeInfo' => '0.11',
+     'File::Slurp' => '9999.07',
+     'HTML::Prototype::Useful' => '0.01',
+     'HTML::Strip' => '1.04',
+     'HTML::Scrubber' => 0,
+     'HTML::TagCloud' => 0,
+     'Image::EXIF' => 0,
+     'Imager' => 0,
+     'IO::Scalar' => 0,
+     'LWP::Simple' => 0,
+     'Module::Pluggable::Ordered' => '1.4',
+     'Plucene::Simple' => '1.04',
+     'Plucene::Plugin::Analyzer::SnowballAnalyzer' => '1.1',
+     'Pod::Simple::HTML' => '3.01',
+     'Pod::Tree' => '1.11',
+     'Text::Context' => '3.5',     
+     'Text::Emoticon::MSN' => '0.02',
+     'Time::Piece' => '1.08',
+     'URI' => '1.35',
+     'XML::Clean' => 0,
+     'XML::Feed' => 0,
+     'YAML' => '0.36',
+     'Net::Amazon' => 0,
+     'URI::Fetch' => 0
+    );
+    build_requires  ('Test::More');
+    recommends      ('Test::Pod' => 0.0);
+    recommends      ('Test::PodCoverage' => 0.0);
+    tests	    ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
-        chdir $cwd or die "Cannot chdir() back to $cwd: $!";
-    }
-    eval "use Module::Build::Compat 0.02; 1" or die $@;
-    use lib '_build/lib';
-    Module::Build::Compat->run_build_pl( args => \@ARGV );
-    require Module::Build;
-    Module::Build::Compat->write_makefile( build_class => 'Module::Build' );
+
+    # -- You'll likely only want one of the below --
+    # auto_bundle();       # bundle run-time dependencies
+    # auto_include();      # include build-time dependencies
+    # auto_include_deps(); # same as above, plus recursive dependencies
+     auto_install();      # auto-install all dependencies from CPAN
+
+    &WriteAll;
+
 
