@@ -12,7 +12,7 @@ my $m_base          = 'MojoMojo::M::Core::';
 my $m_page_class    = $m_base . 'Page';
 my $m_content_class = $m_base . 'Content';
 my $m_verison_class = $m_base . 'PageVersion';
-
+my $search_engine   = 'MojoMojo::M::Search::Plucene';
 
 =head1 NAME
 
@@ -106,8 +106,6 @@ sub search : Global {
     $stash->{query} = $q;
     $stash->{search_type} = $search_type;
 
-    my $p = MojoMojo::Search::Plucene->open( MojoMojo->config->{home} . "/plucene" );
-
     my $strip = HTML::Strip->new;
 
     # FIXME: Cache search results.  This will require creating a new data structure since it's
@@ -122,7 +120,7 @@ sub search : Global {
         $q = "_path:$fixed_path* AND " . $q;
     }
 
-    foreach my $key ( $p->search( $q ) ) {
+    foreach my $key ( $search_engine->query( $q ) ) {
 
         my $page = $m_page_class->get_page( $key );
         # add a snippet of text containing the search query

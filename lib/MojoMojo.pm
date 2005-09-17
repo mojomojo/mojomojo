@@ -8,7 +8,6 @@ use Path::Class 'file';
 use Catalyst qw/-Debug FormValidator Session::FastMmap Static
                 SubRequest Authentication::CDBI Prototype  Email
                 Singleton Unicode::Encoding Cache::FileCache FillInForm/;
-use MojoMojo::Search::Plucene;
 use MojoMojo::Formatter::Wiki;
 
 use YAML ();
@@ -33,7 +32,7 @@ MojoMojo->config( cache => { storage=> MojoMojo->config->{home}.'/cache' } );
 MojoMojo->config( encoding => 'UTF-8' ); # A valid Encode encoding
 
 MojoMojo->setup();
-MojoMojo->prepare_search_index();
+MojoMojo::M::Search::Plucene->prepare_search_index();
 
 =head1 MojoMojo - A fancy wiki, powered by Catalyst
 
@@ -199,39 +198,6 @@ sub prepare_home {
       name => 'MojoMojo',
       root => $home.'/root',
       dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'} );
-}
-
-=item prepare_search_index
-
-Create a new Plucene search index from all pages in the database.
-Will do nothing if the index already exists.
-
-=cut
-
-sub prepare_search_index {
-    my $self = shift;
-    my $index = $self->config->{home} . "/plucene";
-    return if ( -e $index . "/segments" );
-
-    # Plucene::Simple doesn't seem to tell Plucene to create a new index properly,
-    # so we have to create a new segments file ourselves
-    open SEGMENTS, ">$index/segments";
-    close SEGMENTS;
-
-    my $p = MojoMojo::Search::Plucene->open($index);
-
-    $self->log->info( "Initializing Plucene search index..." ) if $self->debug;
-    # loop through all latest-version pages
-    my $count = 0;
-    my $it = MojoMojo::M::Core::Page->retrieve_all;
-    while ( my $page = $it->next ) {
-        $p->update_index( $page );
-        $count++;
-    }
-
-    $p->optimize;
-
-    $self->log->info( "Indexed $count pages" ) if $self->debug;
 }
 
 =item fixw word

@@ -7,6 +7,7 @@ my $m_base          = 'MojoMojo::M::Core::';
 my $m_page_class    = $m_base . 'Page';
 my $m_content_class = $m_base . 'Content';
 my $m_verison_class = $m_base . 'PageVersion';
+my $search_engine   = 'MojoMojo::M::Search::Plucene';
 
 =head1 NAME
 
@@ -121,9 +122,7 @@ sub edit : Global {
 
 
     # update the search index with the new content
-    my $p = MojoMojo::Search::Plucene->open( $c->config->{home} . "/plucene" );
-    $p->update_index( $page );
-
+    $search_engine->index_page( $page );
 
     $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );
 

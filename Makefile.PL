@@ -33,6 +33,7 @@
      'Catalyst::Plugin::Static'			    => '0.07',
      'Catalyst::Plugin::SubRequest'		    => '0.06',
      'Catalyst::Plugin::Unicode::Encoding'	    => '0.1',
+     'Catalyst::Model::Search::Plucene'     => 0,
      'Class::DBI::Plugin::RetrieveAll'		    => '1.01',
      'Class::DBI::AbstractSearch'		    => '0.05',
      'DateTime::Format::Mail'			    => 0,
