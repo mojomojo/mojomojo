@@ -1,4 +1,5 @@
-#!/usr/bin/perl -w
+#!/usr/local/bin/perl -w
+
 BEGIN { $ENV{CATALYST_ENGINE} ||= 'CGI' }
 
 use strict;
@@ -12,7 +13,7 @@ MojoMojo->run;
 
 =head1 NAME
 
-cgi - Catalyst CGI
+mojomojo_cgi.pl - Catalyst CGI
 
 =head1 SYNOPSIS
 
@@ -30,8 +31,7 @@ Sebastian Riedel, C<sri@oook.de>
 
 Copyright 2004 Sebastian Riedel. All rights reserved.
 
-This library is free software. You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software, you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
-

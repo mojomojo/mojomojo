@@ -1,8 +1,8 @@
-#!/usr/bin/perl -w
+#!/usr/local/bin/perl -w
 
 BEGIN { 
     $ENV{CATALYST_ENGINE} ||= 'HTTP';
-    $ENV{CATALYST_SCRIPT_GEN} = 4;
+    $ENV{CATALYST_SCRIPT_GEN} = 8;
 }  
 
 use strict;
@@ -12,14 +12,35 @@ use FindBin;
 use lib "$FindBin::Bin/../lib";
 use MojoMojo;
 
-my $help = 0;
-my $port = 3000;
+my $fork          = 0;
+my $help          = 0;
+my $host          = undef;
+my $port          = 3000;
+my $restart       = 0;
+my $restart_delay = 1;
+my $restart_regex = '\.yml$|\.yaml$|\.pm$';
 
-GetOptions( 'help|?' => \$help, 'port=s' => \$port );
+my @argv = @ARGV;
+
+GetOptions(
+    'fork'              => \$fork,
+    'help|?'            => \$help,
+    'host=s'            => \$host,
+    'port=s'            => \$port,
+    'restart|r'         => \$restart,
+    'restartdelay|rd=s' => \$restart_delay,
+    'restartregex|rr=s' => \$restart_regex
+);
 
 pod2usage(1) if $help;
 
-MojoMojo->run($port);
+MojoMojo->run( $port, $host, {
+    argv   => \@argv,
+    'fork' => $fork,
+    restart => $restart,
+    restart_delay => $restart_delay,
+    restart_regex => qr/$restart_regex/
+} );
 
 1;
 
@@ -32,8 +53,17 @@ mojomojo_server.pl - Catalyst Testserver
 mojomojo_server.pl [options]
 
  Options:
-   -? -help    display this help and exits
-   -p -port    port (defaults to 3000)
+   -f -fork           handle each request in a new process
+                      (defaults to false)
+   -? -help           display this help and exits
+      -host           host (defaults to all)
+   -p -port           port (defaults to 3000)
+   -r -restart        restart when files got modified
+                      (defaults to false)
+   -rd -restartdelay  delay between file checks
+   -rr -restartregex  regex match files that trigger
+                      a restart when modified
+                      (defaults to '\.yml$|\.yaml$|\.pm$')
 
  See also:
    perldoc Catalyst::Manual
@@ -51,7 +81,7 @@ Sebastian Riedel, C<sri@oook.de>
 
 Copyright 2004 Sebastian Riedel. All rights reserved.
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+This library is free software, you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
