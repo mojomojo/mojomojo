@@ -7,33 +7,14 @@
 [% END %] gallery -
 [%page.name%]
 [%IF tag %]
-(<a href="[%base%][%path%].gallery/by_tag/[%tag%]">[%tag%]</a>)[%END%]
+(<a href="[%c.uri_for(path,'.gallery/by_tag',tag)%]">[%tag%]</a>)[%END%]
 </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 </script>
 <div id="content">
 [% IF user %]
-<div id="title">
-[% url = base _ page.path _'.gallery/title/' _ photo %]
-[%c.prototype.form_remote_tag({ 
-    update => 'message', 
-    url=>url,
-    loading=>"\$('phototitle').value=\$('titlebox').value;\$('titlebox').blur",
-    complete=>"Fat.fade('.message')"
-})%] 
-<input type="hidden" id="phototitle" value="[%c.unicode(photo.title)%]">
-<input class="dual" id="titlebox" value="[%c.unicode(photo.title)%]" type="text" 
-       name="title" width="80" autocomplete="off"
-       onFocus="javascript:$('titlebutton').style.display='inline';$('message').innerHTML='<em>Click here to abort.</em>';"
-       onBlur="javascript:window.setTimeout(function() {$('titlebox').value=$('phototitle').value;$('titlebutton').style.display='none';},1000); $('message').innerHTML=''; "/>
-<input class="dualbutton" id="titlebutton" type="submit" name="add" value="save"/> 
-<span class="highlight" id="message"><em>Click title to edit it.</em></span>
-</form>
-</div>
-[%ELSE%]   
-<div id="title" class="showdiv"><big><span id="titletext">[%c.unicode(photo.title)%]</span></big></div>
-[%END%]
+<h2 id="title">[%c.unicode(photo.title)%]</span></h2>
 <div class="navigation">
 <a name="nav">
 [% IF prev %]
@@ -51,28 +32,13 @@
 <a href="[%base%][%page.path%].attachment/[%photo.id%]" title="Click for hi-res version"
 ><img width="700" src="[%base%][%page.path%].attachment/[%photo.id%]/inline"></a>
 </div>
-[% IF user %]
-<div id="description">
-[% url = base _ page.path _'.gallery/description/' _ photo %]
-[%c.prototype.form_remote_tag({ 
-    update => 'descmessage', 
-    url=>url,
-    loading=>"\$('photodesc').value=\$('descbox').value;",
-    complete=>"Fat.fade('#descmessage')"
-})%] 
-<input type="hidden" id="photodesc" value="[%c.unicode(photo.description)%]">
-<textarea class="dual" id="descbox" value="[%c.unicode(photo.description)%]" 
-       name="description" width="80" autocomplete="off"
-       onFocus="javascript:$('descbutton').style.display='inline';$('descmessage').innerHTML='<em>Click here to abort.</em>';this.select();"
-       onBlur="javascript:window.setTimeout(function() {$('descbox').value=$('photodesc').value;$('descbutton').style.display='none';},500); $('descmessage').innerHTML=''; ">
-[%c.unicode(photo.description) || "Click here to write a description"%]
-</textarea>
-<input class="dualbutton" id="descbutton" type="submit" name="add" value="save"/> 
-<span id="descmessage"><em>Click the text to edit it.</em></span>
-</form>
-</div>
-[%ELSE%]   
-<div id="description" class="showdiv"><small><span id="desctext">[%photo.description%]</span></small></div>
+<p id="description" >[%photo.description||"no description"%]<p>
+<script language="JavaScript">
+[% IF user.admin || user  %]
+ new Ajax.InPlaceEditor('title', '[%c.uri_for(page.path,'.gallery/title',photo)%]', {rows:1,cols:30,callback: function(form,value) {return 'title='+value}});
+new Ajax.InPlaceEditor('description', '[%c.uri_for(page.path,'.gallery/description',photo)%]', {rows:1,cols:30,callback: function(form,value) {return 'description='+value}});
+[% END %]
+ </script>
 [%END%]
 </div>
 [%PROCESS gallery/footer.tt%]
