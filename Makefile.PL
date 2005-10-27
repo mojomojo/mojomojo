@@ -30,7 +30,7 @@
      'Catalyst::Plugin::Session::FastMmap'	    => '0.09',
      'Catalyst::Plugin::Singleton'		    => '0.02',
      'Catalyst::Plugin::Static::Simple'		    => '0.07',
-     'Catalyst::Plugin::SubRequest'		    => '0.08',
+     'Catalyst::Plugin::SubRequest'		    => '0.09',
      'Catalyst::Plugin::Unicode::Encoding'	    => '0.1',
      'Catalyst::Model::Search::Plucene'             => 0,
      'Class::DBI::Plugin::RetrieveAll'		    => '1.01',
