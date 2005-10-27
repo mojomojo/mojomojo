@@ -33,7 +33,6 @@ lib/MojoMojo/C/User.pm
 lib/MojoMojo/Formatter/Amazon.pm
 lib/MojoMojo/Formatter/Comment.pm
 lib/MojoMojo/Formatter/Emote.pm
-lib/MojoMojo/Formatter/Flickr.pm
 lib/MojoMojo/Formatter/Include.pm
 lib/MojoMojo/Formatter/Pod.pm
 lib/MojoMojo/Formatter/RSS.pm
@@ -41,7 +40,6 @@ lib/MojoMojo/Formatter/Scrub.pm
 lib/MojoMojo/Formatter/Textile.pm
 lib/MojoMojo/Formatter/Wiki.pm
 lib/MojoMojo/M/CDBI.pm
-lib/MojoMojo/M/Core/.Page.pm.swp
 lib/MojoMojo/M/Core/Attachment.pm
 lib/MojoMojo/M/Core/Comment.pm
 lib/MojoMojo/M/Core/Content.pm
@@ -60,7 +58,6 @@ lib/MojoMojo/M/Core/Tag.pm
 lib/MojoMojo/M/Core/WantedPage.pm
 lib/MojoMojo/M/Search/Plucene.pm
 lib/MojoMojo/Plugin/DefaultAuth.pm
-lib/MojoMojo/Search/Kinosearch.pm
 lib/MojoMojo/V/TT.pm
 lib/Text/SmartyPants.pm
 lib/Text/Textile2.pm
@@ -254,4 +251,3 @@ t/c/user.t
 t/formatter/amazon.t
 t/formatter/comment.t
 t/formatter/wiki.t
-test
