@@ -3,7 +3,7 @@
 [%PROCESS breadcrumbs.tt%]
         <div id="content">
         <form id="loginForm" action="[%base%]/.do_register" method="POST">
-<dl>
+<dl class="form">
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
 <dt>name:</dt>

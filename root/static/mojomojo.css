@@ -154,7 +154,7 @@ color: #577091;
 }
 
 a:visited { 
-color: #273d661;
+color: #273d66;
 }
 
 a:hover { 
@@ -223,6 +223,7 @@ blockquote {
   font-size:11px;
   line-height:17px;
   font-style: italic;  
+  width: 400px;
 }
 
 pre {
@@ -276,7 +277,7 @@ p#message {
 
 div.preview {
  clear:left;
- width:728;
+ width: 728px;
  overflow: auto; 
  height: 290px;
 }
@@ -470,27 +471,46 @@ div.amazon img {
     margin: 1.2em;
 }
 
-form dl {
+.form dl {
  margin: 13px;
  font-family: sans-serif;
  float: left;
 }
 
-form dt {
+.form dt {
   float: left;
   width: 80px;
   font-size: 14px;
   line-height: 24px;
 }
 
-form dd {
+.form dd {
   margin: 0 0 5px 90px;
   font-size: 11px;
   line-height: 24px;
   margin-left: 80px;
 }
 
-form input {
+.list dl {
+ margin: 13px;
+ font-family: sans-serif;
+ float: left;
+}
+
+.list dt {
+  float: left;
+  width: 80px;
+  font-size: 1.5em;;
+  line-height: 24px;
+}
+
+.list dd {
+  margin: 0 0 5px 90px;
+  font-size: 1.4em;
+  line-height: 24px;
+  margin-left: 80px;
+}
+.form input {
   font-size: 14px;
 }
 
@@ -528,8 +548,8 @@ input {
 
 .imageinfo {
   float:right;
-  padding:none ;
-  margin:none;
+  padding:0px;
+  margin:0px;
   width: 150px;
   min-height: 250px;
 }
@@ -699,9 +719,30 @@ div.photo img{
 }
 
 .inline p,dt,dd{
-    font-size: 0.7em;
+    font-size: 1.2em;
 }
 
 acronym {
   border-bottom: 1px dotted !important;
 }
+
+.inplaceeditor-form input {
+    margin: 0px 10px 0px 0px;
+}
+
+.inplaceeditor-form a {
+    border: 1px solid black;
+    background: #eee;
+    padding: 5px 6px 1px 6px;
+    margin: 0px 0px 0px 0px;
+    text-decoration: none;
+}
+
+#title { 
+    margin-left: 1em;
+}
+
+#description {
+    font-style: italic;
+    margin-left: 2em;
+
