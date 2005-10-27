@@ -31,7 +31,7 @@ id="editForm" action="[% base %][% page.path %].edit" method="post">
 [%PROCESS toolbar.tt%]
  <br/>
 <textarea id="body" name="body">[% 
-FILTER html %][% c.req.params.body %][%END
+FILTER html %][% content.body||c.req.params.body %][%END
 %]</textarea>
  [%# value.replace(/\+/&#043a;%]
  [% url= base _ page.path _ '.jsrpc/render' %]
