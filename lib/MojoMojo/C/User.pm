@@ -204,7 +204,7 @@ sub profile : Global {
     my $page=$c->stash->{page};
     my $user=MojoMojo::M::Core::Person->get_user($page->name_orig);
     if ( $user ) {
-          $c->stash->{profile}=$user;
+          $c->stash->{person}=$user;
           $c->stash->{template}='user/profile.tt';
     } else { 
         $c->stash->{template}='message.tt';
