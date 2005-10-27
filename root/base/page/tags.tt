@@ -1,7 +1,7 @@
 [% IF tags %]
 <b>my tags : </b>
 [% FOREACH tag IN tags %]
-[% url = $base _ page.path _ '.jsrpc/untag/' _ tag.tag %]
+[% url = base _ page.path _ '.jsrpc/untag/' _ tag.tag %]
 [<b class="remove">[%c.prototype.link_to_remote('x', {
     update => 'tags', 
     url=>url 
@@ -12,7 +12,7 @@
 [%ELSE%]
 <a class="tag" 
 [%END%]
-href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a> 
+href="[%c.uri_for('.recent',tag.tag)%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
 [% IF others_tags && tags %]
@@ -23,11 +23,10 @@ href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
 [% NEXT IF taglist.match(tagmatch) %]
-[% url = base _ '/.jsrpc/tag/' _ othertag.tag %]
 [% IF user.active %]
 [<b class="add">[%c.prototype.link_to_remote('+', { 
     update => 'tags', 
-    url=>url, 
+    url=> c.uri_for('.jsrpc/tag',othertag.tag), 
     complete=>"Fat.fade('.highlight');"
 })%]</b>]
 [%END%]
@@ -36,6 +35,6 @@ href="[%base%]/.recent/[%tag.tag%]">[%tag.tag%]</a>
 [%ELSE%]
 <a class="tag" title="[%othertag.pagecount%]" 
 [%END%]
-href="[%base%][%page.path%].recent/[%othertag.tag%]" >[%othertag.tag%]</a> 
+href="[%c.uri_for(page.path,'.recent',othertag.tag)%]" >[%othertag.tag%]</a> 
 [%END%]
 [%END%]
