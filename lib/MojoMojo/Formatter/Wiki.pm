@@ -99,6 +99,7 @@ sub format_content {
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
+        $non_wikiword_check
         $explicit_start
         \s*
         ($explicit_path)
@@ -111,6 +112,21 @@ sub format_content {
         )?
         $explicit_end
     }{ $class->format_link($c, $1, $c->req->base, $2) }gex;
+    $$content =~ s{
+        $non_wikiword_check
+	(
+        $explicit_start
+        \s*
+        $explicit_path
+        \s*
+        (?:
+           $explicit_separator
+           \s*
+           $explicit_text
+           \s*
+        )?
+        $explicit_end)
+    }{ $1 }gx;
 }
 
 =item format_link <c> <word> <base> [<link_text>]
@@ -193,7 +209,7 @@ sub find_links {
     my $c = MojoMojo->context;
 
     my $wikiword_regex = qr/$non_wikiword_check($wikiword)/x;
-    my $explicit_regex = qr/$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
+    my $explicit_regex = qr/$non_wikiword_check$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
 
     for ($wikiword_regex, $explicit_regex) {
         while ($$content =~ /$_/g) {
