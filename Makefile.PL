@@ -1,7 +1,7 @@
   use inc::Module::Install;
 
     name            ('MojoMojo');
-    abstract        ('the xmas wiki');
+    abstract        ('wiki on speed');
     author          ('Marcus Ramberg <marcus@thefeed.no>');
     version_from    ('lib/MojoMojo.pm');
     include	    ('ExtUtils::AutoInstall');
@@ -14,11 +14,10 @@
      # We are developing MojoMojo on Catalyst trunk,
      # so relying on the version number below may be
      # problematic. We recommend installing the latest
-     # Catalyst from svn. In particular, some revisions
-     # prior to Catalyst revision 556 are known to
-     # break MojoMojo.
-
-     'Catalyst' => '5.30',
+     # Catalyst from svn. We plan to stbilize this after
+     # the release of 5.5 
+     
+     'Catalyst' => '5.49_2',
 
      'Catalyst::Model::CDBI::Sweet'		    => '0.01',
      'Catalyst::Plugin::Authentication::CDBI'	    => '0.08',
@@ -30,10 +29,10 @@
      'Catalyst::Plugin::Prototype'		    => '0.01',
      'Catalyst::Plugin::Session::FastMmap'	    => '0.09',
      'Catalyst::Plugin::Singleton'		    => '0.02',
-     'Catalyst::Plugin::Static'			    => '0.07',
-     'Catalyst::Plugin::SubRequest'		    => '0.06',
+     'Catalyst::Plugin::Static::Simple'		    => '0.07',
+     'Catalyst::Plugin::SubRequest'		    => '0.08',
      'Catalyst::Plugin::Unicode::Encoding'	    => '0.1',
-     'Catalyst::Model::Search::Plucene'     => 0,
+     'Catalyst::Model::Search::Plucene'             => 0,
      'Class::DBI::Plugin::RetrieveAll'		    => '1.01',
      'Class::DBI::AbstractSearch'		    => '0.05',
      'DateTime::Format::Mail'			    => 0,
