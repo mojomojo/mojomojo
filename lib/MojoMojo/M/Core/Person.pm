@@ -63,7 +63,7 @@ Link to user page/profile.
 sub link {
    my ($self) = @_;
    #FIXME: Link to profile here? 
-   return lc "/".($self->login || '/no_login');
+   return lc "/".($self->login || MojoMojo->pref('anonymous_user'));
 }
 
 =item registration_profile
