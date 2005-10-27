@@ -11,7 +11,7 @@
 </ul>
 </div>
 <form id="accountForm" action="[%base%][%page_user.link%][%c.req.user%].prefs" method="POST">
-<dl>
+<dl class="form">
 <dd>Change your preferences to update them.</dd>
  <dt>login</dt>
 <dd><input id="loginField" value="[%user.login%]" type="text" name="login"/></dd>

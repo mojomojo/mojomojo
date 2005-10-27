@@ -7,16 +7,29 @@ User profile for [% person.name %]
 <div id="content">
 <dl>
 <dt>Name:</dt>
-<dd>[%person.name || "Name missing"%]</dd>
+<dd id="name">[%person.name || "Name missing"%]</dd>
+[% IF user.admin || user.id == person.id  %]
+<dt>Birth Date:</dt>
+<dd>[%person.born%]</dd>
+[% ELSE %]
+<dt>Age:</dt>
+<dd>[%person.age%]</dd>
+[%END%]
 <dt>Email:</dt>
-<dd>
-[% IF user.admin %]
+<dd id="email">
+[% IF user.admin || user.id == person.id  %]
 [%person.email%]
 [% ELSE %]
 *private*
 [% END %]
 </dd>
 </dl>
+<script language="JavaScript">
+[% IF user.admin || user.id == person.id  %]
+ new Ajax.InPlaceEditor('name', '[%c.uri_for(page.path,'.user/name')%]', {rows:1,cols:30});
+new Ajax.InPlaceEditor('email', '[%c.uri_for(page.path,'.user/email')%]', {rows:1,cols:30});
+[% END %]
+ </script>
 </div>
         <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt %]
