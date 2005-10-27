@@ -89,8 +89,17 @@ sub attachments : Global {
               $c->stash->{message}= "Can't open $file for writing.";
           }
        }
+	$c->stash->{template} = 'attachments/complete.tt' 
+	    unless $c->stash->{template} eq 'message.tt';
     }
 }
+
+sub progress : Global {
+    my ( $self, $c, $upload_id ) = @_;
+    $c->stash->{progress} = $c->upload_progress( $upload_id );
+    $c->stash->{template} = 'attachments/progress.tt';
+}
+
 
 =item default
 
@@ -107,7 +116,7 @@ sub default : Private {
     unless ($att) {
         $c->stash->{template}='message.tt';
         $c->stash->{message}= "Attachment not found.";
-        return ( $c->res->code(404) );
+        return ( $c->res->status(404) );
     }
     if ($action) {
         $c->forward("$action", [$att,@_] );

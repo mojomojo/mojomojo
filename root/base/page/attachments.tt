@@ -2,13 +2,45 @@
  <div id="header"><h1>Attachments for [%page.name%]</h1></div>
 [%PROCESS breadcrumbs.tt %]
 
+<script language="javascript" type="text/javascript">
+function watch_progress(form) {
+    if (form.action.indexOf('upload_id') < 0) {
+        form.action += '?upload_id=[% c.next_upload_id %]';
+    }
+    form.target = 'UploadTarget1';
+    $('UploadStatus1').innerHTML='Upload starting...';
+    $('UploadProgressBar1').firstChild.firstChild.style.width='0%';
+    new Effect.Appear('status');
+    if (document.uploadStatus1) {
+        document.uploadStatus1.stop();
+    }
+    document.uploadStatus1 = new Ajax.PeriodicalUpdater(
+        'UploadStatus1',
+        '[%base%]/.progress/[% c.last_upload_id %]',
+        {onComplete:function(request){$('UploadStatus1').innerHTML='Upload finished.';$('UploadProgressBar1').firstChild.firstChild.style.width='100%';document.uploadStatus1 = null; setTimeout(function() {new Effect.Fade('status');}, 2000)}, evalScripts:true, asynchronous:true}
+    );
+        
+    return true;
+}
+</script>
+
  <div id="toplinks"><a  href="[% base %][% page.path %].edit">Edit</a> | Attachments</div><div id="content">
-<form action="[%base%][%page.path%].attachments" enctype="multipart/form-data" method="post">
-<p> Please select a file to attach to this page. To upload multiple files, put them in a zip.</p>
+<form action="[%base%][%page.path%].attachments/"
+    enctype="multipart/form-data" 
+    target="result"
+    onsubmit="watch_progress(this);"
+    method="post">
+<p>Please select a file to attach to this page. To upload multiple files, put them in a zip.</p>
 <input type="file" name="file">
 <input type="submit">
 </form>
 
+<iframe id="UploadTarget1" name="UploadTarget1" src="" style="width:0px;height:0px;border:0"></iframe>
+
+<div id="status" style="display: none">
+    <div class="progressBar" id="UploadProgressBar1"><div class="border"><div class="background"><div class="foreground"></div></div></div></div>
+    <div class="uploadStatus" id="UploadStatus1"></div>
+</div>
 [% FOR attachment IN page.attachments %]
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |
