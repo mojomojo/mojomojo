@@ -7,7 +7,7 @@
 [% END %]</h1></div>
 [% PROCESS breadcrumbs.tt %]
  [% IF page.content_version ; %] 
- <div id="toplinks">
+ <div id="toplinks"><a href="[% c.uri_for(page.path) %]">View</a> |
  Edit | <a  href="[% base %][% page.path %].attachments">Attachments</a>
  </div>
  [% END %]
