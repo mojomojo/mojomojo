@@ -201,13 +201,14 @@ sub description : Local {
     my $img=MojoMojo::M::Core::Photo->retrieve($photo);
     unless ($c->form->has_missing && $c->form->has_invalid ) {
       $img->update_from_form($c->form);
+      $img->update;
     }
-      $c->res->body('<em>updated ok</em>');
+      $c->res->body($img->title);
 }
 
 =item title ( .gallery/title )
 
-Ajax method for updatingg picture titles inline.
+Ajax method for updating picture titles inline.
 
 =cut
 
@@ -217,8 +218,10 @@ sub title : Local {
     my $img=MojoMojo::M::Core::Photo->retrieve($photo);
     unless ($c->form->has_missing && $c->form->has_invalid ) {
       $img->update_from_form($c->form);
+      $img->update;
     }
-      $c->res->body('<em>updated ok</em>');
+      $c->log->info('title:'.$img->title);
+      $c->res->body($img->title);
 }
 
 
