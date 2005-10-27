@@ -5,36 +5,47 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/-Debug FormValidator Session::FastMmap Static
-                SubRequest Authentication::CDBI Prototype  Email
-                Singleton Unicode::Encoding Cache::FileCache FillInForm/;
-use MojoMojo::Formatter::Wiki;
+use Catalyst qw/-Debug              Authentication::CDBI 
+		Cache::FileCache    DefaultEnd
+		Email	            FillInForm	    
+		FormValidator	    Prototype
+		Session::FastMmap   Singleton 
+		Static::Simple	    SubRequest	    
+		Unicode::Encoding   UploadProgress
+		/;
 
+use MojoMojo::Formatter::Wiki;
 use YAML ();
-use Module::Pluggable::Ordered search_path => [qw/MojoMojo/], except => qr/^MojoMojo::Plugin::/, require => 1;
+use Module::Pluggable::Ordered 
+    search_path => [qw/MojoMojo/], 
+    except	=> qr/^MojoMojo::Plugin::/, 
+    require	=> 1;
 
 our $VERSION='0.05';
 
 MojoMojo->prepare_home();
-MojoMojo->config( YAML::LoadFile( file( MojoMojo->config->{home},'/mojomojo.yml' ) ) );
+MojoMojo->config( 
+    YAML::LoadFile( file(MojoMojo->config->{home},'/mojomojo.yml') ) );
 
+#FIXME: Something smells here. Should be cleaned up
 MojoMojo->config->{auth_class} ||= 'MojoMojo::Plugin::DefaultAuth';
 my $auth_class = MojoMojo->config->{auth_class};
 eval "CORE::require $auth_class";
 die "Couldn't require $auth_class : $@" if $@;
+
 MojoMojo->config( authentication => {
                     user_class     => 'MojoMojo::M::Core::Person',
                     user_field     => 'login',
                     password_field => 'pass' } );
 
-MojoMojo->config ( no_url_rewrite=>1 );
-MojoMojo->config( cache => { storage=> MojoMojo->config->{home}.'/cache' } );
+MojoMojo->config( no_url_rewrite=>1 );
+MojoMojo->config( cache    => {storage => MojoMojo->config->{home}.'/cache'} );
 MojoMojo->config( encoding => 'UTF-8' ); # A valid Encode encoding
 
 MojoMojo->setup();
 MojoMojo::M::Search::Plucene->prepare_search_index();
 
-=head1 MojoMojo - A fancy wiki, powered by Catalyst
+=head1 MojoMojo - not your daddy`s wiki.
 
 =head1 SYNOPSIS
 
@@ -64,11 +75,14 @@ powered by Catalyst.
 sub begin : Private {
     my ( $self, $c ) = @_;
     if ( $c->stash->{path} ) {
-        my ( $path_pages, $proto_pages ) = MojoMojo::M::Core::Page->path_pages( $c->stash->{path} );
-        @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
+        my ( $path_pages, $proto_pages ) = 
+	    MojoMojo::M::Core::Page->path_pages( $c->stash->{path} );
+        @{$c->stash}{qw/ path_pages proto_pages /} = 
+	    ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
         $c->req->{user_id} && do {
-            $c->stash->{user} = MojoMojo::M::Core::Person->retrieve( $c->req->{user_id} );
+            $c->stash->{user} = 
+	    MojoMojo::M::Core::Person->retrieve( $c->req->{user_id} );
         };
     }
 }
@@ -93,28 +107,28 @@ show a debug screen.
 
 =cut
 
-sub end : Private {
-    my ( $self, $c ) = @_;
-    return 1 if $c->response->status =~ /^3\d\d$/;
-    return 1 if $c->response->body;
-        if ($c->req->action ne 'static') {
-                $c->res->header('Cache-Control','no-cache');
-        }
-    unless ( $c->response->content_type ) {
-       $c->response->content_type('text/html; charset=utf-8');
-    }
-    if ( $c->request->param('rest') ) {
-	$c->stash->{template} = 'rest/'.$c->stash->{template};
-    }
-    $c->forward( 'MojoMojo::V::TT' );
-    unless ($c->res->body) {
-	$c->stash->{message}  = 'No data returned';
-	$c->stash->{template} = 'message.tt';
-	$c->res->status(404);
+#sub end : Private {
+#    my ( $self, $c ) = @_;
+#    return 1 if $c->response->status =~ /^3\d\d$/;
+#    return 1 if $c->response->body;
+#        if ($c->req->action ne 'static') {
+#                $c->res->header('Cache-Control','no-cache');
+#        }
+#    unless ( $c->response->content_type ) {
+#       $c->response->content_type('text/html; charset=utf-8');
+#    }
+#    if ( $c->request->param('rest') ) {
+#	$c->stash->{template} = 'rest/'.$c->stash->{template};
+#    }
+#    $c->forward( 'MojoMojo::V::TT' );
+#    unless ($c->res->body) {
+#	$c->stash->{message}  = 'No data returned';
+#	$c->stash->{template} = 'message.tt';
+#	$c->res->status(404);
 
-    }
-    die "debubbah" if $c->debug() && $c->req->params->{die};
-}
+#    }
+#    die "debubbah" if $c->debug() && $c->req->params->{die};
+#}
 
 =item auto
 
@@ -243,7 +257,7 @@ sub prepare_path {
     $c->stash->{pre_hacked_uri} = $c->req->uri;
     my $base=$c->req->base;
     $base =~s|/+$||;
-    $c->req->base($base);
+    $c->req->base( URI->new($base) );
     my ($path,$action);
     $path=$c->req->path;
     my $index=index($path,'.');
