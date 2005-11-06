@@ -39,7 +39,7 @@
      'HTML::Prototype::Useful'			    => '0.01',
      'Plucene::Plugin::Analyzer::SnowballAnalyzer'  => '1.1',
      'Module::Pluggable::Ordered'		    => '1.4',
-     'Catalyst::View::TT'   => '0.11',
+     'Catalyst::View::TT'   => '0.14',
      'Class::DBI::Loader'   => '0.19',
      'Class::DBI::FromForm' => '0.01',
      'Class::DBI::SQLite'   => '0.09',
