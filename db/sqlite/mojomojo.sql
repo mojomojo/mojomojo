@@ -3,12 +3,21 @@
 CREATE TABLE person (
  id         INTEGER PRIMARY KEY,
  active     INTEGER, -- boolean
+ registered INTEGER,
+ views	    INTEGER,
+ photo	    INTEGER references PHOTO,
  login      VARCHAR(100),
  name       VARCHAR(100),
  email      VARCHAR(100),
  pass       VARCHAR(100),
  timezone   VARCHAR(100),
- foaf       TEXT
+ born	    INT,
+ gender	    CHAR(1),
+ occupation VARCHAR(100),
+ industry   VARCHART(100),
+ interests  TEXT,
+ movies	    TEXT,
+ music	    TEXT
 );
 
 -- * page-content tree * --
