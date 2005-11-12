@@ -745,4 +745,9 @@ acronym {
 #description {
     font-style: italic;
     margin-left: 2em;
+}
+
+#content img.right {
+	margin-left: 1em;
+}
 

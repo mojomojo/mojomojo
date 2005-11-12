@@ -8,28 +8,30 @@ User profile for [% person.name %]
 <dl>
 <dt>Name:</dt>
 <dd id="name">[%person.name || "Name missing"%]</dd>
-[% IF user.admin || user.id == person.id  %]
-<dt>Birth Date:</dt>
-<dd>[%person.born%]</dd>
-[% ELSE %]
-<dt>Age:</dt>
-<dd>[%person.age%]</dd>
-[%END%]
 <dt>Email:</dt>
 <dd id="email">
 [% IF user.admin || user.id == person.id  %]
 [%person.email%]
 [% ELSE %]
-*private*
+(private)
 [% END %]
 </dd>
+<dt>Age:</dt>
+<dd>[%person.age || '(Unknown)' %] <dd>
+<dt>Gender:</dt>
+<dd>[% person.gender || '(Unknown)' %]</dd>
+<dt>Industry:</dt>
+<dd>[% person.Industry || '(Unknown)' %]</dd>
+<dt>Interests</dt>
+<dd>[% person.interests_formatted || 'Nothing entered' %]</dd>
+<dt>Music</dt>
+<dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+<dt>Movies</dt>
+<dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+<dt><small>Registered at site:</small></dt>
+<dd><small>[%person.registered.ymd%]</small></dd>
 </dl>
-<script language="JavaScript">
-[% IF user.admin || user.id == person.id  %]
- new Ajax.InPlaceEditor('name', '[%c.uri_for(page.path,'.user/name')%]', {rows:1,cols:30});
-new Ajax.InPlaceEditor('email', '[%c.uri_for(page.path,'.user/email')%]', {rows:1,cols:30});
-[% END %]
- </script>
 </div>
         <div id="bottomnav">&nbsp;
+ <a title="Change profile content" href="[% c.uri_for( page.path,'.editprofile' ) %]" accesskey="E">Edit Profile</a>
 [%PROCESS footer.tt %]

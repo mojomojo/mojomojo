@@ -11,7 +11,7 @@ use Catalyst qw/-Debug              Authentication::CDBI
 		FormValidator	    Prototype
 		Session::FastMmap   Singleton 
 		Static::Simple	    SubRequest	    
-		Unicode::Encoding   UploadProgress
+		UploadProgress	    Unicode 
 		/;
 
 use MojoMojo::Formatter::Wiki;
@@ -107,28 +107,12 @@ show a debug screen.
 
 =cut
 
-#sub end : Private {
-#    my ( $self, $c ) = @_;
-#    return 1 if $c->response->status =~ /^3\d\d$/;
-#    return 1 if $c->response->body;
-#        if ($c->req->action ne 'static') {
-#                $c->res->header('Cache-Control','no-cache');
-#        }
-#    unless ( $c->response->content_type ) {
-#       $c->response->content_type('text/html; charset=utf-8');
-#    }
-#    if ( $c->request->param('rest') ) {
-#	$c->stash->{template} = 'rest/'.$c->stash->{template};
-#    }
-#    $c->forward( 'MojoMojo::V::TT' );
-#    unless ($c->res->body) {
-#	$c->stash->{message}  = 'No data returned';
-#	$c->stash->{template} = 'message.tt';
-#	$c->res->status(404);
-
-#    }
-#    die "debubbah" if $c->debug() && $c->req->params->{die};
-#}
+sub end : Private {
+    my ( $self ) = shift;
+    my ( $c ) = @_;
+    $c->stash->{path} ||= '/';
+    $c->NEXT::end(@_);
+}
 
 =item auto
 

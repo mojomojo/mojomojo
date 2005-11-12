@@ -20,6 +20,23 @@ MojoMojo::M::Core::Person->has_many( 'pageversions' => 'MojoMojo::M::Core::PageV
 MojoMojo::M::Core::Person->has_many( 'rolemembers' => 'MojoMojo::M::Core::RoleMember' );
 MojoMojo::M::Core::Person->has_many( 'tags' => 'MojoMojo::M::Core::Tag' );
 
+__PACKAGE__->has_a(
+    registered => 'DateTime',
+    inflate => sub {
+        DateTime->from_epoch(epoch=>shift);
+    },
+    deflate => 'epoch'
+);
+
+
+__PACKAGE__->has_a(
+    born => 'DateTime',
+    inflate => sub {
+        DateTime->from_epoch(epoch=>shift);
+    },
+    deflate => 'epoch'
+);
+
 =item get_user <user>
 
 Takes a username, returns a Person object.

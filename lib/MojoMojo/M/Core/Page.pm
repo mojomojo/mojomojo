@@ -16,6 +16,7 @@ This class models only "live" MojoMojo pages.
 
 __PACKAGE__->columns( Essential => qw/name name_orig parent depth/ );
 __PACKAGE__->columns( TEMP      => qw/path/ );
+#
 
 # automatically set the path TEMP column on select: deprecated
 # in favor of set_paths (NOT set_path)

@@ -3,6 +3,7 @@ package MojoMojo::C::Jsrpc;
 use strict;
 use base 'Catalyst::Base';
 use HTML::Entities;
+use utf8;
 
 =head1 NAME
 
@@ -35,6 +36,7 @@ sub render : Local {
     if ( $input && $input =~ /(\S+)/ ) {
         $output =  MojoMojo::M::Core::Content->formatted( $c, $input );
     }
+    utf8::decode($output);
     $c->res->output( $output );
 }
 

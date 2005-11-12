@@ -4,6 +4,7 @@ use strict;
 use base 'Catalyst::Base';
 
 use Digest::MD5 qw/md5_hex/;
+use Data::FormValidator::Constraints::DateTime qw(:all);
 
 my $auth_class = MojoMojo->config->{auth_class};
 
@@ -212,7 +213,49 @@ sub profile : Global {
     }
 }
 
+sub editprofile : Global {
+    my ($self,$c)=@_;
+    my $page=$c->stash->{page};
+    my $user=MojoMojo::M::Core::Person->get_user($page->name_orig);
+    if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
+		   $user->id eq $c->stash->{user}->id ) ) {
+          $c->stash->{person}=$user;
+	  $c->stash->{years} = [ 1905 .. 2005 ];
+	  $c->stash->{months} = [ 1 .. 12 ];
+	  $c->stash->{days} = [ 1 .. 31 ];
+          $c->stash->{template}='user/editprofile.tt';
+    } else { 
+        $c->stash->{template}='message.tt';
+        $c->stash->{message}='User not found!';
+    }
 
+}
+
+sub do_editprofile : Global {
+    my ( $self, $c ) = @_;
+    $c->form(required => [qw(name email born)],
+	     optional => [MojoMojo::M::Core::Person->columns],
+             defaults  => { gender => undef }, 
+	     constraint_methods => {
+		born => ymd_to_datetime(qw(birth_year birth_month birth_day))
+	     },
+	     untaint_all_constraints=>1,
+           );
+
+    if ($c->form->has_missing) {
+        $c->stash->{message}='You have to fill in all required fields.'. 
+        'the following are missing: <b>'.
+        join(', ',$c->form->missing()).'</b>';
+    } elsif ($c->form->has_invalid) {
+        $c->stash->{message}='Some fields are invalid. Please '.
+                             'correct them and try again:';
+    } else {
+	my $user=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name_orig);
+	$user->update_from_form($c->form);
+	return $c->forward('profile');
+    }
+    $c->forward('editprofile');
+}
 
 =back
 
