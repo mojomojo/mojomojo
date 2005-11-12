@@ -2,7 +2,7 @@
 
 BEGIN { 
     $ENV{CATALYST_ENGINE} ||= 'HTTP';
-    $ENV{CATALYST_SCRIPT_GEN} = 8;
+    $ENV{CATALYST_SCRIPT_GEN} = 10;
 }  
 
 use strict;
@@ -10,7 +10,6 @@ use Getopt::Long;
 use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
-use MojoMojo;
 
 my $fork          = 0;
 my $help          = 0;
@@ -33,6 +32,12 @@ GetOptions(
 );
 
 pod2usage(1) if $help;
+
+if ( $restart ) {
+    $ENV{CATALYST_ENGINE} = 'HTTP::Restarter';
+}
+
+require MojoMojo;
 
 MojoMojo->run( $port, $host, {
     argv   => \@argv,

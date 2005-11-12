@@ -3,11 +3,24 @@
 BEGIN { $ENV{CATALYST_ENGINE} ||= 'FastCGI' }
 
 use strict;
+use Getopt::Long;
+use Pod::Usage;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
 use MojoMojo;
 
-MojoMojo->run;
+my $help = 0;
+my ( $listen, $nproc );
+ 
+GetOptions(
+    'help|?'     => \$help,
+    'listen|l=s' => \$listen,
+    'nproc|n=i'  => \$nproc,
+);
+
+pod2usage(1) if $help;
+
+MojoMojo->run( $listen, { nproc => $nproc } );
 
 1;
 
@@ -17,7 +30,16 @@ mojomojo_fastcgi.pl - Catalyst FastCGI
 
 =head1 SYNOPSIS
 
-See L<Catalyst::Manual>
+mojomojo_fastcgi.pl [options]
+ 
+ Options:
+   -? -help      display this help and exits
+   -l -listen    Socket path to listen on
+                 (defaults to standard input)
+                 can be HOST:PORT, :PORT or a
+                 filesystem path
+   -n -nproc     specify number of processes to keep
+                 to serve requests (defaults to 1)
 
 =head1 DESCRIPTION
 

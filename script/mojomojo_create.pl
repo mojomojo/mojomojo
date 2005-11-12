@@ -7,13 +7,19 @@ use Catalyst::Helper;
 
 my $help = 0;
 my $nonew = 0;
+my $short = 0;
 
-GetOptions( 'help|?' => \$help,
-	    'nonew'  => \$nonew );
+GetOptions(
+    'help|?' => \$help,
+    'nonew'  => \$nonew,
+    'short'  => \$short
+ );
 
 pod2usage(1) if ( $help || !$ARGV[0] );
 
-my $helper = Catalyst::Helper->new({'.newfiles' => !$nonew});
+my $helper =
+    Catalyst::Helper->new( { '.newfiles' => !$nonew, short => $short } );
+
 pod2usage(1) unless $helper->mk_component( 'MojoMojo', @ARGV );
 
 1;
@@ -27,8 +33,9 @@ mojomojo_create.pl - Create a new Catalyst Component
 mojomojo_create.pl [options] model|view|controller name [helper] [options]
 
  Options:
-   -help    display this help and exits
-   -nonew   don't create a .new file where a file to be created exists
+   -help     display this help and exits
+   -nonew    don't create a .new file where a file to be created exists
+   -short    use short types, like C instead of Controller...
 
  Examples:
    mojomojo_create.pl controller My::Controller
