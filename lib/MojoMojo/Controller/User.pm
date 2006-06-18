@@ -1,7 +1,7 @@
-package MojoMojo::C::User;
+package MojoMojo::Controller::User;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 
 use Digest::MD5 qw/md5_hex/;
 use Data::FormValidator::Constraints::DateTime qw(:all);

@@ -1,7 +1,7 @@
-package MojoMojo::C::Tag;
+package MojoMojo::Controller::Tag;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 use HTML::TagCloud;
 
 =head1 NAME

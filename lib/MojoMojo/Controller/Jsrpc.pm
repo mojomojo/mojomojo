@@ -1,7 +1,7 @@
-package MojoMojo::C::Jsrpc;
+package MojoMojo::Controller::Jsrpc;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 use HTML::Entities;
 use utf8;
 

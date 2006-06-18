@@ -1,7 +1,7 @@
-package MojoMojo::C::Page;
+package MojoMojo::Controller::Page;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 use IO::Scalar;
 use URI;
 use Time::Piece;

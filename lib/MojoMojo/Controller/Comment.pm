@@ -1,8 +1,8 @@
-package MojoMojo::C::Comment;
+package MojoMojo::Controller::Comment;
 
 use strict;
 
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 
 =head1 NAME
 

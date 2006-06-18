@@ -1,7 +1,7 @@
-package MojoMojo::C::Export;
+package MojoMojo::Controller::Export;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 
 use Archive::Zip;
 use Time::Piece;

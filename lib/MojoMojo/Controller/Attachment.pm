@@ -1,7 +1,7 @@
-package MojoMojo::C::Attachment;
+package MojoMojo::Controller::Attachment;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 use Archive::Zip qw(:ERROR_CODES);
 use File::MimeInfo::Magic;
 use File::Slurp;

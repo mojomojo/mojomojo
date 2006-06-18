@@ -1,7 +1,7 @@
-package MojoMojo::C::PageAdmin;
+package MojoMojo::Controller::PageAdmin;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 
 my $m_base          = 'MojoMojo::M::Core::';
 my $m_page_class    = $m_base . 'Page';
