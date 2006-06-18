@@ -1,4 +1,4 @@
-package MojoMojo::V::TT;
+package MojoMojo::View::TT;
 
 use strict;
 use base 'Catalyst::View::TT';
