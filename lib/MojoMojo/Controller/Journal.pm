@@ -6,7 +6,7 @@ use base 'Catalyst::Controller';
 
 =head1 NAME
 
-MojoMojo::C::Journal - Journaling for MojoMojo?
+MojoMojo::Controller::Journal - Journaling for MojoMojo?
 
 =head1 SYNOPSIS
 

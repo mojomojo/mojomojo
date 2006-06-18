@@ -5,7 +5,7 @@ use base 'Catalyst::Controller';
 
 =head1 NAME
 
-MojoMojo::C::Admin - Catalyst component
+MojoMojo::Controller::Admin - Catalyst component
 
 =head1 DESCRIPTION
 
@@ -25,7 +25,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
-        $c->stash->{message}='sorry bubba, gotta be admin';
+        $c->stash->{message}='Sorry bubba, gotta be admin';
         $c->stash->{template}='message.tt';
         return 0;
     }

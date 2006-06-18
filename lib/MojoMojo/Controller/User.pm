@@ -10,7 +10,7 @@ my $auth_class = MojoMojo->config->{auth_class};
 
 =head1 NAME
 
-MojoMojo::C::User - Login/User Management Controller
+MojoMojo::Controller::User - Login/User Management Controller
 
 
 =head1 DESCRIPTION

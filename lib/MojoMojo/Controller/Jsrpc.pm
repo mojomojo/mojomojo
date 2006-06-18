@@ -7,7 +7,7 @@ use utf8;
 
 =head1 NAME
 
-MojoMojo::C::Jsrpc - Various JsRPC functions.
+MojoMojo::Controller::Jsrpc - Various JsRPC functions.
 
 =head1 SYNOPSIS
 

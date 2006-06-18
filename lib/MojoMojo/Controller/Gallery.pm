@@ -5,7 +5,7 @@ use base 'Catalyst::Controller';
 
 =head1 NAME
 
-MojoMojo::C::Gallery - Page gallery.
+MojoMojo::Controller::Gallery - Page gallery.
 
 =head1 SYNOPSIS
 

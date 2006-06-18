@@ -6,7 +6,7 @@ use base 'Catalyst::Controller';
 
 =head1 NAME
 
-MojoMojo::C::Comment - MojoMojo Comment controller
+MojoMojo::Controller::Comment - MojoMojo Comment controller
 
 See L<MojoMojo>
 

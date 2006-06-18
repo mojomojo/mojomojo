@@ -11,7 +11,7 @@ my $search_engine   = 'MojoMojo::M::Search::Plucene';
 
 =head1 NAME
 
-MojoMojo::C::PageAdmin - MojoMojo Page Administration
+MojoMojo::Controller::PageAdmin - MojoMojo Page Administration
 
 =head1 SYNOPSIS
 

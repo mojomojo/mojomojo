@@ -10,7 +10,7 @@ my $model = 'MojoMojo::M::Core::Page';
 
 =head1 NAME
 
-MojoMojo::C::Export - Export / Import related controller
+MojoMojo::Controller::Export - Export / Import related controller
 
 =head1 SYNOPSIS
 
