@@ -148,7 +148,7 @@ sub previous {
     my ($self) = @_;
     return (
         $self->version > 1
-        ? __PACKAGE__->retrieve(
+        ? __PACKAGE__->find(
             page    => $self->page,
             version => $self->version - 1
           )

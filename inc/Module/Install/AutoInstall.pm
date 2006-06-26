@@ -1,6 +1,15 @@
-#line 1 "inc/Module/Install/AutoInstall.pm - /usr/local/lib/perl5/site_perl/5.8.5/Module/Install/AutoInstall.pm"
+#line 1
 package Module::Install::AutoInstall;
-use Module::Install::Base; @ISA = qw(Module::Install::Base);
+
+use strict;
+use Module::Install::Base;
+
+use vars qw{$VERSION $ISCORE @ISA};
+BEGIN {
+	$VERSION = '0.63';
+	$ISCORE  = 1;
+	@ISA     = qw{Module::Install::Base};
+}
 
 sub AutoInstall { $_[0] }
 
@@ -22,31 +31,31 @@ sub auto_install {
     my @core = map @$_, map @$_, grep ref,
                $self->build_requires, $self->requires;
 
-    while ( @core and @_ > 1 and $_[0] =~ /^-\w+$/ ) {
-        push @core, splice(@_, 0, 2);
-    }
+    my @config = @_;
 
-    # We'll need ExtUtils::AutoInstall
-    $self->include('ExtUtils::AutoInstall');
-    require ExtUtils::AutoInstall;
+    # We'll need Module::AutoInstall
+    $self->include('Module::AutoInstall');
+    require Module::AutoInstall;
 
-    ExtUtils::AutoInstall->import(
-        (@core ? (-core => \@core) : ()), @_, $self->features
+    Module::AutoInstall->import(
+        (@config ? (-config => \@config) : ()),
+        (@core   ? (-core   => \@core)   : ()),
+        $self->features,
     );
 
-    $self->makemaker_args( ExtUtils::AutoInstall::_make_args() );
+    $self->makemaker_args( Module::AutoInstall::_make_args() );
 
     my $class = ref($self);
     $self->postamble(
         "# --- $class section:\n" .
-        ExtUtils::AutoInstall::postamble()
+        Module::AutoInstall::postamble()
     );
 }
 
 sub auto_install_now {
     my $self = shift;
-    $self->auto_install;
-    ExtUtils::AutoInstall::do_install();
+    $self->auto_install(@_);
+    Module::AutoInstall::do_install();
 }
 
 1;

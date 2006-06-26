@@ -31,7 +31,7 @@ sub default : Private {
     $c->stash->{template} = 'gallery.tt';
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
-    my ($pager,$iterator) =MojoMojo::M::Core::Photo->pager( 
+    my ($pager,$iterator) =$c->model("DBIC::Photo")->pager( 
         'attachment.page'  =>$c->stash->{page}, 
           { page           =>$page || 1,
             rows           => 12,
@@ -50,7 +50,7 @@ descendants of the page with the given tag.
 
 sub by_tag : Local {
     my ( $self, $c, $tag,$page) = @_;
-    $tag=MojoMojo::M::Core::Tag->search(tag=>$tag)->next;
+    $tag=$c->model("DBIC::Tag")->search(tag=>$tag)->next;
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{tag}      = $tag->tag;
     my $conditions        = { 'tags.tag' => $tag->tag };
@@ -58,7 +58,7 @@ sub by_tag : Local {
           map { $_->id  } ($c->stash->{page}->descendants,
                            $c->stash->{page}) ] 
         unless length($c->stash->{page}->path) == 1;  # root
-    my ( $pager,$iterator ) =MojoMojo::M::Core::Photo->pager(
+    my ( $pager,$iterator ) =$c->model("DBIC::Photo")->pager(
         $conditions, { 
             page     => $page || 1,
             rows     => 12,
@@ -74,7 +74,7 @@ sub by_tag : Local {
 
 sub p : Global {
     my ( $self, $c, $photo)  = @_;
-    $photo                   = MojoMojo::M::Core::Photo->retrieve($photo);
+    $photo                   = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{photo}       = $photo;
     $c->forward( 'inline_tags' );
     $c->stash->{template}    =  'gallery/photo.tt';
@@ -96,7 +96,7 @@ show a picture in tag gallery.
 
 sub p_by_tag : Global {
     my ( $self, $c, $tag, $photo ) = @_;
-    $photo                = MojoMojo::M::Core::Photo->retrieve($photo);
+    $photo                = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{photo}    = $photo;
     $c->stash->{tag}      = $tag; 
     $c->forward( 'inline_tags' );
@@ -127,12 +127,12 @@ sub tag : Local {
     ( $tagname )= $tagname =~ m/([\w\s]+)/;
     foreach my $tag ( split m/\s/,$tagname ) {
         if (  $tag && !
-            MojoMojo::M::Core::Tag->search(
+            $c->model("DBIC::Tag")->search(
                 photo   => $photo,
                 person => $c->stash->{user},
                 tag    => $tag
             )->next() ) {
-            MojoMojo::M::Core::Tag->create({
+            $c->model("DBIC::Tag")->create({
                 photo  => $photo,
                 tag    => $tag,
                 person => $c->stash->{user}
@@ -151,7 +151,7 @@ remove a tag to a page. return list of yours and popular tags.
 
 sub untag : Local {
     my ( $self, $c, $photo, $tagname ) = @_;
-    my $tag = MojoMojo::M::Core::Tag->search(
+    my $tag = $c->model("DBIC::Tag")->search(
         photo   => $photo,
         person => $c->stash->{user},
         tag    => $tagname
@@ -175,7 +175,7 @@ sub inline_tags : Local {
     $c->stash->{highlight} = $highlight;
     my $photo=$c->stash->{photo}||$c->req->params->{photo};
     $c->log->info('photo is '.$photo);
-    $photo=MojoMojo::M::Core::Photo->retrieve($photo) unless ref $photo;
+    $photo=$c->model("DBIC::Photo")->find($photo) unless ref $photo;
     $c->stash->{photo}=$photo;
     $c->log->info('user is '.$c->req->{user_id});
     if ($c->stash->{user}) {
@@ -198,7 +198,7 @@ Ajax method for updating picture descriptions inline.
 sub description : Local { 
     my ( $self, $c, $photo ) = @_;
     $c->form(required=>[qw/description/]);
-    my $img=MojoMojo::M::Core::Photo->retrieve($photo);
+    my $img=$c->model("DBIC::Photo")->find($photo);
     unless ($c->form->has_missing && $c->form->has_invalid ) {
       $img->update_from_form($c->form);
       $img->update;
@@ -215,7 +215,7 @@ Ajax method for updating picture titles inline.
 sub title : Local { 
     my ( $self, $c, $photo ) = @_;
     $c->form(required=>[qw/title/]);
-    my $img=MojoMojo::M::Core::Photo->retrieve($photo);
+    my $img=$c->model("DBIC::Photo")->find($photo);
     unless ($c->form->has_missing && $c->form->has_invalid ) {
       $img->update_from_form($c->form);
       $img->update;
@@ -227,7 +227,7 @@ sub title : Local {
 
 sub tags : Local {
     my ($self, $c, $tag ) = @_;
-    $c->stash->{tags}=[ MojoMojo::M::Core::Tag->by_photo ];
+    $c->stash->{tags}=[ $c->model("DBIC::Tag")->by_photo ];
     my $cloud=HTML::TagCloud->new();
     foreach my $tag (@{$c->stash->{tags}}) {
         $cloud->add($tag->tag,

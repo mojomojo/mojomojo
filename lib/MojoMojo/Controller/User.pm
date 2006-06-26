@@ -52,7 +52,7 @@ Show a list of the active users with a link to their page.
 
 sub users : Global {
    my ($elf,$c,$tag)  = @_;   
-   my ($p,$res) = MojoMojo::M::Core::Person->pager(
+   my ($p,$res) = $c->model("DBIC::Person")->pager(
       { active=>1 } , { 
       page     => $c->req->param('page')||1,
       rows     => 20,
@@ -72,7 +72,7 @@ sub prefs : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template}='user/prefs.tt';
     my @proto=@{$c->stash->{proto_pages}};
-    $c->stash->{page_user}=MojoMojo::M::Core::Person->get_user(
+    $c->stash->{page_user}=$c->model("DBIC::Person")->get_user(
         $proto[0]->{name} || $c->stash->{page}->name_orig 
     );
     unless ($c->stash->{page_user} && (
@@ -143,7 +143,7 @@ sub do_register : Global {
     $c->stash->{template} = 'user/register.tt';
     $c->form(required => [qw(login name pass confirm email)],
              defaults  => { active => -1 }, 
-             constraints => MojoMojo::M::Core::Person->registration_profile);
+             constraints => $c->model("DBIC::Person")->registration_profile);
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'. 
         'the following are missing: <b>'.
@@ -152,7 +152,7 @@ sub do_register : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
-        my $user=MojoMojo::M::Core::Person->create_from_form($c->form);
+        my $user=$c->model("DBIC::Person")->create_from_form($c->form);
         $c->forward('/user/login');
         $c->pref('entropy') || $c->pref('entropy',rand);
         $c->email( header => [
@@ -179,7 +179,7 @@ earlier. Non-validated users will only be able to log out.
 
 sub validate : Global {
     my ($self,$c,$user,$check)=@_;
-    $user=MojoMojo::M::Core::Person->retrieve($user);
+    $user=$c->model("DBIC::Person")->find($user);
     if($check = md5_hex($user->email.$c->pref('entropy'))) {
         $user->active(0);
         $user->update();
@@ -203,7 +203,7 @@ Show user profile.
 sub profile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
-    my $user=MojoMojo::M::Core::Person->get_user($page->name_orig);
+    my $user=$c->model("DBIC::Person")->get_user($page->name_orig);
     if ( $user ) {
           $c->stash->{person}=$user;
           $c->stash->{template}='user/profile.tt';
@@ -216,7 +216,7 @@ sub profile : Global {
 sub editprofile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
-    my $user=MojoMojo::M::Core::Person->get_user($page->name_orig);
+    my $user=$c->model("DBIC::Person")->get_user($page->name_orig);
     if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
 		   $user->id eq $c->stash->{user}->id ) ) {
           $c->stash->{person}=$user;
@@ -234,7 +234,7 @@ sub editprofile : Global {
 sub do_editprofile : Global {
     my ( $self, $c ) = @_;
     $c->form(required => [qw(name email born)],
-	     optional => [MojoMojo::M::Core::Person->columns],
+	     optional => [$c->model("DBIC::Person")->columns],
              defaults  => { gender => undef }, 
 	     constraint_methods => {
 		born => ymd_to_datetime(qw(birth_year birth_month birth_day))
@@ -250,7 +250,7 @@ sub do_editprofile : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
-	my $user=MojoMojo::M::Core::Person->get_user($c->stash->{page}->name_orig);
+	my $user=$c->model("DBIC::Person")->get_user($c->stash->{page}->name_orig);
 	$user->update_from_form($c->form);
 	return $c->forward('profile');
     }

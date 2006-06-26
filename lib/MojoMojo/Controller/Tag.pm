@@ -38,9 +38,9 @@ sub list : Private {
     $c->stash->{template} = 'page/list.tt';
 
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used ];
+    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants($tag) ];
-    $c->stash->{related}   = [ MojoMojo::M::Core::Tag->related_to($tag) ];
+    $c->stash->{related}   = [ $c->model("DBIC::Tag")->related_to($tag) ];
 }
 
 =item recent
@@ -56,7 +56,7 @@ sub recent : Private {
     $c->stash->{template} = 'page/recent.tt';
     return unless $tag;
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used ];
+    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
   
 }
@@ -70,7 +70,7 @@ tag cloud for pages.
 sub tags : Global {
     my ($self, $c, $tag ) = @_;
     $c->stash->{tags}=[ 
-        MojoMojo::M::Core::Tag->by_page($c->stash->{page}) 
+        $c->model("DBIC::Tag")->by_page($c->stash->{page}) 
     ];
     my $cloud=HTML::TagCloud->new();
     foreach my $tag (@{$c->stash->{tags}}) {

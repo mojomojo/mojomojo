@@ -34,7 +34,7 @@ sub render : Local {
     my $output  =  "Please type something";
     my $input   =  decode_entities($c->req->params->{content});
     if ( $input && $input =~ /(\S+)/ ) {
-        $output =  MojoMojo::M::Core::Content->formatted( $c, $input );
+        $output =  $c->model("DBIC::Content")->formatted( $c, $input );
     }
     utf8::decode($output);
     $c->res->output( $output );
@@ -49,7 +49,7 @@ formatted for inclusion in a vertical tree navigation menu.
 
 sub child_menu : Local {
     my ( $self, $c, $page_id ) = @_;
-    $c->stash->{parent_page} = MojoMojo::M::Core::Page->retrieve( 
+    $c->stash->{parent_page} = $c->model("DBIC::Page")->find( 
         $c->req->params->{page_id} 
     );
     $c->stash->{template}    = 'child_menu.tt';
@@ -64,12 +64,12 @@ and diffs it against the previous version.
 
 sub diff : Local {
     my ( $self, $c, $page, $revision, $against ) = @_;
-    $revision = MojoMojo::M::Core::Content->retrieve(
+    $revision = $c->model("DBIC::Content")->find(
         page    => $page, 
         version => $revision
     );
     if ( my $previous = $revision->previous || 
-        MojoMojo::M::Core::Content->retrieve(
+        $c->model("DBIC::Content")->find(
             page    => $page,
             version => $against
         ) 
@@ -103,7 +103,7 @@ sub tag : Local {
     my $page = $c->stash->{page};
     foreach my $tag ( split m/\s/,$tagname ) {
         if ( $tag && !
-            MojoMojo::M::Core::Tag->search(
+            $c->model("DBIC::Tag")->search(
                 page   => $page,
                 person => $c->req->{user_id},
                 tag    => $tagname
@@ -129,7 +129,7 @@ sub untag : Local {
     my ( $self, $c, $tagname ) = @_;
     my $page = $c->stash->{page};
     die "Page " . $page . " not found" unless ref $page;
-    my $tag = MojoMojo::M::Core::Tag->search(
+    my $tag = $c->model("DBIC::Tag")->search(
         page   => $page,
         person => $c->req->{user_id},
         tag    => $tagname
@@ -147,7 +147,7 @@ Inline info on hoved for gallery photos.
 
 sub imginfo : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->stash->{photo}    = MojoMojo::M::Core::Photo->retrieve($photo);
+    $c->stash->{photo}    = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
 

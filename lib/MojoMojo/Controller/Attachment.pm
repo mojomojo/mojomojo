@@ -65,7 +65,7 @@ sub attachments : Global {
             }
             foreach my $member ($zip->members) {
                 next if $member->isDirectory;
-                my $att = MojoMojo::M::Core::Attachment->
+                my $att = $c->model("DBIC::Attachment")->
                    create_from_file( $page, $member->fileName,
                    sub {my $file=shift;
                     $member->extractToFileNamed($file)});
@@ -78,7 +78,7 @@ sub attachments : Global {
           }
       } else {
           my $att =
-          MojoMojo::M::Core::Attachment->create_from_file ( $page, $file, 
+          $c->model("DBIC::Attachment")->create_from_file ( $page, $file, 
               sub { 
                   my $file=shift; 
                   $upload->link_to($file) || $upload->copy_to($file);
@@ -112,7 +112,7 @@ an attachment id.
 sub default : Private {
     my ( $self, $c, $called, $att, $action ) = @_;
 
-    $att=MojoMojo::M::Core::Attachment->retrieve($att);
+    $att=$c->model("DBIC::Attachment")->find($att);
     unless ($att) {
         $c->stash->{template}='message.tt';
         $c->stash->{message}= "Attachment not found.";
@@ -122,7 +122,8 @@ sub default : Private {
         $c->forward("$action", [$att,@_] );
     }
     unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
-        $c->res->output( scalar( read_file( $att->filename)));
+        $c->res->output( scalar( read_file( 
+            $c->path_to('uploads',$att->id))));
         $c->res->headers->header( 'content-type', $att->contenttype );
         $c->res->headers->header(
             "Content-Disposition" => "inline; filename=".$att->name 
@@ -139,7 +140,8 @@ content-disposition.
 
 sub download : Private {
     my ( $self, $c, $att ) = @_;
-    $c->res->output( scalar(read_file( $att->filename)) );
+    $c->res->output( scalar(read_file( 
+        $c->path_to('uploads',$att->id))) );
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename=" . $att->name 
@@ -154,8 +156,11 @@ thumb action for attachments. makes 100x100px thumbs
 
 sub thumb : Private {
     my ( $self, $c, $att ) = @_;
-    $att->make_thumb() unless -f $att->filename . ".thumb" ;
-    $c->res->output( scalar(read_file($att->filename. '.thumb')) );
+    $att->make_thumb() unless -f 
+       $c->path_to('uploads',$att->id . ".thumb");
+
+    $c->res->output( scalar(read_file(
+        $c->path_to('uploads',$att->id. '.thumb'))) );
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename=" . $att->name 
@@ -170,10 +175,11 @@ show inline attachment
 
 sub inline : Private {
     my ( $self, $c, $att ) = @_;
-    $att->make_inline
-      unless -f $att->filename . ".inline" ;
+    $att->photo->make_inline
+      unless -f $c->path_to('uploads',$att->id . '.inline');
     $c->res->output(
-        scalar( read_file( $att->filename . '.inline'))
+        scalar( read_file( 
+           $c->path_to('uploads',$att->id . '.inline'))
      );
     $c->res->headers->header( 'content-type',
         $att->contenttype );

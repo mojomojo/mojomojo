@@ -65,7 +65,7 @@ sub update : Local {
     }
     my @users =  split(m/\s+/,$c->form->valid('admins'));
     foreach my $user ( @users ) {
-        unless (MojoMojo::M::Core::Person->get_user($user)) {
+        unless ($c->model("DBIC::Person")->get_user($user)) {
             $c->res->body('Cant find admin user: '.$user);
             return; 
         }
@@ -88,7 +88,7 @@ sub user : Local {
     my ( $self, $c, $user ) = @_;
     $c->forward('update_user') if $user;
     $c->stash->{template}='settings/user.tt';
-    my ($pager,$iterator) =MojoMojo::M::Core::Person->pager( 
+    my ($pager,$iterator) =$c->model("DBIC::Person")->pager( 
        {}, {
             page           =>$c->req->param('page') || 1,
             rows             => 20,
@@ -106,7 +106,7 @@ Update user based on user listing.
 
 sub update_user : Private {
     my ( $self, $c, $user, $action ) = @_;
-    $user=MojoMojo::M::Core::Person->retrieve($user) || return;
+    $user=$c->model("DBIC::Person")->find($user) || return;
     if ($action eq 'active') {
         $user->active(! $user->active);
     }

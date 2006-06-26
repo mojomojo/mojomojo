@@ -113,7 +113,7 @@ sub open_gap {
     $parent->remove_from_object_index;
 
     # get the new nested set numbers for the parent
-    $parent = $class->retrieve( $parent_id );
+    $parent = $class->find( $parent_id );
     return $parent;
 }
 
@@ -651,7 +651,7 @@ Returns the currently active content object for this page.
 
 sub content {
     my ($self) = @_;
-    return MojoMojo::M::Core::Content->retrieve(
+    return MojoMojo::M::Core::Content->find(
         page    => $self->id,
         version => $self->content_version,
     );
@@ -667,7 +667,7 @@ this Page object.
 
 sub page_version {
     my ($self) = @_;
-    return MojoMojo::M::Core::PageVersion->retrieve(
+    return MojoMojo::M::Core::PageVersion->find(
         page    => $self->id,
         version => $self->version,
     );

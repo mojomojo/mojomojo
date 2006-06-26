@@ -7,12 +7,12 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components("PK::Auto", "Core");
+__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",
   "active",
-  "registered",
+  "registered" => {data_type => 'bigint', epoch => 'ctime'},
   "views",
   "photo",
   "login",
@@ -20,7 +20,7 @@ __PACKAGE__->add_columns(
   "email",
   "pass",
   "timezone",
-  "born",
+  "born" => {data_type => 'bigint', epoch => 1},
   "gender",
   "occupation",
   "industry",
@@ -44,5 +44,39 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many("contents", "Content", { "foreign.creator" => "self.id" });
 
-1;
+sub get_person : ResultSet {
+    my ($self,$login) = @_;
+    my ($person) = $self->search({login=>$login});
+}
 
+sub is_admin {
+    my $self   =shift;
+    my $admins = MojoMojo->pref('admins');
+    my $login = $self->login;
+    return 1 if $login && $admins =~m/\b$login\b/ ;
+    return 0;
+}
+
+sub link {
+   my ($self) = @_;
+   #FIXME: Link to profile here?
+   return lc "/".($self->login || MojoMojo->pref('anonymous_user'));
+}
+
+=item can_edit <path>
+
+Checks if a user has rights to edit a given path.
+
+=cut
+
+sub can_edit {
+    my ( $self, $page ) = @_;
+    return 0 unless $self->active;
+     # allow admins, and users editing their pages
+    return 1 if $self->is_admin;
+    my $link=$self->link;
+    return 1 if $page =~ m|^$link\b|i;
+    return 0;
+}
+
+1;

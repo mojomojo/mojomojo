@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl -w
+#!/usr/bin/perl -w
 
 BEGIN { $ENV{CATALYST_ENGINE} ||= 'FastCGI' }
 
@@ -10,17 +10,27 @@ use lib "$FindBin::Bin/../lib";
 use MojoMojo;
 
 my $help = 0;
-my ( $listen, $nproc );
+my ( $listen, $nproc, $pidfile, $manager, $detach );
  
 GetOptions(
-    'help|?'     => \$help,
-    'listen|l=s' => \$listen,
-    'nproc|n=i'  => \$nproc,
+    'help|?'      => \$help,
+    'listen|l=s'  => \$listen,
+    'nproc|n=i'   => \$nproc,
+    'pidfile|p=s' => \$pidfile,
+    'manager|M=s' => \$manager,
+    'daemon|d'    => \$detach,
 );
 
 pod2usage(1) if $help;
 
-MojoMojo->run( $listen, { nproc => $nproc } );
+MojoMojo->run( 
+    $listen, 
+    {   nproc   => $nproc,
+        pidfile => $pidfile, 
+        manager => $manager,
+        detach  => $detach,
+    }
+);
 
 1;
 
@@ -39,7 +49,14 @@ mojomojo_fastcgi.pl [options]
                  can be HOST:PORT, :PORT or a
                  filesystem path
    -n -nproc     specify number of processes to keep
-                 to serve requests (defaults to 1)
+                 to serve requests (defaults to 1,
+                 requires -listen)
+   -p -pidfile   specify filename for pid file
+                 (requires -listen)
+   -d -daemon    daemonize (requires -listen)
+   -M -manager   specify alternate process manager
+                 (FCGI::ProcManager sub-class)
+                 or empty string to disable
 
 =head1 DESCRIPTION
 

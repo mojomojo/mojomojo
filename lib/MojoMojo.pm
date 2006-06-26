@@ -1,21 +1,22 @@
 package MojoMojo;
 
-require HTTP::Daemon; $HTTP::Daemon::PROTO = "HTTP/1.0";
 use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/-Debug              Authentication::CDBI 
+use Catalyst qw/-Debug              Authentication
+		Authentication::Store::DBIC 
+		Authentication::Credential::Password 
 		Cache::FileCache    DefaultEnd
 		Email	            FillInForm	    
 		FormValidator	    Prototype
-		Session::FastMmap   Singleton 
+		Session		    Session::Store::File
+		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
 		/;
 
 use MojoMojo::Formatter::Wiki;
-use YAML ();
 use Module::Pluggable::Ordered 
     search_path => [qw/MojoMojo/], 
     except	=> qr/^MojoMojo::Plugin::/, 
@@ -24,26 +25,23 @@ use Module::Pluggable::Ordered
 our $VERSION='0.05';
 
 MojoMojo->prepare_home();
-MojoMojo->config( 
-    YAML::LoadFile( file(MojoMojo->config->{home},'/mojomojo.yml') ) );
 
 #FIXME: Something smells here. Should be cleaned up
-MojoMojo->config->{auth_class} ||= 'MojoMojo::Plugin::DefaultAuth';
-my $auth_class = MojoMojo->config->{auth_class};
-eval "CORE::require $auth_class";
-die "Couldn't require $auth_class : $@" if $@;
+#MojoMojo->config->{auth_class} ||= 'MojoMojo::Plugin::DefaultAuth';
+#my $auth_class = MojoMojo->config->{auth_class};
+#eval "CORE::require $auth_class";
+#die "Couldn't require $auth_class : $@" if $@;
 
-MojoMojo->config( authentication => {
-                    user_class     => 'MojoMojo::M::Core::Person',
+MojoMojo->config->{authentication}{dbic} = {
+                    user_class     => 'DBIC::Person',
                     user_field     => 'login',
-                    password_field => 'pass' } );
+                    password_field => 'pass' };
 
-MojoMojo->config( no_url_rewrite=>1 );
 MojoMojo->config( cache    => {storage => MojoMojo->config->{home}.'/cache'} );
-MojoMojo->config( encoding => 'UTF-8' ); # A valid Encode encoding
 
 MojoMojo->setup();
-MojoMojo::M::Search::Plucene->prepare_search_index();
+
+#MojoMojo::M::Search::Plucene->prepare_search_index();
 
 =head1 MojoMojo - not your daddy`s wiki.
 
@@ -68,66 +66,8 @@ powered by Catalyst.
 =over 4
 
 
-=item begin (builtin)
 
-=cut
 
-sub begin : Private {
-    my ( $self, $c ) = @_;
-    if ( $c->stash->{path} ) {
-        my ( $path_pages, $proto_pages ) = 
-	    MojoMojo::M::Core::Page->path_pages( $c->stash->{path} );
-        @{$c->stash}{qw/ path_pages proto_pages /} = 
-	    ( $path_pages, $proto_pages );
-        $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
-        $c->req->{user_id} && do {
-            $c->stash->{user} = 
-	    MojoMojo::M::Core::Person->retrieve( $c->req->{user_id} );
-        };
-    }
-}
-
-=item default (global)
-
-default action - serve the home node
-
-=cut
-
-sub default : Private {
-    my ( $self, $c )      = @_;
-    $c->stash->{message}  = "Couldn't find that page, jimmy";
-    $c->stash->{template} = 'message.tt';
-}
-
-=item end (builtin)
-
-At the end of any request, forward to view unless there is a template
-or response. then render the template. If param 'die' is passed, 
-show a debug screen.
-
-=cut
-
-sub end : Private {
-    my ( $self ) = shift;
-    my ( $c ) = @_;
-    $c->stash->{path} ||= '/';
-    $c->NEXT::end(@_);
-}
-
-=item auto
-
-runs for all requests, checks if user is in need of validation, and 
-intercepts the request if so.
-
-=cut
-
-sub auto : Private {
-    my ($self,$c) = @_;
-    return 1 unless $c->stash->{user};
-    return 1 if $c->stash->{user}->active != -1;
-    return 1 if $c->req->action eq 'logout';
-    $c->stash->{template}='user/validate.tt';
-}
 
 =back
 
@@ -165,7 +105,7 @@ then return the current setting.
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
-    $setting = MojoMojo::M::Core::Preference->find_or_create(
+    $setting = $c->model('DBIC::Preference')->find_or_create(
                                     { prefkey => $setting } );
     if ( defined $value ) {
         $setting->prefvalue($value);
@@ -210,9 +150,6 @@ sub fixw {
   $w =~ s/[^\w\/\.]//g;
   return $w;
 }
-
-# Disable performance info
-#sub Catalyst::Log::info {}
 
 1;
 

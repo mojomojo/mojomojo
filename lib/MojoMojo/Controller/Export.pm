@@ -6,7 +6,7 @@ use base 'Catalyst::Controller';
 use Archive::Zip;
 use Time::Piece;
 
-my $model = 'MojoMojo::M::Core::Page';
+my $model = '$c->model("DBIC::Page")';
 
 =head1 NAME
 

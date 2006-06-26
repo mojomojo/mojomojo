@@ -38,9 +38,9 @@ sub default : Private {
     unless (! $c->stash->{user} || 
               $c->form->has_missing || 
               $c->form->has_invalid ) {
-        MojoMojo::M::Core::Comment->create_from_form($c->form);
+        $c->model("DBIC::Comment")->create_from_form($c->form);
     }
-    $c->stash->{comments} = MojoMojo::M::Core::Comment->find_page(
+    $c->stash->{comments} = $c->model("DBIC::Comment")->find_page(
         $c->stash->{page}, 
         {order_by=>'posted'}
     );
@@ -70,7 +70,7 @@ Remove comments, provided user can edit the page the comment is on.
 
 sub remove : Local {
     my ( $self, $c, $comment ) = @_;
-    if ($comment=MojoMojo::M::Core::Comment->retrieve($comment)) {
+    if ($comment=$c->model("DBIC::Comment")->find($comment)) {
         if ( $comment->page->id == $c->stash->{page}->id &&
              $c->stash->{user}->can_edit($comment->page->path)) {
             $comment->delete();

@@ -22,12 +22,12 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many(
-  "wanted_pages",
+  "wantedpages",
   "WantedPage",
   { "foreign.from_page" => "self.id" },
 );
 __PACKAGE__->belongs_to("parent", "Page", { id => "parent" });
-__PACKAGE__->has_many("pages", "Page", { "foreign.parent" => "self.id" });
+__PACKAGE__->has_many("children", "Page", { "foreign.parent" => "self.id" });
 __PACKAGE__->belongs_to(
   "content",
   "Content",
@@ -40,13 +40,13 @@ __PACKAGE__->belongs_to(
 );
 __PACKAGE__->has_many("tags", "Tag", { "foreign.page" => "self.id" });
 __PACKAGE__->has_many(
-  "link_from_pages",
+  "links_from",
   "Link",
   { "foreign.from_page" => "self.id" },
 );
-__PACKAGE__->has_many("link_to_pages", "Link", { "foreign.to_page" => "self.id" });
+__PACKAGE__->has_many("links_to", "Link", { "foreign.to_page" => "self.id" });
 __PACKAGE__->has_many(
-  "role_privileges",
+  "roleprivileges",
   "RolePrivilege",
   { "foreign.page" => "self.id" },
 );

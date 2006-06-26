@@ -65,7 +65,7 @@ sub view : Global {
 
     my $rev = $c->req->params->{rev};
     if ( $rev && defined $page->content_version ) {
-        $content = MojoMojo::M::Core::Content->retrieve(
+        $content = $c->model("DBIC::Content")->find(
             page    => $page->id,
             version => $rev
         );
@@ -209,9 +209,9 @@ sub list : Global {
 
     # FIXME - real data here please
     $c->stash->{orphans}   = [];
-    $c->stash->{backlinks} = [ MojoMojo::M::Core::Link->search( to_page => $page->id ) ];
-    $c->stash->{wanted}    = [ MojoMojo::M::Core::WantedPage->retrieve_all ];
-    $c->stash->{tags}      = [ MojoMojo::M::Core::Tag->most_used() ];
+    $c->stash->{backlinks} = [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
+    $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->retrieve_all ];
+    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used() ];
 }
 
 =item recent (.recent)
@@ -225,7 +225,7 @@ sub recent : Global {
     return $c->forward('/tag/recent') if $tag;
     my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
-    $c->stash->{tags}     = [ MojoMojo::M::Core::Tag->most_used ];
+    $c->stash->{tags}     = [ $c->model("DBIC::Tag")->most_used ];
     $c->stash->{pages}    = [ $page->descendants_by_date ];
 
     # FIXME - needs to be populated even without tags

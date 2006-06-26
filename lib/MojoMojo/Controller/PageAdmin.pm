@@ -93,7 +93,7 @@ sub edit : Global {
         $stash->{page}    = $page;
         # Note that this isn't a real Content object, just a proto object!!!
         # It's just a hash, not blessed into the Content package.
-        $stash->{content} = MojoMojo::M::Core::Content->create_proto($page);
+        $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
         $stash->{content}->{creator} = $user;
         $c->req->params->{body} = $stash->{content}->{body}
            unless $c->req->params->{body};
@@ -115,7 +115,7 @@ sub edit : Global {
             proto_pages => $proto_pages,
             creator     => $user,
         );
-        MojoMojo::M::Core::Page->set_paths(@$path_pages);
+        $c->model("DBIC::Page")->set_paths(@$path_pages);
         $page = $path_pages->[ @$path_pages - 1 ];
     }
     $page->update_content( %$valid, %$unknown );
