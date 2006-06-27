@@ -8,11 +8,8 @@ use Time::Piece;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
-my $m_base          = 'MojoMojo::M::Core::';
-my $m_page_class    = $m_base . 'Page';
-my $m_content_class = $m_base . 'Content';
-my $m_verison_class = $m_base . 'PageVersion';
-my $search_engine   = 'MojoMojo::M::Search::Plucene';
+
+my $search_engine = 'Catalyst::Model::Search::Plucene';
 
 =head1 NAME
 
@@ -35,45 +32,45 @@ can be called with urls like "/page1/page2.action".
 
 =item  view (.view)
 
-This is probably the most common action in MojoMojo. A lot of the 
-other actions redispatches to this one. It will prepare the stash 
-for page view, and set the template to view.tt, unless another is
-already set.
+    This is probably the most common action in MojoMojo. A lot of the 
+    other actions redispatches to this one. It will prepare the stash 
+    for page view, and set the template to view.tt, unless another is
+    already set.
 
-It also takes an optional 'rev' parameter, in which case it will
-load the provided revision instead.
+    It also takes an optional 'rev' parameter, in which case it will
+    load the provided revision instead.
 
-=cut
+    =cut
 
-sub view : Global {
-    my ( $self, $c, $path ) = @_;
+    sub view : Global {
+	my ( $self, $c, $path ) = @_;
 
-    my $stash = $c->stash;
-    $stash->{template} ||= 'page/view.tt';
+	my $stash = $c->stash;
+	$stash->{template} ||= 'page/view.tt';
 
-    my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
+	my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
 
-    # we should always have at least "/" in path pages. if we don't,
-    # we must not have had these structures in the stash
+# we should always have at least "/" in path pages. if we don't,
+# we must not have had these structures in the stash
 
-    return $c->forward('suggest')
-        if $proto_pages && @$proto_pages;
+	return $c->forward('suggest')
+	    if $proto_pages && @$proto_pages;
 
-    my $page = $stash->{page};
+	my $page = $stash->{page};
 
-    my $content;
+	my $content;
 
-    my $rev = $c->req->params->{rev};
-    if ( $rev && defined $page->content_version ) {
-        $content = $c->model("DBIC::Content")->find(
-            page    => $page->id,
-            version => $rev
-        );
-        $stash->{rev} = ( defined $content ? $content->version : undef );
-        unless( $stash->{rev} ) {
-              $stash->{message} = 'No such revision for '.$page->name;
-              $stash->{template} = 'message.tt';
-        }
+	my $rev = $c->req->params->{rev};
+	if ( $rev && defined $page->content_version ) {
+	    $content = $c->model("DBIC::Content")->find(
+		    page    => $page->id,
+		    version => $rev
+		    );
+	    $stash->{rev} = ( defined $content ? $content->version : undef );
+	    unless( $stash->{rev} ) {
+		$stash->{message} = 'No such revision for '.$page->name;
+		$stash->{template} = 'message.tt';
+	    }
     }
     else {
         $content = $page->content;
@@ -95,7 +92,7 @@ sub search : Global {
 
     my $stash=$c->stash;
 
-    # number of search results to show per page
+# number of search results to show per page
     my $results_per_page = 10;
 
     my $page = $c->stash->{page};
@@ -108,55 +105,55 @@ sub search : Global {
 
     my $strip = HTML::Strip->new;
 
-    # FIXME: Cache search results.  This will require creating a new data structure since it's
-    #      not safe to cache $page objects.
+# FIXME: Cache search results.  This will require creating a new data structure since it's
+#      not safe to cache $page objects.
     my $results = [];
 
-    # for subtree searches, add the path info to the query, replacing slashes with X
+# for subtree searches, add the path info to the query, replacing slashes with X
     my $real_query = $q;    # this is for context matching later
-    if ( $search_type eq "subtree" ) {
-        my $fixed_path = $page->path;
-        $fixed_path =~ s/\//X/g;
-        $q = "_path:$fixed_path* AND " . $q;
-    }
+	if ( $search_type eq "subtree" ) {
+	    my $fixed_path = $page->path;
+	    $fixed_path =~ s/\//X/g;
+	    $q = "_path:$fixed_path* AND " . $q;
+	}
 
     foreach my $key ( $search_engine->query( $q ) ) {
 
-        my $page = $m_page_class->get_page( $key );
-        # add a snippet of text containing the search query
-        my $content = $strip->parse( $page->content->formatted($c) );
-        $strip->eof;
+	my $page = $c->model('DBIC::Page')->get_page( $key );
+# add a snippet of text containing the search query
+	my $content = $strip->parse( $page->content->formatted($c) );
+	$strip->eof;
 
-        # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
-        my $snippet = Text::Context->new( $content, split(/ /, $real_query) );
+# FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
+	my $snippet = Text::Context->new( $content, split(/ /, $real_query) );
 
-        my $result = {
-            snippet => $snippet->as_html,
-            page => $page,
-        };
-        push @$results, $result;
+	my $result = {
+	    snippet => $snippet->as_html,
+	    page => $page,
+	};
+	push @$results, $result;
     }
 
     my $result_count = scalar @$results;
     if ( $result_count ) {
-        # Paginate the results
-        # This is done even with even 1 page of results so the template doesn't need to do
-        # two separate things
-        my $pager = Data::Page->new;
-        $pager->total_entries( $result_count );
-        $pager->entries_per_page( $results_per_page );
-        $pager->current_page( $c->req->params->{p} || 1 );
+# Paginate the results
+# This is done even with even 1 page of results so the template doesn't need to do
+# two separate things
+	my $pager = Data::Page->new;
+	$pager->total_entries( $result_count );
+	$pager->entries_per_page( $results_per_page );
+	$pager->current_page( $c->req->params->{p} || 1 );
 
-        if ( $result_count > $results_per_page ) {
-            # trim down the results to just this page
-            @$results = $pager->splice( $results );
-        }
+	if ( $result_count > $results_per_page ) {
+# trim down the results to just this page
+	    @$results = $pager->splice( $results );
+	}
 
-        $c->stash->{pager} = $pager;
-        my $last_page = ( $pager->last_page > 10 ) ? 10 : $pager->last_page;
-        $c->stash->{pages_to_link} = [ 1 .. $last_page ];
-        $c->stash->{results} = $results;
-        $c->stash->{result_count} = $result_count;
+	$c->stash->{pager} = $pager;
+	my $last_page = ( $pager->last_page > 10 ) ? 10 : $pager->last_page;
+	$c->stash->{pages_to_link} = [ 1 .. $last_page ];
+	$c->stash->{results} = $results;
+	$c->stash->{result_count} = $result_count;
     }
 }
 

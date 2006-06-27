@@ -75,7 +75,7 @@ sub path_pages :ResultSet {
     ## FIXME: Continue porting here
 
     my @depths;
-    for my $proto ( $proto_pages )  {
+    for my $proto ( @proto_pages )  {
 	push @depths, -and => [ depth =>  $proto->{depth},
 	                        name  =>  $proto->{name}];
 
