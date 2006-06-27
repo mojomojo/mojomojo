@@ -180,7 +180,7 @@ sub inline : Private {
     $c->res->output(
         scalar( read_file( 
            $c->path_to('uploads',$att->id . '.inline'))
-     );
+     ));
     $c->res->headers->header( 'content-type',
         $att->contenttype );
     $c->res->headers->header(

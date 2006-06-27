@@ -5,7 +5,9 @@ package MojoMojo::Schema::Page;
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/Class::Accessor::Fast DBIx::Class/;
+
+__PACKAGE__->mk_accessors(qw/path/);
 
 __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("page");
