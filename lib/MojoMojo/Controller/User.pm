@@ -22,26 +22,40 @@ This controller allows user to Log In and Log out.
 
 =over 4
 
-=item logout (/.logout)
-
-Executes the logout method provided by the user's auth plugin class.
-
-=cut
-
-sub logout : Global {
-    no strict 'refs';
-    &{ $auth_class . '::logout' }( @_ );
-}
-
 =item login (/.login)
 
-Executes the login method provided by the user's auth plugin class.
+Log in through the authentication system.
 
 =cut
 
 sub login : Global {
-    no strict 'refs';
-    &{ $auth_class . '::login' }( @_ );
+    my ($self,$c) = @_;
+    $c->stash->{message} = 'please enter username & password';
+    if ( $c->req->params->{login} ) {
+        if ( $c->login() ) {
+	    $c->stash->{user}=$c->user->obj;
+            $c->res->redirect($c->stash->{user}->link)
+                unless $c->stash->{template};
+            return;
+        }
+        else {
+            $c->stash->{message} = 'could not authenticate that login.';
+        }
+    }
+    $c->stash->{template} ||= "user/login.tt";
+}
+
+=item logout (/.logout)
+
+Log out the user
+
+=cut
+
+sub logout : Global {
+    my ($self,$c) = @_;
+    $c->logout;
+    undef $c->stash->{user};
+    $c->forward('/page/view');
 }
 
 =item users (/.users)
