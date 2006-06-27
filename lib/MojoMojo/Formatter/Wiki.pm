@@ -169,16 +169,16 @@ sub format_link {
     $url    =~ s/[\/]+$//;
 
     # use the normalized path string returned by path_pages:
-    my ($path_pages, $proto_pages) = MojoMojo::M::Core::Page->path_pages( $word );
-    if (@$proto_pages) {
-        my $proto_page = pop @$proto_pages;
-        $url .= $proto_page->{path};
-    } else {
-        my $page = pop @$path_pages;
-        $url .= $page->path;
-        return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
-    }
-    return qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
+my ($path_pages, $proto_pages) = $c->model('DBIC::Page')->path_pages( $word );
+if (@$proto_pages) {
+    my $proto_page = pop @$proto_pages;
+    $url .= $proto_page->{path};
+} else {
+    my $page = pop @$path_pages;
+    $url .= $page->path;
+    return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
+}
+return qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
 }
 
 =item expand_wikiword <word>

@@ -86,6 +86,7 @@ sub path_pages :ResultSet {
 
     my $query_name = "get_path_depth_$depth";
 
+    return undef; # FIXME: BAD MARCUS!
     unless ( $self->can($query_name) ) {
         my $where = join ' OR ',
           ('( depth = ? AND name = ? )') x ( $depth + 1 );

@@ -7,14 +7,16 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto Core/);
+use Algorithm::Diff;
+
+__PACKAGE__->load_components(qw/UTF8Columns DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
   "page",
   "version",
   "creator",
-  "created" => {data_type=>'bigint',epoch=>'ctime'},
   "status",
+  "created" => {data_type=>'bigint',epoch=>'ctime'},
   "release_date" => {data_type=>'bigint',epoch=>'1'},
   "remove_date"  => {data_type=>'bigint',epoch=>'1'},
   "type",
@@ -76,6 +78,52 @@ sub highlight {
         else { $diff .= $$line[1] }
     }
     return $diff;
+}
+
+=item formatted_diff <context> <old_content>
+
+Compare this content version to <old_content>, using
+Algorithm::Diff. Show added lines in with diffins css class
+and deleted with diffdel css class.
+
+=cut
+
+sub formatted_diff {
+    my ( $self, $c, $to ) = @_;
+    my $this = [ split /\n\n/, $self->formatted($c) ];
+    my $prev = [ split /\n\n/, $to->formatted($c) ];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    for my $line (@diff) {
+        if ( $$line[0] eq "+" ) {
+            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+        }
+        elsif ( $$line[0] eq "-" ) {
+            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+        }
+        elsif ( $$line[0] eq "c" ) {
+            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+        }
+        elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
+        else { $diff .= "Unknown operator " . $$line[0] }
+    }
+    return $diff;
+}
+
+=item formatted [<content>]
+
+Return content after being run through MojoMojo::Formatter::* ,
+either own content or passed <content>
+
+=cut
+
+sub formatted {
+    my ( $self, $c, $content ) = @_;
+    $content ||= $self->body;
+    $c       ||= MojoMojo->instance();
+    MojoMojo->call_plugins( "format_content", \$content, $c, $self ) if ($content);
+    return $content;
 }
 
 

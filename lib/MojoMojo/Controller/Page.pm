@@ -32,48 +32,48 @@ can be called with urls like "/page1/page2.action".
 
 =item  view (.view)
 
-    This is probably the most common action in MojoMojo. A lot of the 
-    other actions redispatches to this one. It will prepare the stash 
-    for page view, and set the template to view.tt, unless another is
-    already set.
+This is probably the most common action in MojoMojo. A lot of the 
+other actions redispatches to this one. It will prepare the stash 
+for page view, and set the template to view.tt, unless another is
+already set.
 
-    It also takes an optional 'rev' parameter, in which case it will
-    load the provided revision instead.
+It also takes an optional 'rev' parameter, in which case it will
+load the provided revision instead.
 
-    =cut
+=cut
 
-    sub view : Global {
-	my ( $self, $c, $path ) = @_;
+sub view : Global {
+    my ( $self, $c, $path ) = @_;
 
-	my $stash = $c->stash;
-	$stash->{template} ||= 'page/view.tt';
+    my $stash = $c->stash;
+    $stash->{template} ||= 'page/view.tt';
 
-	my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
+    my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
 
 # we should always have at least "/" in path pages. if we don't,
 # we must not have had these structures in the stash
 
-	return $c->forward('suggest')
-	    if $proto_pages && @$proto_pages;
+    return $c->forward('suggest')
+	if $proto_pages && @$proto_pages;
 
-	my $page = $stash->{page};
+    my $page = $stash->{page};
 
-	my $content;
+    my $content;
 
-	my $rev = $c->req->params->{rev};
-	if ( $rev && defined $page->content_version ) {
-	    $content = $c->model("DBIC::Content")->find(
-		    page    => $page->id,
-		    version => $rev
-		    );
-	    $stash->{rev} = ( defined $content ? $content->version : undef );
-	    unless( $stash->{rev} ) {
-		$stash->{message} = 'No such revision for '.$page->name;
-		$stash->{template} = 'message.tt';
-	    }
+    my $rev = $c->req->params->{rev};
+    if ( $rev && defined $page->content_version ) {
+	$content = $c->model("DBIC::Content")->find(
+		page    => $page->id,
+		version => $rev
+		);
+	$stash->{rev} = ( defined $content ? $content->version : undef );
+	unless( $stash->{rev} ) {
+	    $stash->{message} = 'No such revision for '.$page->name;
+	    $stash->{template} = 'message.tt';
+	}
     }
     else {
-        $content = $page->content;
+	$content = $page->content;
     }
     $stash->{content} = $content;
 
