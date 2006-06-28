@@ -119,12 +119,15 @@ either own content or passed <content>
 
 =cut
 
-sub formatted {
-    my ( $self, $c, $content ) = @_;
-    $content ||= $self->body;
+sub format_content : ResultSet {
+    my ( $self, $c, $content,$page ) = @_;
     $c       ||= MojoMojo->instance();
-    MojoMojo->call_plugins( "format_content", \$content, $c, $self ) if ($content);
+    MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
     return $content;
+}
+sub formatted {
+    my ( $self, $c) = @_;
+    $self->result_source->resultset->format_content($c,$self->body,$self);
 }
 
 # create_proto: create a "proto content version" that may

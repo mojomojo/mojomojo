@@ -41,7 +41,7 @@ sub default : Private {
         $c->model("DBIC::Comment")->create_from_form($c->form);
     }
     $c->stash->{comments} = $c->model("DBIC::Comment")->search({
-        page=>$c->stash->{page} } , 
+        page=>$c->stash->{page}->id } , 
         {order_by=>'posted'}
     );
 }

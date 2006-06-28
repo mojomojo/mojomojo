@@ -34,7 +34,7 @@ sub render : Local {
     my $output  =  "Please type something";
     my $input   =  decode_entities($c->req->params->{content});
     if ( $input && $input =~ /(\S+)/ ) {
-        $output =  $c->model("DBIC::Content")->formatted( $c, $input );
+        $output =  $c->model("DBIC::Content")->format_content( $c, $input );
     }
     utf8::decode($output);
     $c->res->output( $output );
