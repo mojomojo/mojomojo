@@ -258,5 +258,21 @@ sub resolve_path :ResultSet {
 
 } # end sub resolve_path
 
+sub tagged_descendants_by_date {
+    my ($self,$tag) = @_;
+    return $self->result_source->resultset->search({
+     'me.id'=>$self->id,
+     'tag' => $tag,
+     'descendant.lft', { '>', \'me.lft'},
+     'descendant.rgt', { '<', \'me.rgt'},
+     'descendant.id',  => {'=', \'tag.page'},
+     'content.page'    => {'=','descendant.id'},
+     'content.version' => {'=',\'descendant.content_version'},
+    },{
+	from     => "page as me, page as descendant, tag, content",
+	order_by => 'content.release_date DESC',
+    });
+}
+
 1;
 

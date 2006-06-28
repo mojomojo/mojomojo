@@ -25,6 +25,7 @@ __PACKAGE__->add_columns(
   "body",
   "precompiled",
 );
+__PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key("page", "version");
 __PACKAGE__->has_many(
   "pages",
