@@ -74,6 +74,7 @@ sub path_pages :ResultSet {
     my @proto_pages = $self->parse_path($path);
 
     my $depth      = @proto_pages - 1;          # depth starts at 0
+
     ## FIXME: Continue porting here
 
     my @depths;
@@ -82,11 +83,13 @@ sub path_pages :ResultSet {
 	                        name  =>  $proto->{name}];
 
     }
-    my @pages = $self->search( -or => [ @depths ] ); 
+
+    my @pages = $self->search({ -or => [ @depths ] },{} ); 
+
+   # Start of old stuff
 
     my $query_name = "get_path_depth_$depth";
 
-    return undef; # FIXME: BAD MARCUS!
     unless ( $self->can($query_name) ) {
         my $where = join ' OR ',
           ('( depth = ? AND name = ? )') x ( $depth + 1 );

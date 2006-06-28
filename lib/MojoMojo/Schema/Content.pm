@@ -9,7 +9,7 @@ use base 'DBIx::Class';
 
 use Algorithm::Diff;
 
-__PACKAGE__->load_components(qw/UTF8Columns DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/ResultSetManager UTF8Columns DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
   "page",
@@ -124,6 +124,36 @@ sub formatted {
     $c       ||= MojoMojo->instance();
     MojoMojo->call_plugins( "format_content", \$content, $c, $self ) if ($content);
     return $content;
+}
+
+# create_proto: create a "proto content version" that may
+# be the basis for a new revision
+
+=item create_proto <page>
+
+Create a content prototype object, as the basis for a new revision.
+
+=cut
+
+sub create_proto : ResultSet {
+    my ( $class, $page ) = @_;
+    my %proto_content;
+    my @columns = __PACKAGE__->columns;
+    eval { $page->isa('MojoMojo::Schema::Page'); $page->content->isa('MojoMojo::Schema::Content') };
+    if ($@) {
+
+        # assume page is a simple "proto page" hashref,
+        # or the page has no content yet
+        %proto_content = map { $_ => undef } @columns;
+        $proto_content{version} = 1;
+    }
+    else {
+        my $content = $page->content;
+        %proto_content = map { $_ => $content->$_ } @columns;
+        @proto_content{qw/ creator created comments /} = (undef) x 3;
+        $proto_content{version}++;
+    }
+    return \%proto_content;
 }
 
 

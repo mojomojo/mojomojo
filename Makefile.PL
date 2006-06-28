@@ -61,7 +61,6 @@
      'XML::Clean'	    => 0,
      'YAML'		    => '0.36',
      'URI::Fetch'	    => 0,
-     'Class::DBI::AsXML'    => 0,
     );
     build_requires  ('Test::More');
     recommends      ('Test::Pod' => 0.0);
