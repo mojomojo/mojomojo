@@ -14,6 +14,7 @@ use Catalyst qw/-Debug              Authentication
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
+		StackTrace
 		/;
 
 use MojoMojo::Formatter::Wiki;

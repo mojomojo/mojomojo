@@ -9,16 +9,16 @@ use base 'DBIx::Class';
 
 use Algorithm::Diff;
 
-__PACKAGE__->load_components(qw/ResultSetManager UTF8Columns DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
   "page",
   "version",
   "creator",
   "status",
-  "created" => {data_type=>'bigint',epoch=>'ctime'},
-  "release_date" => {data_type=>'bigint',epoch=>'1'},
-  "remove_date"  => {data_type=>'bigint',epoch=>'1'},
+  "created",      => {data_type=>'bigint',epoch=>'ctime'},
+  "release_date", => {data_type=>'bigint',epoch=>'1'},
+  "remove_date",  => {data_type=>'bigint',epoch=>'1'},
   "type",
   "abstract",
   "comments",
