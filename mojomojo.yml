@@ -1,0 +1,4 @@
+---
+dsn: dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
+name: MojoMojo
+root: __HOME__/root

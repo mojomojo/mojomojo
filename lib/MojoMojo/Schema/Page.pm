@@ -56,6 +56,19 @@ __PACKAGE__->has_many("attachments", "Attachment", { "foreign.page" => "self.id"
 __PACKAGE__->has_many("comments", "Comment", { "foreign.page" => "self.id" });
 __PACKAGE__->has_many("journals", "Journal", { "foreign.pageid" => "self.id" });
 
+=head2 path_pages
+
+Accepts a path in url/unix directory format, e.g. "/page1/page2".
+Paths are assumed to be absolute, so a leading slash (/) is not 
+required.
+Returns an array of any pages that exist in the path, starting with "/",
+and an additional array of "proto page" hahses for any pages at the end
+of the path that do not exist. All paths include the root (/), which 
+must exist, so a path of at least one element will always be returned. 
+The "proto page" hash keys are:
+
+=cut
+
 sub path_pages :ResultSet {
     my ( $self, $path, $id ) = @_;
 
@@ -80,7 +93,7 @@ sub path_pages :ResultSet {
     my @depths;
     for my $proto ( @proto_pages )  {
 	push @depths, -and => [ depth =>  $proto->{depth},
-	                        name  =>  $proto->{name}];
+	                        name  =>  $proto->{name} ];
 
     }
 
@@ -130,6 +143,13 @@ sub path_pages :ResultSet {
 
 } # end sub get_path
 
+=item path_pages_by_id
+
+  @path_pages = __PACKAGE__->path_pages_by_id( $id );
+
+Returns all the pages in the path to a page, given that page's id.
+
+=cut
 
 sub path_pages_by_id : ResultSet {
     my ($self,$id)=@_;
@@ -144,6 +164,12 @@ sub path_pages_by_id : ResultSet {
 	order_by => 'me.lft'
     });
 }
+
+=head2 parse_path <path>
+
+Create prototype page objects for each level in a given path.
+
+=cut
 
 sub parse_path : ResultSet {
     my ( $self, $path ) = @_;
@@ -175,6 +201,13 @@ sub parse_path : ResultSet {
     return @proto_pages;
 
 } # end sub parse_path
+
+=head2 normalize_name <orig_name>
+
+Strip superfluos spaces, and convert the rest to _,
+and lowercase the result.
+
+=cut
 
 sub normalize_name : ResultSet {
     my ( $self, $name_orig ) = @_;
