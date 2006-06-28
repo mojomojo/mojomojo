@@ -74,6 +74,7 @@ sub view : Global {
     }
     else {
 	$content = $page->content;
+	$stash->{rev} =  $content->version ;
     }
     $stash->{content} = $content;
 

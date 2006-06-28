@@ -17,10 +17,9 @@ sub begin : Private {
 	    ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
 	# FIXME: new user stuff.
-        $c->req->{user_id} && do {
-            $c->stash->{user} = 
-	    $c->model('DBIC::Person')->find( $c->req->{user_id} );
-        };
+#        $c->req->{user_id} && do {
+            $c->stash->{user} = $c->user->obj();
+#        };
     }
 }
 

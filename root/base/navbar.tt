@@ -2,12 +2,12 @@
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR
                                          template.name.search('^user')))%]
-  <b class="navon">[%c.fixw(c.req.user)%]</b> | 
+  <b class="navon">[%c.fixw(user.login)%]</b> | 
   [%ELSE%]
   [% IF user.active%]
-  <a href="[%base%][%user.link%]" title="Go to home page">[%c.fixw(c.req.user)%]</a> | 
+  <a href="[%base%][%user.link%]" title="Go to home page">[%c.fixw(user.login)%]</a> | 
   [% ELSE %]
-  <a href="[%base%][%user.link%].prefs" title="User Preferences">[%c.fixw(c.req.user)%]</a> | 
+  <a href="[%base%][%user.link%].prefs" title="User Preferences">[%c.fixw(user.login)%]</a> | 
   [% END %]
   [%END%]
   [% ELSE %]

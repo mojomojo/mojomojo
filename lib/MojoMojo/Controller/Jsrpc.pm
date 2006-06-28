@@ -64,15 +64,16 @@ and diffs it against the previous version.
 
 sub diff : Local {
     my ( $self, $c, $page, $revision, $against ) = @_;
-    $revision = $c->model("DBIC::Content")->find(
+    $revision = $c->model("DBIC::Content")->search({
         page    => $page, 
         version => $revision
-    );
-    if ( my $previous = $revision->previous || 
-        $c->model("DBIC::Content")->find(
+    })->next ;
+    #$c->log->info('working on version : '.$revision->page->id.' '.$revision->version);
+    if ( my $previous = $against ? 
+        $c->model("DBIC::Content")->search({
             page    => $page,
             version => $against
-        ) 
+        })->next : $revision->previous 
     ) {
         $c->res->output( $revision->formatted_diff( $c, $previous ) );
     } else {

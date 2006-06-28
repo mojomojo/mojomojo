@@ -79,4 +79,9 @@ sub can_edit {
     return 0;
 }
 
+sub get_user :ResultSet {
+    my ($self,$user) = @_;
+    return $self->search({login=>$user})->next();
+}
+
 1;

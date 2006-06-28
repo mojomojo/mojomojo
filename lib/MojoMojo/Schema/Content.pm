@@ -90,26 +90,26 @@ and deleted with diffdel css class.
 =cut
 
 sub formatted_diff {
-    my ( $self, $c, $to ) = @_;
-    my $this = [ split /\n\n/, $self->formatted($c) ];
-    my $prev = [ split /\n\n/, $to->formatted($c) ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
-    my $diff;
-    for my $line (@diff) {
-        if ( $$line[0] eq "+" ) {
-            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
-        }
-        elsif ( $$line[0] eq "-" ) {
-            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
-        }
-        elsif ( $$line[0] eq "c" ) {
-            $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
-            $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
-        }
-        elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
-        else { $diff .= "Unknown operator " . $$line[0] }
+my ( $self, $c, $to ) = @_;
+my $this = [ split /\n\n/, $self->formatted($c) ];
+my $prev = [ split /\n\n/, $to->formatted($c) ];
+my @diff = Algorithm::Diff::sdiff( $prev, $this );
+my $diff;
+for my $line (@diff) {
+    if ( $$line[0] eq "+" ) {
+	$diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
     }
-    return $diff;
+    elsif ( $$line[0] eq "-" ) {
+	$diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+    }
+    elsif ( $$line[0] eq "c" ) {
+	$diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+	$diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+    }
+    elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
+    else { $diff .= "Unknown operator " . $$line[0] }
+}
+return $diff;
 }
 
 =item formatted [<content>]
@@ -120,14 +120,14 @@ either own content or passed <content>
 =cut
 
 sub format_content : ResultSet {
-    my ( $self, $c, $content,$page ) = @_;
-    $c       ||= MojoMojo->instance();
-    MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
-    return $content;
+my ( $self, $c, $content,$page ) = @_;
+$c       ||= MojoMojo->instance();
+MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
+return $content;
 }
 sub formatted {
-    my ( $self, $c) = @_;
-    $self->result_source->resultset->format_content($c,$self->body,$self);
+my ( $self, $c) = @_;
+$self->result_source->resultset->format_content($c,$self->body,$self);
 }
 
 # create_proto: create a "proto content version" that may
@@ -140,27 +140,54 @@ Create a content prototype object, as the basis for a new revision.
 =cut
 
 sub create_proto : ResultSet {
-    my ( $class, $page ) = @_;
-    my %proto_content;
-    my @columns = __PACKAGE__->columns;
-    eval { $page->isa('MojoMojo::Schema::Page'); $page->content->isa('MojoMojo::Schema::Content') };
-    if ($@) {
+my ( $class, $page ) = @_;
+my %proto_content;
+my @columns = __PACKAGE__->columns;
+eval { $page->isa('MojoMojo::Schema::Page'); $page->content->isa('MojoMojo::Schema::Content') };
+if ($@) {
 
-        # assume page is a simple "proto page" hashref,
-        # or the page has no content yet
-        %proto_content = map { $_ => undef } @columns;
-        $proto_content{version} = 1;
-    }
-    else {
-        my $content = $page->content;
-        %proto_content = map { $_ => $content->$_ } @columns;
-        @proto_content{qw/ creator created comments /} = (undef) x 3;
-        $proto_content{version}++;
-    }
-    return \%proto_content;
+    # assume page is a simple "proto page" hashref,
+    # or the page has no content yet
+    %proto_content = map { $_ => undef } @columns;
+    $proto_content{version} = 1;
+}
+else {
+    my $content = $page->content;
+    %proto_content = map { $_ => $content->$_ } @columns;
+    @proto_content{qw/ creator created comments /} = (undef) x 3;
+    $proto_content{version}++;
+}
+return \%proto_content;
 }
 
+=item max_version 
 
+Return the highest numbered revision.
+
+=cut
+
+sub max_version {
+my $self=shift;
+my $max=$self->result_source->resultset->search({page=>$self->page->id},{
+    select => [ {max=>'me.version'}],
+    as     => ['max_ver']
+});
+return 0 unless $max->count;
+return $max->next->get_column('max_ver');
+}
+
+=item previous
+
+Return previous version of this content, or undef for first version.
+
+=cut
+
+sub previous {
+my $self = shift;
+return $self->result_source->resultset->search({
+	page    => $self->page->id,
+	version => $self->version-1
+          })->next;
+}
 
 1;
-

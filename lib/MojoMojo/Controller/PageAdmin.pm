@@ -60,7 +60,7 @@ sub edit : Global {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
-    my $user = $c->req->{user_id} || 0; # Anon edit
+    my $user = $c->stash->{user} ? $c->stash->{user}->id : 1; # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
@@ -122,7 +122,8 @@ sub edit : Global {
 
 
     # update the search index with the new content
-    $search_engine->index_page( $page );
+    # FIXME: Disabling search engine for now.
+    # $search_engine->index_page( $page );
 
     $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );
 

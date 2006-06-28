@@ -19,13 +19,14 @@ function toggleInfo() {
 
 function toggleChanges(changeurl) {
   if (!$('diff').innerHTML) {
-      var req=new Ajax.Request( changeurl, {asynchronous: false});
-      $('diff').innerHTML=req.transport.responseText;
+      var req=new Ajax.Request( changeurl, {
+      onComplete: function() {
+	$('diff').innerHTML=req.transport.responseText;
+        Element.toggle('changes','current','show_changes','hide_changes');
+      }});
+  } else {
+      Element.toggle('changes','current','show_changes','hide_changes');
   }
-  Toggle.display('changes');
-  Toggle.display('current');
-  Toggle.display('show_changes');
-  Toggle.display('hide_changes');
 }
 
 function encodeAjax (str) {
