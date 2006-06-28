@@ -38,7 +38,7 @@ Fat.fade();
 </div>
 <div class="byline">
   <acronym title="Revised on [% content.created.ymd %] at [% content.created.hms %] by BeJesus [%# content.creator.name %]">
-    Last Revised</acronym> by [% c.wikiword(content.creator.link, base) %]
+    Last Revised</acronym> by [%# c.wikiword(content.creator.link, base) %] BeJesus
     <br />
 </div>
 </div> 

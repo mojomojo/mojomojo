@@ -97,27 +97,14 @@ sub path_pages :ResultSet {
 
     }
 
+
     my @pages = $self->search({ -or => [ @depths ] },{} ); 
 
-   # Start of old stuff
-
-    my $query_name = "get_path_depth_$depth";
-
-    unless ( $self->can($query_name) ) {
-        my $where = join ' OR ',
-          ('( depth = ? AND name = ? )') x ( $depth + 1 );
-        $self->add_constructor( $query_name => $where );
-    }
-
-    # store query results by depth:
-    my @bind = map { $_->{depth}, $_->{name} } @proto_pages;
     my @query_pages;
-    for ( $self->$query_name(@bind) ) {
+    for (@pages ) {
         $query_pages[ $_->depth ] ||= [];
         push @{ $query_pages[ $_->depth ] }, $_;
     }
-
-    # END OF PORTING BLOCK
 
     my $resolved = $self->resolve_path(
         path_pages    => \@path_pages,
@@ -130,8 +117,7 @@ sub path_pages :ResultSet {
     # If there are any proto pages, put the original
     # page names back into the paths, so they will
     # be preserved upon page creation:
-    if (@proto_pages)
-    {
+    if (@proto_pages) {
 	my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
 	for (@proto_pages) {
 	    ($proto_path =~ /\/$/) || ($proto_path .= '/');
@@ -221,6 +207,56 @@ sub normalize_name : ResultSet {
     $name = lc($name);
     return ( $name_orig, $name );
 }
+
+=head2 resolve_path <%args>
+
+Takes the following args:
+
+=over 4
+
+=item path_pages
+
+=item proto_pages
+
+=item query_pages
+
+=item current_depth
+
+=item final_depth
+
+=back
+
+returns true if path can be resolved, or false otherwise.
+
+=cut
+
+sub resolve_path :ResultSet {
+    my ( $class, %args ) = @_;
+
+    my ( $path_pages, $proto_pages, $query_pages, $current_depth, $final_depth )
+      = @args{qw/ path_pages proto_pages query_pages current_depth final_depth/
+      };
+
+    while ( my $page = shift @{ $query_pages->[$current_depth] } ) {
+        unless ( $current_depth == 0 ) {
+            my $parent = $path_pages->[ $current_depth - 1 ];
+            next unless $page->parent && $page->parent->id == $parent->id;
+        }
+        my $proto_page = shift @{$proto_pages};
+        $page->path( $proto_page->{path} );
+        push @{$path_pages}, $page;
+        return 1
+          if (
+            $current_depth == $final_depth
+            ||
+
+            # must pre-icrement for this to work when current_depth == 0
+            ( ++$args{current_depth} && $class->resolve_path(%args) )
+          );
+    }
+    return 0;
+
+} # end sub resolve_path
 
 1;
 

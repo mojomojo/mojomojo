@@ -40,8 +40,8 @@ sub default : Private {
               $c->form->has_invalid ) {
         $c->model("DBIC::Comment")->create_from_form($c->form);
     }
-    $c->stash->{comments} = $c->model("DBIC::Comment")->find_page(
-        $c->stash->{page}, 
+    $c->stash->{comments} = $c->model("DBIC::Comment")->search({
+        page=>$c->stash->{page} } , 
         {order_by=>'posted'}
     );
 }
