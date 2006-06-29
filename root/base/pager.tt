@@ -8,4 +8,4 @@
 <a href="[%base%][%page.path%].[%c.req.actiont%]?page=[%pager.last_page%]">&#187;</a>
 [%END%]
 </div>
-<p><em>Showing [%pager.entries_on_this_page%] ([%pager.first%]-[%pager.last%]) of [%pager.total_entries%] pages in [%c.wikiword(page.path,base)%].</em></p>
+<p><em>Showing [%pager.entries_on_this_page%] ([%pager.first%]-[%pager.last%]) of [%pager.total_entries%] entries in [%c.wikiword(page.path,base)%].</em></p>

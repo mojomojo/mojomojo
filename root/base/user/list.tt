@@ -11,8 +11,8 @@
 [% WHILE (user=users.next) %]
 <li>[%c.wikiword(user.link,base)%]<br/>
 Last Changed 
-[% FOR changed = user.pages %]
-[%c.wikiword(Changed.path,base)%]
+[% FOREACH  changed IN user.pages %]
+[%c.wikiword(changed.path,base)%]
 [%END%]
 </li>
 [%END %]

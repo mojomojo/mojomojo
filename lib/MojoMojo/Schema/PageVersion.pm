@@ -34,6 +34,11 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
 __PACKAGE__->belongs_to(
+  "page",
+  "Page",
+  { page => "page" },
+);
+__PACKAGE__->belongs_to(
   "content",
   "Content",
   { page => "page", version => "content_version_first" },
