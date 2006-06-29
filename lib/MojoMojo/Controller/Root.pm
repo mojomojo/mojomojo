@@ -17,9 +17,7 @@ sub begin : Private {
 	    ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
 	# FIXME: new user stuff.
-#        $c->req->{user_id} && do {
-            $c->stash->{user} = $c->user->obj();
-#        };
+         $c->stash->{user} = $c->user->obj() if $c->user_exists;
     }
 }
 
