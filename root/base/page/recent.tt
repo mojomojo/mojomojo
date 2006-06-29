@@ -8,7 +8,7 @@
 
 <div id="categories">
   <strong>tags</strong>: <small>
-  [% FOREACH tag IN tags %]
+  [% WHILE (tag = tags.next) %]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]

@@ -13,7 +13,7 @@
 <dt>Admins:</dt>
 <dd>
 <input id="admins"  name="admins" type="text" value="[%admins%]"/>
-(also includes [%c.req.user%]) </dd>
+(also includes [%user.login%]) </dd>
 <dt>Anon. user</dt>
 <dd> <input id="anon"  name="anonymous_user" type="text" value="[%anonymous_user%]"/> ( blank to disable )</dd>
 </dd>

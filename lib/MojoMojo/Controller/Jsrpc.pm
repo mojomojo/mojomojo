@@ -77,7 +77,7 @@ sub diff : Local {
     ) {
         $c->res->output( $revision->formatted_diff( $c, $previous ) );
     } else {
-        $c->res->output("This is the first revision!");
+        $c->res->output("This is the first revision! Nothing to diff against.");
     }
 }
 
@@ -105,7 +105,7 @@ sub tag : Local {
     foreach my $tag ( split m/\s/,$tagname ) {
         if ( $tag && !
             $c->model("DBIC::Tag")->search(
-                page   => $page,
+                page   => $page->id,
                 person => $c->req->{user_id},
                 tag    => $tagname
             )->next() 

@@ -66,13 +66,13 @@ Show a list of the active users with a link to their page.
 
 sub users : Global {
    my ($elf,$c,$tag)  = @_;   
-   my ($p,$res) = $c->model("DBIC::Person")->pager(
+   my $res = $c->model("DBIC::Person")->search(
       { active=>1 } , { 
       page     => $c->req->param('page')||1,
       rows     => 20,
       order_by => 'login' } );
    $c->stash->{users}=$res;
-   $c->stash->{pager}=$p;
+   $c->stash->{pager}=$res->pager;
    $c->stash->{template}='user/list.tt';  
 }
 

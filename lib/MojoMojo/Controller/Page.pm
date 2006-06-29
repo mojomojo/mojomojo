@@ -182,13 +182,13 @@ sub inline_tags : Global {
     $c->stash->{highlight} = $highlight;
     my $page = $c->stash->{page};
     if ($c->req->{user}) {
-        my @tags = $page->others_tags( $c->req->{user_id} );
+        my @tags = $page->others_tags( $c->stash->{user}->id );
         $c->stash->{others_tags} = [@tags];
-        @tags                    = $page->user_tags( $c->req->{user_id} );
+        @tags                    = $page->user_tags( $c->stash->{user}->id );
         $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
         $c->stash->{tags}        = [@tags];
     } else {
-        $c->stash->{others_tags}      = [ $page->tags ];
+        $c->stash->{others_tags}      = [ $page->tags_with_counts ];
     }
 }
 
@@ -208,7 +208,7 @@ sub list : Global {
     # FIXME - real data here please
     $c->stash->{orphans}   = [];
     $c->stash->{backlinks} = [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
-    $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->retrieve_all ];
+    $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->search()];
     $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used() ];
 }
 
@@ -223,7 +223,7 @@ sub recent : Global {
     return $c->forward('/tag/recent') if $tag;
     my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
-    $c->stash->{tags}     = [ $c->model("DBIC::Tag")->most_used ];
+    $c->stash->{tags}     = $c->model("DBIC::Tag")->most_used;
     $c->stash->{pages}    = [ $page->descendants_by_date ];
 
     # FIXME - needs to be populated even without tags

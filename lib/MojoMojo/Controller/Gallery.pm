@@ -31,14 +31,14 @@ sub default : Private {
     $c->stash->{template} = 'gallery.tt';
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
-    my ($pager,$iterator) =$c->model("DBIC::Photo")->pager( 
-        'attachment.page'  =>$c->stash->{page}, 
+    my $iterator=$c->model("DBIC::Photo")->search( 
+        'attachment.page'  =>$c->stash->{page}->id, 
           { page           =>$page || 1,
             rows           => 12,
             order_by       => 'taken' }
     );
     $c->stash->{pictures} = $iterator;
-    $c->stash->{pager}    = $pager;
+    $c->stash->{pager}    = $iterator->pager;
 }
 
 =item by_tag ( .gallery/by_tag )
@@ -58,14 +58,14 @@ sub by_tag : Local {
           map { $_->id  } ($c->stash->{page}->descendants,
                            $c->stash->{page}) ] 
         unless length($c->stash->{page}->path) == 1;  # root
-    my ( $pager,$iterator ) =$c->model("DBIC::Photo")->pager(
+    my  $iterator =$c->model("DBIC::Photo")->search(
         $conditions, { 
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'
         });
     $c->stash->{pictures} = $iterator;
-    $c->stash->{pager}    = $pager;
+    $c->stash->{pager}    = $iterator->pager;
 }
 
 =item p ( .p) 

@@ -38,7 +38,8 @@ MojoMojo->config->{authentication}{dbic} = {
                     user_field     => 'login',
                     password_field => 'pass' };
 
-MojoMojo->config( cache    => {storage => MojoMojo->config->{home}.'/cache'} );
+#MojoMojo->config( cache    => {storage => MojoMojo->config->{home}.'/cache'} );
+MojoMojo->config( cache    => {storage =>'/home/marcus/sr/mojomojo/cache'} );
 
 MojoMojo->setup();
 

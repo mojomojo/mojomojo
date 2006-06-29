@@ -88,14 +88,14 @@ sub user : Local {
     my ( $self, $c, $user ) = @_;
     $c->forward('update_user') if $user;
     $c->stash->{template}='settings/user.tt';
-    my ($pager,$iterator) =$c->model("DBIC::Person")->pager( 
+    my $iterator =$c->model("DBIC::Person")->search( 
        {}, {
             page           =>$c->req->param('page') || 1,
             rows             => 20,
             order_by => 'active, login'
         });
     $c->stash->{users} = $iterator;
-    $c->stash->{pager} = $pager;
+    $c->stash->{pager} = $iterator->pager;
 }
 
 =item update_user ( *private*)

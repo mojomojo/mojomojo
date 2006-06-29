@@ -10,7 +10,7 @@
 <li><a href="[%base%]/.logout">log out</a></li>
 </ul>
 </div>
-<form id="accountForm" action="[%base%][%page_user.link%][%c.req.user%].prefs" method="POST">
+<form id="accountForm" action="[%base%][%page_user.link%].prefs" method="POST">
 <dl class="form">
 <dd>Change your preferences to update them.</dd>
  <dt>login</dt>

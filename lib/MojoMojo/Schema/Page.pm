@@ -142,8 +142,8 @@ my ($self,$id)=@_;
 return $self->search({
     'start_page.lft' => 1,
     'end_page.id' => $id,
-    'me.lft'       => { 'BETWEEN', 'start_page.lft', 'start_page.rgt' },
-    'end_page.lft' => { 'BETWEEN', 'me.lft','me.rgt' },
+    'me.lft'       =>  \'BETWEEN start_page.lft AND start_page.rgt',
+    'end_page.lft' =>  'BETWEEN me.lft AND me.rgt',
 },
 {
     from=>"page AS start_page, page AS me, page AS end_page ",
@@ -263,11 +263,11 @@ my ($self,$tag) = @_;
 return $self->result_source->resultset->search({
  'me.id'=>$self->id,
  'tag' => $tag,
- 'descendant.lft', { '>', \'me.lft'},
- 'descendant.rgt', { '<', \'me.rgt'},
- 'descendant.id',  => {'=', \'tag.page'},
- 'content.page'    => {'=','descendant.id'},
- 'content.version' => {'=',\'descendant.content_version'},
+ 'descendant.lft', \'> me.lft',
+ 'descendant.rgt', \'< me.rgt',
+ 'descendant.id',  => \'= tag.page',
+ 'content.page'    => \'= descendant.id',
+ 'content.version' => \'=descendant.content_version',
 },{
     from     => "page as me, page as descendant, tag, content",
     order_by => 'content.release_date DESC',
@@ -404,6 +404,73 @@ sub descendants_by_date {
 	order_by => 'content.release_date DESC'
 	});
         return $self->result_source->resultset->set_paths( @pages );
+}
+
+sub descendants {
+    my ($self) = @_;
+    $self->result_source->resultset->search({
+	'ancestor.id'=>$self->id,
+	-or => [
+	    'ancestor.id' => \'=me.id',
+	    -and => [
+		'me.lft' => \'> ancestor.lft',
+		'me.rgt' => \'< ancestor.rgt',
+	    ]
+	],
+    },{
+	from     => 'page me, page ancestor',
+	order_by => [ 'me.name' ] 
+    });
+}
+
+sub tagged_descendants {
+    my ($self,$tag) = @_;
+    return $self->result_source->resultset->search({
+	    'me.id'=>$self->id,
+	    'tag' => $tag,
+	    'descendant.lft', \'> me.lft',
+	    'descendant.rgt', \'< me.rgt',
+	    'descendant.id',  => \'= tag.page',
+	    'content.page'    => \'= descendant.id',
+	    'content.version' => \'=descendant.content_version',
+	    },{
+	    from     => "page as me, page as descendant, tag, content",
+	    order_by => 'descendant.name',
+	    });
+}
+
+=item others_tags <user>
+
+Return popular tags for this page used by other people than <user>.
+
+=cut
+
+sub others_tags {
+    my ( $self, $user ) = @_;
+    my (@tags) = $self->result_source->related_source('tags')->resultset
+	->search({ 
+	    page=>$self->id, 
+	    person=> {'!=', $user}
+	},{
+             select   => [ 'me.id','me.tag', 'count(me.tag)' ],
+             as       => [ 'id','tag','pagecount' ],
+             order_by => [ 'count(me.tag)' ],
+	     group_by => [ 'tag' ],
+	});
+    return @tags;
+}
+sub tags_with_counts {
+    my ( $self, $user ) = @_;
+    my (@tags) = $self->result_source->related_source('tags')->resultset
+	->search({ 
+	    page=>$self->id, 
+	},{
+             select   => [ 'me.id','me.tag', 'count(me.tag)' ],
+             as       => [ 'id','tag','pagecount' ],
+             order_by => [ 'count(me.tag)' ],
+	     group_by => [ 'tag' ],
+	});
+    return @tags;
 }
 
 1;
