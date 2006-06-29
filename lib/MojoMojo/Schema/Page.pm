@@ -445,6 +445,21 @@ Return popular tags for this page used by other people than <user>.
 
 =cut
 
+sub user_tags {
+    my ( $self, $user ) = @_;
+    my (@tags) = $self->result_source->related_source('tags')->resultset
+	->search({ 
+	    page=>$self->id, 
+	    person=> $user,
+	},{
+             select   => [ 'me.id','me.tag', 'count(me.tag)' ],
+             as       => [ 'id','tag','pagecount' ],
+             order_by => [ 'count(me.tag)' ],
+	     group_by => [ 'tag' ],
+	});
+    return @tags;
+}
+
 sub others_tags {
     my ( $self, $user ) = @_;
     my (@tags) = $self->result_source->related_source('tags')->resultset

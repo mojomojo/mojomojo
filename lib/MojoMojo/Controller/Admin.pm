@@ -71,7 +71,7 @@ sub update : Local {
         }
     }
     $c->res->body('Updated');
-    $c->pref( 'admins',join(' ',@users,$c->req->{user}));
+    $c->pref( 'admins',join(' ',@users,$c->stash->{user}->login));
     $c->pref( 'name',$c->form->valid('name'));
     $c->pref( 'anonymous_user',$c->form->valid('anonymous_user')||'');
 

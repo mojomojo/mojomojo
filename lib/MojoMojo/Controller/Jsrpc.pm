@@ -131,8 +131,8 @@ sub untag : Local {
     my $page = $c->stash->{page};
     die "Page " . $page . " not found" unless ref $page;
     my $tag = $c->model("DBIC::Tag")->search(
-        page   => $page,
-        person => $c->req->{user_id},
+        page   => $page->id,
+        person => $c->user->obj->id,
         tag    => $tagname
     )->next();
     $tag->delete() if $tag;

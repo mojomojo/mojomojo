@@ -181,10 +181,10 @@ sub inline_tags : Global {
     $c->stash->{template}  = 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
     my $page = $c->stash->{page};
-    if ($c->req->{user}) {
-        my @tags = $page->others_tags( $c->stash->{user}->id );
+    if ($c->user_exists) {
+        my @tags = $page->others_tags( $c->user->obj->id );
         $c->stash->{others_tags} = [@tags];
-        @tags                    = $page->user_tags( $c->stash->{user}->id );
+        @tags                    = $page->user_tags( $c->user->obj->id );
         $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
         $c->stash->{tags}        = [@tags];
     } else {
