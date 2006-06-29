@@ -146,7 +146,7 @@ return $self->search({
     'end_page.lft' => { 'BETWEEN', 'me.lft','me.rgt' },
 },
 {
-    from=>\" page AS start_page, page AS me, page AS end_page ",
+    from=>"page AS start_page, page AS me, page AS end_page ",
     order_by => 'me.lft'
 });
 }
@@ -315,7 +315,7 @@ if (my $previous_content = $content->previous) {
     $previous_content->comments( "Replaced by version $content_version." );
     $previous_content->update;
 } else {
-    $self->set_paths($self);
+    $self->result_source->resultset->set_paths($self);
 }
 
 } # end sub update_content
@@ -329,7 +329,7 @@ Sets the path TEMP columns for multiple pages, either a subtree or a group of no
 =cut
 
 
-sub set_paths {
+sub set_paths :ResultSet {
 my ($class, @pages) = @_;
 return () unless (scalar @pages >= 1);
 my %pages = map { $_->id => $_ } @pages;
@@ -371,12 +371,39 @@ for (@lft_sorted_pages) {
                  $pages{ $path_page->id } = $path_page;
 	    }
              # don't know if this is necessary, but just in case
-             my $current_page = pop @path_pages;
-             $_->path( $current_page->path );
+             #my $current_page = pop @path_pages;
+             #$_->path( $current_page->path );
 	}
     }
     return @pages;
 
 } # end sub set_paths
+=item descendants_by_date
+
+  @descendants = $page->descendants_by_date;
+
+Like L<descendants>, but returns pages sorted by the dates of their
+last content release dates.
+
+=cut
+
+
+sub descendants_by_date {
+    my $self=shift;
+    my @pages=$self->result_source->resultset->search({
+	'ancestor.id' => $self->id,
+	'content.page' => \'= me.id',
+	'content.version' => \'= me.content_version',
+	-or => [
+	  -and => [
+	    'me.lft' =>  \'> ancestor.lft' ,
+	    'me.rgt' =>  \'< ancestor.rgt' ],
+	    'ancestor.id' => \'= me.id',  ]
+	}, {
+	from     => 'page as me, page as ancestor, content',
+	order_by => 'content.release_date DESC'
+	});
+        return $self->result_source->resultset->set_paths( @pages );
+}
 
 1;
