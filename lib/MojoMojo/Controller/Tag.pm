@@ -38,7 +38,6 @@ sub list : Private {
     $c->stash->{template} = 'page/list.tt';
 
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants($tag) ];
     $c->stash->{related}   = [ $c->model("DBIC::Tag")->related_to($tag) ];
 }
@@ -56,7 +55,6 @@ sub recent : Private {
     $c->stash->{template} = 'page/recent.tt';
     return unless $tag;
     $c->stash->{activetag} = $tag;
-    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used ];
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
   
 }

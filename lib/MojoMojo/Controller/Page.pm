@@ -201,15 +201,15 @@ all nodes in this namespace
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page=$c->stash->{page};
-    return $c->forward('/tag/list') if $tag;
+    $c->stash->{tags}      = $c->model("DBIC::Tag")->most_used();
+    $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
-    $c->stash->{pages}    =  [ $page->descendants ];
+    $c->stash->{pages}    =  [$page->descendants];
 
     # FIXME - real data here please
     $c->stash->{orphans}   = [];
     $c->stash->{backlinks} = [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
     $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->search()];
-    $c->stash->{tags}      = [ $c->model("DBIC::Tag")->most_used() ];
 }
 
 =item recent (.recent)
@@ -220,10 +220,10 @@ recently changed nodes in this namespace.
 
 sub recent : Global {
     my ( $self, $c, $tag ) = @_;
-    return $c->forward('/tag/recent') if $tag;
+    $c->stash->{tags}     = $c->model("DBIC::Tag")->most_used;
+    $c->detach('/tag/recent') if $tag;
     my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
-    $c->stash->{tags}     = $c->model("DBIC::Tag")->most_used;
     $c->stash->{pages}    = [ $page->descendants_by_date ];
 
     # FIXME - needs to be populated even without tags

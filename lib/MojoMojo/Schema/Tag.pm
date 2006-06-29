@@ -63,13 +63,13 @@ sub related_to : ResultSet {
     return $self->search({
 	'me.tag'=>$tag,
 	'other.tag'=>{'!=',$tag},
-	'me.page'=>\'other.page',
+	'me.page'=>\'=other.page',
     },{
 	select     => [ 'me.tag', 'count(me.tag)' ],
 	as         => [ 'tag','refcount' ],
 	'group_by' => ['me.tag'],
         'from'     => 'tag me, tag other',
-        'order_by' => \'count(tag)',
+        'order_by' => \'count(me.tag)',
 	'rows'	   => $count,
     })
 }

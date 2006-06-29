@@ -31,7 +31,7 @@ sub create_from_file :ResultSet {
   my ($class,$page,$filename, $storage_callback)=@_;
   my $self=$class->create(
                  { name => $filename,
-                 page => $page } );
+                 page => $page->id } );
   die "Could not attach $filename to $page"  unless $self;
   &$storage_callback($self->filename);
   unless  (-f $self->filename) {

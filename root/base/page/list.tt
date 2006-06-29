@@ -6,7 +6,7 @@
  <div id="content">
 <div id="categories">
   <strong>tags</strong>: 
-  [% FOREACH tag IN tags.list %]
+  [% WHILE(tag=tags.next)%]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
@@ -21,11 +21,11 @@
  </h2>
 <ul>
 [% FOREACH page IN pages %]
-    [% NEXT UNLESS page.name %]
-    <li>[% c.wikiword(page.path, base) %]</li>
+    <li><a href="[%base _ page.path%]">[%page.name_orig%]</a></li>
 [% END %]
 </ul>
 </div>
+[% IF ! activetag %]
 <div id="wantedPages">
 
   <h2> Backlinks
@@ -58,11 +58,12 @@
   [%IF orphans.size%]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
-    <li><a href="[% base %][% orphan.path %]">[%c.expand_wikiword(orphan.path,base)%]</a></li>
+    <li><a href="[% base %][% orphan.path %]"><span class="newWikiWord">[%orphan.path%]<a title=">Not found. Click to create this page." href="[%base _ orphan.path%].edit">_</a></span></li>
 [% END %]
     </ul>
   [%END%]
 </div>
+[% END %]
 <p class="end">&nbsp;</p>
 </div>
         <div id="bottomnav">&nbsp;

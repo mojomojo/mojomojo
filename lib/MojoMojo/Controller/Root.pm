@@ -44,6 +44,12 @@ show a debug screen.
 sub end : Private {
     my ( $self ) = shift;
     my ( $c ) = @_;
+   if ($c->debug && $c->req->params->{dump_info}) {
+        foreach my $item (keys %{$c->stash}) {
+            undef $c->stash->{$item}->{result_source}
+               if $c->stash->{$item}->isa('DBIx::Class');
+        }
+    }
     $c->stash->{path} ||= '/';
     $c->NEXT::end(@_);
 }

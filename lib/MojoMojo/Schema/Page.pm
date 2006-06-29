@@ -35,6 +35,7 @@ __PACKAGE__->belongs_to(
   "Content",
   { page => "id", version => "content_version" },
 );
+__PACKAGE__->has_many("versions", "Content", { "foreign.page" => "self.id" });
 __PACKAGE__->belongs_to(
   "page_version",
   "PageVersion",
@@ -259,20 +260,39 @@ return 0;
 } # end sub resolve_path
 
 sub tagged_descendants_by_date {
-my ($self,$tag) = @_;
-return $self->result_source->resultset->search({
- 'me.id'=>$self->id,
- 'tag' => $tag,
- 'descendant.lft', \'> me.lft',
- 'descendant.rgt', \'< me.rgt',
- 'descendant.id',  => \'= tag.page',
- 'content.page'    => \'= descendant.id',
- 'content.version' => \'=descendant.content_version',
-},{
-    from     => "page as me, page as descendant, tag, content",
-    order_by => 'content.release_date DESC',
-});
+    my ($self,$tag) = @_;
+    my (@pages)=$self->result_source->resultset->search({
+	    'ancestor.id'=>$self->id,
+	    'tag' => $tag,
+	    'me.lft', \'> ancestor.lft',
+	    'me.rgt', \'< ancestor.rgt',
+	    'me.id',  => \'=tag.page',
+	    'content.page'    => \'=me.id',
+	    'content.version' => \'=me.content_version',
+	    },{
+	    from     => "page as me, page as ancestor, tag, content",
+	    order_by => 'content.release_date DESC',
+	    });
+    return $self->result_source->resultset->set_paths(@pages);
 }
+
+sub tagged_descendants {
+    my ($self,$tag) = @_;
+    my(@pages)=$self->result_source->resultset->search({
+	    'ancestor.id'=>$self->id,
+	    'tag' => $tag,
+	    'me.lft', \'> ancestor.lft',
+	    'me.rgt', \'< ancestor.rgt',
+	    'me.id',  => \'=tag.page',
+	    'content.page'    => \'=me.id',
+	    'content.version' => \'=me.content_version',
+	    },{
+	    from     => "page as me, page as ancestor, tag, content",
+	    order_by => 'me.name',
+	    });
+    return $self->result_source->resultset->set_paths(@pages);
+}
+
 # update_content: this whole method may need work to deal with workflow.
 # maybe it can't even be called if the site uses workflow...
 # may need fixing for better conflict handling, too. maybe use a transaction?
@@ -408,7 +428,7 @@ sub descendants_by_date {
 
 sub descendants {
     my ($self) = @_;
-    $self->result_source->resultset->search({
+    my (@pages)=$self->result_source->resultset->search({
 	'ancestor.id'=>$self->id,
 	-or => [
 	    'ancestor.id' => \'=me.id',
@@ -421,23 +441,9 @@ sub descendants {
 	from     => 'page me, page ancestor',
 	order_by => [ 'me.name' ] 
     });
+    return $self->result_source->resultset->set_paths( @pages );
 }
 
-sub tagged_descendants {
-    my ($self,$tag) = @_;
-    return $self->result_source->resultset->search({
-	    'me.id'=>$self->id,
-	    'tag' => $tag,
-	    'descendant.lft', \'> me.lft',
-	    'descendant.rgt', \'< me.rgt',
-	    'descendant.id',  => \'= tag.page',
-	    'content.page'    => \'= descendant.id',
-	    'content.version' => \'=descendant.content_version',
-	    },{
-	    from     => "page as me, page as descendant, tag, content",
-	    order_by => 'descendant.name',
-	    });
-}
 
 =item others_tags <user>
 

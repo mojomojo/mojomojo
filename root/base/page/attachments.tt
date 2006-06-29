@@ -44,7 +44,7 @@ function watch_progress(form) {
 [% FOR attachment IN page.attachments %]
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |
-     [%attachment.size div 1024%]k |
+     [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
 	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]">view</a> |
 	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/inline">inline</a> |
 	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/download">download</a> |
