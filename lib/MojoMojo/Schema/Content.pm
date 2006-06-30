@@ -218,22 +218,22 @@ version.
 sub store_links {
     my ($self) = @_;
     return unless ($self->status eq 'released');
-    my $content = $self->body_decoded;
+    my $content = $self->body;
     my $page = $self->page;
     require MojoMojo::Formatter::Wiki;
     my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
     return unless (@$linked_pages || @$wanted_pages);
-    $self->search( from_page => $page )->delete_all;
-    $self->result_source->schema->resultset('WantedPage')->search({ from_page => $page })->delete_all;
+    $self->page->links_from->delete();
+    $self->page->wantedpages->delete();
     for (@$linked_pages) {
-	my $link = $self->result_source->schema->resultset('Link')
-	    ->resultset->find_or_create(
+	my $link = $self->result_source->schema->resultset('Link')->
+	    find_or_create(
 		    { from_page => $self->page->id, to_page => $_->id });
     }
     for (@$wanted_pages) {
-	my $wanted_page = $self->result_source->schema('WantedPage')->
+	my $wanted_page = $self->result_source->schema()->
 	    resultset('WantedPage')->find_or_create(
-		    { from_page => $page, to_path => $_->{path} });
+		    { from_page => $page->id, to_path => $_->{path} });
     }
 }
 
