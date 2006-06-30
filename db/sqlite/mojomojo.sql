@@ -268,5 +268,24 @@ INSERT INTO page_version
  creator,
  created)
 VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,0);
-INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,'Welcome to MojoMojo!');
-INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (1,1,NULL,'/','/',0,1,2,1);
+INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,
+'h1. Welcome to MojoMojo!
+
+This is your front page. To start administrating your wiki, please log in with
+username admin/password admin. At that point you will be able to set up your
+configuration. If you want to play around a little with the wiki, just create
+a NewPage or edit this one through the edit link at the bottom.
+
+h2. Need some assistance?
+
+Check out our [[Help]] section.');
+INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (1,1,NULL,'/','/',0,1,4,1);
+INSERT INTO content (page,version,creator,created,body) VALUES(2,1,1,0,
+'h1. Help Index.
+
+* Editing Pages
+* Formatter Syntax.
+* Using Tags
+* Attachments & Photos');
+
+INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (2,1,1,'help','Help',1,2,3,1);
