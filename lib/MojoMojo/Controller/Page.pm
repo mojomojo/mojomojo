@@ -8,6 +8,7 @@ use Time::Piece;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
+use Devel::Trace;
 
 my $search_engine = 'Catalyst::Model::Search::Plucene';
 
@@ -74,6 +75,10 @@ sub view : Global {
     }
     else {
 	$content = $page->content;
+	unless ($content) {
+	    $stash->{message} = $page->name.' does not have a version';
+	    return $stash->{template} = 'message.tt';
+	}
 	$stash->{rev} =  $content->version ;
     }
     $stash->{content} = $content;

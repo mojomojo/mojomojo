@@ -494,4 +494,101 @@ sub tags_with_counts {
     return @tags;
 }
 
+=item create_path_pages
+
+find or creates a list of path_pages
+
+=cut
+
+sub create_path_pages :ResultSet {
+    my ( $self,      %args )        = @_;
+    my ( $path_pages, $proto_pages, $creator ) = @args{qw/path_pages proto_pages creator/};
+
+    # find the deepest existing page in the path, and save
+    # some of its data for later use
+    my $parent = $path_pages->[ @$path_pages - 1 ];
+    my %original_ancestor = ( id => $parent->id, rgt => $parent->rgt );
+
+    # open a gap in the nested set numbers to accommodate the new pages
+    $parent = $self->open_gap( $parent, scalar @$proto_pages );
+
+    my @version_columns = $self->related_resultset('page_version')->result_source->columns;
+
+    # create all missing pages in the path
+    for my $proto_page (@$proto_pages) {
+
+        # since SQLite doesn't support sequences, just cheat
+        # for now and get the next id by creating a page record
+        my $page = $self->create( { parent => $parent->id } );
+        my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
+
+        @version_data{qw/page version parent parent_version creator status release_date/} = (
+            $page->id,
+            1,
+            $page->parent->id,
+            # why this? we should always have a parent...
+            ( $page->parent ? $page->parent->version : undef ),
+            $creator,
+            'released',
+            DateTime->now,
+        );
+
+        my $page_version = 
+	    $self->related_resultset('page_version')->create( \%version_data );
+        for ( $page->columns ) {
+            next if $_ eq 'id'; # page already exists
+            next if $_ eq 'content_version'; # no content yet
+            next unless $page_version->can( $_ );
+            $page->$_( $page_version->$_ );
+        }
+        # set the nested set columns:
+        ## we always create the first page as a right child,
+        ## so if this is the first new page, its left number
+        ## will be the same as the parent's old right number
+        $page->lft(
+            $parent->id == $original_ancestor{id}
+            ? $original_ancestor{rgt}
+            : $parent->lft + 1
+        );
+        $page->rgt( $parent->rgt - 1 );
+        $page->update;
+        push @$path_pages, $page;
+        $parent = $page;
+    }
+    return $path_pages;
+
+} # end sub create_path_pages
+
+=item open_gap
+
+Opens a gap in the nested set numbers to allow the inserting
+of new pages into the tree. Since nested sets number each node
+twice, the size of the gap is always twice the number of new
+pages. Also, since nested sets number the nodes from left to
+right, we determine what nodes to re-number according to the
+C<rgt> column of the parent of the top-most new node.
+
+Returns a new parent object that is updated with the new C<lft>
+C<rgt> nested set numbers.
+
+=cut
+
+sub open_gap :ResultSet {
+    my ($self, $parent, $new_page_count) = @_;
+    my ($gap_increment, $parent_rgt, $parent_id)
+        = ($new_page_count * 2, $parent->rgt, $parent->id);
+    $self->result_source->schema->storage->dbh->do(qq{ UPDATE page 
+    SET rgt = rgt + ?, lft = CASE
+    WHEN lft > ? THEN lft + ?
+    ELSE lft
+    END
+    WHERE rgt >= ? }, undef
+    $gap_increment, $parent_rgt, $gap_increment, $parent_rgt );
+
+    # get the new nested set numbers for the parent
+    $parent = $self->find( $parent_id );
+    return $parent;
+}
+
+
 1;

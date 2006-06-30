@@ -62,7 +62,7 @@
 [% END %]
  <small>
   | Views: <a title="Format page for printing" href="[%base _ page.path%].print">Print</a>
-  <a title="Subscribe to page changes" href="[%base _ page.path%].rss_changes">RSS</a>
+  <a title="Subscribe to page changes" href="[%base _ page.path%].rss">RSS</a>
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </small>
 [% IF page.links_to.first ; %] 

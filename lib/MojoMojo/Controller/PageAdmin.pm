@@ -3,12 +3,6 @@ package MojoMojo::Controller::PageAdmin;
 use strict;
 use base 'Catalyst::Controller';
 
-my $m_base          = 'MojoMojo::M::Core::';
-my $m_page_class    = $m_base . 'Page';
-my $m_content_class = $m_base . 'Content';
-my $m_verison_class = $m_base . 'PageVersion';
-my $search_engine   = 'MojoMojo::M::Search::Plucene';
-
 =head1 NAME
 
 MojoMojo::Controller::PageAdmin - MojoMojo Page Administration
@@ -60,14 +54,14 @@ sub edit : Global {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
-    my $user = $c->stash->{user} ? $c->stash->{user}->id : 1; # Anon edit
+    my $user = $c->user_exists ? $c->user->obj->id : 1; # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
     unless ($path_pages) {
-        ( $path_pages, $proto_pages ) = $m_page_class->path_pages($path);
+        ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($path);
     }
 
     # the page we're editing is at the end of either path_pages or 
@@ -100,7 +94,7 @@ sub edit : Global {
         return;
     }
 
-    if ($user == 0 && ! $c->pref('anonymous_user')) {
+    if ($user == 1 && ! $c->pref('anonymous_user')) {
       $c->stash->{message} ||= 'Anonymous Edit disabled';
       return;
     }
@@ -110,7 +104,7 @@ sub edit : Global {
 
     if (@$proto_pages)    # page doesn't exist yet
     {
-        $path_pages = $m_page_class->create_path_pages(
+        $path_pages = $c->model('DBIC::Page')->create_path_pages(
             path_pages  => $path_pages,
             proto_pages => $proto_pages,
             creator     => $user,

@@ -29,7 +29,9 @@ default action - serve the home node
 
 sub default : Private {
     my ( $self, $c )      = @_;
-    $c->stash->{message}  = "Couldn't find that page, jimmy";
+    $c->stash->{message}  = "Couldn't find that page, Jimmy ".
+    '('.$c->stash->{pre_hacked_uri}.')';
+    ;
     $c->stash->{template} = 'message.tt';
 }
 

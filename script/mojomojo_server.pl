@@ -5,6 +5,8 @@ BEGIN {
     $ENV{CATALYST_SCRIPT_GEN} = 4;
 }  
 
+use Devel::Trace;
+$Devel::Trace::TRACE=0;
 use strict;
 use Getopt::Long;
 use Pod::Usage;
