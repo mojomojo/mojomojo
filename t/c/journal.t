@@ -1,5 +1,5 @@
-use Test::More tests => 3;
+use Test::More tests => 2;
 use_ok( Catalyst::Test, 'MojoMojo' );
-use_ok('MojoMojo::C::Journal');
+use_ok('MojoMojo::Controller::Journal');
 
-ok( request('journal')->is_success );
+#ok( request('/.journal')->is_success );
