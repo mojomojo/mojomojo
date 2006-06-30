@@ -7,6 +7,8 @@ use warnings;
 
 use base 'DBIx::Class';
 
+use DateTime::Format::Mail;
+
 use Algorithm::Diff;
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
@@ -122,12 +124,17 @@ either own content or passed <content>
 sub format_content : ResultSet {
 my ( $self, $c, $content,$page ) = @_;
 $c       ||= MojoMojo->instance();
+warn "Starting formatting";
+$Devel::Trace::TRACE=1;
 MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
+$Devel::Trace::TRACE=0;
+warn "Done formatting";
 return $content;
 }
 sub formatted {
 my ( $self, $c) = @_;
-$self->result_source->resultset->format_content($c,$self->body,$self);
+    my $result=$self->result_source->resultset->format_content($c,$self->body,$self);
+    return $result;
 }
 
 # create_proto: create a "proto content version" that may
@@ -189,5 +196,17 @@ return $self->result_source->resultset->search({
 	version => $self->version-1
           })->next;
 }
+
+=item  pub_date
+
+return publish date of this version in a format suitable for RSS 2.0
+
+=cut
+
+sub pub_date {
+    my $self=shift;
+    return DateTime::Format::Mail->format_datetime($self->created);
+}
+
 
 1;
