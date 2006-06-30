@@ -88,7 +88,10 @@ sub deploy_schema {
         my $sql;
         { local $/ = undef; $sql = <IN>; }
         close IN;
-        $schema->storage->dbh->do($_) for split(/;\n/, $sql);
+        my $dbh = $schema->storage->dbh;
+        map {
+            $dbh->do($_) or die $dbh->errstr;
+        } split(/;\s*\n/, $sql);
     }
 }
 
@@ -239,3 +242,4 @@ sub populate_schema {
 }
 
 1;
+
