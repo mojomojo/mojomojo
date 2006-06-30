@@ -90,7 +90,7 @@ sub export_html : Global {
         my $home = $c->pref("home_node");
         foreach my $page ( @$pages ) {
             $c->log->debug('Rendering '.$page->path);
-            $archive->addString( $c->subreq( $page->path .'.print' ),
+            $archive->addString( $c->subreq('/print',{path=>$page->path} ),
                 $prefix . $page->path ."/index.html" );
         }
         my $fh = IO::Scalar->new( \$c->res->{body} );
