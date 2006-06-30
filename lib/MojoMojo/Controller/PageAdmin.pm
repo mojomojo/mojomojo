@@ -118,6 +118,7 @@ sub edit : Global {
     # update the search index with the new content
     # FIXME: Disabling search engine for now.
     # $search_engine->index_page( $page );
+    $page->content->store_links();
 
     $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );
 
