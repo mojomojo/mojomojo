@@ -54,34 +54,34 @@ __PACKAGE__->has_many(
   },
 );
 __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
-__PACKAGE__->belongs_to("page", "Page", { id => "page" });
+    __PACKAGE__->belongs_to("page", "Page", { id => "page" });
 
-sub highlight {
-    my ( $self, $c ) = @_;
-    my $this_content = $self->formatted($c);
+    sub highlight {
+	my ( $self, $c ) = @_;
+	my $this_content = $self->formatted($c);
 
-    # FIXME: This may return undef. What do we do then?
-    my $previous_content = (
-        defined $self->previous
-        ? $self->previous->formatted($c)
-        : $this_content );
-    my $this = [ split /\n\n/,                  $this_content ];
-    my $prev = [ split /\n\n/,                  $previous_content ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
-    my $diff;
-    my $hi = 0;
-    for my $line (@diff) {
-        $hi++;
-        if ( $$line[0] eq "+" ) {
-            $diff .= qq(<div id="hi$hi" class="fade">) . $$line[2] . "</div>";
-        }
-        elsif ( $$line[0] eq "c" ) {
-            $diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
-        } elsif ( $$line[0] eq "-" ) { }
-        else { $diff .= $$line[1] }
+	# FIXME: This may return undef. What do we do then?
+	my $previous_content = (
+	    defined $self->previous
+	    ? $self->previous->formatted($c)
+	    : $this_content );
+	my $this = [ split /\n\n/,                  $this_content ];
+	my $prev = [ split /\n\n/,                  $previous_content ];
+	my @diff = Algorithm::Diff::sdiff( $prev, $this );
+	my $diff;
+	my $hi = 0;
+	for my $line (@diff) {
+	    $hi++;
+	    if ( $$line[0] eq "+" ) {
+		$diff .= qq(<div id="hi$hi" class="fade">) . $$line[2] . "</div>";
+	    }
+	    elsif ( $$line[0] eq "c" ) {
+		$diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
+	    } elsif ( $$line[0] eq "-" ) { }
+	    else { $diff .= $$line[1] }
+	}
+	return $diff;
     }
-    return $diff;
-}
 
 =item formatted_diff <context> <old_content>
 
@@ -92,47 +92,47 @@ and deleted with diffdel css class.
 =cut
 
 sub formatted_diff {
-my ( $self, $c, $to ) = @_;
-my $this = [ split /\n\n/, $self->formatted($c) ];
-my $prev = [ split /\n\n/, $to->formatted($c) ];
-my @diff = Algorithm::Diff::sdiff( $prev, $this );
-my $diff;
-for my $line (@diff) {
-    if ( $$line[0] eq "+" ) {
-	$diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+    my ( $self, $c, $to ) = @_;
+    my $this = [ split /\n\n/, $self->formatted($c) ];
+    my $prev = [ split /\n\n/, $to->formatted($c) ];
+    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $diff;
+    for my $line (@diff) {
+	if ( $$line[0] eq "+" ) {
+	    $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+	}
+	elsif ( $$line[0] eq "-" ) {
+	    $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+	}
+	elsif ( $$line[0] eq "c" ) {
+	    $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
+	    $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+	}
+	elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
+	else { $diff .= "Unknown operator " . $$line[0] }
     }
-    elsif ( $$line[0] eq "-" ) {
-	$diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
-    }
-    elsif ( $$line[0] eq "c" ) {
-	$diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
-	$diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
-    }
-    elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
-    else { $diff .= "Unknown operator " . $$line[0] }
-}
-return $diff;
-}
+    return $diff;
+	}
 
 =item formatted [<content>]
 
 Return content after being run through MojoMojo::Formatter::* ,
-either own content or passed <content>
+       either own content or passed <content>
 
 =cut
 
 sub format_content : ResultSet {
-my ( $self, $c, $content,$page ) = @_;
-$c       ||= MojoMojo->instance();
-warn "Starting formatting";
-$Devel::Trace::TRACE=1;
-MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
-$Devel::Trace::TRACE=0;
-warn "Done formatting";
-return $content;
+    my ( $self, $c, $content,$page ) = @_;
+    $c       ||= MojoMojo->instance();
+    warn "Starting formatting";
+    $Devel::Trace::TRACE=1;
+    MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
+    $Devel::Trace::TRACE=0;
+    warn "Done formatting";
+    return $content;
 }
 sub formatted {
-my ( $self, $c) = @_;
+    my ( $self, $c) = @_;
     my $result=$self->result_source->resultset->format_content($c,$self->body,$self);
     return $result;
 }
@@ -147,24 +147,24 @@ Create a content prototype object, as the basis for a new revision.
 =cut
 
 sub create_proto : ResultSet {
-my ( $class, $page ) = @_;
-my %proto_content;
-my @columns = __PACKAGE__->columns;
-eval { $page->isa('MojoMojo::Schema::Page'); $page->content->isa('MojoMojo::Schema::Content') };
-if ($@) {
+    my ( $class, $page ) = @_;
+    my %proto_content;
+    my @columns = __PACKAGE__->columns;
+    eval { $page->isa('MojoMojo::Schema::Page'); $page->content->isa('MojoMojo::Schema::Content') };
+    if ($@) {
 
-    # assume page is a simple "proto page" hashref,
-    # or the page has no content yet
-    %proto_content = map { $_ => undef } @columns;
-    $proto_content{version} = 1;
-}
-else {
-    my $content = $page->content;
-    %proto_content = map { $_ => $content->$_ } @columns;
-    @proto_content{qw/ creator created comments /} = (undef) x 3;
-    $proto_content{version}++;
-}
-return \%proto_content;
+# assume page is a simple "proto page" hashref,
+# or the page has no content yet
+	%proto_content = map { $_ => undef } @columns;
+	$proto_content{version} = 1;
+    }
+    else {
+	my $content = $page->content;
+	%proto_content = map { $_ => $content->$_ } @columns;
+	@proto_content{qw/ creator created comments /} = (undef) x 3;
+	$proto_content{version}++;
+    }
+    return \%proto_content;
 }
 
 =item max_version 
@@ -174,13 +174,13 @@ Return the highest numbered revision.
 =cut
 
 sub max_version {
-my $self=shift;
-my $max=$self->result_source->resultset->search({page=>$self->page->id},{
-    select => [ {max=>'me.version'}],
-    as     => ['max_ver']
-});
-return 0 unless $max->count;
-return $max->next->get_column('max_ver');
+    my $self=shift;
+    my $max=$self->result_source->resultset->search({page=>$self->page->id},{
+	    select => [ {max=>'me.version'}],
+	    as     => ['max_ver']
+	    });
+    return 0 unless $max->count;
+    return $max->next->get_column('max_ver');
 }
 
 =item previous
@@ -190,11 +190,11 @@ Return previous version of this content, or undef for first version.
 =cut
 
 sub previous {
-my $self = shift;
-return $self->result_source->resultset->search({
-	page    => $self->page->id,
-	version => $self->version-1
-          })->next;
+    my $self = shift;
+    return $self->result_source->resultset->search({
+	    page    => $self->page->id,
+	    version => $self->version-1
+	    })->next;
 }
 
 =item  pub_date
@@ -208,5 +208,33 @@ sub pub_date {
     return DateTime::Format::Mail->format_datetime($self->created);
 }
 
+=item store_links
+
+Extract and store all links and wanted paged from a given content
+version.
+
+=cut
+
+sub store_links {
+    my ($self) = @_;
+    return unless ($self->status eq 'released');
+    my $content = $self->body_decoded;
+    my $page = $self->page;
+    require MojoMojo::Formatter::Wiki;
+    my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
+    return unless (@$linked_pages || @$wanted_pages);
+    $self->search( from_page => $page )->delete_all;
+    $self->result_source->schema->resultset('WantedPage')->search({ from_page => $page })->delete_all;
+    for (@$linked_pages) {
+	my $link = $self->result_source->schema->resultset('Link')
+	    ->resultset->find_or_create(
+		    { from_page => $self->page->id, to_page => $_->id });
+    }
+    for (@$wanted_pages) {
+	my $wanted_page = $self->result_source->schema('WantedPage')->
+	    resultset('WantedPage')->find_or_create(
+		    { from_page => $page, to_path => $_->{path} });
+    }
+}
 
 1;
