@@ -157,7 +157,8 @@ sub do_register : Global {
     $c->stash->{template} = 'user/register.tt';
     $c->form(required => [qw(login name pass confirm email)],
              defaults  => { active => -1 }, 
-             constraints => $c->model("DBIC::Person")->registration_profile);
+             constraints => $c->model("DBIC::Person")->registration_profile(
+	     $c->model('DBIC')->schema));
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'. 
         'the following are missing: <b>'.
@@ -166,7 +167,8 @@ sub do_register : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
-        my $user=$c->model("DBIC::Person")->create_from_form($c->form);
+	delete $c->form->{valid}->{confirm};
+        my $user=$c->model("DBIC::Person")->create($c->form->{valid});
         $c->forward('/user/login');
         $c->pref('entropy') || $c->pref('entropy',rand);
         $c->email( header => [
@@ -264,8 +266,9 @@ sub do_editprofile : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
-	my $user=$c->model("DBIC::Person")->get_user($c->stash->{page}->name_orig);
-	$user->update_from_form($c->form);
+	my $user=$c->model("DBIC::Person")->get_user(
+	    $c->stash->{page}->name_orig);
+	$user->sel_columns($c->form->{valid});
 	return $c->forward('profile');
     }
     $c->forward('editprofile');
@@ -275,7 +278,8 @@ sub do_editprofile : Global {
 
 =head1 AUTHOR
 
-David Naughton <naughton@cpan.org>, Marcus Ramberg <mramberg@cpan.org>
+David Naughton <naughton@cpan.org>, 
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
