@@ -169,7 +169,8 @@ sub format_link {
     $url    =~ s/[\/]+$//;
 
     # use the normalized path string returned by path_pages:
-my ($path_pages, $proto_pages) = $c->model('DBIC::Page')->path_pages( $word );
+    my ($path_pages, $proto_pages) = 
+	$c->model('DBIC::Page')->path_pages( $word );
 if (@$proto_pages) {
     my $proto_page = pop @$proto_pages;
     $url .= $proto_page->{path};

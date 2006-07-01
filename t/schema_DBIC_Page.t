@@ -6,7 +6,7 @@ BEGIN {
     eval "use DBD::SQLite";
     plan $@
         ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 8 );
+        : ( tests => 11 );
 }
 
 use lib qw(t/lib);
@@ -19,6 +19,8 @@ my $root_path_pages_count = @$root_path_pages;
 my $root_proto_pages_count = @$root_proto_pages;
 is( $root_path_pages_count, 1, 'exactly 1 page returned for path "/"...' );
 is( $root_proto_pages_count, 0, '...and 0 "proto" pages' );
+my $root=$root_path_pages->[0];
+isa_ok($root,'MojoMojo::Schema::Page');
 
 my ($child_path_pages, $child_proto_pages) = $schema->resultset('Page')->path_pages('/child/grandchild');
 my $child_path_pages_count = @$child_path_pages;
@@ -52,3 +54,13 @@ push @child_names,'help';
 
 is_deeply( \@descendant_names, \@child_names, 'new children returned as descendants of root');
 
+{
+# test tagged_descendants 
+    my $tag=$schema->resultset('Tag')
+	->create({tag=>'test',page=>$root->id,person=>1});
+    is(scalar $root->tagged_descendants('test'),1,'Got 1 tagged descendant.');
+    my $tag2=$schema->resultset('Tag')
+	->create({tag=>'test',page=>2,person=>1});
+    is(scalar $root->tagged_descendants('test'),2,'Got 2 tagged descendants.');
+    is(scalar $root->tagged_descendants_by_date('test'),2,'Got 2 tagged descendants.');
+}

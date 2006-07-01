@@ -76,55 +76,54 @@ sub path_pages :ResultSet {
     # avoid recursive path resolution, if possible:
     my @path_pages;
     if ($path eq '/') {
-        @path_pages = $self->search({ lft => 1 });
-        $path_pages[0]->path( '/' );
+	@path_pages = $self->search({ lft => 1 })->all;
     }
     elsif ($id) {
-        # this only works if depth is at least 1
-    @path_pages = $self->path_pages_by_id( $id );
-}
-return (\@path_pages, []) if (@path_pages > 0);
+    # this only works if depth is at least 1
+	@path_pages = $self->path_pages_by_id( $id );
+    }
+    return (\@path_pages, []) if (@path_pages > 0);
 
-my @proto_pages = $self->parse_path($path);
+    my @proto_pages = $self->parse_path($path);
 
-my $depth      = @proto_pages - 1;          # depth starts at 0
+    my $depth      = @proto_pages - 1;          # depth starts at 0
 
 
-my @depths;
-for my $proto ( @proto_pages )  {
-    push @depths, -and => [ depth =>  $proto->{depth},
-			    name  =>  $proto->{name} ];
+	my @depths;
+    for my $proto ( @proto_pages )  {
+	push @depths, -and => [ depth =>  $proto->{depth},
+	     name  =>  $proto->{name} ];
 
-}
+    }
 
-my @pages = $self->search({ -or => [ @depths ] },{} ); 
+    my @pages = $self->search({ -or => [ @depths ] },{} ); 
 
-my @query_pages;
-for (@pages ) {
-    $query_pages[ $_->depth ] ||= [];
-    push @{ $query_pages[ $_->depth ] }, $_;
-}
+    my @query_pages;
+    for (@pages ) {
+	$query_pages[ $_->depth ] ||= [];
+	push @{ $query_pages[ $_->depth ] }, $_;
+    }
 
-my $resolved = $self->resolve_path(
-    path_pages    => \@path_pages,
-    proto_pages   => \@proto_pages,
-    query_pages   => \@query_pages,
-    current_depth => 0,
-    final_depth   => $depth,
-);
+    my $resolved = $self->resolve_path(
+	    path_pages    => \@path_pages,
+	    proto_pages   => \@proto_pages,
+	    query_pages   => \@query_pages,
+	    current_depth => 0,
+	    final_depth   => $depth,
+	    );
 
 # If there are any proto pages, put the original
 # page names back into the paths, so they will
 # be preserved upon page creation:
-if (@proto_pages) {
-    my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
-    for (@proto_pages) {
-	($proto_path =~ /\/$/) || ($proto_path .= '/');
-	 $proto_path .= $_->{name_orig};
-	$_->{path} = $proto_path;
+    if (@proto_pages) {
+	my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
+	for (@proto_pages) {
+	    ($proto_path =~ /\/$/) || ($proto_path .= '/');
+	    $proto_path .= $_->{name_orig};
+	    $_->{path} = $proto_path;
+	}
     }
-}
-return ( \@path_pages, \@proto_pages );
+    return ( \@path_pages, \@proto_pages );
 
 } # end sub get_path
 
@@ -262,8 +261,13 @@ sub tagged_descendants_by_date {
     my (@pages)=$self->result_source->resultset->search({
 	    'ancestor.id'=>$self->id,
 	    'tag' => $tag,
-	    'me.lft', \'> ancestor.lft',
-	    'me.rgt', \'< ancestor.rgt',
+	    -or => [
+		'me.id' => \'=ancestor.id', 
+		-and => [
+		    'me.lft', \'> ancestor.lft',
+		    'me.rgt', \'< ancestor.rgt',
+		],
+	    ],
 	    'me.id',  => \'=tag.page',
 	    'content.page'    => \'=me.id',
 	    'content.version' => \'=me.content_version',
@@ -279,15 +283,20 @@ sub tagged_descendants {
     my(@pages)=$self->result_source->resultset->search({
 	    'ancestor.id'=>$self->id,
 	    'tag' => $tag,
-	    'me.lft', \'> ancestor.lft',
-	    'me.rgt', \'< ancestor.rgt',
+	    -or => [
+		'me.id' => \'=ancestor.id', 
+		-and => [
+		    'me.lft', \'> ancestor.lft',
+		    'me.rgt', \'< ancestor.rgt',
+		],
+	    ],
 	    'me.id',  => \'=tag.page',
 	    'content.page'    => \'=me.id',
 	    'content.version' => \'=me.content_version',
 	    },{
 	    from     => "page as me, page as ancestor, tag, content",
 	    order_by => 'me.name',
-	    });
+	    })->all;
     return $self->result_source->resultset->set_paths(@pages);
 }
 
@@ -303,38 +312,37 @@ args is each column of L<MojoMojo::M::Core::Content>.
 =cut
 
 sub update_content {
-my ( $self, %args ) = @_;
+    my ( $self, %args ) = @_;
 
-my $content_version = ( $self->content ? 
-	 $self->content->max_version() : 
-	 undef );
-my %content_data =
-  map { $_ => $args{$_} } 
-    $self->result_source->related_source('content')->columns;
-my $now = DateTime->now;
-@content_data{qw/page version status release_date/} =
-  ($self->id,
-     ($content_version ? $content_version + 1 : 1),
-     'released',
-     $now,
-);
-my $content = $self->result_source->related_source('content')
-    ->resultset->create( \%content_data );
-$self->content_version( $content->version );
-$self->update;
-$self->page_version->content_version_first( $content_version )
-    unless defined $self->page_version->content_version_first;
-$self->page_version->content_version_last($content_version);
-$self->page_version->update;
+    my $content_version = ( $self->content ? 
+	    $self->content->max_version() : 
+	    undef );
+    my %content_data = map { $_ => $args{$_} } 
+	$self->result_source->related_source('content')->columns;
+    my $now = DateTime->now;
+    @content_data{qw/page version status release_date/} =
+	($self->id,
+	 ($content_version ? $content_version + 1 : 1),
+	 'released',
+	 $now,
+	);
+    my $content = $self->result_source->related_source('content')
+	->resultset->create( \%content_data );
+    $self->content_version( $content->version );
+    $self->update;
+    $self->page_version->content_version_first( $content_version )
+	unless defined $self->page_version->content_version_first;
+    $self->page_version->content_version_last($content_version);
+    $self->page_version->update;
 
-if (my $previous_content = $content->previous) {
-    $previous_content->remove_date( $now );
-    $previous_content->status( 'removed' );
-    $previous_content->comments( "Replaced by version $content_version." );
-    $previous_content->update;
-} else {
-    $self->result_source->resultset->set_paths($self);
-}
+    if (my $previous_content = $content->previous) {
+	$previous_content->remove_date( $now );
+	$previous_content->status( 'removed' );
+	$previous_content->comments( "Replaced by version $content_version." );
+	$previous_content->update;
+    } else {
+	$self->result_source->resultset->set_paths($self);
+    }
 
 } # end sub update_content
 
@@ -348,49 +356,51 @@ Sets the path TEMP columns for multiple pages, either a subtree or a group of no
 
 
 sub set_paths :ResultSet {
-my ($class, @pages) = @_;
-return () unless (scalar @pages >= 1);
-my %pages = map { $_->id => $_ } @pages;
+    my ($class, @pages) = @_;
+    return @pages if (scalar @pages == 1) && 
+	$pages[0]->depth == 0 ;
+    return unless (scalar @pages);
+    my %pages = map { $_->id => $_ } @pages;
 
 # Preserve the original sort order, because the pages
 # passed in may have been sorted differently than we
 # need them sorted to set paths:
-my @lft_sorted_pages = sort { $a->lft <=> $b->lft } @pages;
+    my @lft_sorted_pages = sort { $a->lft <=> $b->lft } @pages;
 
 # In some cases, e.g. retrieving descendants, we
 # may not have passed in the root of the subtree:
-unless ($lft_sorted_pages[0]->name eq '/') {
-    my $parent = $lft_sorted_pages[0]->parent;
-    $pages{ $parent->id } = $parent;
-}
+    unless ($lft_sorted_pages[0]->name eq '/') {
+	my $parent = $lft_sorted_pages[0]->parent;
+	$pages{ $parent->id } = $parent;
+    }
 
 # Sorting by the rgt column ensures that we always set
 # paths for parents before their children, allowing us
 # to avoid recursion.
-for (@lft_sorted_pages) {
-    if ($_->name eq '/') {
-	$_->path('/');
-	 next;
-    }
-    if ($_->depth == 1) {
-	$_->path( '/' . $_->name );
-	next;
-    }
-    my $parent = $pages{ $_->parent->id };
-    if (ref $parent) {
-	$_->path( $parent->path . '/' . $_->name );
-    }
-     # unless all pages were adjacent, i.e. a whole subtree,
-     # we still may not have the parent:
-     else {
-	my @path_pages = $class->path_pages_by_id( $_->id );
-	 # store these in case they're parents of other pages
+    for (@lft_sorted_pages) {
+	if ($_->name eq '/') {
+	    $_->path('/');
+	    next;
+	}
+	if ($_->depth == 1) {
+	    $_->path( '/' . $_->name );
+	    next;
+	}
+	my $parent = $pages{ $_->parent->id };
+	if (ref $parent) {
+	    $_->path( $parent->path . '/' . $_->name );
+	}
+# unless all pages were adjacent, i.e. a whole subtree,
+# we still may not have the parent:
+	else {
+	    my @path_pages = $class->path_pages_by_id( $_->id );
+# store these in case they're parents of other pages
 	    for my $path_page (@path_pages) {
-                 $pages{ $path_page->id } = $path_page;
+		$pages{ $path_page->id } = $path_page;
 	    }
-             # don't know if this is necessary, but just in case
-             #my $current_page = pop @path_pages;
-             #$_->path( $current_page->path );
+# don't know if this is necessary, but just in case
+#my $current_page = pop @path_pages;
+#$_->path( $current_page->path );
 	}
     }
     return @pages;
@@ -591,11 +601,13 @@ sub open_gap :ResultSet {
 
 sub path {
     my ($self,$path) = @_;
+    require Carp;
     if(defined $path) { 
 	$self->{path}=$path;
     }
     unless( defined $self->{path} ) {
-	croak 'path is not set on the page object';
+	return '/' if( $self->depth == 0 );
+	croak 'path is not set on the page object:'.$self->name;
     }
     return $self->{path};
 }

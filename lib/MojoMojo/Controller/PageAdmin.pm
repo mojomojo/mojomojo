@@ -27,7 +27,6 @@ Check that user is logged in and has rights to this page.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    $c->req->params->{login}=$c->req->params->{creator};
     $c->forward('/user/login') if $c->req->params->{pass} && 
                                 ! $c->stash->{user};
     # everyone can edit with anon mode enabled.
@@ -100,6 +99,7 @@ sub edit : Global {
     }
     # else, update the page and redirect to highlight, which will forward to view:
     my $valid   = $c->form->valid;
+    $valid->{creator} = $user;
     my $unknown = $c->form->unknown;
 
     if (@$proto_pages)    # page doesn't exist yet
@@ -109,15 +109,16 @@ sub edit : Global {
             proto_pages => $proto_pages,
             creator     => $user,
         );
-        $c->model("DBIC::Page")->set_paths(@$path_pages);
         $page = $path_pages->[ @$path_pages - 1 ];
     }
+    $c->model("DBIC::Page")->set_paths(@$path_pages);
     $page->update_content( %$valid, %$unknown );
 
 
     # update the search index with the new content
     # FIXME: Disabling search engine for now.
     # $search_engine->index_page( $page );
+    $c->model("DBIC::Page")->set_paths($page);
     $page->content->store_links();
 
     $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );

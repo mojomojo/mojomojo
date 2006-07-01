@@ -125,9 +125,8 @@ sub format_content : ResultSet {
     my ( $self, $c, $content,$page ) = @_;
     $c       ||= MojoMojo->instance();
     #warn "Starting formatting";
-    $Devel::Trace::TRACE=1;
-    MojoMojo->call_plugins( "format_content", \$content, $c, $page) if ($content);
-    $Devel::Trace::TRACE=0;
+    MojoMojo->call_plugins( "format_content", \$content, $c, $page) 
+	if ($content);
     #warn "Done formatting";
     return $content;
 }
