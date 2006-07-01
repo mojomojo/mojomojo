@@ -268,7 +268,7 @@ INSERT INTO page_version
  creator,
  created)
 VALUES (1,1,NULL,NULL,'/','/',0,1,1,1,0);
-INSERT INTO content (page,version,creator,created,body) VALUES(1,1,1,0,
+INSERT INTO content (page,version,creator,created,body,status) VALUES(1,1,1,0,
 'h1. Welcome to MojoMojo!
 
 This is your front page. To start administrating your wiki, please log in with
@@ -278,14 +278,14 @@ a NewPage or edit this one through the edit link at the bottom.
 
 h2. Need some assistance?
 
-Check out our [[Help]] section.');
+Check out our [[Help]] section.','released');
 INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (1,1,NULL,'/','/',0,1,4,1);
-INSERT INTO content (page,version,creator,created,body) VALUES(2,1,1,0,
+INSERT INTO content (page,version,creator,created,body,status) VALUES(2,1,1,0,
 'h1. Help Index.
 
 * Editing Pages
 * Formatter Syntax.
 * Using Tags
-* Attachments & Photos');
+* Attachments & Photos','released');
 
 INSERT INTO page (id,version,parent,name,name_orig,depth,lft,rgt,content_version) VALUES (2,1,1,'help','Help',1,2,3,1);

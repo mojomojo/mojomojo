@@ -47,7 +47,7 @@
 [%IF wanted.size%]
   <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-    <li>[%c.wikiword(wanted.to_path,base)%] wanted by [%c.wikiword(wanted.from_page.path,base)%]</li>
+    <li><span class="newWikiWord">[%wanted.to_path%]<a title=">Not found. Click to create this page." href="[%base _ wanted.to_path%].edit">?</a></span> wanted by [%wanted.from_page.path%]</li>
 [% END %]
   </ul>
 [%END%]
@@ -58,7 +58,7 @@
   [%IF orphans.size%]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
-    <li><a href="[% base %][% orphan.path %]"><span class="newWikiWord">[%orphan.path%]<a title=">Not found. Click to create this page." href="[%base _ orphan.path%].edit">_</a></span></li>
+    <li><a href="[% base %][% orphan.path %]">[%orphan.path%]<a  href="[%base _ orphan.path%].edit">_</a></span></li>
 [% END %]
     </ul>
   [%END%]

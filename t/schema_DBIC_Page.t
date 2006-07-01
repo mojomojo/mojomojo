@@ -45,5 +45,10 @@ is_deeply( \@child_names, ['/', 'child', 'grandchild'], 'new children have the c
 my $root_page = $root_path_pages->[0];
 my @descendant_names = map { $_->name } $root_page->descendants;
 
+# We also have a help node in the default db, that needs to be in there.
+# FIXME: This is kidna retarded, is this test a dud?
+
+push @child_names,'help';
+
 is_deeply( \@descendant_names, \@child_names, 'new children returned as descendants of root');
 

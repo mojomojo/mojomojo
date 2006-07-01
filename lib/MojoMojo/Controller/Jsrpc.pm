@@ -68,7 +68,6 @@ sub diff : Local {
         page    => $page, 
         version => $revision
     })->next ;
-    #$c->log->info('working on version : '.$revision->page->id.' '.$revision->version);
     if ( my $previous = $against ? 
         $c->model("DBIC::Content")->search({
             page    => $page,

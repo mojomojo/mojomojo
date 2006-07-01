@@ -1,5 +1,5 @@
 use Test::More tests => 4;
-#$ENV{CATALYST_DEBUG}=0;
+$ENV{CATALYST_DEBUG}=0;
 use_ok( Catalyst::Test, 'MojoMojo' );
 use_ok('MojoMojo::Controller::Comment');
 

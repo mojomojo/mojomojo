@@ -11,14 +11,8 @@ requires        (
 	'Algorithm::Diff' => '1.1901',
 	'Archive::Zip' => '1.14',
 
-# We are developing MojoMojo on Catalyst trunk,
-# so relying on the version number below may be
-# problematic. We recommend installing the latest
-# Catalyst from svn. We plan to stbilize this after
-# the release of 5.5 
-
-	'Catalyst' => '5.49_2',
-
+	'Catalyst' => '5.6902',
+	'Catalyst::View::TT'   => '0.23',
 	'Catalyst::Model::DBIC::Schema'		    => '0.01',
 	'Catalyst::Plugin::Authentication'	            => '0.07',
 	'Catalyst::Plugin::Authentication::Store::DBIC' => '0',
@@ -40,8 +34,6 @@ requires        (
 	'HTML::Prototype::Useful'			    => '0.01',
 	'Plucene::Plugin::Analyzer::SnowballAnalyzer'  => '1.1',
 	'Module::Pluggable::Ordered'		    => '1.4',
-	'Catalyst::View::TT'  => 0 ,
-	'Catalyst::View::TT'   => '0.23',
 	'Data::Page'	    => '2.00',
 	'DateTime'		    => '0.28',
 	'DBD::SQLite'	    => '1.08',

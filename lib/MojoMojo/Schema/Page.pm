@@ -4,10 +4,10 @@ package MojoMojo::Schema::Page;
 
 use strict;
 use warnings;
+use Carp qw/croak/;
 
 use base qw/Class::Accessor::Fast DBIx::Class/;
 
-__PACKAGE__->mk_accessors(qw/path/);
 
 __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("page");
@@ -89,7 +89,6 @@ my @proto_pages = $self->parse_path($path);
 
 my $depth      = @proto_pages - 1;          # depth starts at 0
 
-## FIXME: Continue porting here
 
 my @depths;
 for my $proto ( @proto_pages )  {
@@ -97,7 +96,6 @@ for my $proto ( @proto_pages )  {
 			    name  =>  $proto->{name} ];
 
 }
-
 
 my @pages = $self->search({ -or => [ @depths ] },{} ); 
 
@@ -582,7 +580,7 @@ sub open_gap :ResultSet {
     WHEN lft > ? THEN lft + ?
     ELSE lft
     END
-    WHERE rgt >= ? }, undef
+    WHERE rgt >= ? }, undef,
     $gap_increment, $parent_rgt, $gap_increment, $parent_rgt );
 
     # get the new nested set numbers for the parent
@@ -590,5 +588,16 @@ sub open_gap :ResultSet {
     return $parent;
 }
 
+
+sub path {
+    my ($self,$path) = @_;
+    if(defined $path) { 
+	$self->{path}=$path;
+    }
+    unless( defined $self->{path} ) {
+	croak 'path is not set on the page object';
+    }
+    return $self->{path};
+}
 
 1;
