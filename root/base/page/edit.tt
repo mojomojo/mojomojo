@@ -38,7 +38,7 @@ FILTER html %][% content.body||c.req.params.body %][%END
  [%c.prototype.lazy_observe_field ( 'body', {
   url       => url,
   frequency => 2,
-  with      => "'content='+encodeAjax(value)", 
+  with      => "'content='+window.escape(value)", 
   update    => 'content_preview'
   loading   => "Element.show('editspinner')",
   complete  => "Element.hide('editspinner')",

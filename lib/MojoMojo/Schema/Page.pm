@@ -607,7 +607,7 @@ sub path {
     }
     unless( defined $self->{path} ) {
 	return '/' if( $self->depth == 0 );
-	croak 'path is not set on the page object:'.$self->name;
+	#croak 'path is not set on the page object:'.$self->name;
     }
     return $self->{path};
 }

@@ -8,3 +8,5 @@ is( get(encode_entities('/.jsrpc/render?content=').'\WikiWord'),
                                                    '<p>WikiWord</p>' );
 is( get(encode_entities('/.jsrpc/render?content=').'/[[wikiword]]'), 
                                                    '<p>/[[wikiword]]</p>' );
+is( get(encode_entities('/.jsrpc/render?content=').'text+%3D+more'),
+                                                   '<p>text = more</p>' );
