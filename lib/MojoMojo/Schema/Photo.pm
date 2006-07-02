@@ -110,7 +110,7 @@ sub exif2datetime {
     my ($y,$M,$d) = split ':',$date;
     my ($h,$m,$s) = split ':',$time;
     return DateTime->new(year=>$y,month =>$M,   day=>$d,
-                         hour=>$h,minute=>$m,second=>$s);
+	    hour=>$h,minute=>$m,second=>$s);
 }
 
 
@@ -132,9 +132,46 @@ Return next image object after this when browsing by the given tag.
 =cut
 
 
-sub next_by_tag {
-    my  ($self,$tag)=@_;
-    return $self->retrieve_next('tags.tag'=>$tag, {order_by=>'taken DESC'})->next;
+    sub next_by_tag {
+	my  ($self,$tag)=@_;
+	return $self->result_source->resultset-_search({id=>{'>',$self->id},'tags.tag'=>$tag}, {order_by=>'taken DESC',join=>[qw/tags/],rows=>1})->next;
+    }
+
+=item others_tags <user>
+
+Tags other users have given to this Photo.
+
+=cut
+
+  sub others_tags {
+	my ( $self, $user ) = @_;
+	my (@tags) = $self->related_resultset('tags')->search({
+	    photo => $self->id, 
+	    person=> { '!=', $user},
+	    },{
+	select     => [ 'me.tag', 'count(me.tag)' ],
+	as         => [ 'tag','refcount' ],
+	'group_by' => ['me.tag'],
+        'order_by' => \'count(me.tag)',
+	});
+    return @tags;
+}
+
+=item user_tags <user>
+
+Tags this user have given to this photo.
+
+=cut
+
+sub user_tags {
+    my ( $self, $user ) = @_;
+    my (@tags) = $self->related_resultset('tags')->search({
+	    photo => $self->id, 
+	    person=>  $user,
+	    },{
+	    'order_by' => ['me.tag']
+	    });
+    return @tags;
 }
 
 

@@ -34,9 +34,9 @@
 </div>
 <p id="description" >[%photo.description||"no description"%]<p>
 <script language="JavaScript">
-[% IF user.admin || user  %]
- new Ajax.InPlaceEditor('title', '[%c.uri_for(page.path,'.gallery/title',photo)%]', {rows:1,cols:30,callback: function(form,value) {return 'title='+value}});
-new Ajax.InPlaceEditor('description', '[%c.uri_for(page.path,'.gallery/description',photo)%]', {rows:1,cols:30,callback: function(form,value) {return 'description='+value}});
+[% IF c.user.obj.can_edit(page)%]
+ new Ajax.InPlaceEditor('title', '[%c.uri_for(page.path,'.gallery/title',photo.id)%]', {rows:1,cols:30,callback: function(form,value) {return 'title='+value}});
+new Ajax.InPlaceEditor('description', '[%c.uri_for(page.path,'.gallery/description',photo.id)%]', {rows:1,cols:30,callback: function(form,value) {return 'description='+value}});
 [% END %]
  </script>
 [%END%]

@@ -165,7 +165,7 @@ sub thumb : Private {
        $c->path_to('uploads',$att->id . ".thumb");
 
     $c->res->output( scalar(read_file(
-        $c->path_to('uploads',$att->id. '.thumb'))) );
+        $c->path_to('uploads',$att->id).'.thumb')));
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename=" . $att->name 
@@ -185,7 +185,7 @@ sub inline : Private {
       unless -f $c->path_to('uploads',$att->id . '.inline');
     $c->res->output(
         scalar( read_file( 
-           $c->path_to('uploads',$att->id . '.inline'))
+           $c->path_to('uploads',$att->id) . '.inline')
      ));
     };
     $c->detach('not_found') if $@ =~ m/^Could not open/;
