@@ -1,6 +1,5 @@
 package MojoMojo::Formatter::Pod;
 
-use Pod::Tree::HTML;
 
 =head1 NAME
 

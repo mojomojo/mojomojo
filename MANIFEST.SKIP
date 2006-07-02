@@ -3,8 +3,10 @@
 \bCVS\b
 ,v$
 \B\.svn\b
+\B\.
 
 # Avoid Makemaker generated and utility files.
+\bFormatters
 \bMakefile$
 \bblib
 \bMakeMaker-\d
@@ -25,5 +27,7 @@
 \b\.#
 \buploads
 \bcache
-\.db$
 \bplucene
+
+\bdb/oracle
+\bt/var

@@ -5,8 +5,6 @@ use utf8;
 use Path::Class 'file';
 
 use Catalyst qw/-Debug              Authentication
-		Authentication::Store::DBIC 
-		Authentication::Credential::Password 
 		Cache::FileCache    DefaultEnd
 		Email	            FillInForm	    
 		FormValidator	    Prototype
@@ -14,7 +12,8 @@ use Catalyst qw/-Debug              Authentication
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
-		StackTrace
+		StackTrace	    Authentication::Store::DBIC 
+		ConfigLoader	    Authentication::Credential::Password 
 		/;
 
 use MojoMojo::Formatter::Wiki;
@@ -23,27 +22,15 @@ use Module::Pluggable::Ordered
     except	=> qr/^MojoMojo::Plugin::/, 
     require	=> 1;
 
-our $VERSION='0.05';
-
-MojoMojo->prepare_home();
-
-#FIXME: Something smells here. Should be cleaned up
-#MojoMojo->config->{auth_class} ||= 'MojoMojo::Plugin::DefaultAuth';
-#my $auth_class = MojoMojo->config->{auth_class};
-#eval "CORE::require $auth_class";
-#die "Couldn't require $auth_class : $@" if $@;
+our $VERSION='0.01';
 
 MojoMojo->config->{authentication}{dbic} = {
-                    user_class     => 'DBIC::Person',
-                    user_field     => 'login',
-                    password_field => 'pass' };
-
-#MojoMojo->config( cache    => {storage => MojoMojo->config->{home}.'/cache'} );
-MojoMojo->config( cache    => {storage =>'/home/marcus/sr/mojomojo/cache'} );
+    user_class => 'DBIC::Person',
+    user_field => 'login',
+    password_field => 'pass'
+};
 
 MojoMojo->setup();
-
-#MojoMojo::M::Search::Plucene->prepare_search_index();
 
 =head1 MojoMojo - not your daddy`s wiki.
 
@@ -60,18 +47,8 @@ MojoMojo->setup();
 
 =head1 DESCRIPTION
 
-Wiki-based community software,
+Mojomojo is a Wiki-based community software,
 powered by Catalyst.
-
-=head1 ACTIONS
-
-=over 4
-
-
-
-
-
-=back
 
 =head1 METHODS
 
@@ -119,26 +96,6 @@ sub pref {
              "" );
 }
 
-=item prepare_home
-
-Prepare mojomojo's homedir for first time use. Make directories
-as apropriate, write config, create database, extract templates.
-
-=cut
-
-sub prepare_home {
-    my $self=shift;
-    my $home=$self->config->{home};
-    return unless $home;
-    return if -f $home.'/mojomojo.yml';
-    for ( qw( db uploads logs root ) ) {
-        mkdir $home.'/'.$_ unless -w $home.'/'.$_;
-    }
-    YAML::DumpFile( $home.'/mojomojo.yml',{
-      name => 'MojoMojo',
-      root => $home.'/root',
-      dsn => 'dbi:SQLite:'.$home.'/db/sqlite/mojomojo.db'} );
-}
 
 =item fixw word
 

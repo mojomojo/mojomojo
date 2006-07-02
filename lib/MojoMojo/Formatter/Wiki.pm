@@ -91,7 +91,7 @@ sub format_content {
     $$content =~ s{
         $non_wikiword_check
         ($wikiword)
-    }{ $class->format_link($c, $1, $c->req->base) }gex;
+    }{ $class->format_link($c, $1, $c->req->base.$c->stash->{page}->path) }gex;
 
     # Remove escapes on escaped wikiwords. The escape means
     # that this wikiword is NOT a link to a wiki page.

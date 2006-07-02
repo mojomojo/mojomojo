@@ -1,4 +1,13 @@
 ---
-dsn: dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
 name: MojoMojo
+Model::DBIC:
+    connect_info:
+        - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
 root: __HOME__/root
+cache:
+    storage: __HOME__/cache
+authentication:
+    dbic:
+        user_class: 'DBIC::Person'
+        user_field: login
+        password_field: pass

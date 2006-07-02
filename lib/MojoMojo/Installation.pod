@@ -1,0 +1,18 @@
+=head1 Installation.
+
+MojoMojo should just run out of the tarbar. After you've extracted it
+somewhere, you can start it using the stand alone server like this.
+
+  ./script/mojomojo_server.pl [-p <num>]
+
+Where -p is an optional parameter to specify the port number. The default
+is 3000. This is a normal catalyst development server, and takes a few other
+options as well, run it with C<--help> to get more information.
+
+By default, MojoMojo is set up to run against a SQLite database, with which
+it is shipped. There is also a mysql schema in the db/mysql/ directory, to
+use mojomojo with it, change the connect_info setting in the mojomojo.yml 
+configuration file. This file also contains some other interesting config
+options.
+
+If you want, you can 

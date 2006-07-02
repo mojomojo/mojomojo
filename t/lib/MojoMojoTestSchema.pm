@@ -4,6 +4,7 @@ package # hide from PAUSE
 use strict;
 use warnings;
 use MojoMojo::Schema;
+use YAML;
 
 =head1 NAME
 
@@ -61,6 +62,14 @@ sub init_schema {
         __PACKAGE__->deploy_schema( $schema );
         __PACKAGE__->populate_schema( $schema ) if( !$args{no_populate} );
     }
+    my $config = {
+	name => 'MojoMojo Test Suite',
+	'Model::DBIC' => {
+	    connect_info => [ $dsn ], 
+	}
+    };
+    YAML::DumpFile('t/var/mojomojo.yml',$config);
+    
 
     return $schema;
 }

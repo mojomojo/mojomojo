@@ -4,7 +4,6 @@ use strict;
 use base 'Catalyst::Controller';
 use IO::Scalar;
 use URI;
-use Time::Piece;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;

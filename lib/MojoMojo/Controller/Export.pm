@@ -4,7 +4,7 @@ use strict;
 use base 'Catalyst::Controller';
 
 use Archive::Zip;
-use Time::Piece;
+use DateTime;
 
 my $model = '$c->model("DBIC::Page")';
 
@@ -41,8 +41,8 @@ sub export_raw : Global {
         $c->fixw( $c->pref('name') ) . "-"
       . $c->stash->{page}->path 
       . "-export-"
-      . localtime->ymd('-') . '-'
-      . localtime->hour;
+      . DateTime->now->ymd('-') . '-'
+      . DateTime->now->hour;
     $prefix =~ s|/|_|g;
     unless ($c->res->{body}=$c->cache->get($prefix)) {
         $c->forward('/page/list');
@@ -79,8 +79,8 @@ sub export_html : Global {
         $c->fixw( $c->pref('name') ) . "."
       . $c->stash->{page}->name 
         . "-html-"
-      . localtime->ymd('-') . '-'
-      . localtime->hour;
+      . DateTime->now->ymd('-') . '-'
+      . DateTime->now->hour;
     $prefix =~ s|/|_|g;
     unless ($c->res->{body}=$c->cache->get($prefix)) {
         $c->forward('/page/list');

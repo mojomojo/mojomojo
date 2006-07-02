@@ -31,9 +31,10 @@ sub default : Private {
     $c->stash->{template} = 'gallery.tt';
     # oops, we have a column value named Page
     # FIXME : Messing with the iterator.
-    my $iterator=$c->model("DBIC::Photo")->search( 
-        'attachment.page'  =>$c->stash->{page}->id, 
+    my $iterator=$c->model("DBIC::Photo")->search({
+        'attachment.page'  =>$c->stash->{page}->id}, 
           { page           =>$page || 1,
+	    join	   => [qw/attachment/], 
             rows           => 12,
             order_by       => 'taken' }
     );
@@ -60,6 +61,7 @@ sub by_tag : Local {
         unless length($c->stash->{page}->path) == 1;  # root
     my  $iterator =$c->model("DBIC::Photo")->search(
         $conditions, { 
+	    join     => [qw/attachment/],
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'
@@ -78,13 +80,21 @@ sub p : Global {
     $c->stash->{photo}       = $photo;
     $c->forward( 'inline_tags' );
     $c->stash->{template}    =  'gallery/photo.tt';
-    $c->stash->{next}        =  $photo->retrieve_next(
-        { 'attachment.page'  => $photo->attachment->page },
-        {order_by            => 'taken' }
+    $c->stash->{next}        =  $c->model('DBIC::Photo')->search(
+        { 'attachment.page'  => $c->stash->{page}->id,
+	  taken	             => { '<',$photo->taken },
+	},
+        {order_by            => 'taken',
+	 rows		     => 1,
+	 join                => [qw/attachment/] }
     )->next;
-    $c->stash->{prev}        =  $photo->retrieve_previous( 
-        { 'attachment.page'  => $c->stash->{page}},
-        { order_by           => 'taken'}
+    $c->stash->{prev}        =  $c->model('DBIC::Photo')->search( 
+        { 'attachment.page'  => $c->stash->{page}->id,
+	  taken              => { '<',$photo->taken },
+	},
+        { order_by           => 'taken',
+	  rows		     => 1,
+	  join		     => [qw/attachment/]}
     )->next;
 }
 
@@ -129,13 +139,13 @@ sub tag : Local {
         if (  $tag && !
             $c->model("DBIC::Tag")->search(
                 photo   => $photo,
-                person => $c->stash->{user},
+                person => $c->user->obj->id,
                 tag    => $tag
             )->next() ) {
             $c->model("DBIC::Tag")->create({
                 photo  => $photo,
                 tag    => $tag,
-                person => $c->stash->{user}
+                person => $c->user->obj->id
             }) if $photo;
         }
     }
@@ -153,7 +163,7 @@ sub untag : Local {
     my ( $self, $c, $photo, $tagname ) = @_;
     my $tag = $c->model("DBIC::Tag")->search(
         photo   => $photo,
-        person => $c->stash->{user},
+        person => $c->user->obj->id,
         tag    => $tagname
     )->next();
     $tag->delete() if $tag;
@@ -174,14 +184,12 @@ sub inline_tags : Local {
     $c->stash->{template}  = 'gallery/tags.tt';
     $c->stash->{highlight} = $highlight;
     my $photo=$c->stash->{photo}||$c->req->params->{photo};
-    $c->log->info('photo is '.$photo);
     $photo=$c->model("DBIC::Photo")->find($photo) unless ref $photo;
     $c->stash->{photo}=$photo;
-    $c->log->info('user is '.$c->req->{user_id});
-    if ($c->stash->{user}) {
-    my @tags = $photo->others_tags( $c->stash->{user});
+    if ($c->user_exists) {
+    my @tags = $photo->others_tags( $c->user->obj->id);
     $c->stash->{others_tags} = [@tags];
-    @tags                    = $photo->user_tags( $c->stash->{user} );
+    @tags                    = $photo->user_tags( $c->user->obj->id );
     $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
     $c->stash->{tags}        = [@tags];
     } else {

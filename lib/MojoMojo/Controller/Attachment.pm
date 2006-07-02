@@ -113,22 +113,27 @@ sub default : Private {
     my ( $self, $c, $called, $att, $action ) = @_;
 
     $att=$c->model("DBIC::Attachment")->find($att);
-    unless ($att) {
-        $c->stash->{template}='message.tt';
-        $c->stash->{message}= "Attachment not found.";
-        return ( $c->res->status(404) );
-    }
+    $c->detach('not_found') unless ($att);
     if ($action) {
         $c->forward("$action", [$att,@_] );
     }
     unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
+    eval {
         $c->res->output( scalar( read_file( 
-            $c->path_to('uploads',$att->id))));
+            $c->path_to('uploads',$att->id).""))); };
+    $c->detach('not_found') if ($@);
         $c->res->headers->header( 'content-type', $att->contenttype );
         $c->res->headers->header(
             "Content-Disposition" => "inline; filename=".$att->name 
         );
     }
+}
+
+sub not_found : Private {
+    my ( $self, $c ) = @_;
+    $c->stash->{template}='message.tt';
+    $c->stash->{message}= "Attachment not found.";
+    return ( $c->res->status(404) );
 }
 
 =item download
@@ -175,12 +180,15 @@ show inline attachment
 
 sub inline : Private {
     my ( $self, $c, $att ) = @_;
+    eval {
     $att->photo->make_inline
       unless -f $c->path_to('uploads',$att->id . '.inline');
     $c->res->output(
         scalar( read_file( 
            $c->path_to('uploads',$att->id . '.inline'))
      ));
+    };
+    $c->detach('not_found') if $@ =~ m/^Could not open/;
     $c->res->headers->header( 'content-type',
         $att->contenttype );
     $c->res->headers->header(

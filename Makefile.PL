@@ -1,16 +1,10 @@
 use inc::Module::Install;
 
-name            ('MojoMojo');
-abstract        ('wiki on speed');
-author          ('Marcus Ramberg <marcus@thefeed.no>');
-version_from    ('lib/MojoMojo.pm');
-include	    ('ExtUtils::AutoInstall');
-license         ('perl');
+all_from 'lib/MojoMojo.pm';
 
 requires        (
 	'Algorithm::Diff' => '1.1901',
 	'Archive::Zip' => '1.14',
-
 	'Catalyst' => '5.6902',
 	'Catalyst::View::TT'   => '0.23',
 	'Catalyst::Model::DBIC::Schema'		    => '0.01',
@@ -29,15 +23,12 @@ requires        (
 	'Catalyst::Plugin::SubRequest'		    => '0.09',
 	'Catalyst::Plugin::Unicode'		    => '0.1',
 	'Catalyst::Plugin::UploadProgress'          => 0,
-	'Catalyst::Model::Search::Plucene'             => 0,
 	'DateTime::Format::Mail'			    => 0,
-	'HTML::Prototype::Useful'			    => '0.01',
-	'Plucene::Plugin::Analyzer::SnowballAnalyzer'  => '1.1',
+	'HTML::Prototype::Useful'		    => '0.01',
 	'Module::Pluggable::Ordered'		    => '1.4',
 	'Data::Page'	    => '2.00',
 	'DateTime'		    => '0.28',
 	'DBD::SQLite'	    => '1.08',
-	'Exception::Class'	    => 0,
 	'File::MimeInfo'	    => '0.11',
 	'File::Slurp'	    => '9999.07',
 	'HTML::Strip'	    => '1.04',
@@ -48,7 +39,6 @@ requires        (
 	'IO::Scalar'	    => 0,
 	'LWP::Simple'	    => 0,
 	'Pod::Simple::HTML'    => '3.01',
-	'Pod::Tree'	    => '1.11',
 	'Text::Context'	    => '3.5',     
 	'Time::Piece'	    => '1.08',
 	'URI'		    => '1.35',
@@ -66,7 +56,10 @@ tests	    ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 # auto_bundle();       # bundle run-time dependencies
 # auto_include();      # include build-time dependencies
 # auto_include_deps(); # same as above, plus recursive dependencies
-auto_install();      # auto-install all dependencies from CPAN
+catalyst;
+
+install_script glob('script/*.pl');
+auto_install;
 
 &WriteAll;
 

@@ -6,7 +6,7 @@ BEGIN {
     eval "use DBD::SQLite";
     plan $@
         ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 11 );
+        : ( tests => 12 );
 }
 
 use lib qw(t/lib);

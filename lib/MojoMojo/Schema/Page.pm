@@ -612,4 +612,16 @@ sub path {
     return $self->{path};
 }
 
+=item has_photos
+
+return the number of photos attached to this page. use for galleries.
+
+=cut
+
+sub has_photos {
+  my $self=shift;
+  return $self->result_source->schema->resultset('Photo')->search({'attachment.page'=>$self->id},{join=>[qw/attachment/]})->count;
+}
+
+
 1;

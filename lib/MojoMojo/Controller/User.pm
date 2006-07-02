@@ -249,8 +249,8 @@ sub editprofile : Global {
 
 sub do_editprofile : Global {
     my ( $self, $c ) = @_;
-    $c->form(required => [qw(name email born)],
-	     optional => [$c->model("DBIC::Person")->columns],
+    $c->form(required => [qw(name email)],
+	     optional => [$c->model("DBIC::Person")->result_source->columns],
              defaults  => { gender => undef }, 
 	     constraint_methods => {
 		born => ymd_to_datetime(qw(birth_year birth_month birth_day))
@@ -268,7 +268,8 @@ sub do_editprofile : Global {
     } else {
 	my $user=$c->model("DBIC::Person")->get_user(
 	    $c->stash->{page}->name_orig);
-	$user->sel_columns($c->form->{valid});
+	$user->set_columns($c->form->{valid});
+	$user->update();
 	return $c->forward('profile');
     }
     $c->forward('editprofile');

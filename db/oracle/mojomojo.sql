@@ -1,3 +1,5 @@
+/* WARNING : THIS FILE IS SEVERELY OUT OF DATE */
+
 create table Person
 (
  id varchar2(30) primary key, 
