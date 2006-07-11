@@ -8,6 +8,7 @@ requires        (
 	'Catalyst' => '5.6902',
 	'Catalyst::View::TT'   => '0.23',
 	'Catalyst::Model::DBIC::Schema'		    => '0.01',
+	'DBIx::Class::DateTime::Epoch' => 0,
 	'Catalyst::Plugin::Authentication'	            => '0.07',
 	'Catalyst::Plugin::Authentication::Store::DBIC' => '0',
 	'Catalyst::Plugin::Cache::FileCache'	    => 0,
