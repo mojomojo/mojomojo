@@ -3,6 +3,7 @@
 BEGIN { $ENV{CATALYST_ENGINE} ||= 'FastCGI' }
 
 use strict;
+use warnings;
 use Getopt::Long;
 use Pod::Usage;
 use FindBin;
@@ -65,10 +66,9 @@ Run a Catalyst application as fastcgi.
 =head1 AUTHOR
 
 Sebastian Riedel, C<sri@oook.de>
+Maintained by the Catalyst Core Team.
 
 =head1 COPYRIGHT
-
-Copyright 2004 Sebastian Riedel. All rights reserved.
 
 This library is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.

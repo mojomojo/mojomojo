@@ -1,5 +1,6 @@
 use inc::Module::Install;
 
+name 'MojoMojo';
 all_from 'lib/MojoMojo.pm';
 
 requires        (
@@ -47,21 +48,14 @@ requires        (
 	'YAML'		    => '0.36',
 	'URI::Fetch'	    => 0,
 	);
-build_requires  ('Test::More');
-recommends      ('Test::Pod' => 0.0);
-recommends      ('Test::PodCoverage' => 0.0);
+
 tests	    ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
-
-# -- You'll likely only want one of the below --
-# auto_bundle();       # bundle run-time dependencies
-# auto_include();      # include build-time dependencies
-# auto_include_deps(); # same as above, plus recursive dependencies
 catalyst;
+catalyst_par_script('mojomojo_server.pl');
 
 install_script glob('script/*.pl');
 auto_install;
-
-&WriteAll;
+WriteAll;
 
 

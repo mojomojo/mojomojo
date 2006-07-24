@@ -4,16 +4,18 @@ db/sqlite/add_nested_sets.pl
 db/sqlite/mojomojo.db
 db/sqlite/mojomojo.sql
 db/sqlite/mojomojo_create_db.pl
-inc/ExtUtils/AutoInstall.pm
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
 inc/Module/Install/AutoInstall.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
+inc/Module/Install/Catalyst.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
+inc/Module/Install/Makefile/Name.pm
 inc/Module/Install/Metadata.pm
+inc/Module/Install/Scripts.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Attic/Core/Attachment.pm
@@ -51,6 +53,7 @@ lib/MojoMojo/Formatter/Pod.pm
 lib/MojoMojo/Formatter/Scrub.pm
 lib/MojoMojo/Formatter/Textile.pm
 lib/MojoMojo/Formatter/Wiki.pm
+lib/MojoMojo/Installation.pod
 lib/MojoMojo/Model/DBIC.pm
 lib/MojoMojo/Model/Search/Plucene.pm
 lib/MojoMojo/Schema.pm
@@ -76,9 +79,6 @@ lib/Text/Textile2.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
-MojoMojo-0.01.tar.gz
-MojoMojo-0.01/lib/MojoMojo/Controller/User.pm
-MojoMojo-0.01/root/static/emote/58_58.gif
 mojomojo.yml
 root/base/attachments/complete.tt
 root/base/attachments/progress.tt

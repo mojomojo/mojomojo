@@ -32,7 +32,9 @@ MojoMojo->config->{authentication}{dbic} = {
 
 MojoMojo->setup();
 
-=head1 MojoMojo - not your daddy`s wiki.
+=head1 NAME
+
+MojoMojo - not your daddy`s wiki.
 
 =head1 SYNOPSIS
 
@@ -175,6 +177,20 @@ sub unicode {
     utf8::decode($string);
     return $string;
 }
+
+=head2 uri_for 
+Overrides $c->uri_for to append path.
+
+=cut
+
+sub uri_for {
+    my $c=shift;
+    $_[0] =~ s/^\///;
+    $_[0] = '/'.$c->stash->{path} . '.' . $_[0];
+    $c->log->info('path for '.$_[0]);
+    $c->NEXT::uri_for(@_);
+}
+
 
 =back
 
