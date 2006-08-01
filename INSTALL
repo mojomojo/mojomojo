@@ -1,7 +1,8 @@
 INSTALLING MOJOMOJO
 -------------------
 
-<URL>
+http://dev.catalyst.perl.org/wiki/MojoMojo
+
 
 1. Download the source (which you're probably already done, given you're
 reading this file!)
@@ -9,8 +10,8 @@ reading this file!)
 2. Run the following command while in the directory containing the MojoMojo
 files:
     perl Makefile.PL
-(Module::AutoInstall should already be installed for this to work)
-NB. This requirement will go away once we make a dist of MojoMojo
+(Module::AutoInstall should already be installed for this to work.)
+NB. This requirement will go away once we make a dist of MojoMojo.
 
 This will check your system to make sure that all the appropriate dependencies
 are installed, if they aren't then make files will be created to install them,
@@ -29,14 +30,14 @@ the Catalyst engine.
 located at db/sqlite/mojomojo.db. It can be recreated either by running:
     ./db/sqlite/mojomojo_create_db.pl <options>
 or using the sqlite3 CLI to import db/sqlite/mojomojo.sql
-or using the one that's already bundled with mojomojo, if you use sqlite3
+or using the one that's already bundled with mojomojo, if you use sqlite3.
 
 b) The alternative (and generally better) is to use MySQL.
 (i) Create a database, for instance:
     mysql -u root -p < `CREATE mojo_database`
 (ii) Create a user and grant appropriate permissons, for instance:
     mysql -u root -p < `GRANT ALL ON mojo_database.* to mojo_user@localhost IDENTIFIED BY 'password'`;
-(iii)
+(iii) Import the table structure, for instance:
     mysql -u user mojo_database -p < db/mysql/mojomojo.sql
 Replacing mojo_database, mojo_user and password as needed.
 
@@ -45,7 +46,7 @@ or
 c) Another option is to use Oracle. The database schema which needs to be
 imported can be found at db/oracle/mojomojo.sql and an appropriate user will
 need to be created. (Note: This schema is probably not up to date at the time
-of writing)
+of writing.)
 
 4.a) Catalyst includes a test server which can be started using:
     ./scripts/mojomojo_server -p 3000
@@ -65,6 +66,11 @@ Unless using SQLite as your database, you will need to set appropriate fields
 under
 Model::DBIC:
     connect_info:
+
+For instance, for MySQL:
+        - dbi:mysql:database=mojo_database;host=localhost, mojo_user, password
+or for SQLite:
+        - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
 
 If your server is connected to a http proxy you may need to add the following
 line:
