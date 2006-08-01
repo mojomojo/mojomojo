@@ -6,16 +6,17 @@ INSTALLING MOJOMOJO
 1. Download the source (which you're probably already done, given you're
 reading this file!)
 
-2. Run the following command while in the directory containing the mojomojo
+2. Run the following command while in the directory containing the MojoMojo
 files:
     perl Makefile.PL
 (Module::AutoInstall should already be installed for this to work)
+NB. This requirement will go away once we make a dist of MojoMojo
 
-This will check your system to make sure that all the appropriate dependancies
+This will check your system to make sure that all the appropriate dependencies
 are installed, if they aren't then make files will be created to install them,
-if this is the case then you should run the following command:
+if this is the case then you should run the following command as root:
     make
-and follow the on-screen instructions. This may take some time as dependancies
+and follow the on-screen instructions. This may take some time as dependencies
 may have further dependancies which also need to be downloaded.
 
 2. Tests be can run using the following command:
@@ -28,8 +29,7 @@ the Catalyst engine.
 located at db/sqlite/mojomojo.db. It can be recreated either by running:
     ./db/sqlite/mojomojo_create_db.pl <options>
 or using the sqlite3 CLI to import db/sqlite/mojomojo.sql
-
-or
+or using the one that's already bundled with mojomojo, if you use sqlite3
 
 b) The alternative (and generally better) is to use MySQL.
 (i) Create a database, for instance:
@@ -44,7 +44,8 @@ or
 
 c) Another option is to use Oracle. The database schema which needs to be
 imported can be found at db/oracle/mojomojo.sql and an appropriate user will
-need to be created.
+need to be created. (Note: This schema is probably not up to date at the time
+of writing)
 
 4.a) Catalyst includes a test server which can be started using:
     ./scripts/mojomojo_server -p 3000
