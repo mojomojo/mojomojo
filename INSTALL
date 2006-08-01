@@ -1,0 +1,73 @@
+INSTALLING MOJOMOJO
+-------------------
+
+<URL>
+
+1. Download the source (which you're probably already done, given you're
+reading this file!)
+
+2. Run the following command while in the directory containing the mojomojo
+files:
+    perl Makefile.PL
+(Module::AutoInstall should already be installed for this to work)
+
+This will check your system to make sure that all the appropriate dependancies
+are installed, if they aren't then make files will be created to install them,
+if this is the case then you should run the following command:
+    make
+and follow the on-screen instructions. This may take some time as dependancies
+may have further dependancies which also need to be downloaded.
+
+2. Tests be can run using the following command:
+    CATALYST_DEBUG=0 TEST_POD=0 prove --lib lib/ t/
+
+Changing the first 0 to a 1 will result in extra debugging information from
+the Catalyst engine.
+
+3a) The easiest option for a database is SQLite The database is typically
+located at db/sqlite/mojomojo.db. It can be recreated either by running:
+    ./db/sqlite/mojomojo_create_db.pl <options>
+or using the sqlite3 CLI to import db/sqlite/mojomojo.sql
+
+or
+
+b) The alternative (and generally better) is to use MySQL.
+(i) Create a database, for instance:
+    mysql -u root -p < `CREATE mojo_database`
+(ii) Create a user and grant appropriate permissons, for instance:
+    mysql -u root -p < `GRANT ALL ON mojo_database.* to mojo_user@localhost IDENTIFIED BY 'password'`;
+(iii)
+    mysql -u user mojo_database -p < db/mysql/mojomojo.sql
+Replacing mojo_database, mojo_user and password as needed.
+
+or
+
+c) Another option is to use Oracle. The database schema which needs to be
+imported can be found at db/oracle/mojomojo.sql and an appropriate user will
+need to be created.
+
+4.a) Catalyst includes a test server which can be started using:
+    ./scripts/mojomojo_server -p 3000
+where 3000 is the port number and the default if no port is specified.
+
+or
+
+b) Set up Apache using either mod_perl or FastCGI.
+
+See
+http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
+for further information.
+
+5. mojomojo.yml is the main configuration file and is in YAML format.
+
+Unless using SQLite as your database, you will need to set appropriate fields
+under
+Model::DBIC:
+    connect_info:
+
+If your server is connected to a http proxy you may need to add the following
+line:
+using_frontend_proxy: 1
+
+Note that you should use spaces for indenting when using YAML, rather than
+tabs.
