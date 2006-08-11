@@ -7,7 +7,6 @@ use URI;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
-use Devel::Trace;
 
 my $search_engine = 'Catalyst::Model::Search::Plucene';
 

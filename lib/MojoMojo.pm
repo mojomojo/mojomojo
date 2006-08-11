@@ -12,7 +12,7 @@ use Catalyst qw/-Debug              Authentication
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
-		StackTrace	    Authentication::Store::DBIC 
+		Authentication::Store::DBIC 
 		ConfigLoader	    Authentication::Credential::Password 
 		/;
 
