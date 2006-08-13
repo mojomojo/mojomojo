@@ -37,7 +37,7 @@ requires (
 	'HTML::Strip'                                   => '1.04',
 	'HTML::Scrubber'                                => 0,
 	'HTML::TagCloud'                                => 0,
-	'Image::EXIF'                                   => 0,
+	'Image::ExifTool'                               => 0,
 	'Imager'                                        => 0,
 	'IO::Scalar'                                    => 0,
 	'LWP::Simple'                                   => 0,
