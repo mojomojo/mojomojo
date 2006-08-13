@@ -6,7 +6,7 @@ function cleanAuthorName(author) {
 
 function toggleInfo() {
     //var item=$('hidden_info');
-    Element.Toggle('hidden_info');
+    Element.toggle('hidden_info');
     return false;
     /* if (state) {
 var state=0;

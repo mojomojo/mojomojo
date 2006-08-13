@@ -467,7 +467,7 @@ sub user_tags {
 	    person=> $user,
 	},{
              select   => [ 'me.id','me.tag', 'count(me.tag)' ],
-             as       => [ 'id','tag','pagecount' ],
+             as       => [ 'id','tag','refcount' ],
              order_by => [ 'count(me.tag)' ],
 	     group_by => [ 'tag' ],
 	});
@@ -482,7 +482,7 @@ sub others_tags {
 	    person=> {'!=', $user}
 	},{
              select   => [ 'me.id','me.tag', 'count(me.tag)' ],
-             as       => [ 'id','tag','pagecount' ],
+             as       => [ 'id','tag','refcount' ],
              order_by => [ 'count(me.tag)' ],
 	     group_by => [ 'tag' ],
 	});
@@ -495,7 +495,7 @@ sub tags_with_counts {
 	    page=>$self->id, 
 	},{
              select   => [ 'me.id','me.tag', 'count(me.tag)' ],
-             as       => [ 'id','tag','pagecount' ],
+             as       => [ 'id','tag','refcount' ],
              order_by => [ 'count(me.tag)' ],
 	     group_by => [ 'tag' ],
 	});

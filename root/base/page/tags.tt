@@ -31,9 +31,9 @@ href="[%c.uri_for('.recent',tag.tag)%]">[%tag.tag%]</a>
 })%]</b>]
 [%END%]
 [%IF othertag.tag == highlight %]
-<a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.pagecount%]" 
+<a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.refcount%]" 
 [%ELSE%]
-<a class="tag" title="[%othertag.pagecount%]" 
+<a class="tag" title="[%othertag.refcount%]" 
 [%END%]
 href="[%c.uri_for(page.path,'.recent',othertag.tag)%]" >[%othertag.tag%]</a> 
 [%END%]

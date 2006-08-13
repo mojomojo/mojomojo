@@ -15,13 +15,12 @@ gallery -
 <div id="images">
 [%WHILE(picture=pictures.next)%]
 [% imgid = 'img_' _ picture.id %]
-<a  id="[%imgid%]" href="[%base%][%page.path%].p[%
+<a  id="[%imgid%]" href="[%c.uri_for('p')%][%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb" 
-width="80" height="80" src="[%base%]/.attachment/[%picture.id%]/thumb"/></a>
-[% imgurl=base _ '/.jsrpc/imginfo/'_ picture.id%]
-[% c.prototype.observe_hover(imgid,{url=>imgurl,frequency=>2,update=>'imageinfo'});%]
+width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
+[% c.prototype.observe_hover(imgid,{url=>c.uri_for('jsrpc/imginfo',picture.id),frequency=>2,update=>'imageinfo'});%]
 [%END%]
 </div>
 </div>
-        <div id="bottomnav">&nbsp;
+        <div id="bottomnav">&nbsp;<a href="[%c.uri_for('attachments')%]">View as files</a> 
 [%PROCESS footer.tt%]

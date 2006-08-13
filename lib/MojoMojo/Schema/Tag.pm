@@ -49,6 +49,25 @@ sub by_page :ResultSet {
     });
 }
 
+=head2 by_photo
+
+Tags on photos with counts. Used to make the tag cloud for the gallery. 
+
+=cut
+
+sub by_photo : ResultSet {
+    my ( $self ) = @_;
+    return $self->search({
+        photo => { '!=' => undef}
+    }, { 
+        select => [ 'me.photo', 'me.tag','count(me.tag)' ],
+	as     => [ 'photo','tag','refcount' ],
+        group_by => ['me.tag'],
+        order_by => ['me.tag'],
+    });
+}
+
+
 =item related_to [<tag>] [<count>]
 
 Returns popular tags related to this.
@@ -75,7 +94,5 @@ sub related_to : ResultSet {
 }
 
 sub refcount { shift->get_column('refcount') };
-sub photocount { shift->get_column('photocount') };
-sub pagecount { shift->get_column('pagecount') };
 
 1;

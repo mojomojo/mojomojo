@@ -1,9 +1,12 @@
 [% PROCESS header.tt %]
-        <div id="header"><h1>[%page.name%] tags</h1></div>
+        <div id="header"><h1>tags under [%page.name%]</h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">
-[%cloud.html_and_css(50)%]
-</div>
+[%cloud.html_and_css(50) || "No tags in use" %]
+[% IF page.depth %]
+<p>Or you can check out <a href="[%base%]/.tags">All tags</a> instead</p>
+[% END %]
         <div id="bottomnav">&nbsp;
+		</div>
 [% PROCESS footer.tt %]

@@ -56,5 +56,5 @@ function watch_progress(form) {
 </div>
 
 
-   <div id="bottomnav">&nbsp;
+   <div id="bottomnav">&nbsp;<a href="[%c.uri_for('gallery')%]">View as gallery</a>
 [% PROCESS footer.tt %]

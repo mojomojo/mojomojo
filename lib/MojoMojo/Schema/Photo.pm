@@ -8,9 +8,11 @@ use warnings;
 use base 'DBIx::Class';
 
 use DateTime;
-use Image::EXIF;
+use Image::ExifTool;
+my $exif=Image::ExifTool->new();
 
-__PACKAGE__->load_components("PK::Auto", "Core");
+__PACKAGE__->load_components("PK::Auto", 'Ordered',"Core");
+__PACKAGE__->position_column('id');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
   "id",
@@ -85,17 +87,14 @@ populates the Photo object.
 
 sub extract_exif {
     my ($self,$att)=@_;
-    my $exif=new Image::EXIF;
-    $exif->file_name($att->filename);
-    my $info=$exif->get_all_info();
-    $self->camera($info->{camera}->{'Camera Model'});
-    $self->lens($info->{image}->{'Focal Length'});
-    $self->iso($info->{image}->{'ISO Speed Rating'});
-    $self->aperture($info->{image}->{'Lens Aperture'});
-    $self->description($info->{image}->{'ImageDescription'});
-    $self->taken($self->exif2datetime($info->{image}->{'Image Created'}));
-#    $self->update();
-}
+    my $info=$exif->ImageInfo($att->filename);
+    $self->camera($info->{'Model'});
+    $self->lens($info->{'FocalLength'});
+    $self->iso($info->{'ISO'});
+    $self->aperture($info->{'Aperture'});
+    $self->description($info->{'UserComment'});
+    $self->taken($self->exif2datetime($info->{'DateTimeOriginal'}));
+	}
 
 =item exif2datetime datetime
 

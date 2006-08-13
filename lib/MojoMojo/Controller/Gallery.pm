@@ -3,6 +3,8 @@ package MojoMojo::Controller::Gallery;
 use strict;
 use base 'Catalyst::Controller';
 
+use HTML::Entities;
+
 =head1 NAME
 
 MojoMojo::Controller::Gallery - Page gallery.
@@ -80,22 +82,24 @@ sub p : Global {
     $c->stash->{photo}       = $photo;
     $c->forward( 'inline_tags' );
     $c->stash->{template}    =  'gallery/photo.tt';
-    $c->stash->{next}        =  $c->model('DBIC::Photo')->search(
-        { 'attachment.page'  => $c->stash->{page}->id,
-	  taken	             => { '<',$photo->taken },
-	},
-        {order_by            => 'taken',
-	 rows		     => 1,
-	 join                => [qw/attachment/] }
-    )->next;
-    $c->stash->{prev}        =  $c->model('DBIC::Photo')->search( 
-        { 'attachment.page'  => $c->stash->{page}->id,
-	  taken              => { '<',$photo->taken },
-	},
-        { order_by           => 'taken',
-	  rows		     => 1,
-	  join		     => [qw/attachment/]}
-    )->next;
+    $c->stash->{next}        =  $photo->next_sibling;
+#search(
+#        { 'attachment.page'  => $c->stash->{page}->id,
+#	  taken	             => { '>',$photo->taken },
+#	},
+#        {order_by            => 'taken',
+#	 rows		     => 1,
+#	 join                => [qw/attachment/] }
+#    )->next;
+    $c->stash->{prev}        =  $photo->previous_sibling;
+#search( 
+#       { 'attachment.page'  => $c->stash->{page}->id,
+#	  taken              => { '<',$photo->taken },
+#	},
+#        { order_by           => 'taken',
+#	  rows		     => 1,
+#	  join		     => [qw/attachment/]}
+#    )->next;
 }
 
 =item (/p_by_tag/\d+)
@@ -207,11 +211,11 @@ sub description : Local {
     my ( $self, $c, $photo ) = @_;
     $c->form(required=>[qw/description/]);
     my $img=$c->model("DBIC::Photo")->find($photo);
-    unless ($c->form->has_missing && $c->form->has_invalid ) {
-      $img->update_from_form($c->form);
+    if($c->req->param('description')) {
+      $img->description(encode_entities($c->req->param('description')));
       $img->update;
     }
-      $c->res->body($img->title);
+      $c->res->body($img->description);
 }
 
 =item title ( .gallery/title )
@@ -224,11 +228,10 @@ sub title : Local {
     my ( $self, $c, $photo ) = @_;
     $c->form(required=>[qw/title/]);
     my $img=$c->model("DBIC::Photo")->find($photo);
-    unless ($c->form->has_missing && $c->form->has_invalid ) {
-      $img->update_from_form($c->form);
+    if($c->req->param('title')) {
+      $img->title(encode_entities($c->req->param('title')));
       $img->update;
     }
-      $c->log->info('title:'.$img->title);
       $c->res->body($img->title);
 }
 
