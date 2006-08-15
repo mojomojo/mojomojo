@@ -11,7 +11,7 @@ __PACKAGE__->add_columns(
   "prefkey",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "prefvalue",
-    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+    { data_type => "VARCHAR", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("prefkey");
 

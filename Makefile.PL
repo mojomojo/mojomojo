@@ -50,7 +50,7 @@ requires (
 	'URI::Fetch'                                    => 0,
 );
 
-tests	    ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
+tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
 catalyst;
 catalyst_par_script('mojomojo_server.pl');
