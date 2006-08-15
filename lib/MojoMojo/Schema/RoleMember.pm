@@ -13,7 +13,7 @@ __PACKAGE__->add_columns(
   "person",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "admin",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, default => 0 },
 );
 __PACKAGE__->set_primary_key("role", "person");
 __PACKAGE__->belongs_to("role", "Role", { id => "role" });

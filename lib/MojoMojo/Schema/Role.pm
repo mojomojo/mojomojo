@@ -13,7 +13,7 @@ __PACKAGE__->add_columns(
   "name",
     { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "active",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, default => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("name_unique", ["name"]);

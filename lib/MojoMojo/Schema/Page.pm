@@ -29,6 +29,7 @@ __PACKAGE__->add_columns(
     { data_type => "INTEGER", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("page_unique_child_index", ["parent", "name"]);
 __PACKAGE__->has_many(
   "wantedpages",
   "WantedPage",

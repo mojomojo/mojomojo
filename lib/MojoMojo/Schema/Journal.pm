@@ -13,7 +13,7 @@ __PACKAGE__->add_columns(
   "name",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "dateformat",
-    { data_type => "VARCHAR", is_nullable => 0, size => 20 },
+    { data_type => "VARCHAR", is_nullable => 0, size => 20, default => "%F" },
   "defaultlocation",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
 );
