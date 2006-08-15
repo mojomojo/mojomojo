@@ -32,14 +32,14 @@ CREATE TABLE wanted_page (
 DROP TABLE page;
 CREATE TABLE page (
   id INTEGER PRIMARY KEY NOT NULL,
-  version INTEGER NOT NULL,
+  version INTEGER,
   parent INTEGER NOT NULL,
-  name VARCHAR(200) NOT NULL,
-  name_orig VARCHAR(200) NOT NULL,
-  depth INTEGER NOT NULL,
-  lft INTEGER NOT NULL,
-  rgt INTEGER NOT NULL,
-  content_version INTEGER NOT NULL
+  name VARCHAR(200),
+  name_orig VARCHAR(200),
+  depth INTEGER,
+  lft INTEGER,
+  rgt INTEGER,
+  content_version INTEGER
 );
 CREATE UNIQUE INDEX page_unique_child_index_page on page (parent, name);
 
@@ -49,20 +49,20 @@ CREATE TABLE person (
   id INTEGER PRIMARY KEY NOT NULL,
   active INTEGER NOT NULL,
   registered BIGINT NOT NULL,
-  views INTEGER NOT NULL,
-  photo INTEGER NOT NULL,
+  views INTEGER,
+  photo INTEGER,
   login VARCHAR(100) NOT NULL,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   pass VARCHAR(100) NOT NULL,
-  timezone VARCHAR(100) NOT NULL,
-  born BIGINT NOT NULL,
-  gender CHAR(1) NOT NULL,
-  occupation VARCHAR(100) NOT NULL,
-  industry VARCHART(100) NOT NULL,
-  interests TEXT NOT NULL,
-  movies TEXT NOT NULL,
-  music TEXT NOT NULL
+  timezone VARCHAR(100),
+  born BIGINT,
+  gender CHAR(1),
+  occupation VARCHAR(100),
+  industry VARCHART(100),
+  interests TEXT,
+  movies TEXT,
+  music TEXT
 );
 
 
@@ -159,13 +159,13 @@ CREATE TABLE page_version (
   name_orig VARCHAR(200) NOT NULL,
   depth INTEGER NOT NULL,
   creator INTEGER NOT NULL,
-  created VARCHAR(100) NOT NULL,
+  created VARCHAR(100),
   status VARCHAR(20) NOT NULL,
   release_date VARCHAR(100) NOT NULL,
-  remove_date VARCHAR(100) NOT NULL,
-  comments TEXT NOT NULL,
-  content_version_first INTEGER NOT NULL,
-  content_version_last INTEGER NOT NULL,
+  remove_date VARCHAR(100),
+  comments TEXT,
+  content_version_first INTEGER,
+  content_version_last INTEGER,
   PRIMARY KEY (page, version)
 );
 
@@ -178,10 +178,10 @@ CREATE TABLE content (
   created VARCHAR(100) NOT NULL,
   status VARCHAR(20) NOT NULL,
   release_date VARCHAR(100) NOT NULL,
-  remove_date VARCHAR(100) NOT NULL,
-  type VARCHAR(200) NOT NULL,
-  abstract TEXT NOT NULL,
-  comments TEXT NOT NULL,
+  remove_date BIGINT(100),
+  type VARCHAR(200),
+  abstract TEXT,
+  comments TEXT,
   body TEXT NOT NULL,
   precompiled TEXT NOT NULL,
   PRIMARY KEY (page, version)

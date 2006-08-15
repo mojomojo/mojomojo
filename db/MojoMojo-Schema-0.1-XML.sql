@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 Created by SQL::Translator::Producer::XML::SQLFairy
-Created on Tue Aug 15 18:32:58 2006
+Created on Tue Aug 15 22:13:32 2006
 
  -->
 
@@ -108,7 +108,7 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="version" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="450">
+        <field name="version" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="450">
           <extra />
           <comments></comments>
         </field>
@@ -116,27 +116,27 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="name" data_type="VARCHAR" size="200" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="452">
+        <field name="name" data_type="VARCHAR" size="200" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="452">
           <extra />
           <comments></comments>
         </field>
-        <field name="name_orig" data_type="VARCHAR" size="200" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="453">
+        <field name="name_orig" data_type="VARCHAR" size="200" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="453">
           <extra />
           <comments></comments>
         </field>
-        <field name="depth" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="454">
+        <field name="depth" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="454">
           <extra />
           <comments></comments>
         </field>
-        <field name="lft" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="455">
+        <field name="lft" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="455">
           <extra />
           <comments></comments>
         </field>
-        <field name="rgt" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="456">
+        <field name="rgt" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="456">
           <extra />
           <comments></comments>
         </field>
-        <field name="content_version" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="457">
+        <field name="content_version" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="457">
           <extra />
           <comments></comments>
         </field>
@@ -176,11 +176,11 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="views" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="461">
+        <field name="views" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="461">
           <extra />
           <comments></comments>
         </field>
-        <field name="photo" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="462">
+        <field name="photo" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="462">
           <extra />
           <comments></comments>
         </field>
@@ -200,35 +200,35 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="timezone" data_type="VARCHAR" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="467">
+        <field name="timezone" data_type="VARCHAR" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="467">
           <extra />
           <comments></comments>
         </field>
-        <field name="born" data_type="BIGINT" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="468">
+        <field name="born" data_type="BIGINT" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="468">
           <extra />
           <comments></comments>
         </field>
-        <field name="gender" data_type="CHAR" size="1" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="469">
+        <field name="gender" data_type="CHAR" size="1" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="469">
           <extra />
           <comments></comments>
         </field>
-        <field name="occupation" data_type="VARCHAR" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="470">
+        <field name="occupation" data_type="VARCHAR" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="470">
           <extra />
           <comments></comments>
         </field>
-        <field name="industry" data_type="VARCHART" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="471">
+        <field name="industry" data_type="VARCHART" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="471">
           <extra />
           <comments></comments>
         </field>
-        <field name="interests" data_type="TEXT" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="472">
+        <field name="interests" data_type="TEXT" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="472">
           <extra />
           <comments></comments>
         </field>
-        <field name="movies" data_type="TEXT" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="473">
+        <field name="movies" data_type="TEXT" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="473">
           <extra />
           <comments></comments>
         </field>
-        <field name="music" data_type="TEXT" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="474">
+        <field name="music" data_type="TEXT" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="474">
           <extra />
           <comments></comments>
         </field>
@@ -574,7 +574,7 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="created" data_type="VARCHAR" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="523">
+        <field name="created" data_type="VARCHAR" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="523">
           <extra />
           <comments></comments>
         </field>
@@ -586,19 +586,19 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="remove_date" data_type="VARCHAR" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="526">
+        <field name="remove_date" data_type="VARCHAR" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="526">
           <extra />
           <comments></comments>
         </field>
-        <field name="comments" data_type="TEXT" size="4000" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="527">
+        <field name="comments" data_type="TEXT" size="4000" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="527">
           <extra />
           <comments></comments>
         </field>
-        <field name="content_version_first" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="528">
+        <field name="content_version_first" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="528">
           <extra />
           <comments></comments>
         </field>
-        <field name="content_version_last" data_type="INTEGER" size="0" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="529">
+        <field name="content_version_last" data_type="INTEGER" size="0" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="1" order="529">
           <extra />
           <comments></comments>
         </field>
@@ -650,19 +650,19 @@ Created on Tue Aug 15 18:32:58 2006
           <extra />
           <comments></comments>
         </field>
-        <field name="remove_date" data_type="VARCHAR" size="100" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="536">
+        <field name="remove_date" data_type="BIGINT" size="100" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="536">
           <extra />
           <comments></comments>
         </field>
-        <field name="type" data_type="VARCHAR" size="200" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="537">
+        <field name="type" data_type="VARCHAR" size="200" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="537">
           <extra />
           <comments></comments>
         </field>
-        <field name="abstract" data_type="TEXT" size="4000" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="538">
+        <field name="abstract" data_type="TEXT" size="4000" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="538">
           <extra />
           <comments></comments>
         </field>
-        <field name="comments" data_type="TEXT" size="4000" is_nullable="0" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="539">
+        <field name="comments" data_type="TEXT" size="4000" is_nullable="1" is_auto_increment="0" is_primary_key="0" is_foreign_key="0" order="539">
           <extra />
           <comments></comments>
         </field>

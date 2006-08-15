@@ -11,3 +11,7 @@ authentication:
         user_class: 'DBIC::Person'
         user_field: login
         password_field: pass
+email:
+    - SMTP
+    - localhost
+
