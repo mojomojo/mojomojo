@@ -1,0 +1,82 @@
+-- changed "user" to "person" because "user"
+-- is a reserved word in Oracle. 8-(
+
+
+-- * page-content tree * --
+
+-- In this tree, the page records are edges and the content
+-- records are nodes. Separating pages-edges from content-nodes
+-- has several benefits:
+
+-- * fast reads-searches: most page listings (e.g. nav lists)
+--   don't need content. searches should be faster and more
+--   efficient without bulky content in the page table. this
+--   may make writes a little slower, but reads will far
+--   outnumber writes
+
+-- * the page tree structure can change independently of
+--   content, and vice versa. for example, this prevents
+--   duplicating content every time a page name or parent
+--   changes
+
+-- content:
+-- although this table will be large, almost all searching will be
+-- done on page records, which have content fks. therefore 
+-- retrieval should be fast: we'll always have content pks.
+-- also note that content records are versioned separately from
+-- the page tree structure. that way we don't have to perform
+-- version updates on whole subtrees when only the content changes
+
+
+-- * page-page_version * --
+
+-- we further separate pages from page versions.
+-- the page table contains only "live" pages, which also has
+-- several benefits:
+
+-- * we can use single-column pks. most page metadata
+-- can be left out of the page table. all this should
+-- make for even faster reads
+
+-- * we can enforce the constraint that all children of 
+--   a parent page must have unique names
+
+-- also, we could have made the page name the pk,
+-- but then, for page renames, all child records would
+-- have to be updated with the new name. therefore,
+-- we define a separate page id instead 
+
+-- also, the content fks really only exist in the table
+-- to record the content version at the time of the
+-- page structure change
+
+
+-- we resolve paths by searching on page name and depth:
+CREATE INDEX page_depth_index ON page (depth, name);
+
+-- we also resolve paths with nested sets:
+CREATE INDEX page_lft_index ON page (lft);
+CREATE INDEX page_rgt_index ON page (rgt);
+
+-- * roles * --
+
+-- currently unused
+
+-- notice that all role tables and references are
+-- now completely separate from the page-related
+-- tables. that way we can allow for multiple
+-- ownership and access plugins, role-based, 
+-- tag-based, something completely different...
+-- ...or even no access restrictions at all,
+-- for people who want a traditional, wide-open wiki
+
+
+-- role_privilege is a relationship talbe.
+-- with cascading deletes, if a page is deleted, the 
+-- privilege is deleted. restores of deleted pages must
+-- be done by someone with write privilege for the parent,
+-- or the parent's parent, and so on, up to whatever 
+-- depth in the path a parent page still exists
+
+
+-- * end of role tables so far
