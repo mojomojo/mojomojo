@@ -15,7 +15,7 @@ __PACKAGE__->add_columns(
   "page",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "photo",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef },
   "tag",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
 );
