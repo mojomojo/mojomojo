@@ -10,9 +10,9 @@ __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/)
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns("id", 
   "id",
-    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "uploaded",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
   "page",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "name",

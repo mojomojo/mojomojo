@@ -11,21 +11,24 @@ use FindBin;
 use lib "$FindBin::Bin/../lib";
 use MojoMojo::Schema;
 
-my $help   = 0;
-my $dsn    = '';
-my $config = "$FindBin::Bin/../mojomojo.yml";
-my $deploy = 0;
-my $attrs  = {add_drop_table => 1, no_comments => 1};
-my $type   = '';
+my @databases      = [ qw/ MySQL SQLite PostgreSQL Oracle XML / ];
+my $help           = 0;
+my $dsn            = '';
+my $config         = "$FindBin::Bin/../mojomojo.yml";
+my $deploy         = 0;
+my $create_ddl_dir = 0;
+my $attrs          = {add_drop_table => 1, no_comments => 1};
+my $type           = '';
 my ($user, $pass);
 
 GetOptions(
-    'help|?'   => \$help,
-    'dsn=s'    => \$dsn,
-    'config=s' => \$config,
-    'user=s'   => \$user,
-    'pass=s'   => \$pass,
-    'deploy'   => \$deploy,
+    'help|?'         => \$help,
+    'dsn=s'          => \$dsn,
+    'config=s'       => \$config,
+    'user=s'         => \$user,
+    'pass=s'         => \$pass,
+    'deploy'         => \$deploy,
+    'create_ddl_dir' => \$create_ddl_dir,
 );
 pod2usage(1) if ($help);
 
@@ -36,12 +39,19 @@ if (-e $config) {
     $config = {};
 }
 
-$dsn ||= $config->{'Model::DBIC'}->{'connect_info'}[0];
+$dsn  ||= $config->{'Model::DBIC'}->{'connect_info'}[0];
+$user ||= $config->{'Model::DBIC'}->{'connect_info'}[1];
+$pass ||= $config->{'Model::DBIC'}->{'connect_info'}[2];
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 ($type) = ($dsn =~ m/:(.+?):/);
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
 my $db = MojoMojo::Schema->connect( $dsn, $user, $pass, $attrs );
+
+if ($create_ddl_dir) {
+    print $db->storage->create_ddl_dir($db, @databases, '0.1', "$FindBin::Bin/../db/", $attrs);
+    exit (1);
+}
 
 if (!$deploy) {
     print $db->storage->deployment_statements($db, $type, undef, undef, $attrs);
@@ -112,6 +122,7 @@ mojomojo_spawn_db.pl -config <config-filename> [options]
  Options:
    -help              Display this help and exit
    -deploy            Deploy database schema and initial records
+   -create_ddl_dir    Create SQL files for common databases in /db. Requires SQL::Translator installed.
    -dsn <dsn-string>  Use custom DSN string
    -user <username>   Database username to use when deploying
    -pass <password>   Database password to use when deploying

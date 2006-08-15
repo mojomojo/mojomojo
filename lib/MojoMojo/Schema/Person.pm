@@ -9,7 +9,7 @@ __PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core/)
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "active",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "registered",

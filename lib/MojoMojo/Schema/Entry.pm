@@ -9,11 +9,11 @@ __PACKAGE__->load_components("PK::Auto", "Core");
 __PACKAGE__->table("entry");
 __PACKAGE__->add_columns(
   "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "journal",
-    { data_type => "INT", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "author",
-    { data_type => "INT", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "title",
     { data_type => "VARCHAR", is_nullable => 0, size => 150 },
   "content",

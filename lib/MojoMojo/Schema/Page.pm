@@ -10,7 +10,7 @@ __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
   "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "version",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "parent",

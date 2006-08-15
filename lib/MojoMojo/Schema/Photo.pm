@@ -14,7 +14,7 @@ __PACKAGE__->position_column('id');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
   "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "title",
     { data_type => "TEXT", is_nullable => 0, size => undef },
   "description",

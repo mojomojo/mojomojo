@@ -9,7 +9,7 @@ __PACKAGE__->load_components("PK::Auto", "Core");
 __PACKAGE__->table("link");
 __PACKAGE__->add_columns(
   "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "from_page",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "to_page",
