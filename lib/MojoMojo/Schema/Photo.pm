@@ -1,7 +1,5 @@
 package MojoMojo::Schema::Photo;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
@@ -16,16 +14,27 @@ __PACKAGE__->position_column('id');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
   "id",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "title",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "description",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "camera",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "taken",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "iso",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "lens",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "aperture",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "flash",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "height",
+    { data_type => "INT", is_nullable => 0, size => undef },
   "width",
+    { data_type => "INT", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many("tags", "Tag", { "foreign.photo" => "self.id" });
@@ -175,4 +184,3 @@ sub user_tags {
 
 
 1;
-

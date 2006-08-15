@@ -1,16 +1,24 @@
 package MojoMojo::Schema::Tag;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
 use base 'DBIx::Class';
 
-
 __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("tag");
-__PACKAGE__->add_columns("id", "person", "page", "photo", "tag");
+__PACKAGE__->add_columns(
+  "id",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "person",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "page",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "photo",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "tag",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+);
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to("person", "Person", { id => "person" });
 __PACKAGE__->belongs_to("page", "Page", { id => "page" });

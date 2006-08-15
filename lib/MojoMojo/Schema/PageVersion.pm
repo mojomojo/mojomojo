@@ -1,7 +1,5 @@
 package MojoMojo::Schema::PageVersion;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
@@ -11,20 +9,35 @@ __PACKAGE__->load_components("PK::Auto", "Core");
 __PACKAGE__->table("page_version");
 __PACKAGE__->add_columns(
   "page",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "version",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "parent",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "parent_version",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "name",
+    { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "name_orig",
+    { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "depth",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "creator",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "created",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "status",
+    { data_type => "VARCHAR", is_nullable => 0, size => 20 },
   "release_date",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "remove_date",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "comments",
+    { data_type => "TEXT", is_nullable => 0, size => 4000 },
   "content_version_first",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "content_version_last",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("page", "version");
 __PACKAGE__->has_many(
@@ -63,4 +76,3 @@ __PACKAGE__->has_many(
 );
 
 1;
-

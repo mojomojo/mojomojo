@@ -1,26 +1,32 @@
 package MojoMojo::Schema::Page;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 use Carp qw/croak/;
 
 use base qw/Class::Accessor::Fast DBIx::Class/;
 
-
 __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
   "id",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "version",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "parent",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "name",
+    { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "name_orig",
+    { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "depth",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "lft",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "rgt",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "content_version",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many(
@@ -622,6 +628,5 @@ sub has_photos {
   my $self=shift;
   return $self->result_source->schema->resultset('Photo')->search({'attachment.page'=>$self->id},{join=>[qw/attachment/]})->count;
 }
-
 
 1;

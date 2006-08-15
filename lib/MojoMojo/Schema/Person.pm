@@ -1,7 +1,5 @@
 package MojoMojo::Schema::Person;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
@@ -11,22 +9,39 @@ __PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core/)
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "active",
-  "registered" => {data_type => 'bigint', epoch => 'ctime'},
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "registered",
+    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
   "views",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "photo",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "login",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "name",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "email",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "pass",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "timezone",
-  "born" => {data_type => 'bigint', epoch => 1},
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+  "born",
+    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 1 },
   "gender",
+    { data_type => "CHAR", is_nullable => 0, size => 1 },
   "occupation",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "industry",
+    { data_type => "VARCHART", is_nullable => 0, size => 100 },
   "interests",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "movies",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "music",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many("entries", "Entry", { "foreign.author" => "self.id" });

@@ -1,7 +1,5 @@
 package MojoMojo::Schema::Content;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
@@ -15,17 +13,33 @@ __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK:
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
   "page",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "version",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "creator",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "created",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100, epoch => 'ctime' },
   "status",
-  "created",      => {data_type=>'bigint',epoch=>'ctime'},
-  "release_date", => {data_type=>'bigint',epoch=>'1'},
-  "remove_date",  => {data_type=>'bigint',epoch=>'1'},
+    { data_type => "VARCHAR", is_nullable => 0, size => 20 },
+  "release_date",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100, epoch => '1' },
+  "remove_date",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100, epoch => '1' },
   "type",
+    { data_type => "VARCHAR", is_nullable => 0, size => 200 },
   "abstract",
+    { data_type => "VARCHAR", is_nullable => 0, size => 4000 },
   "comments",
+    { data_type => "VARCHAR", is_nullable => 0, size => 4000 },
   "body",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
   "precompiled",
+    { data_type => "TEXT", is_nullable => 0, size => undef },
+
+#  "created",      => {data_type=>'bigint',epoch=>'ctime'},
+#  "release_date", => {data_type=>'bigint',epoch=>'1'},
+#  "remove_date",  => {data_type=>'bigint',epoch=>'1'},
 );
 __PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key("page", "version");

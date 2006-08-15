@@ -1,7 +1,5 @@
 package MojoMojo::Schema::Attachment;
 
-# Created by DBIx::Class::Schema::Loader v0.03003 @ 2006-06-18 12:23:29
-
 use strict;
 use warnings;
 
@@ -11,11 +9,19 @@ use File::MimeInfo::Magic;
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns("id", 
-    "uploaded" => {data_type=>'bigint',epoch=>'ctime'},
-    "page", 
-    "name", 
-    "size", 
-    "contenttype");
+  "id",
+    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+  "uploaded",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "page",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "name",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+  "size",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
+  "contenttype",
+    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+);
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to("page", "Page", { id => "page" });
 __PACKAGE__->might_have("photo", "MojoMojo::Schema::Photo" ); #, {id =>'foreign.id' } );
