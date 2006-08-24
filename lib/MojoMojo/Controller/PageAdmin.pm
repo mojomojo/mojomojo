@@ -34,7 +34,7 @@ sub auto : Private {
     my $user = $c->stash->{user};
     return 1 if $user && $user->can_edit($c->stash->{path});
     $c->stash->{template}='message.tt';
-    $c->stash->{message}='sorry bubba, you aint got no rights';
+    $c->stash->{message}='Sorry bubba, you aint got no rights to this page';
     return 0;
 }
 
