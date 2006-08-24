@@ -270,6 +270,7 @@ sub do_editprofile : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
+	    my $page=$c->stash->{page};
 	    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 		? $c->stash->{proto_pages}[-1]->{name_orig}
 		: $page->name_orig);
