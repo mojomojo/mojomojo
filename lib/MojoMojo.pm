@@ -179,15 +179,15 @@ sub unicode {
 }
 
 =head2 uri_for 
-Overrides $c->uri_for to append path.
+Overrides $c->uri_for to append path, if relative path is used
 
 =cut
 
 sub uri_for {
     my $c=shift;
-    $_[0] =~ s/^\///;
-    $_[0] = '/'.$c->stash->{path} . '.' . $_[0];
-    $c->log->info('path for '.$_[0]);
+   	unless ($_[0] =~ m/^\//) {
+    	$_[0] = '/'.$c->stash->{path} . '.' . $_[0];
+	}
     $c->NEXT::uri_for(@_);
 }
 

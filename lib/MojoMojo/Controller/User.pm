@@ -34,7 +34,7 @@ sub login : Global {
     if ( $c->req->params->{login} ) {
         if ( $c->login() ) {
 	    $c->stash->{user}=$c->user->obj;
-            $c->res->redirect($c->stash->{user}->link)
+            $c->res->redirect($c->uri_for($c->stash->{user}->link))
                 unless $c->stash->{template};
             return;
         }
@@ -219,7 +219,9 @@ Show user profile.
 sub profile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
-    my $user=$c->model("DBIC::Person")->get_user($page->name_orig);
+    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
+	? $c->stash->{proto_pages}[-1]->{name_orig}
+	: $page->name_orig);
     if ( $user ) {
           $c->stash->{person}=$user;
           $c->stash->{template}='user/profile.tt';
@@ -232,7 +234,9 @@ sub profile : Global {
 sub editprofile : Global {
     my ($self,$c)=@_;
     my $page=$c->stash->{page};
-    my $user=$c->model("DBIC::Person")->get_user($page->name_orig);
+    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
+	? $c->stash->{proto_pages}[-1]->{name_orig}
+	: $page->name_orig);
     if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
 		   $user->id eq $c->stash->{user}->id ) ) {
           $c->stash->{person}=$user;
@@ -266,8 +270,9 @@ sub do_editprofile : Global {
         $c->stash->{message}='Some fields are invalid. Please '.
                              'correct them and try again:';
     } else {
-	my $user=$c->model("DBIC::Person")->get_user(
-	    $c->stash->{page}->name_orig);
+	    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
+		? $c->stash->{proto_pages}[-1]->{name_orig}
+		: $page->name_orig);
 	$user->set_columns($c->form->{valid});
 	$user->update();
 	return $c->forward('profile');

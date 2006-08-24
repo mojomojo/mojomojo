@@ -5,13 +5,13 @@
   <b class="navon">[%c.fixw(user.login)%]</b> | 
   [%ELSE%]
   [% IF user.active%]
-  <a href="[%base%][%user.link%]" title="Go to home page">[%c.fixw(user.login)%]</a> | 
+  <a href="[%c.uri_for(user.link)%]" title="Go to home page">[%c.fixw(user.login)%]</a> | 
   [% ELSE %]
-  <a href="[%base%][%user.link%].prefs" title="User Preferences">[%c.fixw(user.login)%]</a> | 
+  <a href="[%c.uri_for(user.link,'.prefs')%]" title="User Preferences">[%c.fixw(user.login)%]</a> | 
   [% END %]
   [%END%]
   [% ELSE %]
-  <a href="[%base%]/.login" title="Get in there" accesskey="L">log in</a> | 
+  <a href="[%c.uri_for('login')%]" title="Get in there" accesskey="L">log in</a> | 
   [% END %]
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
@@ -52,13 +52,13 @@
 [%IF (c.req.action=="view")%]
 <b class="navOn">page</b> | 
 [%ELSE%]
-<a title="The Wikilicious page" href="[%base%][%page.path%]">page</a> | 
+<a title="The Wikilicious page" href="[%c.uri_for('view')%]">page</a> | 
 [%END%]
 [%IF (page.has_photos) %]
 [%IF (pictures )%]
 <b class="navOn">gallery</b> | 
 [%ELSE%]
-<a title="Photo Album" href="[%base%][%page.path%].gallery">gallery</a> | 
+<a title="Photo Album" href="[%c.uri_for('gallery')%]">gallery</a> | 
 [%END%]
 [%END%]
 
@@ -69,12 +69,12 @@
 [%IF (c.req.action=="profile")%]
 <b class="navOn">Profile</b> | 
 [%ELSE%]
-<a title="User Profile" href="[%base%][%page.path%].profile">profile</a> | 
+<a title="User Profile" href="[%c.uri_for('profile')%]">profile</a> | 
 [%END%]
 [%IF (c.req.action=="prefs")%]
 <b class="navOn">preferences</b> 
 [%ELSE%]
-<a title="User Settings" href="[%base%][%page.path%].prefs">preferences</a>
+<a title="User Settings" href="[%c.uri_for('prefs')%]">preferences</a>
 [%END%]
     [% END %] 
 </form>

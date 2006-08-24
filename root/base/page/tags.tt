@@ -35,6 +35,6 @@ href="[%c.uri_for('.recent',tag.tag)%]">[%tag.tag%]</a>
 [%ELSE%]
 <a class="tag" title="[%othertag.refcount%]" 
 [%END%]
-href="[%c.uri_for(page.path,'.recent',othertag.tag)%]" >[%othertag.tag%]</a> 
+href="[%c.uri_for('recent',othertag.tag)%]" >[%othertag.tag%]</a> 
 [%END%]
 [%END%]

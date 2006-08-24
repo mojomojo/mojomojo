@@ -33,5 +33,5 @@ User profile for [% person.name %]
 </dl>
 </div>
         <div id="bottomnav">&nbsp;
- <a title="Change profile content" href="[% c.uri_for( page.path,'.editprofile' ) %]" accesskey="E">Edit Profile</a>
+ <a title="Change profile content" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">Edit Profile</a>
 [%PROCESS footer.tt %]
