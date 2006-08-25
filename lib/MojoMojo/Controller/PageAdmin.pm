@@ -33,6 +33,7 @@ sub auto : Private {
     return 1 if MojoMojo->pref('anonymous_user');
     my $user = $c->stash->{user};
     return 1 if $user && $user->can_edit($c->stash->{path});
+	return 1 if $user && ! $c->pref('restricted_user');
     $c->stash->{template}='message.tt';
     $c->stash->{message}='Sorry bubba, you aint got no rights to this page';
     return 0;

@@ -5,28 +5,27 @@
 <a accesskey="B" href="[%base%]/">back</a> </div>
  <div id="content">
  <h1>Site Configuration</h1>
-<form id="adminform" action="javascript:return 0;">
+<form id="adminform" action="[%c.uri_for('/.admin/update')%]" method="post">
 <dl>
 <dt>Name:</dd>
 <dd><input id="sitename" name="name"  type="text" value="[%c.pref('name')%]"/></dt>
-[% url = base _ "/.settings/name" %]
 <dt>Admins:</dt>
 <dd>
-<input id="admins"  name="admins" type="text" value="[%admins%]"/>
+[% regex = '\s*\b' _ user.login _ '\b\s*' %]
+<input id="admins"  name="admins" type="text" value="[%c.pref('admins').replace(regex,' ').replace('^\s+','').replace('\s+$','')%]"/>
 (also includes [%user.login%]) </dd>
 <dt>Anon. user</dt>
-<dd> <input id="anon"  name="anonymous_user" type="text" value="[%anonymous_user%]"/> ( blank to disable )</dd>
+<dd> <input id="anon"  name="anonymous_user" type="text" value="[%c.pref('anonymous_user')%]"/> ( blank to disable )</dd>
 </dd>
 </form>
-[% url = base _ "/.admin/update" %]
-[% c.prototype.observe_form('adminform', {
-    url     => url,
-    update  => "message",
-  loading   => "Element.show('editspinner')",
-  complete  => "Element.hide('editspinner');\$('pageName').innerHTML=\$('sitename').value",
-})%]
-<p id="message">[% status || 'No change' %]</p>
 <br/>
+<h2>Settings</h2>
+<label for="registration">Registration open</label>
+<input type="checkbox" name="registration"[% IF (c.pref('open_registration'))%] checked="checked"[%END%]/><br/>
+<label for="restricted">Restrict User Access to home</label>
+<input type="checkbox" name="restricted"[% IF (c.pref('restricted_user'))%] checked="checked"[%END%]/><br/>
+<p id="message">[% message || 'ready' %]</p>
+<input type="submit" name="save" value="save"/>
  <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;

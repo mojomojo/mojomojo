@@ -56,26 +56,39 @@ ajax saving of system settings.
 
 sub update : Local {
     my ( $self, $c ) = @_;
-    $c->form( required => [qw/name admins/],
-              optional => [qw/anonymous_user/] );
+    $c->stash->{template} = 'settings.tt';
+    $c->form( required => [qw/name/],
+              optional => [qw/admins anonymous_user registration restricted/] );
     if ( $c->form->has_missing ) {
-        $c->res->body( "Can't update, missing fields:" .
-        join( ', ', $c->form->missing()).'</b>' );
+        $c->stash->{message} = "Can't update, missing fields:" .
+        join( ', ', $c->form->missing()).'</b>';
         return;
     }
     my @users =  split(m/\s+/,$c->form->valid('admins'));
     foreach my $user ( @users ) {
         unless ($c->model("DBIC::Person")->get_user($user)) {
-            $c->res->body('Cant find admin user: '.$user);
+            $c->stash->{message}='Cant find admin user: '.$user;
             return; 
         }
     }
-    $c->res->body('Updated');
+	# FIXME: Needs refactor
+	if ($c->form->valid('registration')) {
+		$c->pref('open_registration',1);
+	}
+	else { 
+		$c->pref('open_registration',0);
+	}
+	if ($c->form->valid('restricted')) {
+		$c->pref('restricted_user',1);
+	}
+	else { 
+		$c->pref('restricted_user',0);
+	}
     $c->pref( 'admins',join(' ',@users,$c->stash->{user}->login));
     $c->pref( 'name',$c->form->valid('name'));
     $c->pref( 'anonymous_user',$c->form->valid('anonymous_user')||'');
 
-    $c->res->body( "Updated successfully." );
+    $c->stash->{message} = "Updated successfully.";
 }
 
 =item user ( .admin/user )

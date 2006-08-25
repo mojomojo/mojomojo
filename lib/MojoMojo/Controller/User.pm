@@ -139,6 +139,10 @@ B<template:> user/register.tt
 
 sub register : Global {
     my ( $self, $c ) = @_;
+	if(!$c->pref('open_registration')) {
+    	$c->stash->{template}='message.tt';
+    	return $c->stash->{message}='Registration is closed!';
+	}
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message}='Please fill in the following information to '.
     'register. All fields are mandatory.';
@@ -154,6 +158,10 @@ B<template:> user/password.tt /  user/validate.tt
 
 sub do_register : Global {
     my ( $self, $c ) = @_;
+	if(!$c->pref('open_registration')) {
+    	$c->stash->{template}='message.tt';
+    	return $c->stash->{message}='Registration is closed!';
+	}
     $c->stash->{template} = 'user/register.tt';
     $c->form(required => [qw(login name pass confirm email)],
              defaults  => { active => -1 }, 
