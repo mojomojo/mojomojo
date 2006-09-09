@@ -3,12 +3,22 @@
 CREATE TABLE person (
  id         INTEGER AUTO_INCREMENT PRIMARY KEY,
  active     INTEGER, -- boolean
+ registered INTEGER,
+ views	    INTEGER,
+ photo	    INTEGER references PHOTO,
  login      VARCHAR(100),
  name       VARCHAR(100),
  email      VARCHAR(100),
  pass       VARCHAR(100),
  timezone   VARCHAR(100),
- foaf       TEXT
+ born	    INTEGER,
+ gender	    CHAR(1),
+ occupation VARCHAR(100),
+ industry   VARCHAR(100),
+ interests  TEXT,
+ movies	    TEXT,
+ music	    TEXT
+
 ) /*! ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin */;
 
 -- * page-content tree * --
