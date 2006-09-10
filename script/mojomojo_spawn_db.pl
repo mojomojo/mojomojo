@@ -44,6 +44,8 @@ $user ||= $config->{'Model::DBIC'}->{'connect_info'}[1];
 $pass ||= $config->{'Model::DBIC'}->{'connect_info'}[2];
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 ($type) = ($dsn =~ m/:(.+?):/);
+$type = 'MySQL' if $type eq 'mysql';
+
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
 my $db = MojoMojo::Schema->connect( $dsn, $user, $pass, $attrs );

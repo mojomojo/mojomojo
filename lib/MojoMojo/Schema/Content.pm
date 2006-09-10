@@ -42,7 +42,7 @@ __PACKAGE__->add_columns(
 #  "remove_date",  => {data_type=>'bigint',epoch=>'1'},
 );
 __PACKAGE__->utf8_columns(qw/body precompiled/);
-__PACKAGE__->set_primary_key("page", "version");
+__PACKAGE__->set_primary_key("version", "page");
 __PACKAGE__->has_many(
   "pages",
   "Page",

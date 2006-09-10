@@ -35,7 +35,7 @@ __PACKAGE__->add_columns(
   "occupation",
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
   "industry",
-    { data_type => "VARCHART", is_nullable => 1, size => 100 },
+    { data_type => "VARCHAR", is_nullable => 1, size => 100 },
   "interests",
     { data_type => "TEXT", is_nullable => 1, size => undef },
   "movies",

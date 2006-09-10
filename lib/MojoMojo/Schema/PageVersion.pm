@@ -39,7 +39,7 @@ __PACKAGE__->add_columns(
   "content_version_last",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
-__PACKAGE__->set_primary_key("page", "version");
+__PACKAGE__->set_primary_key("version", "page");
 __PACKAGE__->has_many(
   "pages",
   "Page",
@@ -49,7 +49,7 @@ __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
 __PACKAGE__->belongs_to(
   "page",
   "Page",
-  { page => "page" },
+  { id => "page" },
 );
 __PACKAGE__->belongs_to(
   "content",
