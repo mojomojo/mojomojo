@@ -63,7 +63,7 @@ if (!$deploy) {
 $db->storage->ensure_connected;
 $db->deploy( $attrs );
 
-$db->populate('Person', [
+my @people = $db->populate('Person', [
     [ qw/ active views photo login name email pass timezone born gender occupation industry interests movies music / ],
     [ 1,0,0,'AnonymousCoward','Anonymous Coward','','','',0,'','','','','','' ],
     [ 1,0,0,'admin','Enoch Root','','admin','',0,'','','','','','' ],
@@ -76,15 +76,16 @@ $db->populate('Preference', [
 ]);
 
 $db->populate('PageVersion', [
-    [ qw/ page version parent parent_version name name_orig depth content_version_first content_version_last 
-    creator status created release_date remove_date comments/ ],
-    [ 1,1,'NULL','NULL','/','/',0,1,1,1,'',0,'','','' ],
+    [ qw/page version parent parent_version name name_orig depth
+         content_version_first content_version_last creator status created
+         release_date remove_date comments/ ],
+    [ 1,1,'NULL','NULL','/','/',0,1,1, $people[1]->id,'',0,'','','' ],
 ]);
 
 $db->populate('Content', [
     [ qw/ page version creator created body status release_date remove_date type abstract version comments 
     precompiled / ],
-    [ 1,1,1,0,'h1. Welcome to MojoMojo!
+    [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
 
 This is your front page. To start administrating your wiki, please log in with
 username admin/password admin. At that point you will be able to set up your
