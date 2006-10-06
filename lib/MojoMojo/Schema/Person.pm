@@ -106,10 +106,11 @@ sub pages {
 	related_source('page')->resultset->search({
 	    'versions.creator' => $self->id,
 	},{
+        include_columns => [ qw/versions.version/ ],
 	    join     => [qw/versions/],
 	    order_by => ['me.name'],
 	    group_by => ['me.id'],
-	    having   => { 'versions.version' => \'=MAX(versions.version)' },
+	    #having   => { 'versions.version' => \'=MAX(versions.version)' },
 	})->all;
     return $self->result_source->related_source('page_versions')->
 	related_source('page')->resultset->set_paths(@pages);
