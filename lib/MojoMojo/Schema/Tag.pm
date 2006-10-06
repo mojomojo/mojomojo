@@ -29,10 +29,10 @@ sub most_used : ResultSet {
     return $self->search({
 	page => { '!=', undef },
     },{
-             select   => [ 'me.tag', 'count(me.tag)' ],
+             select   => [ 'me.tag', 'count(me.tag) as refcount' ],
              as       => [ 'tag','refcount' ],
              group_by => [ 'me.tag' ],
-	     order_by => [ 'count(me.tag)' ],
+	     order_by => [ 'refcount' ],
     });
 }
 
@@ -50,10 +50,10 @@ sub by_page :ResultSet {
         ],
     }, { 
         from=> 'page as ancestor, page as descendant, tag as me',
-        select => [ 'me.page', 'me.tag','count(me.tag)' ],
-	as     => [ 'page','tag','refcount' ],
+        select => [ 'me.page', 'me.tag','count(me.tag) as refcount' ],
+	    as     => [ 'page','tag','refcount' ],
         group_by => ['me.tag'],
-        order_by => ['me.tag'],
+        order_by => ['refcount'],
     });
 }
 
@@ -68,8 +68,8 @@ sub by_photo : ResultSet {
     return $self->search({
         photo => { '!=' => undef}
     }, { 
-        select => [ 'me.photo', 'me.tag','count(me.tag)' ],
-	as     => [ 'photo','tag','refcount' ],
+        select => [ 'me.photo', 'me.tag','count(me.tag) as refcount' ],
+	    as     => [ 'photo','tag','refcount' ],
         group_by => ['me.tag'],
         order_by => ['me.tag'],
     });
@@ -92,11 +92,11 @@ sub related_to : ResultSet {
 	'other.tag'=>{'!=',$tag},
 	'me.page'=>\'=other.page',
     },{
-	select     => [ 'me.tag', 'count(me.tag)' ],
+	select     => [ 'me.tag', 'count(me.tag) as refcount' ],
 	as         => [ 'tag','refcount' ],
 	'group_by' => ['me.tag'],
         'from'     => 'tag me, tag other',
-        'order_by' => \'count(me.tag)',
+        'order_by' => \'refcount',
 	'rows'	   => $count,
     })
 }
