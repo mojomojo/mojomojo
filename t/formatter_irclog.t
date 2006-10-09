@@ -1,4 +1,4 @@
-use Test::More qw(no_plan);
+use Test::More tests => 8;
 
 use MojoMojo::Formatter::IRCLog;
 
@@ -31,5 +31,10 @@ is($content, "$ob<dt>[[nick]]</dt>\n<dd>text</dd>\n$oe", "voice");
 $content = "${ib}12:00 <+nick> text\nmore$ie";
 MojoMojo::Formatter::IRCLog->format_content(\$content);
 is($content, "$ob<dt>[[nick]]</dt>\n<dd>text more</dd>\n$oe", "multi-line");
+
+$content = "${ib}12:00 <+nick> text\nmore$ie${ib}12:00 <+nick> text\nmore$ie";
+MojoMojo::Formatter::IRCLog->format_content(\$content);
+is($content, "$ob<dt>[[nick]]</dt>\n<dd>text more</dd>\n$oe$ob<dt>[[nick]]</dt>\n<dd>text more</dd>\n$oe", "multi-block");
+
 
 

@@ -45,12 +45,14 @@ sub format_content {
 		if ($longline) {
 		    $longline .= "</dd>";
 		    push (@newlines, $longline);
+		    $longline = "";
 		}
 		push @newlines, $line;
 	    } elsif ($line =~ /^[\d:]*\s*<[+\%\@ ]?(.*?)>\s*(.*)/) {
 		if ($longline) {
 		    $longline .= "</dd>";
 		    push (@newlines, $longline);
+		    $longline = "";
 		}
 		$nicks{$1} = 1;
 		$longline = "<dt>$1</dt>\n<dd>$2";
