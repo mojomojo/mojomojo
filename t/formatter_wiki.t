@@ -1,28 +1,93 @@
-use Test::More;
-BEGIN {
-    eval "use DBD::SQLite";
-    plan $@
-        ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 6 );
+package Dummy;
+sub new {
+	my $class = shift;
+	bless {}, $class;
 }
 
-use lib qw(t/lib);
-use MojoMojoTestSchema;
+sub req {
+	return $_[0];
+}
 
-my $schema = MojoMojoTestSchema->init_schema(no_populate => 1);
-$ENV{CATALYST_DEBUG}=0;
-$ENV{MOJOMOJO_CONFIG}='t/var/mojomojo.yml';
-use HTML::Entities;
-use_ok( Catalyst::Test, 'MojoMojo' );
-use Carp qw/verbose/;
+sub base {
+	$_[0]->{path} = '/';
+	return "http://example.com";
+}
 
-is( get(encode_entities('/.jsrpc/render?content=').'\WikiWord'), 
-                                                   '<p>WikiWord</p>' );
-is( get(encode_entities('/.jsrpc/render?content=').'/[[wikiword]]'), 
-                                                   '<p>/[[wikiword]]</p>' );
-is( get(encode_entities('/.jsrpc/render?content=').'text+%3D+more'),
-                                                   '<p>text = more</p>' );
-is( get(encode_entities('/.jsrpc/render?content=').'WikiWord'), 
-                                                   '<p><span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://localhost/WikiWord.edit">?</a></span></p>' );
-is( get(encode_entities('/help.jsrpc/render?content=').'WikiWord'), 
-                                                   '<p><span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://localhost/help/WikiWord.edit">?</a></span></p>' );
+sub stash {
+	my $self = shift;
+	return { page => $self,
+		 page_path => 'http://example.com/',
+	};
+}
+
+sub path {
+	my $self = shift;
+	$path = $self->{path};
+	return $path;
+}
+
+sub model {
+	return $_[0];
+}
+
+sub result_source {
+	return $_[0];
+}
+
+sub resultset {
+	return $_[0];
+}
+
+sub path_pages {
+	if ($_[1] =~ /Existing/) {
+		my $page = Dummy->new;
+		$page->{path} = '/ExistingWord';
+		return [$page], undef;
+	} else {
+		return [], [{path => '/WikiWord'}];
+	}
+}
+
+package main;
+
+use MojoMojo::Formatter::Wiki;
+use Test::More;
+
+plan tests => 9;
+
+my $content;
+
+$content = '[[ExistingWord]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, '<a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Word</a> ');
+
+my $content;
+$content = '\WikiWord';
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, 'WikiWord');
+
+$content = '/[[wikiword]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, '/[[wikiword]]');
+
+#$content = 'text+%3D+more';
+#MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+#is($content, '<p>text = more</p>');
+
+$content = "WikiWord";
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, '<span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://example.com/WikiWord.edit">?</a></span>');
+
+$content = "ExistingWord";
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, '<a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Word</a> ');
+
+$content = 'ExistingWord';
+my ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+is(@$exist, 1);
+is(@$new, 0);
+
+$content = 'WikiWord';
+my ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+is(@$exist, 0);
+is(@$new, 1);
