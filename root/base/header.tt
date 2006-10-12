@@ -2,12 +2,12 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/getElementsBySelector.js"></script>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/prototype.js"></script>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/scriptaculous.js"></script>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/prototype-useful.js"></script>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/fat.js"></script>
-    <script type="text/javascript" language="JavaScript" src="[%base%]/.static/js/wiki.js"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/getElementsBySelector.js')%]"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/prototype.js')%]"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/scriptaculous.js')%]"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/prototype-useful.js')%]"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/fat.js')%]"></script>
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for('/.static/js/wiki.js')%]"></script>
     <title>
 	[% IF page %] [% c.expand_wikiword(page.name_orig) %] in [% END %]
             [%
@@ -16,14 +16,14 @@
             %]
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link title="main stylesheet" href="[% base %]/.static/mojomojo.css" type="text/css" 
+    <link title="main stylesheet" href="[%c.uri_for('/.static/mojomojo.css')%]" type="text/css" 
             rel="stylesheet" />
-    <link title="pod stylesheet" href="[% base %]/.static/pod.css" type="text/css" 
+    <link title="pod stylesheet" href="[% c.uri_for('/.static/pod.css')%]" type="text/css" 
             rel="stylesheet" />
-	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%base%][%path%].atom" />
-    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%base%][%path%].rss" />
-    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%base%]/[%path%].rss_full" />
-    <link rel="shortcut icon" href="[%base%]/.static/favicon.ico" />
+	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
+    <link rel="shortcut icon" href="[%c.uri_for('/.static/favicon.ico')%]" />
 </head>
 
 <body id="page">
