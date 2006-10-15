@@ -14,7 +14,7 @@ __PACKAGE__->add_columns(
   "version",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
   "parent",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef },
   "name",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
   "name_orig",

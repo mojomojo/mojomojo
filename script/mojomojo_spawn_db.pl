@@ -79,7 +79,7 @@ $db->populate('PageVersion', [
     [ qw/page version parent parent_version name name_orig depth
          content_version_first content_version_last creator status created
          release_date remove_date comments/ ],
-    [ 1,1,'NULL','NULL','/','/',0,1,1, $people[1]->id,'',0,'','','' ],
+    [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
 ]);
 
 $db->populate('Content', [
@@ -105,7 +105,7 @@ Check out our [[Help]] section.','released','','','','',1,'','' ],
 
 $db->populate('Page', [
     [ qw/ id version parent name name_orig depth lft rgt content_version / ],
-    [ 1,1,'NULL','/','/',0,1,4,1 ],
+    [ 1,1,undef,'/','/',0,1,4,1 ],
     [ 2,1,1,'help','Help',1,2,3,1 ],
 ]);
 
