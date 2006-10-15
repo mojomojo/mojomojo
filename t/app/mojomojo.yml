@@ -1,0 +1,5 @@
+---
+Model::DBIC:
+  connect_info:
+    - dbi:SQLite:t/app/mojomojo.db
+name: MojoMojo Test Suite
