@@ -223,20 +223,14 @@ mime-type
 sub insert : Private {
     my ( $self, $c, $att ) = @_;
     return unless $c->forward('auth');
-    if ($att->contenttype =~ //) {
+    if ($att->contenttype =~ /^image/) {
         $c->stash->{append} = '\n\n<div class="photo">"!'
-            . $c->req->base 
-            . "/.attachment/"
-            . $att. "/thumb!\":"
-            . $c->req->base
-            . "/.attachment/"
-            . $att.'</div>';
+            . $c->uri_for("attachment",$att->id,'thumb')."!\":"
+            . $c->uri_for("attachment",$att->id).'</div>';
     } else {
         $c->stash->{append} = '\n\n"'
             . $att->name . "\":"
-            . $c->req->base
-            . "/.attachment/"
-            . $att;
+            . $c->uri_for("attachment",$att->id);
     }
         $c->forward('/pageadmin/edit');
 }

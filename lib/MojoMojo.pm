@@ -12,6 +12,7 @@ use Catalyst qw/-Debug              Authentication
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
+		StackTrace
 		Authentication::Store::DBIC 
 		ConfigLoader	    Authentication::Credential::Password 
 		/;
@@ -186,7 +187,8 @@ Overrides $c->uri_for to append path, if relative path is used
 sub uri_for {
     my $c=shift;
    	unless ($_[0] =~ m/^\//) {
-    	$_[0] = '/'.$c->stash->{path} . '.' . $_[0];
+		 my $val=shift @_;
+    	 unshift(@_,'/'.$c->stash->{path} . '.' . $val);
 	}
     $c->NEXT::uri_for(@_);
 }

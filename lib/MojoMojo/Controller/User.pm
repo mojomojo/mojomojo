@@ -34,7 +34,7 @@ sub login : Global {
     if ( $c->req->params->{login} ) {
         if ( $c->login() ) {
 	    $c->stash->{user}=$c->user->obj;
-            $c->res->redirect($c->uri_for($c->stash->{user}->link))
+            $c->res->redirect($c->uri_for($c->stash->{path}))
                 unless $c->stash->{template};
             return;
         }
