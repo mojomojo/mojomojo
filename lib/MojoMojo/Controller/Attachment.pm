@@ -109,31 +109,32 @@ an attachment id.
 
 =cut
 
-sub default : Private {
-    my ( $self, $c, $called, $att, $action ) = @_;
-
-    $att=$c->model("DBIC::Attachment")->find($att);
-    $c->detach('not_found') unless ($att);
-    if ($action) {
-        $c->forward("$action", [$att,@_] );
-    }
-    unless ( $c->res->output || $c->stash->{template} || @{$c->error} ) {
-    eval {
-        $c->res->output( scalar( read_file( 
-            $c->path_to('uploads',$att->id).""))); };
-    $c->detach('not_found') if ($@);
-        $c->res->headers->header( 'content-type', $att->contenttype );
-        $c->res->headers->header(
-            "Content-Disposition" => "inline; filename=".$att->name 
-        );
-    }
+sub attachment : Chained CaptureArgs(1) {
+    my ( $self, $c, $att ) = @_;
+    $c->stash->{att}=$c->model("DBIC::Attachment")->find($att);
+    $c->detach('default') unless ($att);
 }
 
-sub not_found : Private {
+
+sub defaultaction : PathPart('') Chained('attachment') Args('') {
+    my ( $self, $c ) = @_;
+    $c->forward('view');
+}
+
+sub default : Private {
     my ( $self, $c ) = @_;
     $c->stash->{template}='message.tt';
     $c->stash->{message}= "Attachment not found.";
     return ( $c->res->status(404) );
+}
+
+sub view : Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->res->output( scalar( read_file( 
+      $c->path_to('uploads',$c->stash->{att}->id).""))); 
+    $c->res->headers->header( 'content-type', $c->stash->{att}->contenttype );
+    $c->res->headers->header("Content-Disposition" => "inline; filename=".
+		$c->stash->{att}->name);
 }
 
 =item download
@@ -143,10 +144,10 @@ content-disposition.
 
 =cut
 
-sub download : Private {
-    my ( $self, $c, $att ) = @_;
-    $c->res->output( scalar(read_file( 
-        $c->path_to('uploads',$att->id))) );
+sub download : Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
+	my $att=$c->stash->{att};
+	$c->forward('view');
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "attachment; filename=" . $att->name 
@@ -159,8 +160,9 @@ thumb action for attachments. makes 100x100px thumbs
 
 =cut
 
-sub thumb : Private {
-    my ( $self, $c, $att ) = @_;
+sub thumb : Chained('attachment') Args(0) {
+    my ( $self, $c) = @_;
+	my $att=$c->stash->{att};
     $att->make_thumb() unless -f 
        $c->path_to('uploads',$att->id . ".thumb");
 
@@ -178,22 +180,22 @@ show inline attachment
 
 =cut
 
-sub inline : Private {
-    my ( $self, $c, $att ) = @_;
+sub inline : Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
     eval {
-    $att->photo->make_inline
-      unless -f $c->path_to('uploads',$att->id . '.inline');
+    $c->stash->{att}->photo->make_inline
+      unless -f $c->path_to('uploads',$c->stash->{att}->id . '.inline');
     $c->res->output(
         scalar( read_file( 
-           $c->path_to('uploads',$att->id) . '.inline')
+           $c->path_to('uploads',$c->stash->{att}->id) . '.inline')
      ));
     };
-    $c->detach('not_found') if $@ =~ m/^Could not open/;
+    $c->detach('default') if $@ =~ m/^Could not open/;
     $c->res->headers->header( 'content-type',
-        $att->contenttype );
+        $c->stash->{att}->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename="
-        . $att->name );
+        . $c->stash->{att}->name );
 }
 
 
@@ -204,10 +206,10 @@ file system.
 
 =cut
 
-sub delete : Private {
-    my ( $self, $c, $att ) = @_;
+sub delete: Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
     return unless $c->forward('auth');
-    $att->delete();
+    $c->stash->{att}->delete();
     $c->forward('/attachment/attachments');
 }
 
@@ -220,10 +222,11 @@ mime-type
 
 =cut
 
-sub insert : Private {
-    my ( $self, $c, $att ) = @_;
+sub insert : Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
     return unless $c->forward('auth');
-    if ($att->contenttype =~ /^image/) {
+    my $att=$c->stash->{att};
+	if ($att->contenttype =~ /^image/) {
         $c->stash->{append} = '\n\n<div class="photo">"!'
             . $c->uri_for("attachment",$att->id,'thumb')."!\":"
             . $c->uri_for("attachment",$att->id).'</div>';
