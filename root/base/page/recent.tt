@@ -1,11 +1,8 @@
-[% PROCESS header.tt %]
+[% SET title = "Recent pages in " _ page.path %]
 [% SET now = objects.first.content.created.ymd; %]
-        <div id="header"><h1>Recent pages in [%page.path%]</h1></div>
-[% PROCESS breadcrumbs.tt %]
+[% WRAPPER page/wrapper.tt title=title %]
 
-        [% PROCESS navbar.tt %]
-        <div id="content">
-
+<div id="content">
 <div id="categories">
   <strong>tags</strong>: <small>
   [% WHILE (tag = tags.next) %]
@@ -34,5 +31,4 @@
   </li>
 [% END %]
 </ul></div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+[% END %]

@@ -1,8 +1,6 @@
-[% PROCESS header.tt %]
-        <div id="header"><h1>All Pages in [%page.path%]</h1></div>
 
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% SET title = "All Pages in " _ page.path %]
+[% WRAPPER page/wrapper.tt title=title %]
  <div id="content">
 <div id="categories">
   <strong>tags</strong>: 
@@ -66,5 +64,5 @@
 [% END %]
 <p class="end">&nbsp;</p>
 </div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+[% END %]
+

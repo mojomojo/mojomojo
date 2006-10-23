@@ -1,10 +1,4 @@
-[% # get the title %]
-   [% IF page.name == "/" %]
-     [% SET title = c.pref("name") || "MojoMojo" %]
-   [% ELSE %]
-     [% SET title = c.expand_wikiword(page.name_orig) %]
-   [% END %]
-[% WRAPPER page/wrapper.tt title=title %]
+[% WRAPPER page/wrapper.tt %]
 
 [%IF c.req.params.rev %](Revision [% c.req.params.rev %])
 [%IF c.req.params.rev > page.content_version %]
