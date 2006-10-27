@@ -1,13 +1,10 @@
-[% PROCESS header.tt %]
-<div id="header"><h1> Page info for 
 [% IF page.name == "/" %]
- [% c.pref("name") || "MojoMojo" %]
+ [% _name = c.pref("name") || "MojoMojo" %]
 [% ELSE %]
- [% c.expand_wikiword(page.name_orig) %]
+ [% _name = c.expand_wikiword(page.name_orig) %]
 [% END %]
-</h1></div>
-[%PROCESS breadcrumbs.tt%]
-[%PROCESS navbar.tt%]
+
+[% WRAPPER page/wrapper.tt title = "Page info for " _ _name %]
 <div id="content">
 <p>
 <div class="rightHandSide">
@@ -29,5 +26,6 @@
 [%END%]
 </ol>
 </h4>
-</div>        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+</div>
+[% END %]
+

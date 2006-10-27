@@ -1,11 +1,5 @@
-[% PROCESS header.tt %]
-<div id="header"><h1>
-  <small> [% title || config.application_name || "MojoMojo" %] </small>
-  Authors
-</h1>
-</div>
-[% PROCESS navbar.tt %]
- <div id="content">
+[% WRAPPER page/wrapper.tt title = title || config.application_name || "MojoMojo" %]
+<div id="content">
 [% PROCESS pager.tt %]
 <ul>
 [% WHILE (user=users.next) %]
@@ -18,5 +12,5 @@ Last Changed
 [%END %]
 </ul>
 </div>
-<div class="content">
-[% PROCESS footer.tt %]
+[% END %]
+

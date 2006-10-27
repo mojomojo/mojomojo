@@ -1,9 +1,4 @@
-[% PROCESS header.tt %]
-<div id="header"><h1>
-Not found: [%c.expand_wikiword(proto_pages.last.name_orig) %]
-</h1></div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title = c.expand_wikiword(proto_pages.last.name_orig) %]
 <div id="content">
 <p>One or more pages in the requested path do not exist.</p>
 <h2>Existent Pages</h2>
@@ -27,5 +22,6 @@ Not found: [%c.expand_wikiword(proto_pages.last.name_orig) %]
 </p>
 <h2>Other Suggestions</h2>
 [%c.subreq('/search/inline',page=>path_pages.first,query=>proto_pages.first.name)%]
-</div> <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+</div> 
+[% END %]
+

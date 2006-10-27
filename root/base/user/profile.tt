@@ -1,9 +1,4 @@
-[%PROCESS header.tt %]
-<div id="header"><h1>
-User profile for [% person.name %]
-</h1></div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title = "User profile for " _ person.name %]
 <div id="content">
 <dl>
 <dt>Name:</dt>
@@ -31,7 +26,8 @@ User profile for [% person.name %]
 <dt><small>Registered at site:</small></dt>
 <dd><small>[%person.registered.ymd%]</small></dd>
 </dl>
-</div>
-        <div id="bottomnav">&nbsp;
+<br />
+
  <a title="Change profile content" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">Edit Profile</a>
-[%PROCESS footer.tt %]
+</div>
+[% END %]

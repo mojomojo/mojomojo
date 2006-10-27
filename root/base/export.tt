@@ -1,7 +1,4 @@
-[% PROCESS header.tt %]
-        <div id="header"><h1>Export</h1></div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title="Export" %]
 <div id="content">
 <p>You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki).</p> 
 
@@ -10,5 +7,4 @@
   <li><a href="[%base%][%page.path%].export_raw">Markup (textile)</a></li>
 </ul>
 </div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+[% END %]

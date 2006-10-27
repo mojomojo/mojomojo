@@ -1,6 +1,4 @@
-[% PROCESS header.tt %]
- <div id="header"><h1>Attachments for [%page.name%]</h1></div>
-[%PROCESS breadcrumbs.tt %]
+[% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
 
 <script language="javascript" type="text/javascript">
 function watch_progress(form) {
@@ -53,8 +51,6 @@ function watch_progress(form) {
     </small>
 </p>
 [% END %]
+<a href="[%c.uri_for('gallery')%]">View as gallery</a>
 </div>
-
-
-   <div id="bottomnav">&nbsp;<a href="[%c.uri_for('gallery')%]">View as gallery</a>
-[% PROCESS footer.tt %]
+[% END %]

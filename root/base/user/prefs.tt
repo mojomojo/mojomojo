@@ -1,7 +1,4 @@
-[% PROCESS header.tt %]
-        <div id="header"><h1>preferences</h1></div>
-[%PROCESS breadcrumbs.tt%]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title="preferences" %]
 <div class="preferences" id="content">
 <h2>your account</h2>
 <div class="rightHandSide">
@@ -21,5 +18,5 @@
 <dd> <b>Status:</b> no change</dd>
 </dl>
 </form>
-</div>  <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+</div>
+[% END %]
