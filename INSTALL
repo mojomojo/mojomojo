@@ -34,12 +34,18 @@ or using the one that's already bundled with mojomojo, if you use sqlite3.
 
 b) The alternative (and generally better) is to use MySQL.
 (i) Create a database, for instance:
-    mysql -u root -p < `CREATE mojo_database`
+    mysql -u root -p < `CREATE database mojo_database`
 (ii) Create a user and grant appropriate permissons, for instance:
     mysql -u root -p < `GRANT ALL ON mojo_database.* to mojo_user@localhost IDENTIFIED BY 'password'`;
-(iii) Import the table structure, for instance:
-    mysql -u user mojo_database -p < db/mysql/mojomojo.sql
-Replacing mojo_database, mojo_user and password as needed.
+(iii) Edit mojomojo.yml to contain your database configuration:
+    Model::DBIC:
+        connect_info:
+            - dbi:mysql:database=mojo_database;host=dbhost
+            - username
+            - password
+(iv) Import the table structure, by running the following script:
+    ./script/mojomojo_spawn_db.pl
+Replacing mojo_database, mojo_user and password in @people as needed.
 
 or
 
