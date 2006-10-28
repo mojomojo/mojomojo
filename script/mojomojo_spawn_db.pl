@@ -48,22 +48,20 @@ if($@){
 $dsn = $config_dsn if(!$dsn);
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 
-print "Connecting to $dsn\n";
-print " as $user\n" if $user;
-print " with password\n" if $pass;
-
 ($type) = ($dsn =~ m/:(.+?):/);
 $type = 'MySQL' if $type eq 'mysql';
 
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
 my $db = MojoMojo::Schema->connect($dsn, $user, $pass, $attrs);
-
 if ($create_ddl_dir) {
     print $db->storage->create_ddl_dir($db, @databases, '0.1', 
 				       "$FindBin::Bin/../db/", $attrs);
 }
 else {
+    print "Connecting to $dsn\n";
+    print " as $user\n" if $user;
+    print " with password\n" if $pass;
     $db->storage->ensure_connected;
     $db->deploy( $attrs );
 

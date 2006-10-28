@@ -14,7 +14,7 @@ requires (
         'Catalyst::Plugin::Authentication::Store::DBIC' => 0,
         'Catalyst::Plugin::Cache::FileCache'            => 0,
         'Catalyst::Plugin::Email'                       => 0,
-        'Catalyst::Plugin::ConfigLoader'                => 0,
+        'Catalyst::Plugin::ConfigLoader'                => '0.13',
         'Catalyst::Plugin::FillInForm'                  => '0.04',
         'Catalyst::Plugin::DefaultEnd'                  => '0.02',
         'Catalyst::Plugin::FormValidator'               => '0.02',
