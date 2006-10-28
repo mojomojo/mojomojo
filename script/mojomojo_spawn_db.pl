@@ -37,10 +37,21 @@ GetOptions('help|?'         => \$help,
 
 pod2usage(1) if ($help);
 
-($dsn, $user, $pass) = 
-  @{$config->{'Model::DBIC'}->{'connect_info'}};
-
+my $config_dsn;
+eval { 
+    ($config_dsn, $user, $pass) = 
+      @{$config->{'Model::DBIC'}->{'connect_info'}};
+};
+if($@){
+    die "Your DSN line in mojomojo.yml doesn't look like a valid DSN."
+}
+$dsn = $config_dsn if(!$dsn);
 die "No valid Data Source Name (DSN).\n" if !$dsn;
+
+print "Connecting to $dsn\n";
+print " as $user\n" if $user;
+print " with password\n" if $pass;
+
 ($type) = ($dsn =~ m/:(.+?):/);
 $type = 'MySQL' if $type eq 'mysql';
 
