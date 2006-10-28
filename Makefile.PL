@@ -49,6 +49,7 @@ requires (
         'XML::Clean'                                    => 0,
         'YAML'                                          => '0.36',
         'URI::Fetch'                                    => 0,
+        'DBIx::Class'                                   => '0.07002',
 );
 
 tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
