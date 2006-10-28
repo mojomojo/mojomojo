@@ -52,6 +52,9 @@ requires (
         'DBIx::Class'                                   => '0.07002',
 );
 
+feature 'Automatic deployment', 'SQL::Translator';
+   
+
 tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
 catalyst;
