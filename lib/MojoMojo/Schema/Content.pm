@@ -8,6 +8,7 @@ use base 'DBIx::Class';
 use DateTime::Format::Mail;
 
 use Algorithm::Diff;
+use String::Diff;
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
 __PACKAGE__->table("content");
@@ -119,8 +120,13 @@ sub formatted_diff {
 	    $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
 	}
 	elsif ( $$line[0] eq "c" ) {
-	    $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
-	    $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
+
+        $diff .= String::Diff::diff_merge($$line[1], $$line[2],
+            remove_open => '<del>',
+            remove_close => '</del>',
+            append_open => '<ins>',
+            append_close => '</ins>',
+        );
 	}
 	elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
 	else { $diff .= "Unknown operator " . $$line[0] }
