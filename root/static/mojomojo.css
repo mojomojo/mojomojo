@@ -255,12 +255,12 @@ ol.setup li {
   font-size: 10px;
 }
 
-.diffdel {
+.diffdel, del {
   background: pink;
   text-decoration: line-through;
 }
 
-.diffins {
+.diffins, ins {
   background: lightgreen;
 }
 
