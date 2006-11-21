@@ -1,11 +1,11 @@
 use inc::Module::Install;
 
-name 'MojoMojo-Formatter-Amazon';
-all_from 'lib/MojoMojo/Formatter/Amazon.pm';
+name 'MojoMojo-Formatter-Emote';
+all_from 'lib/MojoMojo/Formatter/Emote.pm';
 
 requires (
 	'MojoMojo'    => 0,
-	'Net::Amazon' => 0,
+	'Text::Emoticon::MSN' => 0,
 );
 
 
