@@ -5,7 +5,7 @@
                        config.name || 
                        "A poorly configured MojoMojo Installation"
             %] ] [% page.path %]</title>
-<link rel="alternate" type="text/html" href="[% base %]" />
+<link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline>Recent changes in [%page.path%]</tagline>
 <id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>

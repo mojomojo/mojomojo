@@ -1,6 +1,6 @@
 	</div>
      <div style="float:right;clear:left;">
-      <img src="[% base %]/.static/catalyst.png" alt="Powered by Catalyst" title="Powered by Catalyst" />
+      <img src="[%c.uri_for('/.static/catalyst.png')%]" alt="Powered by Catalyst" title="Powered by Catalyst" />
       </div>
       </div>
     </body>

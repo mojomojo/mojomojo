@@ -9,7 +9,7 @@
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
-  <a href="[% base %][% page.path %].recent/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  <a href="[% c.uri_for('recent,' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
   [% END %]
   [% END %]</small>
 </div>
@@ -23,7 +23,7 @@
   <b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>
+    <a href="[% c.uri_for('/', page.path)%]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
       by [% c.wikiword(page.content.creator.link,base) %]
       at [% page.content.created.hms(":") %]

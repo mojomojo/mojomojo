@@ -8,7 +8,7 @@
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
-  <a href="[% base %][%page.path%].list/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  <a href="[% c.uri_for('list', tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
   [% END %]
   [% END %]
 </div>
@@ -19,7 +19,7 @@
  </h2>
 <ul>
 [% FOREACH page IN pages %]
-    <li><a href="[%base _ page.path%]">[%page.name_orig%]</a></li>
+    <li><a href="[%c.uri_for('/', page.path)%]">[%page.name_orig%]</a></li>
 [% END %]
 </ul>
 </div>
@@ -45,7 +45,7 @@
 [%IF wanted.size%]
   <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-    <li><span class="newWikiWord">[%wanted.to_path%]<a title=">Not found. Click to create this page." href="[%base _ wanted.to_path%].edit">?</a></span> wanted by [%wanted.from_page.path%]</li>
+    <li><span class="newWikiWord">[%wanted.to_path%]<a title=">Not found. Click to create this page." href="[%c.uri_for('/', wanted.to_path,'.edit')%]">?</a></span> wanted by [%wanted.from_page.path%]</li>
 [% END %]
   </ul>
 [%END%]
@@ -56,7 +56,7 @@
   [%IF orphans.size%]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
-    <li><a href="[% base %][% orphan.path %]">[%orphan.path%]<a  href="[%base _ orphan.path%].edit">_</a></span></li>
+    <li><a href="[% c.uri_for('/', orphan.path) %]">[%orphan.path%]<a  href="[%c.uri_for('/',orphan.path,edit)%]">_</a></span></li>
 [% END %]
     </ul>
   [%END%]

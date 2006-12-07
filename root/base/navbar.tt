@@ -1,4 +1,4 @@
-<div id="toplinks"><form action="[% base %][% page.path;%].search" method="get" >  
+<div id="toplinks"><form action="[% c.uri_for('search') %]" method="get" >  
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR
                                          template.name.search('^user')))%]
@@ -16,36 +16,36 @@
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].list" title="Alphabetically sorted list of pages" accesskey="A">all pages</a> | 
+  <a href="[%c.uri_for('list')%]" title="Alphabetically sorted list of pages" accesskey="A">all pages</a> | 
   [% END; IF template.name =='page/recent.tt' %]
   <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].recent" title="Pages sorted by when they were last changed" accesskey="U">recently revised</a> | 
+  <a href="[%c.uri_for('recent')%]" title="Pages sorted by when they were last changed" accesskey="U">recently revised</a> | 
   [% END; IF c.req.action =='tags' %]
   <b class="navOn" title="All tags in this path">tags</b> | 
   [% ELSE %]
   [% IF (pictures OR photo) %]
-  <a href="[%base%][%page.path%].gallery/tags" title="All tags on photos" accesskey="T">tags</a> | 
+  <a href="[%c.uri_for('gallery','tags')%]" title="All tags on photos" accesskey="T">tags</a> | 
   [% ELSE %]
-  <a href="[%base%][%page.path%].tags" title="All tags in this path" accesskey="T">tags</a> | 
+  <a href="[%c.uri_for('tags')%]" title="All tags in this path" accesskey="T">tags</a> | 
   [%END%]
   [% END; IF c.req.action=='users' %]
   <b class="navOn" title="Who wrote what" accesskey="">authors</b> | 
   [%ELSE%]
-  <a href="[%base%][%page.path%].users" title="Who wrote what" accesskey="">authors</a> | 
+  <a href="[%c.uri_for('users')%]" title="Who wrote what" accesskey="">authors</a> | 
   [% END; IF template.name=='feeds.tt' %]
   <b class="navOn" title="Subscribe to changes by RSS">feeds</b> | 
   [%ELSE%]
-  <a href="[%base%][%page.path%].feeds" title="Subscribe to changes by RSS" accesskey="">feeds</a> | 
+  <a href="[%c.uri_for('feeds')%]" title="Subscribe to changes by RSS" accesskey="">feeds</a> | 
   [% END; IF template.name =='export.tt' %]
   <b class="navOn" title="Download a zip with all the pages in this wiki">export</b> | 
   [%ELSE%]
-  <a href="[%base%][%page.path%].export" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
+  <a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
   [%END %]
   [% IF page.name =='about' %]
   <b class="navOn" title="About this site">about</b> | 
   [%ELSE%]
-  <a href="[%base%]/about" title="About this site" accesskey="A">about</a> | 
+  <a href="[%c.uri_for('about')%]" title="About this site" accesskey="A">about</a> | 
   [%END%]
   <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
 <br/>

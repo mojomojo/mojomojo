@@ -9,7 +9,7 @@
 <dd>[%comment.posted.ymd%] [%comment.posted.hms%]</dd>
 <dt>comment: 
 [%IF user.can_edit(page.path)%]
-[<b class="remove" <a href="[%base%][%path%].comment/remove/[%comment.id%]">&times;</a></b>][%END%]</dt>
+[<b class="remove" <a href="[%c.uri_for('comment','remove',comment.id)%]">&times;</a></b>][%END%]</dt>
 <dd>[%comment.formatted%]</dd>
 </dl>
 </div>

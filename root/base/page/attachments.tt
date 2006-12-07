@@ -14,7 +14,7 @@ function watch_progress(form) {
     }
     document.uploadStatus1 = new Ajax.PeriodicalUpdater(
         'UploadStatus1',
-        '[%base%]/.progress/[% c.last_upload_id %]',
+        '[%c.uri_for('progress', c.last_upload_id )%]',
         {onComplete:function(request){$('UploadStatus1').innerHTML='Upload finished.';$('UploadProgressBar1').firstChild.firstChild.style.width='100%';document.uploadStatus1 = null; setTimeout(function() {new Effect.Fade('status');}, 2000)}, evalScripts:true, asynchronous:true}
     );
         
@@ -22,8 +22,8 @@ function watch_progress(form) {
 }
 </script>
 
- <div id="toplinks"><a  href="[% base %][% page.path %].edit">Edit</a> | Attachments</div><div id="content">
-<form action="[%base%][%page.path%].attachments/"
+ <div id="toplinks"><a  href="[% c.uri_for('edit')%]">Edit</a> | Attachments</div><div id="content">
+<form action="[%c.uri_for('attachments')%]"
     enctype="multipart/form-data" 
     target="result"
     onsubmit="watch_progress(this);"
@@ -43,11 +43,11 @@ function watch_progress(form) {
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |
      [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
-	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]">view</a> |
-	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/inline">inline</a> |
-	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/download">download</a> |
-	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/insert">insert</a> |
-	   <a href="[%base%][%page.path%].attachment/[%attachment.id%]/delete">delete</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'view')%]">view</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'inline')%]">inline</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'download')%]">download</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'insert')%]">insert</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'delete')%]">delete</a> |
     </small>
 </p>
 [% END %]
