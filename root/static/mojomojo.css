@@ -53,7 +53,7 @@ Body {
 #toplinks {
 	background: #D7D6D4;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 12px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 13px;
@@ -751,3 +751,7 @@ acronym {
 	margin-left: 1em;
 }
 
+#searchField {
+    margin-left: 150px;
+    font-size: 12px
+}

@@ -205,10 +205,10 @@ sub validate : Global {
     my ($self,$c,$user,$check)=@_;
     $user=$c->model("DBIC::Person")->find($user);
     if($check = md5_hex($user->email.$c->pref('entropy'))) {
-        $user->active(0);
+        $user->active(1);
         $user->update();
         if ($c->stash->{user}) {
-            $c->res->redirect($c->req->base.$c->stash->{user}->link);
+            $c->res->redirect($c->uri_for('/',$c->stash->{user}->link,'.edit'));
         } else {
             $c->stash->{message}='Welcome, '.$user->name.' your email is validated. Please log in.';
             $c->stash->{template}='user/login.tt';

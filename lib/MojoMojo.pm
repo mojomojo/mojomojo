@@ -189,7 +189,6 @@ sub uri_for {
    	unless ($_[0] =~ m/^\//) {
 		 my $val=shift @_;
          my $prefix = $c->stash->{path} eq '/' ? '': '/';
-#         my $prefix = '/';
     	 unshift(@_,$prefix . $c->stash->{path} . '.' . $val);
 	}
     $c->NEXT::uri_for(@_);

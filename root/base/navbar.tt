@@ -47,9 +47,10 @@
   [%ELSE%]
   <a href="[%c.uri_for('about')%]" title="About this site" accesskey="A">about</a> | 
   [%END%]
-  <input type="text" id="searchField" name="query" style="font-size: 10px" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
-<br/>
+  <input type="text" id="searchField" name="query" style="" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
+  <br/>
 [%IF (c.req.action=="view")%]
+
 <b class="navOn">page</b> | 
 [%ELSE%]
 <a title="The Wikilicious page" href="[%c.uri_for('view')%]">page</a> | 
@@ -71,11 +72,13 @@
 [%ELSE%]
 <a title="User Profile" href="[%c.uri_for('profile')%]">profile</a> | 
 [%END%]
+[%END%]
+[%IF c.user_exists%]
 [%IF (c.req.action=="prefs")%]
 <b class="navOn">preferences</b> 
 [%ELSE%]
 <a title="User Settings" href="[%c.uri_for('prefs')%]">preferences</a>
-[%END%]
     [% END %] 
+[% END%]
 </form>
 </div> 
