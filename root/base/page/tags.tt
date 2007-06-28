@@ -12,7 +12,7 @@
 [%ELSE%]
 <a class="tag" 
 [%END%]
-href="[%c.uri_for('.recent',tag.tag)%]">[%tag.tag%]</a> 
+href="[%c.uri_for('recent',tag.tag)%]">[%tag.tag%]</a> 
 [%END%]
 [%END%]
 [% IF others_tags && tags %]
@@ -26,7 +26,7 @@ href="[%c.uri_for('.recent',tag.tag)%]">[%tag.tag%]</a>
 [% IF user.active %]
 [<b class="add">[%c.prototype.link_to_remote('+', { 
     update => 'tags', 
-    url=> c.uri_for('.jsrpc/tag',othertag.tag), 
+    url=> c.uri_for('jsrpc/tag',othertag.tag), 
     complete=>"Fat.fade('.highlight');"
 })%]</b>]
 [%END%]
