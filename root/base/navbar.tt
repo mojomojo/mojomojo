@@ -1,26 +1,27 @@
 <div id="toplinks"><form action="[% c.uri_for('search') %]" method="get" >  
   [% IF (user) %]
-    [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR
-                                         template.name.search('^user')))%]
+    [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user')))%]
   <b class="navon">[%c.fixw(user.login)%]</b> | 
-  [%ELSE%]
-  [% IF user.active%]
+    [% ELSE %]
+      [% IF user.active%]
   <a href="[%c.uri_for(user.link)%]" title="Go to home page">[%c.fixw(user.login)%]</a> | 
-  [% ELSE %]
+      [% ELSE %]
   <a href="[%c.uri_for(user.link,'.prefs')%]" title="User Preferences">[%c.fixw(user.login)%]</a> | 
-  [% END %]
+      [% END %]
   [%END%]
-  [% ELSE %]
+<a href="[%base%]/.logout">log out</a> |
+[% ELSE %]
   <a href="[%c.uri_for('login')%]" title="Get in there" accesskey="L">log in</a> | 
-  [% END %]
+[% IF(c.pref('open_registration'))%]<a href="[%base%]/.register">register</a> |[%END%]
+[% END %]
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 
   [% ELSE %]
   <a href="[%c.uri_for('list')%]" title="Alphabetically sorted list of pages" accesskey="A">all pages</a> | 
   [% END; IF template.name =='page/recent.tt' %]
-  <b class="navOn" title="Pages sorted by when they were last changed">recently revised</b> | 
+  <b class="navOn" title="Pages sorted by when they were last changed">recent</b> | 
   [% ELSE %]
-  <a href="[%c.uri_for('recent')%]" title="Pages sorted by when they were last changed" accesskey="U">recently revised</a> | 
+  <a href="[%c.uri_for('recent')%]" title="Pages sorted by when they were last changed" accesskey="U">recent</a> | 
   [% END; IF c.req.action =='tags' %]
   <b class="navOn" title="All tags in this path">tags</b> | 
   [% ELSE %]
