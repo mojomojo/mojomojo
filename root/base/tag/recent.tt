@@ -4,12 +4,12 @@
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="categories">
- <strong>tags</strong>: <small>
+ <strong>Tags</strong>: <small>
  [% FOREACH tag IN tags.list %]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
-  <a href="[% base %][% page.path %].recent/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  <a href="[%c.uri_for('.recent', tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
   [% END %]
  [% END %]</small>
 </div>
