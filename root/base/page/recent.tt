@@ -1,17 +1,19 @@
-[% SET title = "Recent pages in " _ page.path %]
+[% SET title = "Recent pages in " _ page.path _ ( activetag ? ' tagged with ' _ activetag : '' ) %]
 [% SET now = objects.first.content.created.ymd; %]
 [% WRAPPER page/wrapper.tt title=title %]
 
 <div id="content">
 <div id="categories">
+[% IF tags.count%]
   <strong>tags</strong>: <small>
   [% WHILE (tag = tags.next) %]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
-  <a href="[% c.uri_for('recent,' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
   [% END %]
   [% END %]</small>
+[% END %]
 </div>
 <br/>
 <b>[% now %]</b>
