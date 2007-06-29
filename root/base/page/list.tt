@@ -1,4 +1,3 @@
-
 [% SET title = "All Pages in " _ page.path %]
 [% WRAPPER page/wrapper.tt title=title %]
  <div id="content">
