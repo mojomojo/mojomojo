@@ -26,7 +26,6 @@ function watch_progress(form) {
 <form action="[%c.uri_for('attachments')%]"
     enctype="multipart/form-data" 
     target="result"
-    onsubmit="watch_progress(this);"
     method="post">
 <p>Please select a file to attach to this page. To upload multiple files, put them in a zip.</p>
 <input type="file" name="file">
