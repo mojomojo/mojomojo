@@ -6,6 +6,9 @@ use warnings;
 use MojoMojo::Schema;
 use YAML;
 
+my $attrs          = {add_drop_table => 1, no_comments => 1};
+
+
 =head1 NAME
 
 MojoMojoTestSchema - Library to be used by DBIx::Class test scripts.
@@ -90,18 +93,7 @@ sub deploy_schema {
     my $self = shift;
     my $schema = shift;
 
-    if ($ENV{"MOJOMOJO_TEST_SCHEMA_SQLT_DEPLOY"}) {
-        return $schema->deploy();
-    } else {
-        open IN, "db/sqlite/mojomojo.sql";
-        my $sql;
-        { local $/ = undef; $sql = <IN>; }
-        close IN;
-        my $dbh = $schema->storage->dbh;
-        map {
-            $dbh->do($_) or die $dbh->errstr;
-        } split(/;\s*\n/, $sql);
-    }
+    return $schema->deploy();
 }
 
 =head2 populate_schema
@@ -115,139 +107,58 @@ the tables with test data.
 
 sub populate_schema {
     my $self = shift;
-    my $schema = shift;
+    my $db = shift;
 
-    $schema->storage->dbh->do("PRAGMA synchronous = OFF");
+    $db->storage->dbh->do("PRAGMA synchronous = OFF");
 
-    $schema->populate('Artist', [
-        [ qw/artistid name/ ],
-        [ 1, 'Caterwauler McCrae' ],
-        [ 2, 'Random Boy Band' ],
-        [ 3, 'We Are Goth' ],
-    ]);
+        $db->storage->ensure_connected;
+        $db->deploy( $attrs );
 
-    $schema->populate('CD', [
-        [ qw/cdid artist title year/ ],
-        [ 1, 1, "Spoonful of bees", 1999 ],
-        [ 2, 1, "Forkful of bees", 2001 ],
-        [ 3, 1, "Caterwaulin' Blues", 1997 ],
-        [ 4, 2, "Generic Manufactured Singles", 2001 ],
-        [ 5, 3, "Come Be Depressed With Us", 1998 ],
-    ]);
+        my @people = $db->populate('Person', [
+    					  [ qw/ active views photo login name email pass timezone born gender occupation industry interests movies music / ],
+    					  [ 1,0,0,'AnonymousCoward','Anonymous Coward','','','',0,'','','','','','' ],
+    					  [ 1,0,0,'admin','Enoch Root','','admin','',0,'','','','','','' ],
+    					 ]);
 
-    $schema->populate('LinerNotes', [
-        [ qw/liner_id notes/ ],
-        [ 2, "Buy Whiskey!" ],
-        [ 4, "Buy Merch!" ],
-        [ 5, "Kill Yourself!" ],
-    ]);
+        $db->populate('Preference', [
+    				 [ qw/ prefkey prefvalue / ],
+    				 [ 'name','MojoMojo' ],
+    				 [ 'admins','admin' ],
+    				]);
 
-    $schema->populate('Tag', [
-        [ qw/tagid cd tag/ ],
-        [ 1, 1, "Blue" ],
-        [ 2, 2, "Blue" ],
-        [ 3, 3, "Blue" ],
-        [ 4, 5, "Blue" ],
-        [ 5, 2, "Cheesy" ],
-        [ 6, 4, "Cheesy" ],
-        [ 7, 5, "Cheesy" ],
-        [ 8, 2, "Shiny" ],
-        [ 9, 4, "Shiny" ],
-    ]);
+        $db->populate('PageVersion', [
+    				  [ qw/page version parent parent_version name name_orig depth
+    				       content_version_first content_version_last creator status created
+    				       release_date remove_date comments/ ],
+    				  [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
+    				 ]);
 
-    $schema->populate('TwoKeys', [
-        [ qw/artist cd/ ],
-        [ 1, 1 ],
-        [ 1, 2 ],
-        [ 2, 2 ],
-    ]);
+        $db->populate('Content', [
+    			      [ qw/ page version creator created body status release_date remove_date type abstract comments 
+    				    precompiled / ],
+    			      [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
 
-    $schema->populate('FourKeys', [
-        [ qw/foo bar hello goodbye sensors/ ],
-        [ 1, 2, 3, 4, 'online' ],
-        [ 5, 4, 3, 6, 'offline' ],
-    ]);
+    This is your front page. To start administrating your wiki, please log in with
+    username admin/password admin. At that point you will be able to set up your
+    configuration. If you want to play around a little with the wiki, just create
+    a NewPage or edit this one through the edit link at the bottom.
 
-    $schema->populate('OneKey', [
-        [ qw/id artist cd/ ],
-        [ 1, 1, 1 ],
-        [ 2, 1, 2 ],
-        [ 3, 2, 2 ],
-    ]);
+    h2. Need some assistance?
 
-    $schema->populate('SelfRef', [
-        [ qw/id name/ ],
-        [ 1, 'First' ],
-        [ 2, 'Second' ],
-    ]);
+    Check out our [[Help]] section.','released','','','','','','' ],
+    			      [ 2,1,1,0,'h1. Help Index.
 
-    $schema->populate('SelfRefAlias', [
-        [ qw/self_ref alias/ ],
+    * Editing Pages
+    * Formatter Syntax.
+    * Using Tags
+    * Attachments & Photos','released','','','','','','' ],
+    			     ]);
 
-
-        [ 1, 2 ]
-    ]);
-
-    $schema->populate('ArtistUndirectedMap', [
-        [ qw/id1 id2/ ],
-        [ 1, 2 ]
-    ]);
-
-    $schema->populate('Producer', [
-        [ qw/producerid name/ ],
-        [ 1, 'Matt S Trout' ],
-        [ 2, 'Bob The Builder' ],
-        [ 3, 'Fred The Phenotype' ],
-    ]);
-
-    $schema->populate('CD_to_Producer', [
-        [ qw/cd producer/ ],
-        [ 1, 1 ],
-        [ 1, 2 ],
-        [ 1, 3 ],
-    ]);
-
-    $schema->populate('TreeLike', [
-        [ qw/id parent name/ ],
-        [ 1, 0, 'foo'  ],
-        [ 2, 1, 'bar'  ],
-        [ 3, 2, 'baz'  ],
-        [ 4, 3, 'quux' ],
-    ]);
-
-    $schema->populate('Track', [
-        [ qw/trackid cd  position title/ ],
-        [ 4, 2, 1, "Stung with Success"],
-        [ 5, 2, 2, "Stripy"],
-        [ 6, 2, 3, "Sticky Honey"],
-        [ 7, 3, 1, "Yowlin"],
-        [ 8, 3, 2, "Howlin"],
-        [ 9, 3, 3, "Fowlin"],
-        [ 10, 4, 1, "Boring Name"],
-        [ 11, 4, 2, "Boring Song"],
-        [ 12, 4, 3, "No More Ideas"],
-        [ 13, 5, 1, "Sad"],
-        [ 14, 5, 2, "Under The Weather"],
-        [ 15, 5, 3, "Suicidal"],
-        [ 16, 1, 1, "The Bees Knees"],
-        [ 17, 1, 2, "Apiary"],
-        [ 18, 1, 3, "Beehind You"],
-    ]);
-
-    $schema->populate('Event', [
-        [ qw/id starts_at created_on/ ],
-        [ 1, '2006-04-25 22:24:33', '2006-06-22 21:00:05'],
-    ]);
-
-    $schema->populate('Link', [
-        [ qw/id title/ ],
-        [ 1, 'aaa' ]
-    ]);
-
-    $schema->populate('Bookmark', [
-        [ qw/id link/ ],
-        [ 1, 1 ]
-    ]);
+        $db->populate('Page', [
+    			   [ qw/ id version parent name name_orig depth lft rgt content_version / ],
+    			   [ 1,1,undef,'/','/',0,1,4,1 ],
+    			   [ 2,1,1,'help','Help',1,2,3,1 ],
+    			  ]);
 }
 
 1;

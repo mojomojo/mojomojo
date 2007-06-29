@@ -9,7 +9,7 @@ sub req {
 }
 
 sub base {
-	$_[0]->{path} = '/';
+	$_[0]->{path} ||= '/';
 	return "http://example.com";
 }
 
@@ -90,3 +90,5 @@ $content = 'WikiWord';
 ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 0);
 is(@$new, 1);
+$_[0]->{path} = '/';
+

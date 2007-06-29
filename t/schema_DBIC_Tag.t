@@ -12,7 +12,7 @@ BEGIN {
 use lib qw(t/lib);
 use MojoMojoTestSchema;
 
-my $schema = MojoMojoTestSchema->init_schema(no_populate => 1);
+my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
 my ($page_ref) = $schema->resultset('Page')->path_pages('/');
 my $page=$page_ref->[0];
 is(scalar $page->tags,0,'no tags for root page');
