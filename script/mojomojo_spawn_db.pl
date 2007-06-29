@@ -96,7 +96,7 @@ a NewPage or edit this one through the edit link at the bottom.
 
 h2. Need some assistance?
 
-Check out our [[Help]] section.','released','','','','',1,'','' ],
+Check out our [[Help]] section.','released','','','','','','' ],
 			      [ 2,1,1,0,'h1. Help Index.
 
 * Editing Pages
