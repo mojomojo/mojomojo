@@ -85,7 +85,7 @@ else {
 				 ]);
     
     $db->populate('Content', [
-			      [ qw/ page version creator created body status release_date remove_date type abstract version comments 
+			      [ qw/ page version creator created body status release_date remove_date type abstract comments 
 				    precompiled / ],
 			      [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
 
@@ -102,7 +102,7 @@ Check out our [[Help]] section.','released','','','','',1,'','' ],
 * Editing Pages
 * Formatter Syntax.
 * Using Tags
-* Attachments & Photos','released','','','','',1,'','' ],
+* Attachments & Photos','released','','','','','','' ],
 			     ]);
     
     $db->populate('Page', [
