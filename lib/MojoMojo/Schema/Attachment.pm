@@ -6,6 +6,7 @@ use warnings;
 use base 'DBIx::Class';
 use File::MMagic;
 use FileHandle;
+use MojoMojo;
 my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
 
 

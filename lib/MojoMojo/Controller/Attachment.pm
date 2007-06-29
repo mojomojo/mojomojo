@@ -3,6 +3,8 @@ package MojoMojo::Controller::Attachment;
 use strict;
 use base 'Catalyst::Controller';
 use Archive::Zip qw(:ERROR_CODES);
+
+use MojoMojo;
 use File::MMagic;
 my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
 
