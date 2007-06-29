@@ -86,42 +86,43 @@ sub path_pages :ResultSet {
 	@path_pages = $self->search({ lft => 1 })->all;
     }
     elsif ($id) {
-    # this only works if depth is at least 1
+        # this only works if depth is at least 1
 	@path_pages = $self->path_pages_by_id( $id );
     }
     return (\@path_pages, []) if (@path_pages > 0);
-
+    
     my @proto_pages = $self->parse_path($path);
-
+    
     my $depth      = @proto_pages - 1;          # depth starts at 0
-
-
-	my @depths;
+    
+    
+    my @depths;
     for my $proto ( @proto_pages )  {
-	push @depths, -and => [ depth =>  $proto->{depth},
-	     name  =>  $proto->{name} ];
-
+	push @depths, -and => [ depth => $proto->{depth},
+                                name  => $proto->{name},
+                              ];
+        
     }
-
+    
     my @pages = $self->search({ -or => [ @depths ] },{} ); 
-
+    
     my @query_pages;
-    for (@pages ) {
+    for (@pages) {
 	$query_pages[ $_->depth ] ||= [];
 	push @{ $query_pages[ $_->depth ] }, $_;
     }
 
-    my $resolved = $self->resolve_path(
-	    path_pages    => \@path_pages,
-	    proto_pages   => \@proto_pages,
-	    query_pages   => \@query_pages,
-	    current_depth => 0,
-	    final_depth   => $depth,
-	    );
-
-# If there are any proto pages, put the original
-# page names back into the paths, so they will
-# be preserved upon page creation:
+    my $resolved = $self->
+      resolve_path(path_pages    => \@path_pages,
+                   proto_pages   => \@proto_pages,
+                   query_pages   => \@query_pages,
+                   current_depth => 0,
+                   final_depth   => $depth,
+                  );
+    
+    # If there are any proto pages, put the original
+    # page names back into the paths, so they will
+    # be preserved upon page creation:
     if (@proto_pages) {
 	my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
 	for (@proto_pages) {
@@ -131,7 +132,6 @@ sub path_pages :ResultSet {
 	}
     }
     return ( \@path_pages, \@proto_pages );
-
 } # end sub get_path
 
 =item path_pages_by_id
