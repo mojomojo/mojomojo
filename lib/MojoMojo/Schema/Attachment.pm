@@ -4,7 +4,10 @@ use strict;
 use warnings;
 
 use base 'DBIx::Class';
-use File::MimeInfo::Magic;
+use File::MMagic;
+use FileHandle;
+my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
+
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("attachment");
@@ -45,7 +48,8 @@ sub create_from_file :ResultSet {
       $self->delete();
       return undef;
   }
-  $self->contenttype( mimetype($self->get_filename.'') );
+  my $fh=FileHandle->new($self->get_filename.'');
+  $self->contenttype( $mm->checktype_filehandle($fh) );
   $self->size( -s $self->get_filename );
   $self->update();
   $self-> make_photo if ($self->contenttype =~ m|^image/|);
@@ -66,13 +70,13 @@ sub get_filename {
     return $c->path_to('uploads', $self->id);
 }
 
-=cut
-
 sub make_photo {
   my $self = shift;
   my $photo=$self->result_source->related_source('photo')->resultset->new({
-    id=>$self->id,
-    title=>$self->name});
+    id          => $self->id,
+    title       => $self->name,
+    });
+  $photo->description('Set your description');
   $photo->extract_exif($self) if $self->contenttype eq 'image/jpeg';
   $photo->insert();
 }

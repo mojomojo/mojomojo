@@ -298,11 +298,13 @@ sub tagged_descendants {
 		    'me.rgt', \'< ancestor.rgt',
 		],
 	    ],
+	    
 	    'me.id',  => \'=tag.page',
 	    'content.page'    => \'=me.id',
 	    'content.version' => \'=me.content_version',
 	    },{
-	    from     => "page as me, page as ancestor, tag, content",
+	    group_by => [('me.id')],
+        from     => "page as me, page as ancestor, tag, content",
 	    order_by => 'me.name',
 	    })->all;
     return $self->result_source->resultset->set_paths(@pages);

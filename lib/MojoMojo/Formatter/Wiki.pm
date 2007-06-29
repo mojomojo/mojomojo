@@ -91,7 +91,7 @@ sub format_content {
     $$content =~ s{
         $non_wikiword_check
         ($wikiword)
-    }{ $class->format_link($c, $1, $c->req->base.$c->stash->{page}->path) }gex;
+    }{ $class->format_link($c, $1, $c->req->base,) }gex;
 
     # Remove escapes on escaped wikiwords. The escape means
     # that this wikiword is NOT a link to a wiki page.
@@ -138,7 +138,9 @@ Format a wikiword as a link
 sub format_link {
     #FIXME: why both base and $c?
     my ($class, $c, $word, $base, $link_text) = @_;
-    die "No base for $word" unless $base;
+    $base ||= $c->req->base;
+    warn "dealing with $word";
+    $word=$c->stash->{page}->path.'/'.$word unless $word =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
     # keep the original wikiword for display, stripping leading slashes

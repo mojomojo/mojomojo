@@ -3,7 +3,9 @@ package MojoMojo::Controller::Attachment;
 use strict;
 use base 'Catalyst::Controller';
 use Archive::Zip qw(:ERROR_CODES);
-use File::MimeInfo::Magic;
+use File::MMagic;
+my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
+
 use File::Slurp;
 use Imager;
 
@@ -55,7 +57,7 @@ sub attachments : Global {
     $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
         my $upload=$c->request->upload('file');
-        if ( mimetype($upload->tempname) eq 'application/zip' ) {
+        if ( $mm->checktype_filename($upload->tempname) eq 'application/zip' ) {
             my $zip;
             $zip=Archive::Zip->new($upload->tempname);
             if ( ! $zip ) {
