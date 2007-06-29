@@ -279,6 +279,7 @@ sub tagged_descendants_by_date {
 	    'content.page'    => \'=me.id',
 	    'content.version' => \'=me.content_version',
 	    },{
+        group_by => [('me.id')],
 	    from     => "page as me, page as ancestor, tag, content",
 	    order_by => 'content.release_date DESC',
 	    });
