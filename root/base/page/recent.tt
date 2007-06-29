@@ -25,7 +25,7 @@
   <b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% c.uri_for('/', page.path)%]">[% c.expand_wikiword(page.name) %]</a>
+    <a href="[% c.uri_for('/', page.path)%]">[% page.name_orig %]</a>
     <div class="byline" style="margin-bottom: 0px">
       by [% c.wikiword(page.content.creator.link,base) %]
       at [% page.content.created.hms(":") %]
