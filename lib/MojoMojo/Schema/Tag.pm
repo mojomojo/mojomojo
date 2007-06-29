@@ -32,7 +32,7 @@ sub most_used : ResultSet {
              select   => [ 'me.tag', 'count(me.tag) as refcount' ],
              as       => [ 'tag','refcount' ],
              group_by => [ 'me.tag' ],
-	     order_by => [ 'refcount' ],
+	     order_by => [ 'refcount desc' ],
     });
 }
 
