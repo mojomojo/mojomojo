@@ -81,6 +81,7 @@ sub attachments : Global {
           $c->model("DBIC::Attachment")->create_from_file ( $page, $file, 
               sub { 
                   my $file=shift; 
+                  warn "saving to $file";
                   $upload->link_to($file) || $upload->copy_to($file);
               } );
 
@@ -89,7 +90,7 @@ sub attachments : Global {
               $c->stash->{message}= "Can't open $file for writing.";
           }
        }
-	$c->stash->{template} = 'attachments/complete.tt' 
+    $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
 	    unless $c->stash->{template} eq 'message.tt';
     }
 }
@@ -170,8 +171,7 @@ sub thumb : Chained('attachment') Args(0) {
         $c->path_to('uploads',$att->id).'.thumb')));
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
-        "Content-Disposition" => "inline; filename=" . $att->name 
-    );
+        "Content-Disposition" => "inline; filename=" . $att->name );
 }
 
 =item  inline (private);
@@ -182,20 +182,17 @@ show inline attachment
 
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
-    eval {
-    $c->stash->{att}->photo->make_inline
+    $c->stash->{att}->make_inline
       unless -f $c->path_to('uploads',$c->stash->{att}->id . '.inline');
     $c->res->output(
         scalar( read_file( 
            $c->path_to('uploads',$c->stash->{att}->id) . '.inline')
      ));
-    };
     $c->detach('default') if $@ =~ m/^Could not open/;
     $c->res->headers->header( 'content-type',
         $c->stash->{att}->contenttype );
     $c->res->headers->header(
-        "Content-Disposition" => "inline; filename="
-        . $c->stash->{att}->name );
+        "Content-Disposition" => "inline; filename=". $c->stash->{att}->name );
 }
 
 

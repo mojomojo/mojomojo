@@ -18,9 +18,9 @@ __PACKAGE__->add_columns("id",
   "name",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "size",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef },
   "contenttype",
-    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+    { data_type => "VARCHAR", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to("page", "Page", { id => "page" });
@@ -40,14 +40,13 @@ sub create_from_file :ResultSet {
                  { name => $filename,
                  page => $page->id } );
   die "Could not attach $filename to $page"  unless $self;
-  &$storage_callback($self->filename);
-  unless  (-f $self->filename) {
-      warn $self->filename." not found";
+  &$storage_callback($self->get_filename);
+  unless  (-f $self->get_filename) {
       $self->delete();
       return undef;
   }
-  $self->contenttype( mimetype($self->filename) );
-  $self->size( -s $self->filename );
+  $self->contenttype( mimetype($self->get_filename.'') );
+  $self->size( -s $self->get_filename );
   $self->update();
   $self-> make_photo if ($self->contenttype =~ m|^image/|);
   return $self;
@@ -58,7 +57,9 @@ sub create_from_file :ResultSet {
 Full path to this attachment. Can only be called from within an
 active mojomojo context.
 
-sub filename {
+=cut
+
+sub get_filename {
     my $self=shift;
     my $c=MojoMojo->context;
     return "uploads/" . $self->id unless ref $c;
