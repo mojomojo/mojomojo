@@ -225,8 +225,8 @@ recently changed nodes in this namespace.
 
 sub recent : Global {
     my ( $self, $c, $tag ) = @_;
+    $c->detach('/tag/recent',[$tag]) if $tag;
     $c->stash->{tags}     = $c->model("DBIC::Tag")->most_used;
-    $c->detach('/tag/recent') if $tag;
     my $page=$c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{pages}    = [ $page->descendants_by_date ];
