@@ -26,35 +26,13 @@ may have further dependancies which also need to be downloaded.
 Changing the first 0 to a 1 will result in extra debugging information from
 the Catalyst engine.
 
-3a) The easiest option for a database is SQLite The database is typically
-located at db/sqlite/mojomojo.db. It can be recreated either by running:
-    ./db/sqlite/mojomojo_create_db.pl <options>
-or using the sqlite3 CLI to import db/sqlite/mojomojo.sql
-or using the one that's already bundled with mojomojo, if you use sqlite3.
-
-b) The alternative (and generally better) is to use MySQL.
-(i) Create a database, for instance:
-    mysql -u root -p < `CREATE database mojo_database`
-(ii) Create a user and grant appropriate permissons, for instance:
-    mysql -u root -p < `GRANT ALL ON mojo_database.* to mojo_user@localhost IDENTIFIED BY 'password'`;
-(iii) Edit mojomojo.yml to contain your database configuration:
-    Model::DBIC:
-        connect_info:
-            - dbi:mysql:database=mojo_database;host=dbhost
-            - username
-            - password
-(iv) Import the table structure, by running the following script:
+3a) 
+(i)  Make sure your config file has a valid dsn for your database (You can use SQLite, mysql or Pg )
+(ii) Import the table structure, by running the following script:
     ./script/mojomojo_spawn_db.pl
-Replacing mojo_database, mojo_user and password in @people as needed.
 
-or
-
-c) Another option is to use Oracle. The database schema which needs to be
-imported can be found at db/oracle/mojomojo.sql and an appropriate user will
-need to be created. (Note: This schema is probably not up to date at the time
-of writing.)
-
-4.a) Catalyst includes a test server which can be started using:
+4.
+a) Catalyst includes a test server which can be started using:
     ./scripts/mojomojo_server -p 3000
 where 3000 is the port number and the default if no port is specified.
 
