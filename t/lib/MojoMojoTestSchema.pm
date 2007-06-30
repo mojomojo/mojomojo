@@ -60,7 +60,7 @@ sub init_schema {
     my $dbuser = $ENV{"MOJOMOJO_TEST_SCHEMA_DBUSER"} || '';
     my $dbpass = $ENV{"MOJOMOJO_TEST_SCHEMA_DBPASS"} || '';
 
-    my $schema = MojoMojo::Schema->compose_connection('MojoMojoTestSchema' => $dsn, $dbuser, $dbpass);
+    my $schema = MojoMojo::Schema->connect( $dsn, $dbuser, $dbpass);
     if ( !$args{no_deploy} ) {
         __PACKAGE__->deploy_schema( $schema );
         __PACKAGE__->populate_schema( $schema ) if( !$args{no_populate} );

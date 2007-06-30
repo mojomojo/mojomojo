@@ -55,7 +55,7 @@ use Test::More;
 
 plan tests => 9;
 
-my ($content,$exist);
+my ($content,$exist,$new);
 
 $content = '[[ExistingWord]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
@@ -82,7 +82,7 @@ MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
 is($content, '<a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Word</a> ');
 
 $content = 'ExistingWord';
-my ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+ ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 1);
 is(@$new, 0);
 
