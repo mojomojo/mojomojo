@@ -89,7 +89,7 @@ sub prefs : Global {
     $c->stash->{page_user}=$c->model("DBIC::Person")->get_user(
         $proto[0]->{name} || $c->stash->{page}->name_orig 
     );
-    unless ($c->stash->{page_user} && (
+    unless ($c->stash->{page_user} && $c->stash->{user} && (
         $c->stash->{page_user}->id eq $c->stash->{user}->id ||
         $c->stash->{user}->is_admin())) {
       $c->stash->{message}='Cannot find that user.';
