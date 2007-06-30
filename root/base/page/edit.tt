@@ -44,12 +44,7 @@
     [%PROCESS toolbar.tt%]
     <br/>
     
-    <textarea id="body" name="body">
-[% # HTML sucks here %]
-[%- FILTER html -%]
-[% content.body||c.req.params.body %]
-[%- END -%]
-    </textarea>
+    <textarea id="body" name="body">[%- content.body || c.req.params.body || "" | html -%]</textarea>
 
     [%c.prototype.lazy_observe_field ( 'body', {
     url       => c.uri_for('jsrpc','render'),
