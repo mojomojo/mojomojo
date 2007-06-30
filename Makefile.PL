@@ -33,7 +33,7 @@ requires (
         'Data::Page'                                    => '2.00',
         'DateTime'                                      => '0.28',
         'DBD::SQLite'                                   => '1.08',
-        'File::MimeInfo'                                => '0.11',
+        'File::MMagic'                                  => '1.27',
         'File::Slurp'                                   => '9999.07',
         'HTML::Strip'                                   => '1.04',
         'HTML::Scrubber'                                => 0,
@@ -43,13 +43,13 @@ requires (
         'IO::Scalar'                                    => 0,
         'LWP::Simple'                                   => 0,
         'Pod::Simple::HTML'                             => '3.01',
-	'String::Diff'					=> 0,
+	    'String::Diff'				                	=> 0,
         'Text::Context'                                 => '3.5',
         'URI'                                           => '1.35',
         'XML::Clean'                                    => 0,
         'YAML'                                          => '0.36',
         'URI::Fetch'                                    => 0,
-        'DBIx::Class'                                   => '0.07002',
+        'DBIx::Class'                                   => '0.08',
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
