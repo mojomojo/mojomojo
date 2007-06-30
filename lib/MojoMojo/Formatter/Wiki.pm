@@ -139,7 +139,6 @@ sub format_link {
     #FIXME: why both base and $c?
     my ($class, $c, $word, $base, $link_text) = @_;
     $base ||= $c->req->base;
-    warn "dealing with $word";
     $word=$c->stash->{page}->path.'/'.$word unless $word =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
@@ -173,7 +172,7 @@ sub format_link {
     # use the normalized path string returned by path_pages:
     my ($path_pages, $proto_pages) = 
 	$c->model('DBIC::Page')->path_pages( $word );
-if (@$proto_pages) {
+if (defined $proto_pages && @$proto_pages) {
     my $proto_page = pop @$proto_pages;
     $url .= $proto_page->{path};
 } else {
@@ -219,12 +218,12 @@ sub find_links {
             my $link = $1;
 	   # convert relative paths to absolute paths
 	   if ($link !~ m|^/|) {
-	       $link = URI->new_abs( $link, $page->path."/" );
+	       $link = URI->new_abs( $link, ($page->path||'')."/" );
 	   }
 	   # use the normalized path string returned by path_pages:
 	   my ($path_pages, $proto_pages) = 
 	       $page->result_source->resultset->path_pages( $link );
-	   if (@$proto_pages) {
+	   if (defined $proto_pages && @$proto_pages) {
 	       push @wanted_pages, pop @$proto_pages;
 	   } else {
 	       push @linked_pages, pop @$path_pages;

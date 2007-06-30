@@ -4,7 +4,7 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/-Debug              Authentication
+use Catalyst qw/            Authentication
 		Cache::FileCache    DefaultEnd
 		Email	            FillInForm	    
 		FormValidator	    Prototype
@@ -201,6 +201,7 @@ sub uri_for {
 Marcus Ramberg C<marcus@thefeed.no>
 David Naughton C<naughton@umn.edu>
 Andy Grundman C<andy@hybridized.org>
+Jonathan Rockway C<jrockway@jrockway.us>
 
 =head1 LICENSE
 
