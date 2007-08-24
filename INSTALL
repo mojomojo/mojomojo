@@ -20,18 +20,21 @@ if this is the case then you should run the following command as root:
 and follow the on-screen instructions. This may take some time as dependencies
 may have further dependancies which also need to be downloaded.
 
-2. Tests be can run using the following command:
+3
+a) 
+(i)  Make sure your config file has a valid dsn for your database (You can use SQLite, mysql or Pg - sqlite by default)
+(ii) Import the table structure, by running the following script:
+    ./script/mojomojo_spawn_db.pl
+
+
+4. Tests be can run using the following command:
     CATALYST_DEBUG=0 TEST_POD=0 prove --lib lib/ t/
 
 Changing the first 0 to a 1 will result in extra debugging information from
 the Catalyst engine.
 
-3a) 
-(i)  Make sure your config file has a valid dsn for your database (You can use SQLite, mysql or Pg )
-(ii) Import the table structure, by running the following script:
-    ./script/mojomojo_spawn_db.pl
 
-4.
+5.
 a) Catalyst includes a test server which can be started using:
     ./scripts/mojomojo_server -p 3000
 where 3000 is the port number and the default if no port is specified.
@@ -44,7 +47,7 @@ See
 http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
 for further information.
 
-5. mojomojo.yml is the main configuration file and is in YAML format.
+6. mojomojo.yml is the main configuration file and is in YAML format.
 
 Unless using SQLite as your database, you will need to set appropriate fields
 under
