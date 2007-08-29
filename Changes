@@ -1,3 +1,7 @@
-0.1  Sun Apr 24 12:36:14 2005
-       - Initial Release.
+0.999001  Sun Apr 24 12:36:14 2005
+       - Initial Release. There are bugs, but the basic functionality works, 
+         and the test suite passes all tests here. Please to be contributing
+         tests for bugs you want fixed.
+         
+         Once we fix it all, we'll consider it 1.0
 
