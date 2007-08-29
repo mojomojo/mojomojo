@@ -7,9 +7,13 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
 use MojoMojo::Schema;
-use YAML qw(LoadFile);
+use Config::General;
 
-my $config = LoadFile("$Bin/../mojomojo.yml");
+
+
+
+my $cfg = Config::General->new("$Bin/../mojomojo.conf");
+my $config =  { $cfg->getall };
 
 my ($dsn, $user, $pass) = @ARGV;
 eval {

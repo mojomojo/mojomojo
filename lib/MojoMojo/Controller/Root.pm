@@ -43,7 +43,7 @@ show a debug screen.
 
 =cut
 
-sub end : Private {
+sub end : ActionClass('RenderView') {
     my ( $self ) = shift;
     my ( $c ) = @_;
    if ($c->debug && $c->req->params->{dump_info}) {

@@ -5,10 +5,9 @@ use utf8;
 use Path::Class 'file';
 
 use Catalyst qw/            Authentication
-		Cache::FileCache    DefaultEnd
-		Email	            FillInForm	    
-		FormValidator	    Prototype
-		Session		    Session::Store::File
+		Cache::FileCache    Email
+	    FillInForm	        FormValidator	    
+		Session		        Session::Store::File
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
 		UploadProgress	    Unicode 
