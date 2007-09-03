@@ -124,6 +124,7 @@ sub populate_schema {
     				 [ qw/ prefkey prefvalue / ],
     				 [ 'name','MojoMojo' ],
     				 [ 'admins','admin' ],
+    				 [ 'main_forsmatter','MojoMojo::Formatter::Textile' ],
     				]);
 
         $db->populate('PageVersion', [

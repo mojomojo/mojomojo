@@ -1,67 +1,53 @@
 INSTALLING MOJOMOJO
--------------------
+  Step 1
+    Install MojoMojo either using the cpan shell like this:
 
-http://dev.catalyst.perl.org/wiki/MojoMojo
+        cpan MojoMojo
 
+    or by downloading the tarball from http://search.cpan.org/dist/MojoMojo
+    and running perl Makefile.PL on it manually.
 
-1. Download the source (which you're probably already done, given you're
-reading this file!)
+  Step 2
+    mojomojo.conf is the main configuration file and is in Config::General
+    format.
 
-2. Run the following command while in the directory containing the MojoMojo
-files:
-    perl Makefile.PL
-(Module::AutoInstall should already be installed for this to work.)
-NB. This requirement will go away once we make a dist of MojoMojo.
+    First make sure your config file has a valid dsn for your database (You
+    can use SQLite, mysql or Pg - sqlite by default). The setting you change
+    is connect_info in the Model::DBIC Block.
 
-This will check your system to make sure that all the appropriate dependencies
-are installed, if they aren't then make files will be created to install them,
-if this is the case then you should run the following command as root:
-    make
-and follow the on-screen instructions. This may take some time as dependencies
-may have further dependancies which also need to be downloaded.
+    For instance, for MySQL: -
+    dbi:mysql:database=mojo_database;host=localhost, mojo_user, password or
+    for SQLite: - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
 
-3
-a) 
-(i)  Make sure your config file has a valid dsn for your database (You can use SQLite, mysql or Pg - sqlite by default)
-(ii) Import the table structure, by running the following script:
-    ./script/mojomojo_spawn_db.pl
+    Once the db is setup, import the table structure, by running the
+    following script:
 
+        ./script/mojomojo_spawn_db.pl
 
-4. Tests be can run using the following command:
-    CATALYST_DEBUG=0 TEST_POD=0 prove --lib lib/ t/
+  Step 3
+    Do one of these:
 
-Changing the first 0 to a 1 will result in extra debugging information from
-the Catalyst engine.
+    Catalyst includes a test server which can be started using:
+            ./script/mojomojo_server -p 3000
 
+        where 3000 is the port number and the default if no port is
+        specified. Note that if you install it through the cpan shell,
+        mojomojo_server will be found in your bin directory. or
+        alternatively:
 
-5.
-a) Catalyst includes a test server which can be started using:
-    ./scripts/mojomojo_server -p 3000
-where 3000 is the port number and the default if no port is specified.
+    Set up Apache using either mod_perl or FastCGI.
+        See
+        http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.po
+        d#Using_FastCGI for further information on FastCGI, or you can look
+        at Catalyst::Engine::Apache for info on setting up Catalyst apps in
+        Apache.
 
-or
+    If your server is connected to a http proxy you may need to add the
+    following line to the main config block:
 
-b) Set up Apache using either mod_perl or FastCGI.
+        using_frontend_proxy 1
 
-See
-http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
-for further information.
+  Step 4
+    There is no step four. Have fun exploring MojoMojo, the default
+    login/pass is admin/admin.
 
-6. mojomojo.yml is the main configuration file and is in YAML format.
-
-Unless using SQLite as your database, you will need to set appropriate fields
-under
-Model::DBIC:
-    connect_info:
-
-For instance, for MySQL:
-        - dbi:mysql:database=mojo_database;host=localhost, mojo_user, password
-or for SQLite:
-        - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
-
-If your server is connected to a http proxy you may need to add the following
-line:
-using_frontend_proxy: 1
-
-Note that you should use spaces for indenting when using YAML, rather than
-tabs.

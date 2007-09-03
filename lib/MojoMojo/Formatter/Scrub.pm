@@ -1,8 +1,9 @@
 package MojoMojo::Formatter::Scrub;
 
+use base qw/MojoMojo::Formatter/;
+
 use HTML::Scrubber;
 use XML::Clean;
-
 
 =head1 NAME
 

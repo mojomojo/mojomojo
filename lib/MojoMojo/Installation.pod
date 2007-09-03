@@ -1,18 +1,60 @@
-=head1 Installation.
+=head1 INSTALLING MOJOMOJO
 
-MojoMojo should just run out of the tarbar. After you've extracted it
-somewhere, you can start it using the stand alone server like this.
+=head2 Step 1
 
-  ./script/mojomojo_server.pl [-p <num>]
+Install MojoMojo either using the cpan shell like this:
 
-Where -p is an optional parameter to specify the port number. The default
-is 3000. This is a normal catalyst development server, and takes a few other
-options as well, run it with C<--help> to get more information.
+    cpan MojoMojo 
+ 
+or by downloading the tarball from http://search.cpan.org/dist/MojoMojo and
+running perl Makefile.PL on it manually.
 
-By default, MojoMojo is set up to run against a SQLite database, with which
-it is shipped. There is also a mysql schema in the db/mysql/ directory, to
-use mojomojo with it, change the connect_info setting in the mojomojo.yml 
-configuration file. This file also contains some other interesting config
-options.
+=head2 Step 2
 
-If you want, you can 
+mojomojo.conf is the main configuration file and is in Config::General format.
+
+First make sure your config file has a valid dsn for your database (You can use 
+SQLite, mysql or Pg - sqlite by default). The setting you change is connect_info
+in the Model::DBIC Block.
+
+For instance, for MySQL:
+        - dbi:mysql:database=mojo_database;host=localhost, mojo_user, password
+or for SQLite:
+        - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
+
+Once the db is setup, import the table structure, by running the following script:
+
+    ./script/mojomojo_spawn_db.pl
+
+=head2 Step 3
+
+Do one of these:
+
+=over 4
+
+=item  Catalyst includes a test server which can be started using:
+
+    ./script/mojomojo_server -p 3000
+
+where 3000 is the port number and the default if no port is specified. Note
+that if you install it through the cpan shell, mojomojo_server will be found
+in your bin directory. or alternatively:
+
+=item Set up Apache using either mod_perl or FastCGI.
+
+See
+http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
+for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache> 
+for info on setting up Catalyst apps in Apache.
+
+=back
+
+If your server is connected to a http proxy you may need to add the following
+line to the main config block:
+
+    using_frontend_proxy 1
+
+=head2 Step 4
+
+There is no step four. Have fun exploring MojoMojo, the default login/pass is
+admin/admin.

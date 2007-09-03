@@ -1,5 +1,7 @@
 package MojoMojo::Formatter::Include;
 
+use base qw/MojoMojo::Formatter/;
+
 use LWP::Simple;
 use URI::Fetch;
 

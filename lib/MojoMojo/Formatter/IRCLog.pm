@@ -1,5 +1,8 @@
 package MojoMojo::Formatter::IRCLog;
 
+use base qw/MojoMojo::Formatter/;
+
+
 =head1 NAME
 
 MojoMojo::Formatter::IRCLog - format part of content as an IRC log

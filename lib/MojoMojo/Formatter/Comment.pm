@@ -1,5 +1,7 @@
 package MojoMojo::Formatter::Comment;
 
+use base qw/MojoMojo::Formatter/;
+
 =head1 NAME
 
 MojoMojo::Formatter::Comment - Include comments on your page.

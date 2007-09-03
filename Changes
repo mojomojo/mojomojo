@@ -1,4 +1,12 @@
-0.999001  Sun Apr 24 12:36:14 2005
+        - Add Formatter Base Class
+        - Add support for different Primary Formatters
+        - Update default to be Path, rather than Private
+        - Fix tests is t/c/
+        - More documentation
+        - Updated Installation instructions. lib/MojoMojo/Installation.pod is 
+          now the master.
+
+0.999001  2007-08-29 16:29:00
        - Initial Release. There are bugs, but the basic functionality works, 
          and the test suite passes all tests here. Please to be contributing
          tests for bugs you want fixed.

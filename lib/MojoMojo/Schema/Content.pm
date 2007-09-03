@@ -142,14 +142,15 @@ Return content after being run through MojoMojo::Formatter::* ,
 =cut
 
 sub format_content : ResultSet {
+    # FIXME: This thing should use accept-context and stop fucking around with $c everywhere
     my ( $self, $c, $content,$page ) = @_;
     $c       ||= MojoMojo->instance();
-    #warn "Starting formatting";
     MojoMojo->call_plugins( "format_content", \$content, $c, $page) 
 	if ($content);
-    #warn "Done formatting";
     return $content;
 }
+
+
 sub formatted {
     my ( $self, $c) = @_;
     my $result=$self->result_source->resultset->format_content($c,$self->body,$self);

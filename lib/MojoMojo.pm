@@ -33,12 +33,17 @@ MojoMojo->setup();
 
 =head1 NAME
 
-MojoMojo - not your daddy`s wiki.
+MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 SYNOPSIS
+    
+  # Set up database (be sure to edit mojomojo.conf first)
+  
+  ./script/mojomojo_spawn_db.pl
 
-  # on the command line
-  ./bin/server.pl
+  # Standalone mode
+
+  ./bin/mojomo_server.pl
 
   # In apache conf
   <Location /mojomojo>
@@ -48,16 +53,18 @@ MojoMojo - not your daddy`s wiki.
 
 =head1 DESCRIPTION
 
-Mojomojo is a Wiki-based community software,
-powered by Catalyst.
+Mojomojo is a sort of content managment system, borrowing many concepts from
+wikis and blogs. It allows you to maintain a full tree-structure of pages, 
+and to interlink them in various ways. It has full version support, so you can
+always go back to a previous version and see what's changed with a easy ajax-
+based diff system. There are also a bunch of other features like a live AJAX
+preview of editing, and RSS feeds for every wiki page.
 
 =head1 METHODS
 
-=over 4
+=head2 expand_wikiword wikiword
 
-=item expand_wikiword wikiword
-
-Add spaces to wiki words as appropriate
+Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
 
 =cut
 
@@ -66,7 +73,7 @@ sub expand_wikiword {
     return MojoMojo::Formatter::Wiki->expand_wikiword( @_ );
 }
 
-=item  wikiword wikiword base
+=head2 wikiword wikiword base
 
 Format a wikiword as a link or as a wanted page, as appropriate.
 
@@ -76,7 +83,7 @@ sub wikiword {
     return MojoMojo::Formatter::Wiki->format_link( @_ );
 }
 
-=item pref key [value]
+=head2 pref key [value]
 
 Find or create a preference key, update it if you pass a value
 then return the current setting.
@@ -98,7 +105,7 @@ sub pref {
 }
 
 
-=item fixw word
+=head2 fixw word
 
 Clean up explicit wiki words.
 
@@ -113,11 +120,10 @@ sub fixw {
 
 1;
 
-=back
 
 =head2 OVERRIDDEN METHODS
 
-=over 4
+=head2
 
 =item prepare_path
 
@@ -153,7 +159,7 @@ sub prepare_path {
     }
 }
 
-=item  base_uri 
+=head2 base_uri 
 
 Return the base as an URI object.
 
@@ -165,7 +171,7 @@ sub base_uri {
 }
 
 
-=item unicode 
+=head2 unicode 
 
 format for unicode template use.
 
@@ -191,9 +197,6 @@ sub uri_for {
 	}
     $c->NEXT::uri_for(@_);
 }
-
-
-=back
 
 =head1 AUTHORS
 

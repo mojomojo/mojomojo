@@ -1,5 +1,7 @@
 package MojoMojo::Formatter::Wiki;
 
+use base qw/MojoMojo::Formatter/;
+
 use URI;
 
 =head1 NAME

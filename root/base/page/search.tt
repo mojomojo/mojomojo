@@ -43,7 +43,7 @@ of MojoMojo
 [%END%]
 </ul>
 
-[% IF pager.total_entries > pager.entries_per_page %]
+[% IF pager && pager.total_entries > pager.entries_per_page %]
     <div class="pager">
         <ul>
             <li>Result Page:</li>

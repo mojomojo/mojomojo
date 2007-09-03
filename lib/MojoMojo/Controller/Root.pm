@@ -27,8 +27,9 @@ default action - serve the home node
 
 =cut
 
-sub default : Private {
+sub default : Path {
     my ( $self, $c )      = @_;
+    $c->res->status(404);
     $c->stash->{message}  = "Couldn't find that page, Jimmy ".
     '('.$c->stash->{pre_hacked_uri}.')';
     ;

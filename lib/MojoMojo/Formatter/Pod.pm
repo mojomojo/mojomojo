@@ -1,5 +1,6 @@
 package MojoMojo::Formatter::Pod;
 
+use base qw/MojoMojo::Formatter/;
 
 =head1 NAME
 
