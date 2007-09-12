@@ -157,9 +157,10 @@ sub format_link {
 
 
     # convert relative paths to absolute paths
+
     if($c->stash->{page} &&
         # drop spaces
-        ref $c->stash->{page} eq 'MojoMojo::Schema::Page' &&
+        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' &&
         $word !~ m|^/|) {
         $word = URI->new_abs( $word, $c->stash->{page}->path."/" );
     } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {

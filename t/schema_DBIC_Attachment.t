@@ -14,7 +14,6 @@ use MojoMojoTestSchema;
 
 my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
 
-$schema->magic_file('magic');
 $schema->attachment_dir('t/var/upload');
 
 my ($path_pages, $proto_pages) = $schema->resultset('Page')->path_pages('/');

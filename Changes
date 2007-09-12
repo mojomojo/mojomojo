@@ -1,3 +1,7 @@
+        - Set up default page for admin
+        
+0.999002  2007-09-12 23:08:00
+        - Fixed relative linking ([[../Sibling]])/
         - Cleaned up attachments.
         - Wrote database tests for attachments
         - Add Formatter Base Class

@@ -14,10 +14,16 @@ function toggleChanges(changeurl) {
       var req=new Ajax.Request( changeurl, {
       onComplete: function() {
 	$('diff').innerHTML=req.transport.responseText;
-        Element.toggle('changes','current','show_changes','hide_changes');
+        Element.toggle('changes');
+        Element.toggle('current');
+        Element.toggle('show_changes');
+        Element.toggle('hide_changes');
       }});
   } else {
-      Element.toggle('changes','current','show_changes','hide_changes');
+      Element.toggle('changes');
+      Element.toggle('current');
+      Element.toggle('show_changes');
+      Element.toggle('hide_changes');
   }
 }
 

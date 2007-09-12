@@ -6,7 +6,7 @@ BEGIN {
     eval "use DBD::SQLite";
     plan $@
         ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 8 );
+        : ( tests => 10 );
 }
 
 use lib qw(t/lib);
@@ -41,3 +41,7 @@ is(scalar @links_from, 1, '1 link from root page');
 isa_ok($links_from[0], 'MojoMojo::Schema::Link', 'Object of correct type');
 is(scalar @wantedpages, 2, '2 wanted pages from root page');
 isa_ok($wantedpages[0], 'MojoMojo::Schema::WantedPage', 'Object of correct type');
+# Stored links does not grow
+$root_page->content->store_links();
+is(scalar @links_from, 1, '1 link from root page');
+is(scalar @wantedpages, 2, '2 wanted pages from root page');

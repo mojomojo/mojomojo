@@ -49,37 +49,44 @@ $schema->populate('Preference', [
                                 ]);
 
 $schema->populate('PageVersion', [
-                                  [ qw/page version parent parent_version name name_orig depth
-                                       content_version_first content_version_last creator status created
-                                       release_date remove_date comments/ ],
-                                  [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
-                                 ]);
+    				  [ qw/page version parent parent_version name name_orig depth
+    				       content_version_first content_version_last creator status created
+    				       release_date remove_date comments/ ],
+         				  [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
+        				  [ 2,1,1,undef,'help','Help',0,1,1, $people[1]->id,'',0,'','','' ],
+        				  [ 3,1,1,undef,'admin','Admin',0,1,1, $people[1]->id,'',0,'','','' ],
+    				 ]);
 
 $schema->populate('Content', [
-                              [ qw/ page version creator created body status release_date remove_date type abstract comments 
-                                    precompiled / ],
-                              [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
+    			      [ qw/ page version creator created body status release_date remove_date type abstract comments 
+    				    precompiled / ],
+    			      [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
 
-This is your front page. To start administrating your wiki, please log in with
-username admin/password admin. At that point you will be able to set up your
-configuration. If you want to play around a little with the wiki, just create
-a NewPage or edit this one through the edit link at the bottom.
+    This is your front page. To start administrating your wiki, please log in with
+    username admin/password admin. At that point you will be able to set up your
+    configuration. If you want to play around a little with the wiki, just create
+    a NewPage or edit this one through the edit link at the bottom.
 
-h2. Need some assistance?
+    h2. Need some assistance?
 
-Check out our [[Help]] section.','released','','','','','','' ],
-			      [ 2,1,1,0,'h1. Help Index.
+    Check out our [[Help]] section.','released','','','','','','' ],
+    			      [ 2,1,$people[1]->id,0,'h1. Help Index.
 
-* Editing Pages
-* Formatter Syntax.
-* Using Tags
-* Attachments & Photos','released','','','','','','' ],
-                         ]);
+    * Editing Pages
+    * Formatter Syntax.
+    * Using Tags
+    * Attachments & Photos','released','','','','','','' ],
+   			      [ 3,1,$people[1]->id,0,'h1. Admin User.
 
-$schema->populate('Page', [                       [ qw/ id version parent name name_orig depth lft rgt content_version / ],
-                       [ 1,1,undef,'/','/',0,1,4,1 ],
-                       [ 2,1,1,'help','Help',1,2,3,1 ],
-                      ]);
+This is the default home for the admin user. You can change this text by pressing the _Edit_ link at the bottom.','','','','','','' ],
+    			     ]);
+
+$schema->populate('Page', [
+    			   [ qw/ id version parent name name_orig depth lft rgt content_version / ],
+    			   [ 1,1,undef,'/','/',0,1,4,1 ],
+    			   [ 2,1,1,'help','Help',1,2,3,1 ],
+    			   [ 3,1,1,'admin','Admin',1,2,3,1 ],
+    			  ]);
 
   
 print "Success!\n";

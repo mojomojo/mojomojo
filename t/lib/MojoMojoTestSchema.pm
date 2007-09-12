@@ -131,7 +131,9 @@ sub populate_schema {
     				  [ qw/page version parent parent_version name name_orig depth
     				       content_version_first content_version_last creator status created
     				       release_date remove_date comments/ ],
-    				  [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
+         				  [ 1,1,undef,undef,'/','/',0,1,1, $people[1]->id,'',0,'','','' ],
+        				  [ 2,1,1,undef,'help','Help',0,1,1, $people[1]->id,'',0,'','','' ],
+        				  [ 3,1,1,undef,'admin','Admin',0,1,1, $people[1]->id,'',0,'','','' ],
     				 ]);
 
         $db->populate('Content', [
@@ -147,18 +149,22 @@ sub populate_schema {
     h2. Need some assistance?
 
     Check out our [[Help]] section.','released','','','','','','' ],
-    			      [ 2,1,1,0,'h1. Help Index.
+    			      [ 2,1,$people[1]->id,0,'h1. Help Index.
 
     * Editing Pages
     * Formatter Syntax.
     * Using Tags
     * Attachments & Photos','released','','','','','','' ],
+   			      [ 3,1,$people[1]->id,0,'h1. Admin User.
+
+This is the default home for the admin user. You can change this text by pressing the _Edit_ link at the bottom.','','','','','','' ],
     			     ]);
 
         $db->populate('Page', [
     			   [ qw/ id version parent name name_orig depth lft rgt content_version / ],
     			   [ 1,1,undef,'/','/',0,1,4,1 ],
     			   [ 2,1,1,'help','Help',1,2,3,1 ],
+    			   [ 3,1,1,'admin','Admin',1,2,3,1 ],
     			  ]);
 }
 
