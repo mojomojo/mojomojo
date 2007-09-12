@@ -20,7 +20,7 @@
 [% IF prev %]
 <a href="[%c.uri_for('p')%][%IF tag%]_by_tag/[%tag%][%END%]/[%prev.id%]#nav">&lt;</a>
 [%END%]
-<a href="#" onClick="toggleInfo();">(i)</a>
+<a href="#" onclick="Element.toggle('hidden_info'); return false">(i)</a>
 <div id="hidden_info" class="framedpopup">
 [%PROCESS gallery/photo_info.tt%]
 </div>

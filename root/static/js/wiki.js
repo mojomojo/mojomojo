@@ -5,20 +5,8 @@ function cleanAuthorName(author) {
 }
 
 function toggleInfo() {
-    //var item=$('hidden_info');
-    Element.toggle('hidden_info');
+    Element.toggle($('hidden_info'));
     return false;
-    /* if (state) {
-var state=0;
-    state=!state;
-        item.style.display='block'; 
-        item.style.opacity = 0.99999;
-        item.style.filter = "alpha(opacity:"+100+")";
-	
-    } else {
-        new Effect2.Fade('hidden_info',{duration:0.3})
-    }
-    */
 }
 
 function toggleChanges(changeurl) {

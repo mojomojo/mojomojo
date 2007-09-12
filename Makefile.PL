@@ -39,6 +39,7 @@ requires (
         'HTML::Scrubber'                                => 0,
         'HTML::TagCloud'                                => 0,
         'Image::ExifTool'                               => 0,
+        'Image::Math::Constrain'                        => 0,    
         'Imager'                                        => 0,
         'IO::Scalar'                                    => 0,
         'LWP::Simple'                                   => 0,

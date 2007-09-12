@@ -19,9 +19,10 @@
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
  <h3 class="navigation" id="previewHeading">
  Preview | 
- <a href="#" onclick="javascript:toggleInfo();return false;">Syntax</a>
+ <a href="#" onclick="Element.toggle('hidden_info');return false;">Syntax</a>
  </h3>
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
+<script>Element.toggle('hidden_info');</script>
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
   [% page.content.formatted(c) %] 

@@ -1,3 +1,5 @@
+        - Cleaned up attachments.
+        - Wrote database tests for attachments
         - Add Formatter Base Class
         - Add support for different Primary Formatters
         - Update default to be Path, rather than Private

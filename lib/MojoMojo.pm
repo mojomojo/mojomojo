@@ -31,6 +31,9 @@ MojoMojo->config->{authentication}{dbic} = {
 
 MojoMojo->setup();
 
+MojoMojo->model('DBIC::Attachment')->result_source->schema->magic_file(MojoMojo->path_to('magic').'');
+MojoMojo->model('DBIC::Attachment')->result_source->schema->attachment_dir(MojoMojo->path_to('uploads').'');
+
 =head1 NAME
 
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.

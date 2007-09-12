@@ -10,11 +10,13 @@ use Image::ExifTool;
 my $exif=Image::ExifTool->new();
 
 __PACKAGE__->load_components("PK::Auto", 'Ordered',"Core");
-__PACKAGE__->position_column('id');
+__PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
   "id",
     { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+  "position",
+    { data_type => "INTEGER", is_nullable => 0, size => undef },
   "title",
     { data_type => "TEXT", is_nullable => 0, size => undef },
   "description",

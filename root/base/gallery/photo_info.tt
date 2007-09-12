@@ -7,3 +7,4 @@
 <dt>ISO:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
 <dt>Aperture:</dt><dd>[%photo.aperture || 'not specified'%]</dd>
 </dl>
+<script>Element.toggle('hidden_info')</script>

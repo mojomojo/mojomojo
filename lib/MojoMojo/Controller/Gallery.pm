@@ -38,7 +38,7 @@ sub default : Private {
           { page           =>$page || 1,
 	    join	   => [qw/attachment/], 
             rows           => 12,
-            order_by       => 'taken' }
+            order_by       => 'position' }
     );
     $c->stash->{pictures} = $iterator;
     $c->stash->{pager}    = $iterator->pager;

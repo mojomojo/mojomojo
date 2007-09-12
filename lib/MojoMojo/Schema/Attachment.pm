@@ -3,12 +3,16 @@ package MojoMojo::Schema::Attachment;
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/DBIx::Class/;
+
+use Archive::Zip qw(:ERROR_CODES);
 use File::MMagic;
 use FileHandle;
-use MojoMojo;
-my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
-
+use File::Copy;
+use File::Temp qw/tempfile/;
+use Image::Math::Constrain;
+use Imager;
+    
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("attachment");
@@ -28,7 +32,7 @@ __PACKAGE__->add_columns("id",
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to("page", "Page", { id => "page" });
-__PACKAGE__->might_have("photo", "MojoMojo::Schema::Photo" ); #, {id =>'foreign.id' } );
+__PACKAGE__->might_have("photo", "MojoMojo::Schema::Photo" );
 
 =item create_from_file (page,filename,storage_callback)
 
@@ -39,37 +43,65 @@ be called with a full path to where the file should be stored
 =cut
 
 sub create_from_file :ResultSet {
-  my ($class,$page,$filename, $storage_callback)=@_;
-  my $self=$class->create(
-                 { name => $filename,
-                 page => $page->id } );
-  die "Could not attach $filename to $page"  unless $self;
-  &$storage_callback($self->get_filename);
-  unless  (-f $self->get_filename) {
-      $self->delete();
-      return undef;
-  }
-  my $fh=FileHandle->new($self->get_filename.'');
-  $self->contenttype( $mm->checktype_filehandle($fh) );
-  $self->size( -s $self->get_filename );
-  $self->update();
-  $self-> make_photo if ($self->contenttype =~ m|^image/|);
-  return $self;
+    my ($class,$page,$filename,$file)=@_;
+    die('MojoMojo::Schema->mime_magic must be set to a mime magic file\n') 
+        unless -f $class->result_source->schema->magic_file;
+    my $mm=File::MMagic->new($class->result_source->schema->magic_file);
+    if ( $mm->checktype_filename($filename) eq 'application/zip' ) {
+        my $zip;
+        $zip=Archive::Zip->new($file);
+        return unless $zip;
+        my @atts;
+        foreach my $member ($zip->members) {
+            next if $member->isDirectory;
+            my $tmpfile=tempfile;
+            $member->extractToFileNamed($tmpfile);
+            push @atts, $class->create_from_file( $page, $member->fileName,$tmpfile);
+        }
+        return @atts;
+    }
+  
+    my $self=$class->create({ 
+        name => $filename,
+        page => $page->id });
+    die "Could not attach $filename to $page"  unless $self;
+    File::Copy::copy($file,$self->filename);
+
+    my $fh=FileHandle->new($self->filename.'');
+    $self->contenttype( $mm->checktype_filehandle($fh) );
+    $self->size( -s $self->filename );
+    $self->update();
+    $self-> make_photo if ($self->contenttype =~ m|^image/|);
+    return $self;
+}
+
+sub delete {
+    my ($self)=@_;
+    unlink($self->filename) if -f $self->filename;
+    unlink($self->inline_filename) if -f $self->inline_filename;
+    unlink($self->thumb_filename) if -f $self->thumb_filename;
+    $self->next::method();
 }
 
 =head2 filename
 
-Full path to this attachment. Can only be called from within an
-active mojomojo context.
-
+Full path to this attachment. 
 =cut
 
-sub get_filename {
+
+my $attachment_dir;
+
+sub filename {
     my $self=shift;
-    my $c=MojoMojo->context;
-    return "uploads/" . $self->id unless ref $c;
-    return $c->path_to('uploads', $self->id);
+    $attachment_dir ||= $self->result_source->schema->attachment_dir;
+    die('MojoMojo::Schema->attachment must be set to a writeable directory\n') 
+        unless -d $attachment_dir && -w $attachment_dir;
+    return ( $attachment_dir . '/' . $self->id );
 }
+
+sub inline_filename { shift->filename . '.inline'; }
+
+sub thumb_filename  { shift->filename . '.thumb'; }
 
 sub make_photo {
   my $self = shift;
@@ -82,19 +114,6 @@ sub make_photo {
   $photo->insert();
 }
 
-=item filename
-
-returns a full path to the attachment on the filesystem. This function
-uses the MojoMojo config, so requires Catalyst to function.
-
-=cut
-
-sub filename {
-    my $self=shift;
-    my $c=MojoMojo->context;
-    return "uploads/" . $self->id unless $c;
-    return $c->config->{home} . "/uploads/" . $self->id;
-}
 
 =item make_inline
 
@@ -106,9 +125,10 @@ FIXME: should this be moved to photo?
 sub make_inline {
     my ($self)=shift;
     my $img=Imager->new();
-    $img->open(file=>$self->filename,type=>'jpeg') or die $img->errstr;
-    my ($image,$result);
-    $image=$img->scale(xpixels=>700);
+    $img->open(file=>$self->filename) or die $img->errstr;
+    my $constrain = Image::Math::Constrain->new(800, 600);
+    my$image = $img->scale(constrain => $constrain);
+
     $image->write(file=>$self->filename.'.inline',type=>'jpeg') or die $img->errstr;
 }
 
@@ -122,7 +142,7 @@ create a thumbnail version of a photo, for gallery views and linking to pages
 sub make_thumb {
     my ($self)=shift;
     my $img=Imager->new();
-    $img->open(file=>$self->filename,type=>'jpeg') or die $img->errstr;
+    $img->open(file=>$self->filename) or die $img->errstr;
     my $h=$img->getheight;
     my $w=$img->getwidth;
     my ($image,$result);

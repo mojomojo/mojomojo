@@ -2,14 +2,8 @@ package MojoMojo::Controller::Attachment;
 
 use strict;
 use base 'Catalyst::Controller';
-use Archive::Zip qw(:ERROR_CODES);
 
-use MojoMojo;
-use File::MMagic;
-my $mm=File::MMagic->new(MojoMojo->path_to('magic'));
-
-use File::Slurp;
-use Imager;
+use IO::File;
 
 =head1 NAME
 
@@ -59,44 +53,16 @@ sub attachments : Global {
     $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
         my $upload=$c->request->upload('file');
-        if ( $mm->checktype_filename($upload->tempname) eq 'application/zip' ) {
-            my $zip;
-            $zip=Archive::Zip->new($upload->tempname);
-            if ( ! $zip ) {
-                $c->stash->{template} = 'message.tt';
-                $c->stash->{message}  = "Can't open zipfile for reading.";
-                return;
-            }
-            foreach my $member ($zip->members) {
-                next if $member->isDirectory;
-                my $att = $c->model("DBIC::Attachment")->
-                   create_from_file( $page, $member->fileName,
-                   sub {my $file=shift;
-                    $member->extractToFileNamed($file)});
-                if (! $att ) {
-                    $c->stash->{template}='message.tt';
-                    $c->stash->{message}= "Can't extract ".
-                                        $member->fileName.
-                                        " from zip.";
-                }
-          }
-      } else {
-          my $att =
-          $c->model("DBIC::Attachment")->create_from_file ( $page, $file, 
-              sub { 
-                  my $file=shift; 
-                  warn "saving to $file";
-                  $upload->link_to($file) || $upload->copy_to($file);
-              } );
-
-          if (! $att ) {
-              $c->stash->{template}='message.tt';
-              $c->stash->{message}= "Can't open $file for writing.";
-          }
-       }
-    $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
-	    unless $c->stash->{template} eq 'message.tt';
-    }
+        my (@att) =$c->model("DBIC::Attachment")
+            ->create_from_file ( $page, $file, $upload->tempname,$c->path_to('/') );
+        if (! @att ) {
+            $c->stash->{template}='message.tt';
+            $c->stash->{message}= "Could not create attachment from $file.";
+        }
+        $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
+	        unless $c->stash->{template} eq 'message.tt';
+	}
+    
 }
 
 sub progress : Global {
@@ -135,8 +101,7 @@ sub default : Private {
 
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
-    $c->res->output( scalar( read_file( 
-      $c->path_to('uploads',$c->stash->{att}->id).""))); 
+    $c->res->output( IO::File->new($c->stash->{att}->filename) ); 
     $c->res->headers->header( 'content-type', $c->stash->{att}->contenttype );
     $c->res->headers->header("Content-Disposition" => "inline; filename=".
 		$c->stash->{att}->name);
@@ -168,11 +133,8 @@ thumb action for attachments. makes 100x100px thumbs
 sub thumb : Chained('attachment') Args(0) {
     my ( $self, $c) = @_;
 	my $att=$c->stash->{att};
-    $att->make_thumb() unless -f 
-       $c->path_to('uploads',$att->id . ".thumb");
-
-    $c->res->output( scalar(read_file(
-        $c->path_to('uploads',$att->id).'.thumb')));
+    $att->make_thumb() unless -f $att->thumb_filename;
+    $c->res->output( IO::File->new($att->thumb_filename) );
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename=" . $att->name );
@@ -186,12 +148,10 @@ show inline attachment
 
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash->{att}->make_inline
-      unless -f $c->path_to('uploads',$c->stash->{att}->id . '.inline');
-    $c->res->output(
-        scalar( read_file( 
-           $c->path_to('uploads',$c->stash->{att}->id) . '.inline')
-     ));
+    my $att=$c->stash->{att};
+	
+    $att->make_inline unless -f $att->inline_filename;
+    $c->res->output( IO::File->new($att->inline_filename) );
     $c->detach('default') if $@ =~ m/^Could not open/;
     $c->res->headers->header( 'content-type',
         $c->stash->{att}->contenttype );
