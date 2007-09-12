@@ -1,0 +1,52 @@
+.progressmeter {
+    font-family: Arial;
+    font-size: 10pt;
+    text-align: center;
+}
+
+.progressmeter table {
+}
+
+.progressmeter th {
+    font-weight: bold;
+    text-align: right;
+}
+
+.progressmeter td {
+    text-align: left;
+}
+
+.finished {
+    color: #667799;
+}
+
+.aborted {
+    color: red;
+}
+
+.progressmeter .meter {
+    position: relative;
+    background-color: lightgrey;
+    border: 2px solid #667799;
+    height: 20px;
+    width: 380px;
+}
+
+.progressmeter .meter .amount {
+    background-color: #667799;
+    width: 0px;
+    height: 20px
+}
+
+.progressmeter .meter .percent {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 20px;
+    z-index: 1000;
+    text-align: center;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -6,7 +6,6 @@ use warnings;
 use Moose;
 
 has 'attachment_dir' => (is=>'rw', isa=>'Str');
-has 'magic_file' => (is=>'rw', isa=>'Str');
 
 use base 'DBIx::Class::Schema';
 

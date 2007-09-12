@@ -1,14 +1,18 @@
 [% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
 
+
+
  <div id="toplinks"><a  href="[% c.uri_for('edit')%]">Edit</a> | Attachments</div><div id="content">
 <form action="[%c.uri_for('attachments')%]"
     enctype="multipart/form-data" 
+    target="result"
+    onsubmit="return startEmbeddedProgressBar(this)"
     method="post">
-<p>Please select a file to attach to this page. To upload multiple files in a go, put them in a zip archive.</p>
+<p>Please select a file to attach to this page. To upload multiple files, put them in a zip.</p>
 <input type="file" name="file">
 <input type="submit">
 </form>
-
+<div id='progress'></div>
 [% FOR attachment IN page.attachments %]
 <p style="background: #eee; padding: 3px; border: 1px solid silver;width:440px">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |

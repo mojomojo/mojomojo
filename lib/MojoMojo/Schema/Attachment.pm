@@ -44,9 +44,7 @@ be called with a full path to where the file should be stored
 
 sub create_from_file :ResultSet {
     my ($class,$page,$filename,$file)=@_;
-    die('MojoMojo::Schema->mime_magic must be set to a mime magic file\n') 
-        unless -f $class->result_source->schema->magic_file;
-    my $mm=File::MMagic->new($class->result_source->schema->magic_file);
+    my $mm=File::MMagic->new();
     if ( $mm->checktype_filename($filename) eq 'application/zip' ) {
         my $zip;
         $zip=Archive::Zip->new($file);

@@ -24,6 +24,9 @@
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
     <link rel="shortcut icon" href="[%c.uri_for('/.static/favicon.ico')%]" />
+    [% IF c.stash.template=='page/attachments.tt' %]
+        [% c.upload_progress_javascript %]
+    [% END %]
 </head>
 
 <body id="page">

@@ -65,13 +65,6 @@ sub attachments : Global {
     
 }
 
-sub progress : Global {
-    my ( $self, $c, $upload_id ) = @_;
-    $c->stash->{progress} = $c->upload_progress( $upload_id );
-    $c->stash->{template} = 'attachments/progress.tt';
-}
-
-
 =item default
 
 This action dispatches to the other private actions in this controller

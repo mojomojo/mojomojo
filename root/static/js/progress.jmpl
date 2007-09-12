@@ -1,0 +1,32 @@
+<span class="progressmeter">
+  <div class="meter">
+    <div class="amount"  style="width: [% percent %]%;"></div>
+    <div class="percent" style="width: 100%">[% percent %]%</div>
+  </div>
+  <table>
+    <tbody>
+      <tr>
+        <th>Status:</th>
+        <td>
+[% IF finished -%]
+          <span class="finished">Transfer complete  ([% size %])</span>
+[% ELSIF aborted -%]
+          <span class="aborted">Transfer aborted</span>
+[% ELSE -%]
+          [% received %] of [% size %]
+[% END -%]
+        </td>
+      </tr>
+[% IF starttime -%]
+      <tr>
+        <th>Time:</th>
+        <td>[% elapsedtime %] (~ [% remainingtime %] to go)</td>
+      </tr>
+      <tr>
+        <th>Rate:</th>
+        <td>[% currentrate %] (avg [% rate %])</td>
+      </tr>
+[% END -%]
+    </tbody>
+  </table>
+</span>
