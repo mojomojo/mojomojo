@@ -48,10 +48,10 @@ Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
 sub show_comments {
     my ( $c, $page ) = @_;
     my $view=( $c->req->action eq 'view' ?  1 : 0 );
+    $c->forward('/comment/default');
     return '<div id="comments">'.
-           $c->subreq("/comment",{page=>$page,
-                                  add_link => $view }).
-           '</div>';
+        $c->view('TT')->render($c,'comment.tt').'</div>';
+        ;
 }
 
 =back
