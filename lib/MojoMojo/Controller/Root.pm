@@ -13,11 +13,9 @@ sub begin : Private {
     if ( $c->stash->{path} ) {
         my ( $path_pages, $proto_pages ) = 
 	    $c->model('DBIC::Page')->path_pages( $c->stash->{path} );
-        @{$c->stash}{qw/ path_pages proto_pages /} = 
-	    ( $path_pages, $proto_pages );
+        @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
-	# FIXME: new user stuff.
-         $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
+        $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
     }
 }
 

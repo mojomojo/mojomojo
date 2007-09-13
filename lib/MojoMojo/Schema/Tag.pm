@@ -13,7 +13,7 @@ __PACKAGE__->add_columns(
   "person",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "page",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef },
   "photo",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
   "tag",

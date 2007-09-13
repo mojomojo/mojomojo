@@ -1,9 +1,5 @@
 <div id="postForm">
-[% url = base _ page.path _ '.comment' %]
-[%c.prototype.form_remote_tag ({
-url => url
-update => 'comments'
-})%]
+<form action="[%c.uri_for('comment')%]" method="post" onsubmit=" new Ajax.Updater( 'comments',  '[%c.uri_for('comment')%]', { parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
 <textarea id="comment" name="body">
 </textarea>
 <input type="submit" value="Post"/> as

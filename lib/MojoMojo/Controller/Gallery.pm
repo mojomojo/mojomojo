@@ -31,17 +31,13 @@ Show a gallery page for the current node.
 sub default : Private {
     my ( $self, $c, $action, $page) = @_;
     $c->stash->{template} = 'gallery.tt';
-    # oops, we have a column value named Page
-    # FIXME : Messing with the iterator.
-    my $iterator=$c->model("DBIC::Photo")->search({
-        'attachment.page'  =>$c->stash->{page}->id}, 
-          { page           =>$page || 1,
-	    join	   => [qw/attachment/], 
+    $c->stash->{pictures} = $c->model("DBIC::Photo")->search({
+        'attachment.page'  => $c->stash->{page}->id }, 
+          { page           => $page || 1,
+	        join	       => [qw/attachment/], 
             rows           => 12,
-            order_by       => 'position' }
-    );
-    $c->stash->{pictures} = $iterator;
-    $c->stash->{pager}    = $iterator->pager;
+            order_by       => 'position' 
+    });
 }
 
 =item by_tag ( .gallery/by_tag )
@@ -61,15 +57,13 @@ sub by_tag : Local {
           map { $_->id  } ($c->stash->{page}->descendants,
                            $c->stash->{page}) ] 
         unless length($c->stash->{page}->path) == 1;  # root
-    my  $iterator =$c->model("DBIC::Photo")->search(
+    $c->stash->{pictures} =$c->model("DBIC::Photo")->search(
         $conditions, { 
 	    join     => [qw/attachment/],
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'
         });
-    $c->stash->{pictures} = $iterator;
-    $c->stash->{pager}    = $iterator->pager;
 }
 
 =item p ( .p) 
@@ -83,23 +77,7 @@ sub p : Global {
     $c->forward( 'inline_tags' );
     $c->stash->{template}    =  'gallery/photo.tt';
     $c->stash->{next}        =  $photo->next_sibling;
-#search(
-#        { 'attachment.page'  => $c->stash->{page}->id,
-#	  taken	             => { '>',$photo->taken },
-#	},
-#        {order_by            => 'taken',
-#	 rows		     => 1,
-#	 join                => [qw/attachment/] }
-#    )->next;
     $c->stash->{prev}        =  $photo->previous_sibling;
-#search( 
-#       { 'attachment.page'  => $c->stash->{page}->id,
-#	  taken              => { '<',$photo->taken },
-#	},
-#        { order_by           => 'taken',
-#	  rows		     => 1,
-#	  join		     => [qw/attachment/]}
-#    )->next;
 }
 
 =item (/p_by_tag/\d+)

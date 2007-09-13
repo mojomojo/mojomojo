@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/opt/local/bin/perl -w
 
 use strict;
 use warnings;
@@ -39,6 +39,7 @@ mojomojo_create.pl [options] model|view|controller name [helper] [options]
 
  Examples:
    mojomojo_create.pl controller My::Controller
+   mojomojo_create.pl controller My::Controller BindLex
    mojomojo_create.pl -mechanize controller My::Controller
    mojomojo_create.pl view My::View
    mojomojo_create.pl view MyView TT

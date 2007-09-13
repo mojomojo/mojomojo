@@ -47,16 +47,13 @@
     <br/>
     
     <textarea id="body" name="body">[%- content.body || c.req.params.body || "" | html -%]</textarea>
-
-    [%c.prototype.lazy_observe_field ( 'body', {
-    url       => c.uri_for('jsrpc','render'),
-    frequency => 2,
-    with      => "'content='+window.escape(value)", 
-    update    => 'content_preview'
-    loading   => "Element.show('editspinner')",
-    complete  => "Element.hide('editspinner')",
-    }) -%]
-    <!--with      => "'content='+value.replace(/&/g,'%26')", -->
+    <script>
+    new Form.Element.SmartObserver( 'body',
+                               2,
+                               function( element, value ) {
+                                    new Ajax.Updater( 'content_preview',  '[%c.uri_for('jsrpc','render')%]', { parameters: 'content='+window.escape(value),asynchronous: 1,onLoading: function(request){Element.show('editspinner')},onComplete: function(request){Element.hide('editspinner')} } ) 
+                                } );
+    </script>
 
     <script type="text/javascript" language="JavaScript">
       $('body').value=$('body').value +'[%append|js%]';

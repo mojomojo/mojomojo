@@ -78,7 +78,7 @@
 [%IF (c.req.action=="prefs")%]
 <b class="navOn">preferences</b> 
 [%ELSE%]
-<a title="User Settings" href="[%c.uri_for('/',user.link,'.prefs')%]">preferences</a>
+<a title="User Settings" href="[%c.uri_for(user.link)%].prefs">preferences</a>
     [% END %] 
 [% END%]
 </form>

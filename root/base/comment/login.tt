@@ -1,8 +1,4 @@
-[% url = base _ page.path _ '.comment/login/' _ c.req.path %]
-[%c.prototype.form_remote_tag ({
-url => url,
-update => 'hidden_info'
-})%]
+<form action="[%c.uri_for('comment/login')%]" method="post" onsubmit=" new Ajax.Updater( 'hidden_info',  '[%c.uri_for('comment/login')%]', { parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
 <small>You have to log in to post a comment.
 (<a href="[%base%]/.register">register</a>)</small>
 </span>

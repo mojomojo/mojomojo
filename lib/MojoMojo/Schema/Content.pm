@@ -75,11 +75,11 @@ __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
 	my ( $self, $c ) = @_;
 	my $this_content = $self->formatted($c);
 
-	# FIXME: This may return undef. What do we do then?
 	my $previous_content = (
 	    defined $self->previous
 	    ? $self->previous->formatted($c)
 	    : $this_content );
+
 	my $this = [ split /\n\n/,                  $this_content ];
 	my $prev = [ split /\n\n/,                  $previous_content ];
 	my @diff = Algorithm::Diff::sdiff( $prev, $this );

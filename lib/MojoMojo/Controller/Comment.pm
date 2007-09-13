@@ -38,7 +38,12 @@ sub default : Private {
     unless (! $c->stash->{user} || 
               $c->form->has_missing || 
               $c->form->has_invalid ) {
-        $c->model("DBIC::Comment")->create_from_form($c->form);
+        $c->model("DBIC::Comment")->create({
+            page    => $c->stash->{page}->id,
+            poster  => $c->stash->{user}->id,
+            posted  => DateTime->now(),
+            body    => $c->req->param('body'),
+        });
     }
     $c->stash->{comments} = $c->model("DBIC::Comment")->search({
         page=>$c->stash->{page}->id } , 

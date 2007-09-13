@@ -1,3 +1,7 @@
+        - Fixed Gallery tags (Invalid constraint)
+        - Actually remove all the c.prototype stuff (Unbreaking all the JS)
+        - Fix preferences link.
+        - Fix links in navbar and header.
         - Made the insert attachment system template based and easily extensible.
         - Set up default page for admin
         

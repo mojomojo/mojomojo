@@ -87,7 +87,7 @@ sub prefs : Global {
     $c->stash->{template}='user/prefs.tt';
     my @proto=@{$c->stash->{proto_pages}};
     $c->stash->{page_user}=$c->model("DBIC::Person")->get_user(
-        $proto[0]->{name} || $c->stash->{page}->name_orig 
+        $proto[0]->{name} || $c->stash->{page}->name
     );
     unless ($c->stash->{page_user} && $c->stash->{user} && (
         $c->stash->{page_user}->id eq $c->stash->{user}->id ||

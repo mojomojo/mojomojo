@@ -1,12 +1,10 @@
 [% IF user ; %]
 <div id="showtag" class="showdiv"><a href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
 <div id="addtag" class="formdiv" style="display:none;">
-[%c.prototype.form_remote_tag({ 
-    update => 'tags', 
-    url=> c.uri_for('gallery/submittag',photo.id),
-    loading=>"Element.hide('addtag');Element.show('showtag');\$('taginput').value=''",
-    complete=>"Fat.fade('.highlight');"
-})%] 
+<form action="[%c.uri_for('gallery/submittag',photo.id)%]" method="post" onsubmit=" new Ajax.Updater( 'tags', '[%c.uri_for('gallery/submittag',photo.id)%]', { 
+onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},
+onComplete: function(request){Fat.fade('.highlight');},
+parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>

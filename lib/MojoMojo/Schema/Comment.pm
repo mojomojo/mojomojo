@@ -13,7 +13,7 @@ my $textile=Text::Textile2->new(
     char_encoding=>1
 );
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns("id", 
   "id",
@@ -23,7 +23,7 @@ __PACKAGE__->add_columns("id",
   "page",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "picture",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef },
   "posted",
     { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
   "body",
@@ -33,7 +33,7 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to("poster", "Person", { id => "poster" });
 __PACKAGE__->belongs_to("page", "Page", { id => "page" });
 __PACKAGE__->belongs_to("picture", "Photo", { id => "picture" });
-
+__PACKAGE__->utf8_columns(qw/body/);
 
 =item formatted
 

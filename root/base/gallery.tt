@@ -8,7 +8,7 @@ gallery -
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">
-[% PROCESS gallery/pager.tt %]
+[% PROCESS gallery/pager.tt pager=pictures.pager %]
 <div id="imageinfo" class="imageinfo">
 <small>Hoover over an image to get more info.</small>
 </div>
@@ -18,7 +18,10 @@ gallery -
 <a  id="[%imgid%]" href="[%c.uri_for('p')%][%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb" 
 width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
-[% c.prototype.observe_hover(imgid,{url=>c.uri_for('jsrpc/imginfo',picture.id),frequency=>2,update=>'imageinfo'});%]
+<script>var [%imgid%]=new Element.HoverObserver( '[%imgid%]',2,
+function( element, value ) {
+    [%imgid%]_updater=new Ajax.Updater( 'imageinfo', '[%c.uri_for('jsrpc/imginfo',picture.id)%]' ); 
+});</script>
 [%END%]
 </div>
 </div>

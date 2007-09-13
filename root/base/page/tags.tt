@@ -1,12 +1,9 @@
 [% IF tags %]
 <b>my tags : </b>
 [% FOREACH tag IN tags %]
-[% url = base _ page.path _ '.jsrpc/untag/' _ tag.tag %]
-[<b class="remove">[%c.prototype.link_to_remote('x', {
-    update => 'tags', 
-    url=>url 
-   complete=>"Fat.fade('.highlight');",
-})%]</b>]
+
+[<b class="remove"><a href="[%c.uri_for('jrpc/untag',tag.tag)%]"
+onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/untag',tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">x</a>]</b>]
 [%IF tag.tag == highlight %]
 <b id="tag_[%tag.tag%]" class="navOn" 
 [%ELSE%]
@@ -24,11 +21,8 @@ href="[%c.uri_for('recent',tag.tag)%]">[%tag.tag%]</a>
 [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
 [% NEXT IF taglist.match(tagmatch) %]
 [% IF user.active %]
-[<b class="add">[%c.prototype.link_to_remote('+', { 
-    update => 'tags', 
-    url=> c.uri_for(page.path,'.jsrpc/tag',othertag.tag), 
-    complete=>"Fat.fade('.highlight');"
-})%]</b>]
+[<b class="add"><a href="[%c.uri_for('jrpc/tag',tag.tag)%]"
+onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/tag',tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">+</a>]</b>]
 [%END%]
 [%IF othertag.tag == highlight %]
 <a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.refcount%]" 
