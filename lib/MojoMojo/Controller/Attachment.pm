@@ -171,8 +171,7 @@ sub delete: Chained('attachment') Args(0) {
 
 Insert a link to this attachment in the main text of the node.
 Will show a thumb for images.
-FIXME: should be extended to use a template database based on
-mime-type
+TODO: Write templates for more mime types.
 
 =cut
 
@@ -180,16 +179,11 @@ sub insert : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     return unless $c->forward('auth');
     my $att=$c->stash->{att};
-	if ($att->contenttype =~ /^image/) {
-        $c->stash->{append} = '\n\n<div class="photo">"!'
-            . $c->uri_for("attachment",$att->id,'thumb')."!\":"
-            . $c->uri_for("attachment",$att->id).'</div>';
-    } else {
-        $c->stash->{append} = '\n\n"'
-            . $att->name . "\":"
-            . $c->uri_for("attachment",$att->id);
-    }
-        $c->forward('/pageadmin/edit');
+    my ($family) = $att->contenttype =~ m|^([^/]+)|; 
+    $c->stash->{family} = 'mimetypes/' . $family . '.tt';
+    $c->stash->{type} = 'mimetypes/'. $att->contenttype . '.tt'; 
+    $c->stash->{append}=$c->view('TT')->render($c,'page/insert.tt');
+    $c->forward('/pageadmin/edit');
 }
 
 =back 

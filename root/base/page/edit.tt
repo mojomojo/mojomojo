@@ -1,3 +1,4 @@
+[% USE JavaScript %]
 [% # figure out the extra title part -%]
  [% IF page.content_version -%]
    [% SET pre_title = "Editing" -%]
@@ -58,7 +59,7 @@
     <!--with      => "'content='+value.replace(/&/g,'%26')", -->
 
     <script type="text/javascript" language="JavaScript">
-      $('body').value=$('body').value +'[%append%]';
+      $('body').value=$('body').value +'[%append|js%]';
       Field.focus('body');
       [% UNLESS user %]
         document.registerAction('Submit','editForm',function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});

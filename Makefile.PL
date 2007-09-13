@@ -45,6 +45,7 @@ requires (
         'Moose'                                         => 0,
         'Pod::Simple::HTML'                             => '3.01',
 	    'String::Diff'				                	=> 0,
+	    'Template::Plugin::JavaScript'                  => 0,
         'Text::Context'                                 => '3.5',
         'URI'                                           => '1.35',
         'XML::Clean'                                    => 0,
