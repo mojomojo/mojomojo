@@ -48,7 +48,7 @@ my $root_page = $root_path_pages->[0];
 my @descendant_names = map { $_->name } $root_page->descendants;
 
 # We also have a help node in the default db, that needs to be in there.
-# FIXME: This is kidna retarded, is this test a dud?
+# FIXME: This is kinda retarded, is this test a dud?
 
 push @child_names,'help';
 

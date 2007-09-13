@@ -74,7 +74,6 @@ sub is_admin {
 
 sub link {
    my ($self) = @_;
-   #FIXME: Link to profile here?
    return lc "/".($self->login || MojoMojo->pref('anonymous_user'));
 }
 
