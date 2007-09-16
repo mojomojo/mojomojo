@@ -6,6 +6,6 @@
   [% END %]
  [% END %]
  [% FOREACH page IN proto_pages %]
- / <a class="protoPage" href="[% c.uri_for('/', page.path) %]">[% page.name_orig %]</a>
+ / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% page.name_orig %]</a>
  [% END %]
 </div>

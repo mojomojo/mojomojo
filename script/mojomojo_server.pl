@@ -1,6 +1,6 @@
 #!/opt/local/bin/perl -w
 
-BEGIN { 
+BEGIN {     
     $ENV{CATALYST_ENGINE} ||= 'HTTP';
     $ENV{CATALYST_SCRIPT_GEN} = 30;
     require Catalyst::Engine::HTTP;

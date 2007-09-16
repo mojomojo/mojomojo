@@ -118,7 +118,7 @@ sub edit : Global {
 
     # update the search index with the new content
     # FIXME: Disabling search engine for now.
-    # $search_engine->index_page( $page );
+    $c->model('Search::Plucene')->index_page( $page );
     $c->model("DBIC::Page")->set_paths($page);
     $page->content->store_links();
 

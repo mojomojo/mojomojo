@@ -16,5 +16,5 @@ ok( request('/.highlight')->is_success,'can highlight changes' );
 ok( request('/.export')->is_success, 'can show export page' );
 is( request('/.suggest')->code,'404','show a suggest page, do 404' );
 ok( request('/.info')->is_success,'Can show page info' );
-ok( request('/.search')->is_success,'Can show search page' );
-ok( request('/.search/inline')->is_success,'can show inline search' );
+ok( request('/.search?query=foo')->is_success,'Can show search page' );
+ok( request('/.search/inline?query=foo')->is_success,'can show inline search' );

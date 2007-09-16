@@ -12,21 +12,17 @@
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
         <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> Search entire site 
-        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> Search within [% page_title %]
+        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> Search within [% page.path %]
     </form>
 </div>
 
 <hr />
-[% IF 0 %]
-[% IF result_count > 0 %]
-<h3>Results [% pager.first %]-[% pager.last %] of [% pager.total_entries %] found within [% IF search_type != "all"; page_title; ELSE %]entire site[% END %].</h3>
-[% ELSIF !result_count %]
-<h3>results found.</h3>
-[% END %]
+[% IF result_count %]
+<h3>Results [% pager.first %]-[% pager.last %] of [% pager.total_entries %] found within [% IF search_type != "all"; page.path; ELSE %]entire site[% END %].</h3>
 [% ELSE %]
-Search is temporarily disabled. It will be re-enabled in the next release
-of MojoMojo
+<h3>No results found.</h3>
 [% END %]
+
 
 <ul>
 [% FOR result = results %]

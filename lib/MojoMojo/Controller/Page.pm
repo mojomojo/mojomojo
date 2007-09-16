@@ -8,7 +8,6 @@ use Text::Context;
 use HTML::Strip;
 use Data::Page;
 
-my $search_engine = 'Catalyst::Model::Search::Plucene';
 
 =head1 NAME
 
@@ -61,23 +60,23 @@ sub view : Global {
 
     my $rev = $c->req->params->{rev};
     if ( $rev && defined $page->content_version ) {
-	$content = $c->model("DBIC::Content")->find(
-		page    => $page->id,
-		version => $rev
-		);
-	$stash->{rev} = ( defined $content ? $content->version : undef );
-	unless( $stash->{rev} ) {
-	    $stash->{message} = 'No such revision for '.$page->name;
-	    $stash->{template} = 'message.tt';
-	}
+	    $content = $c->model("DBIC::Content")->find(
+		    page    => $page->id,
+		    version => $rev
+		    );
+	    $stash->{rev} = ( defined $content ? $content->version : undef );
+	    unless( $stash->{rev} ) {
+	        $stash->{message} = 'No such revision for '.$page->name;
+	        $stash->{template} = 'message.tt';
+	    }
     }
     else {
-	$content = $page->content;
-	unless ($content) {
-	    $stash->{message} = $page->name.' does not have a version';
-	    return $stash->{template} = 'message.tt';
-	}
-	$stash->{rev} =  $content->version ;
+        $content = $page->content;
+        unless ($content) {
+            $stash->{message} = $page->name.' does not have a version';
+            return $stash->{template} = 'message.tt';
+        }
+        $stash->{rev} =  $content->version ;
     }
     $stash->{content} = $content;
 
@@ -101,8 +100,6 @@ sub search : Global {
 
     my $page = $c->stash->{page};
     $stash->{template} = 'page/search.tt';
-    #FIXME: disabling search for now.
-    return;
 
     my $q = $c->req->params->{query} ||$c->stash->{query};
     my $search_type = $c->req->params->{search_type} || "subtree";
@@ -123,9 +120,10 @@ sub search : Global {
 	    $q = "_path:$fixed_path* AND " . $q;
 	}
 
-    foreach my $key ( $search_engine->query( $q ) ) {
+    foreach my $key ( $c->model('Search::Plucene')->query( $q ) ) {
 
-	my $page = $c->model('DBIC::Page')->get_page( $key );
+	my ($path_pages) = $c->model('DBIC::Page')->path_pages( $key ) ;
+    my $page=$path_pages->[ @$path_pages - 1 ];
 # add a snippet of text containing the search query
 	my $content = $strip->parse( $page->content->formatted($c) );
 	$strip->eof;
