@@ -1,3 +1,5 @@
+        - Bad scope for attachment dir.
+
 0.999003
         - Fixed Comment formatter
         - Fixed Gallery tags (Invalid constraint)

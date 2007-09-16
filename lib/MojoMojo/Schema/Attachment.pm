@@ -87,11 +87,9 @@ Full path to this attachment.
 =cut
 
 
-my $attachment_dir;
-
 sub filename {
     my $self=shift;
-    $attachment_dir ||= $self->result_source->schema->attachment_dir;
+    my $attachment_dir = $self->result_source->schema->attachment_dir;
     die('MojoMojo::Schema->attachment must be set to a writeable directory\n') 
         unless -d $attachment_dir && -w $attachment_dir;
     return ( $attachment_dir . '/' . $self->id );
