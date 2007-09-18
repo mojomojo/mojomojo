@@ -1,12 +1,23 @@
 use Test::More tests => 6;
 $ENV{CATALYST_DEBUG}=0;
 $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
-use_ok( Catalyst::Test, 'MojoMojo' );
+use Test::WWW::Mechanize::Catalyst 'MojoMojo';
+use WWW::Mechanize::TreeBuilder;
 use_ok('MojoMojo::Controller::Page');
 
-my $root_edit = request('/.edit');
-ok( $root_edit->is_success, 'can edit root page');
-like( $root_edit->content, qr{<input\s+value=""\s+name="parent"\s+type="hidden"\s+/>}, "root page has null parent in edit form");
-my $help_edit = request('/help.edit');
-ok( $help_edit->is_success, 'can edit help page');
-like( $help_edit->content, qr{<input\s+value="1"\s+name="parent"\s+type="hidden"\s+/>}, "help page has root parent in edit form");
+my $mech = Test::WWW::Mechanize::Catalyst->new;
+WWW::Mechanize::TreeBuilder->meta->apply($mech);
+
+$mech->get_ok('http://localhost:3000/.login?login=admin&password=admin','Can log in ok');
+$mech->get_ok('/.edit', 'can edit root page');
+ok( $mech->look_down(
+      _tag => 'input',
+      name => 'parent',
+      type => 'hidden',
+      value => '' ), "root page has null parent in edit form");
+$mech->get_ok('/help.edit', 'can edit help page');
+ok( $mech->look_down(
+      _tag => 'input',
+      name => 'parent',
+      type => 'hidden',
+      value => '1' ), "help page has root parent in edit form");

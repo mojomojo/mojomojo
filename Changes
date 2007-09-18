@@ -1,8 +1,12 @@
+0.999004 2007-09-18 09:29:04
+        - Create t/var/upload if needed
+        - Prefs form redone in FormFu.
+        - Use Mech to test page editing.
         - Fixed test suite again
         - Restore search
         - Bad scope for attachment dir.
 
-0.999003
+0.999003  2007-09-13 14:32:00
         - Fixed Comment formatter
         - Fixed Gallery tags (Invalid constraint)
         - Actually remove all the c.prototype stuff (Unbreaking all the JS)

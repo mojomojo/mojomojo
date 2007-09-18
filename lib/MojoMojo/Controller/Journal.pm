@@ -14,11 +14,12 @@ MojoMojo::Controller::Journal - Journaling for MojoMojo?
 
 =head1 DESCRIPTION
 
-This space is blank. Got any ideas? Sharkpool and Tequilla has been discussed.
+This space is blank. Got any ideas?
 
 =head1 AUTHOR
 
-Clever guy
+Marcus Ramberg <mramberg@cpan.org>
+
 
 =head1 LICENSE
 

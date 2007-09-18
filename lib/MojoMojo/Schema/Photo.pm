@@ -43,52 +43,6 @@ __PACKAGE__->has_many("tags", "Tag", { "foreign.photo" => "self.id" });
 __PACKAGE__->has_many("comments", "Comment", { "foreign.picture" => "self.id" });
 __PACKAGE__->has_one('attachment','MojoMojo::Schema::Attachment'); #,{'foreign.id' => 'self.id' });
 
-sub make_inline {
-    my ($self)=shift;
-    my $img=Imager->new();
-    $img->open(file=>$self->attachment->filename,type=>'jpeg') 
-        or die $img->errstr;
-    my ($image,$result);
-    $image=$img->scale(xpixels=>700);
-    $image->write(file=>$self->attachment->filename.'.inline',type=>'jpeg')
-        or die $img->errstr;
-}
-
-=item make_thumb
-
-create a thumbnail version of a photo, for gallery views and linking to pages
-
-=cut
-
-sub make_thumb {
-    my ($self)=shift;
-    my $img=Imager->new();
-    $img->open(file=>$self->attachment->filename,type=>'jpeg') 
-        or die $img->errstr;
-    my $h=$img->getheight;
-    my $w=$img->getwidth;
-    my ($image,$result);
-    if ($h>$w) {
-        $image=$img->scale(xpixels=>80);
-            $h=$image->getheight;
-        $result =$image->crop(
-                            top=> int(($h-80)/2),
-                            left=>0,
-                          width=>80,
-                            height=>80);
-    } else {
-        $image=$img->scale(ypixels=>80);
-            $w=$image->getwidth;
-        $result  =$image->crop(
-                          left=> int(($w-80)/2),
-                          top=>0,
-                            width=>80,
-                            height=>80);
-    }
-    $result->write(file=>$self->attachment->filename.'.thumb',type=>'jpeg') 
-        or die $img->errstr;
-}
-
 =item extract_exif
 
 Extracts EXIF information from a given Attachment and
@@ -184,5 +138,56 @@ sub user_tags {
     return @tags;
 }
 
+=item make_inline
+
+create a resized version of a photo suitable for inline usage
+
+=cut
+
+sub make_inline {
+    my ($self)=shift;
+    my $img=Imager->new();
+    my $att=$self->attachment;
+    $img->open(file=>$att->filename) or die $img->errstr;
+    my $constrain = Image::Math::Constrain->new(800, 600);
+    my$image = $img->scale(constrain => $constrain);
+
+    $image->write(file=>$att->filename.'.inline',type=>'jpeg') or die $img->errstr;
+}
+
+
+=item make_thumb
+
+create a thumbnail version of a photo, for gallery views and linking to pages
+
+=cut
+
+sub make_thumb {
+    my ($self)=shift;
+    my $img=Imager->new();
+    my $att=$self->attachment;
+    $img->open(file=>$att->filename) or die $img->errstr;
+    my $h=$img->getheight;
+    my $w=$img->getwidth;
+    my ($image,$result);
+    if ($h>$w) {
+        $image=$img->scale(xpixels=>80);
+            $h=$image->getheight;
+        $result =$image->crop(
+                            top=> int(($h-80)/2),
+                            left=>0,
+                          width=>80,
+                            height=>80);
+    } else {
+        $image=$img->scale(ypixels=>80);
+            $w=$image->getwidth;
+        $result  =$image->crop(
+                          left=> int(($w-80)/2),
+                          top=>0,
+                            width=>80,
+                            height=>80);
+    }
+    $result->write(file=>$att->filename.'.thumb',type=>'jpeg') or die $img->errstr;
+}
 
 1;

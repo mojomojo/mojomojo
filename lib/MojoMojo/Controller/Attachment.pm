@@ -126,7 +126,11 @@ thumb action for attachments. makes 100x100px thumbs
 sub thumb : Chained('attachment') Args(0) {
     my ( $self, $c) = @_;
 	my $att=$c->stash->{att};
-    $att->make_thumb() unless -f $att->thumb_filename;
+    my $photo;
+	unless ($photo=$att->photo) {
+	    return $c->res->body('Can only make thumbnails of photos');
+	}
+    $photo->make_thumb() unless -f $att->thumb_filename;
     $c->res->output( IO::File->new($att->thumb_filename) );
     $c->res->headers->header( 'content-type', $att->contenttype );
     $c->res->headers->header(
@@ -142,8 +146,11 @@ show inline attachment
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att=$c->stash->{att};
-	
-    $att->make_inline unless -f $att->inline_filename;
+    my $photo;
+	unless ($photo=$att->photo) {
+	    return $c->res->body('Can only make inline version of photos');
+	}
+    $photo->make_inline unless -f $att->inline_filename;
     $c->res->output( IO::File->new($att->inline_filename) );
     $c->detach('default') if $@ =~ m/^Could not open/;
     $c->res->headers->header( 'content-type',

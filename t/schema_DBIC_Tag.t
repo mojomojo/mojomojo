@@ -4,9 +4,12 @@ use Test::More;
 
 BEGIN {
     eval "use DBD::SQLite";
-    plan $@
-        ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 4 );
+    my $sqlite = ! $@;
+    eval "use SQL::Translator";
+    my $translator = ! $@;
+    plan $sqlite && $translator
+    ? ( tests => 4 )
+    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
 }
 
 use lib qw(t/lib);

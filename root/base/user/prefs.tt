@@ -6,16 +6,7 @@
 <li><a href="[%base%][%page_user.link%].prefs/password">change password</a></li>
 </ul>
 </div>
-<form id="accountForm" action="[%base%][%page_user.link%].prefs" method="POST">
-<dl class="form">
-<dd>Change your preferences to update them.</dd>
- <dt>login</dt>
-<dd><input id="loginField" value="[%user.login%]" type="text" name="login"/></dd>
- <dd></dd>
- <dt>name</dt>
-<dd><input id="loginField" type="text" value="[%user.name%]" name="name"/></dd>
-<dd> <b>Status:</b> no change</dd>
-</dl>
-</form>
+<p>[%message%]</p>
+[% form %]
 </div>
 [% END %]

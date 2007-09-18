@@ -1,0 +1,3 @@
+[% WRAPPER field %]<span[% process_attrs(self.attributes) %]>
+[% FOREACH element = self.elements %][% element.multi %]
+[% END %]</span>[% END %]

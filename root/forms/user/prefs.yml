@@ -1,0 +1,23 @@
+---
+action: 
+indicator: submit
+auto_fieldset: 1
+
+elements:
+  - type: Text
+    name: login
+    label: Login
+    filters:
+       - HTMLEscape
+    constraints:
+      - Required
+  - type: Text
+    name: name
+    label: Name
+    filters:
+       - HTMLEscape
+    constraints:
+      - Required
+  - type: Submit
+    name: submit
+    value: Upload

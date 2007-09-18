@@ -4,15 +4,17 @@ use Test::More;
 
 BEGIN {
     eval "use DBD::SQLite";
-    plan $@
-        ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 5 );
+    my $sqlite = ! $@;
+    eval "use SQL::Translator";
+    my $translator = ! $@;
+    plan $sqlite && $translator
+    ? ( tests => 5 )
+    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
 }
 
-BEGIN {
-    use lib qw(t/lib);
-    use_ok( 'MojoMojoTestSchema' );
-}
+use lib qw(t/lib);
+use_ok( 'MojoMojoTestSchema' );
+
 
 ok( my $schema = MojoMojoTestSchema->init_schema(no_populate => 0), 'created a test schema object' );
 

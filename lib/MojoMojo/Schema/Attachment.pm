@@ -111,56 +111,6 @@ sub make_photo {
 }
 
 
-=item make_inline
-
-create a resized version of a photo suitable for inline usage
-FIXME: should this be moved to photo?
-
-=cut
-
-sub make_inline {
-    my ($self)=shift;
-    my $img=Imager->new();
-    $img->open(file=>$self->filename) or die $img->errstr;
-    my $constrain = Image::Math::Constrain->new(800, 600);
-    my$image = $img->scale(constrain => $constrain);
-
-    $image->write(file=>$self->filename.'.inline',type=>'jpeg') or die $img->errstr;
-}
-
-
-=item make_thumb
-
-create a thumbnail version of a photo, for gallery views and linking to pages
-
-=cut
-
-sub make_thumb {
-    my ($self)=shift;
-    my $img=Imager->new();
-    $img->open(file=>$self->filename) or die $img->errstr;
-    my $h=$img->getheight;
-    my $w=$img->getwidth;
-    my ($image,$result);
-    if ($h>$w) {
-        $image=$img->scale(xpixels=>80);
-            $h=$image->getheight;
-        $result =$image->crop(
-                            top=> int(($h-80)/2),
-                            left=>0,
-                          width=>80,
-                            height=>80);
-    } else {
-        $image=$img->scale(ypixels=>80);
-            $w=$image->getwidth;
-        $result  =$image->crop(
-                          left=> int(($w-80)/2),
-                          top=>0,
-                            width=>80,
-                            height=>80);
-    }
-    $result->write(file=>$self->filename.'.thumb',type=>'jpeg') or die $img->errstr;
-}
 
 1;
 

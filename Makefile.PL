@@ -7,7 +7,9 @@ requires (
         'Algorithm::Diff'                               => '1.1901',
         'Archive::Zip'                                  => '1.14',
         'Catalyst'                                      => '5.7000',
-        'Catalyst::Action::RenderView'                  => 0,
+        'Catalyst::Action::RenderView'                  => '0.07',
+        'Catalyst::Controller::HTML::FormFu'            => 0,
+        'Catalyst::Controller::BindLex'                 => 0,
         'Catalyst::Model::DBIC::Schema'                 => '0.01',      
         'Catalyst::Model::Search'                       => 0,
         'Catalyst::Plugin::Authentication'              => '0.07',
@@ -56,7 +58,10 @@ requires (
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
+feature 'Markdown Formatter', 'Text::Markdown';
+    
    
+build_requires 'Test::WWW::Mechanize::Catalyst';
 
 tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 

@@ -1,7 +1,7 @@
 package MojoMojo::Controller::User;
 
 use strict;
-use base 'Catalyst::Controller';
+use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
 
 use Digest::MD5 qw/md5_hex/;
 use Data::FormValidator::Constraints::DateTime qw(:all);
@@ -30,7 +30,7 @@ Log in through the authentication system.
 
 sub login : Global {
     my ($self,$c) = @_;
-    $c->stash->{message} = 'please enter username & password';
+    my $message:Stashed = 'please enter username & password';
     if ( $c->req->params->{login} ) {
         if ( $c->login() ) {
 	    $c->stash->{user}=$c->user->obj;
@@ -82,22 +82,30 @@ Main user preferences screen.
 
 =cut
 
-sub prefs : Global {
+sub prefs : Global FormConfig {
     my ( $self, $c ) = @_;
-    $c->stash->{template}='user/prefs.tt';
+    my $form : Stashed;
+    my $user : Stashed;
+    my $template :Stashed = 'user/prefs.tt';
     my @proto=@{$c->stash->{proto_pages}};
-    $c->stash->{page_user}=$c->model("DBIC::Person")->get_user(
+    my $page_user=$c->model("DBIC::Person")->get_user(
         $proto[0]->{name} || $c->stash->{page}->name
     );
-    unless ($c->stash->{page_user} && $c->stash->{user} && (
-        $c->stash->{page_user}->id eq $c->stash->{user}->id ||
-        $c->stash->{user}->is_admin())) {
-      $c->stash->{message}='Cannot find that user.';
-      $c->stash->{template}='message.tt';
+
+    unless ($page_user && $user && (
+        $page_user->id eq $user->id ||
+        $user->is_admin())) {
+      my $message:Stashed='Cannot find that user.';
+      $template='message.tt';
     };
+
+    $page_user->fill_formfu_values($form);
+    if ( $form->submitted && !$form->has_errors ) {
+         $page_user->populate_from_formfu( $form );
+    }
 }
 
-=item password (/prefs/passwordy
+=item password (/prefs/password')
 
 Change password action.
 

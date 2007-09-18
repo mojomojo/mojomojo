@@ -2,9 +2,13 @@ package MojoMojo::Formatter::Markdown;
 
 use base qw/MojoMojo::Formatter/;
 
+
+my $markdown;
+eval {
 use Text::Markdown;
 
-my $markdown = Text::Markdown->new();
+$markdown = Text::Markdown->new();
+};
 
 sub primary_formatter { 1; }
 
@@ -39,6 +43,7 @@ context object.
 
 sub format_content {
     my ($class,$content,$c)=@_;
+    return unless $markdown;
     return unless $c->pref('main_formatter') eq 'MojoMojo::Formatter::Markdown';
     # Let textile handle the rest
     $$content= $markdown->markdown( $$content );

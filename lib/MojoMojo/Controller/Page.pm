@@ -108,8 +108,6 @@ sub search : Global {
 
     my $strip = HTML::Strip->new;
 
-# FIXME: Cache search results.  This will require creating a new data structure since it's
-#      not safe to cache $page objects.
     my $results = [];
 
 # for subtree searches, add the path info to the query, replacing slashes with X

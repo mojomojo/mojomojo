@@ -4,9 +4,12 @@ use Test::More;
 
 BEGIN {
     eval "use DBD::SQLite";
-    plan $@
-        ? ( skip_all => 'needs DBD::SQLite for testing' )
-        : ( tests => 12 );
+    my $sqlite = ! $@;
+    eval "use SQL::Translator";
+    my $translator = ! $@;
+    plan $sqlite && $translator
+    ? ( tests => 12 )
+    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
 }
 
 use lib qw(t/lib);
@@ -14,6 +17,7 @@ use MojoMojoTestSchema;
 
 my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
 
+mkdir('t/var/upload') unless -d 't/var/upload';
 $schema->attachment_dir('t/var/upload');
 
 my ($path_pages, $proto_pages) = $schema->resultset('Page')->path_pages('/');
@@ -26,11 +30,11 @@ is(my $fn=$att->filename(),'t/var/upload/1', 'filename is correct');
 ok(-f $att->filename, 'file exists');
 is($att->inline_filename(),'t/var/upload/1.inline', 'inline is correct');
 ok(!-f $att->inline_filename, 'inline file doesnt exist');
-ok($att->make_inline,'make inlinecalled ok');
+ok($att->photo->make_inline,'make inlinecalled ok');
 ok(-f $att->inline_filename, 'inline file exists');
 is($att->thumb_filename(),'t/var/upload/1.thumb', 'thumb is correct');
 ok(!-f $att->thumb_filename, 'thumb file doesnt exist');
-ok($att->make_thumb,'make thumb called ok');
+ok($att->photo->make_thumb,'make thumb called ok');
 ok(-f $att->thumb_filename, 'thumb file exists');
 ok($att->delete(),'Can delete app');
 ok(! -f $fn, 'file cleaned up ok');

@@ -1,0 +1,1 @@
+<label[% process_attrs(self.label_attributes) %]>[% self.label %]</label>

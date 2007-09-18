@@ -1,0 +1,12 @@
+<span[% process_attrs(self.attributes) %]>
+[% FOREACH option = self.options %][% IF option.group %]<span[% process_attrs(option.attributes) %]>
+[% FOREACH item = option.group %]<span>
+<input name="[% self.name %]" type="radio" value="[% item.value %]"[% process_attrs(item.attributes) %] />
+<label[% process_attrs(item.label_attributes) %]>[% item.label %]</label>
+</span>
+[% END %]</span>
+[% ELSE %]<span>
+<input name="[% self.name %]" type="radio" value="[% option.value %]"[% process_attrs(option.attributes) %] />
+<label[% process_attrs(option.label_attributes) %]>[% option.label %]</label>
+</span>
+[% END %][% END %]</span>

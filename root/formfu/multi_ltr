@@ -1,0 +1,2 @@
+[% IF self.label.defined %][% INCLUDE $self.label_filename %]
+[% END %][% INCLUDE $self.field_filename %]

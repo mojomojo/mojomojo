@@ -1,6 +1,8 @@
 --- 
 abstract: A Catalyst & DBIx::Class powered Wiki.
 author: Marcus Ramberg C<marcus@thefeed.no>
+build_requires: 
+  Test::WWW::Mechanize::Catalyst: 0
 distribution_type: module
 generated_by: Module::Install version 0.67
 license: perl
@@ -16,7 +18,9 @@ requires:
   Algorithm::Diff: 1.1901
   Archive::Zip: 1.14
   Catalyst: 5.7000
-  Catalyst::Action::RenderView: 0
+  Catalyst::Action::RenderView: 0.07
+  Catalyst::Controller::BindLex: 0
+  Catalyst::Controller::HTML::FormFu: 0
   Catalyst::Model::DBIC::Schema: 0.01
   Catalyst::Model::Search: 0
   Catalyst::Plugin::Authentication: 0.07
@@ -62,5 +66,5 @@ requires:
   URI::Fetch: 0
   XML::Clean: 0
   YAML: 0.36
-tests: t/01app.t t/02pod.t t/03podcoverage.t t/formatter_comment.t t/formatter_irclog.t t/formatter_wiki.t t/model_DBIC.t t/model_DBIC_Page.t t/schema_DBIC.t t/schema_DBIC_Attachment.t t/schema_DBIC_Content.t t/schema_DBIC_Page.t t/schema_DBIC_Person.t t/schema_DBIC_Tag.t t/c/attachment.t t/c/comment.t t/c/journal.t t/c/jsrpc.t t/c/page.t t/c/page_edit.t t/c/user.t
+tests: t/01app.t t/02pod.t t/03podcoverage.t t/formatter_comment.t t/formatter_irclog.t t/formatter_wiki.t t/schema_DBIC.t t/schema_DBIC_Attachment.t t/schema_DBIC_Content.t t/schema_DBIC_Page.t t/schema_DBIC_Person.t t/schema_DBIC_Tag.t t/c/attachment.t t/c/comment.t t/c/journal.t t/c/jsrpc.t t/c/page.t t/c/page_edit.t t/c/user.t
 version: 0.999003
