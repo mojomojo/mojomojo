@@ -4,10 +4,9 @@ use base qw/MojoMojo::Formatter/;
 
 
 my $markdown;
-eval {
-use Text::Markdown;
-
-$markdown = Text::Markdown->new();
+eval "use Text::Markdown";
+unless ($@) {
+    $markdown = Text::Markdown->new();
 };
 
 sub primary_formatter { 1; }

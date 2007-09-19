@@ -25,7 +25,6 @@
 \.bak$
 \#$
 \b\.#
-\buploads
 \bcache
 \bplucene
 

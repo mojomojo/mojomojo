@@ -1,3 +1,10 @@
+0.999005 2007-09-19 21:31:00
+        - Better error reporting for upload dir.
+        - More dependency fixes.
+
+0.999005 2007-09-18 09:56:04
+        - Really fix tests if markdown isnt installed
+
 0.999004 2007-09-18 09:29:04
         - Create t/var/upload if needed
         - Prefs form redone in FormFu.
