@@ -145,15 +145,28 @@ B<template:> user/register.tt
 
 =cut
 
-sub register : Global {
+sub register : Global FormConfig {
     my ( $self, $c ) = @_;
+
 	if(!$c->pref('open_registration')) {
     	$c->stash->{template}='message.tt';
     	return $c->stash->{message}='Registration is closed!';
 	}
+
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message}='Please fill in the following information to '.
     'register. All fields are mandatory.';
+    my $form : Stashed;
+    my $user : Stashed = $c->model('DBIC::Person')->new_result({});
+    my $template :Stashed = 'user/register.tt';
+
+    $user->fill_formfu_values($form);
+    if ( $form->submitted && !$form->has_errors ) {
+         $user->populate_from_formfu( $form );
+         $user->insert();
+         $c->forward('do_register',[$user]);
+         
+    }
 }
 
 =item do_register (/.register)
@@ -164,42 +177,22 @@ B<template:> user/password.tt /  user/validate.tt
 
 =cut
 
-sub do_register : Global {
-    my ( $self, $c ) = @_;
-	if(!$c->pref('open_registration')) {
-    	$c->stash->{template}='message.tt';
-    	return $c->stash->{message}='Registration is closed!';
-	}
-    $c->stash->{template} = 'user/register.tt';
-    $c->form(required => [qw(login name pass confirm email)],
-             defaults  => { active => -1 }, 
-             constraints => $c->model("DBIC::Person")->registration_profile(
-	     $c->model('DBIC')->schema));
-    if ($c->form->has_missing) {
-        $c->stash->{message}='You have to fill in all fields.'. 
-        'the following are missing: <b>'.
-        join(', ',$c->form->missing()).'</b>';
-    } elsif ($c->form->has_invalid) {
-        $c->stash->{message}='Some fields are invalid. Please '.
-                             'correct them and try again:';
-    } else {
-	delete $c->form->{valid}->{confirm};
-        my $user=$c->model("DBIC::Person")->create($c->form->{valid});
-        $c->forward('/user/login');
-        $c->pref('entropy') || $c->pref('entropy',rand);
-        $c->email( header => [
-                From    => $c->form->valid('email'),
-                To      => $c->form->valid('email'),
-                Subject => '[MojoMojo] New User Validation'
-            ],
-            body => 'Hi. This is a mail to validate your email address, '.
+sub do_register : Private {
+    my ( $self, $c, $user ) = @_;
+    $c->forward('/user/login');
+    $c->pref('entropy') || $c->pref('entropy',rand);
+    $c->email( header => [
+            From    => $c->form->valid('email'),
+            To      => $c->form->valid('email'),
+            Subject => '[MojoMojo] New User Validation'
+        ],
+        body => 'Hi. This is a mail to validate your email address, '.
             $c->form->valid('name').'. To confirm, please click '.
             "the url below:\n\n".$c->req->base.'/.validate/'.
             $user->id.'/'.md5_hex$c->form->valid('email').$c->pref('entropy')
-        );
-        $c->stash->{user}=$user;
-        $c->stash->{template}='user/validate.tt';
-    }
+    );
+    $c->stash->{user}=$user;
+    $c->stash->{template}='user/validate.tt';
 }    
 
 =item validate (/.validate)

@@ -1,10 +1,10 @@
 <h3> Exif Data</h3>
 
 <dl>
-<dt>Taken:</dt><dd>[%photo.taken.ymd('-')%] [%photo.taken.hms(':')%]</dd>
+<dt>Taken:</dt><dd>[%IF photo.taken %][%photo.taken.replace('T',' ')%][% ELSE %]not specified[%END%]</dd>
 <dt>Camera:</dt><dd>[%photo.camera || 'not specified'%]</dd>
-<dt>Lens:</dt><dd>[%photo.lens || 'not specified'%]</dd>
+<dt>Lens:</dt><dd>[%photo.lens.replace('\.\d+mm$','mm') || 'not specified'%]</dd>
 <dt>ISO:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
-<dt>Aperture:</dt><dd>[%photo.aperture || 'not specified'%]</dd>
+<dt>Aperture:</dt><dd>[% IF photo.aperture %]f/[% photo.aperture %][% ELSE %]not specified[%END%]</dd>
 </dl>
 <script>Element.toggle('hidden_info')</script>

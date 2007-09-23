@@ -65,6 +65,7 @@ sub index_page {
    my $fixed_path = $key;
    $fixed_path =~ s{/}{X}g;
 
+   # FIXME: Should author here reflect last edit?
    my $data = {
        _author => $content->creator->login,
        _path => $fixed_path,

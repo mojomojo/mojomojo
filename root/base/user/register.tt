@@ -2,31 +2,15 @@
  <div id="header"><h1>New User Registration</h1></div>
 [%PROCESS breadcrumbs.tt%]
         <div id="content">
-        <form id="loginForm" action="[%base%]/.do_register" method="POST">
-<dl class="form">
-<dt>login:</dt>
-<dd><input id="loginField" type="text" name="login"/></dd>
-<dt>name:</dt>
-<dd><input type="text" name="name"/></dd>
-<dt>password:</dt>
-<dd><input type="password" name="pass"/></dd>
-<dt>repeat:</dt>
-<dd><input type="password" name="confirm"/></dd>
-<dt>email:</dt>
-<dd><input type="text" name="email"/></dd>
-<dd><input type="submit" value="register"/></dd>
-</dl>
-</form>
+
+[% form %]
+
 <p class="end"><span id="logintext">[%message%]</span><br/>
-        [% FOREACH field IN c.form.invalid %]
-        <b>[% field %] is invalid ([%c.form.invalid(field).join(', ')%])</b><br/>
-        [% END %]
-</p>
         </div>
         <div id="bottomnav">&nbsp;
    
        
 <script language="JavaScript">
-$('loginField').focus();
+$('1').focus();
 </script>
 [% PROCESS footer.tt %]

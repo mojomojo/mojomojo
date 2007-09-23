@@ -11,7 +11,7 @@ __PACKAGE__->add_columns(
   "id",
     { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
   "active",
-    { data_type => "INTEGER", is_nullable => 0, size => undef },
+    { data_type => "INTEGER", is_nullable => 0, default_value=>-1, size => undef },
   "registered",
     { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
   "views",

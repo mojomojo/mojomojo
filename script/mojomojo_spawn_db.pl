@@ -35,7 +35,12 @@ my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or
 print "Deploying schema to $dsn\n";
 $schema->deploy;
 
+my $storage=$schema->storage;
+$storage->dbh->do('SET FOREIGN_KEY_CHECKS = 0;') 
+    if (ref $storage eq'DBIx::Class::Storage::DBI::mysql');
+
 print "Creating initial data\n";
+$schema->txn_do (sub {
 my @people = $schema->populate('Person', [
                                           [ qw/ active views photo login name email pass timezone born gender occupation industry interests movies music / ],
                                           [ 1,0,0,'AnonymousCoward','Anonymous Coward','','','',0,'','','','','','' ],
@@ -87,6 +92,9 @@ $schema->populate('Page', [
     			   [ 2,1,1,'help','Help',1,2,3,1 ],
     			   [ 3,1,1,'admin','Admin',1,2,3,1 ],
     			  ]);
+});
+ 
+$storage->dbh->do('SET FOREIGN_KEY_CHECKS = 1;') 
+    if (ref $storage eq 'DBIx::Class::Storage::DBI::mysql');
 
-  
 print "Success!\n";

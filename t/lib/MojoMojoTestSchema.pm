@@ -110,6 +110,9 @@ sub populate_schema {
     my $db = shift;
 
     $db->storage->dbh->do("PRAGMA synchronous = OFF");
+    my $storage=$db->storage;
+    $storage->dbh->do('SET FOREIGN_KEY_CHECKS = 0;') 
+        if (ref $storage eq'DBIx::Class::Storage::DBI::mysql');
 
         $db->storage->ensure_connected;
         $db->deploy( $attrs );
@@ -166,6 +169,10 @@ This is the default home for the admin user. You can change this text by pressin
     			   [ 2,1,1,'help','Help',1,2,3,1 ],
     			   [ 3,1,1,'admin','Admin',1,2,3,1 ],
     			  ]);
+        $storage->dbh->do('SET FOREIGN_KEY_CHECKS = 1;') 
+            if (ref $storage eq 'DBIx::Class::Storage::DBI::mysql');
+    			 
+
 }
 
 1;

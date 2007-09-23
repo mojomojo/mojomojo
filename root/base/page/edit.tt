@@ -8,6 +8,8 @@
 
 [% WRAPPER page/wrapper.tt pre_title=pre_title %]
   
+
+[% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
 [% IF page.content_version ; %] 
  <div id="toplinks">
    <a href="[% c.uri_for(page.path) %]">View</a> |
@@ -53,8 +55,9 @@
                                function( element, value ) {
                                     new Ajax.Updater( 'content_preview',  '[%c.uri_for('jsrpc','render')%]', { parameters: 'content='+window.escape(value),asynchronous: 1,onLoading: function(request){Element.show('editspinner')},onComplete: function(request){Element.hide('editspinner')} } ) 
                                 } );
+    // TODO: Add a script here to confirm leaving the page without saving if it's changed.
     </script>
-
+    
     <script type="text/javascript" language="JavaScript">
       $('body').value=$('body').value +'[%append|js%]';
       Field.focus('body');

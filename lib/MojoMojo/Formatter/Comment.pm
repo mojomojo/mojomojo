@@ -35,7 +35,7 @@ sub format_content {
     my ($class,$content,$c,$self) = @_;
     eval {
     $$content =~ s{\<p\>\=comments\s*\<\/p\>}
-                  {show_comments($c,$self->page)}me;
+                  {show_comments($c,$c->stash->{page})}me;
     };
 }
 
@@ -47,7 +47,6 @@ Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
 
 sub show_comments {
     my ( $c, $page ) = @_;
-    my $view=( $c->req->action eq 'view' ?  1 : 0 );
     $c->forward('/comment/default');
     return '<div id="comments">'.
         $c->view('TT')->render($c,'comment.tt').'</div>';

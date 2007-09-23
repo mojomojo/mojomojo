@@ -15,7 +15,7 @@ gallery -
 <div id="images">
 [%WHILE(picture=pictures.next)%]
 [% imgid = 'img_' _ picture.id %]
-<a  id="[%imgid%]" href="[%c.uri_for('p')%][%
+<a  id="[%imgid%]" href="[%c.uri_for('photo')%][%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb" 
 width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
 <script>var [%imgid%]=new Element.HoverObserver( '[%imgid%]',2,

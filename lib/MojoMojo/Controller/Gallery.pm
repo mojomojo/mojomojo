@@ -70,7 +70,7 @@ sub by_tag : Local {
 
 =cut
 
-sub p : Global {
+sub photo : Global {
     my ( $self, $c, $photo)  = @_;
     $photo                   = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{photo}       = $photo;
@@ -86,7 +86,7 @@ show a picture in tag gallery.
 
 =cut
 
-sub p_by_tag : Global {
+sub photo_by_tag : Global {
     my ( $self, $c, $tag, $photo ) = @_;
     $photo                = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{photo}    = $photo;

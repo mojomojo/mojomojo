@@ -31,6 +31,7 @@ requires (
         'Data::FormValidator::Constraints::DateTime'    => 0,
         'DateTime::Format::Mail'                        => 0,
         'DBIx::Class::DateTime::Epoch'                  => 0,
+        'DBIx::Class::HTML::FormFu'                     => 0,
         'HTML::Prototype::Useful'                       => '0.01',
         'Module::Pluggable::Ordered'                    => '1.4',
         'Data::Page'                                    => '2.00',
@@ -62,6 +63,8 @@ feature 'Markdown Formatter', 'Text::Markdown';
     
    
 build_requires 'Test::WWW::Mechanize::Catalyst';
+build_requires 'WWW::Mechanize::TreeBuilder';
+
 
 tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 

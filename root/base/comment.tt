@@ -1,3 +1,7 @@
+[% IF c.action.reverse == 'pageadmin/edit' || c.action.reverse == 'jsrpc/render'%]
+[comments disabled for preview]
+[% ELSE %]
+[%c.action.reverse%]
 [%IF comments %]
 <h4> [%comments.count%] Comment[% UNLESS comments.count == 1;"s";END%]</h4>
 [% WHILE ( comment = comments.next ) %]
@@ -17,7 +21,6 @@
 [%ELSE%]
 <h4>No Comments posted</h4>
 [%END%]
-[% UNLESS c.action.reverse == 'jsrpc/render.tt' %]
 <p><small><a href="#" onclick="toggleInfo();return false" id="commentlink">add a comment</a></small></p>
 <div id="hidden_info"  class="framedpopup">
 <script>Element.toggle('hidden_info');</script>
