@@ -21,7 +21,7 @@ use Module::Pluggable::Ordered
     except	=> qr/^MojoMojo::Plugin::/, 
     require	=> 1;
 
-our $VERSION='0.999006';
+our $VERSION='0.999007';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class => 'DBIC::Person',
@@ -62,35 +62,27 @@ always go back to a previous version and see what's changed with a easy ajax-
 based diff system. There are also a bunch of other features like a live AJAX
 preview of editing, and RSS feeds for every wiki page.
 
-=head1 METHODS
-
-=head2 expand_wikiword wikiword
-
-Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
+To find out more about how you can use MojoMojo, please visit 
+http://mojomojo.org or read the installation instructions in 
+L<MojoMojo::Installation> to try it out yourself.
 
 =cut
+
+# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
 
 sub expand_wikiword {
     my $c = shift;
     return MojoMojo::Formatter::Wiki->expand_wikiword( @_ );
 }
 
-=head2 wikiword wikiword base
-
-Format a wikiword as a link or as a wanted page, as appropriate.
-
-=cut
+# Format a wikiword as a link or as a wanted page, as appropriate.
 
 sub wikiword {
     return MojoMojo::Formatter::Wiki->format_link( @_ );
 }
 
-=head2 pref key [value]
-
-Find or create a preference key, update it if you pass a value
-then return the current setting.
-
-=cut
+# Find or create a preference key, update it if you pass a value
+# then return the current setting.
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
@@ -107,11 +99,7 @@ sub pref {
 }
 
 
-=head2 fixw word
-
-Clean up explicit wiki words.
-
-=cut
+# Clean up explicit wiki words.
 
 sub fixw {
   my ( $c, $w ) = @_;
@@ -120,25 +108,14 @@ sub fixw {
   return $w;
 }
 
-1;
-
-
-=head2 OVERRIDDEN METHODS
-
-=head2
-
-=item prepare_path
-
-We override this method to work around some of Catalyst's assumptions
-about dispatching. Since MojoMojo supports page namespaces
-(e.g. '/parent_page/child_page'), with page paths that
-always start with '/', we strip the trailing slash from $c->req->base.
-Also, since MojoMojo indicates actions by appending a '.$action' to
-the path (e.g. '/parent_page/child_page.edit'), we remove the page
-path and save it in $c->stash->{path} and reset $c->req->path to $action.
-We save the original uri in $c->stash->{pre_hacked_uri}.
-
-=cut
+# We override this method to work around some of Catalyst's assumptions
+# about dispatching. Since MojoMojo supports page namespaces
+# (e.g. '/parent_page/child_page'), with page paths that
+# always start with '/', we strip the trailing slash from $c->req->base.
+# Also, since MojoMojo indicates actions by appending a '.$action' to
+# the path (e.g. '/parent_page/child_page.edit'), we remove the page
+# path and save it in $c->stash->{path} and reset $c->req->path to $action.
+# We save the original uri in $c->stash->{pre_hacked_uri}.
 
 sub prepare_path {
     my $c = shift;
@@ -161,11 +138,7 @@ sub prepare_path {
     }
 }
 
-=head2 base_uri 
-
-Return the base as an URI object.
-
-=cut
+# Return the base as an URI object.
 
 sub base_uri {
   my $c=shift;
@@ -173,22 +146,15 @@ sub base_uri {
 }
 
 
-=head2 unicode 
-
-format for unicode template use.
-
-=cut
-
+# format for unicode template use.
+ 
 sub unicode {
     my ($c,$string)=@_;
     utf8::decode($string);
     return $string;
 }
 
-=head2 uri_for 
-Overrides $c->uri_for to append path, if relative path is used
-
-=cut
+# Override $c->uri_for to append path, if relative path is used
 
 sub uri_for {
     my $c=shift;
@@ -199,6 +165,8 @@ sub uri_for {
 	}
     $c->NEXT::uri_for(@_);
 }
+
+1; 
 
 =head1 AUTHORS
 
