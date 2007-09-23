@@ -20,11 +20,11 @@ __PACKAGE__->add_columns(
   "creator",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
   "created",
-    { data_type => "VARCHAR", is_nullable => 0, size => 100, epoch => 'ctime' },
+    { data_type => "BIGINT", is_nullable => 0, size => 100, epoch => 'ctime' },
   "status",
     { data_type => "VARCHAR", is_nullable => 0, size => 20 },
   "release_date",
-    { data_type => "VARCHAR", is_nullable => 0, size => 100, epoch => '1' },
+    { data_type => "BIGINT", is_nullable => 0, size => 100, epoch => '1' },
   "remove_date",
     { data_type => "BIGINT", is_nullable => 1, size => 100, epoch => '1' },
   "type",
@@ -38,9 +38,7 @@ __PACKAGE__->add_columns(
   "precompiled",
     { data_type => "TEXT", is_nullable => 1, size => undef },
 
-#  "created",      => {data_type=>'bigint',epoch=>'ctime'},
-#  "release_date", => {data_type=>'bigint',epoch=>'1'},
-#  "remove_date",  => {data_type=>'bigint',epoch=>'1'},
+
 );
 __PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key("version", "page");
