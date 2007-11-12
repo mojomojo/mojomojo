@@ -1,0 +1,62 @@
+---
+action: 
+indicator: submit
+auto_fieldset: 1
+auto_id: '%f_%n'
+
+elements:
+  - type: Text
+    name: login
+    label: Login
+    filters:
+      - LowerCase
+    constraints:
+      - Required
+  - type: Password
+    name: pass
+    label: Password
+    constraints:
+      - Required
+      - type: Equal
+        others: confirm_password
+        message: Password did not match
+      - type: Length
+        min: 4
+        max: 14
+        message: Password must be between 4 and 14 chars
+  - type: Password
+    name: confirm_password
+    label: Repeat  
+  - type: Text
+    name: email
+    label: Email
+    filters:
+      - HTMLEscape
+    constraints:
+      - Email
+      - Required
+  - type: Text
+    name: name
+    label: Name
+    filters:
+      - HTMLEscape
+    constraints:
+      - Required
+  - type: Password
+    name: pass
+    label: Password
+    constraints:
+      - Required
+      - type: Equal
+        others: confirm_password
+        message: Password did not match
+      - type: Length
+        min: 4
+        max: 14
+        message: Password must be between 4 and 14 chars
+  - type: Password
+    name: confirm_password
+    label: Repeat
+  - type: Submit
+    name: submit
+    value: Register
