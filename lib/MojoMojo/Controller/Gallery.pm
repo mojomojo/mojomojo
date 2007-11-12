@@ -59,7 +59,7 @@ sub by_tag : Local {
         unless length($c->stash->{page}->path) == 1;  # root
     $c->stash->{pictures} =$c->model("DBIC::Photo")->search(
         $conditions, { 
-	    join     => [qw/attachment/],
+	    join     => [qw/attachment tags/],
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'

@@ -11,9 +11,11 @@
 <th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
 [%WHILE (user=users.next) %]
 <tr>
-[%activeurl=base _ "/.admin/user/" _ user.id _ "/active"%]
+[%activeurl=base _ "/.admin/update_user/" _ user.id _ '/active' %]
 [%active=user.active || 0%]
-<td><span id="active[%user.id%]">[%c.prototype.link_to_remote(active ,{url=>activeurl,update=>"active$user"})%]</a></span></td>
+<td>
+<a href="[%activeurl%]" onclick=" new Ajax.Updater( 'active_[%user.id%]',  '[%activeurl%]', { asynchronous: 1 } ) ; return false">
+    <span id="active_[%user.id%]">[%active%]</span></a></td>
 <td><a href="[%base%][%user.link%].profile">[%user.login%]</a></td>
 <td>&nbsp;</td>
 <td>[%user.name%]</td>

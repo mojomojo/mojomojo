@@ -1,7 +1,13 @@
-0.999006 2007-09-24 00:01:00
+0.999008 2007-11-12 22:43:00
+	- Fix ajax for tagging
+	- Fix tag galleries
+	- Fix ajax for user activation.
+
+0.999007 2007-09-24 00:01:00
         - Really fix deploy script for mysql
         - Fix deploy script for pg.
         - Refactor test data so it only exists once.
+        - Updated main class POD (removed developer docs and added to description)
 
 0.999006 2007-09-23 12:12:00
         - Fix deploy script to work with mysql constraints

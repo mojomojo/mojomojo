@@ -6,7 +6,7 @@ use Path::Class 'file';
 
 use Catalyst qw/            Authentication
 		Cache::FileCache    Email
-	    FillInForm	        FormValidator	    
+	    FillInForm	        FormValidator
 		Session		        Session::Store::File
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
@@ -21,7 +21,7 @@ use Module::Pluggable::Ordered
     except	=> qr/^MojoMojo::Plugin::/, 
     require	=> 1;
 
-our $VERSION='0.999007';
+our $VERSION='0.999008';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class => 'DBIC::Person',

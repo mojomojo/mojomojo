@@ -99,8 +99,6 @@ User listing with pager, for enabling/disabling users.
 
 sub user : Local {
     my ( $self, $c, $user ) = @_;
-    $c->forward('update_user') if $user;
-    $c->stash->{template}='settings/user.tt';
     my $iterator =$c->model("DBIC::Person")->search( 
        {}, {
             page           =>$c->req->param('page') || 1,
@@ -117,13 +115,14 @@ Update user based on user listing.
 
 =cut
 
-sub update_user : Private {
-    my ( $self, $c, $user, $action ) = @_;
+sub update_user : Local {
+    my ( $self, $c, $user ) = @_;
     $user=$c->model("DBIC::Person")->find($user) || return;
-    if ($action eq 'active') {
+  #  if ($action eq 'active') {
         $user->active(! $user->active);
-    }
+  #  }
     $user->update;
+    $c->stash->{user}=$user;
 }
 
 =back

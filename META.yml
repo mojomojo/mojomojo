@@ -69,4 +69,4 @@ requires:
   XML::Clean: 0
   YAML: 0.36
 tests: t/01app.t t/02pod.t t/03podcoverage.t t/formatter_comment.t t/formatter_irclog.t t/formatter_wiki.t t/schema_DBIC.t t/schema_DBIC_Attachment.t t/schema_DBIC_Content.t t/schema_DBIC_Page.t t/schema_DBIC_Person.t t/schema_DBIC_Tag.t t/c/attachment.t t/c/comment.t t/c/journal.t t/c/jsrpc.t t/c/page.t t/c/page_edit.t t/c/user.t
-version: 0.999006
+version: 0.999007
