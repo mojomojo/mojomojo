@@ -12,7 +12,7 @@
 <a href="[%base%]/.logout">log out</a> |
 [% ELSE %]
   <a href="[%c.uri_for('login')%]" title="Get in there" accesskey="L">log in</a> | 
-[% IF(c.pref('open_registration'))%]<a href="[%base%]/.register">register</a> |[%END%]
+[% IF(c.pref('open_registration'))%]<a href="[%c.uri_for('register')%]">register</a> |[%END%]
 [% END %]
   [% IF template.name == 'page/list.tt' %]
   <b class="navOn" title="Alphabetically sorted list of pages">all pages</b> | 

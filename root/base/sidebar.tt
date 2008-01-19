@@ -10,7 +10,7 @@ if (node.getAttribute("class") != "menuParentMissingChildren") return;
 nodeId = node.getAttribute("id");
 pageId = nodeId.replace("menupage", "");
 
-new Ajax.Updater(nodeId, "[% base %]/.jsrpc/child_menu", {parameters: 'page_id='+pageId, asynchronous: true, insertion: Insertion.Bottom});
+new Ajax.Updater(nodeId, "[% c.uri_for('jsrpc/child_menu')", {parameters: 'page_id='+pageId, asynchronous: true, insertion: Insertion.Bottom});
 
 node.setAttribute("class", "menuParent");
 

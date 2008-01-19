@@ -21,9 +21,9 @@
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
-    <a href="[% base %][% page.path %]">[% c.expand_wikiword(page.name) %]</a>
+    <a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by <a class="existingWikiWord" href="[% base %][% page.content.creator.login %]">[% page.content.creator.name %]</a>
+      by <a class="existingWikiWord" href="[% c.uri_for( page.content.creator.link) %]">[% page.content.creator.name %]</a>
       at [% page.content.created.hms(':') %]
     </div>
   </li>

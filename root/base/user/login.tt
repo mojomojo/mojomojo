@@ -12,7 +12,7 @@
 </dl>
 </form>
 <p class="end"><span id="logintext">[%message%]</span>
-[% IF(c.pref('open_registration'))%] (or <a href="[%base%]/.register">register</a> instead)[%END%]
+[% IF(c.pref('open_registration'))%] (or <a href="[%c.uri_for('register')">register</a> instead)[%END%]
         </p>
         </div>
         <div id="bottomnav">&nbsp;

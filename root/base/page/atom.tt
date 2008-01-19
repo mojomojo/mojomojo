@@ -14,7 +14,7 @@
 [%FOREACH page IN pages %]
 <entry>
 <title>[% page.name %]</title>
-<link rel="alternate" type="text/html" href="[% base %][% page.path %]" />
+<link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <issued>[%IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</issued>
@@ -24,7 +24,7 @@
 <summary type="text/plain">[% page.content.utf8 %]</summary>
 <author>
 <name>[%page.content.creator.name%]</name>
-<url>[%base%][% page.content.creator.link %]</url>
+<url>[%c.uri_for( page.content.creator.link )%]</url>
 </author>
 <content type="text/html" mode="escaped" xml:lang="en" xml:base="[% base %]">
 <![CDATA[[% page.content.formatted(c) %] ]]> </content>

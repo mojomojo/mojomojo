@@ -11,7 +11,7 @@
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
   [% ELSE %]
-  <a href="[% base %]/.list/[% tag.tag %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  <a href="[%c.uri_for('list', tag.tag)%]">[% tag.tag %]</a> ([% tag.refcount %]) 
   [% END %]
   [% END %]</small>
 </div>
@@ -19,11 +19,11 @@
 
   <h2> List by [% activetag %]
           <br/><small style="font-size: 12px"><i>All pages tagged with [% activetag %] listed alphabetically</i><br/>
-	  <a href="[% base %]/.recent/[% activetag %]">recent pages in [% activetag %]</a></small>
+	  <a href="[% c.uri_for('recent', activetag) %]">recent pages in [% activetag %]</a></small>
  </h2>
 <ul>
 [% FOREACH page IN pages %]
-    <li><a href="[% base %][% page.path %]">[% c.expand_wikiword(page.path) %]</a></li>
+    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.path) %]</a></li>
 [% END %]
 </ul>
 </div>
@@ -34,7 +34,7 @@
   <ul style="margin-bottom: 10px">
 [% FOR reltag = related.list %]
  
-    <li><a href="[% base %]/.list/[% reltag.tag %]">[% reltag.tag %]</a> ([% reltag.refcount %])</li>
+    <li><a href="[% c.uri_for('list', reltag.tag) %]">[% reltag.tag %]</a> ([% reltag.refcount %])</li>
 [% END %]
   </ul>
 </div>

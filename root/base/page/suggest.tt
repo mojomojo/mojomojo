@@ -5,8 +5,8 @@
 <p>
  [% FOREACH page IN path_pages %]
   [% IF loop.first %]
-  <a href="[% base _ page.path %]">[% c.pref("name") || "MojoMojo" %] Home</a>
-  [% ELSE %] / <a href="[% base _ page.path %]">[% page.name_orig %]</a>
+  <a href="[% c.uri_for( page.path )%]">[% c.pref("name") || "MojoMojo" %] Home</a>
+  [% ELSE %] / <a href="[% c.uri_for( page.path )%]">[% page.name_orig %]</a>
   [% END %]
  [% END %] ...
 </p>
@@ -14,7 +14,7 @@
 <p>
  ...
  [% FOREACH page IN proto_pages %]
- / <a class="protoPage" href="[% base _ page.path %].edit">[% page.name_orig %]</a>
+ / <a class="protoPage" href="[% c.uri_for( page.path )%].edit">[% page.name_orig %]</a>
  [% END %]
 </p>
 <p>

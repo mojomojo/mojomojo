@@ -1,9 +1,9 @@
 [%PROCESS header.tt%]
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
 <div id="toplinks">
-<a accesskey="C" href="[%base%]/.admin">configuration</a> |
+<a accesskey="C" href="[%c.uri_for('/.admin')%]">configuration</a> |
 <b class="navOn">users</a> |
-<a accesskey="B" href="[%base%]/">back</a> </div>
+<a accesskey="B" href="[% c.uri_for('view')%]">back</a> </div>
 
  <div id="content">
  <h1>Users</h1>
@@ -11,12 +11,12 @@
 <th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
 [%WHILE (user=users.next) %]
 <tr>
-[%activeurl=base _ "/.admin/update_user/" _ user.id _ '/active' %]
+[%activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
 [%active=user.active || 0%]
 <td>
 <a href="[%activeurl%]" onclick=" new Ajax.Updater( 'active_[%user.id%]',  '[%activeurl%]', { asynchronous: 1 } ) ; return false">
     <span id="active_[%user.id%]">[%active%]</span></a></td>
-<td><a href="[%base%][%user.link%].profile">[%user.login%]</a></td>
+<td><a href="[%c.uri_for(user.link)%].profile">[%user.login%]</a></td>
 <td>&nbsp;</td>
 <td>[%user.name%]</td>
 <td><a href="mailto:[%user.email%]">[%user.email||"no email address"%]</a></td>

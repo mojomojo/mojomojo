@@ -1,8 +1,8 @@
 [%PROCESS header.tt%]
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
 <div id="toplinks"><b class="navOn">configuration</b> |
-<a accesskey="U" href="[%base%]/.admin/user">users</a> |
-<a accesskey="B" href="[%base%]/">back</a> </div>
+<a accesskey="U" href="[%c.uri_for('admin/user')">users</a> |
+<a accesskey="B" href="[%c.uri_for('view')%]">back</a> </div>
  <div id="content">
  <h1>Site Configuration</h1>
 <form id="adminform" action="[%c.uri_for('/.admin/update')%]" method="post">
@@ -26,7 +26,7 @@
 <input type="checkbox" name="restricted"[% IF (c.pref('restricted_user'))%] checked="checked"[%END%]/><br/>
 <p id="message">[% message || 'ready' %]</p>
 <input type="submit" name="save" value="save"/>
- <div class="spinner"><img id="editspinner" style="display:none;" src="[%base%]/.static/spinner.gif">&nbsp;</div>
+ <div class="spinner"><img id="editspinner" style="display:none;" src="[%c.uri_for('/.static/spinner.gif')">&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]

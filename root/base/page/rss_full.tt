@@ -3,7 +3,7 @@
   <channel>
 	<title>[ [% c.pref('name') || config.name || "MojoMojo" %]
   ] Content for [% page.name_orig %].</title>
-	<link>[%base%]</link>
+	<link>[%c.uri_for('view')%]</link>
 	<description>Recent changes in [%page.path%]</description>
 	<language>en-us</language>
 	<ttl>40</ttl>
@@ -12,8 +12,8 @@
       <title>[% request.expand_wikiword(page.path) %]</title>
       <description>[% FILTER html %][% page.content.formatted(c) %][% END %]</description>    
       <pubDate>[% page.content.pub_date%]</pubDate>
-      <guid>[% base %][% page.path %]</guid>
-      <link>[% base %][% page.path %]</link>
+      <guid>[% c.uri_for(page.path) %]</guid>
+      <link>[% c.uri_for(page.path) %]</link>
       <dc:creator>[% page.content.creator.login %]</dc:creator>
     </item>
 [%END%]

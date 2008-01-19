@@ -18,7 +18,7 @@
  </h2>
 <ul>
 [% FOREACH page IN pages %]
-    <li><a href="[% base %][% page.path %]">[%page.name_orig%]</a></li>
+    <li><a href="[% c.uri_for(page.path) %]">[%page.name_orig%]</a></li>
 [% END %]
 </ul>
 </div>

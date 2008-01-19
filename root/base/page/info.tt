@@ -4,7 +4,7 @@
  [% _name = c.expand_wikiword(page.name_orig) %]
 [% END %]
 
-[% WRAPPER page/wrapper.tt title = "Page info for " _ _name %]
+[% WRAPPER page/wrapper.tt title = "Page info for " _ page.path %]
 <div id="content">
 <p>
 <div class="rightHandSide">
@@ -22,7 +22,7 @@
 <ol>
 [% FOREACH version IN page.versions %]
 <h4>
-<li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%base%][%version.creator.link%]">[%version.creator.name%]</a></li>
+<li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a></li>
 [%END%]
 </ol>
 </h4>

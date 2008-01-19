@@ -1,4 +1,8 @@
+        - Update several base _ ... to uri_for
+        - Put admin link on every page if admin
         - Fix incorrect url for change password.
+        - Update minimum version for Controller::HTML::Widget
+        
 0.999008 2007-11-12 22:43:00
         - Fix ajax for tagging
         - Fix tag galleries

@@ -1,6 +1,6 @@
 <form action="[%c.uri_for('comment/login')%]" method="post" onsubmit=" new Ajax.Updater( 'hidden_info',  '[%c.uri_for('comment/login')%]', { parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
 <small>You have to log in to post a comment.
-(<a href="[%base%]/.register">register</a>)</small>
+(<a href="[%c.uri_for('register')%]">register</a>)</small>
 </span>
 <dl>
 <dt>login:</dt>

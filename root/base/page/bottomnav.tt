@@ -17,9 +17,9 @@
 [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
  <a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a>
 [%END%]
- [% IF page.path == '/' && user.is_admin %]
- | <a title="Change site settings" href="[% base %]/.admin">Edit Settings</a>
- [% END %]
+[% IF user.is_admin %]
+ | <a title="Change site settings" href="[%c.uri_for('admin')%]">Edit Settings</a>
+ [% END %] 
  [% IF c.req.action=='info'%]
  | <b title="Page meta information" class="navOn">Page Info</a>
  [% ELSE %]
@@ -63,7 +63,7 @@
  <small>
   | Linked from:
   [% FOR linkitem = page.links_to %] 
-   <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%base%][%linkitem.path%]">[%c.expand_wikiword(linkitem.path)%]</a>
+   <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%c.uri_for('linkitem.path')%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </small>
 </span>[% END %]
