@@ -1,7 +1,8 @@
+        - Fix incorrect url for change password.
 0.999008 2007-11-12 22:43:00
-	- Fix ajax for tagging
-	- Fix tag galleries
-	- Fix ajax for user activation.
+        - Fix ajax for tagging
+        - Fix tag galleries
+        - Fix ajax for user activation.
 
 0.999007 2007-09-24 00:01:00
         - Really fix deploy script for mysql

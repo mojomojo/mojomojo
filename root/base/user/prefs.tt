@@ -3,7 +3,7 @@
 <h2>your account</h2>
 <div class="rightHandSide">
 <ul>
-<li><a href="[%base%][%page_user.link%].prefs/password">change password</a></li>
+<li><a href="[%c.uri_for('prefs/password')%]">change password</a></li>
 </ul>
 </div>
 <p>[%message%]</p>
