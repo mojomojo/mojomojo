@@ -162,6 +162,7 @@ sub register : Global FormConfig {
 
     $user->fill_formfu_values($form);
     if ( $form->submitted && !$form->has_errors ) {
+         $user->active(0);
          $user->populate_from_formfu( $form );
          $user->insert();
          $c->forward('do_register',[$user]);

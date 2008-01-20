@@ -42,21 +42,6 @@ elements:
       - HTMLEscape
     constraints:
       - Required
-  - type: Password
-    name: pass
-    label: Password
-    constraints:
-      - Required
-      - type: Equal
-        others: confirm_password
-        message: Password did not match
-      - type: Length
-        min: 4
-        max: 14
-        message: Password must be between 4 and 14 chars
-  - type: Password
-    name: confirm_password
-    label: Repeat
   - type: Submit
     name: submit
     value: Register

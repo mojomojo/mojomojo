@@ -46,8 +46,8 @@ sub end : ActionClass('RenderView') {
     my ( $self ) = shift;
     my ( $c ) = @_;
     $c->stash->{path} ||= '/';
-    $c->NEXT::end(@_);
 }
+
 
 =item auto
 
