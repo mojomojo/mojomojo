@@ -27,6 +27,7 @@
 \b\.#
 \bcache
 \bplucene
+\buploads
 
 \bdb/oracle
-\bt/var
+\bt/var/mojomojo

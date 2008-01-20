@@ -232,7 +232,7 @@ Extract and store all links and wanted paged from a given content
 version.
 
 =cut
-
+use Data::Dumper;
 sub store_links {
     my ($self) = @_;
     return unless ($self->status eq 'released');
@@ -245,9 +245,9 @@ sub store_links {
     my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links( \$content, $page );
     return unless (@$linked_pages || @$wanted_pages);
     for (@$linked_pages) {
-	my $link = $self->result_source->schema->resultset('Link')->
-	    find_or_create(
-		    { from_page => $self->page->id, to_page => $_->id });
+	    my $link = $self->result_source->schema->resultset('Link')->
+	        find_or_create(
+		        { from_page => $self->page->id, to_page => $_->id });
     }
     for (@$wanted_pages) {
 	my $wanted_page = $self->result_source->schema()->

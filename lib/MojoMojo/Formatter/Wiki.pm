@@ -215,7 +215,7 @@ sub find_links {
 
     my $wikiword_regex = qr/$non_wikiword_check($wikiword)/x;
     my $explicit_regex = qr/$non_wikiword_check$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
-
+   
     for ($wikiword_regex, $explicit_regex) {
         while ($$content =~ /$_/g) {
             my $link = $1;

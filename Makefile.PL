@@ -8,7 +8,7 @@ requires (
         'Archive::Zip'                                  => '1.14',
         'Catalyst'                                      => '5.7000',
         'Catalyst::Action::RenderView'                  => '0.07',
-        'Catalyst::Controller::HTML::FormFu'            => 0,
+        'Catalyst::Controller::HTML::FormFu'            => '0.02000',
         'Catalyst::Controller::BindLex'                 => 0,
         'Catalyst::Model::DBIC::Schema'                 => '0.01',      
         'Catalyst::Model::Search'                       => 0,
