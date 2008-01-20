@@ -10,7 +10,7 @@
 [%FOREACH page IN pages %]
     <item>
       <title>[% request.expand_wikiword(page.path) %]</title>
-      <description>[% FILTER html %][% page.content.formatted(c) %][% END %]</description>    
+      <description><![CDATA[[% page.content.formatted(c) %]]</description>    
       <pubDate>[% page.content.pub_date%]</pubDate>
       <guid>[% c.uri_for(page.path) %]</guid>
       <link>[% c.uri_for(page.path) %]</link>
