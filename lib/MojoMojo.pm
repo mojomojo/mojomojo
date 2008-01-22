@@ -21,7 +21,7 @@ use Module::Pluggable::Ordered
     except	=> qr/^MojoMojo::Plugin::/, 
     require	=> 1;
 
-our $VERSION='0.999008';
+our $VERSION='0.999010';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class => 'DBIC::Person',
@@ -165,6 +165,11 @@ sub uri_for {
 	}
     $c->NEXT::uri_for(@_);
 }
+
+sub uri_for_static {
+    my ($self,$asset)=@_;
+    return ($self->config->{static_path} || '/.static/') . $asset;
+} 
 
 1; 
 

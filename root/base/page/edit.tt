@@ -69,7 +69,7 @@
     <div class="spinner">
         <span id="editstatus"></span>
       <img id="editspinner" style="display:none;" 
-	   src="[%c.uri_for('/.static/spinner.gif')%]"/>
+	   src="[%c.uri_for_static('spinner.gif')%]"/>
     </div>
     
     <input type="submit" value='[% IF content.version > 1; "Save"; ELSE; "Create"; END %]'/> as 

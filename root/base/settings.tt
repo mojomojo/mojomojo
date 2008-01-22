@@ -26,7 +26,7 @@
 <input type="checkbox" name="restricted"[% IF (c.pref('restricted_user'))%] checked="checked"[%END%]/><br/>
 <p id="message">[% message || 'ready' %]</p>
 <input type="submit" name="save" value="save"/>
- <div class="spinner"><img id="editspinner" style="display:none;" src="[%c.uri_for('/.static/spinner.gif')">&nbsp;</div>
+ <div class="spinner"><img id="editspinner" style="display:none;" src="[%c.uri_for_static('/spinner.gif')">&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;
 [%PROCESS footer.tt%]
