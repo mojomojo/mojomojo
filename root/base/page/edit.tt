@@ -32,7 +32,7 @@
 [% ELSE %]
    <i>To start editing this page, write in the text area below this
    preview. To find out what kind of codes you can use click the syntax
-   link above.</i>"
+   link above.</i>
 [% END %]
 </div>
 <p>
