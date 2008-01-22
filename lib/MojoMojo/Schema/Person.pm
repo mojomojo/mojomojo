@@ -5,7 +5,7 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core HTML::FormFu/);
+__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",

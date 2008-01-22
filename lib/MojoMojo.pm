@@ -6,7 +6,6 @@ use Path::Class 'file';
 
 use Catalyst qw/            Authentication
 		Cache::FileCache    Email
-	    FillInForm	        FormValidator
 		Session		        Session::Store::File
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
