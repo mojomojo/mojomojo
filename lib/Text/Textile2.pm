@@ -195,7 +195,7 @@ $urlre = qr{
     # Match the leading part (proto://hostname, or just hostname)
     (?:
         # ftp://, http://, or https:// leading part
-        (?:ftp|https?|telnet|nntp)://(?:\w+(?::\w+)?@)?[-\w]+(?:\.\w[-\w]*)+
+        (?:ftp|https?|telnet|nntp|irc)://(?:\w+(?::\w+)?@)?[-\w]+(?:\.\w[-\w]*)+
         |
         (?:mailto:)?[-\+\w]+\@[-\w]+(?:\.\w[-\w]*)+
         |
