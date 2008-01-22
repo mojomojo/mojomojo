@@ -33,9 +33,11 @@ Body {
 
 #header {
 	background: url(gfx/header.jpg) White;
-	height: 54px;
+	height: auto;
+	padding-bottom: 0.1em;
 	margin: 0;
 }
+
 
 #breadcrumbs {
 	background: #4E5662;
@@ -123,7 +125,7 @@ Body {
 }
 #header h1 {
 	top: 14px;
-	left: 100px;
+    padding-left: 100px;
 	position: relative;
 	font-size: 30px;
 	color: #ffffff;
@@ -720,7 +722,8 @@ div.photo img{
 }
 
 .inline p,dt,dd{
-    font-size: 1.2em;
+    font-size: 0.8em;
+    width: auto;
 }
 
 acronym {
