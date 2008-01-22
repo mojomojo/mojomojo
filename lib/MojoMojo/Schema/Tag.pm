@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use base 'DBIx::Class';
+use Carp qw/croak/;
 
 __PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
 __PACKAGE__->table("tag");
@@ -101,6 +102,10 @@ sub related_to : ResultSet {
     })
 }
 
-sub refcount { shift->get_column('refcount') };
+sub refcount { 
+    my $self=shift;
+    return $self->get_column('refcount') if $self->has_column_loaded('refcount');
+    croak 'Tried to call refcount on resultset without column';
+}
 
 1;
