@@ -705,6 +705,9 @@ ul#menuHome {
     height:1em;
 }
 
+#editstatus {
+    color: red;
+}
 
 div.photo img{
     margin: 1em;

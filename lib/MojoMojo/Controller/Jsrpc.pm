@@ -36,6 +36,12 @@ sub render : Local {
     if ( $input && $input =~ /(\S+)/ ) {
         $output =  $c->model("DBIC::Content")->format_content( $c, $input );
     }
+
+    unless($output) {
+        $output = 'Your input is invalid, please reformat it and try again.';
+        $c->res->status(500);
+    }
+
     utf8::decode($output);
     $c->res->output( $output );
 }
