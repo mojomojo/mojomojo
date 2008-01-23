@@ -11,6 +11,6 @@
    
        
 <script language="JavaScript">
-$('1').focus();
+$('register_login').focus();
 </script>
 [% PROCESS footer.tt %]

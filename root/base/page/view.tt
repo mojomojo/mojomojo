@@ -10,13 +10,14 @@
 <div id="current">
 	[% IF render == 'highlight' %]
 	[% content.highlight(c) %]
+    </div>
 	<script language="Javascript" type="text/javascript">
-	Fat.fade();
+	Fat.fade('.fade');
 	</script>
 	[% ELSE %]
 	[% content.formatted(c) %]
-	[% END %]
 </div>
+	[% END %]
 
 <div id="changes" style="display: none">
 	<p id="message">
