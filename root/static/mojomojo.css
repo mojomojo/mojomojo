@@ -24,7 +24,7 @@ Body {
 #container {
 	width: 750px;
 	position: absolute;
-  left: 50%;
+    left: 50%;
 	height: 500px;
 	top: 10px;
 	display: block;
@@ -894,4 +894,10 @@ fieldset .comment .comment {
 fieldset .label .comment {
 	display: block;
 	margin-left: 12em;
+}
+
+#powered
+{
+    float:right;
+    clear:left;
 }

@@ -2,7 +2,7 @@
  <div id="header"><h1>Login</h1></div>
  [%PROCESS breadcrumbs.tt%]
         <div id="content">
-        <form id="loginForm" action="[%c.uri_for('login')%]" method="POST">
+        <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
 <dl class="form">
 <dt>login:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
@@ -15,10 +15,10 @@
 [% IF(c.pref('open_registration'))%] (or <a href="[%c.uri_for('register')%]">register</a> instead)[%END%]
         </p>
         </div>
-        <div id="bottomnav">&nbsp;
+        <div id="bottomnav">&nbsp;</div>
    
        
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 Field.focus('loginField');
 </script>
 [% PROCESS footer.tt %]

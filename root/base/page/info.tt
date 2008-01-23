@@ -5,27 +5,21 @@
 [% END %]
 
 [% WRAPPER page/wrapper.tt title = "Page info for " _ page.path %]
-<div id="content">
-<p>
 <div class="rightHandSide">
-<b>Active version:</b> [%page.content_version%]<br/>
-<b>Content size:</b> [%page.content.body.length%] chars<br/>
-<b>Children:</b> [%page.children.size%]<br/>
-<b>Descendants:</b> [%page.descendants.size%]<br/>
-<b>Links to:</b> [%page.links_to.size||0%] pages<br/>
-<b>Links from:</b> [%page.links_from.size||0%] pages<br/>
-<b>Attachments:</b>[%page.attachments.size||0%]<br/>
-<b>Photos: </b> [%page.has_photos||0%]
-</p>
+ <b>Active version:</b> [%page.content_version%]<br/>
+ <b>Content size:</b> [%page.content.body.length%] chars<br/>
+ <b>Children:</b> [%page.children.size%]<br/>
+ <b>Descendants:</b> [%page.descendants.size%]<br/>
+ <b>Links to:</b> [%page.links_to.size||0%] pages<br/>
+ <b>Links from:</b> [%page.links_from.size||0%] pages<br/>
+ <b>Attachments:</b>[%page.attachments.size||0%]<br/>
+ <b>Photos: </b> [%page.has_photos||0%]
 </div>
 <h3>[%page.versions.size%] revisions</h3>
 <ol>
-[% FOREACH version IN page.versions %]
-<h4>
-<li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a></li>
-[%END%]
+ [% FOREACH version IN page.versions %]
+ <li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a></li>
+ [%END%]
 </ol>
-</h4>
-</div>
 [% END %]
 

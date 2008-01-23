@@ -30,7 +30,7 @@ Log in through the authentication system.
 
 sub login : Global {
     my ($self,$c) = @_;
-    my $message:Stashed = 'please enter username & password';
+    my $message:Stashed = 'please enter username &amp; password';
     if ( $c->req->params->{login} ) {
         if ( $c->login() ) {
 	    $c->stash->{user}=$c->user->obj;

@@ -1,5 +1,4 @@
 [% WRAPPER page/wrapper.tt title = title || config.application_name || "MojoMojo" %]
-<div id="content">
 [% PROCESS pager.tt %]
 <ul>
 [% WHILE (user=users.next) %]
@@ -11,6 +10,5 @@ Last Changed
 </li>
 [%END %]
 </ul>
-</div>
 [% END %]
 

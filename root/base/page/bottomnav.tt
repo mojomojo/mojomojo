@@ -1,52 +1,52 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
-[% IF user %]
-<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
-<div id="addtag" style="display:none;" class="formdiv">
-<form action="[%c.uri_for('jsrpc/submittag')%]" method="post" onsubmit=" new Ajax.Updater( 'tags', '[%c.uri_for('jsrpc/submittag')%]', { parameters: Form.serialize(this),asynchronous: 1,onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},onComplete: function(request){Fat.fade('.highlight');} } ) ; return false"> 
-<input id="taginput" type="text" name="tag" width="5" autocomplete="off">
-<input class="addbutton" type="submit" name="add" value="+"> 
-</form>
-</div>
-[%END%]
-<div id="tags">
-[%  c.subreq('/inline_tags', 'page'=>page ) %]
-</div>
+  [% IF user %]
+    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
+    <div id="addtag" style="display:none;" class="formdiv">
+      <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" onsubmit=" new Ajax.Updater( 'tags', '[%c.uri_for('jsrpc/submittag')%]', { parameters: Form.serialize(this),asynchronous: 1,onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},onComplete: function(request){Fat.fade('.highlight');} } ) ; return false"> 
+        <input id="taginput" type="text" name="tag" size="5" />
+ 	    <input class="addbutton" type="submit" name="add" value="+" /> 
+      </form>
+    </div>
+  [%END%]
+  <div id="tags">
+    [%  c.subreq('/inline_tags', 'page'=>page ) %]
+  </div>
 [% END %]
 <div id="bottomnav">
 [% IF (!rev OR rev==page.content_version) %]
-[% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
- <a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a>
-[%END%]
-[% IF user.is_admin %]
+  [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+    <a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a>
+  [%END%]
+  [% IF user.is_admin %]
  | <a title="Change site settings" href="[%c.uri_for('admin')%]">Edit Settings</a>
- [% END %] 
- [% IF c.req.action=='info'%]
- | <b title="Page meta information" class="navOn">Page Info</a>
- [% ELSE %]
+  [% END %] 
+  [% IF c.req.action=='info'%]
+ | <a title="Page meta information" class="navOn">Page Info</a>
+  [% ELSE %]
  | <a title="Page meta information" href="[% c.uri_for('info')%]" accesskey="I">Page Info</a>
- [% END%]
- [% IF page.content_version && page.content_version > 1 %] 
+  [% END%]
+  [% IF page.content_version && page.content_version > 1 %] 
  | <a title="See previous revision" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">Back in time</a> 
- ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])
- [% END %]
- [% IF  (page.content_version < page.content.max_version) %]
- <a title="See next revision" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">Forward in time</a> 
- <small>([% page.content.max_version - page.content_version %] more)</small>
- [%END%]
+   ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])
+  [% END %]
+  [% IF  (page.content_version < page.content.max_version) %]
+    <a title="See next revision" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">Forward in time</a> 
+    <small>([% page.content.max_version - page.content_version %] more)</small>
+  [%END%]
 [% ELSE %]
- [% IF (rev < page.content.max_version) %]
- <a "title="See next revision" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">Forward in time</a> 
- <small>([% page.content.max_version - rev %] more)</small>
- [% END %]
- [% IF rev > 1 %]
+  [% IF (rev < page.content.max_version) %]
+    <a "title="See next revision" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">Forward in time</a> 
+    <small>([% page.content.max_version - rev %] more)</small>
+  [% END %]
+  [% IF rev > 1 %]
  | <a title="See previous revision" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">Back in time</a> 
- <small>([% rev - 1 %] more)</small>
- [%END%]
- [% UNLESS rev == page.content_version %]
- | <a title="Back to the page" href="[% c.uri_for('view')%]" accesskey="C">Current Revision</a>
- [% END %]
+    <small>([% rev - 1 %] more)</small>
+  [%END%]
+  [% UNLESS rev == page.content_version %]
+   | <a title="Back to the page" href="[% c.uri_for('view')%]" accesskey="C">Current Revision</a>
+  [% END %]
 [% END %] 
- [% IF page.content_version && page.content_version > 1 %] 
+[% IF page.content_version && page.content_version > 1 %] 
  <span id="show_changes">
   | <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev)%]'); return false;">See changes</a>
  </span>
@@ -66,4 +66,6 @@
    <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%c.uri_for('linkitem.path')%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </small>
-</span>[% END %]
+</span>
+[% END %]
+</div>

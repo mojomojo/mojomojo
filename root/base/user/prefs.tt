@@ -1,5 +1,5 @@
 [% WRAPPER page/wrapper.tt title="preferences" %]
-<div class="preferences" id="content">
+<div class="preferences">
 <h2>your account</h2>
 <div class="rightHandSide">
 <ul>

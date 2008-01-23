@@ -1,5 +1,4 @@
 [% WRAPPER page/wrapper.tt title="Feeds" %]
-<div id="content">
 <p>You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page.</p> 
 
 <ul id="feedsList">
@@ -7,5 +6,4 @@
   <li><a href="[%c.uri_for('rss')%]">Headlines (RSS 2.0)</a></li>
   <li><a href="[%c.uri_for('atom')%]">Full content (Atom 0.3)</a></li>
 </ul>
-</div>
 [% END %]
