@@ -6,6 +6,9 @@
         - Fix render bug in preview
         - Various markup fixes (gphat)
         - Escape wiki formatting inside pre.
+        - Markdown formatter now using MultiMarkdown
+        - Fix JS for highlight + focus in register
+        - Fixed profile, added Last Changed.
 
 0.999010 2008-01-20 20:16:00
         - Fix registration form.
