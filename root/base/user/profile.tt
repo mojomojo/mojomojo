@@ -1,5 +1,4 @@
 [% WRAPPER page/wrapper.tt title = "User profile for " _ person.name %]
-<div id="content">
 <dl>
 <dt>Name:</dt>
 <dd id="name">[%person.name || "Name missing"%]</dd>
@@ -12,7 +11,7 @@
 [% END %]
 </dd>
 <dt>Age:</dt>
-<dd>[%person.age || '(Unknown)' %] <dd>
+<dd>[%person.age || '(Unknown)' %]</dd>
 <dt>Gender:</dt>
 <dd>[% person.gender || '(Unknown)' %]</dd>
 <dt>Industry:</dt>
@@ -34,5 +33,4 @@
 <br />
 
  <a title="Change profile content" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">Edit Profile</a>
-</div>
 [% END %]
