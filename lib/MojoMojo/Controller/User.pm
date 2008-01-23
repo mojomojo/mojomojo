@@ -251,7 +251,10 @@ sub editprofile : Global {
     if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
 		   $user->id eq $c->stash->{user}->id ) ) {
           $c->stash->{person}=$user;
-	  $c->stash->{years} = [ 1905 .. 2005 ];
+
+      my $now = DateTime->now();
+      my $curryear = $now->year();     
+	  $c->stash->{years} = [ ($curryear - 90) .. $curryear ];
 	  $c->stash->{months} = [ 1 .. 12 ];
 	  $c->stash->{days} = [ 1 .. 31 ];
           $c->stash->{template}='user/editprofile.tt';
