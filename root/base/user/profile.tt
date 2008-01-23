@@ -25,6 +25,11 @@
 <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
 <dt><small>Registered at site:</small></dt>
 <dd><small>[%person.registered.ymd%]</small></dd>
+<dt>Last Changed</dt><dd>
+[% FOREACH  changed IN user.pages -%]
+[% c.wikiword(changed.path,base) -%]
+[%END%]</dd>
+
 </dl>
 <br />
 
