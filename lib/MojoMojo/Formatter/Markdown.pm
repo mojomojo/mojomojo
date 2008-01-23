@@ -4,9 +4,14 @@ use base qw/MojoMojo::Formatter/;
 
 
 my $markdown;
-eval "use Text::Markdown";
+eval "use Text::MultiMarkdown";
 unless ($@) {
-    $markdown = Text::Markdown->new();
+    $markdown = Text::MultiMarkdown->new(
+        markdown_in_html_blocks => 1,
+        use_metadata => 0,
+        heading_ids  => 0, # Remove MultiMarkdown behavior change in <hX> tags.
+        img_ids      => 0, # Remove MultiMarkdown behavior change in <img> tags.
+    );
 };
 
 sub primary_formatter { 1; }
