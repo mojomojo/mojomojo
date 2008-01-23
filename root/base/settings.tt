@@ -18,7 +18,6 @@
   <dt>Anon. user</dt>
   <dd><input id="anon"  name="anonymous_user" type="text" value="[%c.pref('anonymous_user')%]"/> ( blank to disable )</dd>
  </dl>
-</form>
 <br/>
 <h2>Settings</h2>
 <label for="registration">Registration open</label>
@@ -27,6 +26,7 @@
 <input type="checkbox" id="restricted" name="restricted"[% IF (c.pref('restricted_user'))%] checked="checked"[%END%]/><br/>
 <p id="message">[% message || 'ready' %]</p>
 <input type="submit" name="save" value="save"/>
+</form>
  <div class="spinner"><img id="editspinner" style="display:none;" src="[%c.uri_for_static('/spinner.gif')%]" alt="busy spinner" />&nbsp;</div>
         </div>
         <div id="bottomnav">&nbsp;</div>
