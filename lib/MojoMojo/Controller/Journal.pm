@@ -14,7 +14,8 @@ MojoMojo::Controller::Journal - Journaling for MojoMojo?
 
 =head1 DESCRIPTION
 
-This space is blank. Got any ideas?
+Would preferably get some sort of integration with MTOS and Angerwhale to allow embedding blogs at given 
+node points here.
 
 =head1 AUTHOR
 

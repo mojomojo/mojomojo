@@ -50,7 +50,7 @@ sub default : Private {
 
 =item update ( .admin/update )
 
-ajax saving of system settings.
+Update system settings.
 
 =cut
 
