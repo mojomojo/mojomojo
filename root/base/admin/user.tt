@@ -2,13 +2,15 @@
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
 <div id="toplinks">
 <a accesskey="C" href="[%c.uri_for('/.admin')%]">configuration</a> |
-<b class="navOn">users</a> |
+<b class="navOn">users</b> |
 <a accesskey="B" href="[% c.uri_for('view')%]">back</a> </div>
 
  <div id="content">
  <h1>Users</h1>
  <table>
-<th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
+  <tr>
+   <th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
+  </tr>
 [%WHILE (user=users.next) %]
 <tr>
 [%activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
@@ -22,4 +24,7 @@
 <td><a href="mailto:[%user.email%]">[%user.email||"no email address"%]</a></td>
 </tr>
 [%END%]
- </table
+ </table>
+</div>
+<div id="bottomnav">&nbsp;</div>
+[% PROCESS footer.tt %]

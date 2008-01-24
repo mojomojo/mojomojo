@@ -53,7 +53,7 @@ package main;
 use MojoMojo::Formatter::Wiki;
 use Test::More;
 
-plan tests => 9;
+plan tests => 12;
 
 my ($content,$exist,$new);
 
@@ -81,6 +81,11 @@ $content = "ExistingWord";
 MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
 is($content, '<a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Word</a> ');
 
+$content = 'WikiWord <pre>Blah HubbaBubba Wikwiord</pre> blah humbug ExistingWikiWord';
+MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
+is($content, '<span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://example.com/WikiWord.edit">?</a></span> <pre>Blah HubbaBubba Wikwiord</pre> blah humbug <a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Wiki Word</a> ');
+
+
 $content = 'ExistingWord';
  ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 1);
@@ -91,4 +96,9 @@ $content = 'WikiWord';
 is(@$exist, 0);
 is(@$new, 1);
 $_[0]->{path} = '/';
+
+$content = 'WikiWord <pre>Blah HubbaBubba Wikwiord</pre> blah humbug ExistingWikiWord';
+($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+is(@$exist, 1);
+is(@$new, 1);
 

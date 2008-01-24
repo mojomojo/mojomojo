@@ -1,10 +1,9 @@
 [% WRAPPER page/wrapper.tt title="Export" %]
-<div id="content">
 <p>You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki).</p> 
 
 <ul id="feedsList">
   <li><a href="[%c.uri_for('export_html')%]">HTML</a></li>
   <li><a href="[%c.uri_for('export_raw')%]">Markup (textile)</a></li>
 </ul>
-</div>
+
 [% END %]

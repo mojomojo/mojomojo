@@ -18,14 +18,13 @@
  </div>
 [% END %]
 
-<div id="content">
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
  <h3 class="navigation" id="previewHeading">
  Preview | 
  <a href="#" onclick="Element.toggle('hidden_info');return false;">Syntax</a>
  </h3>
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
-<script>Element.toggle('hidden_info');</script>
+<script type="text/javascript">Element.toggle('hidden_info');</script>
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
   [% page.content.formatted(c) %] 
@@ -48,8 +47,8 @@
     [%PROCESS toolbar.tt%]
     <br/>
     
-    <textarea id="body" name="body">[%- content.body || c.req.params.body || "" | html -%]</textarea>
-    <script>
+    <textarea id="body" name="body" cols="70">[%- content.body || c.req.params.body || "" | html -%]</textarea>
+    <script type="text/javascript">
     new Form.Element.SmartObserver( 'body',
                                2,
                                function( element, value ) {
@@ -69,7 +68,7 @@
     <div class="spinner">
         <span id="editstatus"></span>
       <img id="editspinner" style="display:none;" 
-	   src="[%c.uri_for('/.static/spinner.gif')%]"/>
+	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
     </div>
     
     <input type="submit" value='[% IF content.version > 1; "Save"; ELSE; "Create"; END %]'/> as 
@@ -85,5 +84,4 @@
     [% END %]
   </form>
 </p>
-</div>
 [% END %]

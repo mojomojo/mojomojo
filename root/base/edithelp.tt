@@ -3,7 +3,7 @@
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
 <p>
-  Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.
+  Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.
 </p>
 <p>
   Wiki words: <i>HomePage, ThreeWordsTogether, [[C++]], [[Let's play again!]] ((easy to type))</i><br/>
@@ -26,7 +26,7 @@
       </tr>
 
 			<tr><td># Numbered list<br /># Second item</td><td class="arrow">-></td><td>1. Numbered list<br />2. Second item</td>
-			   <td>:-)</td><td class="arrow">-></td><td><em><img src="[%base%]/.static/emote/regular_smile.gif"><br/>
+			   <td>:-)</td><td class="arrow">-></td><td><em><img src="[%base%]/.static/emote/regular_smile.gif" alt="smile emote" /><br/>
          And others.</em></td>
       </tr>
 			<tr><td>"linkname":URL</td><td class="arrow">-></td><td><a href="URL">linkname</a></td>
@@ -40,7 +40,7 @@
     </table>
 </div>
 
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
   function quickRedReference() {
     window.open( 
       "http://www.bradchoate.com/mt/docs/mtmanual_textile2.html",

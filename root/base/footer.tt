@@ -1,7 +1,6 @@
-	</div>
-     <div style="float:right;clear:left;">
-      <img src="[%c.uri_for('/.static/catalyst.png')%]" alt="Powered by Catalyst" title="Powered by Catalyst" />
-      </div>
-      </div>
-    </body>
+			<div id="powered">
+				<img src="[%c.uri_for_static('catalyst.png')%]" alt="Powered by Catalyst" title="Powered by Catalyst" />
+			</div>
+		</div>
+	</body>
 </html>

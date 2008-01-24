@@ -113,10 +113,10 @@ Tags other users have given to this Photo.
 	    photo => $self->id, 
 	    person=> { '!=', $user},
 	    },{
-	select     => [ 'me.tag', 'count(me.tag) as count' ],
+	select     => [ 'me.tag', 'count(me.tag)' ],
 	as         => [ 'tag','refcount' ],
 	'group_by' => ['me.tag'],
-    'order_by' => 'count',
+    'order_by' => 'refcount',
 	});
     return @tags;
 }

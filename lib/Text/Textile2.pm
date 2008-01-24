@@ -397,7 +397,7 @@ sub textile {
     # lines like this are stripped from the content, and can be
     # referred to using the "link text":id_without_spaces syntax
     my %links;
-    $str =~ s{(?:\n|^) [ ]* \[ ([^ ]+?) [ ]*? (?:\( (.+?) \) )?  \] ((?:(?:ftp|https?|telnet|nntp)://|/)[^ ]+?) [ ]* (\n|$)}
+    $str =~ s{(?:\n|^) [ ]* \[ ([^ ]+?) [ ]*? (?:\( (.+?) \) )?  \] ((?:(?:ftp|https?|telnet|nntp|irc)://|/)[^ ]+?) [ ]* (\n|$)}
              {($links{$1} = {url => $3, title => $2}),"$4"}gemx;
     local $self->{links} = \%links;
 
@@ -1417,7 +1417,7 @@ sub format_url {
         $url = 'mailto:'.$self->mail_encode($2);
     }
     if ($url !~ m!^(/|\./|\.\./|#)!) {
-        $url = "http://$url" if $url !~ m!^(https?|ftp|mailto|nntp|telnet)!;
+        $url = "http://$url" if $url !~ m!^(https?|ftp|mailto|nntp|telnet|irc)!;
     }
     $url =~ s/&(?!amp;)/&amp;/g;
     $url =~ s/\ /\+/g;

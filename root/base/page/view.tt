@@ -1,31 +1,31 @@
 [% WRAPPER page/wrapper.tt %]
 
-<div id="content">
 <div id="revision_info">
-[%IF c.req.params.rev %](Revision [% c.req.params.rev %])
-[%IF c.req.params.rev > page.content_version %]
-<em>Rolled Back (Current: [%page.content_version%])</em>
-[%END%]
-[%END%]
+	[%IF c.req.params.rev %](Revision [% c.req.params.rev %])
+	[%IF c.req.params.rev > page.content_version %]
+	<em>Rolled Back (Current: [%page.content_version%])</em>
+	[%END%]
+	[%END%]
 </div>
 <div id="current">
-[% IF render == 'highlight' %]
-[% content.highlight(c) %]
-<script language="Javascript" type="text/javascript">
-Fat.fade();
-</script>
-[% ELSE %]
-[% content.formatted(c) %]
-[% END %]
+	[% IF render == 'highlight' %]
+	[% content.highlight(c) %]
+    </div>
+	<script language="Javascript" type="text/javascript">
+	Fat.fade('.fade');
+	</script>
+	[% ELSE %]
+	[% content.formatted(c) %]
 </div>
+	[% END %]
 
 <div id="changes" style="display: none">
-  <p id="message">
-    <small>
-      Showing changes from previous revision.
-      <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
-    </small>
-  </p>
+	<p id="message">
+		<small>
+	      Showing changes from previous revision.
+	      <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
+	    </small>
+	</p>
 	<div id="diff"></div>
 </div>
 <div class="byline">
@@ -33,5 +33,4 @@ Fat.fade();
     Last Revised</acronym> by [% c.wikiword(content.creator.link, base) %] 
     <br />
 </div>
-</div> 
 [% END %]

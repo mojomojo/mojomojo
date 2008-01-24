@@ -38,6 +38,7 @@ sub _explicit_start_delims {
     my %delims = @explicit_delims;
     return keys %delims;
 }
+
 sub _explicit_end_delims {
     my %delims = @explicit_delims;
     return values %delims;
@@ -80,6 +81,37 @@ sub _generate_non_wikiword_check {
 
 my $non_wikiword_check = _generate_non_wikiword_check();
 
+
+sub strip_pre {
+    my $content=shift;
+    my (@parts,$res);
+    $res='';
+    while (my ($part) = $$content =~ m{
+            ^(.+?)
+            <\s*pre\b[^>]*>}sx ) {
+        $$content =~ s{^.+?<\s*pre\b[^>]*>}{}sx;
+        my ($inner) = $$content =~ m{^(.+?)<\s*/pre\s*>};
+        unless ($inner) {
+            $res .=$part;
+            last;
+        }
+        push @parts,$inner;
+        $res .= $part . '<!--pre_placeholder-->';
+        $$content =~ s{^.+?<\s*/pre\s*>}{};
+    }
+    $res .= $$content;
+    return $res,@parts;
+}
+
+
+sub reinsert_pre {
+    my ($content,@parts) = @_;
+    foreach my $part (@parts) {
+        $$content =~ s{<!--pre_placeholder-->}{<pre>$part</pre>};
+    }
+    return $$content;
+}
+
 =item format_content
 
 calls the formatter. Takes a ref to the content as well as the
@@ -90,6 +122,8 @@ context object.
 sub format_content {
     my ($class, $content, $c, $self) = @_;
     # Extract wikiwords, avoiding escaped and part of urls
+    my @parts;
+    ($$content,@parts)=strip_pre($content);
     $$content =~ s{
         $non_wikiword_check
         ($wikiword)
@@ -129,6 +163,7 @@ sub format_content {
         )?
         $explicit_end)
     }{ $1 }gx;
+    $$content=reinsert_pre($content,@parts);
 }
 
 =item format_link <c> <word> <base> [<link_text>]
@@ -211,7 +246,9 @@ sub find_links {
     my ($class, $content, $page) = @_;
     my @linked_pages;
     my @wanted_pages;
-    #my $c = MojoMojo->context;
+
+    my @parts;
+    ($$content,@parts)=strip_pre($content);
 
     my $wikiword_regex = qr/$non_wikiword_check($wikiword)/x;
     my $explicit_regex = qr/$non_wikiword_check$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
@@ -233,6 +270,7 @@ sub find_links {
             }
         }
     }
+    $$content=reinsert_pre($content,@parts);
     return (\@linked_pages, \@wanted_pages);
 }
 

@@ -1,6 +1,5 @@
 [% SET title = "All Pages in " _ page.path %]
 [% WRAPPER page/wrapper.tt title=title %]
- <div id="content">
 <div id="categories">
   <strong>tags</strong>: 
   [% WHILE(tag=tags.next)%]
@@ -62,6 +61,5 @@
 </div>
 [% END %]
 <p class="end">&nbsp;</p>
-</div>
 [% END %]
 

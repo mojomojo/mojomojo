@@ -15,6 +15,8 @@
 [% PROCESS breadcrumbs.tt %]
 [% # PROCESS sidebar.tt %]
 [% PROCESS navbar.tt %]
+<div id="content">
 [% content %]
+</div>
 [% PROCESS page/bottomnav.tt %]
 [% PROCESS footer.tt %]

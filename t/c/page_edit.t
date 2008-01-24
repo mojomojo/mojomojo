@@ -1,5 +1,5 @@
 use Test::More tests => 6;
-$ENV{CATALYST_DEBUG}=0;
+BEGIN { $ENV{CATALYST_DEBUG}=0; };
 $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
 use Test::WWW::Mechanize::Catalyst 'MojoMojo';
 use WWW::Mechanize::TreeBuilder;

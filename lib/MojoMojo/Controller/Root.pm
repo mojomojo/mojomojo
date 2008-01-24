@@ -42,10 +42,16 @@ show a debug screen.
 
 =cut
 
-sub end : ActionClass('RenderView') {
+sub render : ActionClass('RenderView') {
     my ( $self ) = shift;
     my ( $c ) = @_;
     $c->stash->{path} ||= '/';
+}
+
+sub end : Private {
+    my ($self,$c)=@_;
+    $c->req->uri->path($c->stash->{pre_hacked_uri}->path);
+    $c->forward('render');
 }
 
 

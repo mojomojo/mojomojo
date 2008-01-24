@@ -8,22 +8,22 @@ gallery -
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">
-[% PROCESS gallery/pager.tt pager=pictures.pager %]
-<div id="imageinfo" class="imageinfo">
-<small>Hoover over an image to get more info.</small>
-</div>
-<div id="images">
-[%WHILE(picture=pictures.next)%]
-[% imgid = 'img_' _ picture.id %]
-<a  id="[%imgid%]" href="[%c.uri_for('photo')%][%
+  [% PROCESS gallery/pager.tt pager=pictures.pager %]
+  <div id="imageinfo" class="imageinfo">
+    <small>Hover over an image to get more info.</small>
+  </div>
+  <div id="images">
+  [%WHILE(picture=pictures.next)%]
+    [% imgid = 'img_' _ picture.id %]
+    <a  id="[%imgid%]" href="[%c.uri_for('photo')%][%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb" 
 width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
-<script>var [%imgid%]=new Element.HoverObserver( '[%imgid%]',2,
+<script type="text/javascript">var [%imgid%]=new Element.HoverObserver( '[%imgid%]',2,
 function( element, value ) {
     [%imgid%]_updater=new Ajax.Updater( 'imageinfo', '[%c.uri_for('jsrpc/imginfo',picture.id)%]' ); 
 });</script>
 [%END%]
+   </div>
 </div>
-</div>
-        <div id="bottomnav">&nbsp;<a href="[%c.uri_for('attachments')%]">View as files</a> 
+        <div id="bottomnav">&nbsp;<a href="[%c.uri_for('attachments')%]">View as files</a></div>
 [%PROCESS footer.tt%]

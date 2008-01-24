@@ -1,0 +1,8 @@
+TODO
+
+* Allow embedding galleries in pages
+* Recent children by tag formatter
+* Fix gallery navigtion to limit to gallery. (Marcus)
+* Migrate all forms to formfu (LTJake)
+* Add <nowiki> support to wiki formatter
+* 

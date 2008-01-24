@@ -175,7 +175,7 @@ sub inline_tags : Local {
     $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
     $c->stash->{tags}        = [@tags];
     } else {
-      $c->stash->{others_tags}      = [ $photo->tags ];
+      $c->stash->{others_tags}      = [ $photo->others_tags(undef) ];
     }
 }
 

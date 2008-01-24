@@ -8,6 +8,7 @@ my $textile = Text::Textile2->new(flavor=>"xhtml1",charset=>'utf-8');
 
 sub primary_formatter { 1; }
 
+
 =head1 NAME
 
 MojoMojo::Formatter::Textile - Texile formatting for your content
