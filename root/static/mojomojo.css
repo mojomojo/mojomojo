@@ -1,4 +1,6 @@
-/*<group=Document Structure>*/
+/* @override http://localhost:3000/.static/mojomojo.css */
+
+/* @group Document Structure */
 
 #categories {
 	background: #ffffff;
@@ -112,8 +114,8 @@ Body {
 }
 
 
-/*</group>*/
-/*<group=Headlines>*/
+/* @end */
+/* @group Headlines */
 
 .logintext {
 	top: 10px;
@@ -136,9 +138,9 @@ Body {
 	color: #ffffff;
 }
 
-/*</group>*/
+/* @end */
 
-/*<group=Links>*/
+/* @group Links */
 
 #breadcrumbs a {
 	color: #e7e7e7;
@@ -165,9 +167,9 @@ a:hover {
 
 
 	
-/*</group>*/
+/* @end */
 
-/*<group=Navigation>*/
+/* @group Navigation */
 
 form { margin: 0;}
 
@@ -429,17 +431,17 @@ textarea#comment {
   background-color:#ab0b0b; 
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Highlighted keywords in search>*/
+/* @group Highlighted keywords in search */
 
 .quoted {
   font-weight: bold;
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Pagination Links>*/
+/* @group Pagination Links */
 
 div.pager {
     font-size: small;
@@ -456,9 +458,9 @@ div.pager ul li {
     white-space: nowrap;
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Amazon Plugin>*/
+/* @group Amazon Plugin */
 
 div.amazon {
     width:80%;
@@ -592,6 +594,12 @@ input.dual:focus, textarea.dual:focus {
 dl {
  margin: 13px;
  font-family: sans-serif;
+ clear: both;
+}
+
+#editlink {
+	float:right;
+	padding: 1em;
 }
 
 dt {
@@ -608,7 +616,7 @@ dd {
   margin-left: 80px;
 }
 
-/*<group=sidebar nav menu>*/
+/* @group sidebar nav menu */
 
 /* code shamelessly stolen from Eric Meyer's http://meyerweb.com/eric/css/edge/menus/demo.html */
 /** with some slight modifications of colors, widths, etc. by Dave Naughton **/
@@ -701,7 +709,7 @@ ul#menuHome {
 }
 
 /* end of shamelessly stolen code */
-/*</group>*/
+/* @end */
 
 .spinner {
     float:right;
@@ -722,7 +730,7 @@ div.photo img{
     clear:both;
 }
 
-.inline p,dt,dd{
+.inline p,.inline dt,.inline dd{
     font-size: 0.8em;
     width: auto;
 }

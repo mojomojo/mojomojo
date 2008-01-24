@@ -5,7 +5,7 @@
 <li>[%c.wikiword(user.link,base)%]<br/>
 Last Changed 
 [% FOREACH  changed IN user.pages %]
-[%c.wikiword(changed.path,base)%]
+[% '&ndash;' UNLESS loop.first%] [%c.wikiword(changed.path,base)%]
 [%END%]
 </li>
 [%END %]

@@ -58,9 +58,7 @@
     [%END%]
   [%END%]
 
-  [% IF ( user AND 
-      (user.login == page.name OR user.link==proto_pages.first.path  OR 
-      ( user.is_admin AND user.get_user(page.name) ) ) ) %]
+  [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
 
     [%IF (c.req.action=="profile")%]
       <b class="navOn">Profile</b> | 
