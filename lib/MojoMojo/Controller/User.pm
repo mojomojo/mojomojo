@@ -32,8 +32,10 @@ sub login : Global {
     my ($self,$c) = @_;
     my $message:Stashed = 'please enter username &amp; password';
     if ( $c->req->params->{login} ) {
-        if ( $c->login() ) {
-	    $c->stash->{user}=$c->user->obj;
+         if ( $c->authenticate( { login => $c->req->params->{'login'}, 
+                                  pass => $c->req->params->{'pass'} } ) ) {
+                                      
+    	    $c->stash->{user}=$c->user->obj;
             $c->res->redirect($c->uri_for($c->stash->{path}))
                 unless $c->stash->{template};
             return;
