@@ -12,7 +12,7 @@ requires (
         'Catalyst::Controller::BindLex'                 => 0,
         'Catalyst::Model::DBIC::Schema'                 => '0.01',      
         'Catalyst::Model::Search'                       => 0,
-        'Catalyst::Plugin::Authentication'              => '0.10004',
+        'Catalyst::Plugin::Authentication'              => '0.10005',
         'Catalyst::Authentication::Store::DBIx::Class'  => '0.101',
         'Catalyst::Plugin::Cache::FileCache'            => 0,
         'Catalyst::Plugin::Email'                       => 0,
