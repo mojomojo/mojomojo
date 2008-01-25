@@ -121,10 +121,14 @@ Body {
 	top: 10px;
 	left: 20px;
 	position: relative;
-	font-size: 12px;
-	width: 500px;
 	overflow: hidden;
+	float: left;
+	padding: 1em 2em;
+	font-size: 1.5em;
+	margin-bottom: 2em;
+	border: 2px solid #788498;
 }
+
 #header h1 {
 	top: 14px;
     padding-left: 100px;
@@ -132,6 +136,8 @@ Body {
 	font-size: 30px;
 	color: #ffffff;
 	font-weight: bold;
+	border-width: 1px;
+	border-color: #000;
 }
 
 #header h1 a {
@@ -258,15 +264,6 @@ ol.setup li {
 
 .references {
   font-size: 10px;
-}
-
-.diffdel, del {
-  background: pink;
-  text-decoration: line-through;
-}
-
-.diffins, ins {
-  background: lightgreen;
 }
 
 p#message {
@@ -450,7 +447,7 @@ div.pager {
 
 div.pager ul { 
     list-style: none;
-}   
+}
 
 div.pager ul li { 
     display: inline;
@@ -474,6 +471,39 @@ div.amazon img {
     margin: 1.2em;
 }
 
+/* @end */
+/* @group Lists */
+
+.recent li {
+	font-style: italic;
+	list-style-type: square;
+	list-style-position: outside;
+}
+
+/* @end */
+
+/* @group Diff */
+
+.diff {
+	margin-right:2em;
+	overflow: visible;
+}
+
+.diff .diffins, .diff .diffdel {
+	
+}
+
+.diffdel, del {
+  background: pink;
+  text-decoration: line-through;
+}
+
+.diffins, ins {
+  background: lightgreen;
+}
+
+/* @end */
+
 .form dl {
  margin: 13px;
  font-family: sans-serif;
@@ -483,13 +513,13 @@ div.amazon img {
 .form dt {
   float: left;
   width: 80px;
-  font-size: 14px;
+  font-size: medium;
   line-height: 24px;
 }
 
 .form dd {
   margin: 0 0 5px 90px;
-  font-size: 11px;
+  font-size: xx-large;
   line-height: 24px;
   margin-left: 80px;
 }
@@ -502,7 +532,7 @@ div.amazon img {
 
 .list dt {
   float: left;
-  width: 80px;
+  width: 160px;
   font-size: 1.5em;;
   line-height: 24px;
 }
@@ -599,7 +629,7 @@ dl {
 
 #editlink {
 	float:right;
-	padding: 1em;
+	padding-right: 10em;
 }
 
 dt {
@@ -729,6 +759,7 @@ div.photo img{
 .end {
     clear:both;
 }
+
 
 .inline p,.inline dt,.inline dd{
     font-size: 0.8em;

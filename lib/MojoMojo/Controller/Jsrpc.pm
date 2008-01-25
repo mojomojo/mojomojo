@@ -69,7 +69,12 @@ and diffs it against the previous version.
 =cut
 
 sub diff : Local {
-    my ( $self, $c, $page, $revision, $against ) = @_;
+    my ( $self, $c, $page, $revision, $against,$sparse ) = @_;
+    warn join(' ',@_);
+    unless ($revision){
+        my $page=$c->model("DBIC::Page")->find( $page );
+        $revision=$page->content->id;
+    }
     $revision = $c->model("DBIC::Content")->search({
         page    => $page, 
         version => $revision
@@ -80,7 +85,7 @@ sub diff : Local {
             version => $against
         })->next : $revision->previous 
     ) {
-        $c->res->output( $revision->formatted_diff( $c, $previous ) );
+        $c->res->output( $revision->formatted_diff( $c, $previous, $sparse ) );
     } else {
         $c->res->output("This is the first revision! Nothing to diff against.");
     }

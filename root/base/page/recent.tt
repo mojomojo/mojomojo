@@ -21,14 +21,15 @@
   [% IF now != page.content.created.ymd; %]
     [%IF first;first=0;ELSE%]</ul>[%END%]
     [% SET now = page.content.created.ymd; %]
-    <b>[% now %]</b><ul>
+    <b>[% now %]</b><ul class="recent">
   [% END %]
   <li>
     <a href="[% c.uri_for('/', page.path)%]">[% page.name_orig %]</a>
-    <div class="byline" style="margin-bottom: 0px">
-      by [% c.wikiword(page.content.creator.link,base) %]
-      at [% page.content.created.hms(":") %]
-    </div>
+     was edited by [% c.wikiword(page.content.creator.link,base) %] [<a href="#" id="diff_[%page.id%]" >diff</a>]
+      at [% page.content.created.hms(":") %]<div class="diff" id="changes_[%page.id%]" style="display: none"></div>
+      <script type="text/javascript">
+      $('diff_[%page.id%]').onclick=function() { showdiff('[%c.uri_for('jsrpc/diff', page.id , undef,undef,1)%]',[%page.id%]); return false;}
+      </script>
   </li>
 [% END %]
 </ul>
