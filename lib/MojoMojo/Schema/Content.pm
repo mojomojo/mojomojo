@@ -128,7 +128,7 @@ sub formatted_diff {
             append_close => '</ins>',
         )  );
 	}
-	elsif ( $$line[0] eq "u" ) { $diff .= ($sparse ? '<div> '.$$line[1].'<div>' :$$line[1]  }
+	elsif ( $$line[0] eq "u" ) { $diff .= ($sparse ? '<div> '.$$line[1].'<div>' :$$line[1] ) }
 	else { $diff .= "Unknown operator " . $$line[0] }
     }
     return $diff;

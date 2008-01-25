@@ -50,7 +50,8 @@ sub render : ActionClass('RenderView') {
 
 sub end : Private {
     my ($self,$c)=@_;
-    $c->req->uri->path($c->stash->{pre_hacked_uri}->path);
+    $c->req->uri->path($c->stash->{pre_hacked_uri}->path)
+	if ref $c->stash->{pre_hacked_uri};
     $c->forward('render');
 }
 
