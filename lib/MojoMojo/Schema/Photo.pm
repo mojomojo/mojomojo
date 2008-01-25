@@ -9,7 +9,7 @@ use DateTime;
 use Image::ExifTool;
 my $exif=Image::ExifTool->new();
 
-__PACKAGE__->load_components("PK::Auto", 'Ordered',"Core");
+__PACKAGE__->load_components('Ordered',"Core");
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(

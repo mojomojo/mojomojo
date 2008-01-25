@@ -4,7 +4,6 @@ use strict;
 use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
 
 use Digest::MD5 qw/md5_hex/;
-use Data::FormValidator::Constraints::DateTime qw(:all);
 
 my $auth_class = MojoMojo->config->{auth_class};
 
@@ -157,14 +156,14 @@ sub register : Global FormConfig {
     $c->stash->{message}='Please fill in the following information to '.
     'register. All fields are mandatory.';
     my $form : Stashed;
-    my $user : Stashed = $c->model('DBIC::Person')->new_result({});
     my $template :Stashed = 'user/register.tt';
 
-    $user->fill_formfu_values($form);
     if ( $form->submitted && !$form->has_errors ) {
+         my $user : Stashed = $c->model('DBIC::Person')->new( { } );
+
          $user->active(0);
-         $user->populate_from_formfu( $form );
-         $user->insert();
+         $form->save_to_model( $user );
+
          $c->forward('do_register',[$user]);
          
     }
@@ -182,15 +181,20 @@ sub do_register : Private {
     my ( $self, $c, $user ) = @_;
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref('entropy',rand);
+
+    my $form : Stashed;
+    my $email = $form->param( 'email' );
+    my $name  = $form->param( 'name' );
+
     $c->email( header => [
-            From    => $c->form->valid('email'),
-            To      => $c->form->valid('email'),
+            From    => $email,
+            To      => $email,
             Subject => '[MojoMojo] New User Validation'
         ],
         body => 'Hi. This is a mail to validate your email address, '.
-            $c->form->valid('name').'. To confirm, please click '.
+            $name.'. To confirm, please click '.
             "the url below:\n\n".$c->req->base.'/.validate/'.
-            $user->id.'/'.md5_hex$c->form->valid('email').$c->pref('entropy')
+            $user->id.'/'.md5_hex$email.$c->pref('entropy')
     );
     $c->stash->{user}=$user;
     $c->stash->{template}='user/validate.tt';

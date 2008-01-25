@@ -5,7 +5,7 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components("PK::Auto", "Core");
+__PACKAGE__->load_components("Core");
 __PACKAGE__->table("journal");
 __PACKAGE__->add_columns(
   "pageid",

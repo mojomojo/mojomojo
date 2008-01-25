@@ -6,7 +6,7 @@ use warnings;
 use base 'DBIx::Class';
 use Carp qw/croak/;
 
-__PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
+__PACKAGE__->load_components("ResultSetManager", "Core");
 __PACKAGE__->table("tag");
 __PACKAGE__->add_columns(
   "id",

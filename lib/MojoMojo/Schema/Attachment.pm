@@ -14,7 +14,7 @@ use Image::Math::Constrain;
 use Imager;
     
 
-__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns("id", 
   "id",

@@ -10,7 +10,7 @@ use DateTime::Format::Mail;
 use Algorithm::Diff;
 use String::Diff;
 
-__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
+__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
   "page",

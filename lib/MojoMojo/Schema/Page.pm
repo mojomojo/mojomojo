@@ -6,7 +6,7 @@ use Carp qw/croak/;
 
 use base qw/Class::Accessor::Fast DBIx::Class/;
 
-__PACKAGE__->load_components("ResultSetManager","PK::Auto", "Core");
+__PACKAGE__->load_components("ResultSetManager", "Core");
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
   "id",

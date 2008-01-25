@@ -13,7 +13,7 @@ my $textile=Text::Textile2->new(
     char_encoding=>1
 );
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns("id", 
   "id",

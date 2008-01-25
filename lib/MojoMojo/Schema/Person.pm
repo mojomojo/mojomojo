@@ -5,7 +5,7 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",
@@ -114,47 +114,6 @@ sub pages {
     return $self->result_source->related_source('page_versions')->
 	related_source('page')->resultset->set_paths(@pages);
 }
-
-=item registration_profile
-
-returns a L<Data::FormValidator> profile for registration.
-
-=cut
-
-sub registration_profile :ResultSet { 
-    my ($self,$schema)=@_;
-    return {
-         email => { constraint => 'email',
-                    name       => 'Invalid format'},
-         login =>[{ constraint => qr/^\w{3,10}$/,
-                    name       => 'only letters, 3-10 chars'},
-                  { constraint => sub { $self->user_free($schema,@_) } ,
-                    name       => 'Username taken'}],
-         name  => { constraint => qr/^\S+\s+\S+/,
-                    name       => 'Full name please'},
-      pass     => { constraint => \&pass_matches,
-                     params    => [ qw( pass confirm)],
-                     name      => "Password doesn't match"}
-   };
-}
-
-=item pass_matches <pass1> <pass2>
-
-Returns true if pass1 eq pass2. For
-validation
-
-=cut
-
-sub pass_matches {
-    return 1 if ($_[0] eq $_[1]);
-    return 0
-}
-
-=item  valid_pass <password>
-
-check password against database.
-
-=cut
 
 sub valid_pass {
     my ( $self,$pass )=@_;
