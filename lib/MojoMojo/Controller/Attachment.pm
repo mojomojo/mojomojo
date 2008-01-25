@@ -76,7 +76,7 @@ an attachment id.
 sub attachment : Chained CaptureArgs(1) {
     my ( $self, $c, $att ) = @_;
     $c->stash->{att}=$c->model("DBIC::Attachment")->find($att);
-    $c->detach('default') unless ($att);
+    $c->detach('default') unless ($c->stash->{att});
 }
 
 
