@@ -2,6 +2,9 @@
  <div id="header"><h1>Login</h1></div>
  [%PROCESS breadcrumbs.tt%]
         <div id="content">
+            <p class="end logintext"><span id="logintext">[%message%]</span>
+            [% IF(c.pref('open_registration'))%] (or <a href="[%c.uri_for('register')%]">register</a> instead)[%END%]
+                    </p>
         <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
 <dl class="form">
 <dt>login:</dt>
@@ -11,9 +14,6 @@
 <dd><input type="submit" value="log in"/></dd>
 </dl>
 </form>
-<p class="end"><span id="logintext">[%message%]</span>
-[% IF(c.pref('open_registration'))%] (or <a href="[%c.uri_for('register')%]">register</a> instead)[%END%]
-        </p>
         </div>
         <div id="bottomnav">&nbsp;</div>
    
