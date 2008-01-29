@@ -25,7 +25,7 @@ Format order can be 1-99. The Comment formatter runs on 1
 
 =cut
 
-sub format_content_order { 1 }
+sub format_content_order { 7 }
 
     my @allow = qw[ p img em br hr b a div pre code];
 

@@ -26,6 +26,16 @@ function toggleChanges(changeurl) {
       Element.toggle('hide_changes');
   }
 }
+function showdiff(changeurl,id) {
+  if (!$('changes_'+id).innerHTML) {
+      var req=new Ajax.Request( changeurl, {
+      onComplete: function() {
+          
+	$('changes_'+id).innerHTML=req.transport.responseText;
+      }});
+  }
+  Element.toggle('changes_'+id);
+}
 
 function encodeAjax (str) {
    str=str.replace(/%/g,'%25');

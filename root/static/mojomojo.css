@@ -1,4 +1,6 @@
-/*<group=Document Structure>*/
+/* @override http://localhost:3000/.static/mojomojo.css */
+
+/* @group Document Structure */
 
 #categories {
 	background: #ffffff;
@@ -112,17 +114,21 @@ Body {
 }
 
 
-/*</group>*/
-/*<group=Headlines>*/
+/* @end */
+/* @group Headlines */
 
 .logintext {
 	top: 10px;
 	left: 20px;
 	position: relative;
-	font-size: 12px;
-	width: 500px;
 	overflow: hidden;
+	float: left;
+	padding: 1em 2em;
+	font-size: 1.5em;
+	margin-bottom: 2em;
+	border: 2px solid #788498;
 }
+
 #header h1 {
 	top: 14px;
     padding-left: 100px;
@@ -130,15 +136,17 @@ Body {
 	font-size: 30px;
 	color: #ffffff;
 	font-weight: bold;
+	border-width: 1px;
+	border-color: #000;
 }
 
 #header h1 a {
 	color: #ffffff;
 }
 
-/*</group>*/
+/* @end */
 
-/*<group=Links>*/
+/* @group Links */
 
 #breadcrumbs a {
 	color: #e7e7e7;
@@ -165,9 +173,9 @@ a:hover {
 
 
 	
-/*</group>*/
+/* @end */
 
-/*<group=Navigation>*/
+/* @group Navigation */
 
 form { margin: 0;}
 
@@ -256,15 +264,6 @@ ol.setup li {
 
 .references {
   font-size: 10px;
-}
-
-.diffdel, del {
-  background: pink;
-  text-decoration: line-through;
-}
-
-.diffins, ins {
-  background: lightgreen;
 }
 
 p#message {
@@ -429,17 +428,17 @@ textarea#comment {
   background-color:#ab0b0b; 
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Highlighted keywords in search>*/
+/* @group Highlighted keywords in search */
 
 .quoted {
   font-weight: bold;
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Pagination Links>*/
+/* @group Pagination Links */
 
 div.pager {
     font-size: small;
@@ -448,7 +447,7 @@ div.pager {
 
 div.pager ul { 
     list-style: none;
-}   
+}
 
 div.pager ul li { 
     display: inline;
@@ -456,9 +455,9 @@ div.pager ul li {
     white-space: nowrap;
 }
 	
-/*</group>*/
+/* @end */
 
-/*<group=Amazon Plugin>*/
+/* @group Amazon Plugin */
 
 div.amazon {
     width:80%;
@@ -472,6 +471,39 @@ div.amazon img {
     margin: 1.2em;
 }
 
+/* @end */
+/* @group Lists */
+
+.recent li {
+	font-style: italic;
+	list-style-type: square;
+	list-style-position: outside;
+}
+
+/* @end */
+
+/* @group Diff */
+
+.diff {
+	margin-right:2em;
+	overflow: visible;
+}
+
+.diff .diffins, .diff .diffdel {
+	
+}
+
+.diffdel, del {
+  background: pink;
+  text-decoration: line-through;
+}
+
+.diffins, ins {
+  background: lightgreen;
+}
+
+/* @end */
+
 .form dl {
  margin: 13px;
  font-family: sans-serif;
@@ -481,13 +513,13 @@ div.amazon img {
 .form dt {
   float: left;
   width: 80px;
-  font-size: 14px;
+  font-size: medium;
   line-height: 24px;
 }
 
 .form dd {
   margin: 0 0 5px 90px;
-  font-size: 11px;
+  font-size: xx-large;
   line-height: 24px;
   margin-left: 80px;
 }
@@ -500,7 +532,7 @@ div.amazon img {
 
 .list dt {
   float: left;
-  width: 80px;
+  width: 160px;
   font-size: 1.5em;;
   line-height: 24px;
 }
@@ -592,6 +624,12 @@ input.dual:focus, textarea.dual:focus {
 dl {
  margin: 13px;
  font-family: sans-serif;
+ clear: both;
+}
+
+#editlink {
+	float:right;
+	padding-right: 10em;
 }
 
 dt {
@@ -608,7 +646,7 @@ dd {
   margin-left: 80px;
 }
 
-/*<group=sidebar nav menu>*/
+/* @group sidebar nav menu */
 
 /* code shamelessly stolen from Eric Meyer's http://meyerweb.com/eric/css/edge/menus/demo.html */
 /** with some slight modifications of colors, widths, etc. by Dave Naughton **/
@@ -701,7 +739,7 @@ ul#menuHome {
 }
 
 /* end of shamelessly stolen code */
-/*</group>*/
+/* @end */
 
 .spinner {
     float:right;
@@ -722,7 +760,8 @@ div.photo img{
     clear:both;
 }
 
-.inline p,dt,dd{
+
+.inline p,.inline dt,.inline dd{
     font-size: 0.8em;
     width: auto;
 }

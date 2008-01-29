@@ -1,8 +1,12 @@
+        - More validation fixes
+        - Updated dependencies
+        - Updated auth to use new plugins
+        - Updated user profile
+
 0.999011 2008-01-20 20:16:00
         - uri_for_static for static assets.
         - Fix header layout.
         - Fix tags in gallery view when not logged in.
-        - Avoid error in preview when syntax cannot be rendered.
         - Fix render bug in preview
         - Various markup fixes (gphat)
         - Escape wiki formatting inside pre.

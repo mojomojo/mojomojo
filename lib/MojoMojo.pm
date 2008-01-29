@@ -4,14 +4,13 @@ use strict;
 use utf8;
 use Path::Class 'file';
 
-use Catalyst qw/            Authentication
+use Catalyst qw/    ConfigLoader        
+        Authentication
 		Cache::FileCache    Email
 		Session		        Session::Store::File
 		Singleton           Session::State::Cookie
 		Static::Simple	    SubRequest	    
-		UploadProgress	    Unicode 
-		Authentication::Store::DBIC 
-		ConfigLoader	    Authentication::Credential::Password 
+		UploadProgress	    Unicode  
 		/;
 
 use MojoMojo::Formatter::Wiki;

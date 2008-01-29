@@ -1,14 +1,15 @@
 [% WRAPPER page/wrapper.tt title = title || config.application_name || "MojoMojo" %]
 [% PROCESS pager.tt %]
 <ul>
-[% WHILE (user=users.next) %]
-<li>[%c.wikiword(user.link,base)%]<br/>
-Last Changed 
-[% FOREACH  changed IN user.pages %]
-[%c.wikiword(changed.path,base)%]
-[%END%]
+[% WHILE (user=users.next) -%]
+<li>[%c.wikiword(user.link,base) -%]
+[% pages = user.pages -%]
+[% IF pages %] last changed <br/>[% ELSE %] no recent changes [% END -%]
+[% FOREACH  changed IN pages -%]
+[% '&ndash;' UNLESS loop.first -%] [%c.wikiword(changed.path,base) -%]
+[%END -%]
 </li>
-[%END %]
+[% END -%]
 </ul>
-[% END %]
+[% END -%]
 

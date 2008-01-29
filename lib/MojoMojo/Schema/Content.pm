@@ -9,6 +9,7 @@ use DateTime::Format::Mail;
 
 use Algorithm::Diff;
 use String::Diff;
+use HTML::Entities qw/encode_entities/;
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns Core/);
 __PACKAGE__->table("content");
@@ -105,9 +106,9 @@ and deleted with diffdel css class.
 =cut
 
 sub formatted_diff {
-    my ( $self, $c, $to ) = @_;
-    my $this = [ split /\n\n/, $self->formatted($c) ];
-    my $prev = [ split /\n\n/, $to->formatted($c) ];
+    my ( $self, $c, $to, $sparse ) = @_;
+    my $this = [ $sparse ? split /\n/, ( $self->encoded_body ) : split /\n\n/, ( $self->formatted($c) ) ];
+    my $prev = [ $sparse ? split /\n/, ( $to->encoded_body ) : split /\n\n/, ( $to->formatted($c) ) ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
@@ -119,14 +120,15 @@ sub formatted_diff {
 	}
 	elsif ( $$line[0] eq "c" ) {
 
-        $diff .= String::Diff::diff_merge($$line[1], $$line[2],
+        $diff .= ($sparse ? qq(<div class="diffdel">) . $$line[1] . "</div>" .  qq(<div class="diffins">) . $$line[2] . "</div>" :
+        String::Diff::diff_merge($$line[1], $$line[2],
             remove_open => '<del>',
             remove_close => '</del>',
             append_open => '<ins>',
             append_close => '</ins>',
-        );
+        )  );
 	}
-	elsif ( $$line[0] eq "u" ) { $diff .= $$line[1] }
+	elsif ( $$line[0] eq "u" ) { $diff .= ($sparse ? '<div> '.$$line[1].'<div>' :$$line[1] ) }
 	else { $diff .= "Unknown operator " . $$line[0] }
     }
     return $diff;
@@ -255,5 +257,7 @@ sub store_links {
 		    { from_page => $page->id, to_path => $_->{path} });
     }
 }
+
+sub encoded_body { return encode_entities(shift->body); }
 
 1;
