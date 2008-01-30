@@ -27,7 +27,7 @@ elements:
         message: Password must be between 4 and 14 chars
   - type: Password
     name: confirm_password
-    label: Repeat  
+    label: Repeat password 
   - type: Text
     name: email
     label: Email
