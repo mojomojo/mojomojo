@@ -6,7 +6,8 @@ use Path::Class 'file';
 
 use Catalyst qw/    ConfigLoader        
         Authentication
-		Cache::FileCache    Email
+		Cache               Email
+		Cache::Store::Memory
 	    FillInForm	        FormValidator
 		Session		        Session::Store::File
 		Singleton           Session::State::Cookie
@@ -14,6 +15,10 @@ use Catalyst qw/    ConfigLoader
 		UploadProgress	    Unicode  
 		/;
 
+use Storable;
+use Cache::Memory;
+use Data::Dumper;
+use DBIx::Class::ResultClass::HashRefInflator;
 use MojoMojo::Formatter::Wiki;
 use Module::Pluggable::Ordered 
     search_path => [qw/MojoMojo/], 
@@ -169,6 +174,230 @@ sub uri_for_static {
     my ($self,$asset)=@_;
     return ($self->config->{static_path} || '/.static/') . $asset;
 } 
+
+
+#  Permissions are checked prior to most actions. Including view if that is
+#  turned on in the configuration. The permission system works as follows. 
+#  1. There is a base set of rules which may be defined in the application 
+#     config, these are: 
+#          $c->config->{permissions}{view_allowed} = 1; # or 0 
+#     similar entries exist for delete, edit, create and attachment. 
+#     if these config variables are not defined, default is to allow 
+#     anyone to do anything.
+#  
+#   2. Global rules that apply to everyone may be specified by creating a
+#      record with a role-id of 0.
+#  
+#   3. Rules are defined using a combination of path, and role and may be
+#      applied to subpages or not.
+#  
+#   4. All rules matching a given user's roles and the current path are used to
+#      determine the final yes/no on each permission. Rules are evaluated from
+#      least-specific path to most specific. This means that when checking
+#      permissions on /foo/bar/baz, permission rules set for /foo will be
+#      overridden by rules set on /foo/bar when editing /foo/bar/baz. When two
+#      rules (from different roles) are found for the same path prefix, explicit
+#      allows override denys. Null entries for a given permission are always
+#      ignored and do not effect the permissions defined at earlier level. This
+#      allows you to change certain permissions (such as create) only while not
+#      affecting previously determined permissions for the other actions. Finally -
+#      apply_to_subpages yes/no is exclusive. Meaning that a rule for /foo with
+#      apply_to_subpages set to yes will apply to /foo/bar but not to /foo alone.
+#      The endpoint in the path is always checked for a rule explicitly for that
+#      page - meaning apply_to_subpages = no.
+
+
+sub check_permissions {
+    my ($c, $path, $user) = @_;
+    
+    
+    ## make some changes to the path - We have to do this
+    ## because path is not always cleaned up before we get it.
+    ## sometimes we get caps, other times we don't.  permissions are
+    ## set using lowercase paths.
+    
+    ## lowercase the path - and ensure it has a leading /
+    my $searchpath = lc($path);
+    
+    # clear out any double-slashes 
+    $searchpath =~ s|//|/|g;
+
+    
+    my @pathelements = split '/', $searchpath;
+
+    if ($pathelements[0] eq '') {
+        shift @pathelements;
+    }
+    
+    my @paths_to_check = ('/');
+    
+    my $current_path; 
+    
+    foreach my $pathitem (@pathelements) {
+        $current_path .= "/" . $pathitem;
+        push @paths_to_check, $current_path;
+    }
+
+    ## always use role_id 0 - which is default role and includes everyone.
+    my @role_ids = ( 0 );
+    if (ref($user)) {
+        push @role_ids, map { $_->role->id } $user->role_members->all;
+    }
+
+
+    ## ok - now that we have our path elements to check - we have to figure out how we are accessing them.
+    ## If we have caching turned on, we load the perms from the cache and walk the tree.
+    ## otherwise we pull what we need out of the db.
+    # structure:   $permdata{$pagepath} = { 
+    #                                         admin => { 
+    #                                                   page => {
+    #                                                               create => 'yes', 
+    #                                                               delete => 'yes', 
+    #                                                               view => 'yes', 
+    #                                                               edit => 'yes', 
+    #                                                               attachment => 'yes',
+    #                                                           }, 
+    #                                                   subpages => {
+    #                                                               create => 'yes', 
+    #                                                               delete => 'yes', 
+    #                                                               view => 'yes', 
+    #                                                               edit => 'yes', 
+    #                                                               attachment => 'yes',
+    #                                                           },
+    #                                                  },
+    #                                         users => .....
+    #                                     }
+    
+    my $permdata;    
+
+    if ($c->config->{'permissions'}{'cache_permission_data'}) {
+        $permdata = $c->cache->get('page_permission_data');        
+    } 
+    
+    # if we don't have any permissions data, we have a problem. we need to load it.
+    # we have two options here - if we are caching, we will load everything and cache it.
+    # if we are not - then we load just the bits we need.
+    if (!$permdata) {
+        ## either the data hasn't been loaded, or it's expired since we used it last.
+        ## so we need to reload it.
+        my $rs = $c->model('DBIC::PathPermissions')->search(undef, { order_by => 'length(path),role,apply_to_subpages' });
+
+        # if we are not caching, we don't return the whole enchilada.
+        if (!$c->config->{'permissions'}{'cache_permission_data'}) {
+            ## this seems odd to me - but that's what the dbix::class says to do.
+            $rs = $rs->search({ role => \@role_ids });
+            $rs = $rs->search({ '-or' => [
+                                        {
+                                            path => \@paths_to_check,
+                                            apply_to_subpages => 'yes'
+                                        },
+                                     {
+                                            path => $current_path,
+                                            apply_to_subpages => 'no'
+                                        }
+                                    ]
+                        });
+        }
+        $rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+        
+        my $recordtype;
+        while (my $record = $rs->next) {
+            if ($record->{'apply_to_subpages'} eq 'yes') {
+                $recordtype = 'subpages';
+            } else {
+                $recordtype = 'page';
+            }
+            %{$permdata->{$record->{'path'}}{$record->{'role'}}{$recordtype}} = map { $_ => $record->{$_ . "_allowed"} } qw/create edit view delete attachment/;             
+        }   
+    }
+    
+    ## now we re-cache it - if we need to.  # !$c->cache('memory')->exists('page_permission_data')
+    if ($c->config->{'permissions'}{'cache_permission_data'}) {
+        $c->cache->set('page_permission_data', $permdata);
+    }
+
+    # rules comparison hash
+    # allow everything by default
+    my %rulescomparison = (
+        'create' => {
+                        'allowed' => ($c->config->{'permissions'}{'create_allowed'} || 1),
+                        'role' => '__default',
+                        'len' => 0,
+                  },
+        'delete' => {
+                        'allowed' => ($c->config->{'permissions'}{'delete_allowed'} || 1),
+                        'role' => '__default',
+                        'len' => 0,            
+                    },
+        'edit' =>   {
+                        'allowed' => ($c->config->{'permissions'}{'edit_allowed'} || 1),
+                        'role' => '__default',
+                        'len' => 0,
+                    },
+        'view' =>   {
+                        'allowed' => ($c->config->{'permissions'}{'view_allowed'} || 1),
+                        'role' => '__default',
+                        'len' => 0,
+                    },
+        'attachment' =>   {
+                        'allowed' => ($c->config->{'permissions'}{'attachment_allowed'} || 1),
+                        'role' => '__default',
+                        'len' => 0,
+                    },                    
+        );
+    
+    
+    ## the outcome of this loop is a combined permission set.
+    ## The rule orders are basically based on how specific the path
+    ## match is.  More specific paths override less specific paths.
+    ## When conflicting rules at the same level of path hierarchy 
+    ## (with different roles) are discovered, the grant is given precedence
+    ## over the deny.  Note that more-specific denies will still
+    ## override.
+    my $permtype = 'subpages';
+    foreach my $i (0..$#paths_to_check) {
+        my $path = $paths_to_check[$i];
+        if ($i == $#paths_to_check) {
+            $permtype = 'page';
+        }
+        foreach my $role (@role_ids) {
+            if (exists($permdata->{$path}) && exists($permdata->{$path}{$role}) && 
+                exists($permdata->{$path}{$role}{$permtype})) {
+
+                my $len = length($path);
+                
+                print STDERR "processing rule for " . $path . "\n\n";
+                foreach my $perm (keys %{$permdata->{$path}{$role}{$permtype}} ) {
+                    
+                    ## if the xxxx_allowed column is null, this permission is ignored.
+                    if (defined($permdata->{$path}{$role}{$permtype}{$perm})) {
+                        if ($len == $rulescomparison{$perm}{'len'} ) {
+                            if ($permdata->{$path}{$role}{$permtype}{$perm} eq 'yes') {
+                                $rulescomparison{$perm}{'allowed'} = 1;
+                                $rulescomparison{$perm}{'len'} = $len;
+                                $rulescomparison{$perm}{'role'} = $role;
+                            }
+                        } elsif ($len > $rulescomparison{$perm}{'len'}) {
+                            if ($permdata->{$path}{$role}{$permtype}{$perm} eq 'yes') {
+                                $rulescomparison{$perm}{'allowed'} = 1;                    
+                            } else {
+                                $rulescomparison{$perm}{'allowed'} = 0;
+                            }
+                            $rulescomparison{$perm}{'len'} = $len;
+                            $rulescomparison{$perm}{'role'} = $role;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
+    return \%perms;
+}
+
+
+
 
 1; 
 

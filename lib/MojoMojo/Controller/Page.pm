@@ -7,6 +7,7 @@ use URI;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
+use Data::Dumper;
 
 
 =head1 NAME
@@ -54,7 +55,21 @@ sub view : Global {
     return $c->forward('suggest')
 	if $proto_pages && @$proto_pages;
 
-    my $page = $stash->{page};
+    my $page = $stash->{'page'};
+
+    my $user;
+
+    if ($c->config->{'permissions'}{'check_permission_on_view'}) {
+        if ($c->user_exists()) { $user = $c->user->obj; }
+
+        my $perms = $c->check_permissions($stash->{'path'}, $user);
+        if (!$perms->{'view'}) {
+            $stash->{'message'} = 'Permission Denied to view '. $page->name;
+            $stash->{'template'} = 'message.tt';
+            return;
+        }
+    }
+    
 
     my $content;
 

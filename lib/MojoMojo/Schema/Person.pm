@@ -57,6 +57,7 @@ __PACKAGE__->has_many(
   "PageVersion",
   { "foreign.creator" => "self.id" },
 );
+__PACKAGE__->many_to_many( roles => 'role_members', 'role');
 __PACKAGE__->has_many("contents", "Content", { "foreign.creator" => "self.id" });
 
 sub get_person : ResultSet {

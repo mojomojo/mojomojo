@@ -1,6 +1,7 @@
 package MojoMojo::Controller::Attachment;
 
 use strict;
+use Data::Dumper;
 use base 'Catalyst::Controller';
 
 use IO::File;
@@ -33,7 +34,11 @@ auth controll for mojomojo
 sub auth : Private {
     my ( $self, $c ) = @_;
     return $c->forward('/user/login') unless $c->stash->{user};
-    return 1 if ($c->stash->{user}->can_edit($c->stash->{path}));
+
+    my $perms = $c->check_permissions($c->stash->{'path'}, ($c->user_exists ? $c->user->obj : undef));
+    if ($perms->{'attachment'}) {
+        return 1;
+    }
 
     $c->stash->{template}='message.tt';
     $c->stash->{message}='sorry bubba, you aint got no rights';
