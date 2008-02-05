@@ -14,7 +14,7 @@ requires (
         'Catalyst::Model::Search'                       => 0,
         'Catalyst::Plugin::Authentication'              => '0.10005',
         'Catalyst::Authentication::Store::DBIx::Class'  => '0.101',
-        'Catalyst::Plugin::Cache::Store::Memory'            => 0,
+        'Catalyst::Plugin::Cache::Memory'               => 0,
         'Catalyst::Plugin::Email'                       => 0,
         'Catalyst::Plugin::ConfigLoader'                => '0.13',
         'Catalyst::Plugin::FillInForm'                  => '0.04',
