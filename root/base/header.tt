@@ -10,7 +10,7 @@
     <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
     <title>
 	[% IF title; title %]
-	[% ELSIF page %] [% c.expand_wikiword(page.name_orig) %] [% END %]
+	[% ELSIF page %] [% c.expand_wikiword(page.name_orig) %]  [% END %]
             - [%
                c.pref('name') ||
                 "A poorly configured MojoMojo Installation"
