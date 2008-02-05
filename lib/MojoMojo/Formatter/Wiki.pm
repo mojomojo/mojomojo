@@ -90,14 +90,14 @@ sub strip_pre {
             ^(.+?)
             <\s*pre\b[^>]*>}sx ) {
         $$content =~ s{^.+?<\s*pre\b[^>]*>}{}sx;
-        my ($inner) = $$content =~ m{^(.+?)<\s*/pre\s*>};
+        my ($inner) = $$content =~ m{^(.+?)<\s*/pre\s*>}sx;
         unless ($inner) {
             $res .=$part;
             last;
         }
         push @parts,$inner;
         $res .= $part . '<!--pre_placeholder-->';
-        $$content =~ s{^.+?<\s*/pre\s*>}{};
+        $$content =~ s{^.+?<\s*/pre\s*>}{}sx;
     }
     $res .= $$content;
     return $res,@parts;
@@ -107,7 +107,7 @@ sub strip_pre {
 sub reinsert_pre {
     my ($content,@parts) = @_;
     foreach my $part (@parts) {
-        $$content =~ s{<!--pre_placeholder-->}{<pre>$part</pre>};
+        $$content =~ s{<!--pre_placeholder-->}{<pre>$part</pre>}sx;
     }
     return $$content;
 }
