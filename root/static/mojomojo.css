@@ -237,12 +237,13 @@ blockquote {
 }
 
 pre {
-  width:95%;
+  width:90%;
   background-color: #eee;
   padding: 10px;
   margin-left: 3em;
   margin-right:1em ;
   font-size: 11px;
+  overflow: scroll;
 }
 
 ol.setup {
