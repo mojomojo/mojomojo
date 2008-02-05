@@ -28,6 +28,7 @@ requires (
         'Catalyst::Plugin::UploadProgress'              => 0,
         'Catalyst::View::TT'                            => '0.23',
         'Config::General'                               => 0,
+        'Cache::Memory'                                 => 0,
         'Data::FormValidator::Constraints::DateTime'    => 0,
         'DateTime::Format::Mail'                        => 0,
         'DBIx::Class::DateTime::Epoch'                  => 0,
