@@ -210,7 +210,6 @@ sub uri_for_static {
 sub check_permissions {
     my ($c, $path, $user) = @_;
     
-    
     ## make some changes to the path - We have to do this
     ## because path is not always cleaned up before we get it.
     ## sometimes we get caps, other times we don't.  permissions are
@@ -225,7 +224,7 @@ sub check_permissions {
     
     my @pathelements = split '/', $searchpath;
 
-    if ($pathelements[0] eq '') {
+    if (@pathelements && $pathelements[0] eq '') {
         shift @pathelements;
     }
     

@@ -1,3 +1,7 @@
+0.999011 2008-02-06 00:08:00
+        - Fix multiline pre render error
+        - Further updates for layout.
+        - Flexible auth framework added (No UI yet) (jayk)
         - More validation fixes
         - Updated dependencies
         - Updated auth to use new plugins
