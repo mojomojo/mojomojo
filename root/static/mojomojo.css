@@ -154,11 +154,10 @@ h1 {
 /* @group Links */
 
 #breadcrumbs a {
-	background-color: white;
 	padding: 1px 4px;
-	color: #4E5662;
+	color: white;
 	text-decoration: none;
-	border: 1px solid white;
+	border: 1px solid transparent;
 }
 
 #breadcrumbs a:hover {
