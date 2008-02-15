@@ -1,6 +1,48 @@
+/* @override http://mojomojo.org:3000/.static/mojomojo.css */
+
 /* @override http://localhost:3000/.static/mojomojo.css */
 
 /* @group Document Structure */
+
+Body {
+	background: #7D7C7A repeat-x url(gfx/background.jpg);
+	margin: 0;
+	color: #626262;
+	font: 62.5% "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+}
+
+#container {
+	width: 750px;
+	text-align: left;
+	margin: 10px auto;
+}
+
+#header {
+	background: url(gfx/header.jpg) White;
+	height: auto;
+	padding-bottom: 0.1em;
+	margin: 0;
+}
+
+#breadcrumbs {
+	background: #4E5662;
+	height: 12px;
+	font-size: 11px;
+	color: #e3e3e3;
+	margin: 0;
+	padding: 3px 13px;
+}
+
+div#toplinks {
+	background: #ebeae7;
+	font-weight: bold;
+	font-size: 12px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 13px;
+	color: #000000;
+}
 
 #categories {
 	background: #ffffff;
@@ -16,62 +58,12 @@
 	background: #ffffff;
 }
 
-Body {
-	background: #7D7C7A repeat-x url(gfx/background.jpg);
-	margin: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #626262;
-}
-
-#container {
-	width: 750px;
-	position: absolute;
-    left: 50%;
-	height: 500px;
-	top: 10px;
-	display: block;
-	margin-left: -375px;
-}
-
-#header {
-	background: url(gfx/header.jpg) White;
-	height: auto;
-	padding-bottom: 0.1em;
-	margin: 0;
-}
-
-
-#breadcrumbs {
-	background: #4E5662;
-	height: 12px;
-	font-size: 11px;
-	color: #e3e3e3;
-	margin-top: 0;
-	margin-right: 0;
-	margin-bottom: 0;
-	padding-left: 13px;
-	padding-top: 1px;
-	padding-bottom: 1px;
-}
-
-#toplinks {
-	background: #D7D6D4;
-	font-weight: bold;
-	font-size: 12px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	padding-left: 13px;
-	color: #000000;
-}
-
 #tags {
-	background: #fffdfa;
+	background: #f6f6f6;
 	font-weight: bold;
 	font-size: 11px;
-	color: #919191;
-	padding-left: 13px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	color: #676767;
+	padding: 5px 13px;
 }
 
 .showdiv {
@@ -88,7 +80,6 @@ Body {
 	background: #ffffff;
 	padding: 13px;
 	overflow: hidden;
-	font-size: 12px;
 }
 
 #bottomnav {
@@ -97,13 +88,12 @@ Body {
 	padding-left: 13px;
 	color: #000000;
 	margin: 0;
-	font-size: 12px;
 	font-weight: bold;
 	padding-top: 6px;
 }
 
 #bottomnav input {
-	font-size: 10px;
+	font-size: 1em;
 }
 
 .formdiv {
@@ -113,7 +103,10 @@ Body {
   padding-bottom: 5px;
 }
 
-
+p {
+	font-size: 1.2em;
+	line-height: 1.5em;
+}
 /* @end */
 /* @group Headlines */
 
@@ -133,7 +126,7 @@ Body {
 	top: 14px;
     padding-left: 100px;
 	position: relative;
-	font-size: 30px;
+	font-size: 2.8em;
 	color: #ffffff;
 	font-weight: bold;
 	border-width: 1px;
@@ -149,7 +142,7 @@ Body {
 /* @group Links */
 
 #breadcrumbs a {
-	color: #e7e7e7;
+	color: #b9d876;
 	text-decoration: none;
 }
 
@@ -257,10 +250,11 @@ ol.setup li {
 }
 
 .byline {
-  font-size: 10px;
-  font-style: italic;  
   margin-bottom: 10px;
   color: #999;
+  border-left: 1.2em solid #577091;
+  padding-left: 4px;
+  font-size: 1em;
 }
 
 .references {
@@ -797,8 +791,11 @@ acronym {
 }
 
 #searchField {
-    margin-left: 150px;
-    font-size: 12px
+	float: right;
+	padding: 3px;
+    font-size: 1em;
+    border: 1px solid #bbb;
+    margin: 0px 13px;
 }
 fieldset {
 	padding: 1em;
