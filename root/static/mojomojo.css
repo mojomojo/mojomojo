@@ -88,7 +88,6 @@ div#pagenav ul li a:hover {
 
 #tags {
 	background: #f6f6f6;
-	font-weight: bold;
 	font-size: 1.1em;
 	color: #676767;
 	padding: 5px 13px;
@@ -411,12 +410,17 @@ textarea#comment {
   color: #003800;
 	font-size: 13px;
 }
-
+a.tag {
+	text-decoration: none;
+}
+a.tag:hover {
+	text-decoration: underline;
+}
 .remove a {
   color: red;
-	font-size: 13px;
+  font-size: 1.1em;
+  margin: 0px 1px;
   text-decoration: none;
-  vertical-align: middle;
 }
 
 .remove a:hover {

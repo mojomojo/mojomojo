@@ -13,59 +13,57 @@
   </div>
 [% END %]
 <div id="bottomnav">
+<ul>
 [% IF (!rev OR rev==page.content_version) %]
   [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
-    <a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a>
+    <li><a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a></li>
   [%END%]
   [% IF user.is_admin %]
- | <a title="Change site settings" href="[%c.uri_for('admin')%]">Edit Settings</a>
+   <li><a title="Change site settings" href="[%c.uri_for('admin')%]">Edit Settings</a></li>
   [% END %] 
   [% IF c.req.action=='info'%]
- | <a title="Page meta information" class="navOn">Page Info</a>
+   <li><a title="Page meta information" class="navOn">Page Info</a></li>
   [% ELSE %]
- | <a title="Page meta information" href="[% c.uri_for('info')%]" accesskey="I">Page Info</a>
+   <li><a title="Page meta information" href="[% c.uri_for('info')%]" accesskey="I">Page Info</a></li>
   [% END%]
   [% IF page.content_version && page.content_version > 1 %] 
- | <a title="See previous revision" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">Back in time</a> 
-   ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])
+   <li><a title="See previous revision" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">Back in time</a>
+   ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])</li>
   [% END %]
   [% IF  (page.content_version < page.content.max_version) %]
-    <a title="See next revision" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">Forward in time</a> 
-    <small>([% page.content.max_version - page.content_version %] more)</small>
+    <li><a title="See next revision" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">Forward in time</a> ([% page.content.max_version - page.content_version %] more)</li>
   [%END%]
 [% ELSE %]
   [% IF (rev < page.content.max_version) %]
-    <a "title="See next revision" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">Forward in time</a> 
-    <small>([% page.content.max_version - rev %] more)</small>
+    <li><a "title="See next revision" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">Forward in time</a> ([% page.content.max_version - rev %] more)</li>
   [% END %]
   [% IF rev > 1 %]
- | <a title="See previous revision" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">Back in time</a> 
-    <small>([% rev - 1 %] more)</small>
+   <li><a title="See previous revision" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">Back in time</a> ([% rev - 1 %] more)</li>
   [%END%]
   [% UNLESS rev == page.content_version %]
-   | <a title="Back to the page" href="[% c.uri_for('view')%]" accesskey="C">Current Revision</a>
+   <li><a title="Back to the page" href="[% c.uri_for('view')%]" accesskey="C">Current Revision</a></li>
   [% END %]
 [% END %] 
 [% IF page.content_version && page.content_version > 1 %] 
- <span id="show_changes">
-  | <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev)%]'); return false;">See changes</a>
+ <li><span id="show_changes">
+  <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev)%]'); return false;">See changes</a>
  </span>
  <span id="hide_changes" style="display: none;" >
-  | <a title="Show normal page" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev) %]'); return false;">Hide changes</a>
- </span>
+  <a title="Show normal page" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev) %]'); return false;">Hide changes</a>
+ </span></li>
 [% END %]
- <small>
-  | Views: <a title="Format page for printing" href="[%c.uri_for('print')%]">Print</a>
+  <li>
+  Views: <a title="Format page for printing" href="[%c.uri_for('print')%]">Print</a>
   <a title="Subscribe to page changes" href="[%c.uri_for('rss')%]">RSS</a>
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
- </small>
+ </li>
 [% IF page.links_to.first ; %] 
- <small>
-  | Linked from:
+ <li>
+  Linked from:
   [% FOR linkitem = page.links_to %] 
    <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%c.uri_for('linkitem.path')%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
- </small>
-</span>
+ </li>
 [% END %]
+</ul>
 </div>
