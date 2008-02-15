@@ -66,12 +66,11 @@ div#pagenav ul li {
 	display: inline;
 }
 div#pagenav ul li a {
-	padding: 2px 3px;	
+	padding: 2px 3px;
+	text-decoration: none;	
 }
 div#pagenav ul li a:hover {
-	background-color: #f5f5f5;
-	border: 1px solid #bbb;
-	padding: 1px 2px;	
+	text-decoration: underline;
 }
 #categories {
 	background: #ffffff;
