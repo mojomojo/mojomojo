@@ -16,7 +16,7 @@ Body {
 #container {
 	width: 750px;
 	text-align: left;
-	margin: 10px auto;
+	margin: 20px auto 0;
 }
 
 #header {
@@ -39,7 +39,7 @@ div#toplinks {
 	background: #ebeae7;
 	font-weight: bold;
 	color: #000000;
-	padding: 6px 10px;
+	padding: 4px 10px;
 	min-height: 1.8em;
 }
 div#toplinks ul li {
