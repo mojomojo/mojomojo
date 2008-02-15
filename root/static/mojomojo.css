@@ -113,6 +113,7 @@ div#pagenav {
 p {
 	font-size: 1.2em;
 	line-height: 1.5em;
+	margin: 1.2em 0;
 }
 /* @end */
 /* @group Headlines */
@@ -132,7 +133,8 @@ p {
 #header h1 {
 	top: 14px;
     padding-left: 100px;
-	position: relative;
+    padding-top: 13px;
+    padding-bottom: 10px;
 	font-size: 2.8em;
 	color: #ffffff;
 	font-weight: bold;
@@ -143,7 +145,10 @@ p {
 #header h1 a {
 	color: #ffffff;
 }
-
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+}
 /* @end */
 
 /* @group Links */
@@ -419,7 +424,7 @@ textarea#comment {
 
 .newWikiWord a {
   vertical-align: super;
-  font-size: 0.8em;
+  line-height: 0;
 }
 
 .protoPage a:link {
