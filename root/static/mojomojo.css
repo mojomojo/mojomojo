@@ -39,8 +39,20 @@ div#toplinks {
 	background: #ebeae7;
 	font-weight: bold;
 	color: #000000;
-	padding: 6px 13px;
+	padding: 6px 10px;
 	min-height: 1.8em;
+}
+div#toplinks ul li {
+	display: inline;
+	font-size: 1.1em;
+}
+div#toplinks ul li a:hover {
+	background-color: #eee;
+	border: 1px solid #bbb;
+}
+div#toplinks ul li a {
+	padding: 2px 3px;
+	border: 1px solid transparent;
 }
 div#pagenav {
 	clear: both;
@@ -48,6 +60,9 @@ div#pagenav {
 	background: #f6f6f6;
 	border-top: 1px solid #bbb;
 	border-bottom: 1px solid #bbb;
+}
+div#pagenav ul li {
+	font-size: 1.1em;
 }
 #categories {
 	background: #ffffff;
@@ -191,7 +206,7 @@ form { margin: 0;}
 a.nav, a.nav:link, a.nav:visited { color: #577091; }
 a.nav:hover { color: #121239; }
 
-li { margin-bottom: 7px }
+
 
 .navigation {
   margin-top: 5px;
@@ -216,9 +231,7 @@ li { margin-bottom: 7px }
 }
   
 .navOn {
-  font-size: 11px;
-  color: gray;
-  font-weight: bold;
+  color: #3a3a3a;
   text-decoration: none;
 }
 
@@ -811,6 +824,7 @@ acronym {
 	padding: 3px;
     font-size: 1em;
     border: 1px solid #bbb;
+    margin-left: 10px;
 }
 fieldset {
 	padding: 1em;
