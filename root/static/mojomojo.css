@@ -38,7 +38,6 @@ div#toplinks {
 	background: #ebeae7;
 	font-weight: bold;
 	color: #000000;
-	margin: 1px 0px;
 	padding: 6px 13px;
 	min-height: 1.8em;
 }
@@ -46,6 +45,8 @@ div#pagenav {
 	clear: both;
 	padding: 3px 13px;
 	background: #f6f6f6;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 }
 #categories {
 	background: #ffffff;
@@ -67,7 +68,8 @@ div#pagenav {
 	font-size: 1.1em;
 	color: #676767;
 	padding: 5px 13px;
-	margin: 1px 0px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 }
 
 .showdiv {
@@ -505,7 +507,7 @@ div.amazon img {
 
 .form dl {
  margin: 13px;
- font-family: sans-serif;
+ font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
  float: left;
 }
 
@@ -795,7 +797,6 @@ acronym {
 }
 
 #searchField {
-	float: right;
 	padding: 3px;
     font-size: 1em;
     border: 1px solid #bbb;
