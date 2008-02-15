@@ -425,6 +425,7 @@ textarea#comment {
 .newWikiWord a {
   vertical-align: super;
   line-height: 0;
+  font-size: 0.8em;
 }
 
 .protoPage a:link {

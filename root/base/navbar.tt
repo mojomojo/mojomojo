@@ -1,4 +1,5 @@
-<div id="toplinks"><form action="[% c.uri_for('search') %]" method="get">  
+<div id="toplinks"><p><form action="[% c.uri_for('search') %]" method="get">  
+	
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user')))%]
     <b class="navon">[%c.fixw(user.login)%]</b> | 
@@ -74,4 +75,5 @@
       <a title="User Settings" href="[%c.uri_for(user.link)%].prefs">preferences</a>
     [% END %] 
   [% END%]
+</p>
 </div>
