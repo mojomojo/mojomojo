@@ -49,10 +49,10 @@ div#toplinks ul li {
 div#toplinks ul li a:hover {
 	background-color: #eee;
 	border: 1px solid #bbb;
+	padding: 2px 3px;
 }
 div#toplinks ul li a {
-	padding: 2px 3px;
-	border: 1px solid transparent;
+	padding: 3px 4px;
 }
 div#pagenav {
 	clear: both;
@@ -169,10 +169,9 @@ h1 {
 /* @group Links */
 
 #breadcrumbs a {
-	padding: 1px 4px;
+	padding: 2px 5px;
 	color: white;
 	text-decoration: none;
-	border: 1px solid transparent;
 }
 
 #breadcrumbs a:hover {
@@ -180,6 +179,7 @@ h1 {
 	background-color: #7D7C7A;
 	text-decoration: none;
 	border: 1px solid #bbb;
+	padding: 1px 4px;
 }
 
 a { 
