@@ -42,16 +42,16 @@ div#toplinks {
 	padding: 4px 10px;
 	min-height: 1.8em;
 }
-div#toplinks ul li {
+div#toplinks ul li, div#bottomnav ul li {
 	display: inline;
 	font-size: 1.1em;
 }
-div#toplinks ul li a:hover {
+div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
 	background-color: #eee;
 	border: 1px solid #bbb;
 	padding: 2px 3px;
 }
-div#toplinks ul li a {
+div#toplinks ul li a,  div#bottomnav ul li a {
 	padding: 3px 4px;
 }
 div#pagenav {
@@ -114,7 +114,7 @@ div#pagenav ul li a:hover {
 #bottomnav {
 	height: 28px;
 	background: url(gfx/backbottom.gif) no-repeat;
-	padding-left: 13px;
+	padding-left: 8px;
 	color: #000000;
 	margin: 0;
 	font-weight: bold;
@@ -424,9 +424,7 @@ a.tag:hover {
 }
 
 .remove a:hover {
-  color: #650000;
-	font-size: 13px;
-	background: transparent;
+  	color: #650000;
 }
 
 .tagedit {
