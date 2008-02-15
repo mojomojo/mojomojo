@@ -44,7 +44,8 @@
     <a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">export</a> | 
   [%END %]
   <input type="text" id="searchField" name="query" style="" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
-  <br/>
+  </form></div> 
+  <div id="pagenav">
   [%IF (c.req.action=="view")%]
     <b class="navOn">page</b> | 
   [%ELSE%]
@@ -73,4 +74,4 @@
       <a title="User Settings" href="[%c.uri_for(user.link)%].prefs">preferences</a>
     [% END %] 
   [% END%]
-</form></div> 
+</div>
