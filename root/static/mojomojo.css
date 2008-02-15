@@ -37,13 +37,16 @@ Body {
 div#toplinks {
 	background: #ebeae7;
 	font-weight: bold;
-	font-size: 12px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	padding-left: 13px;
 	color: #000000;
+	margin: 1px 0px;
+	padding: 6px 13px;
+	min-height: 1.8em;
 }
-
+div#pagenav {
+	clear: both;
+	padding: 3px 13px;
+	background: #f6f6f6;
+}
 #categories {
 	background: #ffffff;
 }
@@ -61,9 +64,10 @@ div#toplinks {
 #tags {
 	background: #f6f6f6;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 1.1em;
 	color: #676767;
 	padding: 5px 13px;
+	margin: 1px 0px;
 }
 
 .showdiv {
@@ -795,7 +799,6 @@ acronym {
 	padding: 3px;
     font-size: 1em;
     border: 1px solid #bbb;
-    margin: 0px 13px;
 }
 fieldset {
 	padding: 1em;
