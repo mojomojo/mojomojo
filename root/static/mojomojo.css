@@ -72,6 +72,19 @@ div#pagenav ul li a {
 div#pagenav ul li a:hover {
 	text-decoration: underline;
 }
+div#pageoptions {
+	padding: 5px 13px;
+	background-color: #ceebb6;
+}
+div#pageoptions ul li {
+	display: inline;
+	padding: 10px 3px;
+	color: black;
+	font-size: 1.1em;
+}
+div#pageoptions a {
+	color: green;
+}
 #categories {
 	background: #ffffff;
 }
@@ -170,6 +183,14 @@ p {
 h1 {
 	font-size: 2em;
 	font-weight: bold;
+}
+h2 {
+	font-size: 1.6em;
+	font-weight: bold;
+}
+h3 {
+	font-size: 1.4em;
+	color: black;
 }
 /* @end */
 
