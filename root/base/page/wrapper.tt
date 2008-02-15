@@ -15,6 +15,7 @@
 [% PROCESS breadcrumbs.tt %]
 [% # PROCESS sidebar.tt %]
 [% PROCESS navbar.tt %]
+[% PROCESS page/editbar.tt IF c.action.reverse = 'pageadmin/edit' %]
 <div id="content">
 [% content %]
 </div>

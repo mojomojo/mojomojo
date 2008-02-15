@@ -1,0 +1,11 @@
+[% IF page.content_version ; %] 
+ <div id="toplinks">
+   <a href="[% c.uri_for(page.path) %]">View</a> |
+   Edit | 
+   <a href="[% c.uri_for('attachments') %]">Attachments</a>
+ <h3 class="navigation" id="previewHeading">
+ Preview | 
+ <a href="#" onclick="Element.toggle('hidden_info');return false;">Syntax</a>
+ </h3>
+</div>
+[% END %]
