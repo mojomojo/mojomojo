@@ -4,6 +4,7 @@
 
 /* @group Document Structure */
 
+@import "reset.css";
 Body {
 	background: #7D7C7A repeat-x url(gfx/background.jpg);
 	margin: 0;
