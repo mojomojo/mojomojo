@@ -31,7 +31,7 @@ Body {
 	font-size: 11px;
 	color: #e3e3e3;
 	margin: 0;
-	padding: 3px 13px;
+	padding: 6px 8px;
 }
 
 div#toplinks {
@@ -148,13 +148,18 @@ p {
 /* @group Links */
 
 #breadcrumbs a {
-	color: #b9d876;
+	background-color: white;
+	padding: 1px 4px;
+	color: #4E5662;
 	text-decoration: none;
+	border: 1px solid white;
 }
 
 #breadcrumbs a:hover {
 	color: #ffffff;
+	background-color: #7D7C7A;
 	text-decoration: none;
+	border: 1px solid #bbb;
 }
 
 a { 
