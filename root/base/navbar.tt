@@ -51,13 +51,13 @@
   <div id="pagenav">
 	<ul>
   [%IF (c.req.action=="view")%]
-    <li class="navOn">page</b> | 
+    <li class="navOn">Page</li>
   [%ELSE%]
-    <li><a title="The Wikilicious page" href="[%c.uri_for('view')%]">page</a></li>
+    <li><a title="The Wikilicious page" href="[%c.uri_for('view')%]">Page</a></li>
   [%END%]
   [%IF (page.has_photos) %]
     [%IF (pictures )%]
-      <li class="navOn">gallery</li>
+      <li class="navOn">Gallery</li>
     [%ELSE%]
       <li><a title="Photo Album" href="[%c.uri_for('gallery')%]">gallery</a></li> 
     [%END%]
@@ -68,14 +68,14 @@
     [%IF (c.req.action=="profile")%]
       <li class="navOn">Profile</li> 
     [%ELSE%]
-      <li><a title="User Profile" href="[%c.uri_for('profile')%]">profile</a></li>
+      <li><a title="User Profile" href="[%c.uri_for('profile')%]">Profile</a></li>
     [%END%]
   [%END%]
   [%IF c.user_exists%]
     [%IF (c.req.action=="prefs")%]
-      <li class="navOn">preferences</li> 
+      <li class="navOn">Preferences</li> 
     [%ELSE%]
-      <li><a title="User Settings" href="[%c.uri_for(user.link)%].prefs">preferences</a></li>
+      <li><a title="User Settings" href="[%c.uri_for(user.link)%].prefs">Preferences</a></li>
     [% END %] 
   [% END%]
   </ul>
