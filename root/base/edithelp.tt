@@ -1,4 +1,4 @@
-<div id="TextileHelp">
+<div id="TextileHelp" style="display: none;">
 		<h2>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h2>
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
@@ -45,6 +45,135 @@
     window.open( 
       "http://www.bradchoate.com/mt/docs/mtmanual_textile2.html",
       "redRef",
+      "height=600,width=550,channelmode=0,dependent=0," +
+      "directories=0,fullscreen=0,location=0,menubar=0," +
+      "resizable=0,scrollbars=1,status=1,toolbar=0" 
+    );
+  }
+</script>
+<div id="MarkdownHelp">
+		<h2>Markdown formatting tips (<a href="#" onclick="quickMarkdownReference(); return false;">advanced</a>)</h2>
+<div class="rightHandSide"> 
+    <h3>Wiki words</h3>
+<p>
+  Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.
+</p>
+<p>
+  Wiki words: <i>HomePage, ThreeWordsTogether, [[C++]], [[Let's play again!]] ((easy to type))</i><br/>
+
+  Not wiki words: <i>IBM, School</i>
+</p>
+</div>
+		<table cellspacing="0" cellpadding="0">
+            <tr><th colspan="2">Text Formatting</th></tr>
+            <tr><td>*italic* or _italic_</td><td>Text in <em>italics</em></td>
+            <tr><td>**bold** or __bold__</td><td>Text in <b>bold</b></td>
+            <tr><th colspan="2">Links</th></tr>
+            <tr><td>Inline Links:</td><td>[example](http://example.com/ "Link Title")</td>
+            <tr><td>&nbsp;</td><td>[example][IdLabel]<br/>Later in the document:<br/>[IdLabel]: http://example.com/ "Link Title"</td>
+            <tr><th colspan="2">Images</th></tr>
+            <tr>
+                <td>Inline</td>
+                <td>![alt text("/image/path/file.jpg" "Optional Title")</td>
+            </tr>
+            <tr><th colspan="2">Headers</th></tr>
+            <tr>
+                <td>Header 1 (&lt;h1&gt;)</td>
+                <td>Header 1<br/>==========</td>
+            </tr>
+            <tr>
+                <td>Header 1 (&lt;h1&gt;)</td>
+                <td># Header 1 #</td>
+            </tr>
+            <tr>
+                <td>Header 2 (&lt;h2&gt;)</td>
+                <td>Header 2<br/>---------</td>
+            </tr>
+            <tr>
+                <td>Header 2 (&lt;h2&gt;)</td>
+                <td>## Header 2 ##</td>
+            </tr>
+            <tr>
+                <td>Header 6 (&lt;h6&gt;)</td>
+                <td>###### Header 6 #######</td>
+            </tr>
+            <tr><th colspan="2">Ordered Lists</th></tr>
+            <tr>
+                <td>To get:<br/>
+                  &lt;ol&gt;<br/>
+                  &nbsp;&lt;li&gt;Foo&lt;/li&gt;<br/>
+                  &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
+                  &lt;ol&gt;<br/>
+                </td><td>Write:<br/>
+                1. Foo<br/>
+                2. Bar
+                </td>
+            </tr>
+            <tr><th colspan="2">Unordered Lists with Paragraphs</th></tr>
+            <tr>
+                <td>To get:<br/>
+                  &lt;ul&gt;<br/>
+                  &nbsp;&lt;li&gt;Foo&lt;/li&gt;<br/>
+                  &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
+                  &lt;ul&gt;<br/>
+                </td><td>Write:<br/>
+                * Foo<br/>
+                * Bar
+                </td>
+            </tr><tr>
+                <td colspan="2">Lists can be nested by indentation level:
+                    <pre>
+                        * Foo
+                            1. Bar
+                               With a second line
+                            2. Baz
+                        * Shapes
+                            * Circle
+                            * Square
+                            * Rectangle
+                    </pre>
+                </td>
+            </tr>
+            <tr><th colspan="2">Blockquotes</th></tr>
+            <tr><td colspan="2"><pre>
+&gt; Just like email quoting!
+
+&gt; &gt;Blockquotes can be nested
+
+&gt;  ## An h2 tag in a blockquote
+&gt;  
+&gt;  And additional Markdown formatting:
+&gt;  * An unordered list
+&gt;  * Item
+            </pre></td></tr>
+            <tr><th colspan="2">Code Spans</th></tr>
+                <td colspan="2">`&lt;code&gt;` blocks are wrapped in backticks.</td>
+            </tr><tr><td>Nested backticks:</td>
+                <td><code>`` just use `2` ``</code> in the wrapping block</td>
+            </tr>
+            <tr><th colspan="2">Preformatted Code Blocks</th></tr>
+                <td colspan="2">Simply indent every line of a code block by 4:<br/>
+                <pre>
+                    Normal Paragraph
+
+                        This is a pre formatted code block
+
+                    Going back to normal formatting
+                </pre>
+            </td></tr>
+            <tr><th colspan="2">Horizontal Rules (&lt;hr&gt;)</th></tr>
+            <tr>
+                <td>3 or more dashes or asterisks:<br/>--- or *** or * * *</td>
+                <td>Creates: <hr/></td></tr>
+            </td></tr>
+    </table>
+</div>
+
+<script language="JavaScript">
+  function quickMarkdownReference() {
+    window.open( 
+      "http://daringfireball.net/projects/markdown/basics",
+      "markdownRef",
       "height=600,width=550,channelmode=0,dependent=0," +
       "directories=0,fullscreen=0,location=0,menubar=0," +
       "resizable=0,scrollbars=1,status=1,toolbar=0" 
