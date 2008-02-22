@@ -186,11 +186,11 @@ sub do_register : Private {
     $c->pref('entropy') || $c->pref('entropy',rand);
     $c->stash->{secret}=md5_hex($c->form->valid('email').$c->pref('entropy'));
     $c->email( header => [
-            From    => $c->form->valid('email'),
-            To      => $c->form->valid('email'),
+            From    => 'no-reply@catalystframework.org',
+            To      => $user->email,
             Subject => '[MojoMojo] New User Validation'
         ],
-        body => $c->view('TT')->render($c,'mail/validate.tt'),
+        body =>  $c->view('TT')->render($c, 'mail/validate.tt'),
     );
     $c->stash->{user}=$user;
     $c->stash->{template}='user/validate.tt';
@@ -205,8 +205,8 @@ earlier. Non-validated users will only be able to log out.
 
 sub validate : Global {
     my ($self,$c,$user,$check)=@_;
-    $user=$c->model("DBIC::Person")->find($user);
-    if($check = md5_hex($user->email.$c->pref('entropy'))) {
+    $user=$c->model("DBIC::Person")->find({ login => $user });
+    if( $user and $check = md5_hex($user->email.$c->pref('entropy'))) {
         $user->active(1);
         $user->update();
         if ($c->stash->{user}) {
