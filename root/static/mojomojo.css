@@ -1,10 +1,12 @@
-/* @override http://mojomojo.org:3000/.static/mojomojo.css */
+/* @override 
+	http://mojomojo.org:3000/.static/mojomojo.css
+	http://localhost:3000/.static/mojomojo.css
+*/
 
-/* @override http://localhost:3000/.static/mojomojo.css */
+@import "reset.css";
 
 /* @group Document Structure */
 
-@import "reset.css";
 Body {
 	background: #7D7C7A repeat-x url(gfx/background.jpg);
 	margin: 0;
@@ -122,6 +124,13 @@ div#pageoptions a {
 	background: #ffffff;
 	padding: 13px;
 	overflow: hidden;
+}
+
+#content li {
+	list-style: square;
+	margin-left: 1.5em;
+	margin-bottom:5px;
+	font-size: 1.2em;
 }
 
 #bottomnav {
@@ -992,6 +1001,7 @@ fieldset .label .comment {
 	display: block;
 	margin-left: 12em;
 }
+
 
 #powered
 {
