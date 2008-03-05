@@ -1,4 +1,9 @@
-0.999011 2008-02-06 00:08:00
+0.999013 2008-02-06 00:08:00
+        - renovated skin (arne)
+        - syntax fixes, registration/login (jshirley))
+        - fix email validation template (jshirley)
+
+0.999012 2008-02-06 00:08:00
         - Fix multiline pre render error
         - Further updates for layout.
         - Flexible auth framework added (No UI yet) (jayk)
