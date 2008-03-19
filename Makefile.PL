@@ -59,7 +59,7 @@ requires (
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
-feature 'Markdown Formatter', 'Text::MultiMarkdown';
+feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
     
    
 build_requires 'Test::WWW::Mechanize::Catalyst';
