@@ -75,10 +75,10 @@ sub view : Global {
 
     my $rev = $c->req->params->{rev};
     if ( $rev && defined $page->content_version ) {
-	    $content = $c->model("DBIC::Content")->find(
+	    $content = $c->model("DBIC::Content")->find({
 		    page    => $page->id,
 		    version => $rev
-		    );
+		});
 	    $stash->{rev} = ( defined $content ? $content->version : undef );
 	    unless( $stash->{rev} ) {
 	        $stash->{message} = 'No such revision for '.$page->name;
