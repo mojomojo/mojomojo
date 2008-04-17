@@ -126,8 +126,15 @@ div#pageoptions a {
 	overflow: hidden;
 }
 
-#content li {
-	list-style: square;
+#content ul li { 
+    list-style: square;
+}
+
+#content ol li {
+list-style: decimal;
+}
+
+#content li{
 	margin-left: 1.5em;
 	margin-bottom:5px;
 	font-size: 1.2em;
