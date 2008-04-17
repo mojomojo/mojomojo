@@ -1,4 +1,5 @@
-<div id="TextileHelp" style="display: none;">
+[%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
+<div id="TextileHelp">
 		<h2>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h2>
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
@@ -51,6 +52,7 @@
     );
   }
 </script>
+[% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <div id="MarkdownHelp">
 		<h2>Markdown formatting tips (<a href="#" onclick="quickMarkdownReference(); return false;">advanced</a>)</h2>
 <div class="rightHandSide"> 
@@ -180,3 +182,6 @@
     );
   }
 </script>
+[% ELSE%]
+<div><p>No help yet for [%c.pref('main_formatter')%]</p></div>
+[% END %]
