@@ -41,7 +41,8 @@
     new Form.Element.SmartObserver( 'body',
                                2,
                                function( element, value ) {
-                                    new Ajax.Updater( { success: 'content_preview', failure: 'editstatus' },  '[%c.uri_for('jsrpc','render')%]', { parameters: 'content='+value,asynchronous: 1,onLoading: function(request){Element.show('editspinner'); Element.remove($('editstatus').firstChild ); },onComplete: function(request){Element.hide('editspinner')} } ) 
+                                    parms=$H({content: value});
+                                    new Ajax.Updater( { success: 'content_preview', failure: 'editstatus' },  '[%c.uri_for('jsrpc','render')%]', { parameters: parms.toQueryString(),asynchronous: 1,onLoading: function(request){Element.show('editspinner'); Element.remove($('editstatus').firstChild ); },onComplete: function(request){Element.hide('editspinner')} } ) 
                                 } );
     // TODO: Add a script here to confirm leaving the page without saving if it's changed.
     </script>
