@@ -1,3 +1,8 @@
+
+        - Redirect to edit for missing pages higher up in the path.
+        - Respect formatter pref in edithelp/toolbar. 
+        - Markdown formatter toolbar.
+
 0.999013 2008-02-06 00:08:00
         - renovated skin (arne)
         - syntax fixes, registration/login (jshirley))

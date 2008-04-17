@@ -88,8 +88,8 @@ sub view : Global {
     else {
         $content = $page->content;
         unless ($content) {
-            $stash->{message} = $page->name.' does not have a version';
-            return $stash->{template} = 'message.tt';
+            $c->detach('/pageadmin/edit');
+
         }
         $stash->{rev} =  $content->version ;
     }
