@@ -76,7 +76,7 @@
             <tr><th colspan="2">Images</th></tr>
             <tr>
                 <td>Inline</td>
-                <td>![alt text("/image/path/file.jpg" "Optional Title")</td>
+                <td>![alt text](/image/path/file.jpg "Optional Title")</td>
             </tr>
             <tr><th colspan="2">Headers</th></tr>
             <tr>
