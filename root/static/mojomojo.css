@@ -126,6 +126,14 @@ div#pageoptions a {
 	overflow: hidden;
 }
 
+#content strong,b {
+  font-weight: bold;
+}
+
+#content em,i {
+  font-style: italic;
+}
+
 #content ul li { 
     list-style: square;
 }
@@ -309,7 +317,7 @@ pre {
   margin-left: 3em;
   margin-right:1em ;
   font-size: 11px;
-  overflow: scroll;
+  overflow: auto
 }
 
 ol.setup {

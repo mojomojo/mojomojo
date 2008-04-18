@@ -9,10 +9,11 @@ table {
 fieldset,img { 
 	border:0;
 }
-address,caption,cite,code,dfn,em,strong,th,var {
+address,caption,cite,code,dfn,em,strong,th,var :not #content {
 	font-style:normal;
 	font-weight:normal;
 }
+
 ol,ul {
 	list-style:none;
 }
