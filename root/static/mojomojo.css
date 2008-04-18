@@ -145,7 +145,11 @@ list-style: decimal;
 #content li{
 	margin-left: 1.5em;
 	margin-bottom:5px;
-	font-size: 1.2em;
+	font-size: 1.3em;
+}
+
+#content li li {
+  font-size: 0.95em;
 }
 
 #bottomnav {
