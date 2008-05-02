@@ -5,6 +5,7 @@ use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
 
 use Digest::MD5 qw/md5_hex/;
 use Data::FormValidator::Constraints::DateTime qw(:all);
+use Crypt::PassGen;
 
 my $auth_class = MojoMojo->config->{auth_class};
 
@@ -30,7 +31,8 @@ Log in through the authentication system.
 
 sub login : Global {
     my ($self,$c) = @_;
-    my $message:Stashed = 'please enter username &amp; password';
+    my $message:Stashed;
+    $message ||= 'please enter username &amp; password';
     if ( $c->req->params->{login} ) {
          if ( $c->authenticate( { login => $c->req->params->{'login'}, 
                                   pass => $c->req->params->{'pass'} } ) ) {
@@ -139,6 +141,33 @@ sub password : Path('/prefs/password') {
     $c->stash->{message} ||= 'please fill out all fields';
 }
 
+sub recover_pass : Global {
+    my ($self,$c) = @_;
+    return unless( $c->req->method eq 'POST' );
+    my $id=$c->req->param('recover');
+    my $user:Stashed=$c->model('DBIC::Person')
+			->search([ email=>$id,login=>$id])->first;
+    unless($user) {
+	$c->flash->{message}='Could not recover password.';
+	return $c->res->redirect($c->uri_for('login'));
+    }
+    my $password:Stashed;
+    ($password)=Crypt::PassGen::passgen(NLETT=>6,NWORDS=>1);
+    $user->pass($password);
+    $user->update();
+    $c->email(
+        header => [
+            From    => $c->config->{system_mail},
+            To      => $user->login.' <'.$user->email.'>',
+            Subject => 'Your new password on '.$c->config->{name},
+        ],
+        body => $c->view('TT')->render($c,'mail/reset_password.tt'),
+    );
+    my $message:Stashed='Emailed you your new password.';
+    $c->forward('login');
+}
+
+
 =item register (/.register)
 
 Show new user registration form.
@@ -186,7 +215,7 @@ sub do_register : Private {
     $c->pref('entropy') || $c->pref('entropy',rand);
     $c->stash->{secret}=md5_hex($c->form->valid('email').$c->pref('entropy'));
     $c->email( header => [
-            From    => 'no-reply@catalystframework.org',
+            From    => $c->config->{system_mail},
             To      => $user->email,
             Subject => '[MojoMojo] New User Validation'
         ],

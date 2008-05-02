@@ -1,7 +1,10 @@
-
+0.999014 2008-04-19 00:08:00
+        - Fixed preview for unicode
+        - Fixed styling issues with lists/strong/em
         - Redirect to edit for missing pages higher up in the path.
         - Respect formatter pref in edithelp/toolbar. 
         - Markdown formatter toolbar.
+        - Recover password function
 
 0.999013 2008-02-06 00:08:00
         - renovated skin (arne)

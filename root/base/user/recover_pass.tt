@@ -1,0 +1,19 @@
+[% PROCESS header.tt %]
+ <div id="header"><h1>Recover Password</h1></div>
+ [%PROCESS breadcrumbs.tt%]
+        <div id="content">
+        <form id="loginForm" action="[%c.uri_for('recover_pass')%]" method="post">
+<dl class="form">
+<dt>login/email:</dt>
+<dd><input id="loginField" type="text" name="recover"/></dd>
+<dd><input type="submit" value="log in"/></dd>
+</dl>
+</form>
+        </div>
+        <div id="bottomnav">&nbsp;</div>
+   
+       
+<script language="JavaScript" type="text/javascript">
+Field.focus('loginField');
+</script>
+[% PROCESS footer.tt %]

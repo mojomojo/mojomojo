@@ -3,7 +3,7 @@
  [%PROCESS breadcrumbs.tt%]
         <div id="content">
             <p class="end logintext"><span id="logintext">[%message%]</span>
-            [% IF(c.pref('open_registration'))%] (or <a href="[%c.uri_for('register')%]">register</a> instead)[%END%]
+            [% IF(c.pref('open_registration'))%]<a href="[%c.uri_for('register')%]">register</a> / [% END %]<a href="[%c.uri_for('recover_pass')%]">recover password</a>
                     </p>
         <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
 <dl class="form">
