@@ -1,3 +1,7 @@
+0.999015 2008-05-03 18:01:00
+        - patches from linio with user related bugfixes
+        - fix missing dependencies
+
 0.999014 2008-04-19 00:08:00
         - Fixed preview for unicode
         - Fixed styling issues with lists/strong/em

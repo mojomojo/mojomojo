@@ -15,7 +15,7 @@
 <dt>Gender:</dt>
 <dd>[% person.gender || '(Unknown)' %]</dd>
 <dt>Industry:</dt>
-<dd>[% person.Industry || '(Unknown)' %]</dd>
+<dd>[% person.industry || '(Unknown)' %]</dd>
 <dt>Interests:</dt>
 <dd>[% person.interests_formatted || 'Nothing entered' %]</dd>
 <dt>Music:</dt>

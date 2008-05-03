@@ -55,6 +55,7 @@ requires (
         'XML::Clean'                                    => 0,
         'YAML'                                          => '0.36',
         'URI::Fetch'                                    => 0,
+        'Crypt::PassGen'                                => 0,
         'DBIx::Class'                                   => '0.08',
 );
 

@@ -276,7 +276,7 @@ sub editprofile : Global {
     my $page=$c->stash->{page};
     my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 	? $c->stash->{proto_pages}[-1]->{name_orig}
-	: $page->name_orig);
+	: $page->name);
     if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
 		   $user->id eq $c->stash->{user}->id ) ) {
           $c->stash->{person}=$user;
@@ -314,9 +314,10 @@ sub do_editprofile : Global {
                              'correct them and try again:';
     } else {
 	    my $page=$c->stash->{page};
+$c->log->debug($page->name.",".$page->name_orig);
 	    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 		? $c->stash->{proto_pages}[-1]->{name_orig}
-		: $page->name_orig);
+		: $page->name);
 	$user->set_columns($c->form->{valid});
 	$user->update();
 	return $c->forward('profile');
