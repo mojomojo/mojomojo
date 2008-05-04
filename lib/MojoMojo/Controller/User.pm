@@ -153,17 +153,20 @@ sub recover_pass : Global {
     }
     my $password:Stashed;
     ($password)=Crypt::PassGen::passgen(NLETT=>6,NWORDS=>1);
-    $user->pass($password);
-    $user->update();
-    $c->email(
+    if ($c->email(
         header => [
             From    => $c->config->{system_mail},
             To      => $user->login.' <'.$user->email.'>',
             Subject => 'Your new password on '.$c->config->{name},
         ],
         body => $c->view('TT')->render($c,'mail/reset_password.tt'),
-    );
-    my $message:Stashed='Emailed you your new password.';
+    )){
+        $user->pass($password);
+        $user->update();
+        my $message:Stashed='Emailed you your new password.';
+    } else {
+        my $message:Stashed='Error occurred while emailing you your new password.';
+    }
     $c->forward('login');
 }
 
@@ -214,13 +217,16 @@ sub do_register : Private {
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref('entropy',rand);
     $c->stash->{secret}=md5_hex($c->form->valid('email').$c->pref('entropy'));
-    $c->email( header => [
+    if ( $c->email( header => [
             From    => $c->config->{system_mail},
             To      => $user->email,
             Subject => '[MojoMojo] New User Validation'
         ],
         body =>  $c->view('TT')->render($c, 'mail/validate.tt'),
-    );
+    )){
+    } else {
+        $c->stash->{error}='An error occourred. Sorry.';
+    }
     $c->stash->{user}=$user;
     $c->stash->{template}='user/validate.tt';
 }    
@@ -314,7 +320,6 @@ sub do_editprofile : Global {
                              'correct them and try again:';
     } else {
 	    my $page=$c->stash->{page};
-$c->log->debug($page->name.",".$page->name_orig);
 	    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 		? $c->stash->{proto_pages}[-1]->{name_orig}
 		: $page->name);
