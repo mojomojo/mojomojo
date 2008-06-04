@@ -50,7 +50,7 @@
 				</select>
 			</dd>
 			<dt>Industry:</dt>
-			<dd><input type="text" name="industry" value="[% person.Industry %]"/></dd>
+			<dd><input type="text" name="industry" value="[% person.industry %]"/></dd>
 			<dt>Interests:</dt>
 			<dd><textarea rows="3" cols="30" name="interests">[%person.interests%]</textarea></dd>
 			<dt>Favorite Albums:</dt>

@@ -32,7 +32,8 @@ params->{content} and runs it through the formatter chain.
 sub render : Local {
     my ( $self, $c ) = @_;
     my $output  =  "Please type something";
-    my $input   =  decode_entities($c->req->params->{content});
+    my $input   =  $c->req->params->{content};
+    utf8::encode($input);
     if ( $input && $input =~ /(\S+)/ ) {
         $output =  $c->model("DBIC::Content")->format_content( $c, $input );
     }

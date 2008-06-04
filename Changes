@@ -1,3 +1,24 @@
+0.999015 2008-05-03 18:01:00
+        - patches from linio with user related bugfixes
+        - fix missing dependencies
+
+0.999014 2008-04-19 00:08:00
+        - Fixed preview for unicode
+        - Fixed styling issues with lists/strong/em
+        - Redirect to edit for missing pages higher up in the path.
+        - Respect formatter pref in edithelp/toolbar. 
+        - Markdown formatter toolbar.
+        - Recover password function
+
+0.999013 2008-02-06 00:08:00
+        - renovated skin (arne)
+        - syntax fixes, registration/login (jshirley))
+        - fix email validation template (jshirley)
+
+0.999012 2008-02-06 00:08:00
+        - Fix multiline pre render error
+        - Further updates for layout.
+        - Flexible auth framework added (No UI yet) (jayk)
         - More validation fixes
         - Updated dependencies
         - Updated auth to use new plugins

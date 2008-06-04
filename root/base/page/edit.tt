@@ -10,19 +10,8 @@
   
 
 [% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
-[% IF page.content_version ; %] 
- <div id="toplinks">
-   <a href="[% c.uri_for(page.path) %]">View</a> |
-   Edit | 
-   <a href="[% c.uri_for('attachments') %]">Attachments</a>
- </div>
-[% END %]
 
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
- <h3 class="navigation" id="previewHeading">
- Preview | 
- <a href="#" onclick="Element.toggle('hidden_info');return false;">Syntax</a>
- </h3>
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
 <script type="text/javascript">Element.toggle('hidden_info');</script>
 <div class="preview" id="content_preview">
@@ -52,7 +41,8 @@
     new Form.Element.SmartObserver( 'body',
                                2,
                                function( element, value ) {
-                                    new Ajax.Updater( { success: 'content_preview', failure: 'editstatus' },  '[%c.uri_for('jsrpc','render')%]', { parameters: 'content='+window.escape(value),asynchronous: 1,onLoading: function(request){Element.show('editspinner'); Element.remove($('editstatus').firstChild ); },onComplete: function(request){Element.hide('editspinner')} } ) 
+                                    parms=$H({content: value});
+                                    new Ajax.Updater( { success: 'content_preview', failure: 'editstatus' },  '[%c.uri_for('jsrpc','render')%]', { parameters: parms.toQueryString(),asynchronous: 1,onLoading: function(request){Element.show('editspinner'); Element.remove($('editstatus').firstChild ); },onComplete: function(request){Element.hide('editspinner')} } ) 
                                 } );
     // TODO: Add a script here to confirm leaving the page without saving if it's changed.
     </script>

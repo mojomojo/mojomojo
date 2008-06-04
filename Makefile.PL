@@ -14,7 +14,7 @@ requires (
         'Catalyst::Model::Search'                       => 0,
         'Catalyst::Plugin::Authentication'              => '0.10005',
         'Catalyst::Authentication::Store::DBIx::Class'  => '0.101',
-        'Catalyst::Plugin::Cache::FileCache'            => 0,
+        'Catalyst::Plugin::Cache::Store::Memory'        => 0,
         'Catalyst::Plugin::Email'                       => 0,
         'Catalyst::Plugin::ConfigLoader'                => '0.13',
         'Catalyst::Plugin::Session::Store::File'        => 0,
@@ -51,11 +51,12 @@ requires (
         'XML::Clean'                                    => 0,
         'YAML'                                          => '0.36',
         'URI::Fetch'                                    => 0,
+        'Crypt::PassGen'                                => 0,
         'DBIx::Class'                                   => '0.08',
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
-feature 'Markdown Formatter', 'Text::MultiMarkdown';
+feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
     
    
 build_requires 'Test::WWW::Mechanize::Catalyst';

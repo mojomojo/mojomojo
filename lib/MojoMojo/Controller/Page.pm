@@ -7,6 +7,7 @@ use URI;
 use Text::Context;
 use HTML::Strip;
 use Data::Page;
+use Data::Dumper;
 
 
 =head1 NAME
@@ -54,16 +55,30 @@ sub view : Global {
     return $c->forward('suggest')
 	if $proto_pages && @$proto_pages;
 
-    my $page = $stash->{page};
+    my $page = $stash->{'page'};
+
+    my $user;
+
+    if ($c->config->{'permissions'}{'check_permission_on_view'}) {
+        if ($c->user_exists()) { $user = $c->user->obj; }
+
+        my $perms = $c->check_permissions($stash->{'path'}, $user);
+        if (!$perms->{'view'}) {
+            $stash->{'message'} = 'Permission Denied to view '. $page->name;
+            $stash->{'template'} = 'message.tt';
+            return;
+        }
+    }
+    
 
     my $content;
 
     my $rev = $c->req->params->{rev};
     if ( $rev && defined $page->content_version ) {
-	    $content = $c->model("DBIC::Content")->find(
+	    $content = $c->model("DBIC::Content")->find({
 		    page    => $page->id,
 		    version => $rev
-		    );
+		});
 	    $stash->{rev} = ( defined $content ? $content->version : undef );
 	    unless( $stash->{rev} ) {
 	        $stash->{message} = 'No such revision for '.$page->name;
@@ -73,8 +88,8 @@ sub view : Global {
     else {
         $content = $page->content;
         unless ($content) {
-            $stash->{message} = $page->name.' does not have a version';
-            return $stash->{template} = 'message.tt';
+            $c->detach('/pageadmin/edit');
+
         }
         $stash->{rev} =  $content->version ;
     }

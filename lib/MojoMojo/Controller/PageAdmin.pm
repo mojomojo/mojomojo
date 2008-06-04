@@ -1,6 +1,7 @@
 package MojoMojo::Controller::PageAdmin;
 
 use strict;
+use Data::Dumper;
 use base 'Catalyst::Controller';
 
 =head1 NAME
@@ -81,6 +82,14 @@ sub edit : Global {
         defaults => { creator => $user, }
     );
 
+    my $perms = $c->check_permissions($stash->{'path'}, ($c->user_exists ? $c->user->obj : undef));
+    my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
+    if (!$perms->{$permtocheck}) {
+        $stash->{'message'} = 'Permission Denied to ' . $permtocheck . ' ' . $page->name;
+        $stash->{'template'} = 'message.tt';
+        return;
+    }
+
     # if we have missing or invalid fields, display the edit form.
     # this will always happen on the initial request
     if ( $c->form->has_missing || $c->form->has_invalid ) {
@@ -98,6 +107,10 @@ sub edit : Global {
       $c->stash->{message} ||= 'Anonymous Edit disabled';
       return;
     }
+  
+
+
+    
     # else, update the page and redirect to highlight, which will forward to view:
     my $valid   = $c->form->valid;
     $valid->{creator} = $user;

@@ -1,8 +1,12 @@
 [% PROCESS header.tt %]
 <div id="header"><h1>Email Validation</h1></div>
 <div id="content">
+[% IF error %]
+<p>[% error %]</p>
+[% ELSE %]
 <p>Please click on the link in the email we sent you to validate
 your email, [%user.name%]. The email was sent to ([%user.email%]).</p>
+[% END %]
 <p>If you are unable to validate, please <a href="[%c.uri_for('logout')%]">log out</a>.</p>
 </div>
         <div id="bottomnav">&nbsp;

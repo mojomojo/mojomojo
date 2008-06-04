@@ -4,6 +4,7 @@ use strict;
 use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
 
 use Digest::MD5 qw/md5_hex/;
+use Crypt::PassGen;
 
 my $auth_class = MojoMojo->config->{auth_class};
 
@@ -29,7 +30,8 @@ Log in through the authentication system.
 
 sub login : Global {
     my ($self,$c) = @_;
-    my $message:Stashed = 'please enter username &amp; password';
+    my $message:Stashed;
+    $message ||= 'please enter username &amp; password';
     if ( $c->req->params->{login} ) {
          if ( $c->authenticate( { login => $c->req->params->{'login'}, 
                                   pass => $c->req->params->{'pass'} } ) ) {
@@ -138,6 +140,36 @@ sub password : Path('/prefs/password') {
     $c->stash->{message} ||= 'please fill out all fields';
 }
 
+sub recover_pass : Global {
+    my ($self,$c) = @_;
+    return unless( $c->req->method eq 'POST' );
+    my $id=$c->req->param('recover');
+    my $user:Stashed=$c->model('DBIC::Person')
+			->search([ email=>$id,login=>$id])->first;
+    unless($user) {
+	$c->flash->{message}='Could not recover password.';
+	return $c->res->redirect($c->uri_for('login'));
+    }
+    my $password:Stashed;
+    ($password)=Crypt::PassGen::passgen(NLETT=>6,NWORDS=>1);
+    if ($c->email(
+        header => [
+            From    => $c->config->{system_mail},
+            To      => $user->login.' <'.$user->email.'>',
+            Subject => 'Your new password on '.$c->config->{name},
+        ],
+        body => $c->view('TT')->render($c,'mail/reset_password.tt'),
+    )){
+        $user->pass($password);
+        $user->update();
+        my $message:Stashed='Emailed you your new password.';
+    } else {
+        my $message:Stashed='Error occurred while emailing you your new password.';
+    }
+    $c->forward('login');
+}
+
+
 =item register (/.register)
 
 Show new user registration form.
@@ -183,21 +215,17 @@ sub do_register : Private {
     my ( $self, $c, $user ) = @_;
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref('entropy',rand);
-
-    my $form : Stashed;
-    my $email = $form->param( 'email' );
-    my $name  = $form->param( 'name' );
-
-    $c->email( header => [
-            From    => $email,
-            To      => $email,
+    $c->stash->{secret}=md5_hex($c->form->valid('email').$c->pref('entropy'));
+    if ( $c->email( header => [
+            From    => $c->config->{system_mail},
+            To      => $user->email,
             Subject => '[MojoMojo] New User Validation'
         ],
-        body => 'Hi. This is a mail to validate your email address, '.
-            $name.'. To confirm, please click '.
-            "the url below:\n\n".$c->req->base.'/.validate/'.
-            $user->id.'/'.md5_hex$email.$c->pref('entropy')
-    );
+        body =>  $c->view('TT')->render($c, 'mail/validate.tt'),
+    )){
+    } else {
+        $c->stash->{error}='An error occourred. Sorry.';
+    }
     $c->stash->{user}=$user;
     $c->stash->{template}='user/validate.tt';
 }    
@@ -211,8 +239,8 @@ earlier. Non-validated users will only be able to log out.
 
 sub validate : Global {
     my ($self,$c,$user,$check)=@_;
-    $user=$c->model("DBIC::Person")->find($user);
-    if($check = md5_hex($user->email.$c->pref('entropy'))) {
+    $user=$c->model("DBIC::Person")->find({ login => $user });
+    if( $user and $check = md5_hex($user->email.$c->pref('entropy'))) {
         $user->active(1);
         $user->update();
         if ($c->stash->{user}) {
@@ -253,7 +281,7 @@ sub editprofile : Global {
     my $page=$c->stash->{page};
     my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 	? $c->stash->{proto_pages}[-1]->{name_orig}
-	: $page->name_orig);
+	: $page->name);
     if ( $user && $c->stash->{user} && ($c->stash->{user}->is_admin || 
 		   $user->id eq $c->stash->{user}->id ) ) {
           $c->stash->{person}=$user;
@@ -293,7 +321,7 @@ sub do_editprofile : Global {
 	    my $page=$c->stash->{page};
 	    my $user=$c->model('DBIC::Person')->get_user( $c->stash->{proto_pages}[-1] 
 		? $c->stash->{proto_pages}[-1]->{name_orig}
-		: $page->name_orig);
+		: $page->name);
 	$user->set_columns($c->form->{valid});
 	$user->update();
 	return $c->forward('profile');
