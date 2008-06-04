@@ -124,14 +124,13 @@ sub format_content {
     # Extract wikiwords, avoiding escaped and part of urls
     my @parts;
     ($$content,@parts)=strip_pre($content);
-    $$content =~ s{
-        $non_wikiword_check
-        ($wikiword)
-    }{ $class->format_link($c, $1, $c->req->base,) }gex;
-
-    # Remove escapes on escaped wikiwords. The escape means
-    # that this wikiword is NOT a link to a wiki page.
-    $$content =~ s{$wikiword_escape($wikiword)}{$1}g;
+    
+    if ($c->pref('enable_implict_wikiwords')) {
+        $$content =~ s{
+            $non_wikiword_check
+            ($wikiword)
+        }{ $class->format_link($c, $1, $c->req->base,) }gex;
+    }        
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
@@ -163,6 +162,11 @@ sub format_content {
         )?
         $explicit_end)
     }{ $1 }gx;
+
+    # Remove escapes on escaped wikiwords. The escape means
+    # that this wikiword is NOT a link to a wiki page.
+    $$content =~ s{$wikiword_escape($wikiword)}{$1}g;
+
     $$content=reinsert_pre($content,@parts);
 }
 

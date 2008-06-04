@@ -48,6 +48,8 @@ sub path_pages {
 	}
 }
 
+sub pref { return 1; }
+
 package main;
 
 use MojoMojo::Formatter::Wiki;
