@@ -32,6 +32,7 @@ requires (
         'DateTime::Format::Mail'                        => 0,
         'DBIx::Class::DateTime::Epoch'                  => 0,
         'DBIx::Class::HTML::FormFu'                     => 0,
+        'DBIx::Class::EncodedColumn'                    => 0,
         'HTML::Prototype::Useful'                       => '0.01',
         'Module::Pluggable::Ordered'                    => '1.4',
         'Data::Page'                                    => '2.00',

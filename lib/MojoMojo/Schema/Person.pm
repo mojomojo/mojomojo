@@ -5,7 +5,7 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components(qw/DateTime::Epoch ResultSetManager PK::Auto Core HTML::FormFu/);
+__PACKAGE__->load_components(qw/DateTime::Epoch EncodedColumn ResultSetManager PK::Auto Core HTML::FormFu/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
   "id",
@@ -25,7 +25,11 @@ __PACKAGE__->add_columns(
   "email",
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
   "pass",
-    { data_type => "VARCHAR", is_nullable => 0, size => 100 },
+    { data_type => "CHAR", is_nullable => 0, size => 40,
+    encode_column => 1,
+    encode_class  => 'Digest',
+    encode_args   => {algorithm => 'SHA-1', format => 'hex'},
+    },
   "timezone",
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
   "born",
