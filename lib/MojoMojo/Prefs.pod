@@ -1,0 +1,43 @@
+=head2 MojoMojo Preferences
+
+MojoMojo has a number of things that can be set in the preference system,
+some that are accessible via the admin interface, others that need to be 
+set directly in the database:
+
+=head3 main_formatter
+
+This chooses which formatter is to be used as the main text formatter.
+The two options so far is 'MojoMojo::Formatter::Textile' and 
+'MojoMojo::Formatter::Markdown'.
+
+=head3 open_registration
+
+This option allows you to control weither user registration is available
+or not. 
+
+=head3 anonymous_user
+
+If set, users are allowed to post anonymously, and the edit will be 
+shown with the username set in this option.
+
+=head3 restricted_user
+
+If set, to a true value, normal users are restricted to editing pages
+inside their user space. Admin users can edit the entire site.
+
+=head3 entropy
+
+Random string used to generate secret keys for mail verification and such.
+
+
+=head3 enable_implicit_wikiwords
+
+Turn this option on to enable CamelCase words in the text to be parsed as
+wiki words. Disabled by default.
+
+=head3 disable_search
+
+Set this to a true value to disable the internal search function. Will
+fall back to try site search using google.
+
+=cut

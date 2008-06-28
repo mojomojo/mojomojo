@@ -438,6 +438,7 @@ sub descendants_by_date {
 	    'me.rgt' =>  \'< ancestor.rgt' ],
 	    'ancestor.id' => \'= me.id',  ]
 	}, {
+    rows     => 20, page =>1,
 	from     => 'page as me, page as ancestor, content',
 	order_by => 'content.release_date DESC'
 	});

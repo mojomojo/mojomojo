@@ -93,7 +93,7 @@ sub can_edit {
     return 0 unless $self->active;
      # allow admins, and users editing their pages
     return 1 if $self->is_admin;
-    return 1 unless MojoMojo->pref('restrict_to_home');
+    return 1 unless MojoMojo->pref('restricted_user');
     my $link=$self->link;
     return 1 if $page =~ m|^$link\b|i;
     return 0;

@@ -87,7 +87,6 @@ sub export_html : Global {
         my $pages = $c->stash->{pages};
         my $archive = Archive::Zip->new();
         $archive->addDirectory("$prefix/");
-        my $home = $c->pref("home_node");
         foreach my $page ( @$pages ) {
             $c->log->debug('Rendering '.$page->path);
             $archive->addString( $c->subreq('/print',{path=>$page->path} ),
@@ -97,7 +96,6 @@ sub export_html : Global {
         $archive->writeToFileHandle($fh);
         $c->cache->set($prefix,$c->res->body);
     }
-    die "meh!";
     $c->res->headers->header( "Content-Type" => 'archive/zip' );
     $c->res->headers->header( "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }

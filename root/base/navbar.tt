@@ -1,6 +1,12 @@
 <div id="toplinks">
-	
-	<form action="[% c.uri_for('search') %]" method="get">  
+
+	[% IF c.pref('disable_search') -%]
+	<form action="http://www.google.com/search" method="get">  
+    <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+    [% ELSE -%]
+ <form action="[% c.uri_for('search') %]" method="get">
+    [% END -%]
+
 	<ul>
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user')))%]
@@ -46,7 +52,8 @@
   [%ELSE%]
     <li><a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a></li>
   [%END %]
-  <input type="text" id="searchField" name="query" style="" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
+  <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+  <input type="text" id="searchField" name="q" style="" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
   </ul></form></div> 
   <div id="pagenav">
 	<ul>

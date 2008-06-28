@@ -1,5 +1,12 @@
-        - Hash passwords. Run ./script/hash_passwords.pl to 
-          hash the passwords for an existing install.
+0.999016 2008-05-03 18:01:00
+        - Limit recent feed to 20 entries.
+        - Add option to disable search
+        - Make implicit wikiword linking disabled by default
+        - Hash passwords. 
+          WARNING! if you have an old installtion, you will need to
+          run ./script/hash_passwords.pl to 
+          hash the passwords for an existing install. Don't run this 
+          more than once! (Script should complain tho)
 
 0.999015 2008-05-03 18:01:00
         - patches from linio with user related bugfixes
