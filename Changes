@@ -1,4 +1,8 @@
-0.999016 2008-05-03 18:01:00
+0.999017 2008-06-29 15:01:00
+        - Unbreak search.
+        - Add a default from address for mail
+
+0.999016 2008-06-29 15:01:00
         - Limit recent feed to 20 entries.
         - Add option to disable search
         - Make implicit wikiword linking disabled by default

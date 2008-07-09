@@ -10,7 +10,7 @@
 <div id="content">
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
-        Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
+        Search: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="Go" /><br />
         <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> Search entire site 
         <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> Search within [% page.path %]
     </form>
