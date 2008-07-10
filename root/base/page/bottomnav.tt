@@ -30,17 +30,17 @@
    <li><a title="See previous revision" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">Back in time</a>
    ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])</li>
   [% END %]
-  [% IF  (page.content_version < page.content.max_version) %]
+  [% IF  (page.content_version AND page.content.max_version AND page.content_version < page.content.max_version) %]
     <li><a title="See next revision" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">Forward in time</a> ([% page.content.max_version - page.content_version %] more)</li>
   [%END%]
 [% ELSE %]
-  [% IF (rev < page.content.max_version) %]
+  [% IF (rev AND page.content.max_version AND rev < page.content.max_version) %]
     <li><a "title="See next revision" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">Forward in time</a> ([% page.content.max_version - rev %] more)</li>
   [% END %]
-  [% IF rev > 1 %]
+  [% IF rev AND rev > 1 %]
    <li><a title="See previous revision" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">Back in time</a> ([% rev - 1 %] more)</li>
   [%END%]
-  [% UNLESS rev == page.content_version %]
+  [% UNLESS rev||0 == page.content_version||0 %]
    <li><a title="Back to the page" href="[% c.uri_for('view')%]" accesskey="C">Current Revision</a></li>
   [% END %]
 [% END %] 
