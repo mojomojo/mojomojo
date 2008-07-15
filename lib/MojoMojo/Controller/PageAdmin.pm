@@ -154,7 +154,13 @@ sub rollback : Global {
     }
 }
 
-=back
+
+sub delete : Global {
+    my ( $self, $c, $page ) = @_;
+    $c->stash->{page}->delete;
+    $c->forward('/page/view');
+}
+
 
 
 =head1 AUTHOR

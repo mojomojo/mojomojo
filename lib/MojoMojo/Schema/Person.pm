@@ -29,6 +29,7 @@ __PACKAGE__->add_columns(
     encode_column => 1,
     encode_class  => 'Digest',
     encode_args   => {algorithm => 'SHA-1', format => 'hex'},
+       encode_check_method => 'check_password',
     },
   "timezone",
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
@@ -163,8 +164,7 @@ check password against database.
 
 sub valid_pass {
     my ( $self,$pass )=@_;
-    return 1 if $self->pass eq $pass;
-    return 0;
+    return $self->check_password($pass);
 }
 
 sub user_free :ResultSet {
