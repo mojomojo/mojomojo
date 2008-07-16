@@ -85,7 +85,8 @@ sub edit : Global {
     my $perms = $c->check_permissions($stash->{'path'}, ($c->user_exists ? $c->user->obj : undef));
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     if (!$perms->{$permtocheck}) {
-        $stash->{'message'} = 'Permission Denied to ' . $permtocheck . ' ' . $page->name;
+		my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
+        $stash->{'message'} = 'Permission Denied to ' . $permtocheck . ' ' . $name;
         $stash->{'template'} = 'message.tt';
         return;
     }
