@@ -35,9 +35,8 @@ sub format_content {
     my ($class,$content,$c)=@_;
 
     if (my ($page)=$$content =~ m/^=redirect\s((?:\/\w*)+)$/) {
-        $c->res->redirect($c->uri_for($page)) unless 
-        $c->ajax ||
-        $c->action->name eq 'edit';
+        $c->res->redirect($c->uri_for($page)) if 
+        $c->action->name eq 'view' && ! $c->ajax;
     }
 }
 
