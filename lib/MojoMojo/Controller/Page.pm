@@ -142,9 +142,9 @@ sub search : Global {
     my $user;
     if ($c->config->{'permissions'}{'check_permission_on_view'}) {
         if ($c->user_exists()) { $user = $c->user->obj; }
-		my $perms = $c->check_permissions($page->path, $user);
-		next unless $perms->{'view'};
-	}
+        my $perms = $c->check_permissions($page->path, $user);
+        next unless $perms->{'view'};
+    }
 
 # add a snippet of text containing the search query
 	my $content = $strip->parse( $page->content->formatted($c) );
