@@ -319,27 +319,37 @@ sub check_permissions {
     # allow everything by default
     my %rulescomparison = (
         'create' => {
-                        'allowed' => ($c->config->{'permissions'}{'create_allowed'} || 1),
+                        'allowed' => (defined $c->config->{'permissions'}{'create_allowed'}
+							                ? $c->config->{'permissions'}{'create_allowed'}
+											: 1),
                         'role' => '__default',
                         'len' => 0,
                   },
         'delete' => {
-                        'allowed' => ($c->config->{'permissions'}{'delete_allowed'} || 1),
+                        'allowed' => (defined $c->config->{'permissions'}{'delete_allowed'}
+							                ? $c->config->{'permissions'}{'delete_allowed'}
+											: 1),
                         'role' => '__default',
                         'len' => 0,            
                     },
         'edit' =>   {
-                        'allowed' => ($c->config->{'permissions'}{'edit_allowed'} || 1),
+                        'allowed' => (defined $c->config->{'permissions'}{'edit_allowed'}
+							                ? $c->config->{'permissions'}{'edit_allowed'}
+											: 1),
                         'role' => '__default',
                         'len' => 0,
                     },
         'view' =>   {
-                        'allowed' => ($c->config->{'permissions'}{'view_allowed'} || 1),
+                        'allowed' => (defined $c->config->{'permissions'}{'view_allowed'}
+							                ? $c->config->{'permissions'}{'view_allowed'}
+											: 1),
                         'role' => '__default',
                         'len' => 0,
                     },
         'attachment' =>   {
-                        'allowed' => ($c->config->{'permissions'}{'attachment_allowed'} || 1),
+                        'allowed' => (defined $c->config->{'permissions'}{'attachment_allowed'}
+							                ? $c->config->{'permissions'}{'attachment_allowed'}
+											: 1),
                         'role' => '__default',
                         'len' => 0,
                     },                    
@@ -365,7 +375,6 @@ sub check_permissions {
 
                 my $len = length($path);
                 
-                print STDERR "processing rule for " . $path . "\n\n";
                 foreach my $perm (keys %{$permdata->{$path}{$role}{$permtype}} ) {
                     
                     ## if the xxxx_allowed column is null, this permission is ignored.
