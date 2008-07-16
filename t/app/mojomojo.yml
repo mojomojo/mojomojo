@@ -3,3 +3,16 @@ Model::DBIC:
   connect_info:
     - dbi:SQLite:t/app/mojomojo.db
 name: MojoMojo Test Suite
+authentication:
+    default_realm: members
+    use_session: 1
+    realms:
+        members:
+            credential:
+                class: Password
+                password_field: pass
+                password_type: hashed
+                password_hash_type:  SHA-1
+            store:
+                class: DBIx::Class
+                user_class: DBIC::Person

@@ -1,3 +1,7 @@
+0.999018 2008-07-16 19:45:00
+        - Fix selenium tests
+        - Add redirect formatter
+        - Update dependencies
         - Fix change password after switching to hashed passwords. (plu)
         - Fix warning in navbar.tt
         - Fix: If you're logged in, page doesnt exist yet and you dont

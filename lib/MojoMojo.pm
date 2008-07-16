@@ -74,6 +74,13 @@ L<MojoMojo::Installation> to try it out yourself.
 
 # Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
 
+sub ajax {
+    my ($c) = @_;
+    return $c->req->header('x-requested-with') &&
+		$c->req->header('x-requested-with') eq 'XMLHttpRequest';
+}
+
+
 sub expand_wikiword {
     my $c = shift;
     return MojoMojo::Formatter::Wiki->expand_wikiword( @_ );

@@ -3,7 +3,7 @@ BEGIN {
 };
 eval "use Test::WWW::Selenium::Catalyst 'MojoMojo'";
 use Test::More;
-plan skip_all => 'Test::Pod::Coverage 1.04 required' if $@;
+plan skip_all => 'requires Test::WWW::Selenium::Catalyst' if $@;
 plan tests => 11;
 
 my $sel = Test::WWW::Selenium::Catalyst->start; 
