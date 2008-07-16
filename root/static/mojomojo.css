@@ -159,6 +159,7 @@ list-style: decimal;
 	border: 2px solid #000;
 	color: #444;
 	background: #fff;
+	margin-bottom:.6em;
 }
 
 #content table td, #content table th {
