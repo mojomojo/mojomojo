@@ -7,6 +7,7 @@
         - Fix: If you're logged in, page doesnt exist yet and you dont
           have the permission to create it there was an exception
           thrown (plu)
+		- Add table CSS (plu)
 
 0.999017 2008-07-09 11:59:00
         - Unbreak search.

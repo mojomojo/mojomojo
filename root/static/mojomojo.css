@@ -152,6 +152,42 @@ list-style: decimal;
   font-size: 0.95em;
 }
 
+/* tables */
+
+#content table {
+	border-collapse: collapse;
+	border: 2px solid #000;
+	color: #444;
+	background: #fff;
+}
+
+#content table td, #content table th {
+	border: 1px dotted #aaa;
+	padding: .6em;
+}
+
+#content table thead th, #content table tfoot th {
+	border: 1px solid #000;
+	text-align: left;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #222;
+	background: transparent;
+}
+
+#content table tbody th, #content table tbody td {
+	vertical-align: top;
+	text-align: left;
+}
+
+#content table tfoot td {
+	border: 2px solid #000;
+}
+
+#content table tr.odd td, #content table tr.odd th {
+	background: #efefef;
+}
+
 #bottomnav {
 	height: 28px;
 	background: url(gfx/backbottom.gif) no-repeat;
@@ -1036,3 +1072,4 @@ fieldset .label .comment {
     float:right;
     clear:left;
 }
+
