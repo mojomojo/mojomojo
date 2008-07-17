@@ -1,3 +1,5 @@
+        - Fix: /foo.photo/1 was broken (plu)
+
 0.999018 2008-07-16 19:45:00
         - Fix selenium tests
         - Add redirect formatter
