@@ -65,6 +65,16 @@ intercepts the request if so.
 
 sub auto : Private {
     my ($self,$c) = @_;
+    if (defined $c->config->{permissions}{enforce_login} and $c->config->{permissions}{enforce_login}) {
+        # allow a few actions
+        if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {
+            return 1;
+        }
+        if ( !$c->user_exists ) {
+            $c->res->redirect( $c->uri_for('/.login') );
+        }
+    }
+
     return 1 unless $c->stash->{user};
     return 1 if $c->stash->{user}->active != -1;
     return 1 if $c->req->action eq 'logout';
