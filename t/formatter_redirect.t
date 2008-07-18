@@ -48,7 +48,7 @@ sub action {
     return $_[0];
 }
 
-sub name { 'dummy_object' }
+sub name { 'view' }
 
 
 sub path_pages {

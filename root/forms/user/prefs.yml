@@ -20,4 +20,4 @@ elements:
       - Required
   - type: Submit
     name: submit
-    value: Upload
+    value: Save

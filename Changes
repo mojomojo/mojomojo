@@ -1,3 +1,4 @@
+        - Fix prefs button label
         - Fix: /foo.photo/1 was broken (plu)
         - Add new config option to enforce login: 
           <permissions>enforce_login 1</permissions>
