@@ -7,6 +7,15 @@
 <p>Please click on the link in the email we sent you to validate
 your email, [%user.name%]. The email was sent to ([%user.email%]).</p>
 [% END %]
+<h2>Didn't receive an email?</h2>
+
+Fill out the email address you want to use here:
+
+<form action="[%c.uri_for('user/reconfirm')%]" method="POST">
+<label for="email">email:<label> <input id="email" type="text" name="email"/>
+<input type="submit" name="OK" value="OK"/>
+</form>
+
 <p>If you are unable to validate, please <a href="[%c.uri_for('logout')%]">log out</a>.</p>
 </div>
         <div id="bottomnav">&nbsp;

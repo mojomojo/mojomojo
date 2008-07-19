@@ -18,9 +18,7 @@ methods for administration of pages.
 
 =head1 METHODS
 
-=over 4
-
-=item auto
+=head2 auto
 
 Check that user is logged in and has rights to this page.
 
@@ -40,7 +38,7 @@ sub auto : Private {
     return 0;
 }
 
-=item edit
+=head2 edit
 
 This action will display the edit form, then save the previous
 revision, and create a new based on the posted content.
@@ -141,7 +139,7 @@ sub edit : Global {
 } # end sub edit
 
 
-=item rollback
+=head2 rollback
 
 =cut
 

@@ -24,9 +24,7 @@ This controller handles node attachments
 
 =head1 ACTIONS
 
-=over 4
-
-=item auth
+=head2 auth
 
 auth controll for mojomojo
 
@@ -45,7 +43,7 @@ sub auth : Private {
     return 0;
 }
 
-=item attachments
+=head2 attachments
 
 main attachment screen.  Handles uploading of new attachments.
 
@@ -70,7 +68,7 @@ sub attachments : Global {
     
 }
 
-=item default
+=head2 default
 
 This action dispatches to the other private actions in this controller
 based on the second argument. the first argument is expected to be 
@@ -105,7 +103,7 @@ sub view : Chained('attachment') Args(0) {
 		$c->stash->{att}->name);
 }
 
-=item download
+=head2 download
 
 force the attachment to be downloaded, through the use of 
 content-disposition.
@@ -122,7 +120,7 @@ sub download : Chained('attachment') Args(0) {
     );
 }
 
-=item thumb
+=head2 thumb
 
 thumb action for attachments. makes 100x100px thumbs
 
@@ -142,7 +140,7 @@ sub thumb : Chained('attachment') Args(0) {
         "Content-Disposition" => "inline; filename=" . $att->name );
 }
 
-=item  inline (private);
+=head2  inline (private);
 
 show inline attachment
 
@@ -165,7 +163,7 @@ sub inline : Chained('attachment') Args(0) {
 }
 
 
-=item delete
+=head2 delete
 
 delete the attachment from this node. Will leave the file on the 
 file system.
@@ -179,7 +177,7 @@ sub delete: Chained('attachment') Args(0) {
     $c->forward('/attachment/attachments');
 }
 
-=item insert
+=head2 insert
 
 Insert a link to this attachment in the main text of the node.
 Will show a thumb for images.
@@ -197,8 +195,6 @@ sub insert : Chained('attachment') Args(0) {
     $c->stash->{append}=$c->view('TT')->render($c,'page/insert.tt');
     $c->forward('/pageadmin/edit');
 }
-
-=back 
 
 =head1 AUTHOR
 

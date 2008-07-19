@@ -197,7 +197,7 @@ sub register : Global FormConfig {
 
     $user->fill_formfu_values($form);
     if ( $form->submitted && !$form->has_errors ) {
-         $user->active(0);
+         $user->active(-1);
          $user->populate_from_formfu( $form );
          $user->insert();
          $c->forward('do_register',[$user]);
@@ -255,6 +255,30 @@ sub validate : Global {
     }
     $c->stash->{template}='user/validate.tt';
 }
+=item reconfirm
+
+Send the confirmation mail again to another address.
+
+=cut
+
+sub reconfirm : Local {
+    my ($self,$c) = @_;
+    $c->detach('/default') unless $c->req->method eq 'POST'; 
+    if ($c->user->obj->email ne $c->req->param('email')) {
+        if( $c->model('DBIC::Person')
+            ->search({email=>$c->req->param('email')})->count) {
+	        return $c->stash->{error}='That mail is already in use';
+        }
+    }
+    my $user=$c->user->obj;
+    $user->email($c->req->params->{email});
+    $user->active(-1);
+    $user->update();
+    $c->forward('do_register',[$user]);
+    $c->flash->{message}='confirmation message resent';
+    $c->res->redirect($c->uri_for('/'));
+}
+
 
 =item profile .profile
 

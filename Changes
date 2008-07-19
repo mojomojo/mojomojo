@@ -1,3 +1,6 @@
+0.999019 2008-07-19 19:45:00
+        - Support for re-requesting validation mails.
+        - Fix for TT syntax error.
         - Fix recover password (plu)
         - Fix prefs button label
         - Fix: /foo.photo/1 was broken (plu)

@@ -27,9 +27,7 @@ can be called with urls like "/page1/page2.action".
 
 =head1 ACTIONS
 
-=over 4
-
-=item  view (.view)
+=head2  view (.view)
 
 This is probably the most common action in MojoMojo. A lot of the 
 other actions redispatches to this one. It will prepare the stash 
@@ -97,7 +95,7 @@ sub view : Global {
 
 }
 
-=item search (.search)
+=head2 search (.search)
 
 This action is called as .search on the current page when the user 
 performs a search.  The user can choose whether or not to search
@@ -183,7 +181,7 @@ sub search : Global {
     }
 }
 
-=item print
+=head2 print
 
 this action is the same as the view action, with another template
 
@@ -195,7 +193,7 @@ sub print : Global {
     $c->forward('view');
 }
 
-=item inline_tags (.inline_tags)
+=head2 inline_tags (.inline_tags)
 
 Tag list for the bottom of page views.
 
@@ -217,7 +215,7 @@ sub inline_tags : Global {
     }
 }
 
-=item list (.list)
+=head2 list (.list)
 
 all nodes in this namespace
 
@@ -237,7 +235,7 @@ sub list : Global {
     $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->search()];
 }
 
-=item recent (.recent)
+=head2 recent (.recent)
 
 recently changed nodes in this namespace.
 
@@ -254,7 +252,7 @@ sub recent : Global {
     # FIXME - needs to be populated even without tags
 }
 
-=item feeds (.feeds)
+=head2 feeds (.feeds)
 
 overview of available feeds for this node.
 
@@ -265,7 +263,7 @@ sub feeds  : Global {
     $c->stash->{template} = 'feeds.tt';
 }
 
-=item rss (.rss)
+=head2 rss (.rss)
 
 RSS feed with headlines of recent nodes in this namespace.
 
@@ -278,7 +276,7 @@ sub rss : Global {
     $c->res->content_type('application/rss+xml');
 }
 
-=item atom (.atom)
+=head2 atom (.atom)
 
 Full content ATOM feed of recent nodes in this namespace.
 
@@ -292,7 +290,7 @@ sub atom : Global {
     $c->stash->{template} = 'page/atom.tt';
 }
 
-=item rss_full (.rss_full) 
+=head2 rss_full (.rss_full) 
 
 Full content RSS feed of recent nodes in this namespace.
 
@@ -305,7 +303,7 @@ sub rss_full : Global {
     $c->stash->{template} = 'page/rss_full.tt';
 }
 
-=item  highlight (.highlight)
+=head2  highlight (.highlight)
 
 Highlight changes for save.
 
@@ -317,7 +315,7 @@ sub highlight : Global {
     $c->forward('view');
 }
 
-=item  export (.export)
+=head2  export (.export)
 
 Page showing available export options.
 
@@ -328,7 +326,7 @@ sub export : Global {
     $c->stash->{template} = 'export.tt';
 }
 
-=item suggest (.suggest)
+=head2 suggest (.suggest)
 
 Page not found page, suggesting alternatives, and allowing you to create the page.
 
@@ -340,7 +338,7 @@ sub suggest : Global {
     $c->res->status(404);
 }
 
-=item search_inline (.search/inline)
+=head2 search_inline (.search/inline)
 
 embedded search results in another page (for use with suggest).
 
@@ -352,7 +350,7 @@ sub search_inline : Path('/search/inline') {
     $c->stash->{template} = 'page/search_inline.tt';
 }
 
-=item info (.info)
+=head2 info (.info)
 
 Display meta information about the current page.
 
@@ -362,9 +360,6 @@ sub info : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'page/info.tt';
 }
-
-=back
-
 
 =head1 AUTHOR
 
