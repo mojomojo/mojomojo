@@ -151,8 +151,9 @@ sub recover_pass : Global {
 	$c->flash->{message}='Could not recover password.';
 	return $c->res->redirect($c->uri_for('login'));
     }
-    my $password:Stashed;
+    my $password : Stashed = '';
     ($password)=Crypt::PassGen::passgen(NLETT=>6,NWORDS=>1);
+    my $message:Stashed='';
     if ($c->email(
         header => [
             From    => $c->config->{system_mail},
@@ -163,9 +164,9 @@ sub recover_pass : Global {
     )){
         $user->pass($password);
         $user->update();
-        my $message:Stashed='Emailed you your new password.';
+        $message = 'Emailed you your new password.';
     } else {
-        my $message:Stashed='Error occurred while emailing you your new password.';
+        $message = 'Error occurred while emailing you your new password.';
     }
     $c->forward('login');
 }

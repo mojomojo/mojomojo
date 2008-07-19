@@ -1,7 +1,8 @@
+        - Fix recover password (plu)
         - Fix prefs button label
         - Fix: /foo.photo/1 was broken (plu)
         - Add new config option to enforce login: 
-          <permissions>enforce_login 1</permissions>
+          <permissions>enforce_login 1</permissions> (plu)
 
 0.999018 2008-07-16 19:45:00
         - Fix selenium tests
