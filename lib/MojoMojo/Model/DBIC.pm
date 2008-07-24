@@ -4,8 +4,6 @@ use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config( schema_class => 'MojoMojo::Schema' );
-    #connect_info => [
-     #   'dbi:SQLite:db/sqlite/mojomojo.db',
 
 =head1 NAME
 

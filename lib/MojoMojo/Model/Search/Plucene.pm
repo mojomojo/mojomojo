@@ -1,11 +1,16 @@
 package MojoMojo::Model::Search::Plucene;
 
 use strict;
-use base qw/Catalyst::Model::Search::Plucene/;
 
-use MojoMojo;
-use Plucene::Plugin::Analyzer::SnowballAnalyzer;
+BEGIN {
 
+eval "use base qw/Catalyst::Model::Search::Plucene/;use Plucene::Plugin::Analyzer::SnowballAnalyzer";
+
+if ($@) {
+    our @ISA=qw/Catalyst::Model::Search/;
+};
+
+};
 
 __PACKAGE__->config(
     index    => MojoMojo->config->{home} . '/plucene',
@@ -53,6 +58,7 @@ Create/update the search index with data from a MojoMojo page.
 sub index_page {
    my ( $self, $page ) = @_;
    return unless ( $page && $page->content );
+   return unless $self->isa('Catalyst::Model::Search::Plucene');
 
    my $content = $page->content;
    my $key = $page->path;

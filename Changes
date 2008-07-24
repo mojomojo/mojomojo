@@ -1,6 +1,8 @@
+        - default to searchtype=all (mateu)
         - Fix highlight causing layout being broken (plu)
-
+        
 0.999019 2008-07-19 19:45:00
+        - Eval plucene to let mojomojo work if it fails.
         - Support for re-requesting validation mails.
         - Fix for TT syntax error.
         - Fix recover password (plu)
