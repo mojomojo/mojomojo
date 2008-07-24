@@ -87,10 +87,10 @@ __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
 	for my $line (@diff) {
 	    $hi++;
 	    if ( $$line[0] eq "+" ) {
-		$diff .= qq(<div id="hi$hi" class="fade">) . $$line[2] . "</div>";
+		$diff .= qq(<span id="hi$hi" class="fade">) . $$line[2] . "</span>";
 	    }
 	    elsif ( $$line[0] eq "c" ) {
-		$diff .= qq(<div id="hi$hi"class="fade">) . $$line[2] . "</div>";
+		$diff .= qq(<span id="hi$hi"class="fade">) . $$line[2] . "</span>";
 	    } elsif ( $$line[0] eq "-" ) { }
 	    else { $diff .= $$line[1] }
 	}
