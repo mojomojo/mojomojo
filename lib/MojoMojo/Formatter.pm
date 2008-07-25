@@ -55,7 +55,11 @@ for the default plugins is currently as follows:
 =back
 
 Note that if your formatter expects a HTML body, it should run after the
-main formatter
+main formatter.
+
+If you want your formatter to do something, you also need to override format_content.
+it get's passed it's classname, a scalar ref to the content, and the context object.
+it should return the scalarref.
 
 =head1 METHODS
 
