@@ -1,4 +1,5 @@
-0.999020
+        - Make attachment_dir configurable
+        - Major CSS/XHTML overhaul (tkremer)
         - Update default expires for session to 1 week
         - default to searchtype=all (mateu)
         - Fix highlight causing layout being broken (plu)

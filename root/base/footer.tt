@@ -1,5 +1,5 @@
 			<div id="powered">
-				<img src="[%c.uri_for_static('catalyst.png')%]" alt="Powered by Catalyst" title="Powered by Catalyst" />
+				<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="Powered by Catalyst" title="Powered by Catalyst" /></a>
 			</div>
 		</div>
 	</body>

@@ -32,7 +32,7 @@ Log in through the authentication system.
 sub login : Global {
     my ($self,$c) = @_;
     my $message:Stashed;
-    $message ||= 'please enter username &amp; password';
+    $message ||= 'Please enter username &amp; password';
     if ( $c->req->params->{login} ) {
          if ( $c->authenticate( { login => $c->req->params->{'login'}, 
                                   pass => $c->req->params->{'pass'} } ) ) {
@@ -43,7 +43,7 @@ sub login : Global {
             return;
         }
         else {
-            $c->stash->{message} = 'could not authenticate that login.';
+            $c->stash->{message} = 'Could not authenticate that login.';
         }
     }
     $c->stash->{template} ||= "user/login.tt";
@@ -138,7 +138,7 @@ sub password : Path('/prefs/password') {
       $c->stash->{user}->update();
       $c->stash->{message}='Your password has been updated';
     }
-    $c->stash->{message} ||= 'please fill out all fields';
+    $c->stash->{message} ||= 'Please fill out all fields!';
 }
 
 sub recover_pass : Global {

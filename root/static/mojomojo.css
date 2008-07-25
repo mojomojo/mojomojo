@@ -7,80 +7,108 @@
 
 /* @group Document Structure */
 
-Body {
+body {
 	background: #7D7C7A repeat-x url(gfx/background.jpg);
 	margin: 0;
 	color: #626262;
-	font: 62.5% "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: 75% Arial, Helvetica, Geneva, sans-serif;
 	text-align: center;
 }
 
 #container {
-	width: 750px;
+	width: 960px;
 	text-align: left;
 	margin: 20px auto 0;
 }
 
 #header {
-	background: url(gfx/header.jpg) White;
+	background: url(gfx/header.png) White;
 	height: auto;
 	padding-bottom: 0.1em;
 	margin: 0;
 }
 
+#header h1 {
+	top: 14px;
+    padding: 13px 0 10px 100px;
+	color: #ffffff;
+	font-weight: bold;
+	border-width: 1px;
+	border-color: #000;
+    margin:0;
+}
+
+#header h1 a {
+	color: #ffffff;
+}
+
 #breadcrumbs {
 	background: #4E5662;
 	height: 12px;
-	font-size: 11px;
+	font-size: .9em;
 	color: #e3e3e3;
 	margin: 0;
 	padding: 6px 8px;
 }
+#breadcrumbs a {
+	padding: 2px 7px;
+	color: white;
+	text-decoration: none;
+}
+#breadcrumbs a:hover {
+	color: #ffffff;
+	background-color: #7D7C7A;
+	text-decoration: none;
+	border: 1px solid #8d8c8a;
+	padding: 1px 6px;
+}
 
 div#toplinks {
+    font-size:.9em;
 	background: #ebeae7;
 	font-weight: bold;
 	color: #000000;
-	padding: 4px 10px;
+	padding: 4px 8px;
 	min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
 	display: inline;
-	font-size: 1.1em;
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
-	background-color: #eee;
-	border: 1px solid #bbb;
-	padding: 2px 3px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 2px 6px;
+    color:#333;
+    text-decoration:none;
 }
 div#toplinks ul li a,  div#bottomnav ul li a {
-	padding: 3px 4px;
+	padding: 3px 7px;
 }
 div#pagenav {
+	font-size: .9em;
 	clear: both;
-	padding: 4px 13px;
+	padding: 4px 15px;
 	background: #f6f6f6;
 	border-top: 1px solid #bbb;
 	border-bottom: 1px solid #bbb;
 }
 div#pagenav ul li {
-	font-size: 1.1em;
+    padding: 2px 14px 2px 0;
 	display: inline;
 }
 div#pagenav ul li a {
-	padding: 2px 3px;
 	text-decoration: none;	
 }
 div#pagenav ul li a:hover {
 	text-decoration: underline;
 }
 div#pageoptions {
-	padding: 5px 13px;
+	padding: 5px 14px;
 	background-color: #ceebb6;
 }
 div#pageoptions ul li {
 	display: inline;
-	padding: 10px 3px;
+	padding: 5px 14px 5px 0;
 	color: black;
 	font-size: 1.1em;
 }
@@ -92,14 +120,16 @@ div#pageoptions a {
 }
 
 #allPages {
-	background: #ffffff;
+    float:left;
+    width:40%;
+    margin-right:20px;
 }
 
 #wantedPages {
-	float: left; 
-	width: 280px;
-	background: #ffffff;
+	float:left; 
+	width:55%;
 }
+.wantedBy { color:#999; }
 
 #tags {
 	background: #f6f6f6;
@@ -134,18 +164,21 @@ div#pageoptions a {
   font-style: italic;
 }
 
+#content ul, #content ol {
+    padding-left:1.5em;
+}
+
 #content ul li { 
     list-style: square;
 }
 
 #content ol li {
-list-style: decimal;
+  list-style: decimal;
 }
 
 #content li{
 	margin-left: 1.5em;
 	margin-bottom:5px;
-	font-size: 1.3em;
 }
 
 #content li li {
@@ -156,24 +189,19 @@ list-style: decimal;
 
 #content table {
 	border-collapse: collapse;
-	border: 2px solid #000;
-	color: #444;
+	border:2px solid #bbb;
 	background: #fff;
 	margin-bottom:.6em;
 }
 
 #content table td, #content table th {
 	border: 1px dotted #aaa;
-	padding: .6em;
+	padding: .5em;
 }
 
 #content table thead th, #content table tfoot th {
-	border: 1px solid #000;
-	text-align: left;
-	font-size: 1.2em;
 	font-weight: bold;
-	color: #222;
-	background: transparent;
+    background:#f6f6f6;
 }
 
 #content table tbody th, #content table tbody td {
@@ -192,11 +220,10 @@ list-style: decimal;
 #bottomnav {
 	height: 28px;
 	background: url(gfx/backbottom.gif) no-repeat;
-	padding-left: 8px;
+	padding: 6px 8px;
 	color: #000000;
 	margin: 0;
 	font-weight: bold;
-	padding-top: 6px;
 }
 
 #bottomnav input {
@@ -207,85 +234,57 @@ list-style: decimal;
 	text-align: left;
 	background: #ffffff;
 	padding-left: 13px;
-  padding-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 p {
-	font-size: 1.2em;
-	line-height: 1.5em;
+	line-height: 1.3em;
 	margin: 1.2em 0;
 }
 /* @end */
 /* @group Headlines */
 
 .logintext {
-	top: 10px;
-	left: 20px;
-	position: relative;
-	overflow: hidden;
-	float: left;
-	padding: 1em 2em;
-	font-size: 1.5em;
-	margin-bottom: 2em;
-	border: 2px solid #788498;
+    font-weight:bold;
+    font-size:1.25em;
+	margin: 1em 0 1.5em 13px;
 }
 
-#header h1 {
-	top: 14px;
-    padding-left: 100px;
-    padding-top: 13px;
-    padding-bottom: 10px;
-	font-size: 2.8em;
-	color: #ffffff;
-	font-weight: bold;
-	border-width: 1px;
-	border-color: #000;
-}
-
-#header h1 a {
-	color: #ffffff;
-}
 h1 {
-	font-size: 2em;
-	font-weight: bold;
+	font-size: 2.5em;
+}
+#content h1 {
+    margin-top:0;
+    font-size: 2em;
 }
 h2 {
-	font-size: 1.6em;
-	font-weight: bold;
+	font-size: 1.4em;
 }
 h3 {
-	font-size: 1.4em;
-	color: black;
+	font-size: 1.2em;
 }
+h4 {
+    font-size: 1.1em;
+}
+h5, h6 {
+    font-size: 1em;
+}
+
 /* @end */
 
 /* @group Links */
 
-#breadcrumbs a {
-	padding: 2px 5px;
-	color: white;
-	text-decoration: none;
+a, a:visited { 
+    color: #2274A8;
+    text-decoration: underline;
 }
 
-#breadcrumbs a:hover {
-	color: #ffffff;
-	background-color: #7D7C7A;
-	text-decoration: none;
-	border: 1px solid #bbb;
-	padding: 1px 4px;
+#content a:visited { 
+    color: #4496ca;
 }
 
-a { 
-color: #577091;
-  text-decoration: underline;
-}
-
-a:visited { 
-color: #273d66;
-}
-
-a:hover { 
-  color: #22252e; 
+a:hover, #content a:hover { 
+    color: #004276;
 }
 
 
@@ -296,45 +295,26 @@ a:hover {
 
 form { margin: 0;}
 
-a.nav, a.nav:link, a.nav:visited { color: #577091; }
-a.nav:hover { color: #121239; }
-
-
-
 .navigation {
-  margin-top: 5px;
-  font-size : 12px;
   color: #999;
 }
 
 #navigationForm {
   font-size : 12px;
 }
-.navigation a:hover { color: #ab0b0b; }
 
-.navigation a {
-  font-size: 11px;
-  color: black;
-  font-weight: bold;
-}
-
-.navigation small a {
-  font-weight: normal;
-  font-size: 11px;
-}
-  
-.navOn {
+div#toplinks ul li.navOn {
   color: #3a3a3a;
+  background:#fff;
+  padding:2px 8px;
   text-decoration: none;
 }
 
 .help {
-  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 11px;
 }
 
 .inputBox {
-  font-family: verdana, arial, helvetica, sans-serif;
   font-size: 11px;
   background-color: #eee;
   padding: 5px;
@@ -372,11 +352,11 @@ ol.setup li {
 }
 
 .byline {
-  margin-bottom: 10px;
+  margin: 2em 0 0 0;
   color: #999;
-  border-left: 1.2em solid #577091;
   padding-left: 4px;
-  font-size: 1em;
+  font-size: 11px;
+  text-align:right;
 }
 
 .references {
@@ -387,7 +367,7 @@ p#message {
  background: #eee; 
  padding: 0.7em; 
  border: 1px solid silver; 
- width: 440px;
+ margin: 1em 0;
 }
 
 #previewHeading {
@@ -396,14 +376,17 @@ p#message {
 
 div.preview {
  clear:left;
- width: 728px;
+ width: 920px;
+ border:1px solid #ddd;
+ padding:5px;
  overflow: auto; 
- height: 290px;
+ height: 250px;
+ margin:0 0 1em 0;
 }
 
 textarea#body {
- height: 180px; 
- width: 722px;
+ height: 240px; 
+ width: 930px;
 }
 
 textarea#comment {
@@ -422,14 +405,14 @@ textarea#comment {
   width: 700px; 
   background: #ddd; 
   border: 1px solid #aaa;
-  padding-bottom: 1.5em;
-  padding-top: 1em;
+  padding:1em;
 }
 
 #MarkdownHelp table,
 #TextileHelp table {
   margin-bottom: 0;
 }
+
 
 #MarkdownHelp table+h3,
 #TextileHelp table+h3 {
@@ -468,6 +451,8 @@ textarea#comment {
   margin: 0 0 5px 0;
   padding: 5px 0 0 0;
 }
+
+#TextileHelp h2 { margin-top:0; }
 
 #MarkdownHelp p,
 #TextileHelp p {
@@ -527,22 +512,27 @@ a.tag:hover {
 }
 
 #taginput {
-  font-size : 11px;
-  font-weight : normal;
-  border-style : solid;
-  border-width : 1px;
-  border-color: #000000;
-  width: 80px;
+  width: 120px;
 }
 
 .newWikiWord {
-  background-color: #ddf;
+  color: #e33;
+  background: #fee;
 }
 
 .newWikiWord a {
   vertical-align: super;
   line-height: 0;
   font-size: 0.8em;
+  font-weight:bold;
+  text-decoration:none;
+  color:#e33;
+  padding:0 2px;
+  margin:0 0 0 .1em;
+}
+#content .newWikiWord a:hover { 
+  background:#e33;
+  color:#fff;
 }
 
 .protoPage a:link {
@@ -570,21 +560,55 @@ a.tag:hover {
 
 /* @group Pagination Links */
 
-div.pager {
-    font-size: small;
+#content div.pager {
+    border:1px solid #eee;
+    padding:.25em;
     text-align: center;
+    font-size:1.25em;
 }
 
-div.pager ul { 
-    list-style: none;
+#content div.pager ul { 
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-weight:bold;
+    list-style-position:inside;
 }
 
-div.pager ul li { 
-    display: inline;
-    padding: 0 2px;
-    white-space: nowrap;
+#content div.pager .prev { margin:0; padding:0; float:left; }
+#content div.pager .next { margin:0; padding:0; float:right; }
+
+#content div.pager ul li { 
+    display:inline;
+    margin:0;
+    padding:0;
 }
-	
+
+div.pager ul li a {
+    text-decoration:none;
+    padding:2px .25em;
+}
+#content div.pager ul li a:hover {
+    color:#fff;
+    background:#2274a8;
+}
+
+dl#pageInfoMeta {
+    float:right;
+    width:350px;
+    border-left:2px solid #ccc;
+    padding:0 0 0 1em;
+    font-family:Arial,Helvetica,sans-serif;
+}
+dl#pageInfoMeta dt { line-height:16px; width:150px; font-weight:bold; float:left; clear:left; margin:0;padding:0; }
+dl#pageInfoMeta dd { line-height:16px; width:200px; }
+
+dl#authors          { padding:0; margin:1.5em 0; }
+dl#authors dd,
+dl#authors dt { line-height:16px; }
+
+dl#authors dt { width:200px; }
+
 /* @end */
 
 /* @group Amazon Plugin */
@@ -604,11 +628,13 @@ div.amazon img {
 /* @end */
 /* @group Lists */
 
-.recent li {
-	font-style: italic;
-	list-style-type: square;
-	list-style-position: outside;
+table.recent {
+    width:100%;
 }
+table.recent .page          { width:50%; }
+table.recent .editedBy      { width:20%; }
+table.recent .dateEdited    { width:20%; }
+table.recent .actions       { width:10%; }
 
 /* @end */
 
@@ -617,64 +643,35 @@ div.amazon img {
 .diff {
 	margin-right:2em;
 	overflow: visible;
-}
-
-.diff .diffins, .diff .diffdel {
-	
+    margin-top:1em;
 }
 
 .diffdel, del {
-  background: pink;
+  background: #fcc;
   text-decoration: line-through;
 }
 
 .diffins, ins {
-  background: lightgreen;
+  background: #cfc;
 }
 
 /* @end */
 
 .form dl {
  margin: 13px;
- font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
  float: left;
 }
 
 .form dt {
   float: left;
-  width: 80px;
-  font-size: medium;
+  width: 120px;
   line-height: 24px;
 }
 
 .form dd {
   margin: 0 0 5px 90px;
-  font-size: xx-large;
   line-height: 24px;
   margin-left: 80px;
-}
-
-.list dl {
- margin: 13px;
- font-family: sans-serif;
- float: left;
-}
-
-.list dt {
-  float: left;
-  width: 160px;
-  font-size: 1.5em;;
-  line-height: 24px;
-}
-
-.list dd {
-  margin: 0 0 5px 90px;
-  font-size: 1.4em;
-  line-height: 24px;
-  margin-left: 80px;
-}
-.form input {
-  font-size: 14px;
 }
 
 span.statusmsg {
@@ -684,12 +681,7 @@ span.statusmsg {
 }
 
 .login form input {
-  font-size: 14px;
   width: 120px;
-}
-
-input {
-  border: 1px solid black;
 }
 
 .thumb {
@@ -697,16 +689,14 @@ input {
 }
 
 .addbutton {
-        margin-right: 0.5em;
-  border: 1px solid black;
+  margin-right: 0.5em;
   background: white; 
-  color: green;
 }
 
 .thumb {
   background: #ddd;
   padding: 8px;
-          margin: 8px;
+  margin: 8px;
 }
 
 .imageinfo {
@@ -765,7 +755,6 @@ dl {
 dt {
   float: left;
   width: 80px;
-  font-size: 14px;
   line-height: 24px;
 }
 
@@ -990,12 +979,6 @@ fieldset .label .error_message {
        padding-left: 12em;
 }
 
-fieldset .error input,
-fieldset .error textarea,
-fieldset .error select {
-       background-color: #ffdddd;
-}
-
 fieldset .button label,
 fieldset .contentbutton label,
 fieldset .checkbox label,
@@ -1013,7 +996,8 @@ fieldset .textarea label
 	float: left;
 	width: 11em;
 	text-align: right;
-	padding-right: 1em;
+	padding: 4px 1em 0 0;
+    margin:0 0 1.5em 0;
 }
 
 fieldset .radiogroup span label {
@@ -1068,9 +1052,28 @@ fieldset .label .comment {
 }
 
 
-#powered
-{
+#powered {
     float:right;
-    clear:left;
+    clear:both;
+    margin:1em 0 0 0;
 }
+
+dl.list { 
+    font-size:14px;
+    font-family:Arial,Helvetica,sans-serif;
+}
+dl.list dt { 
+    font-weight:bold; 
+    width:15em; 
+}
+
+div#tags { height:4em; }
+
+div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
+div#tags dt { clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
+div#tags dd { margin:0; padding:0; }
+
+div#bottomnav { clear:both; }
+
+#revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
 

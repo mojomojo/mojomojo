@@ -1,36 +1,61 @@
-[% SET title = "Recent pages in " _ page.path _ ( activetag ? ' tagged with ' _ activetag : '' ) %]
-[% SET now = objects.first.content.created.ymd; %]
-[% WRAPPER page/wrapper.tt title=title %]
+[% 
+    SET title = "Recent pages in " _ page.path _ ( activetag ? ' tagged with ' _ activetag : '' );
+    SET now = objects.first.content.created.ymd;
+%]
 
+[% WRAPPER page/wrapper.tt title = title %]
+
+[% IF tags.count %]
 <div id="categories">
-[% IF tags.count%]
-  <strong>tags</strong>: <small>
-  [% WHILE (tag = tags.next) %]
-  [% IF tag.tag==activetag %]
-  <b>[% tag.tag %]</b>
-  [% ELSE %]
-  <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
-  [% END %]
-  [% END %]</small>
-[% END %]
+    <strong>Tags</strong>:
+    [% WHILE (tag = tags.next) %]
+        [% IF tag.tag == activetag %]
+        <strong>[% tag.tag %]</strong>
+        [% ELSE %]
+        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+        [% END %]
+    [% END %]
 </div>
-<br/>
-<b>[% now %]</b>
-[% first=1 %]
-[% FOREACH page IN pages %]
-  [% IF now != page.content.created.ymd; %]
-    [%IF first;first=0;ELSE%]</ul>[%END%]
-    [% SET now = page.content.created.ymd; %]
-    <b>[% now %]</b><ul class="recent">
-  [% END %]
-  <li>
-    <a href="[% c.uri_for('/', page.path)%]">[% page.name_orig %]</a>
-     was edited by [% c.wikiword(page.content.creator.link,base) %] [<a href="#" id="diff_[%page.id%]" >diff</a>]
-      at [% page.content.created.hms(":") %]<div class="diff" id="changes_[%page.id%]" style="display: none"></div>
-      <script type="text/javascript">
-      $('diff_[%page.id%]').onclick=function() { showdiff('[%c.uri_for('jsrpc/diff', page.id , undef,undef,1)%]',[%page.id%]); return false;}
-      </script>
-  </li>
 [% END %]
-</ul>
+
+<h3>[% now %]</h3>
+
+[% first = 1 %]
+[% FOREACH page IN pages %]
+    [% IF now != page.content.created.ymd; %]
+        [% IF first; first = 0; ELSE %]
+        </tbody></table>
+        [% END %]
+
+        [% SET now = page.content.created.ymd %]
+        <h3>[% now %]</h3>
+        <table class="recent">
+            <thead>
+                <tr>
+                    <th class="page">Page</th>
+                    <th class="editedBy">Edited by</th>
+                    <th class="dateEdited">Date edited</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+    [% END %]
+        <tr>
+            <td>
+                <a href="[% c.uri_for( '/', page.path ) %]">[% page.name_orig %]</a>
+                <div id="changes_[% page.id %]" class="diff" style="display:none;"></div>
+            </td>
+            <td>[% c.wikiword( page.content.creator.link, base ) %]</td>
+            <td>
+                [% page.content.created.hms(":") %]
+            </td>
+            <td><a href="#" id="diff_[% page.id %]">View Diff</a></td>
+        </tr>
+        <script type="text/javascript">
+            $('diff_[% page.id %]').onclick=function() { 
+                showdiff( '[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]', [% page.id %] ); return false;
+            }
+        </script>
+[% END %]
+</table>
 [% END %]

@@ -1,24 +1,33 @@
 [% PROCESS header.tt %]
- <div id="header"><h1>Login</h1></div>
- [%PROCESS breadcrumbs.tt%]
-        <div id="content">
-            <p class="end logintext"><span id="logintext">[%message%]</span>
-            [% IF(c.pref('open_registration'))%]<a href="[%c.uri_for('register')%]">register</a> / [% END %]<a href="[%c.uri_for('recover_pass')%]">recover password</a>
-                    </p>
-        <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
-<dl class="form">
-<dt>login:</dt>
-<dd><input id="loginField" type="text" name="login"/></dd>
-<dt>password:</dt>
-<dd><input type="password" name="pass"/></dd>
-<dd><input type="submit" value="log in"/></dd>
-</dl>
-</form>
-        </div>
-        <div id="bottomnav">&nbsp;</div>
-   
+
+<div id="header"><h1>Login</h1></div>
+
+[% PROCESS breadcrumbs.tt %]
+        
+<div id="content">
+    <p class="end logintext"><span id="logintext">[% message %]</span>
+        <br />
+        [% IF( c.pref( 'open_registration' ) ) %]
+            <a href="[% c.uri_for('register') %]">Register new account</a> / 
+        [% END %] 
+        <a href="[%c.uri_for('recover_pass')%]">Recover password</a>
+    </p>
+    <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
+        <dl class="form">
+        <dt>Username:</dt>
+        <dd><input id="loginField" type="text" name="login"/></dd>
+        <dt>Password:</dt>
+        <dd><input type="password" name="pass"/></dd>
+        <dt>&nbsp;</dt>
+        <dd><input type="submit" value="Log in"/></dd>
+        </dl>
+    </form>
+</div>
+
+<div id="bottomnav">&nbsp;</div>
        
 <script language="JavaScript" type="text/javascript">
-Field.focus('loginField');
+    Field.focus('loginField');
 </script>
+
 [% PROCESS footer.tt %]

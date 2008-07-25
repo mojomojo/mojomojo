@@ -1,31 +1,35 @@
+<dl>
+    <dt>My tags:</dt>
+    <dd>&nbsp;
 [% IF tags %]
-<span class="taghead">My tags:</span>
-[% FOREACH tag IN tags %]
-
+    [% FOREACH tag IN tags %]
 [<span class="remove"><a href="[%c.uri_for('jrpc/untag',tag.tag)%]"
 onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/untag',tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">x</a>]</span>
-[%IF tag.tag == highlight %]
-<b id="tag_[%tag.tag%]" class="navOn" 
-[%ELSE%]
-<a class="tag" 
-[%END%]
-href="[%c.uri_for('recent',tag.tag)%]">[%tag.tag%]</a> 
-[%END%]
-[%END%]
+        [% IF tag.tag == highlight %]
+<b id="tag_[% tag.tag %]" class="navOn">[% tag.tag %]</b>
+        [% ELSE %]
+<a class="tag" href="[% c.uri_for('recent', tag.tag) %]">[% tag.tag %]</a> 
+        [% END %]
+    [% END %]
+[% END %]
+    </dd>
+    <dt>Popular tags:</dt>
+    <dd>&nbsp;
 [% IF others_tags %]
-<span class="taghead">Popular tags:</span>
-[% FOREACH othertag IN others_tags %]
-[% SET tagmatch='\b' _ othertag.tag _ '\b' %]
-[% NEXT IF taglist.match(tagmatch) %]
-[% IF user.active %]
-[<span class="add"><a href="[%c.uri_for('jrpc/tag',tag.tag)%]"
-onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/tag',tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">+</a>]</span>]
+    [% FOREACH othertag IN others_tags %]
+        [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
+        [% NEXT IF taglist.match(tagmatch) %]
+        [% IF user.active %]
+[<span class="add"><a href="[% c.uri_for('jrpc/tag',tag.tag) %]"
+onclick=" new Ajax.Updater( 'tags',  '[% c.uri_for('jsrpc/tag',tag.tag) %]', { asynchronous: 1, onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">+</a></span>]
+        [% END %]
+        [% IF othertag.tag == highlight %]
+        <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]" 
+        [% ELSE %]
+        <a class="tag" title="[% othertag.refcount %]" 
+        [% END %]
+        href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>[% UNLESS loop.last() %],[% END %] 
+    [% END %]
 [%END%]
-[%IF othertag.tag == highlight %]
-<a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.refcount%]" 
-[%ELSE%]
-<a class="tag" title="[%othertag.refcount%]" 
-[%END%]
-href="[%c.uri_for('recent',othertag.tag)%]" >[%othertag.tag%]</a> 
-[%END%]
-[%END%]
+    </dd>
+</dl>

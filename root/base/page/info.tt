@@ -1,25 +1,46 @@
-[% IF page.name == "/" %]
- [% _name = c.pref("name") || "MojoMojo" %]
-[% ELSE %]
- [% _name = c.expand_wikiword(page.name_orig) %]
-[% END %]
+[% 
+    IF page.name == "/";
+        _name = c.pref( "name" ) || "MojoMojo";
+    ELSE;
+        _name = c.expand_wikiword( page.name_orig );
+    END 
+%]
 
 [% WRAPPER page/wrapper.tt title = "Page info for " _ page.path %]
-<div class="rightHandSide">
- <b>Active version:</b> [%page.content_version%]<br/>
- <b>Content size:</b> [%page.content.body.length%] chars<br/>
- <b>Children:</b> [%page.children.size%]<br/>
- <b>Descendants:</b> [%page.descendants.size%]<br/>
- <b>Links to:</b> [%page.links_to.size||0%] pages<br/>
- <b>Links from:</b> [%page.links_from.size||0%] pages<br/>
- <b>Attachments:</b>[%page.attachments.size||0%]<br/>
- <b>Photos: </b> [%page.has_photos||0%]
-</div>
-<h3>[%page.versions.size%] revisions</h3>
+
+<dl id="pageInfoMeta">
+    <dt>Active version:</dt>
+    <dd>[% page.content_version %]</dd>
+
+    <dt>Content size:</dt>
+    <dd>[% page.content.body.length %] chars</dd>
+
+    <dt>Children:</dt>
+    <dd>[% page.children.size || 0 %]</dd>
+
+    <dt>Descendants:</dt>
+    <dd>[% page.descendants.size %]</dd>
+    
+    <dt>Links to:</dt>
+    <dd>[% page.links_to.size || 0 %] pages</dd>
+    
+    <dt>Links from:</dt>
+    <dd>[% page.links_from.size || 0%] pages</dd>
+    
+    <dt>Attachments:</dt>
+    <dd>[% page.attachments.size || 0%]</dd>
+    
+    <dt>Photos:</dt>
+    <dd>[% page.has_photos || 0 %]</dd>
+</dl>
+
+<h3>[% page.versions.size %] revisions</h3>
+
 <ol>
- [% FOREACH version IN page.versions %]
- <li> at [%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a></li>
- [%END%]
+    [% FOREACH version IN page.versions %]
+        <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] by <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a></li>
+    [% END %]
 </ol>
+
 [% END %]
 

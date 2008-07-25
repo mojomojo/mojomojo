@@ -1,10 +1,10 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
   [% IF user %]
-    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">add tag</a></div>
+    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">Add tag</a></div>
     <div id="addtag" style="display:none;" class="formdiv">
       <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" onsubmit=" new Ajax.Updater( 'tags', '[%c.uri_for('jsrpc/submittag')%]', { parameters: Form.serialize(this),asynchronous: 1,onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},onComplete: function(request){Fat.fade('.highlight');} } ) ; return false"> 
         <input id="taginput" type="text" name="tag" size="5" />
- 	    <input class="addbutton" type="submit" name="add" value="+" /> 
+ 	    <input class="addbutton" type="submit" name="add" value=" Add " /> 
       </form>
     </div>
   [%END%]

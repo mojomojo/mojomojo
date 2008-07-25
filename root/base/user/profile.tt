@@ -1,35 +1,45 @@
 [% WRAPPER page/wrapper.tt title = "User profile for " _ person.name %]
 <dl class="list">
-<dt>Name:</dt>
-<dd id="name">[%person.name || "Name missing"%]</dd>
-<dt>Email:</dt>
-<dd id="email">
-[% IF user.admin || user.id == person.id  %]
-[%person.email%]
-[% ELSE %]
-(private)
-[% END %]
-</dd>
-<dt>Age:</dt>
-<dd>[%person.age || '(Unknown)' %]</dd>
-<dt>Gender:</dt>
-<dd>[% person.gender || '(Unknown)' %]</dd>
-<dt>Industry:</dt>
-<dd>[% person.industry || '(Unknown)' %]</dd>
-<dt>Interests:</dt>
-<dd>[% person.interests_formatted || 'Nothing entered' %]</dd>
-<dt>Music:</dt>
-<dd>[% person.music_formatted || 'Nothing entered' %]</dd>
-<dt>Movies:</dt>
-<dd>[% person.music_formatted || 'Nothing entered' %]</dd>
-<dt><small>Registered at site:</small></dt>
-<dd><small>[%person.registered.ymd%]</small></dd>
-<dt><small>Last Changed</small></dt><dd><small>
-[% FOREACH  changed IN person.pages -%]
-[% '&ndash;' UNLESS loop.first%] [% c.wikiword(changed.path,base) -%]
-[%END%] </small></dd>
+    <dt>Name:</dt>
+    <dd id="name">[% person.name || "Name missing" %]</dd>
+    
+    <dt>Email:</dt>
+    <dd id="email">
+    [% IF user.admin || user.id == person.id %]
+        [% person.email || '(Unknown)' %]
+    [% ELSE %]
+        (Private)
+    [% END %]
+    </dd>
+    
+    <dt>Age:</dt>
+    <dd>[% person.age || '(Unknown)' %]</dd>
+    
+    <dt>Gender:</dt>
+    <dd>[% person.gender || '(Unknown)' %]</dd>
 
+    <dt>Industry:</dt>
+    <dd>[% person.industry || '(Unknown)' %]</dd>
+
+    <dt>Interests:</dt>
+    <dd>[% person.interests_formatted || 'Nothing entered' %]</dd>
+
+    <dt>Music:</dt>
+    <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+
+    <dt>Movies:</dt>
+    <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+
+    <dt>Date registered:</dt>
+    <dd>[%person.registered.ymd%]</dd>
+
+    <dt>Last changes:<dt>
+    <dd>
+    [% FOREACH  changed IN person.pages -%]
+        [% '&ndash;' UNLESS loop.first %] [% c.wikiword(changed.path,base) -%]
+    [% END %]</dd>
 </dl>
+
 <p id="editlink">
 [% IF (user.login == page.name OR user.link==proto_pages.first.path  OR 
   ( user.is_admin AND user.get_user(page.name) ) ) %]

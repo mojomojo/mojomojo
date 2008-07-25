@@ -1,22 +1,37 @@
 [% PROCESS header.tt %]
-<div id="header"><h1>Email Validation</h1></div>
+
+<div id="header">
+    <h1>Email Validation</h1>
+</div>
+
 <div id="content">
 [% IF error %]
-<p>[% error %]</p>
+    [% error %]
 [% ELSE %]
-<p>Please click on the link in the email we sent you to validate
-your email, [%user.name%]. The email was sent to ([%user.email%]).</p>
+    <h1>Validation</h1>    
+    <h4>
+        We've sent you an email with an activation link. Please click on it to activate your account!
+    </h4>
+
+    The email was sent to "[% user.email %]".
 [% END %]
+
 <h2>Didn't receive an email?</h2>
 
-Fill out the email address you want to use here:
+<p>
+    Fill in the email address you want to use here:
+</p>
 
-<form action="[%c.uri_for('user/reconfirm')%]" method="POST">
-<label for="email">email:<label> <input id="email" type="text" name="email"/>
-<input type="submit" name="OK" value="OK"/>
+<form action="[% c.uri_for('user/reconfirm') %]" method="POST">
+    <label for="email">Email:<label> 
+    <input id="email" type="text" name="email"/>
+    <input type="submit" name="OK" value="OK"/>
 </form>
 
-<p>If you are unable to validate, please <a href="[%c.uri_for('logout')%]">log out</a>.</p>
+<p>If you are unable to validate, please <a href="[% c.uri_for('logout') %]">log out</a>.</p>
+
 </div>
-        <div id="bottomnav">&nbsp;
+
+<div id="bottomnav">&nbsp;
+
 [% PROCESS footer.tt %]
