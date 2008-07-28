@@ -25,7 +25,7 @@ use Module::Pluggable::Ordered
     except	=> qr/^MojoMojo::Plugin::/, 
     require	=> 1;
 
-our $VERSION='0.999019';
+our $VERSION='0.999020';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class => 'DBIC::Person',
