@@ -1,8 +1,17 @@
-use Test::More tests => 6;
+use Test::More ;
 BEGIN { $ENV{CATALYST_DEBUG}=0; };
 $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
-use Test::WWW::Mechanize::Catalyst 'MojoMojo';
-use WWW::Mechanize::TreeBuilder;
+
+BEGIN {
+    eval "use Test::WWW::Mechanize::Catalyst 'MojoMojo'";
+    my $catmech = ! $@;
+    eval "use WWW::Mechanize::TreeBuilder";
+    my $mech_treebuilder = ! $@;
+    plan $catmech && $mech_treebuilder
+    ? ( tests => 6 )
+    : ( skip_all => 'needs Test::WWW::Mechanize::Catalyst and WWW::Mechanize::TreeBuilder for this test' ) ;
+}
+
 use_ok('MojoMojo::Controller::Page');
 
 my $mech = Test::WWW::Mechanize::Catalyst->new;

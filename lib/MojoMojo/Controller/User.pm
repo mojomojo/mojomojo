@@ -5,7 +5,7 @@ use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
 
 use Digest::MD5 qw/md5_hex/;
 use Data::FormValidator::Constraints::DateTime qw(:all);
-use Crypt::PassGen;
+use Text::Password::Pronounceable;
 
 my $auth_class = MojoMojo->config->{auth_class};
 
@@ -152,7 +152,7 @@ sub recover_pass : Global {
 	return $c->res->redirect($c->uri_for('login'));
     }
     my $password : Stashed = '';
-    ($password)=Crypt::PassGen::passgen(NLETT=>6,NWORDS=>1);
+    ($password)=Text::Password::Pronounceable->generate(6, 10);
     my $message:Stashed='';
     if ($c->email(
         header => [

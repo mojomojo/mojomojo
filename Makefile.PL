@@ -58,17 +58,12 @@ requires (
         'XML::Clean'                                    => 0,
         'YAML'                                          => '0.36',
         'URI::Fetch'                                    => 0,
-        'Crypt::PassGen'                                => 0,
+        'Text::Password::Pronounceable'                 => 0,
         'DBIx::Class'                                   => '0.08',
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
 feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
-    
-   
-build_requires 'Test::WWW::Mechanize::Catalyst';
-build_requires 'WWW::Mechanize::TreeBuilder';
-
 
 tests ( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 

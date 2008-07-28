@@ -99,7 +99,6 @@ __PACKAGE__->belongs_to("creator", "Person", { id => "creator" });
 	    $diff .= "\n";
 	    $pre_tag_open = 0 if $$line[2] =~ qr{</pre>} and $$line[2] !~ qr{<pre>};
 	}
-	warn $diff;
 	return $diff;
     }
 
