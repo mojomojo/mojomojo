@@ -48,23 +48,23 @@ sub create_initial_data {
         				    precompiled / ],
         			      [ 1,1, $people[1]->id, 0,'h1. Welcome to MojoMojo!
 
-        This is your front page. To start administrating your wiki, please log in with
-        username admin/password admin. At that point you will be able to set up your
-        configuration. If you want to play around a little with the wiki, just create
-        a NewPage or edit this one through the edit link at the bottom.
+This is your front page. To start administrating your wiki, please log in with
+username admin/password admin. At that point you will be able to set up your
+configuration. If you want to play around a little with the wiki, just create
+a NewPage or edit this one through the edit link at the bottom.
 
-        h2. Need some assistance?
+h2. Need some assistance?
 
-        Check out our [[Help]] section.','released',1,1,'','','','' ],
+Check out our [[Help]] section.','released',1,1,'','','','' ],
         			      [ 2,1,$people[1]->id,0,'h1. Help Index.
 
-        * Editing Pages
-        * Formatter Syntax.
-        * Using Tags
-        * Attachments & Photos','released',1,1,'','','','' ],
+ * Editing Pages
+ * Formatter Syntax.
+ * Using Tags
+ * Attachments & Photos','released',1,1,'','','','' ],
        			      [ 3,1,$people[1]->id,0,'h1. Admin User.
 
-    This is the default home for the admin user. You can change this text by pressing the _Edit_ link at the bottom.','released',1,1,'','','' ],
+This is the default home for the admin user. You can change this text by pressing the _Edit_ link at the bottom.','released',1,1,'','','' ],
         			     ]);
 
 
