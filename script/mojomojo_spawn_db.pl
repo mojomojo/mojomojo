@@ -23,7 +23,7 @@ eval {
     };
 };
 if($@){
-    die "Your DSN line in mojomojo.yml doesn't look like a valid DSN.".
+    die "Your DSN line in mojomojo.conf doesn't look like a valid DSN.".
       "  Add one, or pass it on the command line.";
 }
 die "No valid Data Source Name (DSN).\n" if !$dsn;
