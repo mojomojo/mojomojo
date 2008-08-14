@@ -1,6 +1,6 @@
 /* @override 
-	http://mojomojo.org:3000/.static/mojomojo.css
-	http://localhost:3000/.static/mojomojo.css
+    http://mojomojo.org:3000/.static/mojomojo.css
+    http://localhost:3000/.static/mojomojo.css
 */
 
 @import "reset.css";
@@ -8,115 +8,115 @@
 /* @group Document Structure */
 
 body {
-	background: #7D7C7A repeat-x url(gfx/background.jpg);
-	margin: 0;
-	color: #626262;
-	font: 75% Arial, Helvetica, Geneva, sans-serif;
-	text-align: center;
+    background: #7D7C7A repeat-x url(gfx/background.jpg);
+    margin: 0;
+    color: #626262;
+    font: 85% Arial, Helvetica, Geneva, sans-serif;
+    text-align: center;
 }
 
 #container {
-	width: 960px;
-	text-align: left;
-	margin: 20px auto 0;
+    max-width: 960px;
+    text-align: left;
+    margin: 0 auto 0;
 }
 
 #header {
-	background: url(gfx/header.png) White;
-	height: auto;
-	padding-bottom: 0.1em;
-	margin: 0;
+    background: url(gfx/header.png) White;
+    height: auto;
+    padding-bottom: 0.1em;
+    margin: 0;
 }
 
 #header h1 {
-	top: 14px;
+    top: 14px;
     padding: 13px 0 10px 100px;
-	color: #ffffff;
-	font-weight: bold;
-	border-width: 1px;
-	border-color: #000;
-    margin:0;
+    color: #ffffff;
+    font-weight: bold;
+    border-width: 1px;
+    border-color: #000;
+    margin: 0;
 }
 
 #header h1 a {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 #breadcrumbs {
-	background: #4E5662;
-	height: 12px;
-	font-size: .9em;
-	color: #e3e3e3;
-	margin: 0;
-	padding: 6px 8px;
+    background: #4E5662;
+    height: 12px;
+    font-size: .9em;
+    color: #e3e3e3;
+    margin: 0;
+    padding: 6px 8px;
 }
 #breadcrumbs a {
-	padding: 2px 7px;
-	color: white;
-	text-decoration: none;
+    padding: 2px 7px;
+    color: white;
+    text-decoration: none;
 }
 #breadcrumbs a:hover {
-	color: #ffffff;
-	background-color: #7D7C7A;
-	text-decoration: none;
-	border: 1px solid #8d8c8a;
-	padding: 1px 6px;
+    color: #ffffff;
+    background-color: #7D7C7A;
+    text-decoration: none;
+    border: 1px solid #8d8c8a;
+    padding: 1px 6px;
 }
 
 div#toplinks {
     font-size:.9em;
-	background: #ebeae7;
-	font-weight: bold;
-	color: #000000;
-	padding: 4px 8px;
-	min-height: 1.8em;
+    background: #ebeae7;
+    font-weight: bold;
+    color: #000000;
+    padding: 4px 8px;
+    min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
-	display: inline;
+    display: inline;
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
-	background-color: #fff;
-	border: 1px solid #ddd;
-	padding: 2px 6px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 2px 6px;
     color:#333;
     text-decoration:none;
 }
 div#toplinks ul li a,  div#bottomnav ul li a {
-	padding: 3px 7px;
+    padding: 3px 7px;
 }
 div#pagenav {
-	font-size: .9em;
-	clear: both;
-	padding: 4px 15px;
-	background: #f6f6f6;
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
+    font-size: .9em;
+    clear: both;
+    padding: 4px 15px;
+    background: #f6f6f6;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
 }
 div#pagenav ul li {
     padding: 2px 14px 2px 0;
-	display: inline;
+    display: inline;
 }
 div#pagenav ul li a {
-	text-decoration: none;	
+    text-decoration: none;  
 }
 div#pagenav ul li a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 div#pageoptions {
-	padding: 5px 14px;
-	background-color: #ceebb6;
+    padding: 5px 14px;
+    background-color: #ceebb6;
 }
 div#pageoptions ul li {
-	display: inline;
-	padding: 5px 14px 5px 0;
-	color: black;
-	font-size: 1.1em;
+    display: inline;
+    padding: 5px 14px 5px 0;
+    color: black;
+    font-size: 1.1em;
 }
 div#pageoptions a {
-	color: green;
+    color: green;
 }
 #categories {
-	background: #ffffff;
+    background: #ffffff;
 }
 
 #allPages {
@@ -126,34 +126,34 @@ div#pageoptions a {
 }
 
 #wantedPages {
-	float:left; 
-	width:55%;
+    float:left; 
+    width:55%;
 }
 .wantedBy { color:#999; }
 
 #tags {
-	background: #f6f6f6;
-	font-size: 1.1em;
-	color: #676767;
-	padding: 5px 13px;
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
+    background: #f6f6f6;
+    font-size: 1.1em;
+    color: #676767;
+    padding: 5px 13px;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
 }
 
 .showdiv {
-	background: white;
-	font-size: 11px;
-	padding-left: 13px;
-	padding-bottom: 5px;
-	padding-top: 5px;
-	font-weight: bold;
+    background: white;
+    font-size: 11px;
+    padding-left: 13px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-weight: bold;
 }
 
 #content {
   overflow: hidden;
-	background: #ffffff;
-	padding: 13px;
-	overflow: hidden;
+    background: #ffffff;
+    padding: 13px;
+    overflow: hidden;
 }
 
 #content strong,b {
@@ -177,8 +177,8 @@ div#pageoptions a {
 }
 
 #content li{
-	margin-left: 1.5em;
-	margin-bottom:5px;
+    margin-left: 1.5em;
+    margin-bottom:5px;
 }
 
 #content li li {
@@ -188,58 +188,59 @@ div#pageoptions a {
 /* tables */
 
 #content table {
-	border-collapse: collapse;
-	border:2px solid #bbb;
-	background: #fff;
-	margin-bottom:.6em;
+    border-collapse: collapse;
+    border:2px solid #bbb;
+    background: #fff;
+    margin-bottom:.6em;
 }
 
 #content table td, #content table th {
-	border: 1px dotted #aaa;
-	padding: .5em;
+    border: 1px dotted #aaa;
+    padding: .5em;
 }
 
 #content table thead th, #content table tfoot th {
-	font-weight: bold;
+    font-weight: bold;
     background:#f6f6f6;
 }
 
 #content table tbody th, #content table tbody td {
-	vertical-align: top;
-	text-align: left;
+    vertical-align: top;
+    text-align: left;
 }
 
 #content table tfoot td {
-	border: 2px solid #000;
+    border: 2px solid #000;
 }
 
 #content table tr.odd td, #content table tr.odd th {
-	background: #efefef;
+    background: #efefef;
 }
 
 #bottomnav {
-	height: 28px;
-	background: url(gfx/backbottom.gif) no-repeat;
-	padding: 6px 8px;
-	color: #000000;
-	margin: 0;
-	font-weight: bold;
+    background: #ebeae7;
+    padding: 6px 8px;
+    color: #000000;
+    margin: 0;
+    font-weight: bold;
+    min-height: 1.8em;
+    font-size: 0.9em;
 }
 
 #bottomnav input {
-	font-size: 1em;
+    font-size: 1em;
 }
 
 .formdiv {
-	text-align: left;
-	background: #ffffff;
-	padding-left: 13px;
+    text-align: left;
+    background: #ffffff;
+    padding-left: 13px;
     padding-bottom: 5px;
 }
 
 p {
-	line-height: 1.3em;
-	margin: 1.2em 0;
+    line-height: 1.3em;
+    margin: 1.2em 0;
 }
 /* @end */
 /* @group Headlines */
@@ -247,21 +248,21 @@ p {
 .logintext {
     font-weight:bold;
     font-size:1.25em;
-	margin: 1em 0 1.5em 13px;
+    margin: 1em 0 1.5em 13px;
 }
 
 h1 {
-	font-size: 2.5em;
+    font-size: 2.5em;
 }
 #content h1 {
     margin-top:0;
     font-size: 2em;
 }
 h2 {
-	font-size: 1.4em;
+    font-size: 1.4em;
 }
 h3 {
-	font-size: 1.2em;
+    font-size: 1.2em;
 }
 h4 {
     font-size: 1.1em;
@@ -288,7 +289,7 @@ a:hover, #content a:hover {
 }
 
 
-	
+    
 /* @end */
 
 /* @group Navigation */
@@ -376,7 +377,7 @@ p#message {
 
 div.preview {
  clear:left;
- width: 920px;
+ max-width: 920px;
  border:1px solid #ddd;
  padding:5px;
  overflow: auto; 
@@ -385,8 +386,9 @@ div.preview {
 }
 
 textarea#body {
- height: 240px; 
- width: 930px;
+ height: 280px; 
+ max-width: 930px;
+ width: 100%;
 }
 
 textarea#comment {
@@ -481,20 +483,20 @@ textarea#comment {
 
 .add a {
   color: green;
-	font-size: 13px;
+    font-size: 13px;
   text-decoration: none;
   vertical-align: middle;
 }
 
 .add a:hover {
   color: #003800;
-	font-size: 13px;
+    font-size: 13px;
 }
 a.tag {
-	text-decoration: none;
+    text-decoration: none;
 }
 a.tag:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 .remove a {
   color: red;
@@ -504,7 +506,7 @@ a.tag:hover {
 }
 
 .remove a:hover {
-  	color: #650000;
+    color: #650000;
 }
 
 .tagedit {
@@ -547,7 +549,7 @@ a.tag:hover {
   color: #fff; 
   background-color:#ab0b0b; 
 }
-	
+    
 /* @end */
 
 /* @group Highlighted keywords in search */
@@ -555,7 +557,7 @@ a.tag:hover {
 .quoted {
   font-weight: bold;
 }
-	
+    
 /* @end */
 
 /* @group Pagination Links */
@@ -641,8 +643,8 @@ table.recent .actions       { width:10%; }
 /* @group Diff */
 
 .diff {
-	margin-right:2em;
-	overflow: visible;
+    margin-right:2em;
+    overflow: visible;
     margin-top:1em;
 }
 
@@ -748,8 +750,8 @@ dl {
 }
 
 #editlink {
-	float:right;
-	padding-right: 10em;
+    float:right;
+    padding-right: 10em;
 }
 
 dt {
@@ -911,17 +913,17 @@ acronym {
 }
 
 #content img.right {
-	margin-left: 1em;
+    margin-left: 1em;
 }
 
 #searchField {
-	padding: 3px;
+    padding: 3px;
     font-size: 1em;
     border: 1px solid #bbb;
     margin-left: 10px;
 }
 fieldset {
-	padding: 1em;
+    padding: 1em;
 }
 
 fieldset .button,
@@ -938,12 +940,12 @@ fieldset .submit,
 fieldset .text,
 fieldset .textarea
 {
-	display: block;
-	clear: left;
-	border: 0;
-	margin: 1px;
-	/* when no label */
-	margin-left: 12em;
+    display: block;
+    clear: left;
+    border: 0;
+    margin: 1px;
+    /* when no label */
+    margin-left: 12em;
 }
 
 fieldset .button.label,
@@ -960,13 +962,13 @@ fieldset .submit.label,
 fieldset .text.label,
 fieldset .textarea.label
 {
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 fieldset .error.label {
-	/* border + margin swap values with above, to ensure rows align */
-	border: 1px #fff;
-	margin: 0;
+    /* border + margin swap values with above, to ensure rows align */
+    border: 1px #fff;
+    margin: 0;
 }
 
 fieldset .error_message {
@@ -992,63 +994,63 @@ fieldset .select label,
 fieldset .text label,
 fieldset .textarea label
 {
-	display: inline;
-	float: left;
-	width: 11em;
-	text-align: right;
-	padding: 4px 1em 0 0;
+    display: inline;
+    float: left;
+    width: 11em;
+    text-align: right;
+    padding: 4px 1em 0 0;
     margin:0 0 1.5em 0;
 }
 
 fieldset .radiogroup span label {
-	/* undo the above style */
-	float: none;
-	width: auto;
-	text-align: left;
-	padding-right: 0;
+    /* undo the above style */
+    float: none;
+    width: auto;
+    text-align: left;
+    padding-right: 0;
 }
 
 fieldset .multi .elements {
-	display: block;
-	float: left;
+    display: block;
+    float: left;
 }
 
 fieldset .multi .elements label {
-	display: block;
-	width: auto;
-	padding-right: 0.25em;
+    display: block;
+    width: auto;
+    padding-right: 0.25em;
 }
 
 fieldset .multi input,
 fieldset .multi select {
-	display: block;
-	float: left;
-	margin-right: 0.5em;
+    display: block;
+    float: left;
+    margin-right: 0.5em;
 }
 
 fieldset.checkboxgroup,
 fieldset.radiogroup
 {
-	margin: 0;
-	margin-left: 12em;
-	padding: 0;
-	width: auto;
+    margin: 0;
+    margin-left: 12em;
+    padding: 0;
+    width: auto;
 }
 
 fieldset.radiogroup.label {
-	border: 0;
-	margin-left: 0em;
+    border: 0;
+    margin-left: 0em;
 }
 
 fieldset .comment .comment {
-	/* when no label */
-	display: block;
-	margin-left: 0em;
+    /* when no label */
+    display: block;
+    margin-left: 0em;
 }
 
 fieldset .label .comment {
-	display: block;
-	margin-left: 12em;
+    display: block;
+    margin-left: 12em;
 }
 
 
