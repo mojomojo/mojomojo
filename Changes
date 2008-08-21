@@ -1,3 +1,5 @@
+        - Fix session config, removed colonos (plu)
+
 0.999020  2008-07-28 15:45:00
         - Replaced favicon (soulchild)
         - Make attachment_dir configurable
