@@ -71,7 +71,6 @@ and diffs it against the previous version.
 
 sub diff : Local {
     my ( $self, $c, $page, $revision, $against,$sparse ) = @_;
-    warn join(' ',@_);
     unless ($revision){
         my $page=$c->model("DBIC::Page")->find( $page );
         $revision=$page->content->id;
