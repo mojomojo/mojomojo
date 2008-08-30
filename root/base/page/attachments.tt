@@ -1,8 +1,4 @@
 [% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
-
-
-
- <div id="toplinks"><a  href="[% c.uri_for('edit')%]">Edit</a> | Attachments</div><div id="content">
 <form action="[%c.uri_for('attachments')%]"
     enctype="multipart/form-data" 
     onsubmit="return startEmbeddedProgressBar(this)"
