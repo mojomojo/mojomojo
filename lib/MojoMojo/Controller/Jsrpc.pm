@@ -31,20 +31,20 @@ params->{content} and runs it through the formatter chain.
 
 sub render : Local {
     my ( $self, $c ) = @_;
-    my $output  =  "Please type something";
-    my $input   =  $c->req->params->{content};
+    my $output = "Please type something";
+    my $input  = $c->req->params->{content};
     utf8::encode($input);
     if ( $input && $input =~ /(\S+)/ ) {
-        $output =  $c->model("DBIC::Content")->format_content( $c, $input );
+        $output = $c->model("DBIC::Content")->format_content( $c, $input );
     }
 
-    unless($output) {
+    unless ($output) {
         $output = 'Your input is invalid, please reformat it and try again.';
         $c->res->status(500);
     }
 
     utf8::decode($output);
-    $c->res->output( $output );
+    $c->res->output($output);
 }
 
 =item child_menu (/.jsrpc/child_menu?page_id=$page_id)
@@ -56,9 +56,7 @@ formatted for inclusion in a vertical tree navigation menu.
 
 sub child_menu : Local {
     my ( $self, $c, $page_id ) = @_;
-    $c->stash->{parent_page} = $c->model("DBIC::Page")->find( 
-        $c->req->params->{page_id} 
-    );
+    $c->stash->{parent_page} = $c->model("DBIC::Page")->find( $c->req->params->{page_id} );
     $c->stash->{template}    = 'child_menu.tt';
 }
 
@@ -70,23 +68,31 @@ and diffs it against the previous version.
 =cut
 
 sub diff : Local {
-    my ( $self, $c, $page, $revision, $against,$sparse ) = @_;
-    unless ($revision){
-        my $page=$c->model("DBIC::Page")->find( $page );
-        $revision=$page->content->id;
+    my ( $self, $c, $page, $revision, $against, $sparse ) = @_;
+    unless ($revision) {
+        my $page = $c->model("DBIC::Page")->find($page);
+        $revision = $page->content->id;
     }
-    $revision = $c->model("DBIC::Content")->search({
-        page    => $page, 
-        version => $revision
-    })->next ;
-    if ( my $previous = $against ? 
-        $c->model("DBIC::Content")->search({
+    $revision = $c->model("DBIC::Content")->search(
+        {
             page    => $page,
-            version => $against
-        })->next : $revision->previous 
-    ) {
+            version => $revision
+        }
+    )->next;
+    if (
+        my $previous = $against
+        ? $c->model("DBIC::Content")->search(
+            {
+                page    => $page,
+                version => $against
+            }
+        )->next
+        : $revision->previous
+        )
+    {
         $c->res->output( $revision->formatted_diff( $c, $previous, $sparse ) );
-    } else {
+    }
+    else {
         $c->res->output("This is the first revision! Nothing to diff against.");
     }
 }
@@ -99,7 +105,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $page ) = @_;
-    $c->forward('/jsrpc/tag', [$c->req->params->{tag}] );
+    $c->forward( '/jsrpc/tag', [ $c->req->params->{tag} ] );
 }
 
 =item tag (/.jsrpc/tag)
@@ -110,23 +116,27 @@ add a tag to a page. return list of yours and popular tags.
 
 sub tag : Local {
     my ( $self, $c, $tagname ) = @_;
-    ( $tagname )= $tagname =~ m/([\w\s]+)/;
+    ($tagname) = $tagname =~ m/([\w\s]+)/;
     my $page = $c->stash->{page};
-    foreach my $tag ( split m/\s/,$tagname ) {
-        if ( $tag && !
-            $c->model("DBIC::Tag")->search(
+    foreach my $tag ( split m/\s/, $tagname ) {
+        if (
+            $tag
+            && !$c->model("DBIC::Tag")->search(
                 page   => $page->id,
                 person => $c->req->{user_id},
                 tag    => $tagname
-            )->next() 
-        ) {
-            $page->add_to_tags({
-                tag    => $tag,
-                person => $c->stash->{user}->id
-            }) if $page;
+            )->next()
+            )
+        {
+            $page->add_to_tags(
+                {
+                    tag    => $tag,
+                    person => $c->stash->{user}->id
+                }
+            ) if $page;
         }
     }
-    $c->req->args( [  $tagname ] );
+    $c->req->args( [$tagname] );
     $c->forward('/page/inline_tags');
 }
 
@@ -146,7 +156,7 @@ sub untag : Local {
         tag    => $tagname
     )->next();
     $tag->delete() if $tag;
-    $c->req->args( [ $tagname ] );
+    $c->req->args( [$tagname] );
     $c->forward('/page/inline_tags');
 }
 

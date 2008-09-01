@@ -26,29 +26,31 @@ display comments for embedding in a page
 
 sub default : Private {
     my ( $self, $c ) = @_;
-    $c->stash->{template}='comment.tt';
+    $c->stash->{template} = 'comment.tt';
     $c->form(
-        required=>[qw/body/],
+        required => [qw/body/],
         defaults => {
-            page=>$c->stash->{page},
-            poster=>$c->stash->{user},
-            posted=>DateTime->now(),
+            page   => $c->stash->{page},
+            poster => $c->stash->{user},
+            posted => DateTime->now(),
         }
     );
-    unless (! $c->stash->{user} || 
-              $c->form->has_missing || 
-              $c->form->has_invalid ) {
-        $c->model("DBIC::Comment")->create({
-            page    => $c->stash->{page}->id,
-            poster  => $c->stash->{user}->id,
-            posted  => DateTime->now(),
-            body    => $c->req->param('body'),
-        });
+    unless ( !$c->stash->{user}
+        || $c->form->has_missing
+        || $c->form->has_invalid )
+    {
+        $c->model("DBIC::Comment")->create(
+            {
+                page   => $c->stash->{page}->id,
+                poster => $c->stash->{user}->id,
+                posted => DateTime->now(),
+                body   => $c->req->param('body'),
+            }
+        );
     }
-    $c->stash->{comments} = $c->model("DBIC::Comment")->search({
-        page=>$c->stash->{page}->id } , 
-        {order_by=>'posted'}
-    );
+    $c->stash->{comments} =
+        $c->model("DBIC::Comment")
+        ->search( { page => $c->stash->{page}->id }, { order_by => 'posted' } );
 }
 
 =item login (.comment/login)
@@ -60,10 +62,11 @@ inline login for comments.
 sub login : Local {
     my ( $self, $c ) = @_;
     $c->forward('/user/login');
-    if ($c->stash->{message}) {
-        $c->stash->{template}='comment/login.tt';
-    } else {
-        $c->stash->{template}='comment/post.tt';
+    if ( $c->stash->{message} ) {
+        $c->stash->{template} = 'comment/login.tt';
+    }
+    else {
+        $c->stash->{template} = 'comment/post.tt';
     }
 }
 
@@ -75,9 +78,10 @@ Remove comments, provided user can edit the page the comment is on.
 
 sub remove : Local {
     my ( $self, $c, $comment ) = @_;
-    if ($comment=$c->model("DBIC::Comment")->find($comment)) {
-        if ( $comment->page->id == $c->stash->{page}->id &&
-             $c->stash->{user}->can_edit($comment->page->path)) {
+    if ( $comment = $c->model("DBIC::Comment")->find($comment) ) {
+        if (   $comment->page->id == $c->stash->{page}->id
+            && $c->stash->{user}->can_edit( $comment->page->path ) )
+        {
             $comment->delete();
         }
     }

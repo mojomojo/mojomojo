@@ -26,15 +26,17 @@ Check that user is logged in and has rights to this page.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    $c->forward('/user/login') if $c->req->params->{pass} && 
-                                ! $c->stash->{user};
+    $c->forward('/user/login')
+        if $c->req->params->{pass}
+            && !$c->stash->{user};
+
     # everyone can edit with anon mode enabled.
     return 1 if MojoMojo->pref('anonymous_user');
     my $user = $c->stash->{user};
-    return 1 if $user && $user->can_edit($c->stash->{path});
-	return 1 if $user && ! $c->pref('restricted_user');
-    $c->stash->{template}='message.tt';
-    $c->stash->{message}='Sorry bubba, you aint got no rights to this page';
+    return 1 if $user && $user->can_edit( $c->stash->{path} );
+    return 1 if $user && !$c->pref('restricted_user');
+    $c->stash->{template} = 'message.tt';
+    $c->stash->{message}  = 'Sorry bubba, you aint got no rights to this page';
     return 0;
 }
 
@@ -53,7 +55,7 @@ sub edit : Global {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
-    my $user = $c->user_exists ? $c->user->obj->id : 1; # Anon edit
+    my $user = $c->user_exists ? $c->user->obj->id : 1;    # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
@@ -63,28 +65,31 @@ sub edit : Global {
         ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($path);
     }
 
-    # the page we're editing is at the end of either path_pages or 
+    # the page we're editing is at the end of either path_pages or
     # proto_pages, # depending on whether or not the page already exists
-    my $page =
-      (   @$proto_pages > 0
+    my $page = (
+          @$proto_pages > 0
         ? $proto_pages->[ @$proto_pages - 1 ]
-        : $path_pages->[ @$path_pages - 1 ] );
+        : $path_pages->[ @$path_pages - 1 ]
+    );
 
     # this should never happen!
     die "Cannot determine what page to edit for path: $path" unless $page;
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     $c->form(
+
         # may need to add more required fields...
         required => [qw/body/],
         defaults => { creator => $user, }
     );
 
-    my $perms = $c->check_permissions($stash->{'path'}, ($c->user_exists ? $c->user->obj : undef));
+    my $perms =
+        $c->check_permissions( $stash->{'path'}, ( $c->user_exists ? $c->user->obj : undef ) );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
-    if (!$perms->{$permtocheck}) {
-		my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
-        $stash->{'message'} = 'Permission Denied to ' . $permtocheck . ' ' . $name;
+    if ( !$perms->{$permtocheck} ) {
+        my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
+        $stash->{'message'}  = 'Permission Denied to ' . $permtocheck . ' ' . $name;
         $stash->{'template'} = 'message.tt';
         return;
     }
@@ -92,26 +97,24 @@ sub edit : Global {
     # if we have missing or invalid fields, display the edit form.
     # this will always happen on the initial request
     if ( $c->form->has_missing || $c->form->has_invalid ) {
-        $stash->{page}    = $page;
+        $stash->{page} = $page;
+
         # Note that this isn't a real Content object, just a proto object!!!
         # It's just a hash, not blessed into the Content package.
-        $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
+        $stash->{content}            = $c->model("DBIC::Content")->create_proto($page);
         $stash->{content}->{creator} = $user;
-        $c->req->params->{body} = $stash->{content}->{body}
-           unless $c->req->params->{body};
+        $c->req->params->{body}      = $stash->{content}->{body}
+            unless $c->req->params->{body};
         return;
     }
 
-    if ($user == 1 && ! $c->pref('anonymous_user')) {
-      $c->stash->{message} ||= 'Anonymous Edit disabled';
-      return;
+    if ( $user == 1 && !$c->pref('anonymous_user') ) {
+        $c->stash->{message} ||= 'Anonymous Edit disabled';
+        return;
     }
-  
 
-
-    
     # else, update the page and redirect to highlight, which will forward to view:
-    my $valid   = $c->form->valid;
+    my $valid = $c->form->valid;
     $valid->{creator} = $user;
     my $unknown = $c->form->unknown;
 
@@ -127,17 +130,15 @@ sub edit : Global {
     $c->model("DBIC::Page")->set_paths(@$path_pages);
     $page->update_content( %$valid, %$unknown );
 
-
     # update the search index with the new content
     # FIXME: Disabling search engine for now.
-    $c->model('Search::Plucene')->index_page( $page ) unless $c->pref('disable_search');
+    $c->model('Search::Plucene')->index_page($page) unless $c->pref('disable_search');
     $c->model("DBIC::Page")->set_paths($page);
     $page->content->store_links();
 
     $c->res->redirect( $c->req->base . $c->stash->{path} . '.highlight' );
 
-} # end sub edit
-
+}    # end sub edit
 
 =head2 rollback
 
@@ -145,22 +146,19 @@ sub edit : Global {
 
 sub rollback : Global {
     my ( $self, $c, $page ) = @_;
-    if ($c->req->param('rev')) {
-      $c->stash->{page}->content_version($c->req->param('rev'));
-      $c->stash->{page}->update;
-      undef $c->req->params->{rev};
-      $c->forward('/page/view');
+    if ( $c->req->param('rev') ) {
+        $c->stash->{page}->content_version( $c->req->param('rev') );
+        $c->stash->{page}->update;
+        undef $c->req->params->{rev};
+        $c->forward('/page/view');
     }
 }
-
 
 sub delete : Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{page}->delete;
     $c->forward('/page/view');
 }
-
-
 
 =head1 AUTHOR
 

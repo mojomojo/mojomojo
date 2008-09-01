@@ -51,12 +51,12 @@ to a certain tag.
 =cut
 
 sub recent : Private {
-    my ( $self, $c,  $tag ) = @_;
+    my ( $self, $c, $tag ) = @_;
     $c->stash->{template} = 'page/recent.tt';
     return unless $tag;
     $c->stash->{activetag} = $tag;
     $c->stash->{pages}     = [ $c->stash->{page}->tagged_descendants_by_date($tag) ];
-  
+
 }
 
 =item tags (/.tags)
@@ -66,18 +66,15 @@ tag cloud for pages.
 =cut
 
 sub tags : Global {
-    my ($self, $c, $tag ) = @_;
-    $c->stash->{tags}=[ 
-        $c->model("DBIC::Tag")->by_page($c->stash->{page}->id) 
-    ];
-    my $cloud=HTML::TagCloud->new();
-    foreach my $tag (@{$c->stash->{tags}}) {
-        $cloud->add($tag->tag,
-                    $c->req->base.$c->stash->{path}.'.list/'.$tag->tag,
-                    $tag->refcount);
+    my ( $self, $c, $tag ) = @_;
+    $c->stash->{tags} = [ $c->model("DBIC::Tag")->by_page( $c->stash->{page}->id ) ];
+    my $cloud = HTML::TagCloud->new();
+    foreach my $tag ( @{ $c->stash->{tags} } ) {
+        $cloud->add( $tag->tag, $c->req->base . $c->stash->{path} . '.list/' . $tag->tag,
+            $tag->refcount );
     }
-    $c->stash->{cloud}=$cloud;
-    $c->stash->{template}='tag/cloud.tt';
+    $c->stash->{cloud}    = $cloud;
+    $c->stash->{template} = 'tag/cloud.tt';
 }
 
 =back

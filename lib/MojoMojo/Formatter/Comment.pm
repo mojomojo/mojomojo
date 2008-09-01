@@ -32,9 +32,9 @@ context object.
 =cut
 
 sub format_content {
-    my ($class,$content,$c,$self) = @_;
+    my ( $class, $content, $c, $self ) = @_;
     eval {
-    $$content =~ s{\<p\>\=comments\s*\<\/p\>}
+        $$content =~ s{\<p\>\=comments\s*\<\/p\>}
                   {show_comments($c,$c->stash->{page})}me;
     };
 }
@@ -48,9 +48,7 @@ Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
 sub show_comments {
     my ( $c, $page ) = @_;
     $c->forward('/comment/default');
-    return '<div id="comments">'.
-        $c->view('TT')->render($c,'comment.tt').'</div>';
-        ;
+    return '<div id="comments">' . $c->view('TT')->render( $c, 'comment.tt' ) . '</div>';
 }
 
 =back

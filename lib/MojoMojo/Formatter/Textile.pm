@@ -4,10 +4,9 @@ use base qw/MojoMojo::Formatter/;
 
 use Text::Textile2;
 use Text::SmartyPants;
-my $textile = Text::Textile2->new(flavor=>"xhtml1",charset=>'utf-8');
+my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 sub primary_formatter { 1; }
-
 
 =head1 NAME
 
@@ -37,13 +36,15 @@ context object.
 
 =cut
 
-
 sub format_content {
-    my ($class,$content,$c)=@_;
+    my ( $class, $content, $c ) = @_;
+
     # Let textile handle the rest
-    return unless $c->pref('main_formatter') eq 'MojoMojo::Formatter::Textile' || ! $c->pref('main_formatter');
-    $$content= $textile->process( $$content );
-    $$content= Text::SmartyPants->process( $$content );
+    return
+        unless $c->pref('main_formatter') eq 'MojoMojo::Formatter::Textile'
+            || !$c->pref('main_formatter');
+    $$content = $textile->process($$content);
+    $$content = Text::SmartyPants->process($$content);
 }
 
 =back 

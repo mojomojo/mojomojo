@@ -2,7 +2,6 @@ package MojoMojo::Formatter::Redirect;
 
 use base qw/MojoMojo::Formatter/;
 
-
 =head1 NAME
 
 MojoMojo::Formatter::Comment - Include comments on your page.
@@ -23,7 +22,6 @@ Format order can be 1-99. The Comment formatter runs on 91
 
 sub format_content_order { 1 }
 
-
 =item format_content
 
 calls the formatter. Takes a ref to the content as well as the
@@ -32,11 +30,11 @@ context object.
 =cut
 
 sub format_content {
-    my ($class,$content,$c)=@_;
+    my ( $class, $content, $c ) = @_;
 
-    if (my ($page)=$$content =~ m/^=redirect\s((?:\/\w*)+)$/) {
-        $c->res->redirect($c->uri_for($page)) if 
-        $c->action->name eq 'view' && ! $c->ajax;
+    if ( my ($page) = $$content =~ m/^=redirect\s((?:\/\w*)+)$/ ) {
+        $c->res->redirect( $c->uri_for($page) )
+            if $c->action->name eq 'view' && !$c->ajax;
     }
 }
 
@@ -48,12 +46,12 @@ $c->cache
 =cut
 
 sub include {
-    my ($class,$c,$url)=@_;
-    $url=URI->new($url);
+    my ( $class, $c, $url ) = @_;
+    $url = URI->new($url);
     return "$url is not a valid url." unless $url;
-    my $rel=$url->rel($c->req->base);
+    my $rel = $url->rel( $c->req->base );
     return "$url is part of own site, cannot include." unless $rel->scheme;
-    my $res=URI::Fetch->fetch($url,Cache=>$c->cache);
+    my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
     return "Could not  retrieve $url.\n";
 }

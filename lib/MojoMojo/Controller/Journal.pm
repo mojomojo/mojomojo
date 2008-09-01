@@ -3,7 +3,6 @@ package MojoMojo::Controller::Journal;
 use strict;
 use base 'Catalyst::Controller';
 
-
 =head1 NAME
 
 MojoMojo::Controller::Journal - Journaling for MojoMojo?

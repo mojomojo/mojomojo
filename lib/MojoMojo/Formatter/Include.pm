@@ -25,7 +25,6 @@ Format order can be 1-99. The Comment formatter runs on 91
 
 sub format_content_order { 6 }
 
-
 =item format_content
 
 calls the formatter. Takes a ref to the content as well as the
@@ -34,15 +33,16 @@ context object.
 =cut
 
 sub format_content {
-    my ($class,$content,$c)=@_;
+    my ( $class, $content, $c ) = @_;
 
-    my @lines=split /\n/,$$content;
-    $$content="";
+    my @lines = split /\n/, $$content;
+    $$content = "";
     foreach my $line (@lines) {
-        if ($line =~ m/^=(http\:\/\/\S+)$/) { 
-            $$content.=$class->include($c,$1);
-        } else {
-            $$content .=$line."\n";	
+        if ( $line =~ m/^=(http\:\/\/\S+)$/ ) {
+            $$content .= $class->include( $c, $1 );
+        }
+        else {
+            $$content .= $line . "\n";
         }
     }
 }
@@ -55,12 +55,12 @@ $c->cache
 =cut
 
 sub include {
-    my ($class,$c,$url)=@_;
-    $url=URI->new($url);
+    my ( $class, $c, $url ) = @_;
+    $url = URI->new($url);
     return "$url is not a valid url." unless $url;
-    my $rel=$url->rel($c->req->base);
+    my $rel = $url->rel( $c->req->base );
     return "$url is part of own site, cannot include." unless $rel->scheme;
-    my $res=URI::Fetch->fetch($url,Cache=>$c->cache);
+    my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
     return "Could not  retrieve $url.\n";
 }

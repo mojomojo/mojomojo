@@ -31,7 +31,7 @@ sub format_content_order { 30 }
 # explicit link regexes
 
 ## list of start-end delimiter pairs
-my @explicit_delims = ( qw{ \[\[ \]\] \(\( \)\) } );
+my @explicit_delims    = (qw{ \[\[ \]\] \(\( \)\) });
 my $explicit_separator = '\|';
 
 sub _explicit_start_delims {
@@ -43,29 +43,35 @@ sub _explicit_end_delims {
     my %delims = @explicit_delims;
     return values %delims;
 }
+
 sub _generate_explicit_start {
     my $delims = join '|', _explicit_start_delims();
-    return qr{(?: $delims )}x; # non-capturing match
+    return qr{(?: $delims )}x;    # non-capturing match
 }
+
 sub _generate_explicit_end {
     my $delims = join '|', _explicit_end_delims();
-    return qr{(?: $delims )}x; # non-capturing match
+    return qr{(?: $delims )}x;    # non-capturing match
 }
+
 sub _generate_explicit_path {
+
     # non-greedily match characters that don't match the start-end and text delimiters
-    my $delims =  ( join '', _explicit_end_delims() ) . $explicit_separator;
+    my $delims = ( join '', _explicit_end_delims() ) . $explicit_separator;
     return qr{[^$delims]+?};
 }
+
 sub _generate_explicit_text {
+
     # non-greedily match characters that don't match the start-end delimiters
     my $delims = join '', _explicit_end_delims();
     return qr{[^$delims]+?};
 }
 
-my $explicit_start     = _generate_explicit_start();
-my $explicit_end       = _generate_explicit_end();
-my $explicit_path      = _generate_explicit_path();
-my $explicit_text      = _generate_explicit_text();
+my $explicit_start = _generate_explicit_start();
+my $explicit_end   = _generate_explicit_end();
+my $explicit_path  = _generate_explicit_path();
+my $explicit_text  = _generate_explicit_text();
 
 # implicit link (wikiword) regexes
 
@@ -73,39 +79,43 @@ my $wikiword        = qr{\b[A-Z][a-z]+[A-Z]\w*};
 my $wikiword_escape = qr{\\};
 
 sub _generate_non_wikiword_check {
+
     # we include '\/' to avoid wikiwords that are parts of urls
     # but why the question mark ('\?') at the end?
-    my $non_wikiword_chars = ( join '', _explicit_start_delims() ) . $wikiword_escape . '\/' . '\?';
+    my $non_wikiword_chars =
+        ( join '', _explicit_start_delims() ) . $wikiword_escape . '\/' . '\?';
     return qr{( ?<! [$non_wikiword_chars] )}x;
 }
 
 my $non_wikiword_check = _generate_non_wikiword_check();
 
-
 sub strip_pre {
-    my $content=shift;
-    my (@parts,$res);
-    $res='';
-    while (my ($part) = $$content =~ m{
+    my $content = shift;
+    my ( @parts, $res );
+    $res = '';
+    while (
+        my ($part) =
+        $$content =~ m{
             ^(.+?)
-            <\s*pre\b[^>]*>}sx ) {
+            <\s*pre\b[^>]*>}sx
+        )
+    {
         $$content =~ s{^.+?<\s*pre\b[^>]*>}{}sx;
         my ($inner) = $$content =~ m{^(.+?)<\s*/pre\s*>}sx;
         unless ($inner) {
-            $res .=$part;
+            $res .= $part;
             last;
         }
-        push @parts,$inner;
+        push @parts, $inner;
         $res .= $part . '<!--pre_placeholder-->';
         $$content =~ s{^.+?<\s*/pre\s*>}{}sx;
     }
     $res .= $$content;
-    return $res,@parts;
+    return $res, @parts;
 }
 
-
 sub reinsert_pre {
-    my ($content,@parts) = @_;
+    my ( $content, @parts ) = @_;
     foreach my $part (@parts) {
         $$content =~ s{<!--pre_placeholder-->}{<pre>$part</pre>}sx;
     }
@@ -120,17 +130,18 @@ context object.
 =cut
 
 sub format_content {
-    my ($class, $content, $c, $self) = @_;
+    my ( $class, $content, $c, $self ) = @_;
+
     # Extract wikiwords, avoiding escaped and part of urls
     my @parts;
-    ($$content,@parts)=strip_pre($content);
-    
-    if ($c->pref('enable_implict_wikiwords')) {
+    ( $$content, @parts ) = strip_pre($content);
+
+    if ( $c->pref('enable_implict_wikiwords') ) {
         $$content =~ s{
             $non_wikiword_check
             ($wikiword)
         }{ $class->format_link($c, $1, $c->req->base,) }gex;
-    }        
+    }
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
@@ -167,7 +178,7 @@ sub format_content {
     # that this wikiword is NOT a link to a wiki page.
     $$content =~ s{$wikiword_escape($wikiword)}{$1}g;
 
-    $$content=reinsert_pre($content,@parts);
+    $$content = reinsert_pre( $content, @parts );
 }
 
 =item format_link <c> <word> <base> [<link_text>]
@@ -177,15 +188,16 @@ Format a wikiword as a link
 =cut
 
 sub format_link {
+
     #FIXME: why both base and $c?
-    my ($class, $c, $word, $base, $link_text) = @_;
+    my ( $class, $c, $word, $base, $link_text ) = @_;
     $base ||= $c->req->base;
-    $word=$c->stash->{page}->path.'/'.$word unless $word =~ m|^[/\.]|;
+    $word = $c->stash->{page}->path . '/' . $word unless $word =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
     # keep the original wikiword for display, stripping leading slashes
     my $orig_word = $word;
-    if ($orig_word =~ m|^ \s* /+ \s* $|x) {
+    if ( $orig_word =~ m|^ \s* /+ \s* $|x ) {
         $orig_word = '/';
     }
     else {
@@ -194,35 +206,40 @@ sub format_link {
     $word =~ s/\s/_/g;
     my $formatted = $link_text || $class->expand_wikiword($orig_word);
 
-
     # convert relative paths to absolute paths
 
-    if($c->stash->{page} &&
+    if (
+        $c->stash->{page}
+        &&
+
         # drop spaces
-        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' &&
-        $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page}->path."/" );
-    } elsif ( $c->stash->{page_path} && $word !~ m|^/|) {
-        $word = URI->new_abs( $word, $c->stash->{page_path}."/" );
+        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' && $word !~ m|^/|
+        )
+    {
+        $word = URI->new_abs( $word, $c->stash->{page}->path . "/" );
+    }
+    elsif ( $c->stash->{page_path} && $word !~ m|^/| ) {
+        $word = URI->new_abs( $word, $c->stash->{page_path} . "/" );
     }
 
     # make sure that base url has no trailing slash, since
     # the page path will have a leading slash
-    my $url =  $base;
-    $url    =~ s/[\/]+$//;
+    my $url = $base;
+    $url =~ s/[\/]+$//;
 
     # use the normalized path string returned by path_pages:
-    my ($path_pages, $proto_pages) = 
-	$c->model('DBIC::Page')->path_pages( $word );
-if (defined $proto_pages && @$proto_pages) {
-    my $proto_page = pop @$proto_pages;
-    $url .= $proto_page->{path};
-} else {
-    my $page = pop @$path_pages;
-    $url .= $page->path;
-    return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
-}
-return qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
+    my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($word);
+    if ( defined $proto_pages && @$proto_pages ) {
+        my $proto_page = pop @$proto_pages;
+        $url .= $proto_page->{path};
+    }
+    else {
+        my $page = pop @$path_pages;
+        $url .= $page->path;
+        return qq{<a class="existingWikiWord" href="$url">$formatted</a> };
+    }
+    return
+        qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
 }
 
 =item expand_wikiword <word>
@@ -232,7 +249,7 @@ Expand mixed case and _ with spaces.
 =cut
 
 sub expand_wikiword {
-    my ($class, $word) = @_;
+    my ( $class, $word ) = @_;
     $word =~ s/([a-z])([A-Z])/$1 $2/g;
     $word =~ s/\_/ /g;
     return $word;
@@ -247,35 +264,39 @@ Return a listref of linked and wanted pages.
 =cut
 
 sub find_links {
-    my ($class, $content, $page) = @_;
+    my ( $class, $content, $page ) = @_;
     my @linked_pages;
     my @wanted_pages;
 
     my @parts;
-    ($$content,@parts)=strip_pre($content);
+    ( $$content, @parts ) = strip_pre($content);
 
     my $wikiword_regex = qr/$non_wikiword_check($wikiword)/x;
-    my $explicit_regex = qr/$non_wikiword_check$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
-   
-    for ($wikiword_regex, $explicit_regex) {
-        while ($$content =~ /$_/g) {
+    my $explicit_regex =
+        qr/$non_wikiword_check$explicit_start \s* ($explicit_path) \s* (?: $explicit_separator \s* $explicit_text \s* )? $explicit_end/x;
+
+    for ( $wikiword_regex, $explicit_regex ) {
+        while ( $$content =~ /$_/g ) {
             my $link = $1;
-	   # convert relative paths to absolute paths
-	   if ($link !~ m|^/|) {
-	       $link = URI->new_abs( $link, ($page->path||'')."/" );
-	   }
-	   # use the normalized path string returned by path_pages:
-	   my ($path_pages, $proto_pages) = 
-	       $page->result_source->resultset->path_pages( $link );
-	   if (defined $proto_pages && @$proto_pages) {
-	       push @wanted_pages, pop @$proto_pages;
-	   } else {
-	       push @linked_pages, pop @$path_pages;
+
+            # convert relative paths to absolute paths
+            if ( $link !~ m|^/| ) {
+                $link = URI->new_abs( $link, ( $page->path || '' ) . "/" );
+            }
+
+            # use the normalized path string returned by path_pages:
+            my ( $path_pages, $proto_pages ) =
+                $page->result_source->resultset->path_pages($link);
+            if ( defined $proto_pages && @$proto_pages ) {
+                push @wanted_pages, pop @$proto_pages;
+            }
+            else {
+                push @linked_pages, pop @$path_pages;
             }
         }
     }
-    $$content=reinsert_pre($content,@parts);
-    return (\@linked_pages, \@wanted_pages);
+    $$content = reinsert_pre( $content, @parts );
+    return ( \@linked_pages, \@wanted_pages );
 }
 
 =back

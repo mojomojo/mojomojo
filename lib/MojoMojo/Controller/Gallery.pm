@@ -29,15 +29,17 @@ Show a gallery page for the current node.
 =cut
 
 sub default : Private {
-    my ( $self, $c, $action, $page) = @_;
+    my ( $self, $c, $action, $page ) = @_;
     $c->stash->{template} = 'gallery.tt';
-    $c->stash->{pictures} = $c->model("DBIC::Photo")->search({
-        'attachment.page'  => $c->stash->{page}->id }, 
-          { page           => $page || 1,
-	        join	       => [qw/attachment/], 
-            rows           => 12,
-            order_by       => 'position' 
-    });
+    $c->stash->{pictures} = $c->model("DBIC::Photo")->search(
+        { 'attachment.page' => $c->stash->{page}->id },
+        {
+            page => $page || 1,
+            join => [qw/attachment/],
+            rows => 12,
+            order_by => 'position'
+        }
+    );
 }
 
 =item by_tag ( .gallery/by_tag )
@@ -48,22 +50,23 @@ descendants of the page with the given tag.
 =cut
 
 sub by_tag : Local {
-    my ( $self, $c, $tag,$page) = @_;
-    $tag=$c->model("DBIC::Tag")->search(tag=>$tag)->next;
+    my ( $self, $c, $tag, $page ) = @_;
+    $tag = $c->model("DBIC::Tag")->search( tag => $tag )->next;
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{tag}      = $tag->tag;
-    my $conditions        = { 'tags.tag' => $tag->tag };
-    $$conditions{'attachment.page'} = [ 
-          map { $_->id  } ($c->stash->{page}->descendants,
-                           $c->stash->{page}) ] 
-        unless length($c->stash->{page}->path) == 1;  # root
-    $c->stash->{pictures} =$c->model("DBIC::Photo")->search(
-        $conditions, { 
-	    join     => [qw/attachment tags/],
+    my $conditions = { 'tags.tag' => $tag->tag };
+    $$conditions{'attachment.page'} =
+        [ map { $_->id } ( $c->stash->{page}->descendants, $c->stash->{page} ) ]
+        unless length( $c->stash->{page}->path ) == 1;    # root
+    $c->stash->{pictures} = $c->model("DBIC::Photo")->search(
+        $conditions,
+        {
+            join     => [qw/attachment tags/],
             page     => $page || 1,
             rows     => 12,
             order_by => 'taken DESC'
-        });
+        }
+    );
 }
 
 =item p ( .p) 
@@ -71,13 +74,13 @@ sub by_tag : Local {
 =cut
 
 sub photo : Global {
-    my ( $self, $c, $photo)  = @_;
-    $photo                   = $c->model("DBIC::Photo")->find($photo);
-    $c->stash->{photo}       = $photo;
-    $c->forward( 'inline_tags' );
-    $c->stash->{template}    =  'gallery/photo.tt';
-    $c->stash->{next}        =  $photo->next_sibling;
-    $c->stash->{prev}        =  $photo->previous_sibling;
+    my ( $self, $c, $photo ) = @_;
+    $photo = $c->model("DBIC::Photo")->find($photo);
+    $c->stash->{photo} = $photo;
+    $c->forward('inline_tags');
+    $c->stash->{template} = 'gallery/photo.tt';
+    $c->stash->{next}     = $photo->next_sibling;
+    $c->stash->{prev}     = $photo->previous_sibling;
 }
 
 =item (/p_by_tag/\d+)
@@ -88,10 +91,10 @@ show a picture in tag gallery.
 
 sub photo_by_tag : Global {
     my ( $self, $c, $tag, $photo ) = @_;
-    $photo                = $c->model("DBIC::Photo")->find($photo);
-    $c->stash->{photo}    = $photo;
-    $c->stash->{tag}      = $tag; 
-    $c->forward( 'inline_tags' );
+    $photo             = $c->model("DBIC::Photo")->find($photo);
+    $c->stash->{photo} = $photo;
+    $c->stash->{tag}   = $tag;
+    $c->forward('inline_tags');
     $c->stash->{template} = 'gallery/photo.tt';
     $c->stash->{next}     = $photo->next_by_tag($tag);
     $c->stash->{prev}     = $photo->prev_by_tag($tag);
@@ -105,7 +108,7 @@ Add a tag through form submit
 
 sub submittag : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->forward( 'tag', [ $photo,$c->req->params->{tag} ] );
+    $c->forward( 'tag', [ $photo, $c->req->params->{tag} ] );
 }
 
 =item tag (/.jsrpc/tag)
@@ -115,24 +118,29 @@ add a tag to a page. return list of yours and popular tags.
 =cut
 
 sub tag : Local {
-    my ( $self, $c,$photo, $tagname ) = @_;
-    ( $tagname )= $tagname =~ m/([\w\s]+)/;
-    foreach my $tag ( split m/\s/,$tagname ) {
-        if (  $tag && !
-            $c->model("DBIC::Tag")->search(
-                photo   => $photo,
+    my ( $self, $c, $photo, $tagname ) = @_;
+    ($tagname) = $tagname =~ m/([\w\s]+)/;
+    foreach my $tag ( split m/\s/, $tagname ) {
+        if (
+            $tag
+            && !$c->model("DBIC::Tag")->search(
+                photo  => $photo,
                 person => $c->user->obj->id,
                 tag    => $tag
-            )->next() ) {
-            $c->model("DBIC::Tag")->create({
-                photo  => $photo,
-                tag    => $tag,
-                person => $c->user->obj->id
-            }) if $photo;
+            )->next()
+            )
+        {
+            $c->model("DBIC::Tag")->create(
+                {
+                    photo  => $photo,
+                    tag    => $tag,
+                    person => $c->user->obj->id
+                }
+            ) if $photo;
         }
     }
-    $c->stash->{photo}=$photo;
-    $c->forward( 'inline_tags', [ $tagname ] );
+    $c->stash->{photo} = $photo;
+    $c->forward( 'inline_tags', [$tagname] );
 }
 
 =item untag (.gallery/untag)
@@ -144,15 +152,14 @@ remove a tag to a page. return list of yours and popular tags.
 sub untag : Local {
     my ( $self, $c, $photo, $tagname ) = @_;
     my $tag = $c->model("DBIC::Tag")->search(
-        photo   => $photo,
+        photo  => $photo,
         person => $c->user->obj->id,
         tag    => $tagname
     )->next();
     $tag->delete() if $tag;
-    $c->stash->{photo}=$photo;
-    $c->forward('inline_tags', [ $tagname ]);
+    $c->stash->{photo} = $photo;
+    $c->forward( 'inline_tags', [$tagname] );
 }
-
 
 =item inline_tags (.gallery/tags);
 
@@ -165,17 +172,18 @@ sub inline_tags : Local {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template}  = 'gallery/tags.tt';
     $c->stash->{highlight} = $highlight;
-    my $photo=$c->stash->{photo}||$c->req->params->{photo};
-    $photo=$c->model("DBIC::Photo")->find($photo) unless ref $photo;
-    $c->stash->{photo}=$photo;
-    if ($c->user_exists) {
-    my @tags = $photo->others_tags( $c->user->obj->id);
-    $c->stash->{others_tags} = [@tags];
-    @tags                    = $photo->user_tags( $c->user->obj->id );
-    $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
-    $c->stash->{tags}        = [@tags];
-    } else {
-      $c->stash->{others_tags}      = [ $photo->others_tags(undef) ];
+    my $photo = $c->stash->{photo} || $c->req->params->{photo};
+    $photo = $c->model("DBIC::Photo")->find($photo) unless ref $photo;
+    $c->stash->{photo} = $photo;
+    if ( $c->user_exists ) {
+        my @tags = $photo->others_tags( $c->user->obj->id );
+        $c->stash->{others_tags} = [@tags];
+        @tags                    = $photo->user_tags( $c->user->obj->id );
+        $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
+        $c->stash->{tags}        = [@tags];
+    }
+    else {
+        $c->stash->{others_tags} = [ $photo->others_tags(undef) ];
     }
 }
 
@@ -185,15 +193,15 @@ Ajax method for updating picture descriptions inline.
 
 =cut
 
-sub description : Local { 
+sub description : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->form(required=>[qw/description/]);
-    my $img=$c->model("DBIC::Photo")->find($photo);
-    if($c->req->param('description')) {
-      $img->description(encode_entities($c->req->param('description')));
-      $img->update;
+    $c->form( required => [qw/description/] );
+    my $img = $c->model("DBIC::Photo")->find($photo);
+    if ( $c->req->param('description') ) {
+        $img->description( encode_entities( $c->req->param('description') ) );
+        $img->update;
     }
-      $c->res->body($img->description);
+    $c->res->body( $img->description );
 }
 
 =item title ( .gallery/title )
@@ -202,30 +210,34 @@ Ajax method for updating picture titles inline.
 
 =cut
 
-sub title : Local { 
+sub title : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->form(required=>[qw/title/]);
-    my $img=$c->model("DBIC::Photo")->find($photo);
-    if($c->req->param('title')) {
-      $img->title(encode_entities($c->req->param('title')));
-      $img->update;
+    $c->form( required => [qw/title/] );
+    my $img = $c->model("DBIC::Photo")->find($photo);
+    if ( $c->req->param('title') ) {
+        $img->title( encode_entities( $c->req->param('title') ) );
+        $img->update;
     }
-      $c->res->body($img->title);
+    $c->res->body( $img->title );
 }
 
-
 sub tags : Local {
-    my ($self, $c, $tag ) = @_;
-    $c->stash->{tags}=[ $c->model("DBIC::Tag")->by_photo ];
-    my $cloud=HTML::TagCloud->new();
-    foreach my $tag (@{$c->stash->{tags}}) {
-        $cloud->add($tag->tag,
-                    $c->req->base.$c->stash->{path}.'.gallery/by_tag/'.
-                    $tag->tag.'/'.$tag->photo,
-                    $tag->refcount);
+    my ( $self, $c, $tag ) = @_;
+    $c->stash->{tags} = [ $c->model("DBIC::Tag")->by_photo ];
+    my $cloud = HTML::TagCloud->new();
+    foreach my $tag ( @{ $c->stash->{tags} } ) {
+        $cloud->add(
+            $tag->tag,
+            $c->req->base
+                . $c->stash->{path}
+                . '.gallery/by_tag/'
+                . $tag->tag . '/'
+                . $tag->photo,
+            $tag->refcount
+        );
     }
-    $c->stash->{cloud}=$cloud;
-    $c->stash->{template}='gallery/cloud.tt';
+    $c->stash->{cloud}    = $cloud;
+    $c->stash->{template} = 'gallery/cloud.tt';
 }
 
 =back

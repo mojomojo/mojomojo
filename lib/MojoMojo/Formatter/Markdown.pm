@@ -2,17 +2,17 @@ package MojoMojo::Formatter::Markdown;
 
 use base qw/MojoMojo::Formatter/;
 
-
 my $markdown;
 eval "use Text::MultiMarkdown";
 unless ($@) {
     $markdown = Text::MultiMarkdown->new(
-        markdown_in_html_blocks => 1, # Allow Markdown syntax within HTML blocks.
-        use_metadata => 0, # Remove MultiMarkdown behavior change to make the top of the document metadata.
-        heading_ids  => 0, # Remove MultiMarkdown behavior change in <hX> tags.
-        img_ids      => 0, # Remove MultiMarkdown behavior change in <img> tags.
+        markdown_in_html_blocks => 1,    # Allow Markdown syntax within HTML blocks.
+        use_metadata =>
+            0,  # Remove MultiMarkdown behavior change to make the top of the document metadata.
+        heading_ids => 0,    # Remove MultiMarkdown behavior change in <hX> tags.
+        img_ids     => 0,    # Remove MultiMarkdown behavior change in <img> tags.
     );
-};
+}
 
 sub primary_formatter { 1; }
 
@@ -44,13 +44,13 @@ context object.
 
 =cut
 
-
 sub format_content {
-    my ($class,$content,$c)=@_;
+    my ( $class, $content, $c ) = @_;
     return unless $markdown;
     return unless $c->pref('main_formatter') eq 'MojoMojo::Formatter::Markdown';
+
     # Let markdown handle the rest
-    $$content= $markdown->markdown( $$content );
+    $$content = $markdown->markdown($$content);
 }
 
 =back 

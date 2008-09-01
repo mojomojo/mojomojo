@@ -11,9 +11,9 @@ __PACKAGE__->config->{namespace} = '';
 sub begin : Private {
     my ( $self, $c ) = @_;
     if ( $c->stash->{path} ) {
-        my ( $path_pages, $proto_pages ) = 
-	    $c->model('DBIC::Page')->path_pages( $c->stash->{path} );
-        @{$c->stash}{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
+        my ( $path_pages, $proto_pages ) =
+            $c->model('DBIC::Page')->path_pages( $c->stash->{path} );
+        @{ $c->stash }{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
         $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
     }
@@ -26,11 +26,10 @@ default action - serve the home node
 =cut
 
 sub default : Path {
-    my ( $self, $c )      = @_;
+    my ( $self, $c ) = @_;
     $c->res->status(404);
-    $c->stash->{message}  = "Couldn't find that page, Jimmy ".
-    '('.$c->stash->{pre_hacked_uri}.')';
-    ;
+    $c->stash->{message} =
+        "Couldn't find that page, Jimmy " . '(' . $c->stash->{pre_hacked_uri} . ')';
     $c->stash->{template} = 'message.tt';
 }
 
@@ -43,18 +42,17 @@ show a debug screen.
 =cut
 
 sub render : ActionClass('RenderView') {
-    my ( $self ) = shift;
-    my ( $c ) = @_;
+    my ($self) = shift;
+    my ($c)    = @_;
     $c->stash->{path} ||= '/';
 }
 
 sub end : Private {
-    my ($self,$c)=@_;
-    $c->req->uri->path($c->stash->{pre_hacked_uri}->path)
-	if ref $c->stash->{pre_hacked_uri};
+    my ( $self, $c ) = @_;
+    $c->req->uri->path( $c->stash->{pre_hacked_uri}->path )
+        if ref $c->stash->{pre_hacked_uri};
     $c->forward('render');
 }
-
 
 =item auto
 
@@ -64,8 +62,11 @@ intercepts the request if so.
 =cut
 
 sub auto : Private {
-    my ($self,$c) = @_;
-    if (defined $c->config->{permissions}{enforce_login} and $c->config->{permissions}{enforce_login}) {
+    my ( $self, $c ) = @_;
+    if ( defined $c->config->{permissions}{enforce_login}
+        and $c->config->{permissions}{enforce_login} )
+    {
+
         # allow a few actions
         if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {
             return 1;
@@ -78,7 +79,7 @@ sub auto : Private {
     return 1 unless $c->stash->{user};
     return 1 if $c->stash->{user}->active != -1;
     return 1 if $c->req->action eq 'logout';
-    $c->stash->{template}='user/validate.tt';
+    $c->stash->{template} = 'user/validate.tt';
 }
 
 1;
