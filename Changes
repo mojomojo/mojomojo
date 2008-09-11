@@ -1,5 +1,8 @@
+        - Fix lingering 'query' search name which should be 'q'
+        - add Edit Pages link to navbar
         - Some spawn db fixes
         - Fix session config, removed colonos (plu)
+        - liquid layout for less than 1024px wide view
 
 0.999020  2008-07-28 15:45:00
         - Replaced favicon (soulchild)

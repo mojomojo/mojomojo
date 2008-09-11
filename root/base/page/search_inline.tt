@@ -1,6 +1,6 @@
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
-        Search: <input type="text" name="query" value="[% query %]" /> <input type="submit" value="Go" /><br />
+        Search: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="Go" /><br />
         <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> Search entire site 
         <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> Search within [% page_title %]
     </form>
@@ -34,13 +34,13 @@
         <ul>
             <li>Result Page:</li>
         [% IF pager.current_page > pager.first_page %]
-            <li><a href="?query=[% query %]&search_type=[% search_type %]&p=[% pager.previous_page %]">&lt;&lt; Previous</a></li>
+            <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.previous_page %]">&lt;&lt; Previous</a></li>
         [% END %]
         [% FOR num = pages_to_link %]
-            <li>[% UNLESS num == pager.current_page %]<a href="?query=[% query %]&search_type=[% search_type %]&p=[% num %]">[% END %][% num %][% UNLESS num == pager.current_page %]</a>[% END %]</li>
+            <li>[% UNLESS num == pager.current_page %]<a href="?q=[% query %]&search_type=[% search_type %]&p=[% num %]">[% END %][% num %][% UNLESS num == pager.current_page %]</a>[% END %]</li>
         [% END %]
         [% IF pager.current_page < pager.last_page %]
-            <li><a href="?query=[% query %]&search_type=[% search_type %]&p=[% pager.next_page %]">Next &gt;&gt;</a></li>
+            <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.next_page %]">Next &gt;&gt;</a></li>
         [% END %]
         </ul>
     </div>

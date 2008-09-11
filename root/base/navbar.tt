@@ -13,6 +13,11 @@
     <li class="navon">[%c.fixw(user.login)%]</li> 
     [% ELSE %]
       [% IF user.active%]
+        [% IF (!rev OR rev==page.content_version) %]
+          [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+            <li><a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a></li>
+          [%END%]
+        [%END%]
       <li><a href="[%c.uri_for(user.link)%]" title="Go to home page">[%c.fixw(user.login)%]</a></li>
       [% ELSE %]
       <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="User Preferences">[%c.fixw(user.login)%]</a></li> 
