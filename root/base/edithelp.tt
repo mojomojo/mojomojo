@@ -35,9 +35,8 @@
 			<tr><td>|a|table|row|<br />|b|table|row|</td><td class="arrow">-></td><td>Table</td>
 			   <td>=pod</td><td class="arrow">-></td><td><em>Format content until next =pod as plain old documentation</em></td>
       </tr>
-			<tr><td>http://url<br />email@address.com</td><td class="arrow">-></td><td>Auto-linked</td></tr>
-
-			<tr><td>!imageURL!</td><td class="arrow">-></td><td>Image</td></tr>
+			<tr><td>!imageURL!</td><td class="arrow">-></td><td>Image</td>
+	  </tr>
     </table>
 </div>
 
