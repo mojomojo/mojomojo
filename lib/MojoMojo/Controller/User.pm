@@ -1,7 +1,7 @@
 package MojoMojo::Controller::User;
 
 use strict;
-use base qw/Catalyst::Controller::HTML::FormFu Catalyst::Controller::BindLex/;
+use base qw/Catalyst::Controller::HTML::FormFu/;
 
 use Digest::MD5 qw/md5_hex/;
 use Data::FormValidator::Constraints::DateTime qw(:all);
@@ -31,8 +31,7 @@ Log in through the authentication system.
 
 sub login : Global {
     my ( $self, $c ) = @_;
-    my $message : Stashed;
-    $message ||= 'Please enter username &amp; password';
+    $c->stash->{message} ||= 'Please enter username &amp; password';
     if ( $c->req->params->{login} ) {
         if (
             $c->authenticate(
@@ -98,9 +97,9 @@ Main user preferences screen.
 
 sub prefs : Global FormConfig {
     my ( $self, $c ) = @_;
-    my $form : Stashed;
-    my $user : Stashed;
-    my $template : Stashed = 'user/prefs.tt';
+    my $form =$c->stash->{form};
+    my $user = $c->stash->{user};
+    $c->stash->{template} = 'user/prefs.tt';
     my @proto = @{ $c->stash->{proto_pages} };
     my $page_user =
         $c->model("DBIC::Person")->get_user( $proto[0]->{name} || $c->stash->{page}->name );
@@ -112,8 +111,8 @@ sub prefs : Global FormConfig {
             || $user->is_admin() )
         )
     {
-        my $message : Stashed = 'Cannot find that user.';
-        $template = 'message.tt';
+        my $c->stash->{message}  = 'Cannot find that user.';
+        $c->stash->{template} = 'message.tt';
     }
 
     $page_user->fill_formfu_values($form);
@@ -156,15 +155,14 @@ sub recover_pass : Global {
     my ( $self, $c ) = @_;
     return unless ( $c->req->method eq 'POST' );
     my $id = $c->req->param('recover');
-    my $user : Stashed =
+    $c->stash->{user} =
         $c->model('DBIC::Person')->search( [ email => $id, login => $id ] )->first;
-    unless ($user) {
+    my $user=$c->stash->{user};
+    unless ($c->stash->{user}) {
         $c->flash->{message} = 'Could not recover password.';
         return $c->res->redirect( $c->uri_for('login') );
     }
-    my $password : Stashed = '';
-    ($password) = Text::Password::Pronounceable->generate( 6, 10 );
-    my $message : Stashed = '';
+    $c->stash->{password}  =  Text::Password::Pronounceable->generate( 6, 10 );
     if (
         $c->email(
             header => [
@@ -176,12 +174,12 @@ sub recover_pass : Global {
         )
         )
     {
-        $user->pass($password);
+        $user->pass($c->stash->{password});
         $user->update();
-        $message = 'Emailed you your new password.';
+        $c->stash->{message} = 'Emailed you your new password.';
     }
     else {
-        $message = 'Error occurred while emailing you your new password.';
+        $c->stash->{message} = 'Error occurred while emailing you your new password.';
     }
     $c->forward('login');
 }
@@ -205,16 +203,16 @@ sub register : Global FormConfig {
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message} =
         'Please fill in the following information to ' . 'register. All fields are mandatory.';
-    my $form : Stashed;
-    my $user : Stashed = $c->model('DBIC::Person')->new_result( {} );
-    my $template : Stashed = 'user/register.tt';
+    my $form = $c->stash->{form};
+    $c->stash->{user} = $c->model('DBIC::Person')->new_result( {} );
+    $c->stash->{template}  = 'user/register.tt';
 
-    $user->fill_formfu_values($form);
+    $c->stash->{user}->fill_formfu_values($form);
     if ( $form->submitted && !$form->has_errors ) {
-        $user->active(-1);
-        $user->populate_from_formfu($form);
-        $user->insert();
-        $c->forward( 'do_register', [$user] );
+        $c->stash->{user}->active(-1);
+        $c->stash->{user}->populate_from_formfu($form);
+        $c->stash->{user}->insert();
+        $c->forward( 'do_register', [$c->stash->{user}] );
 
     }
 }
