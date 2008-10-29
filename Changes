@@ -1,3 +1,4 @@
+        - Move search to KinoSearch
         - Remove BindLex
         - Fix lingering 'query' search name which should be 'q'
         - add Edit Pages link to navbar

@@ -13,6 +13,7 @@ use Catalyst qw/    ConfigLoader
     Singleton           Session::State::Cookie
     Static::Simple	    SubRequest
     UploadProgress	    Unicode
+    StackTrace
     /;
 
 use Storable;

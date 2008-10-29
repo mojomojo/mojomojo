@@ -13,7 +13,7 @@ use MojoMojo::Model::Search::Plucene;
 use Data::Dumper;
 
 my $index = "$FindBin::Bin/../plucene";
-my $p = MojoMojo::Model::Search::Plucene->open($index) or die "Unable to open index $index";
+my $p = MojoMojo::Model::Search->open($index) or die "Unable to open index $index";
 
 my $query = shift;
 if ($query) {

@@ -128,12 +128,13 @@ sub search : Global {
     if ( $search_type eq "subtree" ) {
         my $fixed_path = $page->path;
         $fixed_path =~ s/\//X/g;
-        $q = "_path:$fixed_path* AND " . $q;
+        $q = "path:$fixed_path* AND " . $q;
     }
-
-    foreach my $key ( $c->model('Search::Plucene')->query($q) ) {
-
-        my ($path_pages) = $c->model('DBIC::Page')->path_pages($key);
+        
+    my $hits=$c->model('Search')->search($q);
+    while (my $hit = $hits->fetch_hit_hashref ) {
+        $hit->{path} =~ s/X/\//;
+        my ($path_pages) = $c->model('DBIC::Page')->path_pages($hit->{path});
         my $page = $path_pages->[ @$path_pages - 1 ];
 
         # skip search result depending on permissions
