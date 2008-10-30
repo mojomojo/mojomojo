@@ -2,7 +2,7 @@ package MojoMojo::Model::Search;
 
 use strict;
 
-use base 'Catalyst::Model::Search';
+use base 'Catalyst::Model';
 
 use KinoSearch::InvIndexer;
 use KinoSearch::Searcher;
