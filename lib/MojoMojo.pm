@@ -25,7 +25,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999020';
+our $VERSION = '0.999021';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -443,12 +443,23 @@ die "Require write access to attachment_dir:".MojoMojo->config->{attachment_dir}
 
 1;
 
+=head1 SUPPORT
+
+If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org. 
+Commercial support and customization for MojoMojo is also provided by Nordaaker 
+Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
+
 =head1 AUTHORS
 
-Marcus Ramberg C<marcus@thefeed.no>
+Marcus Ramberg C<marcus@nordaaker.com>
+
 David Naughton C<naughton@umn.edu>
+
 Andy Grundman C<andy@hybridized.org>
+
 Jonathan Rockway C<jrockway@jrockway.us>
+
+A number of other contributors over the years.
 
 =head1 LICENSE
 
