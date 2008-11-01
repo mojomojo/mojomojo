@@ -431,6 +431,15 @@ sub check_permissions {
     my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
     return \%perms;
 }
+unless (-e MojoMojo->config->{index_dir}) {
+    mkdir(MojoMojo->config->{index_dir}) || die "Could not make index directory:".MojoMojo->config->{index_dir};
+}
+die "Require write access to index:".MojoMojo->config->{index_dir} unless (-w MojoMojo->config->{index_dir});
+MojoMojo->model('Search')->prepare_search_index() unless (-f MojoMojo->config->{index_dir}.'/segments'); 
+unless (-e MojoMojo->config->{attachment_dir}) {
+    mkdir(MojoMojo->config->{attachment_dir}) || die "Could not make attachment directory:".MojoMojo->config->{attachment_dir};
+}
+die "Require write access to attachment_dir:".MojoMojo->config->{attachment_dir} unless (-w MojoMojo->config->{attachment_dir});
 
 1;
 

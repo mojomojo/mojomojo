@@ -11,7 +11,7 @@ use KinoSearch::Index::Term;
 use KinoSearch::Search::Query;
 use KinoSearch::QueryParser::QueryParser;
 
-__PACKAGE__->config->{index} ||= MojoMojo->path_to('/index');
+__PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
 my $invindexer;
 my $analyzer
@@ -21,8 +21,8 @@ sub indexer {
     my $self=shift;
     unless ($invindexer) {
         $invindexer = KinoSearch::InvIndexer->new(
-            invindex => __PACKAGE__->config->{index},
-            create   => ( -f __PACKAGE__->config->{index}.'/segments' ? 0 : 1 ),
+            invindex => __PACKAGE__->config->{index_dir},
+            create   => ( -f __PACKAGE__->config->{index_dir}.'/segments' ? 0 : 1 ),
             analyzer => $analyzer,
             );
         $invindexer->spec_field(name=>'path');
@@ -37,9 +37,9 @@ sub indexer {
 my $searcher;
 sub searcher {
     my $self=shift;
-    $self->prepare_search_index unless -f __PACKAGE__->config->{index}.'/segments';
+    $self->prepare_search_index unless -f __PACKAGE__->config->{index_dir}.'/segments';
     $searcher ||= KinoSearch::Searcher->new(
-        invindex => __PACKAGE__->config->{index},
+        invindex => __PACKAGE__->config->{index_dir},
         analyzer => $analyzer,
     );
     return $searcher;
@@ -61,9 +61,9 @@ sub prepare_search_index {
 
     # loop through all latest-version pages
     my $count = 0;
-    my $it    = MojoMojo->model('DB::Page')->search;
+    my $it    = MojoMojo->model('DBIC::Page')->search;
     while ( my $page = $it->next ) {
-        $page->set_paths($page);
+        $page->result_source->resultset->set_paths($page);
         $self->index_page($page);
         $count++;
     }
