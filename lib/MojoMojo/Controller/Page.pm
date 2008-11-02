@@ -133,7 +133,7 @@ sub search : Global {
         
     my $hits=$c->model('Search')->search($q);
     while (my $hit = $hits->fetch_hit_hashref ) {
-        $hit->{path} =~ s/X/\//;
+        $hit->{path} =~ s/X/\//g;
         my ($path_pages) = $c->model('DBIC::Page')->path_pages($hit->{path});
         my $page = $path_pages->[ @$path_pages - 1 ];
 
