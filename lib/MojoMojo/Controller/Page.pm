@@ -44,13 +44,14 @@ sub view : Global {
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
-    my ( $path_pages, $proto_pages, $id ) = @$stash{qw/ path_pages proto_pages id /};
+    my ( $path_pages, $proto_pages, $id ) =
+      @$stash{qw/ path_pages proto_pages id /};
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
 
     return $c->forward('suggest')
-        if $proto_pages && @$proto_pages;
+      if $proto_pages && @$proto_pages;
 
     my $page = $stash->{'page'};
 
@@ -123,18 +124,19 @@ sub search : Global {
 
     my $results = [];
 
-    # for subtree searches, add the path info to the query, replacing slashes with X
+# for subtree searches, add the path info to the query, replacing slashes with X
     my $real_query = $q;    # this is for context matching later
     if ( $search_type eq "subtree" ) {
         my $fixed_path = $page->path;
         $fixed_path =~ s/\//X/g;
         $q = "path:$fixed_path* AND " . $q;
     }
-        
-    my $hits=$c->model('Search')->search($q);
-    while (my $hit = $hits->fetch_hit_hashref ) {
+
+    my $hits = $c->model('Search')->search($q);
+    my %results_hash;
+    while ( my $hit = $hits->fetch_hit_hashref ) {
         $hit->{path} =~ s/X/\//g;
-        my ($path_pages) = $c->model('DBIC::Page')->path_pages($hit->{path});
+        my ($path_pages) = $c->model('DBIC::Page')->path_pages( $hit->{path} );
         my $page = $path_pages->[ @$path_pages - 1 ];
 
         # skip search result depending on permissions
@@ -149,22 +151,35 @@ sub search : Global {
         my $content = $strip->parse( $page->content->formatted($c) );
         $strip->eof;
 
-        # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
+ # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
         my $snippet = Text::Context->new( $content, split( / /, $real_query ) );
 
+        # Increment hit count if page seen already
+        # and append snippet to existing.
+        if ( exists $results_hash{ $hit->{path} } ) {
+            $results_hash{ $hit->{path} }->{hit_count}++;
+        }
+        else {
+            $results_hash{ $hit->{path} } = {
+                snippet   => $snippet->as_html,
+                page      => $page,
+                hit_count => 1,
+            };
+        }
         my $result = {
             snippet => $snippet->as_html,
             page    => $page,
         };
-        push @$results, $result;
-    }
 
+        #push @$results, $result;
+    }
+    $results = [ values %results_hash ];
     my $result_count = scalar @$results;
     if ($result_count) {
 
-        # Paginate the results
-        # This is done even with even 1 page of results so the template doesn't need to do
-        # two separate things
+# Paginate the results
+# This is done even with even 1 page of results so the template doesn't need to do
+# two separate things
         my $pager = Data::Page->new;
         $pager->total_entries($result_count);
         $pager->entries_per_page($results_per_page);
@@ -210,9 +225,9 @@ sub inline_tags : Global {
     if ( $c->user_exists ) {
         my @tags = $page->others_tags( $c->user->obj->id );
         $c->stash->{others_tags} = [@tags];
-        @tags                    = $page->user_tags( $c->user->obj->id );
-        $c->stash->{taglist}     = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
-        $c->stash->{tags}        = [@tags];
+        @tags = $page->user_tags( $c->user->obj->id );
+        $c->stash->{taglist} = ' ' . join( ' ', map { $_->tag } @tags ) . ' ';
+        $c->stash->{tags}    = [@tags];
     }
     else {
         $c->stash->{others_tags} = [ $page->tags_with_counts ];
@@ -235,8 +250,9 @@ sub list : Global {
 
     # FIXME - real data here please
     $c->stash->{orphans}   = [];
-    $c->stash->{backlinks} = [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
-    $c->stash->{wanted}    = [ $c->model("DBIC::WantedPage")->search() ];
+    $c->stash->{backlinks} =
+      [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
+    $c->stash->{wanted} = [ $c->model("DBIC::WantedPage")->search() ];
 }
 
 =head2 recent (.recent)
