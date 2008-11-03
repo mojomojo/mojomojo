@@ -82,6 +82,7 @@ Create/update the search index with data from a MojoMojo page.
 sub index_page {
     my ( $self, $page ) = @_;
     my $index = $self->indexer;
+    $page->discard_changes();
     return unless ( $page && $page->content );
 
     my $content = $page->content;
