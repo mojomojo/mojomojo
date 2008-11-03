@@ -5,11 +5,13 @@ use base 'Catalyst::Controller';
 
 =head1 NAME
 
-MojoMojo::Controller::Admin - Catalyst component
+MojoMojo::Controller::Admin - Site Administration
 
 =head1 DESCRIPTION
+ 
+Action to handle management of MojoMojo. Click the admin link at the 
+bottom of the page while logged in as admin to access these functions. 
 
-Catalyst admin controller
 
 =head1 METHODS
 
@@ -17,7 +19,7 @@ Catalyst admin controller
 
 =item auto
 
-Only administrators should access functions in this controller
+Access control. Only administrators should access functions in this controller
 
 =cut
 

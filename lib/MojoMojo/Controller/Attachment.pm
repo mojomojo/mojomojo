@@ -10,23 +10,17 @@ use IO::File;
 
 MojoMojo::Controller::Attachment - Attachment controller
 
-=head1 SYNOPSIS
-
-Handles urls like
-  /.attachment/14/download
-  /.attachment/23/view
-  /.attachment/23/insert
-
 =head1 DESCRIPTION
 
-This controller handles node attachments
+MojoMojo supports attaching files to nodes. This controller handles 
+administration and serving of these assets.
 
 
 =head1 ACTIONS
 
 =head2 auth
 
-auth controll for mojomojo
+Permission control for mojomojo pages.
 
 =cut
 
@@ -196,7 +190,7 @@ sub insert : Chained('attachment') Args(0) {
 
 =head1 AUTHOR
 
-Marcus Ramberg C<marcus@thefeed.no>
+Marcus Ramberg C<marcus@nordaaker.com>
 
 =head1 LICENSE
 
