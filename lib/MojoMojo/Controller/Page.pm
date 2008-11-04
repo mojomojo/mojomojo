@@ -44,6 +44,8 @@ sub view : Global {
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
+    $c->stash->{render} = 'highlight' if $c->req->referer =~ /.edit$/;
+
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
 
@@ -321,18 +323,6 @@ sub rss_full : Global {
     $c->forward('recent');
     $c->res->content_type('application/rss+xml');
     $c->stash->{template} = 'page/rss_full.tt';
-}
-
-=head2  highlight (.highlight)
-
-Highlight changes for save.
-
-=cut
-
-sub highlight : Global {
-    my ( $self, $c ) = @_;
-    $c->stash->{render} = 'highlight';
-    $c->forward('view');
 }
 
 =head2  export (.export)
