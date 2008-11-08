@@ -35,7 +35,7 @@ sub auth : Private {
     }
 
     $c->stash->{template} = 'message.tt';
-    $c->stash->{message}  = 'sorry bubba, you aint got no rights';
+    $c->stash->{message}  = $c->loc('You do not have permissions to edit attachments for this page');
     return 0;
 }
 
@@ -57,7 +57,7 @@ sub attachments : Global {
             ->create_from_file( $page, $file, $upload->tempname, $c->path_to('/') );
         if ( !@att ) {
             $c->stash->{template} = 'message.tt';
-            $c->stash->{message}  = "Could not create attachment from $file.";
+            $c->stash->{message}  = $c->loc("Could not create attachment from %1",$file);
         }
         $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
             unless $c->stash->{template} eq 'message.tt';
@@ -104,7 +104,7 @@ sub defaultaction : PathPart('') Chained('attachment') Args('') {
 sub default : Private {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'message.tt';
-    $c->stash->{message}  = "Attachment not found.";
+    $c->stash->{message}  = $c->loc("Attachment not found.");
     return ( $c->res->status(404) );
 }
 
@@ -142,7 +142,7 @@ sub thumb : Chained('attachment') Args(0) {
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
-        return $c->res->body('Can only make thumbnails of photos');
+        return $c->res->body($c->loc('Can only make thumbnails of photos'));
     }
     $photo->make_thumb() unless -f $att->thumb_filename;
     $c->res->output( IO::File->new( $att->thumb_filename ) );
@@ -161,7 +161,7 @@ sub inline : Chained('attachment') Args(0) {
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
-        return $c->res->body('Can only make inline version of photos');
+        return $c->res->body($c->loc('Can only make inline version of photos'));
     }
     $photo->make_inline unless -f $att->inline_filename;
     $c->res->output( IO::File->new( $att->inline_filename ) );

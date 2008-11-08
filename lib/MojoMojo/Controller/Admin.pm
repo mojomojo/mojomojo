@@ -27,7 +27,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
-        $c->stash->{message}  = 'Sorry bubba, gotta be admin';
+        $c->stash->{message}  = $c->loc('Restricted area. Admin access required');
         $c->stash->{template} = 'message.tt';
         return 0;
     }
@@ -65,13 +65,13 @@ sub update : Local {
     );
     if ( $c->form->has_missing ) {
         $c->stash->{message} =
-            "Can't update, missing fields:" . join( ', ', $c->form->missing() ) . '</b>';
+            $c->loc("Can't update, missing fields:") . join( ', ', $c->form->missing() ) . '</b>';
         return;
     }
     my @users = split( m/\s+/, $c->form->valid('admins') );
     foreach my $user (@users) {
         unless ( $c->model("DBIC::Person")->get_user($user) ) {
-            $c->stash->{message} = 'Cant find admin user: ' . $user;
+            $c->stash->{message} = $c->loc('Cant find admin user: ') . $user;
             return;
         }
     }
@@ -93,7 +93,7 @@ sub update : Local {
     $c->pref( 'name', $c->form->valid('name') );
     $c->pref( 'anonymous_user', $c->form->valid('anonymous_user') || '' );
 
-    $c->stash->{message} = "Updated successfully.";
+    $c->stash->{message} = $c->loc("Updated successfully.");
 }
 
 =item user ( .admin/user )

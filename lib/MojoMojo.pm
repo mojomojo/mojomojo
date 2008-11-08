@@ -12,7 +12,8 @@ use Catalyst qw/    ConfigLoader
     Session		        Session::Store::File
     Singleton           Session::State::Cookie
     Static::Simple	    SubRequest
-    Unicode
+    Unicode      	    Unicode 
+    I18N
     /;
 
 use Storable;
