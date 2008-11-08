@@ -1,3 +1,6 @@
+        - Update search not to cache objects
+        - Fix unicode issue with preview
+        - rewrite javascript to use jquery, remove inline js.
         - Fix indexer to use correct content version
 
 0.999021  2008-11-01 01:47:00
