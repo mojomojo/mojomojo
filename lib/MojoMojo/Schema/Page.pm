@@ -493,7 +493,7 @@ sub others_tags {
             select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
             as       => [ 'id',    'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => ['tag'],
+            group_by => ['me.tag','me.id'],
         }
     );
     return @tags;
