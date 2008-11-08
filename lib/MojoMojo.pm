@@ -12,7 +12,7 @@ use Catalyst qw/    ConfigLoader
     Session		        Session::Store::File
     Singleton           Session::State::Cookie
     Static::Simple	    SubRequest
-    UploadProgress	    Unicode
+    Unicode
     /;
 
 use Storable;
