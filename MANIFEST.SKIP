@@ -13,6 +13,7 @@
 \bpm_to_blib$
 \bblibdirs$
 ^MANIFEST\.SKIP$
+^mojomojo\.db$
 
 # Avoid Module::Build generated and utility files.
 \bBuild$
@@ -26,7 +27,7 @@
 \#$
 \b\.#
 \bcache
-\bplucene
+\bindex
 \buploads
 
 \bdb/oracle
