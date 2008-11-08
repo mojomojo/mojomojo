@@ -197,8 +197,8 @@ sub description : Local {
     my ( $self, $c, $photo ) = @_;
     $c->form( required => [qw/description/] );
     my $img = $c->model("DBIC::Photo")->find($photo);
-    if ( $c->req->param('description') ) {
-        $img->description( encode_entities( $c->req->param('description') ) );
+    if ( $c->req->param('update_value') ) {
+        $img->description( encode_entities( $c->req->param('update_value') ) );
         $img->update;
     }
     $c->res->body( $img->description );
@@ -214,8 +214,8 @@ sub title : Local {
     my ( $self, $c, $photo ) = @_;
     $c->form( required => [qw/title/] );
     my $img = $c->model("DBIC::Photo")->find($photo);
-    if ( $c->req->param('title') ) {
-        $img->title( encode_entities( $c->req->param('title') ) );
+    if ( $c->req->param('update_value') ) {
+        $img->title( encode_entities( $c->req->param('update_value') ) );
         $img->update;
     }
     $c->res->body( $img->title );

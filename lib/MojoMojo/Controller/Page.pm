@@ -44,6 +44,7 @@ sub view : Global {
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
+    $c->forward('inline_tags');
     $c->stash->{render} = 'highlight' if $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
@@ -221,7 +222,7 @@ Tag list for the bottom of page views.
 
 sub inline_tags : Global {
     my ( $self, $c, $highlight ) = @_;
-    $c->stash->{template}  = 'page/tags.tt';
+    $c->stash->{template}  ||= 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
     my $page = $c->stash->{page};
     if ( $c->user_exists ) {

@@ -19,8 +19,7 @@ my $analyzer
 
 sub indexer {
     my $self=shift;
-    unless ($invindexer) {
-        $invindexer = KinoSearch::InvIndexer->new(
+     my $invindexer= KinoSearch::InvIndexer->new(
             invindex => __PACKAGE__->config->{index_dir},
             create   => ( -f __PACKAGE__->config->{index_dir}.'/segments' ? 0 : 1 ),
             analyzer => $analyzer,
@@ -30,19 +29,16 @@ sub indexer {
         $invindexer->spec_field(name=>'author');
         $invindexer->spec_field(name=>'date');
         $invindexer->spec_field(name=>'tags');
-    }
-    return $invindexer;
+        return $invindexer;
 }
 
-my $searcher;
 sub searcher {
     my $self=shift;
     $self->prepare_search_index unless -f __PACKAGE__->config->{index_dir}.'/segments';
-    $searcher ||= KinoSearch::Searcher->new(
+    return KinoSearch::Searcher->new(
         invindex => __PACKAGE__->config->{index_dir},
         analyzer => $analyzer,
     );
-    return $searcher;
 }
 
 =item prepare_search_index
@@ -54,7 +50,6 @@ Will do nothing if the index already exists.
 
 sub prepare_search_index {
     my $self  = shift;
-    my $index = $self->indexer;
 
     MojoMojo->log->info("Initializing search index...")
         if MojoMojo->debug;
@@ -105,8 +100,7 @@ sub index_page {
     $doc->set_value(tags    => join( ' ', map { $_->tag } $page->tags ));
     $doc->set_value(text    => $text);
     $index->add_doc($doc);
-    $index->finish(optimize=>1);
-    undef $invindexer;
+    $index->finish(optimize=>1);    
 }
 
 sub search {
