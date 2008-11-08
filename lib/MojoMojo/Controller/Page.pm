@@ -1,4 +1,3 @@
-$c->stash->{render} = 'highlight' if $c->req->referer && $c->req->referer =~ /.edit$/;
 package MojoMojo::Controller::Page;
 
 use strict;
