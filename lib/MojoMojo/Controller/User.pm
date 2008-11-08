@@ -31,7 +31,7 @@ Log in through the authentication system.
 
 sub login : Global {
     my ( $self, $c ) = @_;
-    $c->stash->{message} ||= 'Please enter username &amp; password';
+    $c->stash->{message} ||= $c->loc('Please enter username and password');
     if ( $c->req->params->{login} ) {
         if (
             $c->authenticate(
@@ -49,7 +49,7 @@ sub login : Global {
             return;
         }
         else {
-            $c->stash->{message} = 'Could not authenticate that login.';
+            $c->stash->{message} = $c->loc('Could not authenticate that login.');
         }
     }
     $c->stash->{template} ||= "user/login.tt";
@@ -111,7 +111,7 @@ sub page_user :Private {
             || $user->is_admin() )
         )
     {
-        my $c->stash->{message}  = 'Cannot find that user.';
+        my $c->stash->{message}  = $c->loc('Cannot find that user.');
         $c->stash->{template} = 'message.tt';
         $c->detach('/default');
     }
@@ -151,12 +151,12 @@ sub password : Path('/prefs/password') FormConfig {
     if ( $form->submitted_and_valid) {
         # FIXME: Should be moved into a formfu validator
         unless ( $page_user->valid_pass( $form->params->{current} ) ) {
-            $c->stash->{message} = 'Invalid password.';
+            $c->stash->{message} = $c->loc('Invalid password.');
             return;
         }
         $page_user->pass( $form->params->{pass} );
         $page_user->update();
-        $c->stash->{message} = 'Your password has been updated';
+        $c->stash->{message} = $c->loc('Your password has been updated');
     }
 }
 
@@ -185,10 +185,10 @@ sub recover_pass : Global {
     {
         $user->pass($c->stash->{password});
         $user->update();
-        $c->stash->{message} = 'Emailed you your new password.';
+        $c->stash->{message} = $c->loc('Emailed you your new password.');
     }
     else {
-        $c->stash->{message} = 'Error occurred while emailing you your new password.';
+        $c->stash->{message} = $c->loc('Error occurred while emailing you your new password.');
     }
     $c->forward('login');
 }
@@ -206,12 +206,12 @@ sub register : Global FormConfig {
 
     if ( !$c->pref('open_registration') ) {
         $c->stash->{template} = 'message.tt';
-        return $c->stash->{message} = 'Registration is closed!';
+        return $c->stash->{message} = $c->loc('Registration is closed!');
     }
 
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message} =
-        'Please fill in the following information to ' . 'register. All fields are mandatory.';
+        $c->loc('Please fill in the following information to register. All fields are mandatory.');
     my $form = $c->stash->{form};
     $c->stash->{user} = $c->model('DBIC::Person')->new_result( {} );
     $c->stash->{template}  = 'user/register.tt';
@@ -244,7 +244,7 @@ sub do_register : Private {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->email,
-                Subject => '[MojoMojo] New User Validation'
+                Subject => $c->loc('[%1] New User Validation',$c->pref->{name}||'MojoMojo'),
             ],
             body => $c->view('TT')->render( $c, 'mail/validate.tt' ),
         )
@@ -252,7 +252,7 @@ sub do_register : Private {
     {
     }
     else {
-        $c->stash->{error} = 'An error occourred with emailing your validation mail. Please try again.';
+        $c->stash->{error} = $c->loc('An error occourred. Sorry.');
     }
     $c->stash->{user}     = $user;
     $c->stash->{template} = 'user/validate.tt';
@@ -276,7 +276,7 @@ sub validate : Global {
         }
         else {
             $c->stash->{message} =
-                'Welcome, ' . $user->name . ' your email is validated. Please log in.';
+                $c->loc('Welcome, %1 your email is validated. Please log in.',$user->name);
             $c->stash->{template} = 'user/login.tt';
         }
         return;
@@ -296,7 +296,7 @@ sub reconfirm : Local {
     if ( $c->user->obj->email ne $c->req->param('email') ) {
         if ( $c->model('DBIC::Person')->search( { email => $c->req->param('email') } )->count )
         {
-            return $c->stash->{error} = 'That mail is already in use';
+            return $c->stash->{error} = $c->loc('That mail is already in use');
         }
     }
     my $user = $c->user->obj;
@@ -304,7 +304,7 @@ sub reconfirm : Local {
     $user->active(-1);
     $user->update();
     $c->forward( 'do_register', [$user] );
-    $c->flash->{message} = 'confirmation message resent';
+    $c->flash->{message} = $c->loc('confirmation message resent');
     $c->res->redirect( $c->uri_for('/') );
 }
 
@@ -329,7 +329,7 @@ sub profile : Global {
     }
     else {
         $c->stash->{template} = 'message.tt';
-        $c->stash->{message}  = 'User ' . $login . ' not found!';
+        $c->stash->{message}  = $c->loc('User %1 not found!',$login);
     }
 }
 
@@ -357,9 +357,43 @@ sub editprofile : Global FormConfig {
     }
     else {
         $c->stash->{template} = 'message.tt';
-        $c->stash->{message}  = 'User not found!';
+        $c->stash->{message}  = $c->loc('User not found!');
     }
 
+}
+
+sub do_editprofile : Global {
+    my ( $self, $c ) = @_;
+    $c->form(
+        required           => [qw(name email)],
+        optional           => [ $c->model("DBIC::Person")->result_source->columns ],
+        defaults           => { gender => undef },
+        constraint_methods => { born => ymd_to_datetime(qw(birth_year birth_month birth_day)) },
+        untaint_all_constraints => 1,
+    );
+
+    if ( $c->form->has_missing ) {
+        $c->stash->{message} =
+              $c->loc('You have to fill in all required fields.')
+            . $c->loc('the following are missing:').' <b>'
+            . join( ', ', $c->form->missing() ) . '</b>';
+    }
+    elsif ( $c->form->has_invalid ) {
+        $c->stash->{message} =
+            $c->loc('Some fields are invalid. Please correct them and try again:');
+    }
+    else {
+        my $page = $c->stash->{page};
+        my $user = $c->model('DBIC::Person')->get_user(
+              $c->stash->{proto_pages}[-1]
+            ? $c->stash->{proto_pages}[-1]->{name_orig}
+            : $page->name
+        );
+        $user->set_columns( $c->form->{valid} );
+        $user->update();
+        return $c->forward('profile');
+    }
+    $c->forward('editprofile');
 }
 
 =back

@@ -31,14 +31,14 @@ params->{content} and runs it through the formatter chain.
 
 sub render : Local {
     my ( $self, $c ) = @_;
-    my $output = "Please type something";
+    my $output = $c->loc("Please type something");
     my $input  = $c->req->params->{content};
     if ( $input && $input =~ /(\S+)/ ) {
         $output = $c->model("DBIC::Content")->format_content( $c, $input );
     }
 
     unless ($output) {
-        $output = 'Your input is invalid, please reformat it and try again.';
+        $output = $c->loc('Your input is invalid, please reformat it and try again.');
         $c->res->status(500);
     }
 
@@ -92,7 +92,7 @@ sub diff : Local {
         $c->res->output( $revision->formatted_diff( $c, $previous, $sparse ) );
     }
     else {
-        $c->res->output("This is the first revision! Nothing to diff against.");
+        $c->res->output($c->loc("This is the first revision! Nothing to diff against."));
     }
 }
 

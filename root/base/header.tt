@@ -1,3 +1,4 @@
+[%- MACRO loc(text, args) BLOCK; c.localize(text, args); END; -%]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -17,7 +18,7 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
 	[% ELSIF page %] [% c.expand_wikiword(page.name_orig) %]  [% END %]
             - [%
                c.pref('name') ||
-                "A poorly configured MojoMojo Installation"
+                loc("A poorly configured MojoMojo Installation")
             %]
     </title>
     [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]

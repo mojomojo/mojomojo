@@ -27,7 +27,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
-        $c->stash->{message}  = 'Sorry bubba, gotta be admin';
+        $c->stash->{message}  = $c->loc('Restricted area. Admin access required');
         $c->stash->{template} = 'message.tt';
         return 0;
     }
