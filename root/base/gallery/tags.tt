@@ -1,8 +1,7 @@
 [% IF tags %]
 <b>my tags : </b>
 [% FOREACH tag IN tags %]
-[<b class="remove"><a href="[%c.uri_for('gallery/untag',photo.id,tag.tag)%]"
-onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('gallery/untag',photo.id,tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">x</a>]</b>]
+[<b class="remove"><a href="[%c.uri_for('gallery/untag',photo.id,tag.tag)%]" class="tagaction">x</a>]</b>]
 [%IF tag.tag == highlight %]
 <a id="tag_[%tag.tag%]" class="tag highlight" 
 [%ELSE%]
@@ -21,7 +20,7 @@ href="/.gallery/by_tag/[%tag.tag%]">[%tag.tag%]</a>
 [% NEXT IF taglist.match(tagmatch) %]
 [% IF c.user.active %]
 [<b class="add"><a href="[%c.uri_for('gallery/tag',photo.id,tag.tag)%]"
-onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('gallery/tag',photo.id,tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">+</a>]</b>]
+class="tagaction">+</a>]</b>]
 [%END%]
 [%IF othertag.tag == highlight %]
 <a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.refcount%]" 

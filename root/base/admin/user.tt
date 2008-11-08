@@ -16,8 +16,7 @@
 [%activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
 [%active=user.active || 0%]
 <td>
-<a href="[%activeurl%]" onclick=" new Ajax.Updater( 'active_[%user.id%]',  '[%activeurl%]', { asynchronous: 1 } ) ; return false">
-    <span id="active_[%user.id%]">[%active%]</span></a></td>
+<a class="activelink" href="[%activeurl%]">[%active%]</a></td>
 <td><a href="[%c.uri_for(user.link)%].profile">[%user.login%]</a></td>
 <td>&nbsp;</td>
 <td>[%user.name%]</td>

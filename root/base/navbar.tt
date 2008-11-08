@@ -58,7 +58,7 @@
     <li><a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a></li>
   [%END %]
   <li><input type="hidden" name="search_type" value="all" />
-  <input type="text" id="searchField" name="q" style="" value="Search" onclick="this.value == 'Search' ? this.value = '' : true"/>
+  <input type="text" id="searchField" name="q" style="" value="Search"/>
   </li></ul></form></div> 
   <div id="pagenav">
 	<ul>

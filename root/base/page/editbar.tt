@@ -5,7 +5,7 @@
    [% IF page.content_version ; %] 
     <li><a href="[% c.uri_for('attachments') %]">Attachments</a></li>
    [%END%]
-   <li><a href="#" onclick="Element.toggle('hidden_info');return false;">Syntax</a></li>
+   <li><a href="#" class="toggleInfo">Syntax</a></li>
 [% ELSE -%]
    <li><a href="[% c.uri_for('edit') %]">Edit</a></li>
    <li>Attachments</li>

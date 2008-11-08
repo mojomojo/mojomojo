@@ -20,7 +20,7 @@
 [% IF prev %]
 <a href="[%c.uri_for('photo')%][%IF tag%]_by_tag/[%tag%][%END%]/[%prev.id%]#nav">&lt;</a>
 [%END%]
-<a href="#" onclick="Element.toggle('hidden_info'); return false">(i)</a>
+<a href="#" class="toggleInfo">(i)</a>
 <div id="hidden_info" class="framedpopup">
 [%PROCESS gallery/photo_info.tt%]
 </div>
@@ -35,8 +35,8 @@
 <p id="description" >[%photo.description||"no description"%]<p>
 <script language="JavaScript">
 [% IF c.user.obj.can_edit(page) # FIXME: inline editing needs to be formatted same as viewing the element.%]
- new Ajax.InPlaceEditor('title', '[%c.uri_for('gallery/title',photo.id)%]', {rows:1,cols:30,callback: function(form,value) {return 'title='+value}});
-new Ajax.InPlaceEditor('description', '[%c.uri_for('gallery/description',photo.id)%]', {rows:4,cols:60,callback: function(form,value) {return 'description='+value}});
+$('#title').editInPlace({ url: '[%c.uri_for('gallery/title',photo.id)%]'});
+$('#description').editInPlace({ url: '[%c.uri_for('gallery/description',photo.id)%]',field_type:'textarea'});
 [% END %]
  </script>
 [%END%]

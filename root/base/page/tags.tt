@@ -3,8 +3,7 @@
     <dd>&nbsp;
 [% IF tags %]
     [% FOREACH tag IN tags %]
-[<span class="remove"><a href="[%c.uri_for('jrpc/untag',tag.tag)%]"
-onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/untag',tag.tag)%]', { asynchronous: 1,onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">x</a>]</span>
+[<span class="remove"><a href="[%c.uri_for('jsrpc/untag',tag.tag)%]" class="tagaction">x</a>]</span>
         [% IF tag.tag == highlight %]
 <b id="tag_[% tag.tag %]" class="navOn">[% tag.tag %]</b>
         [% ELSE %]
@@ -20,8 +19,7 @@ onclick=" new Ajax.Updater( 'tags',  '[%c.uri_for('jsrpc/untag',tag.tag)%]', { a
         [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
         [% NEXT IF taglist.match(tagmatch) %]
         [% IF user.active %]
-[<span class="add"><a href="[% c.uri_for('jrpc/tag',tag.tag) %]"
-onclick=" new Ajax.Updater( 'tags',  '[% c.uri_for('jsrpc/tag',tag.tag) %]', { asynchronous: 1, onComplete: function(request){Fat.fade('.highlight');} } ) ; return false">+</a></span>]
+[<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>]
         [% END %]
         [% IF othertag.tag == highlight %]
         <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]" 

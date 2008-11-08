@@ -1,6 +1,6 @@
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
 <div id="TextileHelp">
-		<h2>Textile formatting tips (<a href="#" onclick="quickRedReference(); return false;">advanced</a>)</h2>
+		<h2>Textile formatting tips (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target=>"_top">advanced</a>)</h2>
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
 <p>
@@ -40,20 +40,9 @@
     </table>
 </div>
 
-<script language="JavaScript" type="text/javascript">
-  function quickRedReference() {
-    window.open( 
-      "http://www.bradchoate.com/mt/docs/mtmanual_textile2.html",
-      "redRef",
-      "height=600,width=550,channelmode=0,dependent=0," +
-      "directories=0,fullscreen=0,location=0,menubar=0," +
-      "resizable=0,scrollbars=1,status=1,toolbar=0" 
-    );
-  }
-</script>
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <div id="MarkdownHelp">
-		<h2>Markdown formatting tips (<a href="#" onclick="quickMarkdownReference(); return false;">advanced</a>)</h2>
+		<h2>Markdown formatting tips (<a href="http://daringfireball.net/projects/markdown/basics" target="_top">advanced</a>)</h2>
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
 <p>
@@ -171,15 +160,6 @@
 </div>
 
 <script language="JavaScript">
-  function quickMarkdownReference() {
-    window.open( 
-      "http://daringfireball.net/projects/markdown/basics",
-      "markdownRef",
-      "height=600,width=550,channelmode=0,dependent=0," +
-      "directories=0,fullscreen=0,location=0,menubar=0," +
-      "resizable=0,scrollbars=1,status=1,toolbar=0" 
-    );
-  }
 </script>
 [% ELSE%]
 <div><p>No help yet for [%c.pref('main_formatter')%]</p></div>

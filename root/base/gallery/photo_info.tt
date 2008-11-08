@@ -7,4 +7,3 @@
 <dt>ISO:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
 <dt>Aperture:</dt><dd>[% IF photo.aperture %]f/[% photo.aperture %][% ELSE %]not specified[%END%]</dd>
 </dl>
-<script type="text/javascript">Element.toggle('hidden_info')</script>

@@ -1,15 +1,15 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
   [% IF user %]
-    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" onclick="javascript:Element.show('addtag');Element.hide('showtag');Field.focus('taginput');return false;">Add tag</a></div>
+    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" id="add_tag">Add tag</a></div>
     <div id="addtag" style="display:none;" class="formdiv">
-      <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" onsubmit=" new Ajax.Updater( 'tags', '[%c.uri_for('jsrpc/submittag')%]', { parameters: Form.serialize(this),asynchronous: 1,onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},onComplete: function(request){Fat.fade('.highlight');} } ) ; return false"> 
+      <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" id="addtag_form"> 
         <input id="taginput" type="text" name="tag" size="5" />
  	    <input class="addbutton" type="submit" name="add" value=" Add " /> 
       </form>
     </div>
   [%END%]
   <div id="tags">
-    [%  c.subreq('/inline_tags', 'page'=>page ) %]
+    [% PROCESS page/tags.tt  %]
   </div>
 [% END %]
 <div id="bottomnav">
@@ -46,10 +46,10 @@
 [% END %] 
 [% IF page.content_version && page.content_version > 1 %] 
  <li><span id="show_changes">
-  <a title="Show differences from previous version" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev)%]'); return false;">See changes</a>
+  <a title="Show differences from previous version" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" class="toggleChanges">See changes</a>
  </span>
  <span id="hide_changes" style="display: none;" >
-  <a title="Show normal page" href="#" onclick="toggleChanges('[%c.uri_for('jsrpc/diff', page.id , rev) %]'); return false;">Hide changes</a>
+  <a title="Show normal page" href="[%c.uri_for('jsrpc/diff', page.id , rev) %]" class="toggleChanges">Hide changes</a>
  </span></li>
 [% END %]
   <li>

@@ -14,14 +14,9 @@ gallery -
   </div>
   <div id="images">
   [%WHILE(picture=pictures.next)%]
-    [% imgid = 'img_' _ picture.id %]
-    <a  id="[%imgid%]" href="[%c.uri_for('photo')%][%
+    <a  id="img_[%picture.id%]" class="image" href="[%c.uri_for('photo')%][%
 IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb" 
 width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
-<script type="text/javascript">var [%imgid%]=new Element.HoverObserver( '[%imgid%]',2,
-function( element, value ) {
-    [%imgid%]_updater=new Ajax.Updater( 'imageinfo', '[%c.uri_for('jsrpc/imginfo',picture.id)%]' ); 
-});</script>
 [%END%]
    </div>
 </div>

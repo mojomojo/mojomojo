@@ -12,9 +12,7 @@
 	[% IF render == 'highlight' %]
 	[% content.highlight(c) %]
     </div>
-	<script language="Javascript" type="text/javascript">
-	Fat.fade('.fade');
-	</script>
+
 	[% ELSE %]
 	[% content.formatted(c) %]
 </div>

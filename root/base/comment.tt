@@ -21,9 +21,8 @@
 [%ELSE%]
 <h4>No Comments posted</h4>
 [%END%]
-<p><small><a href="#" onclick="toggleInfo();return false" id="commentlink">add a comment</a></small></p>
+<p><small><a href="#" class="toggleInfo" id="commentlink">add a comment</a></small></p>
 <div id="hidden_info"  class="framedpopup">
-<script type="text/javascript">Element.toggle('hidden_info');</script>
 [% IF user %]
 [%PROCESS comment/post.tt%]
 [%ELSE%]

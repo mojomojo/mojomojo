@@ -13,7 +13,6 @@
 
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
-<script type="text/javascript">Element.toggle('hidden_info');</script>
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
   [% page.content.formatted(c) %] 
@@ -24,7 +23,7 @@
 [% END %]
 </div>
 <p>
-  <form accept-charset="UTF-8"
+  <form id="editForm" accept-charset="UTF-8"
 	id="editForm" 
 	action="[% c.uri_for('edit')%]" 
 	method="post"> 
@@ -35,23 +34,13 @@
     <input type="hidden" name="parent" value="[% page.parent.id %]" />
     [%PROCESS toolbar.tt%]
     <br/>
-    
+    <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
     <textarea id="body" name="body" cols="70">[%- content.body || c.req.params.body || "" | html -%]</textarea>
-    <script type="text/javascript">
-    new Form.Element.SmartObserver( 'body',
-                               2,
-                               function( element, value ) {
-                                    parms=$H({content: value});
-                                    new Ajax.Updater( { success: 'content_preview', failure: 'editstatus' },  '[%c.uri_for('jsrpc','render')%]', { parameters: parms.toQueryString(),asynchronous: 1,onLoading: function(request){Element.show('editspinner'); Element.remove($('editstatus').firstChild ); },onComplete: function(request){Element.hide('editspinner')} } ) 
-                                } );
-    // TODO: Add a script here to confirm leaving the page without saving if it's changed.
-    </script>
     
     <script type="text/javascript" language="JavaScript">
-      $('body').value=$('body').value +'[%append|js%]';
-      Field.focus('body');
+    var append='[%append|js%]';
       [% UNLESS user %]
-        document.registerAction('Submit','editForm',function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
+       $('#editForm').submit(function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
       [% END %]
     </script>
     

@@ -40,22 +40,17 @@
             </thead>
             <tbody>
     [% END %]
-        <tr>
+        <tr class="item">
             <td>
                 <a href="[% c.uri_for( '/', page.path ) %]">[% page.name_orig %]</a>
-                <div id="changes_[% page.id %]" class="diff" style="display:none;"></div>
+                <div class="diff" style="display:none;"></div>
             </td>
             <td>[% c.wikiword( page.content.creator.link, base ) %]</td>
             <td>
                 [% page.content.created.hms(":") %]
             </td>
-            <td><a href="#" id="diff_[% page.id %]">View Diff</a></td>
+            <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">View Diff</a></td>
         </tr>
-        <script type="text/javascript">
-            $('diff_[% page.id %]').onclick=function() { 
-                showdiff( '[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]', [% page.id %] ); return false;
-            }
-        </script>
 [% END %]
 </table>
 [% END %]

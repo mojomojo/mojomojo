@@ -33,7 +33,6 @@ sub render : Local {
     my ( $self, $c ) = @_;
     my $output = "Please type something";
     my $input  = $c->req->params->{content};
-    utf8::encode($input);
     if ( $input && $input =~ /(\S+)/ ) {
         $output = $c->model("DBIC::Content")->format_content( $c, $input );
     }
@@ -114,7 +113,7 @@ add a tag to a page. return list of yours and popular tags.
 
 =cut
 
-sub tag : Local {
+sub tag : Local Args(1) {
     my ( $self, $c, $tagname ) = @_;
     ($tagname) = $tagname =~ m/([\w\s]+)/;
     my $page = $c->stash->{page};
@@ -146,7 +145,7 @@ remove a tag to a page. return list of yours and popular tags.
 
 =cut
 
-sub untag : Local {
+sub untag : Local Args(1) {
     my ( $self, $c, $tagname ) = @_;
     my $page = $c->stash->{page};
     die "Page " . $page . " not found" unless ref $page;
