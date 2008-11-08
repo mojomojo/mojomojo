@@ -476,7 +476,7 @@ sub user_tags {
             select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
             as       => [ 'id',    'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => ['tag'],
+            group_by => [ 'me.id','me.tag'],
         }
     );
     return @tags;
