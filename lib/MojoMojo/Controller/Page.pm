@@ -1,3 +1,4 @@
+$c->stash->{render} = 'highlight' if $c->req->referer && $c->req->referer =~ /.edit$/;
 package MojoMojo::Controller::Page;
 
 use strict;
@@ -45,7 +46,7 @@ sub view : Global {
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
-    $c->stash->{render} = 'highlight' if $c->req->referer =~ /.edit$/;
+    $c->stash->{render} = 'highlight' if $c->req->referer && $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
