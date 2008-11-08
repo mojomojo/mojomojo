@@ -36,7 +36,7 @@ sub auto : Private {
     return 1 if $user && $user->can_edit( $c->stash->{path} );
     return 1 if $user && !$c->pref('restricted_user');
     $c->stash->{template} = 'message.tt';
-    $c->stash->{message}  = 'Sorry bubba, you aint got no rights to this page';
+    $c->stash->{message}  = $c->loc('No permissions to edit this page');
     return 0;
 }
 
@@ -74,7 +74,7 @@ sub edit : Global {
     );
 
     # this should never happen!
-    die "Cannot determine what page to edit for path: $path" unless $page;
+    $c->detach('/default') unless $page;
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     $c->form(
@@ -89,7 +89,7 @@ sub edit : Global {
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
-        $stash->{'message'}  = 'Permission Denied to ' . $permtocheck . ' ' . $name;
+        $stash->{'message'}  = $c->loc('Permission Denied to %1 %2', $permtocheck, $name);
         $stash->{'template'} = 'message.tt';
         return;
     }
@@ -109,7 +109,7 @@ sub edit : Global {
     }
 
     if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= 'Anonymous Edit disabled';
+        $c->stash->{message} ||= $c->loc('Anonymous Edit disabled');
         return;
     }
 
