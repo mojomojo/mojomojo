@@ -1,12 +1,14 @@
-<form action="[%c.uri_for('comment/login')%]" method="post" onsubmit=" new Ajax.Updater( 'hidden_info',  '[%c.uri_for('comment/login')%]', { parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
-<small>You have to log in to post a comment.
-(<a href="[%c.uri_for('register')%]">register</a>)</small>
+<div id="commentLogin">
+<form action="[%c.uri_for('comment/login')%]" method="post" id="commentlogin" >
+<small>[%loc('You have to log in to post a comment.')%]
+(<a href="[%c.uri_for('register')%]">[%loc('register')%]</a>)</small>
 </span>
 <dl>
-<dt>login:</dt>
+<dt>[%loc('login')%]:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
-<dt>password:</dt>
+<dt>[%loc('password')%]:</dt>
 <dd><input type="password" name="pass"/></dd>
-<dd><input type="submit" value="log in"/></dd>
+<dd><input type="submit" value="[%loc('log in')%]"/></dd>
 </dl>
 </form>
+</div>
