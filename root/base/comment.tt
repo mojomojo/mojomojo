@@ -1,5 +1,5 @@
 [% IF c.action.reverse == 'pageadmin/edit' || c.action.reverse == 'jsrpc/render'%]
-[comments disabled for preview]
+[[%loc('comments disabled for preview')%]]
 [% ELSE %]
 [%c.action.reverse%]
 [%IF comments %]
@@ -9,9 +9,9 @@
 <dl>
 <dt>poster</dt>
 <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
-<dt>posted</dt>
+<dt>[%loc('posted')%]</dt>
 <dd>[%comment.posted.ymd%] [%comment.posted.hms%]</dd>
-<dt>comment: 
+<dt>[%loc('comment')%]: 
 [%IF user.can_edit(page.path)%]
 [<b class="remove" <a href="[%c.uri_for('comment','remove',comment.id)%]">&times;</a></b>][%END%]</dt>
 <dd>[%comment.formatted%]</dd>
@@ -19,9 +19,9 @@
 </div>
 [%END%]
 [%ELSE%]
-<h4>No Comments posted</h4>
+<h4>[%loc('No Comments posted')%]</h4>
 [%END%]
-<p><small><a href="#" class="toggleInfo" id="commentlink">add a comment</a></small></p>
+<p><small><a href="#" class="toggleInfo" id="commentlink">[%loc('add a comment')%]</a></small></p>
 <div id="hidden_info"  class="framedpopup">
 [% IF user %]
 [%PROCESS comment/post.tt%]

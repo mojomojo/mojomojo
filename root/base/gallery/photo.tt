@@ -4,7 +4,7 @@
  [% c.pref("name") || "MojoMojo" %]
 [% ELSE %]
  [% c.expand_wikiword(page.name_orig) %]
-[% END %] gallery -
+[% END %] [%loc('gallery')%] -
 [%photo.title%]
 [%IF tag %]
 (<a href="[%c.uri_for('gallery/by_tag',tag)%]">[%tag%]</a>)[%END%]
@@ -29,10 +29,10 @@
 [%END%]
 </div>
 <div class="photo">
-<a href="[%c.uri_for('attachment',photo.id)%]" title="Click for hi-res version"
+<a href="[%c.uri_for('attachment',photo.id)%]" title="[%loc('Click for original version')%]"
 ><img width="700" src="[%c.uri_for('attachment',photo.id,'inline')%]"></a>
 </div>
-<p id="description" >[%photo.description||"no description"%]<p>
+<p id="description" >[%photo.description||loc('no description')%]<p>
 <script language="JavaScript">
 [% IF c.user.obj.can_edit(page) # FIXME: inline editing needs to be formatted same as viewing the element.%]
 $('#title').editInPlace({ url: '[%c.uri_for('gallery/title',photo.id)%]'});

@@ -23,10 +23,16 @@ $( function() {
             $('#taginput').attr('value','')
         }
     })
+    $('#commentlogin').ajaxForm({
+        target: '#commentLogin',
+    });
+    $('#commentForm').ajaxForm({
+        target: '#comments'
+    })
     $('.tagaction').livequery('click', function() {
        $('#tags').load($(this).attr('href') );
        return false;
-    }) 
+    });
     $('.diff_link').click(function() {
         target=$(this).parents('.item').find('.diff');
         if (!target.html()) {
@@ -34,7 +40,7 @@ $( function() {
         } 
         target.toggle();
         return false;
-    })
+    });
    $('.image img').hover(function() {
         var info_url=$(this).parent().attr('href').replace(/.photo\//,'.jsrpc/imginfo/');
         $('#imageinfo').load(info_url)
