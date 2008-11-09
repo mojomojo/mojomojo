@@ -42,6 +42,7 @@ $( function() {
     $('#plain_upload').after('<a href="#" id="do_upload">Choose attachments</a>').hide()
 
 	$('#do_upload').each(function() {
+	    try {
 	    uploader=new SWFUpload({
     		flash_url : '/.static/flash/swfupload_f9.swf',
     		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
@@ -72,7 +73,11 @@ $( function() {
     		  $('#attachments').load($('#list_link').attr('href'))  
     		},
     		debug: false,
-    	})	
+    	})
+	    } 
+	    catch(ex) {
+	        $('#plain_upload').show()
+	    }
 	}).click(function() { uploader.selectFiles() })
 	$('.delete_attachment').click(function(){
 	    link=$(this)
