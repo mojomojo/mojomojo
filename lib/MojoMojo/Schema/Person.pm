@@ -3,6 +3,8 @@ package MojoMojo::Schema::Person;
 use strict;
 use warnings;
 
+use Digest::SHA1;
+
 use base 'DBIx::Class';
 
 __PACKAGE__->load_components(
@@ -185,5 +187,11 @@ sub user_free : ResultSet {
     my $user = $class->result_source->resultset->get_user($login);
     return ( $user ? 0 : 1 );
 }
+
+sub hashed {
+    my ($self,$secret)=@_;
+    return Digest::SHA1::sha1_hex($self->id.$secret);
+}
+
 
 1;

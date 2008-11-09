@@ -1,3 +1,4 @@
+var uploader;
 $( function() {
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })
     
@@ -37,7 +38,49 @@ $( function() {
    $('.image img').hover(function() {
         var info_url=$(this).parent().attr('href').replace(/.photo\//,'.jsrpc/imginfo/');
         $('#imageinfo').load(info_url)
-    },function() { t})    
+    },function() {})
+    $('#plain_upload').after('<a href="#" id="do_upload">Choose attachments</a>').hide()
+
+	$('#do_upload').each(function() {
+	    uploader=new SWFUpload({
+    		flash_url : '/.static/flash/swfupload_f9.swf',
+    		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
+    		file_size_limit : "100 MB",
+            file_post_name: 'file' ,
+    		file_types : "*",
+    		file_types_description : "Any files",
+    		file_dialog_complete_handler : function(numFilesSelected, numFilesQueued) {
+    		    this.startUpload();
+    		},
+    		upload_start_handler : function(file) {
+                $('#progress').width('0')
+                $('#progress_status').html(file.name+' 0% done');
+                $('#progressbar').show();$('#progress_status').show();
+    		    return true;
+    		},
+    		upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
+            	try {
+            		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100)+'%';
+                    $('#progress').width(percent)
+                    $('#progress_status').html(file.name+' '+percent+' done')
+            	} catch (ex) {
+            		this.debug(ex);
+            	}		    
+    		},
+    		queue_complete_handler : function(numfiles) {
+      		  $('#progressbar').hide();$('#progress_status').hide();
+    		  $('#attachments').load($('#list_link').attr('href'))  
+    		},
+    		debug: false,
+    	})	
+	}).click(function() { uploader.selectFiles() })
+	$('.delete_attachment').click(function(){
+	    link=$(this)
+	    $.post(link.attr('href'),function(){
+	        link.parents('p').remove();
+	    })
+	    return false;
+	})
 })
 
 var fetch_preview = function() {

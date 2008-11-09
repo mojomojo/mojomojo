@@ -1,7 +1,6 @@
 package MojoMojo::Controller::Attachment;
 
 use strict;
-use Data::Dumper;
 use base 'Catalyst::Controller';
 
 use IO::File;
@@ -64,6 +63,23 @@ sub attachments : Global {
             unless $c->stash->{template} eq 'message.tt';
     }
 
+}
+
+sub flash_upload : Local {
+    my ( $self, $c ) = @_;
+    my $user=$c->model('DBIC::Person')->find($c->req->params->{id});
+    $c->detach('/default') unless( $user->hashed($c->pref('entropy')) eq $c->req->params->{verify} );
+    $c->forward('attachments');
+    if ($c->res->redirect) {
+        $c->res->redirect(undef,200);
+        return $c->res->body('1');
+    }
+    $c->res->body('0');
+}
+
+sub list : Local {
+    my ( $self, $c ) = @_;
+    $c->stash->{template}='attachments/list.tt';
 }
 
 =head2 default

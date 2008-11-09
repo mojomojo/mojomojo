@@ -1,0 +1,12 @@
+[% FOR attachment IN page.attachments %]
+<p class="attachment">
+    <small>[%attachment.name%] ([%attachment.contenttype%]) |
+     [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
+	   <a href="[%c.uri_for('attachment',attachment.id,'view')%]">view</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'inline')%]">inline</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'download')%]">download</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'insert')%]">insert</a> |
+	   <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">delete</a> |
+    </small>
+</p>
+[% END %]

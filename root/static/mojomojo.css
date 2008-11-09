@@ -1080,3 +1080,22 @@ div#bottomnav { clear:both; }
 
 #revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
 
+.attachment {
+    background: #eee; 
+    padding: 3px;
+    border: 1px solid silver;
+    width:640px
+}
+
+#progressbar {
+    display:none;
+	height: 18px;
+	background-color: grey;
+	margin: 10px 0;
+}
+#progressbar #progress {
+	width: 0%;
+	height: 18px;
+	background-color: white;
+	color: black;
+}
