@@ -24,7 +24,6 @@ requires (
         'Catalyst::Plugin::Static::Simple'              => '0.07',
         'Catalyst::Plugin::SubRequest'                  => '0.09',
         'Catalyst::Plugin::Unicode'                     => '0.8',
-        'Catalyst::Plugin::UploadProgress'              => 0,
         'Catalyst::View::TT'                            => '0.23',
         'Cache::Memory'                                 => 0,
         'Config::General'                               => 0,
