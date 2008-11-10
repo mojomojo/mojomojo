@@ -1,20 +1,23 @@
  <div id="pageoptions">
   <ul>
 [% IF c.action.reverse == 'pageadmin/edit' %]
-   <li>Preview</li>
+   <li>[%loc('Preview')%]</li>
    [% IF page.content_version ; %] 
-    <li><a href="[% c.uri_for('attachments') %]">Attachments</a></li>
+    <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
    [%END%]
-   <li><a href="#" class="toggleInfo">Syntax</a></li>
-   <li><a href="[% c.uri_for('permissions') %]">Permissions</a></li> 
+   <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
+   <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li> 
 [% ELSIF c.action.reverse == 'pageadmin/permissions' %]
-   <li><a href="[% c.uri_for('edit') %]">Edit</a></li>
-   <li><a href="[% c.uri_for('attachments') %]">Attachments</a></li>
-   <li>Permissions</li> 
+   <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
+   [% IF page.content_version ; -%]
+   <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
+   [%END -%]
+   <li>[%loc('Permissions')%]</li> 
 [% ELSE -%]
-   <li><a href="[% c.uri_for('edit') %]">Edit</a></li>
-   <li>Attachments</li>
-   <li><a href="[% c.uri_for('permissions') %]">Permissions</a></li> 
+   <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
+   <li>[%loc('Attachments')%]</li>
+   <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li> 
+   <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
 [% END -%]
   </ul>
  </div>
