@@ -1,6 +1,6 @@
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
 <div id="TextileHelp">
-		<h2>Textile formatting tips (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target=>"_top">advanced</a>)</h2>
+		<h2>Textile formatting tips (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_top">advanced</a>)</h2>
 <div class="rightHandSide"> 
     <h3>Wiki words</h3>
 <p>
