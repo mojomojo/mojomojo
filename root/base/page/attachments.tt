@@ -4,12 +4,12 @@
 <form id="plain_upload" action="[%c.uri_for('attachments')%]"
     enctype="multipart/form-data" 
     method="post">
-<p>Please select a file to attach to this page. To upload multiple files, put them in a zip.<a href="[%c.uri_for('attachment/list')%]" id="list_link"></a><a href="[%c.uri_for('attachment/flash_upload',{id=>c.user.obj.id,verify=>c.user.obj.hashed(c.pref('entropy'))})%]" id="upload_link"></a></p>
+<p>[%loc('Please select a file to attach to this page. To upload multiple files, put them in a zip.')%]<a href="[%c.uri_for('attachment/list')%]" id="list_link"></a><a href="[%c.uri_for('attachment/flash_upload',{id=>c.user.obj.id,verify=>c.user.obj.hashed(c.pref('entropy'))})%]" id="upload_link"></a></p>
 <input type="file" name="file">
-<input type="submit">
+<input type="submit" name="submit" value="[%loc('Upload')%]">
 </form>
 <div id='progressbar'><div id="progress"></div></div>
 <h3 id="progress_status"></h3>
 <div id="attachments">[%PROCESS attachments/list.tt%]</div>
-<a href="[%c.uri_for('gallery')%]">View as gallery</a>
+<a href="[%c.uri_for('gallery')%]">[%loc('View as gallery')%]</a>
 [% END %]
