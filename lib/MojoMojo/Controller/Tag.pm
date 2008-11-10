@@ -6,7 +6,7 @@ use HTML::TagCloud;
 
 =head1 NAME
 
-MojoMojo::Controller::Attachment - Attachment controller
+MojoMojo::Controller::Tag - Tags controller
 
 =head1 SYNOPSIS
 
