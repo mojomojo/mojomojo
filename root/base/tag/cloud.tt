@@ -6,7 +6,7 @@
 
 [% IF page.depth %]
     <p>
-        Or you can check out <a href="[% c.uri_for('tags') %]">All tags</a> instead
+        Or you can check out <a href="[% c.uri_for('/.tags') %]">All tags</a> instead
     </p>
 [% END %]
 
