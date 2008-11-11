@@ -114,7 +114,7 @@ sub pages {
             include_columns => [qw/versions.version/],
             join            => [qw/versions/],
             order_by        => ['me.name'],
-            distinc         => 1,
+            distinct        => 1,
 
             #having   => { 'versions.version' => \'=MAX(versions.version)' },
         }
