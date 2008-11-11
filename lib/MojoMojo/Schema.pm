@@ -87,10 +87,10 @@ Check out our [[Help]] section.', 'released', 1, 1, '', '', '', ''
             [
                 2, 1, $people[1]->id, 0, 'h1. Help Index.
 
- * Editing Pages
- * Formatter Syntax.
- * Using Tags
- * Attachments & Photos', 'released', 1, 1, '', '', '', ''
+h2. Editing Pages
+h2. Formatter Syntax.
+h2. Using Tags
+h2. Attachments & Photos', 'released', 1, 1, '', '', '', ''
             ],
             [
                 3, 1, $people[1]->id, 0, 'h1. Admin User.
