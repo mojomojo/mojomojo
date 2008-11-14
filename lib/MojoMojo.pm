@@ -431,6 +431,8 @@ sub check_permissions {
     return \%perms;
 }
 
+MojoMojo->config->{index_dir}||=MojoMojo->path_to('index');
+MojoMojo->config->{attachment_dir}||=MojoMojo->path_to('uploads');
 unless (-e MojoMojo->config->{index_dir}) {
     mkdir(MojoMojo->config->{index_dir}) || die 'Could not make index directory <'.MojoMojo->config->{index_dir}.'>';
 }
