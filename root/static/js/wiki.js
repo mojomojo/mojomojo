@@ -72,7 +72,7 @@ $( function() {
       		  $('#progressbar').hide();$('#progress_status').hide();
     		  $('#attachments').load($('#list_link').attr('href'))  
     		},
-    		debug: false,
+    		debug: false
     	})
 	    } 
 	    catch(ex) {
@@ -163,17 +163,16 @@ function encodeAjax (str) {
 
 // apply tagOpen/tagClose to selection in textarea,
 // use sampleText instead of selection if there is none
-//
-// copied and adapted from wikipedia, who
-// copied and adapted from phpBB
 
 function insertTags(txtarea,tagOpen, tagClose, sampleText) {
 
-    txtarea = $(txtarea);
-    // IE
-    if(document.selection ) {
-        var theSelection = document.selection.createRange().text;
-        if(!theSelection) { theSelection=sampleText;}
+    txtarea = document.getElementById(txtarea);
+    var theSelection;
+    
+    // IE / Opera
+    if(document.selection  && document.selection.createRange) {
+        theSelection = document.selection.createRange().text;
+        if(!theSelection){ theSelection = sampleText; }
         txtarea.focus();
         if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
             theSelection = theSelection.substring(0, theSelection.length - 1);
@@ -182,30 +181,30 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
             document.selection.createRange().text = tagOpen + theSelection + tagClose;
         }
 
-        // DOM
-    } else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+    // FireFox / Safari / Konqueror
+    } else if (txtarea.selectionStart || txtarea.selectionStart == '0') { // Mozilla
         var startPos = txtarea.selectionStart;
         var endPos = txtarea.selectionEnd;
         var scrollTop=txtarea.scrollTop;
-        var myText = (txtarea.value).substring(startPos, endPos);
-        if(!myText) { myText=sampleText;}
-        if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-            subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " ";
+        theSelection = txtarea.value.substring(startPos, endPos);
+        if(!theSelection){ theSelection = sampleText; }
+        if(theSelection.charAt(theSelection.length - 1) == " "){ // exclude ending space char, if any
+            subst = tagOpen + theSelection.substring(0, (theSelection.length - 1)) + tagClose + " ";
         } else {
-            subst = tagOpen + myText + tagClose;
+            subst = tagOpen + theSelection + tagClose;
         }
         txtarea.value = txtarea.value.substring(0, startPos) + subst +
         txtarea.value.substring(endPos, txtarea.value.length);
         txtarea.focus();
 
-        var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+        var cPos=startPos+(tagOpen.length+theSelection.length+tagClose.length);
         txtarea.selectionStart=cPos;
         txtarea.selectionEnd=cPos;
         txtarea.scrollTop=scrollTop;
 
-        // All others
+        // All others ... such as?
     } else {
-        var copy_alertText=alertText;
+        var copy_alertText=sampleText;
         var re1=new RegExp("\\$1","g");
         var re2=new RegExp("\\$2","g");
         copy_alertText=copy_alertText.replace(re1,sampleText);
@@ -227,6 +226,7 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
     }
     // reposition cursor if possible
     if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+    return false;
 }
 
 // Based on http://www.germanforblack.com/javascript-sleeping-keypress-delays-and-bashing-bad-articles

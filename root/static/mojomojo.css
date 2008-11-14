@@ -22,7 +22,7 @@ body {
 }
 
 #header {
-    background: url(gfx/header.png) White;
+    background: url(gfx/header.png);
     height: auto;
     padding-bottom: 0.1em;
     margin: 0;

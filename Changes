@@ -1,5 +1,6 @@
 0.999022  2008-11-14 17:28:00
         - Fix validation check (sachinjsk)
+        - Fix javascript toolbar
         - Fix various Pg specific issues
         - Change to use flash uploader.
         - Update search not to cache objects
