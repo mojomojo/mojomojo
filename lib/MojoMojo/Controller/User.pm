@@ -259,7 +259,7 @@ earlier. Non-validated users will only be able to log out.
 sub validate : Global {
     my ( $self, $c, $user, $check ) = @_;
     $user = $c->model("DBIC::Person")->find( { login => $user } );
-    if ( $user and $check = md5_hex( $user->email . $c->pref('entropy') ) ) {
+    if ( $user and $check eq md5_hex( $user->email . $c->pref('entropy') ) ) {
         $user->active(1);
         $user->update();
         if ( $c->stash->{user} ) {
