@@ -1,3 +1,4 @@
+        - Fix javascript toolbar
         - Fix various Pg specific issues
         - Change to use flash uploader.
         - Update search not to cache objects
