@@ -71,7 +71,7 @@ sub update : Local {
     my @users = split( m/\s+/, $c->form->valid('admins') );
     foreach my $user (@users) {
         unless ( $c->model("DBIC::Person")->get_user($user) ) {
-            $c->stash->{message} = 'Cant find admin user: ' . $user;
+            $c->stash->{message} = "Can't find admin user: " . $user;
             return;
         }
     }

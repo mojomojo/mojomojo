@@ -636,7 +636,7 @@ table.recent {
 }
 table.recent .page          { width:50%; }
 table.recent .editedBy      { width:20%; }
-table.recent .dateEdited    { width:20%; }
+table.recent .timeEdited    { width:20%; }
 table.recent .actions       { width:10%; }
 
 /* @end */

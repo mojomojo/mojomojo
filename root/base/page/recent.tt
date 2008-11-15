@@ -34,7 +34,7 @@
                 <tr>
                     <th class="page">Page</th>
                     <th class="editedBy">Edited by</th>
-                    <th class="dateEdited">Date edited</th>
+                    <th class="timeEdited">Time edited</th>
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
