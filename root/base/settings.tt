@@ -5,6 +5,7 @@
 <a accesskey="B" href="[%c.uri_for('view')%]">back</a> </div>
  <div id="content">
  <h1>Site Configuration</h1>
+[% form %]
 <form id="adminform" action="[%c.uri_for('/.admin/update')%]" method="post">
  <dl>
   <dt>Name:</dt>

@@ -2,7 +2,7 @@ package MojoMojo::Controller::PageAdmin;
 
 use strict;
 use Data::Dumper;
-use base 'Catalyst::Controller';
+use base 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 
@@ -48,10 +48,11 @@ after saving, it will forward to the highlight action.
 
 =cut
 
-sub edit : Global {
+sub edit : Global FormConfig {
     my ( $self, $c, $path ) = @_;
 
     # Set up the basics. Log in if there's a user.
+    my $form=$c->stash->{form};
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
@@ -68,7 +69,7 @@ sub edit : Global {
     # the page we're editing is at the end of either path_pages or
     # proto_pages, # depending on whether or not the page already exists
     my $page = (
-          @$proto_pages > 0
+        @$proto_pages > 0
         ? $proto_pages->[ @$proto_pages - 1 ]
         : $path_pages->[ @$path_pages - 1 ]
     );
@@ -77,12 +78,6 @@ sub edit : Global {
     die "Cannot determine what page to edit for path: $path" unless $page;
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
-    $c->form(
-
-        # may need to add more required fields...
-        required => [qw/body/],
-        defaults => { creator => $user, }
-    );
 
     my $perms =
         $c->check_permissions( $stash->{'path'}, ( $c->user_exists ? $c->user->obj : undef ) );
@@ -93,10 +88,38 @@ sub edit : Global {
         $stash->{'template'} = 'message.tt';
         return;
     }
+    if ( $user == 1 && !$c->pref('anonymous_user') ) {
+        $c->stash->{message} ||= 'Anonymous Edit disabled';
+        return;
+    }
 
-    # if we have missing or invalid fields, display the edit form.
-    # this will always happen on the initial request
-    if ( $c->form->has_missing || $c->form->has_invalid ) {
+    if ( $form->submitted_and_valid ) {
+
+        my $valid = $form->params;
+        $valid->{creator} = $user;
+
+        if (@$proto_pages) {   # page doesn't exist yet
+            
+            $path_pages = $c->model('DBIC::Page')->create_path_pages(
+                    path_pages  => $path_pages,
+                    proto_pages => $proto_pages,
+                    creator     => $user,
+            );
+            $page = $path_pages->[ @$path_pages - 1 ];
+        }
+        $c->model("DBIC::Page")->set_paths(@$path_pages);
+        $page->update_content( %$valid );
+
+        # update the search index with the new content
+        $c->model("DBIC::Page")->set_paths($page);
+        $c->model('Search')->index_page($page) unless $c->pref('disable_search');
+        $page->content->store_links();
+
+        $c->res->redirect( $c->uri_for( $c->stash->{path}) );   
+    }
+    else {
+        # if we have missing or invalid fields, display the edit form.
+        # this will always happen on the initial request
         $stash->{page} = $page;
 
         # Note that this isn't a real Content object, just a proto object!!!
@@ -104,40 +127,9 @@ sub edit : Global {
         $stash->{content}            = $c->model("DBIC::Content")->create_proto($page);
         $stash->{content}->{creator} = $user;
         $c->req->params->{body}      = $stash->{content}->{body}
-            unless $c->req->params->{body};
+        unless $c->req->params->{body};
         return;
     }
-
-    if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= 'Anonymous Edit disabled';
-        return;
-    }
-
-    # else, update the page and redirect to highlight, which will forward to view:
-    my $valid = $c->form->valid;
-    $valid->{creator} = $user;
-    my $unknown = $c->form->unknown;
-
-    if (@$proto_pages)    # page doesn't exist yet
-    {
-        $path_pages = $c->model('DBIC::Page')->create_path_pages(
-            path_pages  => $path_pages,
-            proto_pages => $proto_pages,
-            creator     => $user,
-        );
-        $page = $path_pages->[ @$path_pages - 1 ];
-    }
-    $c->model("DBIC::Page")->set_paths(@$path_pages);
-    $page->update_content( %$valid, %$unknown );
-
-    # update the search index with the new content
-    # FIXME: Disabling search engine for now.
-    $c->model("DBIC::Page")->set_paths($page);
-    $c->model('Search')->index_page($page) unless $c->pref('disable_search');
-    $page->content->store_links();
-
-    $c->res->redirect( $c->uri_for( $c->stash->{path}) );
-
 }    # end sub edit
 
 =head2 rollback

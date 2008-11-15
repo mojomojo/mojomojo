@@ -16,8 +16,6 @@ requires (
         'Catalyst::Plugin::Cache::Store::Memory'        => 0,
         'Catalyst::Plugin::Email'                       => 0,
         'Catalyst::Plugin::ConfigLoader'                => '0.13',
-        'Catalyst::Plugin::FillInForm'                  => '0.04',
-        'Catalyst::Plugin::FormValidator'               => '0.02',
         'Catalyst::Plugin::Session::Store::File'        => 0,
         'Catalyst::Plugin::Session::State::Cookie'      => 0,
         'Catalyst::Plugin::Singleton'                   => '0.02',
