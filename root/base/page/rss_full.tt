@@ -9,8 +9,8 @@
 	<ttl>40</ttl>
 [%FOREACH page IN pages %]
     <item>
-      <title>[% request.expand_wikiword(page.path) %]</title>
-      <description><![CDATA[[% page.content.formatted(c) %]]</description>    
+      <title>[% c.expand_wikiword( page.name_orig ) %]</title>
+      <description><![CDATA[[% page.content.formatted(c) %]]]></description>    
       <pubDate>[% page.content.pub_date%]</pubDate>
       <guid>[% c.uri_for(page.path) %]</guid>
       <link>[% c.uri_for(page.path) %]</link>
