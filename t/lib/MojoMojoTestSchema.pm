@@ -69,7 +69,7 @@ sub init_schema {
 	name => 'MojoMojo Test Suite',
 	'Model::DBIC' => {
 	    connect_info => [ $dsn ],
-	    authentication => {
+	},    authentication => {
             default_realm=> 'members',
             use_session => 1,
             realms => {
@@ -78,11 +78,11 @@ sub init_schema {
                         class=> 'Password',
                         password_field=> 'pass',
                         password_type=> 'hashed',
-                        password_hash_type=> ' SHA-1',
+                        password_hash_type=> 'SHA-1'},
                     store => {
                         class=> 'DBIx::Class',
                         user_class=> 'DBIC::Person',
-        }   }   }   }   }   }
+        }   }   }   }
     };
     YAML::DumpFile('t/var/mojomojo.yml',$config);
     

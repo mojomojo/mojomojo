@@ -1,8 +1,9 @@
 use Test::More tests => 2;
+use lib qw(t/lib);
+use MojoMojoTestSchema;
 $ENV{CATALYST_DEBUG}=0;
 $ENV{CATALYST_CONFIG}='t/var/mojomojo.yml';
+MojoMojoTestSchema->init_schema(no_populate => 0), 'created a test schema object'
+  unless -f 't/var/mojomojo.db';
 use_ok( Catalyst::Test, 'MojoMojo' );
-
-do MojoMojo->path_to('script','mojomojo_spawn_db.pl') 
-  unless -f MojoMojo->path_to('t/var/mojomojo.db');
 ok( request('/')->is_success );
