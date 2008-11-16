@@ -4,11 +4,17 @@ use base qw/MojoMojo::Formatter/;
 
 =head1 NAME
 
-MojoMojo::Formatter::Comment - Include comments on your page.
+MojoMojo::Formatter::Redirect - Handles =redirect /path.
 
 =head1 DESCRIPTION
 
-Include files verbatim in your content, by writing =<url>.
+Redirect to another page. Useful if your URL changes and
+you want to make sure bookmarked URLs will still work:
+C</help/tutrial> could contain:
+C<=redirect /help/tutorial>
+
+To edit a page that redirects, surf to $page_URL . '.edit'
+See also http://mojomojo.ideascale.com/akira/dtd/6415-2416
 
 =head1 METHODS
 
@@ -16,7 +22,7 @@ Include files verbatim in your content, by writing =<url>.
 
 =item format_content_order
 
-Format order can be 1-99. The Comment formatter runs on 91
+Format order can be 1-99. The Redirect formatter is first.
 
 =cut
 
@@ -36,24 +42,6 @@ sub format_content {
         $c->res->redirect( $c->uri_for($page) )
             if $c->action->name eq 'view' && !$c->ajax;
     }
-}
-
-=item include <c> <url>
-
-returns the content of url. Will store a cached version in 
-$c->cache
-
-=cut
-
-sub include {
-    my ( $class, $c, $url ) = @_;
-    $url = URI->new($url);
-    return "$url is not a valid url." unless $url;
-    my $rel = $url->rel( $c->req->base );
-    return "$url is part of own site, cannot include." unless $rel->scheme;
-    my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
-    return $res->content if defined $res;
-    return "Could not  retrieve $url.\n";
 }
 
 =back

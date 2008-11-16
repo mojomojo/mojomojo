@@ -7,7 +7,7 @@ use URI::Fetch;
 
 =head1 NAME
 
-MojoMojo::Formatter::Comment - Include comments on your page.
+MojoMojo::Formatter::Include - Include files in your content.
 
 =head1 DESCRIPTION
 
@@ -19,7 +19,7 @@ Include files verbatim in your content, by writing =<url>.
 
 =item format_content_order
 
-Format order can be 1-99. The Comment formatter runs on 91
+Format order can be 1-99. The Include formatter runs on 6
 
 =cut
 
@@ -49,7 +49,7 @@ sub format_content {
 
 =item include <c> <url>
 
-returns the content of url. Will store a cached version in 
+returns the content of url. Will store a cached version in
 $c->cache
 
 =cut

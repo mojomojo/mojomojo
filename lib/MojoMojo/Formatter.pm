@@ -42,11 +42,11 @@ for the default plugins is currently as follows:
 
 =item 7  - L<MojoMojo::Formatter::Scrub> - Removes harmful HTML
 
+=item 10 - L<MojoMojo::Formatter::Pod> - handles =pod ... =pod blocks
+
 =item 14 - L<MojoMojo::Formater::IRCLog> - handles =irc ... =irc blocks
 
 =item 15 - Main formatter (either L<MojoMojo::Formatter::Textile> or L<MojoMojo::Formatter::Markdown>)
-
-=item 10 - L<MojoMojo::Formatter::Pod> - handles =pod ... =pod blocks
 
 =item 30 - L<MojoMojo::Formatter::Wiki> - Handles [[wikiwords]]
 
