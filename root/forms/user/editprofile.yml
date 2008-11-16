@@ -11,6 +11,10 @@ elements:
   - type: Date
     name: born
     label: Birth Date
+    auto_inflate: 1
+    year:
+      less: 70 
+      plus: 0
   - type: Select
     name: gender
     label: Gender
