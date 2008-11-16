@@ -1,0 +1,7 @@
+blib/*
+inc/*
+index/*
+uploads/*
+Makefile
+META.yml
+pm_to_blib

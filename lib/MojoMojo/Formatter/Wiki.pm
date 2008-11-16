@@ -13,8 +13,8 @@ MojoMojo::Formatter::Wiki - Handle interpage linking.
 This formatter handles Wiki links using the [[explicit]] and
 ImplicitLink syntax. It will also indicate missing links with 
 a question mark and a link to the edit page. In explicit mode, 
-you can prefix the wikiword with an namespace, just like in a
-normal url. For example: [[../marcus]] or [[/oslo/vacation]].
+you can prefix the wikiword with a path, just like in a
+normal URL. For example: [[../marcus]] or [[/oslo/vacation]].
 
 =head1 METHODS
 

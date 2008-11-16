@@ -63,9 +63,9 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 Mojomojo is a sort of content managment system, borrowing many concepts from
 wikis and blogs. It allows you to maintain a full tree-structure of pages, 
 and to interlink them in various ways. It has full version support, so you can
-always go back to a previous version and see what's changed with a easy ajax-
-based diff system. There are also a bunch of other features like a live AJAX
-preview of editing, and RSS feeds for every wiki page.
+always go back to a previous version and see what's changed with an easy AJAX-
+based diff system. There are also a bunch of other features like bult-in
+fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
 To find out more about how you can use MojoMojo, please visit 
 http://mojomojo.org or read the installation instructions in 

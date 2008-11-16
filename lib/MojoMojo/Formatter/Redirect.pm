@@ -22,7 +22,7 @@ See also http://mojomojo.ideascale.com/akira/dtd/6415-2416
 
 =item format_content_order
 
-Format order can be 1-99. The Redirect formatter is first.
+Format order can be 1-99. The Redirect formatter runs first.
 
 =cut
 
