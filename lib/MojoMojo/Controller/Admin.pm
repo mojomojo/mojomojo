@@ -41,28 +41,36 @@ Show settings screen.
 =cut
 
 
-sub settings : Path FormConfig {
+sub settings : Path FormConfig Args(0) {
     my ( $self, $c ) = @_;
     my $form=$c->stash->{form};
-
     my $admins = $c->pref('admins');
     my $user   = $c->stash->{user}->login;
     $admins =~ s/\b$user\b//g;
-
-    if ( $c->form->submitted_and_valid ) {
-        my @users = split( m/\s+/, $c->form->params->{admins} );
-        foreach my $user (@users) {
+    unless(  $form->submitted ) {
+        $form->default_values({
+            name              => $c->pref('name'),
+            admins            => $admins,
+            anonymous_user    => $c->pref('anonymous_user'),
+            open_registration => $c->pref('open_registration'),
+            restricted_user   => $c->pref('restricted_user'),
+        });
+        $form->process();
+    }
+    elsif ( $form->submitted_and_valid ) {
+        my @users = split( m/\s+/, $form->params->{admins} );
+        foreach $user (@users) {
             unless ( $c->model("DBIC::Person")->get_user($user) ) {
                 $c->stash->{message} = 'Cant find admin user: ' . $user;
                 return;
             }
         }
         # FIXME: Needs refactor
-        $c->pref( 'name', $c->params->{name} );
+        $c->pref( 'name', $form->params->{name} );
         $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
         $c->pref( 'open_registration', $form->params->{open_registration} );
         $c->pref( 'restricted_user', $form->params->{restricted_user} );
-        $c->pref( 'anonymous_user', $c->form->params->{anonymous_user} || '' );
+        $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
         $c->stash->{message} = "Updated successfully.";
     }
 }

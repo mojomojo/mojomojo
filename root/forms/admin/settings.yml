@@ -18,4 +18,15 @@ elements:
     name: anonymous_user
     label: Anonymous User (blank to disable)
   - type: Checkbox
-    name:
+    name: open_registration
+    label: New User Registration open
+    value: 1
+    default_empty_value: 0
+  - type: Checkbox
+    name: restricted_user
+    value: 1
+    default_empty_value: 0
+    label: Restrict user editing to home directory
+  - type: Submit
+    name: submit
+    value: Save
