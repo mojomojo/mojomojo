@@ -112,13 +112,19 @@ sub prefs : Global FormConfig {
         )
     {
         my $c->stash->{message}  = 'Cannot find that user.';
-        $c->stash->{template} = 'message.tt';
+        return $c->stash->{template} = 'message.tt';
     }
 
-    $page_user->fill_formfu_values($form);
-    if ( $form->submitted && !$form->has_errors ) {
-        $page_user->populate_from_formfu($form);
-    }
+    $form->model->default_values($page_user);
+    if ( $form->submitted_and_valid ) {
+        my $old_email=$page_user->email;
+        $form->model->update($page_user);
+        $c->stash->{message}='Updated preferences';
+        if( $form->params->{email} ne $old_email ){
+                $page_user->active(-1);
+                $page_user->update;
+                $c->forward('do_register',[$page_user]);
+        }    }
 }
 
 =item password (/prefs/password')
@@ -207,10 +213,10 @@ sub register : Global FormConfig {
     $c->stash->{user} = $c->model('DBIC::Person')->new_result( {} );
     $c->stash->{template}  = 'user/register.tt';
 
-    $c->stash->{user}->fill_formfu_values($form);
-    if ( $form->submitted && !$form->has_errors ) {
+    $form->model->default_values($c->stash->{user});
+    if ( $form->submitted_and_valid ) {
         $c->stash->{user}->active(-1);
-        $c->stash->{user}->populate_from_formfu($form);
+        $form->model->update( $c->stash->{user} );
         $c->stash->{user}->insert();
         $c->forward( 'do_register', [$c->stash->{user}] );
 
@@ -229,7 +235,7 @@ sub do_register : Private {
     my ( $self, $c, $user ) = @_;
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref( 'entropy', rand );
-    $c->stash->{secret} = md5_hex( $c->form->valid('email') . $c->pref('entropy') );
+    $c->stash->{secret} = md5_hex( $user->email . $c->pref('entropy') );
     if (
         $c->email(
             header => [
@@ -243,7 +249,7 @@ sub do_register : Private {
     {
     }
     else {
-        $c->stash->{error} = 'An error occourred. Sorry.';
+        $c->stash->{error} = 'An error occourred with emailing your validation mail. Please try again.';
     }
     $c->stash->{user}     = $user;
     $c->stash->{template} = 'user/validate.tt';
@@ -324,7 +330,7 @@ sub profile : Global {
     }
 }
 
-sub editprofile : Global {
+sub editprofile : Global FormConfig {
     my ( $self, $c ) = @_;
     my $page = $c->stash->{page};
     my $user = $c->model('DBIC::Person')->get_user(
@@ -355,7 +361,7 @@ sub editprofile : Global {
 
 }
 
-sub do_editprofile : Global {
+sub do_editprofile : Global  {
     my ( $self, $c ) = @_;
     $c->form(
         required           => [qw(name email)],

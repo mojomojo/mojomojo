@@ -16,6 +16,11 @@ elements:
     label: Name
     filters:
        - HTMLEscape
+  - type: Text
+    name: email
+    label: Email
+    filters:
+       - HTMLEscape
     constraints:
       - Required
   - type: Submit

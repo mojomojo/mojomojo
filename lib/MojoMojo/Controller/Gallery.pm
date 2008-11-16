@@ -195,7 +195,6 @@ Ajax method for updating picture descriptions inline.
 
 sub description : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->form( required => [qw/description/] );
     my $img = $c->model("DBIC::Photo")->find($photo);
     if ( $c->req->param('update_value') ) {
         $img->description( encode_entities( $c->req->param('update_value') ) );
@@ -212,7 +211,6 @@ Ajax method for updating picture titles inline.
 
 sub title : Local {
     my ( $self, $c, $photo ) = @_;
-    $c->form( required => [qw/title/] );
     my $img = $c->model("DBIC::Photo")->find($photo);
     if ( $c->req->param('update_value') ) {
         $img->title( encode_entities( $c->req->param('update_value') ) );
