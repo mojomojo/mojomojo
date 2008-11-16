@@ -1,0 +1,16 @@
+---
+action: 
+id: register    
+indicator: submit
+auto_fieldset: 1
+auto_id: '%f_%n'
+
+elements:
+  - type: Text
+    name: body
+    label: Comment body
+    constraints:
+      - Required
+  - type: Submit
+    name: submit
+    value: Register
