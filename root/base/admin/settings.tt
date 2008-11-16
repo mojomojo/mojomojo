@@ -1,0 +1,12 @@
+[%PROCESS header.tt%]
+<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
+<div id="toplinks">
+<a class="navOn">configuration</a> |
+<b accesskey="U" href="[%c.uri_for('/.admin/users')%]">users</b> |
+<a accesskey="B" href="[% c.uri_for('view')%]">back</a> </div>
+
+ <div id="content">
+[% form %]
+</div>
+<div id="bottomnav">&nbsp;</div>
+[% PROCESS footer.tt %]
