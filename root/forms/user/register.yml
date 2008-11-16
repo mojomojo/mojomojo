@@ -4,7 +4,6 @@ id: register
 indicator: submit
 auto_fieldset: 1
 auto_id: '%f_%n'
-
 elements:
   - type: Text
     name: login

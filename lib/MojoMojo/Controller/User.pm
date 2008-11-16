@@ -332,6 +332,7 @@ sub profile : Global {
 
 sub editprofile : Global FormConfig {
     my ( $self, $c ) = @_;
+    my $form=$c->stash->{form};
     my $page = $c->stash->{page};
     my $user = $c->model('DBIC::Person')->get_user(
           $c->stash->{proto_pages}[-1]
@@ -345,54 +346,17 @@ sub editprofile : Global FormConfig {
             || $user->id eq $c->stash->{user}->id )
         )
     {
-        $c->stash->{person} = $user;
-
-        my $now      = DateTime->now();
-        my $curryear = $now->year();
-        $c->stash->{years}    = [ ( $curryear - 90 ) .. $curryear ];
-        $c->stash->{months}   = [ 1 .. 12 ];
-        $c->stash->{days}     = [ 1 .. 31 ];
-        $c->stash->{template} = 'user/editprofile.tt';
+        if ($form->submitted_and_valid) {
+            $form->model->update($user);
+            $c->res->redirect($c->uri_for('profile'));
+        }
+        $form->model->default_values($user) unless $form->submitted;
     }
     else {
         $c->stash->{template} = 'message.tt';
         $c->stash->{message}  = 'User not found!';
     }
 
-}
-
-sub do_editprofile : Global  {
-    my ( $self, $c ) = @_;
-    $c->form(
-        required           => [qw(name email)],
-        optional           => [ $c->model("DBIC::Person")->result_source->columns ],
-        defaults           => { gender => undef },
-        constraint_methods => { born => ymd_to_datetime(qw(birth_year birth_month birth_day)) },
-        untaint_all_constraints => 1,
-    );
-
-    if ( $c->form->has_missing ) {
-        $c->stash->{message} =
-              'You have to fill in all required fields.'
-            . 'the following are missing: <b>'
-            . join( ', ', $c->form->missing() ) . '</b>';
-    }
-    elsif ( $c->form->has_invalid ) {
-        $c->stash->{message} =
-            'Some fields are invalid. Please ' . 'correct them and try again:';
-    }
-    else {
-        my $page = $c->stash->{page};
-        my $user = $c->model('DBIC::Person')->get_user(
-              $c->stash->{proto_pages}[-1]
-            ? $c->stash->{proto_pages}[-1]->{name_orig}
-            : $page->name
-        );
-        $user->set_columns( $c->form->{valid} );
-        $user->update();
-        return $c->forward('profile');
-    }
-    $c->forward('editprofile');
 }
 
 =back
