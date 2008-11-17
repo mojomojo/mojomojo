@@ -2,7 +2,7 @@ package MojoMojo::Controller::Comment;
 
 use strict;
 
-use base 'Catalyst::Controller';
+use base 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 
@@ -24,7 +24,7 @@ display comments for embedding in a page
 
 =cut
 
-sub default : Private FormConfig {
+sub comment : Global FormConfig {
     my ( $self, $c ) = @_;
     my $form=$c->stash->{form};
     $c->stash->{template} = 'comment.tt';
