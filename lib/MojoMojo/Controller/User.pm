@@ -95,9 +95,9 @@ Main user preferences screen.
 
 =cut
 
-sub prefs : Global FormConfig {
-    my ( $self, $c ) = @_;
-    my $form =$c->stash->{form};
+
+sub page_user :Private {
+    my ($self,$c)=@_;
     my $user = $c->stash->{user};
     $c->stash->{template} = 'user/prefs.tt';
     my @proto = @{ $c->stash->{proto_pages} };
@@ -112,10 +112,18 @@ sub prefs : Global FormConfig {
         )
     {
         my $c->stash->{message}  = 'Cannot find that user.';
-        return $c->stash->{template} = 'message.tt';
+        $c->stash->{template} = 'message.tt';
+        $c->detach('/default');
     }
+    $c->stash->{page_user}=$page_user;
+}
 
-    $form->model->default_values($page_user);
+sub prefs : Global FormConfig {
+    my ( $self, $c ) = @_;
+    my $form =$c->stash->{form};
+    $c->forward('page_user');
+    my $page_user = $c->stash->{page_user};
+    $form->model->default_values($c->stash->{user});
     if ( $form->submitted_and_valid ) {
         my $old_email=$page_user->email;
         $form->model->update($page_user);
@@ -135,26 +143,21 @@ B<template:> user/password.tt
 
 =cut
 
-sub password : Path('/prefs/password') {
+sub password : Path('/prefs/password') FormConfig {
     my ( $self, $c ) = @_;
-    $c->forward('prefs');
-    return if $c->stash->{message};
-    $c->stash->{template} = 'user/password.tt';
-    $c->form( required => [qw/current pass again/] );
-    unless ( $c->form->has_missing || $c->form->has_invalid ) {
-        if ( $c->form->valid('again') ne $c->form->valid('pass') ) {
-            $c->stash->{message} = 'Passwords did not match.';
-            return;
-        }
-        unless ( $c->stash->{user}->valid_pass( $c->form->valid('current') ) ) {
+    $c->forward('page_user');
+    my $page_user = $c->stash->{page_user};
+    my $form=$c->stash->{form};
+    if ( $form->submitted_and_valid) {
+        # FIXME: Should be moved into a formfu validator
+        unless ( $page_user->valid_pass( $form->params->{current} ) ) {
             $c->stash->{message} = 'Invalid password.';
             return;
         }
-        $c->stash->{user}->pass( $c->form->valid('pass') );
-        $c->stash->{user}->update();
+        $page_user->pass( $form->params->{pass} );
+        $page_user->update();
         $c->stash->{message} = 'Your password has been updated';
     }
-    $c->stash->{message} ||= 'Please fill out all fields!';
 }
 
 sub recover_pass : Global {
