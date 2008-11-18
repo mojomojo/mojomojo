@@ -7,6 +7,9 @@ use Digest::SHA1;
 
 use base 'DBIx::Class';
 
+use Text::Textile;
+my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
+
 __PACKAGE__->load_components(
     qw/DateTime::Epoch EncodedColumn ResultSetManager PK::Auto Core HTML::FormFu/);
 __PACKAGE__->table("person");
@@ -193,5 +196,15 @@ sub hashed {
     return Digest::SHA1::sha1_hex($self->id.$secret);
 }
 
+sub interests_formatted { $textile->process(shift->interests); }
+sub music_formatted { $textile->process(shift->music); }
+sub movies_formatted { $textile->process(shift->movies); }
+
+sub age {
+    my $self=shift;
+    my $birthdate=$self->born;
+    my $diff=DateTime->now-$birthdate;
+    return $diff->years;
+}
 
 1;

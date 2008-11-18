@@ -8,7 +8,6 @@ use Catalyst qw/    ConfigLoader
     Authentication
     Cache               Email
     Cache::Store::Memory
-    FillInForm	        FormValidator
     Session		        Session::Store::File
     Singleton           Session::State::Cookie
     Static::Simple	    SubRequest

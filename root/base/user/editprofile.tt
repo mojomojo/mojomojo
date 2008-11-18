@@ -6,61 +6,8 @@
 [% PROCESS navbar.tt %]
 <div id="content">
 	<h3>[%message%]</h3>
-	<form action="[% c.uri_for('do_editprofile')%]" method="post">
-		<dl class="form">
-			<dt>Name:</dt>
-			<dd id="name"><input type="text" name="name" value="[%user.name%]"/></dd>
-			<dt>Email:</dt>
-			<dd id="email">
-				[% IF user.admin || user.id == person.id  %]
-				<input type="text" name="email" value="[%person.email%]"/>
-				[% ELSE %]
-				(private)
-				[% END %]
-			</dd>
-			<dt>Birth Date:</dt>
-			<dd>
-				<select name="birth_year">
-					[% FOREACH year IN years %]
-					<option [% IF year == person.born.year %]selected="selected" [% END %] 
-        			value="[%year%]">[%year%]</option>
-					[% END%]
-				</select>
-				<select name="birth_month">
-					[% FOREACH month IN months %]
-					<option [% IF month == person.born.month %] selected="selected" [% END %] 
-    				value="[%month%]">[%month%]</option>
-					[% END%]
-				</select>
-				<select name="birth_day">
-					[% FOREACH day IN days %]
-					<option [% IF day == person.born.day %]selected="selected" [% END %] 
-					value="[%day %]">[%day%]</option>
-					[% END%]
-				</select>
-			</dd>
-			<dt>Gender:</dt>
-			<dd>
-				<select name="gender">
-					<option value="">Not specified</option>
-					<option [% IF person.gender=="M" %]selected="selected"[% END %] 
-    				value="M">Male</option>
-					<option [% IF person.gender=="F" %]selected="selected"[% END %] 
-    				value="F">Female</option>
-				</select>
-			</dd>
-			<dt>Industry:</dt>
-			<dd><input type="text" name="industry" value="[% person.industry %]"/></dd>
-			<dt>Interests:</dt>
-			<dd><textarea rows="3" cols="30" name="interests">[%person.interests%]</textarea></dd>
-			<dt>Favorite Albums:</dt>
-			<dd><textarea rows="3" cols="30" name="music">[%person.music%]</textarea></dd>
-			<dt>Favorite Movies:</dt>
-			<dd><textarea rows="3" cols="30" name="movies">[%person.movies%]</textarea></dd>
-		</dl>
-		<p><em>Please separate entries above with commas</em></p>
-		<input type="submit" value="Save"/>
-	</form>
+[% form %]
+
 </div>
 <div id="bottomnav">&nbsp;</div>
 [%PROCESS footer.tt %]

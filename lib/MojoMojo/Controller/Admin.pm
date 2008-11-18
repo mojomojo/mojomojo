@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Admin;
 
 use strict;
-use base 'Catalyst::Controller';
+use base 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 
@@ -40,60 +40,39 @@ Show settings screen.
 
 =cut
 
-sub default : Private {
+
+sub settings : Path FormConfig Args(0) {
     my ( $self, $c ) = @_;
+    my $form=$c->stash->{form};
     my $admins = $c->pref('admins');
     my $user   = $c->stash->{user}->login;
     $admins =~ s/\b$user\b//g;
-    $c->stash->{template}       = 'settings.tt';
-    $c->stash->{admins}         = $admins;
-    $c->stash->{anonymous_user} = $c->pref('anonymous_user');
-}
-
-=item update ( .admin/update )
-
-Update system settings.
-
-=cut
-
-sub update : Local {
-    my ( $self, $c ) = @_;
-    $c->stash->{template} = 'settings.tt';
-    $c->form(
-        required => [qw/name/],
-        optional => [qw/admins anonymous_user registration restricted/]
-    );
-    if ( $c->form->has_missing ) {
-        $c->stash->{message} =
-            "Can't update, missing fields:" . join( ', ', $c->form->missing() ) . '</b>';
-        return;
+    unless(  $form->submitted ) {
+        $form->default_values({
+            name              => $c->pref('name'),
+            admins            => $admins,
+            anonymous_user    => $c->pref('anonymous_user'),
+            open_registration => $c->pref('open_registration'),
+            restricted_user   => $c->pref('restricted_user'),
+        });
+        $form->process();
     }
-    my @users = split( m/\s+/, $c->form->valid('admins') );
-    foreach my $user (@users) {
-        unless ( $c->model("DBIC::Person")->get_user($user) ) {
-            $c->stash->{message} = "Can't find admin user: " . $user;
-            return;
+    elsif ( $form->submitted_and_valid ) {
+        my @users = split( m/\s+/, $form->params->{admins} );
+        foreach $user (@users) {
+            unless ( $c->model("DBIC::Person")->get_user($user) ) {
+                $c->stash->{message} = 'Cant find admin user: ' . $user;
+                return;
+            }
         }
+        # FIXME: Needs refactor
+        $c->pref( 'name', $form->params->{name} );
+        $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
+        $c->pref( 'open_registration', $form->params->{open_registration} );
+        $c->pref( 'restricted_user', $form->params->{restricted_user} );
+        $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
+        $c->stash->{message} = "Updated successfully.";
     }
-
-    # FIXME: Needs refactor
-    if ( $c->form->valid('registration') ) {
-        $c->pref( 'open_registration', 1 );
-    }
-    else {
-        $c->pref( 'open_registration', 0 );
-    }
-    if ( $c->form->valid('restricted') ) {
-        $c->pref( 'restricted_user', 1 );
-    }
-    else {
-        $c->pref( 'restricted_user', 0 );
-    }
-    $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
-    $c->pref( 'name', $c->form->valid('name') );
-    $c->pref( 'anonymous_user', $c->form->valid('anonymous_user') || '' );
-
-    $c->stash->{message} = "Updated successfully.";
 }
 
 =item user ( .admin/user )

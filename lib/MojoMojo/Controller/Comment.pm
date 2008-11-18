@@ -2,7 +2,7 @@ package MojoMojo::Controller::Comment;
 
 use strict;
 
-use base 'Catalyst::Controller';
+use base 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 
@@ -24,21 +24,12 @@ display comments for embedding in a page
 
 =cut
 
-sub default : Private {
+sub comment : Global FormConfig {
     my ( $self, $c ) = @_;
+    my $form=$c->stash->{form};
     $c->stash->{template} = 'comment.tt';
-    $c->form(
-        required => [qw/body/],
-        defaults => {
-            page   => $c->stash->{page},
-            poster => $c->stash->{user},
-            posted => DateTime->now(),
-        }
-    );
-    unless ( !$c->stash->{user}
-        || $c->form->has_missing
-        || $c->form->has_invalid )
-    {
+
+    if ( $c->stash->{user} && $form->submitted_and_valid) {
         $c->model("DBIC::Comment")->create(
             {
                 page   => $c->stash->{page}->id,

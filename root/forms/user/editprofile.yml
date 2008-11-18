@@ -1,0 +1,40 @@
+---
+action: 
+id: editprofile
+indicator: submit
+auto_fieldset: 1
+auto_id: '%f_%n'
+elements:
+  - type: Text
+    name: name
+    label: Name
+  - type: Date
+    name: born
+    label: Birth Date
+    auto_inflate: 1
+    year:
+      less: 70 
+      plus: 0
+  - type: Select
+    name: gender
+    label: Gender
+    options:
+        - [ 'm', 'Male' ]
+        - [ 'f', 'Female' ]
+        - [ '?', 'Rather not say' ]
+  - type: Text
+    name: industry
+    label: Industry
+  - type: Textarea
+    name: interests
+    label: Interests
+  - type: Textarea
+    label: Favorite Albums
+    name: music
+  - type: Textarea
+    name: movies
+    label: Favorite Movies
+  - type: Submit
+    name: submit
+    value: Update 
+    

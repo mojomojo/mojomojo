@@ -95,9 +95,9 @@ Main user preferences screen.
 
 =cut
 
-sub prefs : Global FormConfig {
-    my ( $self, $c ) = @_;
-    my $form =$c->stash->{form};
+
+sub page_user :Private {
+    my ($self,$c)=@_;
     my $user = $c->stash->{user};
     $c->stash->{template} = 'user/prefs.tt';
     my @proto = @{ $c->stash->{proto_pages} };
@@ -113,12 +113,26 @@ sub prefs : Global FormConfig {
     {
         my $c->stash->{message}  = 'Cannot find that user.';
         $c->stash->{template} = 'message.tt';
+        $c->detach('/default');
     }
+    $c->stash->{page_user}=$page_user;
+}
 
-    $page_user->fill_formfu_values($form);
-    if ( $form->submitted && !$form->has_errors ) {
-        $page_user->populate_from_formfu($form);
-    }
+sub prefs : Global FormConfig {
+    my ( $self, $c ) = @_;
+    my $form =$c->stash->{form};
+    $c->forward('page_user');
+    my $page_user = $c->stash->{page_user};
+    $form->model->default_values($c->stash->{user});
+    if ( $form->submitted_and_valid ) {
+        my $old_email=$page_user->email;
+        $form->model->update($page_user);
+        $c->stash->{message}='Updated preferences';
+        if( $form->params->{email} ne $old_email ){
+                $page_user->active(-1);
+                $page_user->update;
+                $c->forward('do_register',[$page_user]);
+        }    }
 }
 
 =item password (/prefs/password')
@@ -129,26 +143,21 @@ B<template:> user/password.tt
 
 =cut
 
-sub password : Path('/prefs/password') {
+sub password : Path('/prefs/password') FormConfig {
     my ( $self, $c ) = @_;
-    $c->forward('prefs');
-    return if $c->stash->{message};
-    $c->stash->{template} = 'user/password.tt';
-    $c->form( required => [qw/current pass again/] );
-    unless ( $c->form->has_missing || $c->form->has_invalid ) {
-        if ( $c->form->valid('again') ne $c->form->valid('pass') ) {
-            $c->stash->{message} = 'Passwords did not match.';
-            return;
-        }
-        unless ( $c->stash->{user}->valid_pass( $c->form->valid('current') ) ) {
+    $c->forward('page_user');
+    my $page_user = $c->stash->{page_user};
+    my $form=$c->stash->{form};
+    if ( $form->submitted_and_valid) {
+        # FIXME: Should be moved into a formfu validator
+        unless ( $page_user->valid_pass( $form->params->{current} ) ) {
             $c->stash->{message} = 'Invalid password.';
             return;
         }
-        $c->stash->{user}->pass( $c->form->valid('pass') );
-        $c->stash->{user}->update();
+        $page_user->pass( $form->params->{pass} );
+        $page_user->update();
         $c->stash->{message} = 'Your password has been updated';
     }
-    $c->stash->{message} ||= 'Please fill out all fields!';
 }
 
 sub recover_pass : Global {
@@ -207,10 +216,10 @@ sub register : Global FormConfig {
     $c->stash->{user} = $c->model('DBIC::Person')->new_result( {} );
     $c->stash->{template}  = 'user/register.tt';
 
-    $c->stash->{user}->fill_formfu_values($form);
-    if ( $form->submitted && !$form->has_errors ) {
+    $form->model->default_values($c->stash->{user});
+    if ( $form->submitted_and_valid ) {
         $c->stash->{user}->active(-1);
-        $c->stash->{user}->populate_from_formfu($form);
+        $form->model->update( $c->stash->{user} );
         $c->stash->{user}->insert();
         $c->forward( 'do_register', [$c->stash->{user}] );
 
@@ -229,7 +238,7 @@ sub do_register : Private {
     my ( $self, $c, $user ) = @_;
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref( 'entropy', rand );
-    $c->stash->{secret} = md5_hex( $c->form->valid('email') . $c->pref('entropy') );
+    $c->stash->{secret} = md5_hex( $user->email . $c->pref('entropy') );
     if (
         $c->email(
             header => [
@@ -243,7 +252,7 @@ sub do_register : Private {
     {
     }
     else {
-        $c->stash->{error} = 'An error occourred. Sorry.';
+        $c->stash->{error} = 'An error occourred with emailing your validation mail. Please try again.';
     }
     $c->stash->{user}     = $user;
     $c->stash->{template} = 'user/validate.tt';
@@ -324,8 +333,9 @@ sub profile : Global {
     }
 }
 
-sub editprofile : Global {
+sub editprofile : Global FormConfig {
     my ( $self, $c ) = @_;
+    my $form=$c->stash->{form};
     my $page = $c->stash->{page};
     my $user = $c->model('DBIC::Person')->get_user(
           $c->stash->{proto_pages}[-1]
@@ -339,54 +349,17 @@ sub editprofile : Global {
             || $user->id eq $c->stash->{user}->id )
         )
     {
-        $c->stash->{person} = $user;
-
-        my $now      = DateTime->now();
-        my $curryear = $now->year();
-        $c->stash->{years}    = [ ( $curryear - 90 ) .. $curryear ];
-        $c->stash->{months}   = [ 1 .. 12 ];
-        $c->stash->{days}     = [ 1 .. 31 ];
-        $c->stash->{template} = 'user/editprofile.tt';
+        if ($form->submitted_and_valid) {
+            $form->model->update($user);
+            $c->res->redirect($c->uri_for('profile'));
+        }
+        $form->model->default_values($user) unless $form->submitted;
     }
     else {
         $c->stash->{template} = 'message.tt';
         $c->stash->{message}  = 'User not found!';
     }
 
-}
-
-sub do_editprofile : Global {
-    my ( $self, $c ) = @_;
-    $c->form(
-        required           => [qw(name email)],
-        optional           => [ $c->model("DBIC::Person")->result_source->columns ],
-        defaults           => { gender => undef },
-        constraint_methods => { born => ymd_to_datetime(qw(birth_year birth_month birth_day)) },
-        untaint_all_constraints => 1,
-    );
-
-    if ( $c->form->has_missing ) {
-        $c->stash->{message} =
-              'You have to fill in all required fields.'
-            . 'the following are missing: <b>'
-            . join( ', ', $c->form->missing() ) . '</b>';
-    }
-    elsif ( $c->form->has_invalid ) {
-        $c->stash->{message} =
-            'Some fields are invalid. Please ' . 'correct them and try again:';
-    }
-    else {
-        my $page = $c->stash->{page};
-        my $user = $c->model('DBIC::Person')->get_user(
-              $c->stash->{proto_pages}[-1]
-            ? $c->stash->{proto_pages}[-1]->{name_orig}
-            : $page->name
-        );
-        $user->set_columns( $c->form->{valid} );
-        $user->update();
-        return $c->forward('profile');
-    }
-    $c->forward('editprofile');
 }
 
 =back

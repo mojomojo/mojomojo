@@ -50,7 +50,7 @@
 	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
     </div>
     
-    <input type="submit" value='[% IF content.version > 1; "Save"; ELSE; "Create"; END %]'/> as 
+    <input type="submit" name="submit" value='[% IF content.version > 1; "Save"; ELSE; "Create"; END %]'/> as 
     [% IF user.id %]
     [% c.wikiword(user.link,base) %] 
     (<a href="[% c.uri_for('/.logout')%]">forget me</a>)

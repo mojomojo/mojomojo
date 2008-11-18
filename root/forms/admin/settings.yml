@@ -1,0 +1,32 @@
+---
+action: 
+indicator: submit
+auto_fieldset: 1
+
+elements:
+  - type: Text
+    name: name
+    label: Site name
+    filters:
+       - HTMLEscape
+    constraints:
+      - Required
+  - type: Text
+    name: admins
+    label: Site Admins (In addition to you)
+  - type: Text
+    name: anonymous_user
+    label: Anonymous User (blank to disable)
+  - type: Checkbox
+    name: open_registration
+    label: New User Registration open
+    value: 1
+    default_empty_value: 0
+  - type: Checkbox
+    name: restricted_user
+    value: 1
+    default_empty_value: 0
+    label: Restrict user editing to home directory
+  - type: Submit
+    name: submit
+    value: Save
