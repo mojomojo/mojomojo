@@ -171,6 +171,25 @@ sub imginfo : Local {
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
 
+=item usersearch (.jsrpc/usersearch)
+
+Backend which handles jQuery autocomplete requests for users.
+
+=cut
+
+sub usersearch : Local {
+    my ($self, $c) = @_;
+    my $query = $c->req->param('q');
+
+    $c->stash->{template} = "user/user_search.tt";
+    
+    if (defined($query) && length($query)) {
+        my $rs = $c->model('DBIC::Person')->search; #({ active => 1 });
+        $rs = $rs->search_like({ login => '%'.$query.'%'});
+        $c->stash->{users} = [ $rs->all ];
+    }
+}
+
 =back
 
 =head1 AUTHOR

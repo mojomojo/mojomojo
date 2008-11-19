@@ -242,6 +242,15 @@ p {
     line-height: 1.3em;
     margin: 1.2em 0;
 }
+
+.hide { 
+    display: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
 /* @end */
 /* @group Headlines */
 
@@ -766,6 +775,32 @@ dd {
   font-size: 11px;
   line-height: 24px;
   margin-left: 80px;
+}
+
+/* Common Forms Rules */
+
+.standard_form .fields label {
+  display: block;
+  clear: both;
+}
+.standard_form .fields label span {
+  text-align: right;
+  margin-right: .5em;
+}
+.standard_form .fields label span,
+.standard_form .fields label input {
+  display: block;
+  float: left;
+  margin-bottom: 1ex;
+}
+
+/* Role Form */
+.role_form .fields label span {
+  width: 6em;
+}
+
+.role_form #member_input {
+    width: 15em;
 }
 
 /* @group sidebar nav menu */

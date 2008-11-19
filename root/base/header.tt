@@ -6,6 +6,7 @@
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.form.js')%]"></script>
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.livequery.js')%]"></script>
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.inplace.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
     <title>
 	[% IF title; title %]
@@ -21,6 +22,7 @@
     <link title="theme stylesheet" href="[%c.uri_for_static('themes', c.config.theme  ' theme.css')%]" type="text/css" rel="stylesheet" />
     [% END %]
     <link title="pod stylesheet" href="[% c.uri_for_static('pod.css')%]" type="text/css" rel="stylesheet" />
+    <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />

@@ -52,7 +52,7 @@ Accepts a path in url/unix directory format, e.g. "/page1/page2".
 Paths are assumed to be absolute, so a leading slash (/) is not 
 required.
 Returns an array of any pages that exist in the path, starting with "/",
-and an additional array of "proto page" hahses for any pages at the end
+and an additional array of "proto page" hashes for any pages at the end
 of the path that do not exist. All paths include the root (/), which 
 must exist, so a path of at least one element will always be returned. 
 The "proto page" hash keys are:

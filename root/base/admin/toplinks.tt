@@ -1,0 +1,14 @@
+[%- DEFAULT back = 'view' -%]
+[%- MACRO gen_link(action, label, accesskey, selected) BLOCK; -%]
+ [%- IF selected == label -%]
+ <b class="navOn">[% label %]</b>
+ [%- ELSE -%]
+ <a accesskey="[% accesskey %]" href="[% c.uri_for(action) %]">[% label %]</a>
+ [%- END -%] 
+[%- END -%]
+<div id="toplinks">
+ [% gen_link('/.admin',    'configuration', 'C', selected) %] |
+ [% gen_link('admin/user', 'users',         'U', selected) %] |
+ [% gen_link('admin/role', 'roles',         'R', selected) %] |
+ [% gen_link(back,         'back',          'B', selected) %] 
+</div>
