@@ -19,7 +19,7 @@
     <input type="text" id="member_input" name="member_input" />
   </label>
 
-  [% has_members = members.size > 0 %]
+  [% has_members = members && members.size > 0 %]
   <ul id="role_members">
   <li class="empty[% IF has_members %] hide[% END %]">No members added yet.</li>
   [% IF has_members %]

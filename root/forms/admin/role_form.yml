@@ -1,0 +1,23 @@
+---
+action: 
+id: role_form
+indicator: submit
+auto_fieldset: 1
+
+elements:
+  - type: Text
+    name: name
+    label: Role Name
+    constraints:
+      - Required
+  - type: Checkbox
+    name: active
+    label: "Active?"
+  - type: Repeatable
+    increment_field_names: 0
+    elements:
+      - type: Text
+      - name: role_members
+  - type: Submit
+    name: submit
+    value: Save

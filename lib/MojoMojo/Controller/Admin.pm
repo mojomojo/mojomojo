@@ -115,23 +115,9 @@ Role creation page.
 
 =cut
 
-sub create_role : Local Args(0)  {
+sub create_role : Local Args(0) FormConfig('admin/role_form.yml')  {
     my ($self, $c) = @_;
-    my $form = $c->stash->{form};
-
-    if ( $c->req->param('submit') ) {
-        my $name   = $c->req->param('name');
-        my $active = $c->req->param('active') ? 1 : 0;
-        
-        my $role = $c->model('DBIC::Role')->create( {
-            name   => $name,
-            active => $active
-        } );
-
-        if ($role) {        
-            $c->res->redirect( $c->uri_for('admin/role') );
-        }
-    }
+    $c->forward('handle_role_form');
 }
 
 =item edit_role ( .admin/role/ )
@@ -140,33 +126,71 @@ Role edit page.
 
 =cut
 
-sub edit_role : Path('role') Args(1) {
+sub edit_role : Path('role') Args(1) FormConfig('admin/role_form.yml') {
     my ($self, $c, $role_name) = @_;
+    my $form = $c->stash->{form};
+
     my $role = $c->model('DBIC::Role')->find( { name => $role_name } );
     
     if ($role) {
-        if ( $c->req->param('submit') ) {
-            $role->update( {
-                name   => $c->req->param('name'),
-                active => $c->req->param('active') ? 1 : 0
-            } );
-            
-            # update roles
-            $role->role_members->delete;
-
-            for my $person_id ($c->req->param('role_members')) {
-                $role->add_to_role_members( { person => $person_id, admin => 0 } );
-            }
-
-            $c->res->redirect( $c->uri_for('admin/role') );
-        }
-        else {
+        # load stash parameters if the page is only being displayed
+        unless ( $c->forward('handle_role_form', [$role]) ) {
             $c->stash->{members} = [ $role->members->all ];
             $c->stash->{role}    = $role;
         }
     }
     else {
         $c->res->redirect( $c->uri_for('admin/role') );
+    }
+}
+
+=item handle_role_form 
+
+Handle role form processing.
+Returns true when a submitted form was actually processed.
+
+=cut
+
+sub handle_role_form : Private {
+    my ($self, $c, $role) = @_;
+    my $form = $c->stash->{form};
+
+    if ( $form->submitted_and_valid ) {
+        my $params = $form->params;
+
+        my $fields = {
+            name   => $params->{name},
+            active => ( $params->{active} ? 1 : 0 )
+        };
+
+        # make sure updating works
+        $fields->{id} = $role->id if $role;
+        
+        $role = $c->model('DBIC::Role')->update_or_create( $fields );
+
+        if ($role) {
+            # in order to safely update the role members, they're removed and
+            # then reinserted - this is a bit inefficient but updating role 
+            # members shouldn't be a frequent operation
+            $role->role_members->delete;
+            
+            if ($params->{role_members}) {
+                my @role_members = 
+                    ref $params->{role_members} eq 'ARRAY' ? 
+                        @{$params->{role_members}} : $params->{role_members};
+
+                for my $person_id (@role_members) {
+                    $role->add_to_role_members( { 
+                        person => $person_id, 
+                        admin  => 0 
+                    });
+                }
+            }
+
+            $c->res->redirect( $c->uri_for('admin/role') );
+        }
+        
+        return 1;
     }
 }
 
