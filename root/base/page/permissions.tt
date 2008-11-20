@@ -3,14 +3,36 @@
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
 
 <h4>Inherited permissions:</h4>
-[%# TODO: display inherited permissions (already loaded in the backend) %]
+
+[% IF inherited_perms && inherited_perms.size > 0 %]
+
+[% FOREACH perm_set IN inherited_perms %]
+  <pre><strong>From [% perm_set.path %]:</strong>
+  [%- perms = perm_set.perms -%]
+  [%- FOREACH role IN perms.keys.sort -%]
+    [%- 
+      role_perms = perms.$role;
+      perms_list = [];
+      perms_list.push('read')  IF role_perms.view == 'yes' ;
+      perms_list.push('write') IF role_perms.edit == 'yes' ;
+    -%]
+    <br/>
+    [% role -%] can [% perms_list.join(', ') -%]
+  [% END %]
+  </pre>
+
+[% END %]
+
+[% ELSE %]
 
 None.
+
+[% END %]
 
 <h4>Permissions for this page:</h4>
 <table>
  <tr>
-  <th></th><th>read</th><th>write</th><th>apply to subpages</th><th></th>
+  <th></th><th>read</th><th>write</th><th>apply to subpages</th><th>actions</th>
  </tr>
  [% FOREACH perm IN current_perms %]
  <tr>
@@ -18,17 +40,39 @@ None.
   [% perms = perm.perms %]
   <td class="center"><input type="checkbox" name="read"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
   <td class="center"><input type="checkbox" name="write"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
-  <td class="center"><input type="checkbox" name="subpages"[% IF perms && perms.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
   <td>
     <input type="hidden" name="role_name" value="[% perm.role_name %]"/>
     <a class="clickable" onclick="enable_edit(this);">Edit</a>
     <a class="clickable hide" onclick="save_edit(this);">Save</a>
+    <span[% UNLESS perm.inherited %] class="hide"[% END %]>
+      /
+      <a class="clickable[% UNLESS perm.inherited %] hide[% END %]" onclick="use_inherited(this);">Use inherited permissions</a>
+    <span>
   </td>
  </tr>
  [% END %]
 </table>
 
 <script type="text/javascript">
+
+function use_inherited(link) {
+  var span = link.parentNode;
+  var td   = span.parentNode;
+  var row  = td.parentNode;
+  
+  var role_name = $(td).find('input').get(0).value;
+
+  $.ajax({
+    type: "POST",
+    url: "[% c.uri_for('jsrpc/clear_permissions') %]",
+    data: "role_name=" + role_name,
+    success: function() {
+      $(row).find('input').removeAttr('checked');
+      $(td).find('span, span a').addClass('hide');
+    }
+  });
+}
 
 function save_edit(link) {
   var td  = link.parentNode;
@@ -48,13 +92,14 @@ function save_edit(link) {
     data: values.join("&"),
     success: function() {
       $(row).find('input').attr('disabled', 'disabled');
-      $(td).find('a').toggleClass('hide');
+      $(td).find('a,span').toggleClass('hide');
     }
   });
 }
 
 function enable_edit(link) {
   $(link.parentNode).find('a').toggleClass('hide');
+  $(link.parentNode).find('span, span a').addClass('hide');
   $(link.parentNode.parentNode).find('input').removeAttr('disabled');
 }
 

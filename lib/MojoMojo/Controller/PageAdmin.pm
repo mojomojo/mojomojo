@@ -150,25 +150,8 @@ sub permissions : Global {
     my $data = $c->get_permissions_data( $current_path, \@path_elements );
     my $current_data = exists $data->{$current_path} ? $data->{$current_path} : {};
 
-    my %inherited;
-
-    # build inherited permissions hash
-    for my $path (keys %$data) {
-        my $path_perms = $data->{$path};
-        for my $role (keys %$path_perms) {
-            my $role_perms = $path_perms->{$role};
-            $inherited{$path}{$role} = $role_perms->{subpages}
-                if exists $role_perms->{subpages};
-        }
-    }
-    
-    # sort elements to avoid nasty TT code
-    $stash->{inherited_perms} = [ 
-        map { { path => $_, perms => $inherited{$_} } } 
-            sort { length $a <=> length $b } keys %inherited 
-    ];
-
     my @roles = $c->model('DBIC::Role')->active_roles->all;
+    my %roles = map { $_->id => $_->name } @roles;
 
     my %current;
     
@@ -183,10 +166,34 @@ sub permissions : Global {
     $stash->{current_perms} = [ 
         map { { 
             role_name => $_, 
-            perms     => $current{$_}->{page}, 
+            inherited => $current{$_} ? 1 : 0,
+            perms     => $current{$_} && $current{$_}->{page}, 
             subpages  => exists $current{$_}->{subpages} ? 1 : 0
         } } 
         sort keys %current
+    ];
+
+    my %inherited;
+    my $parent_path = $path_elements[-1];
+
+    # build inherited permissions hash
+    for my $path (keys %$data) {
+        # might have additional data (if cached)
+        next unless ($parent_path && $parent_path =~ /^$path/);
+
+        my $path_perms = $data->{$path};
+        for my $role (keys %$path_perms) {
+            next unless exists $roles{$role};
+            my $role_perms = $path_perms->{$role};
+            $inherited{$path}{$roles{$role}} = $role_perms->{subpages}
+                if exists $role_perms->{subpages};
+        }
+    }
+    
+    # sort elements to avoid nasty TT code
+    $stash->{inherited_perms} = [ 
+        map { { path => $_, perms => $inherited{$_} } }
+            sort { length $a <=> length $b } keys %inherited 
     ];
 }
 

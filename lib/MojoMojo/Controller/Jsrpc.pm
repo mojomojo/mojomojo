@@ -211,7 +211,7 @@ sub set_permissions : Local {
         { name => $c->req->param('role_name') } 
     );
 
-    $c->model('DBIC::PathPermissions')->update_or_create({
+    my $params = {
         path => $current_path,
         role => $role->id,
         apply_to_subpages   => $subpages,
@@ -220,7 +220,33 @@ sub set_permissions : Local {
         edit_allowed        => $write,
         view_allowed        => $read,
         attachment_allowed  => $write
-    });
+    };
+
+    my $model = $c->model('DBIC::PathPermissions');
+
+    # when subpages should inherit permissions we actually need to update two 
+    # entries: one for the subpages and one for the current page
+    if ($subpages eq 'yes') {
+        # update permissions for subpages
+        $model->update_or_create( $params );
+
+        # update permissions for the current page
+        $params->{apply_to_subpages} = 'no';
+        $model->update_or_create( $params );
+    }
+    # otherwise, we must remove the subpages permissions entry and update the
+    # entry for the current page
+    else {
+        # delete permissions for subpages
+        $model->search( { 
+            path              => $current_path, 
+            role              => $role->id, 
+            apply_to_subpages => 'yes'
+        } )->delete;
+        
+        # update permissions for the current page
+        $model->update_or_create($params);
+    }
 
     # clear cache
     if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
@@ -230,6 +256,44 @@ sub set_permissions : Local {
     $c->res->body("OK");
     $c->res->status(200);
 }
+
+=item clear_permissions (.jsrpc/clear_permissions)
+
+Clears this page permissions for a given role (making permissions inherited).
+
+=cut
+
+sub clear_permissions : Local {
+    my ($self, $c) = @_;
+
+    my @path_elements = $c->_expand_path_elements($c->stash->{path});
+    my $current_path = pop @path_elements;
+    
+    my $role = $c->model('DBIC::Role')->find( 
+        { name => $c->req->param('role_name') } 
+    );
+
+    if ($role) {
+    
+        # delete permissions for subpages
+        $c->model('DBIC::PathPermissions')->search( { 
+            path              => $current_path, 
+            role              => $role->id
+        } )->delete;
+
+        # clear cache
+        if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+            $c->cache->remove( 'page_permission_data' );
+        }
+
+    }
+
+    $c->res->body("OK");
+    $c->res->status(200);
+
+}
+
+
 
 =back
 
