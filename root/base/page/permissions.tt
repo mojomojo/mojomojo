@@ -1,0 +1,63 @@
+[% WRAPPER page/wrapper.tt pre_title="Edit" %]
+
+[% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
+
+<h4>Inherited permissions:</h4>
+[%# TODO: display inherited permissions (already loaded in the backend) %]
+
+None.
+
+<h4>Permissions for this page:</h4>
+<table>
+ <tr>
+  <th></th><th>read</th><th>write</th><th>apply to subpages</th><th></th>
+ </tr>
+ [% FOREACH perm IN current_perms %]
+ <tr>
+  <td>[% perm.role_name %]</td>
+  [% perms = perm.perms %]
+  <td class="center"><input type="checkbox" name="read"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td class="center"><input type="checkbox" name="write"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td class="center"><input type="checkbox" name="subpages"[% IF perms && perms.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td>
+    <input type="hidden" name="role_name" value="[% perm.role_name %]"/>
+    <a class="clickable" onclick="enable_edit(this);">Edit</a>
+    <a class="clickable hide" onclick="save_edit(this);">Save</a>
+  </td>
+ </tr>
+ [% END %]
+</table>
+
+<script type="text/javascript">
+
+function save_edit(link) {
+  var td  = link.parentNode;
+  var row = td.parentNode;
+  
+  var values = [];
+  $(row).find('input').map( function(i, elt) { 
+    if (elt.type == 'checkbox')
+      values.push(elt.name + "=" + (elt.checked ? "1" : "0"));
+    else
+      values.push(elt.name + "=" + elt.value);
+  } );
+
+  $.ajax({
+    type: "POST",
+    url: "[% c.uri_for('jsrpc/set_permissions') %]",
+    data: values.join("&"),
+    success: function() {
+      $(row).find('input').attr('disabled', 'disabled');
+      $(td).find('a').toggleClass('hide');
+    }
+  });
+}
+
+function enable_edit(link) {
+  $(link.parentNode).find('a').toggleClass('hide');
+  $(link.parentNode.parentNode).find('input').removeAttr('disabled');
+}
+
+</script>
+
+[% END %]

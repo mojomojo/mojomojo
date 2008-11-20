@@ -1,14 +1,20 @@
  <div id="pageoptions">
-	<ul>
+  <ul>
 [% IF c.action.reverse == 'pageadmin/edit' %]
    <li>Preview</li>
    [% IF page.content_version ; %] 
     <li><a href="[% c.uri_for('attachments') %]">Attachments</a></li>
    [%END%]
    <li><a href="#" class="toggleInfo">Syntax</a></li>
+   <li><a href="[% c.uri_for('permissions') %]">Permissions</a></li> 
+[% ELSIF c.action.reverse == 'pageadmin/permissions' %]
+   <li><a href="[% c.uri_for('edit') %]">Edit</a></li>
+   <li><a href="[% c.uri_for('attachments') %]">Attachments</a></li>
+   <li>Permissions</li> 
 [% ELSE -%]
    <li><a href="[% c.uri_for('edit') %]">Edit</a></li>
    <li>Attachments</li>
+   <li><a href="[% c.uri_for('permissions') %]">Permissions</a></li> 
 [% END -%]
-    </ul>
-</div>
+  </ul>
+ </div>

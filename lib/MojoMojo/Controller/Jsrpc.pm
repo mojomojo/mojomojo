@@ -191,6 +191,46 @@ sub usersearch : Local {
     }
 }
 
+=item set_permissions (.jsrpc/ser_permissions)
+
+Sets page permissions.
+
+=cut
+
+sub set_permissions : Local {
+    my ($self, $c) = @_;
+
+    my @path_elements = $c->_expand_path_elements($c->stash->{path});
+    my $current_path = pop @path_elements;
+    
+    my ( $read, $write, $subpages) = 
+        map { $c->req->param($_) ? 'yes' : 'no' } 
+            qw/read write subpages/;
+    
+    my $role = $c->model('DBIC::Role')->find( 
+        { name => $c->req->param('role_name') } 
+    );
+
+    $c->model('DBIC::PathPermissions')->update_or_create({
+        path => $current_path,
+        role => $role->id,
+        apply_to_subpages   => $subpages,
+        create_allowed      => $write,
+        delete_allowed      => $write,
+        edit_allowed        => $write,
+        view_allowed        => $read,
+        attachment_allowed  => $write
+    });
+
+    # clear cache
+    if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+        $c->cache->remove( 'page_permission_data' );
+    }
+
+    $c->res->body("OK");
+    $c->res->status(200);
+}
+
 =back
 
 =head1 AUTHOR

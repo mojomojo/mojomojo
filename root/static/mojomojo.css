@@ -251,6 +251,12 @@ p {
     cursor: pointer;
 }
 
+.center,
+#content .center,
+#content table .center {
+    text-align: center;
+}
+
 /* @end */
 /* @group Headlines */
 
