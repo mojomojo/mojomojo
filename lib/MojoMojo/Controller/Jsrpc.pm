@@ -200,6 +200,13 @@ Sets page permissions.
 sub set_permissions : Local {
     my ($self, $c) = @_;
 
+    # only admins can change permissions for now
+    unless ($c->user->is_admin) {
+        $c->res->body("Forbidden");
+        $c->res->status(403);
+        $c->detach;
+    }
+
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
     
@@ -265,6 +272,13 @@ Clears this page permissions for a given role (making permissions inherited).
 
 sub clear_permissions : Local {
     my ($self, $c) = @_;
+
+    # only admins can change permissions for now
+    unless ($c->user->is_admin) {
+        $c->res->body("Forbidden");
+        $c->res->status(403);
+        $c->detach;
+    }
 
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;

@@ -29,6 +29,8 @@ None.
 
 [% END %]
 
+[% IF user.is_admin %]
+
 <h4>Permissions for this page:</h4>
 <table>
  <tr>
@@ -104,5 +106,6 @@ function enable_edit(link) {
 }
 
 </script>
+[% END %]
 
 [% END %]
