@@ -31,6 +31,13 @@ None.
 
 [% IF user.is_admin %]
 
+<script type="text/javascript">
+var editor = new MojoMojo.PermissionsEditor({
+  clear_url: "[% c.uri_for('jsrpc/clear_permissions') %]",
+  set_url:   "[% c.uri_for('jsrpc/set_permissions') %]"
+});
+</script>
+
 <h4>Permissions for this page:</h4>
 <table>
  <tr>
@@ -45,67 +52,19 @@ None.
   <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
   <td>
     <input type="hidden" name="role_name" value="[% perm.role_name %]"/>
-    <a class="clickable" onclick="enable_edit(this);">Edit</a>
-    <a class="clickable hide" onclick="save_edit(this);">Save</a>
+    <a class="clickable" onclick="editor.enable_edit(this);">Edit</a>
+    <a class="clickable hide" onclick="editor.save_changes(this);">Save</a>
     <span[% UNLESS perm.inherited %] class="hide"[% END %]>
       /
-      <a class="clickable[% UNLESS perm.inherited %] hide[% END %]" onclick="use_inherited(this);">Use inherited permissions</a>
+      <a class="clickable[% UNLESS perm.inherited %] hide[% END %]" onclick="editor.clear_permissions(this);">
+        Use inherited permissions
+      </a>
     <span>
   </td>
  </tr>
  [% END %]
 </table>
 
-<script type="text/javascript">
-
-function use_inherited(link) {
-  var span = link.parentNode;
-  var td   = span.parentNode;
-  var row  = td.parentNode;
-  
-  var role_name = $(td).find('input').get(0).value;
-
-  $.ajax({
-    type: "POST",
-    url: "[% c.uri_for('jsrpc/clear_permissions') %]",
-    data: "role_name=" + role_name,
-    success: function() {
-      $(row).find('input').removeAttr('checked');
-      $(td).find('span, span a').addClass('hide');
-    }
-  });
-}
-
-function save_edit(link) {
-  var td  = link.parentNode;
-  var row = td.parentNode;
-  
-  var values = [];
-  $(row).find('input').map( function(i, elt) { 
-    if (elt.type == 'checkbox')
-      values.push(elt.name + "=" + (elt.checked ? "1" : "0"));
-    else
-      values.push(elt.name + "=" + elt.value);
-  } );
-
-  $.ajax({
-    type: "POST",
-    url: "[% c.uri_for('jsrpc/set_permissions') %]",
-    data: values.join("&"),
-    success: function() {
-      $(row).find('input').attr('disabled', 'disabled');
-      $(td).find('a,span').toggleClass('hide');
-    }
-  });
-}
-
-function enable_edit(link) {
-  $(link.parentNode).find('a').toggleClass('hide');
-  $(link.parentNode).find('span, span a').addClass('hide');
-  $(link.parentNode.parentNode).find('input').removeAttr('disabled');
-}
-
-</script>
 [% END %]
 
 [% END %]

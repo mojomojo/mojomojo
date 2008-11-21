@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  var role_form = new MojoMojo.RoleForm({
+    user_search_url: "[% c.uri_for('/.jsrpc/usersearch') %]"
+  });
+  role_form.setup_autocomplete('member_input');
+</script>
 <form class="role_form standard_form" action="" method="post">
  
  <fieldset class="fields">
@@ -27,7 +33,7 @@
    <li class="member">
     [% member.login %]
     <input type="hidden" name="role_members" value="[% member.id %]" />
-    <a class="clickable" onclick="remove_member(this);">[remove]</a>
+    <a class="clickable" onclick="role_form.remove_member(this);">[remove]</a>
    </li>
    [% END %]
   [% END %]
@@ -40,51 +46,4 @@
  </fieldset>
 </form>
 
-<script type="text/javascript">
 
-function remove_member(link) {
-  var li   = link.parentNode;
-  var list = li.parentNode;
-  list.removeChild(li);
-  
-  var remaining = list.getElementsByTagName('li');
-  if (remaining.length == 1) {
-    $(remaining[0]).removeClass('hide');
-  }
-}
-
-function select_item(li) {
-  $("#member_input").get(0).value = '';
-
-  // check if it's already added
-  if ($("#role_members li.member input[value='" + li.extra[0] + "']").length == 0) {
-    $("#role_members").append(
-      '<li class="member">' +
-        li.selectValue +
-        '<input type="hidden" name="role_members" value="' + li.extra[0] + '"/> ' +
-        '<a class="clickable" onclick="remove_member(this);">[remove]</a>' +
-      '</li>'
-    );
-    $("#role_members li.empty").addClass('hide');
-  }
-}
-function format_item(row) {
-  return row[0];
-}
-
-$(document).ready(function() {
-  $("#member_input").autocomplete(
-    "[% c.uri_for('/.jsrpc/usersearch') %]", 
-    { 
-      minChars:      1, 
-      matchSubset:   1, 
-      matchContains: 1, 
-      cacheLength:   10, 
-      onItemSelect:  select_item, 
-      formatItem:    format_item,
-      selectOnly:    1 
-    }
-  );
-});
-
-</script>
