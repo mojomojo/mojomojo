@@ -7,7 +7,7 @@ use Digest::SHA1;
 
 use base 'DBIx::Class';
 
-use Text::Textile;
+use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
