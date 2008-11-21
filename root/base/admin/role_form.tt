@@ -1,10 +1,4 @@
-<script type="text/javascript">
-  var role_form = new MojoMojo.RoleForm({
-    user_search_url: "[% c.uri_for('/.jsrpc/usersearch') %]"
-  });
-  role_form.setup_autocomplete('member_input');
-</script>
-<form class="role_form standard_form" action="" method="post">
+<form id="role_form" class="role_form standard_form" action="" method="post">
  
  <fieldset class="fields">
   <label>
@@ -23,6 +17,7 @@
   <label>
     <span>Search for users:</span>
     <input type="text" id="member_input" name="member_input" />
+    <input type="hidden" id="user_search_url" name="user_search_url" value="[% c.uri_for('/.jsrpc/usersearch') %]" />
   </label>
 
   [% has_members = members && members.size > 0 %]
@@ -33,7 +28,7 @@
    <li class="member">
     [% member.login %]
     <input type="hidden" name="role_members" value="[% member.id %]" />
-    <a class="clickable" onclick="role_form.remove_member(this);">[remove]</a>
+    <a class="clickable remove_member">[remove]</a>
    </li>
    [% END %]
   [% END %]
