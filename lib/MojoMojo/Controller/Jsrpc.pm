@@ -200,8 +200,10 @@ Sets page permissions.
 sub set_permissions : Local {
     my ($self, $c) = @_;
 
+    my $user = $c->user;
+
     # only admins can change permissions for now
-    unless ($c->user->is_admin) {
+    unless ($user && $user->is_admin) {
         $c->res->body("Forbidden");
         $c->res->status(403);
         $c->detach;
@@ -273,8 +275,10 @@ Clears this page permissions for a given role (making permissions inherited).
 sub clear_permissions : Local {
     my ($self, $c) = @_;
 
+    my $user = $c->user;
+
     # only admins can change permissions for now
-    unless ($c->user->is_admin) {
+    unless ($user && $user->is_admin) {
         $c->res->body("Forbidden");
         $c->res->status(403);
         $c->detach;
