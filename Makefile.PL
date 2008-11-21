@@ -35,6 +35,7 @@ requires (
         'DateTime'                                      => '0.28',
         'DBD::SQLite'                                   => '1.08',
         'File::MMagic'                                  => '1.27',
+	'HTML::GenToc'                                  => 0,
         'HTML::Strip'                                   => '1.04',
         'HTML::Scrubber'                                => 0,
         'HTML::TagCloud'                                => 0,
