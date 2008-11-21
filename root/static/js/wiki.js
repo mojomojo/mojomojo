@@ -65,7 +65,12 @@ MojoMojo.PermissionsEditor = function(params) {
 };
 
 MojoMojo.RoleForm = function(params) {
-    return {
+    var container = $(params.container);
+
+    var member_input = container.find(params.selectors.member_input);
+    var role_members = container.find(params.selectors.role_members);
+
+    var API = {
         remove_member: function (link) {
           var li   = link.parentNode;
           var list = li.parentNode;
@@ -76,20 +81,23 @@ MojoMojo.RoleForm = function(params) {
             $(remaining[0]).removeClass('hide');
           }
         },
-        setup_autocomplete: function(id) {
+        setup_autocomplete: function() {
             var select_item = function (li) {
-              $("#member_input").get(0).value = '';
+              member_input.attr('value', '');
 
               // check if it's already added
-              if ($("#role_members li.member input[value='" + li.extra[0] + "']").length == 0) {
-                $("#role_members").append(
+              if (role_members.find("li.member input[value='" + li.extra[0] + "']").length == 0) {
+                role_members.append(
                   '<li class="member">' +
                     li.selectValue +
                     '<input type="hidden" name="role_members" value="' + li.extra[0] + '"/> ' +
-                    '<a class="clickable" onclick="remove_member(this);">[remove]</a>' +
+                    '<a class="clickable remove_member">[remove]</a>' +
                   '</li>'
                 );
-                $("#role_members li.empty").addClass('hide');
+                var remove_links = container.find(params.selectors.remove_member);
+                $(remove_links.get(remove_links.length - 1)).click( function() { return API.remove_member(this) } );
+
+                role_members.find("li.empty").addClass('hide');
               }
             };
 
@@ -98,7 +106,7 @@ MojoMojo.RoleForm = function(params) {
             };
 
             $(document).ready(function() {
-              $("#" + id).autocomplete(
+              member_input.autocomplete(
                 params.user_search_url, 
                 { 
                   minChars:      1, 
@@ -113,6 +121,12 @@ MojoMojo.RoleForm = function(params) {
             });
         }
     };
+
+    container.find(params.selectors.remove_member).click( function() { return API.remove_member(this) } );
+
+    API.setup_autocomplete();
+
+    return API;
 };
 
 var uploader;
@@ -204,13 +218,23 @@ $( function() {
 	    return false;
 	})
     
-    var editor = new MojoMojo.PermissionsEditor({
+    new MojoMojo.PermissionsEditor({
         container: '#permissions_editor',
         selectors: {
             edit:  '.enable_edit',
             save:  '.save_changes',
             clear: '.clear_permissions'
         }
+    });
+
+    new MojoMojo.RoleForm({
+        container:       '#role_form',
+        selectors: {
+            member_input:  '#member_input',
+            role_members:  '#role_members',
+            remove_member: '.remove_member'
+        },
+        user_search_url: $('#user_search_url').attr('value')
     });
 
 })
