@@ -7,8 +7,6 @@ elements:
   - type: Textarea
     name: body
     label: Page text
-    filters:
-       - HTMLEscape
     constraints:
       - Required
   - type: Text
