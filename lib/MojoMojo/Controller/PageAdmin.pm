@@ -1,5 +1,5 @@
 package MojoMojo::Controller::PageAdmin;
-
+use warnings;
 use strict;
 use Data::Dumper;
 use base 'Catalyst::Controller::HTML::FormFu';
@@ -131,6 +131,71 @@ sub edit : Global FormConfig {
         return;
     }
 }    # end sub edit
+
+=head2 permissions
+
+This action allows page permissions to be displayed and edited.
+
+=cut
+
+sub permissions : Global {
+    my ($self, $c, $path) = @_;
+    
+    my $stash = $c->stash;
+    $stash->{template} = 'page/permissions.tt';
+
+    my @path_elements = $c->_expand_path_elements($stash->{path});
+    my $current_path = pop @path_elements;
+    
+    my $data = $c->get_permissions_data( $current_path, \@path_elements );
+    my $current_data = exists $data->{$current_path} ? $data->{$current_path} : {};
+
+    my @roles = $c->model('DBIC::Role')->active_roles->all;
+    my %roles = map { $_->id => $_->name } @roles;
+
+    my %current;
+    
+    # build current page permissions hash for each role
+    for my $role (@roles) {
+        $current{$role->name} = 
+            exists $current_data->{$role->id} ? 
+                $current_data->{$role->id} : undef;
+    }
+
+    # same as above: sort elements to avoid nasty TT code
+    $stash->{current_perms} = [ 
+        map { { 
+            role_name => $_, 
+            inherited => $current{$_} ? 1 : 0,
+            perms     => $current{$_} && $current{$_}->{page}, 
+            subpages  => exists $current{$_}->{subpages} ? 1 : 0
+        } } 
+        sort keys %current
+    ];
+
+    my %inherited;
+    my $parent_path = $path_elements[-1];
+
+    # build inherited permissions hash
+    for my $path (keys %$data) {
+        # might have additional data (if cached)
+        next unless ($parent_path && $parent_path =~ /^$path/);
+
+        my $path_perms = $data->{$path};
+        for my $role (keys %$path_perms) {
+            next unless exists $roles{$role};
+            my $role_perms = $path_perms->{$role};
+            $inherited{$path}{$roles{$role}} = $role_perms->{subpages}
+                if exists $role_perms->{subpages};
+        }
+    }
+    
+    # sort elements to avoid nasty TT code
+    $stash->{inherited_perms} = [ 
+        map { { path => $_, perms => $inherited{$_} } }
+            sort { length $a <=> length $b } keys %inherited 
+    ];
+}
 
 =head2 rollback
 

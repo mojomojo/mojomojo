@@ -171,6 +171,144 @@ sub imginfo : Local {
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
 
+=item usersearch (.jsrpc/usersearch)
+
+Backend which handles jQuery autocomplete requests for users.
+
+=cut
+
+sub usersearch : Local {
+    my ($self, $c) = @_;
+    my $query = $c->req->param('q');
+
+    $c->stash->{template} = "user/user_search.tt";
+    
+    if (defined($query) && length($query)) {
+        my $rs = $c->model('DBIC::Person')->search_like({
+            login => '%'.$query.'%'
+        });
+        $c->stash->{users} = [ $rs->all ];
+    }
+}
+
+=item set_permissions (.jsrpc/ser_permissions)
+
+Sets page permissions.
+
+=cut
+
+sub set_permissions : Local {
+    my ($self, $c) = @_;
+
+    # only admins can change permissions for now
+    unless ($c->user->is_admin) {
+        $c->res->body("Forbidden");
+        $c->res->status(403);
+        $c->detach;
+    }
+
+    my @path_elements = $c->_expand_path_elements($c->stash->{path});
+    my $current_path = pop @path_elements;
+    
+    my ( $read, $write, $subpages) = 
+        map { $c->req->param($_) ? 'yes' : 'no' } 
+            qw/read write subpages/;
+    
+    my $role = $c->model('DBIC::Role')->find( 
+        { name => $c->req->param('role_name') } 
+    );
+
+    my $params = {
+        path => $current_path,
+        role => $role->id,
+        apply_to_subpages   => $subpages,
+        create_allowed      => $write,
+        delete_allowed      => $write,
+        edit_allowed        => $write,
+        view_allowed        => $read,
+        attachment_allowed  => $write
+    };
+
+    my $model = $c->model('DBIC::PathPermissions');
+
+    # when subpages should inherit permissions we actually need to update two 
+    # entries: one for the subpages and one for the current page
+    if ($subpages eq 'yes') {
+        # update permissions for subpages
+        $model->update_or_create( $params );
+
+        # update permissions for the current page
+        $params->{apply_to_subpages} = 'no';
+        $model->update_or_create( $params );
+    }
+    # otherwise, we must remove the subpages permissions entry and update the
+    # entry for the current page
+    else {
+        # delete permissions for subpages
+        $model->search( { 
+            path              => $current_path, 
+            role              => $role->id, 
+            apply_to_subpages => 'yes'
+        } )->delete;
+        
+        # update permissions for the current page
+        $model->update_or_create($params);
+    }
+
+    # clear cache
+    if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+        $c->cache->remove( 'page_permission_data' );
+    }
+
+    $c->res->body("OK");
+    $c->res->status(200);
+}
+
+=item clear_permissions (.jsrpc/clear_permissions)
+
+Clears this page permissions for a given role (making permissions inherited).
+
+=cut
+
+sub clear_permissions : Local {
+    my ($self, $c) = @_;
+
+    # only admins can change permissions for now
+    unless ($c->user->is_admin) {
+        $c->res->body("Forbidden");
+        $c->res->status(403);
+        $c->detach;
+    }
+
+    my @path_elements = $c->_expand_path_elements($c->stash->{path});
+    my $current_path = pop @path_elements;
+    
+    my $role = $c->model('DBIC::Role')->find( 
+        { name => $c->req->param('role_name') } 
+    );
+
+    if ($role) {
+    
+        # delete permissions for subpages
+        $c->model('DBIC::PathPermissions')->search( { 
+            path              => $current_path, 
+            role              => $role->id
+        } )->delete;
+
+        # clear cache
+        if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+            $c->cache->remove( 'page_permission_data' );
+        }
+
+    }
+
+    $c->res->body("OK");
+    $c->res->status(200);
+
+}
+
+
+
 =back
 
 =head1 AUTHOR

@@ -1,3 +1,106 @@
+/* make sure we've got a MojoMojo namespace */
+if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
+
+MojoMojo.PermissionsEditor = function(params) {
+    return {
+        clear_permissions: function (link) {
+          var span = link.parentNode;
+          var td   = span.parentNode;
+          var row  = td.parentNode;
+          
+          var role_name = $(td).find('input').get(0).value;
+
+          $.ajax({
+            type: "POST",
+            url: params.clear_url,
+            data: "role_name=" + role_name,
+            success: function() {
+              $(row).find('input').removeAttr('checked');
+              $(td).find('span, span a').addClass('hide');
+            }
+          });
+        },
+        enable_edit: function (link) {
+          $(link.parentNode).find('a').toggleClass('hide');
+          $(link.parentNode).find('span, span a').addClass('hide');
+          $(link.parentNode.parentNode).find('input').removeAttr('disabled');
+        },
+        save_changes: function (link) {
+          var td  = link.parentNode;
+          var row = td.parentNode;
+          
+          var values = [];
+          $(row).find('input').map( function(i, elt) { 
+            if (elt.type == 'checkbox')
+              values.push(elt.name + "=" + (elt.checked ? "1" : "0"));
+            else
+              values.push(elt.name + "=" + elt.value);
+          } );
+
+          $.ajax({
+            type: "POST",
+            url: params.set_url,
+            data: values.join("&"),
+            success: function() {
+              $(row).find('input').attr('disabled', 'disabled');
+              $(td).find('a,span').toggleClass('hide');
+            }
+          });
+        }
+    };
+};
+
+MojoMojo.RoleForm = function(params) {
+    return {
+        remove_member: function (link) {
+          var li   = link.parentNode;
+          var list = li.parentNode;
+          list.removeChild(li);
+          
+          var remaining = list.getElementsByTagName('li');
+          if (remaining.length == 1) {
+            $(remaining[0]).removeClass('hide');
+          }
+        },
+        setup_autocomplete: function(id) {
+            var select_item = function (li) {
+              $("#member_input").get(0).value = '';
+
+              // check if it's already added
+              if ($("#role_members li.member input[value='" + li.extra[0] + "']").length == 0) {
+                $("#role_members").append(
+                  '<li class="member">' +
+                    li.selectValue +
+                    '<input type="hidden" name="role_members" value="' + li.extra[0] + '"/> ' +
+                    '<a class="clickable" onclick="remove_member(this);">[remove]</a>' +
+                  '</li>'
+                );
+                $("#role_members li.empty").addClass('hide');
+              }
+            };
+
+            var format_item = function (row) {
+              return row[0];
+            };
+
+            $(document).ready(function() {
+              $("#" + id).autocomplete(
+                params.user_search_url, 
+                { 
+                  minChars:      1, 
+                  matchSubset:   1, 
+                  matchContains: 1, 
+                  cacheLength:   10, 
+                  onItemSelect:  select_item, 
+                  formatItem:    format_item,
+                  selectOnly:    1 
+                }
+              );
+            });
+        }
+    };
+};
+
 var uploader;
 $( function() {
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })

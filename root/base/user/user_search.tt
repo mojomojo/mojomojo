@@ -1,0 +1,3 @@
+[%- FOREACH user IN users -%]
+[% user.login %]|[% user.id %][% "\n" %]
+[%- END -%]

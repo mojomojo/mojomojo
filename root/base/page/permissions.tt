@@ -1,0 +1,70 @@
+[% WRAPPER page/wrapper.tt pre_title="Edit" %]
+
+[% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
+
+<h4>Inherited permissions:</h4>
+
+[% IF inherited_perms && inherited_perms.size > 0 %]
+
+[% FOREACH perm_set IN inherited_perms %]
+  <pre><strong>From [% perm_set.path %]:</strong>
+  [%- perms = perm_set.perms -%]
+  [%- FOREACH role IN perms.keys.sort -%]
+    [%- 
+      role_perms = perms.$role;
+      perms_list = [];
+      perms_list.push('read')  IF role_perms.view == 'yes' ;
+      perms_list.push('write') IF role_perms.edit == 'yes' ;
+    -%]
+    <br/>
+    [% role -%] can [% perms_list.join(', ') -%]
+  [% END %]
+  </pre>
+
+[% END %]
+
+[% ELSE %]
+
+None.
+
+[% END %]
+
+[% IF user.is_admin %]
+
+<script type="text/javascript">
+var editor = new MojoMojo.PermissionsEditor({
+  clear_url: "[% c.uri_for('jsrpc/clear_permissions') %]",
+  set_url:   "[% c.uri_for('jsrpc/set_permissions') %]"
+});
+</script>
+
+<h4>Permissions for this page:</h4>
+<table>
+ <tr>
+  <th></th><th>read</th><th>write</th><th>apply to subpages</th><th>actions</th>
+ </tr>
+ [% FOREACH perm IN current_perms %]
+ <tr>
+  <td>[% perm.role_name %]</td>
+  [% perms = perm.perms %]
+  <td class="center"><input type="checkbox" name="read"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td class="center"><input type="checkbox" name="write"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
+  <td>
+    <input type="hidden" name="role_name" value="[% perm.role_name %]"/>
+    <a class="clickable" onclick="editor.enable_edit(this);">Edit</a>
+    <a class="clickable hide" onclick="editor.save_changes(this);">Save</a>
+    <span[% UNLESS perm.inherited %] class="hide"[% END %]>
+      /
+      <a class="clickable[% UNLESS perm.inherited %] hide[% END %]" onclick="editor.clear_permissions(this);">
+        Use inherited permissions
+      </a>
+    <span>
+  </td>
+ </tr>
+ [% END %]
+</table>
+
+[% END %]
+
+[% END %]

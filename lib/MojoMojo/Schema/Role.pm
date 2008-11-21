@@ -5,7 +5,7 @@ use warnings;
 
 use base 'DBIx::Class';
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "ResultSetManager", "PK::Auto", "Core" );
 __PACKAGE__->table("role");
 __PACKAGE__->add_columns(
     "id",
@@ -19,5 +19,16 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint( "name_unique", ["name"] );
 __PACKAGE__->has_many( "role_privileges", "RolePrivilege", { "foreign.role" => "self.id" }, );
 __PACKAGE__->has_many( "role_members",    "RoleMember",    { "foreign.role" => "self.id" } );
+__PACKAGE__->many_to_many( "members", "role_members", "person" );
+
+=head2 active_roles
+
+Filter inactive roles.
+
+=cut
+
+sub active_roles : ResultSet {
+    shift->search( { active => 1 } );
+}
 
 1;

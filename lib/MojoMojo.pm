@@ -214,9 +214,8 @@ sub uri_for_static {
 #      The endpoint in the path is always checked for a rule explicitly for that
 #      page - meaning apply_to_subpages = no.
 
-sub check_permissions {
-    my ( $c, $path, $user ) = @_;
-
+sub _cleanup_path {
+    my ( $c, $path ) = @_;
     ## make some changes to the path - We have to do this
     ## because path is not always cleaned up before we get it.
     ## sometimes we get caps, other times we don't.  permissions are
@@ -227,6 +226,13 @@ sub check_permissions {
 
     # clear out any double-slashes
     $searchpath =~ s|//|/|g;
+
+    return $searchpath;
+}
+
+sub _expand_path_elements {
+    my ( $c, $path ) = @_;
+    my $searchpath = $c->_cleanup_path( $path );
 
     my @pathelements = split '/', $searchpath;
 
@@ -243,11 +249,16 @@ sub check_permissions {
         push @paths_to_check, $current_path;
     }
 
-    ## always use role_id 0 - which is default role and includes everyone.
-    my @role_ids = (0);
-    if ( ref($user) ) {
-        push @role_ids, map { $_->role->id } $user->role_members->all;
-    }
+    return @paths_to_check;
+}
+
+sub get_permissions_data {
+    my ( $c, $current_path, $paths_to_check, $role_ids ) = @_;
+    
+    # default to roles for current user
+    $role_ids ||= $c->user_role_ids( $c->user );
+
+    my $permdata;
 
     ## ok - now that we have our path elements to check - we have to figure out how we are accessing them.
     ## If we have caching turned on, we load the perms from the cache and walk the tree.
@@ -271,9 +282,6 @@ sub check_permissions {
     #                                                  },
     #                                         users => .....
     #                                     }
-
-    my $permdata;
-
     if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
         $permdata = $c->cache->get('page_permission_data');
     }
@@ -291,12 +299,12 @@ sub check_permissions {
         # if we are not caching, we don't return the whole enchilada.
         if ( !$c->config->{'permissions'}{'cache_permission_data'} ) {
             ## this seems odd to me - but that's what the dbix::class says to do.
-            $rs = $rs->search( { role => \@role_ids } );
+            $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
                 {
                     '-or' => [
                         {
-                            path              => \@paths_to_check,
+                            path              => $paths_to_check,
                             apply_to_subpages => 'yes'
                         },
                         {
@@ -327,6 +335,32 @@ sub check_permissions {
     if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
         $c->cache->set( 'page_permission_data', $permdata );
     }
+
+    return $permdata;
+}
+
+sub user_role_ids {
+    my ( $c, $user ) = @_;
+    
+    ## always use role_id 0 - which is default role and includes everyone.
+    my @role_ids = (0);
+    
+    if ( ref($user) ) {
+        push @role_ids, map { $_->role->id } $user->role_members->all;
+    }
+
+    return @role_ids;
+}
+
+sub check_permissions {
+    my ( $c, $path, $user ) = @_;
+    
+    my @paths_to_check = $c->_expand_path_elements($path);
+    my $current_path   = $paths_to_check[-1];
+
+    my @role_ids = $c->user_role_ids( $user );
+
+    my $permdata = $c->get_permissions_data($current_path, \@paths_to_check, \@role_ids);
 
     # rules comparison hash
     # allow everything by default

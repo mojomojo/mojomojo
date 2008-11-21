@@ -1,10 +1,6 @@
 [%PROCESS header.tt%]
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
-<div id="toplinks">
-<a accesskey="C" href="[%c.uri_for('/.admin')%]">configuration</a> |
-<b class="navOn">users</b> |
-<a accesskey="B" href="[% c.uri_for('view')%]">back</a> </div>
-
+ [% PROCESS admin/toplinks.tt selected = 'users' %]
  <div id="content">
  <h1>Users</h1>
  <table>
