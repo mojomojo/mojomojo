@@ -200,14 +200,7 @@ Sets page permissions.
 sub set_permissions : Local {
     my ($self, $c) = @_;
 
-    my $user = $c->user;
-
-    # only admins can change permissions for now
-    unless ($user && $user->is_admin) {
-        $c->res->body("Forbidden");
-        $c->res->status(403);
-        $c->detach;
-    }
+    $c->forward('validate_perm_edit');
 
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
@@ -216,9 +209,7 @@ sub set_permissions : Local {
         map { $c->req->param($_) ? 'yes' : 'no' } 
             qw/read write subpages/;
     
-    my $role = $c->model('DBIC::Role')->find( 
-        { name => $c->req->param('role_name') } 
-    );
+    my $role = $c->stash->{role};
 
     my $params = {
         path => $current_path,
@@ -275,21 +266,12 @@ Clears this page permissions for a given role (making permissions inherited).
 sub clear_permissions : Local {
     my ($self, $c) = @_;
 
-    my $user = $c->user;
-
-    # only admins can change permissions for now
-    unless ($user && $user->is_admin) {
-        $c->res->body("Forbidden");
-        $c->res->status(403);
-        $c->detach;
-    }
+    $c->forward('validate_perm_edit');
 
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
     
-    my $role = $c->model('DBIC::Role')->find( 
-        { name => $c->req->param('role_name') } 
-    );
+    my $role = $c->stash->{role};
 
     if ($role) {
     
@@ -311,7 +293,36 @@ sub clear_permissions : Local {
 
 }
 
+=item validate_perm_edit
 
+Validates if the user is able to edit permissions and if a role was supplied.
+
+=cut
+
+sub validate_perm_edit : Private {
+    my ($self, $c) = @_;
+    
+    my $user = $c->user;
+
+    # only admins can change permissions for now
+    unless ($user && $user->is_admin) {
+        $c->res->body("Forbidden");
+        $c->res->status(403);
+        $c->detach;
+    }
+
+    my $role = $c->model('DBIC::Role')->find( 
+        { name => $c->req->param('role_name') } 
+    );
+
+    unless ($role) {
+        $c->res->body('Bad Request');
+        $c->res->status(400);
+        $c->detach;
+    }
+
+    $c->stash->{role} = $role;
+}
 
 =back
 
