@@ -2,7 +2,9 @@
 if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
 
 MojoMojo.PermissionsEditor = function(params) {
-    return {
+    var container = $(params.container);
+    
+    var API = {
         clear_permissions: function (link) {
           var span = link.parentNode;
           var td   = span.parentNode;
@@ -12,18 +14,22 @@ MojoMojo.PermissionsEditor = function(params) {
 
           $.ajax({
             type: "POST",
-            url: params.clear_url,
+            url: link.href,
             data: "role_name=" + role_name,
             success: function() {
               $(row).find('input').removeAttr('checked');
               $(td).find('span, span a').addClass('hide');
             }
           });
+          
+          return false;
         },
         enable_edit: function (link) {
           $(link.parentNode).find('a').toggleClass('hide');
           $(link.parentNode).find('span, span a').addClass('hide');
           $(link.parentNode.parentNode).find('input').removeAttr('disabled');
+
+          return false;
         },
         save_changes: function (link) {
           var td  = link.parentNode;
@@ -39,15 +45,23 @@ MojoMojo.PermissionsEditor = function(params) {
 
           $.ajax({
             type: "POST",
-            url: params.set_url,
+            url: link.href,
             data: values.join("&"),
             success: function() {
               $(row).find('input').attr('disabled', 'disabled');
               $(td).find('a,span').toggleClass('hide');
             }
           });
+          
+          return false;
         }
     };
+
+    container.find(params.selectors.edit ).click( function() { return API.enable_edit(this) } );
+    container.find(params.selectors.save ).click( function() { return API.save_changes(this) } );
+    container.find(params.selectors.clear).click( function() { return API.clear_permissions(this) } );
+
+    return API;
 };
 
 MojoMojo.RoleForm = function(params) {
@@ -189,6 +203,16 @@ $( function() {
 	    })
 	    return false;
 	})
+    
+    var editor = new MojoMojo.PermissionsEditor({
+        container: '#permissions_editor',
+        selectors: {
+            edit:  '.enable_edit',
+            save:  '.save_changes',
+            clear: '.clear_permissions'
+        }
+    });
+
 })
 
 var fetch_preview = function() {
