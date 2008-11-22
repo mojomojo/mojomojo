@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 package Dummy;
 sub new {
 	my $class = shift;

@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use Test::More tests => 8;
 
 use MojoMojo::Formatter::IRCLog;
