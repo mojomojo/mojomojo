@@ -29,6 +29,7 @@ requires (
         'DateTime::Format::Mail'                        => 0,
         'DBIx::Class::DateTime::Epoch'                  => 0,
         'DBIx::Class::HTML::FormFu'                     => 0,
+	'HTML::FormFu::Model::DBIC'			=> 0,  # User->prefs
         'DBIx::Class::EncodedColumn'                    => 0,
         'Module::Pluggable::Ordered'                    => '1.4',
         'Data::Page'                                    => '2.00',

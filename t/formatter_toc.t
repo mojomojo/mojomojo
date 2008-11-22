@@ -3,7 +3,7 @@ use strict;
 use MojoMojo::Formatter::TOC;
 
 use Test;
-BEGIN { plan tests => 1; }
+BEGIN { plan tests => 3; }
 
 
 print "# Test 01: character set in anchor names\n";
