@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 use Test::More tests => 5;
 BEGIN{
 $ENV{CATALYST_CONFIG}='t/var/mojomojo.yml';

@@ -1,8 +1,8 @@
-    - Added  GUI Permissions editor (nilsonsjf)
-    - Finished porting MojoMojo to HTML::FormFu
-    - Added TOC plugin using HTML::GenToc + anchor names that are
-	  XHTML compliant and human/SEO-friendly (dandv)
-	- Fixed formatting of profile.
+        - Added  GUI Permissions editor (nilsonsjf)
+        - Finished porting MojoMojo to HTML::FormFu
+        - Added TOC plugin using HTML::GenToc + anchor names that are
+	      XHTML compliant and human/SEO-friendly (dandv)
+	    - Fixed formatting of profile.
 
 0.999022  2008-11-14 17:28:00
         - Fix validation check (sachinjsk)
@@ -169,7 +169,7 @@
 
 0.999001  2007-08-29 16:29:00
        - Initial Release. There are bugs, but the basic functionality works, 
-         and the test suite passes all tests here. Please to be contributing
+         and the test suite passes all tests here. Please contribute
          tests for bugs you want fixed.
          
          Once we fix it all, we'll consider it 1.0

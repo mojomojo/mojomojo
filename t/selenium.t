@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 BEGIN {
   $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
 };
