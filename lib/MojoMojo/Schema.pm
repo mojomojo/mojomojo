@@ -104,7 +104,7 @@ sub create_initial_data {
 This is your front page. To start administrating your wiki, please log in with
 username admin/password admin. At that point you will be able to set up your
 configuration. If you want to play around a little with the wiki, just create
-a NewPage or edit this one through the edit link at the bottom.
+a [[New Page]] or edit this one through the edit link at the bottom.
 
 h2. Need some assistance?
 

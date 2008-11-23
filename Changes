@@ -1,9 +1,12 @@
+0.999023  2008-11-23 10:35:00
         - Added  GUI Permissions editor (nilsonsjf)
         - Finished porting MojoMojo to HTML::FormFu
         - Added TOC plugin using HTML::GenToc + anchor names that are
 	      XHTML compliant and human/SEO-friendly (dandv)
 	    - Fixed formatting of profile.
-        - Fix list to not display implicit links.
+        - Fix recent list to not display implicit links.
+        - Fix bind issue in .list
+        - Set noindex for most pages
 
 0.999022  2008-11-14 17:28:00
         - Fix validation check (sachinjsk)
