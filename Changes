@@ -3,6 +3,7 @@
         - Added TOC plugin using HTML::GenToc + anchor names that are
 	      XHTML compliant and human/SEO-friendly (dandv)
 	    - Fixed formatting of profile.
+        - Fix list to not display implicit links.
 
 0.999022  2008-11-14 17:28:00
         - Fix validation check (sachinjsk)
