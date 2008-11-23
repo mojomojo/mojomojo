@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt %]
+[% WRAPPER page/wrapper.tt index_page=1%]
 
 	[%IF c.req.params.rev %]
 	<div id="revision_info">

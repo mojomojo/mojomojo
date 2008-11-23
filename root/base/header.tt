@@ -16,6 +16,7 @@
                 "A poorly configured MojoMojo Installation"
             %]
     </title>
+    [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link title="main stylesheet" href="[%c.uri_for_static('mojomojo.css')%]" type="text/css" rel="stylesheet" />
     [% IF c.config.theme %]

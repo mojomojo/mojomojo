@@ -1,4 +1,4 @@
-[%PROCESS header.tt%]
+[%PROCESS header.tt index_page=1 %]
 <div id="header"><h1>
  [% c.pref("name") || "MojoMojo" %]
 gallery -

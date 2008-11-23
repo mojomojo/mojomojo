@@ -1,6 +1,6 @@
 [% SET title = "Tags under " _ page.name %]
 
-[% WRAPPER page/wrapper.tt title=title %]
+[% WRAPPER page/wrapper.tt title=title index_page=1 %]
 
 [% cloud.html_and_css(50) || "No tags in use" %]
 

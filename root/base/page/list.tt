@@ -40,7 +40,7 @@
 [% IF wanted.size %]
     <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">Not found. Click to create this page." href="[%c.uri_for('/', wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">referenced by [% wanted.from_page.path %]</a></li>
+        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">Not found. Click to create this page." href="[%c.uri_for( wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">referenced by [% wanted.from_page.path %]</a></li>
 [% END %]
     </ul>
 [% END %]
@@ -51,7 +51,7 @@
 [% IF orphans.size %]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
-        <li><a href="[% c.uri_for('/', orphan.path) %]">[%orphan.path%]<a  href="[%c.uri_for('/',orphan.path,edit)%]">_</a></span></li>
+        <li><a href="[% c.uri_for( orphan.path) %]">[%orphan.path%]<a  href="[%c.uri_for(_orphan.path,edit)%]">_</a></span></li>
 [% END %]
     </ul>
 [% END %]
