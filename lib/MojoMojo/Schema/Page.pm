@@ -132,7 +132,7 @@ sub path_pages_by_id : ResultSet {
             'start_page.lft' => 1,
             'end_page.id'    => $id,
             'me.lft'         => \'BETWEEN start_page.lft AND start_page.rgt',
-            'end_page.lft'   => 'BETWEEN me.lft AND me.rgt',
+            'end_page.lft'   => \'BETWEEN me.lft AND me.rgt',
         },
         {
             from     => "page AS start_page, page AS me, page AS end_page ",
