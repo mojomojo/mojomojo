@@ -26,7 +26,7 @@ Format order can be 1-99. The Wiki formatter runs on 30
 
 =cut
 
-sub format_content_order { 30 }
+sub format_content_order { 10 }
 
 # explicit link regexes
 
