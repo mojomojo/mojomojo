@@ -28,7 +28,7 @@
     <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
 
     <dt>Movies:</dt>
-    <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+    <dd>[% person.movies_formatted || 'Nothing entered' %]</dd>
 
     <dt>Date registered:</dt>
     <dd>[%person.registered.ymd%]</dd>
