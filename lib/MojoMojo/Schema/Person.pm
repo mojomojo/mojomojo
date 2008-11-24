@@ -201,10 +201,11 @@ sub music_formatted { $textile->process(shift->music); }
 sub movies_formatted { $textile->process(shift->movies); }
 
 sub age {
-    my $self=shift;
-    my $birthdate=$self->born;
-    my $diff=DateTime->now-$birthdate;
-    return $diff->years;
+    my ($self) = @_;
+    if (my $birthdate = $self->born) {
+        my $diff = DateTime->now - $birthdate;
+        return $diff->years;
+    }
 }
 
 1;
