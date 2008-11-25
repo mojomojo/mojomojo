@@ -31,7 +31,7 @@
   [% IF template.name == 'page/list.tt' %]
     <li class="navOn" title="Alphabetically sorted list of pages">Sub pages</li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('list')%]" title="Alphabetically sorted list of pages" accesskey="A">All pages</a></li> 
+    <li><a href="[%c.uri_for('list')%]" title="Alphabetically sorted list of pages" accesskey="A">Sub pages</a></li> 
   [% END; IF template.name =='page/recent.tt' %]
     <li class="navOn" title="Pages sorted by when they were last changed">Recent</li>
   [% ELSE %]
