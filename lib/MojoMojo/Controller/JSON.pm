@@ -30,8 +30,6 @@ sub tagsearch : Local {
     my ($self, $c) = @_;
     my $query = $c->req->param('q');
 
-    #$c->stash->{template} = "user/user_search.tt";
-    
     $c->log->debug('Just before if');
     if (defined($query) && length($query)) {
         my $rs = $c->model('DBIC::Tag')->search_like({
@@ -40,6 +38,8 @@ sub tagsearch : Local {
         $c->stash->{users} = 'ok something here';
     }
     undef $c->stash->{page};
+    undef $c->stash->{person};
+    undef $c->stash->{pre_hacked_uri};
     $c->log->debug('Just before forwarding');
 }
 
