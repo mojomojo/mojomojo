@@ -67,3 +67,32 @@
 [% END %]
 </ul>
 </div>
+
+
+<script>
+$(document).ready(function() 
+{
+    $("#taginput").autocomplete("[%c.uri_for('json/tagsearch')%]", 
+    {
+        dataType: 'json',
+        parse: function(data) 
+        {
+            var rows = new Array();
+            for (var i = 0; i < data.length; i++) 
+            {
+                rows[i] = { data: data[i], value: data[i].Tag, result: data[i].Tag };
+            }
+            return rows;
+        },
+        formatItem: function(row, i, max) 
+        {
+            return row.Tag;
+        },
+        width: 300,
+        highlight: false,
+        multiple: true,
+        multipleSeparator: ","
+    });
+});
+
+</script>
