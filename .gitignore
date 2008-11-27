@@ -6,3 +6,4 @@ Makefile
 META.yml
 pm_to_blib
 t/var/mojomojo.db
+mojomojos.kpf
