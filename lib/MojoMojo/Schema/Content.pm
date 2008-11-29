@@ -9,7 +9,7 @@ use DateTime::Format::Mail;
 
 use Algorithm::Diff;
 use String::Diff;
-use HTML::Entities qw/encode_entities/;
+use HTML::Entities qw/encode_entities_numeric/;
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
 __PACKAGE__->table("content");
@@ -293,6 +293,6 @@ sub store_links {
     }
 }
 
-sub encoded_body { return encode_entities( shift->body ); }
+sub encoded_body { return encode_entities_numeric( shift->body ); }
 
 1;
