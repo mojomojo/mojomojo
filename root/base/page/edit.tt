@@ -35,7 +35,7 @@
     [%PROCESS toolbar.tt%]
     <br/>
     <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
-    <textarea id="body" name="body" cols="70">[%- content.body || c.req.params.body || "" | html -%]</textarea>
+    <textarea id="body" name="body" cols="70">[%- content.encoded_body || c.req.params.body || "" | html -%]</textarea>
     
     <script type="text/javascript" language="JavaScript">
     var append='[%append|js%]';
