@@ -7,6 +7,7 @@ use base 'DBIx::Class';
 
 use DateTime;
 use Image::ExifTool;
+use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
 __PACKAGE__->load_components( "PK::Auto", 'Ordered', "Core" );

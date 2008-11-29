@@ -10,7 +10,6 @@ use File::MMagic;
 use FileHandle;
 use File::Copy;
 use File::Temp qw/tempfile/;
-use Image::Math::Constrain;
 use Imager;
 
 __PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch PK::Auto Core/);
