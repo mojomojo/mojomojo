@@ -27,28 +27,40 @@ Backend which handles jQuery autocomplete requests for tag.
 =cut
 
 sub tagsearch : Local {
-    my ($self, $c) = @_;
-    my $query = $c->req->param('q');
+   my ($self, $c) = @_;
+   my $query = $c->req->param('q');
 
-    $c->log->debug('Just before if');
-    if (defined($query) && length($query)) {
-        my $rs = $c->model('DBIC::Tag')->search_like({
-            tag => '%'.$query.'%'
-        });
-        $c->stash->{users} = 'ok something here';
-    }
-    undef $c->stash->{page};
-    undef $c->stash->{person};
-    undef $c->stash->{pre_hacked_uri};
-    $c->log->debug('Just before forwarding');
+   if (defined($query) && length($query)) {
+       my $rs = $c->model('DBIC::Tag')->search_like({
+           tag => $query.'%'
+       }, {
+           select => [ { distinct => [ 'tag' ] } ],
+           as => [ 'tag' ]
+       });
+       my @tags;
+       while( my $each_rs = $rs->next )
+       {
+           push(@tags, $each_rs->tag);
+       }
+       $c->stash->{tags} = \@tags;
+   }
 }
+
 
 sub auto : Private {
-    my ($self,$c) =@_;
-   $c->stash->{current_view}='MojoMojo::View::JSON';
+   my ($self, $c) = @_;
+
+   delete $c->stash->{page};
+   delete $c->stash->{person};
+   delete $c->stash->{user};
+   delete $c->stash->{pre_hacked_uri};
+   delete $c->stash->{path_pages};
+   delete $c->stash->{proto_pages};
+   delete $c->stash->{path};
+
+   $c->stash->{current_view} = 'MojoMojo::View::JSON';
    return 1;
 }
-
 1;
 
 =head1 AUTHOR
