@@ -37,6 +37,7 @@ sub tagsearch : Local {
            select => [ { distinct => [ 'tag' ] } ],
            as => [ 'tag' ]
        });
+
        my @tags;
        while( my $each_rs = $rs->next )
        {
@@ -46,6 +47,11 @@ sub tagsearch : Local {
    }
 }
 
+=head2 auto
+
+Delete all DBIC objects in stash.
+
+=cut
 
 sub auto : Private {
    my ($self, $c) = @_;
@@ -61,6 +67,7 @@ sub auto : Private {
    $c->stash->{current_view} = 'MojoMojo::View::JSON';
    return 1;
 }
+
 1;
 
 =head1 AUTHOR
