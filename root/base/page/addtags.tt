@@ -1,0 +1,32 @@
+<div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" id="add_tag">Add tag</a></div>
+<div id="addtag" style="display:none;" class="formdiv">
+    <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" id="addtag_form"> 
+      <input id="taginput" type="text" name="tag" size="5" />
+      <input class="addbutton" type="submit" name="add" value=" Add " /> 
+    </form>
+</div>
+
+<script>
+$(document).ready(function() {
+   $("#taginput").autocomplete("[%c.uri_for('json/tagsearch')%]", {
+       dataType: 'json',
+       parse: function(data) {
+           var result = [];
+           for (var i = 0; i < data.tags.length; i++) {
+               result[i] = { data: data.tags[i],
+                             value: data.tags[i],
+                             result: data.tags[i]
+                            };
+           }
+           return result;
+       },
+       formatItem: function(row, i, max) {
+           return row;
+       },
+       width: 120,
+       highlight: false,
+       multiple: true,
+       multipleSeparator: " "
+   });
+});
+</script>
