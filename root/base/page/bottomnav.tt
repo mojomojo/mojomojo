@@ -1,12 +1,6 @@
 [% IF template.name == "page/view.tt" or template.name == "page/highlight.tt" %]
   [% IF user %]
-    <div id="showtag" class="showdiv"><a title="Set a keyword for this page" href="#" id="add_tag">Add tag</a></div>
-    <div id="addtag" style="display:none;" class="formdiv">
-      <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" id="addtag_form"> 
-        <input id="taginput" type="text" name="tag" size="5" />
- 	    <input class="addbutton" type="submit" name="add" value=" Add " /> 
-      </form>
-    </div>
+    [% PROCESS page/addtags.tt %]
   [%END%]
   <div id="tags">
     [% PROCESS page/tags.tt  %]
