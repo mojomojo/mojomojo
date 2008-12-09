@@ -31,8 +31,10 @@ MojoMojo->config->{authentication}{dbic} = {
     user_field     => 'login',
     password_field => 'pass'
 };
+MojoMojo->config->{default_view}='TT';
 
 MojoMojo->setup();
+
 
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
