@@ -1,3 +1,6 @@
+        - Fix password dialog
+        - Autocomplete for tags (Sachin Sebastian )
+        - Update SWFUpload to support flash 1
         - Resolve a unicode issue in some installations when editing text.
 
 0.999023  2008-11-23 10:35:00
