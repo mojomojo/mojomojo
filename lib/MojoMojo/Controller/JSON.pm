@@ -43,28 +43,20 @@ sub tagsearch : Local {
        {
            push(@tags, $each_rs->tag);
        }
-       $c->stash->{tags} = \@tags;
+       $c->stash->{json}->{tags} = \@tags;
    }
 }
 
 =head2 auto
 
-Delete all DBIC objects in stash.
+Set default view
 
 =cut
 
 sub auto : Private {
    my ($self, $c) = @_;
 
-   delete $c->stash->{page};
-   delete $c->stash->{person};
-   delete $c->stash->{user};
-   delete $c->stash->{pre_hacked_uri};
-   delete $c->stash->{path_pages};
-   delete $c->stash->{proto_pages};
-   delete $c->stash->{path};
-
-   $c->stash->{current_view} = 'MojoMojo::View::JSON';
+   $c->stash->{current_view} = 'View::JSON';
    return 1;
 }
 
