@@ -1,3 +1,5 @@
+mojomojo.db
+mojomojo_local.conf
 blib/*
 inc/*
 index/*

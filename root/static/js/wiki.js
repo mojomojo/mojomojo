@@ -173,9 +173,13 @@ $( function() {
     $('#plain_upload').after('<a href="#" id="do_upload">Choose attachments</a>').hide()
 
 	$('#do_upload').each(function() {
-	    try {
+	    console.log('foo')
 	    uploader=new SWFUpload({
-    		flash_url : '/.static/flash/swfupload_f9.swf',
+    		button_placeholder_id: "do_upload",
+            button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
+            button_width: 61,
+			button_height: 22,
+    		flash_url : $.uri_for('/.static/flash/swfupload.swf'),
     		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
     		file_size_limit : "100 MB",
             file_post_name: 'file' ,
@@ -203,12 +207,8 @@ $( function() {
       		  $('#progressbar').hide();$('#progress_status').hide();
     		  $('#attachments').load($('#list_link').attr('href'))  
     		},
-    		debug: false
+    		debug: true
     	})
-	    } 
-	    catch(ex) {
-	        $('#plain_upload').show()
-	    }
 	}).click(function() { uploader.selectFiles() })
 	$('.delete_attachment').click(function(){
 	    link=$(this)
@@ -236,7 +236,26 @@ $( function() {
         },
         user_search_url: $('#user_search_url').attr('value')
     });
-
+    $("#taginput").autocomplete($('#autocomplete_url').attr('href'), {
+        dataType: 'json',
+        parse: function(data) {
+            var result = [];
+            for (var i = 0; i < data.tags.length; i++) {
+                result[i] = { data: data.tags[i],
+                              value: data.tags[i],
+                              result: data.tags[i]
+                             };
+            }
+            return result;
+        },
+        formatItem: function(row, i, max) {
+            return row;
+        },
+        width: 120,
+        highlight: false,
+        multiple: true,
+        multipleSeparator: " "
+    });
 })
 
 var fetch_preview = function() {
