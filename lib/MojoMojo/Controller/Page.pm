@@ -60,8 +60,9 @@ sub view : Global {
 
     my $user;
 
-    if ( $c->config->{'permissions'}{'check_permission_on_view'} ) {
+    if ( $c->config->{'permissions'}->{'check_permission_on_view'} ) {
         if ( $c->user_exists() ) { $user = $c->user->obj; }
+        $c->log->info('Checking permissions');
 
         my $perms = $c->check_permissions( $stash->{'path'}, $user );
         if ( !$perms->{'view'} ) {

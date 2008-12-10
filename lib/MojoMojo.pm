@@ -369,8 +369,8 @@ sub check_permissions {
     my %rulescomparison = (
         'create' => {
             'allowed' => (
-                defined $c->config->{'permissions'}{'create_allowed'}
-                ? $c->config->{'permissions'}{'create_allowed'}
+                defined $c->config->{'permissions'}->{'create_allowed'}
+                ? $c->config->{'permissions'}->{'create_allowed'}
                 : 1
             ),
             'role' => '__default',
@@ -378,8 +378,8 @@ sub check_permissions {
         },
         'delete' => {
             'allowed' => (
-                defined $c->config->{'permissions'}{'delete_allowed'}
-                ? $c->config->{'permissions'}{'delete_allowed'}
+                defined $c->config->{'permissions'}->{'delete_allowed'}
+                ? $c->config->{'permissions'}->{'delete_allowed'}
                 : 1
             ),
             'role' => '__default',
@@ -387,8 +387,8 @@ sub check_permissions {
         },
         'edit' => {
             'allowed' => (
-                defined $c->config->{'permissions'}{'edit_allowed'}
-                ? $c->config->{'permissions'}{'edit_allowed'}
+                defined $c->config->{'permissions'}->{'edit_allowed'}
+                ? $c->config->{'permissions'}->{'edit_allowed'}
                 : 1
             ),
             'role' => '__default',
@@ -396,8 +396,8 @@ sub check_permissions {
         },
         'view' => {
             'allowed' => (
-                defined $c->config->{'permissions'}{'view_allowed'}
-                ? $c->config->{'permissions'}{'view_allowed'}
+                defined $c->config->{'permissions'}->{'view_allowed'}
+                ? $c->config->{'permissions'}->{'view_allowed'}
                 : 1
             ),
             'role' => '__default',
@@ -405,8 +405,8 @@ sub check_permissions {
         },
         'attachment' => {
             'allowed' => (
-                defined $c->config->{'permissions'}{'attachment_allowed'}
-                ? $c->config->{'permissions'}{'attachment_allowed'}
+                defined $c->config->{'permissions'}->{'attachment_allowed'}
+                ? $c->config->{'permissions'}->{'attachment_allowed'}
                 : 1
             ),
             'role' => '__default',
