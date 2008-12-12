@@ -110,7 +110,12 @@ sub default : Private {
 
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
-    $c->res->output( IO::File->new( $c->stash->{att}->filename ) );
+    
+    # avoid broken binary files
+    my $io_file = IO::File->new( $c->stash->{att}->filename );
+    $io_file->binmode;
+
+    $c->res->output( $io_file );
     $c->res->headers->header( 'content-type', $c->stash->{att}->contenttype );
     $c->res->headers->header(
         "Content-Disposition" => "inline; filename=" . $c->stash->{att}->name );
