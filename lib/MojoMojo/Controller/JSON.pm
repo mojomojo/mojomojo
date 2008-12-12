@@ -56,7 +56,7 @@ Set default view
 sub auto : Private {
    my ($self, $c) = @_;
 
-   $c->stash->{current_view} = 'View::JSON';
+   $c->stash->{current_view} = 'JSON';
    return 1;
 }
 
