@@ -205,8 +205,7 @@ $( function() {
     		queue_complete_handler : function(numfiles) {
       		  $('#progressbar').hide();$('#progress_status').hide();
     		  $('#attachments').load($('#list_link').attr('href'))  
-    		},
-    		debug: true
+    		} 
     	})
 	}).click(function() { uploader.selectFiles() })
 	$('.delete_attachment').click(function(){
