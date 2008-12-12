@@ -173,7 +173,6 @@ $( function() {
     $('#plain_upload').after('<a href="#" id="do_upload">Choose attachments</a>').hide()
 
 	$('#do_upload').each(function() {
-	    console.log('foo')
 	    uploader=new SWFUpload({
     		button_placeholder_id: "do_upload",
             button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
