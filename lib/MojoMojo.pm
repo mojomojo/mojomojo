@@ -357,6 +357,11 @@ sub user_role_ids {
 sub check_permissions {
     my ( $c, $path, $user ) = @_;
     
+    return {
+        attachment  => 1,    create      => 1, delete      => 1,    
+        edit        => 1,    view        => 1,
+    } if ($user && $user->admin);
+    
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
