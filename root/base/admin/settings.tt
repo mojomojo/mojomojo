@@ -2,7 +2,7 @@
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
 [% PROCESS admin/toplinks.tt selected = 'configuration' %]
 <div id="content">
-   <h1>Site Configuration</h1>
+   <h1>[%loc('Site Configuration')%]</h1>
    [% form %]
 <h2>[%message%]</h2>
 </div>

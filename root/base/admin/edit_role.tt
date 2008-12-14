@@ -6,7 +6,7 @@
 [% PROCESS admin/toplinks.tt selected = 'roles', back = 'admin/role' %]
 
 <div id="content">
-<h1>Edit Role</h1>
+<h1>[%loc('Edit Role')%]</h1>
 [% PROCESS admin/role_form.tt active = role.active, role_name => role.name %]
 </div>
 
