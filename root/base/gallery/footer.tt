@@ -5,6 +5,7 @@
 onLoading: function(request){Element.hide('addtag');Element.show('showtag');$('taginput').value=''},
 onComplete: function(request){Fat.fade('.highlight');},
 parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
+<a href="[%c.uri_for('json/tagsearch')%]" id="autocomplete_url"></a>
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="add"> 
 </form>
