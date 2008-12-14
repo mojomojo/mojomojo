@@ -360,7 +360,7 @@ sub check_permissions {
     return {
         attachment  => 1,    create      => 1, delete      => 1,    
         edit        => 1,    view        => 1,
-    } if ($user && $user->admin);
+    } if ($user && $user->is_admin);
     
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
