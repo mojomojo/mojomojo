@@ -26,8 +26,4 @@
 
 <div id="bottomnav">&nbsp;</div>
        
-<script language="JavaScript" type="text/javascript">
-    Field.focus('loginField');
-</script>
-
 [% PROCESS footer.tt %]
