@@ -10,7 +10,7 @@ __PACKAGE__->config->{namespace} = '';
 
 sub begin : Private {
     my ( $self, $c ) = @_;
-    $c->languages([qw/no/]);
+    $c->languages(['no']);
     if ( $c->stash->{path} ) {
         my ( $path_pages, $proto_pages ) =
             $c->model('DBIC::Page')->path_pages( $c->stash->{path} );
