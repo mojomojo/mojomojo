@@ -2,6 +2,7 @@
 <div id="showtag" class="showdiv"><a href="#" id="add_tag">[%loc('add tag')%]</a></div>
 <div id="addtag" class="formdiv" style="display:none;">
 <form action="[%c.uri_for('gallery/submittag',photo.id)%]" method="post" id="addtag_form">
+<a href="[%c.uri_for('json/tagsearch')%]" id="autocomplete_url"></a>
 <input id="taginput" type="text" name="tag" width="5" autocomplete="off">
 <input type="submit" name="add" value="[%loc('add')%]"> 
 </form>

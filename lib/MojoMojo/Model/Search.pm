@@ -24,10 +24,10 @@ sub indexer {
             create   => ( -f __PACKAGE__->config->{index_dir}.'/segments' ? 0 : 1 ),
             analyzer => $analyzer,
             );
-        $invindexer->spec_field(name=>'path');
+        $invindexer->spec_field(name=>'path',analyzed=>0);
         $invindexer->spec_field(name=>'text');
         $invindexer->spec_field(name=>'author');
-        $invindexer->spec_field(name=>'date');
+        $invindexer->spec_field(name=>'date',analyzed=>0);
         $invindexer->spec_field(name=>'tags');
         return $invindexer;
 }
