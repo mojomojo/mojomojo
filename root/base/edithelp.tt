@@ -2,7 +2,7 @@
 <div id="TextileHelp">
 		<h2>[%loc('Textile formatting tips')%] (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_top">[%loc('advanced')%]</a>)</h2>
 <div class="rightHandSide"> 
-    <h3>[%[%loc('Wiki words')%]</h3>
+    <h3>[%loc('Wiki words')%]</h3>
 <p>
   [%loc('Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.')%]
 </p>
@@ -56,7 +56,7 @@
 </div>
 		<table cellspacing="0" cellpadding="0">
             <tr><th colspan="2">[%loc('Text Formatting')%]</th></tr>
-            <tr><td>[%loc('*italic* or _italic_')%]</td><td>[%loc('Text in')%] <em>[%[%loc('italics')%]</em></td>
+            <tr><td>[%loc('*italic* or _italic_')%]</td><td>[%loc('Text in')%] <em>[%loc('italics')%]</em></td>
             <tr><td>[%loc('**bold** or __bold__')%]</td><td>[%loc('Text in')%] <b>[%loc('bold')%]</b></td>
             <tr><th colspan="2">[%loc('Links')%]</th></tr>
             <tr><td>[%loc('Inline Links')%]:</td><td>[[%loc('example')%]]([%loc('http://example.com/')%] "[%loc('Link Title')%]")</td>
