@@ -7,7 +7,7 @@
   [%loc('Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.')%]
 </p>
 <p>
-  [%loc('Wiki words')%]: <i>[%loc('HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))')%]'</i><br/>
+  [%loc('Wiki words')%]: <i>[%loc('HomePage, ThreeWordsTogether, ~[~[C++~]~], ~[~[Lets play again!~]~] ((easy to type))')%]'</i><br/>
 
   [%loc('Not wiki words')%]: <i>[%loc('IBM, School')%]</i>
 </p>
