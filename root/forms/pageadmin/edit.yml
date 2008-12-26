@@ -14,4 +14,3 @@ elements:
     label: creator
   - type: Submit
     name: submit
-    value: Save
