@@ -8,9 +8,9 @@ auto_id: '%f_%n'
 elements:
   - type: Text
     name: body
-    label: Comment body
+    label_loc: Comment body
     constraints:
       - Required
   - type: Submit
     name: submit
-    value: Register
+    value_loc: Register
