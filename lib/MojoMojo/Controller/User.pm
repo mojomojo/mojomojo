@@ -244,7 +244,7 @@ sub do_register : Private {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->email,
-                Subject => $c->loc('[%1] New User Validation',$c->pref->{name}||'MojoMojo'),
+                Subject => $c->loc('[x] New User Validation',$c->pref->{name}||'MojoMojo'),
             ],
             body => $c->view('TT')->render( $c, 'mail/validate.tt' ),
         )
@@ -276,7 +276,7 @@ sub validate : Global {
         }
         else {
             $c->stash->{message} =
-                $c->loc('Welcome, %1 your email is validated. Please log in.',$user->name);
+                $c->loc('Welcome, x your email is validated. Please log in.',$user->name);
             $c->stash->{template} = 'user/login.tt';
         }
         return;
@@ -329,7 +329,7 @@ sub profile : Global {
     }
     else {
         $c->stash->{template} = 'message.tt';
-        $c->stash->{message}  = $c->loc('User %1 not found!',$login);
+        $c->stash->{message}  = $c->loc('User x not found!',$login);
     }
 }
 

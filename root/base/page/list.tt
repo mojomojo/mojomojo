@@ -1,4 +1,4 @@
-[% SET title = loc('All Pages in %1',  page.path) %]
+[% SET title = loc('All Pages in x',  page.path) %]
 
 [% WRAPPER page/wrapper.tt title = title %]
 
@@ -14,7 +14,7 @@
 </div>
 <div id="allPages">
     <h2>[%loc('All Pages')%]</h2>
-    [%loc('All pages in %1 listed alphabetically', page.name )%]
+    [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages %]
         <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a></li>
