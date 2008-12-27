@@ -1,6 +1,10 @@
 /* make sure we've got a MojoMojo namespace */
 if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
 
+if (window['loadFirebugConsole']) {
+    window.loadFirebugConsole();
+}
+
 MojoMojo.PermissionsEditor = function(params) {
     var container = $(params.container);
     
@@ -82,15 +86,15 @@ MojoMojo.RoleForm = function(params) {
           }
         },
         setup_autocomplete: function() {
-            var select_item = function (li) {
+            var select_item = function (input, data) {
               member_input.attr('value', '');
 
               // check if it's already added
-              if (role_members.find("li.member input[value='" + li.extra[0] + "']").length == 0) {
+              if (role_members.find("li.member input[value='" + data[1] + "']").length == 0) {
                 role_members.append(
                   '<li class="member">' +
-                    li.selectValue +
-                    '<input type="hidden" name="role_members" value="' + li.extra[0] + '"/> ' +
+                    data[0] +
+                    '<input type="hidden" name="role_members" value="' + data[1] + '"/> ' +
                     '<a class="clickable remove_member">[remove]</a>' +
                   '</li>'
                 );
@@ -113,11 +117,10 @@ MojoMojo.RoleForm = function(params) {
                   matchSubset:   1, 
                   matchContains: 1, 
                   cacheLength:   10, 
-                  onItemSelect:  select_item, 
                   formatItem:    format_item,
                   selectOnly:    1 
                 }
-              );
+              ).result(select_item);
             });
         }
     };
