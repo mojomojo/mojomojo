@@ -1,6 +1,6 @@
 [% PROCESS header.tt %]
 
-<div id="header"><h1>Login</h1></div>
+<div id="header"><h1>[% loc('Login') %]</h1></div>
 
 [% PROCESS breadcrumbs.tt %]
         
@@ -8,18 +8,18 @@
     <p class="end logintext"><span id="logintext">[% message %]</span>
         <br />
         [% IF( c.pref( 'open_registration' ) ) %]
-            <a href="[% c.uri_for('register') %]">Register new account</a> / 
+            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> / 
         [% END %] 
-        <a href="[%c.uri_for('recover_pass')%]">Recover password</a>
+        <a href="[%c.uri_for('recover_pass')%]">[% loc('Recover password') %]</a>
     </p>
     <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
         <dl class="form">
-        <dt>Username:</dt>
+        <dt>[% loc('Username') %]:</dt>
         <dd><input id="loginField" type="text" name="login"/></dd>
-        <dt>Password:</dt>
+        <dt>[% loc('Password') %]:</dt>
         <dd><input type="password" name="pass"/></dd>
         <dt>&nbsp;</dt>
-        <dd><input type="submit" value="Log in"/></dd>
+        <dd><input type="submit" value="[% loc('Log in') %]"/></dd>
         </dl>
     </form>
 </div>

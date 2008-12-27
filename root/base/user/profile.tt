@@ -1,39 +1,39 @@
 [% WRAPPER page/wrapper.tt title = "User profile for " _ person.name %]
 <dl class="list">
-    <dt>Name:</dt>
-    <dd id="name">[% person.name || "Name missing" %]</dd>
+    <dt>[% loc('Name') %]:</dt>
+    <dd id="name">[% person.name || loc('Name missing') %]</dd>
     
-    <dt>Email:</dt>
+    <dt>[% loc('Email') %]:</dt>
     <dd id="email">
     [% IF user.admin || user.id == person.id %]
-        [% person.email || '(Unknown)' %]
+        [% person.email || loc('(Unknown)') %]
     [% ELSE %]
-        (Private)
+        [% loc('(Private)') %]
     [% END %]
     </dd>
     
-    <dt>Age:</dt>
-    <dd>[% person.age || '(Unknown)' %]</dd>
+    <dt>[% loc('Age') %]:</dt>
+    <dd>[% person.age || loc('(Unknown)') %]</dd>
     
-    <dt>Gender:</dt>
-    <dd>[% person.gender || '(Unknown)' %]</dd>
+    <dt>[% loc('Gender') %]:</dt>
+    <dd>[% person.gender || loc('(Unknown)') %]</dd>
 
-    <dt>Industry:</dt>
-    <dd>[% person.industry || '(Unknown)' %]</dd>
+    <dt>[% loc('Industry') %]:</dt>
+    <dd>[% person.industry || loc('(Unknown)') %]</dd>
 
-    <dt>Interests:</dt>
-    <dd>[% person.interests_formatted || 'Nothing entered' %]</dd>
+    <dt>[% loc('Interests') %]:</dt>
+    <dd>[% person.interests_formatted || loc('Nothing entered') %]</dd>
 
-    <dt>Music:</dt>
-    <dd>[% person.music_formatted || 'Nothing entered' %]</dd>
+    <dt>[% loc('Music') %]:</dt>
+    <dd>[% person.music_formatted || loc('Nothing entered') %]</dd>
 
-    <dt>Movies:</dt>
-    <dd>[% person.movies_formatted || 'Nothing entered' %]</dd>
+    <dt>[% loc('Movies') %]:</dt>
+    <dd>[% person.movies_formatted || loc('Nothing entered') %]</dd>
 
-    <dt>Date registered:</dt>
+    <dt>[% loc('Date registered') %]:</dt>
     <dd>[%person.registered.ymd%]</dd>
 
-    <dt>Last changes:<dt>
+    <dt>[% loc('Last changes') %]:<dt>
     <dd>
     [% FOREACH  changed IN person.pages -%]
         [% '&ndash;' UNLESS loop.first %] [% c.wikiword(changed.path,base) -%]
@@ -43,6 +43,6 @@
 <p id="editlink">
 [% IF (user.login == page.name OR user.link==proto_pages.first.path  OR 
   ( user.is_admin AND user.get_user(page.name) ) ) %]
- <a title="Change profile content" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">Edit Profile</a>
+ <a title="[% loc('Change profile content') %]" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">[% loc('Edit Profile') %]</a>
 [% END %]
 [% END %]
