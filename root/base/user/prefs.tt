@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title="preferences" %]
+[% WRAPPER page/wrapper.tt title=loc("preferences") %]
 <div class="preferences">
 <h2>[% loc('Your Account') %]</h2>
 <div class="rightHandSide">
