@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2008-12-27 20:18+0100\n"
+"PO-Revision-Date: 2008-12-28 00:29+0100\n"
 "Last-Translator: Marcus Ramberg <marcus@nordaaker.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,7 @@ msgstr "Kan bare lage forhåndsvisning for bilder"
 msgid "Cannot find that user."
 msgstr "Kan ikke finne den brukeren"
 
-#: lib/MojoMojo/Controller/Admin.pm:73
+#: lib/MojoMojo/Controller/Admin.pm:67
 msgid "Cant find admin user: "
 msgstr "Kan ikke finne admin brukeren:"
 
@@ -648,8 +648,6 @@ msgstr "Navn mangler"
 msgid "Nested backticks"
 msgstr "Nøstede aksenter"
 
-#: lib/MojoMojo/Controller/Admin.pm:53
-#: lib/MojoMojo/Controller/Admin.pm:54
 #: root/forms/admin/settings.yml:25
 msgid "New User Registration open"
 msgstr "Åpen brukerregistrering"
@@ -840,7 +838,7 @@ msgstr "Populære nøkkelord"
 msgid "Post"
 msgstr "Lagre"
 
-#: root/base/footer.tt:2
+#: root/base/footer.tt:6
 msgid "Powered by Catalyst"
 msgstr "Skrevet i Catalyst"
 
@@ -986,6 +984,10 @@ msgstr "Se forrige revisjon."
 msgid "Set a keyword for this page"
 msgstr "Set et nøkkelord for denne siden"
 
+#: root/base/footer.tt:1
+msgid "Set language"
+msgstr "Velg språk"
+
 #: root/base/edithelp.tt:120
 msgid "Shapes"
 msgstr "Former"
@@ -1099,7 +1101,7 @@ msgid "The requested URL (%1) was not found"
 msgstr "Den etterspurte URLen (%1) kunne ikke finnes"
 
 #. ($c->stash->{pre_hacked_uri})
-#: lib/MojoMojo/Controller/Root.pm:33
+#: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
 msgstr "Den etterspurte adressen (x) kunne ikke finnes"
 
@@ -1148,7 +1150,7 @@ msgstr "Oppdater"
 msgid "Updated preferences"
 msgstr "Oppdaterte instillinger"
 
-#: lib/MojoMojo/Controller/Admin.pm:102
+#: lib/MojoMojo/Controller/Admin.pm:96
 msgid "Updated successfully."
 msgstr "Endringene er lagret"
 
@@ -1493,6 +1495,10 @@ msgstr "populære nøkkelord"
 #: root/base/comment.tt:12
 msgid "posted"
 msgstr "postet"
+
+#: root/base/user/prefs.tt:1
+msgid "preferences"
+msgstr "instillinger"
 
 #: root/base/page/permissions.tt:13
 #: root/base/page/permissions.tt:16

@@ -185,7 +185,7 @@ msgstr ""
 msgid "Cannot find that user."
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:73
+#: lib/MojoMojo/Controller/Admin.pm:67
 msgid "Cant find admin user: "
 msgstr ""
 
@@ -584,7 +584,7 @@ msgstr ""
 msgid "Nested backticks"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:53 lib/MojoMojo/Controller/Admin.pm:54 root/forms/admin/settings.yml:25
+#: root/forms/admin/settings.yml:25
 msgid "New User Registration open"
 msgstr ""
 
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-#: root/base/footer.tt:2
+#: root/base/footer.tt:6
 msgid "Powered by Catalyst"
 msgstr ""
 
@@ -877,6 +877,10 @@ msgstr ""
 msgid "Set a keyword for this page"
 msgstr ""
 
+#: root/base/footer.tt:1
+msgid "Set language"
+msgstr ""
+
 #: root/base/edithelp.tt:120
 msgid "Shapes"
 msgstr ""
@@ -976,7 +980,7 @@ msgid "The Wikilicious page"
 msgstr ""
 
 #. ($c->stash->{pre_hacked_uri})
-#: lib/MojoMojo/Controller/Root.pm:33
+#: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
 msgstr ""
 
@@ -1020,7 +1024,7 @@ msgstr ""
 msgid "Updated preferences"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:102
+#: lib/MojoMojo/Controller/Admin.pm:96
 msgid "Updated successfully."
 msgstr ""
 
@@ -1335,6 +1339,10 @@ msgstr ""
 
 #: root/base/comment.tt:12
 msgid "posted"
+msgstr ""
+
+#: root/base/user/prefs.tt:1
+msgid "preferences"
 msgstr ""
 
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36

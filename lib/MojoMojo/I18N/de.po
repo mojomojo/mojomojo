@@ -185,7 +185,7 @@ msgstr "Ein Vorschaubild kann nur von einem Foto erzeugt werden."
 msgid "Cannot find that user."
 msgstr "Der Benutzer konnte nicht gefunden werden."
 
-#: lib/MojoMojo/Controller/Admin.pm:73
+#: lib/MojoMojo/Controller/Admin.pm:67
 msgid "Cant find admin user: "
 msgstr "Der Admin konnte nicht gefunden werden: "
 
@@ -584,7 +584,7 @@ msgstr "Name fehlt"
 msgid "Nested backticks"
 msgstr "Verschachtelte hochkommas"
 
-#: lib/MojoMojo/Controller/Admin.pm:53 lib/MojoMojo/Controller/Admin.pm:54 root/forms/admin/settings.yml:25
+#: root/forms/admin/settings.yml:25
 msgid "New User Registration open"
 msgstr "Registrierung neuer Benutzer zulassen"
 
@@ -750,7 +750,7 @@ msgstr "Beliebte Tags"
 msgid "Post"
 msgstr "Schreiben"
 
-#: root/base/footer.tt:2
+#: root/base/footer.tt:6
 msgid "Powered by Catalyst"
 msgstr ""
 
@@ -877,6 +877,10 @@ msgstr "Vorherige Revision ansehen"
 msgid "Set a keyword for this page"
 msgstr "Einen Tag für diese Seite hinzufügen"
 
+#: root/base/footer.tt:1
+msgid "Set language"
+msgstr ""
+
 #: root/base/edithelp.tt:120
 msgid "Shapes"
 msgstr "Gebilde"
@@ -976,7 +980,7 @@ msgid "The Wikilicious page"
 msgstr ""
 
 #. ($c->stash->{pre_hacked_uri})
-#: lib/MojoMojo/Controller/Root.pm:33
+#: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
 msgstr "Die angeforderte URL (%1) wurde nicht gefunden"
 
@@ -1020,7 +1024,7 @@ msgstr ""
 msgid "Updated preferences"
 msgstr "Einstellungen wurden aktualisiert"
 
-#: lib/MojoMojo/Controller/Admin.pm:102
+#: lib/MojoMojo/Controller/Admin.pm:96
 msgid "Updated successfully."
 msgstr "Update erfolgreich"
 
@@ -1336,6 +1340,10 @@ msgstr "beliebte Tags"
 #: root/base/comment.tt:12
 msgid "posted"
 msgstr "geschrieben"
+
+#: root/base/user/prefs.tt:1
+msgid "preferences"
+msgstr ""
 
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36
 msgid "read"

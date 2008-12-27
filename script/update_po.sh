@@ -4,6 +4,6 @@
 
     for i in 'en' 'no' 'de' ; do
     echo "lang: $i"
-	  perl /usr/bin/xgettext.pl -D lib -D root -o lib/MojoMojo/I18N/$i.po
+	  perl -Ilib /usr/bin/xgettext.pl -D lib -D root -o lib/MojoMojo/I18N/$i.po
 done;
 
