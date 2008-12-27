@@ -40,4 +40,9 @@ wiki words. Disabled by default.
 Set this to a true value to disable the internal search function. Will
 fall back to try site search using google.
 
+=head3 default_lang
+
+Set default language for internationalization. Currently supported values
+are "no" for norwegian and "en" for english. will default to english.
+
 =cut
