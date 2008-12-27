@@ -317,11 +317,11 @@ msgstr "eMail"
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
-msgstr "Dir wurde soeben ein neues Passwort zugeschickt."
+msgstr "Dir wurde soeben ein neues Passwort per eMail zugeschickt."
 
 #: lib/MojoMojo/Controller/User.pm:191
 msgid "Error occurred while emailing you your new password."
-msgstr "Es ist ein Fehler aufgetreten als versucht wurde dir ein neues Passwort zuzuschicken."
+msgstr "Es ist ein Fehler aufgetreten als versucht wurde dir ein neues Passwort per eMail zuzuschicken."
 
 #: root/base/gallery/photo_info.tt:1
 msgid "Exif Data"
@@ -1295,7 +1295,7 @@ msgstr "Anmelden"
 
 #: root/base/admin/user.tt:8 root/base/comment/login.tt:7
 msgid "login"
-msgstr "Anmelden"
+msgstr "Benutzername"
 
 #: root/base/gallery/tags.tt:2
 msgid "my tags"
