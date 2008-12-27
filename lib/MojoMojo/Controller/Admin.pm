@@ -59,8 +59,9 @@ sub settings : Path FormConfig Args(0) {
             restricted_user   => $c->pref('restricted_user'),
         });
         $form->process();
+        return;
     }
-    my @users = split( m/\s+/, $c->form->valid('admins') );
+    my @users = split( m/\s+/, $form->params->{admins} );
     foreach my $user (@users) {
         unless ( $c->model("DBIC::Person")->get_user($user) ) {
             $c->stash->{message} = $c->loc('Cant find admin user: ') . $user;
@@ -76,21 +77,21 @@ sub settings : Path FormConfig Args(0) {
     }
 
     # FIXME: Needs refactor
-    if ( $c->form->valid('registration') ) {
+    if ( $form->params->{registration} ) {
         $c->pref( 'open_registration', 1 );
     }
     else {
         $c->pref( 'open_registration', 0 );
     }
-    if ( $c->form->valid('restricted') ) {
+    if ( $form->params->{restricted} ) {
         $c->pref( 'restricted_user', 1 );
     }
     else {
         $c->pref( 'restricted_user', 0 );
     }
     $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
-    $c->pref( 'name', $c->form->valid('name') );
-    $c->pref( 'anonymous_user', $c->form->valid('anonymous_user') || '' );
+    $c->pref( 'name', $form->params->{name} );
+    $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
 
     $c->stash->{message} = $c->loc("Updated successfully.");
 }

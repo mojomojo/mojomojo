@@ -66,7 +66,7 @@ sub view : Global {
 
         my $perms = $c->check_permissions( $stash->{'path'}, $user );
         if ( !$perms->{'view'} ) {
-            $stash->{'message'}  = $c->loc('Permission Denied to view %1', $page->name);
+            $stash->{'message'}  = $c->loc('Permission Denied to view x', $page->name);
             $stash->{'template'} = 'message.tt';
             return;
         }

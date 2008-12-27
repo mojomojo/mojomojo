@@ -6,7 +6,7 @@
 [% PROCESS admin/toplinks.tt selected = 'roles' %]
 
 <div id="content">
- <h1>Roles</h1>
+ <h1>[% loc('Roles') %]</h1>
  [% IF roles.size > 0 %]
  <a href="[% c.uri_for('admin/create_role') %]">[%loc('Create a new role')%]</a>
  <br/>

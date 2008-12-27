@@ -6,23 +6,23 @@ auto_fieldset: 1
 elements:
   - type: Text
     name: login
-    label: Login
+    label_loc: Login
     filters:
        - HTMLEscape
     constraints:
       - Required
   - type: Text
     name: name
-    label: Name
+    label_loc: Name
     filters:
        - HTMLEscape
   - type: Text
     name: email
-    label: Email
+    label_loc: Email
     filters:
        - HTMLEscape
     constraints:
       - Required
   - type: Submit
     name: submit
-    value: Save
+    value_loc: Save

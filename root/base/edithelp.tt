@@ -14,9 +14,9 @@
 </div>
 		<table cellspacing="0" cellpadding="0">
 			<tr><td>_[%loc('your text')%]_</td><td class="arrow">-></td><td><em>[%loc('your text')%]</em></td>
-			   <td>=http://[[%loc('your/url')%]</td><td class="arrow">-></td><td><em>[%loc('include this page')%]</em></td>
+			   <td>=http://[%loc('your/url')%]</td><td class="arrow">-></td><td><em>[%loc('include this page')%]</em></td>
       </tr>
-			<tr><td>*your text*</td><td class="arrow">-></td><td><strong>[%loc('your text')%]</strong></td>
+			<tr><td>*[%loc('your text')%]*</td><td class="arrow">-></td><td><strong>[%loc('your text')%]</strong></td>
 			   <td>=feed://[%loc('your/url')%]</td><td class="arrow">-></td><td><em>[%loc('include this rss feed')%]</em></td>
          </tr>
 			<tr><td>%{color:red}[%loc('hello')%]%</td><td class="arrow">-></td><td><span style="color: red;">[%loc('hello')%]</span></td>
@@ -46,7 +46,7 @@
 <div class="rightHandSide"> 
     <h3>[%loc('Wiki words')%]</h3>
 <p>
-  [%loc('Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.')%]
+  [%loc('Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \ in front of it.')%]
 </p>
 <p>
   [%loc('Wiki words')%]': <i>[%loc('HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))')%]</i><br/>
@@ -113,28 +113,26 @@
             </tr><tr>
                 <td colspan="2">[%loc('Lists can be nested by indentation level')%]:
                     <pre>
-                        * Foo
-                            1. Bar
-                               [%loc('With a second line')%]
-                            2. Baz
-                        * [%loc('Shapes')%]
-                            * [%loc('Circle')%]
-                            * [%loc('Square')%]
+                        * Foo<br>
+                            1. Bar<br>
+                               [%loc('With a second line')%]<br>
+                            2. Baz<br>
+                        * [%loc('Shapes')%]<br>
+                            * [%loc('Circle')%]<br>
+                            * [%loc('Square')%]<br>
                             * [%loc('Rectangle')%]
                     </pre>
                 </td>
             </tr>
             <tr><th colspan="2">[%loc('Block quotes')%]</th></tr>
             <tr><td colspan="2"><pre>
-&gt; [%loc('Just like email quoting!')%]
-
-&gt; &gt;[%loc('Blockquotes can be nested')%]
-
-&gt;  ## [%loc('An h2 tag in a blockquote')%]
-&gt;  
-&gt;  [%loc('And additional Markdown formatting')%]:
-&gt;  * [%loc('An unordered list')%]
-&gt;  * [%loc('Item')%]
+&gt; [%loc('Just like email quoting!')%]<br>
+&gt; &gt; [%loc('Blockquotes can be nested')%]<br>
+&gt;  ## [%loc('An h2 tag in a blockquote')%]<br>
+&gt;  <br>
+&gt;  [%loc('And additional Markdown formatting')%]:<br>
+&gt;  * [%loc('An unordered list')%]<br>
+&gt;  * [%loc('Item')%]<br>
             </pre></td></tr>
             <tr><th colspan="2">[%loc('Code Spans')%]</th></tr>
                 <td colspan="2">`&lt;[%loc('code')%]&gt;` [%loc('blocks are wrapped in backticks')%].</td>
@@ -160,5 +158,5 @@
 </div>
 
 [% ELSE%]
-<div><p>[%loc('No help yet for %1',c.pref('main_formatter'))%]</p></div>
+<div><p>[%loc('No help yet for x',c.pref('main_formatter'))%]</p></div>
 [% END %]

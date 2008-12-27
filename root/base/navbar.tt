@@ -78,7 +78,7 @@
   [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
 
     [%IF (c.req.action=="profile")%]
-      <li class="navOn">Profile</li> 
+      <li class="navOn">[% loc('Profile') %]</li> 
     [%ELSE%]
       <li><a title="[%loc('User Profile')%]" href="[%c.uri_for('profile')%]">[%loc('Profile')%]</a></li>
     [%END%]

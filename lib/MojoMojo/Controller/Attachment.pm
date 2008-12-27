@@ -57,7 +57,7 @@ sub attachments : Global {
             ->create_from_file( $page, $file, $upload->tempname, $c->path_to('/') );
         if ( !@att ) {
             $c->stash->{template} = 'message.tt';
-            $c->stash->{message}  = $c->loc("Could not create attachment from %1",$file);
+            $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
         $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
             unless $c->stash->{template} eq 'message.tt';
