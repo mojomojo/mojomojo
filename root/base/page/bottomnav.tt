@@ -22,7 +22,7 @@
   [% END%]
   [% IF page.content_version && page.content_version > 1 %] 
    <li><a title="[%loc('See previous revision')%]" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">[%loc('Back in time')%]</a>
-   ([% page.content.max_version%] revision[% IF page.content_version > 1; "s" ; END %])</li>
+   ([% page.content.max_version%] [% loc('revision') %][% IF page.content_version > 1; "s" ; END %])</li>
   [% END %]
   [% IF  (page.content_version AND page.content.max_version AND page.content_version < page.content.max_version) %]
     <li><a title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - page.content_version )%])</li>
@@ -37,7 +37,7 @@
   [% UNLESS rev||0 == page.content_version||0 %]
    <li><a title="[%loc('Back to the page')%]" href="[% c.uri_for('view')%]" accesskey="C">[%loc('Current Revision')%]</a></li>
   [% END %]
-[% END %] 
+[% END %]
 [% IF page.content_version && page.content_version > 1 %] 
  <li><span id="show_changes">
   <a title="[%loc('Show differences from previous version')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" class="toggleChanges">[%loc('See changes')%]</a>

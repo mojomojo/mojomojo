@@ -127,7 +127,7 @@ sub prefs : Global FormConfig {
     if ( $form->submitted_and_valid ) {
         my $old_email=$page_user->email;
         $form->model->update($page_user);
-        $c->stash->{message}='Updated preferences';
+        $c->stash->{message}=$c->loc('Updated preferences');
         if( $form->params->{email} ne $old_email ){
                 $page_user->active(-1);
                 $page_user->update;
