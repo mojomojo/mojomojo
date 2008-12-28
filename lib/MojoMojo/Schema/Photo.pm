@@ -71,7 +71,6 @@ Creates a L<DateTime> object from a EXIF timestamp.
 
 sub exif2datetime {
     my ( $self, $datetime ) = @_;
-    warn "\n\n\n$datetime\n\n\n";
     return undef unless $datetime;
     my ( $date, $time ) = split( ' ', $datetime );
     my ( $y, $M, $d ) = split ':', $date;
