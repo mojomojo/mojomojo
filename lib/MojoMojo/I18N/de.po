@@ -55,7 +55,7 @@ msgstr "Aktiv"
 msgid "Active version"
 msgstr "Aktive Version"
 
-#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:16
+#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:15
 msgid "Active?"
 msgstr "Aktiv?"
 
@@ -121,7 +121,7 @@ msgstr "Und mit zusätzlichem Markdown Format versehen werden"
 msgid "And others."
 msgstr "Und andere."
 
-#: root/forms/admin/settings.yml:20
+#: root/forms/admin/settings.yml:19
 msgid "Anonymous User (blank to disable)"
 msgstr "Anonyme Benutzer (leeres Feld = ausgeschaltet)"
 
@@ -153,7 +153,7 @@ msgstr "Zurück zur Seite"
 msgid "Backlinks"
 msgstr "Rückverweise"
 
-#: root/forms/user/editprofile.yml:18
+#: root/forms/user/editprofile.yml:13
 msgid "Birth Date"
 msgstr "Geburtsdatum"
 
@@ -221,7 +221,7 @@ msgstr "Klicken um die Original-Version anzusehen"
 msgid "Code Spans"
 msgstr "Code Blöcke"
 
-#: root/forms/comment/comment.yml:14
+#: root/forms/comment/comment.yml:11
 msgid "Comment body"
 msgstr "Kommentar-Inhalt"
 
@@ -262,7 +262,7 @@ msgstr "Erstellen"
 msgid "Current Revision"
 msgstr "Aktuelle Revision"
 
-#: root/forms/user/password.yml:13
+#: root/forms/user/password.yml:10
 msgid "Current password"
 msgstr "Momentanes Passwort"
 
@@ -311,7 +311,7 @@ msgstr "Bearbeiten"
 msgid "Editing user profile for x"
 msgstr "Bearbeite Benutzerprofil von %1"
 
-#: root/base/user/profile.tt:6 root/forms/user/prefs.yml:26 root/forms/user/register.yml:38
+#: root/base/user/profile.tt:6 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
 msgid "Email"
 msgstr "eMail"
 
@@ -331,11 +331,11 @@ msgstr ""
 msgid "Export"
 msgstr "Exportieren"
 
-#: root/forms/user/editprofile.yml:34
+#: root/forms/user/editprofile.yml:32
 msgid "Favorite Albums"
 msgstr "Lieblings-Alben"
 
-#: root/forms/user/editprofile.yml:37
+#: root/forms/user/editprofile.yml:36
 msgid "Favorite Movies"
 msgstr "Lieblings-Filme"
 
@@ -367,7 +367,7 @@ msgstr "Vollständiger Inhalt"
 msgid "Gallery"
 msgstr "Galerie"
 
-#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:25
+#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:20
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -464,7 +464,7 @@ msgstr "Bild"
 msgid "Images"
 msgstr "Bilder"
 
-#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:28
+#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
 msgid "Industry"
 msgstr "Gewerbe"
 
@@ -480,7 +480,7 @@ msgstr ""
 msgid "Inline Links"
 msgstr ""
 
-#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:31
+#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
 msgid "Interests"
 msgstr "Interessen"
 
@@ -548,7 +548,7 @@ msgstr "Anmelden"
 msgid "Log out"
 msgstr "Abmelden"
 
-#: root/base/user/login.tt:3 root/forms/user/prefs.yml:14 root/forms/user/register.yml:15
+#: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
 msgid "Login"
 msgstr "Anmelden"
 
@@ -572,7 +572,7 @@ msgstr "Musik"
 msgid "My tags"
 msgstr "Meine Tags"
 
-#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:11 root/forms/user/prefs.yml:19 root/forms/user/register.yml:45
+#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:10 root/forms/user/prefs.yml:16 root/forms/user/register.yml:40
 msgid "Name"
 msgstr ""
 
@@ -584,17 +584,21 @@ msgstr "Name fehlt"
 msgid "Nested backticks"
 msgstr "Verschachtelte hochkommas"
 
-#: root/forms/admin/settings.yml:25
+#: root/forms/admin/settings.yml:22
 msgid "New User Registration open"
 msgstr "Registrierung neuer Benutzer zulassen"
 
-#: root/forms/user/password.yml:18
+#: root/forms/user/password.yml:15
 msgid "New password"
 msgstr "Neues Passwort"
 
-#: root/forms/user/password.yml:26
+#:
 msgid "New password again"
 msgstr "Neues Passwort - Wiederholung"
+
+#: root/forms/user/password.yml:20
+msgid "New password again "
+msgstr "Neues Passwort - Wiederholung "
 
 #: root/base/admin/role.tt:22
 msgid "No"
@@ -680,7 +684,7 @@ msgstr "Seiten-Informationen von %1"
 msgid "Page meta information"
 msgstr "Meta-Informationen dieser Seite anzeigen"
 
-#: root/forms/pageadmin/edit.yml:12
+#: root/forms/pageadmin/edit.yml:9
 msgid "Page text"
 msgstr "Seiten-Text"
 
@@ -688,15 +692,15 @@ msgstr "Seiten-Text"
 msgid "Pages sorted by when they were last changed"
 msgstr "Seiten sortiert nach dem Datum der letzten Änderung"
 
-#: root/base/user/login.tt:19 root/forms/user/register.yml:27
+#: root/base/user/login.tt:19 root/forms/user/register.yml:17
 msgid "Password"
 msgstr "Passwort"
 
-#: root/forms/user/password.yml:25 root/forms/user/register.yml:23
+#: root/forms/user/password.yml:24 root/forms/user/register.yml:22
 msgid "Password did not match"
 msgstr "Die Passwörter sind unterschiedlich"
 
-#: root/forms/user/register.yml:27
+#: root/forms/user/register.yml:26
 msgid "Password must be between 4 and 14 chars"
 msgstr "Das Passwort muss zwischen 4 und 14 Zeichen lang sein"
 
@@ -817,11 +821,15 @@ msgstr "Ein neues Benutzerkonto Registrieren"
 msgid "Registration is closed!"
 msgstr "Die Registrierung ist nicht möglich!"
 
-#: root/forms/user/register.yml:30
+#:
 msgid "Repeat password"
 msgstr "Wiederhole Passwort"
 
-#: root/forms/admin/settings.yml:30
+#: root/forms/user/register.yml:29
+msgid "Repeat password "
+msgstr "Wiederhole Passwort "
+
+#: root/forms/admin/settings.yml:29
 msgid "Restrict user editing to home directory"
 msgstr "Beschränke das Editieren auf die Home-Verzeichnisse der Benutzer"
 
@@ -833,7 +841,7 @@ msgstr "Keine Berechtigung, du musst ein Admin sein um diese Seite sehen zu dür
 msgid "Role Members"
 msgstr "Mitglieder dieser Rolle"
 
-#: root/forms/admin/role_form.yml:13
+#: root/forms/admin/role_form.yml:10
 msgid "Role Name"
 msgstr "Name der Rolle"
 
@@ -911,7 +919,7 @@ msgstr "Zeige %1 (%2-%3) von %4 Bildern in %5"
 msgid "Simply indent every line of a code block by 4"
 msgstr "Rücke jede Zeile eines Code-Blocks um 4 Leerzeichen ein"
 
-#: root/forms/admin/settings.yml:17
+#: root/forms/admin/settings.yml:16
 msgid "Site Admins (In addition to you)"
 msgstr "Admins (außer dir)"
 
@@ -919,7 +927,7 @@ msgstr "Admins (außer dir)"
 msgid "Site Configuration"
 msgstr "Einstellungen"
 
-#: root/forms/admin/settings.yml:14
+#: root/forms/admin/settings.yml:9
 msgid "Site name"
 msgstr "Name der Seite"
 
@@ -1017,7 +1025,7 @@ msgid "Unordered Lists with Paragraphs"
 msgstr "Unsortierte Liste"
 
 #: root/forms/user/editprofile.yml:39
-msgid "Update"
+msgid "Update "
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:130
@@ -1221,7 +1229,7 @@ msgstr "Einstellungen"
 msgid "confirmation message resent"
 msgstr "Bestätigungs-eMail wurde erneut gesendet"
 
-#: root/forms/pageadmin/edit.yml:15
+#: root/forms/pageadmin/edit.yml:14
 msgid "creator"
 msgstr "Ersteller"
 
@@ -1317,6 +1325,10 @@ msgstr "Keine Beschreibung"
 msgid "no email address"
 msgstr "Keine eMail-Adresse"
 
+#: root/base/page/permissions.tt:20
+msgid "not access page"
+msgstr ""
+
 #: root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:8
 msgid "not specified"
 msgstr "nichts eingegeben"
@@ -1376,6 +1388,10 @@ msgstr "Start"
 #: lib/MojoMojo/Controller/User.pm:378
 msgid "the following are missing:"
 msgstr "Folgende fehlen:"
+
+#: lib/Locale/Maketext/Extract/Plugin/FormFu.pm:32
+msgid "this is the string"
+msgstr ""
 
 #: root/base/admin/toplinks.tt:11
 msgid "users"

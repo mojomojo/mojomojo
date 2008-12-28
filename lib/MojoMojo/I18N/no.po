@@ -14,9 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#:
 msgid "%1 more"
 msgstr "%1 til"
 
+#:
 msgid "%1 revisions"
 msgstr "%1 revisjoner"
 
@@ -24,10 +26,7 @@ msgstr "%1 revisjoner"
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: root/base/user/profile.tt:16
-#: root/base/user/profile.tt:19
-#: root/base/user/profile.tt:22
-#: root/base/user/profile.tt:9
+#: root/base/user/profile.tt:16 root/base/user/profile.tt:19 root/base/user/profile.tt:22 root/base/user/profile.tt:9
 msgid "(Unknown)"
 msgstr "(Ukjent)"
 
@@ -47,10 +46,7 @@ msgstr "3 eller flere bindestreker eller stjerner"
 msgid "A message from our sponsors..."
 msgstr "En melding fra våre sponsorer..."
 
-#: root/base/header.tt:18
-#: root/base/header.tt:20
-#: root/base/page/atom.tt:3
-#: root/base/page/atom.tt:6
+#: root/base/header.tt:18 root/base/header.tt:20 root/base/page/atom.tt:3 root/base/page/atom.tt:6
 msgid "A poorly configured MojoMojo Installation"
 msgstr "En dårlig konfigurert MojoMojo installasjon"
 
@@ -58,8 +54,7 @@ msgstr "En dårlig konfigurert MojoMojo installasjon"
 msgid "Actions"
 msgstr "Handlinger"
 
-#: root/base/admin/role.tt:16
-#: root/base/admin/user.tt:8
+#: root/base/admin/role.tt:16 root/base/admin/user.tt:8
 msgid "Active"
 msgstr "Aktiv"
 
@@ -67,8 +62,7 @@ msgstr "Aktiv"
 msgid "Active version"
 msgstr "Aktiv versjon"
 
-#: root/base/admin/role_form.tt:9
-#: root/forms/admin/role_form.yml:16
+#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:15
 msgid "Active?"
 msgstr "Aktiv?"
 
@@ -88,6 +82,7 @@ msgstr "Alder"
 msgid "All Pages"
 msgstr "All sidene"
 
+#:
 msgid "All Pages in %1"
 msgstr "Alle undersider av %1"
 
@@ -96,6 +91,7 @@ msgstr "Alle undersider av %1"
 msgid "All Pages in x"
 msgstr "Alle sider i x"
 
+#:
 msgid "All pages in %1 listed alphabetically"
 msgstr "Alle undersider av %1 i alfabetisk rekkefølge"
 
@@ -104,8 +100,7 @@ msgstr "Alle undersider av %1 i alfabetisk rekkefølge"
 msgid "All pages in x listed alphabetically"
 msgstr "Alle sider i x alfabetisk sortert"
 
-#: root/base/navbar.tt:40
-#: root/base/navbar.tt:45
+#: root/base/navbar.tt:40 root/base/navbar.tt:45
 msgid "All tags in this path"
 msgstr "Alle nøkkelord i bruk under denne siden"
 
@@ -117,8 +112,7 @@ msgstr "Alle nøkkelord i bruk på bilder"
 msgid "Allow comments on this page."
 msgstr "Tillat kommentarer på denne siden"
 
-#: root/base/navbar.tt:32
-#: root/base/navbar.tt:34
+#: root/base/navbar.tt:32 root/base/navbar.tt:34
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetisk sortert liste over sider"
 
@@ -142,7 +136,7 @@ msgstr "Og ytterligere Markdown formattering"
 msgid "And others."
 msgstr "Og andre."
 
-#: root/forms/admin/settings.yml:20
+#: root/forms/admin/settings.yml:19
 msgid "Anonymous User (blank to disable)"
 msgstr "Anonym bruker (tomt for å skru av)"
 
@@ -154,20 +148,15 @@ msgstr "Blender"
 msgid "Attachment not found."
 msgstr "Vedlegg kunne ikke finnes"
 
-#: root/base/page/editbar.tt:13
-#: root/base/page/editbar.tt:18
-#: root/base/page/editbar.tt:6
-#: root/base/page/info.tt:30
+#: root/base/page/editbar.tt:13 root/base/page/editbar.tt:18 root/base/page/editbar.tt:6 root/base/page/info.tt:30
 msgid "Attachments"
 msgstr "Vedlegg"
 
-#: root/base/navbar.tt:48
-#: root/base/navbar.tt:50
+#: root/base/navbar.tt:48 root/base/navbar.tt:50
 msgid "Authors"
 msgstr "Forfattere"
 
-#: root/base/page/bottomnav.tt:24
-#: root/base/page/bottomnav.tt:35
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "Back in time"
 msgstr "Tilbake i tid"
 
@@ -179,7 +168,7 @@ msgstr "Tilbake til siden"
 msgid "Backlinks"
 msgstr "Lenker tilbake"
 
-#: root/forms/user/editprofile.yml:18
+#: root/forms/user/editprofile.yml:13
 msgid "Birth Date"
 msgstr "Fødselsdato"
 
@@ -215,8 +204,7 @@ msgstr "Kan ikke finne den brukeren"
 msgid "Cant find admin user: "
 msgstr "Kan ikke finne admin brukeren:"
 
-#: root/base/navbar.tt:18
-#: root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Endre side-innhold"
 
@@ -248,7 +236,7 @@ msgstr "Klikk for original versjon"
 msgid "Code Spans"
 msgstr "Kode-blokker"
 
-#: root/forms/comment/comment.yml:14
+#: root/forms/comment/comment.yml:11
 msgid "Comment body"
 msgstr "Kommentar"
 
@@ -260,6 +248,7 @@ msgstr "Størrelse på innhold"
 msgid "Could not authenticate that login."
 msgstr "Kunne ikke autentisere det brukernavnet."
 
+#:
 msgid "Could not create attachment from %1"
 msgstr "Kunne ikke lage vedlegg fra %1"
 
@@ -276,8 +265,7 @@ msgstr "Opprett"
 msgid "Create Role"
 msgstr "Opprett rolle"
 
-#: root/base/admin/role.tt:11
-#: root/base/admin/role.tt:30
+#: root/base/admin/role.tt:11 root/base/admin/role.tt:30
 msgid "Create a new role"
 msgstr "Lag en ny rolle"
 
@@ -293,7 +281,7 @@ msgstr "Oppretter"
 msgid "Current Revision"
 msgstr "Nåværende revisjon"
 
-#: root/forms/user/password.yml:13
+#: root/forms/user/password.yml:10
 msgid "Current password"
 msgstr "Nåværende passord"
 
@@ -305,20 +293,15 @@ msgstr "Registreringsdato"
 msgid "Descendants"
 msgstr "Etterkommere"
 
-#: root/base/navbar.tt:56
-#: root/base/navbar.tt:58
+#: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Last ned en zip-fil med alle sidene i denne wikien"
 
-#: root/base/admin/role.tt:23
-#: root/base/page/editbar.tt:11
-#: root/base/page/editbar.tt:17
-#: root/base/page/permissions.tt:47
+#: root/base/admin/role.tt:23 root/base/page/editbar.tt:11 root/base/page/editbar.tt:17 root/base/page/permissions.tt:47
 msgid "Edit"
 msgstr "Rediger"
 
-#: root/base/navbar.tt:18
-#: root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Edit Page"
 msgstr "Rediger siden"
 
@@ -347,9 +330,7 @@ msgstr "Redigerer"
 msgid "Editing user profile for x"
 msgstr "Redigerer brukerprofil for x"
 
-#: root/base/user/profile.tt:6
-#: root/forms/user/prefs.yml:26
-#: root/forms/user/register.yml:38
+#: root/base/user/profile.tt:6 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
 msgid "Email"
 msgstr "Epost"
 
@@ -365,17 +346,15 @@ msgstr "En feil oppsto under utsending av ditt nye passord."
 msgid "Exif Data"
 msgstr "EXIF Data"
 
-#: root/base/export.tt:1
-#: root/base/navbar.tt:56
-#: root/base/navbar.tt:58
+#: root/base/export.tt:1 root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Export"
 msgstr "Eksport"
 
-#: root/forms/user/editprofile.yml:34
+#: root/forms/user/editprofile.yml:32
 msgid "Favorite Albums"
 msgstr "Favorittalbum"
 
-#: root/forms/user/editprofile.yml:37
+#: root/forms/user/editprofile.yml:36
 msgid "Favorite Movies"
 msgstr "Favorittfilmer"
 
@@ -391,8 +370,7 @@ msgstr "Behandler alt innhold fram til neste =pod som perl dokumentasjon"
 msgid "Format page for printing"
 msgstr "Formatter siden for utskrift"
 
-#: root/base/page/bottomnav.tt:28
-#: root/base/page/bottomnav.tt:32
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "Forward in time"
 msgstr "Fram i tid"
 
@@ -400,8 +378,7 @@ msgstr "Fram i tid"
 msgid "From"
 msgstr "Fra"
 
-#: root/base/feeds.tt:6
-#: root/base/feeds.tt:8
+#: root/base/feeds.tt:6 root/base/feeds.tt:8
 msgid "Full content"
 msgstr "Fullt innhold"
 
@@ -409,8 +386,7 @@ msgstr "Fullt innhold"
 msgid "Gallery"
 msgstr "Galleri"
 
-#: root/base/user/profile.tt:18
-#: root/forms/user/editprofile.yml:25
+#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:20
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -438,22 +414,15 @@ msgstr "HTML"
 msgid "Have a nice day"
 msgstr "Ha en fin dag"
 
-#: root/base/edithelp.tt:71
-#: root/base/edithelp.tt:72
-#: root/base/edithelp.tt:75
-#: root/base/edithelp.tt:76
+#: root/base/edithelp.tt:71 root/base/edithelp.tt:72 root/base/edithelp.tt:75 root/base/edithelp.tt:76
 msgid "Header 1"
 msgstr "Overskrift 1"
 
-#: root/base/edithelp.tt:79
-#: root/base/edithelp.tt:80
-#: root/base/edithelp.tt:83
-#: root/base/edithelp.tt:84
+#: root/base/edithelp.tt:79 root/base/edithelp.tt:80 root/base/edithelp.tt:83 root/base/edithelp.tt:84
 msgid "Header 2"
 msgstr "Overskift 2"
 
-#: root/base/edithelp.tt:87
-#: root/base/edithelp.tt:88
+#: root/base/edithelp.tt:87 root/base/edithelp.tt:88
 msgid "Header 6"
 msgstr "Overskift 6"
 
@@ -469,6 +438,7 @@ msgstr "Overskrifter"
 msgid "Hi there."
 msgstr "Hei der."
 
+#:
 msgid "Hi. This is a mail to validate your email address, %1. To confirm, please click the url below:"
 msgstr "Hei. Poenet med denne eposten for å validere din epost-adresse, %1. For å gjøre det, trykk på linken under: "
 
@@ -493,8 +463,7 @@ msgstr "Skillelinjer "
 msgid "Hover over an image to get more info."
 msgstr "Hold pekeren over et bilde for å få mer informasjon"
 
-#: root/base/edithelp.tt:12
-#: root/base/edithelp.tt:54
+#: root/base/edithelp.tt:12 root/base/edithelp.tt:54
 msgid "IBM, School"
 msgstr "IBM, Skole"
 
@@ -518,8 +487,7 @@ msgstr "Bilde"
 msgid "Images"
 msgstr "Bilder"
 
-#: root/base/user/profile.tt:21
-#: root/forms/user/editprofile.yml:28
+#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
 msgid "Industry"
 msgstr "Yrke"
 
@@ -535,8 +503,7 @@ msgstr "direkte"
 msgid "Inline Links"
 msgstr "Direkte linker"
 
-#: root/base/user/profile.tt:24
-#: root/forms/user/editprofile.yml:31
+#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
 msgid "Interests"
 msgstr "Interesser"
 
@@ -568,8 +535,7 @@ msgstr "La andre være tom hvis du ikke vil ha passord"
 msgid "Lens"
 msgstr "Linse"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "Link Title"
 msgstr "Linktittel"
 
@@ -597,8 +563,7 @@ msgstr "Lenker til ikke-eksisterende sider."
 msgid "Lists can be nested by indentation level"
 msgstr "Lister kan ha underlister ved hjelper av indentering"
 
-#: root/base/navbar.tt:28
-#: root/base/user/login.tt:22
+#: root/base/navbar.tt:28 root/base/user/login.tt:22
 msgid "Log in"
 msgstr "Logg inn"
 
@@ -606,9 +571,7 @@ msgstr "Logg inn"
 msgid "Log out"
 msgstr "Logg ut"
 
-#: root/base/user/login.tt:3
-#: root/forms/user/prefs.yml:14
-#: root/forms/user/register.yml:15
+#: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
 msgid "Login"
 msgstr "brukernavn"
 
@@ -632,11 +595,7 @@ msgstr "Musikk"
 msgid "My tags"
 msgstr "Mine nøkkelord"
 
-#: root/base/admin/role.tt:16
-#: root/base/user/profile.tt:3
-#: root/forms/user/editprofile.yml:11
-#: root/forms/user/prefs.yml:19
-#: root/forms/user/register.yml:45
+#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:10 root/forms/user/prefs.yml:16 root/forms/user/register.yml:40
 msgid "Name"
 msgstr "Navn"
 
@@ -648,17 +607,21 @@ msgstr "Navn mangler"
 msgid "Nested backticks"
 msgstr "Nøstede aksenter"
 
-#: root/forms/admin/settings.yml:25
+#: root/forms/admin/settings.yml:22
 msgid "New User Registration open"
 msgstr "Åpen brukerregistrering"
 
-#: root/forms/user/password.yml:18
+#: root/forms/user/password.yml:15
 msgid "New password"
 msgstr "Nytt passord"
 
-#: root/forms/user/password.yml:26
+#:
 msgid "New password again"
 msgstr "Gjenta nytt passord"
+
+#: root/forms/user/password.yml:20
+msgid "New password again "
+msgstr "Gjenta nytt passord "
 
 #: root/base/admin/role.tt:22
 msgid "No"
@@ -668,6 +631,7 @@ msgstr "Nei"
 msgid "No Comments posted"
 msgstr "Ingen kommentarer"
 
+#:
 msgid "No help yet for %1"
 msgstr "Finnes ingen hjelp enda for %1"
 
@@ -706,14 +670,11 @@ msgstr "Normal paragraf"
 msgid "Not found. Click to create this page."
 msgstr "Finnes ikke. Klikk for å opprette denne siden."
 
-#: root/base/edithelp.tt:12
-#: root/base/edithelp.tt:54
+#: root/base/edithelp.tt:12 root/base/edithelp.tt:54
 msgid "Not wiki words"
 msgstr "Ikke wiki ord"
 
-#: root/base/user/profile.tt:25
-#: root/base/user/profile.tt:28
-#: root/base/user/profile.tt:31
+#: root/base/user/profile.tt:25 root/base/user/profile.tt:28 root/base/user/profile.tt:31
 msgid "Nothing entered"
 msgstr "Ingenting er skrevet"
 
@@ -733,17 +694,15 @@ msgstr "Sortert Liste"
 msgid "Other pages that link to this page."
 msgstr "Andre sider som linker til denne siden."
 
-#: root/base/navbar.tt:66
-#: root/base/navbar.tt:68
-#: root/base/page/recent.tt:38
+#: root/base/navbar.tt:66 root/base/navbar.tt:68 root/base/page/recent.tt:38
 msgid "Page"
 msgstr "Side"
 
-#: root/base/page/bottomnav.tt:19
-#: root/base/page/bottomnav.tt:21
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page Info"
 msgstr "Side-info"
 
+#:
 msgid "Page info for %1"
 msgstr "Side-info for %1"
 
@@ -752,37 +711,35 @@ msgstr "Side-info for %1"
 msgid "Page info for x"
 msgstr "Sideinformasjon for x"
 
-#: root/base/page/bottomnav.tt:19
-#: root/base/page/bottomnav.tt:21
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page meta information"
 msgstr "Meta informasjon for siden"
 
-#: root/forms/pageadmin/edit.yml:12
+#: root/forms/pageadmin/edit.yml:9
 msgid "Page text"
 msgstr " Side-innhold"
 
-#: root/base/navbar.tt:36
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:36 root/base/navbar.tt:38
 msgid "Pages sorted by when they were last changed"
 msgstr "Sider sortert etter når de ble endret sist."
 
-#: root/base/user/login.tt:19
-#: root/forms/user/register.yml:27
+#: root/base/user/login.tt:19 root/forms/user/register.yml:17
 msgid "Password"
 msgstr "Passord"
 
-#: root/forms/user/password.yml:25
-#: root/forms/user/register.yml:23
+#: root/forms/user/password.yml:24 root/forms/user/register.yml:22
 msgid "Password did not match"
 msgstr "Passordet ble ikke gjentatt korrekt"
 
-#: root/forms/user/register.yml:27
+#: root/forms/user/register.yml:26
 msgid "Password must be between 4 and 14 chars"
 msgstr "Passordet må være mellom 4 og 4 tegn"
 
+#:
 msgid "Permission Denied to %1 %2"
 msgstr "Tilgang nektet til %1 %2"
 
+#:
 msgid "Permission Denied to view %1"
 msgstr "Du har ikke tilgang til å se %1"
 
@@ -796,9 +753,7 @@ msgstr "Du har ikke rettigheter til å se x"
 msgid "Permission Denied to x x"
 msgstr "Du har ingen rettigheter til x x"
 
-#: root/base/page/editbar.tt:15
-#: root/base/page/editbar.tt:19
-#: root/base/page/editbar.tt:9
+#: root/base/page/editbar.tt:15 root/base/page/editbar.tt:19 root/base/page/editbar.tt:9
 msgid "Permissions"
 msgstr "Rettigheter"
 
@@ -842,8 +797,7 @@ msgstr "Lagre"
 msgid "Powered by Catalyst"
 msgstr "Skrevet i Catalyst"
 
-#: root/base/navbar.tt:88
-#: root/base/navbar.tt:90
+#: root/base/navbar.tt:88 root/base/navbar.tt:90
 msgid "Preferences"
 msgstr "Instillinger"
 
@@ -859,8 +813,7 @@ msgstr "Forhåndsvisning"
 msgid "Print"
 msgstr "Utskrift"
 
-#: root/base/navbar.tt:81
-#: root/base/navbar.tt:83
+#: root/base/navbar.tt:81 root/base/navbar.tt:83
 msgid "Profile"
 msgstr "Profil"
 
@@ -868,11 +821,11 @@ msgstr "Profil"
 msgid "Raw markup"
 msgstr "Uformattert text"
 
-#: root/base/navbar.tt:36
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:36 root/base/navbar.tt:38
 msgid "Recent"
 msgstr "Nylig"
 
+#:
 msgid "Recent changes in %1"
 msgstr "Nylige endringer i %1"
 
@@ -882,14 +835,12 @@ msgid "Recent changes in x"
 msgstr "Nylige endringer i x"
 
 #. (page.path)
-#: root/base/page/recent.tt:1
-#: root/base/page/recent.tt:2
+#: root/base/page/recent.tt:1 root/base/page/recent.tt:2
 msgid "Recent pages in x"
 msgstr "Nye side i x"
 
 #. (page.path, activetag)
-#: root/base/page/recent.tt:1
-#: root/base/page/recent.tt:4
+#: root/base/page/recent.tt:1 root/base/page/recent.tt:4
 msgid "Recent pages in x tagged with x"
 msgstr "Nye sider i x med nøkkelord x"
 
@@ -901,9 +852,7 @@ msgstr "Resett passord"
 msgid "Rectangle"
 msgstr "Rektangel"
 
-#: root/base/navbar.tt:29
-#: root/forms/comment/comment.yml:16
-#: root/forms/user/register.yml:47
+#: root/base/navbar.tt:29 root/forms/comment/comment.yml:16 root/forms/user/register.yml:47
 msgid "Register"
 msgstr "Registrering"
 
@@ -915,11 +864,15 @@ msgstr "Registrerer ny bruker"
 msgid "Registration is closed!"
 msgstr "Registrering er stengt!"
 
-#: root/forms/user/register.yml:30
+#:
 msgid "Repeat password"
 msgstr "Gjenta passord"
 
-#: root/forms/admin/settings.yml:30
+#: root/forms/user/register.yml:29
+msgid "Repeat password "
+msgstr "Gjenta passord "
+
+#: root/forms/admin/settings.yml:29
 msgid "Restrict user editing to home directory"
 msgstr "Begrens bruker-rettigheter til hjemmeområdet"
 
@@ -931,7 +884,7 @@ msgstr "Begrenset område. Du trenger administrator privileger"
 msgid "Role Members"
 msgstr "Rolle-medlemmer"
 
-#: root/forms/admin/role_form.yml:13
+#: root/forms/admin/role_form.yml:10
 msgid "Role Name"
 msgstr "Rollenavn"
 
@@ -943,13 +896,7 @@ msgstr "Rollénavn:"
 msgid "Roles"
 msgstr "Roller"
 
-#: root/base/admin/role_form.tt:40
-#: root/base/page/edit.tt:51
-#: root/base/page/permissions.tt:48
-#: root/forms/admin/role_form.yml:23
-#: root/forms/admin/settings.yml:32
-#: root/forms/user/password.yml:28
-#: root/forms/user/prefs.yml:28
+#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:28
 msgid "Save"
 msgstr "Lagre"
 
@@ -961,8 +908,7 @@ msgstr "Søk"
 msgid "Search for users:"
 msgstr "Søk etter brukere:"
 
-#: root/base/edithelp.tt:25
-#: root/base/edithelp.tt:29
+#: root/base/edithelp.tt:25 root/base/edithelp.tt:29
 msgid "Second item"
 msgstr "Andre ting"
 
@@ -970,13 +916,11 @@ msgstr "Andre ting"
 msgid "See changes"
 msgstr "Se endringer"
 
-#: root/base/page/bottomnav.tt:28
-#: root/base/page/bottomnav.tt:32
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "See next revision"
 msgstr "Se neste revisjon"
 
-#: root/base/page/bottomnav.tt:24
-#: root/base/page/bottomnav.tt:35
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "See previous revision"
 msgstr "Se forrige revisjon."
 
@@ -1008,6 +952,7 @@ msgstr "Vis bildet"
 msgid "Show this product"
 msgstr "Vis dette produktet"
 
+#:
 msgid "Showing %1 (%2-%3) of %4 pictures in %5"
 msgstr "Viser %1 (%2-%3) av %4 bilder i %5"
 
@@ -1021,7 +966,7 @@ msgstr "Viser x (x-x) av x bilder i x"
 msgid "Simply indent every line of a code block by 4"
 msgstr "Begyn hver linje av kodeblokken med 4 mellomrom"
 
-#: root/forms/admin/settings.yml:17
+#: root/forms/admin/settings.yml:16
 msgid "Site Admins (In addition to you)"
 msgstr "Administratorer (I tillegg til deg)"
 
@@ -1029,7 +974,7 @@ msgstr "Administratorer (I tillegg til deg)"
 msgid "Site Configuration"
 msgstr "Instillinger for siten"
 
-#: root/forms/admin/settings.yml:14
+#: root/forms/admin/settings.yml:9
 msgid "Site name"
 msgstr "Navn på wikien"
 
@@ -1041,13 +986,11 @@ msgstr "Formen var ikke riktig fylt ut. Rett feilene og prøv igjen:"
 msgid "Square"
 msgstr "Firkant"
 
-#: root/base/navbar.tt:32
-#: root/base/navbar.tt:34
+#: root/base/navbar.tt:32 root/base/navbar.tt:34
 msgid "Sub pages"
 msgstr "Undersider"
 
-#: root/base/navbar.tt:52
-#: root/base/navbar.tt:54
+#: root/base/navbar.tt:52 root/base/navbar.tt:54
 msgid "Subscribe to changes by RSS"
 msgstr "Abbonner på endringer med RSS"
 
@@ -1055,8 +998,7 @@ msgstr "Abbonner på endringer med RSS"
 msgid "Subscribe to page changes"
 msgstr "Abboner på endringer i siden"
 
-#: root/base/page/editbar.tt:20
-#: root/base/page/editbar.tt:8
+#: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
 msgid "Syntax"
 msgstr "Syntaks"
 
@@ -1064,11 +1006,7 @@ msgstr "Syntaks"
 msgid "Table"
 msgstr "Tabell"
 
-#: root/base/navbar.tt:40
-#: root/base/navbar.tt:43
-#: root/base/navbar.tt:45
-#: root/base/page/list.tt:6
-#: root/base/page/recent.tt:13
+#: root/base/navbar.tt:40 root/base/navbar.tt:43 root/base/navbar.tt:45 root/base/page/list.tt:6 root/base/page/recent.tt:13
 msgid "Tags"
 msgstr "Nøkkelord"
 
@@ -1080,8 +1018,7 @@ msgstr "Tatt"
 msgid "Text Formatting"
 msgstr "Tekstformattering"
 
-#: root/base/edithelp.tt:59
-#: root/base/edithelp.tt:60
+#: root/base/edithelp.tt:59 root/base/edithelp.tt:60
 msgid "Text in"
 msgstr "Tekst i"
 
@@ -1097,6 +1034,7 @@ msgstr "Det finnes allerede en bruker med den epostadressen"
 msgid "The Wikilicious page"
 msgstr "Wikilious siden"
 
+#:
 msgid "The requested URL (%1) was not found"
 msgstr "Den etterspurte URLen (%1) kunne ikke finnes"
 
@@ -1117,8 +1055,7 @@ msgstr "Dette er den første revisjonen! Ingen å sjekke endringer mot."
 msgid "Time edited"
 msgstr "Tid for redigering"
 
-#: root/base/edithelp.tt:104
-#: root/base/edithelp.tt:92
+#: root/base/edithelp.tt:104 root/base/edithelp.tt:92
 msgid "To get"
 msgstr "Å få"
 
@@ -1126,11 +1063,11 @@ msgstr "Å få"
 msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
 msgstr "Skriv i tekstområdet under denne teksten for å begynne å redigere denne siden. For å finne ut mer om hvilke koder du kan bruke, trykk på 'syntax' over."
 
+#:
 msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
 msgstr "To eller flere kapitaliserte ord limt sammen (camel case) eller en frase med doble paranteser eller hakeparanteser rundt er et wiki ord. For å unngå dette, sett '' forran ordet"
 
-#: root/base/edithelp.tt:49
-#: root/base/edithelp.tt:7
+#: root/base/edithelp.tt:49 root/base/edithelp.tt:7
 msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
 msgstr "To eller flere kapitaliserte ord limt sammen (camel case) eller en frase med doble paranteser eller hakeparanteser rundt er et wiki ord. For å unngå dette, sett '' forran ordet"
 
@@ -1142,9 +1079,13 @@ msgstr "URL"
 msgid "Unordered Lists with Paragraphs"
 msgstr "Usorterte lister med paragrafer"
 
-#: root/forms/user/editprofile.yml:39
+#:
 msgid "Update"
 msgstr "Oppdater"
+
+#: root/forms/user/editprofile.yml:39
+msgid "Update "
+msgstr "Oppdater "
 
 #: lib/MojoMojo/Controller/User.pm:130
 msgid "Updated preferences"
@@ -1162,6 +1103,7 @@ msgstr "Last opp"
 msgid "Use inherited permissions"
 msgstr "Bruk arvede rettigheter"
 
+#:
 msgid "User %1 not found!"
 msgstr "Brukeren %1 finnes ikke!"
 
@@ -1214,6 +1156,7 @@ msgstr "Visninger"
 msgid "Wanted Pages"
 msgstr "Ønskede Sider"
 
+#:
 msgid "Welcome, %1 your email is validated. Please log in."
 msgstr "Velkommen, %1. Din epost er nå bekreftet. Vennligst logg inn."
 
@@ -1222,15 +1165,11 @@ msgstr "Velkommen, %1. Din epost er nå bekreftet. Vennligst logg inn."
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Velkommen, x, din epost er godkjent. Vennligst logg inn."
 
-#: root/base/navbar.tt:48
-#: root/base/navbar.tt:50
+#: root/base/navbar.tt:48 root/base/navbar.tt:50
 msgid "Who wrote what"
 msgstr "Hvem skrev hva"
 
-#: root/base/edithelp.tt:10
-#: root/base/edithelp.tt:47
-#: root/base/edithelp.tt:5
-#: root/base/edithelp.tt:52
+#: root/base/edithelp.tt:10 root/base/edithelp.tt:47 root/base/edithelp.tt:5 root/base/edithelp.tt:52
 msgid "Wiki words"
 msgstr "Wiki ord"
 
@@ -1238,8 +1177,7 @@ msgstr "Wiki ord"
 msgid "With a second line"
 msgstr "Med en linje til"
 
-#: root/base/edithelp.tt:109
-#: root/base/edithelp.tt:97
+#: root/base/edithelp.tt:109 root/base/edithelp.tt:97
 msgid "Write"
 msgstr "Skriv"
 
@@ -1279,6 +1217,7 @@ msgstr "Teksten din er ugyldig, reformatter den og prøv igjen."
 msgid "Your password has been updated"
 msgstr "Ditt passord er nå endret"
 
+#:
 msgid "Your password on %1 has been reset. This is your new password:"
 msgstr "Passordet ditt på %1 har blitt resatt. Det nye passordet ditt er:"
 
@@ -1287,6 +1226,7 @@ msgstr "Passordet ditt på %1 har blitt resatt. Det nye passordet ditt er:"
 msgid "Your password on x has been reset. This is your new password:"
 msgstr "Ditt passord på x har blitt resatt. Dette er ditt nye passord:"
 
+#:
 msgid "[%1] New User Validation"
 msgstr "[%1] Validering av ny bruker"
 
@@ -1311,8 +1251,7 @@ msgstr "legg til en kommentar"
 msgid "add tag"
 msgstr "legg til nøkkelord"
 
-#: root/base/edithelp.tt:3
-#: root/base/edithelp.tt:45
+#: root/base/edithelp.tt:3 root/base/edithelp.tt:45
 msgid "advanced"
 msgstr "avansert"
 
@@ -1324,6 +1263,7 @@ msgstr "alt tekst"
 msgid "apply to subpages"
 msgstr "gjelder for undersider"
 
+#:
 msgid "as %1"
 msgstr "som %1"
 
@@ -1368,7 +1308,7 @@ msgstr "konfigurasjon"
 msgid "confirmation message resent"
 msgstr "bekreftelsesmelding ble sendt på nytt"
 
-#: root/forms/pageadmin/edit.yml:15
+#: root/forms/pageadmin/edit.yml:14
 msgid "creator"
 msgstr "skaper"
 
@@ -1388,18 +1328,15 @@ msgstr "last ned"
 msgid "email"
 msgstr "epost"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "example"
 msgstr "eksempel"
 
-#: root/base/comment/post.tt:6
-#: root/base/page/edit.tt:54
+#: root/base/comment/post.tt:6 root/base/page/edit.tt:54
 msgid "forget me"
 msgstr "glem meg"
 
-#: root/base/gallery/photo.tt:7
-#: root/base/navbar.tt:74
+#: root/base/gallery/photo.tt:7 root/base/navbar.tt:74
 msgid "gallery"
 msgstr "galleri"
 
@@ -1407,8 +1344,7 @@ msgstr "galleri"
 msgid "hello"
 msgstr "hallo"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "http://example.com/"
 msgstr "http://eksempel.no/"
 
@@ -1448,8 +1384,7 @@ msgstr "linknavn"
 msgid "log in"
 msgstr "log inn"
 
-#: root/base/admin/user.tt:8
-#: root/base/comment/login.tt:7
+#: root/base/admin/user.tt:8 root/base/comment/login.tt:7
 msgid "login"
 msgstr "innlogging"
 
@@ -1469,10 +1404,11 @@ msgstr "ingen beskrivelse"
 msgid "no email address"
 msgstr "ingen epostadresse"
 
-#: root/base/gallery/photo_info.tt:4
-#: root/base/gallery/photo_info.tt:5
-#: root/base/gallery/photo_info.tt:6
-#: root/base/gallery/photo_info.tt:8
+#: root/base/page/permissions.tt:20
+msgid "not access page"
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:8
 msgid "not specified"
 msgstr "ikke oppgitt"
 
@@ -1500,9 +1436,7 @@ msgstr "postet"
 msgid "preferences"
 msgstr "instillinger"
 
-#: root/base/page/permissions.tt:13
-#: root/base/page/permissions.tt:16
-#: root/base/page/permissions.tt:36
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36
 msgid "read"
 msgstr "lese"
 
@@ -1534,6 +1468,10 @@ msgstr "start"
 msgid "the following are missing:"
 msgstr "følgende mangler:"
 
+#: lib/Locale/Maketext/Extract/Plugin/FormFu.pm:32
+msgid "this is the string"
+msgstr ""
+
 #: root/base/admin/toplinks.tt:11
 msgid "users"
 msgstr "brukere"
@@ -1542,18 +1480,14 @@ msgstr "brukere"
 msgid "view"
 msgstr "vis"
 
-#: root/base/page/permissions.tt:13
-#: root/base/page/permissions.tt:17
-#: root/base/page/permissions.tt:36
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:17 root/base/page/permissions.tt:36
 msgid "write"
 msgstr "skrive"
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)
 #. (rev - 1)
-#: root/base/page/bottomnav.tt:28
-#: root/base/page/bottomnav.tt:32
-#: root/base/page/bottomnav.tt:35
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32 root/base/page/bottomnav.tt:35
 msgid "x more"
 msgstr "x flere"
 
@@ -1562,19 +1496,15 @@ msgstr "x flere"
 msgid "x revisions"
 msgstr "x revisjoner"
 
-#: root/base/page/permissions.tt:13
-#: root/base/page/permissions.tt:16
-#: root/base/page/permissions.tt:17
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:17
 msgid "yes"
 msgstr "ja"
 
-#: root/base/edithelp.tt:16
-#: root/base/edithelp.tt:19
+#: root/base/edithelp.tt:16 root/base/edithelp.tt:19
 msgid "your text"
 msgstr "din tekst"
 
-#: root/base/edithelp.tt:17
-#: root/base/edithelp.tt:20
+#: root/base/edithelp.tt:17 root/base/edithelp.tt:20
 msgid "your/url"
 msgstr "din/url"
 
@@ -1585,4 +1515,3 @@ msgstr "|en|tabell|rad|"
 #: root/base/edithelp.tt:35
 msgid "|b|table|row|"
 msgstr "|andre|tabell|rad"
-
