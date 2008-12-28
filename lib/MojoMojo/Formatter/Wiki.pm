@@ -276,6 +276,7 @@ sub find_links {
 
     while ( $$content =~ /$explicit_regex/g ) {
         my $link = $1;
+        $link =~ s/\s/_/g;
 
         # convert relative paths to absolute paths
         if ( $link !~ m|^/| ) {
