@@ -32,3 +32,6 @@
 
 \bdb/oracle
 \bt/var/mojomojo.db
+
+# Skip development tools
+lib\/Locale\/Maketext\/Extract\/Plugin\/FormFu.pm
