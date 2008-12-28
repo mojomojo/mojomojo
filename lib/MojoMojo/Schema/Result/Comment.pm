@@ -1,9 +1,9 @@
-package MojoMojo::Schema::Comment;
+package MojoMojo::Schema::Result::Comment;
 
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 use Text::Textile2();
 my $textile = Text::Textile2->new(

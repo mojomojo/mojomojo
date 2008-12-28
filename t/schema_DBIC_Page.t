@@ -24,7 +24,7 @@ my $root_proto_pages_count = @$root_proto_pages;
 is( $root_path_pages_count, 1, 'exactly 1 page returned for path "/"...' );
 is( $root_proto_pages_count, 0, '...and 0 "proto" pages' );
 my $root=$root_path_pages->[0];
-isa_ok($root,'MojoMojo::Schema::Page');
+isa_ok($root,'MojoMojo::Schema::Result::Page');
 
 my ($child_path_pages, $child_proto_pages) = $schema->resultset('Page')->path_pages('/child/grandchild');
 my $child_path_pages_count = @$child_path_pages;

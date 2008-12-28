@@ -1,9 +1,9 @@
-package MojoMojo::Schema::Entry;
+package MojoMojo::Schema::Result::Entry;
 
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "PK::Auto", "Core" );
 __PACKAGE__->table("entry");

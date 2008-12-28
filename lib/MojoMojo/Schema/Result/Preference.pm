@@ -1,9 +1,9 @@
-package MojoMojo::Schema::Preference;
+package MojoMojo::Schema::Result::Preference;
 
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "PK::Auto", "Core" );
 __PACKAGE__->table("preference");

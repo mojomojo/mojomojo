@@ -1,9 +1,9 @@
-package MojoMojo::Schema::Photo;
+package MojoMojo::Schema::Result::Photo;
 
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime;
 use Image::ExifTool;
@@ -42,7 +42,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many( "tags",     "Tag",     { "foreign.photo"   => "self.id" } );
 __PACKAGE__->has_many( "comments", "Comment", { "foreign.picture" => "self.id" } );
-__PACKAGE__->has_one( 'attachment', 'MojoMojo::Schema::Attachment' )
+__PACKAGE__->has_one( 'attachment', 'MojoMojo::Schema::Result::Attachment' )
     ;    #,{'foreign.id' => 'self.id' });
 
 =item extract_exif
