@@ -1,7 +1,9 @@
+        - Fix wanted pages.
         - Fix password dialog
         - Autocomplete for tags (Sachin Sebastian )
         - Update SWFUpload to support flash 10
         - Resolve a unicode issue in some installations when editing text.
+        - Add support for i18n
 
 0.999023  2008-11-23 10:35:00
         - Added  GUI Permissions editor (nilsonsfj)

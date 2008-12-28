@@ -27,7 +27,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
-        $c->stash->{message}  = 'Sorry bubba, gotta be admin';
+        $c->stash->{message}  = $c->loc('Restricted area. Admin access required');
         $c->stash->{template} = 'message.tt';
         return 0;
     }
@@ -59,14 +59,13 @@ sub settings : Path FormConfig Args(0) {
             restricted_user   => $c->pref('restricted_user'),
         });
         $form->process();
+        return;
     }
-    elsif ( $form->submitted_and_valid ) {
-        my @users = split( m/\s+/, $form->params->{admins} );
-        foreach $user (@users) {
-            unless ( $c->model("DBIC::Person")->get_user($user) ) {
-                $c->stash->{message} = 'Cant find admin user: ' . $user;
-                return;
-            }
+    my @users = split( m/\s+/, $form->params->{admins} );
+    foreach my $user (@users) {
+        unless ( $c->model("DBIC::Person")->get_user($user) ) {
+            $c->stash->{message} = $c->loc('Cant find admin user: ') . $user;
+            return;
         }
         # FIXME: Needs refactor
         $c->pref( 'name', $form->params->{name} );
@@ -76,6 +75,25 @@ sub settings : Path FormConfig Args(0) {
         $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
         $c->stash->{message} = "Updated successfully.";
     }
+
+    # FIXME: Needs refactor
+    if ( $form->params->{registration} ) {
+        $c->pref( 'open_registration', 1 );
+    }
+    else {
+        $c->pref( 'open_registration', 0 );
+    }
+    if ( $form->params->{restricted} ) {
+        $c->pref( 'restricted_user', 1 );
+    }
+    else {
+        $c->pref( 'restricted_user', 0 );
+    }
+    $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
+    $c->pref( 'name', $form->params->{name} );
+    $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
+
+    $c->stash->{message} = $c->loc("Updated successfully.");
 }
 
 =item user ( .admin/user )

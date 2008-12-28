@@ -1,5 +1,8 @@
-[% 
-    SET title = "Recent pages in " _ page.path _ ( activetag ? ' tagged with ' _ activetag : '' );
+[%
+    SET title = loc('Recent pages in x', page.path);
+    IF activetag;
+        SET title = loc('Recent pages in x tagged with x', page.path, activetag);
+    END;
     SET now = objects.first.content.created.ymd;
 %]
 
@@ -7,7 +10,7 @@
 
 [% IF tags.count %]
 <div id="categories">
-    <strong>Tags</strong>:
+    <strong>[% loc('Tags') %]</strong>:
     [% WHILE (tag = tags.next) %]
         [% IF tag.tag == activetag %]
         <strong>[% tag.tag %]</strong>
@@ -32,10 +35,10 @@
         <table class="recent">
             <thead>
                 <tr>
-                    <th class="page">Page</th>
-                    <th class="editedBy">Edited by</th>
-                    <th class="timeEdited">Time edited</th>
-                    <th class="actions">Actions</th>
+                    <th class="page">[% loc('Page') %]</th>
+                    <th class="editedBy">[% loc('Edited by') %]</th>
+                    <th class="timeEdited">[% loc('Time edited') %]</th>
+                    <th class="actions">[% loc('Actions') %]</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +52,7 @@
             <td>
                 [% page.content.created.hms(":") %]
             </td>
-            <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">View Diff</a></td>
+            <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
         </tr>
 [% END %]
 </table>

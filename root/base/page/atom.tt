@@ -3,14 +3,13 @@
         <title>[ [%
               title || c.pref('name') || 
                        config.name || 
-                       "A poorly configured MojoMojo Installation"
+                       loc("A poorly configured MojoMojo Installation")
             %] ] [% page.path %]</title>
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
-<tagline>Recent changes in [%page.path%]</tagline>
+<tagline> [%loc('Recent changes in x',page.path)%]</tagline>
 <id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>
 <generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
-<copyright>Copyright (c) [%pages.last.update.year%] [%c.pref('admin_user')%]</copyright>
 [%FOREACH page IN pages %]
 <entry>
 <title>[% page.name %]</title>
@@ -21,7 +20,7 @@
 <id>tag:[% c.base_uri.host %],[% page.content.created.ymd('-') %]:[% page.path %]</id>
 <created>[% IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</created>
-<summary type="text/plain">[% page.content.utf8 %]</summary>
+<summary type="text/plain">[% page.content.body %]</summary>
 <author>
 <name>[%page.content.creator.name%]</name>
 <url>[%c.uri_for( page.content.creator.link )%]</url>

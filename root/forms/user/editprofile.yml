@@ -7,34 +7,33 @@ auto_id: '%f_%n'
 elements:
   - type: Text
     name: name
-    label: Name
+    label_loc: Name
   - type: Date
     name: born
-    label: Birth Date
+    label_loc: Birth Date
     auto_inflate: 1
     year:
       less: 70 
       plus: 0
   - type: Select
     name: gender
-    label: Gender
+    label_loc: Gender
     options:
         - [ 'm', 'Male' ]
         - [ 'f', 'Female' ]
         - [ '?', 'Rather not say' ]
   - type: Text
     name: industry
-    label: Industry
+    label_loc: Industry
   - type: Textarea
     name: interests
-    label: Interests
+    label_loc: Interests
   - type: Textarea
-    label: Favorite Albums
+    label_loc: Favorite Albums
     name: music
   - type: Textarea
     name: movies
-    label: Favorite Movies
+    label_loc: Favorite Movies
   - type: Submit
     name: submit
-    value: Update 
-    
+    value_loc: Update 

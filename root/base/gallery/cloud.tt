@@ -1,5 +1,5 @@
 [% PROCESS header.tt index_page=1 %]
-        <div id="header"><h1>photo tags</h1></div>
+<div id="header"><h1>[%loc('photo tags')%]</h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">

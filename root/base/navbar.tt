@@ -15,79 +15,79 @@
       [% IF user.active%]
         [% IF (!rev OR rev==page.content_version) %]
           [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
-            <li><a title="Change page content" href="[% c.uri_for('edit')%]" accesskey="E">Edit Page</a></li>
+            <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
           [%END%]
         [%END%]
-      <li><a href="[%c.uri_for(user.link)%]" title="Go to home page">[%c.fixw(user.login)%]</a></li>
+      <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
       [% ELSE %]
-      <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="User Preferences">[%c.fixw(user.login)%]</a></li> 
+      <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li> 
       [% END %]
     [%END%]
-    <li><a href="[%base%]/.logout">Log out</a></li>
+    <li><a href="[%base%]/.logout">[%loc('Log out')%]</a></li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('login')%]" title="Get in there" accesskey="L">Log in</a></li>
-      [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">Register</a></li>[%END%]
+    <li><a href="[%c.uri_for('login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a></li>
+      [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>[%END%]
   [% END %]
   [% IF template.name == 'page/list.tt' %]
-    <li class="navOn" title="Alphabetically sorted list of pages">Sub pages</li>
+    <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('list')%]" title="Alphabetically sorted list of pages" accesskey="A">Sub pages</a></li> 
+    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li> 
   [% END; IF template.name =='page/recent.tt' %]
-    <li class="navOn" title="Pages sorted by when they were last changed">Recent</li>
+    <li class="navOn" title="[%loc('Pages sorted by when they were last changed')%]">[%loc('Recent')%]</li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('recent')%]" title="Pages sorted by when they were last changed" accesskey="U">Recent</a></li> 
+    <li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li> 
   [% END; IF c.req.action =='tags' %]
-    <li class="navOn" title="All tags in this path">Tags</li> 
+    <li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li> 
   [% ELSE %]
     [% IF (pictures OR photo) %]
-    <li><a href="[%c.uri_for('gallery','tags')%]" title="All tags on photos" accesskey="T">Tags</a></li>
+    <li><a href="[%c.uri_for('gallery','tags')%]" title="[%loc('All tags on photos')%]" accesskey="T">[%loc('Tags')%]</a></li>
     [% ELSE %]
-    <li><a href="[%c.uri_for('tags')%]" title="All tags in this path" accesskey="T">Tags</a></li>
+    <li><a href="[%c.uri_for('tags')%]" title="[%loc('All tags in this path')%]" accesskey="T">[%loc('Tags')%]</a></li>
     [%END%]
   [% END; IF c.req.action=='users' %]
-    <li class="navOn" title="Who wrote what">Authors</li> 
+    <li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li> 
   [%ELSE%]
-    <li><a href="[%c.uri_for('users')%]" title="Who wrote what" accesskey="">Authors</a></li>
+    <li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
   [% END; IF template.name=='feeds.tt' %]
-    <li class="navOn" title="Subscribe to changes by RSS">Feeds</li> 
+    <li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li> 
   [%ELSE%]
-    <li><a href="[%c.uri_for('feeds')%]" title="Subscribe to changes by RSS" accesskey="">Feeds</a></li>
+    <li><a href="[%c.uri_for('feeds')%]" title="[%loc('Subscribe to changes by RSS')%]" accesskey="">[%loc('Feeds')%]</a></li>
   [% END; IF template.name =='export.tt' %]
-    <li class="navOn" title="Download a zip with all the pages in this wiki">Export</li>
+    <li class="navOn" title="[%loc('Download a zip with all the pages in this wiki')%]">[%loc('Export')%]</li>
   [%ELSE%]
-    <li><a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a></li>
+    <li><a href="[%c.uri_for('export')%]" title="[%loc('Download a zip with all the pages in this wiki')%]" accesskey="X">[%loc('Export')%]</a></li>
   [%END %]
   <li><input type="hidden" name="search_type" value="all" />
-  <input type="text" id="searchField" name="q" style="" value="Search"/>
+  <input type="text" id="searchField" name="q" style="" value="[%loc('Search')%]"/>
   </li></ul></form></div> 
   <div id="pagenav">
 	<ul>
   [%IF (c.req.action=="view")%]
-    <li class="navOn">Page</li>
+    <li class="navOn">[%loc('Page')%]</li>
   [%ELSE%]
-    <li><a title="The Wikilicious page" href="[%c.uri_for('view')%]">Page</a></li>
+    <li><a title="[%loc('The Wikilicious page')%]" href="[%c.uri_for('view')%]">[%loc('Page')%]</a></li>
   [%END%]
   [%IF (page.has_photos) %]
     [%IF (pictures )%]
-      <li class="navOn">Gallery</li>
+      <li class="navOn">[%loc('Gallery')%]</li>
     [%ELSE%]
-      <li><a title="Photo Album" href="[%c.uri_for('gallery')%]">gallery</a></li> 
+      <li><a title="[%loc('Photo Album')%]" href="[%c.uri_for('gallery')%]">[%loc('gallery')%]</a></li> 
     [%END%]
   [%END%]
 
   [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
 
     [%IF (c.req.action=="profile")%]
-      <li class="navOn">Profile</li> 
+      <li class="navOn">[% loc('Profile') %]</li> 
     [%ELSE%]
-      <li><a title="User Profile" href="[%c.uri_for('profile')%]">Profile</a></li>
+      <li><a title="[%loc('User Profile')%]" href="[%c.uri_for('profile')%]">[%loc('Profile')%]</a></li>
     [%END%]
   [%END%]
   [%IF c.user_exists%]
     [%IF (c.req.action=="prefs")%]
-      <li class="navOn">Preferences</li> 
+      <li class="navOn">[%loc('Preferences')%]</li> 
     [%ELSE%]
-      <li><a title="User Settings" href="[%c.uri_for(user.link)%].prefs">Preferences</a></li>
+      <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%].prefs">[%loc('Preferences')%]</a></li>
     [% END %] 
   [% END%]
   </ul>

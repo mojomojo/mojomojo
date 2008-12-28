@@ -1,5 +1,5 @@
 <dl>
-    <dt>My tags:</dt>
+    <dt>[% loc('My tags') %]:</dt>
     <dd>&nbsp;
 [% IF tags %]
     [% FOREACH tag IN tags %]
@@ -12,7 +12,7 @@
     [% END %]
 [% END %]
     </dd>
-    <dt>Popular tags:</dt>
+    <dt>[% loc('Popular tags') %]:</dt>
     <dd>&nbsp;
 [% IF others_tags %]
     [% FOREACH othertag IN others_tags %]

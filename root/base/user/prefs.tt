@@ -1,9 +1,9 @@
-[% WRAPPER page/wrapper.tt title="preferences" %]
+[% WRAPPER page/wrapper.tt title=loc("preferences") %]
 <div class="preferences">
-<h2>Your Account</h2>
+<h2>[% loc('Your Account') %]</h2>
 <div class="rightHandSide">
 <ul>
-<li><a href="[%c.uri_for('prefs/password')%]">Change password</a></li>
+<li><a href="[%c.uri_for('prefs/password')%]">[% loc('Change password') %]</a></li>
 </ul>
 </div>
 <p>[%message%]</p>

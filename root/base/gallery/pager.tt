@@ -8,4 +8,4 @@
 <a href="[%c.uri_for(c.req.args.first,pager.last_page)%]">&#187;</a>
 [%END%]
 </div>
-<p><em>Showing [%pager.entries_on_this_page%] ([%pager.first%]-[%pager.last%]) of [%pager.total_entries%] pictures in [%c.wikiword(page.path,base)%].</em></p>
+<p><em>[%loc('Showing x (x-x) of x pictures in x', pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base))%]</em></p>

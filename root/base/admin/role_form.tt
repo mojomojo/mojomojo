@@ -2,33 +2,33 @@
  
  <fieldset class="fields">
   <label>
-   <span>Role Name:</span>
+   <span>[%loc('Role Name:')%]</span>
    <input type="text" name="name" value="[% role_name %]" />
   </label>
   <label>
-   <span>Active?</span>
+   <span>[%loc('Active?')%]</span>
    <input type="checkbox" name="active"[% IF active %] checked="checked"[% END %] />
   </label>
  </fieldset>
 
  <fieldset class="members">
-  <h2>Role Members</h2>
+  <h2>[%loc('Role Members')%]</h2>
 
   <label>
-    <span>Search for users:</span>
+    <span>[%loc('Search for users:')%]</span>
     <input type="text" id="member_input" name="member_input" />
     <input type="hidden" id="user_search_url" name="user_search_url" value="[% c.uri_for('/.jsrpc/usersearch') %]" />
   </label>
 
   [% has_members = members && members.size > 0 %]
   <ul id="role_members">
-  <li class="empty[% IF has_members %] hide[% END %]">No members added yet.</li>
+  <li class="empty[% IF has_members %] hide[% END %]">[%loc('No members added yet.')%]</li>
   [% IF has_members %]
    [% FOREACH member IN members %]
    <li class="member">
     [% member.login %]
     <input type="hidden" name="role_members" value="[% member.id %]" />
-    <a class="clickable remove_member">[remove]</a>
+    <a class="clickable remove_member">[[%loc('remove')%]]</a>
    </li>
    [% END %]
   [% END %]
@@ -37,7 +37,7 @@
  </fieldset>
 
  <fieldset class="buttons">
-  <input type="submit" name="submit" value="Save" />
+  <input type="submit" name="submit" value="[%loc('Save')%]" />
  </fieldset>
 </form>
 

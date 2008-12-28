@@ -420,7 +420,7 @@ textarea#comment {
 #TextileHelp,
 #MarkdownHelp
 {
-  width: 700px; 
+  width: 902px; 
   background: #ddd; 
   border: 1px solid #aaa;
   padding:1em;
@@ -479,7 +479,7 @@ textarea#comment {
 
 .rightHandSide {
   float: right;
-  width: 147px;
+  width: 187px;
   margin-left: 10px;
   padding-left: 20px;
   border-left: 1px dotted #ccc;
@@ -1114,7 +1114,7 @@ dl.list dt {
 div#tags { height:4em; }
 
 div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
+div#tags dt { width:90px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
 div#tags dd { margin:0; padding:0; }
 
 div#bottomnav { clear:both; }

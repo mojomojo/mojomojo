@@ -7,12 +7,12 @@ auto_fieldset: 1
 elements:
   - type: Text
     name: name
-    label: Role Name
+    label_loc: Role Name
     constraints:
       - Required
   - type: Checkbox
     name: active
-    label: "Active?"
+    label_loc: "Active?"
   - type: Repeatable
     increment_field_names: 0
     elements:
@@ -20,4 +20,4 @@ elements:
       - name: role_members
   - type: Submit
     name: submit
-    value: Save
+    value_loc: Save

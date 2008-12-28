@@ -6,35 +6,35 @@
     END 
 %]
 
-[% WRAPPER page/wrapper.tt title = "Page info for " _ page.path %]
+[% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
 
 <dl id="pageInfoMeta">
-    <dt>Active version:</dt>
+    <dt>[%loc('Active version')%]:</dt>
     <dd>[% page.content_version %]</dd>
 
-    <dt>Content size:</dt>
+    <dt>[%loc('Content size')%]:</dt>
     <dd>[% page.content.body.length %] chars</dd>
 
-    <dt>Children:</dt>
+    <dt>[%loc('Children')%]:</dt>
     <dd>[% page.children.size || 0 %]</dd>
 
-    <dt>Descendants:</dt>
+    <dt>[%loc('Descendants')%]:</dt>
     <dd>[% page.descendants.size %]</dd>
     
-    <dt>Links to:</dt>
+    <dt>[%loc('Links to')%]:</dt>
     <dd>[% page.links_to.size || 0 %] pages</dd>
     
-    <dt>Links from:</dt>
+    <dt>[%loc('Links from')%]:</dt>
     <dd>[% page.links_from.size || 0%] pages</dd>
     
-    <dt>Attachments:</dt>
+    <dt>[%loc('Attachments')%]:</dt>
     <dd>[% page.attachments.size || 0%]</dd>
     
-    <dt>Photos:</dt>
+    <dt>[%loc('Photos')%]:</dt>
     <dd>[% page.has_photos || 0 %]</dd>
 </dl>
 
-<h3>[% page.versions.size %] revisions</h3>
+<h3>[% loc('x revisions',page.versions.size)%]</h3>
 
 <ol>
     [% FOREACH version IN page.versions %]

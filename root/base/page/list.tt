@@ -1,9 +1,9 @@
-[% SET title = "All Pages in " _ page.path %]
+[% SET title = loc('All Pages in x',  page.path) %]
 
 [% WRAPPER page/wrapper.tt title = title %]
 
 <div id="categories">
-    <strong>Tags</strong>: 
+    <strong>[%loc('Tags')%]</strong>: 
     [% WHILE( tag = tags.next ) %]
         [% IF tag.tag == activetag %]
     <b>[% tag.tag %]</b>
@@ -13,8 +13,8 @@
     [% END %]
 </div>
 <div id="allPages">
-    <h2>All Pages</h2>
-    All pages in [% page.name %] listed alphabetically
+    <h2>[%loc('All Pages')%]</h2>
+    [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages %]
         <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a></li>
@@ -24,8 +24,8 @@
 
 [% IF ! activetag %]
 <div id="wantedPages">
-    <h2>Backlinks</h2>
-    Other pages that link to this page.
+    <h2>[%loc('Backlinks')%]</h2>
+    [%loc('Other pages that link to this page.')%]
 [% IF backlinks.size %]
     <ul style="margin-bottom: 10px">
 [% FOR backlink = backlinks.list %]
@@ -34,13 +34,13 @@
     </ul>
 [% END %]
 
-    <h2>Wanted Pages</h2>
-    Links to non-existent pages.
+    <h2>[%loc('Wanted Pages')%]</h2>
+    [%loc('Links to non-existent pages.')%]
 
 [% IF wanted.size %]
     <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">Not found. Click to create this page." href="[%c.uri_for( wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">referenced by [% wanted.from_page.path %]</a></li>
+        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">referenced by [% wanted.from_page.path %]</a></li>
 [% END %]
     </ul>
 [% END %]
