@@ -823,7 +823,7 @@ msgstr "Wiederhole Passwort"
 
 #: root/forms/admin/settings.yml:30
 msgid "Restrict user editing to home directory"
-msgstr "Beschränke das Editieren auf die Home-Verzeichniss der Benutzer"
+msgstr "Beschränke das Editieren auf die Home-Verzeichnisse der Benutzer"
 
 #: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
@@ -913,7 +913,7 @@ msgstr "Rücke jede Zeile eines Code-Blocks um 4 Leerzeichen ein"
 
 #: root/forms/admin/settings.yml:17
 msgid "Site Admins (In addition to you)"
-msgstr "Admins (zusätzlich zu dir)"
+msgstr "Admins (außer dir)"
 
 #: root/base/admin/settings.tt:5
 msgid "Site Configuration"
