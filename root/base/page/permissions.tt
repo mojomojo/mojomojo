@@ -17,7 +17,7 @@
       perms_list.push('write') IF role_perms.edit == 'yes' ;
     -%]
     <br/>
-    [% role -%] can [% perms_list.join(', ') -%]
+    [% role -%] can [% perms_list.join(', ') || 'not access page' -%]
   [% END %]
   </pre>
 
