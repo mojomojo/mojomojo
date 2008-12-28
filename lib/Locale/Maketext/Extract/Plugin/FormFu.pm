@@ -3,50 +3,6 @@ package Locale::Maketext::Extract::Plugin::FormFu;
 use strict;
 use base qw(Locale::Maketext::Extract::Plugin::Base);
 
-sub file_types {
-    return qw( yaml yml );
-}
-
-sub extract {
-    my $self = shift;
-    my $data = shift;
-
-    my $y = Locale::Maketext::Extract::Plugin::FormFu::Extractor->new();
-    $y->load($data);
-
-    foreach my $entry (@{$y->found}) {
-        $self->add_entry(@$entry)
-    }
-}
-
-package Locale::Maketext::Extract::Plugin::FormFu::Extractor;
-
-use base qw(YAML::Loader);
-
-sub new {
-    my $class = shift;
-    my $self  = $class->SUPER::new(@_);
-    $self->{found} = [];
-    return $self;
-}
-
-sub _parse_mapping {
-    my $self = shift;
-    my $mapping = $self->SUPER::_parse_mapping(@_);
-    if (ref($mapping) eq 'HASH') {
-        foreach my $key (%$mapping) {
-            next unless $key =~ /.*?_loc/;
-            push @{ $self->{found} }, [ $mapping->{$key}, $self->line ];
-        }
-    }
-    return $mapping;
-}
-
-sub found {
-    my $self = shift;
-    return $self->{found};
-}
-
 =head1 NAME
 
 Locale::Maketext::Extract::Plugin::FormFu - FormFu format parser
@@ -84,6 +40,22 @@ We extract the text after _loc:
 =back
 
 =cut
+
+sub file_types {
+    return qw( * );
+}
+
+sub extract {
+    my $self = shift;
+    my $content = shift;
+    my $lno = 0;
+    foreach my $line (split /\n/, $content) {
+        $lno++;
+        if (my ($str) = $line =~ /.*?_loc[:]*\s+['"]*(.*?)['"]*$/) {
+            $self->add_entry($str, $lno);
+        }
+    }
+}
 
 =head1 SEE ALSO
 
