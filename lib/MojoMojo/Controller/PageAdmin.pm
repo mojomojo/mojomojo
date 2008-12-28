@@ -179,8 +179,8 @@ sub permissions : Global {
     # build inherited permissions hash
     for my $path (keys %$data) {
         # might have additional data (if cached)
-        next unless ($parent_path && $parent_path =~ /^$path/);
-
+  #      next unless ($parent_path && $parent_path =~ /^$path/);
+        next if $path eq $current_path;
         my $path_perms = $data->{$path};
         for my $role (keys %$path_perms) {
             next unless exists $roles{$role};

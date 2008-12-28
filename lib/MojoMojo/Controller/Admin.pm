@@ -106,7 +106,7 @@ Role listing, creation and assignment.
 
 sub role : Local Args(0) {
     my ($self, $c) = @_;
-    $c->stash->{roles} = [ $c->model('DBIC::Role')->all ];
+    $c->stash->{roles} = [ $c->model('DBIC::Role')->search(undef,{order_by=>['id asc']}) ];
 }
 
 =item create_role ( .admin/create_role )

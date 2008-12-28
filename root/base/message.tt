@@ -3,7 +3,7 @@
  <div id="content">
   <div><img src="[%c.uri_for_static('shrinkenhead.jpg')%]" alt="shrunken head" />
    <h1>[%message%].</h1>
-   <p> Go directly to <a href="[%c.uri_for('/')%]/">start</a>, do not pass prison, do not collect $ 200...</p>
+   <p> Go directly to <a href="[%c.req.base%]/">start</a>, do not pass prison, do not collect $ 200...</p>
   </div>
  </div>
 [%PROCESS footer.tt%]
