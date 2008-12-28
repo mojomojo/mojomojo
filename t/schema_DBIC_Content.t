@@ -23,7 +23,7 @@ my $root_page = $path_pages->[0];
 
 my $root_content = $root_page->content;
 
-isa_ok($root_content,'MojoMojo::Schema::Content','Content object can be found');
+isa_ok($root_content,'MojoMojo::Schema::Result::Content','Content object can be found');
 is($root_content->status,'released','root page is released');
 
 # Warning: the following tests only work because
@@ -42,9 +42,9 @@ $root_page->content->store_links();
 @links_from = $root_page->links_from;
 
 is(scalar @links_from, 1, '1 link from root page');
-isa_ok($links_from[0], 'MojoMojo::Schema::Link', 'Object of correct type');
+isa_ok($links_from[0], 'MojoMojo::Schema::Result::Link', 'Object of correct type');
 is(scalar @wantedpages, 1, '1 wanted page from root page');
-isa_ok($wantedpages[0], 'MojoMojo::Schema::WantedPage', 'Object of correct type');
+isa_ok($wantedpages[0], 'MojoMojo::Schema::Result::WantedPage', 'Object of correct type');
 # Stored links does not grow
 $root_page->content->store_links();
 is(scalar @links_from, 1, '1 link from root page');

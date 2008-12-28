@@ -1,9 +1,9 @@
-package MojoMojo::Schema::Content;
+package MojoMojo::Schema::Result::Content;
 
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime::Format::Mail;
 
@@ -11,7 +11,7 @@ use Algorithm::Diff;
 use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
-__PACKAGE__->load_components(qw/ResultSetManager DateTime::Epoch UTF8Columns PK::Auto Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch UTF8Columns PK::Auto Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",
@@ -164,53 +164,10 @@ Return content after being run through MojoMojo::Formatter::* ,
 
 =cut
 
-sub format_content : ResultSet {
-
-    # FIXME: This thing should use accept-context and stop fucking around with $c everywhere
-    my ( $self, $c, $content, $page ) = @_;
-    $c ||= MojoMojo->instance();
-    MojoMojo->call_plugins( "format_content", \$content, $c, $page )
-        if ($content);
-    return $content;
-}
-
 sub formatted {
     my ( $self, $c ) = @_;
     my $result = $self->result_source->resultset->format_content( $c, $self->body, $self );
     return $result;
-}
-
-# create_proto: create a "proto content version" that may
-# be the basis for a new revision
-
-=item create_proto <page>
-
-Create a content prototype object, as the basis for a new revision.
-
-=cut
-
-sub create_proto : ResultSet {
-    my ( $class, $page ) = @_;
-    my %proto_content;
-    my @columns = __PACKAGE__->columns;
-    eval {
-        $page->isa('MojoMojo::Schema::Page');
-        $page->content->isa('MojoMojo::Schema::Content');
-    };
-    if ($@) {
-
-        # assume page is a simple "proto page" hashref,
-        # or the page has no content yet
-        %proto_content = map { $_ => undef } @columns;
-        $proto_content{version} = 1;
-    }
-    else {
-        my $content = $page->content;
-        %proto_content = map { $_ => $content->$_ } @columns;
-        @proto_content{qw/ creator created comments /} = (undef) x 3;
-        $proto_content{version}++;
-    }
-    return \%proto_content;
 }
 
 =item max_version 

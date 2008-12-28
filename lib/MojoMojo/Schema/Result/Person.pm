@@ -1,17 +1,17 @@
-package MojoMojo::Schema::Person;
+package MojoMojo::Schema::Result::Person;
 
 use strict;
 use warnings;
 
 use Digest::SHA1;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
 use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch EncodedColumn ResultSetManager PK::Auto Core HTML::FormFu/);
+    qw/DateTime::Epoch EncodedColumn PK::Auto Core HTML::FormFu/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",
@@ -66,11 +66,6 @@ __PACKAGE__->has_many( "page_versions", "PageVersion", { "foreign.creator" => "s
 __PACKAGE__->many_to_many( roles => 'role_members', 'role' );
 __PACKAGE__->has_many( "contents", "Content", { "foreign.creator" => "self.id" } );
 
-sub get_person : ResultSet {
-    my ( $self, $login ) = @_;
-    my ($person) = $self->search( { login => $login } );
-}
-
 sub is_admin {
     my $self   = shift;
     my $admins = MojoMojo->pref('admins');
@@ -102,11 +97,6 @@ sub can_edit {
     return 0;
 }
 
-sub get_user : ResultSet {
-    my ( $self, $user ) = @_;
-    return $self->search( { login => $user } )->next();
-}
-
 sub pages {
     my ($self) = @_;
     my @pages =
@@ -124,41 +114,6 @@ sub pages {
         )->all;
     return $self->result_source->related_source('page_versions')->related_source('page')
         ->resultset->set_paths(@pages);
-}
-
-=item registration_profile
-
-returns a L<Data::FormValidator> profile for registration.
-
-=cut
-
-sub registration_profile : ResultSet {
-    my ( $self, $schema ) = @_;
-    return {
-        email => {
-            constraint => 'email',
-            name       => 'Invalid format'
-        },
-        login => [
-            {
-                constraint => qr/^\w{3,10}$/,
-                name       => 'only letters, 3-10 chars'
-            },
-            {
-                constraint => sub { $self->user_free( $schema, @_ ) },
-                name       => 'Username taken'
-            }
-        ],
-        name => {
-            constraint => qr/^\S+\s+\S+/,
-            name       => 'Full name please'
-        },
-        pass => {
-            constraint => \&pass_matches,
-            params     => [qw( pass confirm)],
-            name       => "Password doesn't match"
-        }
-    };
 }
 
 =item pass_matches <pass1> <pass2>
@@ -182,13 +137,6 @@ check password against database.
 sub valid_pass {
     my ( $self, $pass ) = @_;
     return $self->check_password($pass);
-}
-
-sub user_free : ResultSet {
-    my ( $class, $schema, $login ) = @_;
-    $login ||= $class;
-    my $user = $class->result_source->resultset->get_user($login);
-    return ( $user ? 0 : 1 );
 }
 
 sub hashed {

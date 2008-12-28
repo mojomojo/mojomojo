@@ -1,12 +1,12 @@
-package MojoMojo::Schema::PathPermissions;
+package MojoMojo::Schema::Result::PathPermissions;
 
 use strict;
 use warnings;
 use Data::Dumper;
 
-use base 'DBIx::Class';
+use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "ResultSetManager", "PK::Auto", "Core" );
+__PACKAGE__->load_components( "PK::Auto", "Core" );
 __PACKAGE__->table("path_permissions");
 __PACKAGE__->add_columns(
     "path",               { data_type => "VARCHAR", is_nullable => 0, size => 255 },
