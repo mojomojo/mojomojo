@@ -108,6 +108,8 @@ sub edit : Global FormConfig {
             $page = $path_pages->[ @$path_pages - 1 ];
         }
         $c->model("DBIC::Page")->set_paths(@$path_pages);
+        # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
+        $page = $c->model("DBIC::Page")->find($page->id);
         $page->update_content( %$valid );
 
         # update the search index with the new content

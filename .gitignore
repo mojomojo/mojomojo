@@ -5,7 +5,9 @@ inc/*
 index/*
 uploads/*
 Makefile
+Makefile.old
 META.yml
 pm_to_blib
 t/var/mojomojo.db
+t/var/upload
 mojomojos.kpf
