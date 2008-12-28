@@ -2,22 +2,22 @@
 
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
 
-<h4>Inherited permissions:</h4>
+<h4>[% loc('Inherited permissions') %]:</h4>
 
 [% IF inherited_perms && inherited_perms.size > 0 %]
 
 [% FOREACH perm_set IN inherited_perms %]
-  <pre><strong>From [% perm_set.path %]:</strong>
+  <pre><strong>[% loc('From') %] [% perm_set.path %]:</strong>
   [%- perms = perm_set.perms -%]
   [%- FOREACH role IN perms.keys.sort -%]
     [%- 
       role_perms = perms.$role;
       perms_list = [];
-      perms_list.push('read')  IF role_perms.view == 'yes' ;
-      perms_list.push('write') IF role_perms.edit == 'yes' ;
+      perms_list.push(loc('read'))  IF role_perms.view == loc('yes') ;
+      perms_list.push(loc('write')) IF role_perms.edit == loc('yes') ;
     -%]
     <br/>
-    [% role -%] can [% perms_list.join(', ') || 'not access page' -%]
+    [% role -%] [% loc('can') %] [% perms_list.join(', ') || loc('not access page') -%]
   [% END %]
   </pre>
 
@@ -25,15 +25,15 @@
 
 [% ELSE %]
 
-None.
+[% loc('None') %].
 
 [% END %]
 
 [% IF user.is_admin %]
-<h4>Permissions for this page:</h4>
+<h4>[% loc('Permissions for this page') %]:</h4>
 <table id="permissions_editor">
  <tr>
-  <th></th><th>read</th><th>write</th><th>apply to subpages</th><th>actions</th>
+  <th></th><th>[% loc('read') %]</th><th>[% loc('write') %]</th><th>[% loc('apply to subpages') %]</th><th>[% loc('actions') %]</th>
  </tr>
  [% FOREACH perm IN current_perms %]
  <tr>
@@ -44,12 +44,12 @@ None.
   <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
   <td>
     <input type="hidden" name="role_name" value="[% perm.role_name %]"/>
-    <a class="clickable enable_edit">Edit</a>
-    <a class="clickable save_changes hide" href="[% c.uri_for('jsrpc/set_permissions') %]">Save</a>
+    <a class="clickable enable_edit">[% loc('Edit') %]</a>
+    <a class="clickable save_changes hide" href="[% c.uri_for('jsrpc/set_permissions') %]">[% loc('Save') %]</a>
     <span[% UNLESS perm.inherited %] class="hide"[% END %]>
       /
       <a class="clickable clear_permissions[% UNLESS perm.inherited %] hide[% END %]" href="[% c.uri_for('jsrpc/clear_permissions') %]">
-        Use inherited permissions
+        [% loc('Use inherited permissions') %]
       </a>
     <span>
   </td>

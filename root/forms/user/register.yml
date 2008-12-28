@@ -7,29 +7,29 @@ auto_id: '%f_%n'
 elements:
   - type: Text
     name: login
-    label: Login
+    label_loc: Login
     filters:
       - LowerCase
     constraints:
       - Required
   - type: Password
     name: pass
-    label: Password
+    label_loc: Password
     constraints:
       - Required
       - type: Equal
         others: confirm_password
-        message: Password did not match
+        message_loc: Password did not match
       - type: Length
         min: 4
         max: 14
-        message: Password must be between 4 and 14 chars
+        message_loc: Password must be between 4 and 14 chars
   - type: Password
     name: confirm_password
-    label: Repeat password 
+    label_loc: Repeat password 
   - type: Text
     name: email
-    label: Email
+    label_loc: Email
     filters:
       - HTMLEscape
     constraints:
@@ -37,11 +37,11 @@ elements:
       - Required
   - type: Text
     name: name
-    label: Name
+    label_loc: Name
     filters:
       - HTMLEscape
     constraints:
       - Required
   - type: Submit
     name: submit
-    value: Register
+    value_loc: Register

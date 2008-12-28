@@ -1,9 +1,8 @@
 <div id="postForm">
-<form action="[%c.uri_for('comment')%]" method="post" onsubmit=" new Ajax.Updater( 'comments',  '[%c.uri_for('comment')%]', { parameters: Form.serialize(this),asynchronous: 1 } ) ; return false">
+<form action="[%c.uri_for('comment')%]" method="post" id="commentForm">
 <textarea id="comment" name="body">
 </textarea>
-<input type="submit" value="Post"/> as
-[% c.wikiword(user.link,base) %] 
-(<a href="[% c.uri_for('logout') %]">forget me</a>)
+<input type="submit" value="[%loc('Post')"/> [%loc('as x', c.wikiword(user.link,base)) %] 
+(<a href="[% c.uri_for('logout') %]">[%loc('forget me')%]</a>)
 </form>
 </div>

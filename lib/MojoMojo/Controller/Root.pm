@@ -10,6 +10,12 @@ __PACKAGE__->config->{namespace} = '';
 
 sub begin : Private {
     my ( $self, $c ) = @_;
+    if(exists $c->session->{lang}) {
+        $c->languages([$c->session->{lang}]);
+    }
+    else {
+        $c->languages([$c->pref('default_lang')]) if $c->pref('default_lang');
+    }
     if ( $c->stash->{path} ) {
         my ( $path_pages, $proto_pages ) =
             $c->model('DBIC::Page')->path_pages( $c->stash->{path} );
@@ -28,9 +34,15 @@ default action - serve the home node
 sub default : Path {
     my ( $self, $c ) = @_;
     $c->res->status(404);
-    $c->stash->{message} =
-        "Couldn't find that page, Jimmy " . '(' . $c->stash->{pre_hacked_uri} . ')';
+    $c->stash->{message} = $c->loc("The requested URL (x) was not found", 
+                               $c->stash->{pre_hacked_uri});
     $c->stash->{template} = 'message.tt';
+}
+
+sub set_lang :Global {
+    my ($self,$c) = @_;
+    $c->session->{lang}=$c->req->params->{lang};
+    $c->res->redirect($c->uri_for('/'));
 }
 
 =item end (builtin)

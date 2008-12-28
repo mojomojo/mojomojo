@@ -1,6 +1,6 @@
 [%PROCESS header.tt %]
 <div id="header">
-	<h1>Editing user profile for [% person.name %]</h1>
+	<h1>[% loc('Editing user profile for x', user.name) %]</h1>
 </div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]

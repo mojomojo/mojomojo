@@ -1,5 +1,5 @@
 [% IF tags %]
-<b>my tags : </b>
+<b>[%loc('my tags')%] : </b>
 [% FOREACH tag IN tags %]
 [<b class="remove"><a href="[%c.uri_for('gallery/untag',photo.id,tag.tag)%]" class="tagaction">x</a>]</b>]
 [%IF tag.tag == highlight %]
@@ -14,7 +14,7 @@ href="/.gallery/by_tag/[%tag.tag%]">[%tag.tag%]</a>
 &nbsp;|&nbsp;
 [%END%]
 [%IF others_tags %]
-<b>popular tags : </b>
+<b>[%loc('popular tags')%] : </b>
 [% FOREACH othertag IN others_tags %]
 [% SET tagmatch=' ' _ othertag.tag _ ' ' %]
 [% NEXT IF taglist.match(tagmatch) %]

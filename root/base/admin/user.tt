@@ -2,10 +2,10 @@
 <div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
  [% PROCESS admin/toplinks.tt selected = 'users' %]
  <div id="content">
- <h1>Users</h1>
+ <h1>[%c.loc('Users')%]</h1>
  <table>
   <tr>
-   <th>Active</th><th>login</th><th>&nbsp;</th><th>name</th><th>email</th>
+   <th>[%c.loc('Active')%]</th><th>[%c.loc('login')%]</th><th>&nbsp;</th><th>[%loc('name')%]</th><th>[%loc('email')%]</th>
   </tr>
 [%WHILE (user=users.next) %]
 <tr>
@@ -16,7 +16,7 @@
 <td><a href="[%c.uri_for(user.link)%].profile">[%user.login%]</a></td>
 <td>&nbsp;</td>
 <td>[%user.name%]</td>
-<td><a href="mailto:[%user.email%]">[%user.email||"no email address"%]</a></td>
+<td><a href="mailto:[%user.email%]">[%user.email||loc("no email address")%]</a></td>
 </tr>
 [%END%]
  </table>

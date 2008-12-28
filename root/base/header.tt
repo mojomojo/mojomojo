@@ -17,7 +17,7 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
 	[% ELSIF page %] [% c.expand_wikiword(page.name_orig) %]  [% END %]
             - [%
                c.pref('name') ||
-                "A poorly configured MojoMojo Installation"
+                loc("A poorly configured MojoMojo Installation")
             %]
     </title>
     [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]

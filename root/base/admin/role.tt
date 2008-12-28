@@ -6,28 +6,28 @@
 [% PROCESS admin/toplinks.tt selected = 'roles' %]
 
 <div id="content">
- <h1>Roles</h1>
+ <h1>[% loc('Roles') %]</h1>
  [% IF roles.size > 0 %]
- <a href="[% c.uri_for('admin/create_role') %]">Create a new role</a>
+ <a href="[% c.uri_for('admin/create_role') %]">[%loc('Create a new role')%]</a>
  <br/>
  <br/>
  <table>
   <tr>
-   <th>ID</th><th>Name</th><th>Active</th><th></th>
+   <th>[%loc('ID')%]</th><th>[%loc('Name')%]</th><th>[%loc('Active')%]</th><th></th>
   </tr>
   [% FOREACH role IN roles %]
   <tr>
    <td>[% role.id     %]</td>
    <td>[% role.name   %]</td>
-   <td>[% role.active ? 'Yes' : 'No' %]</td>
-   <td><a href="[% c.uri_for('admin/role', role.name) %]">Edit</a></td>
+   <td>[% role.active ? loc('Yes') : loc('No') %]</td>
+   <td><a href="[% c.uri_for('admin/role', role.name) %]">[%loc('Edit')%]</a></td>
   </tr>
   [% END %]
  </table>
  [% ELSE %]
  <div>
-  No roles created yet.
-  <a href="[% c.uri_for('admin/create_role') %]">Create a new role</a>
+  [%loc('No roles created yet.')%]
+  <a href="[% c.uri_for('admin/create_role') %]">[%loc('Create a new role')%]</a>
  </div>
  [% END %]
  <h2>[% message %]</h2>

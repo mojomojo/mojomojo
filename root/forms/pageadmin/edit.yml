@@ -6,12 +6,11 @@ auto_fieldset: 1
 elements:
   - type: Textarea
     name: body
-    label: Page text
+    label_loc: Page text
     constraints:
       - Required
   - type: Text
     name: creator
-    label: creator
+    label_loc: creator
   - type: Submit
     name: submit
-    value: Save

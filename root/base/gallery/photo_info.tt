@@ -1,9 +1,9 @@
-<h3> Exif Data</h3>
+<h3> [%loc('Exif Data')%]</h3>
 
 <dl>
-<dt>Taken:</dt><dd>[%IF photo.taken %][%photo.taken.replace('T',' ')%][% ELSE %]not specified[%END%]</dd>
-<dt>Camera:</dt><dd>[%photo.camera || 'not specified'%]</dd>
-<dt>Lens:</dt><dd>[%photo.lens.replace('\.\d+mm$','mm') || 'not specified'%]</dd>
-<dt>ISO:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
-<dt>Aperture:</dt><dd>[% IF photo.aperture %]f/[% photo.aperture %][% ELSE %]not specified[%END%]</dd>
+<dt>[%loc('Taken')%]:</dt><dd>[%IF photo.taken %][%photo.taken.replace('T',' ')%][% ELSE %][%loc('not specified')%][%END%]</dd>
+<dt>[%loc('Camera')%]:</dt><dd>[%photo.camera || loc('not specified')%]</dd>
+<dt>[%loc('Lens')%]:</dt><dd>[%photo.lens.replace('\.\d+mm$','mm') || loc('not specified')%]</dd>
+<dt>[%loc('ISO')%]:</dt><dd>[%photo.iso|| 'not specified'%]</dd>
+<dt>[%loc('Aperture')%]:</dt><dd>[% IF photo.aperture %]f/[% photo.aperture %][% ELSE %][%loc('not specified')%][%END%]</dd>
 </dl>
