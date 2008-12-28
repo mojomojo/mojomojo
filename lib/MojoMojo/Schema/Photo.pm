@@ -71,18 +71,23 @@ Creates a L<DateTime> object from a EXIF timestamp.
 
 sub exif2datetime {
     my ( $self, $datetime ) = @_;
+    warn "\n\n\n$datetime\n\n\n";
     return undef unless $datetime;
     my ( $date, $time ) = split( ' ', $datetime );
     my ( $y, $M, $d ) = split ':', $date;
     my ( $h, $m, $s ) = split ':', $time;
-    return DateTime->new(
-        year   => $y,
-        month  => $M,
-        day    => $d,
-        hour   => $h,
-        minute => $m,
-        second => $s
-    );
+    my $dto;
+    eval {
+        $dto = DateTime->new(
+            year   => $y,
+            month  => $M,
+            day    => $d,
+            hour   => $h,
+            minute => $m,
+            second => $s
+        );
+    };
+    return $dto;
 }
 
 =item prev_by_tag <tag>
