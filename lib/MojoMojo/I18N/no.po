@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2008-12-29 12:31+0100\n"
+"PO-Revision-Date: 2008-12-29 13:31+0100\n"
 "Last-Translator: Marcus Ramberg <marcus@nordaaker.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr "En melding fra våre sponsorer..."
 #: root/base/page/atom.tt:3
 #: root/base/page/atom.tt:6
 msgid "A poorly configured MojoMojo Installation"
-msgstr "En dårlig konfigurert MojoMojo installasjon"
+msgstr "En dårlig konfigurert MojoMojo-installasjon"
 
 #: root/base/page/recent.tt:41
 msgid "Actions"
@@ -86,7 +86,7 @@ msgstr "Alder"
 
 #: root/base/page/list.tt:16
 msgid "All Pages"
-msgstr "All sidene"
+msgstr "All sider"
 
 msgid "All Pages in %1"
 msgstr "Alle undersider av %1"
@@ -124,11 +124,11 @@ msgstr "Alfabetisk sortert liste over sider"
 
 #: lib/MojoMojo/Controller/User.pm:255
 msgid "An error occourred. Sorry."
-msgstr "En feil har oppstått. Beklager."
+msgstr "Unnskyld. En feil har oppstått."
 
 #: root/base/edithelp.tt:131
 msgid "An h2 tag in a blockquote"
-msgstr "en h2 overskrift i en sitat-blokk"
+msgstr "en h2 overskrift i en sitatblokk"
 
 #: root/base/edithelp.tt:134
 msgid "An unordered list"
@@ -136,7 +136,7 @@ msgstr "En usortert liste"
 
 #: root/base/edithelp.tt:133
 msgid "And additional Markdown formatting"
-msgstr "Og ytterligere Markdown formattering"
+msgstr "Og ytterligere Markdown-formattering"
 
 #: root/base/edithelp.tt:31
 msgid "And others."
@@ -185,11 +185,11 @@ msgstr "Fødselsdato"
 
 #: root/base/edithelp.tt:127
 msgid "Block quotes"
-msgstr "Sitat-blokker"
+msgstr "Sitatblokker"
 
 #: root/base/edithelp.tt:130
 msgid "Blockquotes can be nested"
-msgstr "Sitat-blokker kan ha flere nivåer"
+msgstr "Sitatblokker kan ha flere nivåer"
 
 #: root/base/edithelp.tt:25
 msgid "Bulleted list"
@@ -218,7 +218,7 @@ msgstr "Kan ikke finne admin brukeren:"
 #: root/base/navbar.tt:18
 #: root/base/page/bottomnav.tt:13
 msgid "Change page content"
-msgstr "Endre side-innhold"
+msgstr "Endre sideinnhold"
 
 #: root/base/user/prefs.tt:6
 msgid "Change password"
@@ -226,7 +226,7 @@ msgstr "Bytt passord"
 
 #: root/base/user/profile.tt:46
 msgid "Change profile content"
-msgstr "Endre profil-innhold"
+msgstr "Endre profil"
 
 #: root/base/page/bottomnav.tt:16
 msgid "Change site settings"
@@ -250,7 +250,7 @@ msgstr "Klikk for original versjon"
 
 #: root/base/edithelp.tt:137
 msgid "Code Spans"
-msgstr "Kode-blokker"
+msgstr "Kodeblokker"
 
 #: root/forms/comment/comment.yml:11
 msgid "Comment body"
@@ -262,7 +262,7 @@ msgstr "Størrelse på innhold"
 
 #: lib/MojoMojo/Controller/User.pm:52
 msgid "Could not authenticate that login."
-msgstr "Kunne ikke autentisere det brukernavnet."
+msgstr "Kunne ikke autentisere brukernavnet."
 
 msgid "Could not create attachment from %1"
 msgstr "Kunne ikke lage vedlegg fra %1"
@@ -355,7 +355,7 @@ msgstr "Redigerer brukerprofil for x"
 #: root/forms/user/prefs.yml:21
 #: root/forms/user/register.yml:32
 msgid "Email"
-msgstr "Epost"
+msgstr "E-post"
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
@@ -367,7 +367,7 @@ msgstr "En feil oppsto under utsending av ditt nye passord."
 
 #: root/base/gallery/photo_info.tt:1
 msgid "Exif Data"
-msgstr "EXIF Data"
+msgstr "EXIF-data"
 
 #: root/base/export.tt:1
 #: root/base/navbar.tt:56
@@ -424,7 +424,7 @@ msgstr "Kom inn"
 
 #: root/base/message.tt:6
 msgid "Go directly to "
-msgstr "Gå direkte til "
+msgstr "Gå rett til "
 
 #: root/base/navbar.tt:21
 msgid "Go to home page"
@@ -454,12 +454,12 @@ msgstr "Overskrift 1"
 #: root/base/edithelp.tt:83
 #: root/base/edithelp.tt:84
 msgid "Header 2"
-msgstr "Overskift 2"
+msgstr "Overskrift 2"
 
 #: root/base/edithelp.tt:87
 #: root/base/edithelp.tt:88
 msgid "Header 6"
-msgstr "Overskift 6"
+msgstr "Overskrift 6"
 
 #: root/base/edithelp.tt:69
 msgid "Headers"
@@ -474,12 +474,12 @@ msgid "Hi there."
 msgstr "Hei der."
 
 msgid "Hi. This is a mail to validate your email address, %1. To confirm, please click the url below:"
-msgstr "Hei. Poenet med denne eposten for å validere din epost-adresse, %1. For å gjøre det, trykk på linken under: "
+msgstr "Hei. Poenget med denne e-posten for å validere din e-postadresse, %1. For å gjøre det, trykk på linken under: "
 
 #. (user.name)
 #: root/base/mail/validate.tt:1
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
-msgstr "Hei. Dette er en epost for å validere din epostadresse, x. For å bekrefte, trykk på lenken under:"
+msgstr "Hei. Dette er en e-post for å validere din e-postadresse, x. For å bekrefte, trykk på lenken under:"
 
 #: root/base/page/bottomnav.tt:46
 msgid "Hide changes"
@@ -558,7 +558,7 @@ msgstr "Ting"
 
 #: root/base/edithelp.tt:129
 msgid "Just like email quoting!"
-msgstr "Akkurat som epost-sitering!"
+msgstr "Akkurat som e-postsitering!"
 
 #: root/base/user/profile.tt:36
 msgid "Last changes"
@@ -680,7 +680,7 @@ msgid "No Comments posted"
 msgstr "Ingen kommentarer"
 
 msgid "No help yet for %1"
-msgstr "Finnes ingen hjelp enda for %1"
+msgstr "Det finnes ingen hjelp enda for %1"
 
 #. (c.pref('main_formatter')
 #. (c.pref("main_formatter"))
@@ -720,7 +720,7 @@ msgstr "Finnes ikke. Klikk for å opprette denne siden."
 #: root/base/edithelp.tt:12
 #: root/base/edithelp.tt:54
 msgid "Not wiki words"
-msgstr "Ikke wiki ord"
+msgstr "Ikke wiki-ord"
 
 #: root/base/user/profile.tt:25
 #: root/base/user/profile.tt:28
@@ -734,11 +734,11 @@ msgstr "Nummerert liste"
 
 #: root/base/edithelp.tt:67
 msgid "Optional Title"
-msgstr "Valgfri Tittel"
+msgstr "Valgfri tittel"
 
 #: root/base/edithelp.tt:90
 msgid "Ordered Lists"
-msgstr "Sortert Liste"
+msgstr "Sortert liste"
 
 #: root/base/page/list.tt:28
 msgid "Other pages that link to this page."
@@ -851,7 +851,7 @@ msgstr "Lagre"
 
 #: root/base/footer.tt:6
 msgid "Powered by Catalyst"
-msgstr "Skrevet i Catalyst"
+msgstr "Drevet av Catalyst"
 
 #: root/base/navbar.tt:88
 #: root/base/navbar.tt:90
@@ -939,7 +939,7 @@ msgstr "Begrens bruker-rettigheter til hjemmeområdet"
 
 #: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
-msgstr "Begrenset område. Du trenger administrator privileger"
+msgstr "Begrenset område. Du trenger administratorprivileger"
 
 #: root/base/admin/role_form.tt:15
 msgid "Role Members"
@@ -951,7 +951,7 @@ msgstr "Rollenavn"
 
 #: root/base/admin/role_form.tt:5
 msgid "Role Name:"
-msgstr "Rollénavn:"
+msgstr "Rollenavn:"
 
 #: root/base/admin/role.tt:9
 msgid "Roles"
@@ -1116,12 +1116,12 @@ msgid "The Wikilicious page"
 msgstr "Wikilious siden"
 
 msgid "The requested URL (%1) was not found"
-msgstr "Den etterspurte URLen (%1) kunne ikke finnes"
+msgstr "Den etterspurte URLen (%1) finnes ikke"
 
 #. ($c->stash->{pre_hacked_uri})
 #: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
-msgstr "Den etterspurte adressen (x) kunne ikke finnes"
+msgstr "Den etterspurte adressen (x) finnes ikke"
 
 #: root/base/edithelp.tt:147
 msgid "This is a pre formatted code block"
@@ -1133,7 +1133,7 @@ msgstr "Dette er den første revisjonen! Ingen å sjekke endringer mot."
 
 #: root/base/page/recent.tt:40
 msgid "Time edited"
-msgstr "Tid for redigering"
+msgstr "Sist redigert"
 
 #: root/base/edithelp.tt:104
 #: root/base/edithelp.tt:92
@@ -1236,12 +1236,12 @@ msgid "Wanted Pages"
 msgstr "Ønskede Sider"
 
 msgid "Welcome, %1 your email is validated. Please log in."
-msgstr "Velkommen, %1. Din epost er nå bekreftet. Vennligst logg inn."
+msgstr "Velkommen, %1. Din e-post er nå bekreftet. Vennligst logg inn."
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:279
 msgid "Welcome, x your email is validated. Please log in."
-msgstr "Velkommen, x, din epost er godkjent. Vennligst logg inn."
+msgstr "Velkommen, x, din e-post er godkjent. Vennligst logg inn."
 
 #: root/base/navbar.tt:48
 #: root/base/navbar.tt:50
@@ -1314,7 +1314,7 @@ msgstr "[%1] Validering av ny bruker"
 #. ($c->pref->{name}||'MojoMojo')
 #: lib/MojoMojo/Controller/User.pm:247
 msgid "[x] New User Validation"
-msgstr "[x] Bekreft din epostadresse"
+msgstr "[x] Bekreft din e-postadresse"
 
 #: root/base/page/permissions.tt:36
 msgid "actions"
@@ -1359,7 +1359,7 @@ msgstr "tilbake"
 
 #: root/base/edithelp.tt:138
 msgid "blocks are wrapped in backticks"
-msgstr "blokker omringes av grave aksenter"
+msgstr "blokker omringes av aksenter"
 
 #: root/base/edithelp.tt:60
 msgid "bold"
@@ -1399,7 +1399,7 @@ msgstr "slett"
 
 #: root/base/message.tt:6
 msgid "do not pass prison, do not collect $ 200..."
-msgstr "Gå ikke forbi fengsel, motta ikke $ 200..."
+msgstr "Gå direkte til fengsel, motta ikke $100 om du passerer start..."
 
 #: root/base/attachments/list.tt:7
 msgid "download"
@@ -1407,7 +1407,7 @@ msgstr "last ned"
 
 #: root/base/admin/user.tt:8
 msgid "email"
-msgstr "epost"
+msgstr "e-post"
 
 #: root/base/edithelp.tt:62
 #: root/base/edithelp.tt:63
@@ -1488,7 +1488,7 @@ msgstr "ingen beskrivelse"
 
 #: root/base/admin/user.tt:19
 msgid "no email address"
-msgstr "ingen epostadresse"
+msgstr "ingen e-postadresse"
 
 #: root/base/page/permissions.tt:20
 msgid "not access page"
