@@ -23,6 +23,7 @@ elements:
        - HTMLEscape
     constraints:
       - Required
+      - type: Email
   - type: Submit
     name: submit
     value_loc: Save
