@@ -209,6 +209,10 @@ msgstr ""
 msgid "Children"
 msgstr ""
 
+#: root/base/page/attachments.tt:14
+msgid "Choose attachments"
+msgstr ""
+
 #: root/base/edithelp.tt:121
 msgid "Circle"
 msgstr ""
@@ -454,6 +458,10 @@ msgstr ""
 
 #: root/base/edithelp.tt:63
 msgid "IdLabel"
+msgstr ""
+
+#: root/base/page/attachments.tt:16
+msgid "If the flash uploader gives you problems, switch to the"
 msgstr ""
 
 #: root/base/edithelp.tt:38
@@ -734,7 +742,7 @@ msgstr ""
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr ""
 
-#: root/base/page/attachments.tt:10
+#: root/base/page/attachments.tt:15
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
 msgstr ""
 
@@ -845,7 +853,7 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:28
+#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:29
 msgid "Save"
 msgstr ""
 
@@ -943,6 +951,10 @@ msgstr ""
 msgid "Subscribe to page changes"
 msgstr ""
 
+#: root/base/page/attachments.tt:5
+msgid "Switch to flash uploader"
+msgstr ""
+
 #: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
 msgid "Syntax"
 msgstr ""
@@ -1028,7 +1040,7 @@ msgstr ""
 msgid "Updated successfully."
 msgstr ""
 
-#: root/base/page/attachments.tt:8
+#: root/base/page/attachments.tt:11
 msgid "Upload"
 msgstr ""
 
@@ -1073,7 +1085,7 @@ msgstr ""
 msgid "View as files"
 msgstr ""
 
-#: root/base/page/attachments.tt:17
+#: root/base/page/attachments.tt:24
 msgid "View as gallery"
 msgstr ""
 
@@ -1335,6 +1347,10 @@ msgstr ""
 
 #: root/base/gallery/cloud.tt:2
 msgid "photo tags"
+msgstr ""
+
+#: root/base/page/attachments.tt:16
+msgid "plain uploader"
 msgstr ""
 
 #: root/base/gallery/tags.tt:17

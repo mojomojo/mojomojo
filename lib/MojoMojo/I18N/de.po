@@ -209,6 +209,10 @@ msgstr "Einstellungen des Wikis verändern"
 msgid "Children"
 msgstr "Kinder"
 
+#: root/base/page/attachments.tt:14
+msgid "Choose attachments"
+msgstr ""
+
 #: root/base/edithelp.tt:121
 msgid "Circle"
 msgstr "Kreis"
@@ -454,6 +458,10 @@ msgstr ""
 
 #: root/base/edithelp.tt:63
 msgid "IdLabel"
+msgstr ""
+
+#: root/base/page/attachments.tt:16
+msgid "If the flash uploader gives you problems, switch to the"
 msgstr ""
 
 #: root/base/edithelp.tt:38
@@ -738,7 +746,7 @@ msgstr "Bitte Benutzername und Passwort eingeben"
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Zur Registrierung bitte folgende Informationen ausfüllen. Alle Felder sind Pflichtfelder."
 
-#: root/base/page/attachments.tt:10
+#: root/base/page/attachments.tt:15
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
 msgstr "Bitte eine Datei auswählen, die als Anhang hochgeladen werden soll. Um mehrere Dateien hochzuladen musst du diese vorher in einem ZIP-Archiv verpacken."
 
@@ -853,7 +861,7 @@ msgstr "Name der Rolle:"
 msgid "Roles"
 msgstr "Rollen"
 
-#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:28
+#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:29
 msgid "Save"
 msgstr "Speichern"
 
@@ -951,6 +959,10 @@ msgstr "Seitenänderungen als RSS abonnieren"
 msgid "Subscribe to page changes"
 msgstr "Seitenänderungen abonnieren"
 
+#: root/base/page/attachments.tt:5
+msgid "Switch to flash uploader"
+msgstr ""
+
 #: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
 msgid "Syntax"
 msgstr ""
@@ -1036,7 +1048,7 @@ msgstr "Einstellungen wurden aktualisiert"
 msgid "Updated successfully."
 msgstr "Update erfolgreich"
 
-#: root/base/page/attachments.tt:8
+#: root/base/page/attachments.tt:11
 msgid "Upload"
 msgstr ""
 
@@ -1081,7 +1093,7 @@ msgstr "Änderungen anzeigen"
 msgid "View as files"
 msgstr "Dateiansicht"
 
-#: root/base/page/attachments.tt:17
+#: root/base/page/attachments.tt:24
 msgid "View as gallery"
 msgstr "Galerieansicht"
 
@@ -1344,6 +1356,10 @@ msgstr "Passwort"
 #: root/base/gallery/cloud.tt:2
 msgid "photo tags"
 msgstr "Foto-Tags"
+
+#: root/base/page/attachments.tt:16
+msgid "plain uploader"
+msgstr ""
 
 #: root/base/gallery/tags.tt:17
 msgid "popular tags"

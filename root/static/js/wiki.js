@@ -179,7 +179,6 @@ $( function() {
         var info_url=$(this).parent().attr('href').replace(/.photo\//,'.jsrpc/imginfo/');
         $('#imageinfo').load(info_url)
     },function() {})
-    $('#plain_upload').after('<a href="#" id="do_upload">Choose attachments</a>').hide()
 
 	$('#do_upload').each(function() {
 	    uploader=new SWFUpload({
