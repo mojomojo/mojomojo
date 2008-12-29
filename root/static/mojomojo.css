@@ -1114,7 +1114,7 @@ dl.list dt {
 div#tags { height:4em; }
 
 div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { width:90px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
+div#tags dt { width:120px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
 div#tags dd { margin:0; padding:0; }
 
 div#bottomnav { clear:both; }
