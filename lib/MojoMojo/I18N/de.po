@@ -600,10 +600,6 @@ msgstr "Registrierung neuer Benutzer zulassen"
 msgid "New password"
 msgstr "Neues Passwort"
 
-#:
-msgid "New password again"
-msgstr "Neues Passwort - Wiederholung"
-
 #: root/forms/user/password.yml:20
 msgid "New password again "
 msgstr "Neues Passwort - Wiederholung "
@@ -828,10 +824,6 @@ msgstr "Ein neues Benutzerkonto Registrieren"
 #: lib/MojoMojo/Controller/User.pm:209
 msgid "Registration is closed!"
 msgstr "Die Registrierung ist nicht möglich!"
-
-#:
-msgid "Repeat password"
-msgstr "Wiederhole Passwort"
 
 #: root/forms/user/register.yml:29
 msgid "Repeat password "
