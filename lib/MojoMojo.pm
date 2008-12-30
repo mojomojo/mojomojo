@@ -99,6 +99,13 @@ sub wikiword {
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
+
+    # Unfortunately there are MojoMojo->pref() calls in
+    # MojoMojo::Schema::Result::Person which makes it hard
+    # to get cache working for those calls - so we'll just
+    # not use caching for those calls.
+    return $c->pref_cached( $setting, $value ) if ref($c) eq 'MojoMojo';
+
     $setting = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } );
     if ( defined $value ) {
         $setting->prefvalue($value);
@@ -110,6 +117,31 @@ sub pref {
         ? $setting->prefvalue
         : ""
     );
+}
+
+# Get preference key/value from cache if possible.
+
+sub pref_cached {
+    my ( $c, $setting, $value ) = @_;
+
+    # Already in cache and no new value to set?
+    if ( defined $c->cache->get($setting) and not defined $value ) {
+        return $c->cache->get($setting);
+    }
+
+    my $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } );
+
+    # Update database
+    $row->update( { prefvalue => $value } ) if defined $value;
+
+    # Update cache
+    $c->cache->set(
+          $setting => defined $row->prefvalue
+        ? $row->prefvalue()
+        : ""
+    );
+
+    return $c->cache->get($setting);
 }
 
 # Clean up explicit wiki words.
