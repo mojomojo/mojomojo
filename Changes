@@ -1,3 +1,4 @@
+        - Get preference key/value from cache if possible.
         - Fix wanted pages.
         - Fix password dialog
         - Autocomplete for tags (Sachin Sebastian )
