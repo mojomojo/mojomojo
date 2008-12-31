@@ -13,7 +13,7 @@
     <dd>[% page.content_version %]</dd>
 
     <dt>[%loc('Content size')%]:</dt>
-    <dd>[% page.content.body.length %] chars</dd>
+    <dd>[% page.content.body.length %] [% loc('chars') %]</dd>
 
     <dt>[%loc('Children')%]:</dt>
     <dd>[% page.children.size || 0 %]</dd>
@@ -22,10 +22,10 @@
     <dd>[% page.descendants.size %]</dd>
     
     <dt>[%loc('Links to')%]:</dt>
-    <dd>[% page.links_to.size || 0 %] pages</dd>
+    <dd>[% page.links_to.size || 0 %] [% loc('pages') %]</dd>
     
     <dt>[%loc('Links from')%]:</dt>
-    <dd>[% page.links_from.size || 0%] pages</dd>
+    <dd>[% page.links_from.size || 0%] [% loc('pages') %]</dd>
     
     <dt>[%loc('Attachments')%]:</dt>
     <dd>[% page.attachments.size || 0%]</dd>

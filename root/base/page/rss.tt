@@ -3,15 +3,15 @@
   <channel>
 	<title>[ [% c.pref('name') || 
             config.name || 
-            "MojoMojo" %] ] Headlines for [%page.name_orig%] </title>
+            "MojoMojo" %] ] [% loc('Headlines for x', page.name_orig) %] </title>
 	<link>[%c.uri_for('view')%]</link>
-	<description>Recent changes in [%page.path%]</description>
-	<language>en-us</language>
+	<description>[% loc('Recent changes in x', page.path) %]</description>
+	<language>[% lang %]</language>
 	<ttl>40</ttl>
 [%FOREACH page IN pages %]
     <item>
       <title>[% c.expand_wikiword( page.name_orig ) %]
-[%IF page.isa('MojoMojo::M::CDBI::PageRevision')%] Revision from [% page.content.created.datetime %][% END %]
+[%IF page.isa('MojoMojo::M::CDBI::PageRevision')%] [% loc('Revision from x', page.content.created.datetime) %][% END %]
      </title>
       <pubDate>[% page.content.pub_date %]</pubDate>
       <guid>[% c.uri_for(page.path) %]</guid>

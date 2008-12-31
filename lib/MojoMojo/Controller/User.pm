@@ -244,7 +244,7 @@ sub do_register : Private {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->email,
-                Subject => $c->loc('[x] New User Validation',$c->pref->{name}||'MojoMojo'),
+                Subject => $c->loc('~[x~] New User Validation',$c->pref('name')||'MojoMojo'),
             ],
             body => $c->view('TT')->render( $c, 'mail/validate.tt' ),
         )

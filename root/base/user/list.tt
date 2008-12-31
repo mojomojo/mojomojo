@@ -10,7 +10,7 @@
 <dd>
     [% pages = user.pages -%]
     [% UNLESS pages %] 
-        No recent changes 
+        [% loc('No recent changes') %]
     [% END -%]
     [% FOREACH changed IN pages -%]
         [% c.wikiword( changed.path, base ) -%][% '&ndash;' UNLESS loop.last -%]

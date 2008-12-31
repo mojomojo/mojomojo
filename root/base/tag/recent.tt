@@ -1,10 +1,10 @@
 [% PROCESS header.tt %]
 [% SET now=pages.first.updated.ymd; %]
-<div id="header"><h1 id="pageName"> Recent Pages </h1></div>
+<div id="header"><h1 id="pageName"> [% loc('Recent Pages') %] </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="categories">
- <strong>Tags</strong>: <small>
+ <strong>[% loc('Tags') %]</strong>: <small>
  [% FOREACH tag IN tags.list %]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
@@ -23,8 +23,8 @@
  <li>
     <a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
-      by <a class="existingWikiWord" href="[% c.uri_for( page.content.creator.link) %]">[% page.content.creator.name %]</a>
-      at [% page.content.created.hms(':') %]
+      [% loc('by') %] <a class="existingWikiWord" href="[% c.uri_for( page.content.creator.link) %]">[% page.content.creator.name %]</a>
+      [% loc('at') %] [% page.content.created.hms(':') %]
     </div>
   </li>
 [% END %]

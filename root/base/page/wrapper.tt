@@ -4,7 +4,7 @@
       [% IF title %][% title %][% ELSE %]
 	[% IF pre_title %][% pre_title %][% END %]
         [% IF page.name == "/" %]
-           [% c.pref("name") || "MojoMojo" %] Home (/)
+           [% c.pref("name") || "MojoMojo" %] [% loc('Home') %] (/)
         [% ELSE %]
            [% c.expand_wikiword(page.name_orig) %]
         [% END %]

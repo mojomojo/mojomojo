@@ -18,7 +18,7 @@ node.setAttribute("class", "menuParent");
 
 </script>
 
- <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] Home</a></li></ul>
+ <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] [% loc('Home') %]</a></li></ul>
 
  [% PROCESS child_menu.tt parent_page = path_pages.0 %]
   

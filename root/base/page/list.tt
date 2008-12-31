@@ -40,13 +40,13 @@
 [% IF wanted.size %]
     <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">referenced by [% wanted.from_page.path %]</a></li>
+        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></li>
 [% END %]
     </ul>
 [% END %]
 	    
-    <h2>Orphaned Pages</h2>
-    Pages to which no other pages link.
+    <h2>[% loc('Orphaned Pages') %]</h2>
+    [% loc('Pages to which no other pages link.') %]
   
 [% IF orphans.size %]
     <ul style="margin-bottom: 35px">

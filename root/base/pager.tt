@@ -13,7 +13,5 @@
     </ul>
     [% END %]
 
-    Showing entries [% pager.first %] - [% pager.last %] 
-    of [% pager.total_entries %]
-    in [% c.wikiword( page.path, base ) %]
+    [% loc('Showing entries x-x of x in x', [pager.first, pager.last, pager.total_entries, c.wikiword( page.path, base )])%]
 </div>

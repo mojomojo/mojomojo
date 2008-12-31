@@ -26,7 +26,7 @@ elements:
         message_loc: Password must be between 4 and 14 chars
   - type: Password
     name: confirm_password
-    label_loc: Repeat password 
+    label_loc: Repeat password
   - type: Text
     name: email
     label_loc: Email
