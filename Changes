@@ -1,10 +1,13 @@
+0.999024
         - Get preference key/value from cache if possible.
         - Fix wanted pages.
         - Fix password dialog
         - Autocomplete for tags (Sachin Sebastian )
-        - Update SWFUpload to support flash 10
+        - Update SWFUpload to support flash 10. Add plain fallback
         - Resolve a unicode issue in some installations when editing text.
-        - Add support for i18n
+        - Add support for i18n (no, fr, de translations so far).
+          *Warning* Forms will not be localized correctly with Locale::Maketext
+          1.10 and above.
 
 0.999023  2008-11-23 10:35:00
         - Added  GUI Permissions editor (nilsonsfj)
