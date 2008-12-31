@@ -1,7 +1,7 @@
 [%
     SET title = loc('Recent pages in x', page.path);
     IF activetag;
-        SET title = loc('Recent pages in x tagged with x', page.path, activetag);
+        SET title = loc('Recent pages in x tagged with x', [page.path, activetag]);
     END;
     SET now = objects.first.content.created.ymd;
 %]

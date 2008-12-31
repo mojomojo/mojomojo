@@ -2,11 +2,11 @@
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 <h1 id="pageName">
   <small> [% c.pref("name") || "MojoMojo" %] </small>
-  <br/>All Pages
+  <br/>[% loc('All Pages') %]
 </h1>
 [% PROCESS navbar.tt %]
 <div id="categories">
-  <strong>tags</strong>:<small>
+  <strong>[% loc('tags') %]</strong>:<small>
   [% FOREACH tag IN tags %]
   [% IF tag.tag==activetag %]
   <b>[% tag.tag %]</b>
@@ -17,9 +17,9 @@
 </div>
 <div id="allPages" style="float: left; width: 380px; margin-right: 30px">
 
-  <h2> List by [% activetag %]
-          <br/><small style="font-size: 12px"><i>All pages tagged with [% activetag %] listed alphabetically</i><br/>
-	  <a href="[% c.uri_for('recent', activetag) %]">recent pages in [% activetag %]</a></small>
+  <h2> [% loc('List by x', activetag) %]
+          <br/><small style="font-size: 12px"><i>[% loc('All pages tagged with x listed alphabetically', activetag) %]</i><br/>
+	  <a href="[% c.uri_for('recent', activetag) %]">[% loc('Recent pages in x', activetag) %]</a></small>
  </h2>
 <ul>
 [% FOREACH page IN pages %]
@@ -28,8 +28,8 @@
 </ul>
 </div>
 <div style="float: left; width: 280px">
-  <h2> Related Tags
-  <small>(common uses)</small>
+  <h2> [% loc('Related Tags') %]
+  <small>([% loc('common uses') %])</small>
   </h2>
   <ul style="margin-bottom: 10px">
 [% FOR reltag = related.list %]

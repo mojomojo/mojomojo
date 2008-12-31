@@ -27,12 +27,16 @@ msgid "**bold** or __bold__"
 msgstr "**gras** ou __gras__"
 
 #: root/base/edithelp.tt:59
-msgid "*italique* or _italic_"
+msgid "*italic* or _italic_"
 msgstr "*italique* ou _italique_"
 
 #: root/base/edithelp.tt:154
 msgid "3 or more dashes or asterisks"
 msgstr "3 ou plus tirets ou astérisques"
+
+#: root/base/toolbar.tt:38 root/base/toolbar.tt:8
+msgid "<xml> and such.\\nor pure text."
+msgstr ""
 
 #: root/base/message.tt:2
 msgid "A message from our sponsors..."
@@ -66,11 +70,15 @@ msgstr "Ajouter"
 msgid "Add tag"
 msgstr "Ajouter un tag"
 
+#: root/base/page/view.tt:25
+msgid "Added"
+msgstr ""
+
 #: root/base/user/profile.tt:15
 msgid "Age"
 msgstr "Age"
 
-#: root/base/page/list.tt:16
+#: root/base/page/list.tt:16 root/base/tag/list.tt:5
 msgid "All Pages"
 msgstr "Toutes les Pages"
 
@@ -83,6 +91,15 @@ msgstr "Toutes les Pages dans %1"
 #: root/base/page/list.tt:17
 msgid "All pages in x listed alphabetically"
 msgstr "Toutes les Pages dans %1 par ordre alphabétique"
+
+#. (activetag)
+#: root/base/tag/list.tt:21
+msgid "All pages tagged with x listed alphabetically"
+msgstr ""
+
+#: root/base/tag/cloud.tt:9
+msgid "All tags"
+msgstr ""
 
 #: root/base/navbar.tt:40 root/base/navbar.tt:45
 msgid "All tags in this path"
@@ -99,6 +116,10 @@ msgstr "Autoriser les commentaires sur cette page"
 #: root/base/navbar.tt:32 root/base/navbar.tt:34
 msgid "Alphabetically sorted list of pages"
 msgstr "Liste des pages par ordre alphabétique"
+
+#: root/base/toolbar.tt:2
+msgid "Also try h2,h3 and so on"
+msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:255
 msgid "An error occourred. Sorry."
@@ -164,6 +185,14 @@ msgstr "Bloc entre quotes"
 msgid "Blockquotes can be nested"
 msgstr "Bloc entre quotes peuvent être imbriqués"
 
+#: root/base/toolbar.tt:19 root/base/toolbar.tt:41
+msgid "Bold"
+msgstr ""
+
+#: root/base/toolbar.tt:35 root/base/toolbar.tt:5
+msgid "Bullet list"
+msgstr ""
+
 #: root/base/edithelp.tt:25
 msgid "Bulleted list"
 msgstr "Liste à puces"
@@ -188,6 +217,10 @@ msgstr "Utilisateur introuvable"
 msgid "Cant find admin user: "
 msgstr "Utilisateur Admin introuvable:"
 
+#: root/base/toolbar.tt:15
+msgid "Centered paragraph"
+msgstr ""
+
 #: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Modifier le contenu de la page"
@@ -208,6 +241,10 @@ msgstr "Modifier les paramètres du site"
 msgid "Children"
 msgstr "Enfant"
 
+#: root/base/page/attachments.tt:14
+msgid "Choose attachments"
+msgstr ""
+
 #: root/base/edithelp.tt:121
 msgid "Circle"
 msgstr "Cercle"
@@ -216,13 +253,25 @@ msgstr "Cercle"
 msgid "Click for original version"
 msgstr "Cliquer pour la version originale"
 
+#: root/base/page/suggest.tt:21
+msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
+msgstr ""
+
 #: root/base/edithelp.tt:137
 msgid "Code Spans"
 msgstr "Code Spans"
 
+#: root/base/comment.tt:6
+msgid "Comment"
+msgstr ""
+
 #: root/forms/comment/comment.yml:11
 msgid "Comment body"
 msgstr "Commentaire"
+
+#: root/base/comment.tt:6
+msgid "Comments"
+msgstr ""
 
 #: root/base/page/info.tt:15
 msgid "Content size"
@@ -269,9 +318,17 @@ msgstr "Mot de passe actuel"
 msgid "Date registered"
 msgstr "Date d'enregistrement"
 
+#: root/base/toolbar.tt:23 root/base/toolbar.tt:45
+msgid "Deleted Text"
+msgstr ""
+
 #: root/base/page/info.tt:21
 msgid "Descendants"
 msgstr "Descendants"
+
+#: root/base/user/validate.tt:19
+msgid "Didn't receive an email?"
+msgstr ""
 
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
@@ -310,13 +367,21 @@ msgstr "Editer"
 msgid "Editing user profile for x"
 msgstr "Editer le profil utilisateur pour %1"
 
-#: root/base/user/profile.tt:6 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
+#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
 msgid "Email"
 msgstr "Email"
+
+#: root/base/user/validate.tt:4
+msgid "Email Validation"
+msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
 msgstr "Votre nouveau mot de passe a été transmis par mail"
+
+#: root/base/toolbar.tt:37 root/base/toolbar.tt:7
+msgid "Enum list"
+msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:191
 msgid "Error occurred while emailing you your new password."
@@ -326,9 +391,17 @@ msgstr "Une erreur s'est produite pendant la transmission par mail de votre nouv
 msgid "Exif Data"
 msgstr "Données EXIF"
 
+#: root/base/page/suggest.tt:4
+msgid "Existent Pages"
+msgstr ""
+
 #: root/base/export.tt:1 root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Export"
 msgstr "Exporter"
+
+#: root/base/toolbar.tt:27 root/base/toolbar.tt:49
+msgid "External Link"
+msgstr ""
 
 #: root/forms/user/editprofile.yml:32
 msgid "Favorite Albums"
@@ -341,6 +414,10 @@ msgstr "Films Favoris"
 #: root/base/navbar.tt:54
 msgid "Feeds"
 msgstr "Feeds"
+
+#: root/base/user/validate.tt:22
+msgid "Fill in the email address you want to use here"
+msgstr ""
 
 #: root/base/edithelp.tt:36
 msgid "Format content until next =pod as plain old documentation"
@@ -371,8 +448,12 @@ msgid "Gender"
 msgstr "Genre"
 
 #: root/base/navbar.tt:28
-msgid "L'avoir ici"
-msgstr "Kom inn"
+msgid "Get in there"
+msgstr ""
+
+#: root/base/page/search.tt:13 root/base/page/search_inline.tt:3
+msgid "Go"
+msgstr ""
 
 #: root/base/message.tt:6
 msgid "Go directly to "
@@ -414,6 +495,11 @@ msgstr "Titres"
 msgid "Headlines"
 msgstr "Sous-Titres"
 
+#. (page.name_orig)
+#: root/base/page/rss.tt:6
+msgid "Headlines for x"
+msgstr ""
+
 #: root/base/mail/reset_password.tt:1
 msgid "Hi there."
 msgstr "Salut là."
@@ -427,7 +513,11 @@ msgstr "Bonjour. C'est l'email pour valider votre adresse email, %1. Pour confir
 msgid "Hide changes"
 msgstr "Cacher les changements"
 
-#: root/base/edithelp.tt:52
+#: root/base/page/suggest.tt:8 root/base/page/wrapper.tt:7 root/base/sidebar.tt:21
+msgid "Home"
+msgstr ""
+
+#: root/base/edithelp.tt:10 root/base/edithelp.tt:52
 msgid "HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))"
 msgstr "PageAccueil, TroisMotsEnsemble, [[C++]], [[Laisser moi encore jouer !]], ((facile à typer))"
 
@@ -459,6 +549,11 @@ msgstr "IdLabel"
 msgid "If the flash uploader gives you problems, switch to the"
 msgstr "Si l'uploader flash ne fonctionne pas, changez pour le"
 
+#. (link)
+#: root/base/user/validate.tt:32
+msgid "If you are unable to validate, please x"
+msgstr ""
+
 #: root/base/edithelp.tt:38
 msgid "Image"
 msgstr "Image"
@@ -487,9 +582,17 @@ msgstr "Liens en ligne"
 msgid "Interests"
 msgstr "Centre d'intérêts"
 
+#: root/base/toolbar.tt:25 root/base/toolbar.tt:47
+msgid "Internal Link"
+msgstr ""
+
 #: lib/MojoMojo/Controller/User.pm:154
 msgid "Invalid password."
 msgstr "Mot de passe invalide."
+
+#: root/base/toolbar.tt:21 root/base/toolbar.tt:43
+msgid "Italic"
+msgstr ""
 
 #: root/base/edithelp.tt:135
 msgid "Item"
@@ -498,6 +601,10 @@ msgstr "Elément"
 #: root/base/edithelp.tt:129
 msgid "Just like email quoting!"
 msgstr "Just like email quoting!"
+
+#: root/base/toolbar.tt:17
+msgid "Justified paragraph"
+msgstr ""
 
 #: root/base/user/profile.tt:36
 msgid "Last changes"
@@ -510,6 +617,10 @@ msgstr "Plus loin dans le document"
 #: root/base/page/edit.tt:60
 msgid "Leave second blank if you do not want a password"
 msgstr "Laisser le deuxième champ vide si vous ne voulez pas de mot de passe"
+
+#: root/base/toolbar.tt:11
+msgid "Left-justified paragraph"
+msgstr ""
 
 #: root/base/gallery/photo_info.tt:6
 msgid "Lens"
@@ -539,6 +650,15 @@ msgstr "Liés à"
 msgid "Links to non-existent pages."
 msgstr "Liens vers des pages inexistantes."
 
+#. (activetag)
+#: root/base/tag/list.tt:20
+msgid "List by x"
+msgstr ""
+
+#: root/base/toolbar.tt:34 root/base/toolbar.tt:4
+msgid "List item 1"
+msgstr ""
+
 #: root/base/edithelp.tt:114
 msgid "Lists can be nested by indentation level"
 msgstr "Les listes peuvent être imbriqués par niveau d'indentation"
@@ -554,6 +674,18 @@ msgstr "Déconnexion"
 #: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
 msgid "Login"
 msgstr "Identification"
+
+#: root/base/toolbar.tt:3 root/base/toolbar.tt:33
+msgid "Main heading"
+msgstr ""
+
+#: root/base/page/rollback.tt:4
+msgid "Make current"
+msgstr ""
+
+#: root/base/toolbar.tt:30 root/base/toolbar.tt:52
+msgid "Mark some text to apply the toolbar actions to that text"
+msgstr ""
 
 #: root/base/edithelp.tt:45
 msgid "Markdown formatting tips"
@@ -587,6 +719,10 @@ msgstr "Nom manquant"
 msgid "Nested backticks"
 msgstr "Nested backticks"
 
+#: root/base/user/register.tt:2
+msgid "New User Registration"
+msgstr ""
+
 #: root/forms/admin/settings.yml:22
 msgid "New User Registration open"
 msgstr "Enregistrement nouvel utilisateur ouvert"
@@ -599,9 +735,9 @@ msgstr "Nouveau mot de passe"
 msgid "New password again"
 msgstr "Répéter nouveau mot de passe"
 
-#: root/forms/user/password.yml:20
-msgid "New password again "
-msgstr "Répéter nouveau mot de passe "
+#: root/base/page/search.tt:54 root/base/page/search_inline.tt:44
+msgid "Next"
+msgstr ""
 
 #: root/base/admin/role.tt:22
 msgid "No"
@@ -625,6 +761,14 @@ msgstr "Aucun utilisateur n'a été ajouté."
 msgid "No permissions to edit this page"
 msgstr "Acune permissions pour éditer cette page"
 
+#: root/base/user/list.tt:13
+msgid "No recent changes"
+msgstr ""
+
+#: root/base/page/search.tt:25 root/base/page/search_inline.tt:15
+msgid "No results found"
+msgstr ""
+
 #: root/base/admin/role.tt:29
 msgid "No roles created yet."
 msgstr "Aucun rôle n'a été créé"
@@ -633,6 +777,10 @@ msgstr "Aucun rôle n'a été créé"
 #: lib/MojoMojo/Controller/Page.pm:87
 msgid "No such revision for "
 msgstr "Aucune révision correspondate pour "
+
+#: root/base/page/suggest.tt:13
+msgid "Non-Existent Pages"
+msgstr ""
 
 #: root/base/page/permissions.tt:28
 msgid "None"
@@ -658,13 +806,34 @@ msgstr "Aucune saisie"
 msgid "Numbered list"
 msgstr "Liste numérotée"
 
+#: root/base/toolbar.tt:36 root/base/toolbar.tt:6
+msgid "Numbered list item"
+msgstr ""
+
+#: root/base/page/suggest.tt:3
+msgid "One or more pages in the requested path do not exist."
+msgstr ""
+
 #: root/base/edithelp.tt:67
 msgid "Optional Title"
 msgstr "Titre optionnel"
 
+#. (link)
+#: root/base/tag/cloud.tt:10
+msgid "Or you can check out x instead"
+msgstr ""
+
 #: root/base/edithelp.tt:90
 msgid "Ordered Lists"
 msgstr "Listes ordonnées"
+
+#: root/base/page/list.tt:48
+msgid "Orphaned Pages"
+msgstr ""
+
+#: root/base/page/suggest.tt:23
+msgid "Other Suggestions"
+msgstr ""
 
 #: root/base/page/list.tt:28
 msgid "Other pages that link to this page."
@@ -695,6 +864,10 @@ msgstr " Texte de la page"
 msgid "Pages sorted by when they were last changed"
 msgstr "Pages triées par derniers changements."
 
+#: root/base/page/list.tt:49
+msgid "Pages to which no other pages link."
+msgstr ""
+
 #: root/base/user/login.tt:19 root/forms/user/register.yml:17
 msgid "Password"
 msgstr "Mot de passe"
@@ -712,7 +885,7 @@ msgstr "Les mots de passe doit comprendre entre 4 et 14 caractères"
 msgid "Permission Denied to view x"
 msgstr "Permission de voir Réfusée %1"
 
-#. ($permtocheck, $name)
+#. ([$permtocheck, $name])
 #: lib/MojoMojo/Controller/PageAdmin.pm:87
 msgid "Permission Denied to x x"
 msgstr "Permission Réfusée pour %1 %2"
@@ -733,6 +906,10 @@ msgstr "Album Photo"
 msgid "Photos"
 msgstr "Photos"
 
+#: root/base/toolbar.tt:29 root/base/toolbar.tt:51
+msgid "Picture"
+msgstr ""
+
 #: lib/MojoMojo/Controller/User.pm:34
 msgid "Please enter username and password"
 msgstr "Merci de saisir votre identifiant et vote mot de passe"
@@ -741,7 +918,7 @@ msgstr "Merci de saisir votre identifiant et vote mot de passe"
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Merci de renseigner les informations suivantes pour être enregistré. Tous les champs sont obligatoires."
 
-#: root/base/page/attachments.tt:10
+#: root/base/page/attachments.tt:15
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
 msgstr "Merci de sélectionner un fichier a attacher à cette page. Pour envoyer plusieurs fichiers, les mettre dans un fichier zip"
 
@@ -757,7 +934,7 @@ msgstr "Tags populaires"
 msgid "Post"
 msgstr "Poster"
 
-#: root/base/footer.tt:6
+#: root/base/footer.tt:7
 msgid "Powered by Catalyst"
 msgstr "Propulsé par Catalyst"
 
@@ -769,9 +946,17 @@ msgstr "Préférences"
 msgid "Preformatted Code Blocks"
 msgstr "Bloc de Code préformater"
 
+#: root/base/toolbar.tt:39 root/base/toolbar.tt:9
+msgid "Preformatted text"
+msgstr ""
+
 #: root/base/page/editbar.tt:4
 msgid "Preview"
 msgstr "Prévisualisation"
+
+#: root/base/page/search.tt:48 root/base/page/search_inline.tt:38
+msgid "Previous"
+msgstr ""
 
 #: root/base/page/bottomnav.tt:50
 msgid "Print"
@@ -789,22 +974,32 @@ msgstr "Text brut"
 msgid "Recent"
 msgstr "Actualitées"
 
+#: root/base/tag/recent.tt:3
+msgid "Recent Pages"
+msgstr ""
+
 #. (page.path)
-#: root/base/page/atom.tt:10
+#: root/base/page/atom.tt:10 root/base/page/rss.tt:8 root/base/page/rss_full.tt:7
 msgid "Recent changes in x"
 msgstr "Changement récent dans %1"
 
+#. (activetag)
 #. (page.path)
-#: root/base/page/recent.tt:1 root/base/page/recent.tt:2
+#: root/base/page/recent.tt:1 root/base/page/recent.tt:2 root/base/tag/list.tt:22
 msgid "Recent pages in x"
 msgstr "Pages récentes dans %1"
 
-#. (page.path, activetag)
+#. ([page.path, activetag])
+#. ([ page.path, activetag ])
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:4
 msgid "Recent pages in x tagged with x"
 msgstr "Pages récentes dans %1 taguées avec %2"
 
-#: root/base/user/login.tt:13
+#: root/base/user/recover_pass.tt:3
+msgid "Recover Password"
+msgstr ""
+
+#: root/base/user/login.tt:13 root/base/user/recover_pass.tt:13
 msgid "Recover password"
 msgstr "Retrouver sont mot de passe"
 
@@ -824,9 +1019,17 @@ msgstr "Créer un nouveau compte"
 msgid "Registration is closed!"
 msgstr "L'enregistrement est clos!"
 
+#: root/base/tag/list.tt:31
+msgid "Related Tags"
+msgstr ""
+
+#: root/base/page/view.tt:25
+msgid "Removed"
+msgstr ""
+
 #: root/forms/user/register.yml:29
-msgid "Repeat password "
-msgstr "Répéter le mot de passe "
+msgid "Repeat password"
+msgstr "Répéter le mot de passe"
 
 #: root/forms/admin/settings.yml:29
 msgid "Restrict user editing to home directory"
@@ -835,6 +1038,35 @@ msgstr "Restreindre les droits d'édition des utilisateurs à leur page d'accuei
 #: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
 msgstr "Zone restreinte. Accès Administrateur obligatoire"
+
+#: root/base/page/search.tt:46 root/base/page/search_inline.tt:36
+msgid "Result Page"
+msgstr ""
+
+#. ([pager.first, pager.last, pager.total_entries, found_within])
+#. ([ pager.first, pager.last, pager.total_entries, found_within ])
+#: root/base/page/search.tt:23 root/base/page/search_inline.tt:13
+msgid "Results x-x of x found within x"
+msgstr ""
+
+#. ([content.created.ymd, content.created.hms, content.creator.name])
+#. ([ content.created.ymd, content.created.hms, content.creator.name ])
+#: root/base/page/print.tt:15 root/base/page/view.tt:31
+msgid "Revised on x at x by x"
+msgstr ""
+
+#: root/base/page/print.tt:8 root/base/page/view.tt:32 root/base/page/view.tt:5
+msgid "Revision"
+msgstr ""
+
+#. (page.content.created.datetime)
+#: root/base/page/rss.tt:14
+msgid "Revision from x"
+msgstr ""
+
+#: root/base/toolbar.tt:13
+msgid "Right-justified paragraph"
+msgstr ""
 
 #: root/base/admin/role_form.tt:15
 msgid "Role Members"
@@ -852,17 +1084,35 @@ msgstr "Nom du rôle:"
 msgid "Roles"
 msgstr "Rôles"
 
-#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:28
+#. (page.content_version)
+#: root/base/page/view.tt:7
+msgid "Rolled Back (Current: x)"
+msgstr ""
+
+#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:29
 msgid "Save"
 msgstr "Enregistrer"
 
-#: root/base/navbar.tt:61
+#: root/base/navbar.tt:61 root/base/page/search.tt:13 root/base/page/search_inline.tt:3
 msgid "Search"
 msgstr "Rechercher"
+
+#: root/base/page/search.tt:5
+msgid "Search Results"
+msgstr ""
+
+#: root/base/page/search.tt:14 root/base/page/search_inline.tt:4
+msgid "Search entire site"
+msgstr ""
 
 #: root/base/admin/role_form.tt:18
 msgid "Search for users:"
 msgstr "Rechercher les utilisateurs:"
+
+#. (page.path)
+#: root/base/page/search.tt:15 root/base/page/search_inline.tt:5
+msgid "Search within x"
+msgstr ""
 
 #: root/base/edithelp.tt:25 root/base/edithelp.tt:29
 msgid "Second item"
@@ -884,7 +1134,7 @@ msgstr "Voir la révision précédente"
 msgid "Set a keyword for this page"
 msgstr "Définir un mot-clé pour cette page"
 
-#: root/base/footer.tt:1
+#: root/base/footer.tt:2
 msgid "Set language"
 msgstr "Définir le langage"
 
@@ -908,8 +1158,18 @@ msgstr "Voir l'image"
 msgid "Show this product"
 msgstr "Voir ce produit"
 
-#. (pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
-#. (pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base))
+#: root/base/page/view.tt:24
+msgid "Showing changes from previous revision."
+msgstr ""
+
+#. ([pager.first, pager.last, pager.total_entries, c.wikiword( page.path, base)
+#. ([ pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
+#: root/base/pager.tt:16
+msgid "Showing entries x-x of x in x"
+msgstr ""
+
+#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
+#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
 #: root/base/gallery/pager.tt:11
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Voir %1 (%2-%3) sur %4 images sur %5"
@@ -962,9 +1222,14 @@ msgstr "Syntaxe"
 msgid "Table"
 msgstr "Table"
 
-#: root/base/navbar.tt:40 root/base/navbar.tt:43 root/base/navbar.tt:45 root/base/page/list.tt:6 root/base/page/recent.tt:13
+#: root/base/navbar.tt:40 root/base/navbar.tt:43 root/base/navbar.tt:45 root/base/page/list.tt:6 root/base/page/recent.tt:13 root/base/tag/recent.tt:7
 msgid "Tags"
 msgstr "Tags"
+
+#. (page.name)
+#: root/base/tag/cloud.tt:1
+msgid "Tags under x"
+msgstr ""
 
 #: root/base/gallery/photo_info.tt:4
 msgid "Taken"
@@ -989,6 +1254,11 @@ msgstr "Cet email est déjà utilisé"
 #: root/base/navbar.tt:68
 msgid "The Wikilicious page"
 msgstr "La page Wikilious"
+
+#. (user.email)
+#: root/base/user/validate.tt:16
+msgid "The email was sent to x."
+msgstr ""
 
 #. ($c->stash->{pre_hacked_uri})
 #: lib/MojoMojo/Controller/Root.pm:38
@@ -1039,7 +1309,7 @@ msgstr "Préférences mise à jour"
 msgid "Updated successfully."
 msgstr "Mise à jour effectuée avec succès"
 
-#: root/base/page/attachments.tt:8
+#: root/base/page/attachments.tt:11
 msgid "Upload"
 msgstr "Upload"
 
@@ -1068,13 +1338,17 @@ msgstr "Utilisateur introuvable!"
 msgid "User x not found!"
 msgstr "Utilisateur %1 introuvable!"
 
-#: root/base/user/login.tt:17
+#: root/base/user/login.tt:17 root/base/user/recover_pass.tt:10
 msgid "Username"
 msgstr "Identifiant"
 
 #: root/base/admin/user.tt:5
 msgid "Users"
 msgstr "Utilisateurs"
+
+#: root/base/user/validate.tt:11
+msgid "Validation"
+msgstr ""
 
 #: root/base/page/recent.tt:55
 msgid "View Diff"
@@ -1084,7 +1358,7 @@ msgstr "Voir les différences"
 msgid "View as files"
 msgstr "Voir comme des fichiers"
 
-#: root/base/page/attachments.tt:17
+#: root/base/page/attachments.tt:24
 msgid "View as gallery"
 msgstr "Voir comme une gallerie"
 
@@ -1095,6 +1369,10 @@ msgstr "Vues"
 #: root/base/page/list.tt:37
 msgid "Wanted Pages"
 msgstr "Pages Souhaitées"
+
+#: root/base/user/validate.tt:13
+msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
+msgstr ""
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:279
@@ -1158,7 +1436,7 @@ msgstr "Votre mot de passe a été mis à jour"
 msgid "Your password on x has been reset. This is your new password:"
 msgstr "Votre mot de passe sur %1 a été réinitialisé. Voici vote nouveau mot de passe:"
 
-#. ($c->pref->{name}||'MojoMojo')
+#. ($c->pref('name')
 #: lib/MojoMojo/Controller/User.pm:247
 msgid "[x] New User Validation"
 msgstr "[%1] Validation d'un nouvel utilisateur"
@@ -1196,6 +1474,10 @@ msgstr "appliquer aux sous-pages"
 msgid "as x"
 msgstr "en tant que %1"
 
+#: root/base/page/search.tt:34 root/base/page/search_inline.tt:24 root/base/page/view.tt:5 root/base/tag/recent.tt:27
+msgid "at"
+msgstr ""
+
 #: root/base/admin/toplinks.tt:13
 msgid "back"
 msgstr "retour"
@@ -1204,13 +1486,25 @@ msgstr "retour"
 msgid "blocks are wrapped in backticks"
 msgstr "les blocs sont encadrés par des quotes"
 
-#: root/base/edithelp.tt:60
+#: root/base/edithelp.tt:60 root/base/toolbar.tt:18 root/base/toolbar.tt:40
 msgid "bold"
 msgstr "gras"
+
+#: root/base/page/search.tt:33 root/base/page/search_inline.tt:23 root/base/page/view.tt:32 root/base/tag/recent.tt:26
+msgid "by"
+msgstr ""
 
 #: root/base/page/permissions.tt:20
 msgid "can"
 msgstr "peut"
+
+#: root/base/toolbar.tt:14
+msgid "centered paragraph"
+msgstr ""
+
+#: root/base/page/info.tt:16
+msgid "chars"
+msgstr ""
 
 #: root/base/edithelp.tt:138
 msgid "code"
@@ -1223,6 +1517,10 @@ msgstr "commentaire"
 #: root/base/comment.tt:2
 msgid "comments disabled for preview"
 msgstr "les commentaires sont désactivés pour la prévisualisation"
+
+#: root/base/tag/list.tt:32
+msgid "common uses"
+msgstr ""
 
 #: root/base/admin/toplinks.tt:10
 msgid "configuration"
@@ -1240,6 +1538,10 @@ msgstr "Créateur"
 msgid "delete"
 msgstr "supprimer"
 
+#: root/base/toolbar.tt:22 root/base/toolbar.tt:44
+msgid "deleted"
+msgstr ""
+
 #: root/base/message.tt:6
 msgid "do not pass prison, do not collect $ 200..."
 msgstr "vous ne passez pas la prison, vous ne recevez pas $ 200..."
@@ -1251,6 +1553,10 @@ msgstr "télécharger"
 #: root/base/admin/user.tt:8
 msgid "email"
 msgstr "email"
+
+#: root/base/page/search.tt:21 root/base/page/search_inline.tt:12
+msgid "entire site"
+msgstr ""
 
 #: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "example"
@@ -1284,6 +1590,10 @@ msgstr "inclure cette page"
 msgid "include this rss feed"
 msgstr "inclure ce flux rss"
 
+#: root/base/toolbar.tt:32
+msgid "increase # for smaller headline"
+msgstr ""
+
 #: root/base/attachments/list.tt:6
 msgid "inline"
 msgstr "en ligne"
@@ -1291,6 +1601,10 @@ msgstr "en ligne"
 #: root/base/attachments/list.tt:8
 msgid "insert"
 msgstr "insérer"
+
+#: root/base/toolbar.tt:20 root/base/toolbar.tt:42
+msgid "italic"
+msgstr ""
 
 #: root/base/edithelp.tt:59
 msgid "italics"
@@ -1300,6 +1614,14 @@ msgstr "italique"
 msgid "just use `2`"
 msgstr "utiliser juste `2`"
 
+#: root/base/toolbar.tt:16
+msgid "justified paragraph"
+msgstr ""
+
+#: root/base/toolbar.tt:10
+msgid "left justified paragraph"
+msgstr ""
+
 #: root/base/edithelp.tt:33
 msgid "linkname"
 msgstr "nomdulien"
@@ -1307,6 +1629,10 @@ msgstr "nomdulien"
 #: root/base/comment/login.tt:11
 msgid "log in"
 msgstr "s'identifier"
+
+#: root/base/user/validate.tt:31
+msgid "log out"
+msgstr ""
 
 #: root/base/admin/user.tt:8 root/base/comment/login.tt:7
 msgid "login"
@@ -1340,6 +1666,10 @@ msgstr "non spécifié"
 msgid "or"
 msgstr "ou"
 
+#: root/base/page/info.tt:25 root/base/page/info.tt:28
+msgid "pages"
+msgstr ""
+
 #: root/base/comment/login.tt:9
 msgid "password"
 msgstr "mot de passe"
@@ -1360,6 +1690,10 @@ msgstr "tags populaires"
 msgid "posted"
 msgstr "posté"
 
+#: root/base/comment.tt:10
+msgid "poster"
+msgstr ""
+
 #: root/base/user/prefs.tt:1
 msgid "preferences"
 msgstr "préférences"
@@ -1367,6 +1701,11 @@ msgstr "préférences"
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36
 msgid "read"
 msgstr "lecture"
+
+#. (wanted.from_page.path)
+#: root/base/page/list.tt:43
+msgid "referenced by x"
+msgstr ""
 
 #: root/base/comment/login.tt:4
 msgid "register"
@@ -1380,6 +1719,10 @@ msgstr "enlever"
 msgid "revision"
 msgstr "révision"
 
+#: root/base/toolbar.tt:12
+msgid "right justified paragraph"
+msgstr ""
+
 #: root/base/admin/toplinks.tt:12
 msgid "roles"
 msgstr "rôles"
@@ -1392,6 +1735,10 @@ msgstr "tête réduite"
 msgid "start"
 msgstr "commencer"
 
+#: root/base/tag/list.tt:9
+msgid "tags"
+msgstr ""
+
 #: lib/MojoMojo/Controller/User.pm:378
 msgid "the following are missing:"
 msgstr "les champs suivants sont manquants"
@@ -1399,6 +1746,10 @@ msgstr "les champs suivants sont manquants"
 #: lib/Locale/Maketext/Extract/Plugin/FormFu.pm:32
 msgid "this is the string"
 msgstr "c'est une chaîne de caractère"
+
+#: root/base/toolbar.tt:48
+msgid "url inside paranthesis"
+msgstr ""
 
 #: root/base/admin/toplinks.tt:11
 msgid "users"
@@ -1411,6 +1762,11 @@ msgstr "voir"
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:17 root/base/page/permissions.tt:36
 msgid "write"
 msgstr "écrire"
+
+#. (result.hit_count)
+#: root/base/page/search.tt:31
+msgid "x hits"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

@@ -2,9 +2,9 @@
 
 	[%IF c.req.params.rev %]
 	<div id="revision_info">
-	     Revision [% c.req.params.rev %] - [% content.created.ymd %] at [% content.created.hms %]
+	     [% loc('Revision') %] [% c.req.params.rev %] - [% content.created.ymd %] [% loc('at') %] [% content.created.hms %]
 	[%IF c.req.params.rev > page.content_version %]
-	<em>Rolled Back (Current: [%page.content_version%])</em>
+	<em>[% loc('Rolled Back (Current: x)', page.content_version) %]</em>
 	[%END%]
 </div>
 	[%END%]
@@ -21,15 +21,15 @@
 <div id="changes" style="display: none">
 	<p id="message">
 		<small>
-	      Showing changes from previous revision.
-	      <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
+	      [% loc('Showing changes from previous revision.') %]
+	      <ins class="diffins">[% loc('Added') %]</ins> | <del class="diffdel">[% loc('Removed') %]</del>
 	    </small>
 	</p>
 	<div id="diff"></div>
 </div>
 <div class="byline">
-  <acronym title="Revised on [% content.created.ymd %] at [% content.created.hms %] by [% content.creator.name %]">
-    Revision</acronym> by [% c.wikiword(content.creator.link, base) %] 
+  <acronym title="[% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]">
+    [% loc('Revision') %]</acronym> [% loc('by') %] [% c.wikiword(content.creator.link, base) %] 
     <br />
 </div>
 [% END %]

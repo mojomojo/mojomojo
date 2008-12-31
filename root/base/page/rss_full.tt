@@ -4,8 +4,8 @@
 	<title>[ [% c.pref('name') || config.name || "MojoMojo" %]
   ] Content for [% page.name_orig %].</title>
 	<link>[%c.uri_for('view')%]</link>
-	<description>Recent changes in [%page.path%]</description>
-	<language>en-us</language>
+	<description>[% loc('Recent changes in x', page.path) %]</description>
+	<language>[% lang %]</language>
 	<ttl>40</ttl>
 [%FOREACH page IN pages %]
     <item>

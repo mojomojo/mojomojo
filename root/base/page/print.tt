@@ -5,15 +5,14 @@
 	   [% c.pref("name") || "MojoMojo" %]
 	  </small>
 	  <br/>[%c.expand_wikiword(page.path)%] [%IF c.req.params.rev %]
-	  (Revision #[%c.req.params.rev%])[%END%]
+	  ([% loc('Revision') %] #[%c.req.params.rev%])[%END%]
 	 </h1>
 	 <div id="revision">
 	  [% content.formatted(c) %]
 	 </div>
 
 	 <div class="byline">
-	  Revised on [% content.created.ymd %] at [% content.created.hms %]
-	    by [% content.creator.name %]
+	  [% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]
 	 </div>
     </div>
 </div>

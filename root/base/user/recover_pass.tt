@@ -1,16 +1,16 @@
 [% PROCESS header.tt %]
 
-<div id="header"><h1>Recover Password</h1></div>
+<div id="header"><h1>[% loc('Recover Password') %]</h1></div>
 
 [% PROCESS breadcrumbs.tt %]
 
 <div id="content">
     <form id="loginForm" action="[%c.uri_for('recover_pass')%]" method="post">
     <dl class="form">
-        <dt>Username/Email:</dt>
+        <dt>[% loc('Username') %]/[% loc('Email') %]:</dt>
         <dd><input id="loginField" type="text" name="recover" /></dd>
         <dt>&nbsp;</dt>
-        <dd><input type="submit" value="Recover password" /></dd>
+        <dd><input type="submit" value="[% loc('Recover password') %]" /></dd>
     </dl>
     </form>
 </div>
