@@ -1,4 +1,4 @@
-		# SOME DESCRIPTIVE TITLE.
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -13,14 +13,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#:
-msgid "%1 more"
-msgstr "%1 de plus"
-
-#:
-msgid "%1 revisions"
-msgstr "%1 révisions"
 
 #: root/base/user/profile.tt:11
 msgid "(Private)"
@@ -82,23 +74,15 @@ msgstr "Age"
 msgid "All Pages"
 msgstr "Toutes les Pages"
 
-#:
-msgid "All Pages in %1"
-msgstr "Toutes les Pages dans %1"
-
 #. (page.path)
 #: root/base/page/list.tt:1
 msgid "All Pages in x"
-msgstr "Toutes les Pages dans x"
-
-#:
-msgid "All pages in %1 listed alphabetically"
-msgstr "Toutes les Pages dans %1 par ordre alphabétique"
+msgstr "Toutes les Pages dans %1"
 
 #. (page.name)
 #: root/base/page/list.tt:17
 msgid "All pages in x listed alphabetically"
-msgstr "Toutes les Pages dans x par ordre alphabétique"
+msgstr "Toutes les Pages dans %1 par ordre alphabétique"
 
 #: root/base/navbar.tt:40 root/base/navbar.tt:45
 msgid "All tags in this path"
@@ -248,14 +232,10 @@ msgstr "Poids du contenu"
 msgid "Could not authenticate that login."
 msgstr "Identification impossible."
 
-#:
-msgid "Could not create attachment from %1"
-msgstr "Création de la pièce jointe impossible à partir de %1"
-
 #. ($file)
 #: lib/MojoMojo/Controller/Attachment.pm:60
 msgid "Could not create attachment from x"
-msgstr "Création de la pièce jointe impossible à partir de x"
+msgstr "Création de la pièce jointe impossible à partir de %1"
 
 #: root/base/page/edit.tt:51
 msgid "Create"
@@ -328,7 +308,7 @@ msgstr "Editer"
 #. (user.name)
 #: root/base/user/editprofile.tt:3
 msgid "Editing user profile for x"
-msgstr "Editer le profil utilisateur pour x"
+msgstr "Editer le profil utilisateur pour %1"
 
 #: root/base/user/profile.tt:6 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
 msgid "Email"
@@ -356,7 +336,7 @@ msgstr "Albums Favoris"
 
 #: root/forms/user/editprofile.yml:36
 msgid "Favorite Movies"
-msgstr "Films Favoris" 
+msgstr "Films Favoris"
 
 #: root/base/navbar.tt:54
 msgid "Feeds"
@@ -438,14 +418,10 @@ msgstr "Sous-Titres"
 msgid "Hi there."
 msgstr "Salut là."
 
-#:
-msgid "Hi. This is a mail to validate your email address, %1. To confirm, please click the url below:"
-msgstr "Bonjour. C'est l'email pour valider votre adresse email, %1. Pour confirmer, merci de cliquer sur l'url ci-dessous:"
-
 #. (user.name)
 #: root/base/mail/validate.tt:1
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
-msgstr "Bonjour. C'est l'email pour valider votre adresse email, x. Pour confirmer, merci de cliquer sur l'url ci-dessous:"
+msgstr "Bonjour. C'est l'email pour valider votre adresse email, %1. Pour confirmer, merci de cliquer sur l'url ci-dessous:"
 
 #: root/base/page/bottomnav.tt:46
 msgid "Hide changes"
@@ -478,6 +454,10 @@ msgstr "ISO"
 #: root/base/edithelp.tt:63
 msgid "IdLabel"
 msgstr "IdLabel"
+
+#: root/base/page/attachments.tt:16
+msgid "If the flash uploader gives you problems, switch to the"
+msgstr "Si l'uploader flash ne fonctionne pas, changez pour le"
 
 #: root/base/edithelp.tt:38
 msgid "Image"
@@ -615,7 +595,7 @@ msgstr "Enregistrement nouvel utilisateur ouvert"
 msgid "New password"
 msgstr "Nouveau mot de passe"
 
-#:
+#: root/forms/user/password.yml:20
 msgid "New password again"
 msgstr "Répéter nouveau mot de passe"
 
@@ -631,15 +611,11 @@ msgstr "Non"
 msgid "No Comments posted"
 msgstr "Aucun commentaire"
 
-#:
-msgid "No help yet for %1"
-msgstr "Pas encore d'aide pour %1"
-
 #. (c.pref('main_formatter')
 #. (c.pref("main_formatter"))
 #: root/base/edithelp.tt:161
 msgid "No help yet for x"
-msgstr "Pas encore d'aide pour x"
+msgstr "Pas encore d'aide pour %1"
 
 #: root/base/admin/role_form.tt:25
 msgid "No members added yet."
@@ -702,14 +678,10 @@ msgstr "Page"
 msgid "Page Info"
 msgstr "Infos Page"
 
-#:
-msgid "Page info for %1"
-msgstr "Infos Page pour %1"
-
 #. (page.path)
 #: root/base/page/info.tt:9
 msgid "Page info for x"
-msgstr "Infos Page pour x"
+msgstr "Infos Page pour %1"
 
 #: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page meta information"
@@ -736,22 +708,18 @@ msgid "Password must be between 4 and 14 chars"
 msgstr "Les mots de passe doit comprendre entre 4 et 14 caractères"
 
 #:
-msgid "Permission Denied to %1 %2"
+msgid "Permission Denied to x x"
 msgstr "Permission Réfusée %1 %2"
-
-#:
-msgid "Permission Denied to view %1"
-msgstr "Permission de voir Réfusée %1"
 
 #. ($page->name)
 #: lib/MojoMojo/Controller/Page.pm:69
 msgid "Permission Denied to view x"
-msgstr "Permission de voir Réfusée x"
+msgstr "Permission de voir Réfusée %1"
 
 #. ($permtocheck, $name)
 #: lib/MojoMojo/Controller/PageAdmin.pm:87
 msgid "Permission Denied to x x"
-msgstr "Permission Réfusée pour x x"
+msgstr "Permission Réfusée pour %1 %2"
 
 #: root/base/page/editbar.tt:15 root/base/page/editbar.tt:19 root/base/page/editbar.tt:9
 msgid "Permissions"
@@ -825,24 +793,20 @@ msgstr "Text brut"
 msgid "Recent"
 msgstr "Actualitées"
 
-#:
-msgid "Recent changes in %1"
-msgstr "Changement récent dans %1"
-
 #. (page.path)
 #: root/base/page/atom.tt:10
 msgid "Recent changes in x"
-msgstr "Changement récent dans x"
+msgstr "Changement récent dans %1"
 
 #. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:2
 msgid "Recent pages in x"
-msgstr "Pages récentes dans x"
+msgstr "Pages récentes dans %1"
 
 #. (page.path, activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:4
 msgid "Recent pages in x tagged with x"
-msgstr "Pages récentes dans x taguées avec x"
+msgstr "Pages récentes dans %1 taguées avec %2"
 
 #: root/base/user/login.tt:13
 msgid "Recover password"
@@ -952,15 +916,11 @@ msgstr "Voir l'image"
 msgid "Show this product"
 msgstr "Voir ce produit"
 
-#:
-msgid "Showing %1 (%2-%3) of %4 pictures in %5"
-msgstr "Voir %1 (%2-%3) sur %4 images dans %5"
-
 #. (pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
 #. (pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base))
 #: root/base/gallery/pager.tt:11
 msgid "Showing x (x-x) of x pictures in x"
-msgstr "Voir x (x-x) sur x images i x"
+msgstr "Voir %1 (%2-%3) sur %4 images sur %5"
 
 #: root/base/edithelp.tt:143
 msgid "Simply indent every line of a code block by 4"
@@ -998,6 +958,10 @@ msgstr "S'abonner aux modifications par flux RSS"
 msgid "Subscribe to page changes"
 msgstr "S'abonner aux modifications de pages"
 
+#: root/base/page/attachments.tt:5
+msgid "Switch to flash uploader"
+msgstr "Changer pour l'upload flash"
+
 #: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
 msgid "Syntax"
 msgstr "Syntaxe"
@@ -1034,14 +998,10 @@ msgstr "Cet email est déjà utilisé"
 msgid "The Wikilicious page"
 msgstr "La page Wikilious"
 
-#:
-msgid "The requested URL (%1) was not found"
-msgstr "L'URL demandée (%1) est introuvable"
-
 #. ($c->stash->{pre_hacked_uri})
 #: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
-msgstr "L'URL demandée (x) est introuvable"
+msgstr "L'URL demandée (%1) est introuvable"
 
 #: root/base/edithelp.tt:147
 msgid "This is a pre formatted code block"
@@ -1062,10 +1022,6 @@ msgstr "Pour avoir"
 #: root/base/page/edit.tt:20
 msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
 msgstr "Pour commencer à éditer cette page, écrire dans la zone d etexte sous la prévisualisation. Pour voir les différentes possibilitées de codes à utiliser vous pouvez cliquer sir le lien syntaxe au-dessus."
-
-#:
-msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
-msgstr "Deux ou plus mots en majuscule collés ou n'importe quelle phrase encadrés par des doubles quotes ou des parenthèses est un mot wiki. On peut les échapper en mettant \\ devant"
 
 #: root/base/edithelp.tt:49 root/base/edithelp.tt:7
 msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
@@ -1104,7 +1060,7 @@ msgid "Use inherited permissions"
 msgstr "Utiliser les permissions héritées"
 
 #:
-msgid "User %1 not found!"
+msgid "User x not found!"
 msgstr "Utilisateur %1 introuvable!"
 
 #: root/base/navbar.tt:23
@@ -1126,7 +1082,7 @@ msgstr "Utilisateur introuvable!"
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:332
 msgid "User x not found!"
-msgstr "Utilisateur x introuvable"
+msgstr "Utilisateur %1 introuvable"
 
 #: root/base/user/login.tt:17
 msgid "Username"
@@ -1156,14 +1112,10 @@ msgstr "Vues"
 msgid "Wanted Pages"
 msgstr "Pages Souhaitées"
 
-#:
-msgid "Welcome, %1 your email is validated. Please log in."
-msgstr "Bienvenue, %1 votre email est validé. Merci de vous identifiez"
-
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:279
 msgid "Welcome, x your email is validated. Please log in."
-msgstr "Bienvenue, x votre email est validé. Merci de vous identifiez"
+msgstr "Bienvenue, %1 votre email est validé. Merci de vous identifiez"
 
 #: root/base/navbar.tt:48 root/base/navbar.tt:50
 msgid "Who wrote what"
@@ -1217,23 +1169,15 @@ msgstr "Votre saisie est invalide, merci de reformater et de réessayer."
 msgid "Your password has been updated"
 msgstr "Votre mot de passe a été mis à jour"
 
-#:
-msgid "Your password on %1 has been reset. This is your new password:"
-msgstr "Votre mot de passe sur %1 a été réinitialisé. Voici vote nouveau mot de passe:"
-
 #. (c.config.name)
 #: root/base/mail/reset_password.tt:3
 msgid "Your password on x has been reset. This is your new password:"
-msgstr "Votre mot de passe sur x a été réinitialisé. Voici vote nouveau mot de passe:"
-
-#:
-msgid "[%1] New User Validation"
-msgstr "[%1] Validation d'un nouvel utilisateur"
+msgstr "Votre mot de passe sur %1 a été réinitialisé. Voici vote nouveau mot de passe:"
 
 #. ($c->pref->{name}||'MojoMojo')
 #: lib/MojoMojo/Controller/User.pm:247
 msgid "[x] New User Validation"
-msgstr "[x] Validation d'un nouvel utilisateur"
+msgstr "[%1] Validation d'un nouvel utilisateur"
 
 #: root/base/page/permissions.tt:36
 msgid "actions"
@@ -1263,14 +1207,10 @@ msgstr "texte alt"
 msgid "apply to subpages"
 msgstr "appliquer aux sous-pages"
 
-#:
-msgid "as %1"
-msgstr "en tant que %1"
-
 #. (c.wikiword(user.link,base)
 #: root/base/comment/post.tt:5
 msgid "as x"
-msgstr "en tant que x"
+msgstr "en tant que %1"
 
 #: root/base/admin/toplinks.tt:13
 msgid "back"
@@ -1424,6 +1364,10 @@ msgstr "mot de passe"
 msgid "photo tags"
 msgstr "tags photo"
 
+#: root/base/page/attachments.tt:16
+msgid "plain uploader"
+msgstr "Upload simple"
+
 #: root/base/gallery/tags.tt:17
 msgid "popular tags"
 msgstr "tags populaires"
@@ -1489,12 +1433,12 @@ msgstr "écrire"
 #. (rev - 1)
 #: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32 root/base/page/bottomnav.tt:35
 msgid "x more"
-msgstr "x de plus"
+msgstr "%1 de plus"
 
 #. (page.versions.size)
 #: root/base/page/info.tt:37
 msgid "x revisions"
-msgstr "x revisions"
+msgstr "%1 revisions"
 
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:17
 msgid "yes"
