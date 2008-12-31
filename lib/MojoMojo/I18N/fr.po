@@ -707,10 +707,6 @@ msgstr "Les mots de passe ne correspondent pas"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Les mots de passe doit comprendre entre 4 et 14 caractères"
 
-#:
-msgid "Permission Denied to x x"
-msgstr "Permission Réfusée %1 %2"
-
 #. ($page->name)
 #: lib/MojoMojo/Controller/Page.pm:69
 msgid "Permission Denied to view x"
@@ -827,10 +823,6 @@ msgstr "Créer un nouveau compte"
 #: lib/MojoMojo/Controller/User.pm:209
 msgid "Registration is closed!"
 msgstr "L'enregistrement est clos!"
-
-#:
-msgid "Repeat password"
-msgstr "Répéter le mot de passe"
 
 #: root/forms/user/register.yml:29
 msgid "Repeat password "
@@ -1035,10 +1027,6 @@ msgstr "URL"
 msgid "Unordered Lists with Paragraphs"
 msgstr "Listes non-ordonnées avec des paragraphes"
 
-#:
-msgid "Update"
-msgstr "Mise à jour"
-
 #: root/forms/user/editprofile.yml:39
 msgid "Update "
 msgstr "Mise à jour "
@@ -1059,10 +1047,6 @@ msgstr "Upload"
 msgid "Use inherited permissions"
 msgstr "Utiliser les permissions héritées"
 
-#:
-msgid "User x not found!"
-msgstr "Utilisateur %1 introuvable!"
-
 #: root/base/navbar.tt:23
 msgid "User Preferences"
 msgstr "Préférences Utilisateur"
@@ -1082,7 +1066,7 @@ msgstr "Utilisateur introuvable!"
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:332
 msgid "User x not found!"
-msgstr "Utilisateur %1 introuvable"
+msgstr "Utilisateur %1 introuvable!"
 
 #: root/base/user/login.tt:17
 msgid "Username"
