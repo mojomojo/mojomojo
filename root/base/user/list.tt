@@ -3,12 +3,12 @@
 [% PROCESS pager.tt %]
 
 <dl id="authors">
-[% WHILE( user = users.next ) -%]
+[% WHILE( u = users.next ) -%]
 <dt>
-    [% c.wikiword( user.link, base ) -%]
+    [% c.wikiword( u.link, base ) -%]
 </dt>
 <dd>
-    [% pages = user.pages -%]
+    [% pages = u.pages -%]
     [% UNLESS pages %] 
         [% loc('No recent changes') %]
     [% END -%]
