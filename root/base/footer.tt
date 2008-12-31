@@ -1,6 +1,7 @@
+            [% SET redir = c.uri_for(c.req.path) %]
             <div id="lang">[%loc('Set language')%]: 
                 [% FOREACH lang IN ['no','de','en'] -%]
-                <a href="[%c.uri_for('set_lang',{lang=>lang})%]">[%lang%]</a> 
+                <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a> 
                 [% END -%]
 			<div id="powered">
 				<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" /></a>

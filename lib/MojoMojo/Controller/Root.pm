@@ -42,7 +42,7 @@ sub default : Path {
 sub set_lang :Global {
     my ($self,$c) = @_;
     $c->session->{lang}=$c->req->params->{lang};
-    $c->res->redirect($c->uri_for('/'));
+    $c->res->redirect($c->req->params->{redir});
 }
 
 =item end (builtin)
