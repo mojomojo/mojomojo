@@ -100,6 +100,8 @@ sub wikiword {
 sub pref {
     my ( $c, $setting, $value ) = @_;
 
+    return unless $setting;
+
     # Unfortunately there are MojoMojo->pref() calls in
     # MojoMojo::Schema::Result::Person which makes it hard
     # to get cache working for those calls - so we'll just
