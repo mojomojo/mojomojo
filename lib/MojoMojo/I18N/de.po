@@ -648,7 +648,7 @@ msgstr "Verlinkt zu"
 
 #: root/base/page/list.tt:38
 msgid "Links to non-existent pages."
-msgstr "Verlinkt nicht existierende Seiten."
+msgstr "Verlinkte nicht existierende Seiten."
 
 #. (activetag)
 #: root/base/tag/list.tt:20
@@ -916,7 +916,7 @@ msgstr "Bitte Benutzername und Passwort eingeben"
 
 #: lib/MojoMojo/Controller/User.pm:214
 msgid "Please fill in the following information to register. All fields are mandatory."
-msgstr "Zur Registrierung bitte folgende Informationen ausfüllen. Alle Felder sind Pflichtfelder."
+msgstr "Zur Registrierung bitte obenstehende Informationen ausfüllen. Alle Felder sind Pflichtfelder."
 
 #: root/base/page/attachments.tt:15
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
