@@ -77,13 +77,13 @@ sub settings : Path FormConfig Args(0) {
     }
 
     # FIXME: Needs refactor
-    if ( $form->params->{registration} ) {
+    if ( $form->params->{open_registration} ) {
         $c->pref( 'open_registration', 1 );
     }
     else {
         $c->pref( 'open_registration', 0 );
     }
-    if ( $form->params->{restricted} ) {
+    if ( $form->params->{restricted_user} ) {
         $c->pref( 'restricted_user', 1 );
     }
     else {
