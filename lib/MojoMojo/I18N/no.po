@@ -14,14 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#:
-msgid "%1 more"
-msgstr "%1 til"
-
-#:
-msgid "%1 revisions"
-msgstr "%1 revisjoner"
-
 #: root/base/user/profile.tt:11
 msgid "(Private)"
 msgstr "(Privat)"
@@ -82,18 +74,10 @@ msgstr "Alder"
 msgid "All Pages"
 msgstr "All sider"
 
-#:
-msgid "All Pages in %1"
-msgstr "Alle undersider av %1"
-
 #. (page.path)
 #: root/base/page/list.tt:1
 msgid "All Pages in x"
 msgstr "Alle sider i %1"
-
-#:
-msgid "All pages in %1 listed alphabetically"
-msgstr "Alle undersider av %1 i alfabetisk rekkefølge"
 
 #. (page.name)
 #: root/base/page/list.tt:17
@@ -251,10 +235,6 @@ msgstr "Størrelse på innhold"
 #: lib/MojoMojo/Controller/User.pm:52
 msgid "Could not authenticate that login."
 msgstr "Kunne ikke autentisere brukernavnet."
-
-#:
-msgid "Could not create attachment from %1"
-msgstr "Kunne ikke lage vedlegg fra %1"
 
 #. ($file)
 #: lib/MojoMojo/Controller/Attachment.pm:60
@@ -442,10 +422,6 @@ msgstr "Overskrifter"
 msgid "Hi there."
 msgstr "Hei der."
 
-#:
-msgid "Hi. This is a mail to validate your email address, %1. To confirm, please click the url below:"
-msgstr "Hei. Poenget med denne e-posten for å validere din e-postadresse, %1. For å gjøre det, trykk på linken under: "
-
 #. (user.name)
 #: root/base/mail/validate.tt:1
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
@@ -623,10 +599,6 @@ msgstr "Åpen brukerregistrering"
 msgid "New password"
 msgstr "Nytt passord"
 
-#:
-msgid "New password again"
-msgstr "Gjenta nytt passord"
-
 #: root/forms/user/password.yml:20
 msgid "New password again "
 msgstr "Gjenta nytt passord "
@@ -638,10 +610,6 @@ msgstr "Nei"
 #: root/base/comment.tt:22
 msgid "No Comments posted"
 msgstr "Ingen kommentarer"
-
-#:
-msgid "No help yet for %1"
-msgstr "Det finnes ingen hjelp enda for %1"
 
 #. (c.pref('main_formatter')
 #. (c.pref("main_formatter"))
@@ -710,10 +678,6 @@ msgstr "Side"
 msgid "Page Info"
 msgstr "Side-info"
 
-#:
-msgid "Page info for %1"
-msgstr "Side-info for %1"
-
 #. (page.path)
 #: root/base/page/info.tt:9
 msgid "Page info for x"
@@ -742,14 +706,6 @@ msgstr "Passordet ble ikke gjentatt korrekt"
 #: root/forms/user/register.yml:26
 msgid "Password must be between 4 and 14 chars"
 msgstr "Passordet må være mellom 4 og 4 tegn"
-
-#:
-msgid "Permission Denied to %1 %2"
-msgstr "Tilgang nektet til %1 %2"
-
-#:
-msgid "Permission Denied to view %1"
-msgstr "Du har ikke tilgang til å se %1"
 
 #. ($page->name)
 #: lib/MojoMojo/Controller/Page.pm:69
@@ -833,10 +789,6 @@ msgstr "Uformattert text"
 msgid "Recent"
 msgstr "Nylig"
 
-#:
-msgid "Recent changes in %1"
-msgstr "Nylige endringer i %1"
-
 #. (page.path)
 #: root/base/page/atom.tt:10
 msgid "Recent changes in x"
@@ -871,10 +823,6 @@ msgstr "Registrerer ny bruker"
 #: lib/MojoMojo/Controller/User.pm:209
 msgid "Registration is closed!"
 msgstr "Registrering er stengt!"
-
-#:
-msgid "Repeat password"
-msgstr "Gjenta passord"
 
 #: root/forms/user/register.yml:29
 msgid "Repeat password "
@@ -960,10 +908,6 @@ msgstr "Vis bildet"
 msgid "Show this product"
 msgstr "Vis dette produktet"
 
-#:
-msgid "Showing %1 (%2-%3) of %4 pictures in %5"
-msgstr "Viser %1 (%2-%3) av %4 bilder i %5"
-
 #. (pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
 #. (pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base))
 #: root/base/gallery/pager.tt:11
@@ -1046,10 +990,6 @@ msgstr "Det finnes allerede en bruker med den epostadressen"
 msgid "The Wikilicious page"
 msgstr "Wikilious siden"
 
-#:
-msgid "The requested URL (%1) was not found"
-msgstr "Den etterspurte URLen (%1) finnes ikke"
-
 #. ($c->stash->{pre_hacked_uri})
 #: lib/MojoMojo/Controller/Root.pm:38
 msgid "The requested URL (x) was not found"
@@ -1075,10 +1015,6 @@ msgstr "Å få"
 msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
 msgstr "Skriv i tekstområdet under denne teksten for å begynne å redigere denne siden. For å finne ut mer om hvilke koder du kan bruke, trykk på 'syntax' over."
 
-#:
-msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or paranthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
-msgstr "To eller flere kapitaliserte ord limt sammen (camel case) eller en frase med doble paranteser eller hakeparanteser rundt er et wiki ord. For å unngå dette, sett '' forran ordet"
-
 #: root/base/edithelp.tt:49 root/base/edithelp.tt:7
 msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
 msgstr "To eller flere kapitaliserte ord limt sammen (camel case) eller en frase med doble paranteser eller hakeparanteser rundt er et wiki ord. For å unngå dette, sett '' forran ordet"
@@ -1090,10 +1026,6 @@ msgstr "URL"
 #: root/base/edithelp.tt:102
 msgid "Unordered Lists with Paragraphs"
 msgstr "Usorterte lister med paragrafer"
-
-#:
-msgid "Update"
-msgstr "Oppdater"
 
 #: root/forms/user/editprofile.yml:39
 msgid "Update "
@@ -1114,10 +1046,6 @@ msgstr "Last opp"
 #: root/base/page/permissions.tt:52
 msgid "Use inherited permissions"
 msgstr "Bruk arvede rettigheter"
-
-#:
-msgid "User %1 not found!"
-msgstr "Brukeren %1 finnes ikke!"
 
 #: root/base/navbar.tt:23
 msgid "User Preferences"
@@ -1167,10 +1095,6 @@ msgstr "Visninger"
 #: root/base/page/list.tt:37
 msgid "Wanted Pages"
 msgstr "Ønskede Sider"
-
-#:
-msgid "Welcome, %1 your email is validated. Please log in."
-msgstr "Velkommen, %1. Din e-post er nå bekreftet. Vennligst logg inn."
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:279
@@ -1229,18 +1153,10 @@ msgstr "Teksten din er ugyldig, reformatter den og prøv igjen."
 msgid "Your password has been updated"
 msgstr "Ditt passord er nå endret"
 
-#:
-msgid "Your password on %1 has been reset. This is your new password:"
-msgstr "Passordet ditt på %1 har blitt resatt. Det nye passordet ditt er:"
-
 #. (c.config.name)
 #: root/base/mail/reset_password.tt:3
 msgid "Your password on x has been reset. This is your new password:"
 msgstr "Ditt passord på %1 har blitt resatt. Dette er ditt nye passord:"
-
-#:
-msgid "[%1] New User Validation"
-msgstr "[%1] Validering av ny bruker"
 
 #. ($c->pref->{name}||'MojoMojo')
 #: lib/MojoMojo/Controller/User.pm:247
@@ -1274,10 +1190,6 @@ msgstr "alt tekst"
 #: root/base/page/permissions.tt:36
 msgid "apply to subpages"
 msgstr "gjelder for undersider"
-
-#:
-msgid "as %1"
-msgstr "som %1"
 
 #. (c.wikiword(user.link,base)
 #: root/base/comment/post.tt:5
