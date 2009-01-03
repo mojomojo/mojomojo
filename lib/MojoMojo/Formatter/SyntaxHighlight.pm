@@ -54,8 +54,12 @@ sub format_content {
     while ( $$content =~ s/<pre(?:\s+lang=['"]*(.*?)['"]*")?>(.*?)<\/pre>/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         if ($language) {
-            $kate->language($language);
-            $block = $kate->highlightText($block);
+            eval {
+                $kate->language($language);
+            };
+            unless ($@) {
+                $block = $kate->highlightText($block);
+            }
         }
         push @blocks, $block;
         $ph++;
