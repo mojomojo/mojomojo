@@ -1142,21 +1142,21 @@ div#bottomnav { clear:both; }
 }
 
 /* Syntax Highlight Engine Kate */
-.Alert { color: #0000ff; }
-.BaseN { color: #007f00; }
-.BString { color: #c9a7ff; }
-.Char { color: #ff00ff; }
-.Comment { color: #7f7f7f; }
-.DataType { color: #0000ff; }
-.DecVal { color: #00007f; }
-.Error { color: #ff0000; }
-.Float { color: #00007f; }
-.Function { color: #007f00; }
-.IString { color: #ff0000; }
-.Operator { color: #ffa500; }
-.Others { color: #b03060; }
-.RegionMarker { color: #96b9ff; }
-.Reserved { color: #9b30ff; }
-.String { color: #ff0000; }
-.Variable { color: #0000ff; }
-.Warning { color: #0000ff; }
+.kateAlert { color: #0000ff; }
+.kateBaseN { color: #007f00; }
+.kateBString { color: #c9a7ff; }
+.kateChar { color: #ff00ff; }
+.kateComment { color: #7f7f7f; }
+.kateDataType { color: #0000ff; }
+.kateDecVal { color: #00007f; }
+.kateError { color: #ff0000; }
+.kateFloat { color: #00007f; }
+.kateFunction { color: #007f00; }
+.kateIString { color: #ff0000; }
+.kateOperator { color: #ffa500; }
+.kateOthers { color: #b03060; }
+.kateRegionMarker { color: #96b9ff; }
+.kateReserved { color: #9b30ff; }
+.kateString { color: #ff0000; }
+.kateVariable { color: #0000ff; }
+.kateWarning { color: #0000ff; }

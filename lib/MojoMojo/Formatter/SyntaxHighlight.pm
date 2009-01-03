@@ -45,7 +45,7 @@ languages.
 
 sub format_content {
     my ( $class, $content ) = @_;
-    
+
     my @blocks  = ();
     my $kate    = _kate();
     my $ph      = 0;
@@ -68,7 +68,7 @@ sub format_content {
     for (my $i=0; $i<$ph; $i++) {
         $$content =~ s/$ph_base$i/<pre>$blocks[$i]<\/pre>/;
     }
-
+    
     return $content;
 }
 
@@ -81,34 +81,48 @@ sub _kate {
             "&"  => "&amp;",
             " "  => "&nbsp;",
             "\t" => "&nbsp;&nbsp;&nbsp;",
-            "\n" => "",
+            "\n" => "\n",
         },
         format_table => {
-            Alert        => [ q{<span class="Alert">},           "</span>" ],
-            BaseN        => [ q{<span class="BaseN">},           "</span>" ],
-            BString      => [ q{<span class="BString">},         "</span>" ],
-            Char         => [ q{<span class="Char">},            "</span>" ],
-            Comment      => [ q{<span class="Comment"><i>},      "</i></span>" ],
-            DataType     => [ q{<span class="DataType">},        "</span>" ],
-            DecVal       => [ q{<span class="DecVal">},          "</span>" ],
-            Error        => [ q{<span class="Error"><b><i>},     "</i></b></span>" ],
-            Float        => [ q{<span class="Float">},           "</span>" ],
-            Function     => [ q{<span class="Function">},        "</span>" ],
-            IString      => [ q{<span class="IString">},         "" ],
+            Alert        => [ q{<span class="kateAlert">},           "</span>" ],
+            BaseN        => [ q{<span class="kateBaseN">},           "</span>" ],
+            BString      => [ q{<span class="kateBString">},         "</span>" ],
+            Char         => [ q{<span class="kateChar">},            "</span>" ],
+            Comment      => [ q{<span class="kateComment"><i>},      "</i></span>" ],
+            DataType     => [ q{<span class="kateDataType">},        "</span>" ],
+            DecVal       => [ q{<span class="kateDecVal">},          "</span>" ],
+            Error        => [ q{<span class="kateError"><b><i>},     "</i></b></span>" ],
+            Float        => [ q{<span class="kateFloat">},           "</span>" ],
+            Function     => [ q{<span class="kateFunction">},        "</span>" ],
+            IString      => [ q{<span class="kateIString">},         "" ],
             Keyword      => [ q{<b>},                            "</b>" ],
             Normal       => [ q{},                               "" ],
-            Operator     => [ q{<span class="Operator">},        "</span>" ],
-            Others       => [ q{<span class="Others">},          "</span>" ],
-            RegionMarker => [ q{<span class="RegionMarker"><i>}, "</i></span>" ],
-            Reserved     => [ q{<span class="Reserved"><b>},     "</b></span>" ],
-            String       => [ q{<span class="String">},          "</span>" ],
-            Variable     => [ q{<span class="Variable"><b>},     "</b></span>" ],
-            Warning      => [ q{<span class="Warning"><b><i>},   "</b></i></span>" ],
+            Operator     => [ q{<span class="kateOperator">},        "</span>" ],
+            Others       => [ q{<span class="kateOthers">},          "</span>" ],
+            RegionMarker => [ q{<span class="kateRegionMarker"><i>}, "</i></span>" ],
+            Reserved     => [ q{<span class="kateReserved"><b>},     "</b></span>" ],
+            String       => [ q{<span class="kateString">},          "</span>" ],
+            Variable     => [ q{<span class="kateVariable"><b>},     "</b></span>" ],
+            Warning      => [ q{<span class="kateWarning"><b><i>},   "</b></i></span>" ],
         },
     );
 }
 
 =back
+
+=head1 TODO
+
+Fix extra newline issue after comments. To see what i mean, do:
+
+    <pre lang="Perl">
+    sub login : Local {
+      my ( $self, $c ) = @_;
+      # comment
+      return 1;
+    }
+    </pre>
+
+Also compare preview to real page.
 
 =head1 SEE ALSO
 
