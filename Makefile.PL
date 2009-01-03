@@ -56,6 +56,7 @@ requires (
         'URI::Fetch'                                    => 0,
         'Text::Password::Pronounceable'                 => 0,
         'DBIx::Class'                                   => '0.08',
+        'Syntax::Highlight::Engine::Kate'               => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
