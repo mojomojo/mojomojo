@@ -42,6 +42,8 @@ for the default plugins is currently as follows:
 
 =item 7  - L<MojoMojo::Formatter::Scrub> - Removes harmful HTML
 
+=item 9  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks
+
 =item 10 - L<MojoMojo::Formatter::Pod> - handles =pod ... =pod blocks
 
 =item 14 - L<MojoMojo::Formater::IRCLog> - handles =irc ... =irc blocks
