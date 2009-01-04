@@ -231,6 +231,11 @@ div#pageoptions a {
     font-size: 1em;
 }
 
+#lang {
+    background: #ccc;
+    padding: 0.4em;
+}
+
 .formdiv {
     text-align: left;
     background: #ffffff;

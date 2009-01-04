@@ -1,6 +1,6 @@
             [% SET redir = c.uri_for(c.req.path) %]
             <div id="lang">[%loc('Set language')%]: 
-                [% FOREACH lang IN ['no','de','en'] -%]
+                [% FOREACH lang IN ['en','de','fr','no'] -%]
                 <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a> 
                 [% END -%]
 			<div id="powered">
