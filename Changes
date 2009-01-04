@@ -1,6 +1,9 @@
+0.999025  2009-01-04 23:39:00
+        - Updated language selector, add fr to choices.
         - Improved search setup error handling on startup
         - New formatter: SyntaxHighlight
-
+        - Fixed /.users to show logout-link correctly if user is logged in. 
+        
 0.999024  2008-12-31 18:04:00
         - Get preference key/value from cache if possible.
         - Fix wanted pages.
