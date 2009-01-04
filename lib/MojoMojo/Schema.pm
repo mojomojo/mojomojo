@@ -121,7 +121,7 @@ h2. Attachments & Photos', 'released', 1, 1, '', '', '', ''
             [
                 3, 1, $people[1]->id, 0, 'h1. Admin User.
 
-This is the default home for the admin user. You can change this text by pressing the _Edit_ link at the bottom.',
+This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom.',
                 'released', 1, 1, '', '', ''
             ],
         ]
