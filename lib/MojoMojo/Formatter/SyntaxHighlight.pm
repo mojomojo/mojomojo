@@ -53,6 +53,8 @@ sub format_content {
 
     while ( $$content =~ s/<pre(?:\s+lang=['"]*(.*?)['"]*")?>(.*?)<\/pre>/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
+        # Fix newline issue
+        $block =~ s/\r//g;
         if ($language) {
             eval {
                 $kate->language($language);
