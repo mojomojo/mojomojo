@@ -1,3 +1,4 @@
+        - Improved search setup error handling on startup
         - New formatter: SyntaxHighlight
 
 0.999024  2008-12-31 18:04:00
