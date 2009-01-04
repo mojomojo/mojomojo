@@ -112,20 +112,6 @@ sub _kate {
 
 =back
 
-=head1 TODO
-
-Fix extra newline issue after comments. To see what i mean, do:
-
-    <pre lang="Perl">
-    sub login : Local {
-      my ( $self, $c ) = @_;
-      # comment
-      return 1;
-    }
-    </pre>
-
-Also compare preview to real page.
-
 =head1 SEE ALSO
 
 L<MojoMojo>, L<Module::Pluggable::Ordered> and L<Syntax::Highlight::Engine::Kate>.
