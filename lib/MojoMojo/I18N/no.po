@@ -196,7 +196,7 @@ msgstr "Lenker tilbake"
 
 #: root/forms/user/editprofile.yml:13
 msgid "Birth Date"
-msgstr "Fødselsdato"
+msgstr "Født"
 
 #: root/base/edithelp.tt:127
 msgid "Block quotes"
@@ -1282,7 +1282,7 @@ msgstr "Viser endringer mot forrige revisjon."
 #. ([ pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
 #: root/base/pager.tt:16
 msgid "Showing entries x-x of x in x"
-msgstr "Viser %1-%2 oppføriner av totalt %3 i %4"
+msgstr "Viser %1-%2 oppføringer av totalt %3 i %4"
 
 #. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
 #. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
