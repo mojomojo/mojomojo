@@ -1634,7 +1634,7 @@ msgstr "uthevet"
 #: root/base/page/view.tt:32
 #: root/base/tag/recent.tt:26
 msgid "by"
-msgstr "av"
+msgstr "laget av"
 
 #: root/base/page/permissions.tt:20
 msgid "can"
