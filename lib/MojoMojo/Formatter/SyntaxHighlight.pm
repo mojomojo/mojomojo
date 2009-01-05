@@ -4,6 +4,13 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
 use Syntax::Highlight::Engine::Kate;
+use HTML::Entities;
+
+my $main_formatter;
+eval {
+    $main_formatter = MojoMojo->pref('main_formatter');
+};
+$main_formatter ||= 'MojoMojo::Formatter::Textile';
 
 =head1 NAME
 
@@ -11,7 +18,9 @@ MojoMojo::Formatter::SyntaxHighlight - syntax highlighting for code blocks
 
 =head1 DESCRIPTION
 
-This formatter performs syntax highlighting on code blocks.
+This formatter performs syntax highlighting on code blocks. Unfortunately
+this currently works only if you're using L<MojoMojo::Formatter::Textile>
+as main formatter.
 
 =head1 METHODS
 
@@ -26,7 +35,7 @@ those tags.
 
 =cut
 
-sub format_content_order { 9 }
+sub format_content_order { 99 }
 
 =item format_content
 
@@ -45,13 +54,24 @@ languages.
 
 sub format_content {
     my ( $class, $content ) = @_;
+    
+    # No syntax highlighting for anything else than Textile yet, SORRY
+    unless ($main_formatter eq 'MojoMojo::Formatter::Textile') {
+        $$content =~ s/<\s*pre\s+lang=".*?"\s*>/<pre>/g;
+        return $$content;
+    }
+
+    $$content = decode_entities($$content);
 
     my @blocks  = ();
     my $kate    = _kate();
     my $ph      = 0;
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
-
-    while ( $$content =~ s/<pre(?:\s+lang=['"]*(.*?)['"]*")?>(.*?)<\/pre>/$ph_base$ph/si ) {
+    
+    # drop all lang=""
+    $$content =~ s/<\s*pre\s+lang=""\s*>/<pre>/g;
+    
+    while ( $$content =~ s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;
