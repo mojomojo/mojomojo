@@ -26,6 +26,16 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to( "page", "Page", { id => "page" } );
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Attachment
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 sub delete {
     my ($self) = @_;
     unlink( $self->filename )        if -f $self->filename;
@@ -34,7 +44,7 @@ sub delete {
     $self->next::method();
 }
 
-=head2 filename
+=item filename
 
 Full path to this attachment.
 

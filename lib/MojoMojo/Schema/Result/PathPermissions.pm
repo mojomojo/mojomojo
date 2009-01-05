@@ -21,4 +21,15 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key( "path", "role", "apply_to_subpages" );
 __PACKAGE__->belongs_to( "role", "Role", { id => "role" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::PathPermissions
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;

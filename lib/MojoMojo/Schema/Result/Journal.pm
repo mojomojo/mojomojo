@@ -21,5 +21,16 @@ __PACKAGE__->set_primary_key("pageid");
 __PACKAGE__->has_many( "entries", "Entry", { "foreign.journal" => "self.pageid" } );
 __PACKAGE__->belongs_to( "pageid", "Page", { id => "pageid" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Journal
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;
 

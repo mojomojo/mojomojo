@@ -4,7 +4,17 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Schema::Base::ResultSet/;
 
-=head2 path_pages
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Page
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
+=item path_pages
 
 Accepts a path in url/unix directory format, e.g. "/page1/page2".
 Paths are assumed to be absolute, so a leading slash (/) is not 
@@ -99,7 +109,7 @@ sub path_pages_by_id {
     );
 }
 
-=head2 parse_path <path>
+=item parse_path <path>
 
 Create prototype page objects for each level in a given path.
 
@@ -135,7 +145,7 @@ sub parse_path {
 
 }    # end sub parse_path
 
-=head2 normalize_name <orig_name>
+=item normalize_name <orig_name>
 
 Strip superfluos spaces, and convert the rest to _,
 and lowercase the result.
@@ -155,11 +165,11 @@ sub normalize_name {
     return ( $name_orig, $name );
 }
 
-=head2 resolve_path <%args>
+=item resolve_path <%args>
 
 Takes the following args:
 
-=over 4
+=over 8
 
 =item path_pages
 

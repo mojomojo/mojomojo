@@ -34,12 +34,11 @@ sub auto : Private {
     return 1;
 }
 
-=item  default ( /.admin )
+=item settings ( /.admin )
 
 Show settings screen.
 
 =cut
-
 
 sub settings : Path FormConfig Args(0) {
     my ( $self, $c ) = @_;

@@ -20,9 +20,11 @@ These methods will be called indirectly through javascript functions.
 
 =over 4
 
-=item tag search (json/tagsearch)
+=item tagsearch (json/tagsearch)
 
 Backend which handles jQuery autocomplete requests for tag.
+
+=back
 
 =cut
 

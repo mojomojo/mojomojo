@@ -4,6 +4,21 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Schema::Base::ResultSet/;
 
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Tag
+
+=head1 METHODS
+
+=over 4
+
+=item most_used
+
+Returns a list of all tags and the amount each of these tags
+is used on any page.
+
+=cut
+
 sub most_used {
     my ( $self, $count ) = @_;
     return $self->search(
@@ -16,6 +31,12 @@ sub most_used {
         }
     );
 }
+
+=item by_page
+
+Same as L</most_used> but for a particular page.
+
+=cut
 
 sub by_page {
     my ( $self, $page ) = @_;
@@ -41,7 +62,7 @@ sub by_page {
     );
 }
 
-=head2 by_photo
+=item by_photo
 
 Tags on photos with counts. Used to make the tag cloud for the gallery. 
 
@@ -87,5 +108,14 @@ sub related_to {
         }
     );
 }
+
+=back
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
 
 1;

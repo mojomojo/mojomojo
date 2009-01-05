@@ -4,6 +4,20 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Schema::Base::ResultSet/;
 
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Content
+
+=head1 METHODS
+
+=over 4
+
+=item format_content
+
+Uses all available formatters of MojoMojo to format content.
+
+=cut
+
 sub format_content {
 
     # FIXME: This thing should use accept-context and stop fucking around with $c everywhere

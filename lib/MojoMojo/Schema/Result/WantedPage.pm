@@ -18,4 +18,15 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to( "from_page", "Page", { id => "from_page" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::WantedPage
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;

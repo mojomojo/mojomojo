@@ -11,6 +11,20 @@ use base 'DBIx::Class::Schema';
 
 __PACKAGE__->load_namespaces( default_resultset_class => '+MojoMojo::Schema::Base::ResultSet' );
 
+=head1 NAME
+
+MojoMojo::Schema
+
+=head1 METHODS
+
+=over 4
+
+=item create_initial_data
+
+Creates initial set of data in the database which is necessary to run MojoMojo.
+
+=cut
+
 sub create_initial_data {
     my $schema = shift;
     print "Creating initial data\n";
@@ -134,5 +148,14 @@ This is the default home node for the admin user. You can change this text by pr
 
     print "Success!\n";
 }
+
+=back
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
 
 1;
