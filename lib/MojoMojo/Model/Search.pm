@@ -13,6 +13,16 @@ use KinoSearch::QueryParser::QueryParser;
 
 __PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
+=head1 NAME
+
+MojoMojo::Controller::Search
+
+=head1 ACTIONS
+
+=over 4
+
+=cut
+
 my $invindexer;
 my $analyzer
     = KinoSearch::Analysis::PolyAnalyzer->new( language => 'en');

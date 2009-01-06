@@ -42,7 +42,7 @@ for the default plugins is currently as follows:
 
 =item 7  - L<MojoMojo::Formatter::Scrub> - Removes harmful HTML
 
-=item 9  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks
+=item 10 - L<MojoMojo::Formatter::Wiki> - Handles [[wikiwords]]
 
 =item 10 - L<MojoMojo::Formatter::Pod> - handles =pod ... =pod blocks
 
@@ -50,9 +50,11 @@ for the default plugins is currently as follows:
 
 =item 15 - Main formatter (either L<MojoMojo::Formatter::Textile> or L<MojoMojo::Formatter::Markdown>)
 
-=item 30 - L<MojoMojo::Formatter::Wiki> - Handles [[wikiwords]]
-
 =item 91 - L<MojoMojo::Formatter::Comment> Handles =comments , inserts a comment box
+
+=item 95 - L<MojoMojo::Formatter::TOC> replace =toc with table of contents
+
+=item 99  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks (Textile only)
 
 =back
 

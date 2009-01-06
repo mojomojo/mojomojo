@@ -14,8 +14,6 @@ unless ($@) {
     );
 }
 
-sub primary_formatter { 1; }
-
 =head1 NAME
 
 MojoMojo::Formatter::MarkDown - Texile formatting for your content
@@ -28,6 +26,14 @@ syntax for writing human-friendly formatted text.
 =head1 METHODS
 
 =over 4
+
+=item primary_formatter
+
+See also L<MojoMojo::Formatter/primary_formatter>.
+
+=cut
+
+sub primary_formatter { 1; }
 
 =item format_content_order
 

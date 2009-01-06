@@ -13,4 +13,15 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("prefkey");
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Preference
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;

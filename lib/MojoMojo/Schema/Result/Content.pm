@@ -68,6 +68,16 @@ __PACKAGE__->has_many(
 __PACKAGE__->belongs_to( "creator", "Person", { id => "creator" } );
 __PACKAGE__->belongs_to( "page",    "Page",   { id => "page" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Content
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 sub highlight {
     my ( $self, $c ) = @_;
     my $this_content = $self->formatted($c);

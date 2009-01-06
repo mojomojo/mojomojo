@@ -18,7 +18,7 @@ Controller for Page comments.
 
 =over 4
 
-=item default
+=item comment
 
 display comments for embedding in a page
 

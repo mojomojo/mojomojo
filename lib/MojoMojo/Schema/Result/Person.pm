@@ -66,6 +66,20 @@ __PACKAGE__->has_many( "page_versions", "PageVersion", { "foreign.creator" => "s
 __PACKAGE__->many_to_many( roles => 'role_members', 'role' );
 __PACKAGE__->has_many( "contents", "Content", { "foreign.creator" => "self.id" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Person
+
+=head1 METHODS
+
+=over 4
+
+=item is_admin
+
+Checks if user belongs to list of admins.
+
+=cut
+
 sub is_admin {
     my $self   = shift;
     my $admins = MojoMojo->pref('admins');
@@ -73,6 +87,12 @@ sub is_admin {
     return 1 if $login && $admins =~ m/\b$login\b/;
     return 0;
 }
+
+=item link
+
+Returns relative link to users home node.
+
+=cut
 
 sub link {
     my ($self) = @_;
@@ -148,6 +168,12 @@ sub interests_formatted { $textile->process(shift->interests); }
 sub music_formatted { $textile->process(shift->music); }
 sub movies_formatted { $textile->process(shift->movies); }
 
+=item age
+
+Returns age of the user in years.
+
+=cut
+
 sub age {
     my ($self) = @_;
     if (my $birthdate = $self->born) {
@@ -155,5 +181,14 @@ sub age {
         return $diff->years;
     }
 }
+
+=back
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
 
 1;

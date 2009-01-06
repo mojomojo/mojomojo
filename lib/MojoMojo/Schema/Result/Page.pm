@@ -46,6 +46,16 @@ __PACKAGE__->has_many( "attachments",    "Attachment",    { "foreign.page"   => 
 __PACKAGE__->has_many( "comments",       "Comment",       { "foreign.page"   => "self.id" } );
 __PACKAGE__->has_many( "journals",       "Journal",       { "foreign.pageid" => "self.id" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Page
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 sub tagged_descendants_by_date {
     my ( $self, $tag ) = @_;
     my (@pages) = $self->result_source->resultset->search(

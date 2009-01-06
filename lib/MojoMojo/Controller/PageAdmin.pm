@@ -203,6 +203,8 @@ sub permissions : Global {
 
 =head2 rollback
 
+This action will revert a page to a older revision.
+
 =cut
 
 sub rollback : Global {
@@ -214,6 +216,12 @@ sub rollback : Global {
         $c->forward('/page/view');
     }
 }
+
+=head2 delete
+
+This action will delete a page.
+
+=cut
 
 sub delete : Global {
     my ( $self, $c, $page ) = @_;

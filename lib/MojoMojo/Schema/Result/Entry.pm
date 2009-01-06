@@ -27,5 +27,16 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to( "journal", "Journal", { pageid => "journal" } );
 __PACKAGE__->belongs_to( "author",  "Person",  { id     => "author" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Entry
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;
 

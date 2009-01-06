@@ -4,10 +4,30 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Schema::Base::ResultSet/;
 
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Person
+
+=head1 METHODS
+
+=over 4
+
+=item get_person
+
+Get a person by login.
+
+=cut
+
 sub get_person {
     my ( $self, $login ) = @_;
     my ($person) = $self->search( { login => $login } );
 }
+
+=item get_user
+
+Same as L</get_person>.
+
+=cut
 
 sub get_user {
     my ( $self, $user ) = @_;
@@ -49,11 +69,26 @@ sub registration_profile {
     };
 }
 
+=item user_free
+
+Check if a username is already in user. Returns 1 for free, 0 for in use.
+
+=cut
+
 sub user_free {
     my ( $class, $schema, $login ) = @_;
     $login ||= $class;
     my $user = $class->result_source->resultset->get_user($login);
     return ( $user ? 0 : 1 );
 }
+
+=back
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
 
 1;

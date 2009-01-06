@@ -4,6 +4,14 @@ use base 'Catalyst::Controller';
 
 __PACKAGE__->config->{namespace} = '';
 
+=head1 NAME
+
+MojoMojo::Controller::Root
+
+=head1 ACTIONS
+
+=over 4
+
 =item begin (builtin)
 
 =cut
@@ -39,10 +47,28 @@ sub default : Path {
     $c->stash->{template} = 'message.tt';
 }
 
+=item set_lang
+
+(Re)set language of current session.
+
+=cut
+
 sub set_lang :Global {
     my ($self,$c) = @_;
     $c->session->{lang}=$c->req->params->{lang};
     $c->res->redirect($c->req->params->{redir});
+}
+
+=item render
+
+Finally use ActionClass RenderView to render the content.
+
+=cut
+
+sub render : ActionClass('RenderView') {
+    my ($self) = shift;
+    my ($c)    = @_;
+    $c->stash->{path} ||= '/';
 }
 
 =item end (builtin)
@@ -52,12 +78,6 @@ or response. then render the template. If param 'die' is passed,
 show a debug screen.
 
 =cut
-
-sub render : ActionClass('RenderView') {
-    my ($self) = shift;
-    my ($c)    = @_;
-    $c->stash->{path} ||= '/';
-}
 
 sub end : Private {
     my ( $self, $c ) = @_;
@@ -93,5 +113,14 @@ sub auto : Private {
     return 1 if $c->req->action eq 'logout';
     $c->stash->{template} = 'user/validate.tt';
 }
+
+=back
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
 
 1;

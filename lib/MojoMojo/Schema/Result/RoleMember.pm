@@ -16,4 +16,15 @@ __PACKAGE__->set_primary_key( "role", "person" );
 __PACKAGE__->belongs_to( "role",   "Role",   { id => "role" } );
 __PACKAGE__->belongs_to( "person", "Person", { id => "person" } );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::RoleMember
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;

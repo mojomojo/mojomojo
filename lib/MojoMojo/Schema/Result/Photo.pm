@@ -45,6 +45,16 @@ __PACKAGE__->has_many( "comments", "Comment", { "foreign.picture" => "self.id" }
 __PACKAGE__->has_one( 'attachment', 'MojoMojo::Schema::Result::Attachment' )
     ;    #,{'foreign.id' => 'self.id' });
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Photo
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 =item extract_exif
 
 Extracts EXIF information from a given Attachment and

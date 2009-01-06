@@ -10,6 +10,16 @@ use File::Copy;
 use File::Temp qw/tempfile/;
 use Imager;
 
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Attachment
+
+=head1 METHODS
+
+=over 4
+
+=cut
+
 =item create_from_file (page,filename,storage_callback)
 
 function to create an instance from a given file. Takes a filename,

@@ -86,7 +86,7 @@ is($content, '<a class="existingWikiWord" href="http://example.com/ExistingWord"
 
 $content = qq{WikiWord <pre><code>Blah</code>\nHubbaBubba Wikwiord</pre> blah humbug ExistingWikiWord};
 MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-is($content, qq{<span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://example.com/WikiWord.edit">?</a></span> <pre><code>Blah</code>\nHubbaBubba Wikwiord</pre> blah humbug <a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Wiki Word</a> });
+is($content, qq{<span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://example.com/WikiWord.edit">?</a></span> <pre lang=""><code>Blah</code>\nHubbaBubba Wikwiord</pre> blah humbug <a class="existingWikiWord" href="http://example.com/ExistingWord">Existing Wiki Word</a> });
 
 
 $content = 'There is one [[ Existing Word]] in this text';
@@ -100,7 +100,7 @@ is(@$exist, 0);
 is(@$new, 1);
 $_[0]->{path} = '/';
 
-$content = '[[Wiki Word]] <pre>Blah HubbaBubba Wikwiord</pre> blah humbug [[Existing Wiki Word]]';
+$content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikwiord</pre> blah humbug [[Existing Wiki Word]]';
 ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 1);
 is(@$new, 1);

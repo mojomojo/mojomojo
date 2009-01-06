@@ -21,4 +21,15 @@ __PACKAGE__->has_many( "role_privileges", "RolePrivilege", { "foreign.role" => "
 __PACKAGE__->has_many( "role_members",    "RoleMember",    { "foreign.role" => "self.id" } );
 __PACKAGE__->many_to_many( "members", "role_members", "person" );
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Role
+
+=head1 LICENSE
+
+This library is free software . You can redistribute it and/or modify 
+it under the same terms as perl itself.
+
+=cut
+
 1;
