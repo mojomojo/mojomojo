@@ -140,7 +140,10 @@ $( function() {
         $('#hidden_info').toggle();
         return false;
     });
-    $('#body').attr({value: function() { this.value+append }})
+    if ($('textarea#body')[0]) {
+        $('textarea#body').attr('value',$('textarea#body').attr('value')+append)
+        fetch_preview.only_every(1000);
+    }
     $('#body').each(function() { this.focus(); })
     $('#body').keyup(function() { fetch_preview.only_every(1000);});
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
