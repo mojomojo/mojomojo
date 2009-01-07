@@ -17,7 +17,6 @@ __PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns(
     "id",
-    "id",
     { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
     "poster",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
