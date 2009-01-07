@@ -47,7 +47,7 @@ Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
 
 sub show_comments {
     my ( $c, $page ) = @_;
-    $c->forward('/comment/default');
+    $c->forward('/comment/comment');
     return '<div id="comments">' . $c->view('TT')->render( $c, 'comment.tt' ) . '</div>';
 }
 

@@ -2,7 +2,7 @@
 <form action="[%c.uri_for('comment')%]" method="post" id="commentForm">
 <textarea id="comment" name="body">
 </textarea>
-<input type="submit" value="[%loc('Post')"/> [%loc('as x', c.wikiword(user.link,base)) %] 
+<input type="submit" name="submit" value="[%loc('Post')%]"/> [%loc('as x', c.wikiword(user.link,base)) %] 
 (<a href="[% c.uri_for('logout') %]">[%loc('forget me')%]</a>)
 </form>
 </div>
