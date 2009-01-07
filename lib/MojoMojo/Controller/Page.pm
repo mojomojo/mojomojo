@@ -158,26 +158,26 @@ sub search : Global {
  # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
         my $snippet = Text::Context->new( $content, split( / /, $real_query ) );
 
-        # Increment hit count if page seen already
-        # and append snippet to existing.
-        if ( exists $results_hash{ $hit->{path} } ) {
-            $results_hash{ $hit->{path} }->{hit_count}++;
-        }
-        else {
-            $results_hash{ $hit->{path} } = {
-                snippet   => $snippet->as_html,
-                page      => $page,
-                hit_count => 1,
-            };
-        }
-        my $result = {
+        # Convert Kinosearch hit score from decimal to percent.
+        my $score = sprintf( "%.0f", $hit->{score} * 1000 );
+        $results_hash{ $hit->{path} } = {
             snippet => $snippet->as_html,
             page    => $page,
+            score   => $score,
         };
 
-        #push @$results, $result;
     }
-    $results = [ values %results_hash ];
+
+    # Order hits by score.
+    my @results;
+    foreach my $hit_path (
+        sort { $results_hash{$b}->{'score'} <=> $results_hash{$a}->{'score'} }
+        keys %results_hash
+      )
+    {
+        push @results, $results_hash{$hit_path};
+    }
+    $results = \@results;
     my $result_count = scalar @$results;
     if ($result_count) {
 

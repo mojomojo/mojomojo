@@ -1,3 +1,7 @@
+        - Changed default search to AND using default_boolop of QueryParser.
+        - Edit search_inline.tt to display like search.tt. 
+        - Improved search result layout and added content creation date.
+        - Search results sorted by Kinosearch hit object score.
         - Fix create photo for pics with exif
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
