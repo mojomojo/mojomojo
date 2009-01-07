@@ -28,7 +28,8 @@
 <ul>
 [% FOR result = results %]
  <li>
-    <a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a> ([% loc('x hits', result.hit_count) %])
+    <strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a></strong>
+    <span id="search_hit_score">[% result.score %]%</span>
     <div class="byline" style="margin-bottom: 0px">
       [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
       [% loc('at') %] [% result.page.version.created.hms(":") %]

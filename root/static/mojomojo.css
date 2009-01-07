@@ -578,7 +578,12 @@ a.tag:hover {
 .quoted {
   font-weight: bold;
 }
-    
+
+span#search_hit_score {
+    font-style:italic;
+    font-size:smaller;
+}    
+
 /* @end */
 
 /* @group Pagination Links */

@@ -1,3 +1,4 @@
+        - Search results sorted by Kinosearch hit object score.
         - Fix create photo for pics with exif
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
