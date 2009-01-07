@@ -3,7 +3,6 @@ package MojoMojo::Controller::Jsrpc;
 use strict;
 use base 'Catalyst::Controller';
 use HTML::Entities;
-use utf8;
 
 =head1 NAME
 
@@ -42,7 +41,6 @@ sub render : Local {
         $c->res->status(500);
     }
 
-    utf8::decode($output);
     $c->res->output($output);
 }
 
