@@ -1,3 +1,8 @@
+0.999026 2009-01-08 00:21:00
+        - Fix a javascript issue with insert attachment
+        - Fix comments formatter
+        - Make wantedpage list only apply to current subtree
+        - Make tagged_descendant work for postgresql
         - Changed default search to AND using default_boolop of QueryParser.
         - Edit search_inline.tt to display like search.tt. 
         - Improved search result layout and added content creation date.
@@ -6,6 +11,7 @@
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
         - Link to revision in info page.
+        
 0.999025  2009-01-04 23:39:00
         - Updated language selector, add fr to choices.
         - Improved search setup error handling on startup
