@@ -1,7 +1,6 @@
 package MojoMojo;
 
 use strict;
-use utf8;
 use Path::Class 'file';
 
 use Catalyst qw/    ConfigLoader
