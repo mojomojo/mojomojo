@@ -256,7 +256,9 @@ sub list : Global {
     $c->stash->{orphans}   = [];
     $c->stash->{backlinks} =
       [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
-    $c->stash->{wanted} = [ $c->model("DBIC::WantedPage")->search() ];
+    $c->stash->{wanted} = [ $c->model("DBIC::WantedPage")->search({
+            from_page => [ $page->id, map { $_->id } $page->descendants ]
+        }) ];
 }
 
 =head2 recent (.recent)
