@@ -1,4 +1,6 @@
-        -Resolve utf8 issues on some FastCGI installations.(plu)
+        - Fix create photo for pics with exif
+        - Fixed chars count in page info
+        - Resolve some fastcgi encoding issues
         - Link to revision in info page.
 0.999025  2009-01-04 23:39:00
         - Updated language selector, add fr to choices.

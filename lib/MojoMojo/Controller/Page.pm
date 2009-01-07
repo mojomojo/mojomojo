@@ -370,6 +370,7 @@ Display meta information about the current page.
 
 sub info : Global {
     my ( $self, $c ) = @_;
+    $c->stash->{body_length} = length($c->stash->{page}->content->body);
     $c->stash->{template} = 'page/info.tt';
 }
 
