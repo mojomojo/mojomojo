@@ -1,3 +1,5 @@
+        - List one link for each page by an author via .users (instead of all revisions).
+
 0.999026 2009-01-08 00:21:00
         - Fix a javascript issue with insert attachment
         - Fix comments formatter

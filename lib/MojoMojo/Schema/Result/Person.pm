@@ -124,12 +124,9 @@ sub pages {
         ->resultset->search(
         { 'versions.creator' => $self->id, },
         {
-            include_columns => [qw/versions.version/],
             join            => [qw/versions/],
             order_by        => ['me.name'],
             distinct        => 1,
-
-            #having   => { 'versions.version' => \'=MAX(versions.version)' },
         }
         )->all;
     return $self->result_source->related_source('page_versions')->related_source('page')
