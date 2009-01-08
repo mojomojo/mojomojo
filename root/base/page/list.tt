@@ -19,7 +19,7 @@
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages +%]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a> [% page.content.abstract %]</li>
+        <li><a href="[% c.uri_for(page.path) %]">[% page.path %]</a> [% page.content.abstract %]</li>
 [% END +%]
     </ul>
 </div>
