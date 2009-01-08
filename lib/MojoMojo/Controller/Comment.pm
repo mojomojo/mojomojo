@@ -52,12 +52,10 @@ inline login for comments.
 
 sub login : Local {
     my ( $self, $c ) = @_;
+    $c->stash->{template} = 'comment/post.tt';
     $c->forward('/user/login');
-    if ( $c->stash->{message} ) {
+    if ( $c->stash->{fail} ) {
         $c->stash->{template} = 'comment/login.tt';
-    }
-    else {
-        $c->stash->{template} = 'comment/post.tt';
     }
 }
 

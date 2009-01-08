@@ -3,6 +3,7 @@
 <small>[%loc('You have to log in to post a comment.')%]
 (<a href="[%c.uri_for('register')%]">[%loc('register')%]</a>)</small>
 </span>
+[% IF fail%]<p>[%loc('Could not authenticate that login.')%]</p>[%END%]
 <dl>
 <dt>[%loc('login')%]:</dt>
 <dd><input id="loginField" type="text" name="login"/></dd>
