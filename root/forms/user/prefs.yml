@@ -11,6 +11,7 @@ elements:
        - HTMLEscape
     constraints:
       - Required
+      - Word
   - type: Text
     name: name
     label_loc: Name
