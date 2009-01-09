@@ -164,7 +164,7 @@ sub search : Global {
           Text::Context->new( $content, split( / /, $real_query ) );
 
         # Convert Kinosearch hit score from decimal to percent.
-        my $score = sprintf( "%.0f", $hit->{score} * 1000 );
+        # my $score = sprintf( "%.0f", $hit->{score} * 1000 );
 
         # Store goods to be used in search results listing
         my $link_title = $page->path;
@@ -172,10 +172,11 @@ sub search : Global {
           $link_title     =~ m{(.*/)(.*)$};
         $title_base_nodes =~ s{^/}{};
         $title_base_nodes =~ s{/}{ > }g;
+        $title_terminal_node = ucfirst($title_terminal_node);
         $results_hash{ $hit->{path} } = {
             snippet             => $snippet->as_html,
             page                => $page,
-            score               => $score,
+            score               => $hit->{score},
             link_title          => $link_title,
             title_base_nodes    => $title_base_nodes,
             title_terminal_node => $title_terminal_node
