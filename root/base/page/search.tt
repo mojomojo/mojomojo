@@ -27,7 +27,7 @@
 <ul>
 [% FOR result = results %]
  <li>
-    <strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a></strong>
+    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.title_terminal_node) %]</a></strong>
     <span id="search_hit_score">[% result.score %]%</span>
     <div class="snippet">
       [% result.snippet %]
