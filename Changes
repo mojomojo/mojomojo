@@ -1,3 +1,4 @@
+0.999027
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
         - List one link for each page by an author via .users (instead of all revisions).
