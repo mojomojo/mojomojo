@@ -49,6 +49,7 @@ sub login : Global {
             return;
         }
         else {
+            $c->stash->{fail} =1;
             $c->stash->{message} = $c->loc('Could not authenticate that login.');
         }
     }

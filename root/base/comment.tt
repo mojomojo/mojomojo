@@ -1,7 +1,6 @@
 [% IF c.action.reverse == 'pageadmin/edit' || c.action.reverse == 'jsrpc/render'%]
 [[%loc('comments disabled for preview')%]]
 [% ELSE %]
-[%c.action.reverse%]
 [%IF comments %]
 <h4> [%comments.count%] [% IF comments.count == 1; loc('Comment'); ELSE; loc('Comments'); END %]</h4>
 [% WHILE ( comment = comments.next ) %]

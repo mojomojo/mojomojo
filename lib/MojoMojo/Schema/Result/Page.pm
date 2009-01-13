@@ -97,7 +97,7 @@ sub tagged_descendants {
             'content.version' => \'=me.content_version',
         },
         {
-            group_by => [ ('me.id') ],
+            distinct => 1,
             from     => "page as me, page as ancestor, tag, content",
             order_by => 'me.name',
         }

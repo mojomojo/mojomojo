@@ -45,7 +45,8 @@ sub view : Global {
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
-    $c->stash->{render} = 'highlight' if $c->req->referer && $c->req->referer =~ /.edit$/;
+    $c->stash->{render} = 'highlight'
+      if $c->req->referer && $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
@@ -66,7 +67,8 @@ sub view : Global {
 
         my $perms = $c->check_permissions( $stash->{'path'}, $user );
         if ( !$perms->{'view'} ) {
-            $stash->{'message'}  = $c->loc('Permission Denied to view x', $page->name);
+            $stash->{'message'} =
+              $c->loc( 'Permission Denied to view x', $page->name );
             $stash->{'template'} = 'message.tt';
             return;
         }
@@ -84,7 +86,8 @@ sub view : Global {
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
         unless ( $stash->{rev} ) {
-            $stash->{message}  = $c->loc('No such revision for ', $page->name);
+            $stash->{message} =
+              $c->loc( 'No such revision for ', $page->name );
             $stash->{template} = 'message.tt';
         }
     }
@@ -140,7 +143,8 @@ sub search : Global {
     my %results_hash;
     while ( my $hit = $hits->fetch_hit_hashref ) {
         $hit->{path} =~ s/X/\//g;
-        my ($path_pages) = $c->model('DBIC::Page')->path_pages( $hit->{path} );
+        my ($path_pages) =
+          $c->model('DBIC::Page')->path_pages( $hit->{path} );
         my $page = $path_pages->[ @$path_pages - 1 ];
 
         # skip search result depending on permissions
@@ -155,29 +159,41 @@ sub search : Global {
         my $content = $strip->parse( $page->content->formatted($c) );
         $strip->eof;
 
- # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
-        my $snippet = Text::Context->new( $content, split( / /, $real_query ) );
+# FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
+        my $snippet =
+          Text::Context->new( $content, split( / /, $real_query ) );
 
-        # Increment hit count if page seen already
-        # and append snippet to existing.
-        if ( exists $results_hash{ $hit->{path} } ) {
-            $results_hash{ $hit->{path} }->{hit_count}++;
-        }
-        else {
-            $results_hash{ $hit->{path} } = {
-                snippet   => $snippet->as_html,
-                page      => $page,
-                hit_count => 1,
-            };
-        }
-        my $result = {
-            snippet => $snippet->as_html,
-            page    => $page,
+        # Convert Kinosearch hit score from decimal to percent.
+        # my $score = sprintf( "%.0f", $hit->{score} * 1000 );
+
+        # Store goods to be used in search results listing
+        my $link_title = $page->path;
+        my ( $title_base_nodes, $title_terminal_node ) =
+          $link_title     =~ m{(.*/)(.*)$};
+        $title_base_nodes =~ s{^/}{};
+        $title_base_nodes =~ s{/}{ > }g;
+        $title_terminal_node = ucfirst($title_terminal_node);
+        $results_hash{ $hit->{path} } = {
+            snippet             => $snippet->as_html,
+            page                => $page,
+            score               => $hit->{score},
+            link_title          => $link_title,
+            title_base_nodes    => $title_base_nodes,
+            title_terminal_node => $title_terminal_node
         };
 
-        #push @$results, $result;
     }
-    $results = [ values %results_hash ];
+
+    # Order hits by score.
+    my @results;
+    foreach my $hit_path (
+        sort { $results_hash{$b}->{'score'} <=> $results_hash{$a}->{'score'} }
+        keys %results_hash
+      )
+    {
+        push @results, $results_hash{$hit_path};
+    }
+    $results = \@results;
     my $result_count = scalar @$results;
     if ($result_count) {
 
@@ -223,7 +239,7 @@ Tag list for the bottom of page views.
 
 sub inline_tags : Global {
     my ( $self, $c, $highlight ) = @_;
-    $c->stash->{template}  ||= 'page/tags.tt';
+    $c->stash->{template} ||= 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
     my $page = $c->stash->{page};
     if ( $c->user_exists ) {
@@ -253,10 +269,14 @@ sub list : Global {
     $c->stash->{pages}    = [ $page->descendants ];
 
     # FIXME - real data here please
-    $c->stash->{orphans}   = [];
+    $c->stash->{orphans} = [];
     $c->stash->{backlinks} =
       [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
-    $c->stash->{wanted} = [ $c->model("DBIC::WantedPage")->search() ];
+    $c->stash->{wanted} = [
+        $c->model("DBIC::WantedPage")->search(
+            { from_page => [ $page->id, map { $_->id } $page->descendants ] }
+        )
+    ];
 }
 
 =head2 recent (.recent)
@@ -370,8 +390,8 @@ Display meta information about the current page.
 
 sub info : Global {
     my ( $self, $c ) = @_;
-    $c->stash->{body_length} = length($c->stash->{page}->content->body);
-    $c->stash->{template} = 'page/info.tt';
+    $c->stash->{body_length} = length( $c->stash->{page}->content->body );
+    $c->stash->{template}    = 'page/info.tt';
 }
 
 =head1 AUTHOR

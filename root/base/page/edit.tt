@@ -13,6 +13,9 @@
 
 [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
+
+<div id="preview_and_edit_container">
+
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
   [% page.content.formatted(c) %] 
@@ -20,10 +23,10 @@
    <i>[%loc('To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.')%]</i>
 [% END %]
 </div>
-<p>
+
+<div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
-	id="editForm" 
-	action="[% c.uri_for('edit')%]" 
+    action=""
 	method="post"> 
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
@@ -48,7 +51,9 @@
 	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
     </div>
     
-    <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save"); ELSE; loc("Create"); END %]'/> as 
+    <input type="submit" name="submit" value='[% loc("Save") %]'/>
+    <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
+    as 
     [% IF user.id %]
     [% c.wikiword(user.link,base) %] 
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
@@ -60,5 +65,8 @@
     ([%loc('Leave second blank if you do not want a password')%].
     [% END %]
   </form>
-</p>
+</div>
+<!-- between last two divs -->
+</div>
+
 [% END %]
