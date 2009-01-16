@@ -28,7 +28,7 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
     <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
     <link title="main stylesheet" href="[%c.uri_for_static('mojomojo.css')%]" type="text/css" rel="stylesheet" />
     [% IF c.config.theme %]
-    <link title="theme stylesheet" href="[%c.uri_for_static('themes', c.config.theme  ' theme.css')%]" type="text/css" rel="stylesheet" />
+    <link title="theme stylesheet" href="[%c.uri_for_static('themes', c.config.theme,  'theme.css')%]" type="text/css" rel="stylesheet" />
     [% END %]
     <link title="pod stylesheet" href="[% c.uri_for_static('pod.css')%]" type="text/css" rel="stylesheet" />
     <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
