@@ -6,7 +6,6 @@ use Path::Class 'file';
 use Catalyst qw/    ConfigLoader
     Authentication
     Cache               Email
-    Cache::Store::Memory
     Session		        Session::Store::File
     Singleton           Session::State::Cookie
     Static::Simple	    SubRequest
@@ -32,6 +31,9 @@ MojoMojo->config->{authentication}{dbic} = {
     password_field => 'pass'
 };
 MojoMojo->config->{default_view}='TT';
+MojoMojo->config->{cache}{backend} = {
+    class => "Cache::FastMmap",
+};
 
 MojoMojo->setup();
 

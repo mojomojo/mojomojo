@@ -13,7 +13,6 @@ requires(
     'KinoSearch'                                   => 0,
     'Catalyst::Plugin::Authentication'             => '0.10005',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
-    'Catalyst::Plugin::Cache::Store::Memory'       => 0,
     'Catalyst::Plugin::Email'                      => 0,
     'Catalyst::Plugin::ConfigLoader'               => '0.13',
     'Catalyst::Plugin::Session::Store::File'       => 0,
@@ -60,6 +59,7 @@ requires(
     'Text::Password::Pronounceable'                => 0,
     'DBIx::Class'                                  => '0.08',
     'Syntax::Highlight::Engine::Kate'              => 0,
+    'Cache::FastMmap'                              => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
