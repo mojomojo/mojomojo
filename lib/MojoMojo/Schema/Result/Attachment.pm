@@ -9,7 +9,6 @@ __PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",
-    "id",
     { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
     "uploaded",
     { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },

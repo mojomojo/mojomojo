@@ -140,7 +140,10 @@ $( function() {
         $('#hidden_info').toggle();
         return false;
     });
-    $('#body').attr({value: function() { this.value+append }})
+    if ($('textarea#body')[0]) {
+        $('textarea#body').attr('value',$('textarea#body').attr('value')+append)
+        fetch_preview.only_every(1000);
+    }
     $('#body').each(function() { this.focus(); })
     $('#body').keyup(function() { fetch_preview.only_every(1000);});
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
@@ -157,12 +160,17 @@ $( function() {
             $('#taginput').attr('value','')
         }
     })
-    $('#commentlogin').ajaxForm({
+    
+    $('#commentlogin').livequery (function() {
+         $('#commentlogin').ajaxForm({
         target: '#commentLogin',
-    });
-    $('#commentForm').ajaxForm({
-        target: '#comments'
     })
+    });
+    $('#commentForm').livequery(function() {
+         $('#commentForm').ajaxForm({
+            target: '#comments'
+        });
+    });
     $('.tagaction').livequery('click', function() {
        $('#tags').load($(this).attr('href') );
        return false;

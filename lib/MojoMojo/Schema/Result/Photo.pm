@@ -10,7 +10,7 @@ use Image::ExifTool;
 use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
-__PACKAGE__->load_components( "PK::Auto", 'Ordered', "Core" );
+__PACKAGE__->load_components( "PK::Auto",'DateTime::Epoch', 'Ordered', "Core" );
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
@@ -25,7 +25,7 @@ __PACKAGE__->add_columns(
     "camera",
     { data_type => "TEXT", is_nullable => 1, size => undef },
     "taken",
-    { data_type => "INTEGER", is_nullable => 1, size => undef },
+    { data_type => "INTEGER", is_nullable => 1, size => undef, epoch=>1 },
     "iso",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
     "lens",

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp qw/croak/;
 
-use base qw/Class::Accessor::Fast MojoMojo::Schema::Base::Result/;
+use base qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "PK::Auto", "Core" );
 __PACKAGE__->table("page");
@@ -97,7 +97,7 @@ sub tagged_descendants {
             'content.version' => \'=me.content_version',
         },
         {
-            group_by => [ ('me.id') ],
+            distinct => 1,
             from     => "page as me, page as ancestor, tag, content",
             order_by => 'me.name',
         }

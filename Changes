@@ -1,6 +1,22 @@
+0.999027
+        - Change search results by link to link to ROOT/$author instead of author at page level.
+        - Show bread crumb path on search results, linking the terminal node.
+        - List one link for each page by an author via .users (instead of all revisions).
+
+0.999026 2009-01-08 00:21:00
+        - Fix a javascript issue with insert attachment
+        - Fix comments formatter
+        - Make wantedpage list only apply to current subtree
+        - Make tagged_descendant work for postgresql
+        - Changed default search to AND using default_boolop of QueryParser.
+        - Edit search_inline.tt to display like search.tt. 
+        - Improved search result layout and added content creation date.
+        - Search results sorted by Kinosearch hit object score.
+        - Fix create photo for pics with exif
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
         - Link to revision in info page.
+        
 0.999025  2009-01-04 23:39:00
         - Updated language selector, add fr to choices.
         - Improved search setup error handling on startup
@@ -22,8 +38,8 @@
         - Added  GUI Permissions editor (nilsonsfj)
         - Finished porting MojoMojo to HTML::FormFu
         - Added TOC plugin using HTML::GenToc + anchor names that are
-	      XHTML compliant and human/SEO-friendly (dandv)
-	    - Fixed formatting of profile.
+          XHTML compliant and human/SEO-friendly (dandv)
+        - Fixed formatting of profile.
         - Fix recent list to not display implicit links.
         - Fix bind issue in .list
         - Set noindex for most pages

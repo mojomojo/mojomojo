@@ -12,7 +12,7 @@ The two options so far is 'MojoMojo::Formatter::Textile' and
 
 =head3 open_registration
 
-This option allows you to control weither user registration is available
+This option allows you to control whether user registration is available
 or not. 
 
 =head3 anonymous_user

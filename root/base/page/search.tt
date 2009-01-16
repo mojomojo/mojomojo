@@ -19,26 +19,26 @@
 <hr />
 [% IF result_count %]
 [% IF search_type != "all"; SET found_within = result.page.path; ELSE; SET found_within = loc('entire site'); END %]
-[% found_within %]
 <h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %].</h3>
 [% ELSE %]
 <h3>[% loc('No results found') %].</h3>
 [% END %]
 
-<ul>
+<div id="search_results" style="text-indent: 1em;">
 [% FOR result = results %]
- <li>
-    <a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a> ([% loc('x hits', result.hit_count) %])
-    <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
-      [% loc('at') %] [% result.page.version.created.hms(":") %]
-    </div>
+ <div class="search_result">
+    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.title_terminal_node) %]</a></strong>
     <div class="snippet">
       [% result.snippet %]
     </div>
+    <div class="byline" style="margin-bottom: 0px">
+      [% loc('by') %] [% c.wikiword(result.page.page_version.creator.link,base) %]
+      [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
+    </div>
+  </div>
   </li>
 [%END%]
-</ul>
+</div>
 
 [% IF pager && pager.total_entries > pager.entries_per_page %]
     <div class="pager">

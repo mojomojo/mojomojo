@@ -18,7 +18,7 @@ MojoMojo::Controller::Root
 
 sub begin : Private {
     my ( $self, $c ) = @_;
-    if(exists $c->session->{lang}) {
+    if($c->sessionid && $c->session->{lang}) {
         $c->languages([$c->session->{lang}]);
     }
     else {
