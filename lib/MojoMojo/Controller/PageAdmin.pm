@@ -27,8 +27,8 @@ Check that user is logged in and has rights to this page.
 sub auto : Private {
     my ( $self, $c ) = @_;
     $c->forward('/user/login')
-        if $c->req->params->{pass}
-            && !$c->stash->{user};
+      if $c->req->params->{pass}
+          && !$c->stash->{user};
 
     # everyone can edit with anon mode enabled.
     return 1 if MojoMojo->pref('anonymous_user');
@@ -52,7 +52,7 @@ sub edit : Global FormConfig {
     my ( $self, $c, $path ) = @_;
 
     # Set up the basics. Log in if there's a user.
-    my $form=$c->stash->{form};
+    my $form  = $c->stash->{form};
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
@@ -63,13 +63,14 @@ sub edit : Global FormConfig {
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
     unless ($path_pages) {
-        ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($path);
+        ( $path_pages, $proto_pages ) =
+          $c->model('DBIC::Page')->path_pages($path);
     }
 
     # the page we're editing is at the end of either path_pages or
     # proto_pages, # depending on whether or not the page already exists
     my $page = (
-        @$proto_pages > 0
+          @$proto_pages > 0
         ? $proto_pages->[ @$proto_pages - 1 ]
         : $path_pages->[ @$path_pages - 1 ]
     );
@@ -78,13 +79,14 @@ sub edit : Global FormConfig {
     $c->detach('/default') unless $page;
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
-
     my $perms =
-        $c->check_permissions( $stash->{'path'}, ( $c->user_exists ? $c->user->obj : undef ) );
+      $c->check_permissions( $stash->{'path'},
+        ( $c->user_exists ? $c->user->obj : undef ) );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
-        $stash->{'message'}  = $c->loc('Permission Denied to x x', [$permtocheck, $name]);
+        $stash->{'message'} =
+          $c->loc( 'Permission Denied to x x', [ $permtocheck, $name ] );
         $stash->{'template'} = 'message.tt';
         return;
     }
@@ -98,24 +100,27 @@ sub edit : Global FormConfig {
         my $valid = $form->params;
         $valid->{creator} = $user;
 
-        if (@$proto_pages) {   # page doesn't exist yet
-            
+        if (@$proto_pages) {    # page doesn't exist yet
+
             $path_pages = $c->model('DBIC::Page')->create_path_pages(
-                    path_pages  => $path_pages,
-                    proto_pages => $proto_pages,
-                    creator     => $user,
+                path_pages  => $path_pages,
+                proto_pages => $proto_pages,
+                creator     => $user,
             );
             $page = $path_pages->[ @$path_pages - 1 ];
         }
         $c->model("DBIC::Page")->set_paths(@$path_pages);
-        # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
-        $page = $c->model("DBIC::Page")->find($page->id);
-        $page->update_content( %$valid );
+
+# refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
+        $page = $c->model("DBIC::Page")->find( $page->id );
+        $page->update_content(%$valid);
 
         # update the search index with the new content
         $c->model("DBIC::Page")->set_paths($page);
-        $c->model('Search')->index_page($page) unless $c->pref('disable_search');
+        $c->model('Search')->index_page($page)
+          unless $c->pref('disable_search');
         $page->content->store_links();
+<<<<<<< HEAD:lib/MojoMojo/Controller/PageAdmin.pm
         $c->model('DBIC::WantedPage')->search({to_path=>$c->stash->{path}})
             ->delete();
 
@@ -126,20 +131,45 @@ sub edit : Global FormConfig {
         	$c->res->redirect( $c->req->base . $c->stash->{path} );
         }
 	}
+=======
+        $c->model('DBIC::WantedPage')
+          ->search( { to_path => $c->stash->{path} } )->delete();
+
+        # Redirect back to edit or page view mode.
+        my $redirect = $c->uri_for( $c->stash->{path} );
+        if ( $form->params->{submit} eq 'Save' ) {
+            $redirect .=
+              $c->req->params->{'edit_split'} ? '.edit_split' : '.edit';
+        }
+        $c->res->redirect($redirect);
+    }
+>>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:lib/MojoMojo/Controller/PageAdmin.pm
     else {
+
         # if we have missing or invalid fields, display the edit form.
         # this will always happen on the initial request
         $stash->{page} = $page;
 
         # Note that this isn't a real Content object, just a proto object!!!
         # It's just a hash, not blessed into the Content package.
-        $stash->{content}            = $c->model("DBIC::Content")->create_proto($page);
+        $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
         $stash->{content}->{creator} = $user;
-        $c->req->params->{body}      = $stash->{content}->{body}
-        unless $c->req->params->{body};
+        $c->req->params->{body} = $stash->{content}->{body}
+          unless $c->req->params->{body};
         return;
     }
 }    # end sub edit
+
+=head2 edit_split
+
+This action uses the edit action but in a side-by-side preview edit mode.
+
+=cut
+
+sub edit_split : Global {
+    my ( $self, $c ) = @_;
+    $c->forward('edit');
+}
 
 =head2 permissions
 
@@ -148,61 +178,66 @@ This action allows page permissions to be displayed and edited.
 =cut
 
 sub permissions : Global {
-    my ($self, $c, $path) = @_;
-    
+    my ( $self, $c, $path ) = @_;
+
     my $stash = $c->stash;
     $stash->{template} = 'page/permissions.tt';
 
-    my @path_elements = $c->_expand_path_elements($stash->{path});
-    my $current_path = pop @path_elements;
-    
+    my @path_elements = $c->_expand_path_elements( $stash->{path} );
+    my $current_path  = pop @path_elements;
+
     my $data = $c->get_permissions_data( $current_path, \@path_elements );
-    my $current_data = exists $data->{$current_path} ? $data->{$current_path} : {};
+    my $current_data =
+      exists $data->{$current_path} ? $data->{$current_path} : {};
 
     my @roles = $c->model('DBIC::Role')->active_roles->all;
     my %roles = map { $_->id => $_->name } @roles;
 
     my %current;
-    
+
     # build current page permissions hash for each role
     for my $role (@roles) {
-        $current{$role->name} = 
-            exists $current_data->{$role->id} ? 
-                $current_data->{$role->id} : undef;
+        $current{ $role->name } =
+          exists $current_data->{ $role->id }
+          ? $current_data->{ $role->id }
+          : undef;
     }
 
     # same as above: sort elements to avoid nasty TT code
-    $stash->{current_perms} = [ 
-        map { { 
-            role_name => $_, 
-            inherited => $current{$_} ? 1 : 0,
-            perms     => $current{$_} && $current{$_}->{page}, 
-            subpages  => exists $current{$_}->{subpages} ? 1 : 0
-        } } 
-        sort keys %current
+    $stash->{current_perms} = [
+        map {
+            {
+                role_name => $_,
+                inherited => $current{$_} ? 1 : 0,
+                perms => $current{$_} && $current{$_}->{page},
+                subpages => exists $current{$_}->{subpages} ? 1 : 0
+            }
+          }
+          sort keys %current
     ];
 
     my %inherited;
     my $parent_path = $path_elements[-1];
 
     # build inherited permissions hash
-    for my $path (keys %$data) {
+    for my $path ( keys %$data ) {
+
         # might have additional data (if cached)
-  #      next unless ($parent_path && $parent_path =~ /^$path/);
+        #      next unless ($parent_path && $parent_path =~ /^$path/);
         next if $path eq $current_path;
         my $path_perms = $data->{$path};
-        for my $role (keys %$path_perms) {
+        for my $role ( keys %$path_perms ) {
             next unless exists $roles{$role};
             my $role_perms = $path_perms->{$role};
-            $inherited{$path}{$roles{$role}} = $role_perms->{subpages}
-                if exists $role_perms->{subpages};
+            $inherited{$path}{ $roles{$role} } = $role_perms->{subpages}
+              if exists $role_perms->{subpages};
         }
     }
-    
+
     # sort elements to avoid nasty TT code
-    $stash->{inherited_perms} = [ 
+    $stash->{inherited_perms} = [
         map { { path => $_, perms => $inherited{$_} } }
-            sort { length $a <=> length $b } keys %inherited 
+          sort { length $a <=> length $b } keys %inherited
     ];
 }
 

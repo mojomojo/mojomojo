@@ -25,8 +25,9 @@
 <h3>[% loc('No results found') %].</h3>
 [% END %]
 
-<ul>
+<div id="search_results" style="text-indent: 1em;">
 [% FOR result = results %]
+<<<<<<< HEAD:root/base/page/search.tt
  <li>
     <a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a> ([% loc('x hits', result.hit_count) %])
     <div class="byline" style="margin-bottom: 0px">
@@ -35,10 +36,21 @@
     </div>
     <div class="snippet">
       [% result.snippet %]
+=======
+ <div class="search_result">
+    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.title_terminal_node) %]</a></strong>
+    <div class="snippet">
+      [% result.snippet %]
     </div>
+    <div class="byline" style="margin-bottom: 0px">
+      [% loc('by') %] [% c.wikiword(result.page.page_version.creator.link,base) %]
+      [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
+>>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/base/page/search.tt
+    </div>
+  </div>
   </li>
 [%END%]
-</ul>
+</div>
 
 [% IF pager && pager.total_entries > pager.entries_per_page %]
     <div class="pager">

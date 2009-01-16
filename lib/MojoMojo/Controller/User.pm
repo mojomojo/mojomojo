@@ -4,7 +4,6 @@ use strict;
 use base qw/Catalyst::Controller::HTML::FormFu/;
 
 use Digest::MD5 qw/md5_hex/;
-use Data::FormValidator::Constraints::DateTime qw(:all);
 use Text::Password::Pronounceable;
 
 my $auth_class = MojoMojo->config->{auth_class};

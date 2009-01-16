@@ -4,6 +4,7 @@
 */
 
 @import "reset.css";
+<<<<<<< HEAD:root/static/mojomojo.css
 
 /* @group Document Structure */
 
@@ -265,6 +266,8 @@ p {
 }
 
 /* @end */
+=======
+>>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/static/mojomojo.css
 /* @group Headlines */
 
 .logintext {
@@ -375,10 +378,12 @@ ol.setup li {
 }
 
 .byline {
+<<<<<<< HEAD:root/static/mojomojo.css
   margin: 2em 0 0 0;
+=======
+>>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/static/mojomojo.css
   color: #999;
   padding-left: 4px;
-  font-size: 11px;
   text-align:right;
 }
 
@@ -399,17 +404,23 @@ p#message {
 
 div.preview {
  clear:left;
- max-width: 920px;
- border:1px solid #ddd;
+ /* max-width: 920px; */
+ border:1px solid #ddd; 
  padding:5px;
  overflow: auto;
  height: 250px;
  margin:0 0 1em 0;
+ width: 100%;
 }
 
 textarea#body {
+<<<<<<< HEAD:root/static/mojomojo.css
  height: 280px;
  max-width: 930px;
+=======
+ height: 280px; 
+ /* max-width: 930px; */
+>>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/static/mojomojo.css
  width: 100%;
 }
 
