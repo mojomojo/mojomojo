@@ -26,11 +26,11 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
     [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
-    <link title="main stylesheet" href="[%c.uri_for_static('mojomojo.css')%]" type="text/css" rel="stylesheet" />
-    [% IF c.config.theme %]
-    <link title="theme stylesheet" href="[%c.uri_for_static('themes', c.config.theme  ' theme.css')%]" type="text/css" rel="stylesheet" />
-    [% END %]
-    <link title="pod stylesheet" href="[% c.uri_for_static('pod.css')%]" type="text/css" rel="stylesheet" />
+		<style type="text/css">
+    @import "[%c.uri_for_static('mojomojo.css')%]";
+    @import "[%c.uri_for_static('themes/' _ c.config.theme _ '/theme.css')%]";
+    @import "[% c.uri_for_static('pod.css')%]";
+		</style>
     <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />

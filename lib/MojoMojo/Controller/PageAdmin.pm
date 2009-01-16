@@ -153,10 +153,9 @@ This action uses the edit action but in a side-by-side preview edit mode.
 
 =cut
 
-sub edit_split : Global FormConfig('pageadmin/edit.yml') {
+sub edit_split : Global {
     my ( $self, $c ) = @_;
     $c->forward('edit');
-    $c->stash->{template} = 'page/edit.tt';
 }
 
 =head2 permissions
