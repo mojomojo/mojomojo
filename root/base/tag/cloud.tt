@@ -6,7 +6,7 @@
 
 [% IF page.depth %]
     <p>
-        [% SET link = '<a href="' _ c.uri_for('/.tags') _ '">' _ loc('All tags') _ '</a>' %]
+        [% SET link = '<a href="' _ c.uri_for('/' _ c.config.tool_separator _ 'tags') _ '">' _ loc('All tags') _ '</a>' %]
         [% loc('Or you can check out x instead', link) %]
     </p>
 [% END %]

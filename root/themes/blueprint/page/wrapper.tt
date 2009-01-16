@@ -1,0 +1,3 @@
+[% PROCESS header.tt  %]
+[% content %]
+[% PROCESS footer.tt %]

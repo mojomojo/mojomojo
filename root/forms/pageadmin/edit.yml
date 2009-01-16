@@ -1,5 +1,5 @@
 ---
-action: 
+action:
 indicator: submit
 auto_fieldset: 1
 
@@ -12,5 +12,60 @@ elements:
   - type: Text
     name: creator
     label_loc: creator
+  - type: Text
+    name: description
+    label_loc: description
+  - type: Text
+    name: title
+    label_loc: title
+  - type: Text
+    name: keywords
+    label_loc: keywords
+  - type: Text
+    name: commentaires
+    label_loc: commentaires
+  - type: Checkbox
+    name: gallery
+    label_loc: gallery
+    default_empty_value: 0
+    value: 1
+  - type: Checkbox
+    name: noindex
+    label_loc: noindex
+    default_empty_value: 0
+    value: 1
+  - type: Checkbox
+    name: menufils
+    label_loc: menufils
+    default_empty_value: 0
+    value: 1
+  - type: Checkbox
+    name: notfound
+    label_loc: notfound
+    default_empty_value: 0
+    value: 1
+  - type: Checkbox
+    name: rep
+    label_loc: rep
+    default_empty_value: 0
+    value: 1
+  - type: Text
+    name: short_title
+    label_loc: short_title
+  - type: Text
+    name: location
+    label_loc: location
+  - type: Text
+    name: release_date
+    label_loc: release_date
+  - type: Select
+    name: body_class
+    label_loc: body_class
+  - type: Text
+    name: col_left
+    label_loc: col_left
+  - type: Text
+    name: col_right
+    label_loc: col_right
   - type: Submit
     name: submit

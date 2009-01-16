@@ -18,14 +18,13 @@
 <ul>
 [% FOR result = results %]
  <li>
-    <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a></strong>
-    <span id="search_hit_score">[% result.score %]%</span>
-    <div class="snippet">
-      [% result.snippet %]
-    </div>
+    <a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
       [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
-      [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
+      [% loc('at') %] [% result.page.version.created.hms(":") %]
+    </div>
+    <div class="snippet">
+      [% result.snippet %]
     </div>
   </li>
 [%END%]

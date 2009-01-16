@@ -1,0 +1,81 @@
+<table border="1" cellpadding="0" cellspacing="0" style="margin-left: 1px; margin-top: 1px">
+<tr><td colspan="4" class="searchboxtitle"><input type="submit" value="Search"></td>
+
+[% COUNT = 0;
+   FOREACH element = search.elements_ref;  # TT gets confused by single-element arrays.
+     COUNT = COUNT + 1; %]
+      [% IF loop.index % 2 == 0 %]</tr><tr>[% END %]
+      <td class="searchboxlabel">[% element.label.as_text %]</td>
+      <td class="searchboxinput">[% element.element_xml -%]
+      
+      [%- fname = element.element.id; fname = fname.replace('searchform_', ''); foundfields.$fname = 1; -%]
+        </td>
+ [%- END;
+     IF COUNT % 2 != 0; '<td class="searchboxlabel" colspan="2"></td>'; END; # pad out
+  %]
+</tr>
+</table>
+
+<SCRIPT>
+Ext.onReady(function(){
+    [% FOREACH formfield IN listframework.formdef.search %]
+// try [% formfield.id %] / [% formfield.heading %]
+         [% IF formfield.autocomplete; ac_counter = ac_counter + 1;%]
+// do [% formfield.id %]
+
+        var datastore[% ac_counter %] = new Ext.data.Store({
+            proxy: new Ext.data.HttpProxy({
+            url: '[% c.req.base %]complete/[% listframework.formdef.columns.OBJECT.form_type %]/[% formfield.autocomplete.0 %]/[% formfield.autocomplete.1 %]'
+            }),
+            reader: new Ext.data.JsonReader({
+            root: 'results',
+            totalProperty: 'count',
+            id: 'id'
+        }, [
+            {name: 'name'},
+            {name: 'value'},
+        ])
+    });
+
+    var search[% ac_counter %] = new Ext.form.ComboBox({
+        store: datastore[% ac_counter %],
+        displayField: 'name',
+        valueField: 'value',
+        hiddenName: '[% prefix %]search-[% formfield.id %]',
+        emptyText: '',
+        typeAhead: false,  [%# typeahead doesn't work cos we're doing like %x%, not x%, and may be typing something other than start %]
+        width: 150,
+        listWidth: 200,
+        pageSize: 10,
+        hideTrigger: false,
+        minChars: [% IF formfield.minchars.length; formfield.minchars; ELSE; %]3[% END %],
+    });
+
+    [%# Ext's 'change' event only fires when you select a listed entry and blur the field, not when you type data. %]
+    [%# Also, the el.clearValue doesn't work -- http://extjs.com/forum/showthread.php?t=3404  %]
+
+    [%# I use ClearableComboBox from http://extjs.com/forum/showthread.php?t=9619 hacked to do clearValue not reset() %]
+
+    search[% ac_counter %].applyTo('searchform_[% prefix %]search-[% formfield.id %]');
+
+
+    /* With a remote datastore, combobox.setValue doesn't load the store to look up the display value, so
+        we need this hack to load the store and set the combobox's value */
+    /* http://extjs.com/forum/showthread.php?t=4171&highlight=combobox+jsonreader+setvalue&page=2 */
+    
+    // NOTE: THIS IS IMPRACTICAL FOR LONG LISTS
+    
+    // The [0] below is because there are 2 form fields with the same name: extjs's hidden one and our original.
+    // I'm not sure why it seems that only one gets sent in the request. :-/
+    
+    datastore[% ac_counter %].on('load', function(){
+                                        search[% ac_counter %].setValue(document.forms.form0["[% prefix %]search-[% formfield.id %]"][0].value);
+                                   });
+    datastore[% ac_counter %].load();
+
+
+    [% END %]
+    [% END %]
+
+});
+</SCRIPT>

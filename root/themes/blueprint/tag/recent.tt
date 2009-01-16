@@ -1,0 +1,40 @@
+[% SET page.body_class = 1 %]
+[% WRAPPER page/wrapper.tt %]
+
+[% SET now=pages.first.updated.ymd; %]
+        <div class="main-content">
+        <div class="content-cell">
+
+<h1 id="pageName"> Recent Pages </h1>
+[% PROCESS breadcrumbs.tt %]
+[% PROCESS navbar.tt %]
+<div id="categories">
+ <strong>Tags</strong>: <small>
+ [% FOREACH tag IN tags.list %]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[%c.uri_for('/news', tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
+ [% END %]</small>
+</div>
+<b>[% now %]</b>
+<ul>
+[% FOREACH page IN pages %]
+[% IF now != page.content.created.ymd; %]
+  [% SET now = page.content.created.ymd; %]
+  </ul><b>[% now %]</b><ul>
+[% END %]
+ <li>
+    <a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.name) %]</a>
+    <div class="byline" style="margin-bottom: 0px">
+      by <a class="existingWikiWord" href="[% c.uri_for( page.content.creator.link) %]">[% page.content.creator.name %]</a>
+      at [% page.content.created.hms(':') %]
+    </div>
+  </li>
+[% END %]
+</ul>
+ </div> 
+   </div>   
+
+[% END %]

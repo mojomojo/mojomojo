@@ -1,7 +1,7 @@
-            [% SET redir = c.uri_for(c.req.path) %]
-            <div id="lang">[%loc('Set language')%]: 
+           [% SET redir = base _ '/' _ path %]
+            <div id="lang">[%loc('Set language')%]:
                 [% FOREACH lang IN ['en','de','fr','no'] -%]
-                <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a> 
+                <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a>
                 [% END -%]
 			<div id="powered">
 				<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" /></a>
@@ -9,3 +9,67 @@
 		</div>
 	</body>
 </html>
+[% IF page.content.location %]
+  <script src="http://maps.google.com/maps?hl=fr&file=api&v=2&key=[% c.config.google.apikey %]" type="text/javascript"></script>
+  <style type="text/css">
+    #map {
+        height: 170px;
+        width: 170px;
+        border: 0px solid #ccc;
+        margin: 0em 0 0 15px;
+        background:url(../../img/fond_gris_sans_trait.jpg) repeat-y;
+    }
+  </style>
+  <!-- Default loading code -->
+  <script type="text/javascript">
+    var map;
+    var geocoder;
+
+    function LoadMap() {
+        if ( GBrowserIsCompatible() ) {
+            map = new GMap2(document.getElementById("map"));
+              map.setMapType(G_SATELLITE_MAP);
+            geocoder = new GClientGeocoder();
+            geocoder.getLatLng(
+                '[% location %]',
+
+    function(point) {
+      if (!point) {
+        alert(" not found");
+      } else {
+        map.setCenter(point, [% zoom || 13%]);
+        var marker = new GMarker(point);
+        map.addOverlay(marker);
+      }
+    }
+  );
+            var mapTypeControl = new GSmallMapControl();
+            var topRight = new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(10,40));
+            map.addControl(mapTypeControl, topRight);
+            map.addControl(new GMenuMapTypeControl(true,false));
+
+        }
+    }
+
+    function showAddress(address) {
+      if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert(address + " not found");
+            } else {
+              map.setCenter(point,  [% zoom || 13%]);
+              var marker = new GMarker(point);
+              map.addOverlay(marker);
+              marker.openInfoWindowHtml(address);
+            }
+          }
+        );
+      }
+    }
+
+  </script>
+
+[% END %]
+

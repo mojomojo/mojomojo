@@ -1,12 +1,43 @@
-<ul>
- [% FOR child_page = parent_page.children %]
- <li
-  [% IF (child_page.rgt-child_page.lft) > 1 %]
-  class="menuParentMissingChildren"
-  onmouseover="menuInsertChildren(this)"
-  [% END %]
-  id="menupage[% child_page.id %]"
-  ><a href="[% base _ child_page.path %]">[% child_page.name_orig %]</a>
- </li>
- [% END %]
-</ul>
+<h3>Navigation</h1>
+
+ <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "WiKiosk" %] </a></li></ul>
+
+[% i=0;%]
+[% IF page.content.rep != 1 %]
+    [% IF page.has_child and page.id !=1%]
+    <ul class="list">
+    <li><a href="[% base _ '/' _ page.name_orig %]/" title="[% FILTER upper %][% page.name_orig_format %][% END %]"><strong>[% page.name_orig_format %]</strong></a></li></ul>
+    [% END %]
+    <ul class="list">
+    [% FOR child_page = page.children %]
+        [% IF child_page.menufils != 1 %]
+            <li>
+            [% IF child_page.has_child %]
+                <a  title='[% child_page.name_orig_format %]' href="[% base _ child_page.path %]/">[% child_page.name_orig_format %]</a>
+            [% ELSE %]
+                <a  title='[% child_page.name_orig_format %]' href="[% base _ child_page.path %]">[% child_page.name_orig_format %]</a>
+            [% END %]
+            </li>
+            [% i=i+1;%]
+        [% END %]
+    [% END %]
+    </ul>
+[% END %]
+[% IF (i == 0) && (page.parent.id !=1) %]
+    <ul class="list">
+    <li><a href="[% base _ page.parent.path %]/"><strong>[% page.parent.name_orig_format %]</strong></a></li></ul>
+    <ul class="nav3-grid">
+    [% FOR child_page = page.parent.children %]
+        [% IF child_page.content.menufils != 1 %]
+            <li>
+            [% IF child_page.has_child %]
+                &nbsp;&nbsp;&nbsp;<a title='[% child_page.name_orig_format %]' href="[% base _ child_page.path %]/">[% child_page.name_orig_format %]</a>
+            [% ELSE %]
+                &nbsp;&nbsp;&nbsp;<a title='[% child_page.name_orig_format %]' href="[% base _ child_page.path %]">[% child_page.name_orig_format %]</a>
+            [% END %]
+            </li>
+            [% i=i+1;%]
+        [% END %]
+    [% END %]
+    </ul>
+[% END %]

@@ -1,0 +1,27 @@
+<ul>
+    <li><a href="[%c.uri_for('/news/')%]" title="Pages sorted by when they were last changed" accesskey="U">News</a></li>
+    <li><a href="[%c.uri_for('/tags/')%]" title="All tags in this path" accesskey="T">Tags</a></li>
+    <li><a href="[%c.uri_for('feeds')%]" title="Subscribe to changes by RSS" accesskey="">Feeds</a></li>
+  [%IF (page.has_photos) %]
+      <li><a title="Photo Album" href="[%c.uri_for('/gallery')%]">Gallery</a></li>
+  [%END%]
+  [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
+      <li><a title="User Profile" href="[%c.uri_for('profile')%]">Profile</a></li>
+  [%END%]
+  [%IF c.user_exists%]
+      <li><a title="User Settings" href="[%c.uri_for(user.link)%]+prefs">Preferences</a></li>
+  [% END%]
+[% IF c.user.is_admin %]
+    <li><a href="[%c.uri_for('export')%]" title="Download a zip with all the pages in this wiki" accesskey="X">Export</a></li>
+         <li><a href="[%base%]/+logout">Log out</a></li>
+  [% ELSE %]
+    <li><a href="[%c.uri_for('/+login')%]" title="Get in there" accesskey="L">Log in</a></li>
+      [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">Register</a></li>[%END%]
+ [% IF user.active%]
+      <li><a href="[%c.uri_for(user.link)%]" title="Go to home page">[%c.fixw(user.login)%]</a></li>
+      [% ELSE %]
+      <li><a href="[%c.uri_for(user.link,'+prefs')%]" title="User Preferences">[%c.fixw(user.login)%]</a></li>
+      [% END %]
+
+  [% END %]
+

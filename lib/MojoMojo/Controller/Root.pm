@@ -18,7 +18,7 @@ MojoMojo::Controller::Root
 
 sub begin : Private {
     my ( $self, $c ) = @_;
-    if(exists $c->session->{lang}) {
+    if($c->sessionid && $c->session->{lang}) {
         $c->languages([$c->session->{lang}]);
     }
     else {
@@ -31,6 +31,20 @@ sub begin : Private {
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
         $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
     }
+
+        if ($c->stash->{page}->has_child) {
+            $good_url=$c->stash->{page}->path.'/';
+        }
+        else {
+            $good_url=$c->stash->{page}->path;
+
+        }
+
+       if ( "/" . $c->stash->{path} ne $good_url ){
+	            return $c->forward('default') ;
+        }
+
+
 }
 
 =item default (global)
@@ -42,7 +56,7 @@ default action - serve the home node
 sub default : Path {
     my ( $self, $c ) = @_;
     $c->res->status(404);
-    $c->stash->{message} = $c->loc("The requested URL (x) was not found", 
+    $c->stash->{message} = $c->loc("The requested URL (x) was not found",
                                $c->stash->{pre_hacked_uri});
     $c->stash->{template} = 'message.tt';
 }
@@ -74,7 +88,7 @@ sub render : ActionClass('RenderView') {
 =item end (builtin)
 
 At the end of any request, forward to view unless there is a template
-or response. then render the template. If param 'die' is passed, 
+or response. then render the template. If param 'die' is passed,
 show a debug screen.
 
 =cut
@@ -88,7 +102,7 @@ sub end : Private {
 
 =item auto
 
-runs for all requests, checks if user is in need of validation, and 
+runs for all requests, checks if user is in need of validation, and
 intercepts the request if so.
 
 =cut
@@ -104,7 +118,7 @@ sub auto : Private {
             return 1;
         }
         if ( !$c->user_exists ) {
-            $c->res->redirect( $c->uri_for('/.login') );
+            $c->res->redirect( $c->uri_for('/'.$c->config->{tool_separator}.'login') );
         }
     }
 
@@ -118,7 +132,7 @@ sub auto : Private {
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

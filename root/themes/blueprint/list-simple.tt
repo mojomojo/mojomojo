@@ -1,0 +1,22 @@
+<body class="xtheme-gray" >
+TEMPLATE OK
+<div id="container"><div id="content" class="list">
+<form>
+
+[% INCLUDE list.tt
+    listframework = myprefixlistframework
+    results = myprefixresults
+    sums = myprefixsums
+    search = myprefixsearch
+    pager = myprefixpager
+    view = myprefixview
+    sortparam = "myprefixsort"
+    page_sizeparam = "myprefixpage_size"
+    current_pageparam = "myprefixcurrent_page"
+    options = myprefixoptions  # what to show
+    ;
+%]
+
+</form>
+</div></div>
+</body>

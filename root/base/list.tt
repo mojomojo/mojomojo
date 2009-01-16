@@ -1,0 +1,106 @@
+<h2>
+    [% listframework.formdef.title %]
+    [% IF listframework.formdef.create_uri %]
+        [% curi = listframework.formdef.create_uri %]
+        [% IF add_to_create; curi = "$curi/$add_to_create"; END %]
+        - <a href='#' onclick='window.open("[% c.uri_for(curi) %]", "[%data%]", "resizable=1,scrollbars=1,width=500,height=300");'>add new</a>
+    [% END %]
+</h2>
+
+<table class="listing">
+<tr style="vertical-align:top">
+
+[% FOREACH heading IN listframework.get_listing_columns(view) %]
+<th class="listcolheadsort">
+    [%
+        link = heading.id;
+        arrow = "arrow";
+        IF c.req.params.$sortparam == link _ "-asc";
+            link = link _ "-desc"; 
+            arrow = "arrow_up"; # already sorted 'asc' way
+        ELSE;
+            IF c.req.params.$sortparam == link _ "-desc";
+                arrow = "arrow_down"; # already sorted desc way
+            END;
+            link = link _ "-asc"; # default
+        END;
+    %]
+        <a class="listcolheadsort" href='[%c.req.uri_with({$sortparam=>"$link"})%]'>[% heading.heading %]</a><img src='[% c.req.base %]/images/[% arrow %].gif' />
+</th>
+  [% IF heading.do_running_total %]
+    <th class="listcolheadrunningtotal">[% heading.heading %] R/T</th>
+  [% END %]
+[% END %]
+[% IF options.deletable %]
+<th></th>
+[% END %]
+</tr>
+
+[% SET count = 0;
+   FOREACH row IN results;
+     SET count = count + 1;
+-%]
+
+<tr class="listrow[% bgindex = loop.count % 2; bgindex %]">
+[% FOREACH col IN listframework.get_listing_columns(view) %]
+  <td>
+     [% cell = col.id; data = row.$cell; %]
+     [% IF col.type == "money"; data = data.moneyformat; END %]
+     [% IF col.uri %]
+       <a href='#' onclick='window.open("[% c.uri_for("$col.uri$data") %]", "[%data%]", "resizable=1,scrollbars=1,width=500,height=300");'>[% data %]</a>
+     [% ELSE %]
+       [% data %]
+     [% END %]
+  </td>
+  
+  [% IF col.do_running_total %]
+  <td>
+     [% cell = col.id _ "rt"; data = row.$cell; IF col.type == "money"; data = data.moneyformat; END; GET data %]
+  </td>  
+  [% END %]
+  
+[% END %]
+
+[% IF options.deletable %]
+    [% pk = listframework.formdef.columns.OBJECT.primary_key; objid = row.$pk; %]
+    <td>
+        <a href='#' onclick='window.open("[% c.uri_for("$listframework.formdef.delete_uri/$objid") %]", "deleting", "resizable=1,scrollbars=1,width=500,height=300");'>[DELETE]</a>
+    </td>
+[% END %]
+
+</tr>
+[% END %]
+
+
+[% IF options.sums %]
+<tr class="listrowsum">
+[% FOREACH col IN listframework.get_listing_columns(view) %]
+  <td>[% cell = col.id; data = sums.$cell; IF (data && col.type == "money"); data = data.moneyformat; END; GET data %]</td>
+  [% IF col.do_running_total %]
+    <td>  </td>  
+  [% END %]
+[% END %]
+</tr>
+[% END %]
+
+</table>
+
+[% IF options.pager %]
+<table class="listfoot"><tr><tbody>
+<td class="listpagesize">Show <input class="listpagesize" type='text' name='[% page_sizeparam %]' size='5' value='[% pager.entries_per_page %]'> per page.</td>
+<td class="listfoottotal">Showing page [% pager.current_page %] of [% pager.last_page %] 
+(entries [% pager.first %]-[% pager.last %] of [% pager.total_entries %])</td>
+<td class="listpageselect">
+[% IF pager.previous_page %]
+    <a href='[%c.req.uri_with({$current_pageparam => "$pager.first_page"})%]'>&lt;&lt; First</a>
+    <a href='[%c.req.uri_with({$current_pageparam => "$pager.previous_page"})%]'>&lt; Previous</a>
+[% END %]
+[% IF pager.next_page %]
+    <a href='[%c.req.uri_with({$current_pageparam => "$pager.next_page"})%]'>&gt; Next</a>
+    <a href='[%c.req.uri_with({$current_pageparam => "$pager.last_page"})%]'>&gt;&gt; Last</a>
+[% END %]
+</td>
+</table>
+[% ELSE %]
+<div class="listfootcount">[% count || 'No' %] entr[% IF count == 1; 'y'; ELSE; 'ies'; END %] found</div>
+[% END %]

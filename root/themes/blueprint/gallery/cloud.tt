@@ -1,0 +1,11 @@
+[% PROCESS header.tt %]
+        <div class="content">
+        <div class="content-cell-corner-top"></div>                        
+        <div class="content-cell">
+
+        <h1>photo tags</h1>
+[%cloud.html_and_css(50)%]
+ </div> 
+   <div class="content-cell-corner-bottom"></div>   
+
+[% PROCESS footer.tt %]

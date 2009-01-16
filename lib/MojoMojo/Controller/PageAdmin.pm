@@ -119,8 +119,13 @@ sub edit : Global FormConfig {
         $c->model('DBIC::WantedPage')->search({to_path=>$c->stash->{path}})
             ->delete();
 
-        $c->res->redirect( $c->uri_for( $c->stash->{path}) );   
-    }
+    	if ( $page->has_child && $c->stash->{path} !~ /\/$/ ) {
+        	$c->res->redirect( $c->req->base . $c->stash->{path} . '/' );
+    	}
+        else {
+        	$c->res->redirect( $c->req->base . $c->stash->{path} );
+        }
+	}
     else {
         # if we have missing or invalid fields, display the edit form.
         # this will always happen on the initial request

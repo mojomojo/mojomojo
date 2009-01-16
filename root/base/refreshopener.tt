@@ -1,0 +1,11 @@
+<html>
+<body>
+
+<h2>This window should now close</h2>
+<script>
+    opener.location.reload(1);
+    window.close();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+        <h1 class="first">Neuf</h1>
+        <dl class="nav3-grid">
+          <dt><a href="/rse-consommateur">Bateaux</a></dt>
+          <dt><a href="/rse-consommateur">Moteurs</a></dt>
+          <dt><a href="/rse-consommateur">Remorques</a></dt>
+        </dl>
+        <h1>Occasions</h1>
+        <dl class="nav3-grid">
+          <dt><a href="/rse-consommateur">Bateaux</a></dt>
+          <dt><a href="/rse-consommateur">Moteurs</a></dt>
+          <dt><a href="/rse-consommateur">Remorques</a></dt>
+        </dl>
+        <h1>Pratique</h1>
+        <dl class="nav3-grid">
+          <dt><a href="/rse-consommateur">L'équipe</a></dt>
+          <dt><a href="/rse-consommateur">Contact</a></dt>
+        </dl>
+        <div class="map">
+          [% PROCESS 'custom/gmap.tt' %]
+        </div>
+        <div class="coordonnes">
+        <h4>CASSY-NAUTIC</h4>
+        <ul>
+        <li>Port de Plaisance</li>
+        <li>33138 CASSY</li>
+        <li class="black">Tél: 05 56 82 98 97</li>
+        <li>Fax: 05 56 82 83 63</li>
+        </ul>
+        <br />
+        </div>
+        <div class="loginform">
+        </div>
+
+

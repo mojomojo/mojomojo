@@ -15,7 +15,7 @@
         [% IF tag.tag == activetag %]
         <strong>[% tag.tag %]</strong>
         [% ELSE %]
-        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %])
         [% END %]
     [% END %]
 </div>
@@ -45,7 +45,11 @@
     [% END %]
         <tr class="item">
             <td>
-                <a href="[% c.uri_for( '/', page.path ) %]">[% page.name_orig %]</a>
+                [% IF page.content.rep %]
+                <a href="[% c.uri_for(  page.path _ '/' ) %]">[% page.name_orig %]</a>
+                [% ELSE %]
+                <a href="[% c.uri_for(  page.path ) %]">[% page.name_orig %]</a>
+                [% END %]
                 <div class="diff" style="display:none;"></div>
             </td>
             <td>[% c.wikiword( page.content.creator.link, base ) %]</td>

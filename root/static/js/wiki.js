@@ -7,13 +7,13 @@ if (window['loadFirebugConsole']) {
 
 MojoMojo.PermissionsEditor = function(params) {
     var container = $(params.container);
-    
+
     var API = {
         clear_permissions: function (link) {
           var span = link.parentNode;
           var td   = span.parentNode;
           var row  = td.parentNode;
-          
+
           var role_name = $(td).find('input').get(0).value;
 
           $.ajax({
@@ -25,7 +25,7 @@ MojoMojo.PermissionsEditor = function(params) {
               $(td).find('span, span a').addClass('hide');
             }
           });
-          
+
           return false;
         },
         enable_edit: function (link) {
@@ -38,9 +38,9 @@ MojoMojo.PermissionsEditor = function(params) {
         save_changes: function (link) {
           var td  = link.parentNode;
           var row = td.parentNode;
-          
+
           var values = [];
-          $(row).find('input').map( function(i, elt) { 
+          $(row).find('input').map( function(i, elt) {
             if (elt.type == 'checkbox')
               values.push(elt.name + "=" + (elt.checked ? "1" : "0"));
             else
@@ -56,7 +56,7 @@ MojoMojo.PermissionsEditor = function(params) {
               $(td).find('a,span').toggleClass('hide');
             }
           });
-          
+
           return false;
         }
     };
@@ -79,7 +79,7 @@ MojoMojo.RoleForm = function(params) {
           var li   = link.parentNode;
           var list = li.parentNode;
           list.removeChild(li);
-          
+
           var remaining = list.getElementsByTagName('li');
           if (remaining.length == 1) {
             $(remaining[0]).removeClass('hide');
@@ -111,14 +111,14 @@ MojoMojo.RoleForm = function(params) {
 
             $(document).ready(function() {
               member_input.autocomplete(
-                params.user_search_url, 
-                { 
-                  minChars:      1, 
-                  matchSubset:   1, 
-                  matchContains: 1, 
-                  cacheLength:   10, 
+                params.user_search_url,
+                {
+                  minChars:      1,
+                  matchSubset:   1,
+                  matchContains: 1,
+                  cacheLength:   10,
                   formatItem:    format_item,
-                  selectOnly:    1 
+                  selectOnly:    1
                 }
               ).result(select_item);
             });
@@ -135,15 +135,12 @@ MojoMojo.RoleForm = function(params) {
 var uploader;
 $( function() {
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })
-    
+
     $('.toggleInfo').click(function() {
         $('#hidden_info').toggle();
         return false;
     });
-    if ($('textarea#body')[0]) {
-        $('textarea#body').attr('value',$('textarea#body').attr('value')+append)
-        fetch_preview.only_every(1000);
-    }
+    $('#body').attr({value: function() { this.value+append }})
     $('#body').each(function() { this.focus(); })
     $('#body').keyup(function() { fetch_preview.only_every(1000);});
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
@@ -154,23 +151,18 @@ $( function() {
         target:'#tags',
         beforeSubmit: function() {
             $('#addtag').hide();
-            $('#showtag').show();            
+            $('#showtag').show();
         },
         success: function() {
             $('#taginput').attr('value','')
         }
     })
-    
-    $('#commentlogin').livequery (function() {
-         $('#commentlogin').ajaxForm({
+    $('#commentlogin').ajaxForm({
         target: '#commentLogin',
+    });
+    $('#commentForm').ajaxForm({
+        target: '#comments'
     })
-    });
-    $('#commentForm').livequery(function() {
-         $('#commentForm').ajaxForm({
-            target: '#comments'
-        });
-    });
     $('.tagaction').livequery('click', function() {
        $('#tags').load($(this).attr('href') );
        return false;
@@ -179,22 +171,22 @@ $( function() {
         target=$(this).parents('.item').find('.diff');
         if (!target.html()) {
             target.load( $(this).attr('href') );
-        } 
+        }
         target.toggle();
         return false;
     });
    $('.image img').hover(function() {
-        var info_url=$(this).parent().attr('href').replace(/.photo\//,'.jsrpc/imginfo/');
+        var info_url=$(this).parent().attr('href').replace(/\+photo\//,'+jsrpc/imginfo/');
         $('#imageinfo').load(info_url)
     },function() {})
 
 	$('#do_upload').each(function() {
 	    uploader=new SWFUpload({
     		button_placeholder_id: "do_upload",
-            button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
+            button_image_url: $.uri_for("/static/gfx/uploadbutton.png"),
             button_width: 61,
 			button_height: 22,
-    		flash_url : $.uri_for('/.static/flash/swfupload.swf'),
+    		flash_url : $.uri_for('/static/flash/swfupload.swf'),
     		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
     		file_size_limit : "100 MB",
             file_post_name: 'file' ,
@@ -216,12 +208,12 @@ $( function() {
                     $('#progress_status').html(file.name+' '+percent+' done')
             	} catch (ex) {
             		this.debug(ex);
-            	}		    
+            	}
     		},
     		queue_complete_handler : function(numfiles) {
       		  $('#progressbar').hide();$('#progress_status').hide();
-    		  $('#attachments').load($('#list_link').attr('href'))  
-    		} 
+    		  $('#attachments').load($('#list_link').attr('href'))
+    		}
     	})
 	}).click(function() { uploader.selectFiles() })
 	$('.delete_attachment').click(function(){
@@ -231,7 +223,7 @@ $( function() {
 	    })
 	    return false;
 	})
-    
+
     new MojoMojo.PermissionsEditor({
         container: '#permissions_editor',
         selectors: {
@@ -279,9 +271,9 @@ var fetch_preview = function() {
       url:  $('#preview_url').attr('href'),
       timeout: 2000,
       error: function() {
-        console.log("Failed to submit");
+        alert("Failed to submit");
       },
-      success: function(r) { 
+      success: function(r) {
         $('#content_preview').html(r)
       }
     })
@@ -293,7 +285,7 @@ function easeInOut(minValue,maxValue,totalSteps,actualStep,powr) {
 	var stepp = minValue+(Math.pow(((1 / totalSteps)*actualStep),powr)*delta);
 	return Math.ceil(stepp)
 }
-	
+
 function doBGFade(elem,startRGB,endRGB,finalColor,steps,intervals,powr) {
 	if (elem.bgFadeInt) window.clearInterval(elem.bgFadeInt);
 	var actStep = 0;
@@ -352,7 +344,7 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
 
     txtarea = document.getElementById(txtarea);
     var theSelection;
-    
+
     // IE / Opera
     if(document.selection  && document.selection.createRange) {
         theSelection = document.selection.createRange().text;
@@ -423,7 +415,7 @@ Function.prototype.only_every = function (millisecond_delay) {
 };
 
 // jQuery extensions
-jQuery.prototype.any = function(callback) { 
+jQuery.prototype.any = function(callback) {
   return (this.filter(callback).length > 0)
 }
 

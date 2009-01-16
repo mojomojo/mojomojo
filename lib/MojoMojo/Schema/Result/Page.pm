@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp qw/croak/;
 
-use base qw/Class::Accessor::Fast MojoMojo::Schema::Base::Result/;
+use base qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "PK::Auto", "Core" );
 __PACKAGE__->table("page");
@@ -284,6 +284,30 @@ sub has_photos {
     my $self = shift;
     return $self->result_source->schema->resultset('Photo')
         ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->count;
+}
+sub get_photos {
+    my $self = shift;
+    return $self->result_source->schema->resultset('Photo')
+        ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->all;
+}
+sub has_child {
+  my $self=shift;
+  if ($self->content->rep) {
+    return 1;
+  }
+  else {
+    return $self->result_source->schema->resultset('Page')->search({'parent'=>$self->id},{})->count;
+  }
+}
+sub name_orig_format {
+  my $self=shift;
+
+  my $format = $self->name_orig;
+  $format =~ s/(\w+)/\u\L$1/g;
+  $format =~ s/-/ /g;
+
+  return  $format;
+
 }
 
 1;

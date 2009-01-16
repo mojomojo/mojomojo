@@ -1,0 +1,63 @@
+				<div class="box platinum">
+					<h3><a href="#">MEMBRE PLATINUM</a></h3>
+					<div class="text">
+						<div class="rating"><span class="five">5</span></div>
+						<h4><a href="#">NOM 1</a></h4>
+						<div class="img-hold">
+							<a href="#"><img src="[% c.uri_for_static('images/img21.jpg')%]" width="125" height="125" alt="" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="box diamant">
+					<h3><a href="#">MEMBRE DIAMANT</a></h3>
+					<div class="text">
+						<div class="rating"><span class="four">4</span></div>
+						<h4><a href="#">NOM 2</a></h4>
+						<div class="img-hold">
+							<a href="#"><img src="[% c.uri_for_static('images/img22.jpg')%]" width="125" height="125" alt="" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="box gold">
+					<h3><a href="#">MEMBRE GOLD</a></h3>
+					<div class="text">
+						<div class="rating"><span class="three">3</span></div>
+						<h4><a href="#">NOM 3</a></h4>
+						<div class="img-hold">
+							<a href="#"><img src="[% c.uri_for_static('images/img23.jpg')%]" width="125" height="125" alt="" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="box silver">
+					<h3><a href="#">MEMBRE SILVER</a></h3>
+					<div class="text">
+						<div class="rating"><span class="two">2</span></div>
+						<h4><a href="#">NOM 4</a></h4>
+						<div class="img-hold">
+							<a href="#"><img src="[% c.uri_for_static('images/img24.jpg')%]" width="125" height="125" alt="" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="box bronze">
+					<h3><a href="#">MEMBRE BRONZE</a></h3>
+					<div class="text">
+						<div class="rating"><span class="one">1</span></div>
+						<h4><a href="#">NOM 5</a></h4>
+						<div class="img-hold">
+							<a href="#"><img src="[% c.uri_for_static('images/img25.jpg')%]" width="125" height="125" alt="" /></a>
+						</div>
+					</div>
+				</div>
+				<div class="box admin">
+					<h3>FAC admin</h3>
+					<div class="text">
+						<h5>Sabrina</h5>
+						<ul class="list">
+							<li><a href="#">Casinos-Max</a></li>
+							<li><a href="#">Maxbonuscasino</a></li>
+							<li><a href="#">Blogs-casino</a></li>
+							<li><a href="#">s-casinos</a></li>
+						</ul>
+					</div>
+				</div>
+

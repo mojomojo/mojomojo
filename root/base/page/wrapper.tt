@@ -13,15 +13,15 @@
   </h1>
 </div>
 [% PROCESS breadcrumbs.tt %]
-[% # PROCESS sidebar.tt %]
 [% PROCESS navbar.tt %]
-[% 
+[%
   reverse = c.action.reverse;
-  PROCESS page/editbar.tt 
-    IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions'; 
+  PROCESS page/editbar.tt
+    IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions';
 %]
 <div id="content">
 [% content %]
 </div>
+[% PROCESS sidebar.tt %]
 [% PROCESS page/bottomnav.tt %]
 [% PROCESS footer.tt %]

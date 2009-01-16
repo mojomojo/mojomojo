@@ -59,7 +59,7 @@ sub attachments : Global {
             $c->stash->{template} = 'message.tt';
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
-        $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
+        $c->res->redirect( $c->req->base . $c->stash->{path} . $c->config->{tool_separator} .'attachments' )
             unless $c->stash->{template} eq 'message.tt';
     }
 

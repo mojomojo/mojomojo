@@ -3,8 +3,8 @@
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/swfupload.queue.js')%]"></script>
 [% IF c.req.params.plain %]
 <p>(<a href="[%c.uri_for('attachments',{plain=>0})%]">[%loc('Switch to flash uploader')%]</a>)
-<form action="[%c.uri_for('attachments')%]"
-    enctype="multipart/form-data" 
+<form action="[%c.uri_for_tool('attachments')%]"
+    enctype="multipart/form-data"
     method="post">
 <input type="hidden" name="plain" value="1"/>
 <input type="file" name="file"/>

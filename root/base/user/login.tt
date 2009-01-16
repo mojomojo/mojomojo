@@ -1,29 +1,31 @@
-[% PROCESS header.tt %]
+[% SET page.body_class = 2 %]
+[% SET liste_left = 'default_left'; %]
+[% WRAPPER page/wrapper.tt %]
 
-<div id="header"><h1>[% loc('Login') %]</h1></div>
+        <div class="span-18 main-content">
+       <!-- CONTENT CELL -->
+        <div class="content-cell">
+          <h1 class="login">Acc&egrave;s entreprises</h1>
+          <h3>Merci de renseigner votre siret et votre mot de passe</h3>
+            [% IF(c.pref('open_registration'))%] (ou <a href="[%c.uri_for('register')%]">Adh&eacute;sion</a> )[%END%]
+          <div class="loginform">
+            <form method="post" action="[%c.uri_for_tool('login')%]">
+              <p><input type="hidden" name="rememberme" value="0" /></p>
+              <fieldset>
+                <p><label for="username_1" class="top">SIRET :</label><br />
+                  <input type="text" name="login" id="loginField" tabindex="1" class="field" value="[% siret %]" /></p>
+              <p><label for="password" class="top">Mot de passe :</label><br />
+                  <input type="password" name="pass" id="pass" tabindex="2" class="field" value="" /></p>
+              <p><input type="checkbox" name="checkbox_1" id="checkbox_1" class="checkbox" tabindex="3" size="1" value="" /><label for="checkbox_1" class="right">M&eacute;moriser mon identification</label></p>
+              <p><input type="submit" name="cmdweblogin" class="button" value="LOGIN"  /></p>
+              <p><a href="#" id="forgotpsswd_1">Mot de passe oubli&eacute;?</a></p>
+            </fieldset>
+            </form>
+          </div>
 
-[% PROCESS breadcrumbs.tt %]
-        
-<div id="content">
-    <p class="end logintext"><span id="logintext">[% message %]</span>
-        <br />
-        [% IF( c.pref( 'open_registration' ) ) %]
-            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> / 
-        [% END %] 
-        <a href="[%c.uri_for('recover_pass')%]">[% loc('Recover password') %]</a>
-    </p>
-    <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
-        <dl class="form">
-        <dt>[% loc('Username') %]:</dt>
-        <dd><input id="loginField" type="text" name="login"/></dd>
-        <dt>[% loc('Password') %]:</dt>
-        <dd><input type="password" name="pass"/></dd>
-        <dt>&nbsp;</dt>
-        <dd><input type="submit" value="[% loc('Log in') %]"/></dd>
-        </dl>
-    </form>
+        </div>
 </div>
-
-<div id="bottomnav">&nbsp;</div>
-       
-[% PROCESS footer.tt %]
+<script language="JavaScript" type="text/javascript">
+Field.focus('loginField');
+</script>
+[%  END %]

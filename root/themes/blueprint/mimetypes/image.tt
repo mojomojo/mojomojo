@@ -1,0 +1,3 @@
+
+
+<div class="photo">"![%c.uri_for("attachment",att.id,'thumb')%]!":[%c.uri_for("attachment",att.id)%]</div>

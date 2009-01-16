@@ -1,4 +1,4 @@
-/* @override 
+/* @override
     http://mojomojo.org:3000/.static/mojomojo.css
     http://localhost:3000/.static/mojomojo.css
 */
@@ -16,6 +16,7 @@ body {
 }
 
 #container {
+    background: #ffffff;
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
@@ -97,7 +98,7 @@ div#pagenav ul li {
     display: inline;
 }
 div#pagenav ul li a {
-    text-decoration: none;  
+    text-decoration: none;
 }
 div#pagenav ul li a:hover {
     text-decoration: underline;
@@ -126,7 +127,7 @@ div#pageoptions a {
 }
 
 #wantedPages {
-    float:left; 
+    float:left;
     width:55%;
 }
 .wantedBy { color:#999; }
@@ -150,10 +151,11 @@ div#pageoptions a {
 }
 
 #content {
-  overflow: hidden;
     background: #ffffff;
     padding: 13px;
     overflow: hidden;
+    width:750px;
+    float:left;
 }
 
 #content strong,b {
@@ -168,7 +170,7 @@ div#pageoptions a {
     padding-left:1.5em;
 }
 
-#content ul li { 
+#content ul li {
     list-style: square;
 }
 
@@ -248,7 +250,7 @@ p {
     margin: 1.2em 0;
 }
 
-.hide { 
+.hide {
     display: none;
 }
 
@@ -295,21 +297,21 @@ h5, h6 {
 
 /* @group Links */
 
-a, a:visited { 
+a, a:visited {
     color: #2274A8;
     text-decoration: underline;
 }
 
-#content a:visited { 
+#content a:visited {
     color: #4496ca;
 }
 
-a:hover, #content a:hover { 
+a:hover, #content a:hover {
     color: #004276;
 }
 
 
-    
+
 /* @end */
 
 /* @group Navigation */
@@ -348,7 +350,7 @@ blockquote {
   padding: 0px 30px;
   font-size:11px;
   line-height:17px;
-  font-style: italic;  
+  font-style: italic;
   width: 400px;
 }
 
@@ -373,7 +375,7 @@ ol.setup li {
 }
 
 .byline {
-  /* margin: 2em 0 0 0; */
+  margin: 2em 0 0 0;
   color: #999;
   padding-left: 4px;
   font-size: 11px;
@@ -385,9 +387,9 @@ ol.setup li {
 }
 
 p#message {
- background: #eee; 
- padding: 0.7em; 
- border: 1px solid silver; 
+ background: #eee;
+ padding: 0.7em;
+ border: 1px solid silver;
  margin: 1em 0;
 }
 
@@ -400,19 +402,19 @@ div.preview {
  max-width: 920px;
  border:1px solid #ddd;
  padding:5px;
- overflow: auto; 
+ overflow: auto;
  height: 250px;
  margin:0 0 1em 0;
 }
 
 textarea#body {
- height: 280px; 
+ height: 280px;
  max-width: 930px;
  width: 100%;
 }
 
 textarea#comment {
- height: 150px; 
+ height: 150px;
  width: 400px;
 }
 
@@ -425,8 +427,8 @@ textarea#comment {
 #TextileHelp,
 #MarkdownHelp
 {
-  width: 902px; 
-  background: #ddd; 
+  width: 902px;
+  background: #ddd;
   border: 1px solid #aaa;
   padding:1em;
 }
@@ -483,17 +485,15 @@ textarea#comment {
 }
 
 .rightHandSide {
-  float: right;
-  width: 187px;
+  background: #ffffff;
   margin-left: 10px;
   padding-left: 20px;
-  border-left: 1px dotted #ccc;
 }
 
 .rightHandSide p {
   font-size: 10px;
 }
- 
+
 .newsList {
   margin-top: 20px;
 }
@@ -553,7 +553,7 @@ a.tag:hover {
   padding:0 2px;
   margin:0 0 0 .1em;
 }
-#content .newWikiWord a:hover { 
+#content .newWikiWord a:hover {
   background:#e33;
   color:#fff;
 }
@@ -562,15 +562,15 @@ a.tag:hover {
   color: #ab0b0b;
 }
 
-.protoPage a:visited { 
+.protoPage a:visited {
   color: #666;
 }
 
 .protoPage a:hover {
-  color: #fff; 
-  background-color:#ab0b0b; 
+  color: #fff;
+  background-color:#ab0b0b;
 }
-    
+
 /* @end */
 
 /* @group Highlighted keywords in search */
@@ -578,11 +578,6 @@ a.tag:hover {
 .quoted {
   font-weight: bold;
 }
-
-span#search_hit_score {
-    font-style:italic;
-    font-size:smaller;
-}    
 
 /* @end */
 
@@ -595,7 +590,7 @@ span#search_hit_score {
     font-size:1.25em;
 }
 
-#content div.pager ul { 
+#content div.pager ul {
     list-style:none;
     margin:0;
     padding:0;
@@ -606,7 +601,7 @@ span#search_hit_score {
 #content div.pager .prev { margin:0; padding:0; float:left; }
 #content div.pager .next { margin:0; padding:0; float:right; }
 
-#content div.pager ul li { 
+#content div.pager ul li {
     display:inline;
     margin:0;
     padding:0;
@@ -718,7 +713,7 @@ span.statusmsg {
 
 .addbutton {
   margin-right: 0.5em;
-  background: white; 
+  background: white;
 }
 
 .thumb {
@@ -763,9 +758,9 @@ input.dual:focus, textarea.dual:focus {
 }
 
 .framedpopup {
- background: #eee; 
- padding: 3px; 
- border: 1px solid silver; 
+ background: #eee;
+ padding: 3px;
+ border: 1px solid silver;
  width: 440px;
 }
 
@@ -858,9 +853,10 @@ dd {
 #sidebar ul ul {width: 12em;}
 
 #sidebar {
- position: absolute;
- right: 0;
- width: 10em;
+ width: 184px;
+ display:block;
+ background: #ffffff;
+ float:left;
  margin: 0;
  padding: 0;
  font-family: Arial, sans-serif;
@@ -913,7 +909,6 @@ ul#menuHome {
 
 /* end of shamelessly stolen code */
 /* @end */
-
 .spinner {
     float:right;
     height:1em;
@@ -955,7 +950,7 @@ acronym {
     text-decoration: none;
 }
 
-#title { 
+#title {
     margin-left: 1em;
 }
 
@@ -1112,13 +1107,13 @@ fieldset .label .comment {
     margin:1em 0 0 0;
 }
 
-dl.list { 
+dl.list {
     font-size:14px;
     font-family:Arial,Helvetica,sans-serif;
 }
-dl.list dt { 
-    font-weight:bold; 
-    width:15em; 
+dl.list dt {
+    font-weight:bold;
+    width:15em;
 }
 
 div#tags { height:4em; }
@@ -1132,7 +1127,7 @@ div#bottomnav { clear:both; }
 #revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
 
 .attachment {
-    background: #eee; 
+    background: #eee;
     padding: 3px;
     border: 1px solid silver;
     width:640px

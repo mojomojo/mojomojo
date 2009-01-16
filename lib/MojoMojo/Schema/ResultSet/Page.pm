@@ -17,12 +17,12 @@ MojoMojo::Schema::ResultSet::Page
 =item path_pages
 
 Accepts a path in url/unix directory format, e.g. "/page1/page2".
-Paths are assumed to be absolute, so a leading slash (/) is not 
+Paths are assumed to be absolute, so a leading slash (/) is not
 required.
 Returns an array of any pages that exist in the path, starting with "/",
 and an additional array of "proto page" hashes for any pages at the end
-of the path that do not exist. All paths include the root (/), which 
-must exist, so a path of at least one element will always be returned. 
+of the path that do not exist. All paths include the root (/), which
+must exist, so a path of at least one element will always be returned.
 The "proto page" hash keys are:
 
 =cut
@@ -50,7 +50,7 @@ sub path_pages {
     for my $proto (@proto_pages) {
         push @depths, -and => [
             depth => $proto->{depth},
-            name  => $proto->{name},
+            name_orig  => $proto->{name_orig},
         ];
 
     }
@@ -132,7 +132,7 @@ sub parse_path {
     my $page_path = '';
     for (@proto_pages) {
         ( $_->{name_orig}, $_->{name} ) = $self->normalize_name( $_->{name_orig} );
-        $page_path .= '/' . $_->{name};
+        $page_path .= '/' . $_->{name_orig};
         $_->{path}  = $page_path;
         $_->{depth} = $depth;
         $depth++;
@@ -251,12 +251,12 @@ sub set_paths {
             next;
         }
         if ( $_->depth == 1 ) {
-            $_->path( '/' . $_->name );
+            $_->path( '/' . $_->name_orig );
             next;
         }
         my $parent = $pages{ $_->parent->id };
         if ( ref $parent ) {
-            $_->path( $parent->path . '/' . $_->name );
+            $_->path( $parent->path . '/' . $_->name_orig );
         }
 
         # unless all pages were adjacent, i.e. a whole subtree,
@@ -363,7 +363,7 @@ sub open_gap {
     my ( $gap_increment, $parent_rgt, $parent_id ) =
         ( $new_page_count * 2, $parent->rgt, $parent->id );
     $self->result_source->schema->storage->dbh->do(
-        qq{ UPDATE page 
+        qq{ UPDATE page
     SET rgt = rgt + ?, lft = CASE
     WHEN lft > ? THEN lft + ?
     ELSE lft
