@@ -28,7 +28,7 @@ as main formatter.
 
 =item format_content_order
 
-The syntax highlight formatter is based on <lt>pre<gt> tags and
+The syntax highlight formatter is based on E<lt>preE<gt> tags and
 therefore it's elementary to get those unchanged. So we need to run
 this plugin before L<MojoMojo::Formatter::Wiki> which actually changes
 those tags.
@@ -40,7 +40,7 @@ sub format_content_order { 99 }
 =item format_content
 
 This formatter uses L<Syntax::Highlight::Engine::Kate> to highlight code
-syntax inside of <lt>pre<gt> tags. To let the formatter know which language
+syntax inside of E<lt>preE<gt> tags. To let the formatter know which language
 has to be highlighted, do:
 
  <pre lang="Perl">

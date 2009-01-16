@@ -16,20 +16,20 @@ __PACKAGE__->config->{PRE_PROCESS}        = 'global.tt';
 
 sub new {
     my $class  = shift;
-    
+
     my ( $c, $arg_ref ) = @_;
-    
-    if ($c->config->{theme}) {
-             $c->path_to('root','themes',$c->config->{theme}).
-             " does not exist"
-             unless -d  $c->path_to('root','themes',$c->config->{theme});
-        $class->config->{INCLUDE_PATH}=[
-            $c->path_to('root','themes',$c->config->{theme}),
-            $c->path_to('root'),
-            $c->path_to('root','base'),
-        ];
+
+    my $theme=$c->config->{theme} ||= 'default';
+    unless(-d  $c->path_to('root','themes',$theme)) {
+        $c->log->info(
+            $c->path_to('root','themes',$theme) . " does not exist" );
     }
-    
+    $class->config->{INCLUDE_PATH}=[
+        $c->path_to('root','themes',$theme),
+        $c->path_to('root'),
+        $c->path_to('root','base'),
+    ];
+
     return $class->next::method(@_);
 }
 
