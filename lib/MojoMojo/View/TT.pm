@@ -16,23 +16,6 @@ __PACKAGE__->config->{PRE_PROCESS}        = 'global.tt';
 
 sub new {
     my $class  = shift;
-<<<<<<< HEAD:lib/MojoMojo/View/TT.pm
-    
-    my ( $c, $arg_ref ) = @_;
-    
-    if ($c->config->{theme}) {
-             $c->path_to('root','themes',$c->config->{theme}).
-             " does not exist"
-             unless -d  $c->path_to('root','themes',$c->config->{theme});
-        $class->config->{INCLUDE_PATH}=[
-            $c->path_to('root','themes',$c->config->{theme}),
-            $c->path_to('root'),
-            $c->path_to('root','base'),
-        ];
-    }
-    
-=======
-
     my ( $c, $arg_ref ) = @_;
 
     my $theme=$c->config->{theme} ||= 'default';
@@ -46,7 +29,6 @@ sub new {
         $c->path_to('root','base'),
     ];
 
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:lib/MojoMojo/View/TT.pm
     return $class->next::method(@_);
 }
 

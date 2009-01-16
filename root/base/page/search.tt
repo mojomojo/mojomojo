@@ -11,7 +11,7 @@
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         [% loc('Search') %]: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %] 
+        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
         <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
     </form>
 </div>
@@ -27,16 +27,6 @@
 
 <div id="search_results" style="text-indent: 1em;">
 [% FOR result = results %]
-<<<<<<< HEAD:root/base/page/search.tt
- <li>
-    <a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a> ([% loc('x hits', result.hit_count) %])
-    <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
-      [% loc('at') %] [% result.page.version.created.hms(":") %]
-    </div>
-    <div class="snippet">
-      [% result.snippet %]
-=======
  <div class="search_result">
     <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.title_terminal_node) %]</a></strong>
     <div class="snippet">
@@ -45,7 +35,6 @@
     <div class="byline" style="margin-bottom: 0px">
       [% loc('by') %] [% c.wikiword(result.page.page_version.creator.link,base) %]
       [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/base/page/search.tt
     </div>
   </div>
   </li>

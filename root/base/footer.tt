@@ -1,12 +1,8 @@
-<<<<<<< HEAD:root/base/footer.tt
            [% SET redir = base _ '/' _ path %]
             <div id="lang">[%loc('Set language')%]:
                 [% FOREACH lang IN ['en','de','fr','no'] -%]
                 <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a>
                 [% END -%]
-=======
-
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/base/footer.tt
 			<div id="powered">
 				<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" /></a>
 			</div>

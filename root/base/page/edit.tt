@@ -26,14 +26,9 @@
 
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
-<<<<<<< HEAD:root/base/page/edit.tt
 	id="editForm"
 	action="[% c.uri_for_tool('edit')%]"
 	method="post">
-=======
-    action=""
-	method="post"> 
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/base/page/edit.tt
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -88,15 +83,8 @@ var oEditor = 	FCKeditorAPI.GetInstance( 'body' ) ;
       <img id="editspinner" style="display:none;"
 	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
     </div>
-<<<<<<< HEAD:root/base/page/edit.tt
     [% PROCESS 'page_options.tt' %]
     <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save"); ELSE; loc("Create"); END %]'/> as
-=======
-    
-    <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
-    as 
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:root/base/page/edit.tt
     [% IF user.id %]
     [% c.wikiword(user.link,base) %]
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)

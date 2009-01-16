@@ -120,18 +120,6 @@ sub edit : Global FormConfig {
         $c->model('Search')->index_page($page)
           unless $c->pref('disable_search');
         $page->content->store_links();
-<<<<<<< HEAD:lib/MojoMojo/Controller/PageAdmin.pm
-        $c->model('DBIC::WantedPage')->search({to_path=>$c->stash->{path}})
-            ->delete();
-
-    	if ( $page->has_child && $c->stash->{path} !~ /\/$/ ) {
-        	$c->res->redirect( $c->req->base . $c->stash->{path} . '/' );
-    	}
-        else {
-        	$c->res->redirect( $c->req->base . $c->stash->{path} );
-        }
-	}
-=======
         $c->model('DBIC::WantedPage')
           ->search( { to_path => $c->stash->{path} } )->delete();
 
@@ -143,7 +131,6 @@ sub edit : Global FormConfig {
         }
         $c->res->redirect($redirect);
     }
->>>>>>> afc5fc1945556a0e70c32d79a482d6e12425de6d:lib/MojoMojo/Controller/PageAdmin.pm
     else {
 
         # if we have missing or invalid fields, display the edit form.
@@ -275,7 +262,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
