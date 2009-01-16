@@ -154,9 +154,8 @@ This action uses the edit action but in a side-by-side preview edit mode.
 =cut
 
 sub edit_split : Global {
-    my ( $self, $c, $path ) = @_;
-    $c->forward('edit', [ $path ]);
-    $c->stash->{template} = 'page/edit.tt';
+    my ( $self, $c ) = @_;
+    $c->forward('edit');
 }
 
 =head2 permissions

@@ -1,28 +1,31 @@
+
+
 /* @group Document Structure */
+
+body {
+    background: #7D7C7A repeat-x url(images/background.jpg);
+    margin: 0;
+    color: #626262;
+    font: 85% Arial, Helvetica, Geneva, sans-serif;
+    text-align: center;
+}
 
 #container {
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
 }
-body {
-    background: #c1baaa repeat-x url(images/background.png);
-    margin: 0;
-    color: #626262;
-    font: 85% Arial, Helvetica, Geneva, sans-serif;
-    text-align: center;
-}
-#header {
-    background: url(images/nordaaker.png) no-repeat left top;
-    height: auto;
-    padding-bottom: 2em;
-    margin: 20px 0 0 0;
-}
 
+#header {
+    background: url(images/header.png);
+    height: auto;
+    padding-bottom: 0.1em;
+    margin: 0;
+}
 
 #header h1 {
     top: 14px;
-    padding: 15px 0 0px 100px;
+    padding: 13px 0 10px 100px;
     color: #ffffff;
     font-weight: bold;
     border-width: 1px;
@@ -35,36 +38,32 @@ body {
 }
 
 #breadcrumbs {
-    background: #800;
+    background: #4E5662;
     height: 12px;
     font-size: .9em;
     color: #e3e3e3;
     margin: 0;
     padding: 6px 8px;
-    -moz-border-radius-topleft: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -webkit-border-top-right-radius: 5px;
 }
 #breadcrumbs a {
-    padding: 1px 6px;
+    padding: 2px 7px;
     color: white;
     text-decoration: none;
 }
 #breadcrumbs a:hover {
-    color: #000;
-    background-color: #c1baaa;
+    color: #ffffff;
+    background-color: #7D7C7A;
     text-decoration: none;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border: 1px solid #8d8c8a;
+    padding: 1px 6px;
 }
 
 div#toplinks {
     font-size:.9em;
-    background: red;
+    background: #ebeae7;
     font-weight: bold;
-    color: #fff;
-    padding: 2px 8px;
+    color: #000000;
+    padding: 4px 8px;
     min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
@@ -72,23 +71,21 @@ div#toplinks ul li, div#bottomnav ul li {
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
-    color: #000;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 2px 6px;
+    color:#333;
     text-decoration:none;
 }
 div#toplinks ul li a,  div#bottomnav ul li a {
-    padding: 2px 6px;
-    color: white;
-    text-decoration: none;
+    padding: 3px 7px;
 }
 div#pagenav {
     font-size: .9em;
     clear: both;
     padding: 4px 15px;
-    background: #e0d7c4;
-    border-top: 1px solid #c1baaa;
-    border-bottom: 1px solid #c1baaa;
+    background: #f6f6f6;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
 }
 div#pagenav ul li {
     padding: 2px 14px 2px 0;
@@ -130,12 +127,12 @@ div#pageoptions a {
 .wantedBy { color:#999; }
 
 #tags {
-    background: #e0d7c4;
+    background: #f6f6f6;
     font-size: 1.1em;
     color: #676767;
     padding: 5px 13px;
-    border-top: 1px solid #c1baaa;
-    border-bottom: 1px solid #c1baaa;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
 }
 
 .showdiv {
@@ -216,17 +213,13 @@ div#pageoptions a {
 }
 
 #bottomnav {
-    background: red;
+    background: #ebeae7;
     padding: 6px 8px;
     color: #000000;
     margin: 0;
     font-weight: bold;
     min-height: 1.8em;
     font-size: 0.9em;
-    -moz-border-radius-bottomleft: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -webkit-border-bottom-right-radius: 5px;
 }
 
 #bottomnav input {
