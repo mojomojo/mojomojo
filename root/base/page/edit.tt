@@ -27,7 +27,7 @@
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
     action=""
-	method="post"> 
+	method="POST"> 
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />

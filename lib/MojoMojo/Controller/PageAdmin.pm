@@ -123,11 +123,13 @@ sub edit : Global FormConfig {
         $c->model('DBIC::WantedPage')
           ->search( { to_path => $c->stash->{path} } )->delete();
 
-        # Redirect back to edit or page view mode.
+        # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq 'Save' ) {
-            $redirect .=
-              $c->req->params->{'edit_split'} ? '.edit_split' : '.edit';
+            $redirect .= '.edit';
+            if ( $c->request->query_parameters->{'split'} eq 'vertical' ) {
+                $redirect .= '?split=vertical';
+            }
         }
         $c->res->redirect($redirect);
     }
@@ -147,16 +149,6 @@ sub edit : Global FormConfig {
     }
 }    # end sub edit
 
-=head2 edit_split
-
-This action uses the edit action but in a side-by-side preview edit mode.
-
-=cut
-
-sub edit_split : Global {
-    my ( $self, $c ) = @_;
-    $c->forward('edit');
-}
 
 =head2 permissions
 
@@ -197,7 +189,9 @@ sub permissions : Global {
                 role_name => $_,
                 inherited => $current{$_} ? 1 : 0,
                 perms => $current{$_} && $current{$_}->{page},
-                subpages => exists $current{$_}->{subpages} ? 1 : 0
+                subpages => exists $current{$_}->{subpages}
+                ? 1
+                : 0
             }
           }
           sort keys %current
