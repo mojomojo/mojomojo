@@ -35,7 +35,7 @@ sub login : Global {
         if (
             $c->authenticate(
                 {
-                    login => $c->req->params->{'login'},
+                    login => lc($c->req->params->{'login'}),
                     pass  => $c->req->params->{'pass'}
                 }
             )
