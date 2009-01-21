@@ -22,7 +22,7 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "page", "Page", { id => "page" } );
+__PACKAGE__->belongs_to( "page", "MojoMojo::Schema::Result::Page", { id => "page" } );
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
 
 =head1 NAME

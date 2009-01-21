@@ -30,9 +30,9 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "poster",  "Person", { id => "poster" } );
-__PACKAGE__->belongs_to( "page",    "Page",   { id => "page" } );
-__PACKAGE__->belongs_to( "picture", "Photo",  { id => "picture" } );
+__PACKAGE__->belongs_to( "poster",  "MojoMojo::Schema::Result::Person", { id => "poster" } );
+__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
+__PACKAGE__->belongs_to( "picture", "MojoMojo::Schema::Result::Photo",  { id => "picture" } );
 __PACKAGE__->utf8_columns(qw/body/);
 
 =head1 NAME

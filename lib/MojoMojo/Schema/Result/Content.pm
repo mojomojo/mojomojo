@@ -43,7 +43,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
-    "pages", "Page",
+    "pages", "MojoMojo::Schema::Result::Page",
     {
         "foreign.content_version" => "self.version",
         "foreign.id"              => "self.page",
@@ -51,7 +51,7 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_firsts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_first" => "self.version",
         "foreign.page"                  => "self.page",
@@ -59,14 +59,14 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_lasts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_last" => "self.version",
         "foreign.page"                 => "self.page",
     },
 );
-__PACKAGE__->belongs_to( "creator", "Person", { id => "creator" } );
-__PACKAGE__->belongs_to( "page",    "Page",   { id => "page" } );
+__PACKAGE__->belongs_to( "creator", "MojoMojo::Schema::Result::Person", { id => "creator" } );
+__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
 
 =head1 NAME
 
