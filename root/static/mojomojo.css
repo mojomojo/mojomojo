@@ -11,6 +11,9 @@
     font-size:1.25em;
     margin: 1em 0 1.5em 13px;
 }
+.username {
+	text-transform: capitalize;
+}
 
 h1 {
     font-size: 2.5em;

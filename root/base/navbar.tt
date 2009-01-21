@@ -1,11 +1,11 @@
 <div id="toplinks">
 
 	[% IF c.pref('disable_search') -%]
-	<form action="http://www.google.com/search" method="get">  
-    <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
-    [% ELSE -%]
- <form action="[% c.uri_for('search') %]" method="get">
-    [% END -%]
+		<form action="http://www.google.com/search" method="get">  
+    	<input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+  [% ELSE -%]
+ 		<form action="[% c.uri_for('search') %]" method="get">
+	[% END -%]
 
 	<ul>
   [% IF (user) %]
@@ -13,17 +13,12 @@
     <li class="navon">[%c.fixw(user.login)%]</li> 
     [% ELSE %]
       [% IF user.active%]
-        [% IF (!rev OR rev==page.content_version) %]
-          [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
-            <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
-          [%END%]
-        [%END%]
-      <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
+        
       [% ELSE %]
       <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li> 
       [% END %]
     [%END%]
-    <li><a href="[%base%]/.logout">[%loc('Log out')%]</a></li>
+    <li><a href="[%base%]/.logout">[%loc('Log out')%]</a> (<a class="username" href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a>)</li>
   [% ELSE %]
     <li><a href="[%c.uri_for('login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a></li>
       [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>[%END%]
@@ -60,6 +55,24 @@
   <li><input type="hidden" name="search_type" value="all" />
   <input type="text" id="searchField" name="q" style="" value="[%loc('Search')%]"/>
   </li></ul></form></div> 
+
+
+<div id="pagenav">
+	<ul>
+		[% IF (!rev OR rev==page.content_version) %]
+      [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+        <li class="edit"><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
+      [%END%]
+    [%END%]
+		[% IF c.req.action=='info'%]
+	   <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
+	  [% ELSE %]
+	   <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page Info')%]</a></li>
+	  [% END%]
+	</ul>
+</div>
+
+[%IF 0 %]
   <div id="pagenav">
 	<ul>
   [%IF (c.req.action=="view")%]
@@ -92,3 +105,4 @@
   [% END%]
   </ul>
 </div>
+[% END %]
