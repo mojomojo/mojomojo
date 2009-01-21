@@ -151,18 +151,20 @@ $( function() {
     $('#searchField').click(function() { this.value == 'Search' ? this.value = '' : true })
     $('.toggleChanges').click(function(){ toggleChanges($(this).attr('href'));return false;})
     $('#addtag_form').ajaxForm({
-        target:'#tags',
         beforeSubmit: function() {
             $('#addtag').hide();
-            $('#showtag').show();            
+            $('#showtag').show();
         },
-        success: function() {
-            $('#taginput').attr('value','')
+        dataType: 'html',
+        resetForm: true,
+        success: function(data) {
+            $('#tags').remove();
+            $(data).insertAfter('#showtag');
         }
     })
     
     $('#commentlogin').livequery (function() {
-         $('#commentlogin').ajaxForm({
+         $('#commentlogino').ajaxForm({
         target: '#commentLogin',
     })
     });

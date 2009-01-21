@@ -2,9 +2,7 @@
   [% IF user %]
     [% PROCESS page/addtags.tt %]
   [%END%]
-  <div id="tags">
     [% PROCESS page/tags.tt  %]
-  </div>
 [% END %]
 <div id="bottomnav">
 <ul>
