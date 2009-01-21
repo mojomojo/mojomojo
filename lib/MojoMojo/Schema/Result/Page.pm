@@ -186,15 +186,18 @@ sub descendants_by_date {
 
 sub descendants {
     my ($self)  = @_;
-    my (@pages) = $self->result_source->resultset->search(
+    my (@pages) = $self->descendant_search->all;
+    return $self->result_source->resultset->set_paths(@pages);
+}
+
+sub descendant_search {
+    my $self=shift;
+    return $self->result_source->resultset->search_rs(
         {
-            'ancestor.id' => $self->id,
-            -or           => [
-                'ancestor.id' => \'=me.id',
-                -and          => [
-                    'me.lft' => \'> ancestor.lft',
-                    'me.rgt' => \'< ancestor.rgt',
-                ]
+        'ancestor.id' => $self->id,
+            -and          => [
+                'me.lft' => \'> ancestor.lft',
+                'me.rgt' => \'< ancestor.rgt',
             ],
         },
         {
@@ -202,7 +205,6 @@ sub descendants {
             order_by => ['me.name']
         }
     );
-    return $self->result_source->resultset->set_paths(@pages);
 }
 
 =item others_tags <user>

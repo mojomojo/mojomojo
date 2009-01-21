@@ -2,26 +2,21 @@
 
 [% WRAPPER page/wrapper.tt title = title %]
 
-<div id="categories">
-    <strong>[%loc('Tags')%]</strong>: 
-    [% WHILE( tag = tags.next ) %]
-        [% IF tag.tag == activetag %]
-    <b>[% tag.tag %]</b>
-        [% ELSE %]
-    <a href="[% c.uri_for('list', tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %])
-        [% END %]
-    [% END %]
-</div>
+
 <div id="allPages">
     <h2>[%loc('All Pages')%]</h2>
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages %]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a></li>
-[% END %]
+[% children = page.descendant_search.count%]
+        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a>[% IF(children) -%]
+ - <a href="[%c.uri_for(page.path,'.list')%]">[%children-%] subpages</a>
+[% END %]</li>
+[% END -%]
     </ul>
 </div>
 
+[% IF 0 %]
 [% IF ! activetag %]
 <div id="wantedPages">
     <h2>[%loc('Backlinks')%]</h2>
@@ -60,4 +55,4 @@
 [% END %]
 
 [% END %]
-
+[% END %]

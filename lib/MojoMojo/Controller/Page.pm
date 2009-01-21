@@ -275,13 +275,10 @@ all nodes in this namespace
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
-    $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
-    $c->stash->{pages}    = [ $page->descendants ];
+    $c->stash->{pages}    = [ $page->children ];
 
-    # FIXME - real data here please
-    $c->stash->{orphans} = [];
     $c->stash->{backlinks} =
       [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
     $c->stash->{wanted} = [
