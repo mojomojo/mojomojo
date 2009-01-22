@@ -7,7 +7,7 @@
 /*
  USAGE:
 		$('textarea').fck({ path:'/path/to/fck/editor/' }); // initialize FCK editor
-	
+
 	ADVANCED USAGE:
 		$.fck.update(); // update value in textareas of each FCK editor instance
 */
@@ -19,11 +19,11 @@ if(jQuery) (function($){
 $.extend($, {
 	fck:{
 		config: { Config: {} }, // default configuration
-		path: '/static/js/fckeditor/', // default path to FCKEditor directory
+		path: '/.static/js/fckeditor/', // default path to FCKEditor directory
   list: [], // holds a list of instances
   loaded: false, // flag indicating whether FCK script is loaded
 		intercepted: null, // variable to store intercepted method(s)
-		
+
 		// utility method to read contents of FCK editor
 		content: function(i, v){
 			try{
@@ -32,7 +32,7 @@ $.extend($, {
 				return x.GetXHTML(true);
 			}catch(e){ return ''; };
 		}, // fck.content function
-		
+
 		// inspired by Sebastián Barrozo <sbarrozo@b-soft.com.ar>
 		setHTML: function(i, v){
 			if(typeof i=='object'){
@@ -41,7 +41,7 @@ $.extend($, {
 			};
 			return $.fck.content(i, v);
 		},
-  
+
 		// utility method to update textarea contents before ajax submission
 		update: function(){
 			// Update contents of all instances
@@ -54,7 +54,7 @@ $.extend($, {
 				 alert('Critical error in FCK plugin:'+'\n'+'Unable to update form data');
 			}
 		}, // fck.update
-		
+
 		// utility method to create instances of FCK editor (if any)
 		create: function(o/* options */){
 			o = $.extend($.fck.config || {}, o || {});
@@ -83,7 +83,7 @@ $.extend($, {
 			// Return matched elements...
 			return e;
 		},
-		
+
 		// utility method to integrate this plugin with others...
 		intercept: function(){
 			if($.fck.intercepted) return;
@@ -100,7 +100,7 @@ $.extend($, {
 				return $.fck.intercepted.ajaxSubmit.apply( this, arguments );
 			};
 		},
-		
+
 		// utility method to create an instance of FCK editor
 		editor: function(e /* elements */, o /* options */){
 			o = $.extend($.fck.config || {}, o || {});
@@ -131,12 +131,12 @@ $.extend($, {
 						t.id = (t.id || t.name);
 						if(t.id/* has id */ && !t.fck/* not already installed */){
 							var n = a.length;
-							
+
 							a[n] = new FCKeditor(t.id);
 							$.extend(a[n], o);
 							a[n].ReplaceTextarea();
 							a[n].textarea = T;
-							
+
 							t.fck = a[n];
 						};
 					}
@@ -147,7 +147,7 @@ $.extend($, {
 			// return jQuery array of elements
 		 return e;
 		}, // fck.editor function
-		
+
 		// start-up method
 		start: function(o/* options */){
 			// Attach itself to known plugins...
@@ -155,10 +155,10 @@ $.extend($, {
 			// Create FCK editors
 			return $.fck.create(o);
 		} // fck.start
-		
+
  } // fck object
 	//##############################
-	
+
 });
 // extend $
 //##############################
