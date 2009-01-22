@@ -1,0 +1,26 @@
+<!-- B.3 SUBCONTENT -->
+<div class="subcontent-cell">
+<h1 class="blue">MENU</h1>
+
+[% month=1 %]
+[% year=1 %]
+<ul class="menufils">
+<br />
+
+[% FOREACH page IN pages %]
+[% IF (page.content.release_date.year != 1970 ) %]
+[% IF (page.content.release_date.month != month) || (page.content.release_date.year != year) ; %]
+[% month=page.content.release_date.month; %]
+[% year=page.content.release_date.year; %]
+[% USE test = DateTime(year = year, month = month,day =1, time_zone = 'Europe/Paris',locale ='fr'); %]
+[% USE date = DateTime(now = 1, time_zone = 'Europe/Paris',locale ='fr'); %]
+[% IF (page.content.release_date.month == date.month ) &&  (page.content.release_date.year == date.year ) %]
+<li><a href="[% c.uri_for('/news/') %]">Archives du mois en cours </a></li>
+[% ELSE %]
+<li><a href="[% c.uri_for('/news/' _ c.clean_string(test.month_name) _ '-' _ year) %]">&nbsp;&nbsp;=> [% FILTER upper %][% test.month_name %] [% END %][% year %]</a></li>
+[% END %]
+[% END %]
+[% END %]
+[% END %]
+</ul>
+</div>

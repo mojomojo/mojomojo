@@ -58,13 +58,13 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->has_many( "entries",       "Entry",       { "foreign.author"  => "self.id" } );
-__PACKAGE__->has_many( "tags",          "Tag",         { "foreign.person"  => "self.id" } );
-__PACKAGE__->has_many( "comments",      "Comment",     { "foreign.poster"  => "self.id" } );
-__PACKAGE__->has_many( "role_members",  "RoleMember",  { "foreign.person"  => "self.id" }, );
-__PACKAGE__->has_many( "page_versions", "PageVersion", { "foreign.creator" => "self.id" }, );
+__PACKAGE__->has_many( "entries",       "MojoMojo::Schema::Result::Entry",       { "foreign.author"  => "self.id" } );
+__PACKAGE__->has_many( "tags",          "MojoMojo::Schema::Result::Tag",         { "foreign.person"  => "self.id" } );
+__PACKAGE__->has_many( "comments",      "MojoMojo::Schema::Result::Comment",     { "foreign.poster"  => "self.id" } );
+__PACKAGE__->has_many( "role_members",  "MojoMojo::Schema::Result::RoleMember",  { "foreign.person"  => "self.id" }, );
+__PACKAGE__->has_many( "page_versions", "MojoMojo::Schema::Result::PageVersion", { "foreign.creator" => "self.id" }, );
 __PACKAGE__->many_to_many( roles => 'role_members', 'role' );
-__PACKAGE__->has_many( "contents", "Content", { "foreign.creator" => "self.id" } );
+__PACKAGE__->has_many( "contents", "MojoMojo::Schema::Result::Content", { "foreign.creator" => "self.id" } );
 
 =head1 NAME
 

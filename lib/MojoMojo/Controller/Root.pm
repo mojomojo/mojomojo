@@ -30,22 +30,12 @@ sub begin : Private {
         @{ $c->stash }{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
         $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
+
+
     }
 
-        if ($c->stash->{page}->has_child) {
-            $good_url=$c->stash->{page}->path.'/';
-        }
-        else {
-            $good_url=$c->stash->{page}->path;
-
-        }
-
-       if ( "/" . $c->stash->{path} ne $good_url ){
-	            return $c->forward('default') ;
-        }
-
-
 }
+
 
 =item default (global)
 

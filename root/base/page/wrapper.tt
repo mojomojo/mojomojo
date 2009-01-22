@@ -13,6 +13,7 @@
   </h1>
 </div>
 [% PROCESS breadcrumbs.tt %]
+
 [% PROCESS navbar.tt %]
 [%
   reverse = c.action.reverse;
@@ -22,6 +23,5 @@
 <div id="content">
 [% content %]
 </div>
-[% PROCESS sidebar.tt %]
 [% PROCESS page/bottomnav.tt %]
 [% PROCESS footer.tt %]

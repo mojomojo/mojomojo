@@ -1,4 +1,21 @@
+My Branch
+        - Added Fckeditor optionnal editor
+        - Added Formatter SlideShow ( made a jquery slideshow with photos )
+        - Added Formatter Gallery ( made a jquery gallery with photos )
+        - Added Formatter CustomTemplate ( process a template in wiki area )
+        - Added SEO columns in Content ( title, keywords, description ...)
+        - Added option path_orig in mojomojo.conf to keep name equal name_orig (Case-Sensitive URL)
+        - Added option use_directory in mojomojo.conf to manage end / in url
+        - Added option reserved_keywords in mojomojo.conf : a list of action without . in url
+        - Added option tool_separator in mojomojo.conf : if you dont like . you can use + or what you want
+        - Added action do_sitemap to generate a google sitemap
+        - Added robots.txt and sitemap.gz
+        - Added GoogleMap google apikey in mojomojo.conf in custom_template
+        - Added some content options need to see what good what not
+
+
 0.999027
+        - Added "Split Edit" for side-by-side view/edit.
         - Switched from Cache::Store::Memory to Cache::FastMmap
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
@@ -10,20 +27,20 @@
         - Make wantedpage list only apply to current subtree
         - Make tagged_descendant work for postgresql
         - Changed default search to AND using default_boolop of QueryParser.
-        - Edit search_inline.tt to display like search.tt. 
+        - Edit search_inline.tt to display like search.tt.
         - Improved search result layout and added content creation date.
         - Search results sorted by Kinosearch hit object score.
         - Fix create photo for pics with exif
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
         - Link to revision in info page.
-        
+
 0.999025  2009-01-04 23:39:00
         - Updated language selector, add fr to choices.
         - Improved search setup error handling on startup
         - New formatter: SyntaxHighlight
-        - Fixed /.users to show logout-link correctly if user is logged in. 
-        
+        - Fixed /.users to show logout-link correctly if user is logged in.
+
 0.999024  2008-12-31 18:04:00
         - Get preference key/value from cache if possible.
         - Fix wanted pages.
@@ -74,7 +91,7 @@
         - Fix highlight causing layout being broken (plu)
         - Replace Crypt::PassGen with Text::Password::Pronounceable
         - Make mech tests optional
-        
+
 0.999019 2008-07-19 19:45:00
         - Eval plucene to let mojomojo work if it fails.
         - Support for re-requesting validation mails.
@@ -82,7 +99,7 @@
         - Fix recover password (plu)
         - Fix prefs button label
         - Fix: /foo.photo/1 was broken (plu)
-        - Add new config option to enforce login: 
+        - Add new config option to enforce login:
           <permissions>enforce_login 1</permissions> (plu)
 
 0.999018 2008-07-16 19:45:00
@@ -105,10 +122,10 @@
         - Limit recent feed to 20 entries.
         - Add option to disable search
         - Make implicit wikiword linking disabled by default
-        - Hash passwords. 
+        - Hash passwords.
           WARNING! if you have an old installtion, you will need to
-          run ./script/hash_passwords.pl to 
-          hash the passwords for an existing install. Don't run this 
+          run ./script/hash_passwords.pl to
+          hash the passwords for an existing install. Don't run this
           more than once! (Script should complain tho)
 
 0.999015 2008-05-03 18:01:00
@@ -119,7 +136,7 @@
         - Fixed preview for unicode
         - Fixed styling issues with lists/strong/em
         - Redirect to edit for missing pages higher up in the path.
-        - Respect formatter pref in edithelp/toolbar. 
+        - Respect formatter pref in edithelp/toolbar.
         - Markdown formatter toolbar.
         - Recover password function
 
@@ -154,7 +171,7 @@
         - Put admin link on every page if admin
         - Fix incorrect url for change password.
         - Update minimum version for Controller::HTML::Widget
-        
+
 0.999008 2007-11-12 22:43:00
         - Fix ajax for tagging
         - Fix tag galleries
@@ -171,7 +188,7 @@
         - Fix comment formatter in preview
         - Updated photo exif formatting
         - Renamed photo action from p to photo
-        
+
 0.999005 2007-09-19 21:31:00
         - Better error reporting for upload dir.
         - More dependency fixes.
@@ -195,7 +212,7 @@
         - Fix links in navbar and header.
         - Made the insert attachment system template based and easily extensible.
         - Set up default page for admin
-        
+
 0.999002  2007-09-12 23:08:00
         - Fixed relative linking ([[../Sibling]])/
         - Cleaned up attachments.
@@ -205,13 +222,13 @@
         - Update default to be Path, rather than Private
         - Fix tests is t/c/
         - More documentation
-        - Updated Installation instructions. lib/MojoMojo/Installation.pod is 
+        - Updated Installation instructions. lib/MojoMojo/Installation.pod is
           now the master.
 
 0.999001  2007-08-29 16:29:00
-       - Initial Release. There are bugs, but the basic functionality works, 
+       - Initial Release. There are bugs, but the basic functionality works,
          and the test suite passes all tests here. Please contribute
          tests for bugs you want fixed.
-         
+
          Once we fix it all, we'll consider it 1.0
- 
+

@@ -30,21 +30,21 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint( "page_unique_child_index", [ "parent", "name" ] );
-__PACKAGE__->has_many( "wantedpages", "WantedPage", { "foreign.from_page" => "self.id" }, );
-__PACKAGE__->belongs_to( "parent", "Page", { id => "parent" } );
-__PACKAGE__->has_many( "children", "Page", { "foreign.parent" => "self.id" } );
-__PACKAGE__->belongs_to( "content", "Content", { page => "id", version => "content_version" },
+__PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { "foreign.from_page" => "self.id" }, );
+__PACKAGE__->belongs_to( "parent", "MojoMojo::Schema::Result::Page", { id => "parent" } );
+__PACKAGE__->has_many( "children", "MojoMojo::Schema::Result::Page", { "foreign.parent" => "self.id" } );
+__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content", { page => "id", version => "content_version" },
 );
-__PACKAGE__->has_many( "versions", "Content", { "foreign.page" => "self.id" } );
-__PACKAGE__->belongs_to( "page_version", "PageVersion", { page => "id", version => "version" },
+__PACKAGE__->has_many( "versions", "MojoMojo::Schema::Result::Content", { "foreign.page" => "self.id" } );
+__PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion", { page => "id", version => "version" },
 );
-__PACKAGE__->has_many( "tags",       "Tag",  { "foreign.page"      => "self.id" } );
-__PACKAGE__->has_many( "links_from", "Link", { "foreign.from_page" => "self.id" }, );
-__PACKAGE__->has_many( "links_to",   "Link", { "foreign.to_page"   => "self.id" } );
-__PACKAGE__->has_many( "roleprivileges", "RolePrivilege", { "foreign.page"   => "self.id" }, );
-__PACKAGE__->has_many( "attachments",    "Attachment",    { "foreign.page"   => "self.id" },{order_by=>'id desc' } );
-__PACKAGE__->has_many( "comments",       "Comment",       { "foreign.page"   => "self.id" } );
-__PACKAGE__->has_many( "journals",       "Journal",       { "foreign.pageid" => "self.id" } );
+__PACKAGE__->has_many( "tags",       "MojoMojo::Schema::Result::Tag",  { "foreign.page"      => "self.id" } );
+__PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" }, );
+__PACKAGE__->has_many( "links_to",   "MojoMojo::Schema::Result::Link", { "foreign.to_page"   => "self.id" } );
+__PACKAGE__->has_many( "roleprivileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.page"   => "self.id" }, );
+__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" },{order_by=>'id desc' } );
+__PACKAGE__->has_many( "comments",       "MojoMojo::Schema::Result::Comment",       { "foreign.page"   => "self.id" } );
+__PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",       { "foreign.pageid" => "self.id" } );
 
 =head1 NAME
 
@@ -285,11 +285,7 @@ sub has_photos {
     return $self->result_source->schema->resultset('Photo')
         ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->count;
 }
-sub get_photos {
-    my $self = shift;
-    return $self->result_source->schema->resultset('Photo')
-        ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->all;
-}
+
 sub has_child {
   my $self=shift;
   if ($self->content->rep) {
@@ -299,6 +295,7 @@ sub has_child {
     return $self->result_source->schema->resultset('Page')->search({'parent'=>$self->id},{})->count;
   }
 }
+
 sub name_orig_format {
   my $self=shift;
 

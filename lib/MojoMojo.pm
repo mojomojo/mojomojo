@@ -194,6 +194,7 @@ sub prepare_path {
 		}
     }
     else {
+
         # set path in stash, and set req.path to action
         $c->stash->{path} = '/' . substr( $path, 0, $index );
         $c->req->path( substr( $path, $index + 1 ) );
@@ -225,14 +226,6 @@ sub uri_for {
         unshift( @_, $prefix . $c->stash->{path} . $c->config->{tool_separator} . $val );
     }
     $c->NEXT::uri_for(@_);
-}
-
-sub uri_for_tool {
-    my $c=shift;
-    my $asset=shift;
-    my $extras=shift;
-         return $c->base_uri . $c->stash->{path} . $c->config->{tool_separator} . $asset. $extras;
-
 }
 
 sub uri_for_static {

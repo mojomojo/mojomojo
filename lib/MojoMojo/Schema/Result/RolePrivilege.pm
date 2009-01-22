@@ -13,8 +13,8 @@ __PACKAGE__->add_columns(
     "privilege", { data_type => "VARCHAR", is_nullable => 0, size => 20 },
 );
 __PACKAGE__->set_primary_key( "page", "role", "privilege" );
-__PACKAGE__->belongs_to( "page", "Page", { id => "page" } );
-__PACKAGE__->belongs_to( "role", "Role", { id => "role" } );
+__PACKAGE__->belongs_to( "page", "MojoMojo::Schema::Result::Page", { id => "page" } );
+__PACKAGE__->belongs_to( "role", "MojoMojo::Schema::Result::Role", { id => "role" } );
 
 =head1 NAME
 

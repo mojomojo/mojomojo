@@ -38,44 +38,38 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => undef },
     "precompiled",
     { data_type => "TEXT", is_nullable => 1, size => undef },
-  "title",
+    "title",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "keywords",
+    "keywords",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "description",
+    "description",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "type_contenu",
-    { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "gallery",
+    "noindex",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-  "noindex",
+    "menufils",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-  "menufils",
+    "notfound",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-  "notfound",
+    "rep",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-  "rep",
-    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-  "short_title",
+    "short_title",
     { data_type => "VARCHAR", is_nullable => 1, size => 50 },
-  "commentaires",
+    "commentaires",
     { data_type => "VARCHAR", is_nullable => 1, size => 300 },
-  "location",
+    "location",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "template",
-    { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-  "body_class",
+    "body_class",
     { data_type => "VARCHAR", is_nullable => 1, size => 50 },
-  "col_left",
+    "col_left",
     { data_type => "VARCHAR", is_nullable => 1, size => 150 },
-  "col_right",
+    "col_right",
     { data_type => "VARCHAR", is_nullable => 1, size => 150 },
 
 );
 __PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
-    "pages", "Page",
+    "pages", "MojoMojo::Schema::Result::Page",
     {
         "foreign.content_version" => "self.version",
         "foreign.id"              => "self.page",
@@ -83,7 +77,7 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_firsts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_first" => "self.version",
         "foreign.page"                  => "self.page",
@@ -91,14 +85,14 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_lasts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_last" => "self.version",
         "foreign.page"                 => "self.page",
     },
 );
-__PACKAGE__->belongs_to( "creator", "Person", { id => "creator" } );
-__PACKAGE__->belongs_to( "page",    "Page",   { id => "page" } );
+__PACKAGE__->belongs_to( "creator", "MojoMojo::Schema::Result::Person", { id => "creator" } );
+__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
 
 =head1 NAME
 
@@ -212,7 +206,7 @@ sub formatted {
     return $result;
 }
 
-=item max_version 
+=item max_version
 
 Return the highest numbered revision.
 

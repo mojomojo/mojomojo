@@ -18,8 +18,8 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
 );
 __PACKAGE__->set_primary_key("pageid");
-__PACKAGE__->has_many( "entries", "Entry", { "foreign.journal" => "self.pageid" } );
-__PACKAGE__->belongs_to( "pageid", "Page", { id => "pageid" } );
+__PACKAGE__->has_many( "entries", "MojoMojo::Schema::Result::Entry", { "foreign.journal" => "self.pageid" } );
+__PACKAGE__->belongs_to( "pageid", "MojoMojo::Schema::Result::Page", { id => "pageid" } );
 
 =head1 NAME
 

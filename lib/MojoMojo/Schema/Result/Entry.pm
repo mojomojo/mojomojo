@@ -24,8 +24,8 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "journal", "Journal", { pageid => "journal" } );
-__PACKAGE__->belongs_to( "author",  "Person",  { id     => "author" } );
+__PACKAGE__->belongs_to( "journal", "MojoMojo::Schema::Result::Journal", { pageid => "journal" } );
+__PACKAGE__->belongs_to( "author",  "MojoMojo::Schema::Result::Person",  { id     => "author" } );
 
 =head1 NAME
 

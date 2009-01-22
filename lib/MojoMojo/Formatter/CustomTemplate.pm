@@ -35,7 +35,7 @@ sub format_content {
     my ($class,$content,$c,$self) = @_;
     my (@newlines);
     eval {
-    $$content =~ s{<p\>\=templatecustom\((.*)\)\s*\<\/p\>}
+    $$content =~ s{<p\>\=customtemplate\((.*)\)\s*\<\/p\>}
                   {show_template($c,$c->stash->{page},$1)}ge;
     };
 }

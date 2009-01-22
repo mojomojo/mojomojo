@@ -9,6 +9,9 @@ use HTML::Strip;
 use Data::Page;
 use Data::Dumper;
 use DateTime;
+use Readonly;
+use WWW::Google::SiteMap;
+Readonly my $EMPTY_STRING => '';
 
 =head1 NAME
 
@@ -42,6 +45,8 @@ load the provided revision instead.
 sub page_not_found : Private {
     my ( $self, $c ) = @_;
     $c->res->status('404');
+    $c->stash->{message} = $c->loc("The requested URL (x) was not found",
+                               $c->stash->{pre_hacked_uri});
     $c->stash->{template} = 'message.tt';
 }
 
@@ -59,21 +64,6 @@ sub sitemap : Private {
     $c->stash->{template} = 'sitemap.gz';
 }
 
-sub index : Private {
-    my ( $self, $c ) = @_;
-    $c->res->status('200');
-    my $page = $c->stash->{page};
-
-    $c->stash->{title}       = 'WiKiosk';
-    $c->stash->{keywords}    = 'keywords';
-    $c->stash->{description} = 'Description';
-    $c->stash->{pages}       = [ $page->descendants_by_date ];
-    my $modtime = $c->stash->{modtime};    # set in template
-    $c->response->headers->header( 'Last-Modified' => "4 Dec 2007 11:44:37 GMT",
-    );
-    $c->stash->{template} = 'index.tt';
-}
-
 sub view : Global {
     my ( $self, $c, $path ) = @_;
 
@@ -86,7 +76,8 @@ sub view : Global {
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
-    $c->stash->{render} = 'highlight' if $c->req->referer && $c->req->referer =~ /\+edit$/;
+    $c->stash->{render} = 'highlight'
+      if $c->req->referer && $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
@@ -97,15 +88,25 @@ sub view : Global {
     if ( $c->stash->{user} && $user->is_admin ) {
         return $c->forward('suggest') if $proto_pages && @$proto_pages;
     }
-    else {
-        #return $c->forward('page_not_found')
-        #  if ( $c->req->uri =~ m/\?/ || $c->req->uri =~ m/\&/ );
-    }
-
     my $page = $stash->{'page'};
+
+    my $good_url;
+    if ($c->config->{use_directory}) {
+        if ($page->has_child) {
+            $good_url=$c->stash->{page}->path.'/';
+        }
+        else {
+            $good_url=$c->stash->{page}->path;
+        }
+
+        if ( "/" . $c->stash->{path} ne $good_url ){
+                return $c->forward('page_not_found') ;
+        }
+    }
 
     return $c->forward('page_not_found')
       if ( $page->page_version->status eq 'wait' );
+
     if ( $c->config->{'permissions'}{'check_permission_on_view'} ) {
         if ( $c->user_exists() ) { $user = $c->user->obj; }
         $c->log->info('Checking permissions') if $c->debug;
@@ -119,7 +120,6 @@ sub view : Global {
         }
     }
 
-    $c->stash->{pictures} = $page->get_photos;
     my $content;
 
     my $rev = $c->req->params->{rev};
@@ -221,12 +221,22 @@ sub search : Global {
         # my $score = sprintf( "%.0f", $hit->{score} * 1000 );
 
         # Store goods to be used in search results listing
-        my $link_title = $page->path;
-        my ( $title_base_nodes, $title_terminal_node ) =
-          $link_title     =~ m{(.*/)(.*)$};
-        $title_base_nodes =~ s{^/}{};
-        $title_base_nodes =~ s{/}{ > }g;
-        $title_terminal_node = ucfirst($title_terminal_node);
+        # NOTE: $page->path is '/' for app root,
+        # but $c->request->path is empty for app root.
+        my ( $title_base_nodes, $title_terminal_node );
+        my $link_title =
+          $page->path;
+        if ( $page->path eq '/' ) {
+            $title_base_nodes    = $EMPTY_STRING;
+            $title_terminal_node = '/';
+        }
+        else {
+            ( $title_base_nodes, $title_terminal_node ) =
+              $page->path =~ m{(.*/)(.*)$};
+              $title_base_nodes =~ s{^/}{};
+            $title_base_nodes =~ s{/}{ > }g;
+            $title_terminal_node = ucfirst($title_terminal_node);
+        }
         $results_hash{ $hit->{path} } = {
             snippet             => $snippet->as_html,
             page                => $page,
@@ -350,7 +360,6 @@ sub recent : Global {
     # FIXME - needs to be populated even without tags
 }
 
-
 =head2 feeds (.feeds)
 
 overview of available feeds for this node.
@@ -370,7 +379,7 @@ RSS feed with headlines of recent nodes in this namespace.
 
 sub rss : Global {
     my ( $self, $c ) = @_;
-    $c->forward('news');
+    $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
     $c->res->content_type('application/rss+xml');
 }
@@ -384,7 +393,7 @@ Full content ATOM feed of recent nodes in this namespace.
 
 sub atom : Global {
     my ( $self, $c ) = @_;
-    $c->forward('news');
+    $c->forward('recent');
     $c->res->content_type('application/atom+xml');
     $c->stash->{template} = 'page/atom.tt';
 }
@@ -397,7 +406,7 @@ Full content RSS feed of recent nodes in this namespace.
 
 sub rss_full : Global {
     my ( $self, $c ) = @_;
-    $c->forward('news');
+    $c->forward('recent');
     $c->res->content_type('application/rss+xml');
     $c->stash->{template} = 'page/rss_full.tt';
 }
@@ -474,7 +483,7 @@ sub do_sitemap : Global {
     my $year  = 0;
 
     foreach my $entry (@pages) {
-        if ( !$entry->noindex ) {
+        if ( !$entry->content->noindex ) {
             if ( $entry->has_child && $entry->path ne '/' ) {
                 $loc = $c->uri_for( $entry->path . '/' );
             }

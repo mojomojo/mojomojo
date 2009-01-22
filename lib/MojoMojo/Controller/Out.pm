@@ -3,24 +3,10 @@ package MojoMojo::Controller::Out;
 use strict;
 use base 'Catalyst::Controller';
 use YAML;
-=head1 NAME
-
-
-=head1 DESCRIPTION
-
-
-=head1 METHODS
-
-=cut
-
-
-=head2 index 
-
-=cut
 
 sub default : Global {
     my ($self, $c, $go, $id ) = @_;
-    $c->config( YAML::LoadFile($c->config->{'affiliate'}));
+    $c->config( YAML::LoadFile($c->config->{'out_link'}));
     if ($id &&  $c->config->{$id} ) {
     $c->stash->{good_url} = $c->config->{$id};
     $c->stash->{template} = 'out.tt';

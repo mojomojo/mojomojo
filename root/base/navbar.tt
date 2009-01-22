@@ -1,7 +1,7 @@
 <div id="toplinks">
 
 	[% IF c.pref('disable_search') -%]
-	<form action="http://www.google.com/search" method="get">
+	<form action="http://www.google.com/search" method="get">  
     <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
     [% ELSE -%]
  <form action="[% c.uri_for('search') %]" method="get">
@@ -10,7 +10,7 @@
 	<ul>
   [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user')))%]
-    <li class="navon">[%c.fixw(user.login)%]</li>
+    <li class="navon">[%c.fixw(user.login)%]</li> 
     [% ELSE %]
       [% IF user.active%]
         [% IF (!rev OR rev==page.content_version) %]

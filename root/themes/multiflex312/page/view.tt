@@ -1,0 +1,41 @@
+[% WRAPPER page/wrapper.tt %]
+    [% IF page.content.body_class == 1 %]
+        <div class="span-24 main-content prepend-1">
+
+    [% END %]
+  [% IF page.content.body_class == 2 %]
+        <div class="span-18 main-content">
+    [% END %]
+  [% IF  page.content.body_class == 3%]
+        <div class="span-17 main-content prepend-1">
+    [% END %]
+   [% IF page.content.body_class == 4 %]
+        <div class="span-13 main-content">
+    [% END %]
+
+	[% IF render == 'highlight' %]
+	[% content.highlight(c) %]
+	<script language="Javascript" type="text/javascript">
+	Fat.fade('.fade');
+	</script>
+	[% ELSE %]
+	[% content.formatted(c) %]
+	[% END %]
+
+<div id="changes" style="display: none">
+	<p id="message">
+		<small>
+	      Showing changes from previous revision.
+	      <ins class="diffins">Added</ins> | <del class="diffdel">Removed</del>
+	    </small>
+	</p>
+	<div id="diff"></div>
+
+</div>
+<div class="byline">
+  <acronym title="Revised on [% content.created.ymd %] at [% content.created.hms %] by [% content.creator.name %]">
+    Last Revised</acronym> by [% c.wikiword(content.creator.link, base) %]
+    <br />
+</div>
+ </div>
+ [% END %]

@@ -26,9 +26,8 @@
 
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
-	id="editForm"
-	action="[% c.uri_for_tool('edit')%]"
-	method="post">
+    action=""
+	method="POST"> 
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />

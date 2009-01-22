@@ -50,7 +50,7 @@ sub path_pages {
     for my $proto (@proto_pages) {
         push @depths, -and => [
             depth => $proto->{depth},
-            name_orig  => $proto->{name_orig},
+            name  => $proto->{name},
         ];
 
     }
@@ -132,7 +132,7 @@ sub parse_path {
     my $page_path = '';
     for (@proto_pages) {
         ( $_->{name_orig}, $_->{name} ) = $self->normalize_name( $_->{name_orig} );
-        $page_path .= '/' . $_->{name_orig};
+        $page_path .= '/' . $_->{name};
         $_->{path}  = $page_path;
         $_->{depth} = $depth;
         $depth++;
@@ -155,14 +155,19 @@ and lowercase the result.
 sub normalize_name {
     my ( $self, $name_orig ) = @_;
 
-    $name_orig =~ s/^\s+//;
-    $name_orig =~ s/\s+$//;
-    $name_orig =~ s/\s+/ /g;
+    if (MojoMojo->config->{path_orig}) {
+        return ( $name_orig, $name_orig );
+    }
+    else {
+        $name_orig =~ s/^\s+//;
+        $name_orig =~ s/\s+$//;
+        $name_orig =~ s/\s+/ /g;
 
-    my $name = $name_orig;
-    $name =~ s/\s+/_/g;
-    $name = lc($name);
-    return ( $name_orig, $name );
+        my $name = $name_orig;
+        $name =~ s/\s+/_/g;
+        $name = lc($name);
+        return ( $name_orig, $name );
+    }
 }
 
 =item resolve_path <%args>
@@ -251,12 +256,12 @@ sub set_paths {
             next;
         }
         if ( $_->depth == 1 ) {
-            $_->path( '/' . $_->name_orig );
+            $_->path( '/' . $_->name );
             next;
         }
         my $parent = $pages{ $_->parent->id };
         if ( ref $parent ) {
-            $_->path( $parent->path . '/' . $_->name_orig );
+            $_->path( $parent->path . '/' . $_->name );
         }
 
         # unless all pages were adjacent, i.e. a whole subtree,
