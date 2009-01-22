@@ -77,9 +77,9 @@ sub create_initial_data {
         'Page',
         [
             [qw/ version parent name name_orig depth lft rgt content_version /],
-            [ undef, undef, '/',     '/',     0, 1, 4, undef ],
+            [ undef, undef, '/',     '/',     0, 1, 5, undef ],
             [ undef, 1,     'help',  'Help',  1, 2, 3, undef ],
-            [ undef, 1,     'admin', 'Admin', 1, 2, 3, undef ],
+            [ undef, 1,     'admin', 'Admin', 1, 4, 5, undef ],
         ]
     );
 
