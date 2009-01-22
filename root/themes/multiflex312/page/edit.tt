@@ -5,7 +5,7 @@
  [% ELSE -%]
    [% SET pre_title = loc("Creating") -%]
  [% END -%]
-
+[% SET editor = c.pref('editor') || 'default' %]
 [% WRAPPER page/wrapper.tt pre_title=pre_title %]
 <div class="span-23 prepend-1 main-content">
 [%
