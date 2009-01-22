@@ -1,3 +1,4 @@
+[% SET editor = c.pref('editor') || 'default' %]
 [% USE JavaScript %]
 [% # figure out the extra title part -%]
  [% IF page.content_version -%]
