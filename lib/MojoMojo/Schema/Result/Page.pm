@@ -287,13 +287,9 @@ sub has_photos {
 }
 
 sub has_child {
-  my $self=shift;
-  if ($self->content->rep) {
-    return 1;
-  }
-  else {
-    return $self->result_source->schema->resultset('Page')->search({'parent'=>$self->id},{})->count;
-  }
+    my $self=shift;
+    return 1 if $self->content->rep;
+    return $self->children->count;
 }
 
 sub name_orig_format {
