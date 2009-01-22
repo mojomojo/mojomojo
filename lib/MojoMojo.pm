@@ -34,6 +34,7 @@ MojoMojo->config->{default_view}='TT';
 MojoMojo->config->{cache}{backend} = {
     class => "Cache::FastMmap",
 };
+MojoMojo->config->{static}->{ignore_extensions}=[qw/tt yml/];
 
 MojoMojo->setup();
 
