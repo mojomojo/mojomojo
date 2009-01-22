@@ -1,26 +1,39 @@
-<div id="sidebar" class="rightHandSide">
+<div id="sidebar">
+	<ul>
+		[% IF template.name == 'page/list.tt' %]
+	    <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
+	  [% ELSE %]
+	    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li> 
+	  [% END %]
+	
+	
+		[%IF template.name =='page/recent.tt' %]
+    	<li class="navOn" title="[%loc('Pages sorted by when they were last changed')%]">[%loc('Recent')%]</li>
+  	[% ELSE %]
+    	<li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li> 
+  	[% END; IF c.req.action =='tags' %]
+    	<li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li> 
+  	[% ELSE %]
+    	[% IF (pictures OR photo) %]
+    		<li><a href="[%c.uri_for('gallery','tags')%]" title="[%loc('All tags on photos')%]" accesskey="T">[%loc('Tags')%]</a></li>
+    	[% ELSE %]
+    		<li><a href="[%c.uri_for('tags')%]" title="[%loc('All tags in this path')%]" accesskey="T">[%loc('Tags')%]</a></li>
+    	[%END%]
+  	[% END; IF c.req.action=='users' %]
+    	<li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li> 
+  	[%ELSE%]
+    	<li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
+  	[% END; IF template.name=='feeds.tt' %]
+    	<li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li> 
+  	[%ELSE%]
+    	<li><a href="[%c.uri_for('feeds')%]" title="[%loc('Subscribe to changes by RSS')%]" accesskey="">[%loc('Feeds')%]</a></li>
+  	[% END; IF template.name =='export.tt' %]
+    	<li class="navOn" title="[%loc('Download a zip with all the pages in this wiki')%]">[%loc('Export')%]</li>
+  	[%ELSE%]
+    	<li><a href="[%c.uri_for('export')%]" title="[%loc('Download a zip with all the pages in this wiki')%]" accesskey="X">[%loc('Export')%]</a></li>
+  	[%END %]
+  		
+		</ul>
+</div> 
 
-<script type="text/javascript">
-
-function menuInsertChildren(node) {
-var nodeId, pageId;
-
-if (node.getAttribute("class") != "menuParentMissingChildren") return;
-
-nodeId = node.getAttribute("id");
-pageId = nodeId.replace("menupage", "");
-
-new Ajax.Updater(nodeId, "[% c.uri_for('jsrpc/child_menu')", {parameters: 'page_id='+pageId, asynchronous: true, insertion: Insertion.Bottom});
-
-node.setAttribute("class", "menuParent");
-
-}
-
-</script>
-
- <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] [% loc('Home') %]</a></li></ul>
-
- [% PROCESS child_menu.tt parent_page = path_pages.0 %]
-  
-</div>
 

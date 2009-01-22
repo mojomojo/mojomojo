@@ -1,20 +1,31 @@
 [% PROCESS header.tt  index_page=index_page%]
+
 <div id="header">
    <h1>
-      [% IF title %][% title %][% ELSE %]
-	[% IF pre_title %][% pre_title %][% END %]
+		[% c.pref("name") %]
+    [% IF 0 %]  
+			[% IF title %][% title %]
+			[% ELSE %]
+				[% IF pre_title %][% pre_title %]
+				[% END %]
         [% IF page.name == "/" %]
-           [% c.pref("name") || "MojoMojo" %] [% loc('Home') %] (/)
+          [% c.pref("name") || "MojoMojo" %] [% loc('Home') %] (/)
         [% ELSE %]
-           [% c.expand_wikiword(page.name_orig) %]
+         	[% c.expand_wikiword(page.name_orig) %]
         [% END %]
-	[% IF post_title %][% post_title %][% END %]
-      [% END %]
+				[% IF post_title %][% post_title %][% END %]
+      	[% END %]
+ 		[% END %]
   </h1>
+
+	[% PROCESS topbar.tt %]
 </div>
-[% PROCESS breadcrumbs.tt %]
-[% # PROCESS sidebar.tt %]
-[% PROCESS navbar.tt %]
+	[% PROCESS breadcrumbs.tt %]
+
+<div id="wrapper">
+[%# PROCESS navbar.tt %]
+
+[% PROCESS sidebar.tt %]
 [% 
   reverse = c.action.reverse;
   PROCESS page/editbar.tt 
@@ -24,4 +35,5 @@
 [% content %]
 </div>
 [% PROCESS page/bottomnav.tt %]
+</div>
 [% PROCESS footer.tt %]

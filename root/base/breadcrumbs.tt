@@ -1,11 +1,28 @@
 <div id="breadcrumbs">
- [% FOREACH page IN path_pages %]
+ <span class="breads">[% FOREACH page IN path_pages %]
   [% IF loop.first %]
-  <a href="[% c.uri_for('/') %]">[% c.pref("name") || "MojoMojo" %]</a>
+  <a href="[% c.uri_for('/') %]">[% c.pref("name") || "Home" %]</a>
   [% ELSE %] / <a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a>
   [% END %]
  [% END %]
  [% FOREACH page IN proto_pages %]
  / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% page.name_orig %]</a>
  [% END %]
+</span>
+<span class="loginout">
+	[% IF (user) %]
+  	[% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user')))%]
+  		[%c.fixw(user.login)%] 
+  	[% ELSE %]
+    	[% IF user.active%] 
+    	[% ELSE %]
+    		<a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a> 
+    	[% END %]
+  	[%END%]
+  	<a class="username" href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a> (<a href="[%base%]/.logout">[%loc('Log out')%]</a>)
+	[% ELSE %]
+  <a href="[%c.uri_for('login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a>
+    [% IF(c.pref('open_registration'))%]<a href="[%c.uri_for('register')%]">[%loc('Register')%]</a>[%END%]
+	[% END %]
+</span>
 </div>
