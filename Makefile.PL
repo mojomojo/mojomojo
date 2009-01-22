@@ -47,6 +47,7 @@ requires(
     'Image::Math::Constrain'                       => 0,
     'Imager'                                       => 0,
     'IO::Scalar'                                   => 0,
+    'IO::File'                                     => 1.2301,
     'LWP::Simple'                                  => 0,
     'Moose'                                        => 0,
     'Pod::Simple::HTML'                            => '3.01',
