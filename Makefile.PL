@@ -5,6 +5,7 @@ all_from 'lib/MojoMojo.pm';
 
 requires(
     'Algorithm::Diff'                              => '1.1901',
+    'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
     'Catalyst'                                     => '5.7000',
     'Catalyst::Action::RenderView'                 => '0.07',

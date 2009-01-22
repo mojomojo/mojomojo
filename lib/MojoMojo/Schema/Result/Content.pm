@@ -8,6 +8,7 @@ use base qw/MojoMojo::Schema::Base::Result/;
 use DateTime::Format::Mail;
 
 use Algorithm::Diff;
+use Algorithm::Merge qw/merge/;
 use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
@@ -206,7 +207,23 @@ sub formatted {
     return $result;
 }
 
-=item max_version
+sub merge_content {
+    my ($self,$saved,$content,$h1,$h2,$h3)=@_;
+
+    my $source = [ split /\n/, $self->encoded_body ];
+    my $a      = [ split /\n/, $saved->encoded_body ];
+    my $b      = [ split /\n/, $content ];
+    my @merged = merge( $source,$a,$b, {
+        CONFLICT => sub ($$){ (
+            "<!-- $h1  -->\n",(@{$_[0]}),
+            "<!-- $h2  -->\n",(@{$_[1]}),
+            "<!-- $h3 -->\n",
+            )}
+            });
+    return join('',@merged);
+}
+
+=item max_version 
 
 Return the highest numbered revision.
 
