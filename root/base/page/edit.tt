@@ -1,4 +1,4 @@
-[% SET editor = c.pref('editor') || 'default' %]
+[% SET editor = c.pref('editor') || 'fckeditor' %]
 [% USE JavaScript %]
 [% # figure out the extra title part -%]
  [% IF page.content_version -%]
@@ -26,7 +26,7 @@
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
     action=""
-	method="POST"> 
+	method="POST">
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -40,7 +40,7 @@
     [%END %]
     <br/>
     <a href="[%c.uri_for( '/' _ c.config.tool_separator _'jsrpc/render')%]" id="preview_url"></a>
-    <textarea id="body" name="body" cols="70">[%- page.content.encoded_body  _ append -%]</textarea>
+    <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
 [% IF editor == 'fckeditor' %]
   <script type="text/javascript">
 window.onload = function()
@@ -72,15 +72,12 @@ var oEditor = 	FCKeditorAPI.GetInstance( 'body' ) ;
  </script>
   <input id="btn-ajax" name="btn-ajax" type="button" value="Update preview"/>
 [% END %]
-    <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
-    <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
-    
+
     [% PROCESS 'page_options.tt' %]
-    <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save"); ELSE; loc("Create"); END %]'/> as
-    
+
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
-    as 
+    <input type="submit" name="submit" value='[% IF page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/>
+    as
     [% IF user.id %]
     [% c.wikiword(user.link,base) %]
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
