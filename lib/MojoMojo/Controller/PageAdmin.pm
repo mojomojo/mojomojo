@@ -95,8 +95,6 @@ sub edit : Global FormConfig {
         return;
     }
 
-    $stash->{content}=$page->content;
-
     if ( $form->submitted_and_valid ) {
         
 
@@ -113,9 +111,11 @@ sub edit : Global FormConfig {
             $page = $path_pages->[ @$path_pages - 1 ];
         } 
             
+        $stash->{content}=$page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
+        #$page = $c->model("DBIC::Page")->find( $page->id );
         $page->discard_changes;
 
         if( $c->stash->{content} && 
