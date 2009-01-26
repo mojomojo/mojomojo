@@ -17,23 +17,23 @@ msgstr ""
 
 #: root/base/user/profile.tt:11
 msgid "(Private)"
-msgstr ""
+msgstr "(非公表)"
 
 #: root/base/user/profile.tt:16 root/base/user/profile.tt:19 root/base/user/profile.tt:22 root/base/user/profile.tt:9
 msgid "(Unknown)"
-msgstr ""
+msgstr "(不明)"
 
 #: root/base/edithelp.tt:60
 msgid "**bold** or __bold__"
-msgstr ""
+msgstr "**ボールド** または __ボールド__"
 
 #: root/base/edithelp.tt:59
 msgid "*italic* or _italic_"
-msgstr ""
+msgstr "*イタリック* または _イタリック_"
 
 #: root/base/edithelp.tt:154
 msgid "3 or more dashes or asterisks"
-msgstr ""
+msgstr "三つ以上のハイフン、もしくはアスタリスク"
 
 #: root/base/toolbar.tt:38 root/base/toolbar.tt:8
 msgid "<xml> and such.\\nor pure text."
@@ -49,11 +49,11 @@ msgstr ""
 
 #: root/base/page/recent.tt:41
 msgid "Actions"
-msgstr ""
+msgstr "アクション"
 
 #: root/base/admin/role.tt:16 root/base/admin/user.tt:8
 msgid "Active"
-msgstr ""
+msgstr "有効"
 
 #: root/base/page/info.tt:12
 msgid "Active version"
@@ -65,11 +65,11 @@ msgstr ""
 
 #: root/base/page/addtags.tt:6
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 #: root/base/page/addtags.tt:1
 msgid "Add tag"
-msgstr ""
+msgstr "タグを追加"
 
 #: root/base/page/view.tt:25
 msgid "Added"
@@ -77,21 +77,21 @@ msgstr ""
 
 #: root/base/user/profile.tt:15
 msgid "Age"
-msgstr ""
+msgstr "年齢"
 
 #: root/base/page/list.tt:16 root/base/tag/list.tt:5
 msgid "All Pages"
-msgstr ""
+msgstr "全てのページ"
 
 #. (page.path)
 #: root/base/page/list.tt:1
 msgid "All Pages in x"
-msgstr "All Pages in %1"
+msgstr "「%1」以下の全てのページ"
 
 #. (page.name)
 #: root/base/page/list.tt:17
 msgid "All pages in x listed alphabetically"
-msgstr "All pages in %1 listed alphabetically"
+msgstr "「%1」以下の全てのページ（アルファベット順）"
 
 #. (activetag)
 #: root/base/tag/list.tt:21
@@ -144,7 +144,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:19
 msgid "Anonymous User (blank to disable)"
-msgstr ""
+msgstr "匿名ユーザー（無効にするには空白にしてください）"
 
 #: root/base/gallery/photo_info.tt:8
 msgid "Aperture"
@@ -152,35 +152,35 @@ msgstr ""
 
 #: lib/MojoMojo/Controller/Attachment.pm:107
 msgid "Attachment not found."
-msgstr ""
+msgstr "添付ファイルが見つかりません。"
 
 #: root/base/page/editbar.tt:13 root/base/page/editbar.tt:18 root/base/page/editbar.tt:6 root/base/page/info.tt:30
 msgid "Attachments"
-msgstr ""
+msgstr "添付ファイル"
 
 #: root/base/navbar.tt:48 root/base/navbar.tt:50
 msgid "Authors"
-msgstr ""
+msgstr "メンバー"
 
 #: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "Back in time"
-msgstr ""
+msgstr "過去の状態"
 
 #: root/base/page/bottomnav.tt:38
 msgid "Back to the page"
-msgstr ""
+msgstr "ページに戻る"
 
 #: root/base/page/list.tt:27
 msgid "Backlinks"
-msgstr ""
+msgstr "リンク元"
 
 #: root/forms/user/editprofile.yml:13
 msgid "Birth Date"
-msgstr ""
+msgstr "誕生日"
 
 #: root/base/edithelp.tt:127
 msgid "Block quotes"
-msgstr ""
+msgstr "ブロッククォート"
 
 #: root/base/edithelp.tt:130
 msgid "Blockquotes can be nested"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: root/base/user/prefs.tt:6
 msgid "Change password"
-msgstr ""
+msgstr "パスワードの変更"
 
 #: root/base/user/profile.tt:46
 msgid "Change profile content"
@@ -289,7 +289,7 @@ msgstr "Could not create attachment from %1"
 
 #: root/base/page/edit.tt:51
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 #: root/base/admin/create_role.tt:9
 msgid "Create Role"
@@ -309,19 +309,19 @@ msgstr ""
 
 #: root/base/page/bottomnav.tt:38
 msgid "Current Revision"
-msgstr ""
+msgstr "現在のリビジョン"
 
 #: root/forms/user/password.yml:10
 msgid "Current password"
-msgstr ""
+msgstr "現在のパスワード　"
 
 #: root/base/user/profile.tt:33
 msgid "Date registered"
-msgstr ""
+msgstr "登録日"
 
 #: root/base/toolbar.tt:23 root/base/toolbar.tt:45
 msgid "Deleted Text"
-msgstr ""
+msgstr "削除されたテキスト"
 
 #: root/base/page/info.tt:21
 msgid "Descendants"
@@ -333,35 +333,36 @@ msgstr ""
 
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
-msgstr ""
+msgstr "Wiki内容をZIP形式でダウンロード"
 
 #: root/base/admin/role.tt:23 root/base/page/editbar.tt:11 root/base/page/editbar.tt:17 root/base/page/permissions.tt:47
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Edit Page"
-msgstr ""
+msgstr "ページ編集"
 
 #: root/base/user/profile.tt:46
 msgid "Edit Profile"
-msgstr ""
+msgstr "プロフィール編集"
 
 #: root/base/admin/edit_role.tt:9
 msgid "Edit Role"
-msgstr ""
+msgstr "役割編集"
 
 #: root/base/page/bottomnav.tt:16
 msgid "Edit Settings"
-msgstr ""
+msgstr "設定変更"
 
 #: root/base/page/recent.tt:39
 msgid "Edited by"
-msgstr ""
+msgstr "編集者"
 
 #: root/base/page/edit.tt:4
+#: XXX original markup needs to be changed to take an argument
 msgid "Editing"
-msgstr ""
+msgstr "「%1」を編集中" 
 
 #. (user.name)
 #: root/base/user/editprofile.tt:3
@@ -370,11 +371,11 @@ msgstr "Editing user profile for %1"
 
 #: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:21 root/forms/user/register.yml:32
 msgid "Email"
-msgstr ""
+msgstr "メールアドレス"
 
 #: root/base/user/validate.tt:4
 msgid "Email Validation"
-msgstr ""
+msgstr "メールアドレスの確認"
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
@@ -398,23 +399,23 @@ msgstr ""
 
 #: root/base/export.tt:1 root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Export"
-msgstr ""
+msgstr "エクスポート"
 
 #: root/base/toolbar.tt:27 root/base/toolbar.tt:49
 msgid "External Link"
-msgstr ""
+msgstr "外部リンク"
 
 #: root/forms/user/editprofile.yml:32
 msgid "Favorite Albums"
-msgstr ""
+msgstr "好きなCD"
 
 #: root/forms/user/editprofile.yml:36
 msgid "Favorite Movies"
-msgstr ""
+msgstr "好きな映画"
 
 #: root/base/navbar.tt:54
 msgid "Feeds"
-msgstr ""
+msgstr "フィード"
 
 #: root/base/user/validate.tt:22
 msgid "Fill in the email address you want to use here"
@@ -430,7 +431,7 @@ msgstr ""
 
 #: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "Forward in time"
-msgstr ""
+msgstr "この後の状態"
 
 #: root/base/page/permissions.tt:10
 msgid "From"
@@ -438,7 +439,7 @@ msgstr ""
 
 #: root/base/feeds.tt:6 root/base/feeds.tt:8
 msgid "Full content"
-msgstr ""
+msgstr "全文"
 
 #: root/base/navbar.tt:72
 msgid "Gallery"
@@ -446,7 +447,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:20
 msgid "Gender"
-msgstr ""
+msgstr "性別"
 
 #: root/base/navbar.tt:28
 msgid "Get in there"
@@ -494,7 +495,7 @@ msgstr ""
 
 #: root/base/feeds.tt:7
 msgid "Headlines"
-msgstr ""
+msgstr "ヘッドライン"
 
 #. (page.name_orig)
 #: root/base/page/rss.tt:6
@@ -512,7 +513,7 @@ msgstr "Hi. This is a mail to validate your email address, %1. To confirm, pleas
 
 #: root/base/page/bottomnav.tt:46
 msgid "Hide changes"
-msgstr ""
+msgstr "変更部分を非表示"
 
 #: root/base/page/suggest.tt:8 root/base/page/wrapper.tt:7 root/base/sidebar.tt:21
 msgid "Home"
@@ -547,8 +548,9 @@ msgid "IdLabel"
 msgstr ""
 
 #: root/base/page/attachments.tt:16
+#: XXX - original text needs changing
 msgid "If the flash uploader gives you problems, switch to the"
-msgstr ""
+msgstr "このページではFlashアップローダを使用しています。お使いの環境で正しく動作しない場合はシンプルアップローダに切り替えてください。"
 
 #. (link)
 #: root/base/user/validate.tt:32
@@ -565,7 +567,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
 msgid "Industry"
-msgstr ""
+msgstr "職業"
 
 #: root/base/page/permissions.tt:5
 msgid "Inherited permissions"
@@ -581,7 +583,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
 msgid "Interests"
-msgstr ""
+msgstr "好きな物"
 
 #: root/base/toolbar.tt:25 root/base/toolbar.tt:47
 msgid "Internal Link"
@@ -609,7 +611,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:36
 msgid "Last changes"
-msgstr ""
+msgstr "更新履歴"
 
 #: root/base/edithelp.tt:63
 msgid "Later in the document"
@@ -649,7 +651,7 @@ msgstr ""
 
 #: root/base/page/list.tt:38
 msgid "Links to non-existent pages."
-msgstr ""
+msgstr "リンクは作成されているが、まだ未作成なページ"
 
 #. (activetag)
 #: root/base/tag/list.tt:20
@@ -666,15 +668,15 @@ msgstr ""
 
 #: root/base/navbar.tt:28 root/base/user/login.tt:22
 msgid "Log in"
-msgstr ""
+msgstr "ログイン"
 
 #: root/base/navbar.tt:26
 msgid "Log out"
-msgstr ""
+msgstr "ログアウト"
 
 #: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: root/base/toolbar.tt:3 root/base/toolbar.tt:33
 msgid "Main heading"
@@ -686,7 +688,7 @@ msgstr ""
 
 #: root/base/toolbar.tt:30 root/base/toolbar.tt:52
 msgid "Mark some text to apply the toolbar actions to that text"
-msgstr ""
+msgstr "ツールバーにあるアクションを使うには対象の文字をハイライトしてください"
 
 #: root/base/edithelp.tt:45
 msgid "Markdown formatting tips"
@@ -698,19 +700,19 @@ msgstr ""
 
 #: root/base/user/profile.tt:30
 msgid "Movies"
-msgstr ""
+msgstr "映画"
 
 #: root/base/user/profile.tt:27
 msgid "Music"
-msgstr ""
+msgstr "音楽"
 
 #: root/base/page/tags.tt:2
 msgid "My tags"
-msgstr ""
+msgstr "Myタグ"
 
 #: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:10 root/forms/user/prefs.yml:16 root/forms/user/register.yml:40
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: root/base/user/profile.tt:4
 msgid "Name missing"
@@ -764,7 +766,7 @@ msgstr ""
 
 #: root/base/user/list.tt:13
 msgid "No recent changes"
-msgstr ""
+msgstr "最近の更新はありません"
 
 #: root/base/page/search.tt:25 root/base/page/search_inline.tt:15
 msgid "No results found"
@@ -801,7 +803,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:25 root/base/user/profile.tt:28 root/base/user/profile.tt:31
 msgid "Nothing entered"
-msgstr ""
+msgstr "-"
 
 #: root/base/edithelp.tt:29
 msgid "Numbered list"
@@ -822,7 +824,7 @@ msgstr ""
 #. (link)
 #: root/base/tag/cloud.tt:10
 msgid "Or you can check out x instead"
-msgstr "Or you can check out %1 instead"
+msgstr "もしかして：%1"
 
 #: root/base/edithelp.tt:90
 msgid "Ordered Lists"
@@ -830,7 +832,7 @@ msgstr ""
 
 #: root/base/page/list.tt:48
 msgid "Orphaned Pages"
-msgstr ""
+msgstr "リンクがないページ"
 
 #: root/base/page/suggest.tt:23
 msgid "Other Suggestions"
@@ -838,7 +840,7 @@ msgstr ""
 
 #: root/base/page/list.tt:28
 msgid "Other pages that link to this page."
-msgstr ""
+msgstr "このページへリンクするページ"
 
 #: root/base/navbar.tt:66 root/base/navbar.tt:68 root/base/page/recent.tt:38
 msgid "Page"
@@ -846,7 +848,7 @@ msgstr ""
 
 #: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page Info"
-msgstr ""
+msgstr "ページ情報"
 
 #. (page.path)
 #: root/base/page/info.tt:9
@@ -867,37 +869,37 @@ msgstr ""
 
 #: root/base/page/list.tt:49
 msgid "Pages to which no other pages link."
-msgstr ""
+msgstr "どこからもリンクされていないページ"
 
 #: root/base/user/login.tt:19 root/forms/user/register.yml:17
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: root/forms/user/password.yml:24 root/forms/user/register.yml:22
 msgid "Password did not match"
-msgstr ""
+msgstr "パスワードが一致しませんでした"
 
 #: root/forms/user/register.yml:26
 msgid "Password must be between 4 and 14 chars"
-msgstr ""
+msgstr "パスワードは4文字から14文字である必要があります"
 
 #. ($page->name)
 #: lib/MojoMojo/Controller/Page.pm:69
 msgid "Permission Denied to view x"
-msgstr "Permission Denied to view %1"
+msgstr "「%1」の閲覧権限がありません"
 
 #. ([$permtocheck, $name])
 #: lib/MojoMojo/Controller/PageAdmin.pm:87
 msgid "Permission Denied to x x"
-msgstr "Permission Denied to %1 %2"
+msgstr "「%1 %2」の権限がありません"
 
 #: root/base/page/editbar.tt:15 root/base/page/editbar.tt:19 root/base/page/editbar.tt:9
 msgid "Permissions"
-msgstr ""
+msgstr "権限"
 
 #: root/base/page/permissions.tt:33
 msgid "Permissions for this page"
-msgstr ""
+msgstr "このページについての権限"
 
 #: root/base/navbar.tt:74
 msgid "Photo Album"
@@ -905,15 +907,15 @@ msgstr ""
 
 #: root/base/page/info.tt:33
 msgid "Photos"
-msgstr ""
+msgstr "写真"
 
 #: root/base/toolbar.tt:29 root/base/toolbar.tt:51
 msgid "Picture"
-msgstr ""
+msgstr "画像"
 
 #: lib/MojoMojo/Controller/User.pm:34
 msgid "Please enter username and password"
-msgstr ""
+msgstr "ユーザー名とパスワードを入力してください"
 
 #: lib/MojoMojo/Controller/User.pm:214
 msgid "Please fill in the following information to register. All fields are mandatory."
@@ -921,19 +923,19 @@ msgstr ""
 
 #: root/base/page/attachments.tt:15
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
-msgstr ""
+msgstr "添付するファイルを選択してください。複数のファイルを添付する場合にはZIP形式のファイルを指定してください。"
 
 #: lib/MojoMojo/Controller/Jsrpc.pm:34
 msgid "Please type something"
-msgstr ""
+msgstr "入力してください"
 
 #: root/base/page/tags.tt:15
 msgid "Popular tags"
-msgstr ""
+msgstr "人気タグ"
 
 #: root/base/comment/post.tt:5
 msgid "Post"
-msgstr ""
+msgstr "投稿"
 
 #: root/base/footer.tt:7
 msgid "Powered by Catalyst"
@@ -941,39 +943,39 @@ msgstr ""
 
 #: root/base/navbar.tt:88 root/base/navbar.tt:90
 msgid "Preferences"
-msgstr ""
+msgstr "設定"
 
 #: root/base/edithelp.tt:142
 msgid "Preformatted Code Blocks"
-msgstr ""
+msgstr "フォーマット済みコードブロック"
 
 #: root/base/toolbar.tt:39 root/base/toolbar.tt:9
 msgid "Preformatted text"
-msgstr ""
+msgstr "フォーマット済みテキスト"
 
 #: root/base/page/editbar.tt:4
 msgid "Preview"
-msgstr ""
+msgstr "プレビュー"
 
 #: root/base/page/search.tt:48 root/base/page/search_inline.tt:38
 msgid "Previous"
-msgstr ""
+msgstr "前"
 
 #: root/base/page/bottomnav.tt:50
 msgid "Print"
-msgstr ""
+msgstr "印刷"
 
 #: root/base/navbar.tt:81 root/base/navbar.tt:83
 msgid "Profile"
-msgstr ""
+msgstr "プロフィール"
 
 #: root/base/export.tt:7
 msgid "Raw markup"
-msgstr ""
+msgstr "直接編集"
 
 #: root/base/navbar.tt:36 root/base/navbar.tt:38
 msgid "Recent"
-msgstr ""
+msgstr "最近の更新"
 
 #: root/base/tag/recent.tt:3
 msgid "Recent Pages"
@@ -998,11 +1000,11 @@ msgstr "Recent pages in %1 tagged with %2"
 
 #: root/base/user/recover_pass.tt:3
 msgid "Recover Password"
-msgstr ""
+msgstr "パスワードの再発行"
 
 #: root/base/user/login.tt:13 root/base/user/recover_pass.tt:13
 msgid "Recover password"
-msgstr ""
+msgstr "パスワードの再発行"
 
 #: root/base/edithelp.tt:123
 msgid "Rectangle"
@@ -1022,7 +1024,7 @@ msgstr ""
 
 #: root/base/tag/list.tt:31
 msgid "Related Tags"
-msgstr ""
+msgstr "関連タグ"
 
 #: root/base/page/view.tt:25
 msgid "Removed"
@@ -1058,7 +1060,7 @@ msgstr "Revised on %1 at %2 by %3"
 
 #: root/base/page/print.tt:8 root/base/page/view.tt:32 root/base/page/view.tt:5
 msgid "Revision"
-msgstr ""
+msgstr "最終更新"
 
 #. (page.content.created.datetime)
 #: root/base/page/rss.tt:14
@@ -1121,7 +1123,7 @@ msgstr ""
 
 #: root/base/page/bottomnav.tt:43
 msgid "See changes"
-msgstr ""
+msgstr "変更部分を表示"
 
 #: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "See next revision"
@@ -1137,7 +1139,7 @@ msgstr ""
 
 #: root/base/footer.tt:2
 msgid "Set language"
-msgstr ""
+msgstr "言語"
 
 #: root/base/edithelp.tt:120
 msgid "Shapes"
@@ -1167,7 +1169,7 @@ msgstr ""
 #. ([ pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
 #: root/base/pager.tt:16
 msgid "Showing entries x-x of x in x"
-msgstr "Showing entries %1-%2 of %3 in %4"
+msgstr "「%4」の %1-%2 ページ中 %3 ページ目"
 
 #. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
 #. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
@@ -1201,7 +1203,7 @@ msgstr ""
 
 #: root/base/navbar.tt:32 root/base/navbar.tt:34
 msgid "Sub pages"
-msgstr ""
+msgstr "関連ページ"
 
 #: root/base/navbar.tt:52 root/base/navbar.tt:54
 msgid "Subscribe to changes by RSS"
@@ -1217,7 +1219,7 @@ msgstr ""
 
 #: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
 msgid "Syntax"
-msgstr ""
+msgstr "構文"
 
 #: root/base/edithelp.tt:35
 msgid "Table"
@@ -1225,12 +1227,12 @@ msgstr ""
 
 #: root/base/navbar.tt:40 root/base/navbar.tt:43 root/base/navbar.tt:45 root/base/page/list.tt:6 root/base/page/recent.tt:13 root/base/tag/recent.tt:7
 msgid "Tags"
-msgstr ""
+msgstr "タグ"
 
 #. (page.name)
 #: root/base/tag/cloud.tt:1
 msgid "Tags under x"
-msgstr "Tags under %1"
+msgstr "%1以下のタグ"
 
 #: root/base/gallery/photo_info.tt:4
 msgid "Taken"
@@ -1272,11 +1274,11 @@ msgstr ""
 
 #: lib/MojoMojo/Controller/Jsrpc.pm:95
 msgid "This is the first revision! Nothing to diff against."
-msgstr ""
+msgstr "最初のリビジョンには差分がありません。"
 
 #: root/base/page/recent.tt:40
 msgid "Time edited"
-msgstr ""
+msgstr "編集日時"
 
 #: root/base/edithelp.tt:104 root/base/edithelp.tt:92
 msgid "To get"
@@ -1341,11 +1343,11 @@ msgstr "User %1 not found!"
 
 #: root/base/user/login.tt:17 root/base/user/recover_pass.tt:10
 msgid "Username"
-msgstr ""
+msgstr "ユーザー名"
 
 #: root/base/admin/user.tt:5
 msgid "Users"
-msgstr ""
+msgstr "ユーザー"
 
 #: root/base/user/validate.tt:11
 msgid "Validation"
@@ -1353,23 +1355,23 @@ msgstr ""
 
 #: root/base/page/recent.tt:55
 msgid "View Diff"
-msgstr ""
+msgstr "差分"
 
 #: root/base/gallery.tt:23
 msgid "View as files"
-msgstr ""
+msgstr "リスト形式"
 
 #: root/base/page/attachments.tt:24
 msgid "View as gallery"
-msgstr ""
+msgstr "ギャラリー形式"
 
 #: root/base/page/bottomnav.tt:50
 msgid "Views"
-msgstr ""
+msgstr "表示"
 
 #: root/base/page/list.tt:37
 msgid "Wanted Pages"
-msgstr ""
+msgstr "未作成ページ"
 
 #: root/base/user/validate.tt:13
 msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
@@ -1406,7 +1408,7 @@ msgstr ""
 
 #: root/base/feeds.tt:3
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
-msgstr ""
+msgstr "このWikiの変更をRSS経由で購読する事が可能です。編集されたページのタイトルだけが必要な場合は「ヘッドライン」を、全文が欲しい場合は「全文」をクリックしてください。"
 
 #: lib/MojoMojo/Controller/Attachment.pm:38
 msgid "You do not have permissions to edit attachments for this page"
@@ -1422,7 +1424,7 @@ msgstr ""
 
 #: root/base/user/prefs.tt:3
 msgid "Your Account"
-msgstr ""
+msgstr "アカウント情報"
 
 #: lib/MojoMojo/Controller/Jsrpc.pm:41
 msgid "Your input is invalid, please reformat it and try again."
@@ -1537,7 +1539,7 @@ msgstr ""
 
 #: root/base/attachments/list.tt:9
 msgid "delete"
-msgstr ""
+msgstr "削除"
 
 #: root/base/toolbar.tt:22 root/base/toolbar.tt:44
 msgid "deleted"
@@ -1549,7 +1551,7 @@ msgstr ""
 
 #: root/base/attachments/list.tt:7
 msgid "download"
-msgstr ""
+msgstr "ダウンロード"
 
 #: root/base/admin/user.tt:8
 msgid "email"
@@ -1569,7 +1571,7 @@ msgstr ""
 
 #: root/base/gallery/photo.tt:7 root/base/navbar.tt:74
 msgid "gallery"
-msgstr ""
+msgstr "ギャラリー形式"
 
 #: root/base/edithelp.tt:22
 msgid "hello"
@@ -1597,11 +1599,11 @@ msgstr ""
 
 #: root/base/attachments/list.tt:6
 msgid "inline"
-msgstr ""
+msgstr "インラインで表示"
 
 #: root/base/attachments/list.tt:8
 msgid "insert"
-msgstr ""
+msgstr "ページに挿入"
 
 #: root/base/toolbar.tt:20 root/base/toolbar.tt:42
 msgid "italic"
@@ -1681,7 +1683,7 @@ msgstr ""
 
 #: root/base/page/attachments.tt:16
 msgid "plain uploader"
-msgstr ""
+msgstr "シンプルアップローダ"
 
 #: root/base/gallery/tags.tt:17
 msgid "popular tags"
@@ -1758,7 +1760,7 @@ msgstr ""
 
 #: root/base/attachments/list.tt:5
 msgid "view"
-msgstr ""
+msgstr "閲覧"
 
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:17 root/base/page/permissions.tt:36
 msgid "write"
@@ -1803,5 +1805,6 @@ msgstr ""
 
 #: lib/MojoMojo/Schema.pm: create_initial_data
 msgid "welcome message"
-msgstr "h1. Welcome to MojoMojo!\n\nThis is your front page. To start administrating your wiki, please log in with\nusername admin/password admin. At that point you will be able to set up your\nconfiguration. If you want to play around a little with the wiki, just create\na [[New Page]] or edit this one through the edit link at the bottom.\n\nh2. Need some assistance?\n\nCheck out our [[Help]] section."
+msgstr "h1. MojoMojoへようこそ!\n\nこれが見えているということは無事にMojoMojoのインストールが済んだと言うことです。\nMojoMojoを使い始めるにはまずユーザー名「admin」とパスワード「admin」を使用して\n管理者としてログインしてください。ログインをするとMojoMojoの管理ができるようになります。\n\nログインをしたら手始めに[[New Page]]からページを新規に作成するか、このページの上部の\n編集リンクからこのページを編集してみるとよいでしょう。\n\nわからない事があったら[[Help]]を参照してみてください。"
+
 
