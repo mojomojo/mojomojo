@@ -10,6 +10,10 @@
 	--
 	http://localhost:3000/admin.edit
 	http://nordaaker.com/.static/themes/nordaaker/theme.css
+	/.static/themes/default/theme.css
+	--
+	http://nordaaker.com/wiki/fotoland/referater
+	/.static/themes/default/theme.css -- http://nordaaker.com/wiki/fotoland/referater
 */
 
 body {
@@ -30,8 +34,8 @@ body {
 	margin: 0 auto 0;
 }
 div#header {
-	background: #263447 url(images/mmlogo.png) no-repeat 7px 15px;
-	padding: 10px 0;
+	background: #263447 url(images/mmlogo.png) no-repeat 7px 12px;
+	padding: 10px 0 5px;
 }
 #header h1 {
 	
@@ -52,7 +56,7 @@ div#header {
 #header form {
 	position: absolute;
 	right: 7px;
-	top: 10px;
+	top: 5px;
 }
 #breadcrumbs {
 	background: #3f5673;
@@ -119,8 +123,8 @@ div#pagenav {
 }
 div#pagenav ul li a {
 	padding: 3px 7px;
-	color: white;
-	background-color: black;
+	color: black;
+	background-color: #c0c0c0;
 	text-decoration: none;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -133,12 +137,14 @@ divd#pagenav ul li.edit a {
 
 div#pagenav ul li {
 	padding: 2px 0px 2px 0;
+	margin-right: 5px;
 	display: inline;
 }
 
 
 div#pagenav ul li a:hover {
 	text-decoration: underline;
+	background-color: white;
 }
 div#pagenav ul li.meta a {
 	border: none;
