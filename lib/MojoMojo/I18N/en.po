@@ -1800,3 +1800,8 @@ msgstr ""
 #: root/base/edithelp.tt:35
 msgid "|b|table|row|"
 msgstr ""
+
+#: lib/MojoMojo/Schema.pm: create_initial_data
+msgid "welcome message"
+msgstr "h1. Welcome to MojoMojo!\n\nThis is your front page. To start administrating your wiki, please log in with\nusername admin/password admin. At that point you will be able to set up your\nconfiguration. If you want to play around a little with the wiki, just create\na [[New Page]] or edit this one through the edit link at the bottom.\n\nh2. Need some assistance?\n\nCheck out our [[Help]] section."
+

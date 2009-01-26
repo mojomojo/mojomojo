@@ -1802,3 +1802,9 @@ msgstr ""
 #: root/base/edithelp.tt:35
 msgid "|b|table|row|"
 msgstr ""
+
+#: lib/MojoMojo/Schema.pm: create_initial_data
+msgid "welcome message"
+msgstr "h1. MojoMojoへようこそ!\n\nこれが見えているということは無事にMojoMojoのインストールが済んだと言うことです。\nMojoMojoを使い始めるにはまずユーザー名「admin」とパスワード「admin」を使用して\n管理者としてログインしてください。ログインをするとMojoMojoの管理ができるようになります。\n\nログインをしたら手始めに[[New Page]]からページを新規に作成するか、このページの上部の\n編集リンクからこのページを編集してみるとよいでしょう。\n\nわからない事があったら[[Help]]を参照してみてください。"
+
+
