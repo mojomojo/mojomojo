@@ -1,7 +1,10 @@
 /* @override 
 	http://mojomojo.org:3000/.static/mojomojo.css
 	http://localhost:3000/.static/mojomojo.css
-	/.static/mojomojo.css -- http://localhost:3000/admin.edit
+	/.static/mojomojo.css
+	--
+	http://localhost:3000/admin.edit
+	http://nordaaker.com/.static/mojomojo.css
 */
 
 @import "reset.css";
@@ -61,7 +64,8 @@
 }
 
 #content ul li {
-	list-style: square;
+	list-style: disc;
+	line-height: 1.3em;
 }
 
 #content ol li {
@@ -69,13 +73,9 @@
 }
 
 #content li {
-	margin-left: 1.5em;
-	margin-bottom: 5px;
+	margin-left: 0em;
 }
 
-#content li li {
-	font-size: 0.95em;
-}
 
 /* tables */
 

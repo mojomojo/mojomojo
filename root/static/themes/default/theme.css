@@ -6,7 +6,10 @@
 	/.static/themes/default/theme.css
 	--
 	http://localhost:3000/admin.edit
-	/.static/themes/default/theme.css -- http://localhost:3000/admin.edit
+	/.static/themes/default/theme.css
+	--
+	http://localhost:3000/admin.edit
+	http://nordaaker.com/.static/themes/nordaaker/theme.css
 */
 
 body {

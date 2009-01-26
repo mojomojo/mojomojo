@@ -1,0 +1,26 @@
+<div id="pagenav">
+	<ul>
+		<li><a href="">Create page</a></li>
+		[% IF (!rev OR rev==page.content_version) %]
+      [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+        <li class="edit"><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
+      [%END%]
+    [%END%]
+		[% IF c.req.action=='info'%]
+	   <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
+	  [% ELSE %]
+	   <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page Info')%]</a></li>
+	  [% END%]
+		<li class="meta">[% loc('Revised on x at x by x', [c.stash.content.created.ymd]) %] <span class="username">[% c.wikiword(c.stash.content.creator.link, base) %]</span></li>
+	</ul>
+	[% IF c.pref('disable_search') -%]
+		<form action="http://www.google.com/search" method="get">  
+	  	<input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+	[% ELSE -%]
+		<form action="[% c.uri_for('search') %]" method="get">
+	[% END -%]
+	<input type="hidden" name="search_type" value="all" />
+	<input type="text" id="searchField" name="q" style="" value="[%loc('Search')%]"/>
+
+	</form>
+</div>
