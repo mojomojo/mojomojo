@@ -17,13 +17,13 @@ background: #c1baaa repeat-x url(images/background.png);	margin: 0;
 	margin: 0 auto 0;
 }
 div#header {
-	background: url(images/mmlogo.png) no-repeat 7px 12px;
-	padding: 10px 0 5px;
+	background: url(images/nordaaker.png) no-repeat 7px 8px;
+	padding: 7px 0 5px;
 }
 #header h1 {
 	
 	top: 14px;
-	padding: 16px 0 10px 50px;
+	padding: 16px 0 10px 58px;
 	color: #ffffff;
 	font-weight: bold;
 	border-width: 1px;
@@ -58,7 +58,7 @@ div#header {
 
 #breadcrumbs a:hover {
 	color: #ffffff;
-	background-color: #33455c;
+	background-color: #720000;
 	text-decoration: none;
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
@@ -107,7 +107,7 @@ div#pagenav {
 div#pagenav ul li a {
 	padding: 3px 7px;
 	color: black;
-	background-color: #c0c0c0;
+	background-color: #dedac7;
 	text-decoration: none;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -138,7 +138,7 @@ div#pagenav ul li.meta a {
 }
 div#pagenav ul li.meta {
 	margin-left: 10px;
-	color: silver;
+	color: #dfdcd2;
 }
 /* @end */
 
