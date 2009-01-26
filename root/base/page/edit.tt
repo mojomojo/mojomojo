@@ -5,13 +5,11 @@
  [% ELSE -%]
    [% SET pre_title = loc("Creating") -%]
  [% END -%]
-
 [% WRAPPER page/wrapper.tt pre_title=pre_title %]
   
 
 [% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
 
-[% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
 
 <div id="preview_and_edit_container">
@@ -33,10 +31,13 @@
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
     [% END %]
     <input type="hidden" name="parent" value="[% page.parent.id %]" />
+    <input type="hidden" name="version" value="[% page.content.version %]" />
+    [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
+
     [%PROCESS toolbar.tt%]
     <br/>
     <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
-    <textarea id="body" name="body" cols="70">[%- page.content.encoded_body  -%]</textarea>
+    <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
     
     <script type="text/javascript" language="JavaScript">
     var append='[%append|js%]';
@@ -52,7 +53,7 @@
     </div>
     
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
+    <input type="submit" name="submit" value='[% IF page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
     as 
     [% IF user.id %]
     [% c.wikiword(user.link,base) %] 

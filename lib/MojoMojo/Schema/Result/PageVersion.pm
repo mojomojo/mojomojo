@@ -25,23 +25,23 @@ __PACKAGE__->add_columns(
     "content_version_last",  { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key( "version", "page" );
-__PACKAGE__->has_many( "pages", "Page",
+__PACKAGE__->has_many( "pages", "MojoMojo::Schema::Result::Page",
     { "foreign.id" => "self.page", "foreign.version" => "self.version" },
 );
-__PACKAGE__->belongs_to( "creator", "Person", { id => "creator" } );
-__PACKAGE__->belongs_to( "page",    "Page",   { id => "page" }, );
-__PACKAGE__->belongs_to( "content", "Content",
+__PACKAGE__->belongs_to( "creator", "MojoMojo::Schema::Result::Person", { id => "creator" } );
+__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" }, );
+__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content",
     { page => "page", version => "content_version_first" },
 );
-__PACKAGE__->belongs_to( "content", "Content",
+__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content",
     { page => "page", version => "content_version_last" },
 );
-__PACKAGE__->belongs_to( "page_version", "PageVersion",
+__PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion",
     { page => "parent", version => "parent_version" },
 );
 __PACKAGE__->has_many(
     "page_versions",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.parent"         => "self.page",
         "foreign.parent_version" => "self.version",

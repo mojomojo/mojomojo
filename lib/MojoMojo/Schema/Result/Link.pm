@@ -16,8 +16,8 @@ __PACKAGE__->add_columns(
     { data_type => "INTEGER", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "from_page", "Page", { id => "from_page" } );
-__PACKAGE__->belongs_to( "to_page",   "Page", { id => "to_page" } );
+__PACKAGE__->belongs_to( "from_page", "MojoMojo::Schema::Result::Page", { id => "from_page" } );
+__PACKAGE__->belongs_to( "to_page",   "MojoMojo::Schema::Result::Page", { id => "to_page" } );
 
 =head1 NAME
 

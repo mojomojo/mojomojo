@@ -40,10 +40,9 @@ __PACKAGE__->add_columns(
     { data_type => "INT", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->has_many( "tags",     "Tag",     { "foreign.photo"   => "self.id" } );
-__PACKAGE__->has_many( "comments", "Comment", { "foreign.picture" => "self.id" } );
-__PACKAGE__->has_one( 'attachment', 'MojoMojo::Schema::Result::Attachment' )
-    ;    #,{'foreign.id' => 'self.id' });
+__PACKAGE__->has_many( "tags",     "MojoMojo::Schema::Result::Tag",     { "foreign.photo"   => "self.id" } );
+__PACKAGE__->has_many( "comments", "MojoMojo::Schema::Result::Comment", { "foreign.picture" => "self.id" } );
+__PACKAGE__->has_one( "attachment", "MojoMojo::Schema::Result::Attachment" );
 
 =head1 NAME
 

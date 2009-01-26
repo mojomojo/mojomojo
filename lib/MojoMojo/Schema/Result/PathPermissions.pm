@@ -19,7 +19,7 @@ __PACKAGE__->add_columns(
     "attachment_allowed", { data_type => "VARCHAR", is_nullable => 1, size => 3 },
 );
 __PACKAGE__->set_primary_key( "path", "role", "apply_to_subpages" );
-__PACKAGE__->belongs_to( "role", "Role", { id => "role" } );
+__PACKAGE__->belongs_to( "role", "MojoMojo::Schema::Result::Role", { id => "role" } );
 
 =head1 NAME
 
