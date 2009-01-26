@@ -53,7 +53,7 @@
     </div>
     
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
+    <input type="submit" name="submit" value='[% IF page.content && page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
     as 
     [% IF user.id %]
     [% c.wikiword(user.link,base) %] 
