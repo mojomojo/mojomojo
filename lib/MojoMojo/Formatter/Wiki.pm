@@ -10,11 +10,11 @@ MojoMojo::Formatter::Wiki - Handle interpage linking.
 
 =head1 DESCRIPTION
 
-This formatter handles Wiki links using the [[explicit]] and
-ImplicitLink syntax. It will also indicate missing links with 
-a question mark and a link to the edit page. In explicit mode, 
-you can prefix the wikiword with a path, just like in a
-normal URL. For example: [[../marcus]] or [[/oslo/vacation]].
+This formatter handles Wiki links using the [[WikiWord]] . It 
+will also indicate missing links with a question mark and a 
+link to the edit page. In explicit mode, you can prefix the 
+wikiword with a path, just like in a normal URL. For example: 
+[[../marcus]] or [[/oslo/vacation]].
 
 =head1 METHODS
 
@@ -28,11 +28,11 @@ Format order can be 1-99. The Wiki formatter runs on 30
 
 sub format_content_order { 10 }
 
-# explicit link regexes
-
 ## list of start-end delimiter pairs
 my @explicit_delims    = (qw{ \[\[ \]\] \(\( \)\) });
 my $explicit_separator = '\|';
+
+my $wikiword_escape = qr{\\};
 
 sub _explicit_start_delims {
     my %delims = @explicit_delims;
@@ -73,10 +73,6 @@ my $explicit_end   = _generate_explicit_end();
 my $explicit_path  = _generate_explicit_path();
 my $explicit_text  = _generate_explicit_text();
 
-# implicit link (wikiword) regexes
-
-my $wikiword        = qr{\b[A-Z][a-z]+[A-Z]\w*};
-my $wikiword_escape = qr{\\};
 
 sub _generate_non_wikiword_check {
 
@@ -138,12 +134,6 @@ sub format_content {
     my @parts;
     ( $$content, @parts ) = strip_pre($content);
 
-    if ( $c->pref('enable_implict_wikiwords') ) {
-        $$content =~ s{
-            $non_wikiword_check
-            ($wikiword)
-        }{ $class->format_link($c, $1, $c->req->base,) }gex;
-    }
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
@@ -178,7 +168,7 @@ sub format_content {
 
     # Remove escapes on escaped wikiwords. The escape means
     # that this wikiword is NOT a link to a wiki page.
-    $$content =~ s{$wikiword_escape($wikiword)}{$1}g;
+    $$content =~ s{$wikiword_escape($explicit_start)}{$1}g;
 
     $$content = reinsert_pre( $content, @parts );
 }
@@ -206,6 +196,7 @@ sub format_link {
         $orig_word =~ s/.*\///;
     }
     $word =~ s/\s/_/g;
+    $word =~ s/\.//g;
     my $formatted = $link_text || $class->expand_wikiword($orig_word);
 
     # convert relative paths to absolute paths
