@@ -128,6 +128,21 @@ sub populate_schema {
     $db->deploy( $attrs );
 
     $db->create_initial_data;
+    $self->create_test_data($db);
+}
+
+sub create_test_data {
+    my ($self,$schema)=@_;
+    my @roles = $schema->resultset('Role')->search();
+    $schema->populate('PathPermissions',
+        [
+            [ qw/path role apply_to_subpages create_allowed delete_allowed edit_allowed view_allowed attachment_allowed / ],
+            [ '/admin', $roles[0]->id, qw/ no yes yes yes yes yes yes/ ],
+            [ '/admin', $roles[0]->id, qw/ yes yes yes yes yes yes yes/ ],
+            [ '/help', $roles[0]->id, qw/no yes yes yes yes yes yes/ ],
+            [ '/help', $roles[0]->id, qw/ yes yes yes yes yes yes yes/ ],
+        ]
+    )
 }
 
 1;
