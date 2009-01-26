@@ -96,6 +96,7 @@ sub edit : Global FormConfig {
     }
 
     if ( $form->submitted_and_valid ) {
+        
 
         my $valid = $form->params;
         $valid->{creator} = $user;
@@ -108,11 +109,33 @@ sub edit : Global FormConfig {
                 creator     => $user,
             );
             $page = $path_pages->[ @$path_pages - 1 ];
-        }
+        } 
+            
+        $stash->{content}=$page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
-        $page = $c->model("DBIC::Page")->find( $page->id );
+        #$page = $c->model("DBIC::Page")->find( $page->id );
+        $page->discard_changes;
+
+        if( $c->stash->{content} && 
+            $c->req->params->{version} != $c->stash->{content}->version ) {
+            $c->stash->{message}=$c->loc('Someone else changed the page while you edited. Your changes has been merged. Please review and save again');
+            my $orig_content = $c->model("DBIC::Content")->find(
+                {
+                    page    => $page->id,
+                    version => $c->req->params->{version},
+                }
+            );
+            $c->stash->{merged_body}||=$orig_content->merge_content(
+                $c->stash->{content},
+                $form->params->{body},
+                $c->loc('THEIR CHANGES'),
+                $c->loc('YOUR CHANGES'),
+                $c->loc('END OF CONFLICT'));
+            return;
+        }
+
         $page->update_content(%$valid);
 
         # update the search index with the new content

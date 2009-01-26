@@ -16,7 +16,7 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => 4000 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "from_page", "Page", { id => "from_page" } );
+__PACKAGE__->belongs_to( "from_page", "MojoMojo::Schema::Result::Page", { id => "from_page" } );
 
 =head1 NAME
 

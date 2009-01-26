@@ -17,8 +17,8 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint( "name_unique", ["name"] );
-__PACKAGE__->has_many( "role_privileges", "RolePrivilege", { "foreign.role" => "self.id" }, );
-__PACKAGE__->has_many( "role_members",    "RoleMember",    { "foreign.role" => "self.id" } );
+__PACKAGE__->has_many( "role_privileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.role" => "self.id" }, );
+__PACKAGE__->has_many( "role_members",    "MojoMojo::Schema::Result::RoleMember",    { "foreign.role" => "self.id" } );
 __PACKAGE__->many_to_many( "members", "role_members", "person" );
 
 =head1 NAME
