@@ -3,6 +3,7 @@ package MojoMojo::Formatter::Wiki;
 use base qw/MojoMojo::Formatter/;
 
 use URI;
+use Scalar::Util qw/blessed/;
 
 =head1 NAME
 
@@ -184,7 +185,7 @@ sub format_link {
     #FIXME: why both base and $c?
     my ( $class, $c, $word, $base, $link_text ) = @_;
     $base ||= $c->req->base;
-    $word = $c->stash->{page}->path . '/' . $word unless $word =~ m|^[/\.]|;
+    $word = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $word unless $word =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
     # keep the original wikiword for display, stripping leading slashes
