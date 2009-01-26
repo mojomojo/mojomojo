@@ -17,8 +17,8 @@ background: #c1baaa repeat-x url(images/background.png);	margin: 0;
 	margin: 0 auto 0;
 }
 div#header {
-	background: url(images/nordaaker.png) no-repeat 7px 8px;
-	padding: 7px 0 5px;
+	background: url(images/nordaaker.png) no-repeat 7px 4px;
+	padding: 9px 0 8px;
 }
 #header h1 {
 	
