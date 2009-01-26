@@ -5,28 +5,26 @@
     [% PROCESS page/tags.tt  %]
 [% END %]
 <div id="bottomnav">
+
+<ul>
+
+</ul>
+
+
 <ul>
 [% IF (!rev OR rev==page.content_version) %]
-  [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
-    <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') _ '?split=vertical' %]" accesskey="E">[%loc('Split Edit')%]</a></li>
-  [%END%]
-  [% IF user.is_admin %]
-   <li><a title="[%loc('Change site settings')%]" href="[%c.uri_for('admin')%]">[%loc('Edit Settings')%]</a></li>
-  [% END %] 
-  [% IF c.req.action=='info'%]
-   <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
-  [% ELSE %]
-   <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page Info')%]</a></li>
-  [% END%]
+
   [% IF page.content_version && page.content_version > 1 %] 
    <li><a title="[%loc('See previous revision')%]" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">[%loc('Back in time')%]</a>
    ([% page.content.max_version%] [% loc('revision') %][% IF page.content_version > 1; "s" ; END %])</li>
   [% END %]
   [% IF  (page.content_version AND page.content.max_version AND page.content_version < page.content.max_version) %]
+		[%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
     <li><a title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev=> page.content_version + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - page.content_version )%])</li>
   [%END%]
 [% ELSE %]
   [% IF (rev AND page.content.max_version AND rev < page.content.max_version) %]
+		[%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
     <li><a "title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - rev) %])</li>
   [% END %]
   [% IF rev AND rev > 1 %]
@@ -36,6 +34,8 @@
    <li><a title="[%loc('Back to the page')%]" href="[% c.uri_for('view')%]" accesskey="C">[%loc('Current Revision')%]</a></li>
   [% END %]
 [% END %]
+
+
 [% IF page.content_version && page.content_version > 1 %] 
  <li><span id="show_changes">
   <a title="[%loc('Show differences from previous version')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" class="toggleChanges">[%loc('See changes')%]</a>
@@ -44,25 +44,53 @@
   <a title="[%loc('Show normal page')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev) %]" class="toggleChanges">[%loc('Hide changes')%]</a>
  </span></li>
 [% END %]
-  <li>
-  [% loc('Views') %]: <a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print')%]</a>
-  <a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a>
-  [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
- </li>
+
+</ul>
+
+
+
+[% IF 0 %]
+
+<ul>
+	[% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+    <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') _ '?split=vertical' %]" accesskey="E">[%loc('Split Edit')%]</a></li>
+  [%END%]
+	<li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page Info')%]</a></li>
+</ul>
+[% END %]
+
+
+
+
 [% IF page.links_to.first ; %] 
- <li>
+<ul>
+	<li>
   [%loc('Linked from')%]:
   [% FOR linkitem = page.links_to %] 
    <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%c.uri_for('linkitem.path')%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
- </li>
+	</li>
+	</ul>
 [% END %]
+
+<ul>
 [% SET redir = c.uri_for(c.req.path) %]
-		<li>[%loc('Set language')%]:</li>
-    [% FOREACH lang IN ['en','de','fr','ja', 'no'] -%]
-    <li><a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a></li> 
-    [% END -%]
+	<li>[%loc('Set language')%]:
+[% FOREACH lang IN ['en','de','fr','ja', 'no'] -%]
+  <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a>
+[% END -%]
+	</li>
 
+[% IF user.is_admin %]
 
+	<li>Admin: 
+	<a title="[%loc('Change site settings')%]" href="[%c.uri_for('admin')%]">[%loc('Edit Settings')%]</a>
+	</li>
+[% END %]
+
+	<li>
+  [% loc('Views') %]: <a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print')%]</a>
+  <a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a>
+ </li>
 </ul>
 </div>

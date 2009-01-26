@@ -15,6 +15,7 @@ background: #c1baaa repeat-x url(images/background.png);	margin: 0;
 	max-width: 900px;
 	text-align: left;
 	margin: 0 auto 0;
+	position: relative;
 }
 div#header {
 	background: url(images/nordaaker.png) no-repeat 7px 4px;
@@ -40,6 +41,11 @@ div#header {
 	position: absolute;
 	right: 7px;
 	top: 5px;
+}
+#header form input#searchField {
+	border-color: #800;
+	border-top-color: #d90400;
+	border-left-color: #d90400;
 }
 #breadcrumbs {
 	background: #800;
@@ -142,7 +148,7 @@ div#pagenav ul li.meta {
 }
 /* @end */
 
-div#toplinks ul li a,  div#bottomnav ul li a {
+div#toplinks ul li a {
 	padding: 3px 0px;
 }
 
@@ -179,6 +185,7 @@ div#toplinks ul li.navOn {
 	overflow: hidden;
 	padding: 13px;
 	background-color: #ffffff;
+	position: relative;
 }
 
 
@@ -190,12 +197,28 @@ div#toplinks ul li.navOn {
 	min-height: 1.8em;
 	font-size: 0.9em;	
 	margin-left: 150px;
-	background-color: #ebeae7;
+	background-color: #7f6f59;
 }
-
+div#bottomnav ul li a {
+	color: white;
+}
+div#bottomnav ul li {
+	color: #bebbae;
+	line-height: 2em;
+}
 #bottomnav input {
 	font-size: 1em;
+	margin: 0;
+	border: none;
+	background-color: white;
+	text-decoration: underline;
+	color: red;
+	font: Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
+
 
 /* @group Sidebar */
 
@@ -204,6 +227,8 @@ div#toplinks ul li.navOn {
  	padding: 5px;
  	width: 130px;
 	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 #sidebar ul {

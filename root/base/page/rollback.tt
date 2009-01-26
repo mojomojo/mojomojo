@@ -1,6 +1,7 @@
 [%IF user.can_edit(page.path) && rev %]
-<form id="editForm" action="[% c.uri_for('rollback') %]" method="post">
+<li><form id="editForm" action="[% c.uri_for('rollback') %]" style="display:inline;" method="post">
 <input type="hidden" name="rev" value="[% rev %]"/>
 <input type="submit" value="[% loc('Make current') %]"/>
 </form>
+</li>
 [%END%]

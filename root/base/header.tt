@@ -36,6 +36,14 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
     <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
+		<!--[if lt IE 7]>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
+		<style type="text/css" media="screen">
+		#container {
+		zoom:1; /* helps fix IE6 by initiating hasLayout */
+		}
+		</style>
+		<![endif]-->
 </head>
 
 <body id="page">
