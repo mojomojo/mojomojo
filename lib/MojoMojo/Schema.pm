@@ -26,7 +26,7 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 =cut
 
 sub create_initial_data {
-    my $schema = shift;
+    my ($schema, %args) = @_;
     print "Creating initial data\n";
 
     my $file = __PACKAGE__ . ".pm";
@@ -40,7 +40,7 @@ sub create_initial_data {
         Class  => 'MojoMojo',
         Path   => $path,
     );
-    my $lang = $ENV{MOJOMOJO_LANG} || 'en';
+    my $lang = $args{language} || 'en';
     $lang =~ s/\..*$//;
     loc_lang($lang);
 
