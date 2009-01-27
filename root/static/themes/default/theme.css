@@ -28,17 +28,19 @@ body {
 	text-align: left;
 	margin: 0 auto 0;
 }
+
 #wrapper {
 	max-width: 990px;
 	text-align: left;
 	margin: 0 auto 0;
 }
+
 div#header {
 	background: #263447 url(images/mmlogo.png) no-repeat 7px 12px;
 	padding: 10px 0 5px;
 }
+
 #header h1 {
-	
 	top: 14px;
 	padding: 16px 0 10px 50px;
 	color: #ffffff;
@@ -53,11 +55,13 @@ div#header {
 #header h1 a {
 	color: #ffffff;
 }
+
 #header form {
 	position: absolute;
 	right: 7px;
 	top: 5px;
 }
+
 #breadcrumbs {
 	background: #3f5673;
 	height: 12px;
@@ -82,16 +86,20 @@ div#header {
 	-moz-border-radius-topright: 5px;
 	-webkit-border-top-right-radius: 5px;
 }
+
 span.loginout {
 	float: right;
 }
+
 span.breads {
-	float:left
+	float: left
 }
+
 #breadcrumbs span.loginout a {
-	padding:0;
+	padding: 0;
 	background-color: transparent;
 }
+
 div#toplinks {
 	font-size: .9em;
 	background: #ebeae7;
@@ -111,6 +119,7 @@ div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
 }
 
 /* @group Edit buttons */
+
 div#pagenav ul {
 	display: inline;
 }
@@ -121,6 +130,7 @@ div#pagenav {
 	padding: 10px 15px 1px;
 	display: inline;
 }
+
 div#pagenav ul li a {
 	padding: 3px 7px;
 	color: black;
@@ -129,10 +139,10 @@ div#pagenav ul li a {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
-divd#pagenav ul li.edit a {	
+
+divd#pagenav ul li.edit a {
 	padding-bottom: 2px;
 	border-bottom: none;
-
 }
 
 div#pagenav ul li {
@@ -141,11 +151,11 @@ div#pagenav ul li {
 	display: inline;
 }
 
-
 div#pagenav ul li a:hover {
 	text-decoration: underline;
 	background-color: white;
 }
+
 div#pagenav ul li.meta a {
 	border: none;
 	color: white;
@@ -153,10 +163,12 @@ div#pagenav ul li.meta a {
 	padding: 0;
 	background-color: transparent;
 }
+
 div#pagenav ul li.meta {
 	margin-left: 10px;
 	color: silver;
 }
+
 /* @end */
 
 div#toplinks ul li a,  div#bottomnav ul li a {
@@ -190,15 +202,95 @@ div#toplinks ul li.navOn {
 	padding: 2px 5px;
 }
 
-
 #content {
-	margin-left: 150px;
 	overflow: hidden;
 	padding: 13px;
 	background-color: #ffffff;
 }
 
+div#addtag, div#tags, div#content, div#bottomnav {
+	margin-left: 150px;
+}
 
+/* @group Tags */
+
+#tags {
+	background: #dcdcdc;
+	font-size: 1.1em;
+	color: #676767;
+	padding: 5px 13px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+div#tags ul {
+	margin: 0;
+	padding: 5px 0;
+}
+
+div#tags ul li {
+	display: inline;
+	margin: 0 0.5em 0 0;
+	padding: 4px 2px 4px 6px;
+	background-color: #f1f1f1;
+	font-size: .8em;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+div#tags ul li span a, div#tags ul li span b {
+	background-color: white;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 0px 4px 1px;
+	font-size: 1.1em;
+	text-decoration: none;
+}
+div#tags ul li.title {
+	background-color: transparent;
+	padding: 0;
+}
+
+div#tags dd {
+	margin: 0;
+	padding: 0;
+}
+
+div#tags ul li .add a {
+	color: green;
+}
+
+div#tags ul li .add a:hover {
+	color: white;
+	background-color: green;
+}
+
+a.tag {
+	text-decoration: none;
+}
+
+a.tag:hover {
+	text-decoration: underline;
+}
+
+div#tags ul li .remove a {
+	color: red;
+}
+
+div#tags ul li .remove a:hover {
+	color: white;
+	background-color: red;
+}
+
+.tagedit {
+	float: right;
+}
+
+#taginput {
+	width: 120px;
+}
+
+/* @end */
 
 #bottomnav {
 	padding: 6px 8px;
@@ -206,18 +298,20 @@ div#toplinks ul li.navOn {
 	margin: 0;
 	font-weight: bold;
 	min-height: 1.8em;
-	font-size: 0.9em;	
-	margin-left: 150px;
+	font-size: 0.9em;
 	background-color: #3f5673;
 }
+
 div#bottomnav ul li a {
 	color: white;
 }
+
 div#bottomnav ul li {
 	color: #bebbae;
 	line-height: 2em;
 	padding: 0 0.5em 0 0;
 }
+
 #bottomnav input {
 	font-size: 1em;
 	margin: 0;
@@ -231,13 +325,12 @@ div#bottomnav ul li {
 	-webkit-border-radius: 5px;
 }
 
-
 /* @group Sidebar */
 
 #sidebar {
- 	margin: 0 10px 0 0;
- 	padding: 5px;
- 	width: 130px;
+	margin: 0 10px 0 0;
+	padding: 5px;
+	width: 130px;
 	position: absolute;
 }
 
@@ -245,6 +338,7 @@ div#bottomnav ul li {
 	padding: 0;
 	margin: 10px 0 0 0;
 }
+
 #sidebar ul li {
 	margin: 0 0 5px;
 	padding: 5px 10px;
@@ -254,10 +348,12 @@ div#bottomnav ul li {
 	-moz-border-radius-bottomright: 5px;
 	-webkit-border-bottom-right-radius: 5px;
 }
+
 #sidebar ul li.active {
 	color: white;
 	background-color: #3f5673;
 }
+
 #sidebar ul li a {
 	color: white;
 	text-decoration: none;
