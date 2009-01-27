@@ -292,7 +292,7 @@ var fetch_preview = function() {
       },
       success: function(r) { 
         $('#content_preview').html(r)
-        var ratio=($('textarea#body').attr('scrollHeight')/$('#content_preview').attr('scrollHeight'));
+        var ratio=($('#content_preview').attr('scrollHeight')/$('textarea#body').attr('scrollHeight'));
         $('#content_preview').attr('scrollTop',Math.round($('textarea#body').attr('scrollTop')*ratio))
       }
     })
