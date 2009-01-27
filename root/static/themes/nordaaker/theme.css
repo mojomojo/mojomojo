@@ -45,7 +45,7 @@ div#header {
 #header form input#searchField {
 	border-color: #800;
 	border-top-color: #d90400;
-	border-left-color: #d90400;
+	border-left-color: #750000;
 }
 #breadcrumbs {
 	background: #800;
@@ -205,6 +205,7 @@ div#bottomnav ul li a {
 div#bottomnav ul li {
 	color: #bebbae;
 	line-height: 2em;
+	padding: 0 0.5em 0 0;
 }
 #bottomnav input {
 	font-size: 1em;

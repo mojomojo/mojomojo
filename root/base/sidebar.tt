@@ -1,7 +1,7 @@
 [%- DEFAULT back = 'view' -%]
-[%- MACRO gen_link(action, label, title, accesskey, selected, name) BLOCK; -%]
+[%- MACRO gen_link(action, label, title, accesskey, name) BLOCK; -%]
 
- [%- IF selected == label -%]
+ [%- IF template.name == name -%]
  <li class="active">[% label %]</li>
  [%- ELSE -%]
  <li><a accesskey="[% accesskey %]" href="[% c.uri_for(action) %]">[% label %]</a></li>
@@ -9,16 +9,16 @@
 [%- END -%]
 <div id="sidebar">
 	<ul>
-		[% gen_link(c.uri_for('list'),    					loc('Sub pages'),	loc('Alphabetically sorted list of pages')						'A', selected, 'page/list.tt') %]
- 		[% gen_link(c.uri_for('recent'), 						loc('Recent'),    loc('Pages sorted by when they were last changed') 		'U', selected, 'page/recent.tt') %]
+		[% gen_link('list',    					loc('Sub pages'),	loc('Alphabetically sorted list of pages')						'A', 'page/list.tt') %]
+ 		[% gen_link('recent', 					loc('Recent'),    loc('Pages sorted by when they were last changed') 		'U', 'page/recent.tt') %]
     [% IF (pictures OR photo) %]
-			[% gen_link(c.uri_for('gallery','tags'), 	loc('Tags'),      loc('All tags on photos') 												  	'T', selected, 'page/tags.tt') %]
+			[% gen_link('gallery','tags', loc('Tags'),      loc('All tags on photos') 												  	'T', 'page/tags.tt') %]
 		[% ELSE %]
-			[% gen_link(c.uri_for('tags'), 						loc('Tags'),      loc('All tags in this path') 											  	'T', selected, 'page/tags.tt') %]
+			[% gen_link('tags', 					loc('Tags'),      loc('All tags in this path') 											  	'T', 'page/tags.tt') %]
  		[% END %]
-		[% gen_link(c.uri_for('users'), 					 	loc('Authors'),   loc('Who wrote what')  																'',  selected, 'user/list.tt') %]
- 		[% gen_link(c.uri_for('feeds'),  						loc('Feeds'), 	  loc('Subscribe to changes by RSS') 										'',  selected, 'feeds.tt') %]
- 		[% gen_link(c.uri_for('export'), 					  loc('Authors'),   loc('Download a zip with all the pages in this wiki')	'X', selected, 'export.tt') %]
+		[% gen_link('users', 					 	loc('Authors'),   loc('Who wrote what')  																'', 'user/list.tt') %]
+ 		[% gen_link('feeds',  					loc('Feeds'), 	  loc('Subscribe to changes by RSS') 										'', 'feeds.tt') %]
+ 		[% gen_link('export', 				  loc('Authors'),   loc('Download a zip with all the pages in this wiki')	'X', 'export.tt') %]
 	</ul>
 </div>
 

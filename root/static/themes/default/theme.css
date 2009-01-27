@@ -216,6 +216,7 @@ div#bottomnav ul li a {
 div#bottomnav ul li {
 	color: #bebbae;
 	line-height: 2em;
+	padding: 0 0.5em 0 0;
 }
 #bottomnav input {
 	font-size: 1em;
@@ -252,6 +253,10 @@ div#bottomnav ul li {
 	-webkit-border-top-left-radius: 10px;
 	-moz-border-radius-bottomright: 5px;
 	-webkit-border-bottom-right-radius: 5px;
+}
+#sidebar ul li.active {
+	color: white;
+	background-color: #3f5673;
 }
 #sidebar ul li a {
 	color: white;
