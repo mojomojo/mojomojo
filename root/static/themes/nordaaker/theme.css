@@ -148,6 +148,86 @@ div#pagenav ul li.meta {
 }
 /* @end */
 
+
+/* @group Tags */
+
+#tags {
+	background: #dcdcdc;
+	font-size: 1.1em;
+	color: #676767;
+	padding: 5px 13px;
+	border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+}
+
+div#tags ul {
+	margin: 0;
+	padding: 5px 0;
+}
+
+div#tags ul li {
+	display: inline;
+	margin: 0 0.5em 0 0;
+	padding: 4px 2px 4px 6px;
+	background-color: #f1f1f1;
+	font-size: .8em;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+div#tags ul li span a, div#tags ul li span b {
+	background-color: white;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 0px 4px 1px;
+	font-size: 1.1em;
+	text-decoration: none;
+}
+div#tags ul li.title {
+	background-color: transparent;
+	padding: 0;
+}
+
+div#tags dd {
+	margin: 0;
+	padding: 0;
+}
+
+div#tags ul li .add a {
+	color: green;
+}
+
+div#tags ul li .add a:hover {
+	color: white;
+	background-color: green;
+}
+
+a.tag {
+	text-decoration: none;
+}
+
+a.tag:hover {
+	text-decoration: underline;
+}
+
+div#tags ul li .remove a {
+	color: red;
+}
+
+div#tags ul li .remove a:hover {
+	color: white;
+	background-color: red;
+}
+
+.tagedit {
+	float: right;
+}
+
+#taginput {
+	width: 120px;
+}
+
+/* @end */
 div#toplinks ul li a {
 	padding: 3px 0px;
 }
@@ -188,6 +268,9 @@ div#toplinks ul li.navOn {
 	position: relative;
 }
 
+div#addtag {
+	margin-left: 150px;
+}
 
 #bottomnav {
 	padding: 6px 8px;

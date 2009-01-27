@@ -32,15 +32,6 @@
 	color: #999;
 }
 
-#tags {
-	background: #f6f6f6;
-	font-size: 1.1em;
-	color: #676767;
-	padding: 5px 13px;
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
-}
-
 .showdiv {
 	margin-left: 150px;
 	background: white;
@@ -375,41 +366,7 @@ textarea#comment {
   margin-bottom:30px;
 }
 
-.add a {
-  color: green;
-    font-size: 13px;
-  text-decoration: none;
-  vertical-align: middle;
-}
 
-.add a:hover {
-  color: #003800;
-    font-size: 13px;
-}
-a.tag {
-    text-decoration: none;
-}
-a.tag:hover {
-    text-decoration: underline;
-}
-.remove a {
-  color: red;
-  font-size: 1.1em;
-  margin: 0px 1px;
-  text-decoration: none;
-}
-
-.remove a:hover {
-    color: #650000;
-}
-
-.tagedit {
-  float: right;
-}
-
-#taginput {
-  width: 120px;
-}
 
 .newWikiWord {
   color: #e33;
@@ -918,13 +875,6 @@ dl.list dt {
     font-weight:bold; 
     width:15em; 
 }
-
-div#tags { height:4em; }
-
-div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { width:120px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
-div#tags dd { margin:0; padding:0; }
-
 #revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
 
 .attachment {

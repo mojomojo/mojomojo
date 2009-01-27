@@ -1,37 +1,42 @@
 [% IF tags.size || others_tags.size -%]
 <div id="tags">
-<dl>
-    [% IF tags.size -%]
-    <dt>[% loc('My tags') %]:</dt>
-    <dd>&nbsp;
-    [% FOREACH tag IN tags -%]
-[<span class="remove"><a href="[%c.uri_for('jsrpc/untag',tag.tag)%]" class="tagaction">x</a>]</span>
-        [% IF tag.tag == highlight -%]
-<b id="tag_[% tag.tag %]" class="navOn">[% tag.tag %]</b>
-        [% ELSE -%]
-<a class="tag" href="[% c.uri_for('recent', tag.tag) %]">[% tag.tag %]</a> 
-        [% END -%]
+<ul>
+[% IF tags.size -%]
+  <li class="title">[% loc('My tags') %]:</li>
+  
+	[% FOREACH tag IN tags -%]
+	<li>
+    [% IF tag.tag == highlight -%]
+			<b id="tag_[% tag.tag %]" class="active">[% tag.tag %]</b>
+    [% ELSE -%]
+			<a class="tag" href="[% c.uri_for('recent', tag.tag) %]">[% tag.tag %]</a> 
     [% END -%]
+		<span class="remove"><a href="[%c.uri_for('jsrpc/untag',tag.tag)%]" class="tagaction">x</a></span>
+	</li>
+  [% END -%]
 [% END -%]
-    </dd>
-    [% IF others_tags.size %]
-    <dt>[% loc('Popular tags') %]:</dt>
-    <dd>&nbsp;
-    [% FOREACH othertag IN others_tags -%]
-        [% SET tagmatch='\b' _ othertag.tag _ '\b' -%]
-        [% NEXT IF taglist.match(tagmatch) -%]
-        [% IF user.active -%]
-[<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>]
-        [% END -%]
-        [% IF othertag.tag == highlight -%]
-        <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]" 
-        [% ELSE -%]
-        <a class="tag" title="[% othertag.refcount %]" 
-        [% END -%]
-        href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>[% UNLESS loop.last() %],[% END %] 
+</ul>
+
+<ul>
+[% IF others_tags.size %]
+	<li class="title">[% loc('Popular tags') %]:</li>
+  [% FOREACH othertag IN others_tags -%]
+		<li>
+  	[% SET tagmatch='\b' _ othertag.tag _ '\b' -%]
+    [% NEXT IF taglist.match(tagmatch) -%]
+    [% IF user.active -%]
+			<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>
     [% END -%]
-    </dd>
-    [%END-%]
-</dl>
+    [% IF othertag.tag == highlight -%]
+      <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]" 
+    [% ELSE -%]
+      <a class="tag" title="[% othertag.refcount %]" 
+    [% END -%]
+        href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>[% UNLESS loop.last() %],[% END %] 
+			
+			  </li>
+  [% END -%]
+[%END-%]
+</ul>
 </div>
 [%END -%]
