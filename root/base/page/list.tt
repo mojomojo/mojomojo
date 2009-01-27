@@ -9,8 +9,11 @@
     <ul>
 [% FOREACH page IN pages %]
 [% children = page.descendant_search.count%]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a>[% IF(children) -%]
- [%loc('and')%] <a href="[%c.uri_for(page.path,'.list')%]">[%children%] subpages</a>
+        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a>
+					[% IF(children) -%]
+ 					<ul>
+						<li><a href="[%c.uri_for(page.path,'.list')%]">[%children%] subpages</a></li>
+					</ul>
 [% END %]</li>
 [% END -%]
     </ul>

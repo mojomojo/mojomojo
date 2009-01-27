@@ -12,7 +12,7 @@ background: #c1baaa repeat-x url(images/background.png);	margin: 0;
 	margin: 0 auto 0;
 }
 #wrapper {
-	max-width: 900px;
+	max-width: 990px;
 	text-align: left;
 	margin: 0 auto 0;
 	position: relative;
@@ -207,6 +207,8 @@ div#bottomnav ul li {
 	line-height: 2em;
 	padding: 0 0.5em 0 0;
 }
+
+
 #bottomnav input {
 	font-size: 1em;
 	margin: 0;

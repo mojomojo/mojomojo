@@ -557,7 +557,14 @@ table.recent .actions       { width:10%; }
 }
 
 /* @end */
+/* @group Allpages */
 
+div#allPages ul li ul li {
+	list-style-image: url(gfx/list.png);
+	margin-left: 0.5em;
+}
+
+/* @end */
 .form dl {
  margin: 13px;
  float: left;
