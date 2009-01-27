@@ -272,6 +272,13 @@ $( function() {
         multiple: true,
         multipleSeparator: " "
     });
+    $(document).ready(function(){
+    	if ($("form#editForm")[0]) {
+            $("div#wrapper").css("max-width", 1450);
+            $('div#content_preview').css('overflow','scroll')
+            $("table#preview_and_edit_table > td").css('border', '0px');
+            $("table#preview_and_edit_table").find("td").css('border','0px');    	}
+    });
 })
 
 var fetch_preview = function() {
@@ -281,10 +288,12 @@ var fetch_preview = function() {
       url:  $('#preview_url').attr('href'),
       timeout: 2000,
       error: function() {
-        console.log("Failed to submit");
+        console.log("Failed to update preview");
       },
       success: function(r) { 
         $('#content_preview').html(r)
+        var ratio=($('textarea#body').attr('scrollHeight')/$('#content_preview').attr('scrollHeight'));
+        $('#content_preview').attr('scrollTop',Math.round($('textarea#body').attr('scrollTop')*ratio))
       }
     })
   }

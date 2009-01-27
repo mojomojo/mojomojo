@@ -13,7 +13,8 @@
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
 
 <div id="preview_and_edit_container">
-
+<table id="preview_and_edit_table">
+<td id='preview_cell' width='50%'>
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
   [% page.content.formatted(c) %] 
@@ -21,7 +22,8 @@
    <i>[%loc('To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.')%]</i>
 [% END %]
 </div>
-
+</td>
+<td id="edit_cell">
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
     action=""
@@ -67,6 +69,7 @@
     [% END %]
   </form>
 </div>
+</td></table>
 <!-- between last two divs -->
 </div>
 

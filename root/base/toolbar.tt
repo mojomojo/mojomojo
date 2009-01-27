@@ -27,7 +27,6 @@
  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
- <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <input type="image" onclick="return insertTags('body','\n\n# ',' #\n\n','[% loc('increase # for smaller headline') %]');"
  src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
@@ -49,5 +48,5 @@
  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
- <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
 [% END %]
+<br/><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
