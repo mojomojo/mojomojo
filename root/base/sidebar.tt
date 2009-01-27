@@ -1,39 +1,24 @@
+[%- DEFAULT back = 'view' -%]
+[%- MACRO gen_link(action, label, title, accesskey, selected, name) BLOCK; -%]
+
+ [%- IF selected == label -%]
+ <li class="active">[% label %]</li>
+ [%- ELSE -%]
+ <li><a accesskey="[% accesskey %]" href="[% c.uri_for(action) %]">[% label %]</a></li>
+ [%- END -%] 
+[%- END -%]
 <div id="sidebar">
 	<ul>
-		[% IF template.name == 'page/list.tt' %]
-	    <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
-	  [% ELSE %]
-	    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li> 
-	  [% END %]
-	
-	
-		[%IF template.name =='page/recent.tt' %]
-    	<li class="navOn" title="[%loc('Pages sorted by when they were last changed')%]">[%loc('Recent')%]</li>
-  	[% ELSE %]
-    	<li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li> 
-  	[% END; IF c.req.action =='tags' %]
-    	<li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li> 
-  	[% ELSE %]
-    	[% IF (pictures OR photo) %]
-    		<li><a href="[%c.uri_for('gallery','tags')%]" title="[%loc('All tags on photos')%]" accesskey="T">[%loc('Tags')%]</a></li>
-    	[% ELSE %]
-    		<li><a href="[%c.uri_for('tags')%]" title="[%loc('All tags in this path')%]" accesskey="T">[%loc('Tags')%]</a></li>
-    	[%END%]
-  	[% END; IF c.req.action=='users' %]
-    	<li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li> 
-  	[%ELSE%]
-    	<li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
-  	[% END; IF template.name=='feeds.tt' %]
-    	<li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li> 
-  	[%ELSE%]
-    	<li><a href="[%c.uri_for('feeds')%]" title="[%loc('Subscribe to changes by RSS')%]" accesskey="">[%loc('Feeds')%]</a></li>
-  	[% END; IF template.name =='export.tt' %]
-    	<li class="navOn" title="[%loc('Download a zip with all the pages in this wiki')%]">[%loc('Export')%]</li>
-  	[%ELSE%]
-    	<li><a href="[%c.uri_for('export')%]" title="[%loc('Download a zip with all the pages in this wiki')%]" accesskey="X">[%loc('Export')%]</a></li>
-  	[%END %]
-  		
-		</ul>
-</div> 
-
+		[% gen_link(c.uri_for('list'),    					loc('Sub pages'),	loc('Alphabetically sorted list of pages')						'A', selected, 'page/list.tt') %]
+ 		[% gen_link(c.uri_for('recent'), 						loc('Recent'),    loc('Pages sorted by when they were last changed') 		'U', selected, 'page/recent.tt') %]
+    [% IF (pictures OR photo) %]
+			[% gen_link(c.uri_for('gallery','tags'), 	loc('Tags'),      loc('All tags on photos') 												  	'T', selected, 'page/tags.tt') %]
+		[% ELSE %]
+			[% gen_link(c.uri_for('tags'), 						loc('Tags'),      loc('All tags in this path') 											  	'T', selected, 'page/tags.tt') %]
+ 		[% END %]
+		[% gen_link(c.uri_for('users'), 					 	loc('Authors'),   loc('Who wrote what')  																'',  selected, 'user/list.tt') %]
+ 		[% gen_link(c.uri_for('feeds'),  						loc('Feeds'), 	  loc('Subscribe to changes by RSS') 										'',  selected, 'feeds.tt') %]
+ 		[% gen_link(c.uri_for('export'), 					  loc('Authors'),   loc('Download a zip with all the pages in this wiki')	'X', selected, 'export.tt') %]
+	</ul>
+</div>
 

@@ -1,5 +1,8 @@
 [%PROCESS header.tt%]
-<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
+<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1>[% PROCESS topbar.tt %]</div>
+[% PROCESS breadcrumbs.tt %]
+
+<div id="wrapper">
 [% PROCESS admin/toplinks.tt selected = 'configuration' %]
 <div id="content">
    <h1>[%loc('Site Configuration')%]</h1>
@@ -7,4 +10,5 @@
 <h2>[%message%]</h2>
 </div>
 <div id="bottomnav">&nbsp;</div>
+</div>
 [%PROCESS footer.tt%]

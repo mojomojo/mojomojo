@@ -199,6 +199,7 @@ div#toplinks ul li.navOn {
 }
 
 
+
 #bottomnav {
 	padding: 6px 8px;
 	color: #000000;
@@ -207,12 +208,28 @@ div#toplinks ul li.navOn {
 	min-height: 1.8em;
 	font-size: 0.9em;	
 	margin-left: 150px;
-	background-color: #ebeae7;
+	background-color: #3f5673;
 }
-
+div#bottomnav ul li a {
+	color: white;
+}
+div#bottomnav ul li {
+	color: #bebbae;
+	line-height: 2em;
+}
 #bottomnav input {
 	font-size: 1em;
+	margin: 0;
+	border: none;
+	background-color: white;
+	text-decoration: underline;
+	color: red;
+	font: Arial, Helvetica, Geneva, sans-serif;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
+
 
 /* @group Sidebar */
 
