@@ -292,8 +292,9 @@ var fetch_preview = function() {
       },
       success: function(r) { 
         $('#content_preview').html(r)
-        var ratio=($('#content_preview').attr('scrollHeight')/$('textarea#body').attr('scrollHeight'));
+        var ratio=(($('#content_preview').attr('scrollHeight')-244)/($('textarea#body').attr('scrollHeight')-279));
         $('#content_preview').attr('scrollTop',Math.round($('textarea#body').attr('scrollTop')*ratio))
+
       }
     })
   }
