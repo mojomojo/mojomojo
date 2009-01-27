@@ -57,7 +57,7 @@ sub format_content {
     
     # No syntax highlighting for anything else than Textile yet, SORRY
     unless ($main_formatter eq 'MojoMojo::Formatter::Textile') {
-        $$content =~ s/<\s*pre\s+lang=".*?"\s*>/<pre>/g;
+        $$content =~ s/\{\{\s*code\:lang=".*?"\s*\}\}/<pre>/g;
         return $$content;
     }
 

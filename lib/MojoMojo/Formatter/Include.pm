@@ -34,17 +34,8 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
-
-    my @lines = split /\n/, $$content;
-    $$content = "";
-    foreach my $line (@lines) {
-        if ( $line =~ m/^=(http\:\/\/\S+)$/ ) {
-            $$content .= $class->include( $c, $1 );
-        }
-        else {
-            $$content .= $line . "\n";
-        }
-    }
+    my $re=$class->gen_re(qr/(http\:\/\/[^}]+)/);
+    $$content =~ s|$re|$class->include( $c, $1 )|meg;
 }
 
 =item include <c> <url>

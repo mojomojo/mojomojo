@@ -33,10 +33,8 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
-    eval {
-        $$content =~ s{\<p\>\=comments\s*\<\/p\>}
-                  {show_comments($c,$c->stash->{page})}me;
-    };
+    my $re=$class->gen_re('comments');
+    $$content =~ s|$re|show_comments($c,$c->stash->{page})|xme;
 }
 
 =item show_comments

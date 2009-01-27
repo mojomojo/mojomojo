@@ -1,6 +1,6 @@
-0.999027
+0.999027 2009-
         - Added "Split Edit" for side-by-side view/edit.
-        - Switched from Cache::Store::Memory to Cache::FastMmap
+o        - Switched from Cache::Store::Memory to Cache::FastMmap
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
         - List one link for each page by an author via .users (instead of all revisions).

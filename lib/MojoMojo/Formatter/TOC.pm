@@ -55,8 +55,7 @@ sub format_content {
     while (
         # replace the =toc markup tag if it's on a line of its own (<p>), or not (followed by <br />)
         $$content =~ s{
-            (<p>)=toc(?:$toc_params_RE)? \s* </p>
-          | (?<=>)?=toc(?:$toc_params_RE)? \s* (?=<br)
+            \{\{toc(?:$toc_params_RE)? \s*\}\}
         }{<!--mojomojoTOCwillgohere-->}x) {
         my ($toc_h_min, $toc_h_max);
         # FIXME: Perl 5.10 has a regexp branch reset operator which simplifies this
