@@ -360,3 +360,10 @@ div#bottomnav ul li {
 }
 
 /* @end */
+
+/* @group Revision info */
+
+
+#revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
+
+/* @end */

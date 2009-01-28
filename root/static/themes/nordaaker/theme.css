@@ -1,7 +1,8 @@
 /* @override http://localhost:3000/.static/themes/nordaaker/theme.css */
 
 body {
-background: #c1baaa repeat-x url(images/background.png);	margin: 0;
+	background: #c1baaa repeat-x url(images/background.png);
+	margin: 0;
 	color: #626262;
 	font: 85% Arial, Helvetica, Geneva, sans-serif;
 	text-align: center;
@@ -11,18 +12,20 @@ background: #c1baaa repeat-x url(images/background.png);	margin: 0;
 	text-align: left;
 	margin: 0 auto 0;
 }
+
 #wrapper {
 	max-width: 990px;
 	text-align: left;
 	margin: 0 auto 0;
 	position: relative;
 }
+
 div#header {
 	background: url(images/nordaaker.png) no-repeat 7px 4px;
 	padding: 9px 0 8px;
 }
+
 #header h1 {
-	
 	top: 14px;
 	padding: 16px 0 10px 58px;
 	color: #ffffff;
@@ -37,16 +40,19 @@ div#header {
 #header h1 a {
 	color: #ffffff;
 }
+
 #header form {
 	position: absolute;
 	right: 7px;
 	top: 5px;
 }
+
 #header form input#searchField {
-	border-color: #800;
-	border-top-color: #d90400;
-	border-left-color: #750000;
+	border-top-color: #1d1c19;
+	border-left-color: #1d1c19;
+	border: 1px solid #7e796f;
 }
+
 #breadcrumbs {
 	background: #800;
 	height: 12px;
@@ -71,16 +77,20 @@ div#header {
 	-moz-border-radius-topright: 5px;
 	-webkit-border-top-right-radius: 5px;
 }
+
 span.loginout {
 	float: right;
 }
+
 span.breads {
-	float:left
+	float: left
 }
+
 #breadcrumbs span.loginout a {
-	padding:0;
+	padding: 0;
 	background-color: transparent;
 }
+
 div#toplinks {
 	font-size: .9em;
 	background: #ebeae7;
@@ -100,6 +110,7 @@ div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
 }
 
 /* @group Edit buttons */
+
 div#pagenav ul {
 	display: inline;
 }
@@ -110,6 +121,7 @@ div#pagenav {
 	padding: 10px 15px 1px;
 	display: inline;
 }
+
 div#pagenav ul li a {
 	padding: 3px 7px;
 	color: black;
@@ -118,10 +130,10 @@ div#pagenav ul li a {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
-divd#pagenav ul li.edit a {	
+
+divd#pagenav ul li.edit a {
 	padding-bottom: 2px;
 	border-bottom: none;
-
 }
 
 div#pagenav ul li {
@@ -130,11 +142,11 @@ div#pagenav ul li {
 	display: inline;
 }
 
-
 div#pagenav ul li a:hover {
 	text-decoration: underline;
 	background-color: white;
 }
+
 div#pagenav ul li.meta a {
 	border: none;
 	color: white;
@@ -142,17 +154,18 @@ div#pagenav ul li.meta a {
 	padding: 0;
 	background-color: transparent;
 }
+
 div#pagenav ul li.meta {
 	margin-left: 10px;
 	color: #dfdcd2;
 }
-/* @end */
 
+/* @end */
 
 /* @group Tags */
 
 #tags {
-	background: #dcdcdc;
+	background: #dedac7;
 	font-size: 1.1em;
 	color: #676767;
 	padding: 5px 13px;
@@ -169,20 +182,22 @@ div#tags ul li {
 	display: inline;
 	margin: 0 0.5em 0 0;
 	padding: 4px 2px 4px 6px;
-	background-color: #f1f1f1;
+	background-color: #fcfff4;
 	font-size: .8em;
 	font-weight: bold;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+
 div#tags ul li span a, div#tags ul li span b {
-	background-color: white;	
+	background-color: white;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	padding: 0px 4px 1px;
 	font-size: 1.1em;
 	text-decoration: none;
 }
+
 div#tags ul li.title {
 	background-color: transparent;
 	padding: 0;
@@ -228,6 +243,7 @@ div#tags ul li .remove a:hover {
 }
 
 /* @end */
+
 div#toplinks ul li a {
 	padding: 3px 0px;
 }
@@ -237,20 +253,24 @@ div#toplinks ul li, div#bottomnav ul li {
 }
 
 div#pageoptions {
-	padding: 5px 14px;
-	background-color: #ceebb6;
-	margin-left: 150px;
+	padding: 4px 14px;
+	background-color: #520000;
 }
 
 div#pageoptions ul li {
 	display: inline;
-	padding: 5px 14px 5px 0;
-	color: black;
-	font-size: 1.1em;
+	margin-right: 1em;
+	color: white;
+	font-size: 0.9em;
 }
 
 div#pageoptions a {
-	color: green;
+	color: #dedac7;
+	text-decoration: none;
+}
+
+div#pageoptions a:hover {
+	text-decoration: underline;
 }
 
 div#toplinks ul li.navOn {
@@ -259,9 +279,11 @@ div#toplinks ul li.navOn {
 	padding: 2px 5px;
 }
 
+div#addtag, div#tags, div#content, div#bottomnav, div#pageoptions {
+	margin-left: 150px;
+}
 
 #content {
-	margin-left: 150px;
 	overflow: hidden;
 	padding: 13px;
 	background-color: #ffffff;
@@ -278,19 +300,19 @@ div#addtag {
 	margin: 0;
 	font-weight: bold;
 	min-height: 1.8em;
-	font-size: 0.9em;	
-	margin-left: 150px;
+	font-size: 0.9em;
 	background-color: #867f76;
 }
+
 div#bottomnav ul li a {
 	color: white;
 }
+
 div#bottomnav ul li {
 	color: #bebbae;
 	line-height: 2em;
 	padding: 0 0.5em 0 0;
 }
-
 
 #bottomnav input {
 	font-size: 1em;
@@ -305,13 +327,12 @@ div#bottomnav ul li {
 	-webkit-border-radius: 5px;
 }
 
-
 /* @group Sidebar */
 
 #sidebar {
- 	margin: 0 10px 0 0;
- 	padding: 5px;
- 	width: 130px;
+	margin: 0 10px 0 0;
+	padding: 5px;
+	width: 130px;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -321,6 +342,7 @@ div#bottomnav ul li {
 	padding: 0;
 	margin: 10px 0 0 0;
 }
+
 #sidebar ul li {
 	margin: 0 0 5px;
 	padding: 5px 10px;
@@ -330,13 +352,27 @@ div#bottomnav ul li {
 	-moz-border-radius-bottomright: 5px;
 	-webkit-border-bottom-right-radius: 5px;
 }
+
 #sidebar ul li.active {
 	background-color: #800;
 	color: white;
 }
+
 #sidebar ul li a {
 	color: white;
 	text-decoration: none;
+}
+
+/* @end */
+
+/* @group Revision info */
+
+#revision_info {
+	background: #ffa;
+	padding: .25em .5em;
+	color: #f60;
+	font-size: 1.1em;
+	float: right;
 }
 
 /* @end */

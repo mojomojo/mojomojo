@@ -11,15 +11,12 @@
 
 /* @group My Group */
 
-
-
 #categories {
 	background: #ffffff;
 }
 
 #allPages {
 	float: left;
-	width: 40%;
 	margin-right: 20px;
 }
 
@@ -131,389 +128,446 @@ p {
 }
 
 /* @end */
-/* @group Headlines */
+
+/
+
+* @group Headlines */
 
 .logintext {
-    font-weight:bold;
-    font-size:1.25em;
-    margin: 1em 0 1.5em 13px;
+	font-weight: bold;
+	font-size: 1.25em;
+	margin: 1em 0 1.5em 13px;
 }
+
 .username {
 	text-transform: capitalize;
 }
 
 h1 {
-    font-size: 2.5em;
+	font-size: 2.5em;
 }
+
 #content h1 {
-    margin-top:0;
-    font-size: 2em;
+	margin-top: 0;
+	font-size: 2em;
 }
+
 h2 {
-    font-size: 1.4em;
+	font-size: 1.4em;
 }
+
 h3 {
-    font-size: 1.2em;
-    margin-bottom: 0em;
+	font-size: 1.2em;
+	margin-bottom: 0em;
 }
+
 h4 {
-    font-size: 1.1em;
+	font-size: 1.1em;
 }
+
 h5, h6 {
-    font-size: 1em;
+	font-size: 1em;
 }
 
 /* @end */
 
 /* @group Links */
 
-a, a:visited { 
-    color: #2274A8;
-    text-decoration: underline;
+a, a:visited {
+	color: #2274A8;
+	text-decoration: underline;
 }
 
-#content a:visited { 
-    color: #4496ca;
+#content a:visited {
+	color: #4496ca;
 }
 
-a:hover, #content a:hover { 
-    color: #004276;
+a:hover, #content a:hover {
+	color: #004276;
 }
 
-
-    
 /* @end */
 
 /* @group Navigation */
 
-form { margin: 0;}
+form {
+	margin: 0;
+}
 
 .navigation {
-  color: #999;
+	color: #999;
 }
 
 #navigationForm {
-  font-size : 12px;
+	font-size: 12px;
 }
 
 .help {
-  font-size: 11px;
+	font-size: 11px;
 }
 
 .inputBox {
-  font-size: 11px;
-  background-color: #eee;
-  padding: 5px;
-  margin-bottom: 20px;
+	font-size: 11px;
+	background-color: #eee;
+	padding: 5px;
+	margin-bottom: 20px;
 }
 
 blockquote {
-  display: block;
-  margin: 0px 0px 20px 0px;
-  padding: 0px 30px;
-  font-size:11px;
-  line-height:17px;
-  font-style: italic;  
-  width: 400px;
+	display: block;
+	margin: 0px 0px 20px 0px;
+	padding: 0px 30px;
+	font-size: 11px;
+	line-height: 17px;
+	font-style: italic;
+	width: 400px;
 }
 
 pre {
-  width:90%;
-  background-color: #eee;
-  padding: 10px;
-  margin-left: 3em;
-  margin-right:1em ;
-  font-size: 11px;
-  overflow: auto
+	width: 90%;
+	background-color: #eee;
+	padding: 10px;
+	margin-left: 3em;
+	margin-right: 1em;
+	font-size: 11px;
+	overflow: auto
 }
 
 ol.setup {
-  font-size: 19px;
-  font-family: georgia, verdana, sans-serif;
-  padding-left: 25px;
+	font-size: 19px;
+	font-family: georgia, verdana, sans-serif;
+	padding-left: 25px;
 }
 
 ol.setup li {
-  margin-bottom: 20px
+	margin-bottom: 20px
 }
 
 .byline {
-  color: #999;
-  padding-left: 4px;
-  text-align:right;
+	color: #999;
+	padding-left: 4px;
+	text-align: right;
 }
 
 .references {
-  font-size: 10px;
+	font-size: 10px;
 }
 
 p#message {
- background: #eee; 
- padding: 0.7em; 
- border: 1px solid silver; 
- margin: 1em 0;
+	background: #eee;
+	padding: 0.7em;
+	border: 1px solid silver;
+	margin: 1em 0;
 }
 
 #previewHeading {
- clear:left;
+	clear: left;
 }
 
 div.preview {
- clear:left;
- /* max-width: 920px; */
- border:1px solid #ddd; 
- padding:5px;
- overflow: auto; 
- height: 250px;
- margin:0 0 1em 0;
- width: 100%;
+	clear: left;
+
+
+/* max-width: 920px; */
+ border: 1px solid #ddd;
+	padding: 5px;
+	overflow: auto;
+	height: 250px;
+	margin: 0 0 1em 0;
+	width: 100%;
 }
 
 textarea#body {
- height: 280px; 
- /* max-width: 930px; */
+	height: 280px;
+	/
+
+* max-width: 930px; */
  width: 100%;
 }
 
 textarea#comment {
- height: 150px; 
- width: 400px;
+	height: 150px;
+	width: 400px;
 }
 
 #hidden_info {
-  display:none ;
-  position:absolute;
-  z-index:1;
+	display: none;
+	position: absolute;
+	z-index: 1;
 }
 
 #TextileHelp,
-#MarkdownHelp
-{
-  width: 902px; 
-  background: #ddd; 
-  border: 1px solid #aaa;
-  padding:1em;
+#MarkdownHelp {
+	width: 902px;
+	background: #ddd;
+	border: 1px solid #aaa;
+	padding: 1em;
 }
 
 #MarkdownHelp table,
 #TextileHelp table {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
-
 
 #MarkdownHelp table+h3,
 #TextileHelp table+h3 {
-  margin-top: 11px;
+	margin-top: 11px;
 }
 
 #MarkdownHelp table td,
 #TextileHelp table td {
-  font-size: 11px;
-  padding: 3px;
-  vertical-align: top;
-  border-top: 1px dotted #ccc;
+	font-size: 11px;
+	padding: 3px;
+	vertical-align: top;
+	border-top: 1px dotted #ccc;
 }
 
 #MarkdownHelp table td.arrow,
 #TextileHelp table td.arrow {
-  padding-right: 5px;
-  padding-left: 10px;
-  color: #999;
+	padding-right: 5px;
+	padding-left: 10px;
+	color: #999;
 }
 
 #MarkdownHelp table td.label,
 #TextileHelp table td.label {
-  font-weight: bold;
-  white-space: nowrap;
-  font-size: 10px;
-  padding-right: 15px;
-  color: #000;
+	font-weight: bold;
+	white-space: nowrap;
+	font-size: 10px;
+	padding-right: 15px;
+	color: #000;
 }
 
 #MarkdownHelp h3,
 #TextileHelp h3 {
-  font-size: 11px;
-  font-weight: bold;
-  font-weight: normal;
-  margin: 0 0 5px 0;
-  padding: 5px 0 0 0;
+	font-size: 11px;
+	font-weight: bold;
+	font-weight: normal;
+	margin: 0 0 5px 0;
+	padding: 5px 0 0 0;
 }
 
-#TextileHelp h2 { margin-top:0; }
+#TextileHelp h2 {
+	margin-top: 0;
+}
 
 #MarkdownHelp p,
 #TextileHelp p {
-  font-size: 10px;
+	font-size: 10px;
 }
 
 .rightHandSide {
-  float: right;
-  width: 187px;
-  margin-left: 10px;
-  padding-left: 20px;
-  border-left: 1px dotted #ccc;
+	float: right;
+	width: 187px;
+	margin-left: 10px;
+	padding-left: 20px;
+	border-left: 1px dotted #ccc;
 }
 
 .rightHandSide p {
-  font-size: 10px;
+	font-size: 10px;
 }
- 
+
 .newsList {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .newsList p {
-  margin-bottom:30px;
+	margin-bottom: 30px;
 }
 
-
-
 .newWikiWord {
-  color: #e33;
-  background: #fee;
+	color: #e33;
+	background: #fee;
 }
 
 .newWikiWord a {
-  vertical-align: super;
-  line-height: 0;
-  font-size: 0.8em;
-  font-weight:bold;
-  text-decoration:none;
-  color:#e33;
-  padding:0 2px;
-  margin:0 0 0 .1em;
+	vertical-align: super;
+	line-height: 0;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-decoration: none;
+	color: #e33;
+	padding: 0 2px;
+	margin: 0 0 0 .1em;
 }
-#content .newWikiWord a:hover { 
-  background:#e33;
-  color:#fff;
+
+#content .newWikiWord a:hover {
+	background: #e33;
+	color: #fff;
 }
 
 .protoPage a:link {
-  color: #ab0b0b;
+	color: #ab0b0b;
 }
 
-.protoPage a:visited { 
-  color: #666;
+.protoPage a:visited {
+	color: #666;
 }
 
 .protoPage a:hover {
-  color: #fff; 
-  background-color:#ab0b0b; 
+	color: #fff;
+	background-color: #ab0b0b;
 }
-    
+
 /* @end */
 
 /* @group Highlighted keywords in search */
 
 .quoted {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 span#search_hit_score {
-    font-style:italic;
-    font-size:smaller;
-}    
+	font-style: italic;
+	font-size: smaller;
+}
 
 /* @end */
 
 /* @group Pagination Links */
 
 #content div.pager {
-    border:1px solid #eee;
-    padding:.25em;
-    text-align: center;
-    font-size:1.25em;
+	border: 1px solid #eee;
+	padding: .25em;
+	text-align: center;
+	font-size: 1.25em;
 }
 
-#content div.pager ul { 
-    list-style:none;
-    margin:0;
-    padding:0;
-    font-weight:bold;
-    list-style-position:inside;
+#content div.pager ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	list-style-position: inside;
 }
 
-#content div.pager .prev { margin:0; padding:0; float:left; }
-#content div.pager .next { margin:0; padding:0; float:right; }
+#content div.pager .prev {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
 
-#content div.pager ul li { 
-    display:inline;
-    margin:0;
-    padding:0;
+#content div.pager .next {
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+
+#content div.pager ul li {
+	display: inline;
+	margin: 0;
+	padding: 0;
 }
 
 div.pager ul li a {
-    text-decoration:none;
-    padding:2px .25em;
+	text-decoration: none;
+	padding: 2px .25em;
 }
+
 #content div.pager ul li a:hover {
-    color:#fff;
-    background:#2274a8;
+	color: #fff;
+	background: #2274a8;
 }
 
 dl#pageInfoMeta {
-    float:right;
-    width:350px;
-    border-left:2px solid #ccc;
-    padding:0 0 0 1em;
-    font-family:Arial,Helvetica,sans-serif;
+	float: right;
+	width: 350px;
+	border-left: 2px solid #ccc;
+	padding: 0 0 0 1em;
+	font-family: Arial,Helvetica,sans-serif;
 }
-dl#pageInfoMeta dt { line-height:16px; width:150px; font-weight:bold; float:left; clear:left; margin:0;padding:0; }
-dl#pageInfoMeta dd { line-height:16px; width:200px; }
 
-dl#authors          { padding:0; margin:1.5em 0; }
+dl#pageInfoMeta dt {
+	line-height: 16px;
+	width: 150px;
+	font-weight: bold;
+	float: left;
+	clear: left;
+	margin: 0;
+	padding: 0;
+}
+
+dl#pageInfoMeta dd {
+	line-height: 16px;
+	width: 200px;
+}
+
+dl#authors {
+	padding: 0;
+	margin: 1.5em 0;
+}
+
 dl#authors dd,
-dl#authors dt { line-height:16px; }
+dl#authors dt {
+	line-height: 16px;
+}
 
-dl#authors dt { width:200px; }
+dl#authors dt {
+	width: 200px;
+}
 
 /* @end */
 
 /* @group Amazon Plugin */
 
 div.amazon {
-    width:80%;
-    padding-left: 2em;
-    margin: 1em 4em 1em 4em;
-    border: 1px solid #ccc;
-    background: #eee;
+	width: 80%;
+	padding-left: 2em;
+	margin: 1em 4em 1em 4em;
+	border: 1px solid #ccc;
+	background: #eee;
 }
 
 div.amazon img {
-    margin: 1.2em;
+	margin: 1.2em;
 }
 
 /* @end */
+
 /* @group Lists */
 
 table.recent {
-    width:100%;
+	width: 100%;
 }
-table.recent .page          { width:50%; }
-table.recent .editedBy      { width:20%; }
-table.recent .timeEdited    { width:20%; }
-table.recent .actions       { width:10%; }
+
+table.recent .page {
+	width: 50%;
+}
+
+table.recent .editedBy {
+	width: 20%;
+}
+
+table.recent .timeEdited {
+	width: 20%;
+}
+
+table.recent .actions {
+	width: 10%;
+}
 
 /* @end */
 
 /* @group Diff */
 
 .diff {
-    margin-right:2em;
-    overflow: visible;
-    margin-top:1em;
+	margin-right: 2em;
+	overflow: visible;
+	margin-top: 1em;
 }
 
 .diffdel, del {
-  background: #fcc;
-  text-decoration: line-through;
+	background: #fcc;
+	text-decoration: line-through;
 }
 
 .diffins, ins {
-  background: #cfc;
+	background: #cfc;
 }
 
 /* @end */
+
 /* @group Allpages */
 
 div#allPages ul li ul li {
@@ -522,215 +576,222 @@ div#allPages ul li ul li {
 }
 
 /* @end */
+
 .form dl {
- margin: 13px;
- float: left;
+	margin: 13px;
+	float: left;
 }
 
 .form dt {
-  float: left;
-  width: 120px;
-  line-height: 24px;
+	float: left;
+	width: 120px;
+	line-height: 24px;
 }
 
 .form dd {
-  margin: 0 0 5px 90px;
-  line-height: 24px;
-  margin-left: 80px;
+	margin: 0 0 5px 90px;
+	line-height: 24px;
+	margin-left: 80px;
 }
 
 span.statusmsg {
-  color: #335577;
-  margin-left: 1em;
-  font-size: 1.5em;
+	color: #335577;
+	margin-left: 1em;
+	font-size: 1.5em;
 }
 
 .login form input {
-  width: 120px;
+	width: 120px;
 }
 
 .thumb {
-  border: none;
+	border: none;
 }
 
 .addbutton {
-  margin-right: 0.5em;
-  background: white; 
+	margin-right: 0.5em;
+	background: white;
 }
 
 .thumb {
-  background: #ddd;
-  padding: 8px;
-  margin: 8px;
+	background: #ddd;
+	padding: 8px;
+	margin: 8px;
 }
 
 .imageinfo {
-  float:right;
-  padding:0px;
-  margin:0px;
-  width: 150px;
-  min-height: 250px;
+	float: right;
+	padding: 0px;
+	margin: 0px;
+	width: 150px;
+	min-height: 250px;
 }
-
 
 /* Transparent forms */
 
 input.dual,textarea.dual {
-    width: 500px;
-    border: 1px solid #fff;
-    margin:0.1em;
-    background: transparent;
-    vertical-align: top;
+	width: 500px;
+	border: 1px solid #fff;
+	margin: 0.1em;
+	background: transparent;
+	vertical-align: top;
 }
 
 input.dual:focus, textarea.dual:focus {
-    border: 1px solid #000;
+	border: 1px solid #000;
 }
 
 .dualbutton {
-    display:none;
-    margin:0.1em;
+	display: none;
+	margin: 0.1em;
 }
 
 #title input,big {
-    font-size: 1.6em;
+	font-size: 1.6em;
 }
+
 #description textarea,small {
-    font-size: 0.9em;
+	font-size: 0.9em;
 }
 
 .framedpopup {
- background: #eee; 
- padding: 3px; 
- border: 1px solid silver; 
- width: 440px;
+	background: #eee;
+	padding: 3px;
+	border: 1px solid silver;
+	width: 440px;
 }
 
 dl {
- margin: 13px;
- font-family: sans-serif;
- clear: both;
+	margin: 13px;
+	font-family: sans-serif;
+	clear: both;
 }
 
 #editlink {
-    float:right;
-    padding-right: 10em;
+	float: right;
+	padding-right: 10em;
 }
 
 dt {
-  float: left;
-  width: 80px;
-  line-height: 24px;
+	float: left;
+	width: 80px;
+	line-height: 24px;
 }
 
 dd {
-  margin: 0 0 5px 90px;
-  font-size: 11px;
-  line-height: 24px;
-  margin-left: 80px;
+	margin: 0 0 5px 90px;
+	font-size: 11px;
+	line-height: 24px;
+	margin-left: 80px;
 }
 
 /* Common Forms Rules */
 
 .standard_form .fields label {
-  display: block;
-  clear: both;
+	display: block;
+	clear: both;
 }
+
 .standard_form .fields label span {
-  text-align: right;
-  margin-right: .5em;
+	text-align: right;
+	margin-right: .5em;
 }
+
 .standard_form .fields label span,
 .standard_form .fields label input {
-  display: block;
-  float: left;
-  margin-bottom: 1ex;
+	display: block;
+	float: left;
+	margin-bottom: 1ex;
 }
 
 /* Role Form */
+
 .role_form .fields label span {
-  width: 6em;
+	width: 6em;
 }
 
 .role_form #member_input {
-    width: 15em;
+	width: 15em;
 }
 
 /* @group sidebar nav menu */
 
 /* code shamelessly stolen from Eric Meyer's http://meyerweb.com/eric/css/edge/menus/demo.html */
+
 /** with some slight modifications of colors, widths, etc. by Dave Naughton **/
 
 ul#menuHome {
- border-bottom: 1px solid silver;
- font-weight: bold;
+	border-bottom: 1px solid silver;
+	font-weight: bold;
 }
 
 /* end of shamelessly stolen code */
+
 /* @end */
 
 .spinner {
-    float:right;
-    height:1em;
+	float: right;
+	height: 1em;
 }
 
 #editstatus {
-    color: red;
+	color: red;
 }
 
-div.photo img{
-    margin: 1em;
-    padding:5px;
-    border:1px solid;border-color: #ccc #666 #666 #ccc
+div.photo img {
+	margin: 1em;
+	padding: 5px;
+	border: 1px solid;
+	border-color: #ccc #666 #666 #ccc
 }
 
 .end {
-    clear:both;
+	clear: both;
 }
 
-
-.inline p,.inline dt,.inline dd{
-    font-size: 0.8em;
-    width: auto;
+.inline p,.inline dt,.inline dd {
+	font-size: 0.8em;
+	width: auto;
 }
 
 acronym {
-  border-bottom: 1px dotted;
+	border-bottom: 1px dotted;
 }
 
 .inplaceeditor-form input {
-    margin: 0px 10px 0px 0px;
+	margin: 0px 10px 0px 0px;
 }
 
 .inplaceeditor-form a {
-    border: 1px solid black;
-    background: #eee;
-    padding: 5px 6px 1px 6px;
-    margin: 0px 0px 0px 0px;
-    text-decoration: none;
+	border: 1px solid black;
+	background: #eee;
+	padding: 5px 6px 1px 6px;
+	margin: 0px 0px 0px 0px;
+	text-decoration: none;
 }
 
-#title { 
-    margin-left: 1em;
+#title {
+	margin-left: 1em;
 }
 
 #description {
-    font-style: italic;
-    margin-left: 2em;
+	font-style: italic;
+	margin-left: 2em;
 }
 
 #content img.right {
-    margin-left: 1em;
+	margin-left: 1em;
 }
 
 #searchField {
-    padding: 3px;
-    font-size: 1em;
-    border: 1px solid #bbb;
-    margin-left: 10px;
+	padding: 3px;
+	font-size: 1em;
+	border: 1px solid #bbb;
+	margin-left: 10px;
 }
+
 fieldset {
-    padding: 1em;
+	padding: 1em;
 }
 
 fieldset .button,
@@ -745,13 +806,14 @@ fieldset .reset,
 fieldset .select,
 fieldset .submit,
 fieldset .text,
-fieldset .textarea
-{
-    display: block;
-    clear: left;
-    border: 0;
-    margin: 1px;
-    /* when no label */
+fieldset .textarea {
+	display: block;
+	clear: left;
+	border: 0;
+	margin: 1px;
+	/* when no labe
+
+l */
     margin-left: 12em;
 }
 
@@ -767,24 +829,27 @@ fieldset .reset.label,
 fieldset .select.label,
 fieldset .submit.label,
 fieldset .text.label,
-fieldset .textarea.label
-{
-    margin-left: 1px;
+fieldset .textarea.label {
+	margin-left: 1px;
 }
 
 fieldset .error.label {
-    /* border + margin swap values with above, to ensure rows align */
+	/* 
+
+border + margin swap values with above, to ensure rows align */
     border: 1px #fff;
-    margin: 0;
+	margin: 0;
 }
 
 fieldset .error_message {
-       display: block;
-       color: #ff0000;
+	display: block;
+	color: #ff0000;
 }
 
 fieldset .label .error_message {
-       /* padding-left eq label width + padding-right */
+	/* pad
+
+ding-left eq label width + padding-right */
        padding-left: 12em;
 }
 
@@ -799,97 +864,99 @@ fieldset .radio label,
 fieldset .radiogroup label,
 fieldset .select label,
 fieldset .text label,
-fieldset .textarea label
-{
-    display: inline;
-    float: left;
-    width: 11em;
-    text-align: right;
-    padding: 4px 1em 0 0;
-    margin:0 0 1.5em 0;
+fieldset .textarea label {
+	display: inline;
+	float: left;
+	width: 11em;
+	text-align: right;
+	padding: 4px 1em 0 0;
+	margin: 0 0 1.5em 0;
 }
 
 fieldset .radiogroup span label {
-    /* undo the above style */
+	/* 
+
+undo the above style */
     float: none;
-    width: auto;
-    text-align: left;
-    padding-right: 0;
+	width: auto;
+	text-align: left;
+	padding-right: 0;
 }
 
 fieldset .multi .elements {
-    display: block;
-    float: left;
+	display: block;
+	float: left;
 }
 
 fieldset .multi .elements label {
-    display: block;
-    width: auto;
-    padding-right: 0.25em;
+	display: block;
+	width: auto;
+	padding-right: 0.25em;
 }
 
 fieldset .multi input,
 fieldset .multi select {
-    display: block;
-    float: left;
-    margin-right: 0.5em;
+	display: block;
+	float: left;
+	margin-right: 0.5em;
 }
 
 fieldset.checkboxgroup,
-fieldset.radiogroup
-{
-    margin: 0;
-    margin-left: 12em;
-    padding: 0;
-    width: auto;
+fieldset.radiogroup {
+	margin: 0;
+	margin-left: 12em;
+	padding: 0;
+	width: auto;
 }
 
 fieldset.radiogroup.label {
-    border: 0;
-    margin-left: 0em;
+	border: 0;
+	margin-left: 0em;
 }
 
 fieldset .comment .comment {
-    /* when no label */
+	/* 
+
+when no label */
     display: block;
-    margin-left: 0em;
+	margin-left: 0em;
 }
 
 fieldset .label .comment {
-    display: block;
-    margin-left: 12em;
+	display: block;
+	margin-left: 12em;
 }
-
 
 #powered {
-    float:right;
-    clear:both;
-    margin:1em 0 0 0;
+	float: right;
+	clear: both;
+	margin: 1em 0 0 0;
 }
 
-dl.list { 
-    font-size:14px;
-    font-family:Arial,Helvetica,sans-serif;
+dl.list {
+	font-size: 14px;
+	font-family: Arial,Helvetica,sans-serif;
 }
-dl.list dt { 
-    font-weight:bold; 
-    width:15em; 
+
+dl.list dt {
+	font-weight: bold;
+	width: 15em;
 }
-#revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
 
 .attachment {
-    background: #eee; 
-    padding: 3px;
-    border: 1px solid silver;
-    width:640px
+	background: #eee;
+	padding: 3px;
+	border: 1px solid silver;
+	width: 640px
 }
 
 #progressbar {
-    display:none;
+	display: none;
 	height: 18px;
 	background-color: grey;
 	margin: 10px 0;
 }
+
 #progressbar #progress {
 	width: 0%;
 	height: 18px;
@@ -898,21 +965,75 @@ dl.list dt {
 }
 
 /* Syntax Highlight Engine Kate */
-.kateAlert { color: #0000ff; }
-.kateBaseN { color: #007f00; }
-.kateBString { color: #c9a7ff; }
-.kateChar { color: #ff00ff; }
-.kateComment { color: #7f7f7f; }
-.kateDataType { color: #0000ff; }
-.kateDecVal { color: #00007f; }
-.kateError { color: #ff0000; }
-.kateFloat { color: #00007f; }
-.kateFunction { color: #007f00; }
-.kateIString { color: #ff0000; }
-.kateOperator { color: #ffa500; }
-.kateOthers { color: #b03060; }
-.kateRegionMarker { color: #96b9ff; }
-.kateReserved { color: #9b30ff; }
-.kateString { color: #ff0000; }
-.kateVariable { color: #0000ff; }
-.kateWarning { color: #0000ff; }
+
+.kateAlert {
+	color: #0000ff;
+}
+
+.kateBaseN {
+	color: #007f00;
+}
+
+.kateBString {
+	color: #c9a7ff;
+}
+
+.kateChar {
+	color: #ff00ff;
+}
+
+.kateComment {
+	color: #7f7f7f;
+}
+
+.kateDataType {
+	color: #0000ff;
+}
+
+.kateDecVal {
+	color: #00007f;
+}
+
+.kateError {
+	color: #ff0000;
+}
+
+.kateFloat {
+	color: #00007f;
+}
+
+.kateFunction {
+	color: #007f00;
+}
+
+.kateIString {
+	color: #ff0000;
+}
+
+.kateOperator {
+	color: #ffa500;
+}
+
+.kateOthers {
+	color: #b03060;
+}
+
+.kateRegionMarker {
+	color: #96b9ff;
+}
+
+.kateReserved {
+	color: #9b30ff;
+}
+
+.kateString {
+	color: #ff0000;
+}
+
+.kateVariable {
+	color: #0000ff;
+}
+
+.kateWarning {
+	color: #0000ff;
+}

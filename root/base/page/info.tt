@@ -9,7 +9,7 @@
 [% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
 
 <dl id="pageInfoMeta">
-    <dt>[%loc('Active version')%]:</dt>
+    <dt>[%loc('Active revision')%]:</dt>
     <dd>[% page.content_version %]</dd>
 
     <dt>[%loc('Content size')%]:</dt>
