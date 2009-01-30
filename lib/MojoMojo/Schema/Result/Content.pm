@@ -8,6 +8,7 @@ use base qw/MojoMojo::Schema::Base::Result/;
 use DateTime::Format::Mail;
 
 use Algorithm::Diff;
+use Algorithm::Merge qw/merge/;
 use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
@@ -43,7 +44,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->utf8_columns(qw/body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
-    "pages", "Page",
+    "pages", "MojoMojo::Schema::Result::Page",
     {
         "foreign.content_version" => "self.version",
         "foreign.id"              => "self.page",
@@ -51,7 +52,7 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_firsts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_first" => "self.version",
         "foreign.page"                  => "self.page",
@@ -59,14 +60,14 @@ __PACKAGE__->has_many(
 );
 __PACKAGE__->has_many(
     "page_version_page_content_version_lasts",
-    "PageVersion",
+    "MojoMojo::Schema::Result::PageVersion",
     {
         "foreign.content_version_last" => "self.version",
         "foreign.page"                 => "self.page",
     },
 );
-__PACKAGE__->belongs_to( "creator", "Person", { id => "creator" } );
-__PACKAGE__->belongs_to( "page",    "Page",   { id => "page" } );
+__PACKAGE__->belongs_to( "creator", "MojoMojo::Schema::Result::Person", { id => "creator" } );
+__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
 
 =head1 NAME
 
@@ -178,6 +179,22 @@ sub formatted {
     my ( $self, $c ) = @_;
     my $result = $self->result_source->resultset->format_content( $c, $self->body, $self );
     return $result;
+}
+
+sub merge_content {
+    my ($self,$saved,$content,$h1,$h2,$h3)=@_;
+
+    my $source = [ split /\n/, $self->encoded_body ];
+    my $a      = [ split /\n/, $saved->encoded_body ];
+    my $b      = [ split /\n/, $content ];
+    my @merged = merge( $source,$a,$b, {
+        CONFLICT => sub ($$){ (
+            "<!-- $h1  -->\n",(@{$_[0]}),
+            "<!-- $h2  -->\n",(@{$_[1]}),
+            "<!-- $h3 -->\n",
+            )}
+            });
+    return join('',@merged);
 }
 
 =item max_version 

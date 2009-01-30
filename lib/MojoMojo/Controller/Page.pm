@@ -8,6 +8,8 @@ use Text::Context;
 use HTML::Strip;
 use Data::Page;
 use Data::Dumper;
+use Readonly;
+Readonly my $EMPTY_STRING => '';
 
 =head1 NAME
 
@@ -167,12 +169,22 @@ sub search : Global {
         # my $score = sprintf( "%.0f", $hit->{score} * 1000 );
 
         # Store goods to be used in search results listing
-        my $link_title = $page->path;
-        my ( $title_base_nodes, $title_terminal_node ) =
-          $link_title     =~ m{(.*/)(.*)$};
-        $title_base_nodes =~ s{^/}{};
-        $title_base_nodes =~ s{/}{ > }g;
-        $title_terminal_node = ucfirst($title_terminal_node);
+        # NOTE: $page->path is '/' for app root,
+        # but $c->request->path is empty for app root.
+        my ( $title_base_nodes, $title_terminal_node );
+        my $link_title =
+          $page->path;
+        if ( $page->path eq '/' ) {
+            $title_base_nodes    = $EMPTY_STRING;
+            $title_terminal_node = '/';
+        }
+        else {
+            ( $title_base_nodes, $title_terminal_node ) =
+              $page->path =~ m{(.*/)(.*)$};
+              $title_base_nodes =~ s{^/}{};
+            $title_base_nodes =~ s{/}{ > }g;
+            $title_terminal_node = ucfirst($title_terminal_node);
+        }
         $results_hash{ $hit->{path} } = {
             snippet             => $snippet->as_html,
             page                => $page,

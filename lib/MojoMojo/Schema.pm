@@ -26,8 +26,23 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 =cut
 
 sub create_initial_data {
-    my $schema = shift;
+    my ($schema, %args) = @_;
     print "Creating initial data\n";
+
+    my $file = __PACKAGE__ . ".pm";
+    $file =~ s{::}{/}g;
+    my $path = $INC{$file};
+    $path =~ s{Schema\.pm$}{I18N};
+
+    require Locale::Maketext::Simple;
+    Locale::Maketext::Simple->import(
+        Decode => 1,
+        Class  => 'MojoMojo',
+        Path   => $path,
+    );
+    my $lang = $args{language} || 'en';
+    $lang =~ s/\..*$//;
+    loc_lang($lang);
 
     my @people = $schema->populate(
         'Person',
@@ -77,9 +92,9 @@ sub create_initial_data {
         'Page',
         [
             [qw/ version parent name name_orig depth lft rgt content_version /],
-            [ undef, undef, '/',     '/',     0, 1, 4, undef ],
+            [ undef, undef, '/',     '/',     0, 1, 5, undef ],
             [ undef, 1,     'help',  'Help',  1, 2, 3, undef ],
-            [ undef, 1,     'admin', 'Admin', 1, 2, 3, undef ],
+            [ undef, 1,     'admin', 'Admin', 1, 4, 5, undef ],
         ]
     );
 
@@ -113,16 +128,8 @@ sub create_initial_data {
                     precompiled /
             ],
             [
-                1, 1, $people[1]->id, 0, 'h1. Welcome to MojoMojo!
-
-This is your front page. To start administrating your wiki, please log in with
-username admin/password admin. At that point you will be able to set up your
-configuration. If you want to play around a little with the wiki, just create
-a [[New Page]] or edit this one through the edit link at the bottom.
-
-h2. Need some assistance?
-
-Check out our [[Help]] section.', 'released', 1, 1, '', '', '', ''
+                1, 1, $people[1]->id, 0, loc('welcome message', "test"),
+                , 'released', 1, 1, '', '', '', ''
             ],
             [
                 2, 1, $people[1]->id, 0, 'h1. Help Index.

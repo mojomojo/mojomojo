@@ -13,8 +13,8 @@ __PACKAGE__->add_columns(
     "admin",  { data_type => "INTEGER", is_nullable => 0, size => undef, default => 0 },
 );
 __PACKAGE__->set_primary_key( "role", "person" );
-__PACKAGE__->belongs_to( "role",   "Role",   { id => "role" } );
-__PACKAGE__->belongs_to( "person", "Person", { id => "person" } );
+__PACKAGE__->belongs_to( "role",   "MojoMojo::Schema::Result::Role",   { id => "role" } );
+__PACKAGE__->belongs_to( "person", "MojoMojo::Schema::Result::Person", { id => "person" } );
 
 =head1 NAME
 

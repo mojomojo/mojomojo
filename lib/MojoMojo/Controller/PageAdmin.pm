@@ -96,6 +96,7 @@ sub edit : Global FormConfig {
     }
 
     if ( $form->submitted_and_valid ) {
+        
 
         my $valid = $form->params;
         $valid->{creator} = $user;
@@ -108,11 +109,33 @@ sub edit : Global FormConfig {
                 creator     => $user,
             );
             $page = $path_pages->[ @$path_pages - 1 ];
-        }
+        } 
+            
+        $stash->{content}=$page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
-        $page = $c->model("DBIC::Page")->find( $page->id );
+        #$page = $c->model("DBIC::Page")->find( $page->id );
+        $page->discard_changes;
+
+        if( $c->stash->{content} && 
+            $c->req->params->{version} != $c->stash->{content}->version ) {
+            $c->stash->{message}=$c->loc('Someone else changed the page while you edited. Your changes has been merged. Please review and save again');
+            my $orig_content = $c->model("DBIC::Content")->find(
+                {
+                    page    => $page->id,
+                    version => $c->req->params->{version},
+                }
+            );
+            $c->stash->{merged_body}||=$orig_content->merge_content(
+                $c->stash->{content},
+                $form->params->{body},
+                $c->loc('THEIR CHANGES'),
+                $c->loc('YOUR CHANGES'),
+                $c->loc('END OF CONFLICT'));
+            return;
+        }
+
         $page->update_content(%$valid);
 
         # update the search index with the new content
@@ -123,11 +146,14 @@ sub edit : Global FormConfig {
         $c->model('DBIC::WantedPage')
           ->search( { to_path => $c->stash->{path} } )->delete();
 
-        # Redirect back to edit or page view mode.
+        # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq 'Save' ) {
-            $redirect .=
-              $c->req->params->{'edit_split'} ? '.edit_split' : '.edit';
+            $redirect .= '.edit';
+            if ( $c->req->params->{split} &&
+                 $c->req->params->{'split'} eq 'vertical' ) {
+                $redirect .= '?split=vertical';
+            }
         }
         $c->res->redirect($redirect);
     }
@@ -147,16 +173,6 @@ sub edit : Global FormConfig {
     }
 }    # end sub edit
 
-=head2 edit_split
-
-This action uses the edit action but in a side-by-side preview edit mode.
-
-=cut
-
-sub edit_split : Global {
-    my ( $self, $c ) = @_;
-    $c->forward('edit');
-}
 
 =head2 permissions
 
@@ -197,7 +213,9 @@ sub permissions : Global {
                 role_name => $_,
                 inherited => $current{$_} ? 1 : 0,
                 perms => $current{$_} && $current{$_}->{page},
-                subpages => exists $current{$_}->{subpages} ? 1 : 0
+                subpages => exists $current{$_}->{subpages}
+                ? 1
+                : 0
             }
           }
           sort keys %current
@@ -210,7 +228,7 @@ sub permissions : Global {
     for my $path ( keys %$data ) {
 
         # might have additional data (if cached)
-        #      next unless ($parent_path && $parent_path =~ /^$path/);
+        next unless ($parent_path && $parent_path =~ /^$path/);
         next if $path eq $current_path;
         my $path_perms = $data->{$path};
         for my $role ( keys %$path_perms ) {

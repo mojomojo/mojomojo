@@ -21,9 +21,9 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 0, size => 100 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "person", "Person", { id => "person" } );
-__PACKAGE__->belongs_to( "page",   "Page",   { id => "page" } );
-__PACKAGE__->belongs_to( "photo",  "Photo",  { id => "photo" } );
+__PACKAGE__->belongs_to( "person", "MojoMojo::Schema::Result::Person", { id => "person" } );
+__PACKAGE__->belongs_to( "page",   "MojoMojo::Schema::Result::Page",   { id => "page" } );
+__PACKAGE__->belongs_to( "photo",  "MojoMojo::Schema::Result::Photo",  { id => "photo" } );
 
 =head1 NAME
 
