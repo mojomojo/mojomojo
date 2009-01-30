@@ -1,15 +1,15 @@
 <div class="pager">
     [% UNLESS pager.current_page == pager.first_page %]
     <ul class="prev">
-        <li><a href="[% c.req.uri_with( { page => pager.first_page } ) %]">&lt;&lt;</a></li>
-        <li><a href="[% c.req.uri_with( { page => pager.previous_page } ) %]">&lt;</a></li>
+        <li><a href="[% c.uri_for(c.req.path) _ '?page=' _ pager.first_page %]">&lt;&lt;</a></li>
+        <li><a href="[% c.uri_for(c.req.path) _ '?page=' _ pager.previous_page %]">&lt;</a></li>
     </ul>
     [% END %]
     
     [% UNLESS pager.current_page == pager.last_page %]
     <ul class="next">
-        <li><a href="[% c.req.uri_with( { page => pager.next_page } ) %]">&gt;</a></li>
-        <li><a href="[% c.req.uri_with( { page => pager.last_page } ) %]">&gt;&gt;</a></li>
+        <li><a href="[% c.uri_for(c.req.path) _ '?page=' _ pager.next_page %]">&gt;</a></li>
+        <li><a href="[% c.uri_for(c.req.path) _ '?page=' _ pager.last_page %]">&gt;&gt;</a></li>
     </ul>
     [% END %]
 
