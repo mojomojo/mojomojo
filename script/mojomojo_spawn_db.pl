@@ -7,13 +7,13 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
 use MojoMojo::Schema;
-use Config::General;
+use Config::JFDI;
 
 
 
 
-my $cfg = Config::General->new("$Bin/../mojomojo.conf");
-my $config =  { $cfg->getall };
+my $jfdi = Config::JFDI->new(name => "MojoMojo");
+my $config = $jfdi->get;
 
 my ($dsn, $user, $pass) = @ARGV;
 eval {
