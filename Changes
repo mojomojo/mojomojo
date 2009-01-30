@@ -1,10 +1,11 @@
-0.999027
+0.999027 2009-01-30 23:17:00
         - Added "Split Edit" for side-by-side view/edit.
         - Switched from Cache::Store::Memory to Cache::FastMmap
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
         - List one link for each page by an author via .users (instead of all revisions).
         - Support merge for overlapping edits.
+        - Add japanese translation
 
 0.999026 2009-01-08 00:21:00
         - Fix a javascript issue with insert attachment
