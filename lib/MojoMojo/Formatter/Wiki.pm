@@ -244,7 +244,7 @@ Expand mixed case and _ with spaces.
 
 sub expand_wikiword {
     my ( $class, $word ) = @_;
-    $word =~ s/([a-z])([A-Z])/$1 $2/g;
+    #$word =~ s/([a-z])([A-Z])/$1 $2/g;
     $word =~ s/\_/ /g;
     return $word;
 }
