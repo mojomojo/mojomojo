@@ -1,4 +1,3 @@
-[% SET editor = c.pref('editor') || 'default' %]
 [% USE JavaScript %]
 [% # figure out the extra title part -%]
  [% IF page.content_version -%]
@@ -7,7 +6,7 @@
    [% SET pre_title = loc("Creating") -%]
  [% END -%]
 [% WRAPPER page/wrapper.tt pre_title=pre_title %]
-
+  
 
 [% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
 
@@ -17,7 +16,7 @@
 
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
-  [% page.content.formatted(c) %]
+  [% page.content.formatted(c) %] 
 [% ELSE %]
    <i>[%loc('To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.')%]</i>
 [% END %]
@@ -26,7 +25,7 @@
 <div id="edit_form">
   <form id="editForm" accept-charset="UTF-8"
     action=""
-	method="POST">
+	method="POST"> 
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -34,58 +33,36 @@
     <input type="hidden" name="parent" value="[% page.parent.id %]" />
     <input type="hidden" name="version" value="[% page.content.version %]" />
     [% IF message %]<p id="message"><small>[% message %]</small></p>[% END %]
-    [% IF editor == 'default' %]
 
     [%PROCESS toolbar.tt%]
-    [%END %]
     <br/>
     <a href="[%c.uri_for( '/' _ c.config.tool_separator _'jsrpc/render')%]" id="preview_url"></a>
     <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
-[% IF editor == 'fckeditor' %]
-  <script type="text/javascript">
-window.onload = function()
-{
-var oFCKeditor = new FCKeditor( 'body' ) ;
-oFCKeditor.BasePath = "[% c.uri_for_static('js/fckeditor/')%]" ;
-oFCKeditor.Height = '400' ;
-oFCKeditor.ReplaceTextarea() ;
-}
- </script>
- <script type="text/javascript">
-$(function(){
- $('#btn-ajax').click(function(){
-var oEditor = 	FCKeditorAPI.GetInstance( 'body' ) ;
-  jQuery.ajax({
-      data: {content: oEditor.GetXHTML( false )},
-      type: 'POST',
-      url:  $('#preview_url').attr('href'),
-      timeout: 2000,
-      error: function() {
-        alert("Failed to submit");
-      },
-      success: function(r) {
-        $('#content_preview').html(r)
-      }
-    })
- });
-});
- </script>
-  <input id="btn-ajax" name="btn-ajax" type="button" value="Update preview"/>
-[% END %]
-
-    [% PROCESS 'page_options.tt' %]
-
+    [% 	PROCESS 'page_options.tt' %]
+   <script type="text/javascript" language="JavaScript">
+    var append='[%append|js%]';
+      [% UNLESS user %]
+       $('#editForm').submit(function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
+      [% END %]
+    </script>
+    
+    <div class="spinner">
+        <span id="editstatus"></span>
+      <img id="editspinner" style="display:none;" 
+	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
+    </div>
+    
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/>
-    as
+    <input type="submit" name="submit" value='[% IF page.content && page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
+    as 
     [% IF user.id %]
-    [% c.wikiword(user.link,base) %]
+    [% c.wikiword(user.link,base) %] 
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
     [% ELSE %]
-    <input type="text" name="login"
-	   id="authorName" value="[% c.pref('anonymous_user')%]"
+    <input type="text" name="login" 
+	   id="authorName" value="[% c.pref('anonymous_user')%]" 
 	   onclick="this.value == '[%c.pref('anonymous_user')%]' ? this.value = '' : true" />
-    <input type="password" name="pass" id="userAuth" /><br/>
+    <input type="password" name="pass" id="userAuth" /><br/> 
     ([%loc('Leave second blank if you do not want a password')%].
     [% END %]
   </form>

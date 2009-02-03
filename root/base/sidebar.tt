@@ -1,16 +1,26 @@
-<div id="sidebar">
-[% IF c.stash.template!='page/attachments.tt' AND c.stash.template!='page/edit.tt' %]
-[% IF page.content.body_class == 4 OR  page.content.body_class == 3%]
-            [% IF page.content.col_right %]
-            [% FOREACH box IN liste_right %]
-            [% right='custom/' _ box _ '.tt'%]
-            [% PROCESS $right %]
-            [% END %]
-            [% ELSE %]
-            [% PROCESS custom/default_right.tt %]
-            [% END %]
-[% END %]
-[% END %]
+<div id="sidebar" class="rightHandSide">
+
+<script type="text/javascript">
+
+function menuInsertChildren(node) {
+var nodeId, pageId;
+
+if (node.getAttribute("class") != "menuParentMissingChildren") return;
+
+nodeId = node.getAttribute("id");
+pageId = nodeId.replace("menupage", "");
+
+new Ajax.Updater(nodeId, "[% c.uri_for('jsrpc/child_menu')", {parameters: 'page_id='+pageId, asynchronous: true, insertion: Insertion.Bottom});
+
+node.setAttribute("class", "menuParent");
+
+}
+
+</script>
+
+ <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] [% loc('Home') %]</a></li></ul>
+
+ [% PROCESS child_menu.tt parent_page = path_pages.0 %]
+  
 </div>
-<br style="clear:left" />
 

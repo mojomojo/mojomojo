@@ -1,4 +1,3 @@
 [% IF page.content.location %]
-<h3>Plan</h3>
 <div id="map"></div>
 [% END %]

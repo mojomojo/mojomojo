@@ -32,8 +32,8 @@ can be called with urls like "/page1/page2.action".
 
 =head2  view (.view)
 
-This is probably the most common action in MojoMojo. A lot of the
-other actions redispatches to this one. It will prepare the stash
+This is probably the most common action in MojoMojo. A lot of the 
+other actions redispatches to this one. It will prepare the stash 
 for page view, and set the template to view.tt, unless another is
 already set.
 
@@ -146,20 +146,13 @@ sub view : Global {
         $stash->{rev} = $content->version;
     }
     $stash->{content} = $content;
-    ( $c->stash->{location}, $c->stash->{zoom} ) =
-      split( /%/, $page->content->location );
-    $c->stash->{liste_left} = [ split( /;/, $page->content->col_left ) ]
-      if $page->content->col_left;
-    $c->stash->{liste_right} = [ split( /;/, $page->content->col_right ) ]
-      if $page->content->col_right;
-
     $c->res->status('404') if $page->content->notfound;
 
 }
 
 =head2 search (.search)
 
-This action is called as .search on the current page when the user
+This action is called as .search on the current page when the user 
 performs a search.  The user can choose whether or not to search
 the entire site or a subtree starting from the current page.
 
@@ -223,27 +216,18 @@ sub search : Global {
         # Store goods to be used in search results listing
         # NOTE: $page->path is '/' for app root,
         # but $c->request->path is empty for app root.
-        my ( $title_base_nodes, $title_terminal_node );
-        my $link_title =
-          $page->path;
-        if ( $page->path eq '/' ) {
-            $title_base_nodes    = $EMPTY_STRING;
-            $title_terminal_node = '/';
-        }
-        else {
-            ( $title_base_nodes, $title_terminal_node ) =
-              $page->path =~ m{(.*/)(.*)$};
-              $title_base_nodes =~ s{^/}{};
+        my $title_base_nodes;
+        if ( $page->path ne '/' ) {
+            ( $title_base_nodes ) =
+              $page->path =~ m{(.*/).*$};
+            $title_base_nodes =~ s{^/}{};
             $title_base_nodes =~ s{/}{ > }g;
-            $title_terminal_node = ucfirst($title_terminal_node);
         }
         $results_hash{ $hit->{path} } = {
             snippet             => $snippet->as_html,
             page                => $page,
             score               => $hit->{score},
-            link_title          => $link_title,
             title_base_nodes    => $title_base_nodes,
-            title_terminal_node => $title_terminal_node
         };
 
     }
@@ -398,7 +382,7 @@ sub atom : Global {
     $c->stash->{template} = 'page/atom.tt';
 }
 
-=head2 rss_full (.rss_full)
+=head2 rss_full (.rss_full) 
 
 Full content RSS feed of recent nodes in this namespace.
 
@@ -456,6 +440,7 @@ sub info : Global {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
     if ( $c->stash->{user} && $user->is_admin ) {
+		$c->stash->{body_length} = length( $c->stash->{page}->content->body );
         $c->stash->{template} = 'page/info.tt';
     }
     else {
@@ -544,8 +529,7 @@ sub do_sitemap : Global {
 "google sitemap generated, set config var 'gsm_ping' to equal 1 to enable automatic ping of google on generation"
     );
     $c->detach();
-    $c->stash->{body_length} = length( $c->stash->{page}->content->body );
-    $c->stash->{template}    = 'page/info.tt';
+    
 }
 
 =head1 AUTHOR

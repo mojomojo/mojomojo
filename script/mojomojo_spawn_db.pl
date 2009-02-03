@@ -7,13 +7,13 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
 use MojoMojo::Schema;
-use Config::General;
+use Config::JFDI;
 
 
 
 
-my $cfg = Config::General->new("$Bin/../mojomojo.conf");
-my $config =  { $cfg->getall };
+my $jfdi = Config::JFDI->new(name => "MojoMojo");
+my $config = $jfdi->get;
 
 my ($dsn, $user, $pass) = @ARGV;
 eval {
@@ -35,4 +35,4 @@ my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or
 print "Deploying schema to $dsn\n";
 $schema->deploy;
 
-$schema->create_initial_data();
+$schema->create_initial_data(language => $config->{default_lang} || 'en');

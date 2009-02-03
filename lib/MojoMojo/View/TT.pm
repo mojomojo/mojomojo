@@ -14,7 +14,6 @@ __PACKAGE__->config->{CONTEXT}            = undef;
 __PACKAGE__->config->{TEMPLATE_EXTENSION} = '.tt';
 __PACKAGE__->config->{PRE_PROCESS}        = 'global.tt';
 
-
 sub new {
     my $class  = shift;
 

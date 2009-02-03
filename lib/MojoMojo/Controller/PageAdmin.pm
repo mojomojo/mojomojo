@@ -95,8 +95,6 @@ sub edit : Global FormConfig {
         return;
     }
 
-    $stash->{content}=$page->content;
-
     if ( $form->submitted_and_valid ) {
         
 
@@ -113,9 +111,11 @@ sub edit : Global FormConfig {
             $page = $path_pages->[ @$path_pages - 1 ];
         } 
             
+        $stash->{content}=$page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
+        #$page = $c->model("DBIC::Page")->find( $page->id );
         $page->discard_changes;
 
         if( $c->stash->{content} && 
@@ -150,7 +150,8 @@ sub edit : Global FormConfig {
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq 'Save' ) {
             $redirect .= '.edit';
-            if ( $c->request->query_parameters->{'split'} eq 'vertical' ) {
+            if ( $c->req->params->{split} &&
+                 $c->req->params->{'split'} eq 'vertical' ) {
                 $redirect .= '?split=vertical';
             }
         }
@@ -227,7 +228,7 @@ sub permissions : Global {
     for my $path ( keys %$data ) {
 
         # might have additional data (if cached)
-        #      next unless ($parent_path && $parent_path =~ /^$path/);
+        next unless ($parent_path && $parent_path =~ /^$path/);
         next if $path eq $current_path;
         my $path_perms = $data->{$path};
         for my $role ( keys %$path_perms ) {

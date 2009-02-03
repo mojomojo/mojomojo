@@ -25,11 +25,6 @@ elements:
     name: commentaires
     label_loc: commentaires
   - type: Checkbox
-    name: gallery
-    label_loc: gallery
-    default_empty_value: 0
-    value: 1
-  - type: Checkbox
     name: noindex
     label_loc: noindex
     default_empty_value: 0
@@ -53,19 +48,7 @@ elements:
     name: short_title
     label_loc: short_title
   - type: Text
-    name: location
-    label_loc: location
-  - type: Text
     name: release_date
     label_loc: release_date
-  - type: Select
-    name: body_class
-    label_loc: body_class
-  - type: Text
-    name: col_left
-    label_loc: col_left
-  - type: Text
-    name: col_right
-    label_loc: col_right
   - type: Submit
     name: submit

@@ -23,7 +23,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999026';
+our $VERSION = '0.999027';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -34,7 +34,6 @@ MojoMojo->config->{default_view}='TT';
 MojoMojo->config->{cache}{backend} = {
     class => "Cache::FastMmap",
 };
-MojoMojo->config->{static}->{ignore_extensions}=[qw/tt yml/];
 
 MojoMojo->setup();
 
@@ -49,9 +48,9 @@ MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_d
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 SYNOPSIS
-
+    
   # Set up database (be sure to edit mojomojo.conf first)
-
+  
   ./script/mojomojo_spawn_db.pl
 
   # Standalone mode
@@ -67,14 +66,14 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 =head1 DESCRIPTION
 
 Mojomojo is a sort of content managment system, borrowing many concepts from
-wikis and blogs. It allows you to maintain a full tree-structure of pages,
+wikis and blogs. It allows you to maintain a full tree-structure of pages, 
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy AJAX-
 based diff system. There are also a bunch of other features like bult-in
 fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
-To find out more about how you can use MojoMojo, please visit
-http://mojomojo.org or read the installation instructions in
+To find out more about how you can use MojoMojo, please visit 
+http://mojomojo.org or read the installation instructions in 
 L<MojoMojo::Installation> to try it out yourself.
 
 =cut
@@ -181,8 +180,8 @@ sub prepare_path {
 	my $use_keywords=0;
     if ($index==-1) {
         my @data = split(',',$c->config->{reserved_keywords});
-        foreach my $dat (@data){
-	        if ( $path =~ m/^$dat/ ) {
+        foreach my $entry (@data){
+	        if ( $path =~ m/^$entry/ ) {
         	    $c->stash->{path}='/';
       	        $c->req->path($path);
 				$use_keywords=1;
@@ -304,7 +303,7 @@ sub _expand_path_elements {
 
 sub get_permissions_data {
     my ( $c, $current_path, $paths_to_check, $role_ids ) = @_;
-
+    
     # default to roles for current user
     $role_ids ||= $c->user_role_ids( $c->user );
 
@@ -391,10 +390,10 @@ sub get_permissions_data {
 
 sub user_role_ids {
     my ( $c, $user ) = @_;
-
+    
     ## always use role_id 0 - which is default role and includes everyone.
     my @role_ids = (0);
-
+    
     if ( ref($user) ) {
         push @role_ids, map { $_->role->id } $user->role_members->all;
     }
@@ -404,12 +403,12 @@ sub user_role_ids {
 
 sub check_permissions {
     my ( $c, $path, $user ) = @_;
-
+    
     return {
-        attachment  => 1,    create      => 1, delete      => 1,
+        attachment  => 1,    create      => 1, delete      => 1,    
         edit        => 1,    view        => 1,
     } if ($user && $user->is_admin);
-
+    
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
@@ -538,8 +537,8 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org.
-Commercial support and customization for MojoMojo is also provided by Nordaaker
+If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org. 
+Commercial support and customization for MojoMojo is also provided by Nordaaker 
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
 
 =head1 AUTHORS

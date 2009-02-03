@@ -1,37 +1,21 @@
-<h1>Options Page</h1>
-            <fieldset>
-            <label>Titre de la page :</label><br /><textarea style="width:500px;height:50px; id="title" name="title">[% page.content.title %]</textarea><br/>
-<label>Description</label><br /><textarea style="width:500px;height:50px; id="description" name="description">[% page.content.description %]</textarea><br />
-            <label>Mots cles de la page :</label><br /><textarea style="width:500px;height:50px; id="keywords" name="keywords">[% page.content.keywords %]</textarea>
-            <br/>
-            <label>Commentaires :</label><br /><textarea style="width:500px;height:50px; id="commentaires" name="commentaires">[% page.content.commentaires %]</textarea>
-            <br/>
-
-            <label >MAJ page :</label><input type="checkbox" id="maj" name="maj" checked="checked"/><br/><br />
-            <label >Destruction:</label><input type="checkbox" id="destroy" name="destroy" /><br/><br />
-        <label >No INDEX</label><input type="checkbox" [% IF  page.content.noindex == 'on' %]checked="checked"[% END %] name="noindex" id="noindex" /><br/><br />
- <label >Ne pas afficher dans le menu</label><input [% IF page.content.menufils == 'on' %]checked="checked"[% END %]  type="checkbox" name="menufils" id="menufils" /><br /><br /><br />
-<label >Error 404</label><input type="checkbox" [% IF  page.content.notfound == 'on' %]checked="checked"[% END %] name="notfound" id="notfound" />
-<br /><br />
- <label >Repertoire virtuel?</label><input type="checkbox" [% IF  page.content.rep == 1 %]checked="checked"[% END %] name="rep" id="rep" /><br/><br />
- <label >Titre menu</label><input type="text" name="short_title" id="short_title" value="[% page.content.short_title %]" /><br/>
-<label >GMap</label><input type="text" name="location" id="location" value="[% page.content.location %]" /><br/>
-[% USE date = DateTime(now = 1, time_zone = 'Europe/Paris',locale ='fr'); %]
- <label >Date</label><input type="text" name="release_date" id="release_date" value="[% IF page.content.release_date%][% page.content.release_date.ymd _ ' ' _ page.content.release_date.hms %][% ELSE %][% date.ymd _ ' ' _ date.hms %][%END%]" /><br/>
- <label >Body class </label><select name="body_class" id="body_class">
- <option [% IF page.content.body_class ==1 %] selected [% END %] value="1"> 1 colonne </option>
- <option [% IF page.content.body_class ==2 %] selected [% END %]  value="2"> 2 colonne gauche</option>
- <option [% IF page.content.body_class ==3 %] selected [% END %]  value="3"> 2 colonne droite</option>
- <option [% IF page.content.body_class ==4 %] selected [% END %]  value="4"> 3 colonne </option>
- </select>
- <br/>
- <label >Colonne Gauche</label><br /><textarea name="col_left" id="col_left">[% page.content.col_left%]</textarea><br/>
- <label >Colonne Droite</label><br /><textarea name="col_right" id="col_right">[% page.content.col_right%]</textarea><br/>
+<h1>[% loc("Options Page") %]</h1>
+            <label>[% loc("Status") %]</label>
  <select name="status" id="status">
- <option [% IF page.page_version.status == 'released'%]selected [% END %] value="released">Released</option>
-
- <option [% IF page.page_version.status == 'wait'%]selected [% END %] value="wait">En attente</option>
- <option [% IF page.page_version.status == 'remove'%]selected [% END %]  value="remove">Remove</option>
+ <option [% IF page.page_version.status == 'released'%]selected [% END %] value="released">[% loc("Released") %]</option>
+ <option [% IF page.page_version.status == 'minor_released'%]selected [% END %] value="minor released">[% loc("Minor Released") %]</option>
+ <option [% IF page.page_version.status == 'wait'%]selected [% END %] value="wait">[% loc("Not yet published") %]</option>
+ <option [% IF page.page_version.status == 'remove'%]selected [% END %]  value="remove">[% loc("Remove") %]</option>
  </select>
  <br />
- <br />
+
+            <label>[% loc("Page Title") %] :</label><br /><textarea style="width:500px;height:50px; id="title" name="title">[% page.content.title %]</textarea><br/>
+            <label>[% loc("Description") %]</label><br /><textarea style="width:500px;height:50px; id="description" name="description">[% page.content.description %]</textarea><br />
+            <label>[% loc("Keywords") %] :</label><br /><textarea style="width:500px;height:50px; id="keywords" name="keywords">[% page.content.keywords %]</textarea>
+            <br/>
+        <label >[% loc("NoIndex") %]</label><input type="checkbox" [% IF  page.content.noindex == 'on' %]checked="checked"[% END %] name="noindex" id="noindex" />
+        <label>[% loc("Don't show in nav") %]</label><input [% IF page.content.show_nav == 'on' %]checked="checked"[% END %]  type="checkbox" name="show_nav" id="show_nav" />
+<label>[% loc("Error 404") %]</label><input type="checkbox" [% IF  page.content.notfound == 'on' %]checked="checked"[% END %] name="notfound" id="notfound" />
+ <label>[% loc("Is Directory ?") %]</label><input type="checkbox" [% IF  page.content.is_directory == 1 %]checked="checked"[% END %] name="is_directory" id="is_directory" /><br/>
+ <label >[% loc("Short title") %]</label><input type="text" name="short_title" id="short_title" value="[% page.content.short_title %]" /><br/>
+ <label>[% loc("Writer Notes") %] :</label><br /><textarea style="width:500px;height:50px; id="commentaires" name="commentaires">[% page.content.commentaires %]</textarea>
+            <br/>

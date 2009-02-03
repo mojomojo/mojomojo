@@ -1,7 +1,8 @@
-[% SET page.body_class = 2 %]
-[% SET liste_left = 'default_left'; %]
-[% WRAPPER page/wrapper.tt %]
+[% PROCESS header.tt %]
 
+<div id="header"><h1>[% loc('Login') %]</h1></div>
+
+[% PROCESS breadcrumbs.tt %]
         
 <div id="content">
     <p class="end logintext"><span id="logintext">[% message %]</span>
@@ -22,7 +23,7 @@
         </dl>
     </form>
 </div>
-<script language="JavaScript" type="text/javascript">
-Field.focus('loginField');
-</script>
-[%  END %]
+
+<div id="bottomnav">&nbsp;</div>
+       
+[% PROCESS footer.tt %]

@@ -31,13 +31,13 @@
   [% IF template.name == 'page/list.tt' %]
     <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li>
+    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li> 
   [% END; IF template.name =='page/recent.tt' %]
     <li class="navOn" title="[%loc('Pages sorted by when they were last changed')%]">[%loc('Recent')%]</li>
   [% ELSE %]
-    <li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li>
+    <li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li> 
   [% END; IF c.req.action =='tags' %]
-    <li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li>
+    <li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li> 
   [% ELSE %]
     [% IF (pictures OR photo) %]
     <li><a href="[%c.uri_for('gallery','tags')%]" title="[%loc('All tags on photos')%]" accesskey="T">[%loc('Tags')%]</a></li>
@@ -45,11 +45,11 @@
     <li><a href="[%c.uri_for('tags')%]" title="[%loc('All tags in this path')%]" accesskey="T">[%loc('Tags')%]</a></li>
     [%END%]
   [% END; IF c.req.action=='users' %]
-    <li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li>
+    <li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li> 
   [%ELSE%]
     <li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
   [% END; IF template.name=='feeds.tt' %]
-    <li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li>
+    <li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li> 
   [%ELSE%]
     <li><a href="[%c.uri_for('feeds')%]" title="[%loc('Subscribe to changes by RSS')%]" accesskey="">[%loc('Feeds')%]</a></li>
   [% END; IF template.name =='export.tt' %]
@@ -59,7 +59,7 @@
   [%END %]
   <li><input type="hidden" name="search_type" value="all" />
   <input type="text" id="searchField" name="q" style="" value="[%loc('Search')%]"/>
-  </li></ul></form></div>
+  </li></ul></form></div> 
   <div id="pagenav">
 	<ul>
   [%IF (c.req.action=="view")%]
@@ -71,21 +71,21 @@
     [%IF (pictures )%]
       <li class="navOn">[%loc('Gallery')%]</li>
     [%ELSE%]
-      <li><a title="[%loc('Photo Album')%]" href="[%c.uri_for('gallery')%]">[%loc('gallery')%]</a></li>
+      <li><a title="[%loc('Photo Album')%]" href="[%c.uri_for('gallery')%]">[%loc('gallery')%]</a></li> 
     [%END%]
   [%END%]
 
   [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
 
     [%IF (c.req.action=="profile")%]
-      <li class="navOn">[% loc('Profile') %]</li>
+      <li class="navOn">[% loc('Profile') %]</li> 
     [%ELSE%]
       <li><a title="[%loc('User Profile')%]" href="[%c.uri_for('profile')%]">[%loc('Profile')%]</a></li>
     [%END%]
   [%END%]
   [%IF c.user_exists%]
     [%IF (c.req.action=="prefs")%]
-      <li class="navOn">[%loc('Preferences')%]</li>
+      <li class="navOn">[%loc('Preferences')%]</li> 
     [%ELSE%]
       <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%][% c.config.tool_separator %]prefs">[%loc('Preferences')%]</a></li>
     [% END %]

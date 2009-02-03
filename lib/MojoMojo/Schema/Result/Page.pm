@@ -288,7 +288,7 @@ sub has_photos {
 
 sub has_child {
     my $self=shift;
-    return 1 if $self->content->rep;
+    return 1 if $self->content->is_directory;
     return $self->children->count;
 }
 

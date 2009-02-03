@@ -47,6 +47,7 @@ requires(
     'Image::Math::Constrain'                       => 0,
     'Imager'                                       => 0,
     'IO::Scalar'                                   => 0,
+    'IO::File'                                     => 1.14,
     'LWP::Simple'                                  => 0,
     'Moose'                                        => 0,
     'Pod::Simple::HTML'                            => '3.01',
@@ -61,6 +62,7 @@ requires(
     'DBIx::Class'                                  => '0.08',
     'Syntax::Highlight::Engine::Kate'              => 0,
     'Cache::FastMmap'                              => 0,
+    'Config::JFDI'                                 => 0,
     'WWW::Google::SiteMap'                         => 0,
 );
 

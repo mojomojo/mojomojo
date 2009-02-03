@@ -1,16 +1,16 @@
-package MojoMojo::Formatter::SlideShow;
+package MojoMojo::Formatter::Left;
 
 use base qw/MojoMojo::Formatter/;
 
 =head1 NAME
 
-MojoMojo::Formatter::Slideshow - Include slideshows on your page.
+MojoMojo::Formatter::Gmap - Include gmap on your page.
 
 =head1 DESCRIPTION
 
-
-This formatter allows you to embed a slideshow of the current page's
-gallery into the content.
+This is a hook for the page gmap functionality. It allows a
+gmap box to be placed anywhere on your page through the =gmap
+tag.
 
 =head1 METHODS
 
@@ -22,7 +22,7 @@ Format order can be 1-99. The Comment formatter runs on 91
 
 =cut
 
-sub format_content_order { 92 }
+sub format_content_order { 100 }
 
 =item format_content
 
@@ -34,19 +34,22 @@ context object.
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
     eval {
-        $$content =~ s{\<p\>\=slideshow\s*\<\/p\>}
-                  {show_slide($c,$c->stash->{page})}me;
+        $$content =~ s{\<p\>\=left\((.*)\)\s*\<\/p\>}
+                  {show_left($c,$c->stash->{page},$1)}me;
     };
 }
 
-=item show_comments
+=item show_gmap
 
+Draw GMAP.
 
 =cut
 
-sub show_slide {
-    my ( $c, $page ) = @_;
-    return '<div id="slide">' . $c->view('TT')->render( $c, 'slideshow.tt' ) . '</div>';
+sub show_left {
+    my ( $c, $page,$content ) = @_;
+    $c->stash->{nb_column} = $content;
+    return $c->view('TT')->render( $c, 'custom/default_left.tt' );
+
 }
 
 =back
@@ -58,6 +61,7 @@ L<MojoMojo>,L<Module::Pluggable::Ordered>
 =head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>
+
 
 =head1 LICENSE
 
