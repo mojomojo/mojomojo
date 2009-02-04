@@ -1,0 +1,27 @@
+[% WRAPPER page/wrapper.tt index_page=(c.req.params.rev ? 0 : 1) %]
+	[%IF c.req.params.rev %]
+	<div id="revision_info">
+	     [% loc('Revision') %] [% c.req.params.rev %] - [% content.created.ymd %] [% loc('at') %] [% content.created.hms %]
+	[%IF c.req.params.rev > page.content_version %]
+	<em>[% loc('Rolled Back (Current: x)', page.content_version) %]</em>
+	[%END%]
+</div>
+	[%END%]
+	[% IF render == 'highlight' %]
+	[% content.highlight(c) %]
+    </div>
+
+	[% ELSE %]
+	[% content.formatted(c) %]
+	[% END %]
+
+<div id="changes" style="display: none">
+	<p id="message">
+		<small>
+	      [% loc('Showing changes from previous revision.') %]
+	      <ins class="diffins">[% loc('Added') %]</ins> | <del class="diffdel">[% loc('Removed') %]</del>
+	    </small>
+	</p>
+	<div id="diff"></div>
+</div>
+[% END %]

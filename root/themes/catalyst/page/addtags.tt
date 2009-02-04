@@ -1,0 +1,8 @@
+<div id="showtag" class="showdiv"><a title="[%loc('Set a keyword for this page')%]" href="#" id="add_tag">[%loc('Add tag')%]</a></div>
+<div id="addtag" style="display:none;" class="formdiv">
+    <a href="[%c.uri_for('json/tagsearch')%]" id="autocomplete_url"></a>
+    <form action="[%c.uri_for('jsrpc/submittag')%]" method="post" id="addtag_form"> 
+      <input id="taginput" type="text" name="tag" size="5" />
+      <input class="addbutton" type="submit" name="add" value="[%loc('Add')%]" /> 
+    </form>
+</div>

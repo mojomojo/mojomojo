@@ -1,0 +1,12 @@
+<ul>
+ [% FOR child_page = parent_page.children %]
+ <li
+  [% IF (child_page.rgt-child_page.lft) > 1 %]
+  class="menuParentMissingChildren"
+  onmouseover="menuInsertChildren(this)"
+  [% END %]
+  id="menupage[% child_page.id %]"
+  ><a href="[% base _ child_page.path %]">[% child_page.name_orig %]</a>
+ </li>
+ [% END %]
+</ul>

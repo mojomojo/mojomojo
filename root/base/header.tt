@@ -13,6 +13,7 @@
 [% END %]
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.slides.js')%]"></script>
 <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/slimbox2.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/tiny_mce/tiny_mce.js')%]"></script>
 <script type="text/javascript">
 jQuery.uri_for = function(path) { return '[%c.req.base%]' + path }
 jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.config.platform)%]/' + path }

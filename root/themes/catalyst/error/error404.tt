@@ -1,0 +1,10 @@
+[% WRAPPER page/wrapper.tt title = 'Page inexistante' %]
+<div id="main-navigation">
+</div> 
+<div id="main-content">
+<font face="Verdana" size="1">
+<h1>Error 404 Page not found</h1>
+<p>La page demand&eacute; n'existe pas.</p>
+</font>
+</div> 
+[%END%]

@@ -1,0 +1,16 @@
+[% PROCESS header.tt %]
+ <div id="header"><h1>[% loc('New User Registration') %]</h1></div>
+[%PROCESS breadcrumbs.tt%]
+        <div id="content">
+
+[% form %]
+
+<p class="end"><span id="logintext">[%message%]</span><br/>
+        </div>
+        <div id="bottomnav">&nbsp;
+   
+       
+<script language="JavaScript">
+$('register_login').focus();
+</script>
+[% PROCESS footer.tt %]

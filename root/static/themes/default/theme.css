@@ -17,7 +17,7 @@ body {
 }
 
 #header {
-    
+
     height: auto;
     padding-bottom: 0.1em;
     margin: 0;
@@ -101,7 +101,7 @@ div#pagenav ul li {
     display: inline;
 }
 div#pagenav ul li a {
-    text-decoration: none;  
+    text-decoration: none;
 }
 div#pagenav ul li a:hover {
     text-decoration: underline;
@@ -130,7 +130,7 @@ div#pageoptions a {
 }
 
 #wantedPages {
-    float:left; 
+    float:left;
     width:55%;
 }
 .wantedBy { color:#999; }
@@ -154,7 +154,6 @@ div#pageoptions a {
 }
 
 #content {
-  overflow: hidden;
     background: #ffffff;
     padding: 13px;
     overflow: hidden;
@@ -172,7 +171,7 @@ div#pageoptions a {
     padding-left:1.5em;
 }
 
-#content ul li { 
+#content ul li {
     list-style: square;
 }
 
@@ -191,7 +190,7 @@ div#pageoptions a {
 
 /* tables */
 
-#content table {
+/*#content table {
     border-collapse: collapse;
     border:2px solid #bbb;
     background: #fff;
@@ -220,6 +219,7 @@ div#pageoptions a {
 #content table tr.odd td, #content table tr.odd th {
     background: #efefef;
 }
+*/
 
 #bottomnav {
     background: #ebeae7;
@@ -252,7 +252,7 @@ p {
     margin: 1.2em 0;
 }
 
-.hide { 
+.hide {
     display: none;
 }
 
@@ -262,8 +262,8 @@ p {
 
 .center,
 #content .center,
-#content table .center {
+/*#content table .center {
     text-align: center;
-}
+}*/
 
 /* @end */
