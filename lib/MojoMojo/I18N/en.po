@@ -779,7 +779,7 @@ msgid "No roles created yet."
 msgstr ""
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:92
+#: lib/MojoMojo/Controller/Page.pm:90
 msgid "No such revision for "
 msgstr ""
 
@@ -886,7 +886,7 @@ msgid "Password must be between 4 and 14 chars"
 msgstr ""
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:73
+#: lib/MojoMojo/Controller/Page.pm:71
 msgid "Permission Denied to view x"
 msgstr "Permission Denied to view %1"
 
@@ -1323,7 +1323,7 @@ msgid "Unordered Lists with Paragraphs"
 msgstr ""
 
 #: root/forms/user/editprofile.yml:39
-msgid "Update "
+msgid "Update"
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:130
@@ -1524,6 +1524,10 @@ msgstr ""
 msgid "by"
 msgstr ""
 
+#: root/base/page/info.tt:31
+msgid "bytes"
+msgstr ""
+
 #: root/base/page/permissions.tt:20
 msgid "can"
 msgstr ""
@@ -1625,11 +1629,11 @@ msgid "increase # for smaller headline"
 msgstr ""
 
 #: root/base/attachments/list.tt:6
-msgid "inline"
+msgid "inline view"
 msgstr ""
 
 #: root/base/attachments/list.tt:8
-msgid "insert"
+msgid "insert link"
 msgstr ""
 
 #: root/base/toolbar.tt:20 root/base/toolbar.tt:42

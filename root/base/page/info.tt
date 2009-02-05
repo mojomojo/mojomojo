@@ -28,7 +28,7 @@
     <dd>[% page.links_from.size || 0%] [% loc('pages') %]</dd>
     
     <dt>[%loc('Attachments')%]:</dt>
-    <dd>[% page.attachments.size || 0%]</dd>
+    <dd>[% page.attachments.size || 0%] [% loc('bytes') %]</dd>
     
     <dt>[%loc('Photos')%]:</dt>
     <dd>[% page.has_photos || 0 %]</dd>
