@@ -329,7 +329,7 @@ msgstr ""
 
 #: root/base/user/validate.tt:19
 msgid "Didn't receive an email?"
-msgstr ""
+msgstr "メールが受け取れなかった場合"
 
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
@@ -419,7 +419,7 @@ msgstr "フィード"
 
 #: root/base/user/validate.tt:22
 msgid "Fill in the email address you want to use here"
-msgstr ""
+msgstr "アクティベーションを送りたいメールアドレスを以下に記入してください"
 
 #: root/base/edithelp.tt:36
 msgid "Format content until next =pod as plain old documentation"
@@ -555,7 +555,7 @@ msgstr "このページではFlashアップローダを使用しています。�
 #. (link)
 #: root/base/user/validate.tt:32
 msgid "If you are unable to validate, please x"
-msgstr "If you are unable to validate, please %1"
+msgstr "確認ができない場合は%1"
 
 #: root/base/edithelp.tt:38
 msgid "Image"
@@ -724,11 +724,11 @@ msgstr ""
 
 #: root/base/user/register.tt:2
 msgid "New User Registration"
-msgstr ""
+msgstr "ユーザーの新規登録"
 
 #: root/forms/admin/settings.yml:22
 msgid "New User Registration open"
-msgstr ""
+msgstr "ユーザーの新規登録を許可"
 
 #: root/forms/user/password.yml:15
 msgid "New password"
@@ -1016,11 +1016,11 @@ msgstr ""
 
 #: root/base/user/login.tt:11
 msgid "Register new account"
-msgstr ""
+msgstr "新規登録"
 
 #: lib/MojoMojo/Controller/User.pm:209
 msgid "Registration is closed!"
-msgstr ""
+msgstr "新規登録は行っておりません"
 
 #: root/base/tag/list.tt:31
 msgid "Related Tags"
@@ -1036,7 +1036,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:29
 msgid "Restrict user editing to home directory"
-msgstr ""
+msgstr "ホームディレクトリ以下の編集のみ許可"
 
 #: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
@@ -1094,15 +1094,15 @@ msgstr "Rolled Back (Current: %1)"
 
 #: root/base/admin/role_form.tt:40 root/base/page/edit.tt:51 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:29
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: root/base/navbar.tt:61 root/base/page/search.tt:13 root/base/page/search_inline.tt:3
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: root/base/page/search.tt:5
 msgid "Search Results"
-msgstr ""
+msgstr "検索結果"
 
 #: root/base/page/search.tt:14 root/base/page/search_inline.tt:4
 msgid "Search entire site"
@@ -1183,15 +1183,15 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:16
 msgid "Site Admins (In addition to you)"
-msgstr ""
+msgstr "サイト管理者（admin以外）"
 
 #: root/base/admin/settings.tt:5
 msgid "Site Configuration"
-msgstr ""
+msgstr "サイト全体の設定"
 
 #: root/forms/admin/settings.yml:9
 msgid "Site name"
-msgstr ""
+msgstr "サイト名"
 
 #: lib/MojoMojo/Controller/User.pm:383
 msgid "Some fields are invalid. Please correct them and try again:"
@@ -1351,7 +1351,7 @@ msgstr "ユーザー"
 
 #: root/base/user/validate.tt:11
 msgid "Validation"
-msgstr ""
+msgstr "確認"
 
 #: root/base/page/recent.tt:55
 msgid "View Diff"
@@ -1375,7 +1375,7 @@ msgstr "未作成ページ"
 
 #: root/base/user/validate.tt:13
 msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
-msgstr ""
+msgstr "アクティベーションリンクを記載したメールをお送りいたしました。メールに記載されたリンクをクリックして、アカウントを有効にしてください。"
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:279
