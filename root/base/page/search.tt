@@ -32,7 +32,7 @@
       [% result.snippet %]
     </div>
     <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] <a href="[% c.uri_for('/' _ result.page.page_version.creator.login _ '.profile') %]">[% result.page.page_version.creator.login %]</a>        
+      [% loc('by') %] [% c.wikiword(result.page.content.creator.link, base) %]       
       [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
     </div>
   </div>
