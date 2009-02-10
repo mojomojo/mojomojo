@@ -148,7 +148,7 @@ sub edit : Global FormConfig {
 
         # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
-        if ( $form->params->{submit} eq 'Save' ) {
+        if ( $form->params->{submit} eq $c->localize('Save') ) {
             $redirect .= '.edit';
             if ( $c->req->params->{split} &&
                  $c->req->params->{'split'} eq 'vertical' ) {
