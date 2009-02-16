@@ -12,15 +12,17 @@ $(document).ready(function(){
 
 // Hack up the edit layout into split mode using a two cell table.
 function split_layout_vertical() {
-    var max_container_width   = '1450px';
-    var preview_area_height   = '100%';
-    var edit_area_height      = '40em';
+    var max_container_width       = '1450px';
+    var preview_area_height       = '100%';
+    var edit_area_height          = '40em';
+    var preview_area_max_width    = '725px';
     
 	// Set the dimension and banner for side-by-side preview/edit.
     $("div#container").css("max-width", max_container_width);
     $("div#header").css('background-repeat', 'no-repeat');
     $("div.preview").css('height', preview_area_height);
     $("textarea#body").css('height', edit_area_height);
+    $("div.preview").css('max-width', preview_area_max_width);
 
     // Put the preview and edit divs into a 1x2 table. 
     $("div#content_preview").wrap("<td id='preview_cell' width='50%'></td>");

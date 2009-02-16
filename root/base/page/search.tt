@@ -27,12 +27,12 @@
 <div id="search_results" style="text-indent: 1em;">
 [% FOR result = results %]
  <div class="search_result">
-    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.title_terminal_node) %]</a></strong>
+    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name_orig) %]</a></strong>
     <div class="snippet">
       [% result.snippet %]
     </div>
     <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] <a href="[% c.uri_for('/' _ result.page.page_version.creator.login _ '.profile') %]">[% result.page.page_version.creator.login %]</a>        
+      [% loc('by') %] [% c.wikiword(result.page.content.creator.link, base) %]       
       [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
     </div>
   </div>
