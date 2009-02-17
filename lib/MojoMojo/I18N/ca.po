@@ -569,7 +569,7 @@ msgstr "Imatges"
 
 #: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
 msgid "Industry"
-msgstr ""
+msgstr "Indústria"
 
 #: root/base/page/permissions.tt:5
 msgid "Inherited permissions"
@@ -577,7 +577,7 @@ msgstr ""
 
 #: root/base/edithelp.tt:66
 msgid "Inline"
-msgstr "El línia"
+msgstr "En línia"
 
 #: root/base/edithelp.tt:62
 msgid "Inline Links"
@@ -585,11 +585,11 @@ msgstr ""
 
 #: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
 msgid "Interests"
-msgstr "Iteressos"
+msgstr "Interessos"
 
 #: root/base/toolbar.tt:25 root/base/toolbar.tt:47
 msgid "Internal Link"
-msgstr ""
+msgstr "Enllaç Intern"
 
 #: lib/MojoMojo/Controller/User.pm:154
 msgid "Invalid password."
@@ -613,7 +613,7 @@ msgstr ""
 
 #: root/base/user/profile.tt:36
 msgid "Last changes"
-msgstr ""
+msgstr "Últim canvis"
 
 #: root/base/edithelp.tt:63
 msgid "Later in the document"
@@ -793,7 +793,7 @@ msgstr "Res"
 
 #: root/base/edithelp.tt:145
 msgid "Normal Paragraph"
-msgstr ""
+msgstr "Paràgraf normal"
 
 #: root/base/page/list.tt:43
 msgid "Not found. Click to create this page."
@@ -821,7 +821,7 @@ msgstr ""
 
 #: root/base/edithelp.tt:67
 msgid "Optional Title"
-msgstr ""
+msgstr "Títol Opcional"
 
 #. (link)
 #: root/base/tag/cloud.tt:10
@@ -863,7 +863,7 @@ msgstr ""
 
 #: root/forms/pageadmin/edit.yml:9
 msgid "Page text"
-msgstr ""
+msgstr "Text de pàgina"
 
 #: root/base/navbar.tt:36 root/base/navbar.tt:38
 msgid "Pages sorted by when they were last changed"
@@ -917,7 +917,7 @@ msgstr "Fotos"
 
 #: lib/MojoMojo/Controller/User.pm:33
 msgid "Please enter username and password"
-msgstr ""
+msgstr "Entra nom d'usuari i contrasenya"
 
 #: lib/MojoMojo/Controller/User.pm:214
 msgid "Please fill in the following information to register. All fields are mandatory."
@@ -1116,7 +1116,7 @@ msgstr ""
 
 #: root/base/admin/role_form.tt:18
 msgid "Search for users:"
-msgstr ""
+msgstr "Cerca usuaris"
 
 #. (page.path)
 #: root/base/page/search.tt:15 root/base/page/search_inline.tt:5
@@ -1133,7 +1133,7 @@ msgstr "Veure canvis"
 
 #: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "See next revision"
-msgstr ""
+msgstr "Veure propera revisió"
 
 #: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "See previous revision"
@@ -1169,7 +1169,7 @@ msgstr "Mostra revisió"
 
 #: root/base/edithelp.tt:23
 msgid "Show this product"
-msgstr ""
+msgstr "Mostra aquest producte"
 
 #: root/base/page/view.tt:24
 msgid "Showing changes from previous revision."
@@ -1558,7 +1558,7 @@ msgstr ""
 
 #: root/base/admin/toplinks.tt:10
 msgid "configuration"
-msgstr ""
+msgstr "configuració"
 
 #: lib/MojoMojo/Controller/User.pm:307
 msgid "confirmation message resent"
@@ -1566,7 +1566,7 @@ msgstr ""
 
 #: root/forms/pageadmin/edit.yml:14
 msgid "creator"
-msgstr ""
+msgstr "creador"
 
 #: root/base/attachments/list.tt:9
 msgid "delete"
@@ -1574,7 +1574,7 @@ msgstr "suprimir"
 
 #: root/base/toolbar.tt:22 root/base/toolbar.tt:44
 msgid "deleted"
-msgstr ""
+msgstr "suprimit"
 
 #: root/base/message.tt:6
 msgid "do not pass prison, do not collect $ 200..."
@@ -1638,7 +1638,7 @@ msgstr ""
 
 #: root/base/toolbar.tt:20 root/base/toolbar.tt:42
 msgid "italic"
-msgstr ""
+msgstr "cursiva"
 
 #: root/base/edithelp.tt:59
 msgid "italics"
@@ -1682,11 +1682,11 @@ msgstr "nom"
 
 #: root/base/gallery/photo.tt:35
 msgid "no description"
-msgstr ""
+msgstr "no descripció"
 
 #: root/base/admin/user.tt:19
 msgid "no email address"
-msgstr ""
+msgstr "no correu electrònic"
 
 #: root/base/page/permissions.tt:20
 msgid "not access page"
