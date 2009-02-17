@@ -3,6 +3,8 @@ package MojoMojo::Schema::ResultSet::Page;
 use strict;
 use warnings;
 use base qw/MojoMojo::Schema::Base::ResultSet/;
+use Encode ();
+use URI::Escape ();
 
 =head1 NAME
 
@@ -162,7 +164,10 @@ sub normalize_name {
     my $name = $name_orig;
     $name =~ s/\s+/_/g;
     $name = lc($name);
-    return ( $name_orig, $name );
+    return (
+        Encode::decode_utf8(URI::Escape::uri_unescape($name_orig)), 
+        Encode::decode_utf8(URI::Escape::uri_unescape($name)), 
+    );
 }
 
 =item resolve_path <%args>
