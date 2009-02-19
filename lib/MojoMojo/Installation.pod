@@ -21,6 +21,10 @@ For instance, for MySQL:
         - dbi:mysql:database=mojo_database;host=localhost, mojo_user, password
 or for SQLite:
         - dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
+or for PostgreSQL:
+    connect_info   dbi:Pg:dbname=mojomojo;host=localhost;port=5432
+    connect_info   db_user
+    connect_info   db_password
 
 Once the db is setup, import the table structure, by running the following script:
 
