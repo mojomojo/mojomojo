@@ -782,7 +782,7 @@ msgid "No roles created yet."
 msgstr "Es wurde noch keine Rollen angelegt."
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:92
+#: lib/MojoMojo/Controller/Page.pm:90
 msgid "No such revision for "
 msgstr "Diese Revision existiert nicht für "
 
@@ -889,7 +889,7 @@ msgid "Password must be between 4 and 14 chars"
 msgstr "Das Passwort muss zwischen 4 und 14 Zeichen lang sein"
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:73
+#: lib/MojoMojo/Controller/Page.pm:71
 msgid "Permission Denied to view x"
 msgstr "Keine Berechtigung um %1 anzusehen"
 
@@ -1325,11 +1325,11 @@ msgstr "URL"
 msgid "Unordered Lists with Paragraphs"
 msgstr "Unsortierte Liste"
 
-#:
+#: root/forms/user/editprofile.yml:39
 msgid "Update"
 msgstr "Update"
 
-#: root/forms/user/editprofile.yml:39
+#:
 msgid "Update "
 msgstr "Update"
 
@@ -1531,6 +1531,10 @@ msgstr "fett"
 msgid "by"
 msgstr "von"
 
+#: root/base/page/info.tt:31
+msgid "bytes"
+msgstr ""
+
 #: root/base/page/permissions.tt:20
 msgid "can"
 msgstr "darf"
@@ -1631,13 +1635,21 @@ msgstr "diesen RSS-Feed inkludieren"
 msgid "increase # for smaller headline"
 msgstr "mehr # eingeben um die Überschrift zu verkleinern"
 
-#: root/base/attachments/list.tt:6
+#:
 msgid "inline"
 msgstr "inline"
 
-#: root/base/attachments/list.tt:8
+#: root/base/attachments/list.tt:6
+msgid "inline view"
+msgstr ""
+
+#:
 msgid "insert"
 msgstr "einfügen"
+
+#: root/base/attachments/list.tt:8
+msgid "insert link"
+msgstr ""
 
 #: root/base/toolbar.tt:20 root/base/toolbar.tt:42
 msgid "italic"

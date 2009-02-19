@@ -1,3 +1,13 @@
+        - Add polish tranlsation (linio)
+        - Add support for utf8 wiki words
+        - Fixes for paragraphs in toolbar (linio)
+        - Add Catalan language support
+        - limit width of preview area in split edit.
+        - expand_wikiword() only replaces underscores with spaces now.
+        - match display name of page title, breadcrumb final node, and search results.
+        - Make search results byline for last edit author.
+        - Limit preview width so long pre lines don't squash edit area. 
+
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.
         - Added "Split Edit" for side-by-side view/edit.

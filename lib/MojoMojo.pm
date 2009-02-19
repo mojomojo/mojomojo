@@ -17,6 +17,8 @@ use Storable;
 use Cache::Memory;
 use Data::Dumper;
 use DBIx::Class::ResultClass::HashRefInflator;
+use Encode ();
+use URI::Escape ();
 use MojoMojo::Formatter::Wiki;
 use Module::Pluggable::Ordered
     search_path => [qw/MojoMojo/],
@@ -216,6 +218,12 @@ sub uri_for {
         my $prefix = $c->stash->{path} =~ m|^/| ? '' : '/';
         unshift( @_, $prefix . $c->stash->{path} . '.' . $val );
     }
+
+    # do I see unicode here?
+    if (Encode::is_utf8($_[0])) {
+        $_[0] = join('/', map { URI::Escape::uri_escape_utf8($_) } split(/\//, $_[0]) );
+    }
+
     $c->NEXT::uri_for(@_);
 }
 
