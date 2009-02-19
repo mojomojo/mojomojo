@@ -11,9 +11,9 @@
  src="[%c.uri_for_static('toolbar/left.png')%]" title="[% loc('Left-justified paragraph') %]"/>
  <input type="image" onclick="return insertTags('body','\n\np>. ','\n\n','[% loc('right justified paragraph') %].');"
  src="[%c.uri_for_static('toolbar/right.png')%]" title="[% loc('Right-justified paragraph') %]"/>
- <input type="image" onclick="return insertTags('body','\n\np<>. ','\n\n','[% loc('centered paragraph') %].');"
+ <input type="image" onclick="return insertTags('body','\n\np=. ','\n\n','[% loc('centered paragraph') %].');"
  src="[%c.uri_for_static('toolbar/center.png')%]" title="[% loc('Centered paragraph') %]"/>
- <input type="image" onclick="return insertTags('body','\n\np=. ','\n\n','[% loc('justified paragraph') %].');"
+ <input type="image" onclick="return insertTags('body','\n\np<>. ','\n\n','[% loc('justified paragraph') %].');"
  src="[%c.uri_for_static('toolbar/justify.png')%]" title="[% loc('Justified paragraph') %]"/>&nbsp;&nbsp;&nbsp;
  <input type="image" onclick="return insertTags('body','*','*','[% loc('bold') %]');"
  src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
