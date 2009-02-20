@@ -14,7 +14,6 @@ use Catalyst qw/    ConfigLoader
     /;
 
 use Storable;
-use Cache::Memory;
 use Data::Dumper;
 use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
