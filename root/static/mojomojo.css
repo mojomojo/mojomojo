@@ -85,12 +85,29 @@ div#toplinks ul li.navOn {
 
 blockquote {
   display: block;
-  margin: 0px 0px 20px 0px;
-  padding: 0px 30px;
-  font-size:11px;
-  line-height:17px;
-  font-style: italic;  
-  width: 400px;
+  width: 80%;
+  background-color: #EEE;
+  border : 1px dotted black;
+  padding-right: 2em;
+  padding-left: 2em;
+  font-style: italic;
+  quotes: "\201C" "\201D";
+}
+blockquote:before, blockquote:after {
+  display: block; 
+  color: #7aa5d5;
+  font-size: 5em;
+}
+blockquote:before {
+  content: open-quote;
+  height: 0px;
+  margin-left: -0.45em;
+}
+blockquote:after {
+  content: close-quote;
+  height: 0.6em;
+  margin-left: 99.5%;
+  margin-top: -0.5em;
 }
 
 pre {
