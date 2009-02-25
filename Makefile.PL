@@ -25,7 +25,6 @@ requires(
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::View::TT'                           => '0.23',
     'Catalyst::View::JSON'                         => 0,
-    'Cache::Memory'                                => 0,
     'Config::General'                              => 0,
     'Data::FormValidator::Constraints::DateTime'   => 0,
     'DateTime::Format::Mail'                       => 0,
