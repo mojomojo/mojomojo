@@ -1,0 +1,2026 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8    \n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: root/base/user/profile.tt:11
+msgid "(Private)"
+msgstr "(비공식)"
+
+#: root/base/user/profile.tt:16 root/base/user/profile.tt:19 root/base/user/profile.tt:22 root/base/user/profile.tt:9
+msgid "(Unknown)"
+msgstr "(알려지지않음)"
+
+#: root/base/edithelp.tt:60
+msgid "**bold** or __bold__"
+msgstr "**볼드** 또는  __볼드__"
+
+#: root/base/edithelp.tt:59
+msgid "*italic* or _italic_"
+msgstr "*이탤릭* 또는  _이탤릭_"
+
+#: root/base/edithelp.tt:154
+msgid "3 or more dashes or asterisks"
+msgstr "3개 이상의 하이픈, 또는 아스테리스크(*)"
+
+#: root/base/toolbar.tt:38 root/base/toolbar.tt:8
+msgid "<xml> and such.\\nor pure text."
+msgstr ""
+
+#: root/base/message.tt:2
+msgid "A message from our sponsors..."
+msgstr ""
+
+#: root/base/header.tt:21 root/base/header.tt:23 root/base/page/atom.tt:3 root/base/page/atom.tt:6
+msgid "A poorly configured MojoMojo Installation"
+msgstr ""
+
+#: root/base/page/recent.tt:41
+msgid "Actions"
+msgstr "액션"
+
+#: root/base/admin/role.tt:16 root/base/admin/user.tt:8
+msgid "Active"
+msgstr "유효"
+
+#: root/base/page/info.tt:12
+msgid "Active version"
+msgstr ""
+
+#: root/base/admin/role_form.tt:9
+msgid "Active?"
+msgstr ""
+
+#: root/base/page/addtags.tt:6
+msgid "Add"
+msgstr "추가"
+
+#: root/base/page/addtags.tt:1
+msgid "Add tag"
+msgstr "태그추가"
+
+#: root/base/page/view.tt:25
+msgid "Added"
+msgstr ""
+
+#: root/base/user/profile.tt:15
+msgid "Age"
+msgstr "나이"
+
+#: root/base/page/list.tt:16 root/base/tag/list.tt:5
+msgid "All Pages"
+msgstr "모든 페이지"
+
+#. (page.path)
+#: root/base/page/list.tt:1
+msgid "All Pages in x"
+msgstr "「%1」아래의 모든 페이지"
+
+#. (page.name)
+#: root/base/page/list.tt:17
+msgid "All pages in x listed alphabetically"
+msgstr "「%1」아래의 모든 페이지(알파벳순)"
+
+#. (activetag)
+#: root/base/tag/list.tt:21
+msgid "All pages tagged with x listed alphabetically"
+msgstr "All pages tagged with %1 listed alphabetically"
+
+#: root/base/tag/cloud.tt:9
+msgid "All tags"
+msgstr ""
+
+#: root/base/navbar.tt:40 root/base/navbar.tt:45
+msgid "All tags in this path"
+msgstr ""
+
+#: root/base/navbar.tt:43
+msgid "All tags on photos"
+msgstr ""
+
+#: root/base/edithelp.tt:26
+msgid "Allow comments on this page."
+msgstr ""
+
+#: root/base/navbar.tt:32 root/base/navbar.tt:34
+msgid "Alphabetically sorted list of pages"
+msgstr ""
+
+#: root/base/toolbar.tt:2
+msgid "Also try h2,h3 and so on"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:255
+msgid "An error occourred. Sorry."
+msgstr ""
+
+#: root/base/edithelp.tt:131
+msgid "An h2 tag in a blockquote"
+msgstr ""
+
+#: root/base/edithelp.tt:134
+msgid "An unordered list"
+msgstr ""
+
+#: root/base/edithelp.tt:133
+msgid "And additional Markdown formatting"
+msgstr ""
+
+#: root/base/edithelp.tt:31
+msgid "And others."
+msgstr ""
+
+#:
+msgid "Anonymous User (blank to disable)"
+msgstr "이름없는 유저(공백을 넣으면 무효가 됩니다)"
+
+#: root/base/gallery/photo_info.tt:8
+msgid "Aperture"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Attachment.pm:107
+msgid "Attachment not found."
+msgstr "첨부파일을 찾을 수 없습니다."
+
+#: root/base/page/editbar.tt:13 root/base/page/editbar.tt:18 root/base/page/editbar.tt:6 root/base/page/info.tt:30
+msgid "Attachments"
+msgstr "첨부파일"
+
+#: root/base/navbar.tt:48 root/base/navbar.tt:50
+msgid "Authors"
+msgstr "멤버"
+
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
+msgid "Back in time"
+msgstr "과거의 상태"
+
+#: root/base/page/bottomnav.tt:38
+msgid "Back to the page"
+msgstr "페이지로 돌아가기"
+
+#: root/base/page/list.tt:27
+msgid "Backlinks"
+msgstr "링크"
+
+#:
+msgid "Birth Date"
+msgstr "생일"
+
+#: root/base/edithelp.tt:127
+msgid "Block quotes"
+msgstr "블록인용"
+
+#: root/base/edithelp.tt:130
+msgid "Blockquotes can be nested"
+msgstr ""
+
+#: root/base/toolbar.tt:19 root/base/toolbar.tt:41
+msgid "Bold"
+msgstr ""
+
+#: root/base/toolbar.tt:35 root/base/toolbar.tt:5
+msgid "Bullet list"
+msgstr ""
+
+#: root/base/edithelp.tt:25
+msgid "Bulleted list"
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:5
+msgid "Camera"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Attachment.pm:169
+msgid "Can only make inline version of photos"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Attachment.pm:150
+msgid "Can only make thumbnails of photos"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:114
+msgid "Cannot find that user."
+msgstr ""
+
+#: lib/MojoMojo/Controller/Admin.pm:66
+msgid "Cant find admin user: "
+msgstr ""
+
+#: root/base/toolbar.tt:15
+msgid "Centered paragraph"
+msgstr ""
+
+#: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
+msgid "Change page content"
+msgstr ""
+
+#: root/base/user/prefs.tt:6
+msgid "Change password"
+msgstr "패스워드 변경"
+
+#: root/base/user/profile.tt:46
+msgid "Change profile content"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:16
+msgid "Change site settings"
+msgstr ""
+
+#: root/base/page/info.tt:18
+msgid "Children"
+msgstr ""
+
+#: root/base/page/attachments.tt:14
+msgid "Choose attachments"
+msgstr ""
+
+#: root/base/edithelp.tt:121
+msgid "Circle"
+msgstr ""
+
+#: root/base/gallery/photo.tt:32
+msgid "Click for original version"
+msgstr ""
+
+#: root/base/page/suggest.tt:21
+msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
+msgstr ""
+
+#: root/base/edithelp.tt:137
+msgid "Code Spans"
+msgstr ""
+
+#: root/base/comment.tt:5
+msgid "Comment"
+msgstr ""
+
+#: root/forms/comment/comment.yml:17
+msgid ""
+"Comment body\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Register\n"
+msgstr ""
+
+#: root/base/comment.tt:5
+msgid "Comments"
+msgstr ""
+
+#: root/base/page/info.tt:15
+msgid "Content size"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:52 root/base/comment/login.tt:6
+msgid "Could not authenticate that login."
+msgstr ""
+
+#. ($file)
+#: lib/MojoMojo/Controller/Attachment.pm:60
+msgid "Could not create attachment from x"
+msgstr "Could not create attachment from %1"
+
+#:
+msgid "Create"
+msgstr "작성"
+
+#: root/base/admin/create_role.tt:9
+msgid "Create Role"
+msgstr ""
+
+#: root/base/admin/role.tt:11 root/base/admin/role.tt:30
+msgid "Create a new role"
+msgstr ""
+
+#: root/base/page/edit.tt:56
+msgid "Create and View"
+msgstr ""
+
+#: root/base/edithelp.tt:155
+msgid "Creates"
+msgstr ""
+
+#: root/base/page/edit.tt:6
+msgid "Creating"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:38
+msgid "Current Revision"
+msgstr "현재 리비젼現"
+
+#:
+msgid "Current password"
+msgstr "현재 패스워드　"
+
+#: root/forms/user/password.yml:29
+msgid ""
+"Current password\n"
+"    constraints:\n"
+"        - Required\n"
+"  - type: Password\n"
+"    name: pass\n"
+"    label_loc: New password\n"
+"    constraints:\n"
+"        - Required\n"
+"  - type: Password\n"
+"    name: pass_again\n"
+"    label_loc: New password again\n"
+"    constraints:\n"
+"        - type: Equal\n"
+"          others: pass\n"
+"          message_loc: 'Password did not match'\n"
+"        - Required\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Save\n"
+msgstr ""
+
+#: root/base/user/profile.tt:33
+msgid "Date registered"
+msgstr "등록일"
+
+#: root/base/toolbar.tt:23 root/base/toolbar.tt:45
+msgid "Deleted Text"
+msgstr "삭제된 텍스트"
+
+#: root/base/page/info.tt:21
+msgid "Descendants"
+msgstr ""
+
+#: root/base/user/validate.tt:19
+msgid "Didn't receive an email?"
+msgstr "메일을 받지 못했을 경우"
+
+#: root/base/navbar.tt:56 root/base/navbar.tt:58
+msgid "Download a zip with all the pages in this wiki"
+msgstr "Wiki 내용을 ZIP형식으로 다운로드"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:135
+msgid "END OF CONFLICT"
+msgstr ""
+
+#: root/base/admin/role.tt:23 root/base/page/editbar.tt:11 root/base/page/editbar.tt:17 root/base/page/permissions.tt:47
+msgid "Edit"
+msgstr "편집"
+
+#: root/base/navbar.tt:18
+msgid "Edit Page"
+msgstr "페이지 수정"
+
+#: root/base/user/profile.tt:46
+msgid "Edit Profile"
+msgstr "프로필 수정"
+
+#: root/base/admin/edit_role.tt:9
+msgid "Edit Role"
+msgstr "역할 수정"
+
+#: root/base/page/bottomnav.tt:16
+msgid "Edit Settings"
+msgstr "설정 변경"
+
+#: root/base/page/recent.tt:39
+msgid "Edited by"
+msgstr "편집자"
+
+#: root/base/page/edit.tt:4
+msgid "Editing"
+msgstr "「%1」를 편집중"
+
+#. (user.name)
+#: root/base/user/editprofile.tt:3
+msgid "Editing user profile for x"
+msgstr "Editing user profile for %1"
+
+#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26
+msgid "Email"
+msgstr "메일주소"
+
+#: root/base/user/validate.tt:4
+msgid "Email Validation"
+msgstr "메일 주소 확인"
+
+#: lib/MojoMojo/Controller/User.pm:188
+msgid "Emailed you your new password."
+msgstr ""
+
+#: root/base/toolbar.tt:37 root/base/toolbar.tt:7
+msgid "Enum list"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:191
+msgid "Error occurred while emailing you your new password."
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:1
+msgid "Exif Data"
+msgstr ""
+
+#: root/base/page/suggest.tt:4
+msgid "Existent Pages"
+msgstr ""
+
+#: root/base/export.tt:1 root/base/navbar.tt:56 root/base/navbar.tt:58
+msgid "Export"
+msgstr "보내기"
+
+#: root/base/toolbar.tt:27 root/base/toolbar.tt:49
+msgid "External Link"
+msgstr "외부링크"
+
+#:
+msgid "Favorite Albums"
+msgstr "좋아하는 앨범"
+
+#:
+msgid "Favorite Movies"
+msgstr "좋아하는 영화"
+
+#: root/base/navbar.tt:54
+msgid "Feeds"
+msgstr "피드"
+
+#: root/base/user/validate.tt:22
+msgid "Fill in the email address you want to use here"
+msgstr "액티베이션을 보내고 싶은 메일주소를 아래에 써주세요"
+
+#: root/base/edithelp.tt:36
+msgid "Format content until next =pod as plain old documentation"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:50
+msgid "Format page for printing"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
+msgid "Forward in time"
+msgstr "이 후의 상태"
+
+#: root/base/page/permissions.tt:10
+msgid "From"
+msgstr ""
+
+#: root/base/feeds.tt:6 root/base/feeds.tt:8
+msgid "Full content"
+msgstr "전체글"
+
+#: root/base/navbar.tt:72
+msgid "Gallery"
+msgstr ""
+
+#: root/base/user/profile.tt:18
+msgid "Gender"
+msgstr "성별"
+
+#: root/base/navbar.tt:28
+msgid "Get in there"
+msgstr ""
+
+#: root/base/page/search.tt:13 root/base/page/search_inline.tt:3
+msgid "Go"
+msgstr ""
+
+#: root/base/message.tt:6
+msgid "Go directly to "
+msgstr ""
+
+#: root/base/navbar.tt:21
+msgid "Go to home page"
+msgstr ""
+
+#: root/base/edithelp.tt:149
+msgid "Going back to normal formatting"
+msgstr ""
+
+#: root/base/export.tt:6
+msgid "HTML"
+msgstr ""
+
+#: root/base/mail/reset_password.tt:8
+msgid "Have a nice day"
+msgstr ""
+
+#: root/base/edithelp.tt:71 root/base/edithelp.tt:72 root/base/edithelp.tt:75 root/base/edithelp.tt:76
+msgid "Header 1"
+msgstr ""
+
+#: root/base/edithelp.tt:79 root/base/edithelp.tt:80 root/base/edithelp.tt:83 root/base/edithelp.tt:84
+msgid "Header 2"
+msgstr ""
+
+#: root/base/edithelp.tt:87 root/base/edithelp.tt:88
+msgid "Header 6"
+msgstr ""
+
+#: root/base/edithelp.tt:69
+msgid "Headers"
+msgstr ""
+
+#: root/base/feeds.tt:7
+msgid "Headlines"
+msgstr "헤드라인"
+
+#. (page.name_orig)
+#: root/base/page/rss.tt:6
+msgid "Headlines for x"
+msgstr "Headlines for %1"
+
+#: root/base/mail/reset_password.tt:1
+msgid "Hi there."
+msgstr ""
+
+#. (user.name)
+#: root/base/mail/validate.tt:1
+msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
+msgstr "Hi. This is a mail to validate your email address, %1. To confirm, please click the url below:"
+
+#: root/base/page/bottomnav.tt:46
+msgid "Hide changes"
+msgstr "변경부분을 표시하지 않음"
+
+#: root/base/page/suggest.tt:8 root/base/page/wrapper.tt:7 root/base/sidebar.tt:21
+msgid "Home"
+msgstr ""
+
+#: root/base/edithelp.tt:10 root/base/edithelp.tt:52
+msgid "HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))"
+msgstr ""
+
+#: root/base/edithelp.tt:152
+msgid "Horizontal Rules"
+msgstr ""
+
+#: root/base/gallery.tt:13
+msgid "Hover over an image to get more info."
+msgstr ""
+
+#: root/base/edithelp.tt:12 root/base/edithelp.tt:54
+msgid "IBM, School"
+msgstr ""
+
+#: root/base/admin/role.tt:16
+msgid "ID"
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:7
+msgid "ISO"
+msgstr ""
+
+#: root/base/edithelp.tt:63
+msgid "IdLabel"
+msgstr ""
+
+#: root/base/page/attachments.tt:16
+msgid "If the flash uploader gives you problems, switch to the"
+msgstr "이 페이지에서는 Flash 업로더를 사용하고 있습니다. 사용하시는 환경에서 제대로 동작하지 않는 경우는 심플 업로더로 바꿔주세요."
+
+#. (link)
+#: root/base/user/validate.tt:32
+msgid "If you are unable to validate, please x"
+msgstr "확인이 되지 않는 경우는 %1"
+
+#: root/base/edithelp.tt:38
+msgid "Image"
+msgstr ""
+
+#: root/base/edithelp.tt:64
+msgid "Images"
+msgstr ""
+
+#: root/base/user/profile.tt:21
+msgid "Industry"
+msgstr "직업"
+
+#: root/base/page/permissions.tt:5
+msgid "Inherited permissions"
+msgstr ""
+
+#: root/base/edithelp.tt:66
+msgid "Inline"
+msgstr ""
+
+#: root/base/edithelp.tt:62
+msgid "Inline Links"
+msgstr ""
+
+#: root/base/user/profile.tt:24
+msgid "Interests"
+msgstr "좋아하는 것"
+
+#: root/base/toolbar.tt:25 root/base/toolbar.tt:47
+msgid "Internal Link"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:154
+msgid "Invalid password."
+msgstr ""
+
+#: root/base/toolbar.tt:21 root/base/toolbar.tt:43
+msgid "Italic"
+msgstr ""
+
+#: root/base/edithelp.tt:135
+msgid "Item"
+msgstr ""
+
+#: root/base/edithelp.tt:129
+msgid "Just like email quoting!"
+msgstr ""
+
+#: root/base/toolbar.tt:17
+msgid "Justified paragraph"
+msgstr ""
+
+#: root/base/user/profile.tt:36
+msgid "Last changes"
+msgstr "변경이력"
+
+#: root/base/edithelp.tt:63
+msgid "Later in the document"
+msgstr ""
+
+#: root/base/page/edit.tt:66
+msgid "Leave second blank if you do not want a password"
+msgstr ""
+
+#: root/base/toolbar.tt:11
+msgid "Left-justified paragraph"
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:6
+msgid "Lens"
+msgstr ""
+
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
+msgid "Link Title"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:56
+msgid "Linked from"
+msgstr ""
+
+#: root/base/edithelp.tt:61
+msgid "Links"
+msgstr ""
+
+#: root/base/page/info.tt:27
+msgid "Links from"
+msgstr ""
+
+#: root/base/page/info.tt:24
+msgid "Links to"
+msgstr ""
+
+#: root/base/page/list.tt:38
+msgid "Links to non-existent pages."
+msgstr "링크는 만들어졌지만, 아직 작성되지 않은 페이지"
+
+#. (activetag)
+#: root/base/tag/list.tt:20
+msgid "List by x"
+msgstr "List by %1"
+
+#: root/base/toolbar.tt:34 root/base/toolbar.tt:4
+msgid "List item 1"
+msgstr ""
+
+#: root/base/edithelp.tt:114
+msgid "Lists can be nested by indentation level"
+msgstr ""
+
+#: root/base/navbar.tt:28 root/base/user/login.tt:22
+msgid "Log in"
+msgstr "로그인"
+
+#: root/base/navbar.tt:26
+msgid "Log out"
+msgstr "로그아웃"
+
+#: root/base/user/login.tt:3
+msgid "Login"
+msgstr "로그인"
+
+#: root/forms/user/prefs.yml:31
+msgid ""
+"Login\n"
+"    filters:\n"
+"       - HTMLEscape\n"
+"    constraints:\n"
+"      - Required\n"
+"      - Word\n"
+"  - type: Text\n"
+"    name: name\n"
+"    label_loc: Name\n"
+"    filters:\n"
+"       - HTMLEscape\n"
+"  - type: Text\n"
+"    name: email\n"
+"    label_loc: Email\n"
+"    filters:\n"
+"       - HTMLEscape\n"
+"    constraints:\n"
+"      - Required\n"
+"      - type: Email\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Save\n"
+msgstr ""
+
+#: root/forms/user/register.yml:48
+msgid ""
+"Login\n"
+"    filters:\n"
+"      - LowerCase\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Password\n"
+"    name: pass\n"
+"    label_loc: Password\n"
+"    constraints:\n"
+"      - Required\n"
+"      - type: Equal\n"
+"        others: confirm_password\n"
+"        message_loc: Password did not match\n"
+"      - type: Length\n"
+"        min: 4\n"
+"        max: 14\n"
+"        message_loc: Password must be between 4 and 14 chars\n"
+"  - type: Password\n"
+"    name: confirm_password\n"
+"    label_loc: Repeat password\n"
+"  - type: Text\n"
+"    name: email\n"
+"    label_loc: Email\n"
+"    filters:\n"
+"      - HTMLEscape\n"
+"    constraints:\n"
+"      - Email\n"
+"      - Required\n"
+"  - type: Text\n"
+"    name: name\n"
+"    label_loc: Name\n"
+"    filters:\n"
+"      - HTMLEscape\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Register\n"
+msgstr ""
+
+#: root/base/toolbar.tt:3 root/base/toolbar.tt:33
+msgid "Main heading"
+msgstr ""
+
+#: root/base/page/rollback.tt:4
+msgid "Make current"
+msgstr ""
+
+#: root/base/toolbar.tt:30 root/base/toolbar.tt:52
+msgid "Mark some text to apply the toolbar actions to that text"
+msgstr "툴바에 있는 액션을 사용하기 위해서는 대상의 문자를 하이라이트해주세요"
+
+#: root/base/edithelp.tt:45
+msgid "Markdown formatting tips"
+msgstr ""
+
+#: root/base/mail/reset_password.tt:9
+msgid "MojoMojo - Spirit in a box"
+msgstr ""
+
+#: root/base/user/profile.tt:30
+msgid "Movies"
+msgstr "영화"
+
+#: root/base/user/profile.tt:27
+msgid "Music"
+msgstr "음악"
+
+#: root/base/page/tags.tt:2
+msgid "My tags"
+msgstr "나의 태그"
+
+#: root/base/admin/role.tt:16 root/base/user/profile.tt:3
+msgid "Name"
+msgstr "이름"
+
+#: root/forms/user/editprofile.yml:40
+msgid ""
+"Name\n"
+"  - type: Date\n"
+"    name: born\n"
+"    label_loc: Birth Date\n"
+"    auto_inflate: 1\n"
+"    year:\n"
+"      less: 70 \n"
+"      plus: 0\n"
+"  - type: Select\n"
+"    name: gender\n"
+"    label_loc: Gender\n"
+"    options:\n"
+"        - [ 'm', 'Male' ]\n"
+"        - [ 'f', 'Female' ]\n"
+"        - [ '?', 'Rather not say' ]\n"
+"  - type: Text\n"
+"    name: industry\n"
+"    label_loc: Industry\n"
+"  - type: Textarea\n"
+"    name: interests\n"
+"    label_loc: Interests\n"
+"  - type: Textarea\n"
+"    label_loc: Favorite Albums\n"
+"    name: music\n"
+"  - type: Textarea\n"
+"    name: movies\n"
+"    label_loc: Favorite Movies\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Update \n"
+msgstr ""
+
+#: root/base/user/profile.tt:4
+msgid "Name missing"
+msgstr ""
+
+#: root/base/edithelp.tt:139
+msgid "Nested backticks"
+msgstr ""
+
+#: root/base/user/register.tt:2
+msgid "New User Registration"
+msgstr "새로운 유저 등록"
+
+#:
+msgid "New User Registration open"
+msgstr "유저 등록 허가"
+
+#: root/base/page/search.tt:54 root/base/page/search_inline.tt:45
+msgid "Next"
+msgstr ""
+
+#: root/base/admin/role.tt:22
+msgid "No"
+msgstr ""
+
+#: root/base/comment.tt:21
+msgid "No Comments posted"
+msgstr ""
+
+#. (c.pref('main_formatter')
+#. (c.pref("main_formatter"))
+#: root/base/edithelp.tt:161
+msgid "No help yet for x"
+msgstr "No help yet for %1"
+
+#: root/base/admin/role_form.tt:25
+msgid "No members added yet."
+msgstr ""
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:39
+msgid "No permissions to edit this page"
+msgstr ""
+
+#: root/base/user/list.tt:13
+msgid "No recent changes"
+msgstr "최근의 변경은 없습니다"
+
+#: root/base/page/search.tt:24 root/base/page/search_inline.tt:15
+msgid "No results found"
+msgstr ""
+
+#: root/base/admin/role.tt:29
+msgid "No roles created yet."
+msgstr ""
+
+#. ($page->name)
+#: lib/MojoMojo/Controller/Page.pm:90
+msgid "No such revision for "
+msgstr ""
+
+#: root/base/page/suggest.tt:13
+msgid "Non-Existent Pages"
+msgstr ""
+
+#: root/base/page/permissions.tt:28
+msgid "None"
+msgstr ""
+
+#: root/base/edithelp.tt:145
+msgid "Normal Paragraph"
+msgstr ""
+
+#: root/base/page/list.tt:43
+msgid "Not found. Click to create this page."
+msgstr ""
+
+#: root/base/edithelp.tt:12 root/base/edithelp.tt:54
+msgid "Not wiki words"
+msgstr ""
+
+#: root/base/user/profile.tt:25 root/base/user/profile.tt:28 root/base/user/profile.tt:31
+msgid "Nothing entered"
+msgstr "-"
+
+#: root/base/edithelp.tt:29
+msgid "Numbered list"
+msgstr ""
+
+#: root/base/toolbar.tt:36 root/base/toolbar.tt:6
+msgid "Numbered list item"
+msgstr ""
+
+#: root/base/page/suggest.tt:3
+msgid "One or more pages in the requested path do not exist."
+msgstr ""
+
+#: root/base/edithelp.tt:67
+msgid "Optional Title"
+msgstr ""
+
+#. (link)
+#: root/base/tag/cloud.tt:10
+msgid "Or you can check out x instead"
+msgstr "혹은：%1"
+
+#: root/base/edithelp.tt:90
+msgid "Ordered Lists"
+msgstr ""
+
+#: root/base/page/list.tt:48
+msgid "Orphaned Pages"
+msgstr "링크가 없는 페이지"
+
+#: root/base/page/suggest.tt:23
+msgid "Other Suggestions"
+msgstr ""
+
+#: root/base/page/list.tt:28
+msgid "Other pages that link to this page."
+msgstr "이 페이지로 링크된 페이지"
+
+#: root/base/navbar.tt:66 root/base/navbar.tt:68 root/base/page/recent.tt:38
+msgid "Page"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
+msgid "Page Info"
+msgstr "페이지정보"
+
+#. (page.path)
+#: root/base/page/info.tt:9
+msgid "Page info for x"
+msgstr "Page info for %1"
+
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
+msgid "Page meta information"
+msgstr ""
+
+#: root/forms/pageadmin/edit.yml:17
+msgid ""
+"Page text\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Text\n"
+"    name: creator\n"
+"    label_loc: creator\n"
+"  - type: Submit\n"
+"    name: submit\n"
+msgstr ""
+
+#: root/base/navbar.tt:36 root/base/navbar.tt:38
+msgid "Pages sorted by when they were last changed"
+msgstr ""
+
+#: root/base/page/list.tt:49
+msgid "Pages to which no other pages link."
+msgstr "어디에도 링크되지 않은 페이지"
+
+#: root/base/user/login.tt:19
+msgid "Password"
+msgstr "패스워드"
+
+#:
+msgid "Password did not match"
+msgstr "패스워드가 일치하지 않습니다"
+
+#:
+msgid "Password must be between 4 and 14 chars"
+msgstr "패스워드는 4~14자로 정해주세요."
+
+#. ($page->name)
+#: lib/MojoMojo/Controller/Page.pm:71
+msgid "Permission Denied to view x"
+msgstr "「%1」를 볼 권한이 없습니다"
+
+#. ([ $permtocheck, $name ])
+#: lib/MojoMojo/Controller/PageAdmin.pm:89
+msgid "Permission Denied to x x"
+msgstr "「%1 %2」 권한이 없습니다"
+
+#: root/base/page/editbar.tt:15 root/base/page/editbar.tt:19 root/base/page/editbar.tt:9
+msgid "Permissions"
+msgstr "권한"
+
+#: root/base/page/permissions.tt:33
+msgid "Permissions for this page"
+msgstr "이 페이지에 대한 권한"
+
+#: root/base/navbar.tt:74
+msgid "Photo Album"
+msgstr ""
+
+#: root/base/page/info.tt:33
+msgid "Photos"
+msgstr "사진"
+
+#: root/base/toolbar.tt:29 root/base/toolbar.tt:51
+msgid "Picture"
+msgstr "그림"
+
+#: lib/MojoMojo/Controller/User.pm:33
+msgid "Please enter username and password"
+msgstr "유저이름과 패스워드를 입력해주세요"
+
+#: lib/MojoMojo/Controller/User.pm:214
+msgid "Please fill in the following information to register. All fields are mandatory."
+msgstr ""
+
+#: root/base/page/attachments.tt:15
+msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
+msgstr "첨부할 파일을 선택해주세요. 여러개의 파일을 첨부할 경우에는 ZIP 형식의 파일을 지정해주세요."
+
+#: lib/MojoMojo/Controller/Jsrpc.pm:33
+msgid "Please type something"
+msgstr "입력해주세요"
+
+#: root/base/page/tags.tt:15
+msgid "Popular tags"
+msgstr "인기태그"
+
+#: root/base/comment/post.tt:5
+msgid "Post"
+msgstr "글쓰기"
+
+#: root/base/footer.tt:3
+msgid "Powered by Catalyst"
+msgstr ""
+
+#: root/base/navbar.tt:88 root/base/navbar.tt:90
+msgid "Preferences"
+msgstr "설정"
+
+#: root/base/edithelp.tt:142
+msgid "Preformatted Code Blocks"
+msgstr "포맷이 정해진 코드블록"
+
+#: root/base/toolbar.tt:39 root/base/toolbar.tt:9
+msgid "Preformatted text"
+msgstr "포맷이 정해진 텍스트"
+
+#: root/base/page/editbar.tt:4
+msgid "Preview"
+msgstr "미리보기"
+
+#: root/base/page/search.tt:48 root/base/page/search_inline.tt:39
+msgid "Previous"
+msgstr "앞"
+
+#: root/base/page/bottomnav.tt:50
+msgid "Print"
+msgstr "프린트"
+
+#: root/base/navbar.tt:81 root/base/navbar.tt:83
+msgid "Profile"
+msgstr "프로필"
+
+#: root/base/export.tt:7
+msgid "Raw markup"
+msgstr "직접편집"
+
+#: root/base/navbar.tt:36 root/base/navbar.tt:38
+msgid "Recent"
+msgstr "최근 변경"
+
+#: root/base/tag/recent.tt:3
+msgid "Recent Pages"
+msgstr ""
+
+#. (page.path)
+#: root/base/page/atom.tt:10 root/base/page/rss.tt:8 root/base/page/rss_full.tt:7
+msgid "Recent changes in x"
+msgstr "Recent changes in %1"
+
+#. (page.path)
+#. (activetag)
+#: root/base/page/recent.tt:1 root/base/page/recent.tt:2 root/base/tag/list.tt:22
+msgid "Recent pages in x"
+msgstr "Recent pages in %1"
+
+#. ([page.path, activetag])
+#. ([ page.path, activetag ])
+#: root/base/page/recent.tt:1 root/base/page/recent.tt:4
+msgid "Recent pages in x tagged with x"
+msgstr "Recent pages in %1 tagged with %2"
+
+#: root/base/user/recover_pass.tt:3
+msgid "Recover Password"
+msgstr "패스워드를 재발행"
+
+#: root/base/user/login.tt:13 root/base/user/recover_pass.tt:13
+msgid "Recover password"
+msgstr "패스워드를 재발행"
+
+#: root/base/edithelp.tt:123
+msgid "Rectangle"
+msgstr ""
+
+#: root/base/navbar.tt:29
+msgid "Register"
+msgstr ""
+
+#: root/base/user/login.tt:11
+msgid "Register new account"
+msgstr "신규등록"
+
+#: lib/MojoMojo/Controller/User.pm:209
+msgid "Registration is closed!"
+msgstr "신규등록은 닫혀있습니다"
+
+#: root/base/tag/list.tt:31
+msgid "Related Tags"
+msgstr "관련태그"
+
+#: root/base/page/view.tt:25
+msgid "Removed"
+msgstr ""
+
+#:
+msgid "Restrict user editing to home directory"
+msgstr "홈디렉토리 아래의 편집만 허가"
+
+#: lib/MojoMojo/Controller/Admin.pm:30
+msgid "Restricted area. Admin access required"
+msgstr ""
+
+#: root/base/page/search.tt:46 root/base/page/search_inline.tt:37
+msgid "Result Page"
+msgstr ""
+
+#. ([pager.first, pager.last, pager.total_entries, found_within])
+#. ([ pager.first, pager.last, pager.total_entries, found_within ])
+#: root/base/page/search.tt:22 root/base/page/search_inline.tt:13
+msgid "Results x-x of x found within x"
+msgstr "Results %1-%2 of %3 found within %4"
+
+#. ([content.created.ymd, content.created.hms, content.creator.name])
+#. ([ content.created.ymd, content.created.hms, content.creator.name ])
+#: root/base/page/print.tt:15 root/base/page/view.tt:31
+msgid "Revised on x at x by x"
+msgstr "Revised on %1 at %2 by %3"
+
+#: root/base/page/print.tt:8 root/base/page/view.tt:32 root/base/page/view.tt:5
+msgid "Revision"
+msgstr "리비젼"
+
+#. (page.content.created.datetime)
+#: root/base/page/rss.tt:14
+msgid "Revision from x"
+msgstr "Revision from %1"
+
+#: root/base/toolbar.tt:13
+msgid "Right-justified paragraph"
+msgstr ""
+
+#: root/base/admin/role_form.tt:15
+msgid "Role Members"
+msgstr ""
+
+#: root/forms/admin/role_form.yml:24
+msgid ""
+"Role Name\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Checkbox\n"
+"    name: active\n"
+"    label_loc: \"Active?\"\n"
+"  - type: Repeatable\n"
+"    increment_field_names: 0\n"
+"    elements:\n"
+"      - type: Text\n"
+"      - name: role_members\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Save\n"
+msgstr ""
+
+#: root/base/admin/role_form.tt:5
+msgid "Role Name:"
+msgstr ""
+
+#: root/base/admin/role.tt:9
+msgid "Roles"
+msgstr ""
+
+#. (page.content_version)
+#: root/base/page/view.tt:7
+msgid "Rolled Back (Current: x)"
+msgstr "Rolled Back (Current: %1)"
+
+#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48
+msgid "Save"
+msgstr "저장"
+
+#: root/base/page/edit.tt:56
+msgid "Save and View"
+msgstr "저장하고 보기"
+
+#: root/base/navbar.tt:61 root/base/page/search.tt:13 root/base/page/search_inline.tt:3
+msgid "Search"
+msgstr "검색"
+
+#: root/base/page/search.tt:5
+msgid "Search Results"
+msgstr "검색결과"
+
+#: root/base/page/search.tt:14 root/base/page/search_inline.tt:4
+msgid "Search entire site"
+msgstr "전체사이트를 검색"
+
+#: root/base/admin/role_form.tt:18
+msgid "Search for users:"
+msgstr "유저를 검색"
+
+#. (page.path)
+#: root/base/page/search.tt:15 root/base/page/search_inline.tt:5
+msgid "Search within x"
+msgstr "Search within %1"
+
+#: root/base/edithelp.tt:25 root/base/edithelp.tt:29
+msgid "Second item"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:43
+msgid "See changes"
+msgstr "변경부분 보기"
+
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
+msgid "See next revision"
+msgstr "다음 리비젼 보기"
+
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
+msgid "See previous revision"
+msgstr "이전 리비젼 보기"
+
+#: root/base/page/addtags.tt:1
+msgid "Set a keyword for this page"
+msgstr "이 페이지의 키워드를 설정해주세요"
+
+#: root/base/page/bottomnav.tt:63
+msgid "Set language"
+msgstr "언어"
+
+#: root/base/edithelp.tt:120
+msgid "Shapes"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:43
+msgid "Show differences from previous version"
+msgstr "이전 버젼과의 차이를 보기"
+
+#: root/base/page/bottomnav.tt:46
+msgid "Show normal page"
+msgstr "일반 페이지 보기"
+
+#: root/base/gallery.tt:18
+msgid "Show picture"
+msgstr "그림 보기"
+
+#: root/base/page/info.tt:41
+msgid "Show revision"
+msgstr "리비젼 보기"
+
+#: root/base/edithelp.tt:23
+msgid "Show this product"
+msgstr ""
+
+#: root/base/page/view.tt:24
+msgid "Showing changes from previous revision."
+msgstr "이전 버젼으로부터의 변경내용 표시"
+
+#. ([pager.first, pager.last, pager.total_entries, c.wikiword( page.path, base)
+#. ([ pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
+#: root/base/pager.tt:16
+msgid "Showing entries x-x of x in x"
+msgstr "「%4」의 %1-%2 페이지중 %3 페이지"
+
+#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
+#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
+#: root/base/gallery/pager.tt:11
+msgid "Showing x (x-x) of x pictures in x"
+msgstr "Showing %1 (%2-%3) of %4 pictures in %5"
+
+#: root/base/edithelp.tt:143
+msgid "Simply indent every line of a code block by 4"
+msgstr ""
+
+#:
+msgid "Site Admins (In addition to you)"
+msgstr "사이트관리자（admin이외）"
+
+#: root/base/admin/settings.tt:5
+msgid "Site Configuration"
+msgstr "사이트 전체 설정"
+
+#:
+msgid "Site name"
+msgstr "사이트 이름"
+
+#: root/forms/admin/settings.yml:33
+msgid ""
+"Site name\n"
+"    filters:\n"
+"       - HTMLEscape\n"
+"    constraints:\n"
+"      - Required\n"
+"  - type: Text\n"
+"    name: admins\n"
+"    label_loc: Site Admins (In addition to you)\n"
+"  - type: Text\n"
+"    name: anonymous_user\n"
+"    label_loc: Anonymous User (blank to disable)\n"
+"  - type: Checkbox\n"
+"    name: open_registration\n"
+"    label_loc: New User Registration open\n"
+"    value: 1\n"
+"    default_empty_value: 0\n"
+"  - type: Checkbox\n"
+"    name: restricted_user\n"
+"    value: 1\n"
+"    default_empty_value: 0\n"
+"    label_loc: Restrict user editing to home directory\n"
+"  - type: Submit\n"
+"    name: submit\n"
+"    value_loc: Save\n"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:383
+msgid "Some fields are invalid. Please correct them and try again:"
+msgstr "몇가지 필드가 정확하지 않습니다. 수정후 다시 시도해주세요:"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:123
+msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
+msgstr "이 페이지를 수정하는 동안에 다른 누군가가 수정했습니다. 당신이 변경한 내용은 통합되었습니다. 다시 리뷰하시고 저장해주세요"
+
+#: root/base/page/bottomnav.tt:13
+msgid "Split Edit"
+msgstr ""
+
+#: root/base/edithelp.tt:122
+msgid "Square"
+msgstr ""
+
+#: root/base/navbar.tt:32 root/base/navbar.tt:34
+msgid "Sub pages"
+msgstr "관련페이지"
+
+#: root/base/navbar.tt:52 root/base/navbar.tt:54
+msgid "Subscribe to changes by RSS"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:51
+msgid "Subscribe to page changes"
+msgstr ""
+
+#: root/base/page/attachments.tt:5
+msgid "Switch to flash uploader"
+msgstr ""
+
+#: root/base/page/editbar.tt:20 root/base/page/editbar.tt:8
+msgid "Syntax"
+msgstr "구문"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:133
+msgid "THEIR CHANGES"
+msgstr "변경"
+
+#: root/base/edithelp.tt:35
+msgid "Table"
+msgstr "테이블"
+
+#: root/base/navbar.tt:40 root/base/navbar.tt:43 root/base/navbar.tt:45 root/base/page/list.tt:6 root/base/page/recent.tt:13 root/base/tag/recent.tt:7
+msgid "Tags"
+msgstr "태그"
+
+#. (page.name)
+#: root/base/tag/cloud.tt:1
+msgid "Tags under x"
+msgstr "%1이하의 태그"
+
+#: root/base/gallery/photo_info.tt:4
+msgid "Taken"
+msgstr ""
+
+#: root/base/edithelp.tt:58
+msgid "Text Formatting"
+msgstr ""
+
+#: root/base/edithelp.tt:59 root/base/edithelp.tt:60
+msgid "Text in"
+msgstr ""
+
+#: root/base/edithelp.tt:3
+msgid "Textile formatting tips"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:299
+msgid "That mail is already in use"
+msgstr ""
+
+#: root/base/navbar.tt:68
+msgid "The Wikilicious page"
+msgstr ""
+
+#. (user.email)
+#: root/base/user/validate.tt:16
+msgid "The email was sent to x."
+msgstr "%1에게 메일을 보냈습니다."
+
+#. ($c->stash->{pre_hacked_uri})
+#: lib/MojoMojo/Controller/Root.pm:46
+msgid "The requested URL (x) was not found"
+msgstr "요청받은 URL(%1) 을 찾지 못했습니다"
+
+#: root/base/edithelp.tt:147
+msgid "This is a pre formatted code block"
+msgstr "이것은 미리 정해진 코드블록입니다"
+
+#: lib/MojoMojo/Controller/Jsrpc.pm:93
+msgid "This is the first revision! Nothing to diff against."
+msgstr "첫번째 리비젼에는 차이점이 없습니다"
+
+#: root/base/page/recent.tt:40
+msgid "Time edited"
+msgstr "편집된 시간"
+
+#: root/base/edithelp.tt:104 root/base/edithelp.tt:92
+msgid "To get"
+msgstr ""
+
+#: root/base/page/edit.tt:21
+msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
+msgstr ""
+
+#: root/base/edithelp.tt:49 root/base/edithelp.tt:7
+msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
+msgstr ""
+
+#: root/base/edithelp.tt:33
+msgid "URL"
+msgstr ""
+
+#: root/base/edithelp.tt:102
+msgid "Unordered Lists with Paragraphs"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:130
+msgid "Updated preferences"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Admin.pm:95
+msgid "Updated successfully."
+msgstr "성공적으로 업데이트되었습니다"
+
+#: root/base/page/attachments.tt:11
+msgid "Upload"
+msgstr ""
+
+#: root/base/page/permissions.tt:52
+msgid "Use inherited permissions"
+msgstr ""
+
+#: root/base/navbar.tt:23
+msgid "User Preferences"
+msgstr "유저 설정"
+
+#: root/base/navbar.tt:83
+msgid "User Profile"
+msgstr "유저 프로파일"
+
+#: root/base/navbar.tt:90
+msgid "User Settings"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:360
+msgid "User not found!"
+msgstr "유저를 찾을 수 없습니다"
+
+#. ($login)
+#: lib/MojoMojo/Controller/User.pm:332
+msgid "User x not found!"
+msgstr "유저 %1 를 찾을 수 없습니다"
+
+#: root/base/user/login.tt:17 root/base/user/recover_pass.tt:10
+msgid "Username"
+msgstr "유저이름"
+
+#: root/base/admin/user.tt:5
+msgid "Users"
+msgstr "유저"
+
+#: root/base/user/validate.tt:11
+msgid "Validation"
+msgstr "확인"
+
+#: root/base/page/recent.tt:55
+msgid "View Diff"
+msgstr "차이를 보기"
+
+#: root/base/gallery.tt:23
+msgid "View as files"
+msgstr "파일 형식"
+
+#: root/base/page/attachments.tt:24
+msgid "View as gallery"
+msgstr "갤러리 형식"
+
+#: root/base/page/bottomnav.tt:50
+msgid "Views"
+msgstr "표시"
+
+#: root/base/page/list.tt:37
+msgid "Wanted Pages"
+msgstr "완전히 작성되지 않은 페이지"
+
+#: root/base/user/validate.tt:13
+msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
+msgstr "인증코드를 담은 링크를 넣은 메일을 보냈습니다. 메일에 기재된 링크를 클릭해서 계정을 활성화시켜주세요"
+
+#. ($user->name)
+#: lib/MojoMojo/Controller/User.pm:279
+msgid "Welcome, x your email is validated. Please log in."
+msgstr " %1 당신의 이메일은 사용가능합니다. 로그인해주세요."
+
+#: root/base/navbar.tt:48 root/base/navbar.tt:50
+msgid "Who wrote what"
+msgstr ""
+
+#: root/base/edithelp.tt:10 root/base/edithelp.tt:47 root/base/edithelp.tt:5 root/base/edithelp.tt:52
+msgid "Wiki words"
+msgstr ""
+
+#: root/base/edithelp.tt:118
+msgid "With a second line"
+msgstr ""
+
+#: root/base/edithelp.tt:109 root/base/edithelp.tt:97
+msgid "Write"
+msgstr ""
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:134
+msgid "YOUR CHANGES"
+msgstr ""
+
+#: root/base/admin/role.tt:22
+msgid "Yes"
+msgstr ""
+
+#: root/base/export.tt:3
+msgid "You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki)."
+msgstr ""
+
+#: root/base/feeds.tt:3
+msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
+msgstr "이 Wiki 의 변경사항을 RSS 경유로 구독할 수 있습니다. 편집된 페이지의 다이렉트만이 필요한 경우는 [헤드라인]을, 전체문장이 필요할 경우는 [전체문장]을 클릭해주세요."
+
+#: lib/MojoMojo/Controller/Attachment.pm:38
+msgid "You do not have permissions to edit attachments for this page"
+msgstr "이 페이지를 편집할 수 있는 권한이 없습니다."
+
+#: lib/MojoMojo/Controller/User.pm:377
+msgid "You have to fill in all required fields."
+msgstr "필수항목을 채워주세요."
+
+#: root/base/comment/login.tt:3
+msgid "You have to log in to post a comment."
+msgstr "코멘트를 쓰기위해서는 로그인해야 합니다."
+
+#: root/base/user/prefs.tt:3
+msgid "Your Account"
+msgstr "계정 정보"
+
+#: lib/MojoMojo/Controller/Jsrpc.pm:40
+msgid "Your input is invalid, please reformat it and try again."
+msgstr "잘못입력하셨습니다. 바르게 입력해주세요."
+
+#: lib/MojoMojo/Controller/User.pm:159
+msgid "Your password has been updated"
+msgstr "패스워드가 바뀌었습니다."
+
+#. (c.config.name)
+#: root/base/mail/reset_password.tt:3
+msgid "Your password on x has been reset. This is your new password:"
+msgstr "당신의 패스워드 %1 가 리셋되었습니다. 새로운 패스워드:"
+
+#. ($c->pref('name')
+#: lib/MojoMojo/Controller/User.pm:247
+msgid "[x] New User Validation"
+msgstr "[%1] New User Validation"
+
+#: root/base/page/permissions.tt:36
+msgid "actions"
+msgstr ""
+
+#: root/base/gallery/footer.tt:7
+msgid "add"
+msgstr ""
+
+#: root/base/comment.tt:23
+msgid "add a comment"
+msgstr "코멘트 등록"
+
+#: root/base/gallery/footer.tt:2
+msgid "add tag"
+msgstr "태그 등록"
+
+#: root/base/edithelp.tt:3 root/base/edithelp.tt:45
+msgid "advanced"
+msgstr ""
+
+#: root/base/edithelp.tt:67
+msgid "alt text"
+msgstr ""
+
+#: root/base/page/permissions.tt:36
+msgid "apply to subpages"
+msgstr ""
+
+#. (c.wikiword(user.link,base)
+#. (c.wikiword(user.link, base))
+#: root/base/comment/post.tt:5
+msgid "as x"
+msgstr "as %1"
+
+#: root/base/page/view.tt:5 root/base/tag/recent.tt:27
+msgid "at"
+msgstr ""
+
+#: root/base/admin/toplinks.tt:13
+msgid "back"
+msgstr ""
+
+#: root/base/edithelp.tt:138
+msgid "blocks are wrapped in backticks"
+msgstr ""
+
+#: root/base/edithelp.tt:60 root/base/toolbar.tt:18 root/base/toolbar.tt:40
+msgid "bold"
+msgstr ""
+
+#: root/base/page/search.tt:35 root/base/page/search_inline.tt:27 root/base/page/view.tt:32 root/base/tag/recent.tt:26
+msgid "by"
+msgstr ""
+
+#: root/base/page/info.tt:31
+msgid "bytes"
+msgstr ""
+
+#: root/base/page/permissions.tt:20
+msgid "can"
+msgstr ""
+
+#: root/base/toolbar.tt:14
+msgid "centered paragraph"
+msgstr ""
+
+#: root/base/page/info.tt:16
+msgid "chars"
+msgstr ""
+
+#: root/base/edithelp.tt:138
+msgid "code"
+msgstr ""
+
+#: root/base/comment.tt:13
+msgid "comment"
+msgstr ""
+
+#: root/base/comment.tt:2
+msgid "comments disabled for preview"
+msgstr "미리보기에서는 커멘트를 표시하지 않습니다"
+
+#: root/base/tag/list.tt:32
+msgid "common uses"
+msgstr ""
+
+#: root/base/admin/toplinks.tt:10
+msgid "configuration"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:307
+msgid "confirmation message resent"
+msgstr "최근 메시지를 확인"
+
+#:
+msgid "creator"
+msgstr "작성자"
+
+#: root/base/attachments/list.tt:9
+msgid "delete"
+msgstr "삭제"
+
+#: root/base/toolbar.tt:22 root/base/toolbar.tt:44
+msgid "deleted"
+msgstr ""
+
+#: root/base/message.tt:6
+msgid "do not pass prison, do not collect $ 200..."
+msgstr ""
+
+#: root/base/attachments/list.tt:7
+msgid "download"
+msgstr "다운로드"
+
+#: root/base/admin/user.tt:8
+msgid "email"
+msgstr "이메일"
+
+#: root/base/page/search.tt:21 root/base/page/search_inline.tt:12
+msgid "entire site"
+msgstr ""
+
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
+msgid "example"
+msgstr ""
+
+#: root/base/comment/post.tt:6 root/base/page/edit.tt:60
+msgid "forget me"
+msgstr ""
+
+#: root/base/gallery/photo.tt:7 root/base/navbar.tt:74
+msgid "gallery"
+msgstr "갤러리 형식"
+
+#: root/base/edithelp.tt:22
+msgid "hello"
+msgstr ""
+
+#: root/base/edithelp.tt:62 root/base/edithelp.tt:63
+msgid "http://example.com/"
+msgstr ""
+
+#: root/base/edithelp.tt:140
+msgid "in the wrapping block"
+msgstr ""
+
+#: root/base/edithelp.tt:17
+msgid "include this page"
+msgstr ""
+
+#: root/base/edithelp.tt:20
+msgid "include this rss feed"
+msgstr ""
+
+#: root/base/toolbar.tt:32
+msgid "increase # for smaller headline"
+msgstr ""
+
+#:
+msgid "inline"
+msgstr "인라인으로 표시"
+
+#: root/base/attachments/list.tt:6
+msgid "inline view"
+msgstr ""
+
+#:
+msgid "insert"
+msgstr "삽입"
+
+#: root/base/attachments/list.tt:8
+msgid "insert link"
+msgstr "링크를 삽입"
+
+#: root/base/toolbar.tt:20 root/base/toolbar.tt:42
+msgid "italic"
+msgstr "이탤릭"
+
+#: root/base/edithelp.tt:59
+msgid "italics"
+msgstr "이탤릭"
+
+#: root/base/edithelp.tt:140
+msgid "just use `2`"
+msgstr ""
+
+#: root/base/toolbar.tt:16
+msgid "justified paragraph"
+msgstr ""
+
+#: root/base/toolbar.tt:10
+msgid "left justified paragraph"
+msgstr ""
+
+#: root/base/edithelp.tt:33
+msgid "linkname"
+msgstr ""
+
+#: root/base/comment/login.tt:12
+msgid "log in"
+msgstr "로그인"
+
+#: root/base/user/validate.tt:31
+msgid "log out"
+msgstr "로그아웃"
+
+#: root/base/admin/user.tt:8 root/base/comment/login.tt:8
+msgid "login"
+msgstr "로그인"
+
+#: root/base/gallery/tags.tt:2
+msgid "my tags"
+msgstr "나의 태그"
+
+#: root/base/admin/user.tt:8
+msgid "name"
+msgstr "이름"
+
+#: root/base/gallery/photo.tt:35
+msgid "no description"
+msgstr ""
+
+#: root/base/admin/user.tt:19
+msgid "no email address"
+msgstr "이메일이 없습니다"
+
+#: root/base/page/permissions.tt:20
+msgid "not access page"
+msgstr ""
+
+#: root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:8
+msgid "not specified"
+msgstr ""
+
+#: root/base/page/search.tt:36 root/base/page/search_inline.tt:28
+msgid "on"
+msgstr ""
+
+#: root/base/edithelp.tt:154
+msgid "or"
+msgstr ""
+
+#: root/base/page/info.tt:25 root/base/page/info.tt:28
+msgid "pages"
+msgstr "페이지"
+
+#: root/base/comment/login.tt:10
+msgid "password"
+msgstr "패스워드"
+
+#: root/base/gallery/cloud.tt:2
+msgid "photo tags"
+msgstr ""
+
+#: root/base/page/attachments.tt:16
+msgid "plain uploader"
+msgstr "심플 다운로더"
+
+#: root/base/gallery/tags.tt:17
+msgid "popular tags"
+msgstr "인기 태그"
+
+#: root/base/comment.tt:11
+msgid "posted"
+msgstr ""
+
+#: root/base/comment.tt:9
+msgid "poster"
+msgstr ""
+
+#: root/base/user/prefs.tt:1
+msgid "preferences"
+msgstr ""
+
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36
+msgid "read"
+msgstr "읽기"
+
+#. (wanted.from_page.path)
+#: root/base/page/list.tt:43
+msgid "referenced by x"
+msgstr "referenced by %1"
+
+#: root/base/comment/login.tt:4
+msgid "register"
+msgstr ""
+
+#: root/base/admin/role_form.tt:31
+msgid "remove"
+msgstr "삭제"
+
+#: root/base/page/bottomnav.tt:25
+msgid "revision"
+msgstr "리비젼"
+
+#: root/base/toolbar.tt:12
+msgid "right justified paragraph"
+msgstr ""
+
+#: root/base/admin/toplinks.tt:12
+msgid "roles"
+msgstr ""
+
+#: root/base/message.tt:4
+msgid "shrinked head"
+msgstr ""
+
+#: root/base/message.tt:6
+msgid "start"
+msgstr ""
+
+#: root/base/tag/list.tt:9
+msgid "tags"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:378
+msgid "the following are missing:"
+msgstr ""
+
+#: root/base/toolbar.tt:48
+msgid "url inside paranthesis"
+msgstr ""
+
+#: root/base/admin/toplinks.tt:11
+msgid "users"
+msgstr ""
+
+#: root/base/attachments/list.tt:5
+msgid "view"
+msgstr "보기"
+
+#. ("test")
+#: lib/MojoMojo/Schema.pm:131
+msgid "welcome message"
+msgstr ""
+"h1. MojoMojo에 오신 것을 환경합니다!\n"
+"\n"
+"이것이 보인다는 것은 무사히 MojoMojo의 인스톨이 끝났다는 것을 의미합니다.\n"
+"MojoMojo를 사용하기위해서는 우선 유저이름 「admin」 과 패스워드 「admin」 을 사용해서\n"
+"관리자로 로그인해주세요. 로그인하면 MojoMojo 의 관리가 가능해집니다.\n"
+"\n"
+"로그인을 했다면 처음으로 [[New Page]]에서 페이지를 새롭게 만들거나, 이 페이지의 위에 있는\n"
+"편집 링크에서 이 페이지를 편집할 수 있습니다.\n"
+"\n"
+"모르는 것이 있다면 [[Help]] 를 참고해주세요."
+
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:17 root/base/page/permissions.tt:36
+msgid "write"
+msgstr "쓰기"
+
+#:
+msgid "x hits"
+msgstr "%1 hits"
+
+#. (page.content.max_version - page.content_version)
+#. (page.content.max_version - rev)
+#. (rev - 1)
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32 root/base/page/bottomnav.tt:35
+msgid "x more"
+msgstr "%1 more"
+
+#. (page.versions.size)
+#: root/base/page/info.tt:37
+msgid "x revisions"
+msgstr "%1 revisions"
+
+#: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:17
+msgid "yes"
+msgstr ""
+
+#: root/base/edithelp.tt:16 root/base/edithelp.tt:19
+msgid "your text"
+msgstr ""
+
+#: root/base/edithelp.tt:17 root/base/edithelp.tt:20
+msgid "your/url"
+msgstr ""
+
+#: root/base/edithelp.tt:35
+msgid "|a|table|row|"
+msgstr ""
+
+#: root/base/edithelp.tt:35
+msgid "|b|table|row|"
+msgstr ""
