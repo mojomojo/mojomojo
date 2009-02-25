@@ -1,25 +1,31 @@
 [%PROCESS header.tt%]
-<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
- [% PROCESS admin/toplinks.tt selected = 'users' %]
- <div id="content">
- <h1>[%c.loc('Users')%]</h1>
- <table>
+<div id="header"><h1><span id="pageName">[% c.pref('name') %]</span></h1></div>
+
+[% PROCESS admin/toplinks.tt selected = 'users' %]
+<div id="content">
+  <h1>[% c.loc('Users') %]</h1>
+  <table>
+    <tr>
+      <th>[% c.loc('Active') %]</th>
+	  <th>[% c.loc('login') %]</th>
+	  <th>[% c.loc('roles') %]</th>
+	  <th>[% loc('name') %]</th>
+	  <th>[% loc('email') %]</th>
+    </tr>
+  [%WHILE (user=users.next) %]
   <tr>
-   <th>[%c.loc('Active')%]</th><th>[%c.loc('login')%]</th><th>&nbsp;</th><th>[%loc('name')%]</th><th>[%loc('email')%]</th>
+    [% activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
+    [% active=user.active || 0 %]
+    <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
+    <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
+    <td>[% user.roles.name %]</td>
+    <td>[% user.name %]</td>
+    <td><a href="mailto:[% user.email %]">[% user.email || loc("no email address") %]</a></td>
   </tr>
-[%WHILE (user=users.next) %]
-<tr>
-[%activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
-[%active=user.active || 0%]
-<td>
-<a class="activelink" href="[%activeurl%]">[%active%]</a></td>
-<td><a href="[%c.uri_for(user.link)%].profile">[%user.login%]</a></td>
-<td>&nbsp;</td>
-<td>[%user.name%]</td>
-<td><a href="mailto:[%user.email%]">[%user.email||loc("no email address")%]</a></td>
-</tr>
-[%END%]
- </table>
+  [%END%]
+  </table>
 </div>
+
 <div id="bottomnav">&nbsp;</div>
+
 [% PROCESS footer.tt %]
