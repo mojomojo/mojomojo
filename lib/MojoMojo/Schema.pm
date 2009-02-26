@@ -51,7 +51,7 @@ sub create_initial_data {
                 qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
             ],
             [
-                1, 0, 0, 'AnonymousCoward', 'Anonymous Coward',
+                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'),
                 '', '', '', 0, '', '', '', '', '', ''
             ],
             [ 1, 0, 0, 'admin', 'Enoch Root', '', 'admin', '', 0, '', '', '', '', '', '' ],
