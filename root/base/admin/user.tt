@@ -20,7 +20,13 @@
     <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
     <td>[% user.roles.name %]</td>
     <td>[% user.name %]</td>
-    <td><a href="mailto:[% user.email %]">[% user.email || loc("no email address") %]</a></td>
+    <td>
+	[% IF user.email %]
+		<a href="mailto:[%user.email%]">[%user.email%]</a>
+	[% ELSE %]
+		[% loc("no email address") %]
+	[% END %]
+    </td>
   </tr>
   [%END%]
   </table>
