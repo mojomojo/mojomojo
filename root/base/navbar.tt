@@ -49,7 +49,7 @@
   [%ELSE%]
     <li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
   [% END; IF template.name=='feeds.tt' %]
-    <li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">Feeds</li> 
+    <li class="navOn" title="[%loc('Subscribe to changes by RSS')%]">[% loc('Feeds') %]</li> 
   [%ELSE%]
     <li><a href="[%c.uri_for('feeds')%]" title="[%loc('Subscribe to changes by RSS')%]" accesskey="">[%loc('Feeds')%]</a></li>
   [% END; IF template.name =='export.tt' %]

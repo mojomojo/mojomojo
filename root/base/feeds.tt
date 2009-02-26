@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title="Feeds" %]
+[% WRAPPER page/wrapper.tt title=loc('Feeds') %]
 
 [%loc('You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page.')%]
 
