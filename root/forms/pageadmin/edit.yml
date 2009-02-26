@@ -2,6 +2,7 @@
 action: 
 indicator: submit
 auto_fieldset: 1
+localize_class: MojoMojo::I18N
 
 elements:
   - type: Textarea
