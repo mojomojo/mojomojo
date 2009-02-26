@@ -37,10 +37,11 @@ sub format_content {
 
     my @lines = split( /\n/, $$content );
     $$content = "";
+    my $re=$class->gen_re(qr/irc/);
 
     foreach my $line (@lines) {
         if ($in_log) {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $re ) {
                 $in_log = 0;
                 if ($longline) {
                     $longline .= "</dd>";
@@ -64,7 +65,7 @@ sub format_content {
             }
         }
         else {
-            if ( $line =~ m/^=irc\s*$/ ) {
+            if ( $line =~ $re ) {
                 push @newlines, $line;
                 $in_log = 1;
             }
@@ -75,7 +76,7 @@ sub format_content {
     }
     foreach my $line (@newlines) {
         if ($in_log) {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $re ) {
                 $in_log = 0;
 
                 # end the dl and the section not handled by textile
@@ -90,7 +91,7 @@ sub format_content {
             }
         }
         else {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $re ) {
                 $in_log = 1;
 
                 # start a definition list in a section not handled by
