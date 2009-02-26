@@ -11,7 +11,7 @@ print "# Test 01: character set in anchor names\n";
 # characters have been escaped into hexadecimal character entities, but attribute
 # values have not.
 my $content = <<'HTML';
-=toc<br />
+{{toc}}<br />
   <h1>The Big Step 1</h1>
   The first heading text hoes hero<br />
   <h1>The Big Step 2</h1>
@@ -95,7 +95,7 @@ EOT
 
 print "# Test 02: range of header levels to make TOC out of: 1-1\n";
 $content = <<'HTML';
-<div id="content">=toc 1-1<br />
+<div id="content">{{toc 1-1}}<br />
   <h1>The Big Step 1</h1>
   The first heading text hoes hero<br />
   <h1>The Big Step 2</h1>
@@ -176,7 +176,7 @@ EOT
 
 print "# Test 03: range of header levels to make TOC out of: 5-\n";
 $content = <<'HTML';
-<p>=toc 5-</p>
+<p>{{toc 5-}}</p>
   <h1>The Big Step 1</h1>
   The first heading text hoes hero<br />
   <h1>The Big Step 2</h1>
