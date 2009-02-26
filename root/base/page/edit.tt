@@ -54,7 +54,7 @@
     
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
     <input type="submit" name="submit" value='[% IF page.content && page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
-    as 
+    [% loc('as') %]
     [% IF user.id %]
     [% c.wikiword(user.link,base) %] 
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
