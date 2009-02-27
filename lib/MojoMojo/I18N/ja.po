@@ -51,7 +51,7 @@ msgstr ""
 msgid "Actions"
 msgstr "アクション"
 
-#: root/base/admin/role.tt:16 root/base/admin/user.tt:8
+#: root/base/admin/role.tt:16 root/base/admin/user.tt:9
 msgid "Active"
 msgstr "有効"
 
@@ -59,7 +59,7 @@ msgstr "有効"
 msgid "Active version"
 msgstr ""
 
-#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:15
+#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:16
 msgid "Active?"
 msgstr ""
 
@@ -142,7 +142,11 @@ msgstr ""
 msgid "And others."
 msgstr ""
 
-#: root/forms/admin/settings.yml:19
+#: lib/MojoMojo/Schema.pm:54
+msgid "Anonymous Coward"
+msgstr ""
+
+#: root/forms/admin/settings.yml:20
 msgid "Anonymous User (blank to disable)"
 msgstr "匿名ユーザー（無効にするには空白にしてください）"
 
@@ -174,7 +178,7 @@ msgstr "ページに戻る"
 msgid "Backlinks"
 msgstr "リンク元"
 
-#: root/forms/user/editprofile.yml:13
+#: root/forms/user/editprofile.yml:15
 msgid "Birth Date"
 msgstr "誕生日"
 
@@ -266,7 +270,7 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: root/forms/comment/comment.yml:11
+#: root/forms/comment/comment.yml:12
 msgid "Comment body"
 msgstr ""
 
@@ -315,7 +319,7 @@ msgstr ""
 msgid "Current Revision"
 msgstr "現在のリビジョン"
 
-#: root/forms/user/password.yml:10
+#: root/forms/user/password.yml:12
 msgid "Current password"
 msgstr "現在のパスワード　"
 
@@ -376,7 +380,7 @@ msgstr "「%1」を編集中"
 msgid "Editing user profile for x"
 msgstr "Editing user profile for %1"
 
-#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:22 root/forms/user/register.yml:32
+#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:23 root/forms/user/register.yml:34
 msgid "Email"
 msgstr "メールアドレス"
 
@@ -412,15 +416,15 @@ msgstr "エクスポート"
 msgid "External Link"
 msgstr "外部リンク"
 
-#: root/forms/user/editprofile.yml:32
+#: root/forms/user/editprofile.yml:34
 msgid "Favorite Albums"
 msgstr "好きなCD"
 
-#: root/forms/user/editprofile.yml:36
+#: root/forms/user/editprofile.yml:38
 msgid "Favorite Movies"
 msgstr "好きな映画"
 
-#: root/base/navbar.tt:54
+#: root/base/feeds.tt:1 root/base/navbar.tt:52 root/base/navbar.tt:54
 msgid "Feeds"
 msgstr "フィード"
 
@@ -452,7 +456,7 @@ msgstr "全文"
 msgid "Gallery"
 msgstr ""
 
-#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:20
+#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:22
 msgid "Gender"
 msgstr "性別"
 
@@ -571,7 +575,7 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
+#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:29
 msgid "Industry"
 msgstr "職業"
 
@@ -587,7 +591,7 @@ msgstr ""
 msgid "Inline Links"
 msgstr ""
 
-#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
+#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:32
 msgid "Interests"
 msgstr "好きな物"
 
@@ -680,7 +684,7 @@ msgstr "ログイン"
 msgid "Log out"
 msgstr "ログアウト"
 
-#: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
+#: root/base/user/login.tt:3 root/forms/user/prefs.yml:10 root/forms/user/register.yml:12
 msgid "Login"
 msgstr "ログイン"
 
@@ -712,11 +716,11 @@ msgstr "映画"
 msgid "Music"
 msgstr "音楽"
 
-#: root/base/page/tags.tt:2
+#: root/base/gallery/tags.tt:2 root/base/page/tags.tt:2
 msgid "My tags"
 msgstr "Myタグ"
 
-#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:10 root/forms/user/prefs.yml:17 root/forms/user/register.yml:40
+#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:12 root/forms/user/prefs.yml:18 root/forms/user/register.yml:42
 msgid "Name"
 msgstr "名前"
 
@@ -732,15 +736,15 @@ msgstr ""
 msgid "New User Registration"
 msgstr "ユーザーの新規登録"
 
-#: root/forms/admin/settings.yml:22
+#: root/forms/admin/settings.yml:23
 msgid "New User Registration open"
 msgstr "ユーザーの新規登録を許可"
 
-#: root/forms/user/password.yml:15
+#: root/forms/user/password.yml:17
 msgid "New password"
 msgstr ""
 
-#: root/forms/user/password.yml:20
+#: root/forms/user/password.yml:22
 msgid "New password again"
 msgstr ""
 
@@ -865,7 +869,7 @@ msgstr "Page info for %1"
 msgid "Page meta information"
 msgstr ""
 
-#: root/forms/pageadmin/edit.yml:9
+#: root/forms/pageadmin/edit.yml:10
 msgid "Page text"
 msgstr ""
 
@@ -877,15 +881,15 @@ msgstr ""
 msgid "Pages to which no other pages link."
 msgstr "どこからもリンクされていないページ"
 
-#: root/base/user/login.tt:19 root/forms/user/register.yml:17
+#: root/base/user/login.tt:19 root/forms/user/register.yml:19
 msgid "Password"
 msgstr "パスワード"
 
-#: root/forms/user/password.yml:24 root/forms/user/register.yml:22
+#: root/forms/user/password.yml:26 root/forms/user/register.yml:24
 msgid "Password did not match"
 msgstr "パスワードが一致しませんでした"
 
-#: root/forms/user/register.yml:26
+#: root/forms/user/register.yml:28
 msgid "Password must be between 4 and 14 chars"
 msgstr "パスワードは4文字から14文字である必要があります"
 
@@ -935,7 +939,7 @@ msgstr "添付するファイルを選択してください。複数のファイ
 msgid "Please type something"
 msgstr "入力してください"
 
-#: root/base/page/tags.tt:15
+#: root/base/gallery/tags.tt:16 root/base/page/tags.tt:17
 msgid "Popular tags"
 msgstr "人気タグ"
 
@@ -992,8 +996,8 @@ msgstr ""
 msgid "Recent changes in x"
 msgstr "Recent changes in %1"
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:2 root/base/tag/list.tt:22
 msgid "Recent pages in x"
 msgstr "Recent pages in %1"
@@ -1016,7 +1020,7 @@ msgstr "パスワードの再発行"
 msgid "Rectangle"
 msgstr ""
 
-#: root/base/navbar.tt:29 root/forms/comment/comment.yml:16 root/forms/user/register.yml:47
+#: root/base/navbar.tt:29 root/forms/comment/comment.yml:17 root/forms/user/register.yml:49
 msgid "Register"
 msgstr ""
 
@@ -1036,11 +1040,11 @@ msgstr "関連タグ"
 msgid "Removed"
 msgstr ""
 
-#: root/forms/user/register.yml:29
+#: root/forms/user/register.yml:31
 msgid "Repeat password"
 msgstr ""
 
-#: root/forms/admin/settings.yml:29
+#: root/forms/admin/settings.yml:30
 msgid "Restrict user editing to home directory"
 msgstr "ホームディレクトリ以下の編集のみ許可"
 
@@ -1081,7 +1085,7 @@ msgstr ""
 msgid "Role Members"
 msgstr ""
 
-#: root/forms/admin/role_form.yml:10
+#: root/forms/admin/role_form.yml:11
 msgid "Role Name"
 msgstr ""
 
@@ -1098,7 +1102,7 @@ msgstr ""
 msgid "Rolled Back (Current: x)"
 msgstr "Rolled Back (Current: %1)"
 
-#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:30
+#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:33 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
 msgid "Save"
 msgstr "保存"
 
@@ -1195,7 +1199,7 @@ msgstr "Showing %1 (%2-%3) of %4 pictures in %5"
 msgid "Simply indent every line of a code block by 4"
 msgstr ""
 
-#: root/forms/admin/settings.yml:16
+#: root/forms/admin/settings.yml:17
 msgid "Site Admins (In addition to you)"
 msgstr "サイト管理者（admin以外）"
 
@@ -1203,7 +1207,7 @@ msgstr "サイト管理者（admin以外）"
 msgid "Site Configuration"
 msgstr "サイト全体の設定"
 
-#: root/forms/admin/settings.yml:9
+#: root/forms/admin/settings.yml:10
 msgid "Site name"
 msgstr "サイト名"
 
@@ -1326,7 +1330,7 @@ msgstr ""
 msgid "Unordered Lists with Paragraphs"
 msgstr ""
 
-#: root/forms/user/editprofile.yml:39
+#: root/forms/user/editprofile.yml:41
 msgid "Update"
 msgstr ""
 
@@ -1362,6 +1366,11 @@ msgstr ""
 msgid "User not found!"
 msgstr ""
 
+#. (person.name)
+#: root/base/user/profile.tt:1
+msgid "User profile for x"
+msgstr ""
+
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:332
 msgid "User x not found!"
@@ -1371,7 +1380,7 @@ msgstr "User %1 not found!"
 msgid "Username"
 msgstr "ユーザー名"
 
-#: root/base/admin/user.tt:5
+#: root/base/admin/user.tt:6
 msgid "Users"
 msgstr "ユーザー"
 
@@ -1490,6 +1499,13 @@ msgstr ""
 msgid "add tag"
 msgstr ""
 
+#: lib/MojoMojo/Schema.pm:139
+msgid "admin home page"
+msgstr ""
+"h1. Admin User.\n"
+"\n"
+"This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom."
+
 #: root/base/edithelp.tt:3 root/base/edithelp.tt:45
 msgid "advanced"
 msgstr ""
@@ -1498,8 +1514,16 @@ msgstr ""
 msgid "alt text"
 msgstr ""
 
+#: lib/MojoMojo/Schema.pm:54
+msgid "anonymouscoward"
+msgstr ""
+
 #: root/base/page/permissions.tt:36
 msgid "apply to subpages"
+msgstr ""
+
+#: root/base/page/edit.tt:57
+msgid "as"
 msgstr ""
 
 #. (c.wikiword(user.link,base)
@@ -1524,7 +1548,7 @@ msgstr ""
 msgid "bold"
 msgstr ""
 
-#: root/base/page/search.tt:35 root/base/page/search_inline.tt:27 root/base/page/view.tt:32 root/base/tag/recent.tt:26
+#: root/base/page/info.tt:41 root/base/page/search.tt:35 root/base/page/search_inline.tt:27 root/base/page/view.tt:32 root/base/tag/recent.tt:26
 msgid "by"
 msgstr ""
 
@@ -1568,7 +1592,7 @@ msgstr ""
 msgid "confirmation message resent"
 msgstr ""
 
-#: root/forms/pageadmin/edit.yml:14
+#: root/forms/pageadmin/edit.yml:15
 msgid "creator"
 msgstr ""
 
@@ -1588,7 +1612,7 @@ msgstr ""
 msgid "download"
 msgstr "ダウンロード"
 
-#: root/base/admin/user.tt:8
+#: root/base/admin/user.tt:13
 msgid "email"
 msgstr ""
 
@@ -1611,6 +1635,19 @@ msgstr "ギャラリー形式"
 #: root/base/edithelp.tt:22
 msgid "hello"
 msgstr ""
+
+#: lib/MojoMojo/Schema.pm:135
+msgid "help message"
+msgstr ""
+"h1. Help Index.\n"
+"\n"
+"h2. Editing Pages\n"
+"\n"
+"h2. Formatter Syntax\n"
+"\n"
+"h2. Using Tags\n"
+"\n"
+"h2. Attachments & Photos\n"
 
 #: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "http://example.com/"
@@ -1680,15 +1717,11 @@ msgstr ""
 msgid "log out"
 msgstr ""
 
-#: root/base/admin/user.tt:8 root/base/comment/login.tt:8
+#: root/base/admin/user.tt:10 root/base/comment/login.tt:8
 msgid "login"
 msgstr ""
 
-#: root/base/gallery/tags.tt:2
-msgid "my tags"
-msgstr ""
-
-#: root/base/admin/user.tt:8
+#: root/base/admin/user.tt:12
 msgid "name"
 msgstr ""
 
@@ -1696,7 +1729,7 @@ msgstr ""
 msgid "no description"
 msgstr ""
 
-#: root/base/admin/user.tt:19
+#: root/base/admin/user.tt:31
 msgid "no email address"
 msgstr ""
 
@@ -1731,10 +1764,6 @@ msgstr ""
 #: root/base/page/attachments.tt:16
 msgid "plain uploader"
 msgstr "シンプルアップローダ"
-
-#: root/base/gallery/tags.tt:17
-msgid "popular tags"
-msgstr ""
 
 #: root/base/comment.tt:11
 msgid "posted"
@@ -1773,7 +1802,7 @@ msgstr ""
 msgid "right justified paragraph"
 msgstr ""
 
-#: root/base/admin/toplinks.tt:12
+#: root/base/admin/toplinks.tt:12 root/base/admin/user.tt:11
 msgid "roles"
 msgstr ""
 

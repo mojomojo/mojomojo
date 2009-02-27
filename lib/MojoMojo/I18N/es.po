@@ -51,7 +51,7 @@ msgstr "Una Instalacíon de MojoMojo mal configurada"
 msgid "Actions"
 msgstr "Funciones"
 
-#: root/base/admin/role.tt:16 root/base/admin/user.tt:8
+#: root/base/admin/role.tt:16 root/base/admin/user.tt:9
 msgid "Active"
 msgstr "Activo"
 
@@ -59,7 +59,7 @@ msgstr "Activo"
 msgid "Active version"
 msgstr "Versión activa"
 
-#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:15
+#: root/base/admin/role_form.tt:9 root/forms/admin/role_form.yml:16
 msgid "Active?"
 msgstr "¿Activo?"
 
@@ -142,7 +142,11 @@ msgstr "Y formato de Markdown adicional"
 msgid "And others."
 msgstr "Y otros."
 
-#: root/forms/admin/settings.yml:19
+#: lib/MojoMojo/Schema.pm:54
+msgid "Anonymous Coward"
+msgstr ""
+
+#: root/forms/admin/settings.yml:20
 msgid "Anonymous User (blank to disable)"
 msgstr "Usuario anónimo (omitir para desactivar)"
 
@@ -174,7 +178,7 @@ msgstr "Regresar a la página"
 msgid "Backlinks"
 msgstr "Retroenlace"
 
-#: root/forms/user/editprofile.yml:13
+#: root/forms/user/editprofile.yml:15
 msgid "Birth Date"
 msgstr "Fecha de nacimiento"
 
@@ -266,7 +270,7 @@ msgstr "Código se extiende sobre"
 msgid "Comment"
 msgstr "Comentario"
 
-#: root/forms/comment/comment.yml:11
+#: root/forms/comment/comment.yml:12
 msgid "Comment body"
 msgstr "Corpus de comentario"
 
@@ -311,7 +315,7 @@ msgstr "Creando"
 msgid "Current Revision"
 msgstr "Edición actual"
 
-#: root/forms/user/password.yml:10
+#: root/forms/user/password.yml:12
 msgid "Current password"
 msgstr "Contranseña actual"
 
@@ -372,7 +376,7 @@ msgstr "Editando"
 msgid "Editing user profile for x"
 msgstr "Editando perfil de %1"
 
-#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:22 root/forms/user/register.yml:32
+#: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:23 root/forms/user/register.yml:34
 msgid "Email"
 msgstr "Correo Electrónico"
 
@@ -408,15 +412,15 @@ msgstr "Exportar"
 msgid "External Link"
 msgstr "Enlace externo"
 
-#: root/forms/user/editprofile.yml:32
+#: root/forms/user/editprofile.yml:34
 msgid "Favorite Albums"
 msgstr "Álbumes Favoritos"
 
-#: root/forms/user/editprofile.yml:36
+#: root/forms/user/editprofile.yml:38
 msgid "Favorite Movies"
 msgstr "Películas Favoritas"
 
-#: root/base/navbar.tt:54
+#: root/base/feeds.tt:1 root/base/navbar.tt:52 root/base/navbar.tt:54
 msgid "Feeds"
 msgstr "Fuentes"
 
@@ -448,7 +452,7 @@ msgstr "Contenido completo"
 msgid "Gallery"
 msgstr "Galería"
 
-#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:20
+#: root/base/user/profile.tt:18 root/forms/user/editprofile.yml:22
 msgid "Gender"
 msgstr "Sexo"
 
@@ -567,7 +571,7 @@ msgstr "Imagen"
 msgid "Images"
 msgstr "Imagenes"
 
-#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:27
+#: root/base/user/profile.tt:21 root/forms/user/editprofile.yml:29
 msgid "Industry"
 msgstr "Industria"
 
@@ -583,7 +587,7 @@ msgstr "En línea"
 msgid "Inline Links"
 msgstr "Enlaces en línea"
 
-#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:30
+#: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:32
 msgid "Interests"
 msgstr "Intereses"
 
@@ -676,7 +680,7 @@ msgstr "Entra al sistema"
 msgid "Log out"
 msgstr "Sal del sistema"
 
-#: root/base/user/login.tt:3 root/forms/user/prefs.yml:9 root/forms/user/register.yml:10
+#: root/base/user/login.tt:3 root/forms/user/prefs.yml:10 root/forms/user/register.yml:12
 msgid "Login"
 msgstr "Entra al sistema"
 
@@ -708,11 +712,11 @@ msgstr "Películas"
 msgid "Music"
 msgstr "Música"
 
-#: root/base/page/tags.tt:2
+#: root/base/gallery/tags.tt:2 root/base/page/tags.tt:2
 msgid "My tags"
 msgstr "Mis etiquetas"
 
-#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:10 root/forms/user/prefs.yml:17 root/forms/user/register.yml:40
+#: root/base/admin/role.tt:16 root/base/user/profile.tt:3 root/forms/user/editprofile.yml:12 root/forms/user/prefs.yml:18 root/forms/user/register.yml:42
 msgid "Name"
 msgstr "Nombre"
 
@@ -728,15 +732,15 @@ msgstr "Acentos graves anidados"
 msgid "New User Registration"
 msgstr "Registración de Usuario Nuevo"
 
-#: root/forms/admin/settings.yml:22
+#: root/forms/admin/settings.yml:23
 msgid "New User Registration open"
 msgstr "Registración de Usuario Nuevo abierta"
 
-#: root/forms/user/password.yml:15
+#: root/forms/user/password.yml:17
 msgid "New password"
 msgstr "Contraseña nueva"
 
-#: root/forms/user/password.yml:20
+#: root/forms/user/password.yml:22
 msgid "New password again"
 msgstr "Contraseña nueva de nuevo"
 
@@ -861,7 +865,7 @@ msgstr "Información de página para %1"
 msgid "Page meta information"
 msgstr "Información de metaetiquetas de página"
 
-#: root/forms/pageadmin/edit.yml:9
+#: root/forms/pageadmin/edit.yml:10
 msgid "Page text"
 msgstr "Texto de página"
 
@@ -873,15 +877,15 @@ msgstr "Páginas organizadas por tiempo de su último cambio"
 msgid "Pages to which no other pages link."
 msgstr "Páginas a las que n páginas no se enlazan"
 
-#: root/base/user/login.tt:19 root/forms/user/register.yml:17
+#: root/base/user/login.tt:19 root/forms/user/register.yml:19
 msgid "Password"
 msgstr "Contraseña"
 
-#: root/forms/user/password.yml:24 root/forms/user/register.yml:22
+#: root/forms/user/password.yml:26 root/forms/user/register.yml:24
 msgid "Password did not match"
 msgstr "La contraseña no coincidió"
 
-#: root/forms/user/register.yml:26
+#: root/forms/user/register.yml:28
 msgid "Password must be between 4 and 14 chars"
 msgstr "Contraseña debe ser entre 4 y 14 carácteres"
 
@@ -931,7 +935,7 @@ msgstr "Por favor seleccione un archivo para adjuntar a esta página. Para subir
 msgid "Please type something"
 msgstr "Por favor teclee algo"
 
-#: root/base/page/tags.tt:15
+#: root/base/gallery/tags.tt:16 root/base/page/tags.tt:17
 msgid "Popular tags"
 msgstr "Etiquetas populares"
 
@@ -988,8 +992,8 @@ msgstr "Páginas Recientes"
 msgid "Recent changes in x"
 msgstr "Cambios recientes en %1"
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:2 root/base/tag/list.tt:22
 msgid "Recent pages in x"
 msgstr "Páginas recientes en %1"
@@ -1012,7 +1016,7 @@ msgstr "Rescatar Contraseña"
 msgid "Rectangle"
 msgstr "Rectángulo"
 
-#: root/base/navbar.tt:29 root/forms/comment/comment.yml:16 root/forms/user/register.yml:47
+#: root/base/navbar.tt:29 root/forms/comment/comment.yml:17 root/forms/user/register.yml:49
 msgid "Register"
 msgstr "Registrar"
 
@@ -1032,11 +1036,11 @@ msgstr "Etiquetas Relacionadas"
 msgid "Removed"
 msgstr "Eliminado"
 
-#: root/forms/user/register.yml:29
+#: root/forms/user/register.yml:31
 msgid "Repeat password"
 msgstr "Repetir contraseña"
 
-#: root/forms/admin/settings.yml:29
+#: root/forms/admin/settings.yml:30
 msgid "Restrict user editing to home directory"
 msgstr "Restringir editaciones de usuarios a directorio de inicio"
 
@@ -1077,7 +1081,7 @@ msgstr "Párrafo justificado derecha"
 msgid "Role Members"
 msgstr "Miembros de Rol"
 
-#: root/forms/admin/role_form.yml:10
+#: root/forms/admin/role_form.yml:11
 msgid "Role Name"
 msgstr "Nombre de Rol"
 
@@ -1094,7 +1098,7 @@ msgstr "Rols"
 msgid "Rolled Back (Current: x)"
 msgstr "Deshecho (Actual: %1)"
 
-#: root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:23 root/forms/admin/settings.yml:32 root/forms/user/password.yml:28 root/forms/user/prefs.yml:30
+#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:33 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
 msgid "Save"
 msgstr "Guardar"
 
@@ -1191,7 +1195,7 @@ msgstr "Mostrando %1 (%2-%3) de %4 fotos en %5"
 msgid "Simply indent every line of a code block by 4"
 msgstr "Simplemente deje un margen de 4 para cada línea de un bloque de código"
 
-#: root/forms/admin/settings.yml:16
+#: root/forms/admin/settings.yml:17
 msgid "Site Admins (In addition to you)"
 msgstr "Administradores de Sitio (Además de usted)"
 
@@ -1199,7 +1203,7 @@ msgstr "Administradores de Sitio (Además de usted)"
 msgid "Site Configuration"
 msgstr "Configuración de Sitio"
 
-#: root/forms/admin/settings.yml:9
+#: root/forms/admin/settings.yml:10
 msgid "Site name"
 msgstr "Nombre de sitio"
 
@@ -1322,7 +1326,7 @@ msgstr "URL"
 msgid "Unordered Lists with Paragraphs"
 msgstr "Listas No Ordenadas con Párrafos"
 
-#: root/forms/user/editprofile.yml:39
+#: root/forms/user/editprofile.yml:41
 msgid "Update"
 msgstr "Actualizar"
 
@@ -1358,6 +1362,11 @@ msgstr "Configuración de Usuario"
 msgid "User not found!"
 msgstr "!Usuario no encontrado!"
 
+#. (person.name)
+#: root/base/user/profile.tt:1
+msgid "User profile for x"
+msgstr ""
+
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:332
 msgid "User x not found!"
@@ -1367,7 +1376,7 @@ msgstr "!Usuario %1 no fue encontrado!"
 msgid "Username"
 msgstr "Nombre de Usuario"
 
-#: root/base/admin/user.tt:5
+#: root/base/admin/user.tt:6
 msgid "Users"
 msgstr "Usuarios"
 
@@ -1486,6 +1495,13 @@ msgstr "añadir comentario"
 msgid "add tag"
 msgstr "añadir etiqueta"
 
+#: lib/MojoMojo/Schema.pm:139
+msgid "admin home page"
+msgstr ""
+"h1. Admin User.\n"
+"\n"
+"This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom."
+
 #: root/base/edithelp.tt:3 root/base/edithelp.tt:45
 msgid "advanced"
 msgstr "avanzado"
@@ -1494,9 +1510,17 @@ msgstr "avanzado"
 msgid "alt text"
 msgstr "texto alternativo"
 
+#: lib/MojoMojo/Schema.pm:54
+msgid "anonymouscoward"
+msgstr ""
+
 #: root/base/page/permissions.tt:36
 msgid "apply to subpages"
 msgstr "aplicar a sub-páginas"
+
+#: root/base/page/edit.tt:57
+msgid "as"
+msgstr ""
 
 #. (c.wikiword(user.link,base)
 #. (c.wikiword(user.link, base))
@@ -1520,7 +1544,7 @@ msgstr "bloques estan encapsulados en acentos graves"
 msgid "bold"
 msgstr "negrita"
 
-#: root/base/page/search.tt:35 root/base/page/search_inline.tt:27 root/base/page/view.tt:32 root/base/tag/recent.tt:26
+#: root/base/page/info.tt:41 root/base/page/search.tt:35 root/base/page/search_inline.tt:27 root/base/page/view.tt:32 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "por"
 
@@ -1564,7 +1588,7 @@ msgstr "Configuración"
 msgid "confirmation message resent"
 msgstr "mensaje de confirmación enviado de nuevo"
 
-#: root/forms/pageadmin/edit.yml:14
+#: root/forms/pageadmin/edit.yml:15
 msgid "creator"
 msgstr "creador"
 
@@ -1584,7 +1608,7 @@ msgstr "no pase prisión, no acumule $ 200..."
 msgid "download"
 msgstr "descargar"
 
-#: root/base/admin/user.tt:8
+#: root/base/admin/user.tt:13
 msgid "email"
 msgstr "correo electrónico"
 
@@ -1607,6 +1631,19 @@ msgstr "galería"
 #: root/base/edithelp.tt:22
 msgid "hello"
 msgstr "hola"
+
+#: lib/MojoMojo/Schema.pm:135
+msgid "help message"
+msgstr ""
+"h1. Help Index.\n"
+"\n"
+"h2. Editing Pages\n"
+"\n"
+"h2. Formatter Syntax\n"
+"\n"
+"h2. Using Tags\n"
+"\n"
+"h2. Attachments & Photos\n"
 
 #: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "http://example.com/"
@@ -1668,15 +1705,15 @@ msgstr "entrar al sistema"
 msgid "log out"
 msgstr "salir del sistema"
 
-#: root/base/admin/user.tt:8 root/base/comment/login.tt:8
+#: root/base/admin/user.tt:10 root/base/comment/login.tt:8
 msgid "login"
 msgstr "entrar al sistema"
 
-#: root/base/gallery/tags.tt:2
+#:
 msgid "my tags"
 msgstr "mis etiquetas"
 
-#: root/base/admin/user.tt:8
+#: root/base/admin/user.tt:12
 msgid "name"
 msgstr "nombre"
 
@@ -1684,7 +1721,7 @@ msgstr "nombre"
 msgid "no description"
 msgstr "descripción no disponible"
 
-#: root/base/admin/user.tt:19
+#: root/base/admin/user.tt:31
 msgid "no email address"
 msgstr "correo electrónico no disponible"
 
@@ -1720,7 +1757,7 @@ msgstr "etiquetas de fotos"
 msgid "plain uploader"
 msgstr "cargador simple"
 
-#: root/base/gallery/tags.tt:17
+#:
 msgid "popular tags"
 msgstr "etiquetas popular"
 
@@ -1761,7 +1798,7 @@ msgstr "edición"
 msgid "right justified paragraph"
 msgstr "párrafo justificado derecha"
 
-#: root/base/admin/toplinks.tt:12
+#: root/base/admin/toplinks.tt:12 root/base/admin/user.tt:11
 msgid "roles"
 msgstr "rols"
 
@@ -1847,4 +1884,3 @@ msgstr "|a|tabla|hilera|"
 #: root/base/edithelp.tt:35
 msgid "|b|table|row|"
 msgstr "|b|tabla|hilera|"
-

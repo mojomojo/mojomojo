@@ -1499,6 +1499,13 @@ msgstr "dodaj komentarz"
 msgid "add tag"
 msgstr "dodaj tak"
 
+#: lib/MojoMojo/Schema.pm:139
+msgid "admin home page"
+msgstr ""
+"h1. Użytkownik Admin.\n"
+"\n"
+"To jest standardowa strona domowa administratora. Możesz zmienić ten tekst poprzez kliknęcie na linku _Edytuj stronę_."
+
 #: root/base/edithelp.tt:3 root/base/edithelp.tt:45
 msgid "advanced"
 msgstr "zaawansowane"
@@ -1629,6 +1636,19 @@ msgstr "galeria"
 msgid "hello"
 msgstr "witaj"
 
+#: lib/MojoMojo/Schema.pm:135
+msgid "help message"
+msgstr ""
+"h1. Indeks pomocy.\n"
+"\n"
+"h2. Edycja stron\n"
+"\n"
+"h2. Składnia formatowania\n"
+"\n"
+"h2. Tagi\n"
+"\n"
+"h2. Załączniki i zdjęcia\n"
+
 #: root/base/edithelp.tt:62 root/base/edithelp.tt:63
 msgid "http://example.com/"
 msgstr ""
@@ -1705,7 +1725,7 @@ msgstr "Nazwa"
 msgid "no description"
 msgstr "brak opisu"
 
-#: root/base/admin/user.tt:27
+#: root/base/admin/user.tt:31
 msgid "no email address"
 msgstr "Brak adresu poczty"
 
