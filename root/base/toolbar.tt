@@ -25,6 +25,10 @@
  src="[%c.uri_for_static('toolbar/italic.png')%]" title="[% loc('Italic') %]"/>
  <input type="image" onclick="return insertTags('body','-','-','[% loc('deleted') %]');"
  src="[%c.uri_for_static('toolbar/strikethrough.png')%]" title="[% loc('Deleted Text') %]"/>&nbsp;&nbsp;&nbsp;
+ <input type="image" onclick="return insertTags('body','++','++','[% loc('bigger') %]');"
+ src="[%c.uri_for_static('toolbar/big.png')%]" title="[% loc('Bigger') %]"/>
+ <input type="image" onclick="return insertTags('body','--','--','[% loc('small') %]');"
+ src="[%c.uri_for_static('toolbar/small.png')%]" title="[% loc('Smaller') %]"/>
  <input type="image" onclick="return insertTags('body','^','^','[% loc('superscript') %]');"
  src="[%c.uri_for_static('toolbar/super.png')%]" title="[% loc('Superscript') %]"/>
  <input type="image" onclick="return insertTags('body','[~','~]','[% loc('subscript') %]');"
@@ -39,7 +43,7 @@
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
- <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
+ <p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <input type="image" onclick="return insertTags('body','\n\n# ',' #\n\n','[% loc('increase # for smaller headline') %]');"
  src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
@@ -65,5 +69,5 @@
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
- <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
+ <p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
 [% END %]
