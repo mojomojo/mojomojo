@@ -25,8 +25,12 @@
  src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
  <input type="image" onclick="return insertTags('body','&quot;','&quot;:/','link(hyper)');"
  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
+ <input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
+ src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
+ <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
+ src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
  <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <input type="image" onclick="return insertTags('body','\n\n# ',' #\n\n','[% loc('increase # for smaller headline') %]');"
@@ -47,7 +51,11 @@
  src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
  <input type="image" onclick="return insertTags('body','[',']()','[% loc('url inside paranthesis') %]');"
  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
+ <input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
+ src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
  <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
+ <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
+ src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
  <small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small>
 [% END %]
