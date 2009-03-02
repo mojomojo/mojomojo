@@ -49,6 +49,8 @@
   <li>
   [% loc('Views') %]: <a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print')%]</a>
   <a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a>
+  <a title="[%loc('Inline for including content')%]" href="[%c.uri_for('inline')%]">[%loc('Inline')%]</a>
+
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </li>
 [% IF page.links_to.first ; %] 

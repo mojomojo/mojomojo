@@ -1,3 +1,4 @@
+        - Add inline view
         - reCAPTCHA added
         - localize: help message, admin home page, anonymous name and login ('anonymous coward')
         - Fixed displaying multiple user roles
