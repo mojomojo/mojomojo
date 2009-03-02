@@ -35,7 +35,7 @@ msgstr "*イタリック* または _イタリック_"
 msgid "3 or more dashes or asterisks"
 msgstr "三つ以上のハイフン、もしくはアスタリスク"
 
-#: root/base/toolbar.tt:38 root/base/toolbar.tt:8
+#: root/base/toolbar.tt:54 root/base/toolbar.tt:8
 msgid "<xml> and such.\\nor pure text."
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Also try h2,h3 and so on"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:255
+#: lib/MojoMojo/Controller/User.pm:261
 msgid "An error occourred. Sorry."
 msgstr ""
 
@@ -178,9 +178,17 @@ msgstr "ページに戻る"
 msgid "Backlinks"
 msgstr "リンク元"
 
+#: root/base/toolbar.tt:29
+msgid "Bigger"
+msgstr ""
+
 #: root/forms/user/editprofile.yml:15
 msgid "Birth Date"
 msgstr "誕生日"
+
+#: root/base/toolbar.tt:13
+msgid "Block quote"
+msgstr ""
 
 #: root/base/edithelp.tt:127
 msgid "Block quotes"
@@ -190,11 +198,11 @@ msgstr "ブロッククォート"
 msgid "Blockquotes can be nested"
 msgstr ""
 
-#: root/base/toolbar.tt:19 root/base/toolbar.tt:41
+#: root/base/toolbar.tt:23 root/base/toolbar.tt:57
 msgid "Bold"
 msgstr ""
 
-#: root/base/toolbar.tt:35 root/base/toolbar.tt:5
+#: root/base/toolbar.tt:5 root/base/toolbar.tt:51
 msgid "Bullet list"
 msgstr ""
 
@@ -218,11 +226,11 @@ msgstr ""
 msgid "Cannot find that user."
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:66
+#: lib/MojoMojo/Controller/Admin.pm:67
 msgid "Cant find admin user: "
 msgstr ""
 
-#: root/base/toolbar.tt:15
+#: root/base/toolbar.tt:19
 msgid "Centered paragraph"
 msgstr ""
 
@@ -260,6 +268,10 @@ msgstr ""
 
 #: root/base/page/suggest.tt:21
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
+msgstr ""
+
+#: root/base/toolbar.tt:11
+msgid "Code"
 msgstr ""
 
 #: root/base/edithelp.tt:137
@@ -327,7 +339,7 @@ msgstr "現在のパスワード　"
 msgid "Date registered"
 msgstr "登録日"
 
-#: root/base/toolbar.tt:23 root/base/toolbar.tt:45
+#: root/base/toolbar.tt:27 root/base/toolbar.tt:61
 msgid "Deleted Text"
 msgstr "削除されたテキスト"
 
@@ -392,7 +404,7 @@ msgstr "メールアドレスの確認"
 msgid "Emailed you your new password."
 msgstr ""
 
-#: root/base/toolbar.tt:37 root/base/toolbar.tt:7
+#: root/base/toolbar.tt:53 root/base/toolbar.tt:7
 msgid "Enum list"
 msgstr ""
 
@@ -412,7 +424,7 @@ msgstr ""
 msgid "Export"
 msgstr "エクスポート"
 
-#: root/base/toolbar.tt:27 root/base/toolbar.tt:49
+#: root/base/toolbar.tt:39 root/base/toolbar.tt:65
 msgid "External Link"
 msgstr "外部リンク"
 
@@ -583,7 +595,7 @@ msgstr "職業"
 msgid "Inherited permissions"
 msgstr ""
 
-#: root/base/edithelp.tt:66
+#: root/base/edithelp.tt:66 root/base/page/bottomnav.tt:52
 msgid "Inline"
 msgstr ""
 
@@ -591,11 +603,15 @@ msgstr ""
 msgid "Inline Links"
 msgstr ""
 
+#: root/base/page/bottomnav.tt:52
+msgid "Inline for including content"
+msgstr ""
+
 #: root/base/user/profile.tt:24 root/forms/user/editprofile.yml:32
 msgid "Interests"
 msgstr "好きな物"
 
-#: root/base/toolbar.tt:25 root/base/toolbar.tt:47
+#: root/base/toolbar.tt:37 root/base/toolbar.tt:63
 msgid "Internal Link"
 msgstr ""
 
@@ -603,7 +619,7 @@ msgstr ""
 msgid "Invalid password."
 msgstr ""
 
-#: root/base/toolbar.tt:21 root/base/toolbar.tt:43
+#: root/base/toolbar.tt:25 root/base/toolbar.tt:59
 msgid "Italic"
 msgstr ""
 
@@ -615,7 +631,7 @@ msgstr ""
 msgid "Just like email quoting!"
 msgstr ""
 
-#: root/base/toolbar.tt:17
+#: root/base/toolbar.tt:21
 msgid "Justified paragraph"
 msgstr ""
 
@@ -631,7 +647,7 @@ msgstr ""
 msgid "Leave second blank if you do not want a password"
 msgstr ""
 
-#: root/base/toolbar.tt:11
+#: root/base/toolbar.tt:15
 msgid "Left-justified paragraph"
 msgstr ""
 
@@ -643,7 +659,7 @@ msgstr ""
 msgid "Link Title"
 msgstr ""
 
-#: root/base/page/bottomnav.tt:56
+#: root/base/page/bottomnav.tt:58
 msgid "Linked from"
 msgstr ""
 
@@ -668,7 +684,7 @@ msgstr "リンクは作成されているが、まだ未作成なページ"
 msgid "List by x"
 msgstr "List by %1"
 
-#: root/base/toolbar.tt:34 root/base/toolbar.tt:4
+#: root/base/toolbar.tt:4 root/base/toolbar.tt:50
 msgid "List item 1"
 msgstr ""
 
@@ -688,7 +704,7 @@ msgstr "ログアウト"
 msgid "Login"
 msgstr "ログイン"
 
-#: root/base/toolbar.tt:3 root/base/toolbar.tt:33
+#: root/base/toolbar.tt:3 root/base/toolbar.tt:49
 msgid "Main heading"
 msgstr ""
 
@@ -696,7 +712,7 @@ msgstr ""
 msgid "Make current"
 msgstr ""
 
-#: root/base/toolbar.tt:30 root/base/toolbar.tt:52
+#: root/base/toolbar.tt:46 root/base/toolbar.tt:72
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "ツールバーにあるアクションを使うには対象の文字をハイライトしてください"
 
@@ -819,7 +835,7 @@ msgstr "-"
 msgid "Numbered list"
 msgstr ""
 
-#: root/base/toolbar.tt:36 root/base/toolbar.tt:6
+#: root/base/toolbar.tt:52 root/base/toolbar.tt:6
 msgid "Numbered list item"
 msgstr ""
 
@@ -919,9 +935,17 @@ msgstr ""
 msgid "Photos"
 msgstr "写真"
 
-#: root/base/toolbar.tt:29 root/base/toolbar.tt:51
+#: root/base/toolbar.tt:43 root/base/toolbar.tt:69
 msgid "Picture"
 msgstr "画像"
+
+#: root/base/toolbar.tt:41 root/base/toolbar.tt:67
+msgid "Picture left"
+msgstr ""
+
+#: root/base/toolbar.tt:45 root/base/toolbar.tt:71
+msgid "Picture right"
+msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:33
 msgid "Please enter username and password"
@@ -959,7 +983,7 @@ msgstr "設定"
 msgid "Preformatted Code Blocks"
 msgstr "フォーマット済みコードブロック"
 
-#: root/base/toolbar.tt:39 root/base/toolbar.tt:9
+#: root/base/toolbar.tt:55 root/base/toolbar.tt:9
 msgid "Preformatted text"
 msgstr "フォーマット済みテキスト"
 
@@ -996,8 +1020,8 @@ msgstr ""
 msgid "Recent changes in x"
 msgstr "Recent changes in %1"
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:2 root/base/tag/list.tt:22
 msgid "Recent pages in x"
 msgstr "Recent pages in %1"
@@ -1077,7 +1101,7 @@ msgstr "最終更新"
 msgid "Revision from x"
 msgstr "Revision from %1"
 
-#: root/base/toolbar.tt:13
+#: root/base/toolbar.tt:17
 msgid "Right-justified paragraph"
 msgstr ""
 
@@ -1102,7 +1126,7 @@ msgstr ""
 msgid "Rolled Back (Current: x)"
 msgstr "Rolled Back (Current: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:33 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
+#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:38 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
 msgid "Save"
 msgstr "保存"
 
@@ -1151,7 +1175,7 @@ msgstr ""
 msgid "Set a keyword for this page"
 msgstr ""
 
-#: root/base/page/bottomnav.tt:63
+#: root/base/page/bottomnav.tt:65
 msgid "Set language"
 msgstr "言語"
 
@@ -1211,7 +1235,11 @@ msgstr "サイト全体の設定"
 msgid "Site name"
 msgstr "サイト名"
 
-#: lib/MojoMojo/Controller/User.pm:383
+#: root/base/toolbar.tt:31
+msgid "Smaller"
+msgstr ""
+
+#: lib/MojoMojo/Controller/User.pm:389
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr ""
 
@@ -1237,6 +1265,14 @@ msgstr ""
 
 #: root/base/page/bottomnav.tt:51
 msgid "Subscribe to page changes"
+msgstr ""
+
+#: root/base/toolbar.tt:35
+msgid "Subscript"
+msgstr ""
+
+#: root/base/toolbar.tt:33
+msgid "Superscript"
 msgstr ""
 
 #: root/base/page/attachments.tt:5
@@ -1280,7 +1316,7 @@ msgstr ""
 msgid "Textile formatting tips"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:299
+#: lib/MojoMojo/Controller/User.pm:305
 msgid "That mail is already in use"
 msgstr ""
 
@@ -1331,19 +1367,23 @@ msgid "Unordered Lists with Paragraphs"
 msgstr ""
 
 #: root/forms/user/editprofile.yml:41
-msgid "Update"
+msgid "Update "
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:130
 msgid "Updated preferences"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:95
+#: lib/MojoMojo/Controller/Admin.pm:103
 msgid "Updated successfully."
 msgstr ""
 
 #: root/base/page/attachments.tt:11
 msgid "Upload"
+msgstr ""
+
+#: root/forms/admin/settings.yml:33
+msgid "Use captcha"
 msgstr ""
 
 #: root/base/page/permissions.tt:52
@@ -1362,7 +1402,7 @@ msgstr ""
 msgid "User Settings"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:360
+#: lib/MojoMojo/Controller/User.pm:366
 msgid "User not found!"
 msgstr ""
 
@@ -1372,7 +1412,7 @@ msgid "User profile for x"
 msgstr ""
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:332
+#: lib/MojoMojo/Controller/User.pm:338
 msgid "User x not found!"
 msgstr "User %1 not found!"
 
@@ -1413,7 +1453,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "アクティベーションリンクを記載したメールをお送りいたしました。メールに記載されたリンクをクリックして、アカウントを有効にしてください。"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:279
+#: lib/MojoMojo/Controller/User.pm:285
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Welcome, %1 your email is validated. Please log in."
 
@@ -1453,7 +1493,7 @@ msgstr "このWikiの変更をRSS経由で購読する事が可能です。編�
 msgid "You do not have permissions to edit attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:377
+#: lib/MojoMojo/Controller/User.pm:383
 msgid "You have to fill in all required fields."
 msgstr ""
 
@@ -1479,7 +1519,7 @@ msgid "Your password on x has been reset. This is your new password:"
 msgstr "Your password on %1 has been reset. This is your new password:"
 
 #. ($c->pref('name')
-#: lib/MojoMojo/Controller/User.pm:247
+#: lib/MojoMojo/Controller/User.pm:253
 msgid "[x] New User Validation"
 msgstr "[%1] New User Validation"
 
@@ -1540,11 +1580,15 @@ msgstr ""
 msgid "back"
 msgstr ""
 
+#: root/base/toolbar.tt:28
+msgid "bigger"
+msgstr ""
+
 #: root/base/edithelp.tt:138
 msgid "blocks are wrapped in backticks"
 msgstr ""
 
-#: root/base/edithelp.tt:60 root/base/toolbar.tt:18 root/base/toolbar.tt:40
+#: root/base/edithelp.tt:60 root/base/toolbar.tt:22 root/base/toolbar.tt:56
 msgid "bold"
 msgstr ""
 
@@ -1560,7 +1604,7 @@ msgstr ""
 msgid "can"
 msgstr ""
 
-#: root/base/toolbar.tt:14
+#: root/base/toolbar.tt:18
 msgid "centered paragraph"
 msgstr ""
 
@@ -1568,7 +1612,7 @@ msgstr ""
 msgid "chars"
 msgstr ""
 
-#: root/base/edithelp.tt:138
+#: root/base/edithelp.tt:138 root/base/toolbar.tt:10
 msgid "code"
 msgstr ""
 
@@ -1588,7 +1632,7 @@ msgstr ""
 msgid "configuration"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:307
+#: lib/MojoMojo/Controller/User.pm:313
 msgid "confirmation message resent"
 msgstr ""
 
@@ -1600,7 +1644,7 @@ msgstr ""
 msgid "delete"
 msgstr "削除"
 
-#: root/base/toolbar.tt:22 root/base/toolbar.tt:44
+#: root/base/toolbar.tt:26 root/base/toolbar.tt:60
 msgid "deleted"
 msgstr ""
 
@@ -1665,7 +1709,7 @@ msgstr ""
 msgid "include this rss feed"
 msgstr ""
 
-#: root/base/toolbar.tt:32
+#: root/base/toolbar.tt:48
 msgid "increase # for smaller headline"
 msgstr ""
 
@@ -1685,7 +1729,7 @@ msgstr "ページに挿入"
 msgid "insert link"
 msgstr ""
 
-#: root/base/toolbar.tt:20 root/base/toolbar.tt:42
+#: root/base/toolbar.tt:24 root/base/toolbar.tt:58
 msgid "italic"
 msgstr ""
 
@@ -1697,11 +1741,11 @@ msgstr ""
 msgid "just use `2`"
 msgstr ""
 
-#: root/base/toolbar.tt:16
+#: root/base/toolbar.tt:20
 msgid "justified paragraph"
 msgstr ""
 
-#: root/base/toolbar.tt:10
+#: root/base/toolbar.tt:14
 msgid "left justified paragraph"
 msgstr ""
 
@@ -1777,6 +1821,10 @@ msgstr ""
 msgid "preferences"
 msgstr ""
 
+#: root/base/toolbar.tt:12
+msgid "quote"
+msgstr ""
+
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:16 root/base/page/permissions.tt:36
 msgid "read"
 msgstr ""
@@ -1798,7 +1846,7 @@ msgstr ""
 msgid "revision"
 msgstr ""
 
-#: root/base/toolbar.tt:12
+#: root/base/toolbar.tt:16
 msgid "right justified paragraph"
 msgstr ""
 
@@ -1810,19 +1858,31 @@ msgstr ""
 msgid "shrinked head"
 msgstr ""
 
+#: root/base/toolbar.tt:30
+msgid "small"
+msgstr ""
+
 #: root/base/message.tt:6
 msgid "start"
+msgstr ""
+
+#: root/base/toolbar.tt:34
+msgid "subscript"
+msgstr ""
+
+#: root/base/toolbar.tt:32
+msgid "superscript"
 msgstr ""
 
 #: root/base/tag/list.tt:9
 msgid "tags"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:378
+#: lib/MojoMojo/Controller/User.pm:384
 msgid "the following are missing:"
 msgstr ""
 
-#: root/base/toolbar.tt:48
+#: root/base/toolbar.tt:64
 msgid "url inside paranthesis"
 msgstr ""
 
