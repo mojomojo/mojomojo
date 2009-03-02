@@ -32,7 +32,7 @@
     <li><a "title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - rev) %])</li>
   [% END %]
   [% IF rev AND rev > 1 %]
-   <li><a title="loc('See previous revision')%]" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">[%loc('Back in time')%]</a> ([% loc('x more', rev - 1) %])</li>
+   <li><a title="[% loc('See previous revision') %]" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">[%loc('Back in time')%]</a> ([% loc('x more', rev - 1) %])</li>
   [%END%]
   [% UNLESS rev||0 == page.content_version||0 %]
    <li><a title="[%loc('Back to the page')%]" href="[% c.uri_for('view')%]" accesskey="C">[%loc('Current Revision')%]</a></li>
