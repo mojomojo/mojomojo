@@ -95,10 +95,7 @@ intercepts the request if so.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    if ( defined $c->config->{permissions}{enforce_login}
-        and $c->config->{permissions}{enforce_login} )
-    {
-
+    if ( $c->pref('enforce_login') ) {
         # allow a few actions
         if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {
             return 1;
