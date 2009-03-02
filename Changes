@@ -1,3 +1,4 @@
+        - reCAPTCHA added
         - localize: help message, admin home page, anonymous name and login ('anonymous coward')
         - Fixed displaying multiple user roles
         - Now FormFu label_loc can be localized by MojoMojo I18N

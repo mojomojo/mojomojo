@@ -11,6 +11,7 @@ use Catalyst qw/    ConfigLoader
     Static::Simple	    SubRequest
     Unicode
     I18N
+    Setenv
     /;
 
 use Storable;

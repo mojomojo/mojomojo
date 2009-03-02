@@ -28,6 +28,11 @@ elements:
     value: 1
     default_empty_value: 0
     label_loc: Restrict user editing to home directory
+  - type: Checkbox
+    name: use_captcha
+    label_loc: Use captcha
+    value: 1
+    default_empty_value: 0
   - type: Submit
     name: submit
     value_loc: Save

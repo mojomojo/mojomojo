@@ -56,6 +56,7 @@ sub settings : Path FormConfig Args(0) {
             anonymous_user    => $c->pref('anonymous_user'),
             open_registration => $c->pref('open_registration'),
             restricted_user   => $c->pref('restricted_user'),
+            use_captcha       => $c->pref('use_captcha'),
         });
         $form->process();
         return;
@@ -72,6 +73,7 @@ sub settings : Path FormConfig Args(0) {
         $c->pref( 'open_registration', $form->params->{open_registration} );
         $c->pref( 'restricted_user', $form->params->{restricted_user} );
         $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
+        $c->pref( 'use_captcha', $form->params->{use_captcha} || '' );
         $c->stash->{message} = "Updated successfully.";
     }
 
@@ -87,6 +89,12 @@ sub settings : Path FormConfig Args(0) {
     }
     else {
         $c->pref( 'restricted_user', 0 );
+    }
+    if ( $form->params->{use_captcha} ) {
+        $c->pref( 'use_captcha', 1 );
+    }
+    else {
+        $c->pref( 'use_captcha', 0 );
     }
     $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
     $c->pref( 'name', $form->params->{name} );

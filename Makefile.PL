@@ -62,6 +62,7 @@ requires(
     'Syntax::Highlight::Engine::Kate'              => 0,
     'Cache::FastMmap'                              => 0,
     'Config::JFDI'                                 => 0,
+    'Catalyst::Plugin::Setenv'                     => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
