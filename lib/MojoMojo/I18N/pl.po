@@ -268,7 +268,7 @@ msgstr "Kliknij aby zobaczyć oryginał"
 
 #: root/base/page/suggest.tt:21
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
-msgstr "Kliknij na nieistniejącej stronie, aby ją utworzyć. Nadrzędne brakujące strony zostaną automatycznie utworzone."
+msgstr "Kliknij na nieistniejącej stronie, aby ją utworzyć. Brakujące nadrzędne strony zostaną automatycznie utworzone."
 
 #: root/base/toolbar.tt:11
 msgid "Code"
@@ -400,6 +400,10 @@ msgstr "Weryfikacja adresu pocztowego"
 msgid "Emailed you your new password."
 msgstr "Nowe hasło zostało wysłane."
 
+#: lib/MojoMojo/Schema.pm:57
+msgid "Enoch Root"
+msgstr "Administrator strony"
+
 #: root/base/toolbar.tt:53 root/base/toolbar.tt:7
 msgid "Enum list"
 msgstr "Lista numerowana"
@@ -520,6 +524,10 @@ msgstr "Nagłówki"
 #: root/base/page/rss.tt:6
 msgid "Headlines for x"
 msgstr "Nagłówki dla %1"
+
+#: lib/MojoMojo/Schema.pm:96
+msgid "Help"
+msgstr "Pomoc"
 
 #: root/base/mail/reset_password.tt:1
 msgid "Hi there."
@@ -815,7 +823,7 @@ msgstr "Brak"
 msgid "Normal Paragraph"
 msgstr "Zwykły paragraf"
 
-#: root/base/page/list.tt:43
+#: lib/MojoMojo/Formatter/Wiki.pm:236 root/base/page/list.tt:43
 msgid "Not found. Click to create this page."
 msgstr "Nie znaleziono. Kliknij aby utworzyć stronę."
 
@@ -891,7 +899,7 @@ msgstr "Strony ułożone według ostatniej zmiany"
 
 #: root/base/page/list.tt:49
 msgid "Pages to which no other pages link."
-msgstr "Strony do których brak linków z innych stron"
+msgstr "Strony do których nie linkuja inne strony."
 
 #: root/base/user/login.tt:19 root/forms/user/register.yml:19
 msgid "Password"
@@ -1773,7 +1781,7 @@ msgstr "Brak adresu poczty"
 msgid "not access page"
 msgstr "brak dostępu do strony"
 
-#: root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:8
+#: root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:7 root/base/gallery/photo_info.tt:8
 msgid "not specified"
 msgstr "nie podano"
 
@@ -1903,7 +1911,7 @@ msgstr ""
 "\n"
 "h2. Potrzebujesz pomocy?\n"
 "\n"
-"Sprawdź sekcję [[Help]]."
+"Sprawdź sekcję [[Help|Pomoc]]."
 
 #: root/base/page/permissions.tt:13 root/base/page/permissions.tt:17 root/base/page/permissions.tt:36
 msgid "write"
