@@ -233,7 +233,7 @@ sub format_link {
         return qq{<a class="existingWikiWord" href="$url">$formatted</a>};
     }
     return
-        qq{<span class="newWikiWord">$formatted<a title="Not found. Click to create this page." href="$url.edit">?</a></span>};
+        qq{<span class="newWikiWord">$formatted<a title="}.$c->loc('Not found. Click to create this page.').qq{" href="$url.edit">?</a></span>};
 }
 
 =item expand_wikiword <word>
