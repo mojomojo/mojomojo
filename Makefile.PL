@@ -9,7 +9,7 @@ requires(
     'Archive::Zip'                                 => '1.14',
     'Catalyst'                                     => '5.7000',
     'Catalyst::Action::RenderView'                 => '0.07',
-    'Catalyst::Controller::HTML::FormFu'           => '0.02000',
+    'Catalyst::Controller::HTML::FormFu'           => '0.03007',
     'Catalyst::Model::DBIC::Schema'                => '0.01',
     'KinoSearch'                                   => 0,
     'Catalyst::Plugin::Authentication'             => '0.10005',
@@ -25,7 +25,6 @@ requires(
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::View::TT'                           => '0.23',
     'Catalyst::View::JSON'                         => 0,
-    'Cache::Memory'                                => 0,
     'Config::General'                              => 0,
     'Data::FormValidator::Constraints::DateTime'   => 0,
     'DateTime::Format::Mail'                       => 0,
@@ -63,6 +62,7 @@ requires(
     'Syntax::Highlight::Engine::Kate'              => 0,
     'Cache::FastMmap'                              => 0,
     'Config::JFDI'                                 => 0,
+    'Catalyst::Plugin::Setenv'                     => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';

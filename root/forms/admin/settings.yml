@@ -2,6 +2,7 @@
 action: 
 indicator: submit
 auto_fieldset: 1
+localize_class: MojoMojo::I18N
 
 elements:
   - type: Text
@@ -27,6 +28,21 @@ elements:
     value: 1
     default_empty_value: 0
     label_loc: Restrict user editing to home directory
+  - type: Checkbox
+    name: disable_search
+    value: 1
+    default_empty_value: 0
+    label_loc: Disable search
+  - type: Checkbox
+    name: enforce_login
+    value: 1
+    default_empty_value: 0
+    label_loc: Enforce login
+  - type: Checkbox
+    name: use_captcha
+    label_loc: Use captcha
+    value: 1
+    default_empty_value: 0
   - type: Submit
     name: submit
     value_loc: Save

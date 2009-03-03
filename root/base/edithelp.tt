@@ -22,7 +22,7 @@
 			<tr><td>%{color:red}[%loc('hello')%]%</td><td class="arrow">-></td><td><span style="color: red;">[%loc('hello')%]</span></td>
 			   <td>=http://amazon/url</td><td class="arrow">-></td><td><em>[%loc('Show this product')%]</em></td>
       </tr>
-			<tr><td>* [%loc('Bulleted list')%]<br />* [%loc('Second item')%]</td><td class="arrow">-></td><td>&#8226; [%loc('Bulleted list')%]<br />&#8226; Second item</td>
+			<tr><td>* [%loc('Bulleted list')%]<br />* [%loc('Second item')%]</td><td class="arrow">-></td><td>&#8226; [%loc('Bulleted list')%]<br />&#8226; [%loc('Second item')%]</td>
 			   <td>=comments</td><td class="arrow">-></td><td><em>[%loc('Allow comments on this page.')%]</em></td>
       </tr>
 

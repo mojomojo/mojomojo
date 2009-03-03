@@ -32,7 +32,7 @@
     <li><a "title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - rev) %])</li>
   [% END %]
   [% IF rev AND rev > 1 %]
-   <li><a title="loc('See previous revision')%]" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">[%loc('Back in time')%]</a> ([% loc('x more', rev - 1) %])</li>
+   <li><a title="[% loc('See previous revision') %]" href="[% c.uri_for('view', { rev=> rev - 1 })%]" accesskey="R">[%loc('Back in time')%]</a> ([% loc('x more', rev - 1) %])</li>
   [%END%]
   [% UNLESS rev||0 == page.content_version||0 %]
    <li><a title="[%loc('Back to the page')%]" href="[% c.uri_for('view')%]" accesskey="C">[%loc('Current Revision')%]</a></li>
@@ -49,6 +49,8 @@
   <li>
   [% loc('Views') %]: <a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print')%]</a>
   <a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a>
+  <a title="[%loc('Inline for including content')%]" href="[%c.uri_for('inline')%]">[%loc('Inline')%]</a>
+
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </li>
 [% IF page.links_to.first ; %] 
@@ -61,7 +63,7 @@
 [% END %]
 [% SET redir = c.uri_for(c.req.path) %]
 		<li>[%loc('Set language')%]:</li>
-    [% FOREACH lang IN ['en','de','fr','ja','no','ca'] -%]
+    [% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl'] -%]
     <li><a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a></li> 
     [% END -%]
 

@@ -56,6 +56,9 @@ sub settings : Path FormConfig Args(0) {
             anonymous_user    => $c->pref('anonymous_user'),
             open_registration => $c->pref('open_registration'),
             restricted_user   => $c->pref('restricted_user'),
+            disable_search    => $c->pref('disable_search'),
+            enforce_login     => $c->pref('enforce_login'),
+            use_captcha       => $c->pref('use_captcha'),
         });
         $form->process();
         return;
@@ -69,25 +72,22 @@ sub settings : Path FormConfig Args(0) {
         # FIXME: Needs refactor
         $c->pref( 'name', $form->params->{name} );
         $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
-        $c->pref( 'open_registration', $form->params->{open_registration} );
-        $c->pref( 'restricted_user', $form->params->{restricted_user} );
-        $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
-        $c->stash->{message} = "Updated successfully.";
     }
+    $c->pref( 'open_registration', $form->params->{open_registration} );
+    $c->pref( 'restricted_user', $form->params->{restricted_user} );
+    $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
+    $c->pref( 'disable_search', $form->params->{disable_search} || '' );
+    $c->pref( 'enforce_login', $form->params->{enforce_login} || '' );
+    $c->pref( 'use_captcha', $form->params->{use_captcha} || '' );
+    $c->stash->{message} = "Updated successfully.";
 
     # FIXME: Needs refactor
-    if ( $form->params->{open_registration} ) {
-        $c->pref( 'open_registration', 1 );
-    }
-    else {
-        $c->pref( 'open_registration', 0 );
-    }
-    if ( $form->params->{restricted_user} ) {
-        $c->pref( 'restricted_user', 1 );
-    }
-    else {
-        $c->pref( 'restricted_user', 0 );
-    }
+    $c->pref( 'open_registration',$form->params->{open_registration}?1:0 );
+    $c->pref( 'restricted_user',  $form->params->{restricted_user}  ?1:0 );
+    $c->pref( 'use_captcha',      $form->params->{use_captcha}      ?1:0 );
+    $c->pref( 'disable_search',   $form->params->{disable_search}   ?1:0 );
+    $c->pref( 'enforce_login',    $form->params->{enforce_login}    ?1:0 );
+
     $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
     $c->pref( 'name', $form->params->{name} );
     $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );

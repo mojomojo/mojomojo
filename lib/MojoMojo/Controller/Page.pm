@@ -232,6 +232,13 @@ sub print : Global {
     $c->forward('view');
 }
 
+sub inline : Global {
+    my ( $self, $c, $page ) = @_;
+    $c->stash->{template} = 'page/inline.tt';
+    $c->forward('view');
+}
+
+
 =head2 inline_tags (.inline_tags)
 
 Tag list for the bottom of page views.

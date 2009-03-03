@@ -51,10 +51,10 @@ sub create_initial_data {
                 qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
             ],
             [
-                1, 0, 0, 'AnonymousCoward', 'Anonymous Coward',
+                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'),
                 '', '', '', 0, '', '', '', '', '', ''
             ],
-            [ 1, 0, 0, 'admin', 'Enoch Root', '', 'admin', '', 0, '', '', '', '', '', '' ],
+            [ 1, 0, 0, 'admin', loc('Enoch Root'), '', 'admin', '', 0, '', '', '', '', '', '' ],
         ]
     );
     
@@ -62,8 +62,8 @@ sub create_initial_data {
         'Role',
         [
             [ qw/ name active / ],
-            [ 'Admins', 1 ],
-            [ 'Users',  1 ]
+            [ loc('Admins'), 1 ],
+            [ loc('Users'),  1 ]
         ]
     );
 
@@ -93,7 +93,7 @@ sub create_initial_data {
         [
             [qw/ version parent name name_orig depth lft rgt content_version /],
             [ undef, undef, '/',     '/',     0, 1, 5, undef ],
-            [ undef, 1,     'help',  'Help',  1, 2, 3, undef ],
+            [ undef, 1,     'help',  loc('Help'),  1, 2, 3, undef ],
             [ undef, 1,     'admin', 'Admin', 1, 4, 5, undef ],
         ]
     );
@@ -132,17 +132,11 @@ sub create_initial_data {
                 , 'released', 1, 1, '', '', '', ''
             ],
             [
-                2, 1, $people[1]->id, 0, 'h1. Help Index.
-
-h2. Editing Pages
-h2. Formatter Syntax.
-h2. Using Tags
-h2. Attachments & Photos', 'released', 1, 1, '', '', '', ''
+                2, 1, $people[1]->id, 0, loc('help message'),
+		'released', 1, 1, '', '', '', ''
             ],
             [
-                3, 1, $people[1]->id, 0, 'h1. Admin User.
-
-This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom.',
+                3, 1, $people[1]->id, 0, loc('admin home page'),
                 'released', 1, 1, '', '', ''
             ],
         ]
