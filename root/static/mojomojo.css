@@ -16,7 +16,7 @@ h1 {
     font-size: 2.5em;
 }
 #content h1 {
-    margin-top:0;
+    margin-top: 0;
     font-size: 2em;
 }
 h2 {
@@ -30,6 +30,28 @@ h4 {
 }
 h5, h6 {
     font-size: 1em;
+}
+
+.toc {
+    border: 1px black dotted;
+	display: inline-block;
+	padding: 1em;
+	margin: 1em;
+}
+
+.toc ul {
+    margin: 0;
+    margin-left: -1em;
+	padding: 0;
+}
+.toc > ul {
+    margin-left: -2em;
+}
+
+.toc li {
+    margin: 0;
+	padding: 0;
+	font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
 }
 
 /* @end */
