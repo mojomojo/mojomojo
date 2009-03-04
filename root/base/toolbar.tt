@@ -63,7 +63,7 @@
   src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
 <input type="image" onclick="return insertTags('body','[',']()','[% loc('url inside paranthesis') %]');"
   src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
-<input type="image" onclick="return insertTags('body','<div class="photo">!<','!</div>','/.static/catalyst.png(Catalyst)');"
+<input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
   src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
 <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
   src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
