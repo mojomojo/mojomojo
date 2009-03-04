@@ -18,6 +18,9 @@ elements:
   - type: Text
     name: anonymous_user
     label_loc: Anonymous User (blank to disable)
+  - type: Text
+    name: theme
+    label_loc: Theme name
   - type: Checkbox
     name: open_registration
     label_loc: New User Registration open

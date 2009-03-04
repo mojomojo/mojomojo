@@ -59,6 +59,7 @@ sub settings : Path FormConfig Args(0) {
             disable_search    => $c->pref('disable_search'),
             enforce_login     => $c->pref('enforce_login'),
             use_captcha       => $c->pref('use_captcha'),
+            theme             => $c->pref('theme'),
         });
         $form->process();
         return;
@@ -79,6 +80,7 @@ sub settings : Path FormConfig Args(0) {
     $c->pref( 'disable_search', $form->params->{disable_search} || '' );
     $c->pref( 'enforce_login', $form->params->{enforce_login} || '' );
     $c->pref( 'use_captcha', $form->params->{use_captcha} || '' );
+    $c->pref( 'theme', $form->params->{theme} || 'default' );
     $c->stash->{message} = "Updated successfully.";
 
     # FIXME: Needs refactor

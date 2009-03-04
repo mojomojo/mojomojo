@@ -40,8 +40,6 @@ MojoMojo->config->{cache}{backend} = {
 MojoMojo->setup();
 
 
-MojoMojo->config->{theme} ||= 'default';
-
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 

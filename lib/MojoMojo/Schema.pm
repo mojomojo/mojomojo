@@ -86,7 +86,7 @@ sub create_initial_data {
     
     my @prefs =
         $schema->populate( 'Preference',
-        [ [qw/ prefkey prefvalue /], [ 'name', 'MojoMojo' ], [ 'admins', 'admin' ], ] );
+        [ [qw/ prefkey prefvalue /], [ 'name', 'MojoMojo' ], [ 'admins', 'admin' ], [ 'theme', 'default' ] ] );
 
     my @pages = $schema->populate(
         'Page',
