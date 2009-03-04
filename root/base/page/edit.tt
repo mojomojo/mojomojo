@@ -65,6 +65,7 @@
     <input type="password" name="pass" id="userAuth" /><br/> 
     ([%loc('Leave second blank if you do not want a password')%].
     [% END %]
+    [% captcha %]
   </form>
 </div>
 <!-- between last two divs -->
