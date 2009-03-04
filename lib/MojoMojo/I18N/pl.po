@@ -75,6 +75,10 @@ msgstr "Dodaj tag"
 msgid "Added"
 msgstr "Dodano"
 
+#: lib/MojoMojo/Schema.pm:65
+msgid "Admins"
+msgstr "Administratorzy"
+
 #: root/base/user/profile.tt:15
 msgid "Age"
 msgstr "Wiek"
@@ -156,7 +160,7 @@ msgstr "Przysłona"
 
 #: lib/MojoMojo/Controller/Attachment.pm:107
 msgid "Attachment not found."
-msgstr "Załacznik nie został znaleziony"
+msgstr "Załącznik nie został znaleziony"
 
 #: root/base/page/editbar.tt:13 root/base/page/editbar.tt:18 root/base/page/editbar.tt:6 root/base/page/info.tt:30
 msgid "Attachments"
@@ -216,17 +220,17 @@ msgstr "Aparat"
 
 #: lib/MojoMojo/Controller/Attachment.pm:169
 msgid "Can only make inline version of photos"
-msgstr ""
+msgstr "W wersji wbudowanej mogę pokazać wyłącznie zdjęcia"
 
 #: lib/MojoMojo/Controller/Attachment.pm:150
 msgid "Can only make thumbnails of photos"
-msgstr ""
+msgstr "Miniaturki dostępne wyłącznie dla zdjęć"
 
 #: lib/MojoMojo/Controller/User.pm:114
 msgid "Cannot find that user."
 msgstr "Użytkownik nie został znaleziony"
 
-#: lib/MojoMojo/Controller/Admin.pm:67
+#: lib/MojoMojo/Controller/Admin.pm:70
 msgid "Cant find admin user: "
 msgstr "Nie mogę znaleźć administratora: "
 
@@ -347,6 +351,10 @@ msgstr "Nadrzędnych"
 msgid "Didn't receive an email?"
 msgstr "Nie otrzymałeś wiadomości pocztowej?"
 
+#: root/forms/admin/settings.yml:38
+msgid "Disable search"
+msgstr "Wyłącz wyszukiwanie"
+
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Pobierz archiwum zip ze wszystkimi stronami na tej wiki"
@@ -399,6 +407,10 @@ msgstr "Weryfikacja adresu pocztowego"
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
 msgstr "Nowe hasło zostało wysłane."
+
+#: root/forms/admin/settings.yml:43
+msgid "Enforce login"
+msgstr "Wymuś logowanie"
 
 #: lib/MojoMojo/Schema.pm:57
 msgid "Enoch Root"
@@ -756,7 +768,7 @@ msgstr "Zagnieżdżone gravisy"
 msgid "New User Registration"
 msgstr "Tworzenie nowego użytkownika"
 
-#: root/forms/admin/settings.yml:23
+#: root/forms/admin/settings.yml:26
 msgid "New User Registration open"
 msgstr "Otwarta rejestracja nowych użytkowników"
 
@@ -1072,7 +1084,7 @@ msgstr "Usunięto"
 msgid "Repeat password"
 msgstr "Powtórz hasło"
 
-#: root/forms/admin/settings.yml:30
+#: root/forms/admin/settings.yml:33
 msgid "Restrict user editing to home directory"
 msgstr "Ogranicz użytkowników do edycji strony domowej"
 
@@ -1130,7 +1142,7 @@ msgstr "Role"
 msgid "Rolled Back (Current: x)"
 msgstr "Przywrócono (aktualna: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:38 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
+#: lib/MojoMojo/Controller/PageAdmin.pm:151 root/base/admin/role_form.tt:40 root/base/page/edit.tt:55 root/base/page/permissions.tt:48 root/forms/admin/role_form.yml:24 root/forms/admin/settings.yml:51 root/forms/user/password.yml:30 root/forms/user/prefs.yml:31
 msgid "Save"
 msgstr "Zapisz"
 
@@ -1338,6 +1350,10 @@ msgstr "Wiadomość została wysłana na konto %1."
 msgid "The requested URL (x) was not found"
 msgstr "Żądany adres URL (%1) nie został znaleziony"
 
+#: root/forms/admin/settings.yml:23
+msgid "Theme name"
+msgstr "Nazwa skórki"
+
 #: root/base/edithelp.tt:147
 msgid "This is a pre formatted code block"
 msgstr "To jest preformatowany blok kodu"
@@ -1378,7 +1394,7 @@ msgstr "Aktualizuj"
 msgid "Updated preferences"
 msgstr "Dane zaktualizowane"
 
-#: lib/MojoMojo/Controller/Admin.pm:103
+#: lib/MojoMojo/Controller/Admin.pm:97
 msgid "Updated successfully."
 msgstr "Dane zostały zaktualizowane."
 
@@ -1386,7 +1402,7 @@ msgstr "Dane zostały zaktualizowane."
 msgid "Upload"
 msgstr "Wgraj"
 
-#: root/forms/admin/settings.yml:33
+#: root/forms/admin/settings.yml:46
 msgid "Use captcha"
 msgstr "Używaj captchy (testów obrazkowych)"
 
@@ -1424,7 +1440,7 @@ msgstr "Użytkownik %1 nie znaleziony!"
 msgid "Username"
 msgstr "Login"
 
-#: root/base/admin/user.tt:6
+#: lib/MojoMojo/Schema.pm:66 root/base/admin/user.tt:6
 msgid "Users"
 msgstr "Użytkownicy"
 
