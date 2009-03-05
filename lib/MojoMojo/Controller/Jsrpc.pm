@@ -10,7 +10,7 @@ MojoMojo::Controller::Jsrpc - Various JsRPC functions.
 
 =head1 SYNOPSIS
 
-This is the Mojo powering our AJAX features. 
+This is the Mojo powering our AJAX features.
 
 =head1 DESCRIPTION
 
@@ -23,7 +23,7 @@ These methods will be called indirectly through javascript functions.
 
 =item render (/.jsrpc/render)
 
-Edit uses this to get live preview. It gets some content in 
+Edit uses this to get live preview. It gets some content in
 params->{content} and runs it through the formatter chain.
 
 =cut
@@ -159,7 +159,7 @@ sub untag : Local Args(1) {
 
 =item imginfo (.jsrpc/imginfo)
 
-Inline info on hoved for gallery photos. 
+Inline info on hover for gallery photos.
 
 =cut
 
@@ -180,7 +180,7 @@ sub usersearch : Local {
     my $query = $c->req->param('q');
 
     $c->stash->{template} = "user/user_search.tt";
-    
+
     if (defined($query) && length($query)) {
         my $rs = $c->model('DBIC::Person')->search_like({
             login => '%'.$query.'%'
@@ -202,11 +202,11 @@ sub set_permissions : Local {
 
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
-    
-    my ( $read, $write, $subpages) = 
-        map { $c->req->param($_) ? 'yes' : 'no' } 
+
+    my ( $read, $write, $subpages) =
+        map { $c->req->param($_) ? 'yes' : 'no' }
             qw/read write subpages/;
-    
+
     my $role = $c->stash->{role};
 
     my $params = {
@@ -222,7 +222,7 @@ sub set_permissions : Local {
 
     my $model = $c->model('DBIC::PathPermissions');
 
-    # when subpages should inherit permissions we actually need to update two 
+    # when subpages should inherit permissions we actually need to update two
     # entries: one for the subpages and one for the current page
     if ($subpages eq 'yes') {
         # update permissions for subpages
@@ -236,12 +236,12 @@ sub set_permissions : Local {
     # entry for the current page
     else {
         # delete permissions for subpages
-        $model->search( { 
-            path              => $current_path, 
-            role              => $role->id, 
+        $model->search( {
+            path              => $current_path,
+            role              => $role->id,
             apply_to_subpages => 'yes'
         } )->delete;
-        
+
         # update permissions for the current page
         $model->update_or_create($params);
     }
@@ -268,14 +268,14 @@ sub clear_permissions : Local {
 
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
-    
+
     my $role = $c->stash->{role};
 
     if ($role) {
-    
+
         # delete permissions for subpages
-        $c->model('DBIC::PathPermissions')->search( { 
-            path              => $current_path, 
+        $c->model('DBIC::PathPermissions')->search( {
+            path              => $current_path,
             role              => $role->id
         } )->delete;
 
@@ -299,7 +299,7 @@ Validates if the user is able to edit permissions and if a role was supplied.
 
 sub validate_perm_edit : Private {
     my ($self, $c) = @_;
-    
+
     my $user = $c->user;
 
     # only admins can change permissions for now
@@ -309,8 +309,8 @@ sub validate_perm_edit : Private {
         $c->detach;
     }
 
-    my $role = $c->model('DBIC::Role')->find( 
-        { name => $c->req->param('role_name') } 
+    my $role = $c->model('DBIC::Role')->find(
+        { name => $c->req->param('role_name') }
     );
 
     unless ($role) {

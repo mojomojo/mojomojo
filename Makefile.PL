@@ -4,6 +4,8 @@ name 'MojoMojo';
 all_from 'lib/MojoMojo.pm';
 
 requires(
+    'Encode'                                       => '2.31',
+    'Template::Toolkit'                            => '2.20',
     'Algorithm::Diff'                              => '1.1901',
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
