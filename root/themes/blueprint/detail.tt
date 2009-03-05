@@ -1,0 +1,75 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<link rel="stylesheet" type="text/css" href="/ext-1.1/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="[% c.req.base %]css/lists.css" />
+
+<script type="text/javascript" src="/ext-1.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/ext-1.1/ext-all.js"></script>
+</head>
+<body class="xtheme-gray" >
+
+<form name='infoboxform' method='get' action='[% c.req.base %]update/[% kind %]/[% id %]'>
+
+<script type="text/javascript">
+ITabs = function(){
+  return {
+    init: function(){
+      var tabs = new Ext.TabPanel("tabs1");
+      [% tabactivated = 0 %]
+      [% FOREACH box IN box_metadata %]
+       [% IF box.title != "TEST" %]
+        tabs.addTab("[% box.id %]", "[% box.title %]");
+        [% IF tabactivated == 0 %]tabs.activate("[% box.id %]");[% tabactivated = 1; END %]
+       [% END %]
+      [% END %]
+    }
+  }
+}();
+Ext.EventManager.onDocumentReady(ITabs.init, ITabs, true);
+</script>
+
+[% FOREACH box IN box_metadata %]
+  [% IF box.title != "TEST" %]
+    [% boxid = box.id %]
+    <div id="[% boxid %]">
+    [% INCLUDE infobox.tt
+        title = box.title
+        boxdata = box_data.$boxid
+        ;
+    %]
+    </div>
+  [% END %]
+[% END %]
+
+<div id="tabs1" class="xp"></div>
+
+<input type="submit" value="Update record (closes this window)">
+
+</form>
+<p>
+
+
+[% IF kind == 'album' %]
+<div id="container"><div id="content" class="list">
+<form>
+
+[% INCLUDE list.tt
+    listframework = myprefixlistframework
+    results = myprefixresults
+    sums = myprefixsums
+    search = myprefixsearch
+    pager = myprefixpager
+    view = myprefixview
+    sortparam = "myprefixsort"
+    page_sizeparam = "myprefixpage_size"
+    current_pageparam = "myprefixcurrent_page"
+    options = myprefixoptions  # what to show
+    ;
+%]
+</form>
+</div></div>
+
+[% END %]
+
+</body>

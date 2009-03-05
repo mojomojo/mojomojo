@@ -1,0 +1,19 @@
+[% SET page.body_class = 2; %]
+[% SET liste_left = 'default_left'; %]
+[% WRAPPER page/wrapper.tt %]
+
+<div class="span-18 main-content">
+
+<h1>Enregistrement de votre Entreprise</h1>
+<p class="end"><span style="color:#ff6000" id="logintext"><strong>[%c.unicode(message)%]</strong></span><br/>
+
+[% form %]
+
+<p class="end"><span style="color:#ff6000" id="logintext"><strong>[%c.unicode(message)%]</strong></span><br/>
+
+<script language="JavaScript">
+$('register_login').focus();
+</script>
+ </div>
+
+[% END %]

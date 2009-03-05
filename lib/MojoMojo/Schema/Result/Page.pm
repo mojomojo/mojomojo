@@ -287,4 +287,21 @@ sub has_photos {
         ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->count;
 }
 
+sub has_child {
+    my $self=shift;
+    return 1 if $self->content->is_directory;
+    return $self->children->count;
+}
+
+sub name_orig_format {
+  my $self=shift;
+
+  my $format = $self->name_orig;
+  $format =~ s/(\w+)/\u\L$1/g;
+  $format =~ s/-/ /g;
+
+  return  $format;
+
+}
+
 1;

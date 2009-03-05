@@ -1,0 +1,3 @@
+[%- MACRO loc(text, args) BLOCK; c.localize(text, args); END; -%]
+[% SET lang = c.session.lang || c.pref('default_lang') || 'en' %]
+[% SET editor = c.pref('editor') || 'default' %]

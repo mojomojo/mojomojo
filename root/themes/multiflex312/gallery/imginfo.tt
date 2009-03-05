@@ -1,0 +1,6 @@
+<h3>[%photo.title%]</h3>
+<div class="inline">
+<p>[%photo.description%]</small></p>
+[% PROCESS gallery/photo_info.tt %]
+<p class="end">&nbsp;</p>
+</div>

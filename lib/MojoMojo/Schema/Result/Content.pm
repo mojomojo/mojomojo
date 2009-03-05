@@ -39,6 +39,28 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => undef },
     "precompiled",
     { data_type => "TEXT", is_nullable => 1, size => undef },
+    # Need to move that in PageOption.pm ?
+    "title",
+    { data_type => "VARCHAR", is_nullable => 1, size => 200 },
+    "keywords",
+    { data_type => "VARCHAR", is_nullable => 1, size => 200 },
+    "description",
+    { data_type => "VARCHAR", is_nullable => 1, size => 200 },
+    #change by code status 301 302...
+    "noindex",
+    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
+    "notfound",
+    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
+    # end / managment
+    "is_directory",
+    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
+    #
+    "show_nav",
+    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
+    "short_title",
+    { data_type => "VARCHAR", is_nullable => 1, size => 50 },
+    "edit_comments",
+    { data_type => "VARCHAR", is_nullable => 1, size => 300 },
 
 );
 __PACKAGE__->utf8_columns(qw/body precompiled/);

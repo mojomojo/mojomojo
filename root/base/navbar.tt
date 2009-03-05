@@ -46,6 +46,27 @@
       [% END %]
     [% END; IF c.req.action=='users' %]
       <li class="navOn" title="[%loc('Who wrote what')%]">[%loc('Authors')%]</li>
+      <li><a href="[%c.uri_for(user.link,c.config.tool_separator _ 'prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
+      [% END %]
+    [%END%]
+    <li><a href="[%base%]/[%c.config.tool_separator%]logout">[%loc('Log out')%]</a></li>
+  [% ELSE %]
+    <li><a href="[%c.uri_for('/' _ c.config.tool_separator _ 'login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a></li>
+      [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>[%END%]
+  [% END %]
+  [% IF template.name == 'page/list.tt' %]
+    <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
+  [% ELSE %]
+    <li><a href="[%c.uri_for('list')%]" title="[%loc('Alphabetically sorted list of pages')%]" accesskey="A">[%loc('Sub pages')%]</a></li>
+  [% END; IF template.name =='page/recent.tt' %]
+    <li class="navOn" title="[%loc('Pages sorted by when they were last changed')%]">[%loc('Recent')%]</li>
+  [% ELSE %]
+    <li><a href="[%c.uri_for('recent')%]" title="[%loc('Pages sorted by when they were last changed')%]" accesskey="U">[%loc('Recent')%]</a></li>
+  [% END; IF c.req.action =='tags' %]
+    <li class="navOn" title="[%loc('All tags in this path')%]">[%loc('Tags')%]</li>
+  [% ELSE %]
+    [% IF (pictures OR photo) %]
+    <li><a href="[%c.uri_for('gallery','tags')%]" title="[%loc('All tags on photos')%]" accesskey="T">[%loc('Tags')%]</a></li>
     [% ELSE %]
       <li><a href="[%c.uri_for('users')%]" title="[%loc('Who wrote what')%]" accesskey="">[%loc('Authors')%]</a></li>
     [% END; IF template.name=='feeds.tt' %]

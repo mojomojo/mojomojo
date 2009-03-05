@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[% lang %]" lang="[% lang %]">
+<head>
+    <title>[% page.content.title || title || 'mojomojo.org'%]</title>
+[% IF (noindex == 1  || page.content.noindex == "1") %]
+  <meta name="robots" content="noindex,nofollow" />
+[% END %]
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="3600" />
+  <meta name="revisit-after" content="2 days" />
+  <meta name="robots" content="index,follow" />
+  <meta name="publisher" content="mojomojo" />
+  <meta name="copyright" content="Perl Artistic License" />
+  <meta name="author" content="Designed by www.1234.info / Modified: mojomojo.org" />
+  <meta name="distribution" content="global" />
+  <meta name="description" content="[% c.unicode(page.content.description) || description || 'mojomojo'%]"/>
+  <meta name="keywords" content="[% page.content.keywords || keywords || 'mojomojo'%]"/>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.form.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.livequery.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.inplace.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/fckeditor/fckeditor.js')%]"></script>
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/jquery.FCKEditor.js')%]"></script>
+[% IF (matches = c.request.query_parameters.split.match('vertical')) %]
+<script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/edit.js')%]"></script>
+[% END %]
+
+<link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+jQuery.uri_for = function(path) { return '[%c.req.base%]' + path }
+jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.config.platform)%]/' + path }
+</script>
+
+  <link href="[%c.uri_for('/static/css/wysiwyg.css')%]" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+    @import "[%c.uri_for_static('mojomojo.css')%]";
+    @import "[%c.uri_for_static('themes/' _ c.config.theme _ '/theme.css')%]";
+    @import "[% c.uri_for_static('pod.css')%]";
+		</style>
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
+    <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
+    <link rel="icon" type="image/x-icon" href="[%c.uri_for_static('img/favicon.ico')%]" />
+    [% IF c.stash.template=='page/attachments.tt' %]
+        [% c.upload_progress_javascript %]
+    [% END %]
+</head>
+[% IF page.content.location %]
+<body id="page" onload="LoadMap()" onunload="GUnload()">
+[% ELSE %]
+<body id="page">
+[% END %]
+<div class="container">
+<!-- A. HEADER -->
+ <div class="header-top">
+        <!-- A.1 SITENAME -->
+   <div class="sitename span-12">
+   <h1>
+      [% IF title %][% title %][% ELSE %]
+	[% IF pre_title %][% pre_title %][% END %]
+        [% IF page.name == "/" %]
+           [% c.pref("name") || "MojoMojo" %] [% loc('Home') %] (/)
+        [% ELSE %]
+           [% c.expand_wikiword(page.name_orig) %]
+        [% END %]
+	[% IF post_title %][% post_title %][% END %]
+      [% END %]
+  </h1>
+        </div>
+                <div class="span-12 nav0">
+          <ul>
+            <li><a href="#" title="Pagina home in Italiano"><img src="[%c.uri_for_static('themes/' _ c.config.theme _ '/images/flag_italy.gif')%]" alt="Image description" /></a></li>
+            <li><a href="#" title="Pagina home in Italiano"><img src="[%c.uri_for_static('themes/' _ c.config.theme _ '/images/flag_germany.gif')%]" alt="Image description" /></a></li>
+            <li><a href="#" title="Pagina home in Italiano"><img src="[%c.uri_for_static('themes/' _ c.config.theme _ '/images/flag_sweden.gif')%]" alt="Image description" /></a></li>
+            <li><a href="#" title="Pagina home in Italiano"><img src="[%c.uri_for_static('themes/' _ c.config.theme _ '/images/flag_sweden.gif')%]" alt="Image description" /></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- A.2 HEADER MIDDLE -->
+        <!-- Site message -->
+              <!-- A.4 BREADCRUMB and SEARCHFORM -->
+    <!-- B. NAVIGATION BAR -->
+    <div class="span-24 nav2 last">
+<ul>
+    [% PROCESS navbar.tt %]
+</ul>
+    </div>
+
+      <div class="span-24 header-breadcrumbs">
+[% PROCESS breadcrumbs.tt %]
+      </div>
+    [% IF page.content.body_class == 2 OR page.content.body_class == 4 %]
+    [% IF c.stash.template!='page/attachments.tt' AND c.stash.template!='page/edit.tt' %]
+    <div class="mainfont span-24">
+    [% ELSE %]
+    <div class="main span-24">
+    [% END %]
+    [% ELSE %]
+    <div class="main span-24">
+    [% END %]
+    [% IF page.content.body_class == 2 OR page.content.body_class == 4 %]
+    <div class="main-navigation span-5">
+                        [% IF page.content.col_left %]
+                        [% FOREACH box IN liste_left %]
+                        [% left='custom/' _ box _'.tt' %]
+                        [% PROCESS $left %]
+                        [% END %]
+                        [% ELSE %]
+                        [% PROCESS custom/default_left.tt %]
+                        [% END %]
+    </div>
+[% END %]

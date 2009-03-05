@@ -159,7 +159,7 @@ sub untag : Local Args(1) {
 
 =item imginfo (.jsrpc/imginfo)
 
-Inline info on hover for gallery photos.
+Inline info on hoved for gallery photos.
 
 =cut
 
@@ -168,12 +168,17 @@ sub imginfo : Local {
     $c->stash->{photo}    = $c->model("DBIC::Photo")->find($photo);
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
+sub image_list : Local {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'page/image_list.tt';
+}
 
 =item usersearch (.jsrpc/usersearch)
 
 Backend which handles jQuery autocomplete requests for users.
 
 =cut
+
 
 sub usersearch : Local {
     my ($self, $c) = @_;

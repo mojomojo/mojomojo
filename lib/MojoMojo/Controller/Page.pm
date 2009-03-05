@@ -8,6 +8,10 @@ use Text::Context;
 use HTML::Strip;
 use Data::Page;
 use Data::Dumper;
+use DateTime;
+use Readonly;
+use WWW::Google::SiteMap;
+Readonly my $EMPTY_STRING => '';
 
 =head1 NAME
 
@@ -28,8 +32,8 @@ can be called with urls like "/page1/page2.action".
 
 =head2  view (.view)
 
-This is probably the most common action in MojoMojo. A lot of the 
-other actions redispatches to this one. It will prepare the stash 
+This is probably the most common action in MojoMojo. A lot of the
+other actions redispatches to this one. It will prepare the stash
 for page view, and set the template to view.tt, unless another is
 already set.
 
@@ -38,8 +42,35 @@ load the provided revision instead.
 
 =cut
 
+sub page_not_found : Private {
+    my ( $self, $c ) = @_;
+    $c->res->status('404');
+    $c->stash->{message} = $c->loc("The requested URL (x) was not found",
+                               $c->stash->{pre_hacked_uri});
+    $c->stash->{template} = 'message.tt';
+}
+
+sub robots : Private {
+    my ( $self, $c ) = @_;
+    $c->res->status('200');
+    $c->res->header( 'Content-Type', 'text/plain' );
+    $c->stash->{template} = 'robots.txt';
+}
+
+sub sitemap : Private {
+    my ( $self, $c ) = @_;
+    $c->res->status('200');
+    $c->res->header( 'Content-Type', 'application/x-gzip' );
+    $c->stash->{template} = 'sitemap.gz';
+}
+
 sub view : Global {
     my ( $self, $c, $path ) = @_;
+
+    return $c->forward('robots')
+      if ( $c->stash->{path} eq "robots.txt" );
+    return $c->forward('sitemap')
+      if ( $c->stash->{path} eq "sitemap.gz" );
 
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
@@ -53,15 +84,30 @@ sub view : Global {
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
-
-    return $c->forward('suggest')
-      if $proto_pages && @$proto_pages;
-
+    my $user = $c->stash->{user};
+    if ( $c->stash->{user} && $user->is_admin ) {
+        return $c->forward('suggest') if $proto_pages && @$proto_pages;
+    }
     my $page = $stash->{'page'};
 
-    my $user;
+    my $good_url;
+    if ($c->config->{use_directory}) {
+        if ($page->has_child) {
+            $good_url=$c->stash->{page}->path.'/';
+        }
+        else {
+            $good_url=$c->stash->{page}->path;
+        }
 
-    if ( $c->config->{'permissions'}->{'check_permission_on_view'} ) {
+        if ( "/" . $c->stash->{path} ne $good_url ){
+                return $c->forward('page_not_found') ;
+        }
+    }
+
+    return $c->forward('page_not_found')
+      if ( $page->page_version->status eq 'wait' );
+
+    if ( $c->config->{'permissions'}{'check_permission_on_view'} ) {
         if ( $c->user_exists() ) { $user = $c->user->obj; }
         $c->log->info('Checking permissions') if $c->debug;
 
@@ -100,12 +146,13 @@ sub view : Global {
         $stash->{rev} = $content->version;
     }
     $stash->{content} = $content;
+    $c->res->status('404') if $page->content->notfound;
 
 }
 
 =head2 search (.search)
 
-This action is called as .search on the current page when the user 
+This action is called as .search on the current page when the user
 performs a search.  The user can choose whether or not to search
 the entire site or a subtree starting from the current page.
 
@@ -342,7 +389,7 @@ sub atom : Global {
     $c->stash->{template} = 'page/atom.tt';
 }
 
-=head2 rss_full (.rss_full) 
+=head2 rss_full (.rss_full)
 
 Full content RSS feed of recent nodes in this namespace.
 
@@ -398,8 +445,98 @@ Display meta information about the current page.
 
 sub info : Global {
     my ( $self, $c ) = @_;
-    $c->stash->{body_length} = length( $c->stash->{page}->content->body );
-    $c->stash->{template}    = 'page/info.tt';
+    my $user = $c->stash->{user};
+    if ( $c->stash->{user} && $user->is_admin ) {
+		$c->stash->{body_length} = length( $c->stash->{page}->content->body );
+        $c->stash->{template} = 'page/info.tt';
+    }
+    else {
+        return $c->forward('page_not_found');
+    }
+
+    $c->res->status(404);
+}
+
+sub do_sitemap : Global {
+    my ( $self, $c ) = @_;
+    return $c->forward('page_not_found')
+      if !$c->user_exists;
+
+    my $page  = $c->stash->{page};
+    my @pages = $page->descendants_by_date;
+    my $sitemap_file =
+      Path::Class::Dir->new( $c->config->{sitemap_loc} )->file('sitemap.gz');
+    my $map = WWW::Google::SiteMap->new(
+        file   => "$sitemap_file",
+        pretty => 1,
+    );
+    my $loc;
+    my $month = 0;
+    my $year  = 0;
+
+    foreach my $entry (@pages) {
+        if ( !$entry->content->noindex ) {
+            if ( $entry->has_child && $entry->path ne '/' ) {
+                $loc = $c->uri_for( $entry->path . '/' );
+            }
+            else {
+                $loc = $c->uri_for( $entry->path );
+            }
+            $map->add( loc => $loc->as_string );
+        }
+        if ( $entry->content->release_date->year != 1970 ) {
+            if (   $entry->content->release_date->month != $month
+                || $entry->content->release_date->year != $year )
+            {
+                $month = $entry->content->release_date->month;
+                $year  = $entry->content->release_date->year;
+                my $date =
+                  DateTime->now( time_zone => 'Europe/Paris', locale => 'fr' );
+                if (   $entry->content->release_date->month == $date->month
+                    && $entry->content->release_date->year == $date->year )
+                {
+                    $loc = $c->uri_for('/news/');
+                    $map->add( loc => $loc->as_string );
+                }
+                else {
+                    my $test = DateTime->new(
+                        year      => $year,
+                        month     => $month,
+                        day       => 1,
+                        time_zone => 'Europe/Paris',
+                        locale    => 'fr'
+                    );
+                    $loc =
+                      $c->uri_for( '/news/'
+                          . $c->clean_string( $test->month_name ) . '-'
+                          . $year );
+                    $map->add( loc => $loc->as_string );
+                }
+            }
+        }
+    }
+
+    $map->write;
+
+    if ( $c->config->{gsm_ping} == 1 ) {
+        use WWW::Google::SiteMap::Ping;
+        my $sitemap_url = $c->uri_for('/sitemap.gz');
+        my $ping        = WWW::Google::SiteMap::Ping->new( "$sitemap_url" );
+        $ping->submit;
+        if ( $ping->success ) {
+            $c->res->body('sitemap generated and google ping succeeded');
+            $c->detach();
+        }
+        else {
+            $c->res->body('sitemap generated and google ping failed');
+            $c->detach();
+        }
+    }
+    $c->res->body(
+"google sitemap generated, set config var 'gsm_ping' to equal 1 to enable automatic ping of google on generation"
+    );
+    $c->detach();
+
 }
 
 =head1 AUTHOR
@@ -412,5 +549,4 @@ This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
-
 1;

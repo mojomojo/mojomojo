@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /
+
+# disallow archiving site
+User-agent: ia_archiver
+Disallow: /
+
+# disable duggmirror
+User-agent: duggmirror
+Disallow: /
+

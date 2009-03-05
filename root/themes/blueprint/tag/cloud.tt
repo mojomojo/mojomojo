@@ -1,0 +1,15 @@
+[% SET title = "Tags under " _ page.name %]
+[% SET page.body_class = 1 %]
+[% WRAPPER page/wrapper.tt title=title %]
+
+        <div class="main-content">
+        <div class="content-cell">
+
+[% cloud.html_and_css(50) || "No tags in use" %]
+[% IF page.depth %]
+<p>Or you can check out <a href="[%c.uri_for('/tags')%]">All tags</a> instead</p>
+[% END %]
+ </div> 
+   </div>   
+
+[% END %]

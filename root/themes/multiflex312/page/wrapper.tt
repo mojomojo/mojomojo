@@ -1,0 +1,3 @@
+[% PROCESS header.tt  index_page=index_page%]
+[% content %]
+[% PROCESS footer.tt %]

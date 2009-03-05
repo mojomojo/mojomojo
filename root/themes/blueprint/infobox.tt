@@ -1,0 +1,72 @@
+<body>
+<table border="2" class="boxdata" id="infobox_[% id %]">
+<tbody>
+<!-- <tr><td class="boxdataheading" colspan=2>[% title %]</td></tr> -->
+[% FOREACH data IN boxdata;
+    value = data.value;
+    id = data.id;
+    primary_key = data.primary_key; %]
+    <tr>
+    <td class="boxdatalabel"><span class="boxdatalabel">[% data.name %]</span></td>
+    [% IF data.is_object %]
+        [%#   If an .OBJECT, show a textfield with the id in it and alongside it an ext combobox, which sets the textfield.
+              Give the combobox an unused name=blah   %]
+          <td class="boxdatavalue">
+          <input type="text" name="EXT[% id %]" id="EXT[% id %]">
+          <SCRIPT>
+            Ext.onReady(function(){
+                var datastore = new Ext.data.Store({
+                    proxy: new Ext.data.HttpProxy({
+                        url: '[% c.req.base %]complete/[% data.form_type %]/[% primary_key %]/OBJECT',
+                    }),
+                    reader: new Ext.data.JsonReader({
+                        root: 'results',
+                        totalProperty: 'count',
+                        id: 'id'
+                    }, [
+                        {name: 'name'},
+                        {name: 'value'},
+                    ])
+                });
+            
+                var search = new Ext.form.ComboBox({
+                    store: datastore,
+                    displayField:'name',
+                    valueField:'value',
+                    hiddenName:'[% id %]',
+                    emptyText:'(unset)',
+                    width: 200,
+                    listWidth: 200,
+                    pageSize:15,
+                    hideTrigger:false,
+                    forceSelection:true,
+                    editable:true,
+                    triggerAction:'all', /* don't search, just show all */
+                    valueNotFoundText:'(not found)',
+                });
+            
+                search.applyTo('EXT[% id %]');
+                
+                /* With a remote datastore, combobox.setValue doesn't load the store to look up the display value, so
+                    we need this hack to load the store and set the combobox's value */
+                /* See http://extjs.com/forum/showthread.php?t=4171&highlight=combobox+jsonreader+setvalue&page=2 */
+                
+                datastore.on('load', function(){
+                                                    search.setValue("[% value.$primary_key %]");
+                                               });
+                datastore.load();
+                
+            });
+          </SCRIPT>
+          
+          </td>
+    [% ELSIF data.is_editable %]
+          <td class="boxdatavalue"><input type="text" name="[% id %]" value="[% value %]"></td>
+    [% ELSE %]
+         <td class="boxdatavalue"><span class="boxdatavalue">[% value %]</span></td>
+    [% END %]
+    </tr>
+[% END %]
+</tbody>
+</table>
+</body>

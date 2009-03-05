@@ -1,0 +1,12 @@
+[% SET page.body_class = 2; %]
+[% SET liste_left = 'default_left'; %]
+[% WRAPPER page/wrapper.tt %]
+
+<div class="span-18 main-content">
+<h1>Finaliser votre inscription</h1>
+<p>Un email de confirmation a &eacute;t&eacute; envoy&eacute; &agrave; l'adresse [%user.email%].</p>
+<p>Merci de v&eacute;rifier votre boîte de r&eacute;ception, l'email peut mettre quelques minutes a arriver &agrave; destination.</p>
+<a href="/">Retour &agrave; l'accueil</a>
+</div>
+
+[% END %]

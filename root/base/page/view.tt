@@ -8,7 +8,6 @@
     [%END%]
   </div>
   [%END%]
-
   <div id="current">
     [% IF render == 'highlight' %]
       [% content.highlight(c) %]
@@ -29,9 +28,19 @@
     <div id="diff"></div>
   </div>
 
-  <div class="byline">
-    <acronym title="[% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]">
-      [% loc('Revision') %]</acronym> [% loc('by') %] [% c.wikiword(content.creator.link, base, content.creator.name) %], [% content.created.ymd %]
-    <br />
-  </div>
   [% END %]
+<div id="changes" style="display: none">
+	<p id="message">
+		<small>
+	      [% loc('Showing changes from previous revision.') %]
+	      <ins class="diffins">[% loc('Added') %]</ins> | <del class="diffdel">[% loc('Removed') %]</del>
+	    </small>
+	</p>
+	<div id="diff"></div>
+</div>
+<div class="byline">
+  <acronym title="[% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]">
+    [% loc('Revision') %]</acronym> [% loc('by') %] [% c.wikiword(content.creator.link, base) %]
+    <br />
+</div>
+[% END %]

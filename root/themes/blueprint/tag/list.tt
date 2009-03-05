@@ -1,0 +1,39 @@
+[% SET page.body_class = 1 %]
+[% WRAPPER page/wrapper.tt %]
+        <div class="main-content">
+        <div class="content-cell">
+  <h1>tags</h1>:<small>
+  [% FOREACH tag IN tags %]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[%c.uri_for('/list', tag.tag)%]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
+  [% END %]</small>
+</div>
+<div id="allPages" style="float: left; width: 380px; margin-right: 30px">
+
+  <h2> List by [% activetag %]
+          <br/><small style="font-size: 12px"><i>All pages tagged with [% activetag %] listed alphabetically</i><br/>
+	  <a href="[% c.uri_for('recent', activetag) %]">recent pages in [% activetag %]</a></small>
+ </h2>
+<ul>
+[% FOREACH page IN pages %]
+    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.path) %]</a></li>
+[% END %]
+</ul>
+</div>
+<div style="float: left; width: 280px">
+  <h2> Related Tags
+  <small>(common uses)</small>
+  </h2>
+  <ul style="margin-bottom: 10px">
+[% FOR reltag = related.list %]
+ 
+    <li><a href="[% c.uri_for('/list', reltag.tag) %]">[% reltag.tag %]</a> ([% reltag.refcount %])</li>
+[% END %]
+  </ul>
+</div>
+  </div> 
+
+[% END %]

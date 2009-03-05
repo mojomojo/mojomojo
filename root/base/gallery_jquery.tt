@@ -1,0 +1,6 @@
+[% FOR picture IN page.attachments %]
+[% imgid = 'img_' _ picture.id %]
+<a rel="lightbox[test]"  id="[%imgid%]" href="[%c.uri_for('attachment')%][%
+IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="Show picture" class="thumb"
+width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
+[%END%]

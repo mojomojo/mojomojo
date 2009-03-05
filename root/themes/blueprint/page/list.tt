@@ -1,0 +1,72 @@
+[% SET title = "All Pages in " _ page.path %]
+[% SET page.body_class = 1 %]
+[% WRAPPER page/wrapper.tt title=title %]
+        <div class="main-content">
+        <div class="content-cell">
+  <h1> All Pages
+          <br/><small style="font-size: 12px"><i>All pages in [% page.name %] listed alphabetically</i></small>
+ </h1>
+
+<div id="categories">
+  <strong>tags</strong>: 
+  [% WHILE(tag=tags.next)%]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[% c.uri_for('/list', tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+  [% END %]
+  [% END %]
+</div>
+<div id="allPages" style="float: left; width: 280px; margin-right: 30px">
+
+<ul>
+[% FOREACH page IN pages %]
+    <li><a href="[% c.uri_for(page.path) %]">[%page.name_orig%]</a></li>
+[% END %]
+</ul>
+</div>
+[% IF ! activetag %]
+<div id="wantedPages">
+
+  <h2> Backlinks
+      <br/><small style="font-size: 12px"><i>Other pages that link to this page.</i></small>
+  </h2>
+
+[%IF backlinks.size%]
+  <ul style="margin-bottom: 10px">
+[% FOR backlink = backlinks.list %]
+    <li>[%c.wikiword(backlink.from_page.path,base)%]</li>
+[% END %]
+  </ul>
+[%END%]
+
+  <h2> Wanted Pages
+      <br/><small style="font-size: 12px"><i>Links to non-existent pages.</i></small>
+  </h2>
+
+[%IF wanted.size%]
+  <ul style="margin-bottom: 10px">
+[% FOR wanted = wanted.list %]
+    <li><span class="newWikiWord">[%wanted.to_path%]<a title=">Not found. Click to create this page." href="[%c.uri_for('/', wanted.to_path,'.edit')%]">?</a></span> wanted by [%wanted.from_page.path%]</li>
+[% END %]
+  </ul>
+[%END%]
+	    
+  <h2> Orphaned Pages
+     <br/><small style="font-size: 12px"><i>Pages to which no other pages link.</i></small>
+  </h2>
+  [%IF orphans.size%]
+    <ul style="margin-bottom: 35px">
+[% FOR orphan = orphans.list %]
+    <li><a href="[% c.uri_for('/', orphan.path) %]">[%orphan.path%]<a  href="[%c.uri_for('/',orphan.path,edit)%]">_</a></span></li>
+[% END %]
+    </ul>
+  [%END%]
+</div>
+[% END %]
+<p class="end">&nbsp;</p>
+ </div> 
+   </div>   
+
+[% END %]
+

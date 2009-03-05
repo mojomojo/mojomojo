@@ -1,0 +1,46 @@
+[% SET page.body_class = 1 %]
+[% WRAPPER page/wrapper.tt %]
+
+
+        <div class="main-content">
+        <div class="content-cell">
+
+ <h1>Site Configuration</h1>
+<div id="toplinks"><b class="navOn">configuration</b> |
+<a accesskey="U" href="[%c.uri_for('admin/user')%]">users</a> |
+<a accesskey="B" href="[%c.uri_for('/')%]">start</a> </div>
+
+<form id="adminform" action="[%c.uri_for('/+admin/update')%]" method="post">
+ <dl>
+  <dt>Name:</dt>
+  <dd><input id="sitename" name="name"  type="text" value="[%c.pref('name')%]"/></dd>
+  <dt>Admins:</dt>
+  <dd>
+   [% regex = '\s*\b' _ user.login _ '\b\s*' %]
+   <input id="admins"  name="admins" type="text" value="[%c.pref('admins').replace(regex,' ').replace('^\s+','').replace('\s+$','')%]"/>
+   (also includes [%user.login%])
+  </dd>
+  <dt>Anon. user</dt>
+  <dd><input id="anon"  name="anonymous_user" type="text" value="[%c.pref('anonymous_user')%]"/> ( blank to disable )</dd>
+ </dl>
+<br/>
+<h2>Settings</h2>
+<label for="registration">Registration open</label>
+<input type="checkbox" id="registration" name="registration"[% IF (c.pref('open_registration'))%] checked="checked"[%END%]/><br/>
+<label for="restricted">Restrict User Access to home</label>
+<input type="checkbox" id="restricted" name="restricted"[% IF (c.pref('restrict_to_home'))%] checked="checked"[%END%]/><br/>
+<h2>HTTP Headers</h2>
+<label for="last_modified">Last-Modified</label>
+<input id="last_modified"  name="last_modified" type="text" value="[%c.pref('last_modified')%]"/> ( blank to disable )<br/>
+
+<label for="catalyst_header">Catalyst Headers</label>
+<input type="checkbox" id="catalyst_header" name="catalyst_header"[% IF (c.pref('catalyst_header'))%] checked="checked"[%END%]/><br/>
+
+<p id="message">[% message || 'ready' %]</p>
+<input type="submit" name="save" value="save"/>
+</form>
+ <div class="spinner"><img id="editspinner" style="display:none;" src="[%c.uri_for_static('/img/spinner.gif')%]" alt="busy spinner" />&nbsp;</div>
+ </div> 
+
+ </div> 
+[% END %]

@@ -1,14 +1,34 @@
-h1#pageName, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, #TextileHelp h3 { 
-    color: #008B26; 
+.tree {
+  float: left;
+  margin-left:10px;
+  width:70%;
 }
 
-.leftHandSide {
-  float: right;
-  width: 147px;
-  margin-left: 10px;
-  padding-left: 20px;
+.two {
+  float: left;
+  margin-left:10px;
+  width:80%;
+}
+.one {
+  float: left;
+  width:100%;
+}
+#colleft {
+  float: left;
+  width: 12%;
+  border-right: 1px dotted #ccc;
+}
+#colleft ul{
+  padding-left: 1px ;
+}
+
+#colright {
+  float: left;
+  width: 12%;
   border-left: 1px dotted #ccc;
+  padding-left:5px;
 }
-.leftHandSide p {
-  font-size: 10px;
+#colright ul{
+  padding-left: 1px ;
 }
+

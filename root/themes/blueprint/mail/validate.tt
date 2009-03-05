@@ -1,0 +1,6 @@
+Bonjour,
+Votre entreprise SIRET [% user.login %] a fait une demande d'inscription sur le site http://entreprises.france-durable.fr.
+Afin de finaliser votre inscription, merci de cliquer sur le lien ci-dessous.
+[% c.uri_for('/+validate', user.login, secret) %]
+Au plaisir de vous accueillir dès maintenant sur notre site internet.
+L'équipe France-Durable

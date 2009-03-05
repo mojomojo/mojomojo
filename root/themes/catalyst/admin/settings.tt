@@ -1,0 +1,10 @@
+[%PROCESS header.tt%]
+<h1><span id="pageName">[%c.pref('name')%]</span></h1>
+[% PROCESS admin/toplinks.tt selected = 'configuration' %]
+<div id="content">
+   <h1>[%loc('Site Configuration')%]</h1>
+   [% form %]
+<h2>[%message%]</h2>
+</div>
+<div id="bottomnav">&nbsp;</div>
+[%PROCESS footer.tt%]

@@ -119,7 +119,7 @@ msgstr "Liste des pages par ordre alphabétique"
 
 #: root/base/toolbar.tt:2
 msgid "Also try h2,h3 and so on"
-msgstr ""
+msgstr "Essayer aussi h2,h3 ..."
 
 #: lib/MojoMojo/Controller/User.pm:261
 msgid "An error occourred. Sorry."
@@ -143,7 +143,7 @@ msgstr "Et d'autres."
 
 #: lib/MojoMojo/Schema.pm:54
 msgid "Anonymous Coward"
-msgstr ""
+msgstr "Utilisateur Anonyme"
 
 #: root/forms/admin/settings.yml:20
 msgid "Anonymous User (blank to disable)"
@@ -179,7 +179,7 @@ msgstr "Backlinks"
 
 #: root/base/toolbar.tt:29
 msgid "Bigger"
-msgstr ""
+msgstr "Plus gros"
 
 #: root/forms/user/editprofile.yml:15
 msgid "Birth Date"
@@ -231,7 +231,7 @@ msgstr "Utilisateur Admin introuvable:"
 
 #: root/base/toolbar.tt:19
 msgid "Centered paragraph"
-msgstr ""
+msgstr "Paragraphe centré"
 
 #: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Change page content"

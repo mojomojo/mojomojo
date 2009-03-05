@@ -1,0 +1,59 @@
+[% SET title = "Recent pages in " _ page.path _ ( activetag ? ' tagged with ' _ activetag : '' ) %]
+[% SET keywords = "news" %]
+[% SET now = objects.first.content.created.dmy; %]
+[% SET recent = 1 %]
+[% SET page.body_class = 4 %]
+
+[% SET now = objects.first.content.created.ymd; %]
+[% WRAPPER page/wrapper.tt title=title %]
+<div class="span-17 prepend-1 main-content">
+<h1 class="title">Recent</h1>
+<div id="categories">
+[% IF tags.count%]
+  <strong>tags</strong>: <small>
+  [% WHILE (tag = tags.next) %]
+  [% IF tag.tag==activetag %]
+  <b>[% tag.tag %]</b>
+  [% ELSE %]
+  <a href="[% c.uri_for('/list' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %])
+  [% END %]
+  [% END %]</small>
+[% END %]
+</div>
+<br/>
+<b>[% now %]</b>
+[% first=1 %]
+[% FOREACH page IN pages %]
+[% IF page.noindex==0 %]
+[% IF page.content.release_date.epoch>date; %]
+[% IF page.content.release_date.epoch<date2; %]
+[% IF now != page.content.release_date.dmy; %]
+  [%IF first;first=0;ELSE%]</ul>[%END%]
+  [% SET now = page.content.release_date.dmy; %]
+  [% IF now != '01-01-1970' %]
+    <b>[% now %]</b>
+    <ul style="text-align:left;width:500px">
+    [% END %]
+[% END %]
+[% IF page.has_child %]
+        <li style="margin-left:5px;text-align:left;">
+        <a  style="text-decoration:none;" href="[% c.uri_for(page.path _ '/' )%]">[%c.unicode(page.description) %]</a>
+        </li>
+[% ELSE %]
+        <li style="margin-left:5px;text-align:left;">
+        <a  style="text-decoration:none;" href="[% c.uri_for(page.path)%]">[% c.unicode(page.description) %]</a>
+        </li>
+[% END %]
+[% i=i+1 %]
+[% END %]
+[% END %]
+[% END %]
+
+[% END %]
+</ul>
+[% IF i == 0 %]
+<h1>Aucune news pour cette date</h1>
+[% END %]
+ </div>
+
+[% END %]
