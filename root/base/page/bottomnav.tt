@@ -9,7 +9,9 @@
 <div id="bottomnav">
 <ul>
 [% IF (!rev OR rev==page.content_version) %]
-  [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
+  [% IF ( (c.pref('anonymous_user') AND (c.pref('use_captcha')) AND ( (NOT (user.active)) OR (user.id == 1)) ) ) %]
+    <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') %]" accesskey="E">[%loc('Edit')%]</a></li>
+  [% ELSIF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
     <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') _ '?split=vertical' %]" accesskey="E">[%loc('Split Edit')%]</a></li>
   [%END%]
   [% IF user.is_admin %]
