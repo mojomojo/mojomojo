@@ -159,7 +159,7 @@ sub untag : Local Args(1) {
 
 =item imginfo (.jsrpc/imginfo)
 
-Inline info on hoved for gallery photos.
+Inline info on hover for gallery photos.
 
 =cut
 
@@ -178,7 +178,6 @@ sub image_list : Local {
 Backend which handles jQuery autocomplete requests for users.
 
 =cut
-
 
 sub usersearch : Local {
     my ($self, $c) = @_;

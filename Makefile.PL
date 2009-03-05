@@ -1,6 +1,8 @@
 use inc::Module::Install;
+
 name 'MojoMojo';
 all_from 'lib/MojoMojo.pm';
+
 requires(
     'Encode'                                       => '2.31',
     'Template::Toolkit'                            => '2.20',

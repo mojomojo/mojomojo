@@ -19,12 +19,12 @@ MojoMojo::Schema::ResultSet::Page
 =item path_pages
 
 Accepts a path in url/unix directory format, e.g. "/page1/page2".
-Paths are assumed to be absolute, so a leading slash (/) is not
+Paths are assumed to be absolute, so a leading slash (/) is not 
 required.
 Returns an array of any pages that exist in the path, starting with "/",
 and an additional array of "proto page" hashes for any pages at the end
-of the path that do not exist. All paths include the root (/), which
-must exist, so a path of at least one element will always be returned.
+of the path that do not exist. All paths include the root (/), which 
+must exist, so a path of at least one element will always be returned. 
 The "proto page" hash keys are:
 
 =cut
@@ -378,7 +378,7 @@ sub open_gap {
     my ( $gap_increment, $parent_rgt, $parent_id ) =
         ( $new_page_count * 2, $parent->rgt, $parent->id );
     $self->result_source->schema->storage->dbh->do(
-        qq{ UPDATE page
+        qq{ UPDATE page 
     SET rgt = rgt + ?, lft = CASE
     WHEN lft > ? THEN lft + ?
     ELSE lft

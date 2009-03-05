@@ -9,9 +9,7 @@ use HTML::Strip;
 use Data::Page;
 use Data::Dumper;
 use DateTime;
-use Readonly;
 use WWW::Google::SiteMap;
-Readonly my $EMPTY_STRING => '';
 
 =head1 NAME
 
@@ -32,8 +30,8 @@ can be called with urls like "/page1/page2.action".
 
 =head2  view (.view)
 
-This is probably the most common action in MojoMojo. A lot of the
-other actions redispatches to this one. It will prepare the stash
+This is probably the most common action in MojoMojo. A lot of the 
+other actions redispatches to this one. It will prepare the stash 
 for page view, and set the template to view.tt, unless another is
 already set.
 
@@ -152,7 +150,7 @@ sub view : Global {
 
 =head2 search (.search)
 
-This action is called as .search on the current page when the user
+This action is called as .search on the current page when the user 
 performs a search.  The user can choose whether or not to search
 the entire site or a subtree starting from the current page.
 
@@ -549,4 +547,5 @@ This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
+
 1;

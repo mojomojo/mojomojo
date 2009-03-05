@@ -65,7 +65,7 @@ sub logout : Global {
     my ( $self, $c ) = @_;
     $c->logout;
     undef $c->stash->{user};
-    $c->forward('/page/view');
+    $c->forward('/user/login');
 }
 
 =item users (/.users)
@@ -406,7 +406,7 @@ sub do_editprofile : Global {
 
 =head1 AUTHOR
 
-David Naughton <naughton@cpan.org>, 
+David Naughton <naughton@cpan.org>,
 Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE

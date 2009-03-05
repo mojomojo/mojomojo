@@ -154,6 +154,7 @@ div#pageoptions a {
 }
 
 #content {
+  overflow: hidden;
     background: #ffffff;
     padding: 13px;
     overflow: hidden;
@@ -190,7 +191,7 @@ div#pageoptions a {
 
 /* tables */
 
-/*#content table {
+#content table {
     border-collapse: collapse;
     border:2px solid #bbb;
     background: #fff;
@@ -219,7 +220,7 @@ div#pageoptions a {
 #content table tr.odd td, #content table tr.odd th {
     background: #efefef;
 }
-*/
+
 
 #bottomnav {
     background: #ebeae7;

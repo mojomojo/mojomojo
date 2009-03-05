@@ -14,13 +14,13 @@
   [%END%]
   [% IF user.is_admin %]
    <li><a title="[%loc('Change site settings')%]" href="[%c.uri_for('admin')%]">[%loc('Edit Settings')%]</a></li>
-  [% END %]
+  [% END %] 
   [% IF c.req.action=='info'%]
    <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
   [% ELSE %]
    <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page Info')%]</a></li>
   [% END%]
-  [% IF page.content_version && page.content_version > 1 %]
+  [% IF page.content_version && page.content_version > 1 %] 
    <li><a title="[%loc('See previous revision')%]" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">[%loc('Back in time')%]</a>
    ([% page.content.max_version%] [% loc('revision') %][% IF page.content_version > 1; "s" ; END %])</li>
   [% END %]
@@ -38,7 +38,7 @@
    <li><a title="[%loc('Back to the page')%]" href="[% c.uri_for('view')%]" accesskey="C">[%loc('Current Revision')%]</a></li>
   [% END %]
 [% END %]
-[% IF page.content_version && page.content_version > 1 %]
+[% IF page.content_version && page.content_version > 1 %] 
  <li><span id="show_changes">
   <a title="[%loc('Show differences from previous version')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" class="toggleChanges">[%loc('See changes')%]</a>
  </span>
@@ -53,10 +53,10 @@
 
   [%IF c.req.params.rev; PROCESS page/rollback.tt; END %]
  </li>
-[% IF page.links_to.first ; %]
+[% IF page.links_to.first ; %] 
  <li>
   [%loc('Linked from')%]:
-  [% FOR linkitem = page.links_to %]
+  [% FOR linkitem = page.links_to %] 
    <a class="existingWikiWord" title="[%linkitem.name_orig%]" href="[%c.uri_for('linkitem.path')%]">[%c.expand_wikiword(linkitem.path)%]</a>
   [% END %]
  </li>
@@ -64,7 +64,7 @@
 [% SET redir = c.uri_for(c.req.path) %]
 		<li>[%loc('Set language')%]:</li>
     [% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl'] -%]
-    <li><a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a></li>
+    <li><a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a></li> 
     [% END -%]
 
 

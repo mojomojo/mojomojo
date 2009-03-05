@@ -13,7 +13,9 @@
         - expand_wikiword() only replaces underscores with spaces now.
         - match display name of page title, breadcrumb final node, and search results.
         - Make search results byline for last edit author.
-        - Limit preview width so long pre lines don't squash edit area.
+        - Limit preview width so long pre lines don't squash edit area. 
+
+0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.
         - Added "Split Edit" for side-by-side view/edit.
         - Switched from Cache::Store::Memory to Cache::FastMmap
@@ -29,20 +31,20 @@
         - Make wantedpage list only apply to current subtree
         - Make tagged_descendant work for postgresql
         - Changed default search to AND using default_boolop of QueryParser.
-        - Edit search_inline.tt to display like search.tt.
+        - Edit search_inline.tt to display like search.tt. 
         - Improved search result layout and added content creation date.
         - Search results sorted by Kinosearch hit object score.
         - Fix create photo for pics with exif
         - Fixed chars count in page info
         - Resolve some fastcgi encoding issues
         - Link to revision in info page.
-
+        
 0.999025  2009-01-04 23:39:00
         - Updated language selector, add fr to choices.
         - Improved search setup error handling on startup
         - New formatter: SyntaxHighlight
-        - Fixed /.users to show logout-link correctly if user is logged in.
-
+        - Fixed /.users to show logout-link correctly if user is logged in. 
+        
 0.999024  2008-12-31 18:04:00
         - Get preference key/value from cache if possible.
         - Fix wanted pages.
@@ -93,7 +95,7 @@
         - Fix highlight causing layout being broken (plu)
         - Replace Crypt::PassGen with Text::Password::Pronounceable
         - Make mech tests optional
-
+        
 0.999019 2008-07-19 19:45:00
         - Eval plucene to let mojomojo work if it fails.
         - Support for re-requesting validation mails.
@@ -101,7 +103,7 @@
         - Fix recover password (plu)
         - Fix prefs button label
         - Fix: /foo.photo/1 was broken (plu)
-        - Add new config option to enforce login:
+        - Add new config option to enforce login: 
           <permissions>enforce_login 1</permissions> (plu)
 
 0.999018 2008-07-16 19:45:00
@@ -124,10 +126,10 @@
         - Limit recent feed to 20 entries.
         - Add option to disable search
         - Make implicit wikiword linking disabled by default
-        - Hash passwords.
+        - Hash passwords. 
           WARNING! if you have an old installtion, you will need to
-          run ./script/hash_passwords.pl to
-          hash the passwords for an existing install. Don't run this
+          run ./script/hash_passwords.pl to 
+          hash the passwords for an existing install. Don't run this 
           more than once! (Script should complain tho)
 
 0.999015 2008-05-03 18:01:00
@@ -214,7 +216,7 @@
         - Fix links in navbar and header.
         - Made the insert attachment system template based and easily extensible.
         - Set up default page for admin
-
+        
 0.999002  2007-09-12 23:08:00
         - Fixed relative linking ([[../Sibling]])/
         - Cleaned up attachments.
@@ -224,13 +226,13 @@
         - Update default to be Path, rather than Private
         - Fix tests is t/c/
         - More documentation
-        - Updated Installation instructions. lib/MojoMojo/Installation.pod is
+        - Updated Installation instructions. lib/MojoMojo/Installation.pod is 
           now the master.
 
 0.999001  2007-08-29 16:29:00
-       - Initial Release. There are bugs, but the basic functionality works,
+       - Initial Release. There are bugs, but the basic functionality works, 
          and the test suite passes all tests here. Please contribute
          tests for bugs you want fixed.
-
+         
          Once we fix it all, we'll consider it 1.0
-
+ 
