@@ -6,7 +6,7 @@
    [% SET pre_title = loc("Creating") -%]
  [% END -%]
 [% WRAPPER page/wrapper.tt pre_title=pre_title %]
-  
+
 
 [% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
 
@@ -16,16 +16,14 @@
 
 <div class="preview" id="content_preview">
 [% IF page.content.formatted(c) %]
-  [% page.content.formatted(c) %] 
+  [% page.content.formatted(c) %]
 [% ELSE %]
    <i>[%loc('To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above.')%]</i>
 [% END %]
 </div>
 
 <div id="edit_form">
-  <form id="editForm" accept-charset="UTF-8"
-    action=""
-	method="POST"> 
+  <form id="editForm" accept-charset="UTF-8" action="" method="POST">
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -38,31 +36,31 @@
     <br/>
     <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
     <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
-    
+
     <script type="text/javascript" language="JavaScript">
     var append='[%append|js%]';
       [% UNLESS user %]
        $('#editForm').submit(function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
       [% END %]
     </script>
-    
+
     <div class="spinner">
-        <span id="editstatus"></span>
-      <img id="editspinner" style="display:none;" 
-	   src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
+      <span id="editstatus"></span>
+      <img id="editspinner" style="display:none;"
+        src="[%c.uri_for_static('spinner.gif')%]" alt="busy spinner"/>
     </div>
-    
+
     <input type="submit" name="submit" value='[% loc("Save") %]'/>
-    <input type="submit" name="submit" value='[% IF page.content && page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/> 
+    <input type="submit" name="submit" value='[% IF page.content && page.content.version > 1; loc("Save and View"); ELSE; loc("Create and View"); END %]'/>
     [% loc('as') %]
     [% IF user.id %]
-    [% c.wikiword(user.link,base) %] 
+    [% c.wikiword(user.link,base) %]
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
     [% ELSE %]
-    <input type="text" name="login" 
-	   id="authorName" value="[% c.pref('anonymous_user')%]" 
-	   onclick="this.value == '[%c.pref('anonymous_user')%]' ? this.value = '' : true" />
-    <input type="password" name="pass" id="userAuth" /><br/> 
+    <input type="text" name="login"
+      id="authorName" value="[% c.pref('anonymous_user')%]"
+      onclick="this.value == '[%c.pref('anonymous_user')%]' ? this.value = '' : true" />
+    <input type="password" name="pass" id="userAuth" /><br/>
     ([%loc('Leave second blank if you do not want a password')%].
     [% END %]
     [% captcha %]

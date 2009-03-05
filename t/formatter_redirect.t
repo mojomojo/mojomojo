@@ -1,46 +1,46 @@
 #!/usr/bin/perl -w
 package Dummy;
 sub new {
-	my $class = shift;
-	bless {}, $class;
+    my $class = shift;
+    bless {}, $class;
 }
 
 sub req {
-	return $_[0];
+    return $_[0];
 }
 
 sub res {
-	return $_[0];
+    return $_[0];
 }
 
 sub base {
-	$_[0]->{path} ||= '/';
-	return URI->new("http://example.com/");
+    $_[0]->{path} ||= '/';
+    return URI->new("http://example.com/");
 }
 
 sub stash {
-	my $self = shift;
-	return { page => $self,
-		 page_path => 'http://example.com/',
-	};
+    my $self = shift;
+    return { page => $self,
+         page_path => 'http://example.com/',
+    };
 }
 
 sub path {
-	my $self = shift;
-	$path = $self->{path};
-	return $path;
+    my $self = shift;
+    $path = $self->{path};
+    return $path;
 }
 
 sub model {
-	return $_[0];
+    return $_[0];
 }
 
 sub result_source {
-	return $_[0];
+    return $_[0];
 }
 
 sub resultset {
-	return $_[0];
+    return $_[0];
 }
 
 sub ajax {}
@@ -53,13 +53,13 @@ sub name { 'view' }
 
 
 sub path_pages {
-	if ($_[1] =~ /Existing/) {
-		my $page = Dummy->new;
-		$page->{path} = '/ExistingWord';
-		return [$page], undef;
-	} else {
-		return [], [{path => '/WikiWord'}];
-	}
+    if ($_[1] =~ /Existing/) {
+        my $page = Dummy->new;
+        $page->{path} = '/ExistingWord';
+        return [$page], undef;
+    } else {
+        return [], [{path => '/WikiWord'}];
+    }
 }
 
 sub cache {

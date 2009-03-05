@@ -3,12 +3,17 @@ package MojoMojo;
 use strict;
 use Path::Class 'file';
 
-use Catalyst qw/    ConfigLoader
+use Catalyst qw/
+    ConfigLoader
     Authentication
-    Cache               Email
-    Session		        Session::Store::File
-    Singleton           Session::State::Cookie
-    Static::Simple	    SubRequest
+    Cache
+    Email
+    Session
+    Session::Store::File
+    Singleton
+    Session::State::Cookie
+    Static::Simple
+    SubRequest
     Unicode
     I18N
     Setenv
@@ -48,9 +53,9 @@ MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_d
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 SYNOPSIS
-    
+
   # Set up database (be sure to edit mojomojo.conf first)
-  
+
   ./script/mojomojo_spawn_db.pl
 
   # Standalone mode
@@ -66,14 +71,14 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 =head1 DESCRIPTION
 
 Mojomojo is a sort of content managment system, borrowing many concepts from
-wikis and blogs. It allows you to maintain a full tree-structure of pages, 
+wikis and blogs. It allows you to maintain a full tree-structure of pages,
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy AJAX-
 based diff system. There are also a bunch of other features like bult-in
 fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
-To find out more about how you can use MojoMojo, please visit 
-http://mojomojo.org or read the installation instructions in 
+To find out more about how you can use MojoMojo, please visit
+http://mojomojo.org or read the installation instructions in
 L<MojoMojo::Installation> to try it out yourself.
 
 =cut
@@ -300,7 +305,7 @@ sub _expand_path_elements {
 
 sub get_permissions_data {
     my ( $c, $current_path, $paths_to_check, $role_ids ) = @_;
-    
+
     # default to roles for current user
     $role_ids ||= $c->user_role_ids( $c->user );
 
@@ -387,10 +392,10 @@ sub get_permissions_data {
 
 sub user_role_ids {
     my ( $c, $user ) = @_;
-    
+
     ## always use role_id 0 - which is default role and includes everyone.
     my @role_ids = (0);
-    
+
     if ( ref($user) ) {
         push @role_ids, map { $_->role->id } $user->role_members->all;
     }
@@ -400,12 +405,12 @@ sub user_role_ids {
 
 sub check_permissions {
     my ( $c, $path, $user ) = @_;
-    
+
     return {
-        attachment  => 1,    create      => 1, delete      => 1,    
+        attachment  => 1,    create      => 1, delete      => 1,
         edit        => 1,    view        => 1,
     } if ($user && $user->is_admin);
-    
+
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
@@ -534,8 +539,8 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org. 
-Commercial support and customization for MojoMojo is also provided by Nordaaker 
+If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org.
+Commercial support and customization for MojoMojo is also provided by Nordaaker
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
 
 =head1 AUTHORS
@@ -555,4 +560,3 @@ A number of other contributors over the years.
 You may distribute this code under the same terms as Perl itself.
 
 =cut
-

@@ -24,14 +24,14 @@ C<connect_info> array in the C<Model::DBIC> block.
 For instance, for MySQL:
 
     connect_info dbi:mysql:database=mojo_database;host=localhost
-	connect_info mojo_user
-	connect_info mojo_password
+    connect_info mojo_user
+    connect_info mojo_password
 
 or for SQLite:
 
     connect_info dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
-	connect_info db_user
-	connect_info db_password
+    connect_info db_user
+    connect_info db_password
 
 or for PostgreSQL:
 

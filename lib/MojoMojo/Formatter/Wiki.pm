@@ -11,10 +11,10 @@ MojoMojo::Formatter::Wiki - Handle interpage linking.
 
 =head1 DESCRIPTION
 
-This formatter handles Wiki links using the [[WikiWord]] . It 
-will also indicate missing links with a question mark and a 
-link to the edit page. In explicit mode, you can prefix the 
-wikiword with a path, just like in a normal URL. For example: 
+This formatter handles Wiki links using the [[WikiWord]] . It
+will also indicate missing links with a question mark and a
+link to the edit page. In explicit mode, you can prefix the
+wikiword with a path, just like in a normal URL. For example:
 [[../marcus]] or [[/oslo/vacation]].
 
 =head1 METHODS
@@ -153,7 +153,7 @@ sub format_content {
     }{ $class->format_link($c, $1, $c->req->base, $2) }gex;
     $$content =~ s{
         $non_wikiword_check
-	(
+        (
         $explicit_start
         \s*
         $explicit_path
@@ -164,7 +164,8 @@ sub format_content {
            $explicit_text
            \s*
         )?
-        $explicit_end)
+        $explicit_end
+        )
     }{ $1 }gx;
 
     # Remove escapes on escaped wikiwords. The escape means

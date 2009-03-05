@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-	<title>[ [% c.pref('name') || 
-            config.name || 
+    <title>[ [% c.pref('name') ||
+            config.name ||
             "MojoMojo" %] ] [% loc('Headlines for x', page.name_orig) %] </title>
-	<link>[%c.uri_for('view')%]</link>
-	<description>[% loc('Recent changes in x', page.path) %]</description>
-	<language>[% lang %]</language>
-	<ttl>40</ttl>
+    <link>[%c.uri_for('view')%]</link>
+    <description>[% loc('Recent changes in x', page.path) %]</description>
+    <language>[% lang %]</language>
+    <ttl>40</ttl>
 [%FOREACH page IN pages %]
     <item>
       <title>[% c.expand_wikiword( page.name_orig ) %]
@@ -20,4 +20,4 @@
     </item>
 [%END%]
   </channel>
-</rss> 
+</rss>
