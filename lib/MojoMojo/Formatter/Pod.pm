@@ -2,6 +2,7 @@ package MojoMojo::Formatter::Pod;
 
 use base qw/MojoMojo::Formatter/;
 
+
 =head1 NAME
 
 MojoMojo::Formatter::Pod - format part of content as POD
@@ -36,17 +37,19 @@ sub format_content {
     my @lines = split /\n/, $$content;
     my $pod;
     $$content = "";
+    my $re=$class->gen_re(qr/pod/);
     foreach my $line (@lines) {
         if ($pod) {
-            if ( $line =~ m/^=pod\s*$/ ) {
-                $$content .= MojoMojo::Formatter::Pod->to_pod( $pod, $c->req->base );
+            if ( $line =~ m/^(.*)$re(.*)$/ ) {
+                $$content .= MojoMojo::Formatter::Pod->to_pod( $pod.$1, $c->req->base ).$2;
                 $pod = "";
             }
             else { $pod .= $line . "\n"; }
         }
         else {
-            if ( $line =~ m/^=pod\s*$/ ) {
-                $pod = " ";    # make it true :)
+            if ( $line =~ m/^(.*)$re(.*)$/ ) {
+                $$content .= $1;
+                $pod = " ".$2;    # make it true :)
             }
             else { $$content .= $line . "\n"; }
         }
