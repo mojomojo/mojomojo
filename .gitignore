@@ -12,3 +12,5 @@ t/var/mojomojo.db
 t/var/upload
 mojomojos.kpf
 MojoMojo-*
+.includepath
+.project
