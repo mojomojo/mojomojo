@@ -8,7 +8,7 @@ Install MojoMojo's prerequisites. See L<http://mojomojo.org/documentation/instal
 
 Install MojoMojo either using the cpan shell like this:
 
-    cpan MojoMojo 
+    cpan MojoMojo
 
 or by downloading the tarball from L<http://search.cpan.org/dist/MojoMojo> and
 running perl Makefile.PL on it manually.
@@ -17,8 +17,8 @@ running perl Makefile.PL on it manually.
 
 C<mojomojo.conf> is the main configuration file and is in Config::General format.
 
-First make sure your config file has a valid DSN for your database (You can use 
-SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the 
+First make sure your config file has a valid DSN for your database (You can use
+SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the
 C<connect_info> array in the C<Model::DBIC> block.
 
 For instance, for MySQL:
@@ -63,13 +63,13 @@ C<nginx> and C<lighttpd> are way easier to setup than Apache, and faster. Unless
 you need some specific features of Apache, nginx is a better choice.
 
 See L<http://mojomojo.org/documentation/deployment> for how to setup MojoMojo
-with nginx.
+with various web servers.
 
 =item Set up Apache using either mod_perl or FastCGI.
 
 See
 http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
-for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache> 
+for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache>
 for info on setting up Catalyst apps in Apache.
 
 =back

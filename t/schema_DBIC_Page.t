@@ -52,12 +52,12 @@ my $root_page = $root_path_pages->[0];
 my @descendant_names = map { $_->name } $root_page->descendants;
 
 {
-# test tagged_descendants 
+# test tagged_descendants
     my $tag=$schema->resultset('Tag')
-	->create({tag=>'test',page=>$root->id,person=>1});
+        ->create({tag=>'test',page=>$root->id,person=>1});
     is(scalar $root->tagged_descendants('test'),1,'Got 1 tagged descendant.');
     my $tag2=$schema->resultset('Tag')
-	->create({tag=>'test',page=>2,person=>1});
+        ->create({tag=>'test',page=>2,person=>1});
     is(scalar $root->tagged_descendants('test'),2,'Got 2 tagged descendants.');
     is(scalar $root->tagged_descendants_by_date('test'),2,'Got 2 tagged descendants.');
 }

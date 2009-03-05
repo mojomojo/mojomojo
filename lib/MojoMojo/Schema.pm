@@ -57,7 +57,7 @@ sub create_initial_data {
             [ 1, 0, 0, 'admin', loc('Enoch Root'), '', 'admin', '', 0, '', '', '', '', '', '' ],
         ]
     );
-    
+
     my @roles = $schema->populate(
         'Role',
         [
@@ -83,7 +83,7 @@ sub create_initial_data {
             [ '/', $roles[0]->id, qw/yes yes yes yes yes yes yes/ ]
         ]
     );
-    
+
     my @prefs =
         $schema->populate( 'Preference',
         [ [qw/ prefkey prefvalue /], [ 'name', 'MojoMojo' ], [ 'admins', 'admin' ], [ 'theme', 'default' ] ] );
@@ -129,11 +129,11 @@ sub create_initial_data {
             ],
             [
                 1, 1, $people[1]->id, 0, loc('welcome message', "test"),
-                , 'released', 1, 1, '', '', '', ''
+                'released', 1, 1, '', '', '', ''
             ],
             [
                 2, 1, $people[1]->id, 0, loc('help message'),
-		'released', 1, 1, '', '', '', ''
+                'released', 1, 1, '', '', '', ''
             ],
             [
                 3, 1, $people[1]->id, 0, loc('admin home page'),
@@ -154,7 +154,7 @@ sub create_initial_data {
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
