@@ -72,6 +72,7 @@ $content = "{{http://github.com/marcusramberg/mojomojo/raw/85605d55158b1e6380457
 MojoMojo::Formatter::Include->format_content(\$content, Dummy->new, undef);
 like($content, qr{0\.999001\s+2007\-08\-29\s16\:29\:00});
 
-$content = "\n{{http://example.com/test/}}\n";
-MojoMojo::Formatter::Include->format_content(\$content, Dummy->new, undef);
-like($content, qr{part of own site, cannot include});
+use_ok( Catalyst::Test, 'MojoMojo' );
+
+$body= get('/.jsrpc/render?content=%7B%7Bhttp://localhost/help.include%7D%7D');
+like($body, qr/comments disabled for preview/,'Check that comment is recognized');
