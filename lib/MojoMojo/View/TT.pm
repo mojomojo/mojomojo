@@ -19,7 +19,9 @@ sub new {
 
     my ( $c, $arg_ref ) = @_;
 
+    my $theme=$c->config->{theme} ||= 'default';
     $class->config->{INCLUDE_PATH}=[
+        $c->path_to('root','themes',$theme),
         $c->path_to('root'),
         $c->path_to('root','base'),
     ];

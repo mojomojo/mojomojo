@@ -278,7 +278,7 @@ sub validate : Global {
         $user->active(1);
         $user->update();
         if ( $c->stash->{user} ) {
-            $c->res->redirect( $c->uri_for( '/', $c->stash->{user}->link, '.edit' ) );
+            $c->res->redirect( $c->uri_for( '/', $c->stash->{user}->link, $c->config->{tool_separator} . 'edit' ) );
         }
         else {
             $c->stash->{message} =

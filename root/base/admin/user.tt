@@ -14,7 +14,7 @@
     </tr>
   [%WHILE (user=users.next) %]
   <tr>
-    [% activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
+    [% activeurl= c.uri_for('/'_ c.config.tool_separator _ admin/update_user',  user.id , 'active') %]
     [% active=user.active || 0 %]
     <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
     <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>

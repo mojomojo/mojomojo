@@ -103,7 +103,7 @@ sub edit : Global FormConfig {
     }
 
     if ( $form->submitted_and_valid ) {
-        
+
 
         my $valid = $form->params;
         $valid->{creator} = $user;
@@ -116,8 +116,8 @@ sub edit : Global FormConfig {
                 creator     => $user,
             );
             $page = $path_pages->[ @$path_pages - 1 ];
-        } 
-            
+        }
+
         $stash->{content}=$page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
@@ -125,7 +125,7 @@ sub edit : Global FormConfig {
         #$page = $c->model("DBIC::Page")->find( $page->id );
         $page->discard_changes;
 
-        if( $c->stash->{content} && 
+        if( $c->stash->{content} &&
             $c->req->params->{version} != $c->stash->{content}->version ) {
             $c->stash->{message}=$c->loc('Someone else changed the page while you edited. Your changes has been merged. Please review and save again');
             my $orig_content = $c->model("DBIC::Content")->find(
@@ -156,7 +156,7 @@ sub edit : Global FormConfig {
         # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq $c->localize('Save') ) {
-            $redirect .= '.edit';
+            $redirect .= $c->config->{tool_separator} . 'edit';
             if ( $c->req->params->{split} &&
                  $c->req->params->{'split'} eq 'vertical' ) {
                 $redirect .= '?split=vertical';
@@ -287,7 +287,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

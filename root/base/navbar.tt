@@ -23,7 +23,7 @@
         <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
         [% END %]
       [% END %]
-      <li><a href="[%base%]/.logout">[%loc('Log out')%]</a></li>
+      <li><a href="[%base%]/[% c.config.tool_separator %]logout">[%loc('Log out')%]</a></li>
     [% ELSE %]
       <li><a href="[%c.uri_for('login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a></li>
         [% IF(c.pref('open_registration'))%]<li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>[%END%]
