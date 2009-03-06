@@ -44,7 +44,7 @@ sub auto : Private {
 
 This action will display the edit form, then save the previous
 revision, and create a new one based on the posted content.
-after saving, it will forward to the highlight action.
+After saving, it will forward to the highlight action.
 
 =cut
 
@@ -287,7 +287,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
