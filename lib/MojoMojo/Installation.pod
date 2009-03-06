@@ -81,7 +81,7 @@ line to the main config block:
 
 =head2 Step 4
 
-There is no step four. Have fun exploring MojoMojo. The default login/pass is
-admin/admin.
+Login to your MojoMojo and change the admin password:
+    login/pass is admin/admin
 
 For troubleshooting, see L<http://mojomojo.org/troubleshooting>.
