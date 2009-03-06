@@ -43,7 +43,7 @@ sub auto : Private {
 =head2 edit
 
 This action will display the edit form, then save the previous
-revision, and create a new based on the posted content.
+revision, and create a new one based on the posted content.
 after saving, it will forward to the highlight action.
 
 =cut
@@ -68,7 +68,7 @@ sub edit : Global FormConfig {
     }
 
     # the page we're editing is at the end of either path_pages or
-    # proto_pages, # depending on whether or not the page already exists
+    # proto_pages, depending on whether or not the page already exists
     my $page = (
           @$proto_pages > 0
         ? $proto_pages->[ @$proto_pages - 1 ]
@@ -85,9 +85,9 @@ sub edit : Global FormConfig {
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
-        $stash->{'message'} =
+        $stash->{message} =
           $c->loc( 'Permission Denied to x x', [ $permtocheck, $name ] );
-        $stash->{'template'} = 'message.tt';
+        $stash->{template} = 'message.tt';
         return;
     }
     if ( $user == 1 && !$c->pref('anonymous_user') ) {
@@ -95,7 +95,7 @@ sub edit : Global FormConfig {
         return;
     }
 
-    # for anonymous, use captcha, if enabled
+    # for anonymous users, use CAPTCHA, if enabled
     if ( $user == 1 && $c->pref('use_captcha') ) {
        my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
        $c->stash->{captcha}=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
@@ -103,7 +103,7 @@ sub edit : Global FormConfig {
     }
 
     if ( $form->submitted_and_valid ) {
-        
+
 
         my $valid = $form->params;
         $valid->{creator} = $user;
@@ -116,16 +116,16 @@ sub edit : Global FormConfig {
                 creator     => $user,
             );
             $page = $path_pages->[ @$path_pages - 1 ];
-        } 
-            
-        $stash->{content}=$page->content;
+        }
+
+        $stash->{content} = $page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
         #$page = $c->model("DBIC::Page")->find( $page->id );
         $page->discard_changes;
 
-        if( $c->stash->{content} && 
+        if( $c->stash->{content} &&
             $c->req->params->{version} != $c->stash->{content}->version ) {
             $c->stash->{message}=$c->loc('Someone else changed the page while you edited. Your changes has been merged. Please review and save again');
             my $orig_content = $c->model("DBIC::Content")->find(
@@ -134,7 +134,7 @@ sub edit : Global FormConfig {
                     version => $c->req->params->{version},
                 }
             );
-            $c->stash->{merged_body}||=$orig_content->merge_content(
+            $c->stash->{merged_body} ||= $orig_content->merge_content(
                 $c->stash->{content},
                 $form->params->{body},
                 $c->loc('THEIR CHANGES'),
@@ -287,7 +287,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
