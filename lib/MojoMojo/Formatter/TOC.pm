@@ -1,4 +1,4 @@
-﻿package MojoMojo::Formatter::TOC;
+package MojoMojo::Formatter::TOC;
 
 use parent qw/MojoMojo::Formatter/;
 use HTML::Toc;
@@ -110,7 +110,7 @@ sub assembleAnchorName() {
         # The allowed character set is limited first by the URI specification for fragments, http://tools.ietf.org/html/rfc3986#section-2: characters
         # then by the limitations of the values of 'id' and 'name' attributes: http://www.w3.org/TR/REC-html40/types.html#type-name
         # Eventually, the only punctuation allowed in id values is [_.:-]
-        # Unicode characters with code points > 0x7E (e.g. Chinese characters) are allowed (test "<h1 id="行政区域">header</h1>" at http://validator.w3.org/#validate_by_input+with_options), except for smart quotes (!), see http://www.w3.org/Search/Mail/Public/search?type-index=www-validator&index-type=t&keywords=[VE][122]+smart+quotes&search=Search+Mail+Archives
+        # Unicode characters with code points > 0x7E (e.g. Chinese characters) are allowed (test "<h1 id="????">header</h1>" at http://validator.w3.org/#validate_by_input+with_options), except for smart quotes (!), see http://www.w3.org/Search/Mail/Public/search?type-index=www-validator&index-type=t&keywords=[VE][122]+smart+quotes&search=Search+Mail+Archives
         # However, that contradicts the HTML 4.01 spec: "Anchor names should be restricted to ASCII characters." - http://www.w3.org/TR/REC-html40/struct/links.html#h-12.2.1
         # ...and the [A-Za-z] class of letters mentioned at http://www.w3.org/TR/REC-html40/types.html#type-name
         # Finally, note that pod2html fails miserably to generate XHTML-compliant anchor links. See http://validator.w3.org/check?uri=http%3A%2F%2Fsearch.cpan.org%2Fdist%2FCatalyst-Runtime%2Flib%2FCatalyst%2FRequest.pm&charset=(detect+automatically)&doctype=XHTML+1.0+Transitional&group=0&user-agent=W3C_Validator%2F1.606

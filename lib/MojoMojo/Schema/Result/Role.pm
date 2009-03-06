@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "PK::Auto", "UTF8Columns", "Core" );
 __PACKAGE__->table("role");
 __PACKAGE__->add_columns(
     "id",
@@ -20,6 +20,8 @@ __PACKAGE__->add_unique_constraint( "name_unique", ["name"] );
 __PACKAGE__->has_many( "role_privileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.role" => "self.id" }, );
 __PACKAGE__->has_many( "role_members",    "MojoMojo::Schema::Result::RoleMember",    { "foreign.role" => "self.id" } );
 __PACKAGE__->many_to_many( "members", "role_members", "person" );
+__PACKAGE__->utf8_columns(qw/name/);
+
 
 =head1 NAME
 

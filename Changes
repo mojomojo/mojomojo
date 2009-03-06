@@ -1,4 +1,10 @@
-        - MojoMojo now habla español (guikubivan)
+        - Set default theme directory when theme preference is NULL
+        - Add inline view
+        - reCAPTCHA added
+        - localize: help message, admin home page, anonymous name and login ('anonymous coward')
+        - Fixed displaying multiple user roles
+        - Now FormFu label_loc can be localized by MojoMojo I18N
+        - MojoMojo habla español (guikubivan)
         - Add polish translation (linio)
         - Add support for utf8 wiki words
         - Fixes for paragraphs in toolbar (linio)

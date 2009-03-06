@@ -4,12 +4,17 @@ name 'MojoMojo';
 all_from 'lib/MojoMojo.pm';
 
 requires(
+    'Encode'                                       => '2.31',
+    'HTML::Entities'                               => '3.60',  # required by Pod::Simple
+    'Crypt::CBC'                                   => '2.12',  # required by FormFu
+    'File::Slurp'                                  => '9999.13'  # versions are odd like that; required by Text::Markdown
+    'Template::Toolkit'                            => '2.20',
     'Algorithm::Diff'                              => '1.1901',
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
     'Catalyst'                                     => '5.7000',
     'Catalyst::Action::RenderView'                 => '0.07',
-    'Catalyst::Controller::HTML::FormFu'           => '0.02000',
+    'Catalyst::Controller::HTML::FormFu'           => '0.03007',
     'Catalyst::Model::DBIC::Schema'                => '0.01',
     'KinoSearch'                                   => 0,
     'Catalyst::Plugin::Authentication'             => '0.10005',
@@ -62,6 +67,7 @@ requires(
     'Syntax::Highlight::Engine::Kate'              => 0,
     'Cache::FastMmap'                              => 0,
     'Config::JFDI'                                 => 0,
+    'Catalyst::Plugin::Setenv'                     => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';

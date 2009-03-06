@@ -3,6 +3,7 @@ action:
 id: role_form
 indicator: submit
 auto_fieldset: 1
+localize_class: MojoMojo::I18N
 
 elements:
   - type: Text

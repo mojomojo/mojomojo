@@ -1,54 +1,54 @@
 #!/usr/bin/perl -w
 package Dummy;
 sub new {
-	my $class = shift;
-	bless {}, $class;
+    my $class = shift;
+    bless {}, $class;
 }
 
 sub req {
-	return $_[0];
+    return $_[0];
 }
 
 sub base {
-	$_[0]->{path} ||= '/';
-	return "http://example.com";
+    $_[0]->{path} ||= '/';
+    return "http://example.com";
 }
 
 sub stash {
-	my $self = shift;
-	return { page => $self,
-		 page_path => 'http://example.com/',
-	};
+    my $self = shift;
+    return { page => $self,
+         page_path => 'http://example.com/',
+    };
 }
 
 sub path {
-	my $self = shift;
-	$path = $self->{path};
-	return $path;
+    my $self = shift;
+    $path = $self->{path};
+    return $path;
 }
 
 sub model {
-	return $_[0];
+    return $_[0];
 }
 
 sub result_source {
-	return $_[0];
+    return $_[0];
 }
 
 sub resultset {
-	return $_[0];
+    return $_[0];
 }
 
 sub path_pages {
     my ($self,$path)=@_;
     $path=~s|^/||;
-	if ($path =~ /Existing/) {
-		my $page = Dummy->new;
-		$page->{path} = $path;
-		return [$page], undef;
-	} else {
-		return [], [{path => $path}];
-	}
+    if ($path =~ /Existing/) {
+        my $page = Dummy->new;
+        $page->{path} = $path;
+        return [$page], undef;
+    } else {
+        return [], [{path => $path}];
+    }
 }
 
 sub pref { return 1; }
@@ -100,7 +100,7 @@ is($content, 'ExistingWord');
 
 
 $content = 'There is one [[Existing Word]] in this text';
- ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 1);
 is(@$new, 0);
 
@@ -114,4 +114,3 @@ $content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikwiord</pre> blah humbu
 ($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
 is(@$exist, 1);
 is(@$new, 1);
-

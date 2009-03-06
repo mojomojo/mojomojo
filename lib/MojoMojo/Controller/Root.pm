@@ -81,6 +81,16 @@ show a debug screen.
 
 sub end : Private {
     my ( $self, $c ) = @_;
+
+    my $theme=$c->pref('theme');
+    # if theme doesn't exist
+    if ( ! -d  $c->path_to('root','static','themes',$theme)) {
+       $theme='default';
+       $c->pref('theme',$theme);
+    }
+    $c->stash->{additional_template_paths} =
+        [ $c->path_to('root','static','themes',$theme) ];
+
     $c->req->uri->path( $c->stash->{pre_hacked_uri}->path )
         if ref $c->stash->{pre_hacked_uri};
     $c->forward('render');
@@ -95,10 +105,7 @@ intercepts the request if so.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    if ( defined $c->config->{permissions}{enforce_login}
-        and $c->config->{permissions}{enforce_login} )
-    {
-
+    if ( $c->pref('enforce_login') ) {
         # allow a few actions
         if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {
             return 1;
