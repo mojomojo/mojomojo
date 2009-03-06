@@ -20,7 +20,7 @@ MojoMojo::Controller::Page - Page controller
 =head1 DESCRIPTION
 
 This controller is the main juice of MojoMojo. it handles all the
-actions related to wiki pages. actions are redispatched to this
+actions related to wiki pages. Actions are redispatched to this
 controller based on a Regex controller in the main MojoMojo class.
 
 Every private action here expects to have a page path in args. They
@@ -30,8 +30,8 @@ can be called with urls like "/page1/page2.action".
 
 =head2  view (.view)
 
-This is probably the most common action in MojoMojo. A lot of the 
-other actions redispatches to this one. It will prepare the stash 
+This is probably the most common action in MojoMojo. A lot of the
+other actions redispatch to this one. It will prepare the stash
 for page view, and set the template to view.tt, unless another is
 already set.
 
@@ -150,7 +150,7 @@ sub view : Global {
 
 =head2 search (.search)
 
-This action is called as .search on the current page when the user 
+This action is called as .search on the current page when the user
 performs a search.  The user can choose whether or not to search
 the entire site or a subtree starting from the current page.
 
@@ -543,7 +543,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
