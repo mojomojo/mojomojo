@@ -91,7 +91,7 @@ sub edit : Global FormConfig {
         return;
     }
     if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= 'Anonymous Edit disabled';
+        $c->stash->{message} ||= loc('Anonymous Edit disabled');
         return;
     }
 
