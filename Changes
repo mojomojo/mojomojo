@@ -1,3 +1,4 @@
+0.999028 2009-03-06 12:11:00
         - Set default theme directory when theme preference is NULL
         - Add inline view
         - reCAPTCHA added
@@ -14,6 +15,7 @@
         - match display name of page title, breadcrumb final node, and search results.
         - Make search results byline for last edit author.
         - Limit preview width so long pre lines don't squash edit area. 
+        - Fix security check for attachments
 
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.

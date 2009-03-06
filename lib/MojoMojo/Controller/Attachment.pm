@@ -25,7 +25,7 @@ Permission control for mojomojo pages.
 
 sub auth : Private {
     my ( $self, $c ) = @_;
-    return $c->forward('/user/login') unless $c->stash->{user};
+    $c->detach('/user/login') unless $c->stash->{user};
 
     my $perms =
         $c->check_permissions( $c->stash->{'path'},

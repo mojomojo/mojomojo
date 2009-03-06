@@ -5,7 +5,10 @@ all_from 'lib/MojoMojo.pm';
 
 requires(
     'Encode'                                       => '2.31',
-    'Template::Toolkit'                            => '2.20',
+    'HTML::Entities'                               => '3.60',  # required by Pod::Simple
+    'Crypt::CBC'                                   => '2.12',  # required by FormFu
+    'File::Slurp'                                  => '9999.13',  # versions are odd like that; required by Text::Markdown
+    'Template'                                     => '2.20',
     'Algorithm::Diff'                              => '1.1901',
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
@@ -40,7 +43,7 @@ requires(
     'DBD::SQLite'                                  => '1.08',
     'File::MMagic'                                 => '1.27',
     'File::Copy::Recursive'                        => 0,
-    'HTML::GenToc'                                 => 0,
+    'HTML::Toc'                                    => '1.10',
     'HTML::Strip'                                  => '1.04',
     'HTML::Scrubber'                               => 0,
     'HTML::TagCloud'                               => 0,

@@ -3,7 +3,7 @@
 [% WRAPPER page/wrapper.tt title = title %]
 
 <div id="categories">
-    <strong>[%loc('Tags')%]</strong>: 
+    <strong>[%loc('Tags')%]</strong>:
     [% WHILE( tag = tags.next ) %]
         [% IF tag.tag == activetag %]
     <b>[% tag.tag %]</b>
@@ -44,10 +44,10 @@
 [% END %]
     </ul>
 [% END %]
-	    
+
     <h2>[% loc('Orphaned Pages') %]</h2>
     [% loc('Pages to which no other pages link.') %]
-  
+
 [% IF orphans.size %]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
@@ -60,4 +60,3 @@
 [% END %]
 
 [% END %]
-

@@ -64,6 +64,7 @@ function ajaxSave() {
 </script>
 [% END %]
 
+
 [% # TODO: Make Edit/Attachment an ajax action, so you can go to attachments while editing and let it retain your content?%]
 
 <div id="hidden_info"> [% PROCESS edithelp.tt %] </div>
@@ -79,9 +80,7 @@ function ajaxSave() {
 </div>
 
 <div id="edit_form">
-  <form id="editForm" accept-charset="UTF-8"
-    action=""
-	method="POST">
+  <form id="editForm" accept-charset="UTF-8" action="" method="POST">
 
     [% FOREACH column IN ['id','depth','name','name_orig','path'] %]
       <input type="hidden" name="[% column %]" value="[% page.$column %]" />
@@ -102,7 +101,8 @@ function ajaxSave() {
     [% END %]
 
     [% 	PROCESS 'page_options.tt' %]
-   <script type="text/javascript" language="JavaScript">
+
+    <script type="text/javascript" language="JavaScript">
     var append='[%append|js%]';
       [% UNLESS user %]
        $('#editForm').submit(function() { return cleanAuthorName('[%c.pref('anonymous_user')%]')});
@@ -123,8 +123,8 @@ function ajaxSave() {
     (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
     [% ELSE %]
     <input type="text" name="login"
-	   id="authorName" value="[% c.pref('anonymous_user')%]"
-	   onclick="this.value == '[%c.pref('anonymous_user')%]' ? this.value = '' : true" />
+      id="authorName" value="[% c.pref('anonymous_user')%]"
+      onclick="this.value == '[%c.pref('anonymous_user')%]' ? this.value = '' : true" />
     <input type="password" name="pass" id="userAuth" /><br/>
     ([%loc('Leave second blank if you do not want a password')%].
     [% END %]
