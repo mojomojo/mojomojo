@@ -5,6 +5,7 @@ use base 'Catalyst::Controller';
 
 use Archive::Zip;
 use DateTime;
+use Encode ();
 
 my $model = '$c->model("DBIC::Page")';
 
@@ -51,7 +52,9 @@ sub export_raw : Global {
         $archive->addDirectory("$prefix/");
         foreach my $page (@$pages) {
             next unless $page->content;
-            $archive->addString( $page->content->body,
+            # XX - see notes from export_html about encode_utf8
+            $archive->addString( 
+                Encode::encode_utf8($page->content->body),
                 $prefix . $page->path . ( $page->path eq '/' ? '' : '/' ) . 'index' );
         }
         my $fh = IO::Scalar->new( \$c->res->{body} );
@@ -85,8 +88,12 @@ sub export_html : Global {
         $archive->addDirectory("$prefix/");
         foreach my $page (@$pages) {
             $c->log->debug( 'Rendering ' . $page->path );
+            # XXX - Note: subreq calls an gets unicode data from Catalyst
+            # (because we're using Plugin::Unicode ;). However,
+            # seems like Compress::Zlib expects octets -- so we explicitly
+            # encode them back to utf8 - lestrrat
             $archive->addString(
-                $c->subreq( '/print', { path => $page->path } ),
+                Encode::encode_utf8($c->subreq( '/print', { path => $page->path } )),
                 $prefix . $page->path . "/index.html"
             );
         }

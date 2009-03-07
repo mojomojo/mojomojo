@@ -7,8 +7,8 @@ requires(
     'Encode'                                       => '2.31',
     'HTML::Entities'                               => '3.60',  # required by Pod::Simple
     'Crypt::CBC'                                   => '2.12',  # required by FormFu
-    'File::Slurp'                                  => '9999.13'  # versions are odd like that; required by Text::Markdown
-    'Template::Toolkit'                            => '2.20',
+    'File::Slurp'                                  => '9999.13',  # versions are odd like that; required by Text::Markdown
+    'Template'                                     => '2.20',
     'Algorithm::Diff'                              => '1.1901',
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
@@ -20,6 +20,7 @@ requires(
     'Catalyst::Plugin::Authentication'             => '0.10005',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
     'Catalyst::Plugin::Email'                      => 0,
+    'Catalyst::Plugin::Cache'                      => 0,
     'Catalyst::Plugin::ConfigLoader'               => '0.13',
     'Catalyst::Plugin::Session::Store::File'       => 0,
     'Catalyst::Plugin::Session::State::Cookie'     => 0,

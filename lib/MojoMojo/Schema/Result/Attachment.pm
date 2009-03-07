@@ -37,7 +37,7 @@ MojoMojo::Schema::Result::Attachment
 
 sub delete {
     my ($self) = @_;
-    unlink( $self->filename )        if -f $self->filename;
+    # we'll delete the inline and thumbnail versions but keep the original version (->filename)
     unlink( $self->inline_filename ) if -f $self->inline_filename;
     unlink( $self->thumb_filename )  if -f $self->thumb_filename;
     $self->next::method();
@@ -76,4 +76,3 @@ sub make_photo {
 }
 
 1;
-
