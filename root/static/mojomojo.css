@@ -884,6 +884,9 @@ fieldset .label .comment {
     margin-left: 12em;
 }
 
+fieldset.secondCol {
+    float: left;
+}
 
 #powered {
     float:right;
