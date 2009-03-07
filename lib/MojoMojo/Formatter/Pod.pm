@@ -9,7 +9,7 @@ MojoMojo::Formatter::Pod - format part of content as POD
 
 =head1 DESCRIPTION
 
-This formatter will format content between two =pod blocks as 
+This formatter will format content between {{pod}} and {{end}} as 
 POD (Plain Old Documentation).
 
 =head1 METHODS
@@ -37,17 +37,18 @@ sub format_content {
     my @lines = split /\n/, $$content;
     my $pod;
     $$content = "";
-    my $re=$class->gen_re(qr/pod/);
+    my $start_re=$class->gen_re(qr/pod/);
+    my $end_re=$class->gen_re(qr/end/);
     foreach my $line (@lines) {
         if ($pod) {
-            if ( $line =~ m/^(.*)$re(.*)$/ ) {
+            if ( $line =~ m/^(.*)$end_re(.*)$/ ) {
                 $$content .= MojoMojo::Formatter::Pod->to_pod( $pod.$1, $c->req->base ).$2;
                 $pod = "";
             }
             else { $pod .= $line . "\n"; }
         }
         else {
-            if ( $line =~ m/^(.*)$re(.*)$/ ) {
+            if ( $line =~ m/^(.*)$start_re(.*)$/ ) {
                 $$content .= $1;
                 $pod = " ".$2;    # make it true :)
             }

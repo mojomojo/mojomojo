@@ -27,7 +27,7 @@ use MojoMojo::Formatter::Pod;
 my $content;
 
 my $ib = '{{pod}}';
-my $ie = '{{pod}}';
+my $ie = '{{end}}';
 $content = "\n$ib\n\n\n=head1 FOO\n\nTest message\n\n=cut\n\n$ie\n";
 MojoMojo::Formatter::Pod->format_content(\$content,Dummy->new);
 like($content, qr/\<h1\>/, "h1");
