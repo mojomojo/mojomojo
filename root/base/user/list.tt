@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title = title || config.application_name || "MojoMojo" %]
+[% WRAPPER page/wrapper.tt title = title || c.pref('name') || c.config.name || "MojoMojo" %]
 
 [% PROCESS pager.tt %]
 
