@@ -16,34 +16,41 @@
   <table cellspacing="0" cellpadding="0">
     <tr>
       <td>_[%loc('your text')%]_</td><td class="arrow">-></td><td><em>[%loc('your text')%]</em></td>
-      <td>=http://[%loc('your/url')%]</td><td class="arrow">-></td><td><em>[%loc('include this page')%]</em></td>
+      <td>{{http://[%loc('your/url')%]}}</td><td class="arrow">-></td><td><em>[%loc('include this page')%]</em></td>
     </tr>
     <tr><td>*[%loc('your text')%]*</td><td class="arrow">-></td><td><strong>[%loc('your text')%]</strong></td>
-      <td>=feed://[%loc('your/url')%]</td><td class="arrow">-></td><td><em>[%loc('include this rss feed')%]</em></td>
-         </tr>
-    <tr>
-      <td>%{color:red}[%loc('hello')%]%</td><td class="arrow">-></td><td><span style="color: red;">[%loc('hello')%]</span></td>
-      <td>=http://amazon/url</td><td class="arrow">-></td><td><em>[%loc('Show this product')%]</em></td>
+        <td>{{toc}}</td><td class="arrow">-></td><td><em>[%loc('Show Table of Contents.')%]</em></td>
     </tr>
     <tr>
+      <td>%{color:red}[%loc('hello')%]%</td><td class="arrow">-></td><td><span style="color: red;">[%loc('hello')%]</span></td>
+      <td>{{pod}}</td><td class="arrow">-></td><td><em>[%loc('Format content until {{end}} as plain old documentation')%]</em></td>
+     </tr>
+    <tr>
       <td>* [%loc('Bulleted list')%]<br />* [%loc('Second item')%]</td><td class="arrow">-></td><td>&#8226; [%loc('Bulleted list')%]<br />&#8226; [%loc('Second item')%]</td>
-      <td>=comments</td><td class="arrow">-></td><td><em>[%loc('Allow comments on this page.')%]</em></td>
+      <td>{{comments}}</td><td class="arrow">-></td><td><em>[%loc('Allow comments on this page.')%]</em></td>
     </tr>
 
     <tr>
       <td># [%loc('Numbered list')%]<br /># [%loc('Second item')%]</td><td class="arrow">-></td><td>1. [%loc('Numbered list')%]<br />2. [%loc('Second item')%]</td>
+      [% IF(INC.exists('MojoMojo/Formatter/Emote.pm')) -%]
       <td>:-)</td><td class="arrow">-></td><td><em><img src="[%base%]/.static/emote/regular_smile.gif" alt="smile emote" /><br/>
          [%loc('And others.')%]</em></td>
+      [% END -%]
     </tr>
     <tr>
       <td>"[%loc('linkname')%]":[%loc('URL')%]</td><td class="arrow">-></td><td><a href="URL">[%loc('linkname')%]</a></td>
+      [% IF(INC.exists('MojoMojo/Formatter/Amazon.pm')) -%]
+       <td>{{http://amazon/url}}</td><td class="arrow">-></td><td><em>[%loc('Show this product')%]</em></td>
+       [% END -%]
     </tr>
     <tr>
       <td>[%loc('|a|table|row|')%]<br />[%loc('|b|table|row|')%]</td><td class="arrow">-></td><td>[%loc('Table')%]</td>
-      <td>=pod</td><td class="arrow">-></td><td><em>[%loc('Format content until next =pod as plain old documentation')%]</em></td>
     </tr>
     <tr>
       <td>!/img/url!</td><td class="arrow">-></td><td>[%loc('Image')%]</td>
+        [% IF(INC.exists('MojoMojo/Formatter/RSS.pm')) -%]
+      <td>{{feed://[%loc('your/url')%]}}</td><td class="arrow">-></td><td><em>[%loc('include this rss feed')%]</em></td>
+      [% END -%]
     </tr>
   </table>
 </div>
