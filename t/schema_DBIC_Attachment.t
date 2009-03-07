@@ -9,7 +9,7 @@ BEGIN {
     eval "use SQL::Translator";
     my $translator = ! $@;
     plan $sqlite && $translator
-    ? ( tests => 12 )
+    ? ( tests => 13 )
     : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
 }
 
@@ -38,4 +38,5 @@ ok(!-f $att->thumb_filename, 'thumb file doesnt exist');
 ok($att->photo->make_thumb,'make thumb called ok');
 ok(-f $att->thumb_filename, 'thumb file exists');
 ok($att->delete(),'Can delete app');
+ok(unlink($fn));
 ok(! -f $fn, 'file cleaned up ok');
