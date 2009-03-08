@@ -35,4 +35,4 @@ my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or
 print "Deploying schema to $dsn\n";
 $schema->deploy;
 
-$schema->create_initial_data(language => $config->{default_lang} || 'en');
+$schema->create_initial_data($config);
