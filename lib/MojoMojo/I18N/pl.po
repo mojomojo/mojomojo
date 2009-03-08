@@ -1780,7 +1780,7 @@ msgstr "w otoczonym bloku"
 
 #: root/base/toolbar.tt:10
 msgid "include"
-msgstr "włącz"
+msgstr "dołącz"
 
 #: root/base/edithelp.tt:19
 msgid "include this page"
