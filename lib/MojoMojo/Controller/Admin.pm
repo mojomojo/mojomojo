@@ -48,6 +48,12 @@ sub settings : Path FormConfig Args(0) {
    
     my $admins = $c->pref('admins');
     $admins =~ s/\b$user\b//g;
+    my $select_theme = $form->get_all_element({name => 'theme'});
+    my @themes;
+    foreach my $theme (MojoMojo::Model::Themes->list){
+        push @themes,[$theme,$theme]; 
+    };
+    $select_theme->options(\@themes);
     unless( $form->submitted ) {
         $form->default_values({
             name                     => $c->pref('name'),

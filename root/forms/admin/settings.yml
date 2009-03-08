@@ -22,7 +22,7 @@ elements:
       - type: Text
         name: anonymous_user
         label_loc: Anonymous User (blank to disable)
-      - type: Text
+      - type: Select
         name: theme
         label_loc: Theme name
       - type: Checkbox
