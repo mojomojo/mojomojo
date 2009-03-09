@@ -26,7 +26,7 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 =cut
 
 sub create_initial_data {
-    my ($schema, %args) = @_;
+    my ($schema, $config) = @_;
     print "Creating initial data\n";
 
     my $file = __PACKAGE__ . ".pm";
@@ -40,7 +40,7 @@ sub create_initial_data {
         Class  => 'MojoMojo',
         Path   => $path,
     );
-    my $lang = $args{language} || 'en';
+    my $lang = $config->{'default_lang'} || 'en';
     $lang =~ s/\..*$//;
     loc_lang($lang);
 
@@ -86,7 +86,7 @@ sub create_initial_data {
 
     my @prefs =
         $schema->populate( 'Preference',
-        [ [qw/ prefkey prefvalue /], [ 'name', 'MojoMojo' ], [ 'admins', 'admin' ], [ 'theme', 'default' ] ] );
+        [ [qw/ prefkey prefvalue /], [ 'name', $config->{'name'} || "MojoMojo" ], [ 'admins', 'admin' ], [ 'theme', $config->{'theme'} || 'default' ] ] );
 
     my @pages = $schema->populate(
         'Page',

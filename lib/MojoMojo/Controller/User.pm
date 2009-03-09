@@ -177,7 +177,7 @@ sub recover_pass : Global {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->login . ' <' . $user->email . '>',
-                Subject => 'Your new password on ' . $c->config->{name},
+                Subject => 'Your new password on ' .  $c->pref('name') || $c->config->{name} || "MojoMojo",
             ],
             body => $c->view('TT')->render( $c, 'mail/reset_password.tt' ),
         )

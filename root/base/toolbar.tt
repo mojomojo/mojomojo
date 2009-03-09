@@ -1,3 +1,17 @@
+<input type="image" onclick="return insertTags('body','\n\n<pre lang=&quot;Perl&quot;>\n','\n</pre>\n\n','#!/usr/bin/perl\nuse strict;\nprint &quot;Hello\\n&quot;;');"
+  src="[%c.uri_for_static('toolbar/formatter_syntax.png')%]" title="[% loc('Syntax Highlight') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=irc\n','\n=irc\n\n','12:00 <nick> Hello #mojomojo!');"
+  src="[%c.uri_for_static('toolbar/formatter_irc.png')%]" title="[% loc('Irc formatter') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=pod\n\n','\n\n=pod\n\n','[% loc('=head1 Header') %]');"
+  src="[%c.uri_for_static('toolbar/formatter_pod.png')%]" title="[% loc('POD formatter') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=comments\n','','');"
+  src="[%c.uri_for_static('toolbar/formatter_comments.png')%]" title="[% loc('comments') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=http:/','\n','');"
+  src="[%c.uri_for_static('toolbar/formatter_include.png')%]" title="[% loc('include') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=redirect ','\n','/new/location');"
+  src="[%c.uri_for_static('toolbar/formatter_redirect.png')%]" title="[% loc('redirect') %]"/>
+<br />
+
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
 <input type="image" onclick="return insertTags('body','\n\nh1. ','\n\n','[% loc('Also try h2,h3 and so on') %]');"
   src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
