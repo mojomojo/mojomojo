@@ -104,6 +104,11 @@ sub settings : Path FormConfig Args(0) {
                                           : 1,
             use_captcha              => $c->pref('use_captcha'),
             theme                    => $c->pref('theme'),
+            main_formatter           => $c->pref('main_formatter')           ne""
+                                        ? $c->pref('main_formatter')
+                                        : defined $c->config->{'main_formatter'}
+                                          ? $c->config->{'main_formatter'}
+                                          : 'MojoMojo::Formatter::Textile',
         });
         $form->process();
         return;
@@ -132,6 +137,7 @@ sub settings : Path FormConfig Args(0) {
     $c->pref( 'name',           $form->params->{name} );
     $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
     $c->pref( 'theme',          $form->params->{theme} || 'default' );
+    $c->pref( 'main_formatter', $form->params->{main_formatter} );
 
     $c->stash->{message} = $c->loc("Updated successfully.");
 }
