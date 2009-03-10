@@ -13,7 +13,7 @@
 
 [% IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile' +%]
 <div class="syntax_help" id="syntax_help_textile">
-  <h2>[%loc('Textile formatting tips')%] (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_top">[%loc('Textile2 reference')%]</a>)</h2>
+  <h2>[%loc('Textile formatting tips')%] (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_blank">[%loc('Textile2 reference')%]</a>)</h2>
 
   <table>
     <tr>
@@ -48,7 +48,7 @@
 
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <div class="syntax_help" id="syntax_help_markdown">
-  <h2>[%loc('MultiMarkdown formatting tips')%] (<a href="http://daringfireball.net/projects/markdown/basics" target="_top">[% loc('Markdown reference') %]</a>, <a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">MultiMarkdown reference</a>)</h2>
+  <h2>[%loc('MultiMarkdown formatting tips')%] (<a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference') %]</a>, <a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">MultiMarkdown reference</a>)</h2>
 
   <table>
     <tr><th colspan="2">[%loc('Text Formatting')%]</th></tr>
