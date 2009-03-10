@@ -201,43 +201,37 @@ textarea#comment {
   z-index:1;
 }
 
-#TextileHelp,
-#MarkdownHelp
-{
-  width: 902px;
+.syntax_help {
+  width: 800px;
   background: #ddd;
   border: 1px solid #aaa;
   padding:1em;
 }
 
-#MarkdownHelp table,
-#TextileHelp table {
+.syntax_help table {
   margin-bottom: 0;
+  border-spacing: 0;
 }
 
 
-#MarkdownHelp table+h3,
-#TextileHelp table+h3 {
+.syntax_help table+h3 {
   margin-top: 11px;
 }
 
-#MarkdownHelp table td,
-#TextileHelp table td {
+.syntax_help  table td {
   font-size: 11px;
   padding: 3px;
   vertical-align: top;
   border-top: 1px dotted #ccc;
 }
 
-#MarkdownHelp table td.arrow,
-#TextileHelp table td.arrow {
+.syntax_help table td.arrow {
   padding-right: 5px;
   padding-left: 10px;
   color: #999;
 }
 
-#MarkdownHelp table td.label,
-#TextileHelp table td.label {
+.syntax_help table td.label {
   font-weight: bold;
   white-space: nowrap;
   font-size: 10px;
@@ -245,8 +239,7 @@ textarea#comment {
   color: #000;
 }
 
-#MarkdownHelp h3,
-#TextileHelp h3 {
+.syntax_help h3 {
   font-size: 11px;
   font-weight: bold;
   font-weight: normal;
@@ -254,12 +247,7 @@ textarea#comment {
   padding: 5px 0 0 0;
 }
 
-#TextileHelp h2 { margin-top:0; }
-
-#MarkdownHelp p,
-#TextileHelp p {
-  font-size: 10px;
-}
+.syntax_help h2 { margin-top:0; }
 
 .rightHandSide {
   float: right;
