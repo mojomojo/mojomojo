@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",
@@ -24,6 +24,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to( "page", "MojoMojo::Schema::Result::Page", { id => "page" } );
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
+__PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
