@@ -1,3 +1,8 @@
 
-
+[% IF c.pref('main_formatter') == "MojoMojo::Formatter::Textile" %]
 "[%att.name%]":[%c.uri_for("attachment",att.id)%]
+[% ELSIF c.pref('main_formatter') == "MojoMojo::Formatter::Markdown" %]
+[[%att.name%]]([%c.uri_for("attachment",att.id)%])
+[% ELSE %]
+"[%att.name%]":[%c.uri_for("attachment",att.id)%]
+[% END %]
