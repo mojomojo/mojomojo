@@ -105,7 +105,6 @@ sub view : Global {
     return $c->forward('page_not_found')
       if ( $page->page_version->status eq 'wait' );
 
-    my $user;
     if ( $c->pref('check_permission_on_view') ne""
          ? $c->pref('check_permission_on_view')
          : $c->config->{'permissions'}{'check_permission_on_view'} ) {

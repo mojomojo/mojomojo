@@ -90,7 +90,7 @@ function ajaxSave() {
       [% IF message %]<p id="message"><small>[% message %]</small></p>[% END +%]
 
     [% IF editor == 'default' %]
-    [%PROCESS toolbar.tt%]
+      [%- PROCESS toolbar.tt | indent 6 %]
     [% END %]
     <br/>
     <a href="[%c.uri_for( '/' _ c.config.tool_separator _'jsrpc/render')%]" id="preview_url"></a>
@@ -101,10 +101,8 @@ function ajaxSave() {
     [% END %]
 
     [% 	PROCESS 'page_options.tt' %]
-      [%- PROCESS toolbar.tt | indent 6 %]
       <br/>
       <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
-      <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
 
       <script type="text/javascript" language="JavaScript">
       var append='[%append|js%]';
