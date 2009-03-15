@@ -352,11 +352,11 @@ sub get_permissions_data {
             ->search( undef, { order_by => 'length(path),role,apply_to_subpages' } );
 
         # if we are not caching, we don't return the whole enchilada.
-        if ( ! $c->pref('cache_permission_data')    ne""
+        if ( ! ( $c->pref('cache_permission_data')    ne""
                ? $c->pref('cache_permission_data')
                : defined $c->config->{'permissions'}{'cache_permission_data'}
                  ? $c->config->{'permissions'}{'cache_permission_data'}
-                 : 1) {
+                 : 1) ) {
             ## this seems odd to me - but that's what the dbix::class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
