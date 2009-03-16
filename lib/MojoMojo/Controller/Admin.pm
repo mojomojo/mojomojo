@@ -48,18 +48,67 @@ sub settings : Path FormConfig Args(0) {
    
     my $admins = $c->pref('admins');
     $admins =~ s/\b$user\b//g;
-
+    my $select_theme = $form->get_all_element({name => 'theme'});
+    my @themes;
+    foreach my $theme (MojoMojo::Model::Themes->list){
+        push @themes,[$theme,$theme]; 
+    };
+    $select_theme->options(\@themes);
     unless( $form->submitted ) {
         $form->default_values({
-            name              => $c->pref('name'),
-            admins            => $admins,
-            anonymous_user    => $c->pref('anonymous_user'),
-            open_registration => $c->pref('open_registration'),
-            restricted_user   => $c->pref('restricted_user'),
-            disable_search    => $c->pref('disable_search'),
-            enforce_login     => $c->pref('enforce_login'),
-            use_captcha       => $c->pref('use_captcha'),
-            theme             => $c->pref('theme'),
+            name                     => $c->pref('name'),
+            admins                   => $admins,
+            anonymous_user           => $c->pref('anonymous_user'),
+            open_registration        => $c->pref('open_registration'),
+            restricted_user          => $c->pref('restricted_user'),
+            disable_search           => $c->pref('disable_search'),
+            check_permission_on_view => $c->pref('check_permission_on_view') ne""
+                                        ? $c->pref('check_permission_on_view')
+                                        : defined $c->config->{'permissions'}{'check_permission_on_view'}
+                                          ? $c->config->{'permissions'}{'check_permission_on_view'}
+                                          : 0,
+            cache_permission_data    => $c->pref('cache_permission_data')    ne""
+                                        ? $c->pref('cache_permission_data')
+                                        : defined $c->config->{'permissions'}{'cache_permission_data'}
+                                          ? $c->config->{'permissions'}{'cache_permission_data'}
+                                          : 1,
+            enforce_login            => $c->pref('enforce_login')            ne""
+                                        ? $c->pref('enforce_login')
+                                        : defined $c->config->{'permissions'}{'enforce_login'}
+                                          ? $c->config->{'permissions'}{'enforce_login'}
+                                          : 0,
+            create_allowed           => $c->pref('create_allowed')           ne""
+                                        ? $c->pref('create_allowed')
+                                        : defined $c->config->{'permissions'}{'create_allowed'}
+                                          ? $c->config->{'permissions'}{'create_allowed'}
+                                          : 1,
+            delete_allowed           => $c->pref('delete_allowed')           ne""
+                                        ? $c->pref('delete_allowed')
+                                        : defined $c->config->{'permissions'}{'delete_allowed'}
+                                          ? $c->config->{'permissions'}{'delete_allowed'}
+                                          : 1,
+            edit_allowed             => $c->pref('edit_allowed')             ne""
+                                        ? $c->pref('edit_allowed')
+                                        : defined $c->config->{'permissions'}{'edit_allowed'}
+                                          ? $c->config->{'permissions'}{'edit_allowed'}
+                                          : 1,
+            view_allowed             => $c->pref('view_allowed')             ne""
+                                        ? $c->pref('view_allowed')
+                                        : defined $c->config->{'permissions'}{'view_allowed'}
+                                          ? $c->config->{'permissions'}{'view_allowed'}
+                                          : 1,
+            attachment_allowed       => $c->pref('attachment_allowed')       ne""
+                                        ? $c->pref('attachment_allowed')
+                                        : defined $c->config->{'permissions'}{'attachment_allowed'}
+                                          ? $c->config->{'permissions'}{'attachment_allowed'}
+                                          : 1,
+            use_captcha              => $c->pref('use_captcha'),
+            theme                    => $c->pref('theme'),
+            main_formatter           => $c->pref('main_formatter')           ne""
+                                        ? $c->pref('main_formatter')
+                                        : defined $c->config->{'main_formatter'}
+                                          ? $c->config->{'main_formatter'}
+                                          : 'MojoMojo::Formatter::Textile',
         });
         $form->process();
         return;
@@ -70,29 +119,25 @@ sub settings : Path FormConfig Args(0) {
             $c->stash->{message} = $c->loc('Cant find admin user: ') . $user;
             return;
         }
-        # FIXME: Needs refactor
-        $c->pref( 'name', $form->params->{name} );
-        $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
     }
-    $c->pref( 'open_registration', $form->params->{open_registration} );
-    $c->pref( 'restricted_user', $form->params->{restricted_user} );
-    $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
-    $c->pref( 'disable_search', $form->params->{disable_search} || '' );
-    $c->pref( 'enforce_login', $form->params->{enforce_login} || '' );
-    $c->pref( 'use_captcha', $form->params->{use_captcha} || '' );
-    $c->pref( 'theme', $form->params->{theme} || 'default' );
-    $c->stash->{message} = "Updated successfully.";
+    $c->pref( 'check_permission_on_view', $form->params->{check_permission_on_view} ?1:0 );
+    $c->pref( 'cache_permission_data',    $form->params->{cache_permission_data}    ?1:0 );
+    $c->pref( 'open_registration',        $form->params->{open_registration}        ?1:0 );
+    $c->pref( 'restricted_user',          $form->params->{restricted_user}          ?1:0 );
+    $c->pref( 'use_captcha',              $form->params->{use_captcha}              ?1:0 );
+    $c->pref( 'disable_search',           $form->params->{disable_search}           ?1:0 );
+    $c->pref( 'enforce_login',            $form->params->{enforce_login}            ?1:0 );
+    $c->pref( 'create_allowed',           $form->params->{create_allowed}           ?1:0 );
+    $c->pref( 'delete_allowed',           $form->params->{delete_allowed}           ?1:0 );
+    $c->pref( 'edit_allowed',             $form->params->{edit_allowed}             ?1:0 );
+    $c->pref( 'view_allowed',             $form->params->{view_allowed}             ?1:0 );
+    $c->pref( 'attachment_allowed',       $form->params->{attachment_allowed}       ?1:0 );
 
-    # FIXME: Needs refactor
-    $c->pref( 'open_registration',$form->params->{open_registration}?1:0 );
-    $c->pref( 'restricted_user',  $form->params->{restricted_user}  ?1:0 );
-    $c->pref( 'use_captcha',      $form->params->{use_captcha}      ?1:0 );
-    $c->pref( 'disable_search',   $form->params->{disable_search}   ?1:0 );
-    $c->pref( 'enforce_login',    $form->params->{enforce_login}    ?1:0 );
-
-    $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
-    $c->pref( 'name', $form->params->{name} );
+    $c->pref( 'admins',         join( ' ', @users, $c->stash->{user}->login ) );
+    $c->pref( 'name',           $form->params->{name} );
     $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
+    $c->pref( 'theme',          $form->params->{theme} || 'default' );
+    $c->pref( 'main_formatter', $form->params->{main_formatter} );
 
     $c->stash->{message} = $c->loc("Updated successfully.");
 }

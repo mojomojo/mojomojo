@@ -1,11 +1,13 @@
 <div id="breadcrumbs">
   [% FOREACH page IN path_pages %]
-    [% IF loop.first %]
-      <a href="[% c.uri_for('/') %]">[% c.pref("name") || "MojoMojo" %]</a>
-    [% ELSE %] / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
+    [% IF loop.first +%]
+  <a href="[% c.uri_for('/') %]">[% c.pref("name") || "MojoMojo" %]</a>
+    [% ELSE +%]
+  / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
     [% END %]
   [% END %]
-  [% FOREACH page IN proto_pages %]
- / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
-  [% END %]
+
+  [% FOREACH page IN proto_pages +%]
+  / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
+  [% END +%]
 </div>

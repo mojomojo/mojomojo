@@ -24,9 +24,9 @@ See L<Catalyst::Manual>
 
 Run a Catalyst application as a cgi script.
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Sebastian Riedel, C<sri@oook.de>
+Catalyst Contributors, see Catalyst.pm
 
 =head1 COPYRIGHT
 

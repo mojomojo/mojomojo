@@ -60,8 +60,9 @@ sub view : Global {
     my $page = $stash->{'page'};
 
     my $user;
-
-    if ( $c->config->{'permissions'}->{'check_permission_on_view'} ) {
+    if ( $c->pref('check_permission_on_view') ne""
+         ? $c->pref('check_permission_on_view')
+         : $c->config->{'permissions'}{'check_permission_on_view'} ) {
         if ( $c->user_exists() ) { $user = $c->user->obj; }
         $c->log->info('Checking permissions') if $c->debug;
 
@@ -149,7 +150,9 @@ sub search : Global {
 
         # skip search result depending on permissions
         my $user;
-        if ( $c->config->{'permissions'}{'check_permission_on_view'} ) {
+        if ( $c->pref('check_permission_on_view') ne""
+             ? $c->pref('check_permission_on_view')
+             : $c->config->{'permissions'}{'check_permission_on_view'} ) {
             if ( $c->user_exists() ) { $user = $c->user->obj; }
             my $perms = $c->check_permissions( $page->path, $user );
             next unless $perms->{'view'};

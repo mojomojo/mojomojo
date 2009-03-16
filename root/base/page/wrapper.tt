@@ -12,12 +12,12 @@
     [% END %]
   </h1>
 </div>
-[% PROCESS breadcrumbs.tt %]
+[%+ PROCESS breadcrumbs.tt | indent 2 %]
 [% # PROCESS sidebar.tt %]
-[% PROCESS navbar.tt %]
-[%
+[%+ PROCESS navbar.tt | indent 2 %]
+[%+
   reverse = c.action.reverse;
-  PROCESS page/editbar.tt
+  PROCESS page/editbar.tt | indent 2
     IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions';
 %]
 
@@ -25,5 +25,5 @@
 [% content %]
 </div>
 
-[% PROCESS page/bottomnav.tt %]
-[% PROCESS footer.tt %]
+[%+ PROCESS page/bottomnav.tt | indent 2 %]
+[%+ PROCESS footer.tt | indent 2 %]
