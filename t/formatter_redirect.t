@@ -25,6 +25,13 @@ sub stash {
     };
 }
 
+sub flash {
+    my $self = shift;
+    return { page => $self,
+         page_path => 'http://example.com/',
+    };
+}
+
 sub path {
     my $self = shift;
     $path = $self->{path};

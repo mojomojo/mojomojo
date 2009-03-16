@@ -4,7 +4,19 @@ use strict;
 use warnings;
 use Getopt::Long;
 use Pod::Usage;
-use Catalyst::Helper;
+eval "use Catalyst::Helper;";
+
+if ($@) {
+  die <<END;
+To use the Catalyst development tools including catalyst.pl and the
+generated script/myapp_create.pl you need Catalyst::Helper, which is
+part of the Catalyst-Devel distribution. Please install this via a
+vendor package or by running one of -
+
+  perl -MCPAN -e 'install Catalyst::Devel'
+  perl -MCPANPLUS -e 'install Catalyst::Devel'
+END
+}
 
 my $force = 0;
 my $mech  = 0;
@@ -62,10 +74,9 @@ Existing component files are not overwritten.  If any of the component files
 to be created already exist the file will be written with a '.new' suffix.
 This behavior can be suppressed with the C<-force> option.
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Sebastian Riedel, C<sri@oook.de>
-Maintained by the Catalyst Core Team.
+Catalyst Contributors, see Catalyst.pm
 
 =head1 COPYRIGHT
 

@@ -22,9 +22,15 @@ elements:
       - type: Text
         name: anonymous_user
         label_loc: Anonymous User (blank to disable)
-      - type: Text
+      - type: Select
         name: theme
         label_loc: Theme name
+      - type: Select
+        name: main_formatter
+        label_loc: Main formatter
+        options:
+          - [ 'MojoMojo::Formatter::Markdown', 'Markdown' ]
+          - [ 'MojoMojo::Formatter::Textile',  'Textile'  ]
       - type: Checkbox
         name: open_registration
         label_loc: New User Registration open
