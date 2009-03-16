@@ -34,6 +34,7 @@
   </tr>
   [%END%]
   </table>
+  <a href="[% c.uri_for('/.register') %]">[% loc('Add user') %]</a>
 </div>
 
 <div id="bottomnav">&nbsp;</div>

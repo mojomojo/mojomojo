@@ -204,7 +204,7 @@ B<template:> user/register.tt
 sub register : Global FormConfig {
     my ( $self, $c ) = @_;
 
-    if ( !$c->pref('open_registration') ) {
+    if ( !$c->pref('open_registration')  && ( !($c->stash->{user} && $c->stash->{user}->is_admin) ) ) {
         $c->stash->{template} = 'message.tt';
         return $c->stash->{message} = $c->loc('Registration is closed!');
     }
@@ -213,22 +213,25 @@ sub register : Global FormConfig {
     $c->stash->{message} =
         $c->loc('Please fill in the following information to register. All fields are mandatory.');
     my $form = $c->stash->{form};
-    $c->stash->{user} = $c->model('DBIC::Person')->new_result( {} );
+    $c->stash->{newuser} = $c->model('DBIC::Person')->new_result( {} );
     $c->stash->{template}  = 'user/register.tt';
 
-    if ($c->pref('use_captcha')){
+    if ($c->pref('use_captcha') && ( !($c->stash->{user} && $c->stash->{user}->is_admin) ) ) {
         my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
         my $captcha=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
         $form->process;
     }
 
-    $form->model->default_values($c->stash->{user});
+    $form->model->default_values($c->stash->{newuser});
     if ( $form->submitted_and_valid ) {
-        $c->stash->{user}->active(-1);
-        $form->model->update( $c->stash->{user} );
-        $c->stash->{user}->insert();
-        $c->forward( 'do_register', [$c->stash->{user}] );
-
+        $c->stash->{newuser}->active(-1);
+        $form->model->update( $c->stash->{newuser} );
+        $c->stash->{newuser}->insert();
+        if ( $c->stash->{user} && $c->stash->{user}->is_admin) {
+            $c->res->redirect($c->uri_for('/.admin/user'));
+        } else {
+            $c->forward( 'do_register', [$c->stash->{newuser}] );
+        }
     }
 }
 
