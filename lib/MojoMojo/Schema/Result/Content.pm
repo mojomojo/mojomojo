@@ -63,7 +63,7 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 1, size => 300 },
 
 );
-__PACKAGE__->utf8_columns(qw/body precompiled/);
+__PACKAGE__->utf8_columns(qw/abstract body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
     "pages", "MojoMojo::Schema::Result::Page",

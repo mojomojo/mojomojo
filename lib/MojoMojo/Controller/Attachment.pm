@@ -46,10 +46,15 @@ main attachment screen.  Handles uploading of new attachments.
 =cut
 
 sub attachments : Global {
-    my ( $self, $c, $page ) = @_;
-    return unless $c->forward('auth');
+    my ( $self, $c ) = @_;
+    $c->forward('auth') ;
     $c->stash->{template} = 'page/attachments.tt';
-    $page = $c->stash->{page};
+    $c->forward('check_file');
+}
+
+sub check_file : Private  {
+    my ($self,$c)=@_;
+    my $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
         my $upload = $c->request->upload('file');
         my (@att) =
@@ -62,14 +67,13 @@ sub attachments : Global {
         $c->res->redirect( $c->req->base . $c->stash->{path} . $c->config->{tool_separator} .'attachments' )
             unless $c->stash->{template} eq 'message.tt';
     }
-
 }
 
 sub flash_upload : Local {
     my ( $self, $c ) = @_;
     my $user=$c->model('DBIC::Person')->find($c->req->params->{id});
     $c->detach('/default') unless( $user->hashed($c->pref('entropy')) eq $c->req->params->{verify} );
-    $c->forward('attachments');
+    $c->forward('check_file');
     if ($c->res->redirect) {
         $c->res->redirect(undef,200);
         return $c->res->body('1');
