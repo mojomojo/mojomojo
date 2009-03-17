@@ -27,7 +27,7 @@
 <div id="search_results" style="text-indent: 1em;">
 [% FOR result = results %]
  <div class="search_result">
-    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name_orig) %]</a></strong>
+    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikiword(result.page.name_orig) %]</a></strong> [% result.page.content.abstract %]
     <div class="snippet">
       [% result.snippet %]
     </div>
