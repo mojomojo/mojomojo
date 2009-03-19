@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",
@@ -24,6 +24,7 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->belongs_to( "page", "MojoMojo::Schema::Result::Page", { id => "page" } );
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
+__PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
@@ -37,7 +38,7 @@ MojoMojo::Schema::Result::Attachment
 
 sub delete {
     my ($self) = @_;
-    unlink( $self->filename )        if -f $self->filename;
+    # we'll delete the inline and thumbnail versions but keep the original version (->filename)
     unlink( $self->inline_filename ) if -f $self->inline_filename;
     unlink( $self->thumb_filename )  if -f $self->thumb_filename;
     $self->next::method();
@@ -76,4 +77,3 @@ sub make_photo {
 }
 
 1;
-

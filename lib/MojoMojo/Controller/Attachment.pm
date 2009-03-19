@@ -11,7 +11,7 @@ MojoMojo::Controller::Attachment - Attachment controller
 
 =head1 DESCRIPTION
 
-MojoMojo supports attaching files to nodes. This controller handles 
+MojoMojo supports attaching files to nodes. This controller handles
 administration and serving of these assets.
 
 
@@ -25,7 +25,7 @@ Permission control for mojomojo pages.
 
 sub auth : Private {
     my ( $self, $c ) = @_;
-    return $c->forward('/user/login') unless $c->stash->{user};
+    $c->detach('/user/login') unless $c->stash->{user};
 
     my $perms =
         $c->check_permissions( $c->stash->{'path'},
@@ -46,10 +46,15 @@ main attachment screen.  Handles uploading of new attachments.
 =cut
 
 sub attachments : Global {
-    my ( $self, $c, $page ) = @_;
-    return unless $c->forward('auth');
+    my ( $self, $c ) = @_;
+    $c->forward('auth') ;
     $c->stash->{template} = 'page/attachments.tt';
-    $page = $c->stash->{page};
+    $c->forward('check_file');
+}
+
+sub check_file : Private  {
+    my ($self,$c)=@_;
+    my $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
         my $upload = $c->request->upload('file');
         my (@att) =
@@ -62,14 +67,13 @@ sub attachments : Global {
         $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
             unless $c->stash->{template} eq 'message.tt';
     }
-
 }
 
 sub flash_upload : Local {
     my ( $self, $c ) = @_;
     my $user=$c->model('DBIC::Person')->find($c->req->params->{id});
     $c->detach('/default') unless( $user->hashed($c->pref('entropy')) eq $c->req->params->{verify} );
-    $c->forward('attachments');
+    $c->forward('check_file');
     if ($c->res->redirect) {
         $c->res->redirect(undef,200);
         return $c->res->body('1');
@@ -85,7 +89,7 @@ sub list : Local {
 =head2 default
 
 This action dispatches to the other private actions in this controller
-based on the second argument. the first argument is expected to be 
+based on the second argument. The first argument is expected to be
 an attachment id.
 
 =cut
@@ -110,21 +114,23 @@ sub default : Private {
 
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
-    
+
     # avoid broken binary files
-    my $io_file = IO::File->new( $c->stash->{att}->filename );
+    my $io_file = IO::File->new( $c->stash->{att}->filename )
+        or $c->detach('default');
     $io_file->binmode;
 
     $c->res->output( $io_file );
-    $c->res->headers->header( 'content-type', $c->stash->{att}->contenttype );
-    $c->res->headers->header(
+    $c->res->header( 'content-type', $c->stash->{att}->contenttype );
+    $c->res->header(
         "Content-Disposition" => "inline; filename=" . $c->stash->{att}->name );
+    $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
 }
 
 =head2 download
 
-force the attachment to be downloaded, through the use of 
-content-disposition.
+Force the attachment to be downloaded, through the use of
+content-disposition. No caching.
 
 =cut
 
@@ -132,8 +138,10 @@ sub download : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att = $c->stash->{att};
     $c->forward('view');
-    $c->res->headers->header( 'content-type', $att->contenttype );
-    $c->res->headers->header( "Content-Disposition" => "attachment; filename=" . $att->name );
+    $c->res->header( 'content-type', $att->contenttype );
+    $c->res->header( "Content-Disposition" => "attachment; filename=" . $att->name );
+    $c->res->header( 'Cache-Control', 'no-cache' );
+
 }
 
 =head2 thumb
@@ -150,14 +158,20 @@ sub thumb : Chained('attachment') Args(0) {
         return $c->res->body($c->loc('Can only make thumbnails of photos'));
     }
     $photo->make_thumb() unless -f $att->thumb_filename;
-    $c->res->output( IO::File->new( $att->thumb_filename ) );
-    $c->res->headers->header( 'content-type', $att->contenttype );
-    $c->res->headers->header( "Content-Disposition" => "inline; filename=" . $att->name );
+    my $io_file = IO::File->new( $att->thumb_filename )
+        or detach('default');
+    $io_file->binmode;
+
+    $c->res->output( $io_file );
+    $c->res->header( 'content-type', $att->contenttype );
+    $c->res->header( "Content-Disposition" => "inline; filename=" . $att->name );
+    $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
+
 }
 
 =head2  inline (private);
 
-show inline attachment
+Show 800x600 inline versions of photo attachments.
 
 =cut
 
@@ -169,17 +183,22 @@ sub inline : Chained('attachment') Args(0) {
         return $c->res->body($c->loc('Can only make inline version of photos'));
     }
     $photo->make_inline unless -f $att->inline_filename;
-    $c->res->output( IO::File->new( $att->inline_filename ) );
-    $c->detach('default') if $@ =~ m/^Could not open/;
-    $c->res->headers->header( 'content-type', $c->stash->{att}->contenttype );
-    $c->res->headers->header(
+    my $io_file = IO::File->new( $att->inline_filename )
+        or detach('default');
+    $io_file->binmode;
+
+    $c->res->output( $io_file );
+    $c->res->header( 'content-type', $c->stash->{att}->contenttype );
+    $c->res->header(
         "Content-Disposition" => "inline; filename=" . $c->stash->{att}->name );
+    $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
+
 }
 
 =head2 delete
 
-delete the attachment from this node. Will leave the file on the 
-file system.
+Delete the attachment from this node. Will leave the original file on the
+file system but delete its thumbnail and inline versions.
 
 =cut
 
@@ -215,8 +234,8 @@ Marcus Ramberg C<marcus@nordaaker.com>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.  
+This library is free software. You can redistribute it and/or modify
+it under the same terms as perl itself.
 
 =cut
 

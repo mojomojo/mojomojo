@@ -270,7 +270,7 @@ sub path {
         return '/' if ( $self->depth == 0 );
         $self->result_source->resultset->set_paths($self);
 
-        #	croak 'path is not set on the page object:'.$self->name;
+        # croak 'path is not set on the page object:'.$self->name;
     }
     return $self->{path};
 }

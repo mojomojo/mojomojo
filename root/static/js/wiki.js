@@ -148,7 +148,7 @@ $( function() {
     $('#body').keyup(function() { fetch_preview.only_every(1000);});
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
     $('#add_tag').click(function(){$('#addtag').show();$('#showtag').hide();$('#taginput')[0].focus();return false;})
-    $('#searchField').click(function() { this.value == 'Search' ? this.value = '' : true })
+    $('#searchField').click(function() { this.value != '' ? this.value = '' : true })
     $('.toggleChanges').click(function(){ toggleChanges($(this).attr('href'));return false;})
     $('#addtag_form').ajaxForm({
         target:'#tags',
@@ -408,6 +408,8 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
         }
         noOverwrite=true;
     }
+    // redraw preview window
+    fetch_preview();
     // reposition cursor if possible
     if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
     return false;

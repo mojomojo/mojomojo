@@ -34,6 +34,8 @@
     <dd>[% page.has_photos || 0 %]</dd>
 </dl>
 
+[% page.content.abstract %]
+
 <h3>[% loc('x revisions',page.versions.size)%]</h3>
 
 <ol>

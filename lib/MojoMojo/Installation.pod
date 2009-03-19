@@ -8,7 +8,7 @@ Install MojoMojo's prerequisites. See L<http://mojomojo.org/documentation/instal
 
 Install MojoMojo either using the cpan shell like this:
 
-    cpan MojoMojo 
+    cpan MojoMojo
 
 or by downloading the tarball from L<http://search.cpan.org/dist/MojoMojo> and
 running perl Makefile.PL on it manually.
@@ -17,21 +17,21 @@ running perl Makefile.PL on it manually.
 
 C<mojomojo.conf> is the main configuration file and is in Config::General format.
 
-First make sure your config file has a valid DSN for your database (You can use 
-SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the 
+First make sure your config file has a valid DSN for your database (You can use
+SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the
 C<connect_info> array in the C<Model::DBIC> block.
 
 For instance, for MySQL:
 
     connect_info dbi:mysql:database=mojo_database;host=localhost
-	connect_info mojo_user
-	connect_info mojo_password
+    connect_info mojo_user
+    connect_info mojo_password
 
 or for SQLite:
 
     connect_info dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
-	connect_info db_user
-	connect_info db_password
+    connect_info db_user
+    connect_info db_password
 
 or for PostgreSQL:
 
@@ -63,13 +63,13 @@ C<nginx> and C<lighttpd> are way easier to setup than Apache, and faster. Unless
 you need some specific features of Apache, nginx is a better choice.
 
 See L<http://mojomojo.org/documentation/deployment> for how to setup MojoMojo
-with nginx.
+with various web servers.
 
 =item Set up Apache using either mod_perl or FastCGI.
 
 See
 http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
-for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache> 
+for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache>
 for info on setting up Catalyst apps in Apache.
 
 =back
@@ -81,7 +81,7 @@ line to the main config block:
 
 =head2 Step 4
 
-There is no step four. Have fun exploring MojoMojo. The default login/pass is
-admin/admin.
+Login to your MojoMojo and change the admin password:
+    login/pass is admin/admin
 
 For troubleshooting, see L<http://mojomojo.org/troubleshooting>.

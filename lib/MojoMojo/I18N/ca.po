@@ -33,7 +33,7 @@ msgstr "*cursiva* or _cursiva_"
 
 #: root/base/edithelp.tt:154
 msgid "3 or more dashes or asterisks"
-msgstr ""
+msgstr "3 o més guions o asterics"
 
 #: root/base/toolbar.tt:54 root/base/toolbar.tt:8
 msgid "<xml> and such.\\nor pure text."
@@ -44,7 +44,7 @@ msgid "A message from our sponsors..."
 msgstr "Un missatge del nostre patrocinador"
 
 #: root/base/header.tt:21 root/base/header.tt:23 root/base/page/atom.tt:3 root/base/page/atom.tt:6
-msgid "A poorly configured MojoMojo Installation"
+msgid "Una instal·lació de MojoMojo mal configurat"
 msgstr ""
 
 #: root/base/page/recent.tt:41
@@ -96,35 +96,35 @@ msgstr "All pages in %1 listed alphabetically"
 #. (activetag)
 #: root/base/tag/list.tt:21
 msgid "All pages tagged with x listed alphabetically"
-msgstr "All pages tagged with %1 listed alphabetically"
+msgstr "Totes les pàgines etiquetates amb %1 per ordre alfabètic"
 
 #: root/base/tag/cloud.tt:9
 msgid "All tags"
-msgstr "Todes les etiquetes"
+msgstr "Totes les etiquetes"
 
 #: root/base/navbar.tt:40 root/base/navbar.tt:45
 msgid "All tags in this path"
-msgstr ""
+msgstr "Totes les etiquetes d'aquest camí."
 
 #: root/base/navbar.tt:43
 msgid "All tags on photos"
-msgstr ""
+msgstr "Totes les etiquetes sobre els fotos"
 
 #: root/base/edithelp.tt:26
 msgid "Allow comments on this page."
-msgstr ""
+msgstr "Permetre comentaris a aquesta pàgina"
 
 #: root/base/navbar.tt:32 root/base/navbar.tt:34
 msgid "Alphabetically sorted list of pages"
-msgstr ""
+msgstr "Llista de pàgines per ordre alfabètic"
 
 #: root/base/toolbar.tt:2
 msgid "Also try h2,h3 and so on"
-msgstr ""
+msgstr "També intenti h2, h3, i més"
 
 #: lib/MojoMojo/Controller/User.pm:261
 msgid "An error occourred. Sorry."
-msgstr ""
+msgstr "Disculpi, un error ha passat"
 
 #: root/base/edithelp.tt:131
 msgid "An h2 tag in a blockquote"
@@ -140,23 +140,23 @@ msgstr ""
 
 #: root/base/edithelp.tt:31
 msgid "And others."
-msgstr ""
+msgstr "I uns altres"
 
 #: lib/MojoMojo/Schema.pm:54
 msgid "Anonymous Coward"
-msgstr ""
+msgstr "Usuari anònim i covard"
 
 #: root/forms/admin/settings.yml:20
 msgid "Anonymous User (blank to disable)"
-msgstr ""
+msgstr "Usuari anònim (en blanc per desactivar)"
 
 #: root/base/gallery/photo_info.tt:8
 msgid "Aperture"
-msgstr ""
+msgstr "Obertura"
 
 #: lib/MojoMojo/Controller/Attachment.pm:107
 msgid "Attachment not found."
-msgstr ""
+msgstr "No s'ha trobat el fitxer adjunt"
 
 #: root/base/page/editbar.tt:13 root/base/page/editbar.tt:18 root/base/page/editbar.tt:6 root/base/page/info.tt:30
 msgid "Attachments"
@@ -184,7 +184,7 @@ msgstr ""
 
 #: root/forms/user/editprofile.yml:15
 msgid "Birth Date"
-msgstr "Dia del Naixement"
+msgstr "Data del Naixement"
 
 #: root/base/toolbar.tt:13
 msgid "Block quote"
@@ -224,11 +224,11 @@ msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:114
 msgid "Cannot find that user."
-msgstr ""
+msgstr "No pot trobar aquest usuari."
 
 #: lib/MojoMojo/Controller/Admin.pm:67
 msgid "Cant find admin user: "
-msgstr "No pot trobar usuari admin"
+msgstr "No pot trobar usuari admin: "
 
 #: root/base/toolbar.tt:19
 msgid "Centered paragraph"
@@ -256,7 +256,7 @@ msgstr "Nens"
 
 #: root/base/page/attachments.tt:14
 msgid "Choose attachments"
-msgstr ""
+msgstr "Elegiu els arxius adjunts"
 
 #: root/base/edithelp.tt:121
 msgid "Circle"
@@ -264,7 +264,7 @@ msgstr "Cercle"
 
 #: root/base/gallery/photo.tt:32
 msgid "Click for original version"
-msgstr ""
+msgstr "Fes clic aquí per la versió original"
 
 #: root/base/page/suggest.tt:21
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
@@ -272,7 +272,7 @@ msgstr ""
 
 #: root/base/toolbar.tt:11
 msgid "Code"
-msgstr ""
+msgstr "Codi"
 
 #: root/base/edithelp.tt:137
 msgid "Code Spans"
@@ -280,15 +280,15 @@ msgstr ""
 
 #: root/base/comment.tt:5
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: root/forms/comment/comment.yml:12
 msgid "Comment body"
-msgstr ""
+msgstr "Cos de comentari"
 
 #: root/base/comment.tt:5
 msgid "Comments"
-msgstr ""
+msgstr "Comentaris"
 
 #: root/base/page/info.tt:15
 msgid "Content size"
@@ -325,7 +325,7 @@ msgstr "Creant"
 
 #: root/base/page/bottomnav.tt:38
 msgid "Current Revision"
-msgstr ""
+msgstr "Repàs actual"
 
 #: root/forms/user/password.yml:12
 msgid "Current password"
@@ -341,11 +341,11 @@ msgstr "Text Suprimit"
 
 #: root/base/page/info.tt:21
 msgid "Descendants"
-msgstr ""
+msgstr "Descendents"
 
 #: root/base/user/validate.tt:19
 msgid "Didn't receive an email?"
-msgstr ""
+msgstr "No has trobat un correu electrònic?"
 
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
@@ -353,7 +353,7 @@ msgstr ""
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:135
 msgid "END OF CONFLICT"
-msgstr ""
+msgstr "ACABAMENT DE CONFLICTE"
 
 #: root/base/admin/role.tt:23 root/base/page/editbar.tt:11 root/base/page/editbar.tt:17 root/base/page/permissions.tt:47
 msgid "Edit"
@@ -394,11 +394,11 @@ msgstr "Correu"
 
 #: root/base/user/validate.tt:4
 msgid "Email Validation"
-msgstr ""
+msgstr "Validació de correu electrònic"
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
-msgstr ""
+msgstr "T'he enviat la teva nova contrasenya"
 
 #: root/base/toolbar.tt:53 root/base/toolbar.tt:7
 msgid "Enum list"
@@ -434,11 +434,11 @@ msgstr ""
 
 #: root/base/feeds.tt:1 root/base/navbar.tt:52 root/base/navbar.tt:54
 msgid "Feeds"
-msgstr ""
+msgstr "Fonts"
 
 #: root/base/user/validate.tt:22
 msgid "Fill in the email address you want to use here"
-msgstr ""
+msgstr "Indica el correu electrònic que volgui utilitza aquí"
 
 #: root/base/edithelp.tt:36
 msgid "Format content until next =pod as plain old documentation"
@@ -498,19 +498,19 @@ msgstr "Que vagi bé"
 
 #: root/base/edithelp.tt:71 root/base/edithelp.tt:72 root/base/edithelp.tt:75 root/base/edithelp.tt:76
 msgid "Header 1"
-msgstr ""
+msgstr "Encapçalament 1"
 
 #: root/base/edithelp.tt:79 root/base/edithelp.tt:80 root/base/edithelp.tt:83 root/base/edithelp.tt:84
 msgid "Header 2"
-msgstr ""
+msgstr "Encapçalament 2"
 
 #: root/base/edithelp.tt:87 root/base/edithelp.tt:88
 msgid "Header 6"
-msgstr ""
+msgstr "Encapçalament 6"
 
 #: root/base/edithelp.tt:69
 msgid "Headers"
-msgstr ""
+msgstr "Encapçalaments"
 
 #: root/base/feeds.tt:7
 msgid "Headlines"
@@ -519,7 +519,7 @@ msgstr "Titulars"
 #. (page.name_orig)
 #: root/base/page/rss.tt:6
 msgid "Headlines for x"
-msgstr "Headlines for %1"
+msgstr "La portada per %1"
 
 #: root/base/mail/reset_password.tt:1
 msgid "Hi there."

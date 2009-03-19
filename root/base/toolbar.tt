@@ -1,73 +1,87 @@
+<input type="image" onclick="return insertTags('body','\n\n<pre lang=&quot;Perl&quot;>\n','\n</pre>\n\n','#!/usr/bin/perl\nuse strict;\nprint &quot;Hello\\n&quot;;');"
+  src="[%c.uri_for_static('toolbar/formatter_syntax.png')%]" title="[% loc('Syntax Highlight') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=irc\n','\n=irc\n\n','12:00 <nick> Hello #mojomojo!');"
+  src="[%c.uri_for_static('toolbar/formatter_irc.png')%]" title="[% loc('IRC formatter') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=pod\n\n','\n\n=pod\n\n','[% loc('=head1 Header') %]');"
+  src="[%c.uri_for_static('toolbar/formatter_pod.png')%]" title="[% loc('POD formatter') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=comments\n\n','','');"
+  src="[%c.uri_for_static('toolbar/formatter_comments.png')%]" title="[% loc('comments') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=http://','','');"
+  src="[%c.uri_for_static('toolbar/formatter_include.png')%]" title="[% loc('include') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=redirect ','','/new/location');"
+  src="[%c.uri_for_static('toolbar/formatter_redirect.png')%]" title="[% loc('redirect') %]"/>
+<br />
+
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
 <input type="image" onclick="return insertTags('body','\n\nh1. ','\n\n','[% loc('Also try h2,h3 and so on') %]');"
- src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
- <input type="image" onclick="return insertTags('body','\n\n* ','\n\n','[% loc('List item 1') %]');"
- src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
- <input type="image" onclick="return insertTags('body','\n\n# ','\n\n','[% loc('Numbered list item') %]');"
- src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
- <input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
- src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>
- <input type="image" onclick="return insertTags('body','@','@','[% loc('code') %]');"
- src="[%c.uri_for_static('toolbar/code.png')%]" title="[% loc('Code') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','bq. ','','[% loc('quote') %]');"
- src="[%c.uri_for_static('toolbar/quote.png')%]" title="[% loc('Block quote') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','\n\np<. ','\n\n','[% loc('left justified paragraph') %].');"
- src="[%c.uri_for_static('toolbar/left.png')%]" title="[% loc('Left-justified paragraph') %]"/>
- <input type="image" onclick="return insertTags('body','\n\np>. ','\n\n','[% loc('right justified paragraph') %].');"
- src="[%c.uri_for_static('toolbar/right.png')%]" title="[% loc('Right-justified paragraph') %]"/>
- <input type="image" onclick="return insertTags('body','\n\np=. ','\n\n','[% loc('centered paragraph') %].');"
- src="[%c.uri_for_static('toolbar/center.png')%]" title="[% loc('Centered paragraph') %]"/>
- <input type="image" onclick="return insertTags('body','\n\np<>. ','\n\n','[% loc('justified paragraph') %].');"
- src="[%c.uri_for_static('toolbar/justify.png')%]" title="[% loc('Justified paragraph') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','*','*','[% loc('bold') %]');"
- src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
- <input type="image" onclick="return insertTags('body','_','_','[% loc('italic') %]');"
- src="[%c.uri_for_static('toolbar/italic.png')%]" title="[% loc('Italic') %]"/>
- <input type="image" onclick="return insertTags('body','-','-','[% loc('deleted') %]');"
- src="[%c.uri_for_static('toolbar/strikethrough.png')%]" title="[% loc('Deleted Text') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','++','++','[% loc('bigger') %]');"
- src="[%c.uri_for_static('toolbar/big.png')%]" title="[% loc('Bigger') %]"/>
- <input type="image" onclick="return insertTags('body','--','--','[% loc('small') %]');"
- src="[%c.uri_for_static('toolbar/small.png')%]" title="[% loc('Smaller') %]"/>
- <input type="image" onclick="return insertTags('body','^','^','[% loc('superscript') %]');"
- src="[%c.uri_for_static('toolbar/super.png')%]" title="[% loc('Superscript') %]"/>
- <input type="image" onclick="return insertTags('body','[~','~]','[% loc('subscript') %]');"
- src="[%c.uri_for_static('toolbar/sub.png')%]" title="[% loc('Subscript') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','[[',']]','/MojoMojo|Interwiki Link');"
- src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
- <input type="image" onclick="return insertTags('body','&quot;','&quot;:/','link(hyper)');"
- src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
- <p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
+  src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n* ','\n\n','[% loc('List item 1') %]');"
+  src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n# ','\n\n','[% loc('Numbered list item') %]');"
+  src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
+<input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
+  src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>
+<input type="image" onclick="return insertTags('body','@','@','[% loc('code') %]');"
+  src="[%c.uri_for_static('toolbar/code.png')%]" title="[% loc('Code') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','bq. ','','[% loc('quote') %]');"
+  src="[%c.uri_for_static('toolbar/quote.png')%]" title="[% loc('Block quote') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','\n\np<. ','\n\n','[% loc('left justified paragraph') %].');"
+  src="[%c.uri_for_static('toolbar/left.png')%]" title="[% loc('Left-justified paragraph') %]"/>
+<input type="image" onclick="return insertTags('body','\n\np>. ','\n\n','[% loc('right justified paragraph') %].');"
+  src="[%c.uri_for_static('toolbar/right.png')%]" title="[% loc('Right-justified paragraph') %]"/>
+<input type="image" onclick="return insertTags('body','\n\np=. ','\n\n','[% loc('centered paragraph') %].');"
+  src="[%c.uri_for_static('toolbar/center.png')%]" title="[% loc('Centered paragraph') %]"/>
+<input type="image" onclick="return insertTags('body','\n\np<>. ','\n\n','[% loc('justified paragraph') %].');"
+  src="[%c.uri_for_static('toolbar/justify.png')%]" title="[% loc('Justified paragraph') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','*','*','[% loc('bold') %]');"
+  src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
+<input type="image" onclick="return insertTags('body','_','_','[% loc('italic') %]');"
+  src="[%c.uri_for_static('toolbar/italic.png')%]" title="[% loc('Italic') %]"/>
+<input type="image" onclick="return insertTags('body','-','-','[% loc('deleted') %]');"
+  src="[%c.uri_for_static('toolbar/strikethrough.png')%]" title="[% loc('Deleted Text') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','++','++','[% loc('bigger') %]');"
+  src="[%c.uri_for_static('toolbar/big.png')%]" title="[% loc('Bigger') %]"/>
+<input type="image" onclick="return insertTags('body','--','--','[% loc('small') %]');"
+  src="[%c.uri_for_static('toolbar/small.png')%]" title="[% loc('Smaller') %]"/>
+<input type="image" onclick="return insertTags('body','^','^','[% loc('superscript') %]');"
+  src="[%c.uri_for_static('toolbar/super.png')%]" title="[% loc('Superscript') %]"/>
+<input type="image" onclick="return insertTags('body','[~','~]','[% loc('subscript') %]');"
+  src="[%c.uri_for_static('toolbar/sub.png')%]" title="[% loc('Subscript') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','[[',']]','/MojoMojo|Interwiki Link');"
+  src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
+<input type="image" onclick="return insertTags('body','&quot;','&quot;:/','link(hyper)');"
+  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
+<p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <input type="image" onclick="return insertTags('body','\n\n# ',' #\n\n','[% loc('increase # for smaller headline') %]');"
- src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
- <input type="image" onclick="return insertTags('body','\n\n* ','\n\n','[% loc('List item 1') %]');"
- src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
- <input type="image" onclick="return insertTags('body','\n\n1 ','\n\n','[% loc('Numbered list item') %]');"
- src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
- <input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
- src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','**','**','[% loc('bold') %]');"
- src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
- <input type="image" onclick="return insertTags('body','_','_','[% loc('italic') %]');"
- src="[%c.uri_for_static('toolbar/italic.png')%]" title="[% loc('Italic') %]"/>
- <input type="image" onclick="return insertTags('body','-','-','[% loc('deleted') %]');"
- src="[%c.uri_for_static('toolbar/strikethrough.png')%]" title="[% loc('Deleted Text') %]"/>&nbsp;&nbsp;&nbsp;
- <input type="image" onclick="return insertTags('body','[[',']]','/MojoMojo|Interwiki Link');"
- src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
- <input type="image" onclick="return insertTags('body','[',']()','[% loc('url inside paranthesis') %]');"
- src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
- <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
- src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
- <p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
+  src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n* ','\n\n','[% loc('List item 1') %]');"
+  src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n1 ','\n\n','[% loc('Numbered list item') %]');"
+  src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
+<input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
+  src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','**','**','[% loc('bold') %]');"
+  src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
+<input type="image" onclick="return insertTags('body','_','_','[% loc('italic') %]');"
+  src="[%c.uri_for_static('toolbar/italic.png')%]" title="[% loc('Italic') %]"/>
+<input type="image" onclick="return insertTags('body','-','-','[% loc('deleted') %]');"
+  src="[%c.uri_for_static('toolbar/strikethrough.png')%]" title="[% loc('Deleted Text') %]"/>&nbsp;&nbsp;&nbsp;
+<input type="image" onclick="return insertTags('body','[[',']]','/MojoMojo|Interwiki Link');"
+  src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
+<input type="image" onclick="return insertTags('body','[',']()','[% loc('url inside paranthesis') %]');"
+  src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
+<input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
+  src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
+<p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
 [% END %]

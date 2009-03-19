@@ -1,23 +1,22 @@
- <div id="pageoptions">
+<div id="pageoptions">
   <ul>
-[% IF c.action.reverse == 'pageadmin/edit' %]
-   <li>[%loc('Preview')%]</li>
-   [% IF page.content_version ; %] 
+   [% IF c.action.reverse == 'pageadmin/edit' +%]
+    <li>[%loc('Preview')%]</li>
+     [% IF page.content_version ; +%]
     <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
-   [%END%]
-   <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
-   <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li> 
-[% ELSIF c.action.reverse == 'pageadmin/permissions' %]
-   <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
-   [% IF page.content_version ; -%]
-   <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
-   [%END -%]
-   <li>[%loc('Permissions')%]</li> 
-[% ELSE -%]
-   <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
-   <li>[%loc('Attachments')%]</li>
-   <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li> 
-   <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
-[% END -%]
+     [% END +%]
+    <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
+    <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
+   [% ELSIF c.action.reverse == 'pageadmin/permissions' +%]
+    <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
+   [% IF page.content_version ; +%]
+    <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
+   [% END +%]
+    <li>[%loc('Permissions')%]</li>
+   [% ELSE +%]
+    <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
+    <li>[%loc('Attachments')%]</li>
+    <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
+   [% END +%]
   </ul>
- </div>
+</div>

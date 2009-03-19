@@ -13,8 +13,8 @@
     [%- 
       role_perms = perms.$role;
       perms_list = [];
-      perms_list.push(loc('read'))  IF role_perms.view == loc('yes') ;
-      perms_list.push(loc('write')) IF role_perms.edit == loc('yes') ;
+      perms_list.push(loc('read'))  IF role_perms.view == 'yes';
+      perms_list.push(loc('write')) IF role_perms.edit == 'yes';
     -%]
     <br/>
     [% role -%] [% loc('can') %] [% perms_list.join(', ') || loc('not access page') -%]

@@ -3,12 +3,17 @@ package MojoMojo;
 use strict;
 use Path::Class 'file';
 
-use Catalyst qw/    ConfigLoader
+use Catalyst qw/
+    ConfigLoader
     Authentication
-    Cache               Email
-    Session		        Session::Store::File
-    Singleton           Session::State::Cookie
-    Static::Simple	    SubRequest
+    Cache
+    Email
+    Session
+    Session::Store::File
+    Singleton
+    Session::State::Cookie
+    Static::Simple
+    SubRequest
     Unicode
     I18N
     Setenv
@@ -25,7 +30,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999027';
+our $VERSION = '0.999028';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -40,8 +45,6 @@ MojoMojo->config->{cache}{backend} = {
 MojoMojo->setup();
 
 
-MojoMojo->config->{theme} ||= 'default';
-
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
@@ -50,9 +53,9 @@ MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_d
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 SYNOPSIS
-    
+
   # Set up database (be sure to edit mojomojo.conf first)
-  
+
   ./script/mojomojo_spawn_db.pl
 
   # Standalone mode
@@ -68,14 +71,14 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 =head1 DESCRIPTION
 
 Mojomojo is a sort of content managment system, borrowing many concepts from
-wikis and blogs. It allows you to maintain a full tree-structure of pages, 
+wikis and blogs. It allows you to maintain a full tree-structure of pages,
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy AJAX-
 based diff system. There are also a bunch of other features like bult-in
 fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
-To find out more about how you can use MojoMojo, please visit 
-http://mojomojo.org or read the installation instructions in 
+To find out more about how you can use MojoMojo, please visit
+http://mojomojo.org or read the installation instructions in
 L<MojoMojo::Installation> to try it out yourself.
 
 =cut
@@ -302,7 +305,7 @@ sub _expand_path_elements {
 
 sub get_permissions_data {
     my ( $c, $current_path, $paths_to_check, $role_ids ) = @_;
-    
+
     # default to roles for current user
     $role_ids ||= $c->user_role_ids( $c->user );
 
@@ -330,7 +333,11 @@ sub get_permissions_data {
     #                                                  },
     #                                         users => .....
     #                                     }
-    if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+    if ( $c->pref('cache_permission_data')    ne""
+         ? $c->pref('cache_permission_data')
+         : defined $c->config->{'permissions'}{'cache_permission_data'}
+           ? $c->config->{'permissions'}{'cache_permission_data'}
+           : 1) {
         $permdata = $c->cache->get('page_permission_data');
     }
 
@@ -345,7 +352,11 @@ sub get_permissions_data {
             ->search( undef, { order_by => 'length(path),role,apply_to_subpages' } );
 
         # if we are not caching, we don't return the whole enchilada.
-        if ( !$c->config->{'permissions'}{'cache_permission_data'} ) {
+        if ( ! ( $c->pref('cache_permission_data')    ne""
+               ? $c->pref('cache_permission_data')
+               : defined $c->config->{'permissions'}{'cache_permission_data'}
+                 ? $c->config->{'permissions'}{'cache_permission_data'}
+                 : 1) ) {
             ## this seems odd to me - but that's what the dbix::class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
@@ -380,7 +391,11 @@ sub get_permissions_data {
     }
 
     ## now we re-cache it - if we need to.  # !$c->cache('memory')->exists('page_permission_data')
-    if ( $c->config->{'permissions'}{'cache_permission_data'} ) {
+    if ( $c->pref('cache_permission_data')    ne""
+         ? $c->pref('cache_permission_data')
+         : defined $c->config->{'permissions'}{'cache_permission_data'}
+           ? $c->config->{'permissions'}{'cache_permission_data'}
+           : 1) {
         $c->cache->set( 'page_permission_data', $permdata );
     }
 
@@ -389,10 +404,10 @@ sub get_permissions_data {
 
 sub user_role_ids {
     my ( $c, $user ) = @_;
-    
+
     ## always use role_id 0 - which is default role and includes everyone.
     my @role_ids = (0);
-    
+
     if ( ref($user) ) {
         push @role_ids, map { $_->role->id } $user->role_members->all;
     }
@@ -402,12 +417,12 @@ sub user_role_ids {
 
 sub check_permissions {
     my ( $c, $path, $user ) = @_;
-    
+
     return {
-        attachment  => 1,    create      => 1, delete      => 1,    
+        attachment  => 1,    create      => 1, delete      => 1,
         edit        => 1,    view        => 1,
     } if ($user && $user->is_admin);
-    
+
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
@@ -420,45 +435,55 @@ sub check_permissions {
     my %rulescomparison = (
         'create' => {
             'allowed' => (
-                defined $c->config->{'permissions'}->{'create_allowed'}
-                ? $c->config->{'permissions'}->{'create_allowed'}
-                : 1
+                $c->pref('create_allowed') ne""
+                ? $c->pref('create_allowed')
+                : defined $c->config->{'permissions'}{'create_allowed'}
+                  ? $c->config->{'permissions'}{'create_allowed'}
+                  : 1
             ),
             'role' => '__default',
             'len'  => 0,
         },
         'delete' => {
             'allowed' => (
-                defined $c->config->{'permissions'}->{'delete_allowed'}
-                ? $c->config->{'permissions'}->{'delete_allowed'}
-                : 1
+                $c->pref('delete_allowed') ne""
+                ? $c->pref('delete_allowed')
+                : defined $c->config->{'permissions'}{'delete_allowed'}
+                  ? $c->config->{'permissions'}{'delete_allowed'}
+                  : 1
             ),
             'role' => '__default',
             'len'  => 0,
         },
         'edit' => {
             'allowed' => (
-                defined $c->config->{'permissions'}->{'edit_allowed'}
-                ? $c->config->{'permissions'}->{'edit_allowed'}
-                : 1
+                $c->pref('edit_allowed') ne""
+                ? $c->pref('edit_allowed')
+                : defined $c->config->{'permissions'}{'edit_allowed'}
+                  ? $c->config->{'permissions'}{'edit_allowed'}
+                  : 1
             ),
             'role' => '__default',
             'len'  => 0,
         },
         'view' => {
             'allowed' => (
-                defined $c->config->{'permissions'}->{'view_allowed'}
-                ? $c->config->{'permissions'}->{'view_allowed'}
-                : 1
+                $c->pref('view_allowed') ne""
+                ? $c->pref('view_allowed')
+                : defined $c->config->{'permissions'}{'view_allowed'}
+                  ? $c->config->{'permissions'}{'view_allowed'}
+                  : 1
             ),
             'role' => '__default',
             'len'  => 0,
         },
         'attachment' => {
             'allowed' => (
-                defined $c->config->{'permissions'}->{'attachment_allowed'}
-                ? $c->config->{'permissions'}->{'attachment_allowed'}
-                : 1
+                $c->pref('attachment_allowed') ne""
+                ? $c->pref('attachment_allowed')
+                : defined $c->config->{'permissions'}{'attachment_allowed'}
+                  ? $c->config->{'permissions'}{'attachment_allowed'}
+                  : 1
             ),
             'role' => '__default',
             'len'  => 0,
@@ -536,8 +561,8 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org. 
-Commercial support and customization for MojoMojo is also provided by Nordaaker 
+If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org.
+Commercial support and customization for MojoMojo is also provided by Nordaaker
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
 
 =head1 AUTHORS
@@ -557,4 +582,3 @@ A number of other contributors over the years.
 You may distribute this code under the same terms as Perl itself.
 
 =cut
-
