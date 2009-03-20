@@ -1,6 +1,0 @@
-			<hr class="hidden">
-			<div id="footer">
-		    [% PROCESS 'page/bottomnav.tt' %]
-            </div>
-		</div>
-	</body></html>

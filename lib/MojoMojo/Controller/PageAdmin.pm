@@ -119,7 +119,7 @@ sub edit : Global FormConfig {
             $page = $path_pages->[ @$path_pages - 1 ];
         }
 
-        $stash->{content}=$page->content;
+        $stash->{content} = $page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
 # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later

@@ -1,3 +1,0 @@
-
-
-"[%att.name%]":[%c.uri_for("attachment",att.id)%]

@@ -1,1 +1,0 @@
-[% PROCESS 'custom/sidebar_left.tt' %]

@@ -39,7 +39,6 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => undef },
     "precompiled",
     { data_type => "TEXT", is_nullable => 1, size => undef },
-    # Need to move that in PageOption.pm ?
     "title",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
     "keywords",

@@ -1,9 +1,0 @@
-[% PROCESS header.tt index_page=1 %]
-<h1>[%loc('photo tags')%]</h1>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
-<div id="content">
-[%cloud.html_and_css(50)%]
-</div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]

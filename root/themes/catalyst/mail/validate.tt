@@ -1,3 +1,0 @@
-[%loc('Hi. This is a mail to validate your email address, x. To confirm, please click the url below:', user.name)%]
-
-[% c.uri_for('/.validate', user.login, secret) %]

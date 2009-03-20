@@ -133,6 +133,7 @@ function ajaxSave() {
       [% captcha +%]
     </form>
   </div>
+<!-- between last two divs -->
 </div>
 
 [% END %]

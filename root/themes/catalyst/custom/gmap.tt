@@ -1,3 +1,0 @@
-[% IF page.content.location %]
-<div id="map"></div>
-[% END %]

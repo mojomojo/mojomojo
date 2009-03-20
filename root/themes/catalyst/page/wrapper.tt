@@ -1,8 +1,0 @@
-[% PROCESS header.tt  index_page=index_page%]
-[%
-  reverse = c.action.reverse;
-  PROCESS page/editbar.tt
-    IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions';
-%]
-[% content %]
-[% PROCESS footer.tt %]

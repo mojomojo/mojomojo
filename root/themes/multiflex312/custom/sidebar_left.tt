@@ -1,7 +1,0 @@
-              <div class="round-border-topright"></div>
-              <h1 class="first">Navigation</h1>
-
- <ul id="menuHome"><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] </a></li></ul>
-
- [% PROCESS 'custom/child_menu.tt' parent_page = path_pages.0 %]
-

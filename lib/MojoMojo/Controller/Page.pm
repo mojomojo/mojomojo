@@ -82,10 +82,10 @@ sub view : Global {
 
     # we should always have at least "/" in path pages. if we don't,
     # we must not have had these structures in the stash
-    my $user = $c->stash->{user};
-    if ( $c->stash->{user} && $user->is_admin ) {
-        return $c->forward('suggest') if $proto_pages && @$proto_pages;
-    }
+
+    return $c->forward('suggest')
+      if $proto_pages && @$proto_pages;
+
     my $page = $stash->{'page'};
 
     my $good_url;
@@ -102,9 +102,8 @@ sub view : Global {
         }
     }
 
-    return $c->forward('page_not_found')
-      if ( $page->page_version->status eq 'wait' );
 
+    my $user;
     if ( $c->pref('check_permission_on_view') ne""
          ? $c->pref('check_permission_on_view')
          : $c->config->{'permissions'}{'check_permission_on_view'} ) {
@@ -146,7 +145,6 @@ sub view : Global {
         $stash->{rev} = $content->version;
     }
     $stash->{content} = $content;
-    $c->res->status('404') if $page->content->notfound;
 
 }
 
@@ -447,17 +445,15 @@ Display meta information about the current page.
 
 sub info : Global {
     my ( $self, $c ) = @_;
-    my $user = $c->stash->{user};
-    if ( $c->stash->{user} && $user->is_admin ) {
-		$c->stash->{body_length} = length( $c->stash->{page}->content->body );
-        $c->stash->{template} = 'page/info.tt';
-    }
-    else {
-        return $c->forward('page_not_found');
-    }
-
-    $c->res->status(404);
+    $c->stash->{body_length} = length( $c->stash->{page}->content->body );
+    $c->stash->{template}    = 'page/info.tt';
 }
+
+=head2 do_sitemap (.do_sitemap)
+
+Create a sitemap.gz
+
+=cut
 
 sub do_sitemap : Global {
     my ( $self, $c ) = @_;

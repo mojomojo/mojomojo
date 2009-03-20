@@ -1,6 +1,0 @@
-var tinyMCEImageList = new Array(
-    [% FOR photo IN c.stash.page.attachments %]
-	["[% photo.id %]", "[% c.uri_for('attachment',photo.id)%]"],
-    [% END %]
-	["no other image", ""]
-);
