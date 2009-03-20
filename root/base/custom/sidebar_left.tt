@@ -1,33 +1,39 @@
 <div id="colleft">
-### Site sections
 
-* [[Advocacy]]
-* [[Features]]
-* [[Download]]
-* [[Documentation]]
-* [[reference_installations|Example installations]]
-* [[Troubleshooting]]
-* [[Development]]
+<h3>Site sections</h3>
 
-### External links
+<ul>
+<li><a class="existingWikiWord" href="http://mojomojo.org/advocacy">Advocacy</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/features">Features</a></li>
 
-* [Suggestions board](http://mojomojo.ideascale.com)
-* MojoMojo on
-  * [wikimatrix.org](http://www.wikimatrix.org/show/MojoMojo)
-  * [ohloh.net](http://www.ohloh.net/projects/mojomojo)
-  * [freshmeat.net](http://freshmeat.net/projects/mojomojo/)
-* [Slideshare.net presentation](http://www.slideshare.net/marcusramberg/mojomojo-talk-presentation)
+<li><a class="existingWikiWord" href="http://mojomojo.org/download">Download</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/documentation">Documentation</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/reference_installations">Example installations</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/troubleshooting">Troubleshooting</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/development">Development</a></li>
+</ul>
+<h3>External links</h3>
 
+<ul>
+<li><a href="http://mojomojo.ideascale.com">Suggestions board</a></li>
+
+<li>MojoMojo on
+<ul>
+<li><a href="http://www.wikimatrix.org/show/MojoMojo">wikimatrix.org</a></li>
+<li><a href="http://www.ohloh.net/projects/mojomojo">ohloh.net</a></li>
+<li><a href="http://freshmeat.net/projects/mojomojo/">freshmeat.net</a></li>
+</ul></li>
+<li><a href="http://www.slideshare.net/marcusramberg/mojomojo-talk-presentation">Slideshare.net presentation</a></li>
+</ul>
 <div class=photo>
 <!-- bogus div required to display the photo below -->
 </div>
 
 <div class=photo style="text-align: center">
-![MojoMojo](http://farm1.static.flickr.com/33/41549474_fb41a81720_t.jpg)
 
-##### [_The Elegant Wiki_](http://flickr.com/photos/marcusramberg)
+<img src="http://farm1.static.flickr.com/33/41549474_fb41a81720_t.jpg" alt="MojoMojo" /></p>
+
+<h5><a href="http://flickr.com/photos/marcusramberg"><em>The Elegant Wiki</em></a></h5>
+
 </div>
-
-
-
 </div>

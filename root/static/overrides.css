@@ -2,37 +2,4 @@ h1#pageName, .newWikiWord a, a.existingWikiWord, .newWikiWord a:hover, #TextileH
     color: #008B26;
 }
 
-.tree {
-  float: left;
-  margin-left:10px;
-  width:70%;
-}
-
-.two {
-  float: left;
-  margin-left:10px;
-  width:80%;
-}
-.one {
-  float: left;
-  width:100%;
-}
-#colleft {
-  float: left;
-  width: 12%;
-  border-right: 1px dotted #ccc;
-}
-#colleft ul{
-  padding-left: 1px ;
-}
-
-#colright {
-  float: left;
-  width: 12%;
-  border-left: 1px dotted #ccc;
-  padding-left:5px;
-}
-#colright ul{
-  padding-left: 1px ;
-}
 

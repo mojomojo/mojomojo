@@ -34,8 +34,8 @@ context object.
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
     eval {
-        $$content =~ s{\<p\>\=right\((.*)\)\s*\<\/p\>}
-                  {show_right($c,$c->stash->{page},$1)}me;
+        $$content =~ s{\<p\>\=right\<\/p\>}
+                  {show_right($c,$c->stash->{page})}me;
     };
 }
 
@@ -46,8 +46,7 @@ Draw GMAP.
 =cut
 
 sub show_right {
-    my ( $c, $page,$content ) = @_;
-    $c->stash->{nb_column} = $content;
+    my ( $c, $page ) = @_;
     return $c->view('TT')->render( $c, 'custom/default_right.tt' );
 
 }
