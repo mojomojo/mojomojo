@@ -83,9 +83,9 @@ sub edit : Global FormConfig {
       $c->check_permissions( $stash->{'path'},
         ( $c->user_exists ? $c->user->obj : undef ) );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
+    my $loc_permtocheck=$permtocheck eq 'create'?$c->loc('create'):$c->loc('edit');
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
-        my $loc_permtocheck=$c->loc($permtocheck);
         $stash->{message} =
           $c->loc( 'Permission Denied to x x', [ $loc_permtocheck, $name ] );
         $stash->{template} = 'message.tt';
