@@ -22,27 +22,14 @@ elements:
   - type: Text
     name: keywords
     label_loc: keywords
-  - type: Text
-    name: commentaires
-    label_loc: commentaires
   - type: Checkbox
     name: noindex
     label_loc: noindex
     default_empty_value: 0
     value: 1
   - type: Checkbox
-    name: menufils
-    label_loc: menufils
-    default_empty_value: 0
-    value: 1
-  - type: Checkbox
-    name: notfound
-    label_loc: notfound
-    default_empty_value: 0
-    value: 1
-  - type: Checkbox
-    name: rep
-    label_loc: rep
+    name: is_directory
+    label_loc: is_directory
     default_empty_value: 0
     value: 1
   - type: Text

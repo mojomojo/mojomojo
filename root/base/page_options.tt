@@ -6,5 +6,5 @@
             <label>[% loc("Keywords") %] :</label><br /><textarea style="width:500px;height:50px; id="keywords" name="keywords">[% page.content.keywords %]</textarea>
             <br/>
         <label >[% loc("NoIndex") %]</label><input type="checkbox" [% IF  page.content.noindex == 'on' %]checked="checked"[% END %] name="noindex" id="noindex" />
- <label>[% loc("Is Directory ?") %]</label><input type="checkbox" [% IF  page.content.is_directory == 1 %]checked="checked"[% END %] name="is_directory" id="is_directory" /><br/>
+ <label>[% loc("Is Directory ?") %]</label><input type="checkbox" [% IF  page.content.is_directory == 'on' %]checked="checked"[% END %] name="is_directory" id="is_directory" /><br/>
             <br/>

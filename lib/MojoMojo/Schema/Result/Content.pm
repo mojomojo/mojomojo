@@ -47,7 +47,6 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
     "noindex",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-    # end / managment
     "is_directory",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
     "short_title",

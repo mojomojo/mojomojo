@@ -26,13 +26,16 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
                 loc("A poorly configured MojoMojo Installation")
             %]
   </title>
-  [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
+  [% IF !index_page || page.content.noindex %]
+  <meta name="robots" content="noindex" />
+  [% END %]
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
   <style type="text/css">
-    [% my_theme_dir = (c.pref('theme') ? c.pref('theme') : 'default') %]    
+    [% my_theme_dir = (c.pref('theme') ? c.pref('theme') : 'default') %]
     [% theme_path = 'themes/' _ my_theme_dir _ '/theme.css' %]
     @import "[% c.uri_for_static('mojomojo.css') %]";
+    @import "[% c.uri_for_static('overrides.css') %]";
     @import "[% c.uri_for_static(theme_path) %]";
     @import "[% c.uri_for_static('pod.css') %]";
   </style>

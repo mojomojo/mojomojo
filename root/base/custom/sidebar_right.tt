@@ -1,7 +1,40 @@
 <div id="colright">
+<h3>Site sections</h3>
 
-<ul ><li><a href="[% base %]">[% c.pref("name") || "MojoMojo" %] </a></li></ul>
+<ul>
+<li><a class="existingWikiWord" href="http://mojomojo.org/advocacy">Advocacy</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/features">Features</a></li>
 
-[% PROCESS 'custom/child_menu.tt' parent_page = path_pages.0 %]
+<li><a class="existingWikiWord" href="http://mojomojo.org/download">Download</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/documentation">Documentation</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/reference_installations">Example installations</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/troubleshooting">Troubleshooting</a></li>
+<li><a class="existingWikiWord" href="http://mojomojo.org/development">Development</a></li>
+</ul>
+<h3>External links</h3>
+
+<ul>
+<li><a href="http://mojomojo.ideascale.com">Suggestions board</a></li>
+
+<li>MojoMojo on
+<ul>
+<li><a href="http://www.wikimatrix.org/show/MojoMojo">wikimatrix.org</a></li>
+<li><a href="http://www.ohloh.net/projects/mojomojo">ohloh.net</a></li>
+<li><a href="http://freshmeat.net/projects/mojomojo/">freshmeat.net</a></li>
+</ul></li>
+<li><a href="http://www.slideshare.net/marcusramberg/mojomojo-talk-presentation">Slideshare.net presentation</a></li>
+</ul>
+<div class=photo>
+<!-- bogus div required to display the photo below -->
+</div>
+
+<div class=photo style="text-align: center">
+
+<img src="http://farm1.static.flickr.com/33/41549474_fb41a81720_t.jpg" alt="MojoMojo" /></p>
+
+<h5><a href="http://flickr.com/photos/marcusramberg"><em>The Elegant Wiki</em></a></h5>
+
+</div>
+
 </div>
 <br style="clear:both" />
