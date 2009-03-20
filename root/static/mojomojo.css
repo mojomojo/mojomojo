@@ -911,7 +911,7 @@ div#bottomnav { clear:both; }
 #progressbar {
   display:none;
   height: 18px;
-  background-color: grey;
+  background-color: gray;
   margin: 10px 0;
 }
 #progressbar #progress {

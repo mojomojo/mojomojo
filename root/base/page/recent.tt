@@ -25,6 +25,7 @@
 
 [% first = 1 %]
 [% FOREACH page IN pages %]
+  [% IF c.check_permissions(page.path,c.user).view %]
     [% IF now != page.content.created.ymd; %]
         [% IF first; first = 0; ELSE %]
         </tbody></table>
@@ -58,6 +59,7 @@
             </td>
             <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
         </tr>
+  [% END %]
 [% END %]
 </table>
 [% END %]
