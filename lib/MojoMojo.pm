@@ -4,7 +4,6 @@ use strict;
 use Path::Class 'file';
 
 use Catalyst qw/
--Debug
     ConfigLoader
     Authentication
     Cache
