@@ -8,6 +8,7 @@
     <label>
       <span>[%loc('Active?')%]</span>
       <input type="checkbox" name="active"[% IF active %] checked="checked"[% END %] />
+
     </label>
   </fieldset>
 
@@ -17,7 +18,7 @@
     <label>
       <span>[%loc('Search for users:')%]</span>
       <input type="text" id="member_input" name="member_input" />
-      <input type="hidden" id="user_search_url" name="user_search_url" value="[% c.uri_for('/.jsrpc/usersearch') %]" />
+      <input type="hidden" id="user_search_url" name="user_search_url" value="[% c.uri_for('/' _ c.config.tool_separator _ 'jsrpc/usersearch') %]" />
     </label>
 
     [% has_members = members && members.size > 0 %]

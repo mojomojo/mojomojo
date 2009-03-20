@@ -8,7 +8,6 @@ use Text::Context;
 use HTML::Strip;
 use Data::Page;
 use Data::Dumper;
-use DateTime;
 use WWW::Google::SiteMap;
 
 =head1 NAME
@@ -75,7 +74,7 @@ sub view : Global {
 
     $c->forward('inline_tags');
     $c->stash->{render} = 'highlight'
-      if $c->req->referer && $c->req->referer =~ /.edit$/;
+      if $c->req->referer && $c->req->referer =~ /.edit/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};

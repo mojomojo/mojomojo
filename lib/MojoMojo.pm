@@ -3,7 +3,7 @@ package MojoMojo;
 use strict;
 use Path::Class 'file';
 
-use Catalyst qw/
+use Catalyst qw/-Debug
     ConfigLoader
     Authentication
     Cache

@@ -1,5 +1,5 @@
 ---
-action: 
+action:
 indicator: submit
 auto_fieldset: 1
 localize_class: MojoMojo::I18N
@@ -48,8 +48,5 @@ elements:
   - type: Text
     name: short_title
     label_loc: short_title
-  - type: Text
-    name: release_date
-    label_loc: release_date
   - type: Submit
     name: submit

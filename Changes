@@ -142,7 +142,7 @@
         - Fixed preview for unicode
         - Fixed styling issues with lists/strong/em
         - Redirect to edit for missing pages higher up in the path.
-        - Respect formatter pref in edithelp/toolbar.
+        - Respect formatter pref in edithelp/toolbar. 
         - Markdown formatter toolbar.
         - Recover password function
 

@@ -45,23 +45,15 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
     "description",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
-    #change by code status 301 302...
     "noindex",
-    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-    "notfound",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
     # end / managment
     "is_directory",
     { data_type => "VARCHAR", is_nullable => 1, size => 2 },
-    #
-    "show_nav",
-    { data_type => "VARCHAR", is_nullable => 1, size => 2 },
     "short_title",
     { data_type => "VARCHAR", is_nullable => 1, size => 50 },
-    "edit_comments",
-    { data_type => "VARCHAR", is_nullable => 1, size => 300 },
-
 );
+
 __PACKAGE__->utf8_columns(qw/abstract body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
@@ -218,7 +210,7 @@ sub merge_content {
     return join('',@merged);
 }
 
-=item max_version 
+=item max_version
 
 Return the highest numbered revision.
 
