@@ -422,6 +422,8 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
         }
         noOverwrite=true;
     }
+    // redraw preview window
+    fetch_preview();
     // reposition cursor if possible
     if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
     return false;

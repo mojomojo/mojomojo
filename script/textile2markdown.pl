@@ -1,9 +1,10 @@
 #!/usr/bin/perl -w
 # Attempt to automatically convert Textile to Markdown through HTML.
-# See the bug list at http://rt.cpan.org/Public/Dist/Display.html?Name=HTML-WikiConverter-Markdown
+# Author: Dan Dascalescu (dandv), http://dandascalescu.com
 use strict;
 
 use HTML::WikiConverter;
+use HTML::WikiConverter::Markdown 0.05;  # Version 0.05 fixed four bugs I reported. See http://rt.cpan.org/Public/Dist/Display.html?Status=Resolved&Name=HTML-WikiConverter-Markdown
 use Text::Textile;
 
 my $textile_engine = new Text::Textile;
@@ -12,12 +13,6 @@ my $wc_engine = new HTML::WikiConverter( dialect => 'Markdown' );
 if (not @ARGV) {
     die "USAGE: $0 <textile_files>
 For each Textile input file, will output a Markdown file with the same name and a .markdown extension
-
-WARNING: see http://rt.cpan.org/Public/Dist/Display.html?Name=HTML-WikiConverter-Markdown for bugs:
-
-* backticks and underscored in code sections are incorrectly/uselessly backslash-escaped
-* code blocks (bc.) are converted to multi-line `code\ncode` instead of 4-space indented code
-* angle brackets are needlessly HTML-escaped
 ";
 }
 

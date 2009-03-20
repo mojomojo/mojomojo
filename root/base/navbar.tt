@@ -1,33 +1,32 @@
 <div id="toplinks">
 
-  [% IF c.pref('disable_search') +%]
+  [% IF c.pref('disable_search') -%]
   <form action="http://www.google.com/search" method="get">
     <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
-    [% ELSE +%]
+    [% ELSE -%]
   <form action="[% c.uri_for('search') %]" method="get">
-    [% END +%]
+    [% END -%]
+
     <ul>
     [% IF (user) %]
       [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user'))) +%]
       <li class="navon">[%c.fixw(user.login)%]</li>
       [% ELSE %]
-        [% IF user.active %]
+        [% IF user.active%]
           [% IF (!rev OR rev==page.content_version) %]
             [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-      <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
+              <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
             [% END %]
           [% END +%]
-      <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
+        <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
         [% ELSE +%]
-      <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
+        <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
         [% END %]
       [% END %]
       <li><a href="[%base%]/[% c.config.tool_separator %]logout">[%loc('Log out')%]</a></li>
     [% ELSE %]
       <li><a href="[%c.uri_for('login')%]" title="[%loc('Get in there')%]" accesskey="L">[%loc('Log in')%]</a></li>
-      [% IF(c.pref('open_registration'))%]
-      <li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>
-      [% END %]
+      [%+ IF(c.pref('open_registration')) %]<li><a href="[%c.uri_for('register')%]">[%loc('Register')%]</a></li>[%END%]
     [% END %]
     [% IF template.name == 'page/list.tt' +%]
       <li class="navOn" title="[%loc('Alphabetically sorted list of pages')%]">[%loc('Sub pages')%]</li>
@@ -66,36 +65,36 @@
   </form>
 </div>
 
-<div id="pagenav">
+  <div id="pagenav">
   <ul>
 
-[% IF (c.req.action=="view") +%]
+  [%IF (c.req.action=="view")%]
     <li class="navOn">[%loc('Page')%]</li>
-[% ELSE +%]
+  [%ELSE%]
     <li><a title="[%loc('The Wikilicious page')%]" href="[%c.uri_for('view')%]">[%loc('Page')%]</a></li>
-[% END %]
-[% IF (page.has_photos) %]
-  [% IF (pictures)%]
-    <li class="navOn">[%loc('Gallery')%]</li>
-  [% ELSE %]
-    <li><a title="[%loc('Photo Album')%]" href="[%c.uri_for('gallery')%]">[%loc('gallery')%]</a></li>
-  [% END %]
-[% END %]
+  [%END%]
+  [%IF (page.has_photos) %]
+    [%IF (pictures )%]
+      <li class="navOn">[%loc('Gallery')%]</li>
+    [%ELSE%]
+      <li><a title="[%loc('Photo Album')%]" href="[%c.uri_for('gallery')%]">[%loc('gallery')%]</a></li>
+    [%END%]
+  [%END%]
 
-[% IF ( c.model('DBIC::Person').get_user(page.name) ) %]
+  [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
 
-  [% IF (c.req.action=="profile") +%]
-    <li class="navOn">[% loc('Profile') %]</li>
-  [% ELSE +%]
-    <li><a title="[%loc('User Profile')%]" href="[%c.uri_for('profile')%]">[%loc('Profile')%]</a></li>
+    [% IF (c.req.action=="profile") %]
+      <li class="navOn">[% loc('Profile') %]</li>
+    [% ELSE %]
+      <li><a title="[%loc('User Profile')%]" href="[%c.uri_for('profile')%]">[%loc('Profile')%]</a></li>
+    [% END %]
   [% END %]
-[% END %]
-[% IF c.user_exists %]
-  [% IF (c.req.action=="prefs") +%]
-    <li class="navOn">[%loc('Preferences')%]</li>
-  [% ELSE +%]
-    <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%].prefs">[%loc('Preferences')%]</a></li>
+  [% IF c.user_exists %]
+    [% IF (c.req.action=="prefs")%]
+      <li class="navOn">[%loc('Preferences')%]</li>
+    [% ELSE %]
+      <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%].prefs">[%loc('Preferences')%]</a></li>
+    [% END %]
   [% END %]
-[% END +%]
   </ul>
 </div>
