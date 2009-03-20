@@ -70,7 +70,7 @@ sub tags : Global {
     $c->stash->{tags} = [ $c->model("DBIC::Tag")->by_page( $c->stash->{page}->id ) ];
     my $cloud = HTML::TagCloud->new();
     foreach my $tag ( @{ $c->stash->{tags} } ) {
-        $cloud->add( $tag->tag, $c->req->base . $c->stash->{path} . '.list/' . $tag->tag,
+        $cloud->add( $tag->tag, $c->req->base . $c->stash->{path} . $c->config->{tool_separator} . 'list/' . $tag->tag,
             $tag->refcount );
     }
     $c->stash->{cloud}    = $cloud;

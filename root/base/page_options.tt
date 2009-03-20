@@ -1,10 +1,7 @@
-<h1>[% loc("Options Page") %]</h1>
-            <label>[% loc("Page Title") %] :</label><br /><textarea style="width:500px;height:50px; id="title" name="title">[% page.content.title %]</textarea><br/>
-
- <label >[% loc("Short title") %]</label><input type="text" name="short_title" id="short_title" value="[% page.content.short_title %]" /><br/>
-            <label>[% loc("Description") %]</label><br /><textarea style="width:500px;height:50px; id="description" name="description">[% page.content.description %]</textarea><br />
-            <label>[% loc("Keywords") %] :</label><br /><textarea style="width:500px;height:50px; id="keywords" name="keywords">[% page.content.keywords %]</textarea>
-            <br/>
-        <label >[% loc("NoIndex") %]</label><input type="checkbox" [% IF  page.content.noindex == 'on' %]checked="checked"[% END %] name="noindex" id="noindex" />
- <label>[% loc("Is Directory ?") %]</label><input type="checkbox" [% IF  page.content.is_directory == 'on' %]checked="checked"[% END %] name="is_directory" id="is_directory" /><br/>
-            <br/>
+<h3>[% loc("Options Page") %]</h3>
+            <label>[% loc("Page Title") %]:</label><input id="title" name="title" value="[% page.content.title %]" /><br/>
+            <label >[% loc("Short title") %]:</label><input type="text" name="short_title" id="short_title" value="[% page.content.short_title %]" /><br/>
+            <label>[% loc("Description") %]:</label><input id="description" name="description" value="[% page.content.description %]" /><br />
+            <label>[% loc("Keywords") %]:</label><input id="keywords" name="keywords" value="[% page.content.keywords %]" /><br/>
+            <label >[% loc("NoIndex") %]:</label><input type="checkbox" [% IF  page.content.noindex == 'on' %]checked="checked"[% END %] name="noindex" id="noindex" />
+            <label>[% loc("Is Directory ?") %]:</label><input type="checkbox" [% IF  page.content.is_directory == 'on' %]checked="checked"[% END %] name="is_directory" id="is_directory" /><br/>

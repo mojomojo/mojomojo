@@ -10,6 +10,18 @@
   src="[%c.uri_for_static('toolbar/formatter_include.png')%]" title="[% loc('include') %]"/>
 <input type="image" onclick="return insertTags('body','\n\n=redirect ','','/new/location');"
   src="[%c.uri_for_static('toolbar/formatter_redirect.png')%]" title="[% loc('redirect') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=left','','(nbcolumn)');"
+  src="[%c.uri_for_static('toolbar/formatter_left.png')%]" title="[% loc('left') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=right','','(nbcolumn)');"
+  src="[%c.uri_for_static('toolbar/formatter_right.png')%]" title="[% loc('right') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=gmap','','(location%9)');"
+  src="[%c.uri_for_static('toolbar/formatter_gmap.png')%]" title="[% loc('gmap') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=customtemplate','','(sidebar_right.tt)');"
+  src="[%c.uri_for_static('toolbar/formatter_custom_template.png')%]" title="[% loc('custom template') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=gallery ','','');"
+  src="[%c.uri_for_static('toolbar/formatter_gallery.png')%]" title="[% loc('gallery') %]"/>
+<input type="image" onclick="return insertTags('body','\n\n=slideshow ','','');"
+  src="[%c.uri_for_static('toolbar/formatter_slideshow.png')%]" title="[% loc('slideshow') %]"/>
 <br />
 
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]

@@ -612,7 +612,7 @@ msgstr "Centre d'intérêts"
 
 #: root/base/toolbar.tt:37 root/base/toolbar.tt:63
 msgid "Internal Link"
-msgstr ""
+msgstr "Lien Interne"
 
 #: lib/MojoMojo/Controller/User.pm:154
 msgid "Invalid password."
@@ -620,7 +620,7 @@ msgstr "Mot de passe invalide."
 
 #: root/base/toolbar.tt:25 root/base/toolbar.tt:59
 msgid "Italic"
-msgstr ""
+msgstr "Italique"
 
 #: root/base/edithelp.tt:135
 msgid "Item"
@@ -632,7 +632,7 @@ msgstr "Just like email quoting!"
 
 #: root/base/toolbar.tt:21
 msgid "Justified paragraph"
-msgstr ""
+msgstr "Paragraphe justifié"
 
 #: root/base/user/profile.tt:36
 msgid "Last changes"
@@ -648,7 +648,7 @@ msgstr "Laisser le deuxième champ vide si vous ne voulez pas de mot de passe"
 
 #: root/base/toolbar.tt:15
 msgid "Left-justified paragraph"
-msgstr ""
+msgstr "Paragraphe justifié à gauche"
 
 #: root/base/gallery/photo_info.tt:6
 msgid "Lens"
@@ -681,11 +681,11 @@ msgstr "Liens vers des pages inexistantes."
 #. (activetag)
 #: root/base/tag/list.tt:20
 msgid "List by x"
-msgstr ""
+msgstr "Liste par %1"
 
 #: root/base/toolbar.tt:4 root/base/toolbar.tt:50
 msgid "List item 1"
-msgstr ""
+msgstr "Element de liste 1"
 
 #: root/base/edithelp.tt:114
 msgid "Lists can be nested by indentation level"
@@ -705,15 +705,15 @@ msgstr "Identification"
 
 #: root/base/toolbar.tt:3 root/base/toolbar.tt:49
 msgid "Main heading"
-msgstr ""
+msgstr "Titre principal"
 
 #: root/base/page/rollback.tt:4
 msgid "Make current"
-msgstr ""
+msgstr "Remplacer par cette version"
 
 #: root/base/toolbar.tt:46 root/base/toolbar.tt:72
 msgid "Mark some text to apply the toolbar actions to that text"
-msgstr ""
+msgstr "Sélectionner du texte pour appliquer les fonctions de la barre d'outils a ce texte "
 
 #: root/base/edithelp.tt:45
 msgid "Markdown formatting tips"
@@ -749,7 +749,7 @@ msgstr "Nested backticks"
 
 #: root/base/user/register.tt:2
 msgid "New User Registration"
-msgstr ""
+msgstr "Enregistrement d'un nouvel utilisateur"
 
 #: root/forms/admin/settings.yml:23
 msgid "New User Registration open"
@@ -765,7 +765,7 @@ msgstr "Répéter nouveau mot de passe"
 
 #: root/base/page/search.tt:54 root/base/page/search_inline.tt:45
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: root/base/admin/role.tt:22
 msgid "No"
@@ -791,11 +791,11 @@ msgstr "Acune permissions pour éditer cette page"
 
 #: root/base/user/list.tt:13
 msgid "No recent changes"
-msgstr ""
+msgstr "Pas de changement récent "
 
 #: root/base/page/search.tt:24 root/base/page/search_inline.tt:15
 msgid "No results found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 #: root/base/admin/role.tt:29
 msgid "No roles created yet."
@@ -808,7 +808,7 @@ msgstr "Aucune révision correspondate pour "
 
 #: root/base/page/suggest.tt:13
 msgid "Non-Existent Pages"
-msgstr ""
+msgstr "Page Inexistante"
 
 #: root/base/page/permissions.tt:28
 msgid "None"
@@ -836,11 +836,11 @@ msgstr "Liste numérotée"
 
 #: root/base/toolbar.tt:52 root/base/toolbar.tt:6
 msgid "Numbered list item"
-msgstr ""
+msgstr "Liste numéroté"
 
 #: root/base/page/suggest.tt:3
 msgid "One or more pages in the requested path do not exist."
-msgstr ""
+msgstr "Une ou plusieurs pages dans la requête demandé n'existe(nt) pas"
 
 #: root/base/edithelp.tt:67
 msgid "Optional Title"
@@ -857,11 +857,11 @@ msgstr "Listes ordonnées"
 
 #: root/base/page/list.tt:48
 msgid "Orphaned Pages"
-msgstr ""
+msgstr "Pages Orphelines"
 
 #: root/base/page/suggest.tt:23
 msgid "Other Suggestions"
-msgstr ""
+msgstr "Autres Suggestions"
 
 #: root/base/page/list.tt:28
 msgid "Other pages that link to this page."
@@ -936,7 +936,7 @@ msgstr "Photos"
 
 #: root/base/toolbar.tt:43 root/base/toolbar.tt:69
 msgid "Picture"
-msgstr ""
+msgstr "Image"
 
 #: root/base/toolbar.tt:41 root/base/toolbar.tt:67
 msgid "Picture left"

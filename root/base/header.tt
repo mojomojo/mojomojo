@@ -40,6 +40,7 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
     @import "[% c.uri_for_static('pod.css') %]";
   </style>
   <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
+  <link href="[% c.uri_for_static('css/slimbox2.css')%]" type="text/css" rel="stylesheet" />
   <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />

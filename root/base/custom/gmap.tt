@@ -1,3 +1,62 @@
-[% IF page.content.location %]
 <div id="map"></div>
-[% END %]
+ <script src="http://maps.google.com/maps?hl=fr&file=api&v=2&key=[% c.config.google.apikey %]" type="text/javascript"></script>
+  <style type="text/css">
+    #map {
+        height: 170px;
+        width: 170px;
+        border: 0px solid #ccc;
+        margin: 0em 0 0 15px;
+        background:url(../../img/fond_gris_sans_trait.jpg) repeat-y;
+    }
+  </style>
+  <!-- Default loading code -->
+  <script type="text/javascript">
+    var map;
+    var geocoder;
+
+    function LoadMap() {
+        if ( GBrowserIsCompatible() ) {
+            map = new GMap2(document.getElementById("map"));
+              map.setMapType(G_SATELLITE_MAP);
+            geocoder = new GClientGeocoder();
+            geocoder.getLatLng(
+                '[% location %]',
+
+    function(point) {
+      if (!point) {
+        alert(" not found");
+      } else {
+        map.setCenter(point, [% zoom || 13%]);
+        var marker = new GMarker(point);
+        map.addOverlay(marker);
+      }
+    }
+  );
+            var mapTypeControl = new GSmallMapControl();
+            var topRight = new GControlPosition(G_ANCHOR_TOP_RIGHT, new GSize(10,40));
+            map.addControl(mapTypeControl, topRight);
+            map.addControl(new GMenuMapTypeControl(true,false));
+
+        }
+    }
+
+    function showAddress(address) {
+      if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert(address + " not found");
+            } else {
+              map.setCenter(point,  [% zoom || 13%]);
+              var marker = new GMarker(point);
+              map.addOverlay(marker);
+              marker.openInfoWindowHtml(address);
+            }
+          }
+        );
+      }
+    }
+
+  </script>
+

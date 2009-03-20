@@ -87,21 +87,6 @@ sub view : Global {
 
     my $page = $stash->{'page'};
 
-    my $good_url;
-    if ($c->config->{use_directory}) {
-        if ($page->has_child) {
-            $good_url=$c->stash->{page}->path.'/';
-        }
-        else {
-            $good_url=$c->stash->{page}->path;
-        }
-
-        if ( "/" . $c->stash->{path} ne $good_url ){
-                return $c->forward('page_not_found') ;
-        }
-    }
-
-
     my $user;
     if ( $c->pref('check_permission_on_view') ne""
          ? $c->pref('check_permission_on_view')
@@ -481,7 +466,6 @@ sub do_sitemap : Global {
             }
             $map->add( loc => $loc->as_string );
         }
-        if ( $entry->content->release_date->year != 1970 ) {
             if (   $entry->content->release_date->month != $month
                 || $entry->content->release_date->year != $year )
             {
@@ -492,7 +476,7 @@ sub do_sitemap : Global {
                 if (   $entry->content->release_date->month == $date->month
                     && $entry->content->release_date->year == $date->year )
                 {
-                    $loc = $c->uri_for('/news/');
+                    $loc = $c->uri_for('/recent');
                     $map->add( loc => $loc->as_string );
                 }
                 else {
@@ -504,13 +488,12 @@ sub do_sitemap : Global {
                         locale    => 'fr'
                     );
                     $loc =
-                      $c->uri_for( '/news/'
+                      $c->uri_for( '/recent'
                           . $c->clean_string( $test->month_name ) . '-'
                           . $year );
                     $map->add( loc => $loc->as_string );
                 }
             }
-        }
     }
 
     $map->write;
