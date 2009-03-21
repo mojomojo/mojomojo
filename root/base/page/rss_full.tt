@@ -8,6 +8,7 @@
     <language>[% lang %]</language>
     <ttl>40</ttl>
 [%FOREACH page IN pages %]
+  [% IF c.check_permissions(page.path,c.user).view %]
     <item>
       <title>[% c.expand_wikiword( page.name_orig ) %]</title>
       <description><![CDATA[[% page.content.formatted(c) %]]]></description>
@@ -16,6 +17,7 @@
       <link>[% c.uri_for(page.path) %]</link>
       <dc:creator>[% page.content.creator.login %]</dc:creator>
     </item>
+  [% END %]
 [%END%]
   </channel>
 </rss>
