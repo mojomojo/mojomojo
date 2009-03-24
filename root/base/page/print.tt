@@ -1,20 +1,22 @@
 [% PROCESS header.tt %]
-	<div id="content">
-	 <h1 id="pageName">
-	  <small>
-	   [% c.pref("name") || "MojoMojo" %]
-	  </small>
-	  <br/>[%c.expand_wikiword(page.path)%] [%IF c.req.params.rev %]
-	  ([% loc('Revision') %] #[%c.req.params.rev%])[%END%]
-	 </h1>
-	 <div id="revision">
-	  [% content.formatted(c) %]
-	 </div>
 
-	 <div class="byline">
-	  [% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]
-	 </div>
+  <div id="content">
+    <h1 id="pageName">
+      <small>
+       [% c.pref("name") || "MojoMojo" %]
+      </small>
+      <br/>[%c.expand_wikiword(page.path)%] [%IF c.req.params.rev %]
+      ([% loc('Revision') %] #[%c.req.params.rev%])[%END%]
+    </h1>
+    <div id="revision">
+      [% content.formatted(c) %]
     </div>
+
+    <div class="byline">
+      [% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]
+    </div>
+  </div>
+
 </div>
 
 </body>

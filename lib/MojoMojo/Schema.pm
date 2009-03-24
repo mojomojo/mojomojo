@@ -26,7 +26,7 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 =cut
 
 sub create_initial_data {
-    my ($schema, %args) = @_;
+    my ($schema, $config) = @_;
     print "Creating initial data\n";
 
     my $file = __PACKAGE__ . ".pm";
@@ -40,7 +40,7 @@ sub create_initial_data {
         Class  => 'MojoMojo',
         Path   => $path,
     );
-    my $lang = $args{language} || 'en';
+    my $lang = $config->{'default_lang'} || 'en';
     $lang =~ s/\..*$//;
     loc_lang($lang);
 
@@ -51,19 +51,20 @@ sub create_initial_data {
                 qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
             ],
             [
-                1, 0, 0, 'AnonymousCoward', 'Anonymous Coward',
+                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'),
                 '', '', '', 0, '', '', '', '', '', ''
             ],
-            [ 1, 0, 0, 'admin', 'Enoch Root', '', 'admin', '', 0, '', '', '', '', '', '' ],
+            [ 1, 0, 0, 'admin', loc('Enoch Root'), '', 'admin', '', 0, '', '', '', '', '', '' ],
         ]
     );
-    
+
     my @roles = $schema->populate(
         'Role',
         [
             [ qw/ name active / ],
-            [ 'Admins', 1 ],
-            [ 'Users',  1 ]
+            [ loc('Admins'), 1 ],
+            [ loc('Users'),  1 ],
+            [ loc('Anonymous'),  1 ]
         ]
     );
 
@@ -71,7 +72,8 @@ sub create_initial_data {
         'RoleMember',
         [
             [ qw/role person admin/ ],
-            [ $roles[0]->id, $people[1]->id, 1 ]
+            [ $roles[0]->id, $people[1]->id, 1 ],
+            [ $roles[2]->id, $people[0]->id, 0 ]
         ]
     );
 
@@ -83,17 +85,17 @@ sub create_initial_data {
             [ '/', $roles[0]->id, qw/yes yes yes yes yes yes yes/ ]
         ]
     );
-    
+
     my @prefs =
         $schema->populate( 'Preference',
-        [ [qw/ prefkey prefvalue /], [ 'name', 'MojoMojo' ], [ 'admins', 'admin' ], ] );
+        [ [qw/ prefkey prefvalue /], [ 'name', $config->{'name'} || "MojoMojo" ], [ 'admins', 'admin' ], [ 'theme', $config->{'theme'} || 'default' ] ] );
 
     my @pages = $schema->populate(
         'Page',
         [
             [qw/ version parent name name_orig depth lft rgt content_version /],
             [ undef, undef, '/',     '/',     0, 1, 5, undef ],
-            [ undef, 1,     'help',  'Help',  1, 2, 3, undef ],
+            [ undef, 1,     'help',  loc('Help'),  1, 2, 3, undef ],
             [ undef, 1,     'admin', 'Admin', 1, 4, 5, undef ],
         ]
     );
@@ -129,20 +131,14 @@ sub create_initial_data {
             ],
             [
                 1, 1, $people[1]->id, 0, loc('welcome message', "test"),
-                , 'released', 1, 1, '', '', '', ''
+                'released', 1, 1, '', '', '', ''
             ],
             [
-                2, 1, $people[1]->id, 0, 'h1. Help Index.
-
-h2. Editing Pages
-h2. Formatter Syntax.
-h2. Using Tags
-h2. Attachments & Photos', 'released', 1, 1, '', '', '', ''
+                2, 1, $people[1]->id, 0, loc('help message'),
+                'released', 1, 1, '', '', '', ''
             ],
             [
-                3, 1, $people[1]->id, 0, 'h1. Admin User.
-
-This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom.',
+                3, 1, $people[1]->id, 0, loc('admin home page'),
                 'released', 1, 1, '', '', ''
             ],
         ]
@@ -160,7 +156,7 @@ This is the default home node for the admin user. You can change this text by pr
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software . You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

@@ -7,10 +7,10 @@
   <table>
     <tr>
       <th>[% c.loc('Active') %]</th>
-	  <th>[% c.loc('login') %]</th>
-	  <th>[% c.loc('roles') %]</th>
-	  <th>[% loc('name') %]</th>
-	  <th>[% loc('email') %]</th>
+      <th>[% c.loc('login') %]</th>
+      <th>[% c.loc('roles') %]</th>
+      <th>[% loc('name') %]</th>
+      <th>[% loc('email') %]</th>
     </tr>
   [%WHILE (user=users.next) %]
   <tr>
@@ -18,12 +18,23 @@
     [% active=user.active || 0 %]
     <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
     <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
-    <td>[% user.roles.name %]</td>
+    <td>
+    [% FOR role=user.roles %]
+        [% role.name %]
+    [% END %]
+    </td>
     <td>[% user.name %]</td>
-    <td><a href="mailto:[% user.email %]">[% user.email || loc("no email address") %]</a></td>
+    <td>
+    [% IF user.email %]
+        <a href="mailto:[%user.email%]">[%user.email%]</a>
+    [% ELSE %]
+        [% loc("no email address") %]
+    [% END %]
+    </td>
   </tr>
   [%END%]
   </table>
+  <a href="[% c.uri_for('/.register') %]">[% loc('Add user') %]</a>
 </div>
 
 <div id="bottomnav">&nbsp;</div>

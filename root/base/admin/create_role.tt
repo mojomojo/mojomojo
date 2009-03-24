@@ -1,13 +1,13 @@
 [% PROCESS header.tt %]
 <div id="header">
- <h1><span id="pageName">[%c.pref('name')%]</span></h1>
+  <h1><span id="pageName">[%c.pref('name')%]</span></h1>
 </div>
 
 [% PROCESS admin/toplinks.tt selected = 'roles', back = 'admin/role' %]
 
 <div id="content">
-<h1>[%loc('Create Role')%]</h1>
-[% PROCESS admin/role_form.tt active = 1 %]
+  <h1>[%loc('Create Role')%]</h1>
+  [% PROCESS admin/role_form.tt active = 1 %]
 </div>
 
 <div id="bottomnav">&nbsp;</div>

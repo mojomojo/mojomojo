@@ -11,6 +11,7 @@
 <id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>
 <generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
 [%FOREACH page IN pages %]
+  [% IF c.check_permissions(page.path,c.user).view %]
 <entry>
 <title>[% page.name %]</title>
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
@@ -28,5 +29,6 @@
 <content type="text/html" mode="escaped" xml:lang="en" xml:base="[% base %]">
 <![CDATA[[% page.content.formatted(c) %] ]]> </content>
 </entry>
+  [% END %]
 [%END%]
 </feed>

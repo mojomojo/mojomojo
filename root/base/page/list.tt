@@ -3,7 +3,7 @@
 [% WRAPPER page/wrapper.tt title = title %]
 
 <div id="categories">
-    <strong>[%loc('Tags')%]</strong>: 
+    <strong>[%loc('Tags')%]</strong>:
     [% WHILE( tag = tags.next ) %]
         [% IF tag.tag == activetag %]
     <b>[% tag.tag %]</b>
@@ -17,7 +17,9 @@
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages %]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a></li>
+    [% IF c.check_permissions(page.path,c.user).view %]
+        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a> [% page.content.abstract %]</li>
+    [% END %]
 [% END %]
     </ul>
 </div>
@@ -40,14 +42,14 @@
 [% IF wanted.size %]
     <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></li>
+        <li><span class="newWikiWord">[% wanted.to_path %]<a title="[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></li>
 [% END %]
     </ul>
 [% END %]
-	    
+
     <h2>[% loc('Orphaned Pages') %]</h2>
     [% loc('Pages to which no other pages link.') %]
-  
+
 [% IF orphans.size %]
     <ul style="margin-bottom: 35px">
 [% FOR orphan = orphans.list %]
@@ -60,4 +62,3 @@
 [% END %]
 
 [% END %]
-

@@ -1,9 +1,18 @@
 #!/bin/sh
 
-#find lib root script -type f -not -path '*.svn*' \( -name '*.pm' -or -name '*.tt' -or -name '*.js' -or -name '*.yml' \) > filelist.tmp
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]
+then
+    echo "$0 [lang] - create/update .po file"
+    exit 0
+fi
 
-    for i in 'en' 'no' 'de' 'fr' 'ja' ; do
-    echo "lang: $i"
-	  perl -Ilib /usr/bin/xgettext.pl -D lib -D root -o lib/MojoMojo/I18N/$i.po
-done;
-
+if [ ! -z "$1" ]
+then
+    echo "lang: $1"
+    perl -Ilib `which xgettext.pl` -D lib -D root/forms -D root/base -o lib/MojoMojo/I18N/$1.po
+else
+    for i in `ls lib/MojoMojo/I18N` ; do
+        echo "lang: `echo $i|sed 's/.po//'`"
+        perl -Ilib `which xgettext.pl` -D lib -D root/forms -D root/base -o lib/MojoMojo/I18N/$i
+    done
+fi

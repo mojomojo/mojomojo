@@ -1,9 +1,9 @@
 [%PROCESS header.tt%]
- <div id="header"><h1>[%loc('A message from our sponsors...')%]</h1></div>
- <div id="content">
-  <div><img src="[%c.uri_for_static('shrinkedhead.jpg')%]" alt="[%loc('shrinked head')%]" />
-   <h1>[%message%].</h1>
-   <p> [%loc('Go directly to ')%]<a href="[%c.req.base%]/">[%loc('start')%]</a>, [%loc('do not pass prison, do not collect $ 200...')%]</p>
+  <div id="header"><h1>[%loc('A message from our sponsors...')%]</h1></div>
+  <div id="content">
+    <div><img src="[%c.uri_for_static('shrinkedhead.jpg')%]" alt="[%loc('shrinked head')%]" />
+      <h1>[%message%].</h1>
+      <p> [%loc('Go directly to ')%]<a href="[% c.req.base %]/">[% loc('start') %]</a> [% loc('or') %] <a href="[% c.req.base %]/.login">[% loc('login') %]</a>, [%loc('do not pass prison, do not collect $ 200...')%]</p>
+    </div>
   </div>
- </div>
 [%PROCESS footer.tt%]

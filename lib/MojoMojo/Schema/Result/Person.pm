@@ -11,7 +11,7 @@ use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch EncodedColumn PK::Auto Core HTML::FormFu/);
+    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core HTML::FormFu/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",
@@ -65,6 +65,7 @@ __PACKAGE__->has_many( "role_members",  "MojoMojo::Schema::Result::RoleMember", 
 __PACKAGE__->has_many( "page_versions", "MojoMojo::Schema::Result::PageVersion", { "foreign.creator" => "self.id" }, );
 __PACKAGE__->many_to_many( roles => 'role_members', 'role' );
 __PACKAGE__->has_many( "contents", "MojoMojo::Schema::Result::Content", { "foreign.creator" => "self.id" } );
+__PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
