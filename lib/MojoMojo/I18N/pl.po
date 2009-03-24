@@ -158,6 +158,10 @@ msgstr "Dodatkowe formatowanie Markdown"
 msgid "And others."
 msgstr "i inne."
 
+#: lib/MojoMojo/Schema.pm:67
+msgid "Anonymous"
+msgstr "Anonim"
+
 #: lib/MojoMojo/Schema.pm:54
 msgid "Anonymous Coward"
 msgstr "Gall Anonim"
@@ -330,6 +334,10 @@ msgstr "Komentarze"
 msgid "Content size"
 msgstr "Rozmiar treści"
 
+#: lib/MojoMojo/Formatter/Include.pm:65 lib/MojoMojo/Formatter/YouTube.pm:71
+msgid "Could not retrieve"
+msgstr "Nie mogę pobrać"
+
 #: lib/MojoMojo/Controller/User.pm:52 root/base/comment/login.tt:6
 msgid "Could not authenticate that login."
 msgstr "Nie mogę sprawdzić tego loginu."
@@ -385,7 +393,7 @@ msgstr "Tekst usunięty"
 
 #: root/base/page/info.tt:21
 msgid "Descendants"
-msgstr "Nadrzędnych"
+msgstr "Potomnych"
 
 #: root/base/user/validate.tt:19
 msgid "Didn't receive an email?"
@@ -593,7 +601,7 @@ msgstr "Nagłówki"
 msgid "Headlines for x"
 msgstr "Nagłówki dla %1"
 
-#: lib/MojoMojo/Schema.pm:96
+#: lib/MojoMojo/Schema.pm:98
 msgid "Help"
 msgstr "Pomoc"
 
@@ -982,7 +990,7 @@ msgstr "Informacje o stronie"
 
 #: root/forms/pageadmin/edit.yml:15
 msgid "Page abstract"
-msgstr ""
+msgstr "Streszczenie"
 
 #. (page.path)
 #: root/base/page/info.tt:9
@@ -1213,7 +1221,7 @@ msgid "Revision"
 msgstr "Wersja edytowana"
 
 #. (page.content.created.datetime)
-#: root/base/page/rss.tt:14
+#: root/base/page/rss.tt:15
 msgid "Revision from x"
 msgstr "Wersja z %1"
 
@@ -1474,7 +1482,7 @@ msgstr "To jest pierwsza wersja!"
 msgid "Time edited"
 msgstr "Data edycji"
 
-#: root/base/edithelp.tt:107 root/base/edithelp.tt:121
+#: root/base/edithelp.tt:107 root/base/edithelp.tt:121 root/base/edithelp.tt:213
 msgid "To get"
 msgstr "Aby otrzymać"
 
@@ -1605,7 +1613,7 @@ msgstr "Druga linia"
 msgid "With a second paragraph"
 msgstr "Drugi paragraf"
 
-#: root/base/edithelp.tt:112 root/base/edithelp.tt:126
+#: root/base/edithelp.tt:112 root/base/edithelp.tt:126 root/base/edithelp.tt:214
 msgid "Write"
 msgstr "Zapis"
 
@@ -1680,7 +1688,7 @@ msgstr "dodaj komentarz"
 msgid "add tag"
 msgstr "dodaj tag"
 
-#: lib/MojoMojo/Schema.pm:139
+#: lib/MojoMojo/Schema.pm:141
 msgid "admin home page"
 msgstr ""
 "h1. Użytkownik Admin.\n"
@@ -1693,7 +1701,7 @@ msgstr "zaawansowane"
 
 #: root/base/edithelp.tt:78
 msgid "alt text"
-msgstr "cały tekst"
+msgstr "tekst alternatywny"
 
 #: lib/MojoMojo/Schema.pm:54
 msgid "anonymouscoward"
@@ -1785,6 +1793,10 @@ msgstr "konfiguracja"
 msgid "confirmation message resent"
 msgstr "wysłano wiadomość potwierdzającą"
 
+#: lib/MojoMojo/Controller/PageAdmin.pm:87
+msgid "create"
+msgstr "utworzenia"
+
 #: root/forms/pageadmin/edit.yml:18
 msgid "creator"
 msgstr "edytor"
@@ -1797,6 +1809,10 @@ msgstr "usuń"
 msgid "deleted"
 msgstr "usunięto"
 
+#: root/base/edithelp.tt:192
+msgid "details"
+msgstr "szczegóły"
+
 #: root/base/message.tt:6
 msgid "do not pass prison, do not collect $ 200..."
 msgstr "Odpocznij chwilkę od komputera..."
@@ -1804,6 +1820,10 @@ msgstr "Odpocznij chwilkę od komputera..."
 #: root/base/attachments/list.tt:7
 msgid "download"
 msgstr "pobierz"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:87
+msgid "edit"
+msgstr "edycji"
 
 #: root/base/admin/user.tt:13
 msgid "email"
@@ -1829,7 +1849,7 @@ msgstr "Galeria"
 msgid "hello"
 msgstr "witaj"
 
-#: lib/MojoMojo/Schema.pm:135
+#: lib/MojoMojo/Schema.pm:137
 msgid "help message"
 msgstr ""
 "h1. Indeks pomocy.\n"
@@ -1874,6 +1894,18 @@ msgstr "widok wbudowany"
 msgid "insert link"
 msgstr "wstaw link"
 
+#: lib/MojoMojo/Formatter/YouTube.pm:64
+msgid "is not a link to youtube"
+msgstr "nie jest linkiem do youtube."
+
+#: lib/MojoMojo/Formatter/Include.pm:60 lib/MojoMojo/Formatter/YouTube.pm:63
+msgid "is not a valid url"
+msgstr "nie jest prawidłowym adresem"
+
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "is part of own site, cannot include"
+msgstr "jest częścią tej strony, nie mogę więc jej włączyć"
+
 #: root/base/toolbar.tt:119 root/base/toolbar.tt:151
 msgid "italic"
 msgstr "pochylenie"
@@ -1917,6 +1949,10 @@ msgstr "moje tagi"
 #: root/base/admin/user.tt:12
 msgid "name"
 msgstr "Nazwa"
+
+#: root/base/edithelp.tt:113 root/base/edithelp.tt:116 root/base/edithelp.tt:127 root/base/edithelp.tt:129 root/base/edithelp.tt:131
+msgid "newline"
+msgstr "nowa linia"
 
 #: root/base/gallery/photo.tt:40
 msgid "no description"
@@ -2031,6 +2067,10 @@ msgstr "indeks dolny"
 msgid "superscript"
 msgstr "indeks górny"
 
+#: root/base/edithelp.tt:219
+msgid "table of contents"
+msgstr "spis treści"
+
 #: root/base/tag/list.tt:9
 msgid "tags"
 msgstr "tagi"
@@ -2084,7 +2124,7 @@ msgid "view"
 msgstr "pokaż"
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:131
+#: lib/MojoMojo/Schema.pm:133
 msgid "welcome message"
 msgstr ""
 "h1. Witaj na MojoMojo!\n"

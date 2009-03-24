@@ -18,9 +18,7 @@ MojoMojo::Formatter::SyntaxHighlight - syntax highlighting for code blocks
 
 =head1 DESCRIPTION
 
-This formatter performs syntax highlighting on code blocks. Unfortunately
-this currently works only if you're using L<MojoMojo::Formatter::Textile>
-as main formatter.
+This formatter performs syntax highlighting on code blocks. 
 
 =head1 METHODS
 
@@ -35,7 +33,13 @@ those tags.
 
 =cut
 
-sub format_content_order { 99 }
+sub format_content_order { 
+  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown'){
+    14
+  } else {
+    99
+  }
+}
 
 =item format_content
 
@@ -55,12 +59,6 @@ languages.
 sub format_content {
     my ( $class, $content ) = @_;
     
-    # No syntax highlighting for anything else than Textile yet, SORRY
-    unless ($main_formatter eq 'MojoMojo::Formatter::Textile') {
-        $$content =~ s/<\s*pre\s+lang=".*?"\s*>/<pre>/g;
-        return $$content;
-    }
-
     $$content = decode_entities($$content);
 
     my @blocks  = ();

@@ -63,7 +63,8 @@ sub create_initial_data {
         [
             [ qw/ name active / ],
             [ loc('Admins'), 1 ],
-            [ loc('Users'),  1 ]
+            [ loc('Users'),  1 ],
+            [ loc('Anonymous'),  1 ]
         ]
     );
 
@@ -71,7 +72,8 @@ sub create_initial_data {
         'RoleMember',
         [
             [ qw/role person admin/ ],
-            [ $roles[0]->id, $people[1]->id, 1 ]
+            [ $roles[0]->id, $people[1]->id, 1 ],
+            [ $roles[2]->id, $people[0]->id, 0 ]
         ]
     );
 
