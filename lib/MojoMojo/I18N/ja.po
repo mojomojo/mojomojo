@@ -1046,7 +1046,7 @@ msgstr ""
 
 #: root/base/navbar.tt:29 root/forms/comment/comment.yml:17 root/forms/user/register.yml:49
 msgid "Register"
-msgstr ""
+msgstr "新規登録"
 
 #: root/base/user/login.tt:11
 msgid "Register new account"
@@ -1836,7 +1836,7 @@ msgstr "referenced by %1"
 
 #: root/base/comment/login.tt:4
 msgid "register"
-msgstr ""
+msgstr "新規登録"
 
 #: root/base/admin/role_form.tt:31
 msgid "remove"
