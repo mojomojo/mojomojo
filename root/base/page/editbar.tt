@@ -18,5 +18,8 @@
     <li>[%loc('Attachments')%]</li>
     <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
    [% END +%]
+<script type="text/javascript">
+    document.write('<li><a href="#" onclick="split_layout_vertical();">[% loc("Split Edit") %]</a></li>');
+</script>
   </ul>
 </div>
