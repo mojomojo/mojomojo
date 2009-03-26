@@ -34,7 +34,7 @@ context object.
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
     eval {
-        $$content =~ s{\<p\>\=slideshow\s*\<\/p\>}
+        $$content =~ s{\=slideshow\s*}
                   {show_slide($c,$c->stash->{page})}me;
     };
 }

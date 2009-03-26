@@ -34,7 +34,7 @@ context object.
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
     eval {
-        $$content =~ s{\<p\>\=gallery\s*\<\/p\>}
+        $$content =~ s{\=gallery\s*}
                   {show_gallery($c,$c->stash->{page})}me;
     };
 }

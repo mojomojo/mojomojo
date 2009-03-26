@@ -7,6 +7,7 @@
 	   '[%c.uri_for('attachment',attachment.id)%]',
        [% END %]
 [% END %]
+	   '[%c.uri_for('attachment',page.attachments.first.id)%]',
 		    ]});
 		})(jQuery);
 		</script>

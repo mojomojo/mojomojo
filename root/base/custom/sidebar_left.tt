@@ -1,6 +1,6 @@
 <div id="colleft">
-
-<h3>Site sections</h3>
+[% PROCESS 'custom/child_menu.tt' parent_page = '/' %]
+<h3>Example</h3>
 
 <ul>
 <li><a class="existingWikiWord" href="http://mojomojo.org/advocacy">Advocacy</a></li>
@@ -14,26 +14,4 @@
 </ul>
 <h3>External links</h3>
 
-<ul>
-<li><a href="http://mojomojo.ideascale.com">Suggestions board</a></li>
-
-<li>MojoMojo on
-<ul>
-<li><a href="http://www.wikimatrix.org/show/MojoMojo">wikimatrix.org</a></li>
-<li><a href="http://www.ohloh.net/projects/mojomojo">ohloh.net</a></li>
-<li><a href="http://freshmeat.net/projects/mojomojo/">freshmeat.net</a></li>
-</ul></li>
-<li><a href="http://www.slideshare.net/marcusramberg/mojomojo-talk-presentation">Slideshare.net presentation</a></li>
-</ul>
-<div class=photo>
-<!-- bogus div required to display the photo below -->
-</div>
-
-<div class=photo style="text-align: center">
-
-<img src="http://farm1.static.flickr.com/33/41549474_fb41a81720_t.jpg" alt="MojoMojo" /></p>
-
-<h5><a href="http://flickr.com/photos/marcusramberg"><em>The Elegant Wiki</em></a></h5>
-
-</div>
 </div>

@@ -1,6 +1,8 @@
 [% i=0;%]
-    [% IF page.has_child and page.id !=1%]
+    [% IF page.has_child %]
+        [% IF page.id != 1 %]
         <ul id="menuHome"><li><a href="[% base _ page.path %]/" title="[% FILTER upper %][% page.name_orig_format %][% END %]"><strong>[% FILTER upper %][% page.name_orig_format %][% END %]</strong></a></li></ul>
+        [% END %]
     <ul class="menuHome">
     [% FOR child_page = page.children %]
         [% IF child_page.menufils != 1 %]

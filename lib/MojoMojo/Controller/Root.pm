@@ -31,7 +31,10 @@ sub begin : Private {
         $c->stash->{page} = $path_pages->[ @$path_pages - 1 ];
         $c->stash->{user} = $c->user->obj() if $c->user_exists && $c->user;
         my $good_url;
-        if ($c->config->{use_directory} && !$c->req->path) {
+        if ($c->config->{use_directory}   ) {
+        unless ($c->req->path =~/edit/ && $c->req->path =~/\?/) {
+
+
             if ($c->stash->{page}->has_child) {
                 $good_url=$c->stash->{page}->path.'/';
             }
@@ -41,6 +44,7 @@ sub begin : Private {
             if ( "/" . $c->stash->{path} ne $good_url ){
                 return $c->forward('default') ;
             }
+        }
         }
     }
 }
