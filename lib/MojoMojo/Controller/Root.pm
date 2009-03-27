@@ -41,7 +41,7 @@ sub begin : Private {
             else {
                 $good_url=$c->stash->{page}->path;
             }
-            if ( "/" . $c->stash->{path} ne $good_url ){
+            if ( "/" . $c->stash->{path} ne $good_url && !$c->req->path =~/attachment/ && !$c->req->path =~/edit/){
                 return $c->forward('default') ;
             }
         }

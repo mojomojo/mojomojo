@@ -20,7 +20,7 @@
           [% END +%]
         <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
         [% ELSE +%]
-        <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
+        <li><a href="[%c.uri_for(user.link,c.config.tool_separator_'prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
         [% END %]
       [% END %]
       <li><a href="[%base%]/[% c.config.tool_separator %]logout">[%loc('Log out')%]</a></li>
@@ -93,7 +93,7 @@
     [% IF (c.req.action=="prefs")%]
       <li class="navOn">[%loc('Preferences')%]</li>
     [% ELSE %]
-      <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%].prefs">[%loc('Preferences')%]</a></li>
+      <li><a title="[%loc('User Settings')%]" href="[%c.uri_for(user.link)%][% c.config.tool_separator %]prefs">[%loc('Preferences')%]</a></li>
     [% END %]
   [% END %]
   </ul>
