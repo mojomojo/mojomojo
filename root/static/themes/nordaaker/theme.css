@@ -148,40 +148,33 @@ div#pageoptions a {
 }
 
 #content {
-  overflow: hidden;
+    overflow: hidden;
     background: #ffffff;
     padding: 13px;
     overflow: hidden;
 }
 
 #content strong,b {
-  font-weight: bold;
+    font-weight: bold;
 }
-
 #content em,i {
-  font-style: italic;
+    font-style: italic;
 }
 
 #content ul, #content ol {
     padding-left:1.5em;
 }
-
-#content ul li { 
+#content ul > li { 
     list-style: square;
 }
-
-#content ol li {
-  list-style: decimal;
+#content ol > li {
+    list-style: decimal;
 }
-
 #content li{
     margin-left: 1.5em;
     margin-bottom:5px;
 }
 
-#content li li {
-  font-size: 0.95em;
-}
 
 /* tables */
 
