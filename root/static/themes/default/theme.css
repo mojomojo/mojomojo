@@ -17,7 +17,7 @@ body {
 }
 
 #header {
-    
+
     height: auto;
     padding-bottom: 0.1em;
     margin: 0;
@@ -101,7 +101,7 @@ div#pagenav ul li {
     display: inline;
 }
 div#pagenav ul li a {
-    text-decoration: none;  
+    text-decoration: none;
 }
 div#pagenav ul li a:hover {
     text-decoration: underline;
@@ -130,7 +130,7 @@ div#pageoptions a {
 }
 
 #wantedPages {
-    float:left; 
+    float:left;
     width:55%;
 }
 .wantedBy { color:#999; }
@@ -170,7 +170,16 @@ div#pageoptions a {
 #content ul, #content ol {
     padding-left:1.5em;
 }
-#content ul > li { 
+/* For IE6, which doesn't support child selectors */
+#content ul li {
+    list-style: square;
+}
+/* this means that the last li in `ol li ul li` will end up with list-style: decimal instead of 'square' */
+#content ol li {
+    list-style: decimal;
+}
+/* The two direct child selectors below take care of that nesting problem, but only for Standards-Compliant Browsers */
+#content ul > li {
     list-style: square;
 }
 #content ol > li {
@@ -244,7 +253,7 @@ p {
     margin: 1.2em 0;
 }
 
-.hide { 
+.hide {
     display: none;
 }
 
