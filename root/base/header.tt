@@ -41,6 +41,9 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
 </head>
 
 <body id="page">
-
+[% IF c.session.maximize_width %]
+  <div id="container" style="max-width:99%;">
+[% ELSE %]
   <div id="container">
+[% END %]
     [% template.title %]
