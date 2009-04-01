@@ -1,10 +1,12 @@
 package MojoMojo::Formatter::DocBook;
 
+
+use strict;
+use warnings;
 use base qw/MojoMojo::Formatter/;
 
 use XML::LibXSLT;
 use XML::SAX::ParserFactory (); # loaded for simplicity;
-use HTML::Entities;
 use XML::LibXML::Reader;
 use MojoMojo::Formatter::DocBook::Colorize;
 
@@ -26,11 +28,11 @@ DocBook document.
 
 =item format_content_order
 
-Format order can be 1-99. The Pod formatter runs on 10
+Format order can be 1-99. The DocBook formatter runs on 10
 
 =cut
 
-sub format_content_order { 12 }
+sub format_content_order { 10 }
 
 =item format_content
 
@@ -68,13 +70,15 @@ sub format_content {
 
 =item to_dbk <dbk>
 
-takes DocBook documentation and renders it as HTML.
+takes DocBook documentation and renders it as XHTML.
 
 =cut
 
 sub to_dbk {
     my ( $class, $dbk ) = @_;
     my $result;
+
+    $dbk =~ s/&/_-_amp_-_;/g;
 
     $dbk =~ s/^\s//;
     # 1 - Mark lang 
@@ -132,6 +136,7 @@ sub to_dbk {
     my @colorized=$parsersax->parse_string($string);
 
     $string="@colorized";
+    $string =~ s/_-_amp_-_;/&/g;
 
 
     # 4 - filter

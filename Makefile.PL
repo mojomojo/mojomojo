@@ -68,6 +68,8 @@ requires(
     'URI'                                          => '1.35',
     'URI::Fetch'                                   => 0,
     'XML::Clean'                                   => 0,
+    'XML::LibXML'                                  => '1.66',
+    'XML::LibXSLT'                                 => '1.66',
     'YAML'                                         => '0.36',
 );
 

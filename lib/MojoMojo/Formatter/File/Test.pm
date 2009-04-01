@@ -31,15 +31,15 @@ sub can_format {
 
 =item to_xhtml <dbk>
 
-takes DocBook documentation and renders it as XHTML.
+takes Test text and renders it as XHTML.
 
 =cut
 
 sub to_xhtml {
     my ( $self, $text ) = @_;
     my $result;
-    
-    
+
+
     return "TESTTESTTESTTESTTEST";
 }
 
