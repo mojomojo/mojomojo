@@ -222,6 +222,9 @@ sub format_link {
     my $url = $base;
     $url =~ s/[\/]+$//;
 
+    # remove http://host/ from url
+    $url =~ s!^https?://[^/]+!!;
+
     # use the normalized path string returned by path_pages:
     my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($word);
     if ( defined $proto_pages && @$proto_pages ) {
