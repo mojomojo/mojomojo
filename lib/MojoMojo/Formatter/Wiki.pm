@@ -23,7 +23,7 @@ wikiword with a path, just like in a normal URL. For example:
 
 =item format_content_order
 
-Format order can be 1-99. The Wiki formatter runs on 30
+Format order can be 1-99. The Wiki formatter runs on 10
 
 =cut
 
