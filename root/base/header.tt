@@ -45,7 +45,10 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
   <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
 </head>
-<body id="page" >
-
+<body id="page">
+[% IF c.session.maximize_width %]
+  <div id="container" style="max-width:99%;">
+[% ELSE %]
   <div id="container">
+[% END %]
     [% template.title %]

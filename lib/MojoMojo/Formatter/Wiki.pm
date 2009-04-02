@@ -23,7 +23,7 @@ wikiword with a path, just like in a normal URL. For example:
 
 =item format_content_order
 
-Format order can be 1-99. The Wiki formatter runs on 30
+Format order can be 1-99. The Wiki formatter runs on 10
 
 =cut
 
@@ -221,6 +221,9 @@ sub format_link {
     # the page path will have a leading slash
     my $url = $base;
     $url =~ s/[\/]+$//;
+
+    # remove http://host/ from url
+    $url =~ s!^https?://[^/]+!!;
 
     # use the normalized path string returned by path_pages:
     my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($word);

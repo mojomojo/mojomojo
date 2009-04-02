@@ -37,7 +37,6 @@ requires(
     'DBD::SQLite'                                  => '1.08',
     'DBIx::Class'                                  => '0.08',
     'DBIx::Class::DateTime::Epoch'                 => 0,
-    'DBIx::Class::HTML::FormFu'                    => 0,
     'DBIx::Class::EncodedColumn'                   => 0,
     'Encode'                                       => '2.31',
     'File::Copy::Recursive'                        => 0,
@@ -69,6 +68,8 @@ requires(
     'URI::Fetch'                                   => 0,
     'XML::Clean'                                   => 0,
     'YAML'                                         => '0.36',
+    'Text::Textile'                                => 0,
+    'Text::SmartyPants'                            => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
