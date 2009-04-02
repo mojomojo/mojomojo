@@ -40,7 +40,7 @@
   font: bold 10pt Arial,Helvetica,sans-serif;
 }
 
-.formatter_pod .menubar A:link, .menubar A:visited {
+.formatter_pod .menubar A:link, .formatter_pod .menubar A:visited {
   color: white;
   text-decoration: none;
 }
@@ -50,7 +50,7 @@
   text-decoration: underline;
 }
 
-.formatter_pod A:link, A:visited {
+.formatter_pod A:link, .formatter_pod A:visited {
   background: transparent;
   color: #006699;
 }
@@ -86,7 +86,7 @@
   color: inherit;
 }
 
-.formatter_pod .s TD, .r TD {
+.formatter_pod .s TD, .formatter_pod .r TD {
   padding: 0.2ex 1ex;
   vertical-align: baseline;
 }
@@ -98,7 +98,7 @@
   text-align: left;
 }
 
-.formatter_pod TH A:link, TH A:visited {
+.formatter_pod TH A:link, .formatter_pod TH A:visited {
   background: transparent;
   color: black;
 }
@@ -127,19 +127,19 @@
   font-weight: normal;
 }
 
-.formatter_pod .t1, .t2, .t3, .t4  {
+.formatter_pod .t1, .formatter_pod .t2, .formatter_pod .t3, .formatter_pod .t4  {
   background: #006699;
   color: white;
 }
 .formatter_pod .t4 {
   padding: 0.2ex 0.4ex;
 }
-.formatter_pod .t1, .t2, .t3  {
+.formatter_pod .t1, .formatter_pod .t2, .formatter_pod .t3  {
   padding: 0.5ex 1ex;
 }
 
 /* IE does not support  .box>.t1  Grrr */
-.formatter_pod .box .t1, .box .t2, .box .t3 {
+.formatter_pod .box .t1, .formatter_pod .box .t2, .formatter_pod .box .t3 {
   margin: 0;
 }
 
@@ -246,14 +246,14 @@
   text-align: right;
 }
 
-.formatter_pod A.m:link, A.m:visited {
+.formatter_pod A.m:link, .formatter_pod A.m:visited {
   background: #006699;
   color: white;
   font: bold 10pt Arial,Helvetica,sans-serif;
   text-decoration: none;
 }
 
-.formatter_pod A.o:link, A.o:visited {
+.formatter_pod A.o:link, .formatter_pod A.o:visited {
   background: #006699;
   color: #ccffcc;
   font: bold 10pt Arial,Helvetica,sans-serif;
@@ -327,7 +327,7 @@
   padding: 0.2ex 1ex;
 }
 
-.formatter_pod .chmenu A:link, .chmenu A:visited  {
+.formatter_pod .chmenu A:link, .formatter_pod .chmenu A:visited  {
   background: transparent;
   color: white;
   text-decoration: none;
