@@ -191,10 +191,10 @@ $( function() {
 	$('#do_upload').each(function() {
 	    uploader=new SWFUpload({
     		button_placeholder_id: "do_upload",
-            button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
+            button_image_url: $.uri_for("/+static/gfx/uploadbutton.png"),
             button_width: 61,
 			button_height: 22,
-    		flash_url : $.uri_for('/.static/flash/swfupload.swf'),
+    		flash_url : $.uri_for('/+static/flash/swfupload.swf'),
     		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
     		file_size_limit : "100 MB",
             file_post_name: 'file' ,
