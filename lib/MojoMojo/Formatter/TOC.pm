@@ -62,6 +62,7 @@ sub format_content {
         my ($toc_h_min, $toc_h_max);
         $toc_h_min = $1 || 1;
         $toc_h_max = $2 || 9;  # in practice, there are no more than 6 heading levels
+		$toc_h_max = 9 if $toc_h_max > 9;  # prevent TocGenerator error for headings >= 10
 
         my $toc = HTML::Toc->new();
         my $tocInsertor = HTML::TocInsertor->new();
