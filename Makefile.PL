@@ -57,6 +57,7 @@ requires(
     'LWP::Simple'                                  => 0,
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'parent'                                       => 0,
     'Pod::Simple::HTML'                            => '3.01',
     'String::Diff'                                 => 0,
     'Syntax::Highlight::Engine::Kate'              => 0,
@@ -69,7 +70,6 @@ requires(
     'XML::Clean'                                   => 0,
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
-    'Text::SmartyPants'                            => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
@@ -78,7 +78,7 @@ feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
 tests( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
 catalyst;
-catalyst_par_script('mojomojo_server.pl');
+catalyst_par_script('script/mojomojo_server.pl');
 
 install_script glob('script/*.pl');
 auto_install;
