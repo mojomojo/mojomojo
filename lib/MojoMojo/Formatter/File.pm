@@ -28,7 +28,7 @@ Format order can be 1-99. The Pod formatter runs on 10
 
 =cut
 
-sub format_content_order { 96 }
+sub format_content_order { 92 }
 
 =item format_content
 
