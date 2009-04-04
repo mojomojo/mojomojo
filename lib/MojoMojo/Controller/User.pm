@@ -180,7 +180,7 @@ sub recover_pass : Global {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->login . ' <' . $user->email . '>',
-                Subject => 'Your new password on ' .  $c->pref('name') || $c->config->{name} || "MojoMojo",
+                Subject => 'Your new password on ' .  $c->pref('name'),
             ],
             body => $c->view('TT')->render( $c, 'mail/reset_password.tt' ),
         )
@@ -220,7 +220,7 @@ sub register : Global FormConfig {
     $c->stash->{template}  = 'user/register.tt';
 
     if ($c->pref('use_captcha') && ( !($c->stash->{user} && $c->stash->{user}->is_admin) ) ) {
-        my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
+        my $captcha_lang= $c->session->{lang} || $c->pref('default_lang');
         my $captcha=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
         $form->process;
     }
@@ -256,7 +256,7 @@ sub do_register : Private {
             header => [
                 From    => $c->config->{system_mail},
                 To      => $user->email,
-                Subject => $c->loc('~[x~] New User Validation',$c->pref('name')||'MojoMojo'),
+                Subject => $c->loc('~[x~] New User Validation',$c->pref('name')),
             ],
             body => $c->view('TT')->render( $c, 'mail/validate.tt' ),
         )

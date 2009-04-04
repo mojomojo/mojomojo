@@ -99,7 +99,7 @@ sub edit : Global FormConfig {
 
     # for anonymous users, use CAPTCHA, if enabled
     if ( $user == 1 && $c->pref('use_captcha') ) {
-       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
+       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') ;
        $c->stash->{captcha}=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
        $form->process;
     }

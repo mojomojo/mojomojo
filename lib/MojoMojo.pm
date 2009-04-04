@@ -144,12 +144,43 @@ sub pref_cached {
     # Update database
     $row->update( { prefvalue => $value } ) if defined $value;
 
+    my $prefvalue= $row->prefvalue();
+
+    # if no entry in preferences, try get one from config or get default value
+    unless ( defined $prefvalue) {
+
+      if ($setting eq 'main_formatter' ) {
+        $prefvalue = defined $c->config->{'main_formatter'}
+                     ? $c->config->{'main_formatter'}
+                     : 'MojoMojo::Formatter::Textile';
+      } elsif ($setting eq 'default_lang' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'en';
+      } elsif ($setting eq 'name' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'MojoMojo';
+      } elsif ($setting eq 'theme' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'default';
+      } elsif ($setting =~ /^(enforce_login|check_permission_on_view)$/ ) {
+        $prefvalue = defined $c->config->{'permissions'}{$setting}
+                     ? $c->config->{'permissions'}{$setting}
+                     : 0;
+      } elsif ($setting =~ /^(cache_permission_data|create_allowed|delete_allowed|edit_allowed|view_allowed|attachment_allowed)$/ ) {
+        $prefvalue = defined $c->config->{'permissions'}{$setting}
+                     ? $c->config->{'permissions'}{$setting}
+                     : 1;
+      } else {
+        $prefvalue = $c->config->{$setting};
+      }
+
+    }
+
     # Update cache
-    $c->cache->set(
-          $setting => defined $row->prefvalue
-        ? $row->prefvalue()
-        : ""
-    );
+    $c->cache->set( $setting => $prefvalue );
 
     return $c->cache->get($setting);
 }
