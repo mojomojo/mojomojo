@@ -42,7 +42,7 @@ context object.
    my ( $self, $content, $c ) = @_;
 
 
-   # XXX : Add cache if file is not modified
+   # TODO : Add cache if file is not modified
 
 
    my @lines = split /\n/, $$content;
@@ -55,11 +55,13 @@ context object.
        my $type=$1; # DocBook, Pod, ...
        my $file=$2; # Attachment
 
-       return "$file doesn't exist !\n" if ( ! -e $file);
-
-       # format with plugin
-       $$content .= $self->format($type,$file);
-
+       if ( -f $file ){
+	 # format with plugin
+	 $$content .= $self->format($type,$file);
+       }
+       else {
+	 $$content .= "Can not read '$file' !\n";
+       }
      }
      else{
        $$content .= $line  . "\n";
@@ -74,20 +76,14 @@ sub format {
   my $type = shift;
   my $file = shift;
 
-
-  my $result;
-  my $findplug;
-  foreach my $plugin ( plugins() ) {
-    if ( $plugin->can('can_format') && $plugin->can_format($type) ) {
-      my $text = read_file( $file );# or die "Can't read $file : $!\n"; ;
-      $result = $plugin->to_xhtml($text) . "\n";
-      $findplug=1;
-      last;
+  my $plugin = __PACKAGE__ . "::$type";
+  if ( $plugin->can('can_format') && $plugin->can_format($type) ) {
+      my $text = read_file( $file );
+      return $plugin->to_xhtml($text) . "\n";
     }
+  else{
+    return "Can't find plugin '$plugin' for file '$file'";
   }
-  return "Can't find plugin " . __PACKAGE__ . "::$type" 
-    . " for  file '$file'" if ! $findplug;
-  return $result;
 }
 
 =back
