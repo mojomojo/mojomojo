@@ -3,7 +3,7 @@
   <div id="content">
     <h1 id="pageName">
       <small>
-       [% c.pref("name") || "MojoMojo" %]
+       [% c.pref("name") %]
       </small>
       <br/>[%c.expand_wikiword(page.path)%] [%IF c.req.params.rev %]
       ([% loc('Revision') %] #[%c.req.params.rev%])[%END%]

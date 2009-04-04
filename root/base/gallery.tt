@@ -1,6 +1,6 @@
 [%PROCESS header.tt index_page=1 %]
 <div id="header"><h1>
-  [% c.pref("name") || "MojoMojo" %]
+  [% c.pref("name") %]
 gallery -
   [% c.expand_wikiword(page.name_orig) %]
 [%IF tag; %]([%tag%])[%END%]

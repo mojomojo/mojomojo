@@ -1,6 +1,6 @@
 [% 
     IF page.name == "/";
-        _name = c.pref( "name" ) || "MojoMojo";
+        _name = c.pref( "name" );
     ELSE;
         _name = c.expand_wikiword( page.name_orig );
     END 

@@ -18,16 +18,13 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
   <title>
     [% IF title; title %]
     [% ELSIF page %] [% c.expand_wikiword(page.name_orig) %]  [% END %]
-            - [%
-               c.pref('name') ||
-                loc("A poorly configured MojoMojo Installation")
-            %]
+            - [% c.pref('name') %]
   </title>
   [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
   <style type="text/css">
-    [% my_theme_dir = (c.pref('theme') ? c.pref('theme') : 'default') %]    
+    [% my_theme_dir = (c.pref('theme') ) %]    
     [% theme_path = 'themes/' _ my_theme_dir _ '/theme.css' %]
     @import "[% c.uri_for_static('mojomojo.css') %]";
     @import "[% c.uri_for_static(theme_path) %]";
