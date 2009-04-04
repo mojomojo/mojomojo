@@ -94,7 +94,7 @@ sub to_xhtml {
     # C'est ici que l'on peut ajouter le css, LANG ...
     # voir http://docbook.sourceforge.net/release/xsl/current/doc/html/index.html
     # et   http://www.sagehill.net/docbookxsl
-    my $results = $stylesheet->transform($source, XML::LibXSLT::xpath_to_string('section.autolabel' => '1', 'chapter.autolabel' => '1', 'suppress.navigation' => '1'));
+    my $results = $stylesheet->transform($source, XML::LibXSLT::xpath_to_string('section.autolabel' => '1', 'chapter.autolabel' => '1', 'suppress.navigation' => '1', 'generate.toc' => '0'));
 
 
     my $format=0;
