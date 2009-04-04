@@ -28,15 +28,18 @@ Log in through the authentication system.
 
 =cut
 
-sub login : Global {
+sub login : Global : FormConfig {
     my ( $self, $c ) = @_;
     $c->stash->{message} ||= $c->loc('Please enter username and password');
-    if ( $c->req->params->{login} ) {
+    
+    my $form = $c->stash->{form};
+    
+    if ( $form->submitted_and_valid ) {
         if (
             $c->authenticate(
                 {
-                    login => $c->req->params->{'login'},
-                    pass  => $c->req->params->{'pass'}
+                    login => $form->param_value('login'),
+                    pass  => $form->param_value('pass'),
                 }
             )
             )
