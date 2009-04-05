@@ -442,6 +442,16 @@ sub check_permissions {
         edit        => 1,    view        => 1,
     } if ($user && $user->is_admin);
 
+    # if no user is logged in
+    unless ($user){
+      # if anonymous user is allowed
+      my $anonymous=$c->pref('anonymous_user');
+      if ($anonymous){
+        # get anonymous user for no logged-in users
+        $user= $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+      }
+    }
+
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
