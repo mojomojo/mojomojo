@@ -15,7 +15,7 @@ MojoMojo::Formatter::File - format file as xhtml
 
 =head1 DESCRIPTION
 
-This formatter will format file as xhtml 
+This formatter will format the content file as xhtml
 
 
 =head1 METHODS
@@ -38,49 +38,80 @@ context object.
 =cut
 
 
- sub format_content {
-   my ( $self, $content, $c ) = @_;
+sub format_content {
+  my ( $self, $content, $c ) = @_;
 
 
-   # TODO : Add cache if file is not modified
+  # TODO : Add cache if file is not modified
 
 
-   my @lines = split /\n/, $$content;
+  my @lines = split /\n/, $$content;
 
-   $$content = "";
-   my $findplug;
-   foreach my $line (@lines) {
+  $$content = "";
+  foreach my $line (@lines) {
 
-     if ( $line =~ m|<p>=file\s(\w+)\s*(.*)</p>| ) {
-       my $type=$1; # DocBook, Pod, ...
-       my $file=$2; # Attachment
+    if ( $line =~ m|<p>=file\s(\w+)\s*(.*)</p>| ) {
+      my $plugin=$1; # DocBook, Pod, ...
+      my $file=$2; # Attachment
 
-       if ( -f $file ){
-	 # format with plugin
-	 $$content .= $self->format($type,$file);
-       }
-       else {
-	 $$content .= "Can not read '$file' !\n";
-       }
-     }
-     else{
-       $$content .= $line  . "\n";
-     }
-   }
-   return $content;
+      if ( -f $file ){
+	# format with plugin
+	$$content .= $self->format($plugin,$file);
+      }
+      else {
+	$$content .= "Can not read '$file' !\n";
+      }
+    }
+    else{
+      $$content .= $line  . "\n";
+    }
+  }
+  return $content;
 }
 
 
-sub format {
-  my $self = shift;
-  my $type = shift;
-  my $file = shift;
+=item plugin
 
-  my $plugin = __PACKAGE__ . "::$type";
-  if ( $plugin->can('can_format') && $plugin->can_format($type) ) {
-      my $text = read_file( $file );
-      return $plugin->to_xhtml($text) . "\n";
+Return the plugin to use with file attachment
+
+=cut
+
+sub plugin {
+  my $self     = shift;
+  my $filename = shift;
+
+  my ($name,$extension) = $filename =~ /(.*)\.(.*)/;
+
+  foreach my $plugin ( plugins() ) {
+    if ( $plugin->can('can_format') && $plugin->can_format($extension)){
+      my $pluginname = $plugin;
+      $pluginname =~ s/.*:://;
+
+      return $pluginname;
+
     }
+  }
+}
+
+
+=item format
+
+Return the content formatted
+
+=cut
+
+sub format {
+  my $self       = shift;
+  my $pluginname = shift;
+  my $file       = shift;
+
+  my $plugin = __PACKAGE__ . "::$pluginname";
+
+  if ( $plugin->can('can_format') ) {
+
+    my $text = read_file( $file );
+    return $plugin->to_xhtml($text) . "\n";
+  }
   else{
     return "Can't find plugin '$plugin' for file '$file'";
   }
