@@ -11,7 +11,7 @@ use File::Slurp;
 
 my $content = read_file( shift ) ;
 
-print MojoMojo::Formatter::DocBook->to_dbk( $content );
+print MojoMojo::Formatter::DocBook->to_xhtml( $content );
 
 
 __END__

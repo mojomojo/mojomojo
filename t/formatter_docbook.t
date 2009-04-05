@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::DocBook;
-#use MojoMojo::Formatter::DocBook::Colorize;
 
 use Test;
 BEGIN { plan tests => 1 }
@@ -23,7 +22,6 @@ BEGIN { plan tests => 1 }
       </programlisting>
 </article>
 DBK
-    #my $html=MojoMojo::Formatter::DocBook->to_dbk( $content );
     my $html=MojoMojo::Formatter::DocBook->to_xhtml($content ) . "\n";
     ok($html, <<HTML);
 <div class="article" xml:lang="fr"><div class="titlepage"><hr></hr></div><pre class="programlisting">
