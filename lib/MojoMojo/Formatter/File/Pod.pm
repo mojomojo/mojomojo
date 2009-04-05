@@ -2,6 +2,7 @@ package MojoMojo::Formatter::File::Pod;
 
 use base qw/MojoMojo::Formatter/;
 
+use MojoMojo::Formatter::Pod;
 
 =head1 NAME
 
