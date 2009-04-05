@@ -364,11 +364,7 @@ sub get_permissions_data {
     #                                                  },
     #                                         users => .....
     #                                     }
-    if ( $c->pref('cache_permission_data')    ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1) {
+    if ( $c->pref('cache_permission_data') ){
         $permdata = $c->cache->get('page_permission_data');
     }
 
@@ -383,11 +379,7 @@ sub get_permissions_data {
             ->search( undef, { order_by => 'length(path),role,apply_to_subpages' } );
 
         # if we are not caching, we don't return the whole enchilada.
-        if ( ! ( $c->pref('cache_permission_data')    ne""
-               ? $c->pref('cache_permission_data')
-               : defined $c->config->{'permissions'}{'cache_permission_data'}
-                 ? $c->config->{'permissions'}{'cache_permission_data'}
-                 : 1) ) {
+        if ( ! $c->pref('cache_permission_data') ) {
             ## this seems odd to me - but that's what the dbix::class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
@@ -422,11 +414,7 @@ sub get_permissions_data {
     }
 
     ## now we re-cache it - if we need to.  # !$c->cache('memory')->exists('page_permission_data')
-    if ( $c->pref('cache_permission_data')    ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1) {
+    if ( $c->pref('cache_permission_data') ) {
         $c->cache->set( 'page_permission_data', $permdata );
     }
 
@@ -465,57 +453,27 @@ sub check_permissions {
     # allow everything by default
     my %rulescomparison = (
         'create' => {
-            'allowed' => (
-                $c->pref('create_allowed') ne""
-                ? $c->pref('create_allowed')
-                : defined $c->config->{'permissions'}{'create_allowed'}
-                  ? $c->config->{'permissions'}{'create_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('create_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'delete' => {
-            'allowed' => (
-                $c->pref('delete_allowed') ne""
-                ? $c->pref('delete_allowed')
-                : defined $c->config->{'permissions'}{'delete_allowed'}
-                  ? $c->config->{'permissions'}{'delete_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('delete_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'edit' => {
-            'allowed' => (
-                $c->pref('edit_allowed') ne""
-                ? $c->pref('edit_allowed')
-                : defined $c->config->{'permissions'}{'edit_allowed'}
-                  ? $c->config->{'permissions'}{'edit_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('edit_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'view' => {
-            'allowed' => (
-                $c->pref('view_allowed') ne""
-                ? $c->pref('view_allowed')
-                : defined $c->config->{'permissions'}{'view_allowed'}
-                  ? $c->config->{'permissions'}{'view_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('view_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'attachment' => {
-            'allowed' => (
-                $c->pref('attachment_allowed') ne""
-                ? $c->pref('attachment_allowed')
-                : defined $c->config->{'permissions'}{'attachment_allowed'}
-                  ? $c->config->{'permissions'}{'attachment_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('attachment_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
