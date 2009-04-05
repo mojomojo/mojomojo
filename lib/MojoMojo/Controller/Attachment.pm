@@ -231,9 +231,7 @@ sub insert : Chained('attachment') Args(0) {
 
 =head2 insert_content
 
-Insert a link to this attachment in the main text of the node.
-Will show a thumb for images.
-TODO: Write templates for more mime types.
+Insert a plugin File link to this attachment in the main text of the node.
 
 =cut
 
@@ -246,9 +244,12 @@ sub insert_content : Chained('attachment') Args(0) {
 #      $io_file->binmode;
 
 #     my @content = <$io_file>;
+    my $filename = $c->stash->{att}->name;
+    use  MojoMojo::Formatter::File;
+    my $plugin   = MojoMojo::Formatter::File->plugin($filename);
 
     return unless $c->forward('auth');
-    $c->stash->{append} = "\n=file DocBook " . $c->stash->{att}->filename;
+    $c->stash->{append} = "\n\n=file $plugin " . $c->stash->{att}->filename;
     $c->forward('/pageadmin/edit');
 }
 
