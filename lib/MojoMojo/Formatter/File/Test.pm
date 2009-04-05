@@ -24,7 +24,7 @@ sub can_format {
   my $self = shift;
   my $type = shift;
 
-  return 1 if ( $type eq "Test" );
+  return 1 if ( $type eq "tst" );
   return 0;
 }
 
