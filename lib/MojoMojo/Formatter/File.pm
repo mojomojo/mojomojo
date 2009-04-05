@@ -6,6 +6,7 @@ use base qw/MojoMojo::Formatter/;
 use File::Slurp;
 use Module::Pluggable (
     search_path => ['MojoMojo::Formatter::File'],
+    require => 1,
 );
 my $debug=0;
 
