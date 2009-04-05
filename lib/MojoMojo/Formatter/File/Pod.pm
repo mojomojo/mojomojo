@@ -24,12 +24,12 @@ sub can_format {
   my $self = shift;
   my $type = shift;
 
-  return 1 if ( $type eq "Pod" );
+  return 1 if ( $type eq "pod" );
   return 0;
 }
 
 
-=item to_xhtml <dbk>
+=item to_xhtml
 
 takes Pod text and renders it as XHTML.
 
