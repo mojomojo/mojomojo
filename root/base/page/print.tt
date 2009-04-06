@@ -5,7 +5,7 @@
       <small>
        [% c.pref("name") %]
       </small>
-      <br/>[%c.expand_wikiword(page.path)%] [%IF c.req.params.rev %]
+      <br/>[%c.expand_wikilink(page.path)%] [%IF c.req.params.rev %]
       ([% loc('Revision') %] #[%c.req.params.rev%])[%END%]
     </h1>
     <div id="revision">

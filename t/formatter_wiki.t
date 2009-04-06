@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 20;
+use Test::More tests => 23;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';
 use DummyCatalystObject;
@@ -61,12 +61,23 @@ is($content, 'explicit link with anchor <a class="existingWikiWord" href="existi
 
 $content = '[[/existing_say_%22NO%22_to_%238|Say "NO" to #8]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-is($content, '<a class="existingWikiWord" href="existing_say_%22NO%22_to_%238">Say "NO" to #8</a>', 'explicit wikilink with already URL-encoded characters');
+is($content, '<a class="existingWikiWord" href="existing_say_%22NO%22_to_%238">Say "NO" to #8</a>', 'explicit existing wikilink with already URL-encoded characters');
+
+$content = '[[/new_link_say_%22NO%22_to_%238|Say "NO" to #8]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<span class="newWikiWord">Say "NO" to #8<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="new_link_say_%22NO%22_to_%238.edit">?</a></span>', 'explicit new wikilink with already URL-encoded characters');
+
+$content = '[[/new_link_say_%22NO%22_to_%238]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<span class="newWikiWord">new link say "NO" to #8<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="new_link_say_%22NO%22_to_%238.edit">?</a></span>', 'implicit new wikilink with already URL-encoded characters');
 
 $content = '[[79.1% of Americans believe in miracles]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
 is($content, '<span class="newWikiWord">79.1% of Americans believe in miracles<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/79.1%25_of_Americans_believe_in_miracles.edit">?</a></span>', 'link with a period');
 
+
+# expand_wikilink tests
+is('foo bar', MojoMojo::Formatter::Wiki->expand_wikilink('foo_bar'), 'expand wikilinks - underscores');
 
 
 # find_links() tests

@@ -3,7 +3,7 @@
 [% IF page.name == "/" %]
  [% c.pref("name") %]
 [% ELSE %]
- [% c.expand_wikiword(page.name_orig) %]
+ [% c.expand_wikilink(page.name_orig) %]
 [% END %] [%loc('gallery')%] -
 [%photo.title%]
 [%IF tag %]

@@ -25,7 +25,7 @@
 
   <ul>
   [% FOREACH page IN pages %]
-    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.path) %]</a></li>
+    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikilink(page.path) %]</a></li>
   [% END %]
   </ul>
 </div>

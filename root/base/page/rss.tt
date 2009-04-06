@@ -6,11 +6,11 @@
     <description>[% loc('Recent changes in x', page.path) %]</description>
     <language>[% lang %]</language>
     <ttl>40</ttl>
-[%FOREACH page IN pages %]
+[% FOREACH page IN pages %]
   [% IF c.check_permissions(page.path,c.user).view %]
     <item>
-      <title>[% c.expand_wikiword( page.name_orig ) %]
-[%IF page.isa('MojoMojo::M::CDBI::PageRevision')%] [% loc('Revision from x', page.content.created.datetime) %][% END %]
+      <title>[% c.expand_wikilink( page.name_orig ) %]
+[% IF page.isa('MojoMojo::M::CDBI::PageRevision') %] [% loc('Revision from x', page.content.created.datetime) %][% END %]
      </title>
       <pubDate>[% page.content.pub_date %]</pubDate>
       <guid>[% c.uri_for(page.path) %]</guid>
@@ -18,6 +18,6 @@
       <dc:creator>[% page.content.creator.login %]</dc:creator>
     </item>
   [% END %]
-[%END%]
+[% END %]
   </channel>
 </rss>

@@ -226,8 +226,8 @@ sub format_link {
         if (!defined $link_text or $link_text eq '') {
             s/%(?![0-9A-F]{2})  # escape '%' unless it's followed by two uppercase hex digits
             | (?<=_)\#          # escape '#' only if it directly follows a whitespace (which had been replaced by a '_')
-            | [":<=>?{|}]       # escape all other characters that are invalid in URLs 
-            /sprintf('%%%02X', ord($&))/egx;  # all other characters in the 0x21..0x7E range are OK in URLs. For the escaped characters, see the conflicting guidelines at http://www.ietf.org/rfc/rfc1738.txt and http://labs.apache.org/webarch/uri/rfc/rfc3986.html#reserved
+            | [":<=>?{|}]       # escape all other characters that are invalid in URLs
+            /sprintf('%%%02X', ord($&))/egx;  # all other characters in the 0x21..0x7E range are OK in URLs; see the conflicting guidelines at http://www.ietf.org/rfc/rfc1738.txt and http://labs.apache.org/webarch/uri/rfc/rfc3986.html#reserved
         }
         s/#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion in preparation for the page search below, and save it in $fragment
     }
@@ -274,14 +274,16 @@ sub format_link {
 
 =item expand_wikilink <wikilink>
 
-Replace _ with spaces.
+Replace _ with spaces and unescape URL-encoded characters
 
 =cut
 
 sub expand_wikilink {
     my ( $class, $wikilink ) = @_;
-    #TODO: encode characters that are invalid in URLs
-    $wikilink =~ s/\_/ /g;
+    for ($wikilink) {
+        s/\_/ /g;
+        s/%([0-9A-F]{2})/chr(hex($1))/eg;
+    }
     return $wikilink;
 }
 

@@ -83,7 +83,7 @@ L<MojoMojo::Installation> to try it out yourself.
 
 =cut
 
-# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
+# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
 
 sub ajax {
     my ($c) = @_;
@@ -91,9 +91,9 @@ sub ajax {
         && $c->req->header('x-requested-with') eq 'XMLHttpRequest';
 }
 
-sub expand_wikiword {
+sub expand_wikilink {
     my $c = shift;
-    return MojoMojo::Formatter::Wiki->expand_wikiword(@_);
+    return MojoMojo::Formatter::Wiki->expand_wikilink(@_);
 }
 
 # Format a wikiword as a link or as a wanted page, as appropriate.
