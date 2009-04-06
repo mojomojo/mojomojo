@@ -247,11 +247,7 @@ sub set_permissions : Local {
     }
 
     # clear cache
-    if ( $c->pref('cache_permission_data') ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1 ) {
+    if ( $c->pref('cache_permission_data') ) {
         $c->cache->remove( 'page_permission_data' );
     }
 
@@ -284,11 +280,7 @@ sub clear_permissions : Local {
         } )->delete;
 
         # clear cache
-        if ( $c->pref('cache_permission_data') ne""
-             ? $c->pref('cache_permission_data')
-             : defined $c->config->{'permissions'}{'cache_permission_data'}
-               ? $c->config->{'permissions'}{'cache_permission_data'}
-               : 1 ) {
+        if ( $c->pref('cache_permission_data') ) {
             $c->cache->remove( 'page_permission_data' );
         }
 

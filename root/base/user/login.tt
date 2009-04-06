@@ -24,6 +24,12 @@
     </form>
 </div>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#loginField').focus();
+  });
+</script>
+
 <div id="bottomnav">&nbsp;</div>
        
 [% PROCESS footer.tt %]

@@ -49,6 +49,44 @@ sub tagsearch : Local {
    }
 }
 
+=over 4
+
+=item container_set_default_width (json/container_set_default_width)
+
+Store width in session variable I<container_default_width>
+
+=back
+
+=cut
+
+sub container_set_default_width : Local {
+   my ($self, $c, $width) = @_;
+   $c->session->{container_default_width}=$width;
+   $c->stash->{json}->{width}=$width;
+}
+
+
+=over 4
+
+=item container_maximize_width (json/container_maximize_width)
+
+Set or unset session variable I<maximize_width>, which is used to maximize
+width 
+
+=back
+
+=cut
+sub container_maximize_width : Local {
+   my ($self, $c, $width) = @_;
+   if ($width){
+     $c->session->{maximize_width}=1;
+   } else {
+     delete ($c->session->{maximize_width});
+   }
+   $c->stash->{json}->{width}=$c->session->{container_set_default_width};
+}
+
+
 =head2 auto
 
 Set default view
@@ -67,6 +105,8 @@ sub auto : Private {
 =head1 AUTHOR
 
 Sachin Sebastian <sachinjsk at cpan.org>
+
+Robert Litwiniec <linio at wonder.pl>
 
 =head1 LICENSE
 

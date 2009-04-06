@@ -39,7 +39,7 @@ msgstr "minimum 3 myślniki lub gwiazdki"
 msgid "<xml> and such.\\nor pure text."
 msgstr "<xml> i takie tam\\nlub też czysty tekst."
 
-#: root/base/toolbar.tt:32
+#: root/base/toolbar.tt:10
 msgid "=head1 Header"
 msgstr "=head1 Nagłówek"
 
@@ -47,7 +47,7 @@ msgstr "=head1 Nagłówek"
 msgid "A message from our sponsors..."
 msgstr "Wiadomość sponsorowana..."
 
-#: root/base/header.tt:18 root/base/header.tt:20 root/base/page/atom.tt:3 root/base/page/atom.tt:6
+#: root/base/header.tt:21 root/base/header.tt:23 root/base/page/atom.tt:3 root/base/page/atom.tt:6
 msgid "A poorly configured MojoMojo Installation"
 msgstr "Nieskonfigurowana instalacja MojoMojo"
 
@@ -134,7 +134,7 @@ msgstr "Zezwól na komentarze na tej stronie."
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetycznie posortowana lista stron"
 
-#: root/base/toolbar.tt:99
+#: root/base/toolbar.tt:62
 msgid "Also try h2,h3 and so on"
 msgstr "Spróbuj również h2, h3 itp."
 
@@ -198,11 +198,11 @@ msgstr "Załączniki"
 msgid "Authors"
 msgstr "Autorzy"
 
-#: root/base/page/bottomnav.tt:26 root/base/page/bottomnav.tt:37
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "Back in time"
 msgstr "Wersja poprzednia"
 
-#: root/base/page/bottomnav.tt:40
+#: root/base/page/bottomnav.tt:38
 msgid "Back to the page"
 msgstr "Powrót na stronę"
 
@@ -210,7 +210,7 @@ msgstr "Powrót na stronę"
 msgid "Backlinks"
 msgstr "Linki zwrotne"
 
-#: root/base/toolbar.tt:124
+#: root/base/toolbar.tt:87
 msgid "Bigger"
 msgstr "Większe"
 
@@ -218,7 +218,7 @@ msgstr "Większe"
 msgid "Birth Date"
 msgstr "Data urodzenia"
 
-#: root/base/toolbar.tt:108
+#: root/base/toolbar.tt:71
 msgid "Block quote"
 msgstr "Cytat blokowy"
 
@@ -230,11 +230,11 @@ msgstr "Cytat blokowy"
 msgid "Blockquotes can be nested"
 msgstr "Cytaty blokowe mogą być zagnieżdżone"
 
-#: root/base/toolbar.tt:118 root/base/toolbar.tt:150
+#: root/base/toolbar.tt:113 root/base/toolbar.tt:81
 msgid "Bold"
 msgstr "Pogrubienie"
 
-#: root/base/toolbar.tt:102 root/base/toolbar.tt:146
+#: root/base/toolbar.tt:109 root/base/toolbar.tt:65
 msgid "Bullet list"
 msgstr "Lista wypunktowana"
 
@@ -266,11 +266,11 @@ msgstr "Użytkownik nie został znaleziony"
 msgid "Cant find admin user: "
 msgstr "Nie mogę znaleźć administratora: "
 
-#: root/base/toolbar.tt:114
+#: root/base/toolbar.tt:77
 msgid "Centered paragraph"
 msgstr "Paragraf wyśrodkowany"
 
-#: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13 root/base/page/bottomnav.tt:15
+#: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Zmień zawartość strony"
 
@@ -282,7 +282,7 @@ msgstr "Zmień hasło"
 msgid "Change profile content"
 msgstr "Zmień zawartość profilu"
 
-#: root/base/page/bottomnav.tt:18
+#: root/base/page/bottomnav.tt:16
 msgid "Change site settings"
 msgstr "Zmień ustawienia strony"
 
@@ -310,7 +310,7 @@ msgstr "Kliknij aby zobaczyć oryginał"
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
 msgstr "Kliknij na nieistniejącej stronie, aby ją utworzyć. Brakujące nadrzędne strony zostaną automatycznie utworzone."
 
-#: root/base/toolbar.tt:106
+#: root/base/toolbar.tt:69
 msgid "Code"
 msgstr "Kod"
 
@@ -334,8 +334,8 @@ msgstr "Komentarze"
 msgid "Content size"
 msgstr "Rozmiar treści"
 
-#: lib/MojoMojo/Formatter/Include.pm:65 lib/MojoMojo/Formatter/YouTube.pm:71
-msgid "Could not retrieve"
+#: lib/MojoMojo/Formatter/Include.pm:65
+msgid "Could not  retrieve"
 msgstr "Nie mogę pobrać"
 
 #: lib/MojoMojo/Controller/User.pm:52 root/base/comment/login.tt:6
@@ -346,6 +346,14 @@ msgstr "Nie mogę sprawdzić tego loginu."
 #: lib/MojoMojo/Controller/Attachment.pm:65
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
+
+#: lib/MojoMojo/Formatter/YouTube.pm:78
+msgid "Could not embed player for"
+msgstr "Nie mogę osadzić odtwarzacza dla"
+
+#: lib/MojoMojo/Formatter/YouTube.pm:73
+msgid "Could not retrieve"
+msgstr "Nie mogę pobrać"
 
 #: root/base/admin/create_role.tt:9
 msgid "Create Role"
@@ -371,7 +379,7 @@ msgstr "Tworzy"
 msgid "Creating"
 msgstr "Tworzę"
 
-#: root/base/page/bottomnav.tt:40
+#: root/base/page/bottomnav.tt:38
 msgid "Current Revision"
 msgstr "Aktualna wersja"
 
@@ -387,7 +395,7 @@ msgstr "Data rejestracji"
 msgid "Delete allowed by default"
 msgstr "Domyślnie zezwól na usuwanie"
 
-#: root/base/toolbar.tt:122 root/base/toolbar.tt:154
+#: root/base/toolbar.tt:117 root/base/toolbar.tt:85
 msgid "Deleted Text"
 msgstr "Tekst usunięty"
 
@@ -427,7 +435,7 @@ msgstr "Edytuj profil"
 msgid "Edit Role"
 msgstr "Edycja roli"
 
-#: root/base/page/bottomnav.tt:18
+#: root/base/page/bottomnav.tt:16
 msgid "Edit Settings"
 msgstr "Konfiguracja"
 
@@ -472,7 +480,7 @@ msgstr "Wymuś logowanie"
 msgid "Enoch Root"
 msgstr "Administrator strony"
 
-#: root/base/toolbar.tt:104 root/base/toolbar.tt:148
+#: root/base/toolbar.tt:111 root/base/toolbar.tt:67
 msgid "Enum list"
 msgstr "Lista numerowana"
 
@@ -492,7 +500,7 @@ msgstr "Strony istniejące"
 msgid "Export"
 msgstr "Eksport"
 
-#: root/base/toolbar.tt:134 root/base/toolbar.tt:158
+#: root/base/toolbar.tt:121 root/base/toolbar.tt:97
 msgid "External Link"
 msgstr "Link zewnętrzny"
 
@@ -520,15 +528,15 @@ msgstr "Stopki"
 msgid "Format content until next =pod as plain old documentation"
 msgstr "Tworzenie dokumentacji pod(plain old documentation) aż do następnego =pod"
 
-#: root/base/page/bottomnav.tt:54
+#: root/base/page/bottomnav.tt:52
 msgid "Format page for printing"
 msgstr "Strona do druku"
 
-#: root/base/toolbar.tt:1 root/base/toolbar.tt:2 root/base/toolbar.tt:30
+#: root/base/toolbar.tt:36 root/base/toolbar.tt:37 root/base/toolbar.tt:8
 msgid "Formatter"
 msgstr "Formatowanie"
 
-#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:34
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "Forward in time"
 msgstr "Wersja następna"
 
@@ -614,7 +622,7 @@ msgstr "Witaj."
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
 msgstr "Witaj, aby zweryfikować Twój adres email %1, kliknij na link:"
 
-#: root/base/page/bottomnav.tt:49
+#: root/base/page/bottomnav.tt:47
 msgid "Hide changes"
 msgstr "Ukryj zmiany"
 
@@ -646,7 +654,7 @@ msgstr "IBM, Szkoła"
 msgid "ID"
 msgstr "Identyfikator"
 
-#: root/base/toolbar.tt:3
+#: root/base/toolbar.tt:38
 msgid "IRC formatter"
 msgstr "Format IRC"
 
@@ -683,7 +691,7 @@ msgstr "Praca"
 msgid "Inherited permissions"
 msgstr "Uprawnienia dziedziczone"
 
-#: root/base/edithelp.tt:77 root/base/page/bottomnav.tt:56
+#: root/base/edithelp.tt:77 root/base/page/bottomnav.tt:54
 msgid "Inline"
 msgstr "Wbudowany"
 
@@ -691,11 +699,11 @@ msgstr "Wbudowany"
 msgid "Inline Links"
 msgstr "Linki wbudowane"
 
-#: root/base/page/bottomnav.tt:56
+#: root/base/page/bottomnav.tt:54
 msgid "Inline for including content"
 msgstr "Widok przeznaczony dla włączenia treści"
 
-#: root/base/toolbar.tt:40 root/base/toolbar.tt:7 root/base/toolbar.tt:8
+#: root/base/toolbar.tt:18 root/base/toolbar.tt:42 root/base/toolbar.tt:43
 msgid "Insert"
 msgstr "Wstaw"
 
@@ -703,7 +711,7 @@ msgstr "Wstaw"
 msgid "Interests"
 msgstr "Zainteresowania"
 
-#: root/base/toolbar.tt:132 root/base/toolbar.tt:156
+#: root/base/toolbar.tt:119 root/base/toolbar.tt:95
 msgid "Internal Link"
 msgstr "Link wewnętrzny"
 
@@ -715,7 +723,7 @@ msgstr "Złe hasło"
 msgid "Irc formatter"
 msgstr "Format IRC"
 
-#: root/base/toolbar.tt:120 root/base/toolbar.tt:152
+#: root/base/toolbar.tt:115 root/base/toolbar.tt:83
 msgid "Italic"
 msgstr "Pochylenie"
 
@@ -727,7 +735,7 @@ msgstr "Pozycja"
 msgid "Just like email quoting!"
 msgstr "Cytat z wiadomości pocztowej!"
 
-#: root/base/toolbar.tt:116
+#: root/base/toolbar.tt:79
 msgid "Justified paragraph"
 msgstr "Paragraf wyjustowany"
 
@@ -743,7 +751,7 @@ msgstr "W dalszej części"
 msgid "Leave second blank if you do not want a password"
 msgstr "Drugie pole pozostaw puste, jeśli nie chcesz używać hasła"
 
-#: root/base/toolbar.tt:110
+#: root/base/toolbar.tt:73
 msgid "Left-justified paragraph"
 msgstr "Paragraf wyrównany do lewej"
 
@@ -755,7 +763,7 @@ msgstr "Ogniskowa"
 msgid "Link Title"
 msgstr "Tytuł linku"
 
-#: root/base/page/bottomnav.tt:62
+#: root/base/page/bottomnav.tt:60
 msgid "Linked from"
 msgstr "Linkowane z"
 
@@ -780,7 +788,7 @@ msgstr "Linki do nieistniejących stron."
 msgid "List by x"
 msgstr "Pokaż wg. %1"
 
-#: root/base/toolbar.tt:101 root/base/toolbar.tt:145
+#: root/base/toolbar.tt:108 root/base/toolbar.tt:64
 msgid "List item 1"
 msgstr "Element listy nienumerowanej"
 
@@ -804,7 +812,7 @@ msgstr "Login"
 msgid "Main formatter"
 msgstr "Formatowanie podstawowe"
 
-#: root/base/toolbar.tt:100 root/base/toolbar.tt:144
+#: root/base/toolbar.tt:107 root/base/toolbar.tt:63
 msgid "Main heading"
 msgstr "Nagłówki"
 
@@ -812,7 +820,7 @@ msgstr "Nagłówki"
 msgid "Make current"
 msgstr "Ustaw jako aktualna"
 
-#: root/base/toolbar.tt:141 root/base/toolbar.tt:165
+#: root/base/toolbar.tt:104 root/base/toolbar.tt:128
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Zaznacz fragment tekstu, aby wykonać wybraną akcję na tym tekście"
 
@@ -826,7 +834,7 @@ msgstr "Opis składni Markdown"
 
 #: root/base/mail/reset_password.tt:9
 msgid "MojoMojo - Spirit in a box"
-msgstr ""
+msgstr "MojoMojo - Wiki z klasą"
 
 #: root/base/user/profile.tt:30
 msgid "Movies"
@@ -943,7 +951,7 @@ msgstr "Nie wprowadzone"
 msgid "Numbered list"
 msgstr "Lista numerowana"
 
-#: root/base/toolbar.tt:103 root/base/toolbar.tt:147
+#: root/base/toolbar.tt:110 root/base/toolbar.tt:66
 msgid "Numbered list item"
 msgstr "Element listy numerowanej"
 
@@ -976,7 +984,7 @@ msgstr "Inne propozycje"
 msgid "Other pages that link to this page."
 msgstr "Inne strony linkujące do tej strony"
 
-#: root/base/toolbar.tt:4
+#: root/base/toolbar.tt:39
 msgid "POD formatter"
 msgstr "Format POD"
 
@@ -984,7 +992,7 @@ msgstr "Format POD"
 msgid "Page"
 msgstr "Strona"
 
-#: root/base/page/bottomnav.tt:21 root/base/page/bottomnav.tt:23
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page Info"
 msgstr "Informacje o stronie"
 
@@ -997,7 +1005,7 @@ msgstr "Streszczenie"
 msgid "Page info for x"
 msgstr "Informacje o stronie dla %1"
 
-#: root/base/page/bottomnav.tt:21 root/base/page/bottomnav.tt:23
+#: root/base/page/bottomnav.tt:19 root/base/page/bottomnav.tt:21
 msgid "Page meta information"
 msgstr "Informacje o stronie"
 
@@ -1025,8 +1033,9 @@ msgstr "Podane hasła są różne"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Hasło musi zawierać od 4 do 14 znaków"
 
+#. ('wydruki')
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:72
+#: lib/MojoMojo/Controller/Page.pm:72 lib/MojoMojo/Controller/Wydruki.pm:32
 msgid "Permission Denied to view x"
 msgstr "Brak uprawnień do przeglądania %1"
 
@@ -1051,15 +1060,15 @@ msgstr "Album fotografii"
 msgid "Photos"
 msgstr "Zdjęć"
 
-#: root/base/toolbar.tt:138 root/base/toolbar.tt:162
+#: root/base/toolbar.tt:101 root/base/toolbar.tt:125
 msgid "Picture"
 msgstr "Obrazek"
 
-#: root/base/toolbar.tt:136 root/base/toolbar.tt:160
+#: root/base/toolbar.tt:123 root/base/toolbar.tt:99
 msgid "Picture left"
 msgstr "Obrazek po lewej"
 
-#: root/base/toolbar.tt:140 root/base/toolbar.tt:164
+#: root/base/toolbar.tt:103 root/base/toolbar.tt:127
 msgid "Picture right"
 msgstr "Obrazek po prawej"
 
@@ -1115,7 +1124,7 @@ msgstr "Podgląd"
 msgid "Previous"
 msgstr "Poprzedni"
 
-#: root/base/page/bottomnav.tt:54
+#: root/base/page/bottomnav.tt:52
 msgid "Print"
 msgstr "Drukuj"
 
@@ -1225,7 +1234,7 @@ msgstr "Wersja edytowana"
 msgid "Revision from x"
 msgstr "Wersja z %1"
 
-#: root/base/toolbar.tt:112
+#: root/base/toolbar.tt:75
 msgid "Right-justified paragraph"
 msgstr "Paragraf wyrównany do prawej"
 
@@ -1283,15 +1292,15 @@ msgstr "Szukaj w %1"
 msgid "Second item"
 msgstr "Drugi element"
 
-#: root/base/page/bottomnav.tt:46
+#: root/base/page/bottomnav.tt:44
 msgid "See changes"
 msgstr "Zobacz zmiany"
 
-#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:34
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32
 msgid "See next revision"
 msgstr "Zobacz następną wersję"
 
-#: root/base/page/bottomnav.tt:26 root/base/page/bottomnav.tt:37
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:35
 msgid "See previous revision"
 msgstr "Zobacz poprzednią wersję"
 
@@ -1299,7 +1308,7 @@ msgstr "Zobacz poprzednią wersję"
 msgid "Set a keyword for this page"
 msgstr "Wybierz słowo kluczowe dla tej strony"
 
-#: root/base/page/bottomnav.tt:69
+#: root/base/page/bottomnav.tt:67
 msgid "Set language"
 msgstr "Wybierz język"
 
@@ -1307,11 +1316,11 @@ msgstr "Wybierz język"
 msgid "Shapes"
 msgstr "Kształty"
 
-#: root/base/page/bottomnav.tt:46
+#: root/base/page/bottomnav.tt:44
 msgid "Show differences from previous version"
 msgstr "Pokaż różnice w stosunku do wersji poprzedniej"
 
-#: root/base/page/bottomnav.tt:49
+#: root/base/page/bottomnav.tt:47
 msgid "Show normal page"
 msgstr "Pokaż zwykłą stronę"
 
@@ -1359,7 +1368,7 @@ msgstr "Konfiguracja strony"
 msgid "Site name"
 msgstr "Nazwa strony"
 
-#: root/base/toolbar.tt:126
+#: root/base/toolbar.tt:89
 msgid "Smaller"
 msgstr "Mniejsze"
 
@@ -1371,7 +1380,7 @@ msgstr "Niektóre pola są nieprawidłowe. Popraw je i spróbuj ponownie:"
 msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
 msgstr "W czasie gdy edytowałeś tę stronę ktoś inny również ją zmienił. Wasze zmiany zostały połączone. Proszę przejrzyj je i zapisz ponownie."
 
-#: root/base/page/bottomnav.tt:15
+#: root/base/page/editbar.tt:22
 msgid "Split Edit"
 msgstr "Edycja podzielona"
 
@@ -1387,15 +1396,15 @@ msgstr "Podstrony"
 msgid "Subscribe to changes by RSS"
 msgstr "Subskrybuj zmiany przez RSS"
 
-#: root/base/page/bottomnav.tt:55
+#: root/base/page/bottomnav.tt:53
 msgid "Subscribe to page changes"
 msgstr "Subskrybuj zmiany na stronie"
 
-#: root/base/toolbar.tt:130
+#: root/base/toolbar.tt:93
 msgid "Subscript"
 msgstr "Indeks dolny"
 
-#: root/base/toolbar.tt:128
+#: root/base/toolbar.tt:91
 msgid "Superscript"
 msgstr "Indeks górny"
 
@@ -1407,7 +1416,7 @@ msgstr "Przełącz na wgrywanie przy pomocy flasha"
 msgid "Syntax"
 msgstr "Składnia"
 
-#: root/base/toolbar.tt:15 root/base/toolbar.tt:16 root/base/toolbar.tt:51
+#: root/base/toolbar.tt:30 root/base/toolbar.tt:51 root/base/toolbar.tt:52
 msgid "Syntax Highlight"
 msgstr "Podświetlenie składni"
 
@@ -1580,7 +1589,7 @@ msgstr "Widok plików"
 msgid "View as gallery"
 msgstr "Widok galerii"
 
-#: root/base/page/bottomnav.tt:54
+#: root/base/page/bottomnav.tt:52
 msgid "Views"
 msgstr "Widok"
 
@@ -1644,6 +1653,10 @@ msgstr "Musisz wypełnić wszystkie wymagane pola."
 #: root/base/comment/login.tt:3
 msgid "You have to log in to post a comment."
 msgstr "Musisz się zalogować, aby zamieścić komentarz."
+
+#: lib/MojoMojo/Formatter/YouTube.pm:69
+msgid "YouTube Video"
+msgstr "Film YouTube"
 
 #: root/base/user/prefs.tt:3
 msgid "Your Account"
@@ -1729,7 +1742,7 @@ msgstr "o"
 msgid "back"
 msgstr "wróć"
 
-#: root/base/toolbar.tt:123
+#: root/base/toolbar.tt:86
 msgid "bigger"
 msgstr "większe"
 
@@ -1737,7 +1750,7 @@ msgstr "większe"
 msgid "blocks are wrapped in backticks"
 msgstr "bloki są otoczone gravisami"
 
-#: root/base/edithelp.tt:60 root/base/toolbar.tt:117 root/base/toolbar.tt:149
+#: root/base/edithelp.tt:60 root/base/toolbar.tt:112 root/base/toolbar.tt:80
 msgid "bold"
 msgstr "pogrubienie"
 
@@ -1757,7 +1770,7 @@ msgstr "bajtów"
 msgid "can"
 msgstr ":"
 
-#: root/base/toolbar.tt:113
+#: root/base/toolbar.tt:76
 msgid "centered paragraph"
 msgstr "paragraf wyśrodkowany"
 
@@ -1765,7 +1778,7 @@ msgstr "paragraf wyśrodkowany"
 msgid "chars"
 msgstr "znaków"
 
-#: root/base/edithelp.tt:165 root/base/toolbar.tt:105
+#: root/base/edithelp.tt:165 root/base/toolbar.tt:68
 msgid "code"
 msgstr "kod"
 
@@ -1773,7 +1786,7 @@ msgstr "kod"
 msgid "comment"
 msgstr "komentarz"
 
-#: root/base/toolbar.tt:9
+#: root/base/toolbar.tt:44
 msgid "comments"
 msgstr "komentarze"
 
@@ -1805,7 +1818,7 @@ msgstr "edytor"
 msgid "delete"
 msgstr "usuń"
 
-#: root/base/toolbar.tt:121 root/base/toolbar.tt:153
+#: root/base/toolbar.tt:116 root/base/toolbar.tt:84
 msgid "deleted"
 msgstr "usunięto"
 
@@ -1870,7 +1883,7 @@ msgstr "http://przykład.pl/"
 msgid "in the wrapping block"
 msgstr "w otoczonym bloku"
 
-#: root/base/toolbar.tt:12
+#: root/base/toolbar.tt:47
 msgid "include"
 msgstr "dołącz"
 
@@ -1882,7 +1895,7 @@ msgstr "dołącz zawartość tej strony"
 msgid "include this rss feed"
 msgstr "dołącz zawartość tego źródła RSS"
 
-#: root/base/toolbar.tt:143
+#: root/base/toolbar.tt:106
 msgid "increase # for smaller headline"
 msgstr "zwiększ ilość # zby zmniejszyć nagłówek"
 
@@ -1906,7 +1919,7 @@ msgstr "nie jest prawidłowym adresem"
 msgid "is part of own site, cannot include"
 msgstr "jest częścią tej strony, nie mogę więc jej włączyć"
 
-#: root/base/toolbar.tt:119 root/base/toolbar.tt:151
+#: root/base/toolbar.tt:114 root/base/toolbar.tt:82
 msgid "italic"
 msgstr "pochylenie"
 
@@ -1918,11 +1931,11 @@ msgstr "pochylone"
 msgid "just use `2`"
 msgstr "po prostu wpisz `2`"
 
-#: root/base/toolbar.tt:115
+#: root/base/toolbar.tt:78
 msgid "justified paragraph"
 msgstr "paragraf wyjustowany"
 
-#: root/base/toolbar.tt:109
+#: root/base/toolbar.tt:72
 msgid "left justified paragraph"
 msgstr "paragraf wyrównany do lewej"
 
@@ -1941,6 +1954,10 @@ msgstr "wyloguj się"
 #: root/base/admin/user.tt:10 root/base/comment/login.tt:8 root/base/message.tt:6
 msgid "login"
 msgstr ""
+
+#: root/base/breadcrumbs.tt:17
+msgid "maximize width"
+msgstr "maksymalna szerokość"
 
 #:
 msgid "my tags"
@@ -2010,7 +2027,7 @@ msgstr "komentator"
 msgid "preferences"
 msgstr "preferencje"
 
-#: root/base/toolbar.tt:107
+#: root/base/toolbar.tt:70
 msgid "quote"
 msgstr "cytat"
 
@@ -2018,7 +2035,7 @@ msgstr "cytat"
 msgid "read"
 msgstr "odczyt"
 
-#: root/base/toolbar.tt:11
+#: root/base/toolbar.tt:46
 msgid "redirect"
 msgstr "przekieruj"
 
@@ -2035,11 +2052,11 @@ msgstr "zarejestruj"
 msgid "remove"
 msgstr "usuń"
 
-#: root/base/page/bottomnav.tt:27
+#: root/base/page/bottomnav.tt:25
 msgid "revision"
 msgstr "wersja"
 
-#: root/base/toolbar.tt:111
+#: root/base/toolbar.tt:74
 msgid "right justified paragraph"
 msgstr "paragraf wyrównany do prawej"
 
@@ -2051,7 +2068,7 @@ msgstr "role"
 msgid "shrinked head"
 msgstr "urwanie głowy"
 
-#: root/base/toolbar.tt:125
+#: root/base/toolbar.tt:88
 msgid "small"
 msgstr "małe"
 
@@ -2059,11 +2076,11 @@ msgstr "małe"
 msgid "start"
 msgstr ""
 
-#: root/base/toolbar.tt:129
+#: root/base/toolbar.tt:92
 msgid "subscript"
 msgstr "indeks dolny"
 
-#: root/base/toolbar.tt:127
+#: root/base/toolbar.tt:90
 msgid "superscript"
 msgstr "indeks górny"
 
@@ -2079,45 +2096,21 @@ msgstr "tagi"
 msgid "the following are missing:"
 msgstr "brak następujących:"
 
-#: lib/MojoMojo/Formatter/TOC.pm:45 root/base/edithelp.tt:222 root/base/toolbar.tt:10 root/base/toolbar.tt:42
+#: root/base/toolbar.tt:45
 msgid "toc"
-msgstr ""
+msgstr "Spis treści"
 
-#: lib/MojoMojo/Formatter/TOC.pm:39
-msgid "toc -N "
-msgstr ""
-
-#: root/base/edithelp.tt:222
-msgid "toc 2-"
-msgstr ""
-
-#: lib/MojoMojo/Formatter/TOC.pm:47
-msgid "toc 2-3"
-msgstr ""
-
-#: root/base/edithelp.tt:222
-msgid "toc 2-4"
-msgstr ""
-
-#: lib/MojoMojo/Formatter/TOC.pm:38
-msgid "toc M- "
-msgstr ""
-
-#: lib/MojoMojo/Formatter/TOC.pm:40
-msgid "toc M-N "
-msgstr ""
-
-#: root/base/edithelp.tt:221
-msgid "toc [level1]-[level2]"
-msgstr ""
-
-#: root/base/toolbar.tt:157
+#: root/base/toolbar.tt:120
 msgid "url inside paranthesis"
 msgstr "adres w nawiasach"
 
 #: root/base/admin/toplinks.tt:11
 msgid "users"
 msgstr "użytkownicy"
+
+#: lib/MojoMojo/Formatter/YouTube.pm:78
+msgid "video"
+msgstr "film"
 
 #: root/base/attachments/list.tt:5
 msgid "view"
@@ -2149,7 +2142,7 @@ msgstr "%1 trafień"
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)
 #. (rev - 1)
-#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:34 root/base/page/bottomnav.tt:37
+#: root/base/page/bottomnav.tt:28 root/base/page/bottomnav.tt:32 root/base/page/bottomnav.tt:35
 msgid "x more"
 msgstr "jeszcze %1"
 
@@ -2169,6 +2162,10 @@ msgstr "twój tekst"
 #: root/base/edithelp.tt:227 root/base/edithelp.tt:231
 msgid "your/url"
 msgstr "twój/adres"
+
+#: root/base/toolbar.tt:48
+msgid "youtube"
+msgstr ""
 
 #: root/base/edithelp.tt:41
 msgid "|a|table|row|"

@@ -4,6 +4,7 @@ use strict;
 use base 'Catalyst::Controller';
 
 use IO::File;
+use URI::Escape ();
 
 =head1 NAME
 
@@ -123,7 +124,7 @@ sub view : Chained('attachment') Args(0) {
     $c->res->output( $io_file );
     $c->res->header( 'content-type', $c->stash->{att}->contenttype );
     $c->res->header(
-        "Content-Disposition" => "inline; filename=" . $c->stash->{att}->name );
+        "Content-Disposition" => "inline; filename=" . URI::Escape::uri_escape_utf8( $c->stash->{att}->name ) );
     $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
 }
 
@@ -139,7 +140,7 @@ sub download : Chained('attachment') Args(0) {
     my $att = $c->stash->{att};
     $c->forward('view');
     $c->res->header( 'content-type', $att->contenttype );
-    $c->res->header( "Content-Disposition" => "attachment; filename=" . $att->name );
+    $c->res->header( "Content-Disposition" => "attachment; filename=" . URI::Escape::uri_escape_utf8( $att->name ) );
     $c->res->header( 'Cache-Control', 'no-cache' );
 
 }
@@ -164,7 +165,7 @@ sub thumb : Chained('attachment') Args(0) {
 
     $c->res->output( $io_file );
     $c->res->header( 'content-type', $att->contenttype );
-    $c->res->header( "Content-Disposition" => "inline; filename=" . $att->name );
+    $c->res->header( "Content-Disposition" => "inline; filename=" . URI::Escape::uri_escape_utf8( $att->name ) );
     $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
 
 }
@@ -190,7 +191,7 @@ sub inline : Chained('attachment') Args(0) {
     $c->res->output( $io_file );
     $c->res->header( 'content-type', $c->stash->{att}->contenttype );
     $c->res->header(
-        "Content-Disposition" => "inline; filename=" . $c->stash->{att}->name );
+        "Content-Disposition" => "inline; filename=" . URI::Escape::uri_escape_utf8( $c->stash->{att}->name ) );
     $c->res->header( 'Cache-Control', 'max-age=86400, must-revalidate' );
 
 }
