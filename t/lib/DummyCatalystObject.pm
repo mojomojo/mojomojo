@@ -73,20 +73,25 @@ sub path_pages {
 sub pref { return 1; }
 
 sub cache {
-    my ($self,$c)=@_;
+    my ($self,$c) = @_;
     return undef;
 }
 
 
 sub redirect {
-    my ($self,$url)=@_;
+    my ($self, $url) = @_;
     $self->{url}=$url if $url;
     return $self->{url};
 }
 
 sub uri_for {
-    my ($self,$url)=@_;
+    my ($self, $url) = @_;
     return $url;
+}
+
+sub loc {
+    my ($self, $text) = @_;
+    return "Faking localization... $text ...fake complete.";
 }
 
 1;

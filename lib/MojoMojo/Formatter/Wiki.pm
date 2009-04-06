@@ -56,17 +56,15 @@ sub _generate_explicit_end {
 }
 
 sub _generate_explicit_path {
-
     # non-greedily match characters that don't match the start-end and text delimiters
-    my $delims = ( join '', _explicit_end_delims() ) . $explicit_separator;
-    return qr{[^$delims]+?};
+    my $not_an_end_delimiter_or_separator = '(?:(?!' . (join '|', _explicit_end_delims(), $explicit_separator) . ').)';  # produces (?: (?! ]] | \)\) | \| ) .)  # a character in a place where neither a ]], nor a )), nor a | is
+    return qr{$not_an_end_delimiter_or_separator+?};
 }
 
 sub _generate_explicit_text {
-
     # non-greedily match characters that don't match the start-end delimiters
-    my $delims = join '', _explicit_end_delims();
-    return qr{[^$delims]+?};
+    my $not_an_end_delimiter = '(?:(?!' . join '|', _explicit_end_delims() . ').)';  # produces (?: (?! ]] | \)\) ) .)  # a character in a place where neither a ]] nor a )) starts
+    return qr{$not_an_end_delimiter+?};
 }
 
 my $explicit_start = _generate_explicit_start();
@@ -259,7 +257,7 @@ sub expand_wikiword {
 
 Find wiki links in content.
 
-Return a listref of linked and wanted pages.
+Return a listref of linked (existing) and wanted pages.
 
 =cut
 

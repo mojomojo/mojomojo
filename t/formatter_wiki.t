@@ -1,66 +1,12 @@
 #!/usr/bin/perl -w
-package Dummy;
-sub new {
-    my $class = shift;
-    bless {}, $class;
-}
-
-sub req {
-    return $_[0];
-}
-
-sub base {
-    $_[0]->{path} ||= '/';
-    return "http://example.com";
-}
-
-sub stash {
-    my $self = shift;
-    return { page => $self,
-         page_path => 'http://example.com/',
-    };
-}
-
-sub path {
-    my $self = shift;
-    $path = $self->{path};
-    return $path;
-}
-
-sub model {
-    return $_[0];
-}
-
-sub result_source {
-    return $_[0];
-}
-
-sub resultset {
-    return $_[0];
-}
-
-sub path_pages {
-    my ($self,$path)=@_;
-    $path=~s|^/||;
-    if ($path =~ /Existing/) {
-        my $page = Dummy->new;
-        $page->{path} = $path;
-        return [$page], undef;
-    } else {
-        return [], [{path => $path}];
-    }
-}
-
-sub pref { return 1; }
-
-package main;
-
+use Test::More tests => 16;
 use MojoMojo::Formatter::Wiki;
-use Test::More;
-
-plan tests => 10;
+use lib 't/lib';
+use DummyCatalystObject;
 
 my ($content,$exist,$new);
+# this fake object returns different path_pages based on whether a wiki link containing the text "Existing"
+my $fake_c = DummyCatalystObject->new;
 
 # Tests being removed since wiki_expandword() functionality has been reduced.
 # Specifically it no longer expands wiki words.
@@ -78,39 +24,60 @@ my ($content,$exist,$new);
 
 
 $content = '\[[WikiWord]]';
-
-MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-is($content, '[[WikiWord]]');
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '[[WikiWord]]', 'escaping opening [[');
 
 $content = '/[[wikiword]]';
-MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-is($content, '/[[wikiword]]');
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '/[[wikiword]]', 'escaping URL path');
 
 $content = "WikiWord";
-MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-is($content, 'WikiWord');
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'WikiWord', 'no CamelCase for new WikiWords');
 
 $content = "ExistingWord";
-MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-is($content, 'ExistingWord');
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'ExistingWord', 'no CamelCase for existing WikiWords');
 
-#$content = qq{[[WikiWord]] <pre><code>Blah</code>\nHubbaBubba [[Wikwiord]]</pre> blah humbug [[ExistingWikiWord]]};
-#MojoMojo::Formatter::Wiki->format_content(\$content, Dummy->new, undef);
-#is($content, qq{<span class="newWikiWord">Wiki Word<a title="Not found. Click to create this page." href="http://example.com/WikiWord.edit">?</a></span> <pre lang=""><code>Blah</code>\nHubbaBubba [[Wikwiord]]</pre> blah humbug <a class="existingWikiWord" href="http://example.com/ExistingWikiWord">Existing Wiki Word</a> });
+$content = 'This is an [[explicit_link|explicit wiki link]].';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'This is an <span class="newWikiWord">explicit wiki link<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/explicit_link.edit">?</a></span>.', 'explicit wiki links');
 
+$content = 'New [[wiki link]]. No <pre lang="">[[wiki link]] hyperlinking in code sections</pre>. Here is an [[Existing_link]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'New <span class="newWikiWord">wiki link<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/wiki_link.edit">?</a></span>. No <pre lang="">[[wiki link]] hyperlinking in code sections</pre>. Here is an <a class="existingWikiWord" href="/Existing_link">Existing link</a>', 'no wiki link hyperlinking in code sections');
+
+$content = 'This is an [[explicit_link|explicit wiki link with (parens) and [square brackets] in the text]].';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'This is an <span class="newWikiWord">explicit wiki link with (parens) and [square brackets] in the text<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/explicit_link.edit">?</a></span>.', 'explicit wiki links with parens and square brackets in the text');
+
+$content = 'Implicit link: [[Devil\'s_advocate_(disambiguation)]].';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'Implicit link: <span class="newWikiWord">Devil\'s advocate (disambiguation)<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/Devil\'s_advocate_(disambiguation).edit">?</a></span>.', 'implicit link with apostrophe and parens in the path');
+
+$content = 'Implicit link with [[a [square] bracket]].';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'Implicit link with <span class="newWikiWord">a [square] bracket<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/a_[square]_bracket.edit">?</a></span>.', 'implicit link with a [square] bracket');
+
+TODO: {
+    local $TODO = 'Not exactly a critical issue';
+    $content = 'Implicit link: [[Closed_square_bracket_at_the_[end]]].';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, 'Implicit link: <span class="newWikiWord">Closed square bracket at the [end]<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/Closed_square_bracket_at_the_[end].edit">?</a></span>.', 'implicit link with closed square bracket at the end');
+}
 
 $content = 'There is one [[Existing Word]] in this text';
-($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+($exist, $new) = MojoMojo::Formatter::Wiki->find_links(\$content, $fake_c);
 is(@$exist, 1);
 is(@$new, 0);
 
 $content = 'There is one explicit [[Wiki Word]] in this text';
-($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+($exist, $new) = MojoMojo::Formatter::Wiki->find_links(\$content, $fake_c);
 is(@$exist, 0);
 is(@$new, 1);
-$_[0]->{path} = '/';
 
-$content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikwiord</pre> blah humbug [[Existing Wiki Word]]';
-($exist, $new) = MojoMojo::Formatter::Wiki->find_links (\$content, Dummy->new);
+$content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikiwiord</pre> blah humbug [[Existing Wiki Word]]';
+($exist, $new) = MojoMojo::Formatter::Wiki->find_links(\$content, $fake_c);
 is(@$exist, 1);
 is(@$new, 1);
+
