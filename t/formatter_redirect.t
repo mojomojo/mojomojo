@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 2;
+use Test::More tests => 4;
 use MojoMojo::Formatter::Redirect;
 use lib 't/lib';
 use DummyCatalystObject;
@@ -10,5 +10,10 @@ $fake_c = DummyCatalystObject->new;
 
 $content = "=redirect /foo";
 MojoMojo::Formatter::Redirect->format_content(\$content, $fake_c, undef);
-is($fake_c->redirect, '/foo' ,"Redirect is set");
-is($content,"=redirect /foo","Content is unchanged");
+is($fake_c->redirect, '/foo', "Redirect is set");
+is($content,"=redirect /foo", "Content is unchanged");
+
+$content = "=redirect /foo-bar-baz again";
+MojoMojo::Formatter::Redirect->format_content(\$content, $fake_c, undef);
+is($fake_c->redirect, '/foo-bar-baz', "URL charset test");
+is($content,"=redirect /foo-bar-baz again", "Content is unchanged");
