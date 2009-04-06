@@ -59,9 +59,9 @@ sub name { 'view' }
 
 
 sub path_pages {
-    my ($self,$path) = @_;
+    my ($self, $path) = @_;
     $path =~ s|^/||;
-    if ($path =~ /Existing/) {
+    if ($path =~ /existing/i && $path !~ /#new/) {
         my $page = DummyCatalystObject->new;
         $page->{path} = $path;
         return [$page], undef;

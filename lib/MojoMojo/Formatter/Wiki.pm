@@ -173,50 +173,82 @@ sub format_content {
     $$content = reinsert_pre( $content, @parts );
 }
 
-=item format_link <c> <word> <base> [<link_text>]
+=item format_link <c> <wikilink> <base> [<link_text>]
 
-Format a wikiword as a link
+Format a wikilink as an HTML hyperlink with the given link_text. If the wikilink
+doesn't exist, it will be rendered as a hyperlink to an .edit page ready to be
+created.
+
+Since there is no difference in syntax between new and existing links, some
+abiguities my occur when it comes to characters that are invalid in URLs. For
+example,
+
+* [[say "NO" to #8]] should be rendered as <a href="say_%22NO%22_to_%238">say "NO" to #8</a>
+* [[100% match]] should be rendered as <a href="100%25_match>100% match</a>, URL-escaping the '%'
+* but what about a user pasting an existing link, [[say_%22NO%22_to_%238]]? We shouldn't URL-escape the '%' or '#' here.
+* for links with explicit link text, we should definitiely not URL-escape the link: [[say_%22NO%22_to_%238|say "NO" to #8]]
+
+This is complicated by the fact that '#' can delimit the start of the anchor portion of a link.
+
+* [[Mambo #5]] - URL-escape '#' => Mambo_%235
+* [[Mambo#origins]] - do not URL-escape
+* [[existing/link#Introduction|See the Introduction]] - definitely do not URL-escape
+
+Since escaping is somewhat magic and therefore potentially counter-intuitive,
+we will:
+* only URL-escape '#' if it follows a whitespace directly
+* always URL-escape '%' unless it is followed by two uppercase hex digits
+* always escape other characters that are invalid in URLs
 
 =cut
 
 sub format_link {
 
     #FIXME: why both base and $c?
-    my ( $class, $c, $word, $base, $link_text ) = @_;
+    my ( $class, $c, $wikilink, $base, $link_text ) = @_;
     $base ||= $c->req->base;
-    $word = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $word unless $word =~ m|^[/\.]|;
+    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink unless $wikilink =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
-    # keep the original wikiword for display, stripping leading slashes
-    my $orig_word = $word;
-    if ( $orig_word =~ m|^ \s* /+ \s* $|x ) {
-        $orig_word = '/';
+    # keep the original wikilink for display, stripping leading slashes
+    my $orig_wikilink = $wikilink;
+    if ( $orig_wikilink =~ m|^ \s* /+ \s* $|x ) {
+        $orig_wikilink = '/';
     }
     else {
-        $orig_word =~ s/.*\///;
+        $orig_wikilink =~ s/.*\///;
     }
-    $word =~ s/\s/_/g;
-    $word =~ s/\.//g;
-    my $formatted = $link_text || $class->expand_wikiword($orig_word);
+    my $fragment = '';
+    for ($wikilink) {
+        s/\s/_/g;
+        s/\.//g;  # TODO: why is this done? It breaks links like "[[Web_2.0|Web 2.0]]"
+        # if there's no link text, URL-escape characters in the wikilink that are not valid in URLs
+        if (!defined $link_text or $link_text eq '') {
+            s/%(?![0-9A-F]{2})  # escape '%' unless it's followed by two uppercase hex digits
+            | (?<=_)\#          # escape '#' only if it directly follows a whitespace (which had been replaced by a '_')
+            | [":<=>?{|}]       # escape all other characters that are invalid in URLs 
+            /sprintf('%%%02X', ord($&))/egx;  # all other characters in the 0x21..0x7E range are OK in URLs. For the escaped characters, see the conflicting guidelines at http://www.ietf.org/rfc/rfc1738.txt and http://labs.apache.org/webarch/uri/rfc/rfc3986.html#reserved
+        }
+        s/#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion in preparation for the page search below, and save it in $fragment
+    }
+    my $formatted = $link_text || $class->expand_wikilink($orig_wikilink);
 
     # convert relative paths to absolute paths
-
     if (
         $c->stash->{page}
         &&
 
         # drop spaces
-        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' && $word !~ m|^/|
+        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' && $wikilink !~ m|^/|
         )
     {
-        $word = URI->new_abs( $word, $c->stash->{page}->path . "/" );
+        $wikilink = URI->new_abs( $wikilink, $c->stash->{page}->path . "/" );
     }
-    elsif ( $c->stash->{page_path} && $word !~ m|^/| ) {
-        $word = URI->new_abs( $word, $c->stash->{page_path} . "/" );
+    elsif ( $c->stash->{page_path} && $wikilink !~ m|^/| ) {
+        $wikilink = URI->new_abs( $wikilink, $c->stash->{page_path} . "/" );
     }
 
-    # make sure that base url has no trailing slash, since
-    # the page path will have a leading slash
+    # make sure that base URL has no trailing slash, since the page path will have a leading slash
     my $url = $base;
     $url =~ s/[\/]+$//;
 
@@ -224,33 +256,33 @@ sub format_link {
     $url =~ s!^https?://[^/]+!!;
 
     # use the normalized path string returned by path_pages:
-    my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($word);
+    my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($wikilink);
     if ( defined $proto_pages && @$proto_pages ) {
         my $proto_page = pop @$proto_pages;
         $url .= $proto_page->{path};
+        return qq{<span class="newWikiWord">$formatted<a title="}
+          . $c->loc('Not found. Click to create this page.')
+          . qq{" href="$url.edit">?</a></span>};
     }
     else {
         my $page = pop @$path_pages;
         $url .= $page->path;
+        $url .= "#$fragment" if $fragment ne '';
         return qq{<a class="existingWikiWord" href="$url">$formatted</a>};
     }
-    return
-        qq{<span class="newWikiWord">$formatted<a title="}.$c->loc('Not found. Click to create this page.').qq{" href="$url.edit">?</a></span>};
 }
 
-=item expand_wikiword <word>
+=item expand_wikilink <wikilink>
 
-Expand mixed case and _ with spaces.
+Replace _ with spaces.
 
 =cut
 
-sub expand_wikiword {
-    my ( $class, $word ) = @_;
-    # No longer expanding wikiwords
-    #TODO: Rename this function to something more appropriate.
-    #$word =~ s/([a-z])([A-Z])/$1 $2/g;
-    $word =~ s/\_/ /g;
-    return $word;
+sub expand_wikilink {
+    my ( $class, $wikilink ) = @_;
+    #TODO: encode characters that are invalid in URLs
+    $wikilink =~ s/\_/ /g;
+    return $wikilink;
 }
 
 =item find_links <content> <page>
