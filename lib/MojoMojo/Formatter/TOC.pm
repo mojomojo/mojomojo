@@ -104,7 +104,7 @@ document and anchor names should be restricted to ASCII characters.
 
 
 # http://search.cpan.org/dist/HTML-Toc/Toc.pod#templateAnchorName
-sub assembleAnchorName() {
+sub assembleAnchorName {
     my ($aFile, $aGroupId, $aLevel, $aNode, $text, $children) = @_;
 
     if ($text !~ /^\s*$/) {

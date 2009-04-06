@@ -4,6 +4,7 @@ use base qw/MojoMojo::Formatter/;
 
 use URI;
 use Scalar::Util qw/blessed/;
+use MojoMojo::Formatter::TOC;
 
 =head1 NAME
 
@@ -11,11 +12,16 @@ MojoMojo::Formatter::Wiki - Handle interpage linking.
 
 =head1 DESCRIPTION
 
-This formatter handles Wiki links using the [[WikiWord]] . It
-will also indicate missing links with a question mark and a
-link to the edit page. In explicit mode, you can prefix the
-wikiword with a path, just like in a normal URL. For example:
-[[../marcus]] or [[/oslo/vacation]].
+This formatter handles intra-Wiki links specified between double square brackets
+or parentheses: [[wiki link]] or ((another wiki link)). It will also indicate
+missing links with a question mark and a link to the edit page. Links can be
+implicit (like the two above), where the path is derived from the link text
+by replacing spaces with underscores (<a href="wiki_link">wiki link</a>), or
+explicit, where the path is specified before a '|' sign:
+
+    [[/explicit/path|Link text goes here]]
+
+Note that external links have a different syntax: [Link text](http://foo.com).
 
 =head1 METHODS
 
@@ -74,7 +80,7 @@ my $explicit_text  = _generate_explicit_text();
 
 
 sub _generate_non_wikiword_check {
-
+    # FIXME: this evaluates incorrectly to a regexp that's clearly mistaken: (?x-ism:( ?<! [\[\[\(\((?-xism:\\)\/\?] ))
     # we include '\/' to avoid wikiwords that are parts of urls
     # but why the question mark ('\?') at the end?
     my $non_wikiword_chars =
@@ -132,7 +138,6 @@ sub format_content {
     # Extract wikiwords, avoiding escaped and part of urls
     my @parts;
     ( $$content, @parts ) = strip_pre($content);
-
 
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
@@ -220,8 +225,9 @@ sub format_link {
     }
     my $fragment = '';
     for ($wikilink) {
+        s/(?<!\s)#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion away, in preparation for the page search below, and save it in $fragment
         s/\s/_/g;
-        s/\.//g;  # TODO: why is this done? It breaks links like "[[Web_2.0|Web 2.0]]"
+        s/\./_/g;  # MojoMojo doesn't support periods in wikilinks because they conflict with actions ('.edit', '.info' etc.); actions are a finite set apparently, but it's possible to add new actions from formatter plugins (e.g. Comment)
         # if there's no link text, URL-escape characters in the wikilink that are not valid in URLs
         if (!defined $link_text or $link_text eq '') {
             s/%(?![0-9A-F]{2})  # escape '%' unless it's followed by two uppercase hex digits
@@ -229,8 +235,10 @@ sub format_link {
             | [":<=>?{|}]       # escape all other characters that are invalid in URLs
             /sprintf('%%%02X', ord($&))/egx;  # all other characters in the 0x21..0x7E range are OK in URLs; see the conflicting guidelines at http://www.ietf.org/rfc/rfc1738.txt and http://labs.apache.org/webarch/uri/rfc/rfc3986.html#reserved
         }
-        s/#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion in preparation for the page search below, and save it in $fragment
     }
+    # if the fragment was not properly formatted as a fragment (per the rules explained in MojoMojo::Formatter::TOC::assembleAnchorName, i.e. i has an invalid character), convert it, unless it contains escaped characters already (.[0-9A-F]{2})
+    $fragment = MojoMojo::Formatter::TOC::assembleAnchorName(undef, undef, undef, undef, $fragment)
+        if $fragment ne '' and ($fragment =~ /[^A-Za-z0-9_:.-]/ or $fragment !~ /\.[0-9A-F]{2}/);
     my $formatted = $link_text || $class->expand_wikilink($orig_wikilink);
 
     # convert relative paths to absolute paths

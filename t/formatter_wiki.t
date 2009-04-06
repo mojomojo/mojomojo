@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 23;
+use Test::More tests => 26;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';
 use DummyCatalystObject;
@@ -7,6 +7,10 @@ use DummyCatalystObject;
 my ($content,$exist,$new);
 # this fake object returns different path_pages based on whether a wiki link containing the text "existing"
 my $fake_c = DummyCatalystObject->new;
+
+$content = '[[existing|MojoMojo 2]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', 'number at the end of the link text');
 
 $content = '\[[WikiWord]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
@@ -73,7 +77,15 @@ is($content, '<span class="newWikiWord">new link say "NO" to #8<a title="Faking 
 
 $content = '[[79.1% of Americans believe in miracles]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-is($content, '<span class="newWikiWord">79.1% of Americans believe in miracles<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/79.1%25_of_Americans_believe_in_miracles.edit">?</a></span>', 'link with a period');
+is($content, '<span class="newWikiWord">79.1% of Americans believe in miracles<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/79_1%25_of_Americans_believe_in_miracles.edit">?</a></span>', 'periods in links become underscores');
+
+$content = '[[existing#Really.3F|Really?]]';  # scenario: user copy/pasted the fragment from the ToC link of the target page
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<a class="existingWikiWord" href="/existing#Really.3F">Really?</a>', 'wikilink fragment with period due to encoding of character illegal in fragments');
+
+$content = '[[existing#Really?|Really?]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<a class="existingWikiWord" href="/existing#Really.3F">Really?</a>', 'wikilink fragment with character illegal in fragments - fragment-escape it');
 
 
 # expand_wikilink tests
