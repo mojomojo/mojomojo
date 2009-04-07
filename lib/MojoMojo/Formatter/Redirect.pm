@@ -38,7 +38,7 @@ context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
 
-    if ( my ($page) = $$content =~ m/^=redirect\s((?:\/\w*)+)/ ) {
+    if ( my ($page) = $$content =~ m{^=redirect\s((?:/[^\s":<=>?{|}]*)+)} ) {
         if ($c->action->name eq 'view' && !$c->ajax) {
             $c->flash->{'redirect'}=$c->stash->{'path'};;
             $c->res->redirect( $c->uri_for($page) );

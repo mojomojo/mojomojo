@@ -1,7 +1,7 @@
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         [% loc('Search') %]: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %] 
+        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
         <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
     </form>
 </div>
@@ -18,7 +18,7 @@
 <ul>
 [% FOR result = results %]
  <li>
-    <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a></strong>
+    <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikilink(result.page.name) %]</a></strong>
     <span id="search_hit_score">[% result.score %]%</span>
     <div class="snippet">
       [% result.snippet %]
@@ -28,7 +28,7 @@
       [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
     </div>
   </li>
-[%END%]
+[% END %]
 </ul>
 
 [% IF pager && pager.total_entries > pager.entries_per_page %]
@@ -47,4 +47,3 @@
         </ul>
     </div>
 [% END %]
-

@@ -2,7 +2,7 @@
 <div id="header"><h1>
   [% c.pref("name") %]
 gallery -
-  [% c.expand_wikiword(page.name_orig) %]
+  [% c.expand_wikilink(page.name_orig) %]
 [%IF tag; %]([%tag%])[%END%]
 </h1></div>
 [% PROCESS breadcrumbs.tt %]

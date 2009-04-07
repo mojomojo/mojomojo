@@ -6,7 +6,7 @@
       [% IF page.name == "/" %]
         [% c.pref("name") %] [% loc('Home') %] (/)
       [% ELSE %]
-        [% c.expand_wikiword(page.name_orig) %]
+        [% c.expand_wikilink(page.name_orig) %]
       [% END %]
       [% IF post_title %][% post_title %][% END %]
     [% END %]

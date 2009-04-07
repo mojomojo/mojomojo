@@ -59,7 +59,7 @@
     <li>
   [%loc('Linked from')%]:
   [% FOR linkitem = page.links_to +%]
-      <a class="existingWikiWord" title="[% linkitem.from_page.name_orig %]" href="[% c.uri_for(linkitem.from_page.path) %]">[% c.expand_wikiword(linkitem.from_page.path) %]</a>
+      <a class="existingWikiWord" title="[% linkitem.from_page.name_orig %]" href="[% c.uri_for(linkitem.from_page.path) %]">[% c.expand_wikilink(linkitem.from_page.path) %]</a>
   [% END %]
     </li>
 [% END %]
