@@ -43,7 +43,7 @@ requires(
     'File::MMagic'                                 => '1.27',
     'File::Slurp'                                  => '9999.13', # Markdown
     'HTML::Entities'                               => '3.60',    # Pod::Simple
-    'HTML::FormFu'                                 => '0.02000, # min version with string renderer
+    'HTML::FormFu'                                 => '0.02000', # min version with string renderer
     'HTML::FormFu::Model::DBIC'                    => 0,
     'HTML::Scrubber'                               => 0,
     'HTML::Strip'                                  => '1.04',
