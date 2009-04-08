@@ -44,20 +44,22 @@ MojoMojo->config->{cache}{backend} = {
     class => "Cache::FastMmap",
 };
 
-MojoMojo->config->{page_cache} = {
-        cache_seconds    => 24 * 60 * 60, # once a day
-        set_http_headers => 0,
-        auto_cache       => [
-                               '/.*',
-        ],
-        key_maker => sub {
-             my $c = shift;
-             return $c->stash->{path} . '.' . $c->req->path;
-        },
 
-        debug => 0 ,
-        cache_hook => 'cache_hook'
-};
+MojoMojo->config(
+        'Plugin::PageCache' => {
+            expires          => 300, # only 5 minutes for now
+            set_http_headers => 0,
+            auto_cache       => [
+                               '/.*',
+            ],
+            key_maker => sub {
+                my $c = shift;
+                return $c->stash->{path} . '.' . $c->req->path;
+            },
+            debug => 0 ,
+            cache_hook => 'cache_hook'
+        }
+);
 
 MojoMojo->setup();
 
@@ -130,14 +132,13 @@ Dont cache if user_exist or CATALYST_NOCACHE is set or
 sub cache_hook {
   my ( $c ) = @_;
 
-
   if ( $c->user_exists        ||
        $ENV{CATALYST_NOCACHE} ||
        ! $c->cache_ie_list->evaluate($c->req->path)
      ) {
     return 0; # Don't cache
   }
-  return 1; # Cache
+  return 1;   # Cache
 }
 
 
