@@ -83,7 +83,7 @@ L<MojoMojo::Installation> to try it out yourself.
 
 =cut
 
-# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikiword method.
+# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
 
 sub ajax {
     my ($c) = @_;
@@ -91,9 +91,9 @@ sub ajax {
         && $c->req->header('x-requested-with') eq 'XMLHttpRequest';
 }
 
-sub expand_wikiword {
+sub expand_wikilink {
     my $c = shift;
-    return MojoMojo::Formatter::Wiki->expand_wikiword(@_);
+    return MojoMojo::Formatter::Wiki->expand_wikilink(@_);
 }
 
 # Format a wikiword as a link or as a wanted page, as appropriate.
@@ -107,7 +107,6 @@ sub wikiword {
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
-
     return unless $setting;
 
     # Unfortunately there are MojoMojo->pref() calls in
@@ -144,12 +143,43 @@ sub pref_cached {
     # Update database
     $row->update( { prefvalue => $value } ) if defined $value;
 
+    my $prefvalue= $row->prefvalue();
+
+    # if no entry in preferences, try get one from config or get default value
+    unless ( defined $prefvalue) {
+
+      if ($setting eq 'main_formatter' ) {
+        $prefvalue = defined $c->config->{'main_formatter'}
+                     ? $c->config->{'main_formatter'}
+                     : 'MojoMojo::Formatter::Textile';
+      } elsif ($setting eq 'default_lang' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'en';
+      } elsif ($setting eq 'name' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'MojoMojo';
+      } elsif ($setting eq 'theme' ) {
+        $prefvalue = defined $c->config->{$setting}
+                     ? $c->config->{$setting}
+                     : 'default';
+      } elsif ($setting =~ /^(enforce_login|check_permission_on_view)$/ ) {
+        $prefvalue = defined $c->config->{'permissions'}{$setting}
+                     ? $c->config->{'permissions'}{$setting}
+                     : 0;
+      } elsif ($setting =~ /^(cache_permission_data|create_allowed|delete_allowed|edit_allowed|view_allowed|attachment_allowed)$/ ) {
+        $prefvalue = defined $c->config->{'permissions'}{$setting}
+                     ? $c->config->{'permissions'}{$setting}
+                     : 1;
+      } else {
+        $prefvalue = $c->config->{$setting};
+      }
+
+    }
+
     # Update cache
-    $c->cache->set(
-          $setting => defined $row->prefvalue
-        ? $row->prefvalue()
-        : ""
-    );
+    $c->cache->set( $setting => $prefvalue );
 
     return $c->cache->get($setting);
 }
@@ -342,11 +372,7 @@ sub get_permissions_data {
     #                                                  },
     #                                         users => .....
     #                                     }
-    if ( $c->pref('cache_permission_data')    ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1) {
+    if ( $c->pref('cache_permission_data') ){
         $permdata = $c->cache->get('page_permission_data');
     }
 
@@ -361,11 +387,7 @@ sub get_permissions_data {
             ->search( undef, { order_by => 'length(path),role,apply_to_subpages' } );
 
         # if we are not caching, we don't return the whole enchilada.
-        if ( ! ( $c->pref('cache_permission_data')    ne""
-               ? $c->pref('cache_permission_data')
-               : defined $c->config->{'permissions'}{'cache_permission_data'}
-                 ? $c->config->{'permissions'}{'cache_permission_data'}
-                 : 1) ) {
+        if ( ! $c->pref('cache_permission_data') ) {
             ## this seems odd to me - but that's what the dbix::class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
@@ -400,11 +422,7 @@ sub get_permissions_data {
     }
 
     ## now we re-cache it - if we need to.  # !$c->cache('memory')->exists('page_permission_data')
-    if ( $c->pref('cache_permission_data')    ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1) {
+    if ( $c->pref('cache_permission_data') ) {
         $c->cache->set( 'page_permission_data', $permdata );
     }
 
@@ -432,6 +450,16 @@ sub check_permissions {
         edit        => 1,    view        => 1,
     } if ($user && $user->is_admin);
 
+    # if no user is logged in
+    unless ($user){
+      # if anonymous user is allowed
+      my $anonymous=$c->pref('anonymous_user');
+      if ($anonymous){
+        # get anonymous user for no logged-in users
+        $user= $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+      }
+    }
+
     my @paths_to_check = $c->_expand_path_elements($path);
     my $current_path   = $paths_to_check[-1];
 
@@ -443,57 +471,27 @@ sub check_permissions {
     # allow everything by default
     my %rulescomparison = (
         'create' => {
-            'allowed' => (
-                $c->pref('create_allowed') ne""
-                ? $c->pref('create_allowed')
-                : defined $c->config->{'permissions'}{'create_allowed'}
-                  ? $c->config->{'permissions'}{'create_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('create_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'delete' => {
-            'allowed' => (
-                $c->pref('delete_allowed') ne""
-                ? $c->pref('delete_allowed')
-                : defined $c->config->{'permissions'}{'delete_allowed'}
-                  ? $c->config->{'permissions'}{'delete_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('delete_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'edit' => {
-            'allowed' => (
-                $c->pref('edit_allowed') ne""
-                ? $c->pref('edit_allowed')
-                : defined $c->config->{'permissions'}{'edit_allowed'}
-                  ? $c->config->{'permissions'}{'edit_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('edit_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'view' => {
-            'allowed' => (
-                $c->pref('view_allowed') ne""
-                ? $c->pref('view_allowed')
-                : defined $c->config->{'permissions'}{'view_allowed'}
-                  ? $c->config->{'permissions'}{'view_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('view_allowed'),
             'role' => '__default',
             'len'  => 0,
         },
         'attachment' => {
-            'allowed' => (
-                $c->pref('attachment_allowed') ne""
-                ? $c->pref('attachment_allowed')
-                : defined $c->config->{'permissions'}{'attachment_allowed'}
-                  ? $c->config->{'permissions'}{'attachment_allowed'}
-                  : 1
-            ),
+            'allowed' => $c->pref('attachment_allowed'),
             'role' => '__default',
             'len'  => 0,
         },

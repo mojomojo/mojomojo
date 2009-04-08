@@ -2,14 +2,14 @@
   <div style="float:left;">
   [% FOREACH page IN path_pages %]
     [% IF loop.first +%]
-  <a href="[% c.uri_for('/') %]">[% c.pref("name") || "MojoMojo" %]</a>
+  <a href="[% c.uri_for('/') %]">[% c.pref("name") %]</a>
     [% ELSE +%]
-  / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
+  / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
     [% END %]
   [% END %]
 
   [% FOREACH page IN proto_pages +%]
-  / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikiword(page.name_orig) %]</a>
+  / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
   [% END +%]
   </div>
 
@@ -57,7 +57,7 @@
        $('#container').css('max-width','99%');
        // change icon
        $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_1.png') %]');
-       // set maximize 
+       // set maximize
        $(this).load('[%c.uri_for('json/container_maximize_width/')%]'+toggle_width.width);
      } else {
        // toggle - restore default width
@@ -67,7 +67,7 @@
        // unset maximize
        $(this).load('[%c.uri_for('json/container_maximize_width/')%]');
      }
-   } 
+   }
   </script>
 
 </div>

@@ -692,8 +692,9 @@ ul#menuHome {
 
 div.photo img{
     margin: 1em;
-    padding:5px;
-    border:1px solid;border-color: #ccc #666 #666 #ccc
+    padding: 5px;
+    border: 1px solid;
+	border-color: #ccc #666 #666 #ccc
 }
 
 .end {
@@ -707,12 +708,23 @@ div.photo img{
 }
 
 acronym {
-  border-bottom: 1px dotted !important;
+    border-bottom: 1px dotted !important;
 }
 
 .inplaceeditor-form input {
     margin: 0px 10px 0px 0px;
 }
+
+a.footnote {
+    vertical-align: .6em;
+	font-size: 75%;
+}
+a.footnote:before {
+    content: "["
+}	
+a.footnote:after {
+    content: "]"
+}	
 
 .inplaceeditor-form a {
     border: 1px solid black;
@@ -921,7 +933,7 @@ div#bottomnav { clear:both; }
   color: black;
 }
 
-/* Syntax Highlight Engine Kate */
+/* Syntax::Highlight::Engine::Kate */
 .kateAlert { color: #0000ff; }
 .kateBaseN { color: #007f00; }
 .kateBString { color: #c9a7ff; }
