@@ -58,6 +58,7 @@ requires(
     'LWP::Simple'                                  => 0,
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'Catalyst::Plugin::PageCache'                  => 0,
     'parent'                                       => 0,
     'Pod::Simple::HTML'                            => '3.01',
     'String::Diff'                                 => 0,
