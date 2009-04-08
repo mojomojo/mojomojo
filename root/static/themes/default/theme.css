@@ -57,6 +57,12 @@ body {
     color: white;
     text-decoration: none;
 }
+#breadcrumbs .left{
+    float: left;
+}
+#breadcrumbs .right {
+    float: right;
+}
 #breadcrumbs a:hover {
     color: #ffffff;
     background-color: #33455c;
@@ -236,6 +242,10 @@ div#pageoptions a {
     font-size: 1em;
 }
 
+#bottomnav ul {
+    display: inline;
+}
+
 #lang {
     background: #ccc;
     padding: 0.4em;
@@ -266,5 +276,63 @@ p {
 #content table .center {
     text-align: center;
 }
+
+
+/* ----- for HTML::TagCloud ------------*/
+#htmltagcloud {
+  text-align:  center; 
+  line-height: 1; 
+}
+span.tagcloud0 { font-size: 12px;}
+span.tagcloud0 a {text-decoration: none;}
+span.tagcloud1 { font-size: 13px;}
+span.tagcloud1 a {text-decoration: none;}
+span.tagcloud2 { font-size: 14px;}
+span.tagcloud2 a {text-decoration: none;}
+span.tagcloud3 { font-size: 15px;}
+span.tagcloud3 a {text-decoration: none;}
+span.tagcloud4 { font-size: 16px;}
+span.tagcloud4 a {text-decoration: none;}
+span.tagcloud5 { font-size: 17px;}
+span.tagcloud5 a {text-decoration: none;}
+span.tagcloud6 { font-size: 18px;}
+span.tagcloud6 a {text-decoration: none;}
+span.tagcloud7 { font-size: 19px;}
+span.tagcloud7 a {text-decoration: none;}
+span.tagcloud8 { font-size: 20px;}
+span.tagcloud8 a {text-decoration: none;}
+span.tagcloud9 { font-size: 21px;}
+span.tagcloud9 a {text-decoration: none;}
+span.tagcloud10 { font-size: 22px;}
+span.tagcloud10 a {text-decoration: none;}
+span.tagcloud11 { font-size: 23px;}
+span.tagcloud11 a {text-decoration: none;}
+span.tagcloud12 { font-size: 24px;}
+span.tagcloud12 a {text-decoration: none;}
+span.tagcloud13 { font-size: 25px;}
+span.tagcloud13 a {text-decoration: none;}
+span.tagcloud14 { font-size: 26px;}
+span.tagcloud14 a {text-decoration: none;}
+span.tagcloud15 { font-size: 27px;}
+span.tagcloud15 a {text-decoration: none;}
+span.tagcloud16 { font-size: 28px;}
+span.tagcloud16 a {text-decoration: none;}
+span.tagcloud17 { font-size: 29px;}
+span.tagcloud17 a {text-decoration: none;}
+span.tagcloud18 { font-size: 30px;}
+span.tagcloud18 a {text-decoration: none;}
+span.tagcloud19 { font-size: 31px;}
+span.tagcloud19 a {text-decoration: none;}
+span.tagcloud20 { font-size: 32px;}
+span.tagcloud20 a {text-decoration: none;}
+span.tagcloud21 { font-size: 33px;}
+span.tagcloud21 a {text-decoration: none;}
+span.tagcloud22 { font-size: 34px;}
+span.tagcloud22 a {text-decoration: none;}
+span.tagcloud23 { font-size: 35px;}
+span.tagcloud23 a {text-decoration: none;}
+span.tagcloud24 { font-size: 36px;}
+span.tagcloud24 a {text-decoration: none;}
+
 
 /* @end */

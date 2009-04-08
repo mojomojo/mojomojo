@@ -1,5 +1,5 @@
 <div id="breadcrumbs">
-  <div style="float:left;">
+  <div class="left">
   [% FOREACH page IN path_pages %]
     [% IF loop.first +%]
   <a href="[% c.uri_for('/') %]">[% c.pref("name") %]</a>
@@ -13,61 +13,12 @@
   [% END +%]
   </div>
 
-  <script type="text/javascript">
-    document.write('<div style="float:right;">\
+  <div class="right">
 [% IF c.session.maximize_width %]
-  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_2.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />\
+  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_2.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />
 [% ELSE %]
-  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_1.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />\
+  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_1.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />
 [% END %]
-  </div>');
-   $(document).ready(function() {
-     $('#maximize').mouseover(function () {
-       toggle_maximize_img($(this));
-     });
-     $('#maximize').mouseout(function () {
-       toggle_maximize_img($(this));
-     });
-   });
-
-   function toggle_maximize_img (img) {
-     if (img.attr("src").match('maximize_width_1.png')){
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_2.png') %]');
-     } else {
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_1.png') %]');
-     }
-   }
-
-   function toggle_width() {
-     var width;
-     // first click on icon
-     if ( typeof toggle_width.width == 'undefined' ) {
-       // if maximized, get width from session variable
-       if ( 1 == "[% c.session.maximize_width %]" ){
-         toggle_width.width="[% c.session.container_default_width %]";
-       } else {
-         // get value from css
-         toggle_width.width=$('#container').css('max-width');
-         // store width
-         $(this).load('[%c.uri_for('json/container_set_default_width/')%]'+toggle_width.width);
-       }
-     }
-     // isn't maximized
-     if ( $('#container').css('max-width')==toggle_width.width){
-       $('#container').css('max-width','99%');
-       // change icon
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_1.png') %]');
-       // set maximize
-       $(this).load('[%c.uri_for('json/container_maximize_width/')%]'+toggle_width.width);
-     } else {
-       // toggle - restore default width
-       $('#container').css('max-width',toggle_width.width);
-       // change icon
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_2.png') %]');
-       // unset maximize
-       $(this).load('[%c.uri_for('json/container_maximize_width/')%]');
-     }
-   }
-  </script>
+  </div>
 
 </div>

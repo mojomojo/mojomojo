@@ -57,5 +57,6 @@
         </tr>
   [% END %]
 [% END %]
+</tbody>
 </table>
 [% END %]
