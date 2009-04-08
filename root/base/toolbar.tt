@@ -8,6 +8,7 @@ $(document).ready(function(){
       $('#formatter').val("[% loc('Formatter') %]");
       if (selected=='irc_formatter') return insertTags('body','\n=irc\n',  '\n=irc\n\n',  '12:00 <nick> Hello #mojomojo!');
       if (selected=='pod_formatter') return insertTags('body','\n=pod\n\n','\n\n=pod\n\n','[% loc("=head1 Header") %]'   );
+      if (selected=='docbook_formatter') return insertTags('body','\n=docbook\n','=docbook\n','<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"\n"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">\n<article lang="en">\n  <title>TEST</title>\n  <section id="test">\n    <title>Test programlisting</title>\n    <para>Perl code<programlisting lang="perl">#!/usr/bin/perl\n\nuse feature qw(say);\nprint "Content-type: text/html\\n\\n";\nprint "<H1>Hello World</H1>\\n";\n</programlisting></para>\n</section>\n</article>\n');
     });
     
     // insert
@@ -37,6 +38,7 @@ $(document).ready(function(){
     <option selected>[% loc('Formatter') %]</option>
     <option value="irc_formatter">[% loc('IRC formatter') %]</option>
     <option value="pod_formatter">[% loc('POD formatter') %]</option>
+    <option value="docbook_formatter">[% loc('DocBook formatter') %]</option>
 </select>
 
 <select id="insert" title="[% loc('Insert') %]">
