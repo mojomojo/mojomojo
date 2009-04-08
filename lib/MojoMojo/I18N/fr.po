@@ -95,7 +95,7 @@ msgstr "Toutes les Pages dans %1 par ordre alphabétique"
 #. (activetag)
 #: root/base/tag/list.tt:21
 msgid "All pages tagged with x listed alphabetically"
-msgstr "toutes les pages taggés avec %1 par ordre alphabétique"
+msgstr "Toutes les pages taggées avec %1 listées par ordre alphabétique"
 
 #: root/base/tag/cloud.tt:9
 msgid "All tags"
@@ -121,7 +121,7 @@ msgstr "Liste des pages par ordre alphabétique"
 msgid "Also try h2,h3 and so on"
 msgstr "Essayer aussi h2,h3 ..."
 
-#: lib/MojoMojo/Controller/User.pm:261
+# lib/MojoMojo/Controller/User.pm:261
 msgid "An error occourred. Sorry."
 msgstr "Une erreur s'est produite. Désolé."
 
@@ -143,7 +143,7 @@ msgstr "Et d'autres."
 
 #: lib/MojoMojo/Schema.pm:54
 msgid "Anonymous Coward"
-msgstr "Utilisateur Anonyme"
+msgstr "Anonyme lâche"
 
 #: root/forms/admin/settings.yml:20
 msgid "Anonymous User (blank to disable)"
@@ -231,7 +231,7 @@ msgstr "Utilisateur Admin introuvable:"
 
 #: root/base/toolbar.tt:19
 msgid "Centered paragraph"
-msgstr "Paragraphe centré"
+msgstr "paragraphe centré"
 
 #: root/base/navbar.tt:18 root/base/page/bottomnav.tt:13
 msgid "Change page content"
@@ -255,7 +255,7 @@ msgstr "Enfant"
 
 #: root/base/page/attachments.tt:14
 msgid "Choose attachments"
-msgstr "Choisir les pièces jointes"
+msgstr "Choisir la pièce jointes"
 
 #: root/base/edithelp.tt:121
 msgid "Circle"
@@ -271,7 +271,7 @@ msgstr "Cliquer sur un page inexistante pour la créer. N'importe quelle page au
 
 #: root/base/toolbar.tt:11
 msgid "Code"
-msgstr "Code source"
+msgstr "Code"
 
 #: root/base/edithelp.tt:137
 msgid "Code Spans"
@@ -283,7 +283,7 @@ msgstr "Commentaire"
 
 #: root/forms/comment/comment.yml:12
 msgid "Comment body"
-msgstr "Commentaire"
+msgstr "Corps du commentaire"
 
 #: root/base/comment.tt:5
 msgid "Comments"
@@ -291,7 +291,7 @@ msgstr "Commentaires"
 
 #: root/base/page/info.tt:15
 msgid "Content size"
-msgstr "Poids du contenu"
+msgstr "Taille du contenu"
 
 #: lib/MojoMojo/Controller/User.pm:52 root/base/comment/login.tt:6
 msgid "Could not authenticate that login."
@@ -320,11 +320,11 @@ msgstr "Créer et Voir"
 
 #: root/base/edithelp.tt:155
 msgid "Creates"
-msgstr "Crée"
+msgstr "Créees"
 
 #: root/base/page/edit.tt:6
 msgid "Creating"
-msgstr "Créer"
+msgstr "Création"
 
 #: root/base/page/bottomnav.tt:38
 msgid "Current Revision"
@@ -336,11 +336,11 @@ msgstr "Mot de passe actuel"
 
 #: root/base/user/profile.tt:33
 msgid "Date registered"
-msgstr "Date d'enregistrement"
+msgstr "Date d'inscription"
 
 #: root/base/toolbar.tt:27 root/base/toolbar.tt:61
 msgid "Deleted Text"
-msgstr "Texte effacé"
+msgstr "Texte supprimé"
 
 #: root/base/page/info.tt:21
 msgid "Descendants"
@@ -348,7 +348,7 @@ msgstr "Descendants"
 
 #: root/base/user/validate.tt:19
 msgid "Didn't receive an email?"
-msgstr "Vous n'avez pas reçu d'email?"
+msgstr "Vous n'avez pas reçus de mail ?"
 
 #: root/base/navbar.tt:56 root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
@@ -384,12 +384,12 @@ msgstr "Editer par"
 
 #: root/base/page/edit.tt:4
 msgid "Editing"
-msgstr "Editer"
+msgstr "Edition"
 
 #. (user.name)
 #: root/base/user/editprofile.tt:3
 msgid "Editing user profile for x"
-msgstr "Editer le profil utilisateur pour %1"
+msgstr "Edition du profil utilisateur pour %1"
 
 #: root/base/user/profile.tt:6 root/base/user/recover_pass.tt:10 root/base/user/validate.tt:26 root/forms/user/prefs.yml:23 root/forms/user/register.yml:34
 msgid "Email"
@@ -397,7 +397,7 @@ msgstr "Email"
 
 #: root/base/user/validate.tt:4
 msgid "Email Validation"
-msgstr "Validation de vote email"
+msgstr "Validation Mail"
 
 #: lib/MojoMojo/Controller/User.pm:188
 msgid "Emailed you your new password."
@@ -441,11 +441,11 @@ msgstr "Feeds"
 
 #: root/base/user/validate.tt:22
 msgid "Fill in the email address you want to use here"
-msgstr "Saisir l'adresse email que vous voulez utiliser ici"
+msgstr "2crire l'adresse mail que vous voulez utiliser ici"
 
 #: root/base/edithelp.tt:36
 msgid "Format content until next =pod as plain old documentation"
-msgstr "Formater le contenu jusqu'au prochain =pod comme de la documentationTitre"
+msgstr "Formater le contenu jusqu'au prochain =pod comme le POD"
 
 #: root/base/page/bottomnav.tt:50
 msgid "Format page for printing"
@@ -473,7 +473,7 @@ msgstr "Genre"
 
 #: root/base/navbar.tt:28
 msgid "Get in there"
-msgstr "Allez-y"
+msgstr "Entrez là"
 
 #: root/base/page/search.tt:13 root/base/page/search_inline.tt:3
 msgid "Go"
@@ -576,7 +576,7 @@ msgstr "Si l'uploader flash ne fonctionne pas, changez pour le"
 #. (link)
 #: root/base/user/validate.tt:32
 msgid "If you are unable to validate, please x"
-msgstr "Si vous ne pouvez pas valider, merci %1"
+msgstr "Si vous êtes incapables de valider, s'il vous plaît %1 "
 
 #: root/base/edithelp.tt:38
 msgid "Image"
@@ -612,7 +612,7 @@ msgstr "Centre d'intérêts"
 
 #: root/base/toolbar.tt:37 root/base/toolbar.tt:63
 msgid "Internal Link"
-msgstr "Lien Interne"
+msgstr "Lien interne"
 
 #: lib/MojoMojo/Controller/User.pm:154
 msgid "Invalid password."
@@ -749,11 +749,11 @@ msgstr "Nested backticks"
 
 #: root/base/user/register.tt:2
 msgid "New User Registration"
-msgstr "Enregistrement d'un nouvel utilisateur"
+msgstr "Inscription de nouveau utilisateur "
 
 #: root/forms/admin/settings.yml:23
 msgid "New User Registration open"
-msgstr "Enregistrement nouvel utilisateur ouvert"
+msgstr "Inscription nouvel utilisateur ouvert"
 
 #: root/forms/user/password.yml:17
 msgid "New password"
@@ -787,15 +787,15 @@ msgstr "Aucun utilisateur n'a été ajouté."
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:39
 msgid "No permissions to edit this page"
-msgstr "Acune permissions pour éditer cette page"
+msgstr "Aucune permission pour éditer cette page"
 
 #: root/base/user/list.tt:13
 msgid "No recent changes"
-msgstr "Pas de changement récent "
+msgstr "Pas de changement récent"
 
 #: root/base/page/search.tt:24 root/base/page/search_inline.tt:15
 msgid "No results found"
-msgstr "Aucun résultat trouvé"
+msgstr "Pas de résultat trouvé"
 
 #: root/base/admin/role.tt:29
 msgid "No roles created yet."
@@ -808,7 +808,7 @@ msgstr "Aucune révision correspondate pour "
 
 #: root/base/page/suggest.tt:13
 msgid "Non-Existent Pages"
-msgstr "Page Inexistante"
+msgstr "Page inexistante"
 
 #: root/base/page/permissions.tt:28
 msgid "None"
@@ -836,11 +836,11 @@ msgstr "Liste numérotée"
 
 #: root/base/toolbar.tt:52 root/base/toolbar.tt:6
 msgid "Numbered list item"
-msgstr "Liste numéroté"
+msgstr "Liste numérotée"
 
 #: root/base/page/suggest.tt:3
 msgid "One or more pages in the requested path do not exist."
-msgstr "Une ou plusieurs pages dans la requête demandé n'existe(nt) pas"
+msgstr "Une ou plusieurs pages de la requête sont inexistante"
 
 #: root/base/edithelp.tt:67
 msgid "Optional Title"
@@ -849,7 +849,7 @@ msgstr "Titre optionnel"
 #. (link)
 #: root/base/tag/cloud.tt:10
 msgid "Or you can check out x instead"
-msgstr "Ou vous pouvez essayer %1 à la place"
+msgstr "Vous pouvez aussi vérifier %1"
 
 #: root/base/edithelp.tt:90
 msgid "Ordered Lists"
@@ -857,11 +857,11 @@ msgstr "Listes ordonnées"
 
 #: root/base/page/list.tt:48
 msgid "Orphaned Pages"
-msgstr "Pages Orphelines"
+msgstr "Pages orphelines"
 
 #: root/base/page/suggest.tt:23
 msgid "Other Suggestions"
-msgstr "Autres Suggestions"
+msgstr "Autres suggestions"
 
 #: root/base/page/list.tt:28
 msgid "Other pages that link to this page."
@@ -894,7 +894,7 @@ msgstr "Pages triées par derniers changements."
 
 #: root/base/page/list.tt:49
 msgid "Pages to which no other pages link."
-msgstr "Pages sans liens venant d'autres pages"
+msgstr "Pages auxquelles aucune page ne fait référence"
 
 #: root/base/user/login.tt:19 root/forms/user/register.yml:19
 msgid "Password"
@@ -940,11 +940,11 @@ msgstr "Image"
 
 #: root/base/toolbar.tt:41 root/base/toolbar.tt:67
 msgid "Picture left"
-msgstr "Image à gauche"
+msgstr "Image gauche"
 
 #: root/base/toolbar.tt:45 root/base/toolbar.tt:71
 msgid "Picture right"
-msgstr "Image à droite"
+msgstr "Image droite"
 
 #: lib/MojoMojo/Controller/User.pm:33
 msgid "Please enter username and password"
@@ -1004,7 +1004,7 @@ msgstr "Profil"
 
 #: root/base/export.tt:7
 msgid "Raw markup"
-msgstr "Text brut"
+msgstr "Texte brut"
 
 #: root/base/navbar.tt:36 root/base/navbar.tt:38
 msgid "Recent"
@@ -1012,12 +1012,12 @@ msgstr "Actualitées"
 
 #: root/base/tag/recent.tt:3
 msgid "Recent Pages"
-msgstr "Pages recentes"
+msgstr "Pages récentes"
 
 #. (page.path)
 #: root/base/page/atom.tt:10 root/base/page/rss.tt:8 root/base/page/rss_full.tt:7
 msgid "Recent changes in x"
-msgstr "Changement récent dans %1"
+msgstr "Changements récents dans %1"
 
 #. (activetag)
 #. (page.path)
@@ -1033,11 +1033,11 @@ msgstr "Pages récentes dans %1 taguées avec %2"
 
 #: root/base/user/recover_pass.tt:3
 msgid "Recover Password"
-msgstr "Retrouvez votre mot de passe"
+msgstr "Retrouver son mot de passe"
 
 #: root/base/user/login.tt:13 root/base/user/recover_pass.tt:13
 msgid "Recover password"
-msgstr "Retrouver sont mot de passe"
+msgstr "Retrouver son mot de passe"
 
 #: root/base/edithelp.tt:123
 msgid "Rectangle"
@@ -1045,7 +1045,7 @@ msgstr "Rectangle"
 
 #: root/base/navbar.tt:29 root/forms/comment/comment.yml:17 root/forms/user/register.yml:49
 msgid "Register"
-msgstr "Enregistrement"
+msgstr "Inscription"
 
 #: root/base/user/login.tt:11
 msgid "Register new account"
@@ -1053,7 +1053,7 @@ msgstr "Créer un nouveau compte"
 
 #: lib/MojoMojo/Controller/User.pm:209
 msgid "Registration is closed!"
-msgstr "L'enregistrement est clos!"
+msgstr "L'inscription est terminée!"
 
 #: root/base/tag/list.tt:31
 msgid "Related Tags"
@@ -1061,7 +1061,7 @@ msgstr "Tags associés"
 
 #: root/base/page/view.tt:25
 msgid "Removed"
-msgstr "Supprimé"
+msgstr "Supprimée"
 
 #: root/forms/user/register.yml:31
 msgid "Repeat password"
@@ -1077,13 +1077,13 @@ msgstr "Zone restreinte. Accès Administrateur obligatoire"
 
 #: root/base/page/search.tt:46 root/base/page/search_inline.tt:37
 msgid "Result Page"
-msgstr "Page de Résultat"
+msgstr "Page du résultat"
 
 #. ([pager.first, pager.last, pager.total_entries, found_within])
 #. ([ pager.first, pager.last, pager.total_entries, found_within ])
 #: root/base/page/search.tt:22 root/base/page/search_inline.tt:13
 msgid "Results x-x of x found within x"
-msgstr "Résultats %1-%2 of %3 trouvé dans %4"
+msgstr "%3 Résultats %1-%2 trouvés sur %4 entrées"
 
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
@@ -1098,7 +1098,7 @@ msgstr "Révision"
 #. (page.content.created.datetime)
 #: root/base/page/rss.tt:14
 msgid "Revision from x"
-msgstr "Révision pour %1"
+msgstr "Révision depuis %1"
 
 #: root/base/toolbar.tt:17
 msgid "Right-justified paragraph"
@@ -1210,7 +1210,7 @@ msgstr ""
 #. ([ pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
 #: root/base/pager.tt:16
 msgid "Showing entries x-x of x in x"
-msgstr ""
+msgstr "Entrées %1-%2 de %3 dans %4"
 
 #. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
 #. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
@@ -1408,7 +1408,7 @@ msgstr "Utilisateur introuvable!"
 #. (person.name)
 #: root/base/user/profile.tt:1
 msgid "User profile for x"
-msgstr "Profil utilisateur de %1"
+msgstr "Profile utilisateur pour %1"
 
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:338
@@ -1449,7 +1449,7 @@ msgstr "Pages Souhaitées"
 
 #: root/base/user/validate.tt:13
 msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
-msgstr "Nous vous avons envoyé un email contenant ul lien d'activation. Merci de suivre ce lien pour activer votre compte"
+msgstr "Un mail d'activation vous a été transmis. Merci de cliquer sur le lien pour activer votre compte"
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:285
@@ -1474,7 +1474,7 @@ msgstr "Ecrire"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:134
 msgid "YOUR CHANGES"
-msgstr "VOS  CHANGEMENTS"
+msgstr "VOS CHANGEMENTS"
 
 #: root/base/admin/role.tt:22
 msgid "Yes"

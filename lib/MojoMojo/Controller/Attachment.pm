@@ -229,6 +229,31 @@ sub insert : Chained('attachment') Args(0) {
     $c->forward('/pageadmin/edit');
 }
 
+
+=head2 insert_content
+
+Insert a plugin File link to this attachment in the main text of the node.
+
+=cut
+
+sub insert_content : Chained('attachment') Args(0) {
+    my ( $self, $c ) = @_;
+
+    # avoid broken binary files
+#      my $io_file = IO::File->new( $c->stash->{att}->filename )
+#          or $c->detach('default');
+#      $io_file->binmode;
+
+#     my @content = <$io_file>;
+    my $filename = $c->stash->{att}->name;
+    use  MojoMojo::Formatter::File;
+    my $plugin   = MojoMojo::Formatter::File->plugin($filename);
+
+    return unless $c->forward('auth');
+    $c->stash->{append} = "\n\n=file $plugin " . $c->stash->{att}->filename;
+    $c->forward('/pageadmin/edit');
+}
+
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@nordaaker.com>

@@ -1,2 +1,0 @@
-[% IF self.force_error_message || self.form_error_message.defined && self.form.has_errors %]
-<div class="form_error_message">[% self.form_error_message %]</div>[% END %]
