@@ -273,6 +273,7 @@ $( function() {
 })
 
 var fetch_preview = function() {
+    $('#editspinner').show();
     jQuery.ajax({
       data: {content: $('#body').attr('value')},
       type: 'POST',
@@ -280,9 +281,11 @@ var fetch_preview = function() {
       timeout: 2000,
       error: function() {
         console.log("Failed to submit");
+        $('#editspinner').hide();
       },
       success: function(r) { 
-        $('#content_preview').html(r)
+        $('#content_preview').html(r);
+        $('#editspinner').hide();
       }
     })
   }
