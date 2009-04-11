@@ -70,6 +70,8 @@ requires(
     'URI::Fetch'                                   => 0,
     'XML::Clean'                                   => 0,
     'XML::LibXML'                                  => '1.66',
+
+    # XML::LibXSLT depends on the following libraries: libxslt-dev, libgcrypt11-dev (for `lgcrypt`), libgdbm3-dev (for `lgdbm`) and possibly libxml2-dev
     'XML::LibXSLT'                                 => '1.66',
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
