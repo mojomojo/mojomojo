@@ -6,7 +6,7 @@
   <p>
   [%loc('Wiki words')%]: <i>[%loc("~[~[C++~]~], ~[~[Let's play again!~]~] ((easy to type))")%]</i><br/>
   [%loc('Not wiki words')%]: <i>[%loc('HomePage, IBM, School')%]</i><br/>
-  [%loc('By default, a wiki word will reference it's children. To reference a sibling, you can do [[../Node]], or to reference a toplevel node do [[/Node]]')%]
+  [%loc("By default, a wiki word will reference it's children. To reference a sibling, you can do ~[~[../Node~]~], or to reference a toplevel node do ~[~[/Node~]~]")%]
   </p>
 </div>
 
