@@ -5,8 +5,8 @@
   </p>
   <p>
   [%loc('Wiki words')%]: <i>[%loc("~[~[C++~]~], ~[~[Let's play again!~]~] ((easy to type))")%]</i><br/>
-
-  [%loc('Not wiki words')%]: <i>[%loc('HomePage, IBM, School')%]</i>
+  [%loc('Not wiki words')%]: <i>[%loc('HomePage, IBM, School')%]</i><br/>
+  [%loc('By default, a wiki word will reference it's children. To reference a sibling, you can do [[../Node]], or to reference a toplevel node do [[/Node]]')%]
   </p>
 </div>
 
@@ -118,10 +118,10 @@
         &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
         &lt;ol&gt;<br/>
       </td><td>[%loc('Write')%]:<br/>
-        &lt;newline><br/>
+        &lt;[% loc('newline') %]><br/>
         1. Foo<br/>
         2. Bar<br/>
-        &lt;newline>
+        &lt;[% loc('newline') %]>
       </td>
     </tr>
     <tr><th colspan="2">[%loc('Unordered Lists with Paragraphs')%]</th></tr>
@@ -132,11 +132,11 @@
         &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
         &lt;ul&gt;<br/>
       </td><td>[%loc('Write')%]:<br/>
-        &lt;newline><br/>
+        &lt;[% loc('newline') %]><br/>
         * Foo<br/>
-        &lt;newline><br/>
+        &lt;[% loc('newline') %]><br/>
         * Bar<br/>
-        &lt;newline>
+        &lt;[% loc('newline') %]>
       </td>
     </tr>
     <tr>
@@ -197,7 +197,7 @@
       <td>[%loc('Creates')%]: <hr/></td>
     </tr>
 
-    <tr><th colspan="2">[%loc('Footnotes')%] (<a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/#footnotes">details</a>)</th></tr>
+    <tr><th colspan="2">[%loc('Footnotes')%] (<a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/#footnotes">[% loc('details') %]</a>)</th></tr>
     <tr>
       <td colspan="2">As detailed in the book[^footnote], we will now show that...<br/>
       ...later in the document...<br/>
@@ -218,13 +218,13 @@
   <table>
     <thead>
       <tr>
-        <th>To get</th>
-        <th>Write</th>
+        <th>[% loc('To get') %]</th>
+        <th>[% loc('Write') %]</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>table of contents</td>
+        <td>[% loc('table of contents') %]</td>
         <td>
           {{toc [level1]-[level2]}}<br/>
           Examples: {{toc}}, {{toc 2-}}, {{toc 2-4}}

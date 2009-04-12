@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<article lang="fr">
+  <title>TEST colorisation de code d'un fichier docbook</title>
+
+  <section id="test">
+    <title>test</title>
+
+    <para>De nombreux languages sont reconnus par le modules <emphasis
+    role="bold">Syntax::Highlight::Engine::Kate</emphasis> ( voir <ulink
+    url="http://search.cpan.org/~hanje/Syntax-Highlight-Engine-Kate-0.04/lib/Syntax/Highlight/Engine/Kate.pod#PLUGINS">http://search.cpan.org/~hanje/Syntax-Highlight-Engine-Kate-0.04/lib/Syntax/Highlight/Engine/Kate.pod#PLUGINS</ulink>
+    )</para>
+
+    <para></para>
+
+    <section id="Perl">
+      <title>Perl</title>
+
+      <para><programlisting lang="perl">my $a = "toto";
+if ( $a eq "titi" ) {
+    $b = 1;
+    $c
+        = "Une très longue ligne de plus de 78 caratères pout montrer l'utilité de perltidy";
+}
+else {
+
+    # un commentaire
+    $b = 2;
+}
+print $b, $a, $c . "\n";</programlisting></para>
+    </section>
+
+    <section id="Bash">
+      <title>Bash</title>
+
+      <para><programlisting lang="bash"># if $LOGLEVEL is not set, default to "info"
+############################################
+if [ -z "$LOGLEVEL" ]; then
+  LOGLEVEL="info"
+fi
+
+
+sanity_check()
+{
+  # root check
+  if [ "$(id -u)" != "0" ]; then
+    printf "\033[40m\033[1;31mERROR: Root check FAILED (you MUST be root to use this script)! Quitting...\033[0m\n" &gt;&amp;2
+    exit 1
+  fi
+</programlisting></para>
+    </section>
+
+    <section id="C">
+      <title>C</title>
+
+      <para><programlisting lang="c">       count(buf, size)
+          int size, buf[ ]; {
+               int i, c;
+               for( i=0; i&lt;=size; i++ )
+                       buf[i]  =  0;                     /*  set buf to zero */
+               while(  (c=getchar(  )) != '\0' ) {       /* read til eof */
+                       if( c &gt; size || c &lt; 0 )
+                               c = size;                 /* fix illegal input */
+                       buf[c]++;
+               }
+               return;
+       }</programlisting></para>
+
+      <para></para>
+    </section>
+
+    <section id="Java">
+      <title>Java</title>
+
+      <para><programlisting lang="java">class myfirstjavaprog
+{  
+        public static void main(String args[])
+        {
+           System.out.println("Hello World!");
+        }
+}</programlisting><emphasis role="bold"></emphasis></para>
+    </section>
+
+    <section id="Javascript">
+      <title>Javascript</title>
+
+      <programlisting lang="JavaScript">var progress;
+
+function startPopupProgressBar(form, options) {
+    var id = generateProgressID();
+    if (form.action.match(/\?/))
+        form.action += '&amp;progress_id=' + id;
+    else
+        form.action += '?progress_id=' + id;
+
+    var width  = options.width  || '480';
+    var height = options.height || '150';
+    window.open ('progress?progress_id='+id,'Apache2-UploadProgress','location=0,status=0,width='+width+',height='+height); return true;
+
+
+}</programlisting>
+
+      <para></para>
+    </section>
+
+    <section id="Css">
+      <title>CSS</title>
+
+      <programlisting lang="CSS">/* ------ Default ----------*/
+
+.access_denied {
+  color: #CC4444;
+  display: block;
+  background-color: #e2dc45;
+  padding: 5px 5px 5px 20px;
+  margin: 20px;
+  border: 1px dotted #F00;
+  text-align: center;
+  font-weight: bold;
+}
+
+.message {
+  color: #66AA66;
+  display: block;
+  background-color: #ccc;
+  padding: 5px 5px 5px 20px;
+  margin: 20px;
+  border: 1px dotted #0F0;
+  text-align: center;
+  font-weight: bold;
+}</programlisting>
+
+      <para></para>
+    </section>
+  </section>
+  <section id="test2">
+    <title>test2</title>
+    bla bla bla
+  </section>
+
+</article>

@@ -1,7 +1,7 @@
 [% PROCESS header.tt %]
 [% UNLESS page.name == "/" %][% PROCESS breadcrumbs.tt %][% END %]
 <h1 id="pageName">
-  <small> [% c.pref("name") || "MojoMojo" %] </small>
+  <small> [% c.pref("name") %] </small>
   <br/>[% loc('All Pages') %]
 </h1>
 [% PROCESS navbar.tt %]
@@ -25,7 +25,7 @@
 
   <ul>
   [% FOREACH page IN pages %]
-    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikiword(page.path) %]</a></li>
+    <li><a href="[% c.uri_for( page.path )%]">[% c.expand_wikilink(page.path) %]</a></li>
   [% END %]
   </ul>
 </div>

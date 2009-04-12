@@ -41,7 +41,7 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 1, size => undef },
 
 );
-__PACKAGE__->utf8_columns(qw/body precompiled/);
+__PACKAGE__->utf8_columns(qw/abstract body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
     "pages", "MojoMojo::Schema::Result::Page",

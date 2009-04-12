@@ -48,7 +48,7 @@ $c->cache
 sub include {
     my ( $class, $c, $url ) = @_;
     $url = URI->new($url);
-    return "$url is not a valid url." unless $url;
+    return "$url ".$c->loc('is not a valid url') unless $url;
     my $rel = $url->rel( $c->req->base );
     unless ($rel->scheme) {
         warn "Trying to get ".$rel;
@@ -56,7 +56,7 @@ sub include {
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
-    return "Could not  retrieve $url.\n";
+    return $c->loc('Could not  retrieve')." $url.\n";
 }
 
 =back

@@ -1,16 +1,14 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
         <title>[ [%
-              title || c.pref('name') || 
-                       config.name || 
-                       loc("A poorly configured MojoMojo Installation")
-            %] ] [% page.path %]</title>
+              title || c.pref('name') %] ] [% page.path %]</title>
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline> [%loc('Recent changes in x',page.path)%]</tagline>
 <id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>
 <generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
 [%FOREACH page IN pages %]
+  [% IF c.check_permissions(page.path,c.user).view %]
 <entry>
 <title>[% page.name %]</title>
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
@@ -28,5 +26,6 @@
 <content type="text/html" mode="escaped" xml:lang="en" xml:base="[% base %]">
 <![CDATA[[% page.content.formatted(c) %] ]]> </content>
 </entry>
+  [% END %]
 [%END%]
 </feed>

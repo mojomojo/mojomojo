@@ -17,7 +17,7 @@
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
 [% FOREACH page IN pages %]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a></li>
+        <li><a href="[% c.uri_for(page.path) %]">[% page.name_orig %]</a> [% page.content.abstract %]</li>
 [% END %]
     </ul>
 </div>
@@ -40,7 +40,7 @@
 [% IF wanted.size %]
     <ul style="margin-bottom: 10px">
 [% FOR wanted = wanted.list %]
-        <li><span class="newWikiWord">[% wanted.to_path %]<a title=">[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></li>
+        <li><span class="newWikiWord">[% wanted.to_path %]<a title="[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]">?</a></span> <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></li>
 [% END %]
     </ul>
 [% END %]

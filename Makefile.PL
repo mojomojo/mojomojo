@@ -37,13 +37,13 @@ requires(
     'DBD::SQLite'                                  => '1.08',
     'DBIx::Class'                                  => '0.08',
     'DBIx::Class::DateTime::Epoch'                 => 0,
-    'DBIx::Class::HTML::FormFu'                    => 0,
     'DBIx::Class::EncodedColumn'                   => 0,
     'Encode'                                       => '2.31',
     'File::Copy::Recursive'                        => 0,
     'File::MMagic'                                 => '1.27',
     'File::Slurp'                                  => '9999.13', # Markdown
     'HTML::Entities'                               => '3.60',    # Pod::Simple
+    'HTML::FormFu'                                 => '0.02000', # min version with string renderer
     'HTML::FormFu::Model::DBIC'                    => 0,
     'HTML::Scrubber'                               => 0,
     'HTML::Strip'                                  => '1.04',
@@ -59,6 +59,7 @@ requires(
     'LWP::Simple'                                  => 0,
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'parent'                                       => 0,
     'Pod::Simple::HTML'                            => '3.01',
     'String::Diff'                                 => 0,
     'Syntax::Highlight::Engine::Kate'              => 0,
@@ -69,7 +70,12 @@ requires(
     'URI'                                          => '1.35',
     'URI::Fetch'                                   => 0,
     'XML::Clean'                                   => 0,
+    'XML::LibXML'                                  => '1.66',
+
+    # XML::LibXSLT depends on the following libraries: libxslt-dev, libgcrypt11-dev (for `lgcrypt`), libgdbm3-dev (for `lgdbm`) and possibly libxml2-dev
+    'XML::LibXSLT'                                 => '1.66',
     'YAML'                                         => '0.36',
+    'Text::Textile'                                => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
@@ -78,7 +84,7 @@ feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
 tests( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
 catalyst;
-catalyst_par_script('mojomojo_server.pl');
+catalyst_par_script('script/mojomojo_server.pl');
 
 install_script glob('script/*.pl');
 auto_install;

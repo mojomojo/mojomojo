@@ -3,6 +3,7 @@ use warnings;
 use strict;
 use Data::Dumper;
 use base 'Catalyst::Controller::HTML::FormFu';
+use Syntax::Highlight::Engine::Kate;
 
 =head1 NAME
 
@@ -83,24 +84,28 @@ sub edit : Global FormConfig {
       $c->check_permissions( $stash->{'path'},
         ( $c->user_exists ? $c->user->obj : undef ) );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
+    my $loc_permtocheck=$permtocheck eq 'create'?$c->loc('create'):$c->loc('edit');
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
         $stash->{message} =
-          $c->loc( 'Permission Denied to x x', [ $permtocheck, $name ] );
+          $c->loc( 'Permission Denied to x x', [ $loc_permtocheck, $name ] );
         $stash->{template} = 'message.tt';
         return;
     }
     if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= loc('Anonymous Edit disabled');
+        $c->stash->{message} ||= $c->loc('Anonymous Edit disabled');
         return;
     }
 
     # for anonymous users, use CAPTCHA, if enabled
     if ( $user == 1 && $c->pref('use_captcha') ) {
-       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
+       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') ;
        $c->stash->{captcha}=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
        $form->process;
     }
+
+    my $syntax=new Syntax::Highlight::Engine::Kate;
+    $c->stash->{syntax_formatters}=[ $syntax->languageList() ];
 
     if ( $form->submitted_and_valid ) {
 

@@ -18,9 +18,7 @@ MojoMojo::Formatter::SyntaxHighlight - syntax highlighting for code blocks
 
 =head1 DESCRIPTION
 
-This formatter performs syntax highlighting on code blocks. Unfortunately
-this currently works only if you're using L<MojoMojo::Formatter::Textile>
-as main formatter.
+This formatter performs syntax highlighting on code blocks. 
 
 =head1 METHODS
 
@@ -35,17 +33,23 @@ those tags.
 
 =cut
 
-sub format_content_order { 99 }
+sub format_content_order { 
+  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown'){
+    14
+  } else {
+    99
+  }
+}
 
 =item format_content
 
 This formatter uses L<Syntax::Highlight::Engine::Kate> to highlight code
-syntax inside of E<lt>preE<gt> tags. To let the formatter know which language
+syntax inside of {{code}} tags. To let the formatter know which language
 has to be highlighted, do:
 
- <pre lang="Perl">
+ {{code lang="Perl"}}
    print "Hello World\n";
- </pre>
+ {{end}} 
 
 See L<Syntax::Highlight::Engine::Kate/PLUGINS> for a list of supported
 languages.
@@ -55,11 +59,6 @@ languages.
 sub format_content {
     my ( $class, $content ) = @_;
     
-    # No syntax highlighting for anything else than Textile yet, SORRY
-    unless ($main_formatter eq 'MojoMojo::Formatter::Textile') {
-        $$content =~ s/\{\{\s*code\:lang=".*?"\s*\}\}/<pre>/g;
-        return $$content;
-    }
 
     $$content = decode_entities($$content);
 
@@ -69,9 +68,9 @@ sub format_content {
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
     
     # drop all lang=""
-    $$content =~ s/<\s*pre\s+lang=""\s*>/<pre>/g;
+    $$content =~ s/\{\{\s*code\s+lang=""\s*\}\}/<pre>/g;
     
-    while ( $$content =~ s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si ) {
+    while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*\end\s*\}\}/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;
