@@ -4,9 +4,9 @@
 [% IF tags %]
     [% FOREACH tag IN tags %]
 
-        [% IF tag.tag == highlight %]
+        [% IF tag.tag == highlight +%]
 <b id="tag_[% tag.tag %]" class="navOn">[% tag.tag %]</b>
-        [% ELSE %]
+        [% ELSE +%]
 <a class="tag" href="[% c.uri_for('recent', tag.tag) %]">[% tag.tag %]</a>
         [% END %]
 [<span class="remove"><a href="[%c.uri_for('jsrpc/untag',tag.tag)%]" class="tagaction">x</a></span>][% UNLESS loop.last() %],[% END %]
@@ -21,15 +21,15 @@
         [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
         [% NEXT IF taglist.match(tagmatch) %]
 
-        [% IF othertag.tag == highlight %]
+        [% IF othertag.tag == highlight +%]
 <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]"
-        [% ELSE %]
+        [% ELSE +%]
 <a class="tag" title="[% othertag.refcount %]"
         [% END %]
  href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>
-        [% IF user.active %]
+        [%+ IF user.active +%]
 
-[<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END %]
+[<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END +%]
         [% END %]
     [% END %]
 [%END%]
