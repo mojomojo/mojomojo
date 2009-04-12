@@ -56,13 +56,17 @@ languages.
 
 =cut
 
+# NOTE: Moved $kate outside of format_content method because
+# of apparent memory links so we want to re-use the object instead
+# of creating a new one each time a page is request.
+my $kate    = _kate();
+
 sub format_content {
     my ( $class, $content ) = @_;
     
     $$content = decode_entities($$content);
 
     my @blocks  = ();
-    my $kate    = _kate();
     my $ph      = 0;
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
     

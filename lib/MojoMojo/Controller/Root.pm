@@ -121,6 +121,20 @@ sub auto : Private {
     $c->stash->{template} = 'user/validate.tt';
 }
 
+sub exit : Local {
+    my ($self, $c) = @_;
+    if ($ENV{MOJOMOJO_EXIT_OK}) {
+        exit(0);
+    }
+    else {
+       # $c->stash( template => 'error.tt' );
+        $c->res->status (403); # forbidden
+        $c->res->body('EXIT NOT OK');
+        $c->detach();
+    }
+}
+
+
 =back
 
 =head1 LICENSE
