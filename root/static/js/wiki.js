@@ -210,6 +210,11 @@ $( function() {
     		    return true;
     		},
     		upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
+                if ( $('#progressbar').is(':hidden') ){
+                  $('#progress').width('0');
+                  $('#progress_status').html(file.name+' 0% done');
+                  $('#progressbar').show();$('#progress_status').show();
+                }
             	try {
             		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100)+'%';
                     $('#progress').width(percent)
