@@ -53,7 +53,7 @@
             <td>
                 [% page.content.created.hms(":") %]
             </td>
-            <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
+            <td><a href="[% c.uri_for('jsrpc/diff', page.id , 0, 0, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
         </tr>
   [% END %]
 [% END %]
