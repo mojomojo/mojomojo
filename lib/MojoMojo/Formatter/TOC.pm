@@ -33,7 +33,7 @@ sub format_content_order { 95 }
 =item format_content
 
 Calls the formatter. Takes a ref to the content as well as the context object.
-The format for the toc plugin invocation is:
+The syntax for the TOC plugin invocation is:
 
   {{toc M- }}     # start from Header level M
   {{toc -N }}     # stop at Header level N
@@ -55,10 +55,10 @@ sub format_content {
 
     my $toc_params_RE = qr/\s+ (\d+)? \s* - \s* (\d+)?/x;
     while (
-        # replace the =toc markup tag if it's on a line of its own (<p>), or not (followed by <br />)
-        $$content =~ s{
-            \{\{toc(?:$toc_params_RE)? \s*\}\}
-        }{<div class="toc">\n<!--mojomojoTOCwillgohere-->\n</div>}ix) {
+        # replace the {{toc ..}} markup tag and parse potential parameters
+        $$content =~ s[
+            {{ toc (?:$toc_params_RE)? \s* \/? }}
+        ][<div class="toc">\n<!--mojomojoTOCwillgohere-->\n</div>]ix) {
         my ($toc_h_min, $toc_h_max);
         $toc_h_min = $1 || 1;
         $toc_h_max = $2 || 9;  # in practice, there are no more than 6 heading levels
