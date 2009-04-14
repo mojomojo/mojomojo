@@ -49,7 +49,9 @@
                 <a href="[% c.req.base; page.path; %]">[% page.name_orig %]</a>
                 <div class="diff" style="display:none;"></div>
             </td>
-            <td>[% c.wikiword( page.content.creator.link, base ) %]</td>
+            <td>
+            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.login %]</a>
+             </td>
             <td>
                 [% page.content.created.hms(":") %]
             </td>

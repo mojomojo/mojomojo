@@ -1,4 +1,6 @@
 0.999028 2009-03-06 12:11:00
+        - Make .profile smarter and link to it from .recent.
+        - Clean up extra // in .recent URL's.
         - Use package scope for $kate syntax highlight object to reduce memory leak.
         - Use jquery cookie to make split edit state sticky.
         - Set default theme directory when theme preference is NULL
