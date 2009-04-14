@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 25;
+use Test::More tests => 26;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';
 use DummyCatalystObject;
@@ -8,11 +8,13 @@ my ($content,$exist,$new);
 # this fake object returns different path_pages based on whether a wiki link containing the text "existing"
 my $fake_c = DummyCatalystObject->new;
 
-# TODO: Make this test work.  It fails because of the number, 2.
-# The $content does not get formatted at all so it's bypassing format_content.
-#$content = '[[existing|MojoMojo 2]]';
-#MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-#is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', 'number at the end of the link text');
+TODO: {
+    local $TODO = 'Make this test work.  It fails because of the number, 2. The $content does not get formatted at all so it\'s bypassing format_content.';
+    $content = '[[existing|MojoMojo 2]]';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', 'number at the end of the link text');
+}
+
 
 $content = '\[[WikiWord]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
@@ -110,4 +112,3 @@ $content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikiwiord</pre> blah humb
 ($exist, $new) = MojoMojo::Formatter::Wiki->find_links(\$content, $fake_c);
 is(@$exist, 1);
 is(@$new, 1);
-
