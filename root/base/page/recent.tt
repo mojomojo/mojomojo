@@ -46,7 +46,7 @@
     [% END %]
         <tr class="item">
             <td>
-                <a href="[% c.uri_for( '/', page.path ) %]">[% page.name_orig %]</a>
+                <a href="[% c.req.base; page.path; %]">[% page.name_orig %]</a>
                 <div class="diff" style="display:none;"></div>
             </td>
             <td>[% c.wikiword( page.content.creator.link, base ) %]</td>
