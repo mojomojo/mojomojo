@@ -8,8 +8,6 @@ package MojoMojo::Formatter::DocBook::Colorize;
 
 use strict;
 use Syntax::Highlight::Engine::Kate;
-use Syntax::Highlight::Engine::Kate::All;
-
 
 my $hl_node="programlisting|screen";
 my $hl_attrib="lang";

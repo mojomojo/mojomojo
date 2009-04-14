@@ -1,4 +1,4 @@
-[% PROCESS header.tt  index_page=index_page%]
+[% PROCESS header.tt index_page=index_page+%]
 <div id="header">
   <h1>
     [% IF title %][% title %][% ELSE %]

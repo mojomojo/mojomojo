@@ -15,12 +15,16 @@
         [% IF user.active%]
           [% IF (!rev OR rev==page.content_version) %]
             [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-              <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E">[%loc('Edit Page')%]</a></li>
+              <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[%loc('Edit Page')%]</a></li>
             [% END %]
           [% END +%]
         <li><a href="[%c.uri_for(user.link)%]" title="[%loc('Go to home page')%]">[%c.fixw(user.login)%]</a></li>
         [% ELSE +%]
+<<<<<<< HEAD:root/base/navbar.tt
         <li><a href="[%c.uri_for(user.link,c.config.tool_separator_'prefs')%]" title="[%loc('User Preferences')%]">[%c.fixw(user.login)%]</a></li>
+=======
+        <li><a href="[%c.uri_for(user.link,'.prefs')%]" title="[%loc('User Preferences')%]" rel="nofollow">[%c.fixw(user.login)%]</a></li>
+>>>>>>> master:root/base/navbar.tt
         [% END %]
       [% END %]
       <li><a href="[%base%]/[% c.config.tool_separator %]logout">[%loc('Log out')%]</a></li>

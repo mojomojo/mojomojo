@@ -147,7 +147,6 @@ sub search : Global {
     my $results_per_page = 10;
 
     my $page = $c->stash->{page};
-    $stash->{template} = 'page/search.tt';
 
     my $q           = $c->req->params->{q}           || $c->stash->{query};
     my $search_type = $c->req->params->{search_type} || "subtree";
@@ -245,6 +244,7 @@ sub search : Global {
         $c->stash->{results}       = $results;
         $c->stash->{result_count}  = $result_count;
     }
+    $stash->{template} = 'page/search.tt';
 }
 
 =head2 print

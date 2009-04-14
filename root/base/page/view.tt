@@ -3,7 +3,7 @@
   [% IF c.flash.redirect %]
     [% loc('Redirected from') %]
     [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
-      <a href="[% c.req.base %]/[% c.flash.redirect %][% c.config.tool_separator %]edit">[% c.flash.redirect %]</a>
+      <a href="[% c.req.base %]/[% c.flash.redirect %][% c.config.tool_separator %]edit"  rel="nofollow">[% c.flash.redirect %]</a>
     [% ELSE %]
       [% c.flash.redirect %]
     [% END %]

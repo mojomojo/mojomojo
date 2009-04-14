@@ -1,39 +1,54 @@
-[% WRAPPER page/wrapper.tt title = loc("User profile for x", person.name) %]
+[% SET title = loc('User profile for x', user.name) %]
+
+[% WRAPPER page/wrapper.tt title = title %]
+
 <dl class="list">
     <dt>[% loc('Name') %]:</dt>
     <dd id="name">[% person.name || loc('Name missing') %]</dd>
     
-    <dt>[% loc('Email') %]:</dt>
-    <dd id="email">
-    [% IF user.admin || user.id == person.id %]
+    [% IF person.email %]
+      [% IF user.admin || user.id == person.id %]
+        <dt>[% loc('Email') %]:</dt>
+        <dd id="email">
         [% person.email || loc('(Unknown)') %]
-    [% ELSE %]
-        [% loc('(Private)') %]
+      [% END %]
     [% END %]
     </dd>
     
+    [% IF person.age %]
     <dt>[% loc('Age') %]:</dt>
     <dd>[% person.age || loc('(Unknown)') %]</dd>
-    
+    [% END %]
+ 
+    [% IF person.gender %]   
     <dt>[% loc('Gender') %]:</dt>
     <dd>[% person.gender || loc('(Unknown)') %]</dd>
-
+    [% END %]
+    
+    [% IF person.industry %]
     <dt>[% loc('Industry') %]:</dt>
     <dd>[% person.industry || loc('(Unknown)') %]</dd>
-
+    [% END %]
+    
+    [% IF person.interests_formatted %]
     <dt>[% loc('Interests') %]:</dt>
     <dd>[% person.interests_formatted || loc('Nothing entered') %]</dd>
-
+    [% END %]
+    
+    [% IF person.music_formatted %]
     <dt>[% loc('Music') %]:</dt>
     <dd>[% person.music_formatted || loc('Nothing entered') %]</dd>
-
+    [% END %]
+    
+    [% IF person.movies_formatted %]
     <dt>[% loc('Movies') %]:</dt>
     <dd>[% person.movies_formatted || loc('Nothing entered') %]</dd>
-
+    [% END %]
+    
     <dt>[% loc('Date registered') %]:</dt>
     <dd>[%person.registered.ymd%]</dd>
 
-    <dt>[% loc('Last changes') %]:<dt>
+    <dt>[% loc('Edits') %]:<dt>
     <dd>
     [% FOREACH  changed IN person.pages -%]
         [% '&ndash;' UNLESS loop.first %] [% c.wikiword(changed.path,base) -%]

@@ -1405,7 +1405,7 @@ msgstr ""
 #. (person.name)
 #: root/base/user/profile.tt:1
 msgid "User profile for x"
-msgstr ""
+msgstr "User profile for %1"
 
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:338

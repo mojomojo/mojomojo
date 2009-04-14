@@ -14,7 +14,7 @@
   <p>
   ...
   [% FOREACH page IN proto_pages %]
- / <a class="protoPage" href="[% c.uri_for( page.path )%][% c.config.tool_separator %]edit">[% page.name_orig %]</a>
+ / <a class="protoPage" href="[% c.uri_for( page.path )%][% c.config.tool_separator %]edit"  rel="nofollow">[% page.name_orig %]</a>
   [% END %]
   </p>
   <p>
