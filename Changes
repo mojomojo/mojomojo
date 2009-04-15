@@ -1,4 +1,5 @@
 0.999028 2009-03-06 12:11:00
+        - Use oneshot timer instead of only_every to trigger preview update.
         - Make .profile smarter and link to it from .recent.
         - Clean up extra // in .recent URL's.
         - Use package scope for $kate syntax highlight object to reduce memory leak.

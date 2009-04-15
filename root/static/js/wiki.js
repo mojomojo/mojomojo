@@ -132,6 +132,17 @@ MojoMojo.RoleForm = function(params) {
     return API;
 };
 
+// function to trigger another after a specified period of time.
+function oneshot() {
+    var timer;
+    return function( fun, time ) {
+        clearTimeout( timer );
+        timer = setTimeout( fun, time );
+    };
+} 
+var oneshot_preview = oneshot();
+var oneshot_pause = 3000;  // Time in milliseconds.
+
 var uploader;
 $( function() {
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })
@@ -140,12 +151,16 @@ $( function() {
         $('#hidden_info').toggle();
         return false;
     });
-    if ($('textarea#body')[0]) {
-        $('textarea#body').attr('value',$('textarea#body').attr('value')+append)
-        fetch_preview.only_every(1000);
-    }
+//    if ($('textarea#body')[0]) {
+//        $('textarea#body').attr('value',$('textarea#body').attr('value')+append)
+//        //fetch_preview.only_every(1000);
+//		//oneshot_preview(fetch_preview, oneshot_pause);
+//    }
     $('#body').each(function() { this.focus(); })
-    $('#body').keyup(function() { fetch_preview.only_every(1000);});
+    $('#body').keyup(function() { 
+	   //fetch_preview.only_every(1000);
+	   oneshot_preview(fetch_preview, oneshot_pause);
+	});
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
     $('#add_tag').click(function(){$('#addtag').show();$('#showtag').hide();$('#taginput')[0].focus();return false;})
     $('#searchField').click(function() { this.value != '' ? this.value = '' : true })
@@ -163,7 +178,7 @@ $( function() {
     
     $('#commentlogin').livequery (function() {
          $('#commentlogin').ajaxForm({
-        target: '#commentLogin',
+        target: '#commentLogin'
     })
     });
     $('#commentForm').livequery(function() {
