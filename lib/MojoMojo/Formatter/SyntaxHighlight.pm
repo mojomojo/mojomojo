@@ -3,8 +3,12 @@ package MojoMojo::Formatter::SyntaxHighlight;
 use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
-use Syntax::Highlight::Engine::Kate;
 use HTML::Entities;
+
+eval "use Syntax::Highlight::Engine::Kate;";
+
+sub module_loaded { $@ ? 0 : 1 }
+
 
 my $main_formatter;
 eval {
@@ -63,6 +67,7 @@ my $kate = _kate();
 
 sub format_content {
     my ( $class, $content ) = @_;
+    return unless $class->module_loaded;
 
     $$content = decode_entities($$content);
 
@@ -73,7 +78,7 @@ sub format_content {
     # drop all lang=""
     $$content =~ s/\{\{\s*code\s+lang=""\s*\}\}/<pre>/g;
     
-    while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*\end\s*\}\}/$ph_base$ph/si ) {
+    while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*end\s*\}\}/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;

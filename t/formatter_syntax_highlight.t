@@ -2,17 +2,22 @@
 use strict;
 use MojoMojo::Formatter::SyntaxHighlight;
 
-use Test;
-BEGIN { plan tests => 2 }
+use Test::More;
+BEGIN { 
+    plan skip_all => 'Requirements not installed for Syntax Highligher Formatter' 
+        unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
+    plan tests => 2 ;
+};
+    
 
 {
     my $content = <<HTML;
-    <pre lang="HTML">
+    {{code lang="HTML"}}
         <form action="[% c.uri_for('/login') %]" method="get">
             <input type="text" name="openid_identifier" value="http://" />
             <button type="submit">Sign in with OpenID</button>
         </form>
-    </pre>
+    {{end}}
 HTML
     MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
     ok($content, <<HTML);
@@ -22,7 +27,7 @@ HTML
 
 {
     my $content = <<PERL;
-    <pre lang="Perl">
+    {{code lang=Perl}}
         sub login : Local {
           my ( \$self, \$c ) = @_;
 
@@ -43,7 +48,7 @@ HTML
             \$c->stash->{'template'}='login.tt';
           }
         }
-    </pre>
+    {{end}}
 PERL
     MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
     ok($content, <<PERL);
