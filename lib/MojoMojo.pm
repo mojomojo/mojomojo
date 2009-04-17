@@ -20,6 +20,7 @@ use Catalyst qw/
 
 use Storable;
 use Data::Dumper;
+use Class::C3::Adopt::NEXT;
 use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
 use URI::Escape ();
