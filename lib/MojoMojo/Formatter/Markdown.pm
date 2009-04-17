@@ -4,7 +4,7 @@ use base qw/MojoMojo::Formatter/;
 
 my $markdown;
 eval "use Text::MultiMarkdown";
-unless ($@) {
+if ($@) {
     $markdown = Text::MultiMarkdown->new(
         markdown_in_html_blocks => 1,    # Allow Markdown syntax within HTML blocks.
         use_metadata =>

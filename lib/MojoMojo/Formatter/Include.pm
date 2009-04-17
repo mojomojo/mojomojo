@@ -2,8 +2,8 @@ package MojoMojo::Formatter::Include;
 
 use base qw/MojoMojo::Formatter/;
 
-use LWP::Simple;
-use URI::Fetch;
+eval "use LWP::Simple;use URI::Fetch;";
+sub module_loaded { $@ ? 0 : 1 }
 
 =head1 NAME
 
@@ -34,6 +34,7 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
+    return unless $class->module_loaded;
     my $re=$class->gen_re(qr/(http\:\/\/[^}]+)/);
     $$content =~ s|$re|$class->include( $c, $1 )|meg;
 }

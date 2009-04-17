@@ -1,10 +1,13 @@
 package MojoMojo::Formatter::TOC;
 
 use parent qw/MojoMojo::Formatter/;
-use HTML::Toc;
-use HTML::TocInsertor;
+
 use HTML::Entities;
 use Encode;
+
+eval "use HTML::Toc;use HTML::TocInsertor;";
+
+sub module_loaded { $@ ? 0 : 1 }
 
 =head1 NAME
 
@@ -52,7 +55,7 @@ Defaults to 1-6.
 
 sub format_content {
     my ( $class, $content ) = @_;
-
+    return unless $class->module_loaded;
     my $toc_params_RE = qr/\s+ (\d+)? \s* - \s* (\d+)?/x;
     while (
         # replace the {{toc ..}} markup tag and parse potential parameters

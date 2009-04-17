@@ -106,7 +106,7 @@ sub do_link {
     my $link = $token->attr('to');
 
     #FIXME: This doesn't look right:
-    return $self->SUPER::do_link($token) unless $link =~ /^$WORD+$/;
+    return $self->SUPER::do_link($token) unless $link =~ /^$token+$/;
     my $section = $token->attr('section');
     $section = "#$section"
         if defined $section and length $section;

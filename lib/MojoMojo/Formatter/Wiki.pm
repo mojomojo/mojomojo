@@ -237,8 +237,10 @@ sub format_link {
         }
     }
     # if the fragment was not properly formatted as a fragment (per the rules explained in MojoMojo::Formatter::TOC::assembleAnchorName, i.e. i has an invalid character), convert it, unless it contains escaped characters already (.[0-9A-F]{2})
-    $fragment = MojoMojo::Formatter::TOC::assembleAnchorName(undef, undef, undef, undef, $fragment)
-        if $fragment ne '' and ($fragment =~ /[^A-Za-z0-9_:.-]/ or $fragment !~ /\.[0-9A-F]{2}/);
+    if(MojoMojo::Formatter::TOC->module_loaded){
+        $fragment = MojoMojo::Formatter::TOC::assembleAnchorName(undef, undef, undef, undef, $fragment)
+            if $fragment ne '' and ($fragment =~ /[^A-Za-z0-9_:.-]/ or $fragment !~ /\.[0-9A-F]{2}/);
+    }
     my $formatted = $link_text || $class->expand_wikilink($orig_wikilink);
 
     # convert relative paths to absolute paths

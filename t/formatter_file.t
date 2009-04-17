@@ -14,7 +14,11 @@ my %files = ( 'test.xml' => 'DocBook',
 
 foreach my $file ( keys %files ){
   my $plugin   = MojoMojo::Formatter::File->plugin($file);
+  SKIP:{ 
+  my $package="MojoMojo::Formatter::File::".$plugin;
+  skip("$file formatter not loaded",2) unless $package->module_loaded;
   is($plugin, $files{$file});
   ok(MojoMojo::Formatter::File->format($plugin, "$dir/$file"));
+  }
 }
 

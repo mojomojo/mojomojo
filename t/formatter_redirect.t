@@ -9,7 +9,7 @@ my ($content,$exist,$new,$fake_c);
 $fake_c = DummyCatalystObject->new;
 
 $content = "{{redirect /foo}}";
-$fake_c=Dummy->new;
+$fake_c=DummyCatalystObject->new;
 MojoMojo::Formatter::Redirect->format_content(\$content, $fake_c, undef);
 is($fake_c->redirect, '/foo' ,"Redirect is set");
 is($content,"{{redirect /foo}}","Content is unchanged");

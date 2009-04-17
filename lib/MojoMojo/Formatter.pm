@@ -2,11 +2,14 @@ package MojoMojo::Formatter;
 
 sub primary_formatter { 0; }
 
+sub module_loaded { 1; }
+
 sub gen_re {
     my ($self,$tag,$args)=@_;
     $args ||= '';
     return qr{\{\{\s*$tag\s*$args\s*\}\}};
 }
+
 
 
 =head1 NAME
