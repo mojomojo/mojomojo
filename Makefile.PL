@@ -21,7 +21,6 @@ requires(
     'Catalyst::Plugin::Session::State::Cookie'     => 0,
     'Catalyst::Plugin::Session::Store::File'       => 0,
     'Catalyst::Plugin::Setenv'                     => 0,
-    'Catalyst::Plugin::Singleton'                  => '0.02',
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::SubRequest'                 => '0.09',
     'Catalyst::Plugin::Unicode'                    => '0.8',

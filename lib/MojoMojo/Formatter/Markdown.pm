@@ -16,11 +16,17 @@ unless ($@) {
 
 =head1 NAME
 
-MojoMojo::Formatter::MarkDown - Texile formatting for your content
+MojoMojo::Formatter::Markdown - MultiMarkdown formatting for your content.
+MultiMarkdown is an extension of Markdown, adding support for tables,
+footnotes, bibliography, automatic cross-references, glossaries, appendices,
+definition lists, math syntax, anchor and image attributes, and document metadata.
+
+Markdown syntax: L<http://daringfireball.net/projects/markdown/syntax>
+MultiMarkdown syntax: L<http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/>
 
 =head1 DESCRIPTION
 
-This formatter processes content using L<Text::Markdown> This is a 
+This formatter processes content using L<Text::MultiMarkdown> This is a
 syntax for writing human-friendly formatted text.
 
 =head1 METHODS
@@ -59,7 +65,7 @@ sub format_content {
     $$content = $markdown->markdown($$content);
 }
 
-=back 
+=back
 
 =head1 SEE ALSO
 

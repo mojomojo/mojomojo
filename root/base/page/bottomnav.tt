@@ -10,10 +10,10 @@
   <ul>
 [% IF (!rev OR rev==page.content_version) %]
   [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-    <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') %]" accesskey="E">[%loc('Edit')%]</a></li>
+    <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') %]" accesskey="E" rel="nofollow">[%loc('Edit')%]</a></li>
   [% END %]
   [% IF user.is_admin +%]
-    <li><a title="[%loc('Change site settings')%]" href="[%c.uri_for('admin')%]">[%loc('Edit Settings')%]</a></li>
+    <li><a title="[%loc('Change site settings')%]" href="[%c.uri_for('admin')%]" rel="nofollow">[%loc('Edit Settings')%]</a></li>
   [% END %]
   [% IF c.req.action=='info' +%]
     <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
@@ -66,7 +66,7 @@
 [% SET redir = c.uri_for(c.req.path) +%]
     <li>[%loc('Set language')%]:
       [%# TODO: this needs to become a dropdown -%]
-        [% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl'] +%]
+        [% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl','ru'] +%]
         <li><a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a></li>
         [% END +%]
     </li>

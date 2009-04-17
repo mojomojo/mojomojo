@@ -10,7 +10,6 @@ use Catalyst qw/
     Email
     Session
     Session::Store::File
-    Singleton
     Session::State::Cookie
     Static::Simple
     SubRequest

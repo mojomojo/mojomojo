@@ -8,11 +8,11 @@ use Encode;
 
 =head1 NAME
 
-MojoMojo::Formatter::TOC - replace =toc with table of contents
+MojoMojo::Formatter::TOC - generate table of contents
 
 =head1 DESCRIPTION
 
-This formatter will replace C<=toc> with a table of contents, using
+This formatter will replace C<{{toc}}> with a table of contents, using
 HTML::GenToc. If you don't want an element to be included in the TOC,
 make it have C<class="notoc">
 
@@ -33,7 +33,7 @@ sub format_content_order { 95 }
 =item format_content
 
 Calls the formatter. Takes a ref to the content as well as the context object.
-The format for the toc plugin invocation is:
+The syntax for the TOC plugin invocation is:
 
   {{toc M- }}     # start from Header level M
   {{toc -N }}     # stop at Header level N
@@ -55,10 +55,10 @@ sub format_content {
 
     my $toc_params_RE = qr/\s+ (\d+)? \s* - \s* (\d+)?/x;
     while (
-        # replace the =toc markup tag if it's on a line of its own (<p>), or not (followed by <br />)
-        $$content =~ s{
-            \{\{toc(?:$toc_params_RE)? \s*\}\}
-        }{<div class="toc">\n<!--mojomojoTOCwillgohere-->\n</div>}ix) {
+        # replace the {{toc ..}} markup tag and parse potential parameters
+        $$content =~ s[
+            {{ toc (?:$toc_params_RE)? \s* \/? }}
+        ][<div class="toc">\n<!--mojomojoTOCwillgohere-->\n</div>]ix) {
         my ($toc_h_min, $toc_h_max);
         $toc_h_min = $1 || 1;
         $toc_h_max = $2 || 9;  # in practice, there are no more than 6 heading levels
@@ -97,8 +97,13 @@ In the spirit of http://seo2.0.onreact.com/top-10-fatal-url-design-mistakes, com
 "Which one speaks your language more, which one will you rather click?"
 
 The anchor names generated are compliant with XHTML1.0 Strict. Also, per the
-HTML 4.01 spec, anchors that differ only in case may not appear in the same
-document and anchor names should be restricted to ASCII characters.
+HTML 4.01 spec, anchor names should be restricted to ASCII characters and
+anchors that differ only in case may not appear in the same document. In
+particular, an anchor name may be defined only once in a document (logically,
+because otherwise the user agent wouldn't know which #foo to scroll to).
+This is currently a problem with L<HTML::Toc> v1.11, which doesn't have
+support for passing the already existing anchors to the C<templateAnchorName>
+sub.
 
 =cut
 
@@ -150,7 +155,7 @@ L<MojoMojo> and L<Module::Pluggable::Ordered>.
 
 =head1 AUTHORS
 
-Dan Dascalescu <ddascalescu at g-mail>
+Dan Dascalescu, L<http://dandascalescu.com>
 
 =head1 LICENSE
 
