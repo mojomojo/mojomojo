@@ -7,6 +7,7 @@ requires(
     'Algorithm::Diff'                              => '1.1901',
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
+    'Class::C3::Adopt::NEXT'                              => 0,
     'Cache::FastMmap'                              => 0,
     'Catalyst'                                     => '5.7000',
     'Catalyst::Action::RenderView'                 => '0.07',
