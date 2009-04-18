@@ -6,8 +6,8 @@ $(document).ready(function(){
       var selected=$('#formatter option:selected').val();
       // set to first element
       $('#formatter').val("[% loc('Formatter') %]");
-      if (selected=='irc_formatter') return insertTags('body','\n=irc\n',  '\n=irc\n\n',  '12:00 <nick> Hello #mojomojo!');
-      if (selected=='pod_formatter') return insertTags('body','\n=pod\n\n','\n\n=pod\n\n','[% loc("=head1 Header") %]'   );
+      if (selected=='irc_formatter') return insertTags('body','\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!');
+      if (selected=='pod_formatter') return insertTags('body','\n{{pod}}\n\n','\n\n{{end}}\n\n','[% loc("=head1 Header") %]'   );
     });
     
     // insert
@@ -16,11 +16,11 @@ $(document).ready(function(){
       var selected=$('#insert option:selected').val();
       // set to first element
       $('#insert').val("[% loc('Insert') %]");
-      if (selected=="comment")  return insertTags('body','\n=comments\n','',             '');
-      if (selected=="toc")      return insertTags('body','\n{{toc}}',    '',             '');
-      if (selected=="redirect") return insertTags('body','\n=redirect ', '/new/location','');
-      if (selected=="include")  return insertTags('body','\n=http://',   '',             '');
-      if (selected=="youtube")  return insertTags('body','\n=youtube ',   'http://www.youtube.com','');
+      if (selected=="comment")  return insertTags('body','\n{{comments}}\n','','');
+      if (selected=="toc")      return insertTags('body','\n{{toc}}','','');
+      if (selected=="redirect") return insertTags('body','\n{{redirect ','}}','/new/location');
+      if (selected=="include")  return insertTags('body','\n{{http://}}','','');
+      if (selected=="youtube")  return insertTags('body','\n{{youtube ','}}','http://www.youtube.com');
     });
 
     // syntax
@@ -28,7 +28,7 @@ $(document).ready(function(){
       // get selected value
       var selected=$('#syntax option:selected').text();
       $('#syntax').val("[% loc('Syntax Highlight') %]");
-      return insertTags('body','\n\n<pre lang=\"'+selected+'\">\n','\n</pre>\n\n','#!/usr/bin/perl');
+      return insertTags('body','\n\n{{code lang=\"'+selected+'\"}}\n','\n{{end}}\n\n','#!/usr/bin/perl');
     });
 });
 </script>
