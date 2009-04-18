@@ -21,6 +21,7 @@ $(document).ready(function(){
       if (selected=="redirect") return insertTags('body','\n{{redirect ','}}','/new/location');
       if (selected=="include")  return insertTags('body','\n{{http://}}','','');
       if (selected=="youtube")  return insertTags('body','\n{{youtube ','}}','http://www.youtube.com');
+      if (selected=="cpan")     return insertTags('body','\n{{cpan ','}}','MojoMojo');
     });
 
     // syntax
@@ -46,6 +47,7 @@ $(document).ready(function(){
     <option value="redirect">[% loc('redirect') %]</option>
     <option value="include"> [% loc('include')  %]</option>
     <option value="youtube"> [% loc('youtube')  %]</option>
+    <option value="cpan">    [% loc('cpan')     %]</option>
 </select>
 
 <select id="syntax" title="[% loc('Syntax Highlight') %]">
