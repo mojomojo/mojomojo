@@ -21,7 +21,7 @@ are balaced, using L<XML::Clean>.
 
 =item format_content_order
 
-Format order can be 1-99. The Scrub formatter runs on 1
+Format order can be 1-99. The Scrub formatter runs on 7
 in order to catch direct user input, but trusts all subsequently
 ran plugins to not output unsafe HTML.
 
