@@ -46,6 +46,8 @@ sub format_content {
         if ($c->action->name eq 'view' && !$c->ajax) {
             $c->flash->{'redirect'}=$c->stash->{'path'};;
             $c->res->redirect( $c->uri_for($page) );
+        } elsif ($c->action->name eq 'render') {
+            $$content=$c->loc("redirect to")." ".$page;
         }
     }
 }
