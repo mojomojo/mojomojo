@@ -89,7 +89,7 @@ sub end : Private {
        $c->pref('theme',$theme);
     }
     $c->stash->{additional_template_paths} =
-        [ $c->path_to('root','static','themes',$theme) ];
+        [ $c->path_to('root','themes',$theme) ];
 
     $c->req->uri->path( $c->stash->{pre_hacked_uri}->path )
         if ref $c->stash->{pre_hacked_uri};

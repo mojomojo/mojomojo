@@ -20,7 +20,7 @@ use Catalyst qw/
 
 use Storable;
 use Data::Dumper;
-use Class::C3::Adopt::NEXT;
+use MRO::Compat;
 use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
 use URI::Escape ();
@@ -205,7 +205,7 @@ sub fixw {
 
 sub prepare_path {
     my $c = shift;
-    $c->NEXT::prepare_path;
+    $c->next::method(@_);
     $c->stash->{pre_hacked_uri} = $c->req->uri;
     my $base = $c->req->base;
     $base =~ s|/+$||;
