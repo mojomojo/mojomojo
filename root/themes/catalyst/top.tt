@@ -1,0 +1,27 @@
+	<div id="header-cat">
+		<h1>
+			<a class="logo" href="http://www.catalystframework.org/"><img src="images/layout/catalyst_130pix.html" alt="Catalyst - Web Framework" /></a>
+		</h1>
+		<!--
+		<form method="get" action="/search" id="form">
+			<div>
+				<input class="text" type="text" id="query" name="query" value="" /><br />
+				<input class="submit" type="submit" id="search" value="Search" />
+			</div>
+		</form>
+		//-->
+		<ul id="menu_global">
+			<li id="www"><span><a href="http://www.catalystframework.org/">Home</a></span></li>		            
+			<li id="home"><span><a href="/">Community</a></span></li>
+			<li id="documentation"><span><a href="http://search.cpan.org/dist/Catalyst-Runtime/lib/Catalyst/Manual.pod">Documentation</a></span></li>
+			<li id="developer"><span><a href="http://dev.catalystframework.org/timeline">Developer</a></span></li>
+			<li id="download"><span><a href="http://search.cpan.org/dist/Catalyst-Runtime/">Download</a></span></li>
+			<li id="support"><span><a href="http://dev.catalystframework.org/wiki/Support">Support</a></span></li>
+			<li id="blog"><span><a href="http://www.catalystframework.org/random/">Blog</a></span></li>
+			<li id="planet"><span><a href="http://planet.catalystframework.org/">Planet</a></span></li>
+			<li id="calendar"><span><a href="http://www.catalystframework.org/calendar/" style="font-weight:bold">Calendar</a></span></li>
+		</ul>
+
+[%template.title%]
+
+	</div><!-- end #header-cat -->
