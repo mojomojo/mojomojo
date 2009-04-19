@@ -3,7 +3,8 @@ package MojoMojo::Formatter::Include;
 use base qw/MojoMojo::Formatter/;
 
 eval "use LWP::Simple;use URI::Fetch;";
-sub module_loaded { $@ ? 0 : 1 }
+my $eval_res=$@;
+sub module_loaded { $eval_res ? 0 : 1 }
 
 =head1 NAME
 

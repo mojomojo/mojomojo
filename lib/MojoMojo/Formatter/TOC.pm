@@ -6,8 +6,9 @@ use HTML::Entities;
 use Encode;
 
 eval "use HTML::Toc;use HTML::TocInsertor;";
+my $eval_res=$@;
 
-sub module_loaded { $@ ? 0 : 1 }
+sub module_loaded { $eval_res ? 0 : 1 }
 
 =head1 NAME
 

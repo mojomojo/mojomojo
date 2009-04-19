@@ -6,8 +6,9 @@ use base qw/MojoMojo::Formatter/;
 use HTML::Entities;
 
 eval "use Syntax::Highlight::Engine::Kate;";
+my $eval_res=$@;
 
-sub module_loaded { $@ ? 0 : 1 }
+sub module_loaded { $eval_res ? 0 : 1 }
 
 
 my $main_formatter;
