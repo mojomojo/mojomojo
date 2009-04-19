@@ -19,7 +19,7 @@ $(document).ready(function(){
       if (selected=="comment")  return insertTags('body','\n{{comments}}\n','','');
       if (selected=="toc")      return insertTags('body','\n{{toc}}','','');
       if (selected=="redirect") return insertTags('body','\n{{redirect ','}}','/new/location');
-      if (selected=="include")  return insertTags('body','\n{{http://}}','','');
+      if (selected=="include")  return insertTags('body','\n{{','}}','http://www.google.com');
       if (selected=="youtube")  return insertTags('body','\n{{youtube ','}}','http://www.youtube.com');
       if (selected=="cpan")     return insertTags('body','\n{{cpan ','}}','MojoMojo');
     });
