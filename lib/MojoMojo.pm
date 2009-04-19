@@ -258,7 +258,7 @@ sub uri_for {
         $_[0] = join('/', map { URI::Escape::uri_escape_utf8($_) } split(/\//, $_[0]) );
     }
 
-    $c->NEXT::uri_for(@_);
+    $c->next::method(@_);
 }
 
 sub uri_for_static {
