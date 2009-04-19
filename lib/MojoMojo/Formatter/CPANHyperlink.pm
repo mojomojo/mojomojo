@@ -55,7 +55,6 @@ sub format_content {
             {{cpan \s+ ($cpan_params_RE) \s* \/? }}
         ][<a href="http://search.cpan.org/perldoc?$1">$1</a>]ix) {
 
-        return 1;
     }
 }
 
