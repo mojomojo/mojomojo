@@ -39,7 +39,7 @@ those tags.
 =cut
 
 sub format_content_order {
-  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown'){
+  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown' ) {
     14
   } else {
     99
