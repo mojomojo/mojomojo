@@ -34,9 +34,10 @@ my @allow = qw[ p img em br hr b a div pre code];
 my @rules = (
     script => 0,
     img    => {
-        src => qr{^(?!http://)}i,    # only relative image links allowed
-        alt => 1,                    # alt attribute allowed
-        '*' => 0,                    # deny all other attributes
+        class => 1,
+        src   => qr{^(?!http://)}i,    # only relative image links allowed
+        alt   => 1,                    # alt attribute allowed
+        '*'   => 0,                    # deny all other attributes
     },
 );
 
