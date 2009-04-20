@@ -10,7 +10,6 @@ use Catalyst qw/-Debug
     Email
     Session
     Session::Store::File
-    Singleton
     Session::State::Cookie
     Static::Simple
     SubRequest
@@ -21,6 +20,7 @@ use Catalyst qw/-Debug
 
 use Storable;
 use Data::Dumper;
+use MRO::Compat;
 use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
 use URI::Escape ();
@@ -204,7 +204,7 @@ sub fixw {
 
 sub prepare_path {
     my $c = shift;
-    $c->NEXT::prepare_path;
+    $c->next::method(@_);
     $c->stash->{pre_hacked_uri} = $c->req->uri;
     my $base = $c->req->base;
     $base =~ s|/+$||;
@@ -266,7 +266,7 @@ sub uri_for {
         $_[0] = join('/', map { URI::Escape::uri_escape_utf8($_) } split(/\//, $_[0]) );
     }
 
-    $c->NEXT::uri_for(@_);
+    $c->next::method(@_);
 }
 
 sub uri_for_static {

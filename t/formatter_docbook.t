@@ -2,8 +2,13 @@
 use strict;
 use MojoMojo::Formatter::DocBook;
 
-use Test;
-BEGIN { plan tests => 1 }
+use Test::More;
+
+BEGIN { 
+    plan skip_all => 'Requirements not installed for Docbook Formatter' 
+        unless MojoMojo::Formatter::DocBook->module_loaded;
+    plan tests => 1;
+};
 
 {
     my $content = <<DBK;

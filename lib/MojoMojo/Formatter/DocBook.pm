@@ -1,16 +1,20 @@
 package MojoMojo::Formatter::DocBook;
 
-
 use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
 
-use XML::LibXSLT;
-use XML::SAX::ParserFactory (); # loaded for simplicity;
-use XML::LibXML::Reader;
+eval "use XML::LibXSLT;use XML::SAX::ParserFactory (); use XML::LibXML::Reader;";
+my $eval_res=$@;
 use MojoMojo::Formatter::DocBook::Colorize;
 
 my $xsltfile="/usr/share/sgml/docbook/stylesheet/xsl/nwalsh/xhtml/docbook.xsl";
+
+sub module_loaded { 
+    return 0 unless -f $xsltfile;
+    return $eval_res ? 0 : 1 ;
+}
+
 my $debug=0;
 
 =head1 NAME
@@ -44,6 +48,7 @@ context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
 
+    return unless $class->module_loaded;
     my @lines = split /\n/, $$content;
     my $dbk;
     $$content = "";
@@ -63,8 +68,6 @@ sub format_content {
             else { $$content .= $line . "\n"; }
         }
     }
-
-    return $$content;
 }
 
 

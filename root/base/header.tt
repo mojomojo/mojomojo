@@ -52,4 +52,4 @@ jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.con
 [% ELSE %]
   <div id="container">
 [% END %]
-    [% template.title %]
+[% PROCESS top.tt %]

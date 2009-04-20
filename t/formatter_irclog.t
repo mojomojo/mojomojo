@@ -7,8 +7,8 @@ use MojoMojo::Formatter::IRCLog;
 
 my $content;
 
-my $ib = "\n=irc\n";
-my $ie = "\n=irc\n";
+my $ib = "\n{{irc}}\n";
+my $ie = "\n{{end}}\n";
 my $ob = "\n==\n<dl>\n";
 my $oe = "</dl>\n==\n";
 $content = "${ib}<nick> text$ie";

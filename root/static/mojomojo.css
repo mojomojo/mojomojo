@@ -560,6 +560,10 @@ dd {
   margin-left: 80px;
 }
 
+div#comments div.comment dd {
+  margin-left: 120px;
+}
+
 /* Common Forms Rules */
 
 .standard_form .fields label {

@@ -7,7 +7,8 @@ package MojoMojo::Formatter::DocBook::Colorize;
 #--------------------------------------------------------------------#
 
 use strict;
-use Syntax::Highlight::Engine::Kate;
+eval "use Syntax::Highlight::Engine::Kate;";
+sub module_loaded { $@ ? 0 : 1 }
 
 my $hl_node="programlisting|screen";
 my $hl_attrib="lang";
@@ -166,6 +167,7 @@ sub ColorizeCode{
     }
 
     return $code if ( ! $lang );
+    return $code unless __PACKAGE__->module_loaded;
 
 
     my $hl = Syntax::Highlight::Engine::Kate->new(

@@ -4,6 +4,11 @@ use base qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::Pod;
 
+sub formatter_loaded { 
+    return MojoMojo::Formatter::DocBook->formatter_loaded;
+}
+
+
 =head1 NAME
 
 MojoMojo::Formatter::File::Pod - format Pod File in xhtml
@@ -39,7 +44,6 @@ takes Pod text and renders it as XHTML.
 sub to_xhtml {
     my ( $self, $text ) = @_;
     my $result;
-
     return MojoMojo::Formatter::Pod->to_pod( $text );
 }
 

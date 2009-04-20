@@ -3,8 +3,13 @@ package MojoMojo::Formatter::SyntaxHighlight;
 use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
-use Syntax::Highlight::Engine::Kate;
 use HTML::Entities;
+
+eval "use Syntax::Highlight::Engine::Kate;";
+my $eval_res=$@;
+
+sub module_loaded { $eval_res ? 0 : 1 }
+
 
 my $main_formatter;
 eval {
@@ -34,7 +39,7 @@ those tags.
 =cut
 
 sub format_content_order {
-  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown'){
+  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown' ) {
     14
   } else {
     99
@@ -44,12 +49,12 @@ sub format_content_order {
 =item format_content
 
 This formatter uses L<Syntax::Highlight::Engine::Kate> to highlight code
-syntax inside of E<lt>preE<gt> tags. To let the formatter know which language
+syntax inside of {{code}} tags. To let the formatter know which language
 has to be highlighted, do:
 
- <pre lang="Perl">
+ {{code lang="Perl"}}
    print "Hello World\n";
- </pre>
+ {{end}} 
 
 See L<Syntax::Highlight::Engine::Kate/PLUGINS> for a list of supported
 languages.
@@ -63,6 +68,7 @@ my $kate = _kate();
 
 sub format_content {
     my ( $class, $content ) = @_;
+    return unless $class->module_loaded;
 
     $$content = decode_entities($$content);
 
@@ -71,9 +77,9 @@ sub format_content {
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
 
     # drop all lang=""
-    $$content =~ s/<\s*pre\s+lang=""\s*>/<pre>/g;
-
-    while ( $$content =~ s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si ) {
+    $$content =~ s/\{\{\s*code\s+lang=""\s*\}\}/<pre>/g;
+    
+    while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*end\s*\}\}/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;

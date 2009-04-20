@@ -31,17 +31,25 @@
 
     <tr>
       <td># [%loc('Numbered list')%]<br /># [%loc('Second item')%]</td><td class="arrow">-></td><td>1. [%loc('Numbered list')%]<br />2. [%loc('Second item')%]</td>
+      [% IF(INC.exists('MojoMojo/Formatter/Emote.pm')) -%]
       <td>:-)</td><td class="arrow">-></td><td><em><img src="[%base%]/.static/emote/regular_smile.gif" alt="smile emote" /><br/>
          [%loc('And others.')%]</em></td>
+      [% END -%]
     </tr>
     <tr>
       <td>"[%loc('linkname')%]":[%loc('URL')%]</td><td class="arrow">-></td><td><a href="URL">[%loc('linkname')%]</a></td>
+      [% IF(INC.exists('MojoMojo/Formatter/Amazon.pm')) -%]
+       <td>{{http://amazon/url}}</td><td class="arrow">-></td><td><em>[%loc('Show this product')%]</em></td>
+       [% END -%]
     </tr>
     <tr>
       <td>[%loc('|a|table|row|')%]<br />[%loc('|b|table|row|')%]</td><td class="arrow">-></td><td>[%loc('Table')%]</td>
     </tr>
     <tr>
       <td>!/img/url!</td><td class="arrow">-></td><td>[%loc('Image')%]</td>
+        [% IF(INC.exists('MojoMojo/Formatter/RSS.pm')) -%]
+      <td>{{feed://[%loc('your/url')%]}}</td><td class="arrow">-></td><td><em>[%loc('include this rss feed')%]</em></td>
+      [% END -%]
     </tr>
   </table>
 </div>
