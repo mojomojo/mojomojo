@@ -1,46 +1,41 @@
-[% PROCESS header.tt %]
+[% WRAPPER page/wrapper.tt simple_header = 1 %]
 <div id="header">
-<h1 id="pageName">
-  <small> [% page_title %] </small>
-  [% loc('Search Results') %]
-</h1>
+    <h1 id="pageName">
+        <small>[% page_title %]</small>
+        [% loc('Search Results') %]
+    </h1>
 </div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
 <div id="content">
-<div id="search">
-    <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
-        [% loc('Search') %]: <input type="text" name="q" value="[% query |html %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
-        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
-    </form>
-</div>
-
-<hr />
+    <div id="search">
+        <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
+            [% loc('Search') %]: <input type="text" name="q" value="[% query |html %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
+            <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
+            <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
+        </form>
+    </div>
 [% IF result_count %]
-[% IF search_type != "all"; SET found_within = result.page.path; ELSE; SET found_within = loc('entire site'); END %]
-<h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %].</h3>
-[% ELSE %]
-<h3>[% loc('No results found') %].</h3>
-[% END %]
+    [% IF search_type != "all"; SET found_within = result.page.path; ELSE; SET found_within = loc('entire site'); END %]
+    <h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %].</h3>
+    [% ELSE %]
+    <h3>[% loc('No results found') %].</h3>
+    [% END %]
 
-<div id="search_results" style="text-indent: 1em;">
-[% FOR result = results %]
- <div class="search_result">
-    <span style="font-size:smaller">[% result.title_base_nodes %]</span><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikilink(result.page.name_orig) %]</a></strong> [% result.page.content.abstract %]
-    <div class="snippet">
-      [% result.snippet %]
+    <div id="search_results">
+    [% FOR result = results %]
+        <div class="search_result">
+            <small>[% result.title_base_nodes %]</small><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikilink(result.page.name_orig) %]</a></strong> [% result.page.content.abstract %]
+            <div class="snippet">[% result.snippet %]</div>
+            <div class="byline">
+                [% loc('by') %] [% c.wikiword(result.page.content.creator.link, base) %]
+                [% loc('on') %] <small>[% result.page.content.created.ymd("-") %]</small>
+            </div>
+        </div>
+    [% END %]
     </div>
-    <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] [% c.wikiword(result.page.content.creator.link, base) %]
-      [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
-    </div>
-  </div>
-  </li>
-[%END%]
-</div>
 
-[% IF pager && pager.total_entries > pager.entries_per_page %]
+    [% IF pager && pager.total_entries > pager.entries_per_page %]
     <div class="pager">
         <ul>
             <li>[% loc('Result Page') %]:</li>
@@ -55,7 +50,6 @@
         [% END %]
         </ul>
     </div>
-[% END %]
+    [% END %]
 </div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

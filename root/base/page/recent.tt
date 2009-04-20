@@ -7,6 +7,7 @@
 %]
 
 [% WRAPPER page/wrapper.tt title = title %]
+<div id="content">
 
 [% IF tags.count %]
 <div id="categories">
@@ -47,7 +48,7 @@
         <tr class="item">
             <td>
                 <a href="[% c.req.base; page.path; %]">[% page.name_orig %]</a>
-                <div class="diff" style="display:none;"></div>
+                <div class="diff display-none"></div>
             </td>
             <td>
             <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.login %]</a>
@@ -60,4 +61,6 @@
   [% END %]
 [% END %]
 </table>
-[% END %]
+
+</div>
+[% END # End WRAPPER %]

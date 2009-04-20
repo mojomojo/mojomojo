@@ -156,6 +156,7 @@ ol.setup li {
   color: #999;
   padding-left: 4px;
   text-align:right;
+  margin-bottom: 0px;
 }
 
 .references {
@@ -1052,3 +1053,10 @@ div#bottomnav { clear:both; }
 .kateString { color: #ff0000; }
 .kateVariable { color: #0000ff; }
 .kateWarning { color: #0000ff; }
+
+#editspinner { display: none; }
+#search_results { text-indent: 1em; }
+
+.display-none { display: none; }
+.maximized-container { width: 99%; }
+.float-left { float: left; }
