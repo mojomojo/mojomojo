@@ -507,10 +507,13 @@ a.logo {
 
 @import "../department/home.html";
 
-#wrapper {
+#container {
   width: 860px;
   margin-left: auto;
   margin-right: auto;
+}
+#maximize {
+    display: none;
 }
 
 /* header
@@ -603,7 +606,7 @@ a.logo {
   color: rgb(0,0,0); 
 }
 
-.home #menu_global #home,
+ #menu_global #home,
 .community #menu_global #community,
 .documentation #menu_global #documentation,
 .developer #menu_global #developer,
