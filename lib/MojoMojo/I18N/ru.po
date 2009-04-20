@@ -478,7 +478,7 @@ msgstr "Найти"
 
 #: root/base/message.tt:6
 msgid "Go directly to "
-msgstr "Перейти к "
+msgstr "Перейти на "
 
 #: root/base/navbar.tt:21
 msgid "Go to home page"
@@ -1751,7 +1751,7 @@ msgstr "выйти"
 
 #: root/base/admin/user.tt:10 root/base/comment/login.tt:8
 msgid "login"
-msgstr "залогиниться"
+msgstr "логин"
 
 #: root/base/admin/user.tt:12
 msgid "name"
@@ -1799,11 +1799,11 @@ msgstr "простому загрузчику"
 
 #: root/base/comment.tt:11
 msgid "posted"
-msgstr "отправлено"
+msgstr "размещено"
 
 #: root/base/comment.tt:9
 msgid "poster"
-msgstr "отправитель"
+msgstr "автор"
 
 #: root/base/user/prefs.tt:1
 msgid "preferences"
@@ -1852,7 +1852,7 @@ msgstr "маленький"
 
 #: root/base/message.tt:6
 msgid "start"
-msgstr "началу"
+msgstr "начало"
 
 #: root/base/toolbar.tt:34
 msgid "subscript"

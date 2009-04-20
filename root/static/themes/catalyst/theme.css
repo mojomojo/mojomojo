@@ -30,10 +30,9 @@ body {
 	font-size: 1.8em;
 	font-family: Verdana;
     color: #656060;
-    font-weight: bold;
     border-width: 1px;
     border-color: #000;
-    margin: 0;
+    margin: 0.4em;
 }
 
 #header h1 a {
@@ -64,9 +63,9 @@ body {
 
 div#toplinks {
     font-size:.9em;
-    background: #808080;
+    background: #ccc;
     font-weight: bold;
-    color: #fff;
+    color: #1E1E1E;
     padding: 2px 8px;
     min-height: 1.8em;
     text-align: left;
@@ -76,14 +75,14 @@ div#toplinks ul li, div#bottomnav ul li {
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
-    color: #000;
+    color: #1e1e1e;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     text-decoration:none;
 }
 div#toplinks ul li a,  div#bottomnav ul li a {
     padding: 2px 6px;
-    color: white;
+    color: #1e1e1e;
     text-decoration: none;
 }
 div#pagenav {
@@ -91,7 +90,7 @@ div#pagenav {
     text-align: left;
     clear: both;
     padding: 4px 15px;
-    background: #e0d7c4;
+    background: #eee;
     border-top: 1px solid #c1baaa;
     border-bottom: 1px solid #c1baaa;
 }
@@ -135,7 +134,7 @@ div#pageoptions a {
 .wantedBy { color:#999; }
 
 #tags {
-    background: #e0d7c4;
+    background: #eee;
     font-size: 1.1em;
     color: #676767;
     padding: 5px 13px;
@@ -298,7 +297,7 @@ div#pageoptions a {
 }
 
 #bottomnav {
-    background: #808080;
+    background: #ccc;
     padding: 6px 8px;
     color: #000000;
     margin: 0;
@@ -507,10 +506,13 @@ a.logo {
 
 @import "../department/home.html";
 
-#wrapper {
+#container {
   width: 860px;
   margin-left: auto;
   margin-right: auto;
+}
+#maximize {
+    display: none;
 }
 
 /* header
@@ -603,7 +605,7 @@ a.logo {
   color: rgb(0,0,0); 
 }
 
-.home #menu_global #home,
+ #menu_global #home,
 .community #menu_global #community,
 .documentation #menu_global #documentation,
 .developer #menu_global #developer,
