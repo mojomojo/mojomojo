@@ -448,3 +448,57 @@ jQuery.prototype.any = function(callback) {
   return (this.filter(callback).length > 0)
 }
 
+setupToggleMaximized = function() { 
+    var $img    = $('<img id="maximize"/>');
+    var img_uri = $.uri_for("/.static/gfx/maximize_width_X.png");
+    var max;
+
+    max = $("#container").hasClass('maximized-container');
+
+    // alt="[% loc ('maximize') %]"
+    // title="[% loc('maximize width') %]"
+
+    var toggle = function() {
+        if(max) {
+            $("#container").addClass('maximized-container');
+        }
+        else {
+            $("#container").removeClass('maximized-container');
+        }
+        max = !max;
+    };
+
+    $img.attr('src', img_uri.replace(/X/, max ? 2 : 1))
+        .hover(
+            function() {this.src = img_uri.replace(/X/, max ? 2 : 1)},
+            function() {this.src = img_uri.replace(/X/, max ? 1 : 2)}
+        )
+        .click(function() {
+            $.ajax({
+                success: toggle,
+                url: $.uri_for("/.json/container_maximize_width/")
+                   + (max ? 1 : 0)
+            });
+        });
+
+    $("#breadcrumbs").append( $('<div class="float-right"/>').append($img) );
+
+    toggle();
+};
+
+toggleDefaultValue = function(elem) {
+    elem.focus(function() {
+            if(this.value == this.defaultValue) {
+                this.value = "";
+            }
+        })
+        .blur(function() {
+            if(this.value == "") {
+                this.value = this.defaultValue;
+            }
+        });
+}
+
+$(document).ready(function() {
+    setupToggleMaximized();
+});
