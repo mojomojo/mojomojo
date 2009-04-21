@@ -9,7 +9,7 @@ my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );
 # We do not want Text::Textile to encode HTML entities at all because it will encode something
 # like &gt; into &amp;gt; which sucks
 {
-    no strict ref;
+    no strict 'refs';
     *{"Text::Textile::encode_html"} = sub { my ($self, $html) = @_; return $html; };
 }
 
