@@ -62,53 +62,17 @@ sub settings : Path FormConfig Args(0) {
             open_registration        => $c->pref('open_registration'),
             restricted_user          => $c->pref('restricted_user'),
             disable_search           => $c->pref('disable_search'),
-            check_permission_on_view => $c->pref('check_permission_on_view') ne""
-                                        ? $c->pref('check_permission_on_view')
-                                        : defined $c->config->{'permissions'}{'check_permission_on_view'}
-                                          ? $c->config->{'permissions'}{'check_permission_on_view'}
-                                          : 0,
-            cache_permission_data    => $c->pref('cache_permission_data')    ne""
-                                        ? $c->pref('cache_permission_data')
-                                        : defined $c->config->{'permissions'}{'cache_permission_data'}
-                                          ? $c->config->{'permissions'}{'cache_permission_data'}
-                                          : 1,
-            enforce_login            => $c->pref('enforce_login')            ne""
-                                        ? $c->pref('enforce_login')
-                                        : defined $c->config->{'permissions'}{'enforce_login'}
-                                          ? $c->config->{'permissions'}{'enforce_login'}
-                                          : 0,
-            create_allowed           => $c->pref('create_allowed')           ne""
-                                        ? $c->pref('create_allowed')
-                                        : defined $c->config->{'permissions'}{'create_allowed'}
-                                          ? $c->config->{'permissions'}{'create_allowed'}
-                                          : 1,
-            delete_allowed           => $c->pref('delete_allowed')           ne""
-                                        ? $c->pref('delete_allowed')
-                                        : defined $c->config->{'permissions'}{'delete_allowed'}
-                                          ? $c->config->{'permissions'}{'delete_allowed'}
-                                          : 1,
-            edit_allowed             => $c->pref('edit_allowed')             ne""
-                                        ? $c->pref('edit_allowed')
-                                        : defined $c->config->{'permissions'}{'edit_allowed'}
-                                          ? $c->config->{'permissions'}{'edit_allowed'}
-                                          : 1,
-            view_allowed             => $c->pref('view_allowed')             ne""
-                                        ? $c->pref('view_allowed')
-                                        : defined $c->config->{'permissions'}{'view_allowed'}
-                                          ? $c->config->{'permissions'}{'view_allowed'}
-                                          : 1,
-            attachment_allowed       => $c->pref('attachment_allowed')       ne""
-                                        ? $c->pref('attachment_allowed')
-                                        : defined $c->config->{'permissions'}{'attachment_allowed'}
-                                          ? $c->config->{'permissions'}{'attachment_allowed'}
-                                          : 1,
+            check_permission_on_view => $c->pref('check_permission_on_view'),
+            cache_permission_data    => $c->pref('cache_permission_data'),
+            enforce_login            => $c->pref('enforce_login'),
+            create_allowed           => $c->pref('create_allowed'),
+            delete_allowed           => $c->pref('delete_allowed'),
+            edit_allowed             => $c->pref('edit_allowed'),
+            view_allowed             => $c->pref('view_allowed'),
+            attachment_allowed       => $c->pref('attachment_allowed'),
             use_captcha              => $c->pref('use_captcha'),
             theme                    => $c->pref('theme'),
-            main_formatter           => $c->pref('main_formatter')           ne""
-                                        ? $c->pref('main_formatter')
-                                        : defined $c->config->{'main_formatter'}
-                                          ? $c->config->{'main_formatter'}
-                                          : 'MojoMojo::Formatter::Textile',
+            main_formatter           => $c->pref('main_formatter')
         });
         $form->process();
         return;

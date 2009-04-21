@@ -1,0 +1,20 @@
+---
+load_config_file: __path_to(root/forms/defaults.yml)__
+id: loginForm
+
+elements:
+  - name: login
+    id: loginField
+    label_loc: Username
+    constraints:
+      - Required
+  
+  - type: Password
+    name: pass
+    label_loc: Password
+    constraints:
+      - Required
+  
+  - type: Submit
+    name: submit
+    value_loc: Login

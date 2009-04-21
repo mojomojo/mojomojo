@@ -1,0 +1,118 @@
+/*+-------------------------------------------+
+  | GENERAL                                   |
+  +-------------------------------------------+*/
+
+#content {
+	background: #fff;
+	margin-top: 7px;
+}
+
+#main { 
+	float: left;
+	width: 640px;
+	margin-left: 10px;
+	background: #fff;
+	padding: 1px;
+}
+
+#sidebar {
+	margin-left: 585px;
+	padding: 1px 15px 0 0;
+}
+
+/*+-------------------------------------------+
+  | MAIN                                      |
+  +-------------------------------------------+*/
+
+#main ul {
+	padding-bottom: 1em;
+}
+
+#main ul li {
+	list-style-type: none;
+	padding-left: 1.5em;
+	background: url("../../images/global/list_bullet.png") top left no-repeat;
+	background-position: .55em .55em;
+}
+
+#main pre {
+	background-color: #f7f7f7;
+	border: 1px solid #aaaaaa;
+	padding: 2px;
+	width: 576px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: auto;
+	font-size: 120%;
+}
+
+/*+-------------------------------------------+
+  | LOGO                                      |
+  +-------------------------------------------+*/
+
+a.logo {
+	text-decoration: none;
+}
+
+/*+-------------------------------------------+
+  | ENTRY                                     |
+  +-------------------------------------------+*/
+
+.entry {
+	margin: 0 0 20px 5px;
+	width: 635px;
+	/*border-bottom: 1px solid #f4f4f4;*/
+	padding-bottom: 10px;
+}
+
+.entry-header {
+	padding: 13px 10px 0px 10px;
+	margin-bottom: 0;
+	background: #e7e7e7 url("../../images/global/box_bg_gray_top_635.png") top left no-repeat;
+}
+
+.entry-title {
+	/*padding: 13px 10px 15px 10px;*/
+	font-size: 1.1em;
+	font-weight: bold;
+	/*background: url("../../images/global/box_bg_left.png") top left no-repeat;*/
+}
+
+.entry-body {
+	padding: 10px;
+	background: url("../../images/global/box_bg_gray_bottom.png") top left no-repeat;
+}
+
+.entry-footer {
+	text-align: right;
+	padding: 5px;
+}
+
+/*+-------------------------------------------+
+  | SIDEBAR                                   |
+  +-------------------------------------------+*/
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.sidebar-node {
+	width: 179px;
+	margin-top: 0;
+	background: url("../../images/global/box_bg_gray.png") top right no-repeat; 
+	float: right;
+}
+
+#sidebar dt {  
+	padding: 13px 10px 15px 10px;
+	font-size: 1.1em;
+	font-weight: bold;
+	background: url("../../images/global/box_bg_left.png") top left no-repeat;
+}
+
+#sidebar dd {
+	margin-left: 0;
+	padding: 0 10px 5px 10px;
+}

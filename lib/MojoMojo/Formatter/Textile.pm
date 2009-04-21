@@ -2,9 +2,9 @@ package MojoMojo::Formatter::Textile;
 
 use base qw/MojoMojo::Formatter/;
 
-use Text::Textile2;
+use Text::Textile;
 use Text::SmartyPants;
-my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
+my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );
 
 =head1 NAME
 

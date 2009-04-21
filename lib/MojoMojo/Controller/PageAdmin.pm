@@ -3,6 +3,7 @@ use warnings;
 use strict;
 use Data::Dumper;
 use base 'Catalyst::Controller::HTML::FormFu';
+use Syntax::Highlight::Engine::Kate;
 
 =head1 NAME
 
@@ -92,16 +93,19 @@ sub edit : Global FormConfig {
         return;
     }
     if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= loc('Anonymous Edit disabled');
+        $c->stash->{message} ||= $c->loc('Anonymous Edit disabled');
         return;
     }
 
     # for anonymous users, use CAPTCHA, if enabled
     if ( $user == 1 && $c->pref('use_captcha') ) {
-       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') || 'en' ;
+       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') ;
        $c->stash->{captcha}=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
        $form->process;
     }
+
+    my $syntax=new Syntax::Highlight::Engine::Kate;
+    $c->stash->{syntax_formatters}=[ $syntax->languageList() ];
 
     if ( $form->submitted_and_valid ) {
 

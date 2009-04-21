@@ -1,16 +1,64 @@
-<input type="image" onclick="return insertTags('body','\n\n<pre lang=&quot;Perl&quot;>\n','\n</pre>\n\n','#!/usr/bin/perl\nuse strict;\nprint &quot;Hello\\n&quot;;');"
-  src="[%c.uri_for_static('toolbar/formatter_syntax.png')%]" title="[% loc('Syntax Highlight') %]"/>
-<input type="image" onclick="return insertTags('body','\n\n=irc\n','\n=irc\n\n','12:00 <nick> Hello #mojomojo!');"
-  src="[%c.uri_for_static('toolbar/formatter_irc.png')%]" title="[% loc('IRC formatter') %]"/>
-<input type="image" onclick="return insertTags('body','\n\n=pod\n\n','\n\n=pod\n\n','[% loc('=head1 Header') %]');"
-  src="[%c.uri_for_static('toolbar/formatter_pod.png')%]" title="[% loc('POD formatter') %]"/>
-<input type="image" onclick="return insertTags('body','\n\n=comments\n\n','','');"
-  src="[%c.uri_for_static('toolbar/formatter_comments.png')%]" title="[% loc('comments') %]"/>
-<input type="image" onclick="return insertTags('body','\n\n=http://','','');"
-  src="[%c.uri_for_static('toolbar/formatter_include.png')%]" title="[% loc('include') %]"/>
-<input type="image" onclick="return insertTags('body','\n\n=redirect ','','/new/location');"
-  src="[%c.uri_for_static('toolbar/formatter_redirect.png')%]" title="[% loc('redirect') %]"/>
-<br />
+<script type="text/javascript">
+$(document).ready(function(){
+    // formatter
+    $('#formatter').change (function(){
+      // get selected value
+      var selected=$('#formatter option:selected').val();
+      // set to first element
+      $('#formatter').val("[% loc('Formatter') %]");
+      if (selected=='irc_formatter') return insertTags('body','\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!');
+      if (selected=='pod_formatter') return insertTags('body','\n{{pod}}\n\n','\n\n{{end}}\n\n','[% loc("=head1 Header") %]'   );
+    });
+    
+    // insert
+    $('#insert').change (function(){
+      // get selected value
+      var selected=$('#insert option:selected').val();
+      // set to first element
+      $('#insert').val("[% loc('Insert') %]");
+      if (selected=="comment")  return insertTags('body','\n{{comments}}\n','','');
+      if (selected=="toc")      return insertTags('body','\n{{toc}}','','');
+      if (selected=="redirect") return insertTags('body','\n{{redirect ','}}','/new/location');
+      if (selected=="include")  return insertTags('body','\n{{','}}','http://www.google.com');
+      if (selected=="youtube")  return insertTags('body','\n{{youtube ','}}','http://www.youtube.com');
+      if (selected=="cpan")     return insertTags('body','\n{{cpan ','}}','MojoMojo');
+    });
+
+    // syntax
+    $('#syntax').change (function(){
+      // get selected value
+      var selected=$('#syntax option:selected').text();
+      $('#syntax').val("[% loc('Syntax Highlight') %]");
+      return insertTags('body','\n\n{{code lang=\"'+selected+'\"}}\n','\n{{end}}\n\n','#!/usr/bin/perl');
+    });
+});
+</script>
+
+<select id="formatter" title="[% loc('Formatter') %]">
+    <option selected>[% loc('Formatter') %]</option>
+    <option value="irc_formatter">[% loc('IRC formatter') %]</option>
+    <option value="pod_formatter">[% loc('POD formatter') %]</option>
+</select>
+
+<select id="insert" title="[% loc('Insert') %]">
+    <option selected>        [% loc('Insert')   %]</option>
+    <option value="comment"> [% loc('comments') %]</option>
+    <option value="toc">     [% loc('toc')      %]</option>
+    <option value="redirect">[% loc('redirect') %]</option>
+    <option value="include"> [% loc('include')  %]</option>
+    <option value="youtube"> [% loc('youtube')  %]</option>
+    <option value="cpan">    [% loc('cpan')     %]</option>
+</select>
+
+<select id="syntax" title="[% loc('Syntax Highlight') %]">
+  <option selected>[% loc('Syntax Highlight') %]</option>
+  [% FOR syntax IN syntax_formatters %]
+    <option>[% syntax %]</option>
+  [% END %]
+</select>
+
+
+<br /><br />
 
 [%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
 <input type="image" onclick="return insertTags('body','\n\nh1. ','\n\n','[% loc('Also try h2,h3 and so on') %]');"
@@ -19,8 +67,6 @@
   src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
 <input type="image" onclick="return insertTags('body','\n\n# ','\n\n','[% loc('Numbered list item') %]');"
   src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
-<input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
-  src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>
 <input type="image" onclick="return insertTags('body','@','@','[% loc('code') %]');"
   src="[%c.uri_for_static('toolbar/code.png')%]" title="[% loc('Code') %]"/>&nbsp;&nbsp;&nbsp;
 <input type="image" onclick="return insertTags('body','bq. ','','[% loc('quote') %]');"
@@ -57,7 +103,7 @@
   src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
 <input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
   src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
-<p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
+<br><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small><br />
 [% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
 <input type="image" onclick="return insertTags('body','\n\n# ',' #\n\n','[% loc('increase # for smaller headline') %]');"
   src="[%c.uri_for_static('toolbar/heading.png')%]" title="[% loc('Main heading') %]"/>
@@ -65,8 +111,6 @@
   src="[%c.uri_for_static('toolbar/list_bullet.png')%]" title="[% loc('Bullet list') %]"/>
 <input type="image" onclick="return insertTags('body','\n\n1 ','\n\n','[% loc('Numbered list item') %]');"
   src="[%c.uri_for_static('toolbar/list_enum.png')%]" title="[% loc('Enum list') %]"/>
-<input type="image" onclick="return insertTags('body','<pre>','</pre>','[% loc('<xml> and such.\nor pure text.') %]');"
-  src="[%c.uri_for_static('toolbar/preformatted.png')%]" title="[% loc('Preformatted text') %]"/>&nbsp;&nbsp;&nbsp;
 <input type="image" onclick="return insertTags('body','**','**','[% loc('bold') %]');"
   src="[%c.uri_for_static('toolbar/bold.png')%]" title="[% loc('Bold') %]"/>
 <input type="image" onclick="return insertTags('body','_','_','[% loc('italic') %]');"
@@ -77,11 +121,11 @@
   src="[%c.uri_for_static('toolbar/wikilink.png')%]" title="[% loc('Internal Link') %]"/>
 <input type="image" onclick="return insertTags('body','[',']()','[% loc('url inside paranthesis') %]');"
   src="[%c.uri_for_static('toolbar/hyperlink.png')%]" title="[% loc('External Link') %]"/>
-<input type="image" onclick="return insertTags('body','<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)');"
+<input type="image" onclick="return insertTags( 'body', '<div class=photo style=&quot;float: left&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' );"
   src="[%c.uri_for_static('toolbar/drawing_left.png')%]" title="[% loc('Picture left') %]"/>
-<input type="image" onclick="return insertTags('body','<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)');"
+<input type="image" onclick="return insertTags( 'body', '<div class=photo>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' );"
   src="[%c.uri_for_static('toolbar/drawing.png')%]" title="[% loc('Picture') %]"/>
-<input type="image" onclick="return insertTags('body','<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)');"
+<input type="image" onclick="return insertTags( 'body', '<div class=photo style=&quot;float: right&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' );"
   src="[%c.uri_for_static('toolbar/drawing_right.png')%]" title="[% loc('Picture right') %]"/>
-<p><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small></p>
+<br /><small>&nbsp;[% loc('Mark some text to apply the toolbar actions to that text') %]</small><br />
 [% END %]

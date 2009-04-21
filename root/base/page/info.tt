@@ -1,9 +1,9 @@
-[% 
+[%
     IF page.name == "/";
-        _name = c.pref( "name" ) || "MojoMojo";
+        _name = c.pref( "name" );
     ELSE;
-        _name = c.expand_wikiword( page.name_orig );
-    END 
+        _name = c.expand_wikilink( page.name_orig );
+    END
 %]
 
 [% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
@@ -20,16 +20,16 @@
 
     <dt>[%loc('Descendants')%]:</dt>
     <dd>[% page.descendants.size %]</dd>
-    
+
     <dt>[%loc('Links to')%]:</dt>
     <dd>[% page.links_to.size || 0 %] [% loc('pages') %]</dd>
-    
+
     <dt>[%loc('Links from')%]:</dt>
     <dd>[% page.links_from.size || 0%] [% loc('pages') %]</dd>
-    
+
     <dt>[%loc('Attachments')%]:</dt>
     <dd>[% page.attachments.size || 0%] [% loc('bytes') %]</dd>
-    
+
     <dt>[%loc('Photos')%]:</dt>
     <dd>[% page.has_photos || 0 %]</dd>
 </dl>
@@ -45,4 +45,3 @@
 </ol>
 
 [% END %]
-

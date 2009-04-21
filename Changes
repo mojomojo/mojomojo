@@ -1,13 +1,22 @@
 0.999028 2009-03-06 12:11:00
+        - Use oneshot timer instead of only_every to trigger preview update.
+        - Make .profile smarter and link to it from .recent.
+        - Clean up extra // in .recent URL's.
+        - New formatter: {{cpan Some::Module}} auto-hyperlinks (dandv)
+        - Use package scope for $kate syntax highlight object to reduce memory leak (mateu)
+        - Use jquery cookie to make split edit state sticky
+        - Added maximization of the edit page (linio)
+        - Instant edit window split mode toggle (horiz./vert.) preserves content (linio)
+        - Drop-downs for syntax highlighters, plugins and formatters (linio)
         - Set default theme directory when theme preference is NULL
         - Add inline view
-        - reCAPTCHA added
+        - reCAPTCHA support (linio)
         - localize: help message, admin home page, anonymous name and login ('anonymous coward')
         - Fixed displaying multiple user roles
         - Now FormFu label_loc can be localized by MojoMojo I18N
         - MojoMojo habla español (guikubivan)
         - Add polish translation (linio)
-        - Add support for utf8 wiki words
+        - Improved wikilinks (UTF-8, parentheses, anchors) and added tests
         - Fixes for paragraphs in toolbar (linio)
         - Add Catalan language support
         - limit width of preview area in split edit.
@@ -20,7 +29,7 @@
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.
         - Added "Split Edit" for side-by-side view/edit.
-        - Switched from Cache::Store::Memory to Cache::FastMmap
+o        - Switched from Cache::Store::Memory to Cache::FastMmap
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
         - List one link for each page by an author via .users (instead of all revisions).

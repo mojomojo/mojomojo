@@ -2,13 +2,14 @@ package MojoMojo::Formatter::Pod;
 
 use base qw/MojoMojo::Formatter/;
 
+
 =head1 NAME
 
 MojoMojo::Formatter::Pod - format part of content as POD
 
 =head1 DESCRIPTION
 
-This formatter will format content between two =pod blocks as 
+This formatter will format content between {{pod}} and {{end}} as 
 POD (Plain Old Documentation).
 
 =head1 METHODS
@@ -36,17 +37,20 @@ sub format_content {
     my @lines = split /\n/, $$content;
     my $pod;
     $$content = "";
+    my $start_re=$class->gen_re(qr/pod/);
+    my $end_re=$class->gen_re(qr/end/);
     foreach my $line (@lines) {
         if ($pod) {
-            if ( $line =~ m/^=pod\s*$/ ) {
-                $$content .= MojoMojo::Formatter::Pod->to_pod( $pod, $c->req->base );
+            if ( $line =~ m/^(.*)$end_re(.*)$/ ) {
+                $$content .= MojoMojo::Formatter::Pod->to_pod( $pod.$1, $c->req->base ).$2;
                 $pod = "";
             }
             else { $pod .= $line . "\n"; }
         }
         else {
-            if ( $line =~ m/^=pod\s*$/ ) {
-                $pod = " ";    # make it true :)
+            if ( $line =~ m/^(.*)$start_re(.*)$/ ) {
+                $$content .= $1;
+                $pod = " ".$2;    # make it true :)
             }
             else { $$content .= $line . "\n"; }
         }
@@ -102,7 +106,7 @@ sub do_link {
     my $link = $token->attr('to');
 
     #FIXME: This doesn't look right:
-    return $self->SUPER::do_link($token) unless $link =~ /^$WORD+$/;
+    return $self->SUPER::do_link($token) unless $link =~ /^$token+$/;
     my $section = $token->attr('section');
     $section = "#$section"
         if defined $section and length $section;

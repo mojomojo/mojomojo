@@ -12,17 +12,14 @@
         [% END %] 
         <a href="[%c.uri_for('recover_pass')%]">[% loc('Recover password') %]</a>
     </p>
-    <form id="loginForm" action="[%c.uri_for('login')%]" method="post">
-        <dl class="form">
-        <dt>[% loc('Username') %]:</dt>
-        <dd><input id="loginField" type="text" name="login"/></dd>
-        <dt>[% loc('Password') %]:</dt>
-        <dd><input type="password" name="pass"/></dd>
-        <dt>&nbsp;</dt>
-        <dd><input type="submit" value="[% loc('Log in') %]"/></dd>
-        </dl>
-    </form>
+    [% form %]
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#loginField').focus();
+  });
+</script>
 
 <div id="bottomnav">&nbsp;</div>
        

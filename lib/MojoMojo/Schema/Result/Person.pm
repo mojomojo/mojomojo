@@ -11,7 +11,7 @@ use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core HTML::FormFu/);
+    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",
@@ -110,9 +110,11 @@ sub can_edit {
     my ( $self, $page ) = @_;
     return 0 unless $self->active;
 
-    # allow admins, and users editing their pages
+    # allow admins
     return 1 if $self->is_admin;
+    # allow edit unless users are restricted to home page
     return 1 unless MojoMojo->pref('restricted_user');
+    # allow users editing their pages
     my $link = $self->link;
     return 1 if $page =~ m|^$link\b|i;
     return 0;

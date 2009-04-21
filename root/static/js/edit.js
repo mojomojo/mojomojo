@@ -1,36 +1,47 @@
-/* Change the CSS and add a table to default edit mode to turn it 
- * into a side-by-side view/edit mode.
- */  
-  
-$(document).ready(function(){
-	if ($("form#editForm")) {
-		split_layout_vertical();
-	}
+$(document).ready(function() {
+    if ($.cookies.get('split_edit')=='1'){
+        split_layout_vertical();
+    }
 });
 
 
-
-// Hack up the edit layout into split mode using a two cell table.
 function split_layout_vertical() {
-    var max_container_width       = '1450px';
+    var max_container_width       = $(window).width();
     var preview_area_height       = '100%';
     var edit_area_height          = '40em';
-    var preview_area_max_width    = '725px';
-    
-	// Set the dimension and banner for side-by-side preview/edit.
-    $("div#container").css("max-width", max_container_width);
-    $("div#header").css('background-repeat', 'no-repeat');
-    $("div.preview").css('height', preview_area_height);
-    $("textarea#body").css('height', edit_area_height);
-    $("div.preview").css('max-width', preview_area_max_width);
-
-    // Put the preview and edit divs into a 1x2 table. 
-    $("div#content_preview").wrap("<td id='preview_cell' width='50%'></td>");
-    $("div#edit_form").wrap("<td id='edit_cell' width='50%'></td>");
-    $("div#preview_and_edit_container").wrapInner('<table id="preview_and_edit_table" summary="holder for preview and edit areas" style="margin:auto; border:0px;"><tr></tr></table>');
-    $("table#preview_and_edit_table > td").css('border', '0px');
-    $("table#preview_and_edit_table").find("td").css('border','0px');
-
+    var preview_area_max_width    = max_container_width/2;
+   
+    if ($("div#edit_form").css('float')=='left'){
+        $("div#edit_form").css('float',split_layout_vertical.deff);
+        $("div#content_preview").css('float',split_layout_vertical.dcpf);
+        $("div#content_preview").css('width',split_layout_vertical.dcpw);
+        $("div#edit_form").css('width',split_layout_vertical.defw);
+        $("div#container").css("max-width",split_layout_vertical.dcmw);
+        $("div#header").css("background-repeat",split_layout_vertical.dhbr);
+        $("div#preview").css("height",split_layout_vertical.dph);
+        $("textarea#body").css("height",split_layout_vertical.tbh);
+        //$("div.preview").css("max-width",split_layout_vertical.dpmw);
+        $("div.preview").css("max-width",'100%');
+		$.cookies.set('split_edit',0);
+    } else {
+        split_layout_vertical.deff=$('div#edit_form').css('float');
+        split_layout_vertical.dcpf=$('div#content_preview').css('float');
+        split_layout_vertical.dcpw=$('div#content_preview').css('width');
+        split_layout_vertical.defw=$('div#edit_form').css('width');
+        split_layout_vertical.dcmw=$('div#container').css('max-width');
+        split_layout_vertical.dhbr=$('div#header').css('background-repeat');
+        split_layout_vertical.dph=$('div.preview').css('height');
+        split_layout_vertical.tbh=$('textarea#body').css('height');
+        //split_layout_vertical.dpmw=$('div.preview').css('max-width');
+        $("div#edit_form").css('float','left');
+        $("div#content_preview").css('float','left');
+        $("div#edit_form").css('width','49%');
+        $("div#content_preview").css('width','49%');
+        $("div#container").css("max-width", max_container_width);
+        $("div#header").css('background-repeat', 'no-repeat');
+        $("div.preview").css('height', preview_area_height);
+        $("textarea#body").css('height', edit_area_height);
+        $("div.preview").css('max-width', preview_area_max_width);
+		$.cookies.set('split_edit',1);
+    } 
 }
-
-

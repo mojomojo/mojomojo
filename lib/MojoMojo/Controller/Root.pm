@@ -89,7 +89,7 @@ sub end : Private {
        $c->pref('theme',$theme);
     }
     $c->stash->{additional_template_paths} =
-        [ $c->path_to('root','static','themes',$theme) ];
+        [ $c->path_to('root','themes',$theme) ];
 
     $c->req->uri->path( $c->stash->{pre_hacked_uri}->path )
         if ref $c->stash->{pre_hacked_uri};
@@ -120,6 +120,20 @@ sub auto : Private {
     return 1 if $c->req->action eq 'logout';
     $c->stash->{template} = 'user/validate.tt';
 }
+
+sub exit : Local {
+    my ($self, $c) = @_;
+    if ($ENV{MOJOMOJO_EXIT_OK}) {
+        exit(0);
+    }
+    else {
+       # $c->stash( template => 'error.tt' );
+        $c->res->status (403); # forbidden
+        $c->res->body('EXIT NOT OK');
+        $c->detach();
+    }
+}
+
 
 =back
 

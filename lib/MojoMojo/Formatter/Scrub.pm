@@ -11,7 +11,7 @@ MojoMojo::Formatter::Scrub - Scrub user HTML
 1
 =head1 DESCRIPTION
 
-This formatter makes sure only a safe range of tags are 
+This formatter makes sure only a safe range of tags are
 allowed, using L<HTML::Scrubber>; It also makes sure all tags
 are balaced, using L<XML::Clean>.
 
@@ -21,7 +21,9 @@ are balaced, using L<XML::Clean>.
 
 =item format_content_order
 
-Format order can be 1-99. The Comment formatter runs on 1
+Format order can be 1-99. The Scrub formatter runs on 7
+in order to catch direct user input, but trusts all subsequently
+ran plugins to not output unsafe HTML.
 
 =cut
 
@@ -32,9 +34,10 @@ my @allow = qw[ p img em br hr b a div pre code];
 my @rules = (
     script => 0,
     img    => {
-        src => qr{^(?!http://)}i,    # only relative image links allowed
-        alt => 1,                    # alt attribute allowed
-        '*' => 0,                    # deny all other attributes
+        class => 1,
+        src   => qr{^(?!http://)}i,    # only relative image links allowed
+        alt   => 1,                    # alt attribute allowed
+        '*'   => 0,                    # deny all other attributes
     },
 );
 
@@ -86,7 +89,6 @@ context object.
 =cut
 
 sub format_content {
-    return 0;
     my ( $class, $content, $c ) = @_;
     $$content = $scrubber->scrub($$content);
     return 1;

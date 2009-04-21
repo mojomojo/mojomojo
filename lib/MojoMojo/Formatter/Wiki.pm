@@ -4,6 +4,7 @@ use base qw/MojoMojo::Formatter/;
 
 use URI;
 use Scalar::Util qw/blessed/;
+use MojoMojo::Formatter::TOC;
 
 =head1 NAME
 
@@ -11,11 +12,16 @@ MojoMojo::Formatter::Wiki - Handle interpage linking.
 
 =head1 DESCRIPTION
 
-This formatter handles Wiki links using the [[WikiWord]] . It
-will also indicate missing links with a question mark and a
-link to the edit page. In explicit mode, you can prefix the
-wikiword with a path, just like in a normal URL. For example:
-[[../marcus]] or [[/oslo/vacation]].
+This formatter handles intra-Wiki links specified between double square brackets
+or parentheses: [[wiki link]] or ((another wiki link)). It will also indicate
+missing links with a question mark and a link to the edit page. Links can be
+implicit (like the two above), where the path is derived from the link text
+by replacing spaces with underscores (<a href="wiki_link">wiki link</a>), or
+explicit, where the path is specified before a '|' sign:
+
+    [[/explicit/path|Link text goes here]]
+
+Note that external links have a different syntax: [Link text](http://foo.com).
 
 =head1 METHODS
 
@@ -23,7 +29,7 @@ wikiword with a path, just like in a normal URL. For example:
 
 =item format_content_order
 
-Format order can be 1-99. The Wiki formatter runs on 30
+Format order can be 1-99. The Wiki formatter runs on 10
 
 =cut
 
@@ -56,17 +62,15 @@ sub _generate_explicit_end {
 }
 
 sub _generate_explicit_path {
-
     # non-greedily match characters that don't match the start-end and text delimiters
-    my $delims = ( join '', _explicit_end_delims() ) . $explicit_separator;
-    return qr{[^$delims]+?};
+    my $not_an_end_delimiter_or_separator = '(?:(?!' . (join '|', _explicit_end_delims(), $explicit_separator) . ').)';  # produces (?: (?! ]] | \)\) | \| ) .)  # a character in a place where neither a ]], nor a )), nor a | is
+    return qr{$not_an_end_delimiter_or_separator+?};
 }
 
 sub _generate_explicit_text {
-
     # non-greedily match characters that don't match the start-end delimiters
-    my $delims = join '', _explicit_end_delims();
-    return qr{[^$delims]+?};
+    my $not_an_end_delimiter = '(?:(?!' . join '|', _explicit_end_delims() . ').)';  # produces (?: (?! ]] | \)\) ) .)  # a character in a place where neither a ]] nor a )) starts
+    return qr{$not_an_end_delimiter+?};
 }
 
 my $explicit_start = _generate_explicit_start();
@@ -76,7 +80,7 @@ my $explicit_text  = _generate_explicit_text();
 
 
 sub _generate_non_wikiword_check {
-
+    # FIXME: this evaluates incorrectly to a regexp that's clearly mistaken: (?x-ism:( ?<! [\[\[\(\((?-xism:\\)\/\?] ))
     # we include '\/' to avoid wikiwords that are parts of urls
     # but why the question mark ('\?') at the end?
     my $non_wikiword_chars =
@@ -135,7 +139,6 @@ sub format_content {
     my @parts;
     ( $$content, @parts ) = strip_pre($content);
 
-
     # Do explicit links, e.g. [[ /path/to/page | link text ]]
     $$content =~ s{
         $non_wikiword_check
@@ -175,88 +178,130 @@ sub format_content {
     $$content = reinsert_pre( $content, @parts );
 }
 
-=item format_link <c> <word> <base> [<link_text>]
+=item format_link <c> <wikilink> <base> [<link_text>]
 
-Format a wikiword as a link
+Format a wikilink as an HTML hyperlink with the given link_text. If the wikilink
+doesn't exist, it will be rendered as a hyperlink to an .edit page ready to be
+created.
+
+Since there is no difference in syntax between new and existing links, some
+abiguities my occur when it comes to characters that are invalid in URLs. For
+example,
+
+* [[say "NO" to #8]] should be rendered as <a href="say_%22NO%22_to_%238">say "NO" to #8</a>
+* [[100% match]] should be rendered as <a href="100%25_match>100% match</a>, URL-escaping the '%'
+* but what about a user pasting an existing link, [[say_%22NO%22_to_%238]]? We shouldn't URL-escape the '%' or '#' here.
+* for links with explicit link text, we should definitiely not URL-escape the link: [[say_%22NO%22_to_%238|say "NO" to #8]]
+
+This is complicated by the fact that '#' can delimit the start of the anchor portion of a link.
+
+* [[Mambo #5]] - URL-escape '#' => Mambo_%235
+* [[Mambo#origins]] - do not URL-escape
+* [[existing/link#Introduction|See the Introduction]] - definitely do not URL-escape
+
+Since escaping is somewhat magic and therefore potentially counter-intuitive,
+we will:
+* only URL-escape '#' if it follows a whitespace directly
+* always URL-escape '%' unless it is followed by two uppercase hex digits
+* always escape other characters that are invalid in URLs
 
 =cut
 
 sub format_link {
 
     #FIXME: why both base and $c?
-    my ( $class, $c, $word, $base, $link_text ) = @_;
+    my ( $class, $c, $wikilink, $base, $link_text ) = @_;
     $base ||= $c->req->base;
-    $word = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $word unless $word =~ m|^[/\.]|;
+    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink unless $wikilink =~ m|^[/\.]|;
     $c = MojoMojo->context unless ref $c;
 
-    # keep the original wikiword for display, stripping leading slashes
-    my $orig_word = $word;
-    if ( $orig_word =~ m|^ \s* /+ \s* $|x ) {
-        $orig_word = '/';
+    # keep the original wikilink for display, stripping leading slashes
+    my $orig_wikilink = $wikilink;
+    if ( $orig_wikilink =~ m|^ \s* /+ \s* $|x ) {
+        $orig_wikilink = '/';
     }
     else {
-        $orig_word =~ s/.*\///;
+        $orig_wikilink =~ s/.*\///;
     }
-    $word =~ s/\s/_/g;
-    $word =~ s/\.//g;
-    my $formatted = $link_text || $class->expand_wikiword($orig_word);
+    my $fragment = '';
+    for ($wikilink) {
+        s/(?<!\s)#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion away, in preparation for the page search below, and save it in $fragment
+        s/\s/_/g;
+        s/\./_/g;  # MojoMojo doesn't support periods in wikilinks because they conflict with actions ('.edit', '.info' etc.); actions are a finite set apparently, but it's possible to add new actions from formatter plugins (e.g. Comment)
+        # if there's no link text, URL-escape characters in the wikilink that are not valid in URLs
+        if (!defined $link_text or $link_text eq '') {
+            s/%(?![0-9A-F]{2})  # escape '%' unless it's followed by two uppercase hex digits
+            | (?<=_)\#          # escape '#' only if it directly follows a whitespace (which had been replaced by a '_')
+            | [":<=>?{|}]       # escape all other characters that are invalid in URLs
+            /sprintf('%%%02X', ord($&))/egx;  # all other characters in the 0x21..0x7E range are OK in URLs; see the conflicting guidelines at http://www.ietf.org/rfc/rfc1738.txt and http://labs.apache.org/webarch/uri/rfc/rfc3986.html#reserved
+        }
+    }
+    # if the fragment was not properly formatted as a fragment (per the rules explained in MojoMojo::Formatter::TOC::assembleAnchorName, i.e. i has an invalid character), convert it, unless it contains escaped characters already (.[0-9A-F]{2})
+    if(MojoMojo::Formatter::TOC->module_loaded){
+        $fragment = MojoMojo::Formatter::TOC::assembleAnchorName(undef, undef, undef, undef, $fragment)
+            if $fragment ne '' and ($fragment =~ /[^A-Za-z0-9_:.-]/ or $fragment !~ /\.[0-9A-F]{2}/);
+    }
+    my $formatted = $link_text || $class->expand_wikilink($orig_wikilink);
 
     # convert relative paths to absolute paths
-
     if (
         $c->stash->{page}
         &&
 
         # drop spaces
-        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' && $word !~ m|^/|
+        ref $c->stash->{page} eq 'MojoMojo::Model::DBIC::Page' && $wikilink !~ m|^/|
         )
     {
-        $word = URI->new_abs( $word, $c->stash->{page}->path . "/" );
+        $wikilink = URI->new_abs( $wikilink, $c->stash->{page}->path . "/" );
     }
-    elsif ( $c->stash->{page_path} && $word !~ m|^/| ) {
-        $word = URI->new_abs( $word, $c->stash->{page_path} . "/" );
+    elsif ( $c->stash->{page_path} && $wikilink !~ m|^/| ) {
+        $wikilink = URI->new_abs( $wikilink, $c->stash->{page_path} . "/" );
     }
 
-    # make sure that base url has no trailing slash, since
-    # the page path will have a leading slash
+    # make sure that base URL has no trailing slash, since the page path will have a leading slash
     my $url = $base;
     $url =~ s/[\/]+$//;
 
+    # remove http://host/ from url
+    $url =~ s!^https?://[^/]+!!;
+
     # use the normalized path string returned by path_pages:
-    my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($word);
+    my ( $path_pages, $proto_pages ) = $c->model('DBIC::Page')->path_pages($wikilink);
     if ( defined $proto_pages && @$proto_pages ) {
         my $proto_page = pop @$proto_pages;
         $url .= $proto_page->{path};
+        return qq{<span class="newWikiWord">$formatted<a title="}
+          . $c->loc('Not found. Click to create this page.')
+          . qq{" href="$url.edit">?</a></span>};
     }
     else {
         my $page = pop @$path_pages;
         $url .= $page->path;
+        $url .= "#$fragment" if $fragment ne '';
         return qq{<a class="existingWikiWord" href="$url">$formatted</a>};
     }
-    return
-        qq{<span class="newWikiWord">$formatted<a title="}.$c->loc('Not found. Click to create this page.').qq{" href="$url.edit">?</a></span>};
 }
 
-=item expand_wikiword <word>
+=item expand_wikilink <wikilink>
 
-Expand mixed case and _ with spaces.
+Replace _ with spaces and unescape URL-encoded characters
 
 =cut
 
-sub expand_wikiword {
-    my ( $class, $word ) = @_;
-    # No longer expanding wikiwords
-    #TODO: Rename this function to something more appropriate.
-    #$word =~ s/([a-z])([A-Z])/$1 $2/g;
-    $word =~ s/\_/ /g;
-    return $word;
+sub expand_wikilink {
+    my ( $class, $wikilink ) = @_;
+    for ($wikilink) {
+        s/\_/ /g;
+        s/%([0-9A-F]{2})/chr(hex($1))/eg;
+    }
+    return $wikilink;
 }
 
 =item find_links <content> <page>
 
 Find wiki links in content.
 
-Return a listref of linked and wanted pages.
+Return a listref of linked (existing) and wanted pages.
 
 =cut
 

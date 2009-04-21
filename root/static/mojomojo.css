@@ -560,6 +560,10 @@ dd {
   margin-left: 80px;
 }
 
+div#comments div.comment dd {
+  margin-left: 120px;
+}
+
 /* Common Forms Rules */
 
 .standard_form .fields label {
@@ -692,8 +696,9 @@ ul#menuHome {
 
 div.photo img{
     margin: 1em;
-    padding:5px;
-    border:1px solid;border-color: #ccc #666 #666 #ccc
+    padding: 5px;
+    border: 1px solid;
+	border-color: #ccc #666 #666 #ccc
 }
 
 .end {
@@ -707,12 +712,23 @@ div.photo img{
 }
 
 acronym {
-  border-bottom: 1px dotted !important;
+    border-bottom: 1px dotted !important;
 }
 
 .inplaceeditor-form input {
     margin: 0px 10px 0px 0px;
 }
+
+a.footnote {
+    vertical-align: .6em;
+	font-size: 75%;
+}
+a.footnote:before {
+    content: "["
+}	
+a.footnote:after {
+    content: "]"
+}	
 
 .inplaceeditor-form a {
     border: 1px solid black;
@@ -741,53 +757,78 @@ acronym {
     border: 1px solid #bbb;
     margin-left: 10px;
 }
+
+/* Copied from HTML-FormFu examples/vertically-aligned/vertically-aligned.css */
+
 fieldset {
-    padding: 1em;
+	padding: 1em;
 }
 
 fieldset .button,
 fieldset .checkbox,
 fieldset .contentbutton,
+fieldset .date,
 fieldset .file,
 fieldset .image,
 fieldset .multi,
 fieldset .password,
 fieldset .radio,
+fieldset .recaptcha,
 fieldset .reset,
 fieldset .select,
 fieldset .submit,
 fieldset .text,
 fieldset .textarea
 {
+	display: block;
+	clear: left;
+	border: 0;
+	margin: 1px;
+	/* when no label */
+	margin-left: 12em;
+}
+
+/* make the noscript textarea sit below the iframe
+*/
+fieldset .recaptcha noscript textarea {
     display: block;
-    clear: left;
-    border: 0;
-    margin: 1px;
-    /* when no label */
-    margin-left: 12em;
+}
+
+/* override the iframe's height="" - it's seems a bit big
+*/
+fieldset .recaptcha iframe {
+    height: 230px ! important;
 }
 
 fieldset .button.label,
 fieldset .checkbox.label,
 fieldset .contentbutton.label,
+fieldset .date.label,
 fieldset .file.label,
 fieldset .image.label,
 fieldset .multi.label,
 fieldset .password.label,
 fieldset .radio.label,
+fieldset .recaptcha.label,
 fieldset .reset.label,
 fieldset .select.label,
 fieldset .submit.label,
 fieldset .text.label,
 fieldset .textarea.label
 {
-    margin-left: 1px;
+	margin-left: 1px;
 }
 
 fieldset .error.label {
-    /* border + margin swap values with above, to ensure rows align */
-    border: 1px #fff;
-    margin: 0;
+	/* border + margin swap values with above, to ensure rows align */
+	border: 1px #fff;
+	margin: 0;
+}
+
+form .form_error_message {
+	padding: 0.5em;
+	border: 1px solid #ff0000;
+	background-color: #ffdddd;
 }
 
 fieldset .error_message {
@@ -800,77 +841,147 @@ fieldset .label .error_message {
        padding-left: 12em;
 }
 
+fieldset .error input,
+fieldset .error textarea,
+fieldset .error select {
+       background-color: #ffdddd;
+}
+
 fieldset .button label,
 fieldset .contentbutton label,
 fieldset .checkbox label,
+fieldset .date label,
 fieldset .file label,
 fieldset .image label,
 fieldset .multi label,
 fieldset .password label,
 fieldset .radio label,
 fieldset .radiogroup label,
+fieldset .recaptcha label,
 fieldset .select label,
 fieldset .text label,
 fieldset .textarea label
 {
-    display: inline;
-    float: left;
-    width: 11em;
-    text-align: right;
-    padding: 4px 1em 0 0;
-    margin:0 0 1.5em 0;
+	display: inline;
+	float: left;
+	width: 11em;
+	text-align: right;
+	padding-right: 1em;
 }
 
 fieldset .radiogroup span label {
-    /* undo the above style */
-    float: none;
-    width: auto;
-    text-align: left;
-    padding-right: 0;
+	/* undo the above style */
+	float: none;
+	width: auto;
+	text-align: left;
+	padding-right: 0;
 }
 
 fieldset .multi .elements {
-    display: block;
-    float: left;
+	display: block;
+	float: left;
 }
 
 fieldset .multi .elements label {
-    display: block;
-    width: auto;
-    padding-right: 0.25em;
+	display: block;
+	width: auto;
+	padding-right: 0.25em;
 }
 
 fieldset .multi input,
 fieldset .multi select {
-    display: block;
-    float: left;
-    margin-right: 0.5em;
+	display: block;
+	float: left;
+	margin-right: 0.5em;
 }
 
 fieldset.checkboxgroup,
 fieldset.radiogroup
 {
-    margin: 0;
-    margin-left: 12em;
-    padding: 0;
-    width: auto;
+	margin: 0;
+	margin-left: 12em;
+	padding: 0;
+	width: auto;
 }
 
 fieldset.radiogroup.label {
-    border: 0;
-    margin-left: 0em;
+	border: 0;
+	margin-left: 0em;
 }
 
 fieldset .comment .comment {
-    /* when no label */
-    display: block;
-    margin-left: 0em;
+	/* when no label */
+	display: block;
+	margin-left: 0em;
 }
 
 fieldset .label .comment {
-    display: block;
-    margin-left: 12em;
+	display: block;
+	margin-left: 12em;
 }
+
+/*** Alternative Layouts ***/
+
+fieldset .notes {
+	float: right;
+	width: 30%;
+	border: 1px dotted;
+}
+
+fieldset .multi.vertical input,
+fieldset.checkboxgroup .vertical input,
+fieldset.radiogroup .vertical input
+{
+	display: block;
+	float: left;
+	clear: left;
+	margin-right: 0.5em;
+}
+
+fieldset .multi.vertical select {
+	display: block;
+	float: left;
+	clear: right;
+}
+
+fieldset.checkboxgroup .vertical label,
+fieldset.radiogroup .vertical label
+{
+	display: block;
+	clear: right;
+}
+
+fieldset.radiogroup .vertical .subgroup {
+	float: left;
+}
+
+fieldset .fullwidth label
+{
+	display: block;
+	float: left;
+	width: auto;
+	text-align: left;
+}
+
+fieldset .fullwidth .error_message {
+       padding-left: 0em;
+}
+
+fieldset .fullwidth textarea
+{
+	display: block;
+	clear: left;
+	width: 30em;
+}
+
+fieldset .dojoeditor2 .RichTextEditable { /* Dojo::Editor2 */
+	display: inline;
+	float: left;
+	background-color: #ffc;
+	padding-bottom: 0.1em;
+}
+
+/* end of examples/vertically-aligned/vertically-aligned.css */
 
 fieldset.secondCol {
     float: left;
@@ -921,7 +1032,7 @@ div#bottomnav { clear:both; }
   color: black;
 }
 
-/* Syntax Highlight Engine Kate */
+/* Syntax::Highlight::Engine::Kate */
 .kateAlert { color: #0000ff; }
 .kateBaseN { color: #007f00; }
 .kateBString { color: #c9a7ff; }

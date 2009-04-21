@@ -1,19 +1,26 @@
 =head2 MojoMojo Preferences
 
-MojoMojo has a number of things that can be set in the preference system,
-some that are accessible via the admin interface, others that need to be 
-set directly in the database:
+MojoMojo has a number of things that can be set in the preference system.
+If values are not set in database, they are get from F<mojomojo.conf>, or default varues are taken.
+
+=head3 admins
+
+Login names of admin users. Default value is 'admin'.
+
+=head3 name
+
+Site name. Default value is 'MojoMojo'.
 
 =head3 main_formatter
 
 This chooses which formatter is to be used as the main text formatter.
 The two options so far is 'MojoMojo::Formatter::Textile' and 
-'MojoMojo::Formatter::Markdown'.
+'MojoMojo::Formatter::Markdown'. Default value is 'MojoMojo::Formatter::Textile'.
 
 =head3 open_registration
 
 This option allows you to control whether user registration is available
-or not. 
+or not. Default is false.
 
 =head3 anonymous_user
 
@@ -23,26 +30,82 @@ shown with the username set in this option.
 =head3 restricted_user
 
 If set, to a true value, normal users are restricted to editing pages
-inside their user space. Admin users can edit the entire site.
+inside their user space. Admin users can edit the entire site. Default is false.
+
+=head3 enforce_login
+
+If set to a true value, users are forced to login. Default value is false.
+
+=head3 check_permission_on_view
+
+If set to a true value, permissions to view are checked on view and search.
+Default value is false.
+
+=head3 create_allowed, delete_allowed, edit_allowed, view_allowed, attachment_allowed
+
+If values are set to true, permissions are checked for create, delete, edit, view, attachments. Default values are true.
 
 =head3 entropy
 
 Random string used to generate secret keys for mail verification and such.
 
-
-=head3 enable_implicit_wikiwords
-
-Turn this option on to enable CamelCase words in the text to be parsed as
-wiki words. Disabled by default.
-
 =head3 disable_search
 
 Set this to a true value to disable the internal search function. Will
-fall back to try site search using google.
+fall back to try site search using google. Default is false.
+
+=head3 use_captcha
+
+Set this to a true value to enable captcha for registration new users and
+edits by anonymous. Default value is false.
+
+=head3 theme
+
+Name of the theme. Default value is 'default'.
+
+=head3 cache_permission_data
+
+If set to a true value, permissions are cached. Default is set to true.
 
 =head3 default_lang
 
 Set default language for internationalization. Currently supported values
-are "no" for norwegian and "en" for english. will default to english.
+are (default value is "en"):
+
+=over
+
+=item *
+
+"en" for english
+
+=item *
+
+"de" for german
+
+=item *
+
+"fr" for french
+
+=item *
+
+"ja" for japan
+
+=item *
+
+"no" for norwegian
+
+=item *
+
+"ca" for catalan
+
+=item *
+
+"es" for spanish
+
+=item *
+
+"pl" for polish
+
+=back
 
 =cut
