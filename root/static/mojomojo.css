@@ -33,7 +33,6 @@ h5, h6 {
 }
 
 .toc {
-  border: 1px black dotted;
   display: inline-block;
   padding: 1em;
   margin: 1em;
@@ -83,23 +82,13 @@ form { margin: 0;}
   color: #999;
 }
 
-#navigationForm {
-  font-size : 12px;
-}
-
-div#toplinks ul li.navOn {
+div#toplinks a.navOn {
   color: #3a3a3a;
-  background:#fff;
-  padding:2px 8px;
+  background: #fff;
   text-decoration: none;
 }
 
-.help {
-  font-size: 11px;
-}
-
 .inputBox {
-  font-size: 11px;
   background-color: #eee;
   padding: 5px;
   margin-bottom: 20px;
@@ -138,12 +127,11 @@ pre {
   padding: 10px;
   margin-left: 3em;
   margin-right:1em ;
-  font-size: 11px;
   overflow: auto
 }
 
 ol.setup {
-  font-size: 19px;
+  font-size: 1.5em;
   font-family: georgia, verdana, sans-serif;
   padding-left: 25px;
 }
@@ -156,10 +144,7 @@ ol.setup li {
   color: #999;
   padding-left: 4px;
   text-align:right;
-}
-
-.references {
-  font-size: 10px;
+  margin-bottom: 0px;
 }
 
 p#message {
@@ -181,7 +166,6 @@ div.preview {
   overflow: auto;
   height: 250px;
   margin:0 0 1em 0;
-  width: 100%;
 }
 
 textarea#body {
@@ -195,17 +179,45 @@ textarea#comment {
   width: 400px;
 }
 
-#hidden_info {
-  display:none ;
+#hidden_info, #edithelp {
+  display:none;
   position:absolute;
   z-index:1;
+  width: 800px;
 }
 
+div.tab-nav,
 .syntax_help {
-  width: 800px;
   background: #ddd;
   border: 1px solid #aaa;
   padding:1em;
+}
+
+div.tab-nav {
+    background: #ccc;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0 1em;
+    height: 1.7em;
+}
+
+div.tab-nav a {
+    outline: none;
+    text-decoration: none;
+    float: left;
+    list-style: none;
+    margin: 0 0.3em;
+    padding: 0.2em 0.6em;
+}
+
+div.tab-nav a.active {
+    background: #ddd;
+    color: #222;
+}
+
+div.tab-nav a.close-button {
+    position: absolute;
+    right: 8px;
 }
 
 .syntax_help table {
@@ -219,7 +231,6 @@ textarea#comment {
 }
 
 .syntax_help  table td {
-  font-size: 11px;
   padding: 3px;
   vertical-align: top;
   border-top: 1px dotted #ccc;
@@ -234,13 +245,11 @@ textarea#comment {
 .syntax_help table td.label {
   font-weight: bold;
   white-space: nowrap;
-  font-size: 10px;
   padding-right: 15px;
   color: #000;
 }
 
 .syntax_help h3 {
-  font-size: 11px;
   font-weight: bold;
   font-weight: normal;
   margin: 0 0 5px 0;
@@ -258,7 +267,6 @@ textarea#comment {
 }
 
 .rightHandSide p {
-  font-size: 10px;
 }
 
 .newsList {
@@ -271,14 +279,12 @@ textarea#comment {
 
 .add a {
   color: green;
-    font-size: 13px;
   text-decoration: none;
   vertical-align: middle;
 }
 
 .add a:hover {
   color: #003800;
-    font-size: 13px;
 }
 a.tag {
     text-decoration: none;
@@ -459,7 +465,7 @@ table.recent .actions       { width:10%; }
 
 .form dt {
   float: left;
-  width: 120px;
+  width: 10em;
   line-height: 24px;
 }
 
@@ -495,13 +501,20 @@ span.statusmsg {
 }
 
 .imageinfo {
-  float:right;
-  padding:0px;
-  margin:0px;
-  width: 150px;
+  float: right;
+  padding: 0px;
+  margin: 0px;
+  width: 12em;
   min-height: 250px;
 }
 
+.imageinfo dl {
+    margin: 0;
+}
+
+.imageinfo h3 {
+    margin-top: 0;
+}
 
 /* Transparent forms */
 
@@ -522,7 +535,10 @@ input.dual:focus, textarea.dual:focus {
     margin:0.1em;
 }
 
-#title input,big {
+#title input {
+    font-size: 1em;
+}
+big {
     font-size: 1.6em;
 }
 #description textarea,small {
@@ -550,13 +566,11 @@ dl {
 dt {
   float: left;
   width: 80px;
-  line-height: 24px;
+  clear: left;
 }
 
 dd {
   margin: 0 0 5px 90px;
-  font-size: 11px;
-  line-height: 24px;
   margin-left: 80px;
 }
 
@@ -985,6 +999,7 @@ fieldset .dojoeditor2 .RichTextEditable { /* Dojo::Editor2 */
 
 fieldset.secondCol {
     float: left;
+    width: 45%;
 }
 
 #powered {
@@ -994,7 +1009,6 @@ fieldset.secondCol {
 }
 
 dl.list {
-    font-size:14px;
     font-family:Arial,Helvetica,sans-serif;
 }
 dl.list dt {
@@ -1002,11 +1016,24 @@ dl.list dt {
     width:15em;
 }
 
-div#tags { height:4em; }
+div#tags dl {
+    margin: 0;
+    padding: 0;
+}
 
-div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { width:120px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
-div#tags dd { margin:0; padding:0; }
+div#tags dt,
+div#tags dd {
+    margin: 0;
+    padding: 0;
+    height: 1.6em;
+}
+
+div#tags dt {
+    font-size: .8em;
+    font-weight: bold;
+    width: 120px;
+    clear: left;
+}
 
 div#bottomnav { clear:both; }
 
@@ -1051,3 +1078,24 @@ div#bottomnav { clear:both; }
 .kateString { color: #ff0000; }
 .kateVariable { color: #0000ff; }
 .kateWarning { color: #0000ff; }
+
+#editspinner { display: none; }
+#search_results { text-indent: 1em; }
+
+.display-none { display: none; }
+.float-left { float: left; }
+.float-right { float: right; }
+
+table.roles {
+    min-width: 50%;
+    margin-top: 2em;
+}
+
+form.site-configuration .submit {
+    position: relative;
+    left: -45%;
+    padding-top: 2em;
+}
+
+li.tabnav {
+}

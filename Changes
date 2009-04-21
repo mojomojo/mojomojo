@@ -26,6 +26,10 @@
         - Limit preview width so long pre lines don't squash edit area. 
         - Fix security check for attachments
         - Add Catalyst theme
+        - Add tabs to "Syntax help" popup (batman)
+        - Improved templates: removed js, inline css and most templates use wrapper (batman)
+        - Changed font-size: Removed ever px-based font-size, and set default to 11pt (batman)
+        - Improved w3c validation (batman)
 
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.

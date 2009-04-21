@@ -1,38 +1,24 @@
-[% PROCESS header.tt %]
-
-<div id="header">
-    <h1>[% loc('Email Validation') %]</h1>
-</div>
-
+[% WRAPPER page/wrapper.tt simple_header=1 simple_footer=1 title=loc('Email Validation') %]
 <div id="content">
-[% IF error %]
-    [% error %]
-[% ELSE %]
-    <h1>[% loc('Validation') %]</h1>    
-    <h4>
-        [% loc("We've sent you an email with an activation link. Please click on it to activate your account!") %]
-    </h4>
+    [% IF error %]
+        [% error %]
+    [% ELSE %]
+        <h1>[% loc('Validation') %]</h1>    
+        <h4>[% loc("We've sent you an email with an activation link. Please click on it to activate your account!") %]</h4>
+        [% loc('The email was sent to x.', user.email) %]
+    [% END %]
 
-    [% loc('The email was sent to x.', user.email) %]
-[% END %]
+    <h2>[% loc("Didn't receive an email?") %]</h2>
 
-<h2>[% loc("Didn't receive an email?") %]</h2>
+    <p>[% loc('Fill in the email address you want to use here') %]:</p>
 
-<p>
-    [% loc('Fill in the email address you want to use here') %]:
-</p>
+    <form action="[% c.uri_for('user/reconfirm') %]" method="POST">
+        <label for="email">[% loc('Email') %]:<label> 
+        <input id="email" type="text" name="email"/>
+        <input type="submit" name="OK" value="OK"/>
+    </form>
 
-<form action="[% c.uri_for('user/reconfirm') %]" method="POST">
-    <label for="email">[% loc('Email') %]:<label> 
-    <input id="email" type="text" name="email"/>
-    <input type="submit" name="OK" value="OK"/>
-</form>
-
-[% SET link = '<a href="' _ c.uri_for('logout') _ '">' _ loc('log out') _ '</a>' %]
-<p>[% loc('If you are unable to validate, please x', link) %].</p>
-
+    [% SET link = '<a href="' _ c.uri_for('logout') _ '">' _ loc('log out') _ '</a>' %]
+    <p>[% loc('If you are unable to validate, please x', link) %].</p>
 </div>
-
-<div id="bottomnav">&nbsp;
-
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

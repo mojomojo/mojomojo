@@ -6,24 +6,28 @@ body {
     background: #7D7C7A repeat-x url(images/background.jpg);
     margin: 0;
     color: #626262;
-    font: 85% Arial, Helvetica, Geneva, sans-serif;
+    font: 10pt noemal Arial, Helvetica, Geneva, sans-serif;
     text-align: center;
 }
 
-#container {
+.container {
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
 }
 
-#header {
+.maximized-container {
+    max-width: 99%;
+    width: 99%;
+}
 
+#header {
     height: auto;
     padding-bottom: 0.1em;
     margin: 0;
     margin-top: 10px;
 	background-color: #33455c;
-	    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topleft: 20px;
     -webkit-border-top-left-radius: 20px;
     -moz-border-radius-topright: 20px;
     -webkit-border-top-right-radius: 20px;
@@ -76,17 +80,28 @@ div#toplinks {
     min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
-    display: inline;
+    display: block;
+    float: left;
+    height: 1.5em;
+}
+div#toplinks ul li a, div#bottomnav ul li a, div#bottomnav ul li span.title {
+    text-decoration:none;
+    margin: 0px 0 0 5px;
+    padding: 1px 2px;
+}
+div#toplinks ul li a {
+    padding: 4px;
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 2px 6px;
     color:#333;
-    text-decoration:none;
 }
-div#toplinks ul li a,  div#bottomnav ul li a {
-    padding: 3px 7px;
+div#bottomnav li.set-language-navbar {
+    clear: left;
+}
+div#toplinks a {
+    position: relative;
+    top: 4px;
 }
 div#pagenav {
     font-size: .9em;
@@ -118,6 +133,11 @@ div#pageoptions ul li {
 }
 div#pageoptions a {
     color: green;
+
+}
+div#pageoptions a.active {
+    color: #ceebb6;
+    background: green;
 }
 #categories {
     background: #ffffff;
@@ -156,7 +176,7 @@ div#pageoptions a {
 #content {
     overflow: hidden;
     background: #ffffff;
-    padding: 13px;
+    padding: 2em 13px;
     overflow: hidden;
 }
 
@@ -228,8 +248,9 @@ div#pageoptions a {
     color: #000000;
     margin: 0;
     font-weight: bold;
-    min-height: 1.8em;
+    height: 2.8em;
     font-size: 0.9em;
+    border-top: 1px solid #8899aa;
 }
 
 #bottomnav input {
@@ -265,6 +286,14 @@ p {
 #content .center,
 #content table .center {
     text-align: center;
+}
+
+#powered {
+    border-top: 2px solid #33455C;
+    width: 100%;
+    margin: 0;
+    padding: 1em 0;
+    text-align: right;
 }
 
 /* @end */
