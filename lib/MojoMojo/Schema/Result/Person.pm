@@ -58,6 +58,10 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
+# TODO: Add the unique login and email constraints once
+# this is gracefully handled during registration
+#__PACKAGE__->add_unique_constraint( login => [qw/login/], );
+#__PACKAGE__->add_unique_constraint( email => [qw/email/], );
 __PACKAGE__->has_many( "entries",       "MojoMojo::Schema::Result::Entry",       { "foreign.author"  => "self.id" } );
 __PACKAGE__->has_many( "tags",          "MojoMojo::Schema::Result::Tag",         { "foreign.person"  => "self.id" } );
 __PACKAGE__->has_many( "comments",      "MojoMojo::Schema::Result::Comment",     { "foreign.poster"  => "self.id" } );

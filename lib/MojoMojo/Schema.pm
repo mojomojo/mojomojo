@@ -44,6 +44,9 @@ sub create_initial_data {
     $lang =~ s/\..*$//;
     loc_lang($lang);
 
+    # Get some type of email for admin.
+    my $user = $ENV{USER} || 'unknown';
+    my $admin_email = sprintf '%s@localhost', $user;
     my @people = $schema->populate(
         'Person',
         [
@@ -54,7 +57,7 @@ sub create_initial_data {
                 1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'),
                 '', '', '', 0, '', '', '', '', '', ''
             ],
-            [ 1, 0, 0, 'admin', loc('Enoch Root'), '', 'admin', '', 0, '', '', '', '', '', '' ],
+            [ 1, 0, 0, 'admin', loc('Enoch Root'), $admin_email, 'admin', '', 0, '', '', '', '', '', '' ],
         ]
     );
 
