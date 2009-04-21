@@ -7,14 +7,14 @@ $(document).ready(function() {
     toggleDefaultValue($("#authorName"));
 
     $split_edit_button
-        .attr('href', 'action://' + 'edit/split')
+        .attr('href', 'action://' + 'split_edit')
         .click(function() {
             split_layout_vertical();
             return false;
         });
 
     $toggle_info_button
-        .attr('href', 'action://' + 'syntax/help')
+        .attr('href', 'action://' + 'show/syntax_help')
         .click(function() {
             $("#edithelp").toggle();
             return false;
@@ -224,7 +224,6 @@ setupEditHelp = function() {
             });
             $tab.show();
             $a.addClass('active');
-            $edithelp.show();
             return false;
         });
 
@@ -234,6 +233,7 @@ setupEditHelp = function() {
 
     $close.click(function() { $edithelp.hide(); return false });
 
+    tabs[0][0].click();
     $nav.append($close);
     $edithelp.prepend($nav);
 
