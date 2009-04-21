@@ -2,6 +2,7 @@ package MojoMojo::Schema;
 
 use strict;
 use warnings;
+use Term::Prompt;
 
 use Moose;
 
@@ -27,7 +28,6 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 
 sub create_initial_data {
     my ($schema, $config) = @_;
-    print "Creating initial data\n";
 
     my $file = __PACKAGE__ . ".pm";
     $file =~ s{::}{/}g;
@@ -44,6 +44,19 @@ sub create_initial_data {
     $lang =~ s/\..*$//;
     loc_lang($lang);
 
+    print "It's time to set some default values:\n";
+
+    my %custom_values = (
+        wiki_name       => prompt( 'x', 'Name of the wiki?',                     '', "MojoMojo" ),
+        admin_username  => prompt( 'x', 'Username of the admin user?',           '', "$ENV{USER}" ),
+        admin_password  => prompt( 'x', 'Password of the admin user?',           '', "admin" ),
+        admin_fullname  => prompt( 'x', 'Full name of the admin user?',          '', "$ENV{USER}" ),
+        admin_email     => prompt( 'x', 'E-Mail address of the admin user?',     '', "$ENV{USER}\@localhost" ),
+        anonymous_email => prompt( 'x', 'E-Mail address of the Anonymous user?', '', "$ENV{USER}\@localhost" ),
+    );
+
+    print "Creating initial data\n";
+
     my @people = $schema->populate(
         'Person',
         [
@@ -51,10 +64,13 @@ sub create_initial_data {
                 qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
             ],
             [
-                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'),
-                '', '', '', 0, '', '', '', '', '', ''
+                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'), $custom_values{anonymous_email},
+                '', '', 0, '', '', '', '', '', ''
             ],
-            [ 1, 0, 0, 'admin', loc('Enoch Root'), '', 'admin', '', 0, '', '', '', '', '', '' ],
+            [
+                1, 0, 0, $custom_values{admin_username}, $custom_values{admin_fullname}, $custom_values{admin_email},
+                $custom_values{admin_password}, '', 0, '', '', '', '', '', ''
+            ],
         ]
     );
 
@@ -86,9 +102,15 @@ sub create_initial_data {
         ]
     );
 
-    my @prefs =
-        $schema->populate( 'Preference',
-        [ [qw/ prefkey prefvalue /], [ 'name', $config->{'name'} || "MojoMojo" ], [ 'admins', 'admin' ], [ 'theme', $config->{'theme'} || 'default' ] ] );
+    my @prefs = $schema->populate(
+        'Preference',
+        [
+            [qw/ prefkey prefvalue /],
+            [ 'name', $custom_values{wiki_name} ],
+            [ 'admins', $custom_values{admin_username} ],
+            [ 'theme',  $config->{'theme'} || 'default' ]
+        ]
+    );
 
     my @pages = $schema->populate(
         'Page',

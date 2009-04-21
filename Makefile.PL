@@ -65,6 +65,7 @@ requires(
     'URI'                                          => '1.35',
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
+    'Term::Prompt'                                 => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
