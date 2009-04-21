@@ -1,5 +1,4 @@
 [% WRAPPER page/wrapper.tt simple_header=1 simple_footer=1 title=loc('Email Validation') %]
-
 <div id="content">
     [% IF error %]
         [% error %]
@@ -22,5 +21,4 @@
     [% SET link = '<a href="' _ c.uri_for('logout') _ '">' _ loc('log out') _ '</a>' %]
     <p>[% loc('If you are unable to validate, please x', link) %].</p>
 </div>
-
 [% END # WRAPPER %]

@@ -8,7 +8,7 @@
     <ul>
 [% IF (user) %]
     [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user'))) +%]
-        <li class="navon">[% c.fixw(user.login) %]</li>
+        <li><a class="navOn" href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
     [% ELSE %]
         [% IF user.active %]
             [% IF (!rev OR rev==page.content_version) %]

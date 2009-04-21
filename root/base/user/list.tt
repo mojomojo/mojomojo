@@ -1,5 +1,4 @@
 [% WRAPPER page/wrapper.tt title = title || c.pref('name') %]
-
 <div id="content">
     [% PROCESS pager.tt %]
 
@@ -20,5 +19,4 @@
     [% END -%]
     </dl>
 </div>
-
 [% END # WRAPPER -%]
