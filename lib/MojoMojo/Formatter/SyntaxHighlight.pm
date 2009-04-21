@@ -70,8 +70,6 @@ sub format_content {
     my ( $class, $content ) = @_;
     return unless $class->module_loaded;
 
-    $$content = decode_entities($$content);
-
     my @blocks  = ();
     my $ph      = 0;
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
@@ -86,6 +84,7 @@ sub format_content {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;
+        $block = decode_entities($block);
         if ($language) {
             eval {
                 $kate->language($language);
