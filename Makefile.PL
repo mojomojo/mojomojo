@@ -63,7 +63,6 @@ requires(
     'Text::Context'                                => '3.5',
     'Text::Password::Pronounceable'                => 0,
     'URI'                                          => '1.35',
-    'XML::Clean'                                   => 0,
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
 );

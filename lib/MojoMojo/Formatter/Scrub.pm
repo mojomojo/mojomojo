@@ -3,7 +3,6 @@ package MojoMojo::Formatter::Scrub;
 use base qw/MojoMojo::Formatter/;
 
 use HTML::Scrubber;
-use XML::Clean;
 
 =head1 NAME
 
@@ -92,10 +91,6 @@ sub format_content {
     my ( $class, $content, $c ) = @_;
     $$content = $scrubber->scrub($$content);
     return 1;
-
-    #FIXME: XML::Clean doubles the first word in previews
-    # but makes sure all divs are matched.
-    $$content = XML::Clean::clean($$content);
 }
 
 =back
