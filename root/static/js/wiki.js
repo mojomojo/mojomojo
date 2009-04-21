@@ -503,8 +503,24 @@ toggleDefaultValue = function(elem) {
         });
 }
 
+menuInsertChildren = function(node) {
+    if (node.getAttribute("class") != "menuParentMissingChildren") return;
+
+    var nodeId = node.getAttribute("id");
+    var pageId = nodeId.replace("menupage", "");
+
+    new Ajax.Updater(nodeId, $.uri_for('jsrpc/child_menu'), {
+        parameters: 'page_id=' + pageId,
+        asynchronous: true,
+        insertion: Insertion.Bottom
+    });
+  
+    node.setAttribute("class", "menuParent");
+};
+
 $(document).ready(function() {
+    $("#loginField").focus();
+    $(".child-menu").mouseover(menuInsertChildren);
     setupToggleMaximized();
-    // $(".child-menu").mouseover(menuInsertChildren);
 });
 

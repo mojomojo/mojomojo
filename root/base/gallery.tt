@@ -1,25 +1,23 @@
-[%PROCESS header.tt index_page=1 %]
-<div id="header"><h1>
-  [% c.pref("name") %]
-gallery -
-  [% c.expand_wikilink(page.name_orig) %]
-[%IF tag; %]([%tag%])[%END%]
-</h1></div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title=c.pref("name") _ "gallery - " _ c.expand_wikilink(page.name_orig) _ (tag ? tag : "") simple_footer=1 %]
+
 <div id="content">
-  [% PROCESS gallery/pager.tt pager=pictures.pager %]
-  <div id="imageinfo" class="imageinfo">
-    <small>[%loc('Hover over an image to get more info.')%]</small>
-  </div>
-  <div id="images">
-  [%WHILE(picture=pictures.next)%]
-    <a  id="img_[%picture.id%]" class="image" href="[% c.uri_for('photo') %][%
-IF tag %]_by_tag/[% tag %][%END%]/[% picture.id %]"><img alt="[% loc('Show picture') %]" class="thumb"
-width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
-[%END%]
-  </div>
+    [% PROCESS gallery/pager.tt pager=pictures.pager %]
+    <div id="imageinfo" class="imageinfo">
+        <small>[%loc('Hover over an image to get more info.')%]</small>
+    </div>
+    <div id="images">
+    [% WHILE(picture=pictures.next) %]
+        <a id="img_[% picture.id %]" class="image" href="[% c.uri_for('photo') %][% '_by_tag/' _ tag IF tag %]/[% picture.id %]">
+            <img alt="[% loc('Show picture') %]" class="thumb" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/>
+        </a>
+    [% END %]
+    </div>
 </div>
 
-<div id="bottomnav">&nbsp;<a href="[%c.uri_for('attachments')%]">[%loc('View as files')%]</a></div>
-[%PROCESS footer.tt%]
+<div id="bottomnav">
+    <ul>
+        <li><a href="[% c.uri_for('attachments') %]">[% loc('View as files') %]</a></li>
+    </ul>
+</div>
+
+[% END %]

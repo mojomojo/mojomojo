@@ -171,7 +171,7 @@ div#pageoptions a {
 #content {
     overflow: hidden;
     background: #ffffff;
-    padding: 13px;
+    padding: 2em 13px;
     overflow: hidden;
 }
 
@@ -245,6 +245,7 @@ div#pageoptions a {
     font-weight: bold;
     height: 2.8em;
     font-size: 0.9em;
+    border-top: 1px solid #8899aa;
 }
 
 #bottomnav input {
@@ -280,6 +281,14 @@ p {
 #content .center,
 #content table .center {
     text-align: center;
+}
+
+#powered {
+    border-top: 2px solid #33455C;
+    width: 100%;
+    margin: 0;
+    padding: 1em 0;
+    text-align: right;
 }
 
 /* @end */

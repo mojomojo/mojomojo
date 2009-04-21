@@ -1,12 +1,4 @@
-[% WRAPPER page/wrapper.tt simple_header = 1 %]
-<div id="header">
-    <h1 id="pageName">
-        <small>[% page_title %]</small>
-        [% loc('Search Results') %]
-    </h1>
-</div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt title=loc('Search Results') %]
 <div id="content">
     <div id="search">
         <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">

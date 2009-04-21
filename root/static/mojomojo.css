@@ -459,7 +459,7 @@ table.recent .actions       { width:10%; }
 
 .form dt {
   float: left;
-  width: 120px;
+  width: 10em;
   line-height: 24px;
 }
 
@@ -495,13 +495,20 @@ span.statusmsg {
 }
 
 .imageinfo {
-  float:right;
-  padding:0px;
-  margin:0px;
-  width: 150px;
+  float: right;
+  padding: 0px;
+  margin: 0px;
+  width: 12em;
   min-height: 250px;
 }
 
+.imageinfo dl {
+    margin: 0;
+}
+
+.imageinfo h3 {
+    margin-top: 0;
+}
 
 /* Transparent forms */
 
@@ -550,13 +557,12 @@ dl {
 dt {
   float: left;
   width: 80px;
-  line-height: 24px;
+  clear: left;
 }
 
 dd {
   margin: 0 0 5px 90px;
   font-size: 11px;
-  line-height: 24px;
   margin-left: 80px;
 }
 
@@ -1002,11 +1008,24 @@ dl.list dt {
     width:15em;
 }
 
-div#tags { height:4em; }
+div#tags dl {
+    margin: 0;
+    padding: 0;
+}
 
-div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { width:120px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
-div#tags dd { margin:0; padding:0; }
+div#tags dt,
+div#tags dd {
+    margin: 0;
+    padding: 0;
+    height: 1.6em;
+}
+
+div#tags dt {
+    font-size: .8em;
+    font-weight: bold;
+    width: 120px;
+    clear: left;
+}
 
 div#bottomnav { clear:both; }
 

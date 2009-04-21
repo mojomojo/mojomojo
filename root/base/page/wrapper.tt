@@ -1,5 +1,4 @@
 [% PROCESS header.tt index_page=index_page +%]
-[% UNLESS simple_header %]
 <div id="header">
     <h1>
     [% IF title %]
@@ -19,6 +18,7 @@
     [% END %]
     </h1>
 </div>
+[% UNLESS simple_header %]
 [%+ PROCESS breadcrumbs.tt | indent 4 %]
 [% # PROCESS sidebar.tt %]
 [%+ PROCESS navbar.tt | indent 4 %]
@@ -27,13 +27,15 @@
     PROCESS page/editbar.tt | indent 4
     IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions';
 %]
-[% END # UNLESS !simple_header %]
+[% END # UNLESS !simple_header +%]
 
-[% content %]
+[%+ content +%]
 
-[%
-    UNLESS simple_footer;
+[%+
+    IF simple_footer;
+        PROCESS footer.tt;
+    ELSE;
         PROCESS page/bottomnav.tt | indent 4;
-        PROCESS footer.tt | indent 4;
+        PROCESS footer.tt;
     END;
 %]
