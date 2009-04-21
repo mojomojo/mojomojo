@@ -10,11 +10,18 @@
     # TODO: Make Edit/Attachment an ajax action, so you can go
     # to attachments while editing and let it retain your content.
     # Now, edits are lost.
-
 %]
 
 [% WRAPPER page/wrapper.tt pre_title=pre_titl %]
 <div id="content">
+
+<script type="text/javascript">
+    var append='[% append | js %]';
+    var syntax_formatters = ["[% syntax_formatters.join('","') %]"];
+    [% UNLESS user %]
+    $('#editForm').submit(function() { return cleanAuthorName("[%c.pref('anonymous_user')%]")});
+    [% END %]
+</script>
 
 <div id="hidden_info">[% PROCESS edithelp.tt %]</div>
 
@@ -38,17 +45,10 @@
         [% IF message %]
             <p id="message"><small>[% message %]</small></p>
         [% END +%]
-        [%- PROCESS toolbar.tt | indent 6 %]
+            <span id="formatter_toolbar"><!-- This will be replaced with a js generated toolbar --></span>
             <br/>
             <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
             <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%]</textarea>
-
-            <script type="text/javascript">
-                var append='[% append | js %]';
-                [% UNLESS user %]
-                $('#editForm').submit(function() { return cleanAuthorName("[%c.pref('anonymous_user')%]")});
-                [% END %]
-            </script>
 
             <div class="spinner">
                 <span id="editstatus"></span>

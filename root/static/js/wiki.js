@@ -1,6 +1,13 @@
 /* make sure we've got a MojoMojo namespace */
 if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
 
+/*
+ * i18n function for now - will use asynapse later
+ */
+_ = function(text) {
+    return text;
+}
+
 if (window['loadFirebugConsole']) {
     window.loadFirebugConsole();
 }
@@ -373,7 +380,7 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
     var theSelection;
     
     // IE / Opera
-    if(document.selection  && document.selection.createRange) {
+    if(document.selection && document.selection.createRange) {
         theSelection = document.selection.createRange().text;
         if(!theSelection){ theSelection = sampleText; }
         txtarea.focus();
@@ -501,4 +508,6 @@ toggleDefaultValue = function(elem) {
 
 $(document).ready(function() {
     setupToggleMaximized();
+    // $(".child-menu").mouseover(menuInsertChildren);
 });
+
