@@ -528,7 +528,10 @@ input.dual:focus, textarea.dual:focus {
     margin:0.1em;
 }
 
-#title input,big {
+#title input {
+    font-size: 1em;
+}
+big {
     font-size: 1.6em;
 }
 #description textarea,small {

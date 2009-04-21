@@ -38,6 +38,8 @@
 [%+
     IF simple_footer;
         PROCESS footer.tt;
+    ELSIF gallery_footer;
+        PROCESS gallery/footer.tt;
     ELSE;
         PROCESS page/bottomnav.tt | indent 4;
         PROCESS footer.tt;

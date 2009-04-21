@@ -1,23 +1,24 @@
 [% WRAPPER page/wrapper.tt title = title || c.pref('name') %]
 
-[% PROCESS pager.tt %]
+<div id="content">
+    [% PROCESS pager.tt %]
 
-<dl id="authors">
-[% WHILE( u = users.next ) -%]
-<dt>
-    [% c.wikiword( u.link, base ) -%]
-</dt>
-<dd>
-    [% pages = u.pages -%]
-    [% UNLESS pages %] 
-        [% loc('No recent changes') %]
+    <dl id="authors">
+    [% WHILE( u = users.next ) -%]
+        <dt>
+            [% c.wikiword( u.link, base ) -%]
+        </dt>
+        <dd>
+            [% pages = u.pages -%]
+            [% UNLESS pages %] 
+                [% loc('No recent changes') %]
+            [% END -%]
+            [% FOREACH changed IN pages -%]
+                [% c.wikiword( changed.path, base ) -%][% '&ndash;' UNLESS loop.last -%]
+            [% END -%]
+        </dd>
     [% END -%]
-    [% FOREACH changed IN pages -%]
-        [% c.wikiword( changed.path, base ) -%][% '&ndash;' UNLESS loop.last -%]
-    [% END -%]
-</dd>
-[% END -%]
-</dl>
+    </dl>
+</div>
 
-[% END -%]
-
+[% END # WRAPPER -%]
