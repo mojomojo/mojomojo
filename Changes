@@ -29,7 +29,6 @@
         - Improved templates: removed js, inline css and most templates use wrapper (batman)
         - Changed font-size: Removed ever px-based font-size, and set default to 11pt (batman)
         - Improved w3c validation (batman)
-        - Improved
 
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.

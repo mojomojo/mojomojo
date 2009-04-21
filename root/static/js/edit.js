@@ -12,6 +12,8 @@ $(document).ready(function() {
         .attr('href', 'action://' + 'split_edit')
         .click(function() {
             split_layout_vertical();
+            $edit_help.width($content_preview.innerWidth());
+            $edit_help.height($content_preview.innerHeight());
             return false;
         });
 
@@ -44,6 +46,7 @@ split_layout_vertical = function() {
         $("div#edit_form").css('float',split_layout_vertical.deff);
         $("div#content_preview").css('float',split_layout_vertical.dcpf);
         $("div#content_preview").css('width',split_layout_vertical.dcpw);
+        $("div#content_preview").css('height', '100%');
         $("div#edit_form").css('width',split_layout_vertical.defw);
         $("div#container").css("max-width",split_layout_vertical.dcmw);
         $("div#header").css("background-repeat",split_layout_vertical.dhbr);
@@ -63,12 +66,12 @@ split_layout_vertical = function() {
         split_layout_vertical.tbh=$('textarea#body').css('height');
         //split_layout_vertical.dpmw=$('div.preview').css('max-width');
         $("div#edit_form").css('float','left');
-        $("div#content_preview").css('float','left');
         $("div#edit_form").css('width','49%');
+        $("div#content_preview").css('float','left');
         $("div#content_preview").css('width','49%');
+        $("div#content_preview").css('height', edit_area_height);
         $("div#container").css("max-width", max_container_width);
         $("div#header").css('background-repeat', 'no-repeat');
-        $("div.preview").css('height', preview_area_height);
         $("textarea#body").css('height', edit_area_height);
         $("div.preview").css('max-width', preview_area_max_width);
 		$.cookies.set('split_edit',1);
@@ -220,6 +223,8 @@ setupEditHelp = function() {
         var $a    = $('<a/>');
         var title = $tab.children('h2:first').text();
         var id    = this.id;
+
+        title = title.replace(/\s*\(.*/, '');
 
         $a.append(title).attr('href', "tab://" + title).click(function() {
             $.each(tabs, function() {
