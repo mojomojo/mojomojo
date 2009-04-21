@@ -1,33 +1,36 @@
 [% IF c.action.reverse == 'pageadmin/edit' || c.action.reverse == 'jsrpc/render' %]
-  [[% loc('comments disabled for preview') %]]
+    [[% loc('comments disabled for preview') %]]
 [% ELSE %]
-  [% IF c.action.reverse != 'page/search' %]
-    [% IF comments.count %]
-<h4> [%comments.count%] [% IF comments.count == 1; loc('Comment'); ELSE; loc('Comments'); END %]</h4>
-      [% WHILE ( comment = comments.next ) %]
+    [% IF c.action.reverse != 'page/search' %]
+        [% IF comments.count %]
+<h4>[%comments.count%] [% IF comments.count == 1; loc('Comment'); ELSE; loc('Comments'); END %]</h4>
+            [% WHILE ( comment = comments.next ) %]
 <div class="comment">
-  <dl>
-    <dt>[% loc('poster') %]</dt>
-    <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
-    <dt>[% loc('posted') %]</dt>
-    <dd>[% comment.posted.ymd %] [% comment.posted.hms %]</dd>
-    <dt>[% loc('comment') %]:
-        [% IF user.can_edit(page.path) %]
-      [<b class="remove"><a href="[% c.uri_for('comment','remove',comment.id) %]">&times;</a></b>][% END %]</dt>
-      <dd>[% comment.formatted %]</dd>
-  </dl>
+    <dl>
+        <dt>[% loc('poster') %]</dt>
+        <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
+        <dt>[% loc('posted') %]</dt>
+        <dd>[% comment.posted.ymd %] [% comment.posted.hms %]</dd>
+        <dt>
+            [% loc('comment') %]:
+            [% IF user.can_edit(page.path) %]
+            [<b class="remove"><a href="[% c.uri_for('comment','remove',comment.id) %]">&times;</a></b>]
+            [% END %]
+        </dt>
+        <dd>[% comment.formatted %]</dd>
+    </dl>
 </div>
-      [% END %]
-    [% ELSE %]
-  <h4>[%loc('No Comments posted')%]</h4>
-    [% END %]
+            [% END # WHILE %]
+        [% ELSE # comments.count %]
+<h4>[%loc('No Comments posted')%]</h4>
+        [% END # comments.count %]
 <p><small><a href="#" class="toggleInfo" id="commentlink">[% loc('add a comment') %]</a></small></p>
 <div id="hidden_info"  class="framedpopup">
-    [% IF user %]
-      [% PROCESS comment/post.tt %]
-    [% ELSE %]
-      [% PROCESS comment/login.tt %]
-    [% END %]
+        [% IF user %]
+            [% PROCESS comment/post.tt %]
+        [% ELSE %]
+            [% PROCESS comment/login.tt %]
+        [% END %]
 </div>
-  [% END %]
+    [% END %]
 [% END %]
