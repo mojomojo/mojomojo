@@ -86,10 +86,9 @@ form { margin: 0;}
   font-size : 12px;
 }
 
-div#toplinks ul li.navOn {
+div#toplinks a.navOn {
   color: #3a3a3a;
-  background:#fff;
-  padding:2px 8px;
+  background: #fff;
   text-decoration: none;
 }
 
@@ -991,6 +990,7 @@ fieldset .dojoeditor2 .RichTextEditable { /* Dojo::Editor2 */
 
 fieldset.secondCol {
     float: left;
+    width: 45%;
 }
 
 #powered {
@@ -1078,3 +1078,13 @@ div#bottomnav { clear:both; }
 .float-left { float: left; }
 .float-right { float: right; }
 
+table.roles {
+    min-width: 50%;
+    margin-top: 2em;
+}
+
+form.site-configuration .submit {
+    position: relative;
+    left: -45%;
+    padding-top: 2em;
+}
