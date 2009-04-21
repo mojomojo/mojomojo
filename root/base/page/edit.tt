@@ -23,7 +23,7 @@
     [% END %]
 </script>
 
-<div id="hidden_info">[% PROCESS edithelp.tt %]</div>
+<div id="edithelp">[% PROCESS edithelp.tt %]</div>
 
 <div id="preview_and_edit_container">
     <div class="preview" id="content_preview">

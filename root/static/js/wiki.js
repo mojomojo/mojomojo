@@ -153,10 +153,16 @@ var on_change_refresh_rate = 10000;
 
 var uploader;
 $( function() {
+
+    $("#loginField").focus();
+    $(".child-menu").mouseover(menuInsertChildren);
+    setupEditHelp();
+    setupToggleMaximized();
+
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })
     
     $('.toggleInfo').click(function() {
-        $('#hidden_info').toggle();
+        $('#edithelp, #hidden_info').toggle();
         return false;
     });
     $('#body').each(function() { this.focus(); })
@@ -518,9 +524,32 @@ menuInsertChildren = function(node) {
     node.setAttribute("class", "menuParent");
 };
 
-$(document).ready(function() {
-    $("#loginField").focus();
-    $(".child-menu").mouseover(menuInsertChildren);
-    setupToggleMaximized();
-});
+setupEditHelp = function() {
+    var $edithelp = $('#edithelp');
+    var $nav      = $('<div class="tab-nav"/>');
+    var tabs      = [];
+
+    $edithelp.children('.syntax_help').each(function() {
+        var $tab  = $(this);
+        var $a    = $('<a/>');
+        var title = $tab.children('h2:first').text();
+        var id    = this.id;
+
+        $a.append(title).attr('href', "tab://" + title).click(function() {
+            $.each(tabs, function() {
+                this[0].removeClass('active');
+                this[1].hide();
+            });
+            $tab.show();
+            $a.addClass('active');
+            return false;
+        });
+
+        tabs.push([$a, $tab]);
+        $nav.append($a);
+    });
+
+    $nav.children('a:first').click();
+    $edithelp.prepend($nav);
+};
 

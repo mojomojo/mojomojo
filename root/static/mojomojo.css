@@ -82,22 +82,13 @@ form { margin: 0;}
   color: #999;
 }
 
-#navigationForm {
-  font-size : 12px;
-}
-
 div#toplinks a.navOn {
   color: #3a3a3a;
   background: #fff;
   text-decoration: none;
 }
 
-.help {
-  font-size: 11px;
-}
-
 .inputBox {
-  font-size: 11px;
   background-color: #eee;
   padding: 5px;
   margin-bottom: 20px;
@@ -136,12 +127,11 @@ pre {
   padding: 10px;
   margin-left: 3em;
   margin-right:1em ;
-  font-size: 11px;
   overflow: auto
 }
 
 ol.setup {
-  font-size: 19px;
+  font-size: 1.5em;
   font-family: georgia, verdana, sans-serif;
   padding-left: 25px;
 }
@@ -155,10 +145,6 @@ ol.setup li {
   padding-left: 4px;
   text-align:right;
   margin-bottom: 0px;
-}
-
-.references {
-  font-size: 10px;
 }
 
 p#message {
@@ -180,7 +166,6 @@ div.preview {
   overflow: auto;
   height: 250px;
   margin:0 0 1em 0;
-  width: 100%;
 }
 
 textarea#body {
@@ -194,17 +179,39 @@ textarea#comment {
   width: 400px;
 }
 
-#hidden_info {
-  display:none ;
+#hidden_info, #edithelp {
+  display:none;
   position:absolute;
   z-index:1;
+  width: 934px;
 }
 
+div.tab-nav,
 .syntax_help {
-  width: 800px;
   background: #ddd;
   border: 1px solid #aaa;
   padding:1em;
+}
+
+div.tab-nav {
+    background: #ccc;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0 1em;
+    height: 1.7em;
+}
+
+div.tab-nav a {
+    text-decoration: none;
+    float: left;
+    list-style: none;
+    margin: 0 0.3em;
+    padding: 0.2em 0.6em;
+}
+
+div.tab-nav a.active {
+    background: #ddd;
+    color: #222;
 }
 
 .syntax_help table {
@@ -218,7 +225,6 @@ textarea#comment {
 }
 
 .syntax_help  table td {
-  font-size: 11px;
   padding: 3px;
   vertical-align: top;
   border-top: 1px dotted #ccc;
@@ -233,13 +239,11 @@ textarea#comment {
 .syntax_help table td.label {
   font-weight: bold;
   white-space: nowrap;
-  font-size: 10px;
   padding-right: 15px;
   color: #000;
 }
 
 .syntax_help h3 {
-  font-size: 11px;
   font-weight: bold;
   font-weight: normal;
   margin: 0 0 5px 0;
@@ -257,7 +261,6 @@ textarea#comment {
 }
 
 .rightHandSide p {
-  font-size: 10px;
 }
 
 .newsList {
@@ -270,14 +273,12 @@ textarea#comment {
 
 .add a {
   color: green;
-    font-size: 13px;
   text-decoration: none;
   vertical-align: middle;
 }
 
 .add a:hover {
   color: #003800;
-    font-size: 13px;
 }
 a.tag {
     text-decoration: none;
@@ -564,7 +565,6 @@ dt {
 
 dd {
   margin: 0 0 5px 90px;
-  font-size: 11px;
   margin-left: 80px;
 }
 
@@ -1003,7 +1003,6 @@ fieldset.secondCol {
 }
 
 dl.list {
-    font-size:14px;
     font-family:Arial,Helvetica,sans-serif;
 }
 dl.list dt {
@@ -1090,4 +1089,7 @@ form.site-configuration .submit {
     position: relative;
     left: -45%;
     padding-top: 2em;
+}
+
+li.tabnav {
 }
