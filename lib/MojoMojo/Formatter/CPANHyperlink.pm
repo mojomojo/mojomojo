@@ -49,13 +49,10 @@ sub format_content {
 
     my $component = qr/(?:[_[:alpha:]]\w*)/;
     my $cpan_params_RE = qr/$component (?: ::$component )*/x;
-    while (
 
-        $$content =~ s[
-            {{cpan \s+ ($cpan_params_RE) \s* \/? }}
-        ][<a href="http://search.cpan.org/perldoc?$1">$1</a>]ix) {
-
-    }
+    $$content =~ s[
+        {{cpan \s+ ($cpan_params_RE) \s* \/? }}
+    ]  [<a href="http://search.cpan.org/perldoc?$1" class="external">$1</a>]ixg;
 }
 
 
