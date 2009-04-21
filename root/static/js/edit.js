@@ -1,9 +1,11 @@
 $(document).ready(function() {
-    var edithelp_tabs       = setupEditHelp();
     var $split_edit_button  = $('<a>' + _('Split Edit') + '</a>');
     var $toggle_info_button = $('<a>' + _('Syntax') + '</a>');
+    var $content_preview    = $("#content_preview");
+    var $edit_help          = $("#edithelp");
 
     setupFormatterToolbar();
+    setupEditHelp();
     toggleDefaultValue($("#authorName"));
 
     $split_edit_button
@@ -17,6 +19,8 @@ $(document).ready(function() {
         .attr('href', 'action://' + 'show/syntax_help')
         .click(function() {
             $("#edithelp").toggle();
+            $edit_help.width($content_preview.innerWidth());
+            $edit_help.height($content_preview.innerHeight());
             return false;
         });
 

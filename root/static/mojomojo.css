@@ -184,6 +184,7 @@ textarea#comment {
   position:absolute;
   z-index:1;
   width: 800px;
+  overflow: auto;
 }
 
 div.tab-nav,
