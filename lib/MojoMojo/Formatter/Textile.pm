@@ -10,6 +10,7 @@ my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );
 # like &gt; into &amp;gt; which sucks
 {
     no strict 'refs';
+    no warnings;
     *{"Text::Textile::encode_html"} = sub { my ($self, $html) = @_; return $html; };
 }
 

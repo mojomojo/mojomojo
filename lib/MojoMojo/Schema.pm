@@ -2,7 +2,6 @@ package MojoMojo::Schema;
 
 use strict;
 use warnings;
-use Term::Prompt;
 
 use Moose;
 
@@ -27,7 +26,7 @@ Creates initial set of data in the database which is necessary to run MojoMojo.
 =cut
 
 sub create_initial_data {
-    my ($schema, $config) = @_;
+    my ($schema, $config, $custom_values) = @_;
 
     my $file = __PACKAGE__ . ".pm";
     $file =~ s{::}{/}g;
@@ -43,20 +42,17 @@ sub create_initial_data {
     my $lang = $config->{'default_lang'} || 'en';
     $lang =~ s/\..*$//;
     loc_lang($lang);
-
-    print "It's time to set some default values:\n";
     
-    my $default_user = $ENV{USER} || 'unknown';
-    my $default_email = "$default_user\@localhost";
-
-    my %custom_values = (
-        wiki_name       => prompt( 'x', 'Name of the wiki?',                     '', "MojoMojo" ),
-        admin_username  => prompt( 'x', 'Username of the admin user?',           '', "admin" ),
-        admin_password  => prompt( 'x', 'Password of the admin user?',           '', "admin" ),
-        admin_fullname  => prompt( 'x', 'Full name of the admin user?',          '', $default_user ),
-        admin_email     => prompt( 'x', 'E-Mail address of the admin user?',     '', $default_email ),
-        anonymous_email => prompt( 'x', 'E-Mail address of the Anonymous user?', '', $default_email ),
-    );
+    my $default_user = $ENV{USER} || 'admin';
+    
+    $custom_values ||= {
+        wiki_name       => 'MojoMojo',
+        admin_username  => 'admin',
+        admin_password  => 'admin',
+        admin_fullname  => $default_user,
+        admin_email     => "$default_user\@localhost",
+        anonymous_email => 'anonymous.coward@localhost',
+    };
 
     print "Creating initial data\n";
 
@@ -67,12 +63,12 @@ sub create_initial_data {
                 qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
             ],
             [
-                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'), $custom_values{anonymous_email},
+                1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'), $custom_values->{anonymous_email},
                 '', '', 0, '', '', '', '', '', ''
             ],
             [
-                1, 0, 0, $custom_values{admin_username}, $custom_values{admin_fullname}, $custom_values{admin_email},
-                $custom_values{admin_password}, '', 0, '', '', '', '', '', ''
+                1, 0, 0, $custom_values->{admin_username}, $custom_values->{admin_fullname}, $custom_values->{admin_email},
+                $custom_values->{admin_password}, '', 0, '', '', '', '', '', ''
             ],
         ]
     );
@@ -109,8 +105,8 @@ sub create_initial_data {
         'Preference',
         [
             [qw/ prefkey prefvalue /],
-            [ 'name', $custom_values{wiki_name} ],
-            [ 'admins', $custom_values{admin_username} ],
+            [ 'name', $custom_values->{wiki_name} ],
+            [ 'admins', $custom_values->{admin_username} ],
             [ 'theme',  $config->{'theme'} || 'default' ]
         ]
     );
