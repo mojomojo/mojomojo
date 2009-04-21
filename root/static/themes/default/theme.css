@@ -10,10 +10,15 @@ body {
     text-align: center;
 }
 
-#container {
+.container {
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
+}
+
+.maximized-container {
+    max-width: 99%;
+    width: 99%;
 }
 
 #header {
