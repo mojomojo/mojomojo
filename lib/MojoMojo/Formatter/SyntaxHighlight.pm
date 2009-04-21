@@ -76,10 +76,13 @@ sub format_content {
     my $ph      = 0;
     my $ph_base = __PACKAGE__ . '::PlaceHolder::';
 
+    # new school - consistent with other new syntax, but broke for me to the point of exhaustion
+    # $$content =~ s/\{\{\s*code\s+lang=""\s*\}\}/<pre>/g;
+    # while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*end\s*\}\}/$ph_base$ph/si ) {
+    # old school - which works with textile2 (not textile for mxh)
     # drop all lang=""
-    $$content =~ s/\{\{\s*code\s+lang=""\s*\}\}/<pre>/g;
-    
-    while ( $$content =~ s/\{\{\s*code(?:\s+lang=['"]*(.*?)['"]*")?\s*\}\}(.*?)\{\{\s*end\s*\}\}/$ph_base$ph/si ) {
+    $$content =~ s/<\s*pre\s+lang=""\s*>/<pre>/g;
+    while ( $$content =~ s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si ) {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;

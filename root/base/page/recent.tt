@@ -16,7 +16,7 @@
         [% IF tag.tag == activetag %]
         <strong>[% tag.tag %]</strong>
         [% ELSE %]
-        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %])
         [% END %]
     [% END %]
 </div>
@@ -47,7 +47,7 @@
     [% END %]
         <tr class="item">
             <td>
-                <a href="[% c.req.base; page.path; %]">[% page.name_orig %]</a>
+                <a href="[% c.uri_for( page.path ) %]">[% page.name_orig %]</a>
                 <div class="diff display-none"></div>
             </td>
             <td>
