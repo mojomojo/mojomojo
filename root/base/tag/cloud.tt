@@ -1,14 +1,20 @@
 [% SET title = loc('Tags under x', page.name) %]
-
 [% WRAPPER page/wrapper.tt title=title index_page=1 %]
 
-[% cloud.html_and_css(50) || "No tags in use" %]
-
+<div id="content">
+[%
+    IF cloud.tags(1); 
+        cloud.html_and_css(50);
+    ELSE;
+        "No tags in use.";
+    END;
+%]
 [% IF page.depth %]
     <p>
         [% SET link = '<a href="' _ c.uri_for('/.tags') _ '">' _ loc('All tags') _ '</a>' %]
         [% loc('Or you can check out x instead', link) %]
     </p>
 [% END %]
+</div>
 
-[% END %]
+[% END # WRAPPER %]
