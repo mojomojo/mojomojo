@@ -82,7 +82,7 @@
 [%# TODO: this needs to become a dropdown -%]
 [% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl','ru'] +%]
         <li>
-            <a href="[%c.uri_for('set_lang',{lang=>lang,redir=>redir})%]">[%lang%]</a>
+            <a href="[% c.uri_for('set_lang',{lang=>lang,redir=>redir}) | html %]">[%lang%]</a>
         </li>
 [% END +%]
     </ul>

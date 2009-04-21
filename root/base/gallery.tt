@@ -14,8 +14,8 @@ gallery -
   </div>
   <div id="images">
   [%WHILE(picture=pictures.next)%]
-    <a  id="img_[%picture.id%]" class="image" href="[%c.uri_for('photo')%][%
-IF tag%]_by_tag/[%tag%][%END%]/[%picture.id%]"><img alt="[%loc('Show picture')%]" class="thumb"
+    <a  id="img_[%picture.id%]" class="image" href="[% c.uri_for('photo') %][%
+IF tag %]_by_tag/[% tag %][%END%]/[% picture.id %]"><img alt="[% loc('Show picture') %]" class="thumb"
 width="80" height="80" src="[%c.uri_for('attachment',picture.id,'thumb')%]"/></a>
 [%END%]
   </div>
