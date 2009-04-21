@@ -45,14 +45,17 @@ sub create_initial_data {
     loc_lang($lang);
 
     print "It's time to set some default values:\n";
+    
+    my $default_user = $ENV{USER} || 'unknown';
+    my $default_email = "$default_user\@localhost";
 
     my %custom_values = (
         wiki_name       => prompt( 'x', 'Name of the wiki?',                     '', "MojoMojo" ),
-        admin_username  => prompt( 'x', 'Username of the admin user?',           '', "$ENV{USER}" ),
+        admin_username  => prompt( 'x', 'Username of the admin user?',           '', "admin" ),
         admin_password  => prompt( 'x', 'Password of the admin user?',           '', "admin" ),
-        admin_fullname  => prompt( 'x', 'Full name of the admin user?',          '', "$ENV{USER}" ),
-        admin_email     => prompt( 'x', 'E-Mail address of the admin user?',     '', "$ENV{USER}\@localhost" ),
-        anonymous_email => prompt( 'x', 'E-Mail address of the Anonymous user?', '', "$ENV{USER}\@localhost" ),
+        admin_fullname  => prompt( 'x', 'Full name of the admin user?',          '', $default_user ),
+        admin_email     => prompt( 'x', 'E-Mail address of the admin user?',     '', $default_email ),
+        anonymous_email => prompt( 'x', 'E-Mail address of the Anonymous user?', '', $default_email ),
     );
 
     print "Creating initial data\n";
