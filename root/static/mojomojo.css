@@ -183,7 +183,7 @@ textarea#comment {
   display:none;
   position:absolute;
   z-index:1;
-  width: 934px;
+  width: 800px;
 }
 
 div.tab-nav,
@@ -202,6 +202,7 @@ div.tab-nav {
 }
 
 div.tab-nav a {
+    outline: none;
     text-decoration: none;
     float: left;
     list-style: none;
@@ -212,6 +213,11 @@ div.tab-nav a {
 div.tab-nav a.active {
     background: #ddd;
     color: #222;
+}
+
+div.tab-nav a.close-button {
+    position: absolute;
+    right: 8px;
 }
 
 .syntax_help table {

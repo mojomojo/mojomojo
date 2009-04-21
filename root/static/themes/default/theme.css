@@ -133,6 +133,11 @@ div#pageoptions ul li {
 }
 div#pageoptions a {
     color: green;
+
+}
+div#pageoptions a.active {
+    color: #ceebb6;
+    background: green;
 }
 #categories {
     background: #ffffff;

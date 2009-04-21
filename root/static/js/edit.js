@@ -1,11 +1,33 @@
 $(document).ready(function() {
-    if ($.cookies.get('split_edit')=='1'){
-        split_layout_vertical();
-    }
-    $("#pageoptions").find("#split_edit_button").click(split_layout_vertical);
+    var edithelp_tabs       = setupEditHelp();
+    var $split_edit_button  = $('<a>' + _('Split Edit') + '</a>');
+    var $toggle_info_button = $('<a>' + _('Syntax') + '</a>');
 
-    toggleDefaultValue($("#authorName"));
     setupFormatterToolbar();
+    toggleDefaultValue($("#authorName"));
+
+    $split_edit_button
+        .attr('href', 'action://' + 'edit/split')
+        .click(function() {
+            split_layout_vertical();
+            return false;
+        });
+
+    $toggle_info_button
+        .attr('href', 'action://' + 'syntax/help')
+        .click(function() {
+            $("#edithelp").toggle();
+            return false;
+        });
+
+    $("#pageoptions ul:first").append(
+        $('<li/>').append($toggle_info_button),
+        $('<li/>').append($split_edit_button)
+    );
+
+    if($.cookies.get('split_edit')=='1'){
+        $split_edit_button.click();
+    }
 });
 
 split_layout_vertical = function() {
@@ -46,7 +68,7 @@ split_layout_vertical = function() {
         $("textarea#body").css('height', edit_area_height);
         $("div.preview").css('max-width', preview_area_max_width);
 		$.cookies.set('split_edit',1);
-    } 
+    }
 };
 
 _createToolbarSelect = function(id, options) {
@@ -181,5 +203,40 @@ setupFormatterToolbar = function() {
         + _('Mark some text to apply the toolbar actions to that text')
         + '</small>'
     );
+};
+
+setupEditHelp = function() {
+    var $edithelp = $('#edithelp');
+    var $nav      = $('<div class="tab-nav"/>');
+    var $close    = $('<a href="action://close" class="close-button"><span>X</span></a>');
+    var tabs      = [];
+
+    $edithelp.children('.syntax_help').each(function() {
+        var $tab  = $(this);
+        var $a    = $('<a/>');
+        var title = $tab.children('h2:first').text();
+        var id    = this.id;
+
+        $a.append(title).attr('href', "tab://" + title).click(function() {
+            $.each(tabs, function() {
+                this[0].removeClass('active');
+                this[1].hide();
+            });
+            $tab.show();
+            $a.addClass('active');
+            $edithelp.show();
+            return false;
+        });
+
+        tabs.push([$a, $tab]);
+        $nav.append($a);
+    });
+
+    $close.click(function() { $edithelp.hide(); return false });
+
+    $nav.append($close);
+    $edithelp.prepend($nav);
+
+    return tabs;
 };
 

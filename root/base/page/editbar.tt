@@ -5,7 +5,6 @@
 [% IF page.content_version ; +%]
         <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
 [% END +%]
-        <li><a href="#" class="toggleInfo">[%loc('Syntax')%]</a></li>
         <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
 [% ELSIF c.action.reverse == 'pageadmin/permissions' +%]
         <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>
@@ -18,6 +17,5 @@
         <li>[%loc('Attachments')%]</li>
         <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
 [% END +%]
-        <li><a id="split_edit_button" href=".nojs">[% loc('Split Edit') %]</a></li>
     </ul>
 </div>
