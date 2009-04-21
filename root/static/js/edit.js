@@ -102,6 +102,11 @@ setupFormatterToolbar = function() {
         [ 'cpan', '\n{{cpan ','}}','MojoMojo']
     ]));
 
+    // make sure it is initialized
+    if(typeof syntax_formatters != 'Object') {
+        syntax_formatters = [];
+    }
+
     // Syntax highlight
     $toolbar.append(_createToolbarSelect('Syntax Highlight', 
         $.map(syntax_formatters, function(n, i) {
