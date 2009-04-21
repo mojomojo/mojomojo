@@ -25,6 +25,7 @@
         - Make search results byline for last edit author.
         - Limit preview width so long pre lines don't squash edit area. 
         - Fix security check for attachments
+        - Add Catalyst theme
 
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.
