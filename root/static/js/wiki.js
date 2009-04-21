@@ -1,6 +1,13 @@
 /* make sure we've got a MojoMojo namespace */
 if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
 
+/*
+ * i18n function for now - will use asynapse later
+ */
+_ = function(text) {
+    return text;
+}
+
 if (window['loadFirebugConsole']) {
     window.loadFirebugConsole();
 }
@@ -146,6 +153,11 @@ var on_change_refresh_rate = 10000;
 
 var uploader;
 $( function() {
+
+    $("#loginField").focus();
+    $(".child-menu").mouseover(menuInsertChildren);
+    setupToggleMaximized();
+
     $('.fade').each(function() { doBGFade(this,[255,255,100],[255,255,255],'transparent',75,20,4); })
     
     $('.toggleInfo').click(function() {
@@ -373,7 +385,7 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
     var theSelection;
     
     // IE / Opera
-    if(document.selection  && document.selection.createRange) {
+    if(document.selection && document.selection.createRange) {
         theSelection = document.selection.createRange().text;
         if(!theSelection){ theSelection = sampleText; }
         txtarea.focus();
@@ -447,4 +459,67 @@ Function.prototype.only_every = function (millisecond_delay) {
 jQuery.prototype.any = function(callback) { 
   return (this.filter(callback).length > 0)
 }
+
+setupToggleMaximized = function() { 
+    var $img    = $('<img id="maximize"/>');
+    var max     = $("#container").hasClass('maximized-container');
+    var img_uri = $.uri_for("/.static/gfx/maximize_width_X.png");
+
+    var toggle = function() {
+        if(max) {
+            $("#container").addClass('maximized-container');
+        }
+        else {
+            $("#container").removeClass('maximized-container');
+        }
+        max = !max;
+    };
+
+    $img.attr({
+        'src': img_uri.replace(/X/, max ? 2 : 1),
+        'alt': _('maximize'),
+        'title': _('maximize width')
+    }).hover(
+        function() {this.src = img_uri.replace(/X/, max ? 2 : 1)},
+        function() {this.src = img_uri.replace(/X/, max ? 1 : 2)}
+    ).click(function() {
+        $.ajax({
+            success: toggle,
+            url: $.uri_for("/.json/container_maximize_width/")
+                + (max ? 1 : 0)
+        });
+    });
+
+    $("#breadcrumbs").append( $('<div class="float-right"/>').append($img) );
+
+    toggle();
+};
+
+toggleDefaultValue = function(elem) {
+    elem.focus(function() {
+            if(this.value == this.defaultValue) {
+                this.value = "";
+            }
+        })
+        .blur(function() {
+            if(this.value == "") {
+                this.value = this.defaultValue;
+            }
+        });
+}
+
+menuInsertChildren = function(node) {
+    if (node.getAttribute("class") != "menuParentMissingChildren") return;
+
+    var nodeId = node.getAttribute("id");
+    var pageId = nodeId.replace("menupage", "");
+
+    new Ajax.Updater(nodeId, $.uri_for('jsrpc/child_menu'), {
+        parameters: 'page_id=' + pageId,
+        asynchronous: true,
+        insertion: Insertion.Bottom
+    });
+  
+    node.setAttribute("class", "menuParent");
+};
 

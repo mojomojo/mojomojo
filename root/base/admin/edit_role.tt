@@ -1,14 +1,14 @@
-[% PROCESS header.tt %]
-<div id="header">
-  <h1><span id="pageName">[%c.pref('name')%]</span></h1>
-</div>
-
-[% PROCESS admin/toplinks.tt selected = 'roles', back = 'admin/role' %]
+[%
+    admin_header = 1;
+    title = c.pref('name');
+    selected = 'roles';
+    back = 'admin/role';
+    WRAPPER page/wrapper.tt;
+%]
 
 <div id="content">
   <h1>[%loc('Edit Role')%]</h1>
   [% PROCESS admin/role_form.tt active = role.active, role_name => role.name %]
 </div>
 
-<div id="bottomnav">&nbsp;</div>
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

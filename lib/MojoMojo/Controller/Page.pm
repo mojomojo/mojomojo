@@ -120,7 +120,7 @@ sub search : Global {
 
     my $page = $c->stash->{page};
 
-    my $q           = $c->req->params->{q}           || $c->stash->{query};
+    my $q           = $c->req->params->{q}           || $c->stash->{query} || q();
     my $search_type = $c->req->params->{search_type} || "subtree";
     $stash->{query}       = $q;
     $stash->{search_type} = $search_type;

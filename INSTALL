@@ -5,7 +5,12 @@ INSTALLING MOJOMOJO
         cpan MojoMojo
 
     or by downloading the tarball from http://search.cpan.org/dist/MojoMojo
-    and running perl Makefile.PL on it manually.
+    and running perl Makefile.PL on it manually. This is the most common
+    method.  If you do this, run
+
+        make installdeps 
+        
+    to get all the required modules installed.
 
   Step 2
     mojomojo.conf is the main configuration file and is in Config::General

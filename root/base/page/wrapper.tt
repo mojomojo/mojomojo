@@ -1,29 +1,47 @@
-[% PROCESS header.tt index_page=index_page+%]
+[% PROCESS header.tt index_page=index_page +%]
 <div id="header">
-  <h1>
-    [% IF title %][% title %][% ELSE %]
-      [% IF pre_title %][% pre_title %][% END %]
-      [% IF page.name == "/" %]
-        [% c.pref("name") %] [% loc('Home') %] (/)
-      [% ELSE %]
-        [% c.expand_wikilink(page.name_orig) %]
-      [% END %]
-      [% IF post_title %][% post_title %][% END %]
+    <h1>
+    [% IF title %]
+        [% title %]
+    [% ELSE %]
+        [% IF pre_title %]
+            [% pre_title %]
+        [% END %]
+        [% IF page.name == "/" %]
+            [% c.pref("name") %] [% loc('Home') %] (/)
+        [% ELSE %]
+            [% c.expand_wikilink(page.name_orig) %]
+        [% END %]
+        [% IF post_title %]
+            [% post_title %]
+        [% END %]
     [% END %]
-  </h1>
+    </h1>
 </div>
-[%+ PROCESS breadcrumbs.tt | indent 2 %]
-[% # PROCESS sidebar.tt %]
-[%+ PROCESS navbar.tt | indent 2 %]
-[%+
-  reverse = c.action.reverse;
-  PROCESS page/editbar.tt | indent 2
-    IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments' || reverse == 'pageadmin/permissions';
+[%
+    IF admin_header;
+        PROCESS admin/toplinks.tt;
+    ELSIF ! simple_header;
+        PROCESS breadcrumbs.tt;
+      # PROCESS sidebar.tt;
+        PROCESS navbar.tt;
+
+        reverse = c.action.reverse;
+        IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments';
+            PROCESS page/editbar.tt;
+        END;
+    END;
 %]
 
-<div id="content">
-[% content %]
-</div>
+[%+ content +%]
 
-[%+ PROCESS page/bottomnav.tt | indent 2 %]
-[%+ PROCESS footer.tt | indent 2 %]
+[%+
+    IF simple_footer;
+        PROCESS footer.tt;
+    ELSIF gallery_footer;
+        PROCESS gallery/footer.tt;
+    ELSE;
+        PROCESS page/bottomnav.tt | indent 4;
+        PROCESS footer.tt;
+    END;
+%]

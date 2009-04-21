@@ -1,5 +1,7 @@
 ---
 load_config_file: __path_to(root/forms/defaults.yml)__
+attrs:
+  class: site-configuration
 
 elements:
   - type: Fieldset

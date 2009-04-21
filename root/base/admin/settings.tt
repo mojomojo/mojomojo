@@ -1,10 +1,15 @@
-[%PROCESS header.tt%]
-<div id="header"><h1><span id="pageName">[%c.pref('name')%]</span></h1></div>
-[% PROCESS admin/toplinks.tt selected = 'configuration' %]
+[%
+    admin_header = 1;
+    title = c.pref('name');
+    selected = 'configuration';
+    WRAPPER page/wrapper.tt;
+%]
+
 <div id="content">
-  <h1>[%loc('Site Configuration')%]</h1>
-  [% form %]
-  <h2>[%message%]</h2>
+    <h1>[% loc('Site Configuration') %]</h1>
+    [% form %]
+    [% IF message %]
+    <h2>[% message %]</h2>
+    [% END %]
 </div>
-<div id="bottomnav">&nbsp;</div>
-[%PROCESS footer.tt%]
+[% END # WRAPPER %]
