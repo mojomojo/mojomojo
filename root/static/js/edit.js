@@ -103,7 +103,7 @@ setupFormatterToolbar = function() {
     ]));
 
     // make sure it is initialized
-    if(typeof syntax_formatters != 'Object') {
+    if(typeof syntax_formatters != 'object') {
         syntax_formatters = [];
     }
 
