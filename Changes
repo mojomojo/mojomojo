@@ -27,6 +27,7 @@
         - Fix security check for attachments
         - Add Catalyst theme
         - Add tabs to "Syntax help" popup (batman)
+        - Improved "Syntax help": does not cover textarea and features tabbed navigation (batman)
         - Improved templates: removed js, inline css and most templates use wrapper (batman)
         - Changed font-size: Removed ever px-based font-size, and set default to 11pt (batman)
         - Improved w3c validation (batman)

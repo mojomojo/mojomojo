@@ -296,4 +296,12 @@ p {
     text-align: right;
 }
 
+#content .syntax_help table {
+    width: 100%;
+}
+#content .syntax_help table th,
+#content .syntax_help table td {
+    padding: 0.2em;
+}
+
 /* @end */
