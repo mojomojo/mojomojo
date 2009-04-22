@@ -17,8 +17,8 @@ BEGIN {
 };
 
 END {
-    ok($c->pref(main_formatter => original_formatter), 'restore original formatter');
-}
+    ok($c->pref(main_formatter => $original_formatter), 'restore original formatter');
+};
 
 ok($c->pref(main_formatter => 'MojoMojo::Formatter::Markdown'), 'set preferred formatter to Markdown');
 
