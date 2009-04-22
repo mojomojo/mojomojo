@@ -1,6 +1,6 @@
 <div id="toplinks">
 [% IF c.pref('disable_search') -%]
-<form action="http://www.google.com/search" method="get">
+<form action="http://www.google.com/search" method="get">'
     <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
 [% ELSE -%]
 <form action="[% c.uri_for('search') %]" method="get">
@@ -16,7 +16,7 @@
         <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
                 [% END %]
             [% END +%]
-        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to home page') %]">[% c.fixw(user.login) %]</a></li>
+        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]">[% c.fixw(user.login) %]</a></li>
         [% ELSE +%]
         <li><a href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
         [% END %]
@@ -65,12 +65,10 @@
     [% ELSE %]
         <li><a title="[% loc('User Profile') %]" href="[% c.uri_for('profile') %]">[% loc('Profile') %]</a></li>
     [% END %]
-[% END %]
-[% IF c.user_exists %]
     [% IF (c.req.action=="prefs")%]
         <li class="navOn">[% loc('Preferences') %]</li>
     [% ELSE %]
-        <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link) %].prefs">[% loc('Preferences') %]</a></li>
+        <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
     [% END %]
 [% END %]
     </ul>
