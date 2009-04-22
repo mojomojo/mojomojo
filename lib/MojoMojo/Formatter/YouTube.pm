@@ -39,8 +39,8 @@ sub format_content {
     my $lang=$c->session->{lang} || $c->pref('default_lang') || 'en';
 
     foreach my $line (@lines) {
-        if ( $line =~ m/$re/){
-	    $line=$class->process($c,$line,$re,$lang);
+        if ( $line =~ m/$re/ ) {
+            $line=$class->process($c,$line,$re,$lang);
         }
         $$content .= $line . "\n";
     }
