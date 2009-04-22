@@ -6,7 +6,7 @@ body {
     background: #7D7C7A repeat-x url(images/background.jpg);
     margin: 0;
     color: #626262;
-    font: 10pt Arial, Helvetica, Geneva, sans-serif;
+    font: 10pt  Helvetica Neue,Arial, Helvetica, Geneva, sans-serif;
     text-align: center;
 }
 
@@ -26,7 +26,7 @@ body {
     padding-bottom: 0.1em;
     margin: 0;
     margin-top: 10px;
-    background-color: #33455c;
+	background-color: #33455c;
     -moz-border-radius-topleft: 20px;
     -webkit-border-top-left-radius: 20px;
     -moz-border-radius-topright: 20px;
@@ -96,7 +96,9 @@ div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
     color:#333;
 }
-
+div#bottomnav li.set-language-navbar {
+    clear: left;
+}
 div#toplinks a {
     position: relative;
     top: 4px;
@@ -255,8 +257,9 @@ div#pageoptions a.active {
     font-size: 1em;
 }
 
-li#site_settings {
-    clear: left;
+#lang {
+    background: #ccc;
+    padding: 0.4em;
 }
 
 .formdiv {
