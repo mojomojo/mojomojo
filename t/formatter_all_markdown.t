@@ -93,12 +93,21 @@ HTML
 
 $content = <<MARKDOWN;
 <pre lang="Perl">
-# This is a comment, not a heading
+# A comment, not a heading
 </pre>
 MARKDOWN
 $body = get(POST '/.jsrpc/render', [content => $content]);
 eq_or_diff($body, <<HTML, 'no Markdown parsing in <pre> sections');
 <pre>
-<span class="kateComment">#&nbsp;This&nbsp;is&nbsp;a&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</span>
+<span class="kateComment">#&nbsp;A&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</span>
 </pre>
+HTML
+
+
+$content = <<MARKDOWN;
+This is a child page with a link to its [[../parent]].
+MARKDOWN
+$body = get(POST '/parent/child.jsrpc/render', [content => $content]);
+is($body, <<HTML, 'wikilink to ../parent');
+<p>This is a child page with a link to its <a class="existingWikiWord" href="/parent">.</p>
 HTML
