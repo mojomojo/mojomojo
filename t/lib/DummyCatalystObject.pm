@@ -1,4 +1,7 @@
 package DummyCatalystObject;
+use URI;
+my $reverse;
+
 sub new {
     my $class = shift;
     bless {}, $class;
@@ -17,17 +20,27 @@ sub base {
     return URI->new("http://example.com/");
 }
 
+sub reverse {
+    return $reverse;
+}
+
+sub set_reverse {
+   $reverse=$_[1];
+}
+
 sub stash {
     my $self = shift;
-    return { page => $self,
-         page_path => 'http://example.com/',
+    return {
+        page => $self,
+        page_path => 'http://example.com/',
     };
 }
 
 sub flash {
     my $self = shift;
-    return { page => $self,
-         page_path => 'http://example.com/',
+    return {
+        page => $self,
+        page_path => 'http://example.com/',
     };
 }
 
@@ -70,10 +83,8 @@ sub path_pages {
     }
 }
 
-sub pref { return 1; }
-
 sub cache {
-    my ($self,$c) = @_;
+    my ($self, $c) = @_;
     return undef;
 }
 
@@ -93,5 +104,16 @@ sub loc {
     my ($self, $text) = @_;
     return "Faking localization... $text ...fake complete.";
 }
+
+sub session {
+    my ($self, $c) = @_;
+    return '';
+}
+
+sub pref {
+    my ($self, $c) = @_;
+    return '';
+}
+
 
 1;
