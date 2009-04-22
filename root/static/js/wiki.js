@@ -166,9 +166,9 @@ $( function() {
     });
     $('#body').each(function() { this.focus(); })
     $('#body').keyup(function() { 
-	   fetch_preview.only_every(on_change_refresh_rate);
-	   oneshot_preview(fetch_preview, oneshot_pause);
-	});
+       fetch_preview.only_every(on_change_refresh_rate);
+       oneshot_preview(fetch_preview, oneshot_pause);
+    });
     $('.activelink').click(function() { $(this).load($(this).attr('href')) ; return false })
     $('#add_tag').click(function(){$('#addtag').show();$('#showtag').hide();$('#taginput')[0].focus();return false;})
     $('#searchField').click(function() { this.value != '' ? this.value = '' : true })
@@ -211,54 +211,54 @@ $( function() {
         $('#imageinfo').load(info_url)
     },function() {})
 
-	$('#do_upload').each(function() {
-	    uploader=new SWFUpload({
-    		button_placeholder_id: "do_upload",
+    $('#do_upload').each(function() {
+        uploader=new SWFUpload({
+            button_placeholder_id: "do_upload",
             button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
             button_width: 61,
-			button_height: 22,
-    		flash_url : $.uri_for('/.static/flash/swfupload.swf'),
-    		upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
-    		file_size_limit : "100 MB",
+            button_height: 22,
+            flash_url : $.uri_for('/.static/flash/swfupload.swf'),
+            upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
+            file_size_limit : "100 MB",
             file_post_name: 'file' ,
-    		file_types : "*",
-    		file_types_description : "Any files",
-    		file_dialog_complete_handler : function(numFilesSelected, numFilesQueued) {
-    		    this.startUpload();
-    		},
-    		upload_start_handler : function(file) {
+            file_types : "*",
+            file_types_description : "Any files",
+            file_dialog_complete_handler : function(numFilesSelected, numFilesQueued) {
+                    this.startUpload();
+            },
+            upload_start_handler : function(file) {
                 $('#progress').width('0')
                 $('#progress_status').html(file.name+' 0% done');
                 $('#progressbar').show();$('#progress_status').show();
-    		    return true;
-    		},
-    		upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
+                return true;
+            },
+            upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
                 if ( $('#progressbar').is(':hidden') ){
                   $('#progress').width('0');
                   $('#progress_status').html(file.name+' 0% done');
                   $('#progressbar').show();$('#progress_status').show();
                 }
-            	try {
-            		var percent = Math.ceil((bytesLoaded / bytesTotal) * 100)+'%';
+                try {
+                    var percent = Math.ceil((bytesLoaded / bytesTotal) * 100)+'%';
                     $('#progress').width(percent)
                     $('#progress_status').html(file.name+' '+percent+' done')
-            	} catch (ex) {
-            		this.debug(ex);
-            	}		    
-    		},
-    		queue_complete_handler : function(numfiles) {
-      		  $('#progressbar').hide();$('#progress_status').hide();
-    		  $('#attachments').load($('#list_link').attr('href'))  
-    		} 
-    	})
-	}).click(function() { uploader.selectFiles() })
-	$('.delete_attachment').click(function(){
-	    link=$(this)
-	    $.post(link.attr('href'),function(){
-	        link.parents('p').remove();
-	    })
-	    return false;
-	})
+                } catch (ex) {
+                    this.debug(ex);
+                }
+            },
+            queue_complete_handler : function(numfiles) {
+                $('#progressbar').hide();$('#progress_status').hide();
+                $('#attachments').load($('#list_link').attr('href'))  
+            } 
+        })
+    }).click(function() { uploader.selectFiles() })
+    $('.delete_attachment').click(function() {
+        link=$(this)
+        $.post(link.attr('href'),function() {
+            link.parents('p').remove();
+        })
+        return false;
+    })
     
     new MojoMojo.PermissionsEditor({
         container: '#permissions_editor',
@@ -303,77 +303,78 @@ $( function() {
 var fetch_preview = function() {
     $('#editspinner').show();
     jQuery.ajax({
-      data: {content: $('#body').attr('value')},
-      type: 'POST',
-      url:  $('#preview_url').attr('href'),
-      timeout: 2000,
-      error: function() {
-        console.log("Failed to submit");
-        $('#editspinner').hide();
-      },
-      success: function(r) { 
-        $('#content_preview').html(r);
-        $('#editspinner').hide();
-      }
+        data: {content: $('#body').attr('value')},
+        type: 'POST',
+        url:  $('#preview_url').attr('href'),
+        timeout: 2000,
+        error: function() {
+            console.log("Failed to submit");
+            $('#editspinner').hide();
+        },
+        success: function(r) { 
+            $('#content_preview').html(r);
+            $('#editspinner').hide();
+        }
     })
   }
 
 
 function easeInOut(minValue,maxValue,totalSteps,actualStep,powr) {
-	var delta = maxValue - minValue;
-	var stepp = minValue+(Math.pow(((1 / totalSteps)*actualStep),powr)*delta);
-	return Math.ceil(stepp)
+    var delta = maxValue - minValue;
+    var stepp = minValue+(Math.pow(((1 / totalSteps)*actualStep),powr)*delta);
+    return Math.ceil(stepp)
 }
-	
+
 function doBGFade(elem,startRGB,endRGB,finalColor,steps,intervals,powr) {
-	if (elem.bgFadeInt) window.clearInterval(elem.bgFadeInt);
-	var actStep = 0;
-	elem.bgFadeInt = window.setInterval(
-		function() {
-			elem.style.backgroundColor = "rgb("+
-				easeInOut(startRGB[0],endRGB[0],steps,actStep,powr)+","+
-				easeInOut(startRGB[1],endRGB[1],steps,actStep,powr)+","+
-				easeInOut(startRGB[2],endRGB[2],steps,actStep,powr)+")";
-			actStep++;
-			if (actStep > steps) {
-			elem.style.backgroundColor = finalColor;
-			window.clearInterval(elem.bgFadeInt);
-			}
-		}
-		,intervals)
+    if (elem.bgFadeInt) window.clearInterval(elem.bgFadeInt);
+    var actStep = 0;
+    elem.bgFadeInt = window.setInterval(
+        function() {
+            elem.style.backgroundColor = "rgb("+
+                easeInOut(startRGB[0],endRGB[0],steps,actStep,powr)+","+
+                easeInOut(startRGB[1],endRGB[1],steps,actStep,powr)+","+
+                easeInOut(startRGB[2],endRGB[2],steps,actStep,powr)+")";
+            actStep++;
+            if (actStep > steps) {
+                elem.style.backgroundColor = finalColor;
+                window.clearInterval(elem.bgFadeInt);
+            }
+        }
+        , intervals
+    )
 }
 
 
 function cleanAuthorName(author) {
-  if ($('#authorName').attr('value') == "") {
-    $('#authorName').attr('value', author);
-  }
+    if ($('#authorName').attr('value') == "") {
+        $('#authorName').attr('value', author);
+    }
 }
 
 
 function toggleChanges(changeurl) {
-  if (!$('#diff').html()) {
-      $('#diff').load( changeurl, function() {
+    if (!$('#diff').html()) {
+        $('#diff').load( changeurl, function() {
+            $('#changes').toggle();
+            $('#current').toggle();
+            $('#show_changes').toggle();
+            $('#hide_changes').toggle();
+        });
+    } else {
         $('#changes').toggle();
         $('#current').toggle();
         $('#show_changes').toggle();
         $('#hide_changes').toggle();
-      });
-  } else {
-      $('#changes').toggle();
-      $('#current').toggle();
-      $('#show_changes').toggle();
-      $('#hide_changes').toggle();
-  }
+    }
 }
 
 
 function encodeAjax (str) {
-   str=str.replace(/%/g,'%25');
-   str=str.replace(/&/g,'%26');
-   str=str.replace(/\+/g,'%2b');
-   str=str.replace(/\;/g,'%3b');
-   return str;
+    str=str.replace(/%/g,'%25');
+    str=str.replace(/&/g,'%26');
+    str=str.replace(/\+/g,'%2b');
+    str=str.replace(/\;/g,'%3b');
+    return str;
 }
 
 // apply tagOpen/tagClose to selection in textarea,
@@ -448,16 +449,15 @@ function insertTags(txtarea,tagOpen, tagClose, sampleText) {
 
 // Based on http://www.germanforblack.com/javascript-sleeping-keypress-delays-and-bashing-bad-articles
 Function.prototype.only_every = function (millisecond_delay) {
-  if (!window.only_every_func)
-  {
-    var function_object = this;
-    window.only_every_func = setTimeout(function() { function_object(); window.only_every_func = null}, millisecond_delay);
-   }
+    if (!window.only_every_func) {
+        var function_object = this;
+        window.only_every_func = setTimeout(function() { function_object(); window.only_every_func = null}, millisecond_delay);
+    }
 };
 
 // jQuery extensions
 jQuery.prototype.any = function(callback) { 
-  return (this.filter(callback).length > 0)
+    return (this.filter(callback).length > 0)
 }
 
 setupToggleMaximized = function() { 
@@ -522,4 +522,3 @@ menuInsertChildren = function(node) {
   
     node.setAttribute("class", "menuParent");
 };
-
