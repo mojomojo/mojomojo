@@ -89,3 +89,16 @@ eq_or_diff($body, <<HTML, 'keep divs, spans and their styling attributes');
 
 <p>Divs, spans, and their styling attributes must be kept.</p>
 HTML
+
+
+$content = <<MARKDOWN;
+<pre lang="Perl">
+# This is a comment, not a heading
+</pre>
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<HTML, 'no Markdown parsing in <pre> sections');
+<pre>
+<span class="kateComment">#&nbsp;This&nbsp;is&nbsp;a&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</span>
+</pre>
+HTML
