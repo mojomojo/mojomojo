@@ -1,6 +1,9 @@
 package DummyCatalystObject;
 use URI;
 my $reverse;
+my %prefs = (
+    main_formatter => 'MojoMojo::Formatter::Markdown',
+);
 
 sub new {
     my $class = shift;
@@ -25,7 +28,7 @@ sub reverse {
 }
 
 sub set_reverse {
-   $reverse=$_[1];
+    $reverse=$_[1];
 }
 
 sub stash {
@@ -111,9 +114,10 @@ sub session {
 }
 
 sub pref {
-    my ($self, $c) = @_;
-    return '';
+    my ($self, $c, $setting, $value) = @_;
+    return '' if not defined $setting;
+    return $prefs{$setting} || '' if not defined $value;
+    $prefs{$setting} = $value;
 }
-
 
 1;
