@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 10;
+use Test::More tests => 12;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -105,9 +105,9 @@ HTML
 
 
 $content = <<MARKDOWN;
-This is a child page with a link to its [[../parent]].
+This is a child page with a link to a [[../new_sibling]].
 MARKDOWN
 $body = get(POST '/parent/child.jsrpc/render', [content => $content]);
-is($body, <<HTML, 'wikilink to ../parent');
-<p>This is a child page with a link to its <a class="existingWikiWord" href="/parent">.</p>
+is($body, <<HTML, 'wikilink to ../sibling');
+<p>This is a child page with a link to a <span class="newWikiWord">new_sibling<a title="Not found. Click to create this page." href="/../new_sibling.edit">?</a></span>.</p>
 HTML
