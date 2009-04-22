@@ -56,8 +56,10 @@
     [% IF pictures %]
         <li class="navOn">[% loc('Gallery') %]</li>
     [% ELSE %]
-        <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('gallery') %]</a></li>
+        <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
     [% END %]
+[% ELSE%]
+    <li>[% loc('Gallery') %]</li>
 [% END %]
 [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
     [% IF (c.req.action=="profile") %]
