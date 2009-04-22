@@ -212,7 +212,9 @@ sub format_link {
     #FIXME: why both base and $c?
     my ( $class, $c, $wikilink, $base, $link_text ) = @_;
     $base ||= $c->req->base;
-    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink unless $wikilink =~ m|^[/\.]|;
+    # prepend the base, unless the wikilink is a relative path
+    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink
+        unless $wikilink =~ m'^(\.\.)?/';
     $c = MojoMojo->context unless ref $c;
 
     # keep the original wikilink for display, stripping leading slashes
@@ -227,7 +229,13 @@ sub format_link {
     for ($wikilink) {
         s/(?<!\s)#(.*)/$fragment = $1, ''/e;  # trim the anchor (fragment) portion away, in preparation for the page search below, and save it in $fragment
         s/\s/_/g;
-        s/\./_/g;  # MojoMojo doesn't support periods in wikilinks because they conflict with actions ('.edit', '.info' etc.); actions are a finite set apparently, but it's possible to add new actions from formatter plugins (e.g. Comment)
+
+        # MojoMojo doesn't support periods in wikilinks because they conflict with actions ('.edit', '.info' etc.);
+        # actions are a finite set apparently, but it's possible to add new actions from formatter plugins (e.g. Comment).
+        # At the same time, parent links (../sibling) or (../../nephew) should be left alone, but any other '.' should be replaced by '_'
+        s'^(\.\./)+'MOJOMOJO_RESERVED_TREE_CROSSING_LINK'g;
+        s/\./_/g;
+        s'MOJOMOJO_RESERVED_TREE_CROSSING_LINK'../'g;
         # if there's no link text, URL-escape characters in the wikilink that are not valid in URLs
         if (!defined $link_text or $link_text eq '') {
             s/%(?![0-9A-F]{2})  # escape '%' unless it's followed by two uppercase hex digits
