@@ -145,7 +145,7 @@ setupFormatterToolbar = function() {
     // Syntax highlight
     $toolbar.append(_createToolbarSelect('Syntax Highlight', 
         $.map(syntax_formatters, function(n, i) {
-            return [[ n, '\n\n{{code lang=\"' + n + '\"}}\n','\n{{end}}\n\n','#!/usr/bin/perl' ]];
+            return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n','say "Howdy partner.";' ]];
         })
     ));
 

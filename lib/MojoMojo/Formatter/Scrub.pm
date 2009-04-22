@@ -28,10 +28,18 @@ ran plugins to not output unsafe HTML.
 
 sub format_content_order { 7 }
 
-my @allow = qw[ p img em br hr b a div pre code];
+my @allow = qw[ p img em br hr b a div pre code span];
 
 my @rules = (
     script => 0,
+    div    =>  {
+        class => 1,
+        style => 1,
+    },
+    span    => {
+        class => 1,
+        style => 1,
+    },
     img    => {
         class => 1,
         src   => qr{^(?!http://)}i,    # only relative image links allowed

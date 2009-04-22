@@ -6,7 +6,8 @@ body {
     background: #7D7C7A repeat-x url(images/background.jpg);
     margin: 0;
     color: #626262;
-    font: 10pt Arial, Helvetica, Geneva, sans-serif;
+    font-size: 0.9em;
+    font-family: Helvetica Neue,Arial, Helvetica, Geneva, sans-serif;
     text-align: center;
 }
 
@@ -34,7 +35,7 @@ body {
 }
 
 #header h1 {
-	background: url(images/mmlogo.png) no-repeat 15px 20px;
+    background: url(images/mmlogo.png) no-repeat 15px 20px;
     top: 14px;
     padding: 13px 0 10px 100px;
     color: #ffffff;
@@ -96,7 +97,6 @@ div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
     color:#333;
 }
-
 div#toplinks a {
     position: relative;
     top: 4px;
