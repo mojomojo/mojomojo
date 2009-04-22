@@ -57,6 +57,10 @@ h5, h6 {
 
 /* @end */
 
+#htmltagcloud span {
+    margin: 0 0.4em;
+}
+
 /* @group Links */
 
 a, a:visited {
