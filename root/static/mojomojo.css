@@ -1105,3 +1105,7 @@ form.site-configuration .submit {
 
 li.tabnav {
 }
+
+li.set-language-navbar {
+    clear: left;
+}
