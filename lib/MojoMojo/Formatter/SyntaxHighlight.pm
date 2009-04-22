@@ -38,13 +38,7 @@ those tags.
 
 =cut
 
-sub format_content_order {
-  if ( $main_formatter eq 'MojoMojo::Formatter::Markdown' ) {
-    14
-  } else {
-    99
-  }
-}
+sub format_content_order { 99 }
 
 =item format_content
 
@@ -84,6 +78,12 @@ sub format_content {
         my ($language, $block) = ($1, $2);
         # Fix newline issue
         $block =~ s/\r//g;
+
+        # Unfortunately markdown also encodes entities at some level which is not possible to disable
+        # neither easy to hack like we do for textile. So let's decode &amp; to & to avoid:
+        # &gt; => &amp;gt;
+        $block =~ s/&amp;/&/g;
+
         $block = decode_entities($block);
         if ($language) {
             eval {
@@ -108,9 +108,6 @@ sub _kate {
     return Syntax::Highlight::Engine::Kate->new(
         language      => 'Perl',
         substitutions => {
-            "<"  => "&lt;",
-            ">"  => "&gt;",
-            "&"  => "&amp;",
             " "  => "&nbsp;",
             "\t" => "&nbsp;&nbsp;&nbsp;",
             "\n" => "\n",
