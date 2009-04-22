@@ -64,7 +64,7 @@ for the default plugins is currently as follows:
 
 =item 95 - L<MojoMojo::Formatter::TOC> replace =toc with table of contents
 
-=item 99  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks (Textile only)
+=item 99  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks
 
 =back
 
