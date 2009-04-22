@@ -88,5 +88,4 @@ eq_or_diff($body, <<HTML, 'keep divs, spans and their styling attributes');
 </div>
 
 <p>Divs, spans, and their styling attributes must be kept.</p>
- sections.</p>
 HTML
