@@ -160,14 +160,14 @@ p#message {
   clear:left;
 }
 
-div.preview {
+div#content_preview {
   clear:left;
   /* max-width: 920px; */
   border:1px solid #ddd;
   padding:5px;
   overflow: auto;
   height: 250px;
-  margin:0 0 1em 0;
+  margin: 0 0 1em 0;
 }
 
 textarea#body {
