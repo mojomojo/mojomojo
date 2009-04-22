@@ -13,7 +13,7 @@
         [% IF user.active %]
             [% IF (!rev OR rev==page.content_version) %]
                 [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-        <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit Page') %]</a></li>
+        <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
                 [% END %]
             [% END +%]
         <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to home page') %]">[% c.fixw(user.login) %]</a></li>
