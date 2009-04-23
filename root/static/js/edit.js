@@ -39,8 +39,12 @@ $(document).ready(function() {
 // toggles between horizontal and vertical splitting of the preview and edit areas
 toggle_split_mode = function() {
     var max_container_width       = $(window).width();
-    var preview_area_height       = '100%';
+    // At one point preview was allowed to grown in the vertical dimension
+	//var preview_area_height       = '100%';
     var edit_area_height          = '40em';
+	// This a bit taller than the edit area 
+	// because we don't have toolbars and such in preview.
+	var preview_area_height       = '50em';
     var preview_area_max_width    = max_container_width/2;
     var $content_preview          = $("#content_preview");
    
@@ -56,7 +60,6 @@ toggle_split_mode = function() {
         $content_preview.css("height",toggle_split_mode.dph);
         $("textarea#body").css("height",toggle_split_mode.tbh);
         //$("div.preview").css("max-width",toggle_split_mode.dpmw);
-        $content_preview.css("max-width",'100%');
         $content_preview.css("max-width",'100%');
         $.cookies.set('split_edit',0);
     } else {
@@ -74,7 +77,7 @@ toggle_split_mode = function() {
         $("div#edit_form").css('width','49%');
         $content_preview.css('float','left');
         $content_preview.css('width','49%');
-        $content_preview.css('height', edit_area_height);
+        $content_preview.css('height', preview_area_height );
         $("div#container").css("max-width", max_container_width);
         $("div#header").css('background-repeat', 'no-repeat');
         $("textarea#body").css('height', edit_area_height);

@@ -1,4 +1,4 @@
-0.999028 2009-04-21 12:11:00
+0.999028 2009-04-23 11:58:00
         - Use oneshot timer instead of only_every to trigger preview update.
         - Make .profile smarter and link to it from .recent.
         - Clean up extra // in .recent URL's.
