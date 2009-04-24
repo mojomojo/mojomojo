@@ -12,7 +12,7 @@ MojoMojo::Formatter::Include - Include files in your content.
 
 =head1 DESCRIPTION
 
-Include files verbatim in your content, by writing =<url>.
+Include files verbatim in your content, by writing {{<url>}}.
 
 =head1 METHODS
 
