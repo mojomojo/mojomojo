@@ -17,10 +17,10 @@ BEGIN {
 };
 
 END {
-    ok($c->pref(main_formatter => original_formatter), 'restore original formatter');
+    ok($c->pref(main_formatter => $original_formatter), 'restore original formatter');
 }
 
-ok($c->pref(main_formatter => 'MojoMojo::Formatter::Textile'), 'set preferred formatter to Markdown');
+ok($c->pref(main_formatter => 'MojoMojo::Formatter::Textile'), 'set preferred formatter to Textile');
 
 my $content = '';
 my $body = get(POST '/.jsrpc/render', [content => $content]);
