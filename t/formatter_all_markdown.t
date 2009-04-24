@@ -1,38 +1,47 @@
 #!/usr/bin/perl -w
-use Test::More tests => 10;
+use Test::More tests => 16;
 use HTTP::Request::Common;
 use Test::Differences;
 
-my $original_formatter;  # used to store whatever formatter is set up in mojomojo.db
-my $c;  # the Catalyst object of this live server
+my $original_formatter;  # used to save/restore whatever formatter is set up in mojomojo.db
+my $c;                   # the Catalyst object of this live server
+my $test;                # test description
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG} = 0;
     use_ok('MojoMojo::Formatter::Markdown') and note('Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown');
-    use_ok(Catalyst::Test, 'MojoMojo');
-    
-    (undef, $c) = ctx_request('/');
-    ok($original_formatter = $c->pref(main_formatter), 'save original formatter');
+    use_ok('Catalyst::Test', 'MojoMojo');
 };
 
 END {
     ok($c->pref(main_formatter => $original_formatter), 'restore original formatter');
 };
 
+(undef, $c) = ctx_request('/');
+ok($original_formatter = $c->pref('main_formatter'), 'save original formatter');
+
 ok($c->pref(main_formatter => 'MojoMojo::Formatter::Markdown'), 'set preferred formatter to Markdown');
 
+#----------------------------------------------------------------------------
+$test = "empty body";
+#----------------------------------------------------------------------------
 my $content = '';
 my $body = get(POST '/.jsrpc/render', [content => $content]);
-is($body, 'Please type something', 'empty body');
+is($body, 'Please type something', $test);
 
-$content = <<MARKDOWN;
+
+
+#----------------------------------------------------------------------------
+$test = 'headings';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
 # Heading 1
 paragraph
 ## Heading 2
 MARKDOWN
 $body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<HTML, 'headings');
+eq_or_diff($body, <<'HTML', $test);
 <h1>Heading 1</h1>
 
 <p>paragraph</p>
@@ -41,16 +50,22 @@ eq_or_diff($body, <<HTML, 'headings');
 HTML
 
 
-$content = <<MARKDOWN;
+#----------------------------------------------------------------------------
+$test = '<span>s need to be kept because they are the only way to specift text attributes';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
 Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.
 MARKDOWN
 $body = get(POST '/.jsrpc/render', [content => $content]);
-is($body, <<HTML, '<span>s need to be kept because they are the only way to specift text attributes');
+is($body, <<HTML, $test);
 <p>Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.</p>
 HTML
 
 
-$content = <<MARKDOWN;
+#----------------------------------------------------------------------------
+$test = 'HTML entities must be preserved in code sections';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
 Here's some code:
 
     1 < 2 && '4' > "3"
@@ -58,7 +73,7 @@ Here's some code:
 HTML entities must be preserved in code sections.
 MARKDOWN
 $body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<HTML, 'HTML entities must be preserved in code sections');
+eq_or_diff($body, <<'HTML', $test);
 <p>Here's some code:</p>
 
 <pre><code>1 < 2 && '4' > "3"
@@ -68,46 +83,136 @@ eq_or_diff($body, <<HTML, 'HTML entities must be preserved in code sections');
 HTML
 
 
-#$content = <<MARKDOWN;
-#Divs can be used to add captions to images
-#
-#<div class=photo style="float: right; border: 1px dotted black; text-align: center">
-#![alt text](/.static/catalyst.png "Image title")  
-#<span style="color: green">This is an image caption</span>
-#</div>
-#
-#Divs, spans, and their styling attributes must be kept.
-#MARKDOWN
-#$body = get(POST '/.jsrpc/render', [content => $content]);
-#eq_or_diff($body, <<HTML, 'keep divs, spans and their styling attributes');
-#<p>Divs can be used to add captions to images</p>
-#
-#<div class="photo" style="float: right; border: 1px dotted black; text-align: center">
-#<img src="/.static/catalyst.png" alt="alt text" title="Image title" /> <br />
-#<span style="color: green">This is an image caption</span>
-#</div>
-#
-#<p>Divs, spans, and their styling attributes must be kept.</p>
-#HTML
-#
-#
-#$content = <<MARKDOWN;
-#<pre lang="Perl">
-## A comment, not a heading
-#</pre>
-#MARKDOWN
-#$body = get(POST '/.jsrpc/render', [content => $content]);
-#eq_or_diff($body, <<HTML, 'no Markdown parsing in <pre> sections');
-#<pre>
-#<span class="kateComment">#&nbsp;A&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</span>
-#</pre>
-#HTML
+#----------------------------------------------------------------------------
+$test = '<div> with HTML attribute in a code span';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+This is the code: `<div class="content">`.
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<'HTML', $test);
+<p>This is the code: <code>&lt;div class="content"&gt;</code>.</p>
+HTML
 
 
-$content = <<MARKDOWN;
+
+#----------------------------------------------------------------------------
+$test = '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+This is the code: `<div aria_role="content">`.
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<'HTML', $test);
+<p>This is the code: <code>&lt;div aria_role="content"&gt;</code>.</p>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = '<br/>s need to be preserved';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+Roses are red
+<br/>Violets are blue
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<'HTML', $test);
+<p>Roses are red
+<br/>Violets are blue</p>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = 'blockquotes';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+Below is a blockquote:
+
+> quoted text
+
+A quote is above.
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<'HTML', $test);
+<p>Below is a blockquote:</p>
+
+<blockquote>
+  <p>quoted text</p>
+</blockquote>
+
+<p>A quote is above.</p>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = 'wikilink to ../new_sibling';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
 This is a child page with a link to a [[../new_sibling]].
 MARKDOWN
 $body = get(POST '/parent/child.jsrpc/render', [content => $content]);
-is($body, <<HTML, 'wikilink to ../sibling');
+is($body, <<'HTML', $test);
 <p>This is a child page with a link to a <span class="newWikiWord">new sibling<a title="Not found. Click to create this page." href="/../new_sibling.edit">?</a></span>.</p>
 HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = '<div> with markdown="1"';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+We want to be able to have Markdown interpreted in `<div markdown="1">` sections
+so that we can build sidebars, photo divs etc.
+
+<div class="navbar" markdown="1">
+* [[Home]]
+* [[Products]]
+* [[About]]
+
+![alt text](/.static/catalyst.png "Image title")
+<span style="color: green">This is an image caption</span>
+</div>
+
+The above should render as a list of items with an image and caption below.
+MARKDOWN
+$body = get(POST '/.jsrpc/render', [content => $content]);
+eq_or_diff($body, <<'HTML', $test);
+<p>We want to be able to have Markdown interpreted in <code>&lt;div markdown="1"&gt;</code> sections
+so that we can build sidebars, photo divs etc.</p>
+
+<div class="navbar">
+<ul>
+<li><span class="newWikiWord">Home<a title="Not found. Click to create this page." href="/Home.edit">?</a></span>
+<li><span class="newWikiWord">Products<a title="Not found. Click to create this page." href="/Products.edit">?</a></span>
+<li><span class="newWikiWord">About<a title="Not found. Click to create this page." href="/About.edit">?</a></span>
+</ul>
+
+<img src="/.static/catalyst.png" alt="alt text]" "Image title" ./>
+<span style="color: green">This is an image caption</span>
+</div>
+
+<p>The above should render as a list of items with an image and caption below.</p>
+HTML
+
+
+
+TODO: {
+    #----------------------------------------------------------------------------
+    $test = 'Markdown should not parse block-level markdown in <pre> tags';
+    #----------------------------------------------------------------------------
+    $content = <<'MARKDOWN';
+<pre lang="Perl">
+# A comment, not a heading
+</pre>
+MARKDOWN
+    $body = get(POST '/.jsrpc/render', [content => $content]);
+    eq_or_diff($body, <<'HTML', $test);
+<pre>
+<span class="kateComment">#&nbsp;A&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</span>
+</pre>
+HTML
+}
+

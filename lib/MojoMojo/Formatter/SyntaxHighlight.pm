@@ -7,7 +7,6 @@ use HTML::Entities;
 
 eval "use Syntax::Highlight::Engine::Kate;";
 my $eval_res = $@;
-
 sub module_loaded { $eval_res ? 0 : 1 }
 
 my $main_formatter;
@@ -45,7 +44,7 @@ has to be highlighted, do:
 
  <pre lang="Perl">
    say "Hola Mundo";
- </pre> 
+ </pre>
 
 See L<Syntax::Highlight::Engine::Kate/PLUGINS> for a list of supported
 languages.

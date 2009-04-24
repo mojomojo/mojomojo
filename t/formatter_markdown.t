@@ -1,71 +1,207 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Markdown;
-use Test::More;
+use Test::More tests => 11;
+use Test::Differences;
 
-my ( $response, $c );    # the Catalyst object of this live server
+my ( $content, $got, $expected, $test );
 
-BEGIN {
-    plan skip_all => 'Requirements not installed for Markdown Formatter'
-      unless MojoMojo::Formatter::Markdown->module_loaded;
-    plan tests => 3;
-    $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
-    use_ok( 'Catalyst::Test', 'MojoMojo' );
-    ( $response, $c ) = ctx_request('/');
-}
+$content = 'Here is an ![Image alt text](/image.jpg "Image title") image.';
+$expected = '<p>Here is an <img src="/image.jpg" alt="Image alt text" title="Image title" /> image.</p>' . "\n";  # Markdown makes sure there's a final "\n"
+is(MojoMojo::Formatter::Markdown->main_format_content(\$content), $expected, 'basic image');
 
-$c->pref( 'main_formatter', 'MojoMojo::Formatter::Markdown' );
 
-my ( $content, $got, $expect, $test );
 
-TODO: {
-    local $TODO = 'Markdown does not like <div> around its image tags';
-    $test = "Keep divs, spans and their styling attributes\n";
+#----------------------------------------------------------------------------
+$test = '<div with="attributes"> in a code span';
+#----------------------------------------------------------------------------
 
-    $content = <<MARKDOWN;
-Can divs be used to add captions to images
-
-<div class="photo">
-![Beer](/images/frosty_mug.jpg "Cold One")
-<span style="color: green">This is an image caption</span>
-</div>
-
-Divs, spans, and their styling attributes should be kept.
+$content = <<'MARKDOWN';
+This is the code: `<div markdown="1">`.
 MARKDOWN
-
-    $got = MojoMojo::Formatter::Markdown->format_content( \$content, $c );
-    $expect = <<HTML;
-<p>Can divs be used to add captions to images</p>
-
-<div class="photo">
-![Beer](/images/frosty_mug.jpg "Cold One")
-<span style="color: green">This is an image caption</span>
-</div>
-
-<p>Divs, spans, and their styling attributes should be kept.</p>
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML');
+<p>This is the code: <code>&lt;div markdown="1"&gt;</code>.</p>
 HTML
 
-    is( $got, $expect, $test );
-}
 
-TODO: {
-    local $TODO = 'Markdown does not like lines starting with # in a <pre>.';
-    $test = "No Markdown parsing in <pre> sections.\n";
+#----------------------------------------------------------------------------
+$test = 'blockquotes';
+#----------------------------------------------------------------------------
+$content = <<'MARKDOWN';
+Below is a blockquote:
 
-    $content = <<MARKDOWN;
+> quoted text
+
+A quote is above.
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<p>Below is a blockquote:</p>
+
+<blockquote>
+  <p>quoted text</p>
+</blockquote>
+
+<p>A quote is above.</p>
+HTML
+
+
+#----------------------------------------------------------------------------
+$test = "don't make a <div> into <p><div></p>, for empty divs";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div>
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div>
+
+</div>
+HTML
+
+
+#----------------------------------------------------------------------------
+$test = "don't make a <div> into <p><div></p>, for divs wth attributes";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div class="content">
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div class="content">
+
+</div>
+HTML
+
+
+#----------------------------------------------------------------------------
+$test = "if div attributes are not quoted, they're fair game because that's invalid HTML Strict";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div class=this_must_be_quoted_otherwise_the_whole_div_is_not_HTML_but_junk>
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<p><div class=this_must_be_quoted_otherwise_the_whole_div_is_not_HTML_but_junk></p>
+
+<p></div></p>
+HTML
+
+
+
+
+#----------------------------------------------------------------------------
+$test = "interpret block-level Markdown in divs without attributes";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div>
+# heading 1
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div>
+<h1>heading 1</h1>
+
+</div>
+HTML
+
+
+
+$TODO = "All tests below will fail because Markdown doesn't interpret markdown in HTML block elements, and does interpret block-level markdown in <pre> elements";
+#----------------------------------------------------------------------------
+$test = "interpret inline Markdown in divs without attributes";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div>
+
+*this should be emphasized*
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div>
+
+<em>this should be emphasized</em>
+
+</div>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = "interpret Markdown in divs WITH attributes";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div class="content">
+
+*this should be emphasized*
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div class="content">
+
+<em>this should be emphasized</em>
+
+</div>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = "in <divs>, leave alone HTML like <span>s";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+<div class="photo_frame">
+
+![alt text](/image.jpg "title")
+<span class="caption">Caption</span>
+
+</div>
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<div class="photo_frame">
+
+<img src="/image.jpg" alt="alt text" title="title" /></p>
+<span class="caption">Caption</span>
+
+</div>
+HTML
+
+
+
+#----------------------------------------------------------------------------
+$test = "in <pres>, not even block-level Markdown should be interpreted";
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
 <pre lang="Perl">
 # A comment, not a heading
+[this isn't](a link)
+[[this isn't a wikilink]]
+
+|| this is not | a table ||
+|| this is | a <pre> element ||
 </pre>
 MARKDOWN
-
-    $got = MojoMojo::Formatter::Markdown->format_content( \$content, $c );
-    $expect = <<HTML;
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
 <pre lang="Perl">
-<h1>A comment, not a heading</h1>
+# A comment, not a heading
+[this isn't](a link)
+[[this isn't a wikilink]]
 
+|| this is not | a table ||
+|| this is | a <pre> element ||
 </pre>
 HTML
-    is( $got, $expect, $test );
 
-}
+

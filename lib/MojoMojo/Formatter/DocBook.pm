@@ -5,12 +5,12 @@ use warnings;
 use base qw/MojoMojo::Formatter/;
 
 eval "use XML::LibXSLT;use XML::SAX::ParserFactory (); use XML::LibXML::Reader;";
-my $eval_res=$@;
+my $eval_res = $@;
 use MojoMojo::Formatter::DocBook::Colorize;
 
 my $xsltfile="/usr/share/sgml/docbook/stylesheet/xsl/nwalsh/xhtml/docbook.xsl";
 
-sub module_loaded { 
+sub module_loaded {
     return 0 unless -f $xsltfile;
     return $eval_res ? 0 : 1 ;
 }
@@ -23,7 +23,7 @@ MojoMojo::Formatter::DocBook - format part of content as DocBook
 
 =head1 DESCRIPTION
 
-This formatter will format content between two =docbook blocks as 
+This formatter will format content between two =docbook blocks as
 DocBook document.
 
 =head1 METHODS
@@ -86,7 +86,7 @@ sub to_xhtml {
     $dbk =~ s/&/_-_amp_-_;/g;
 
     $dbk =~ s/^\s//;
-    # 1 - Mark lang 
+    # 1 - Mark lang
     # <programlisting lang="..."> to <programlisting lang="...">[lang=...] code [/lang]
     my $my_Handler = MojoMojo::Formatter::DocBook::Colorize->new($debug);
     $my_Handler->step('marklang');
@@ -116,7 +116,7 @@ sub to_xhtml {
 
 
     my $style_doc = $parser->parse_file($xsltfile);
-    my $stylesheet = 
+    my $stylesheet =
       eval {
           $xslt->parse_stylesheet($style_doc);
       };
