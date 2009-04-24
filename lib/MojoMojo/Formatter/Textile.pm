@@ -44,7 +44,7 @@ C<main_format_content> will only be called by <MojoMojo::Formatter::Main>.
 =cut
 
 sub main_format_content {
-    my ( $class, $content, $c ) = @_;
+    my ( $class, $content ) = @_;
 
     # Let textile handle the rest
     $$content = $textile->process($$content);

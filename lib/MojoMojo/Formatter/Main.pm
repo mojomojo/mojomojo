@@ -39,10 +39,10 @@ sub format_content {
     # dispatch to the preferred formatter
     if ($c->pref('main_formatter') eq 'MojoMojo::Formatter::Textile') {
         require MojoMojo::Formatter::Textile;
-        $$content = MojoMojo::Formatter::Textile->main_format_content($content, $c);
+        $$content = MojoMojo::Formatter::Textile->main_format_content($content);
     } else {
         require MojoMojo::Formatter::Markdown;
-        $$content = MojoMojo::Formatter::Markdown->main_format_content($content, $c);
+        $$content = MojoMojo::Formatter::Markdown->main_format_content($content);
     }
 }
 

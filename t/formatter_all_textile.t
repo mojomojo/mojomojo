@@ -3,22 +3,23 @@ use Test::More tests => 8;
 use HTTP::Request::Common;
 use Test::Differences;
 
-my $original_formatter;  # used to store whatever formatter is set up in mojomojo.db
-my $c;  # the Catalyst object of this live server
+my $original_formatter;  # used to save/restore whatever formatter is set up in mojomojo.db
+my $c;                   # the Catalyst object of this live server
+my $test;                # test description
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG} = 0;
     use_ok('MojoMojo::Formatter::Textile') and note('Comprehensive/chained test of formatters, with the main formatter set to Textile');
-    use_ok(Catalyst::Test, 'MojoMojo');
-    
-    (undef, $c) = ctx_request('/');
-    ok($original_formatter = $c->pref(main_formatter), 'save original formatter');
+    use_ok('Catalyst::Test', 'MojoMojo');
 };
 
 END {
     ok($c->pref(main_formatter => $original_formatter), 'restore original formatter');
-}
+};
+
+(undef, $c) = ctx_request('/');
+ok($original_formatter = $c->pref('main_formatter'), 'save original formatter');
 
 ok($c->pref(main_formatter => 'MojoMojo::Formatter::Textile'), 'set preferred formatter to Textile');
 
@@ -26,7 +27,10 @@ my $content = '';
 my $body = get(POST '/.jsrpc/render', [content => $content]);
 is($body, 'Please type something', 'empty body');
 
-$content = <<TEXTILE;
+#----------------------------------------------------------------------------
+$test = 'headings';
+#----------------------------------------------------------------------------
+$content = <<'TEXTILE';
 h1. Welcome to MojoMojo!
 
 This is your front page. To start administrating your wiki, please log in with
@@ -39,7 +43,7 @@ h2. Need some assistance?
 Check out our [[Help]] section.
 TEXTILE
 $body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<HTML, 'headings');
+eq_or_diff($body, <<'HTML', $test);
 <h1>Welcome to MojoMojo!</h1>
 
 <p>This is your front page. To start administrating your wiki, please log in with<br />
@@ -52,7 +56,11 @@ a <span class="newWikiWord">New Page<a title="Not found. Click to create this pa
 <p>Check out our <a class="existingWikiWord" href="/help">Help</a> section.</p>
 HTML
 
-$content = <<TEXTILE;
+
+#----------------------------------------------------------------------------
+$test = 'HTML entities must be preserved in code sections';
+#----------------------------------------------------------------------------
+$content = <<'TEXTILE';
 Here's some code:
 
 <pre lang="Perl">
@@ -64,13 +72,13 @@ if (1 > 2) {
 Here too:
 
 <pre>
-if (1 > 2) {
-  print "test";
+if (1 < 2) {
+  print "pre section & no lang specified";
 }
 </pre>
 TEXTILE
 $body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<HTML, 'HTML entities must be preserved in code sections');
+eq_or_diff($body, <<'HTML', $test);
 <p>Here&#8217;s some code:</p>
 
 
@@ -88,8 +96,8 @@ eq_or_diff($body, <<HTML, 'HTML entities must be preserved in code sections');
 
 
 <pre>
-if (1 > 2) {
-  print "test";
+if (1 < 2) {
+  print "pre section & no lang specified";
 }
 </pre>
 HTML
