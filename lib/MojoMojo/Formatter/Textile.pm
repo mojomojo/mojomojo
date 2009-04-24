@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Textile;
 
-use base qw/MojoMojo::Formatter/;
+use base 'MojoMojo::Formatter';
 
 use Text::Textile;
 use Text::SmartyPants;
@@ -20,7 +20,7 @@ MojoMojo::Formatter::Textile - Texile formatting for your content
 
 =head1 DESCRIPTION
 
-This formatter processes content using L<Text::Textile2> This is a 
+This formatter processes content using L<Text::Textile> This is a 
 syntax for writing human-friendly formatted text.
 
 =head1 METHODS
@@ -65,7 +65,7 @@ sub format_content {
 
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Text::Textile2>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<Text::Textile>
 
 =head1 AUTHORS
 
