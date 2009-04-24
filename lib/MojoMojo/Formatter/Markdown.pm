@@ -33,33 +33,21 @@ syntax for writing human-friendly formatted text.
 
 =over 4
 
-=item primary_formatter
+=item main_format_content
 
-See also L<MojoMojo::Formatter/primary_formatter>.
+Calls the formatter. Takes a ref to the content as well as the
+context object. Note that this is different from the format_content method
+of non-main formatters. This is because we don't want all main formatters
+to be called when iterating over pluggable modules in
+L<MojoMojo::Schema::ResultSet::Content::format_content>.
 
-=cut
-
-sub primary_formatter { 1; }
-
-=item format_content_order
-
-Format order can be 1-99. The Markdown formatter runs on 15
+C<main_format_content> will only be called by <MojoMojo::Formatter::Main>.
 
 =cut
 
-sub format_content_order { 15 }
-
-=item format_content
-
-calls the formatter. Takes a ref to the content as well as the
-context object.
-
-=cut
-
-sub format_content {
+sub main_format_content {
     my ( $class, $content, $c ) = @_;
     return unless $markdown;
-    return unless $c->pref('main_formatter') eq 'MojoMojo::Formatter::Markdown';
 
     # Let markdown handle the rest
     $$content = $markdown->markdown($$content);
@@ -69,7 +57,7 @@ sub format_content {
 
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Text::MultiMarkdown>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<Text::MultiMarkdown>
 
 =head1 AUTHORS
 
