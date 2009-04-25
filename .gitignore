@@ -14,3 +14,4 @@ mojomojos.kpf
 MojoMojo-*
 .includepath
 .project
+*.out

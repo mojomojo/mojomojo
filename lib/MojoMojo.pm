@@ -7,7 +7,6 @@ use Catalyst qw/
     ConfigLoader
     Authentication
     Cache
-    Email
     Session
     Session::Store::File
     Session::State::Cookie

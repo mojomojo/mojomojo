@@ -17,7 +17,6 @@ requires(
     'Catalyst::Plugin::Authentication'             => '0.10005',
     'Catalyst::Plugin::Cache'                      => 0,
     'Catalyst::Plugin::ConfigLoader'               => '0.13',
-    'Catalyst::Plugin::Email'                      => 0,
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::Plugin::Session::State::Cookie'     => 0,
     'Catalyst::Plugin::Session::Store::File'       => '0.15',
@@ -27,6 +26,7 @@ requires(
     'Catalyst::Plugin::Unicode'                    => '0.8',
     'Catalyst::View::TT'                           => '0.23',
     'Catalyst::View::JSON'                         => 0,
+    'Catalyst::View::Email::Template'              => 0,
     'Config::General'                              => 0,
     'Config::JFDI'                                 => 0,
     'Crypt::CBC'                                   => '2.12',    # FormFu
@@ -85,7 +85,8 @@ feature 'RSS Formatter', 'XML::Feed';
 feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 
-
+test_requires 'Email::Send::Test';
+test_requires 'Test::WWW::Mechanize::Catalyst';
 
 tests( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
