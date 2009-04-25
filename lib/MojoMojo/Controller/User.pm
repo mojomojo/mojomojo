@@ -170,31 +170,32 @@ sub recover_pass : Global {
     my ( $self, $c ) = @_;
     return unless ( $c->req->method eq 'POST' );
     my $id = $c->req->param('recover');
-    $c->stash->{user} =
+    my $user =
       $c->model('DBIC::Person')->search( [ email => $id, login => $id ] )
       ->first;
-    my $user = $c->stash->{user};
-    unless ( $c->stash->{user} ) {
+    unless ( $user ) {
         $c->flash->{message} = 'Could not recover password.';
         return $c->res->redirect( $c->uri_for('login') );
     }
-    $c->stash->{password} = Text::Password::Pronounceable->generate( 6, 10 );
-    if (
-        $c->email(
-            header => [
-                From    => $c->config->{system_mail},
-                To      => $user->login . ' <' . $user->email . '>',
-                Subject => 'Your new password on ' . $c->pref('name'),
-            ],
-            body => $c->view('TT')->render( $c, 'mail/reset_password.tt' ),
-        )
-      )
-    {
+
+    $c->stash(
+        user     => $user,
+        password => Text::Password::Pronounceable->generate(6, 10),
+        email    => {
+            from     => $c->config->{system_mail},
+            to       => $user->login . ' <' . $user->email . '>',
+            subject  => 'Your new password on ' . $c->pref('name'),
+            template => 'reset_password.tt',
+        },
+    );
+
+    if ($c->forward( $c->view('Email') )) {
         $user->pass( $c->stash->{password} );
         $user->update();
         $c->stash->{message} = $c->loc('Emailed you your new password.');
     }
     else {
+        $c->clear_errors;
         $c->stash->{message} =
           $c->loc('Error occurred while emailing you your new password.');
     }
@@ -285,21 +286,18 @@ sub do_register : Private {
     my ( $self, $c, $user ) = @_;
     $c->forward('/user/login');
     $c->pref('entropy') || $c->pref( 'entropy', rand );
-    $c->stash->{secret} = md5_hex( $user->email . $c->pref('entropy') );
-    if (
-        $c->email(
-            header => [
-                From => $c->config->{system_mail},
-                To   => $user->email,
-                Subject =>
-                  $c->loc( '~[x~] New User Validation', $c->pref('name') ),
-            ],
-            body => $c->view('TT')->render( $c, 'mail/validate.tt' ),
-        )
-      )
-    {
-    }
-    else {
+    $c->stash(
+        secret => md5_hex( $user->email . $c->pref('entropy') ),
+        email  => {
+            from     => $c->config->{system_mail},
+            to       => $user->email,
+            subject  => $c->loc( '~[x~] New User Validation', $c->pref('name') ),
+            template => 'validate.tt',
+        },
+    );
+
+    if (!$c->forward( $c->view('Email') )) {
+        $c->clear_errors;
         $c->stash->{error} = $c->loc('An error occourred. Sorry.');
     }
     $c->stash->{user}     = $user;
