@@ -26,7 +26,7 @@ use Encode ();
 use URI::Escape ();
 use MojoMojo::Formatter::Wiki;
 use Module::Pluggable::Ordered
-    search_path => [qw/MojoMojo/],
+    search_path => 'MojoMojo::Formatter',
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 

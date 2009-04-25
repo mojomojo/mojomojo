@@ -3,117 +3,162 @@ use strict;
 use MojoMojo::Formatter::SyntaxHighlight;
 
 use Test::More;
-BEGIN { 
-    plan skip_all => 'Requirements not installed for Syntax Highligher Formatter' 
-        unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
-    plan tests => 3 ;
-};
 
-my ($content, $got, $expected, $test);
+BEGIN {
+    plan skip_all =>
+      'Requirements not installed for Syntax Highligher Formatter'
+      unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
+    plan tests => 5;
+}
 
+my ( $content, $got, $expected, $test );
 
-$test = 'Single <div>';
+{
+    $test = 'Single <div>';
 
-$content = <<HTML;
+    $content = <<HTML;
 <pre lang="HTML">
-<div>   
+<div>
 Ha en god dag
 </div>
 </pre>
 HTML
 
-$got = MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
-$expected = <<HTML;
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    open( F, ">t1.tmp.out" );
+    print F $$got;
+    close F;
+    $expected = <<'HTML';
 <pre>
-<b><div></b>&nbsp;&nbsp;&nbsp;
+<b>&lt;div&gt;</b>
 Ha&nbsp;en&nbsp;god&nbsp;dag
-<b></div></b>
+<b>&lt;/div&gt;</b>
 </pre>
 HTML
 
-is($$got, $expected, $test);
+    is( $$got, $expected, $test );
+}
 
+{
+    $test = 'Simple Perl';
 
-$test = 'Simple Perl';
-
-$content = <<Perl;
+    $content = <<Perl;
 <pre lang="Perl">
     say "Hola Cabrón";
 </pre>
 Perl
 
-$got = MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
-$expected = <<Perl;
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    $expected = <<Perl;
 <pre>
 &nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;<span class="kateOperator">"</span><span class="kateString">Hola&nbsp;Cabrón</span><span class="kateOperator">"</span>;
 </pre>
 Perl
 
-is($$got, $expected, $test);
+    is( $$got, $expected, $test );
+}
 
+{
+    $test = 'Simple SQL SELECT';
 
-$test = 'Simple SQL SELECT';
-
-$content = <<SQL;
+    $content = <<SQL;
 <pre lang="SQL">
 select * from foo
 </pre>
 SQL
 
-$got = MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
-$expected = <<SQL;
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    $expected = <<SQL;
 <pre>
 <b>select</b>&nbsp;*&nbsp;<b>from</b>&nbsp;foo
 </pre>
 SQL
 
-is($$got, $expected, $test);
+    is( $$got, $expected, $test );
 
+}
 
-#{
-#my $content = <<HTML;
-#<pre lang="HTML">
-#    <form action="[% c.uri_for('/login') %]" method="get"> 
-#        <input type="text" name="openid_identifier" value="http://" />
-#        <button type="submit">Sign in with OpenID</button>
-#    </form>
-#</pre>
-#HTML
-#
-#my $got = MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
-#my $expected = <<HTML;
-#<pre>\n&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;form</b><span class="kateOthers">&nbsp;action=</span><span class="kateString">"[%&nbsp;c.uri_for('/login')&nbsp;%]"</span><span class="kateOthers">&nbsp;method=</span><span class="kateString">"get"</span><b>&gt;</b>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;input</b><span class="kateOthers">&nbsp;type=</span><span class="kateString">"text"</span><span class="kateOthers">&nbsp;name=</span><span class="kateString">"openid_identifier"</span><span class="kateOthers">&nbsp;value=</span><span class="kateString">"http://"</span>&nbsp;<b>/&gt;</b>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;button</b><span class="kateOthers">&nbsp;type=</span><span class="kateString">"submit"</span><b>&gt;</b>Sign&nbsp;in&nbsp;with&nbsp;OpenID<b>&lt;/button&gt;</b>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;/form&gt;</b>\n&nbsp;&nbsp;&nbsp;&nbsp;</pre>
-#HTML
-#    is($$got, $expected, 'HTML Highlight');
-#}
+{
+    $test = 'Simple HTML Form';
 
-#{
-#    my $content = <<PERL;
-#    {{code lang=Perl}}
-#        sub login : Local {
-#          my ( \$self, \$c ) = @_;
-#
-#          # eval necessary because LWPx::ParanoidAgent
-#          # croaks if invalid URL is specified
-#          eval {
-#            # Authenticate against OpenID to get user URL
-#            if ( \$c->authenticate({}, 'openid' ) ) {
-#              # ...
-#            else {
-#              # ...
-#            }
-#          };
-#
-#          if (\$@) {
-#            \$c->log->error("Failure during login: " . \$@);
-#            \$c->flash->{'error_msg'}='Failure during login: ' . \$@;
-#            \$c->stash->{'template'}='login.tt';
-#          }
-#        }
-#    {{end}}
-#PERL
-#    MojoMojo::Formatter::SyntaxHighlight->format_content(\$content);
-#    is($content, <<PERL);
-#    <pre>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>sub&nbsp;</b><span class="kateFunction">login</span>&nbsp;:&nbsp;<b>Local</b>&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>my</b>&nbsp;(&nbsp;<span class="kateDataType">\$self</span>,&nbsp;<span class="kateDataType">\$c</span>&nbsp;)&nbsp;=&nbsp;;\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;eval&nbsp;necessary&nbsp;because&nbsp;LWPx::ParanoidAgent</i></span><span class="kateComment"><i>\n</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;croaks&nbsp;if&nbsp;invalid&nbsp;URL&nbsp;is&nbsp;specified</i></span><span class="kateComment"><i>\n</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateFunction">eval</span>&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;Authenticate&nbsp;against&nbsp;OpenID&nbsp;to&nbsp;get&nbsp;user&nbsp;URL</i></span><span class="kateComment"><i>\n</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b>&nbsp;(&nbsp;<span class="kateDataType">\$c</span>-&gt;<span class="kateDataType">authenticate</span>({},&nbsp;<span class="kateOperator">'</span><span class="kateString">openid</span><span class="kateOperator">'</span>&nbsp;)&nbsp;)&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;...</i></span><span class="kateComment"><i>\n</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else</b>&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;...</i></span><span class="kateComment"><i>\n</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b>&nbsp;(<span class="kateVariable"><b>\$@</b></span>)&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">\$c</span>-&gt;<span class="kateDataType">log</span>-&gt;<span class="kateDataType">error</span>(<span class="kateOperator">"</span><span class="kateString">Failure&nbsp;during&nbsp;login:&nbsp;</span><span class="kateOperator">"</span>&nbsp;.&nbsp;<span class="kateVariable"><b>\$@</b></span>);\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">\$c</span>-&gt;<span class="kateDataType">flash</span>-&gt;{<span class="kateOperator">'</span><span class="kateString">error_msg</span><span class="kateOperator">'</span>}=<span class="kateOperator">'</span><span class="kateString">Failure&nbsp;during&nbsp;login:&nbsp;</span><span class="kateOperator">'</span>&nbsp;.&nbsp;<span class="kateVariable"><b>\$@</b></span>;\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">\$c</span>-&gt;<span class="kateDataType">stash</span>-&gt;{<span class="kateOperator">'</span><span class="kateString">template</span><span class="kateOperator">'</span>}=<span class="kateOperator">'</span><span class="kateString">login.tt</span><span class="kateOperator">'</span>;\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\n&nbsp;&nbsp;&nbsp;&nbsp;</pre>
-#PERL
-#}
+    $content = <<'HTML';
+<pre lang="HTML">
+    <form action="[% c.uri_for('/login') %]" method="get">
+        <input type="text" name="openid_identifier" value="http://" />
+        <button type="submit">Sign in with OpenID</button>
+    </form>
+</pre>
+HTML
+
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    $expected = <<HTML;
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;form</b><span class="kateOthers">&nbsp;action=</span><span class="kateString">"[%&nbsp;c.uri_for('/login')&nbsp;%]"</span><span class="kateOthers">&nbsp;method=</span><span class="kateString">"get"</span><b>&gt;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;input</b><span class="kateOthers">&nbsp;type=</span><span class="kateString">"text"</span><span class="kateOthers">&nbsp;name=</span><span class="kateString">"openid_identifier"</span><span class="kateOthers">&nbsp;value=</span><span class="kateString">"http://"</span>&nbsp;<b>/&gt;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;button</b><span class="kateOthers">&nbsp;type=</span><span class="kateString">"submit"</span><b>&gt;</b>Sign&nbsp;in&nbsp;with&nbsp;OpenID<b>&lt;/button&gt;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;/form&gt;</b>
+</pre>
+HTML
+    open( F, ">t2.tmp.out" );
+    print F $$got;
+    close F;
+    is( $$got, $expected, $test );
+
+}
+
+{
+    $test = 'More Complex Perl';
+    my $content = <<PERL;
+<pre lang="Perl">
+    sub login : Local {
+      my ( \$self, \$c ) = @_;
+
+      # eval necessary because LWPx::ParanoidAgent
+      # croaks if invalid URL is specified
+      eval {
+        # Authenticate against OpenID to get user URL
+        if ( \$c->authenticate({}, 'openid' ) ) {
+          # ...
+        else {
+          # ...
+        }
+      };
+
+      if (\$@) {
+        \$c->log->error("Failure during login: " . \$@);
+        \$c->flash->{'error_msg'}='Failure during login: ' . \$@;
+        \$c->stash->{'template'}='login.tt';
+      }
+    }
+</pre>
+PERL
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    my $wanted = <<'PERL';
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>sub&nbsp;</b><span class="kateFunction">login</span>&nbsp;:&nbsp;<b>Local</b>&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>my</b>&nbsp;(&nbsp;<span class="kateDataType">$self</span>,&nbsp;<span class="kateDataType">$c</span>&nbsp;)&nbsp;=&nbsp;;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;eval&nbsp;necessary&nbsp;because&nbsp;LWPx::ParanoidAgent</i></span><span class="kateComment"><i>
+</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;croaks&nbsp;if&nbsp;invalid&nbsp;URL&nbsp;is&nbsp;specified</i></span><span class="kateComment"><i>
+</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateFunction">eval</span>&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;Authenticate&nbsp;against&nbsp;OpenID&nbsp;to&nbsp;get&nbsp;user&nbsp;URL</i></span><span class="kateComment"><i>
+</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b>&nbsp;(&nbsp;<span class="kateDataType">$c</span>-&gt;<span class="kateDataType">authenticate</span>({},&nbsp;<span class="kateOperator">'</span><span class="kateString">openid</span><span class="kateOperator">'</span>&nbsp;)&nbsp;)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;...</i></span><span class="kateComment"><i>
+</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else</b>&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateComment"><i>#&nbsp;...</i></span><span class="kateComment"><i>
+</i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b>&nbsp;(<span class="kateVariable"><b>$@</b></span>)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">$c</span>-&gt;<span class="kateDataType">log</span>-&gt;<span class="kateDataType">error</span>(<span class="kateOperator">"</span><span class="kateString">Failure&nbsp;during&nbsp;login:&nbsp;</span><span class="kateOperator">"</span>&nbsp;.&nbsp;<span class="kateVariable"><b>$@</b></span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">$c</span>-&gt;<span class="kateDataType">flash</span>-&gt;{<span class="kateOperator">'</span><span class="kateString">error_msg</span><span class="kateOperator">'</span>}=<span class="kateOperator">'</span><span class="kateString">Failure&nbsp;during&nbsp;login:&nbsp;</span><span class="kateOperator">'</span>&nbsp;.&nbsp;<span class="kateVariable"><b>$@</b></span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kateDataType">$c</span>-&gt;<span class="kateDataType">stash</span>-&gt;{<span class="kateOperator">'</span><span class="kateString">template</span><span class="kateOperator">'</span>}=<span class="kateOperator">'</span><span class="kateString">login.tt</span><span class="kateOperator">'</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+</pre>
+PERL
+    is( $content, $wanted, $test );
+        open( F, ">t.complex-perl.tmp.out" );
+    print F $$got;
+    close F;
+}

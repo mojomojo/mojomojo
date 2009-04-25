@@ -3,7 +3,7 @@ package MojoMojo::Formatter::Include;
 use base qw/MojoMojo::Formatter/;
 
 eval "use LWP::Simple;use URI::Fetch;";
-my $eval_res=$@;
+my $eval_res = $@;
 sub module_loaded { $eval_res ? 0 : 1 }
 
 =head1 NAME
@@ -12,7 +12,7 @@ MojoMojo::Formatter::Include - Include files in your content.
 
 =head1 DESCRIPTION
 
-Include files verbatim in your content, by writing =<url>.
+Include files verbatim in your content, by writing {{<url>}}.
 
 =head1 METHODS
 

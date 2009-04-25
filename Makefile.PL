@@ -20,7 +20,7 @@ requires(
     'Catalyst::Plugin::Email'                      => 0,
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::Plugin::Session::State::Cookie'     => 0,
-    'Catalyst::Plugin::Session::Store::File'       => 0,
+    'Catalyst::Plugin::Session::Store::File'       => '0.15',
     'Catalyst::Plugin::Setenv'                     => 0,
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::SubRequest'                 => '0.09',
@@ -53,7 +53,8 @@ requires(
     'Image::Math::Constrain'                       => 0,
     'IO::Scalar'                                   => 0,
     'IO::File'                                     => '1.14',
-    'KinoSearch'                                   => 0,
+    'IO::All'                                      => 0,
+    'KinoSearch'                                   => '0.165',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
     'parent'                                       => 0,
@@ -66,6 +67,7 @@ requires(
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
     'Term::Prompt'                                 => 0,
+    'Locale::PO'                                   => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
@@ -78,6 +80,10 @@ feature 'POD formatter', 'Pod::Simple::HTML' => '3.01';
 feature 'Syntax Highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
 feature 'Transclusion support','LWP::Simple' => 0,
         'URI::Fetch'                         => 0;
+feature 'Amazon boxes', 'Net::Amazon' => 0;
+feature 'RSS Formatter', 'XML::Feed';
+feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
+
 
 
 
