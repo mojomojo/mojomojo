@@ -22,7 +22,6 @@ requires(
     'Catalyst::Plugin::Session::Store::File'       => '0.15',
     'Catalyst::Plugin::Setenv'                     => 0,
     'Catalyst::Plugin::Static::Simple'             => '0.07',
-    'Catalyst::Plugin::SubRequest'                 => '0.09',
     'Catalyst::Plugin::Unicode'                    => '0.8',
     'Catalyst::View::TT'                           => '0.23',
     'Catalyst::View::JSON'                         => 0,
