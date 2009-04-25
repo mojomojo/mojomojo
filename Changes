@@ -38,7 +38,7 @@
 0.999027 2009-01-30 23:17:00
         - Fixed broken authors (users) pager links.
         - Added "Split Edit" for side-by-side view/edit.
-o        - Switched from Cache::Store::Memory to Cache::FastMmap
+        - Switched from Cache::Store::Memory to Cache::FastMmap
         - Change search results by link to link to ROOT/$author instead of author at page level.
         - Show bread crumb path on search results, linking the terminal node.
         - List one link for each page by an author via .users (instead of all revisions).
