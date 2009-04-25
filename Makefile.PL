@@ -54,7 +54,7 @@ requires(
     'IO::Scalar'                                   => 0,
     'IO::File'                                     => '1.14',
     'IO::All'                                      => 0,
-    'KinoSearch'                                   => 0,
+    'KinoSearch'                                   => '0.165',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
     'parent'                                       => 0,
