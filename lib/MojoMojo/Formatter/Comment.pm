@@ -39,7 +39,7 @@ sub format_content {
 
 =item show_comments
 
-Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
+Forwards to L<MojoMojo::Controller::Comment>.
 
 =cut
 
