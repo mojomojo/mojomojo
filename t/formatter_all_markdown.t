@@ -200,6 +200,7 @@ HTML
 
 
 TODO: {
+    local $TODO = "We'd like this test to pass, but it won't until Text::Markdown passes it.";
     #----------------------------------------------------------------------------
     $test = 'Markdown should not parse block-level markdown in <pre> tags';
     #----------------------------------------------------------------------------

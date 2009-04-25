@@ -53,7 +53,8 @@ requires(
     'Image::Math::Constrain'                       => 0,
     'IO::Scalar'                                   => 0,
     'IO::File'                                     => '1.14',
-    'KinoSearch'                                   => 0,
+    'IO::All'                                      => 0,
+    'KinoSearch'                                   => '0.165',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
     'parent'                                       => 0,
@@ -66,6 +67,7 @@ requires(
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
     'Term::Prompt'                                 => 0,
+    'Locale::PO'                                   => 0,
 );
 
 feature 'Automatic deployment', 'SQL::Translator';
