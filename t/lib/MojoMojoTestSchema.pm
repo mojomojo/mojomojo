@@ -88,7 +88,7 @@ sub init_schema {
                 }
            }
         },
-        email => ['Test'],
+        'View::Email' => { sender => { mailer => 'Test' } },
     };
     YAML::DumpFile('t/var/mojomojo.yml',$config);
 

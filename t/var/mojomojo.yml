@@ -2,6 +2,9 @@
 Model::DBIC:
   connect_info:
     - dbi:SQLite:t/var/mojomojo.db
+View::Email:
+  sender:
+    mailer: Test
 authentication:
   default_realm: members
   realms:
@@ -15,6 +18,4 @@ authentication:
         class: DBIx::Class
         user_class: DBIC::Person
   use_session: 1
-email:
-  - Test
 name: MojoMojo Test Suite
