@@ -20,7 +20,7 @@ requires(
     'Catalyst::Plugin::Email'                      => 0,
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::Plugin::Session::State::Cookie'     => 0,
-    'Catalyst::Plugin::Session::Store::File'       => 0,
+    'Catalyst::Plugin::Session::Store::File'       => '0.15',
     'Catalyst::Plugin::Setenv'                     => 0,
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::SubRequest'                 => '0.09',
@@ -78,6 +78,10 @@ feature 'POD formatter', 'Pod::Simple::HTML' => '3.01';
 feature 'Syntax Highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
 feature 'Transclusion support','LWP::Simple' => 0,
         'URI::Fetch'                         => 0;
+feature 'Amazon boxes', 'Net::Amazon' => 0;
+feature 'RSS Formatter', 'XML::Feed';
+feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
+
 
 
 
