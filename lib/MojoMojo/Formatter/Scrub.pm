@@ -28,19 +28,24 @@ ran plugins to not output unsafe HTML.
 
 sub format_content_order { 7 }
 
-my @allow = qw[ p img em br hr b a div pre code span];
+my @allow = qw[ p img em strong br hr b a div pre code span
+  table tr th td thead tbody tfoot caption colgroup col
+  h1 h2 h3 h4 h5 h6 ul ol li dl dt dd
+  ];
 
 my @rules = (
     script => 0,
-    div    =>  {
+    div    => {
+        class => 1,
+        style => 1,
+
+        #   '*' => 1,  # This would allow any attribute, beware.
+    },
+    span => {
         class => 1,
         style => 1,
     },
-    span    => {
-        class => 1,
-        style => 1,
-    },
-    img    => {
+    img => {
         class => 1,
         src   => qr{^(?!http://)}i,    # only relative image links allowed
         alt   => 1,                    # alt attribute allowed
@@ -49,14 +54,14 @@ my @rules = (
 );
 
 my @default = (
-    0 =>                             # default rule, deny all tags
-        {
-        '*'           => 1,                                 # default rule, allow all attributes
-        'href'        => qr{^(?!(?:java)?script)}i,
-        'src'         => qr{^(?!(?:java)?script)}i,
-        'cite'        => '(?i-xsm:^(?!(?:java)?script))',
-        'language'    => 0,
-        'name'        => 1,                                 # could be sneaky, but hey ;
+    0 =>                               # default rule, deny all tags
+      {
+        '*'    => 1,                        # default rule, allow all attributes
+        'href' => qr{^(?!(?:java)?script)}i,
+        'src'  => qr{^(?!(?:java)?script)}i,
+        'cite'     => '(?i-xsm:^(?!(?:java)?script))',
+        'language' => 0,
+        'name'        => 1,                 # could be sneaky, but hey ;
         'class'       => 1,
         'onblur'      => 0,
         'onchange'    => 0,
@@ -79,7 +84,7 @@ my @default = (
         'onunload'    => 0,
         'src'         => 0,
         'type'        => 0,
-        }
+      }
 );
 
 my $scrubber = HTML::Scrubber->new();
@@ -98,7 +103,7 @@ context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
     $$content = $scrubber->scrub($$content);
-    return 1;
+    return;
 }
 
 =back

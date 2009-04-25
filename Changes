@@ -1,3 +1,6 @@
+        - Test Textile some more, basic scrub html test, TODO Markdown tests.
+        - Allow html table, definition and list tags through HTML::Srubber.
+        - additional theme colors: grey, purple, pink
         - Add Amazon, RSS, Emote formatter to main distribution.
         - many new tests, including live tests of chained formatters (dandv)
         - main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
