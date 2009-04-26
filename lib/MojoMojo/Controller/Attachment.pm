@@ -66,7 +66,7 @@ sub check_file : Private  {
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
         $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
-            unless $c->stash->{template} eq 'message.tt';
+            unless defined $c->stash->{template} && $c->stash->{template} eq 'message.tt';
     }
 }
 

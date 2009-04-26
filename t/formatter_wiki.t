@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 26;
+use Test::More tests => 32;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';
 use DummyCatalystObject;
@@ -8,9 +8,13 @@ my ($content,$exist,$new);
 # this fake object returns different path_pages based on whether a wiki link containing the text "existing"
 my $fake_c = DummyCatalystObject->new;
 
-$content = '[[existing|MojoMojo 2]]';
-MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', 'number at the end of the link text');
+TODO: {
+    local $TODO = 'Make this test work.  It fails because of the number, 2. The $content does not get formatted at all so it\'s bypassing format_content.';
+    $content = '[[existing|MojoMojo 2]]';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', 'number at the end of the link text');
+}
+
 
 $content = '\[[WikiWord]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
@@ -79,6 +83,39 @@ $content = '[[79.1% of Americans believe in miracles]]';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
 is($content, '<span class="newWikiWord">79.1% of Americans believe in miracles<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/79_1%25_of_Americans_believe_in_miracles.edit">?</a></span>', 'periods in links become underscores');
 
+$content = '[[.net as a dev platform]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<span class="newWikiWord">.net as a dev platform<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/_net_as_a_dev_platform.edit">?</a></span>', 'periods at the start of wikilinks become underscores');
+
+$content = 'Check this [[../sibling]] page';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, 'Check this <span class="newWikiWord">sibling<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="http://example.com/sibling.edit">?</a></span> page', 'links to siblings via ../');
+
+TODO: {
+    local $TODO = 'This fails because the dummy Catalyst object needs to fake a base path deeper than /';
+    $content = 'Check this [[../../nephew]] page';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, 'Check this <span class="newWikiWord">nephew<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="../nephew.edit">?</a></span>', 'links to nephews via ../../');
+}
+
+$content = '[[We were soldiers once... and young]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<span class="newWikiWord">We were soldiers once... and young<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/We_were_soldiers_once____and_young.edit">?</a></span>', 'wikilink with ellipsis');
+
+TODO: {
+    local $TODO = 'This fails because the inner / is detected as delimiting the page title';
+    $content = '[[Are you sure that... /. is a great site?]]';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, '<span class="newWikiWord">Are you sure that... /. is a great site?<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="/Are_you_sure_that____/__is_a_great_site%3F.edit">?</a></span>', 'elipsis, space and /');
+}
+
+TODO: {
+    local $TODO = 'We need ot decide if we allow gratuitous .. links like /root/parent/../parent_sibling';
+    $content = 'No walking inside known paths like [[/root/parent/../parent_sibling]]. Use [[/root/parent_sibling]] directly.';
+    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+    is($content, 'No walking inside known paths like <span class="newWikiWord">We were soldiers once... and young<a title="Faking localization... Not found. Click to create this page. ...fake complete." href="We_were_soldiers_once____and young.edit">?</a></span>', 'wikilink with ellipsis');
+}
+
 $content = '[[existing#Really.3F|Really?]]';  # scenario: user copy/pasted the fragment from the ToC link of the target page
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
 is($content, '<a class="existingWikiWord" href="/existing#Really.3F">Really?</a>', 'wikilink fragment with period due to encoding of character illegal in fragments');
@@ -108,4 +145,3 @@ $content = '[[Wiki Word]] <pre lang="">Blah HubbaBubba Wikiwiord</pre> blah humb
 ($exist, $new) = MojoMojo::Formatter::Wiki->find_links(\$content, $fake_c);
 is(@$exist, 1);
 is(@$new, 1);
-

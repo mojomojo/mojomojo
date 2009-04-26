@@ -12,11 +12,13 @@ my $debug=0;
 
 =head1 NAME
 
-MojoMojo::Formatter::File - format file as xhtml
+MojoMojo::Formatter::File - format file as XHTML
 
 =head1 DESCRIPTION
 
-This formatter will format the content file as xhtml
+This formatter will format the file argument as XHTML. Usage:
+
+    =file filename
 
 
 =head1 METHODS
@@ -25,7 +27,7 @@ This formatter will format the content file as xhtml
 
 =item format_content_order
 
-Format order can be 1-99. The Pod formatter runs on 10
+Format order can be 1-99. The File formatter runs on 92.
 
 =cut
 
@@ -33,7 +35,7 @@ sub format_content_order { 92 }
 
 =item format_content
 
-calls the formatter. Takes a ref to the content as well as the
+Calls the formatter. Takes a ref to the content as well as the
 context object.
 
 =cut
@@ -56,11 +58,11 @@ sub format_content {
       my $file=$2; # Attachment
 
       if ( -f $file ){
-	# format with plugin
-	$$content .= $self->format($plugin,$file);
+      # format with plugin
+          $$content .= $self->format($plugin,$file);
       }
       else {
-	$$content .= "Can not read '$file' !\n";
+          $$content .= "Can not read '$file' !\n";
       }
     }
     else{

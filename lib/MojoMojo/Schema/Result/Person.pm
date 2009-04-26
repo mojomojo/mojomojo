@@ -11,7 +11,7 @@ use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core HTML::FormFu/);
+    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",
@@ -58,6 +58,8 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint( login => [qw/login/], );
+__PACKAGE__->add_unique_constraint( email => [qw/email/], );
 __PACKAGE__->has_many( "entries",       "MojoMojo::Schema::Result::Entry",       { "foreign.author"  => "self.id" } );
 __PACKAGE__->has_many( "tags",          "MojoMojo::Schema::Result::Tag",         { "foreign.person"  => "self.id" } );
 __PACKAGE__->has_many( "comments",      "MojoMojo::Schema::Result::Comment",     { "foreign.poster"  => "self.id" } );
@@ -110,9 +112,11 @@ sub can_edit {
     my ( $self, $page ) = @_;
     return 0 unless $self->active;
 
-    # allow admins, and users editing their pages
+    # allow admins
     return 1 if $self->is_admin;
+    # allow edit unless users are restricted to home page
     return 1 unless MojoMojo->pref('restricted_user');
+    # allow users editing their pages
     my $link = $self->link;
     return 1 if $page =~ m|^$link\b|i;
     return 0;

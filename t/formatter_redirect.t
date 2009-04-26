@@ -8,12 +8,14 @@ use DummyCatalystObject;
 my ($content,$exist,$new,$fake_c);
 $fake_c = DummyCatalystObject->new;
 
-$content = "=redirect /foo";
+$content = "{{redirect /foo}}";
+$fake_c=DummyCatalystObject->new;
 MojoMojo::Formatter::Redirect->format_content(\$content, $fake_c, undef);
-is($fake_c->redirect, '/foo', "Redirect is set");
-is($content,"=redirect /foo", "Content is unchanged");
+is($fake_c->redirect, '/foo' ,"Redirect is set");
+is($content,"{{redirect /foo}}","Content is unchanged");
 
-$content = "=redirect /foo-bar-baz again";
+$fake_c=DummyCatalystObject->new;
+$content = "{{redirect /foo-bar-baz}}";
 MojoMojo::Formatter::Redirect->format_content(\$content, $fake_c, undef);
 is($fake_c->redirect, '/foo-bar-baz', "URL charset test");
-is($content,"=redirect /foo-bar-baz again", "Content is unchanged");
+is($content,"{{redirect /foo-bar-baz}}", "Content is unchanged");

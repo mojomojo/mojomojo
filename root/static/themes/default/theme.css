@@ -6,31 +6,36 @@ body {
     background: #7D7C7A repeat-x url(images/background.jpg);
     margin: 0;
     color: #626262;
-    font: 85% Arial, Helvetica, Geneva, sans-serif;
+    font-size: 0.9em;
+    font-family: Helvetica Neue,Arial, Helvetica, Geneva, sans-serif;
     text-align: center;
 }
 
-#container {
+.container {
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
 }
 
-#header {
+.maximized-container {
+    max-width: 99%;
+    width: 99%;
+}
 
+#header {
     height: auto;
     padding-bottom: 0.1em;
     margin: 0;
     margin-top: 10px;
-	background-color: #33455c;
-	    -moz-border-radius-topleft: 20px;
+    background-color: #33455c;
+    -moz-border-radius-topleft: 20px;
     -webkit-border-top-left-radius: 20px;
     -moz-border-radius-topright: 20px;
     -webkit-border-top-right-radius: 20px;
 }
 
 #header h1 {
-	background: url(images/mmlogo.png) no-repeat 15px 20px;
+    background: url(images/mmlogo.png) no-repeat 15px 20px;
     top: 14px;
     padding: 13px 0 10px 100px;
     color: #ffffff;
@@ -57,12 +62,6 @@ body {
     color: white;
     text-decoration: none;
 }
-#breadcrumbs .left{
-    float: left;
-}
-#breadcrumbs .right {
-    float: right;
-}
 #breadcrumbs a:hover {
     color: #ffffff;
     background-color: #33455c;
@@ -82,17 +81,25 @@ div#toplinks {
     min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
-    display: inline;
+    display: block;
+    float: left;
+    height: 1.5em;
+}
+div#toplinks ul li a, div#bottomnav ul li a, div#bottomnav ul li span.title {
+    text-decoration:none;
+    margin: 0px 0 0 5px;
+    padding: 1px 2px;
+}
+div#toplinks ul li a {
+    padding: 4px;
 }
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 2px 6px;
     color:#333;
-    text-decoration:none;
 }
-div#toplinks ul li a,  div#bottomnav ul li a {
-    padding: 3px 7px;
+div#toplinks a {
+    position: relative;
+    top: 4px;
 }
 div#pagenav {
     font-size: .9em;
@@ -124,6 +131,11 @@ div#pageoptions ul li {
 }
 div#pageoptions a {
     color: green;
+
+}
+div#pageoptions a.active {
+    color: #ceebb6;
+    background: green;
 }
 #categories {
     background: #ffffff;
@@ -162,7 +174,7 @@ div#pageoptions a {
 #content {
     overflow: hidden;
     background: #ffffff;
-    padding: 13px;
+    padding: 2em 13px;
     overflow: hidden;
 }
 
@@ -234,21 +246,17 @@ div#pageoptions a {
     color: #000000;
     margin: 0;
     font-weight: bold;
-    min-height: 1.8em;
+    height: 2.8em;
     font-size: 0.9em;
+    border-top: 1px solid #8899aa;
 }
 
 #bottomnav input {
     font-size: 1em;
 }
 
-#bottomnav ul {
-    display: inline;
-}
-
-#lang {
-    background: #ccc;
-    padding: 0.4em;
+li#site_settings {
+    clear: left;
 }
 
 .formdiv {
@@ -277,62 +285,20 @@ p {
     text-align: center;
 }
 
-
-/* ----- for HTML::TagCloud ------------*/
-#htmltagcloud {
-  text-align:  center; 
-  line-height: 1; 
+#powered {
+    border-top: 2px solid #33455C;
+    width: 100%;
+    margin: 0;
+    padding: 1em 0;
+    text-align: right;
 }
-span.tagcloud0 { font-size: 12px;}
-span.tagcloud0 a {text-decoration: none;}
-span.tagcloud1 { font-size: 13px;}
-span.tagcloud1 a {text-decoration: none;}
-span.tagcloud2 { font-size: 14px;}
-span.tagcloud2 a {text-decoration: none;}
-span.tagcloud3 { font-size: 15px;}
-span.tagcloud3 a {text-decoration: none;}
-span.tagcloud4 { font-size: 16px;}
-span.tagcloud4 a {text-decoration: none;}
-span.tagcloud5 { font-size: 17px;}
-span.tagcloud5 a {text-decoration: none;}
-span.tagcloud6 { font-size: 18px;}
-span.tagcloud6 a {text-decoration: none;}
-span.tagcloud7 { font-size: 19px;}
-span.tagcloud7 a {text-decoration: none;}
-span.tagcloud8 { font-size: 20px;}
-span.tagcloud8 a {text-decoration: none;}
-span.tagcloud9 { font-size: 21px;}
-span.tagcloud9 a {text-decoration: none;}
-span.tagcloud10 { font-size: 22px;}
-span.tagcloud10 a {text-decoration: none;}
-span.tagcloud11 { font-size: 23px;}
-span.tagcloud11 a {text-decoration: none;}
-span.tagcloud12 { font-size: 24px;}
-span.tagcloud12 a {text-decoration: none;}
-span.tagcloud13 { font-size: 25px;}
-span.tagcloud13 a {text-decoration: none;}
-span.tagcloud14 { font-size: 26px;}
-span.tagcloud14 a {text-decoration: none;}
-span.tagcloud15 { font-size: 27px;}
-span.tagcloud15 a {text-decoration: none;}
-span.tagcloud16 { font-size: 28px;}
-span.tagcloud16 a {text-decoration: none;}
-span.tagcloud17 { font-size: 29px;}
-span.tagcloud17 a {text-decoration: none;}
-span.tagcloud18 { font-size: 30px;}
-span.tagcloud18 a {text-decoration: none;}
-span.tagcloud19 { font-size: 31px;}
-span.tagcloud19 a {text-decoration: none;}
-span.tagcloud20 { font-size: 32px;}
-span.tagcloud20 a {text-decoration: none;}
-span.tagcloud21 { font-size: 33px;}
-span.tagcloud21 a {text-decoration: none;}
-span.tagcloud22 { font-size: 34px;}
-span.tagcloud22 a {text-decoration: none;}
-span.tagcloud23 { font-size: 35px;}
-span.tagcloud23 a {text-decoration: none;}
-span.tagcloud24 { font-size: 36px;}
-span.tagcloud24 a {text-decoration: none;}
 
+#content .syntax_help table {
+    width: 100%;
+}
+#content .syntax_help table th,
+#content .syntax_help table td {
+    padding: 0.2em;
+}
 
 /* @end */

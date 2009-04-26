@@ -8,7 +8,7 @@ MojoMojo::Formatter::IRCLog - format part of content as an IRC log
 
 =head1 DESCRIPTION
 
-This formatter will format content between two =irc blocks as 
+This formatter will format content between {{irc}} and {{end}} as 
 an IRC log
 
 =head1 METHODS
@@ -37,10 +37,12 @@ sub format_content {
 
     my @lines = split( /\n/, $$content );
     $$content = "";
+    my $start_re=$class->gen_re(qr/irc/);
+    my $end_re=$class->gen_re(qr/end/);
 
     foreach my $line (@lines) {
         if ($in_log) {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $end_re ) {
                 $in_log = 0;
                 if ($longline) {
                     $longline .= "</dd>";
@@ -64,7 +66,7 @@ sub format_content {
             }
         }
         else {
-            if ( $line =~ m/^=irc\s*$/ ) {
+            if ( $line =~ $start_re ) {
                 push @newlines, $line;
                 $in_log = 1;
             }
@@ -75,7 +77,7 @@ sub format_content {
     }
     foreach my $line (@newlines) {
         if ($in_log) {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $end_re ) {
                 $in_log = 0;
 
                 # end the dl and the section not handled by textile
@@ -90,7 +92,7 @@ sub format_content {
             }
         }
         else {
-            if ( $line =~ /^=irc/ ) {
+            if ( $line =~ $start_re ) {
                 $in_log = 1;
 
                 # start a definition list in a section not handled by

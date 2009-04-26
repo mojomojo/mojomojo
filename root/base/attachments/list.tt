@@ -1,7 +1,7 @@
 [% FOR attachment IN page.attachments %]
 <p class="attachment">
     <small>[%attachment.name%] ([%attachment.contenttype%]) |
-     [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
+    [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
        <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view')%]</a> |
        <a href="[%c.uri_for('attachment',attachment.id,'inline')%]">[%loc('inline view')%]</a> |
        <a href="[%c.uri_for('attachment',attachment.id,'download')%]">[%loc('download')%]</a> |

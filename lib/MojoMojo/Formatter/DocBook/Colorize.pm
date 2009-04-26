@@ -2,14 +2,14 @@ package MojoMojo::Formatter::DocBook::Colorize;
 
 #--------------------------------------------------------------------#
 # Transform XML Docbook in XHTML (colorized programlisting|screen )
-# 'lang' is lost in 'transformation xslt' step then: 
+# 'lang' is lost in 'transformation xslt' step then:
 # mark lang -> transformation xslt -> colorize && unmark lang
 #--------------------------------------------------------------------#
 
 use strict;
-use Syntax::Highlight::Engine::Kate;
-use Syntax::Highlight::Engine::Kate::All;
-
+eval "use Syntax::Highlight::Engine::Kate;";
+my $eval_res = $@;
+sub module_loaded { $eval_res ? 0 : 1 }
 
 my $hl_node="programlisting|screen";
 my $hl_attrib="lang";
@@ -131,7 +131,7 @@ sub end_element{
     }
 
     if ( ! $lang ){ $doc =~ s/\n$// }
-    
+
     $doc .= "</$name>";
 }
 
@@ -168,6 +168,7 @@ sub ColorizeCode{
     }
 
     return $code if ( ! $lang );
+    return $code unless __PACKAGE__->module_loaded;
 
 
     my $hl = Syntax::Highlight::Engine::Kate->new(
@@ -258,5 +259,3 @@ Daniel Brosseau <dab@catapulse.org>
 This module is licensed under the same terms as Perl itself.
 
 =cut
-
-

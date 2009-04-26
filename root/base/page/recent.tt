@@ -7,6 +7,7 @@
 %]
 
 [% WRAPPER page/wrapper.tt title = title %]
+<div id="content">
 
 [% IF tags.count %]
 <div id="categories">
@@ -15,7 +16,7 @@
         [% IF tag.tag == activetag %]
         <strong>[% tag.tag %]</strong>
         [% ELSE %]
-        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %]) 
+        <a href="[% c.uri_for('recent' tag.tag) %]">[% tag.tag %]</a> ([% tag.refcount %])
         [% END %]
     [% END %]
 </div>
@@ -46,17 +47,21 @@
     [% END %]
         <tr class="item">
             <td>
-                <a href="[% c.uri_for( '/', page.path ) %]">[% page.name_orig %]</a>
-                <div class="diff" style="display:none;"></div>
+                <a href="[% c.uri_for( page.path ) %]">[% page.name_orig %]</a>
+                <div class="diff display-none"></div>
             </td>
-            <td>[% c.wikiword( page.content.creator.link, base ) %]</td>
+            <td>
+            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.login %]</a>
+             </td>
             <td>
                 [% page.content.created.hms(":") %]
             </td>
-            <td><a href="[% c.uri_for('jsrpc/diff', page.id , undef, undef, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
+            <td><a href="[% c.uri_for('jsrpc/diff', page.id , 0, 0, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
         </tr>
   [% END %]
 [% END %]
 </tbody>
 </table>
-[% END %]
+
+</div>
+[% END # End WRAPPER %]

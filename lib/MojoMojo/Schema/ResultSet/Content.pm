@@ -22,7 +22,6 @@ sub format_content {
 
     # FIXME: This thing should use accept-context and stop fucking around with $c everywhere
     my ( $self, $c, $content, $page ) = @_;
-    $c ||= MojoMojo->instance();
     MojoMojo->call_plugins( "format_content", \$content, $c, $page )
         if ($content);
     return $content;

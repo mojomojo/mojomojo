@@ -1,96 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[% lang %]">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[% lang %]" lang="[% lang %]">
+
 <head>
-<script type="text/javascript" src="[%c.uri_for_static('js/jquery.js')%]"></script>
-<script type="text/javascript" src="[%c.uri_for_static('js/jquery.form.js')%]"></script>
-<script type="text/javascript" src="[%c.uri_for_static('js/jquery.livequery.js')%]"></script>
-<script type="text/javascript" src="[%c.uri_for_static('js/jquery.inplace.js')%]"></script>
-<script type="text/javascript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
-<script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
-[% IF (c.action.reverse == 'pageadmin/edit') %]
-<script type="text/javascript" src="[%c.uri_for_static('js/edit.js')%]"></script>
-[% END %]
-<script type="text/javascript">
-jQuery.uri_for = function(path) { return '[%c.req.base%]' + path }
-jQuery.uri_for_img = function(path) { return '[%c.uri_for('/static/images',c.config.platform)%]/' + path }
-</script>
-  <script type="text/javascript">
-   $(document).ready(function() {
-     $('#maximize').mouseover(function () {
-       toggle_maximize_img($(this));
-     });
-     $('#maximize').mouseout(function () {
-       toggle_maximize_img($(this));
-     });
-   });
-
-   function toggle_maximize_img (img) {
-     if (img.attr("src").match('maximize_width_1.png')){
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_2.png') %]');
-     } else {
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_1.png') %]');
-     }
-   }
-
-   function toggle_width() {
-     var width;
-     // first click on icon
-     if ( typeof toggle_width.width == 'undefined' ) {
-       // if maximized, get width from session variable
-       if ( 1 == "[% c.session.maximize_width %]" ){
-         toggle_width.width="[% c.session.container_default_width %]";
-       } else {
-         // get value from css
-         toggle_width.width=$('#container').css('max-width');
-         // store width
-         $(this).load('[%c.uri_for('json/container_set_default_width/')%]'+toggle_width.width);
-       }
-     }
-     // isn't maximized
-     if ( $('#container').css('max-width')==toggle_width.width){
-       $('#container').css('max-width','99%');
-       // change icon
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_1.png') %]');
-       // set maximize
-       $(this).load('[%c.uri_for('json/container_maximize_width/')%]'+toggle_width.width);
-     } else {
-       // toggle - restore default width
-       $('#container').css('max-width',toggle_width.width);
-       // change icon
-       $('#maximize').attr("src", '[% c.uri_for_static('gfx/maximize_width_2.png') %]');
-       // unset maximize
-       $(this).load('[%c.uri_for('json/container_maximize_width/')%]');
-     }
-   }
-  </script>
-
-  <title>
-    [% IF title; title %]
-    [% ELSIF page %] [% c.expand_wikilink(page.name_orig) %]  [% END %]
-            - [% c.pref('name') %]
-  </title>
-  [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="powered_by" content="MojoMojo [%c.VERSION%]" />
-  <style type="text/css">
-    [% my_theme_dir = (c.pref('theme') ) %]
-    [% theme_path = 'themes/' _ my_theme_dir _ '/theme.css' %]
-    @import "[% c.uri_for_static('mojomojo.css') %]";
-    @import "[% c.uri_for_static(theme_path) %]";
-    @import "[% c.uri_for_static('pod.css') %]";
-  </style>
-  <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
-  <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
-  <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
-  <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
-  <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
+    <title>
+        [% IF title; title %]
+        [% ELSIF page %] [% c.expand_wikilink(page.name_orig) %]  [% END %]
+                - [% c.pref('name') %]
+    </title>
+    [% UNLESS index_page %]<meta name="robots" content="noindex" />[% END %]
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
+    <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
+    <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
+    <style type="text/css">
+        [% my_theme_dir = (c.pref('theme') ) %]
+        [% theme_path = 'themes/' _ my_theme_dir _ '/theme.css' %]
+        @import "[% c.uri_for_static('mojomojo.css') %]";
+        @import "[% c.uri_for_static(theme_path) %]";
+        @import "[% c.uri_for_static('pod.css') %]";
+    </style>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.form.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.livequery.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.inplace.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.cookies.2.0.1.min.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.queue.js')%]"></script>
+    [% IF (c.action.reverse == 'pageadmin/edit') %]
+    <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/edit.js')%]"></script>
+    [% END %]
+    <script type="text/javascript">
+        jQuery.uri_for = function(path) { return '[%c.req.base%]' + path }
+        jQuery.uri_for_img = function(path) { return '[%c.uri_for('/.static/images',c.config.platform)%]/' + path }
+    </script>
 </head>
 
 <body id="page">
-[% IF c.session.maximize_width %]
-  <div id="container" style="max-width:99%;">
-[% ELSE %]
-  <div id="container">
-[% END %]
-    [% template.title %]
+<div id="container" class="container[% c.session.maximize_width ? ' maximized-container' : '' %]">
+[% PROCESS top.tt %]

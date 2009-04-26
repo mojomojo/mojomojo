@@ -3,7 +3,6 @@ package MojoMojo::Formatter::Scrub;
 use base qw/MojoMojo::Formatter/;
 
 use HTML::Scrubber;
-use XML::Clean;
 
 =head1 NAME
 
@@ -11,7 +10,7 @@ MojoMojo::Formatter::Scrub - Scrub user HTML
 1
 =head1 DESCRIPTION
 
-This formatter makes sure only a safe range of tags are 
+This formatter makes sure only a safe range of tags are
 allowed, using L<HTML::Scrubber>; It also makes sure all tags
 are balaced, using L<XML::Clean>.
 
@@ -21,32 +20,48 @@ are balaced, using L<XML::Clean>.
 
 =item format_content_order
 
-Format order can be 1-99. The Comment formatter runs on 1
+Format order can be 1-99. The Scrub formatter runs on 7
+in order to catch direct user input, but trusts all subsequently
+ran plugins to not output unsafe HTML.
 
 =cut
 
 sub format_content_order { 7 }
 
-my @allow = qw[ p img em br hr b a div pre code];
+my @allow = qw[ p img em strong br hr b a div pre code span
+  table tr th td thead tbody tfoot caption colgroup col
+  h1 h2 h3 h4 h5 h6 ul ol li dl dt dd
+  ];
 
 my @rules = (
     script => 0,
-    img    => {
-        src => qr{^(?!http://)}i,    # only relative image links allowed
-        alt => 1,                    # alt attribute allowed
-        '*' => 0,                    # deny all other attributes
+    div    => {
+        class => 1,
+        style => 1,
+
+        #   '*' => 1,  # This would allow any attribute, beware.
+    },
+    span => {
+        class => 1,
+        style => 1,
+    },
+    img => {
+        class => 1,
+        src   => qr{^(?!http://)}i,    # only relative image links allowed
+        alt   => 1,                    # alt attribute allowed
+        '*'   => 0,                    # deny all other attributes
     },
 );
 
 my @default = (
-    0 =>                             # default rule, deny all tags
-        {
-        '*'           => 1,                                 # default rule, allow all attributes
-        'href'        => qr{^(?!(?:java)?script)}i,
-        'src'         => qr{^(?!(?:java)?script)}i,
-        'cite'        => '(?i-xsm:^(?!(?:java)?script))',
-        'language'    => 0,
-        'name'        => 1,                                 # could be sneaky, but hey ;
+    0 =>                               # default rule, deny all tags
+      {
+        '*'    => 1,                        # default rule, allow all attributes
+        'href' => qr{^(?!(?:java)?script)}i,
+        'src'  => qr{^(?!(?:java)?script)}i,
+        'cite'     => '(?i-xsm:^(?!(?:java)?script))',
+        'language' => 0,
+        'name'        => 1,                 # could be sneaky, but hey ;
         'class'       => 1,
         'onblur'      => 0,
         'onchange'    => 0,
@@ -69,7 +84,7 @@ my @default = (
         'onunload'    => 0,
         'src'         => 0,
         'type'        => 0,
-        }
+      }
 );
 
 my $scrubber = HTML::Scrubber->new();
@@ -86,14 +101,9 @@ context object.
 =cut
 
 sub format_content {
-    return 0;
     my ( $class, $content, $c ) = @_;
     $$content = $scrubber->scrub($$content);
-    return 1;
-
-    #FIXME: XML::Clean doubles the first word in previews
-    # but makes sure all divs are matched.
-    $$content = XML::Clean::clean($$content);
+    return;
 }
 
 =back

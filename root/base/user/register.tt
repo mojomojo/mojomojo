@@ -1,16 +1,9 @@
-[% PROCESS header.tt %]
- <div id="header"><h1>[% loc('New User Registration') %]</h1></div>
-[%PROCESS breadcrumbs.tt%]
-        <div id="content">
-
-[% form %]
-
-<p class="end"><span id="logintext">[%message%]</span><br/>
-        </div>
-        <div id="bottomnav">&nbsp;
-   
-       
-<script language="JavaScript">
-$('register_login').focus();
-</script>
-[% PROCESS footer.tt %]
+[% WRAPPER page/wrapper.tt simple_footer=1 simple_header=1 title=loc('New User Registration') %]
+<div id="content">
+    [% IF account_taken %]
+        <span style="color:red; font-size: 115%;"> [% account_taken %]</span>
+    [% END %]
+    [% form %]
+    <div id="logintext">[%message%]</div>
+</div>
+[% END %]

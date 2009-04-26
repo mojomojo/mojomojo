@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MojoMojo 0.999026\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2009-03-02 13:55+0100\n"
+"PO-Revision-Date: 2009-04-21 15:56+0100\n"
 "Last-Translator: Marcus Ramberg <marcus@nordaaker.com>\n"
 "Language-Team: Norway <marcus@nordaaker.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,31 +16,24 @@ msgstr ""
 "X-Poedit-Language: Norwegian Bokmal\n"
 "X-Poedit-Country: NORWAY\n"
 
-#: root/base/user/profile.tt:11
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: root/base/user/profile.tt:16
-#: root/base/user/profile.tt:19
-#: root/base/user/profile.tt:22
-#: root/base/user/profile.tt:9
 msgid "(Unknown)"
 msgstr "(Ukjent)"
 
-#: root/base/edithelp.tt:60
+#: root/base/edithelp.tt:69
 msgid "**bold** or __bold__"
 msgstr "**uthevet** eller __uthevet__"
 
-#: root/base/edithelp.tt:59
+#: root/base/edithelp.tt:65
 msgid "*italic* or _italic_"
 msgstr "*kursiv* eller _kursiv_"
 
-#: root/base/edithelp.tt:154
+#: root/base/edithelp.tt:196
 msgid "3 or more dashes or asterisks"
 msgstr "3 eller flere bindestreker eller stjerner"
 
-#: root/base/toolbar.tt:54
-#: root/base/toolbar.tt:8
 msgid ""
 "<xml> and such.\\n"
 "or pure text."
@@ -48,18 +41,18 @@ msgstr ""
 "<xml> og lignende\\n"
 "eller ren tekst."
 
+#: root/base/toolbar.tt:10
+msgid "=head1 Header"
+msgstr "=head1 Overskrift"
+
 #: root/base/message.tt:2
 msgid "A message from our sponsors..."
 msgstr "En melding fra våre sponsorer..."
 
-#: root/base/header.tt:21
-#: root/base/header.tt:23
-#: root/base/page/atom.tt:3
-#: root/base/page/atom.tt:6
 msgid "A poorly configured MojoMojo Installation"
 msgstr "En dårlig konfigurert MojoMojo-installasjon"
 
-#: root/base/page/recent.tt:41
+#: root/base/page/recent.tt:42
 msgid "Actions"
 msgstr "Handlinger"
 
@@ -73,7 +66,7 @@ msgid "Active version"
 msgstr "Aktiv versjon"
 
 #: root/base/admin/role_form.tt:9
-#: root/forms/admin/role_form.yml:16
+#: root/forms/admin/role_form.yml:13
 msgid "Active?"
 msgstr "Aktiv?"
 
@@ -85,15 +78,23 @@ msgstr "Legg til"
 msgid "Add tag"
 msgstr "Legg til nøkkelord"
 
-#: root/base/page/view.tt:25
+#: root/base/admin/user.tt:37
+msgid "Add user"
+msgstr "Legg til bruker"
+
+#: root/base/page/view.tt:35
 msgid "Added"
 msgstr "Lagt til"
 
-#: root/base/user/profile.tt:15
+#: lib/MojoMojo/Schema.pm:65
+msgid "Admins"
+msgstr "Adminer"
+
+#: root/base/user/profile.tt:19
 msgid "Age"
 msgstr "Alder"
 
-#: root/base/page/list.tt:16
+#: root/base/page/list.tt:17
 #: root/base/tag/list.tt:5
 msgid "All Pages"
 msgstr "All sider"
@@ -104,12 +105,12 @@ msgid "All Pages in x"
 msgstr "Alle sider i %1"
 
 #. (page.name)
-#: root/base/page/list.tt:17
+#: root/base/page/list.tt:18
 msgid "All pages in x listed alphabetically"
 msgstr "Alle sider i %1 alfabetisk sortert"
 
 #. (activetag)
-#: root/base/tag/list.tt:21
+#: root/base/tag/list.tt:22
 msgid "All pages tagged with x listed alphabetically"
 msgstr "Alle sider med nøkkelordet %1 alfabetisk sortert"
 
@@ -126,7 +127,6 @@ msgstr "Alle nøkkelord i bruk under denne siden"
 msgid "All tags on photos"
 msgstr "Alle nøkkelord i bruk på bilder"
 
-#: root/base/edithelp.tt:26
 msgid "Allow comments on this page."
 msgstr "Tillat kommentarer på denne siden"
 
@@ -135,43 +135,59 @@ msgstr "Tillat kommentarer på denne siden"
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetisk sortert liste over sider"
 
-#: root/base/toolbar.tt:2
+#: root/base/toolbar.tt:64
 msgid "Also try h2,h3 and so on"
 msgstr "Prøv også h2, h3 osv."
 
-#: lib/MojoMojo/Controller/User.pm:261
+#: lib/MojoMojo/Controller/User.pm:267
 msgid "An error occourred. Sorry."
 msgstr "Unnskyld. En feil har oppstått."
 
-#: root/base/edithelp.tt:131
+#: root/base/edithelp.tt:163
 msgid "An h2 tag in a blockquote"
 msgstr "en h2 overskrift i en sitatblokk"
 
-#: root/base/edithelp.tt:134
+#: root/base/edithelp.tt:166
 msgid "An unordered list"
 msgstr "En usortert liste"
 
-#: root/base/edithelp.tt:133
+#: root/base/edithelp.tt:165
 msgid "And additional Markdown formatting"
 msgstr "Og ytterligere Markdown-formattering"
 
-#: root/base/edithelp.tt:31
+#: root/base/edithelp.tt:36
 msgid "And others."
 msgstr "Og andre."
+
+#: lib/MojoMojo/Schema.pm:67
+msgid "Anonymous"
+msgstr "Anonym"
 
 #: lib/MojoMojo/Schema.pm:54
 msgid "Anonymous Coward"
 msgstr "Anonym Feiging"
 
-#: root/forms/admin/settings.yml:20
+#: lib/MojoMojo/Controller/PageAdmin.pm:96
+msgid "Anonymous Edit disabled"
+msgstr "Anonym redigering er skrudd av"
+
+#: root/forms/admin/settings.yml:21
 msgid "Anonymous User (blank to disable)"
 msgstr "Anonym bruker (tomt for å skru av)"
+
+#: root/base/edithelp.tt:4
+msgid "Any phrase surrounded by double brackets or parentheses is a wiki word (camel-case wiki words are not supported for good reasons, one being that some languages don't have the concept of case)."
+msgstr "Alle fraser med doble firkantklammer rundt eller paranteser regnes som wiki ord (WikiOrd er ikke støttet for flere grunnen, blant annet at noen språk ikke har konseptet kapitaler)"
 
 #: root/base/gallery/photo_info.tt:8
 msgid "Aperture"
 msgstr "Blender"
 
-#: lib/MojoMojo/Controller/Attachment.pm:107
+#: root/forms/admin/settings.yml:92
+msgid "Attachment allowed by default"
+msgstr "Vedlegg tillatt som standard"
+
+#: lib/MojoMojo/Controller/Attachment.pm:112
 msgid "Attachment not found."
 msgstr "Vedlegg kunne ikke finnes"
 
@@ -196,65 +212,73 @@ msgstr "Tilbake i tid"
 msgid "Back to the page"
 msgstr "Tilbake til siden"
 
-#: root/base/page/list.tt:27
+#: root/base/page/list.tt:28
 msgid "Backlinks"
 msgstr "Lenker tilbake"
 
-#: root/base/toolbar.tt:29
+#: root/base/toolbar.tt:89
 msgid "Bigger"
 msgstr "Større"
 
-#: root/forms/user/editprofile.yml:15
+#: root/forms/user/editprofile.yml:11
 msgid "Birth Date"
 msgstr "Født"
 
-#: root/base/toolbar.tt:13
+#: root/base/toolbar.tt:73
 msgid "Block quote"
 msgstr "Sitat-blokk"
 
-#: root/base/edithelp.tt:127
+#: root/base/edithelp.tt:159
 msgid "Block quotes"
 msgstr "Sitatblokker"
 
-#: root/base/edithelp.tt:130
+#: root/base/edithelp.tt:162
 msgid "Blockquotes can be nested"
 msgstr "Sitatblokker kan ha flere nivåer"
 
-#: root/base/toolbar.tt:23
-#: root/base/toolbar.tt:57
+#: root/base/toolbar.tt:115
+#: root/base/toolbar.tt:83
 msgid "Bold"
 msgstr "Uthevet"
 
-#: root/base/toolbar.tt:5
-#: root/base/toolbar.tt:51
+#: root/base/toolbar.tt:111
+#: root/base/toolbar.tt:67
 msgid "Bullet list"
 msgstr "Punktliste"
 
-#: root/base/edithelp.tt:25
+#: root/base/edithelp.tt:29
 msgid "Bulleted list"
 msgstr "Punktliste"
+
+#: root/base/edithelp.tt:9
+msgid "By default, a wiki word will reference it's children. To reference a sibling, you can do [[../Node]], or to reference a toplevel node do [[/Node]]"
+msgstr "vanligvis refererer et Wiki-ord til barn av noden du er på. For å referere til et søsken, bruk [[../Node]], eller bruk [[/Node]] for å referere til øverste nivå."
+
+#: root/forms/admin/settings.yml:67
+msgid "Cache permission data"
+msgstr "Cache rettighetsdata."
 
 #: root/base/gallery/photo_info.tt:5
 msgid "Camera"
 msgstr "Kamera"
 
-#: lib/MojoMojo/Controller/Attachment.pm:169
+#: lib/MojoMojo/Controller/Attachment.pm:184
 msgid "Can only make inline version of photos"
 msgstr "Kan bare legge inn bilder"
 
-#: lib/MojoMojo/Controller/Attachment.pm:150
+#: lib/MojoMojo/Controller/Attachment.pm:159
 msgid "Can only make thumbnails of photos"
 msgstr "Kan bare lage forhåndsvisning for bilder"
 
-#: lib/MojoMojo/Controller/User.pm:114
+#: lib/MojoMojo/Controller/User.pm:117
 msgid "Cannot find that user."
 msgstr "Kan ikke finne den brukeren"
 
-#: lib/MojoMojo/Controller/Admin.pm:67
+#: lib/MojoMojo/Controller/Admin.pm:83
 msgid "Cant find admin user: "
 msgstr "Kan ikke finne admin brukeren:"
 
-#: root/base/toolbar.tt:19
+#: root/base/toolbar.tt:79
 msgid "Centered paragraph"
 msgstr "Sentrert paragraf"
 
@@ -267,13 +291,17 @@ msgstr "Endre sideinnhold"
 msgid "Change password"
 msgstr "Bytt passord"
 
-#: root/base/user/profile.tt:46
+#: root/base/user/profile.tt:61
 msgid "Change profile content"
 msgstr "Endre profil"
 
 #: root/base/page/bottomnav.tt:16
 msgid "Change site settings"
 msgstr "Endre instillinger"
+
+#: root/forms/admin/settings.yml:62
+msgid "Check permission on view"
+msgstr "Sjekk rettigheter ved visning"
 
 #: root/base/page/info.tt:18
 msgid "Children"
@@ -283,11 +311,11 @@ msgstr "Barn"
 msgid "Choose attachments"
 msgstr "Velg vedlegg"
 
-#: root/base/edithelp.tt:121
+#: root/base/edithelp.tt:153
 msgid "Circle"
 msgstr "Sirkel"
 
-#: root/base/gallery/photo.tt:32
+#: root/base/gallery/photo.tt:35
 msgid "Click for original version"
 msgstr "Klikk for original versjon"
 
@@ -295,23 +323,23 @@ msgstr "Klikk for original versjon"
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
 msgstr "Klikk på lenken til en manglende side for å opprette den. Sider som mangler vil bli opprettet automatisk."
 
-#: root/base/toolbar.tt:11
+#: root/base/toolbar.tt:71
 msgid "Code"
 msgstr "Koder"
 
-#: root/base/edithelp.tt:137
+#: root/base/edithelp.tt:170
 msgid "Code Spans"
 msgstr "Kodeblokker"
 
-#: root/base/comment.tt:5
+#: root/base/comment.tt:6
 msgid "Comment"
 msgstr "Kommentar"
 
-#: root/forms/comment/comment.yml:12
+#: root/forms/comment/comment.yml:8
 msgid "Comment body"
 msgstr "Kommentar"
 
-#: root/base/comment.tt:5
+#: root/base/comment.tt:6
 msgid "Comments"
 msgstr "Kommentarer"
 
@@ -319,13 +347,17 @@ msgstr "Kommentarer"
 msgid "Content size"
 msgstr "Størrelse på innhold"
 
-#: lib/MojoMojo/Controller/User.pm:52
+#: lib/MojoMojo/Formatter/Include.pm:61
+msgid "Could not  retrieve"
+msgstr "Kunne ikke hente"
+
+#: lib/MojoMojo/Controller/User.pm:55
 #: root/base/comment/login.tt:6
 msgid "Could not authenticate that login."
 msgstr "Kunne ikke autentisere brukernavnet."
 
 #. ($file)
-#: lib/MojoMojo/Controller/Attachment.pm:60
+#: lib/MojoMojo/Controller/Attachment.pm:66
 msgid "Could not create attachment from x"
 msgstr "Kunne ikke opprette vedlegg fra %1"
 
@@ -341,11 +373,15 @@ msgstr "Opprett rolle"
 msgid "Create a new role"
 msgstr "Lag en ny rolle"
 
-#: root/base/page/edit.tt:56
+#: root/forms/admin/settings.yml:72
+msgid "Create allowed by default"
+msgstr "Opprett tillatt som standard"
+
+#: root/base/page/edit.tt:54
 msgid "Create and View"
 msgstr "Opprett og vis"
 
-#: root/base/edithelp.tt:155
+#: root/base/edithelp.tt:197
 msgid "Creates"
 msgstr "Oppretter"
 
@@ -357,16 +393,20 @@ msgstr "Oppretter"
 msgid "Current Revision"
 msgstr "Nåværende revisjon"
 
-#: root/forms/user/password.yml:12
+#: root/forms/user/password.yml:8
 msgid "Current password"
 msgstr "Nåværende passord"
 
-#: root/base/user/profile.tt:33
+#: root/base/user/profile.tt:48
 msgid "Date registered"
 msgstr "Registreringsdato"
 
-#: root/base/toolbar.tt:27
-#: root/base/toolbar.tt:61
+#: root/forms/admin/settings.yml:77
+msgid "Delete allowed by default"
+msgstr "Sletting tillatt som standard"
+
+#: root/base/toolbar.tt:119
+#: root/base/toolbar.tt:87
 msgid "Deleted Text"
 msgstr "Slettet tekst"
 
@@ -378,16 +418,21 @@ msgstr "Etterkommere"
 msgid "Didn't receive an email?"
 msgstr "Mottok ikke en epost?"
 
+#: root/forms/admin/settings.yml:45
+msgid "Disable search"
+msgstr "Skru av søk"
+
 #: root/base/navbar.tt:56
 #: root/base/navbar.tt:58
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Last ned en zip-fil med alle sidene i denne wikien"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:135
+#: lib/MojoMojo/Controller/PageAdmin.pm:147
 msgid "END OF CONFLICT"
 msgstr "SLUTT PÅ KONFLIKTEN"
 
 #: root/base/admin/role.tt:23
+#: root/base/page/bottomnav.tt:13
 #: root/base/page/editbar.tt:11
 #: root/base/page/editbar.tt:17
 #: root/base/page/permissions.tt:47
@@ -398,7 +443,7 @@ msgstr "Rediger"
 msgid "Edit Page"
 msgstr "Rediger siden"
 
-#: root/base/user/profile.tt:46
+#: root/base/user/profile.tt:61
 msgid "Edit Profile"
 msgstr "Rediger profil"
 
@@ -410,7 +455,11 @@ msgstr "Rediger rollen"
 msgid "Edit Settings"
 msgstr "Rediger instillinger"
 
-#: root/base/page/recent.tt:39
+#: root/forms/admin/settings.yml:82
+msgid "Edit allowed by default"
+msgstr "Redigering tillatt som standard"
+
+#: root/base/page/recent.tt:40
 msgid "Edited by"
 msgstr "Redigert av"
 
@@ -423,11 +472,15 @@ msgstr "Redigerer"
 msgid "Editing user profile for x"
 msgstr "Redigerer brukerprofil for %1"
 
-#: root/base/user/profile.tt:6
+#: root/base/user/profile.tt:51
+msgid "Edits"
+msgstr "Redigeringer"
+
+#: root/base/user/profile.tt:11
 #: root/base/user/recover_pass.tt:10
 #: root/base/user/validate.tt:26
-#: root/forms/user/prefs.yml:23
-#: root/forms/user/register.yml:34
+#: root/forms/user/prefs.yml:20
+#: root/forms/user/register.yml:30
 msgid "Email"
 msgstr "E-post"
 
@@ -435,16 +488,28 @@ msgstr "E-post"
 msgid "Email Validation"
 msgstr "Epostvalidering"
 
-#: lib/MojoMojo/Controller/User.pm:188
+#: lib/MojoMojo/Controller/User.pm:191
 msgid "Emailed you your new password."
 msgstr "Sendt deg ditt nye passord"
 
-#: root/base/toolbar.tt:53
-#: root/base/toolbar.tt:7
+#: root/base/edithelp.tt:246
+msgid "Enable comments on this page."
+msgstr "Tillat kommentarer på denne siden."
+
+#: root/forms/admin/settings.yml:57
+msgid "Enforce login"
+msgstr "Tvunget pålogging"
+
+#: lib/MojoMojo/Schema.pm:57
+msgid "Enoch Root"
+msgstr "Einar Root"
+
+#: root/base/toolbar.tt:113
+#: root/base/toolbar.tt:69
 msgid "Enum list"
 msgstr "Numerert liste"
 
-#: lib/MojoMojo/Controller/User.pm:191
+#: lib/MojoMojo/Controller/User.pm:194
 msgid "Error occurred while emailing you your new password."
 msgstr "En feil oppsto under utsending av ditt nye passord."
 
@@ -462,16 +527,16 @@ msgstr "Sider som finnes"
 msgid "Export"
 msgstr "Eksport"
 
-#: root/base/toolbar.tt:39
-#: root/base/toolbar.tt:65
+#: root/base/toolbar.tt:123
+#: root/base/toolbar.tt:99
 msgid "External Link"
 msgstr "Ekstern lenke"
 
-#: root/forms/user/editprofile.yml:34
+#: root/forms/user/editprofile.yml:30
 msgid "Favorite Albums"
 msgstr "Favorittalbum"
 
-#: root/forms/user/editprofile.yml:38
+#: root/forms/user/editprofile.yml:34
 msgid "Favorite Movies"
 msgstr "Favorittfilmer"
 
@@ -485,13 +550,23 @@ msgstr "Strømmer"
 msgid "Fill in the email address you want to use here"
 msgstr "Fyll ut epostadressen du ønsker å bruke her"
 
-#: root/base/edithelp.tt:36
+#: root/base/edithelp.tt:200
+msgid "Footnotes"
+msgstr "Fotnoter"
+
+#: root/base/edithelp.tt:250
 msgid "Format content until next =pod as plain old documentation"
 msgstr "Behandler alt innhold fram til neste =pod som perl dokumentasjon"
 
-#: root/base/page/bottomnav.tt:50
+#: root/base/page/bottomnav.tt:52
 msgid "Format page for printing"
 msgstr "Formatter siden for utskrift"
+
+#: root/base/toolbar.tt:37
+#: root/base/toolbar.tt:38
+#: root/base/toolbar.tt:8
+msgid "Formatter"
+msgstr "Formatterer"
 
 #: root/base/page/bottomnav.tt:28
 #: root/base/page/bottomnav.tt:32
@@ -507,12 +582,12 @@ msgstr "Fra"
 msgid "Full content"
 msgstr "Fullt innhold"
 
-#: root/base/navbar.tt:72
+#: root/base/navbar.tt:78
 msgid "Gallery"
 msgstr "Galleri"
 
-#: root/base/user/profile.tt:18
-#: root/forms/user/editprofile.yml:22
+#: root/base/user/profile.tt:24
+#: root/forms/user/editprofile.yml:18
 msgid "Gender"
 msgstr "Kjønn"
 
@@ -533,7 +608,7 @@ msgstr "Gå rett til "
 msgid "Go to home page"
 msgstr "Gå til hjemmesiden"
 
-#: root/base/edithelp.tt:149
+#: root/base/edithelp.tt:189
 msgid "Going back to normal formatting"
 msgstr "Returnerer til normal formattering"
 
@@ -545,26 +620,28 @@ msgstr "HTML"
 msgid "Have a nice day"
 msgstr "Ha en fin dag"
 
-#: root/base/edithelp.tt:71
-#: root/base/edithelp.tt:72
-#: root/base/edithelp.tt:75
-#: root/base/edithelp.tt:76
+#: root/base/edithelp.tt:90
+#: root/base/edithelp.tt:91
+#: root/base/edithelp.tt:94
+#: root/base/edithelp.tt:95
 msgid "Header 1"
 msgstr "Overskrift 1"
 
-#: root/base/edithelp.tt:79
-#: root/base/edithelp.tt:80
-#: root/base/edithelp.tt:83
-#: root/base/edithelp.tt:84
+#: root/base/edithelp.tt:102
+#: root/base/edithelp.tt:103
+#: root/base/edithelp.tt:104
+#: root/base/edithelp.tt:110
+#: root/base/edithelp.tt:98
+#: root/base/edithelp.tt:99
 msgid "Header 2"
 msgstr "Overskrift 2"
 
-#: root/base/edithelp.tt:87
-#: root/base/edithelp.tt:88
+#: root/base/edithelp.tt:108
+#: root/base/edithelp.tt:109
 msgid "Header 6"
 msgstr "Overskrift 6"
 
-#: root/base/edithelp.tt:69
+#: root/base/edithelp.tt:88
 msgid "Headers"
 msgstr "Overskrifter"
 
@@ -573,9 +650,13 @@ msgid "Headlines"
 msgstr "Overskrifter"
 
 #. (page.name_orig)
-#: root/base/page/rss.tt:6
+#: root/base/page/rss.tt:4
 msgid "Headlines for x"
 msgstr "Overskrifter for %1"
+
+#: lib/MojoMojo/Schema.pm:98
+msgid "Help"
+msgstr "Hjelp"
 
 #: root/base/mail/reset_password.tt:1
 msgid "Hi there."
@@ -586,7 +667,7 @@ msgstr "Hei der."
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
 msgstr "Hei. Dette er en e-post for å validere din e-postadresse, %1. For å bekrefte, trykk på lenken under:"
 
-#: root/base/page/bottomnav.tt:46
+#: root/base/page/bottomnav.tt:47
 msgid "Hide changes"
 msgstr "Skjul endringer"
 
@@ -596,12 +677,14 @@ msgstr "Skjul endringer"
 msgid "Home"
 msgstr "Hjem"
 
-#: root/base/edithelp.tt:10
-#: root/base/edithelp.tt:52
+#: root/base/edithelp.tt:8
+msgid "HomePage, IBM, School"
+msgstr "HjemmeSide, IBM, Skole"
+
 msgid "HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))"
 msgstr "Hjemmeside, TreOrdSammen, [[C++]], [[La oss leke igjen!]], ((lett å skrive))"
 
-#: root/base/edithelp.tt:152
+#: root/base/edithelp.tt:194
 msgid "Horizontal Rules"
 msgstr "Skillelinjer "
 
@@ -609,8 +692,6 @@ msgstr "Skillelinjer "
 msgid "Hover over an image to get more info."
 msgstr "Hold pekeren over et bilde for å få mer informasjon"
 
-#: root/base/edithelp.tt:12
-#: root/base/edithelp.tt:54
 msgid "IBM, School"
 msgstr "IBM, Skole"
 
@@ -618,11 +699,15 @@ msgstr "IBM, Skole"
 msgid "ID"
 msgstr "ID"
 
+#: root/base/toolbar.tt:39
+msgid "IRC formatter"
+msgstr "IRC Formaterer"
+
 #: root/base/gallery/photo_info.tt:7
 msgid "ISO"
 msgstr "ISO"
 
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:81
 msgid "IdLabel"
 msgstr "IdLabel"
 
@@ -635,16 +720,16 @@ msgstr "Hvis flashuploaderen ikke virker for deg kan du bytte til"
 msgid "If you are unable to validate, please x"
 msgstr "Hvis du ikke kan bekrefte, vennligst %1"
 
-#: root/base/edithelp.tt:38
+#: root/base/edithelp.tt:49
 msgid "Image"
 msgstr "Bilde"
 
-#: root/base/edithelp.tt:64
+#: root/base/edithelp.tt:83
 msgid "Images"
 msgstr "Bilder"
 
-#: root/base/user/profile.tt:21
-#: root/forms/user/editprofile.yml:29
+#: root/base/user/profile.tt:29
+#: root/forms/user/editprofile.yml:25
 msgid "Industry"
 msgstr "Yrke"
 
@@ -652,63 +737,68 @@ msgstr "Yrke"
 msgid "Inherited permissions"
 msgstr "Arvede rettigheter"
 
-#: root/base/edithelp.tt:66
-#: root/base/page/bottomnav.tt:52
+#: root/base/edithelp.tt:85
+#: root/base/page/bottomnav.tt:54
 msgid "Inline"
 msgstr "direkte"
 
-#: root/base/edithelp.tt:62
+#: root/base/edithelp.tt:73
 msgid "Inline Links"
 msgstr "Direkte linker"
 
-#: root/base/page/bottomnav.tt:52
+#: root/base/page/bottomnav.tt:54
 msgid "Inline for including content"
 msgstr "Naken for bruk i andre sider"
 
-#: root/base/user/profile.tt:24
-#: root/forms/user/editprofile.yml:32
+#: root/base/toolbar.tt:18
+#: root/base/toolbar.tt:43
+#: root/base/toolbar.tt:44
+msgid "Insert"
+msgstr "Sett Inn"
+
+#: root/base/user/profile.tt:34
+#: root/forms/user/editprofile.yml:28
 msgid "Interests"
 msgstr "Interesser"
 
-#: root/base/toolbar.tt:37
-#: root/base/toolbar.tt:63
+#: root/base/toolbar.tt:121
+#: root/base/toolbar.tt:97
 msgid "Internal Link"
 msgstr "Intern lenke"
 
-#: lib/MojoMojo/Controller/User.pm:154
+#: lib/MojoMojo/Controller/User.pm:157
 msgid "Invalid password."
 msgstr "Ugyldig passord."
 
-#: root/base/toolbar.tt:25
-#: root/base/toolbar.tt:59
+#: root/base/toolbar.tt:117
+#: root/base/toolbar.tt:85
 msgid "Italic"
 msgstr "Kursiv"
 
-#: root/base/edithelp.tt:135
+#: root/base/edithelp.tt:167
 msgid "Item"
 msgstr "Ting"
 
-#: root/base/edithelp.tt:129
+#: root/base/edithelp.tt:161
 msgid "Just like email quoting!"
 msgstr "Akkurat som e-postsitering!"
 
-#: root/base/toolbar.tt:21
+#: root/base/toolbar.tt:81
 msgid "Justified paragraph"
 msgstr "Blokk-justert paragraf"
 
-#: root/base/user/profile.tt:36
 msgid "Last changes"
 msgstr "Siste endringer"
 
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:81
 msgid "Later in the document"
 msgstr "Senere i dokumentet"
 
-#: root/base/page/edit.tt:66
+#: root/base/page/edit.tt:64
 msgid "Leave second blank if you do not want a password"
 msgstr "La andre være tom hvis du ikke vil ha passord"
 
-#: root/base/toolbar.tt:15
+#: root/base/toolbar.tt:75
 msgid "Left-justified paragraph"
 msgstr "Venstre-justert paragraf"
 
@@ -716,16 +806,16 @@ msgstr "Venstre-justert paragraf"
 msgid "Lens"
 msgstr "Linse"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:76
+#: root/base/edithelp.tt:81
 msgid "Link Title"
 msgstr "Linktittel"
 
-#: root/base/page/bottomnav.tt:58
+#: root/base/page/bottomnav.tt:60
 msgid "Linked from"
 msgstr "Lenket fra"
 
-#: root/base/edithelp.tt:61
+#: root/base/edithelp.tt:71
 msgid "Links"
 msgstr "Lenker"
 
@@ -737,7 +827,7 @@ msgstr "Lenker fra"
 msgid "Links to"
 msgstr "Lenker til"
 
-#: root/base/page/list.tt:38
+#: root/base/page/list.tt:39
 msgid "Links to non-existent pages."
 msgstr "Lenker til ikke-eksisterende sider."
 
@@ -746,17 +836,16 @@ msgstr "Lenker til ikke-eksisterende sider."
 msgid "List by x"
 msgstr "List etter %1"
 
-#: root/base/toolbar.tt:4
-#: root/base/toolbar.tt:50
+#: root/base/toolbar.tt:110
+#: root/base/toolbar.tt:66
 msgid "List item 1"
 msgstr "Første gjenstand i listen"
 
-#: root/base/edithelp.tt:114
+#: root/base/edithelp.tt:143
 msgid "Lists can be nested by indentation level"
 msgstr "Lister kan ha underlister ved hjelper av indentering"
 
 #: root/base/navbar.tt:28
-#: root/base/user/login.tt:22
 msgid "Log in"
 msgstr "Logg inn"
 
@@ -765,13 +854,18 @@ msgid "Log out"
 msgstr "Logg ut"
 
 #: root/base/user/login.tt:3
-#: root/forms/user/prefs.yml:10
-#: root/forms/user/register.yml:12
+#: root/forms/user/login.yml:20
+#: root/forms/user/prefs.yml:7
+#: root/forms/user/register.yml:8
 msgid "Login"
 msgstr "brukernavn"
 
-#: root/base/toolbar.tt:3
-#: root/base/toolbar.tt:49
+#: root/forms/admin/settings.yml:27
+msgid "Main formatter"
+msgstr "Hovedformatterer"
+
+#: root/base/toolbar.tt:109
+#: root/base/toolbar.tt:65
 msgid "Main heading"
 msgstr "Hovedoverskrift"
 
@@ -779,24 +873,31 @@ msgstr "Hovedoverskrift"
 msgid "Make current"
 msgstr "Gjør aktiv"
 
-#: root/base/toolbar.tt:46
-#: root/base/toolbar.tt:72
+#: root/base/toolbar.tt:106
+#: root/base/toolbar.tt:130
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Marker teksten du ønsker at ikon-handlingen skal gjelde for"
 
-#: root/base/edithelp.tt:45
 msgid "Markdown formatting tips"
 msgstr "Tips for Markdown-formattering"
+
+#: root/base/edithelp.tt:59
+msgid "Markdown reference"
+msgstr "Markdown-hjelp"
 
 #: root/base/mail/reset_password.tt:9
 msgid "MojoMojo - Spirit in a box"
 msgstr "MojoMojo - Troll i eske"
 
-#: root/base/user/profile.tt:30
+#: root/base/user/profile.tt:44
 msgid "Movies"
 msgstr "Filmer"
 
-#: root/base/user/profile.tt:27
+#: root/base/edithelp.tt:59
+msgid "MultiMarkdown formatting tips"
+msgstr "Tips for MultiMarkdown"
+
+#: root/base/user/profile.tt:39
 msgid "Music"
 msgstr "Musikk"
 
@@ -806,18 +907,18 @@ msgid "My tags"
 msgstr "Mine nøkkelord"
 
 #: root/base/admin/role.tt:16
-#: root/base/user/profile.tt:3
-#: root/forms/user/editprofile.yml:12
-#: root/forms/user/prefs.yml:18
-#: root/forms/user/register.yml:42
+#: root/base/user/profile.tt:6
+#: root/forms/user/editprofile.yml:8
+#: root/forms/user/prefs.yml:15
+#: root/forms/user/register.yml:38
 msgid "Name"
 msgstr "Navn"
 
-#: root/base/user/profile.tt:4
+#: root/base/user/profile.tt:7
 msgid "Name missing"
 msgstr "Navn mangler"
 
-#: root/base/edithelp.tt:139
+#: root/base/edithelp.tt:176
 msgid "Nested backticks"
 msgstr "Nøstede aksenter"
 
@@ -825,15 +926,15 @@ msgstr "Nøstede aksenter"
 msgid "New User Registration"
 msgstr "Brukerregistrering"
 
-#: root/forms/admin/settings.yml:23
+#: root/forms/admin/settings.yml:33
 msgid "New User Registration open"
 msgstr "Åpen brukerregistrering"
 
-#: root/forms/user/password.yml:17
+#: root/forms/user/password.yml:13
 msgid "New password"
 msgstr "Nytt passord"
 
-#: root/forms/user/password.yml:22
+#: root/forms/user/password.yml:18
 msgid "New password again"
 msgstr "Gjenta nytt passord"
 
@@ -846,13 +947,13 @@ msgstr "Neste"
 msgid "No"
 msgstr "Nei"
 
-#: root/base/comment.tt:21
+#: root/base/comment.tt:22
 msgid "No Comments posted"
 msgstr "Ingen kommentarer"
 
 #. (c.pref('main_formatter')
 #. (c.pref("main_formatter"))
-#: root/base/edithelp.tt:161
+#: root/base/edithelp.tt:213
 msgid "No help yet for x"
 msgstr "Ingen hjelp til %1"
 
@@ -860,7 +961,7 @@ msgstr "Ingen hjelp til %1"
 msgid "No members added yet."
 msgstr "Ingen medlemmer er lagt til enda."
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:39
+#: lib/MojoMojo/Controller/PageAdmin.pm:40
 msgid "No permissions to edit this page"
 msgstr "Har ikke rettigheter til å redigere denne siden"
 
@@ -878,7 +979,7 @@ msgid "No roles created yet."
 msgstr "Ingen roller er opprettet enda."
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:90
+#: lib/MojoMojo/Controller/Page.pm:89
 msgid "No such revision for "
 msgstr "Ingen revisjon for "
 
@@ -890,31 +991,28 @@ msgstr "Ikke-eksisterende sider"
 msgid "None"
 msgstr "Ingen"
 
-#: root/base/edithelp.tt:145
+#: root/base/edithelp.tt:185
 msgid "Normal Paragraph"
 msgstr "Normal paragraf"
 
-#: root/base/page/list.tt:43
+#: lib/MojoMojo/Formatter/Wiki.pm:274
+#: root/base/page/list.tt:45
 msgid "Not found. Click to create this page."
 msgstr "Finnes ikke. Klikk for å opprette denne siden."
 
-#: root/base/edithelp.tt:12
-#: root/base/edithelp.tt:54
+#: root/base/edithelp.tt:8
 msgid "Not wiki words"
 msgstr "Ikke wiki-ord"
 
-#: root/base/user/profile.tt:25
-#: root/base/user/profile.tt:28
-#: root/base/user/profile.tt:31
 msgid "Nothing entered"
 msgstr "Ingenting er skrevet"
 
-#: root/base/edithelp.tt:29
+#: root/base/edithelp.tt:33
 msgid "Numbered list"
 msgstr "Nummerert liste"
 
-#: root/base/toolbar.tt:52
-#: root/base/toolbar.tt:6
+#: root/base/toolbar.tt:112
+#: root/base/toolbar.tt:68
 msgid "Numbered list item"
 msgstr "Numerert liste-punkt"
 
@@ -922,7 +1020,7 @@ msgstr "Numerert liste-punkt"
 msgid "One or more pages in the requested path do not exist."
 msgstr "En eller flere siden i denne adressen finnes ikke"
 
-#: root/base/edithelp.tt:67
+#: root/base/edithelp.tt:86
 msgid "Optional Title"
 msgstr "Valgfri tittel"
 
@@ -931,11 +1029,11 @@ msgstr "Valgfri tittel"
 msgid "Or you can check out x instead"
 msgstr "Eller sjekk %1 isteden"
 
-#: root/base/edithelp.tt:90
+#: root/base/edithelp.tt:113
 msgid "Ordered Lists"
 msgstr "Sortert liste"
 
-#: root/base/page/list.tt:48
+#: root/base/page/list.tt:52
 msgid "Orphaned Pages"
 msgstr "Foreldreløse sider"
 
@@ -943,13 +1041,17 @@ msgstr "Foreldreløse sider"
 msgid "Other Suggestions"
 msgstr "Andre forslag"
 
-#: root/base/page/list.tt:28
+#: root/base/page/list.tt:29
 msgid "Other pages that link to this page."
 msgstr "Andre sider som linker til denne siden."
 
-#: root/base/navbar.tt:66
-#: root/base/navbar.tt:68
-#: root/base/page/recent.tt:38
+#: root/base/toolbar.tt:40
+msgid "POD formatter"
+msgstr "POD-Formattering"
+
+#: root/base/navbar.tt:72
+#: root/base/navbar.tt:74
+#: root/base/page/recent.tt:39
 msgid "Page"
 msgstr "Side"
 
@@ -968,7 +1070,7 @@ msgstr "Sideinformasjon for %1"
 msgid "Page meta information"
 msgstr "Meta informasjon for siden"
 
-#: root/forms/pageadmin/edit.yml:10
+#: root/forms/pageadmin/edit.yml:7
 msgid "Page text"
 msgstr " Side-innhold"
 
@@ -977,31 +1079,31 @@ msgstr " Side-innhold"
 msgid "Pages sorted by when they were last changed"
 msgstr "Sider sortert etter når de ble endret sist."
 
-#: root/base/page/list.tt:49
+#: root/base/page/list.tt:53
 msgid "Pages to which no other pages link."
 msgstr "Sider som ikke har noen lenker til seg"
 
-#: root/base/user/login.tt:19
-#: root/forms/user/register.yml:19
+#: root/forms/user/login.yml:14
+#: root/forms/user/register.yml:15
 msgid "Password"
 msgstr "Passord"
 
-#: root/forms/user/password.yml:26
-#: root/forms/user/register.yml:24
+#: root/forms/user/password.yml:22
+#: root/forms/user/register.yml:20
 msgid "Password did not match"
 msgstr "Passordet ble ikke gjentatt korrekt"
 
-#: root/forms/user/register.yml:28
+#: root/forms/user/register.yml:24
 msgid "Password must be between 4 and 14 chars"
 msgstr "Passordet må være mellom 4 og 4 tegn"
 
 #. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:71
+#: lib/MojoMojo/Controller/Page.pm:70
 msgid "Permission Denied to view x"
 msgstr "Du har ikke rettigheter til å se %1"
 
-#. ([ $permtocheck, $name ])
-#: lib/MojoMojo/Controller/PageAdmin.pm:89
+#. ([ $loc_permtocheck, $name ])
+#: lib/MojoMojo/Controller/PageAdmin.pm:91
 msgid "Permission Denied to x x"
 msgstr "Du har ingen rettigheter til %1 %2"
 
@@ -1015,7 +1117,7 @@ msgstr "Rettigheter"
 msgid "Permissions for this page"
 msgstr "Rettigheter for denne siden"
 
-#: root/base/navbar.tt:74
+#: root/base/navbar.tt:80
 msgid "Photo Album"
 msgstr "Fotoalbum"
 
@@ -1023,18 +1125,18 @@ msgstr "Fotoalbum"
 msgid "Photos"
 msgstr "Bilder"
 
-#: root/base/toolbar.tt:43
-#: root/base/toolbar.tt:69
+#: root/base/toolbar.tt:103
+#: root/base/toolbar.tt:127
 msgid "Picture"
 msgstr "Bilde"
 
-#: root/base/toolbar.tt:41
-#: root/base/toolbar.tt:67
+#: root/base/toolbar.tt:101
+#: root/base/toolbar.tt:125
 msgid "Picture left"
 msgstr "Bilde til venstre"
 
-#: root/base/toolbar.tt:45
-#: root/base/toolbar.tt:71
+#: root/base/toolbar.tt:105
+#: root/base/toolbar.tt:129
 msgid "Picture right"
 msgstr "Bilde til høyre"
 
@@ -1042,7 +1144,7 @@ msgstr "Bilde til høyre"
 msgid "Please enter username and password"
 msgstr "Skriv inn brukernavn og passord"
 
-#: lib/MojoMojo/Controller/User.pm:214
+#: lib/MojoMojo/Controller/User.pm:217
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Fyll inn følgende informasjon for å registrere deg. Alle feltene er obligatoriske."
 
@@ -1053,6 +1155,10 @@ msgstr "Velg en fil du ønsker å koble til denne siden. Du kan laste opp et set
 #: lib/MojoMojo/Controller/Jsrpc.pm:33
 msgid "Please type something"
 msgstr "Skriv noe her"
+
+#: root/base/edithelp.tt:217
+msgid "Plugin syntax"
+msgstr "Plugin-syntaks"
 
 #: root/base/gallery/tags.tt:16
 #: root/base/page/tags.tt:17
@@ -1067,17 +1173,15 @@ msgstr "Lagre"
 msgid "Powered by Catalyst"
 msgstr "Drevet av Catalyst"
 
-#: root/base/navbar.tt:88
-#: root/base/navbar.tt:90
+#: root/base/navbar.tt:94
+#: root/base/navbar.tt:96
 msgid "Preferences"
 msgstr "Instillinger"
 
-#: root/base/edithelp.tt:142
+#: root/base/edithelp.tt:180
 msgid "Preformatted Code Blocks"
 msgstr "Preformatterte kodeblokker"
 
-#: root/base/toolbar.tt:55
-#: root/base/toolbar.tt:9
 msgid "Preformatted text"
 msgstr "Forhåndsformattert tekst"
 
@@ -1090,12 +1194,12 @@ msgstr "Forhåndsvisning"
 msgid "Previous"
 msgstr "Forrige"
 
-#: root/base/page/bottomnav.tt:50
+#: root/base/page/bottomnav.tt:52
 msgid "Print"
 msgstr "Utskrift"
 
-#: root/base/navbar.tt:81
-#: root/base/navbar.tt:83
+#: root/base/navbar.tt:87
+#: root/base/navbar.tt:89
 msgid "Profile"
 msgstr "Profil"
 
@@ -1113,8 +1217,8 @@ msgid "Recent Pages"
 msgstr "Nylige sider"
 
 #. (page.path)
-#: root/base/page/atom.tt:10
-#: root/base/page/rss.tt:8
+#: root/base/page/atom.tt:7
+#: root/base/page/rss.tt:6
 #: root/base/page/rss_full.tt:7
 msgid "Recent changes in x"
 msgstr "Nylige endringer i %1"
@@ -1123,7 +1227,7 @@ msgstr "Nylige endringer i %1"
 #. (page.path)
 #: root/base/page/recent.tt:1
 #: root/base/page/recent.tt:2
-#: root/base/tag/list.tt:22
+#: root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Nye side i %1"
 
@@ -1143,13 +1247,17 @@ msgstr "Sett nytt passord"
 msgid "Recover password"
 msgstr "Resett passord"
 
-#: root/base/edithelp.tt:123
+#: root/base/edithelp.tt:155
 msgid "Rectangle"
 msgstr "Rektangel"
 
+#: root/base/page/view.tt:4
+msgid "Redirected from"
+msgstr "Videresendt fra"
+
 #: root/base/navbar.tt:29
-#: root/forms/comment/comment.yml:17
-#: root/forms/user/register.yml:49
+#: root/forms/comment/comment.yml:13
+#: root/forms/user/register.yml:45
 msgid "Register"
 msgstr "Registrering"
 
@@ -1157,23 +1265,23 @@ msgstr "Registrering"
 msgid "Register new account"
 msgstr "Registrerer ny bruker"
 
-#: lib/MojoMojo/Controller/User.pm:209
+#: lib/MojoMojo/Controller/User.pm:212
 msgid "Registration is closed!"
 msgstr "Registrering er stengt!"
 
-#: root/base/tag/list.tt:31
+#: root/base/tag/list.tt:34
 msgid "Related Tags"
 msgstr "Relaterte nøkkelord"
 
-#: root/base/page/view.tt:25
+#: root/base/page/view.tt:35
 msgid "Removed"
 msgstr "Fjernet"
 
-#: root/forms/user/register.yml:31
+#: root/forms/user/register.yml:27
 msgid "Repeat password"
 msgstr "Gjenta passord"
 
-#: root/forms/admin/settings.yml:30
+#: root/forms/admin/settings.yml:52
 msgid "Restrict user editing to home directory"
 msgstr "Begrens bruker-rettigheter til hjemmeområdet"
 
@@ -1195,23 +1303,23 @@ msgstr "Resultater %1-%2 av %3 funnet innen %4"
 
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
-#: root/base/page/print.tt:15
-#: root/base/page/view.tt:31
+#: root/base/page/print.tt:16
+#: root/base/page/view.tt:42
 msgid "Revised on x at x by x"
 msgstr "Revidert den %1 klokken %2 av %3"
 
-#: root/base/page/print.tt:8
-#: root/base/page/view.tt:32
-#: root/base/page/view.tt:5
+#: root/base/page/print.tt:9
+#: root/base/page/view.tt:14
+#: root/base/page/view.tt:43
 msgid "Revision"
 msgstr "Revisjon"
 
 #. (page.content.created.datetime)
-#: root/base/page/rss.tt:14
+#: root/base/page/rss.tt:13
 msgid "Revision from x"
 msgstr "Revisjon fra %1"
 
-#: root/base/toolbar.tt:17
+#: root/base/toolbar.tt:77
 msgid "Right-justified paragraph"
 msgstr "Høyre-justert paragraf"
 
@@ -1219,7 +1327,7 @@ msgstr "Høyre-justert paragraf"
 msgid "Role Members"
 msgstr "Rolle-medlemmer"
 
-#: root/forms/admin/role_form.yml:11
+#: root/forms/admin/role_form.yml:8
 msgid "Role Name"
 msgstr "Rollenavn"
 
@@ -1232,26 +1340,26 @@ msgid "Roles"
 msgstr "Roller"
 
 #. (page.content_version)
-#: root/base/page/view.tt:7
+#: root/base/page/view.tt:16
 msgid "Rolled Back (Current: x)"
 msgstr "Rullet tilbake (Aktiv: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:151
-#: root/base/admin/role_form.tt:40
-#: root/base/page/edit.tt:55
+#: lib/MojoMojo/Controller/PageAdmin.pm:163
+#: root/base/admin/role_form.tt:39
+#: root/base/page/edit.tt:53
 #: root/base/page/permissions.tt:48
-#: root/forms/admin/role_form.yml:24
-#: root/forms/admin/settings.yml:38
-#: root/forms/user/password.yml:30
-#: root/forms/user/prefs.yml:31
+#: root/forms/admin/role_form.yml:21
+#: root/forms/admin/settings.yml:95
+#: root/forms/user/password.yml:26
+#: root/forms/user/prefs.yml:28
 msgid "Save"
 msgstr "Lagre"
 
-#: root/base/page/edit.tt:56
+#: root/base/page/edit.tt:54
 msgid "Save and View"
 msgstr "Lagre og vis"
 
-#: root/base/navbar.tt:61
+#: root/base/navbar.tt:62
 #: root/base/page/search.tt:13
 #: root/base/page/search_inline.tt:3
 msgid "Search"
@@ -1276,12 +1384,12 @@ msgstr "Søk etter brukere:"
 msgid "Search within x"
 msgstr "Søk under %1"
 
-#: root/base/edithelp.tt:25
 #: root/base/edithelp.tt:29
+#: root/base/edithelp.tt:33
 msgid "Second item"
 msgstr "Andre ting"
 
-#: root/base/page/bottomnav.tt:43
+#: root/base/page/bottomnav.tt:44
 msgid "See changes"
 msgstr "Se endringer"
 
@@ -1299,19 +1407,19 @@ msgstr "Se forrige revisjon."
 msgid "Set a keyword for this page"
 msgstr "Set et nøkkelord for denne siden"
 
-#: root/base/page/bottomnav.tt:65
+#: root/base/page/bottomnav.tt:67
 msgid "Set language"
 msgstr "Velg språk"
 
-#: root/base/edithelp.tt:120
+#: root/base/edithelp.tt:152
 msgid "Shapes"
 msgstr "Former"
 
-#: root/base/page/bottomnav.tt:43
+#: root/base/page/bottomnav.tt:44
 msgid "Show differences from previous version"
 msgstr "Vis endringer fra forrige revisjon"
 
-#: root/base/page/bottomnav.tt:46
+#: root/base/page/bottomnav.tt:47
 msgid "Show normal page"
 msgstr "Vis siden som vanlig"
 
@@ -1319,15 +1427,16 @@ msgstr "Vis siden som vanlig"
 msgid "Show picture"
 msgstr "Vis bildet"
 
-#: root/base/page/info.tt:41
+#: root/base/page/info.tt:43
 msgid "Show revision"
 msgstr "Vis revisjon"
 
-#: root/base/edithelp.tt:23
+#: root/base/edithelp.tt:242
+#: root/base/edithelp.tt:42
 msgid "Show this product"
 msgstr "Vis dette produktet"
 
-#: root/base/page/view.tt:24
+#: root/base/page/view.tt:34
 msgid "Showing changes from previous revision."
 msgstr "Viser endringer mot forrige revisjon."
 
@@ -1343,11 +1452,11 @@ msgstr "Viser %1-%2 oppføringer av totalt %3 i %4"
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Viser %1 (%2-%3) av %4 bilder i %5"
 
-#: root/base/edithelp.tt:143
+#: root/base/edithelp.tt:183
 msgid "Simply indent every line of a code block by 4"
 msgstr "Begyn hver linje av kodeblokken med 4 mellomrom"
 
-#: root/forms/admin/settings.yml:17
+#: root/forms/admin/settings.yml:18
 msgid "Site Admins (In addition to you)"
 msgstr "Administratorer (I tillegg til deg)"
 
@@ -1355,27 +1464,27 @@ msgstr "Administratorer (I tillegg til deg)"
 msgid "Site Configuration"
 msgstr "Instillinger for siten"
 
-#: root/forms/admin/settings.yml:10
+#: root/forms/admin/settings.yml:11
 msgid "Site name"
 msgstr "Navn på wikien"
 
-#: root/base/toolbar.tt:31
+#: root/base/toolbar.tt:91
 msgid "Smaller"
 msgstr "Mindre"
 
-#: lib/MojoMojo/Controller/User.pm:389
+#: lib/MojoMojo/Controller/User.pm:395
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Formen var ikke riktig fylt ut. Rett feilene og prøv igjen:"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:123
+#: lib/MojoMojo/Controller/PageAdmin.pm:135
 msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
 msgstr "Noen har endret siden mens du redigerte. Dine endringer har blitt slått sammen med nyeste versjon. Sjekk at alt er OK, og lagre igjen."
 
-#: root/base/page/bottomnav.tt:13
+#: root/base/page/editbar.tt:22
 msgid "Split Edit"
 msgstr "Rediger(vertikal)"
 
-#: root/base/edithelp.tt:122
+#: root/base/edithelp.tt:154
 msgid "Square"
 msgstr "Firkant"
 
@@ -1389,15 +1498,15 @@ msgstr "Undersider"
 msgid "Subscribe to changes by RSS"
 msgstr "Abbonner på endringer med RSS"
 
-#: root/base/page/bottomnav.tt:51
+#: root/base/page/bottomnav.tt:53
 msgid "Subscribe to page changes"
 msgstr "Abboner på endringer i siden"
 
-#: root/base/toolbar.tt:35
+#: root/base/toolbar.tt:95
 msgid "Subscript"
 msgstr "Subskript"
 
-#: root/base/toolbar.tt:33
+#: root/base/toolbar.tt:93
 msgid "Superscript"
 msgstr "Superskript"
 
@@ -1405,16 +1514,21 @@ msgstr "Superskript"
 msgid "Switch to flash uploader"
 msgstr "Bytt til flash-uploaderen"
 
-#: root/base/page/editbar.tt:20
 #: root/base/page/editbar.tt:8
 msgid "Syntax"
 msgstr "Syntaks"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:133
+#: root/base/toolbar.tt:31
+#: root/base/toolbar.tt:53
+#: root/base/toolbar.tt:54
+msgid "Syntax Highlight"
+msgstr "Fargekoding"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:145
 msgid "THEIR CHANGES"
 msgstr "DERES ENDRINGER"
 
-#: root/base/edithelp.tt:35
+#: root/base/edithelp.tt:46
 msgid "Table"
 msgstr "Tabell"
 
@@ -1436,24 +1550,28 @@ msgstr "Nøkkelord under %1"
 msgid "Taken"
 msgstr "Tatt"
 
-#: root/base/edithelp.tt:58
+#: root/base/edithelp.tt:62
 msgid "Text Formatting"
 msgstr "Tekstformattering"
 
-#: root/base/edithelp.tt:59
-#: root/base/edithelp.tt:60
+#: root/base/edithelp.tt:64
+#: root/base/edithelp.tt:68
 msgid "Text in"
 msgstr "Tekst i"
 
-#: root/base/edithelp.tt:3
+#: root/base/edithelp.tt:16
 msgid "Textile formatting tips"
 msgstr "Formatteringstips for Textile"
 
-#: lib/MojoMojo/Controller/User.pm:305
+#: root/base/edithelp.tt:16
+msgid "Textile2 reference"
+msgstr "Hjelp for Textile"
+
+#: lib/MojoMojo/Controller/User.pm:311
 msgid "That mail is already in use"
 msgstr "Det finnes allerede en bruker med den epostadressen"
 
-#: root/base/navbar.tt:68
+#: root/base/navbar.tt:74
 msgid "The Wikilicious page"
 msgstr "Wikilious siden"
 
@@ -1467,7 +1585,11 @@ msgstr "Eposten ble sendt til %1."
 msgid "The requested URL (x) was not found"
 msgstr "Den etterspurte adressen (%1) finnes ikke"
 
-#: root/base/edithelp.tt:147
+#: root/forms/admin/settings.yml:24
+msgid "Theme name"
+msgstr "Tema-navn"
+
+#: root/base/edithelp.tt:187
 msgid "This is a pre formatted code block"
 msgstr "Dette er en forhåndsformattert kodeblokk"
 
@@ -1475,12 +1597,13 @@ msgstr "Dette er en forhåndsformattert kodeblokk"
 msgid "This is the first revision! Nothing to diff against."
 msgstr "Dette er den første revisjonen! Ingen å sjekke endringer mot."
 
-#: root/base/page/recent.tt:40
+#: root/base/page/recent.tt:41
 msgid "Time edited"
 msgstr "Sist redigert"
 
-#: root/base/edithelp.tt:104
-#: root/base/edithelp.tt:92
+#: root/base/edithelp.tt:115
+#: root/base/edithelp.tt:129
+#: root/base/edithelp.tt:221
 msgid "To get"
 msgstr "Å få"
 
@@ -1488,28 +1611,26 @@ msgstr "Å få"
 msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
 msgstr "Skriv i tekstområdet under denne teksten for å begynne å redigere denne siden. For å finne ut mer om hvilke koder du kan bruke, trykk på 'syntax' over."
 
-#: root/base/edithelp.tt:49
-#: root/base/edithelp.tt:7
 msgid "Two or more uppercase words stuck together (camel case) or any phrase surrounded by double brackets or parenthesis is a wiki word. A camel-case wiki word can be escaped by putting \\ in front of it."
 msgstr "To eller flere kapitaliserte ord limt sammen (camel case) eller en frase med doble paranteser eller hakeparanteser rundt er et wiki ord. For å unngå dette, sett '' forran ordet"
 
-#: root/base/edithelp.tt:33
+#: root/base/edithelp.tt:40
 msgid "URL"
 msgstr "URL"
 
-#: root/base/edithelp.tt:102
+#: root/base/edithelp.tt:127
 msgid "Unordered Lists with Paragraphs"
 msgstr "Usorterte lister med paragrafer"
 
-#: root/forms/user/editprofile.yml:41
+#: root/forms/user/editprofile.yml:37
 msgid "Update "
 msgstr "Oppdater "
 
-#: lib/MojoMojo/Controller/User.pm:130
+#: lib/MojoMojo/Controller/User.pm:133
 msgid "Updated preferences"
 msgstr "Oppdaterte instillinger"
 
-#: lib/MojoMojo/Controller/Admin.pm:103
+#: lib/MojoMojo/Controller/Admin.pm:106
 msgid "Updated successfully."
 msgstr "Endringene er lagret"
 
@@ -1517,7 +1638,7 @@ msgstr "Endringene er lagret"
 msgid "Upload"
 msgstr "Last opp"
 
-#: root/forms/admin/settings.yml:33
+#: root/forms/admin/settings.yml:38
 msgid "Use captcha"
 msgstr "Brul captcha"
 
@@ -1529,33 +1650,34 @@ msgstr "Bruk arvede rettigheter"
 msgid "User Preferences"
 msgstr "Brukerinstillinger"
 
-#: root/base/navbar.tt:83
+#: root/base/navbar.tt:89
 msgid "User Profile"
 msgstr "Brukerprofil"
 
-#: root/base/navbar.tt:90
+#: root/base/navbar.tt:96
 msgid "User Settings"
 msgstr "Brukerinstillinger"
 
-#: lib/MojoMojo/Controller/User.pm:366
+#: lib/MojoMojo/Controller/User.pm:372
 msgid "User not found!"
 msgstr "Brukeren kunne ikke finnes"
 
-#. (person.name)
+#. (user.name)
 #: root/base/user/profile.tt:1
 msgid "User profile for x"
 msgstr "Brukerprofil for %1"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:338
+#: lib/MojoMojo/Controller/User.pm:344
 msgid "User x not found!"
 msgstr "Bruker %1 kunne ikke finnes"
 
-#: root/base/user/login.tt:17
 #: root/base/user/recover_pass.tt:10
+#: root/forms/user/login.yml:8
 msgid "Username"
 msgstr "Brukernavn"
 
+#: lib/MojoMojo/Schema.pm:66
 #: root/base/admin/user.tt:6
 msgid "Users"
 msgstr "Brukere"
@@ -1564,11 +1686,15 @@ msgstr "Brukere"
 msgid "Validation"
 msgstr "Validering"
 
-#: root/base/page/recent.tt:55
+#: root/base/page/recent.tt:58
 msgid "View Diff"
 msgstr "Vis forskjeller"
 
-#: root/base/gallery.tt:23
+#: root/forms/admin/settings.yml:87
+msgid "View allowed by default"
+msgstr "Visning tillatt som standard"
+
+#: root/base/gallery.tt:24
 msgid "View as files"
 msgstr "Vis som filer"
 
@@ -1576,11 +1702,11 @@ msgstr "Vis som filer"
 msgid "View as gallery"
 msgstr "Vis som galleri"
 
-#: root/base/page/bottomnav.tt:50
+#: root/base/page/bottomnav.tt:52
 msgid "Views"
 msgstr "Visninger"
 
-#: root/base/page/list.tt:37
+#: root/base/page/list.tt:38
 msgid "Wanted Pages"
 msgstr "Ønskede Sider"
 
@@ -1589,7 +1715,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "Vi har sendt deg en epost med aktiveringslenke. Vennligst følg lenken for å aktivere din konto!"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:285
+#: lib/MojoMojo/Controller/User.pm:291
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Velkommen, %1, din e-post er godkjent. Vennligst logg inn."
 
@@ -1598,23 +1724,25 @@ msgstr "Velkommen, %1, din e-post er godkjent. Vennligst logg inn."
 msgid "Who wrote what"
 msgstr "Hvem skrev hva"
 
-#: root/base/edithelp.tt:10
-#: root/base/edithelp.tt:47
-#: root/base/edithelp.tt:5
-#: root/base/edithelp.tt:52
+#: root/base/edithelp.tt:2
+#: root/base/edithelp.tt:7
 msgid "Wiki words"
 msgstr "Wiki ord"
 
-#: root/base/edithelp.tt:118
 msgid "With a second line"
 msgstr "Med en linje til"
 
-#: root/base/edithelp.tt:109
-#: root/base/edithelp.tt:97
+#: root/base/edithelp.tt:149
+msgid "With a second paragraph"
+msgstr "Med en paragraf til"
+
+#: root/base/edithelp.tt:120
+#: root/base/edithelp.tt:134
+#: root/base/edithelp.tt:222
 msgid "Write"
 msgstr "Skriv"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:134
+#: lib/MojoMojo/Controller/PageAdmin.pm:146
 msgid "YOUR CHANGES"
 msgstr "DINE ENDRINGER"
 
@@ -1630,17 +1758,21 @@ msgstr "Du kan eksportere alle sidene i denne wikien som en zip fil enten som HT
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Du kan abbonere på denne wikien med RS og enten bare få overskriften på sider som endrer seg eller hele siden."
 
-#: lib/MojoMojo/Controller/Attachment.pm:38
+#: lib/MojoMojo/Controller/Attachment.pm:39
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Du har ikke rettigheter til å endre vedlegg for denne siden"
 
-#: lib/MojoMojo/Controller/User.pm:383
+#: lib/MojoMojo/Controller/User.pm:389
 msgid "You have to fill in all required fields."
 msgstr "Du må fylle inn alle de påkrevde feltene."
 
 #: root/base/comment/login.tt:3
 msgid "You have to log in to post a comment."
 msgstr "Du må logge inn for å legge igjen en kommentar."
+
+#: lib/MojoMojo/Formatter/YouTube.pm:54
+msgid "YouTube Video"
+msgstr "Youtube Video"
 
 #: root/base/user/prefs.tt:3
 msgid "Your Account"
@@ -1650,17 +1782,22 @@ msgstr "Din konto"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr "Teksten din er ugyldig, reformatter den og prøv igjen."
 
-#: lib/MojoMojo/Controller/User.pm:159
+#: lib/MojoMojo/Controller/User.pm:162
 msgid "Your password has been updated"
 msgstr "Ditt passord er nå endret"
 
-#. (c.config.name)
+#. (c.pref('name')
+#. (c.pref("name"))
 #: root/base/mail/reset_password.tt:3
 msgid "Your password on x has been reset. This is your new password:"
 msgstr "Ditt passord på %1 har blitt resatt. Dette er ditt nye passord:"
 
+#: root/base/edithelp.tt:7
+msgid "[[C++]], [[Let's play again!]] ((easy to type))"
+msgstr "[C++]], [[Skal vi leke mer?]] ((lett å skrive))"
+
 #. ($c->pref('name')
-#: lib/MojoMojo/Controller/User.pm:253
+#: lib/MojoMojo/Controller/User.pm:259
 msgid "[x] New User Validation"
 msgstr "[%1] Bekreft din e-postadresse"
 
@@ -1672,7 +1809,7 @@ msgstr "handliger"
 msgid "add"
 msgstr "legg til"
 
-#: root/base/comment.tt:23
+#: root/base/comment.tt:24
 msgid "add a comment"
 msgstr "legg til en kommentar"
 
@@ -1680,19 +1817,17 @@ msgstr "legg til en kommentar"
 msgid "add tag"
 msgstr "legg til nøkkelord"
 
-#: lib/MojoMojo/Schema.pm:139
+#: lib/MojoMojo/Schema.pm:141
 msgid "admin home page"
 msgstr ""
 "h1. Admin User.\n"
 "\n"
 "This is the default home node for the admin user. You can change this text by pressing the _Edit_ link at the bottom."
 
-#: root/base/edithelp.tt:3
-#: root/base/edithelp.tt:45
 msgid "advanced"
 msgstr "avansert"
 
-#: root/base/edithelp.tt:67
+#: root/base/edithelp.tt:86
 msgid "alt text"
 msgstr "alt tekst"
 
@@ -1704,7 +1839,7 @@ msgstr "anonymfeiging"
 msgid "apply to subpages"
 msgstr "gjelder for undersider"
 
-#: root/base/page/edit.tt:57
+#: root/base/page/edit.tt:55
 msgid "as"
 msgstr "som"
 
@@ -1714,7 +1849,7 @@ msgstr "som"
 msgid "as x"
 msgstr "som %1"
 
-#: root/base/page/view.tt:5
+#: root/base/page/view.tt:14
 #: root/base/tag/recent.tt:27
 msgid "at"
 msgstr "på"
@@ -1723,24 +1858,28 @@ msgstr "på"
 msgid "back"
 msgstr "tilbake"
 
-#: root/base/toolbar.tt:28
+#: root/base/toolbar.tt:88
 msgid "bigger"
 msgstr "større"
 
-#: root/base/edithelp.tt:138
+#: root/base/edithelp.tt:173
 msgid "blocks are wrapped in backticks"
 msgstr "blokker omringes av aksenter"
 
-#: root/base/edithelp.tt:60
-#: root/base/toolbar.tt:22
-#: root/base/toolbar.tt:56
+#: root/base/edithelp.tt:68
+#: root/base/toolbar.tt:114
+#: root/base/toolbar.tt:82
 msgid "bold"
 msgstr "uthevet"
 
-#: root/base/page/info.tt:41
+#: root/base/page/edit.tt:50
+msgid "busy spinner"
+msgstr "Jobber"
+
+#: root/base/page/info.tt:43
 #: root/base/page/search.tt:35
 #: root/base/page/search_inline.tt:27
-#: root/base/page/view.tt:32
+#: root/base/page/view.tt:43
 #: root/base/tag/recent.tt:26
 msgid "by"
 msgstr "laget av"
@@ -1753,7 +1892,7 @@ msgstr "bytes"
 msgid "can"
 msgstr "kan"
 
-#: root/base/toolbar.tt:18
+#: root/base/toolbar.tt:78
 msgid "centered paragraph"
 msgstr "Senter-justert paragraf"
 
@@ -1761,20 +1900,24 @@ msgstr "Senter-justert paragraf"
 msgid "chars"
 msgstr "tegn"
 
-#: root/base/edithelp.tt:138
-#: root/base/toolbar.tt:10
+#: root/base/edithelp.tt:173
+#: root/base/toolbar.tt:70
 msgid "code"
 msgstr "kode"
 
-#: root/base/comment.tt:13
+#: root/base/comment.tt:14
 msgid "comment"
 msgstr "kommentar"
+
+#: root/base/toolbar.tt:45
+msgid "comments"
+msgstr "kommentarer"
 
 #: root/base/comment.tt:2
 msgid "comments disabled for preview"
 msgstr "kommentarer fungerer ikke i forhåndsvisning"
 
-#: root/base/tag/list.tt:32
+#: root/base/tag/list.tt:35
 msgid "common uses"
 msgstr "vanlige bruksområder"
 
@@ -1782,22 +1925,34 @@ msgstr "vanlige bruksområder"
 msgid "configuration"
 msgstr "konfigurasjon"
 
-#: lib/MojoMojo/Controller/User.pm:313
+#: lib/MojoMojo/Controller/User.pm:319
 msgid "confirmation message resent"
 msgstr "bekreftelsesmelding ble sendt på nytt"
 
-#: root/forms/pageadmin/edit.yml:15
+#: root/base/toolbar.tt:50
+msgid "cpan"
+msgstr "cpan"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:87
+msgid "create"
+msgstr "opprett"
+
+#: root/forms/pageadmin/edit.yml:12
 msgid "creator"
 msgstr "skaper"
 
-#: root/base/attachments/list.tt:9
+#: root/base/attachments/list.tt:10
 msgid "delete"
 msgstr "slett"
 
-#: root/base/toolbar.tt:26
-#: root/base/toolbar.tt:60
+#: root/base/toolbar.tt:118
+#: root/base/toolbar.tt:86
 msgid "deleted"
 msgstr "slettet"
+
+#: root/base/edithelp.tt:200
+msgid "details"
+msgstr "detaljer"
 
 #: root/base/message.tt:6
 msgid "do not pass prison, do not collect $ 200..."
@@ -1806,6 +1961,10 @@ msgstr "Gå direkte til fengsel, motta ikke $100 om du passerer start..."
 #: root/base/attachments/list.tt:7
 msgid "download"
 msgstr "last ned"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:87
+msgid "edit"
+msgstr "rediger"
 
 #: root/base/admin/user.tt:13
 msgid "email"
@@ -1816,26 +1975,27 @@ msgstr "e-post"
 msgid "entire site"
 msgstr "alle sidene"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:75
+#: root/base/edithelp.tt:76
+#: root/base/edithelp.tt:81
 msgid "example"
 msgstr "eksempel"
 
 #: root/base/comment/post.tt:6
-#: root/base/page/edit.tt:60
+#: root/base/page/edit.tt:58
 msgid "forget me"
 msgstr "glem meg"
 
 #: root/base/gallery/photo.tt:7
-#: root/base/navbar.tt:74
+#: root/base/navbar.tt:80
 msgid "gallery"
 msgstr "galleri"
 
-#: root/base/edithelp.tt:22
+#: root/base/edithelp.tt:26
 msgid "hello"
 msgstr "hallo"
 
-#: lib/MojoMojo/Schema.pm:135
+#: lib/MojoMojo/Schema.pm:137
 msgid "help message"
 msgstr ""
 "h1. Help Index.\n"
@@ -1848,24 +2008,30 @@ msgstr ""
 "\n"
 "h2. Attachments & Photos\n"
 
-#: root/base/edithelp.tt:62
-#: root/base/edithelp.tt:63
+#: root/base/edithelp.tt:75
+#: root/base/edithelp.tt:76
+#: root/base/edithelp.tt:81
 msgid "http://example.com/"
 msgstr "http://eksempel.no/"
 
-#: root/base/edithelp.tt:140
+#: root/base/edithelp.tt:177
 msgid "in the wrapping block"
 msgstr "i den nøstede blokken"
 
-#: root/base/edithelp.tt:17
+#: root/base/toolbar.tt:48
+msgid "include"
+msgstr "inkluder"
+
+#: root/base/edithelp.tt:234
 msgid "include this page"
 msgstr "inkluder denne siden"
 
-#: root/base/edithelp.tt:20
+#: root/base/edithelp.tt:238
+#: root/base/edithelp.tt:51
 msgid "include this rss feed"
 msgstr "inkluder denne rss strømmen"
 
-#: root/base/toolbar.tt:48
+#: root/base/toolbar.tt:108
 msgid "increase # for smaller headline"
 msgstr "Øk antall # for mindre overskrifter"
 
@@ -1879,32 +2045,45 @@ msgstr "naken visning"
 msgid "insert"
 msgstr "sett inn"
 
+#: root/base/attachments/list.tt:9
+msgid "insert content"
+msgstr "sett inn innhold"
+
 #: root/base/attachments/list.tt:8
 msgid "insert link"
 msgstr "sett inn lenke"
 
-#: root/base/toolbar.tt:24
-#: root/base/toolbar.tt:58
+#: lib/MojoMojo/Formatter/YouTube.pm:67
+msgid "is not a valid link to youtube video"
+msgstr "er ikke en gyldig youtube lenke"
+
+#: lib/MojoMojo/Formatter/Include.pm:53
+#: lib/MojoMojo/Formatter/YouTube.pm:60
+msgid "is not a valid url"
+msgstr "er ikke en gyldig lenke"
+
+#: root/base/toolbar.tt:116
+#: root/base/toolbar.tt:84
 msgid "italic"
 msgstr "kursiv"
 
-#: root/base/edithelp.tt:59
+#: root/base/edithelp.tt:64
 msgid "italics"
 msgstr "kursiv"
 
-#: root/base/edithelp.tt:140
+#: root/base/edithelp.tt:177
 msgid "just use `2`"
 msgstr "bare bruk `2`"
 
-#: root/base/toolbar.tt:20
+#: root/base/toolbar.tt:80
 msgid "justified paragraph"
 msgstr "blokk-justert paragraf"
 
-#: root/base/toolbar.tt:14
+#: root/base/toolbar.tt:74
 msgid "left justified paragraph"
 msgstr "venstre-justert paragraf"
 
-#: root/base/edithelp.tt:33
+#: root/base/edithelp.tt:40
 msgid "linkname"
 msgstr "linknavn"
 
@@ -1918,8 +2097,19 @@ msgstr "Logg ut"
 
 #: root/base/admin/user.tt:10
 #: root/base/comment/login.tt:8
+#: root/base/message.tt:6
 msgid "login"
 msgstr "innlogging"
+
+#: root/base/breadcrumbs.tt:19
+#: root/base/breadcrumbs.tt:21
+msgid "maximize"
+msgstr "maksimer"
+
+#: root/base/breadcrumbs.tt:19
+#: root/base/breadcrumbs.tt:21
+msgid "maximize width"
+msgstr "maksimer vidde"
 
 msgid "my tags"
 msgstr "mine nøkkelord"
@@ -1928,7 +2118,15 @@ msgstr "mine nøkkelord"
 msgid "name"
 msgstr "navn"
 
-#: root/base/gallery/photo.tt:35
+#: root/base/edithelp.tt:121
+#: root/base/edithelp.tt:124
+#: root/base/edithelp.tt:135
+#: root/base/edithelp.tt:137
+#: root/base/edithelp.tt:139
+msgid "newline"
+msgstr "ny linje"
+
+#: root/base/gallery/photo.tt:40
 msgid "no description"
 msgstr "ingen beskrivelse"
 
@@ -1943,6 +2141,7 @@ msgstr "ikke tilgang til siden"
 #: root/base/gallery/photo_info.tt:4
 #: root/base/gallery/photo_info.tt:5
 #: root/base/gallery/photo_info.tt:6
+#: root/base/gallery/photo_info.tt:7
 #: root/base/gallery/photo_info.tt:8
 msgid "not specified"
 msgstr "ikke oppgitt"
@@ -1952,7 +2151,8 @@ msgstr "ikke oppgitt"
 msgid "on"
 msgstr "på"
 
-#: root/base/edithelp.tt:154
+#: root/base/edithelp.tt:196
+#: root/base/message.tt:6
 msgid "or"
 msgstr "eller"
 
@@ -1976,11 +2176,11 @@ msgstr "den vanlige uploaderen"
 msgid "popular tags"
 msgstr "populære nøkkelord"
 
-#: root/base/comment.tt:11
+#: root/base/comment.tt:12
 msgid "posted"
 msgstr "postet"
 
-#: root/base/comment.tt:9
+#: root/base/comment.tt:10
 msgid "poster"
 msgstr "forfatter"
 
@@ -1988,7 +2188,7 @@ msgstr "forfatter"
 msgid "preferences"
 msgstr "instillinger"
 
-#: root/base/toolbar.tt:12
+#: root/base/toolbar.tt:72
 msgid "quote"
 msgstr "sitat"
 
@@ -1998,8 +2198,16 @@ msgstr "sitat"
 msgid "read"
 msgstr "lese"
 
+#: root/base/toolbar.tt:47
+msgid "redirect"
+msgstr "redirekt"
+
+#: lib/MojoMojo/Formatter/Redirect.pm:50
+msgid "redirect to"
+msgstr "redirekt til"
+
 #. (wanted.from_page.path)
-#: root/base/page/list.tt:43
+#: root/base/page/list.tt:46
 msgid "referenced by x"
 msgstr "refert til av %1"
 
@@ -2015,7 +2223,7 @@ msgstr "fjern"
 msgid "revision"
 msgstr "revisjon"
 
-#: root/base/toolbar.tt:16
+#: root/base/toolbar.tt:76
 msgid "right justified paragraph"
 msgstr "høyre-justert paragraf"
 
@@ -2028,7 +2236,7 @@ msgstr "roller"
 msgid "shrinked head"
 msgstr "tørket hode"
 
-#: root/base/toolbar.tt:30
+#: root/base/toolbar.tt:90
 msgid "small"
 msgstr "liten"
 
@@ -2036,26 +2244,34 @@ msgstr "liten"
 msgid "start"
 msgstr "start"
 
-#: root/base/toolbar.tt:34
+#: root/base/toolbar.tt:94
 msgid "subscript"
 msgstr "subskript"
 
-#: root/base/toolbar.tt:32
+#: root/base/toolbar.tt:92
 msgid "superscript"
 msgstr "superskript"
+
+#: root/base/edithelp.tt:227
+msgid "table of contents"
+msgstr "innhold"
 
 #: root/base/tag/list.tt:9
 msgid "tags"
 msgstr "nøkkelord"
 
-#: lib/MojoMojo/Controller/User.pm:384
+#: lib/MojoMojo/Controller/User.pm:390
 msgid "the following are missing:"
 msgstr "følgende mangler:"
 
 msgid "this is the string"
 msgstr "dette er strengen"
 
-#: root/base/toolbar.tt:64
+#: root/base/toolbar.tt:46
+msgid "toc"
+msgstr "toc"
+
+#: root/base/toolbar.tt:122
 msgid "url inside paranthesis"
 msgstr "url mellom parantesene"
 
@@ -2078,7 +2294,7 @@ msgstr "vis"
 # "\n"
 # "Check out our [[Help]] section."
 #. ("test")
-#: lib/MojoMojo/Schema.pm:131
+#: lib/MojoMojo/Schema.pm:133
 msgid "welcome message"
 msgstr "h1. Velkommen til MojoMojo!Dette er forsiden din. For å begynne å bruke wikien din, logg deg inn medbrukernavn admin/passord admin. Du vil da ha mulighet til å endre instillinger fra bunn-menyen  Hvis du vil teste litt kan du lage en [[Ny Side]] eller redigere denne ved å velge 'Rediger' lenken.h2. Trenger du hjelp?Sjekk ut [[Hjelp|Help]]-siden."
 
@@ -2101,31 +2317,33 @@ msgid "x more"
 msgstr "%1 flere"
 
 #. (page.versions.size)
-#: root/base/page/info.tt:37
+#: root/base/page/info.tt:39
 msgid "x revisions"
 msgstr "%1 revisjoner"
 
-#: root/base/page/permissions.tt:13
-#: root/base/page/permissions.tt:16
-#: root/base/page/permissions.tt:17
 msgid "yes"
 msgstr "ja"
 
-#: root/base/edithelp.tt:16
-#: root/base/edithelp.tt:19
+#: root/base/edithelp.tt:20
+#: root/base/edithelp.tt:23
 msgid "your text"
 msgstr "din tekst"
 
-#: root/base/edithelp.tt:17
-#: root/base/edithelp.tt:20
+#: root/base/edithelp.tt:235
+#: root/base/edithelp.tt:239
+#: root/base/edithelp.tt:51
 msgid "your/url"
 msgstr "din/url"
 
-#: root/base/edithelp.tt:35
+#: root/base/toolbar.tt:49
+msgid "youtube"
+msgstr "youtube"
+
+#: root/base/edithelp.tt:46
 msgid "|a|table|row|"
 msgstr "|en|tabell|rad|"
 
-#: root/base/edithelp.tt:35
+#: root/base/edithelp.tt:46
 msgid "|b|table|row|"
 msgstr "|andre|tabell|rad"
 

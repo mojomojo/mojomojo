@@ -1,24 +1,14 @@
 <div id="breadcrumbs">
-  <div class="left">
-  [% FOREACH page IN path_pages %]
-    [% IF loop.first +%]
-  <a href="[% c.uri_for('/') %]">[% c.pref("name") %]</a>
-    [% ELSE +%]
-  / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
+    <div class="float-left">
+    [% FOREACH page IN path_pages %]
+        [% IF loop.first +%]
+        <a href="[% c.uri_for('/') %]">[% c.pref("name") %]</a>
+        [% ELSE +%]
+        / <a href="[% c.uri_for(page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
+        [% END %]
     [% END %]
-  [% END %]
-
-  [% FOREACH page IN proto_pages +%]
-  / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
-  [% END +%]
-  </div>
-
-  <div class="right">
-[% IF c.session.maximize_width %]
-  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_2.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />
-[% ELSE %]
-  <img id="maximize" src="[% c.uri_for_static('gfx/maximize_width_1.png') %]" onclick="toggle_width();" alt="[% loc ('maximize') %]" title="[% loc('maximize width') %]" />
-[% END %]
-  </div>
-
+    [% FOREACH page IN proto_pages +%]
+        / <a class="protoPage" href="[% c.uri_for( page.path) %]">[% c.expand_wikilink(page.name_orig) %]</a>
+    [% END +%]
+    </div>
 </div>

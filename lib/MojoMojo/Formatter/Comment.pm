@@ -9,7 +9,7 @@ MojoMojo::Formatter::Comment - Include comments on your page.
 =head1 DESCRIPTION
 
 This is a hook for the page comment functionality. It allows a 
-comment box to be placed anywhere on your page through the =comments
+comment box to be placed anywhere on your page through the {{comments}}
 tag.
 
 =head1 METHODS
@@ -33,15 +33,13 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
-    eval {
-        $$content =~ s{\<p\>\=comments\s*\<\/p\>}
-                  {show_comments($c,$c->stash->{page})}me;
-    };
+    my $re=$class->gen_re('comments');
+    $$content =~ s|$re|show_comments($c,$c->stash->{page})|xme;
 }
 
 =item show_comments
 
-Redispatches a subrequest to L<MojoMojo::Controller::Comment>.
+Forwards to L<MojoMojo::Controller::Comment>.
 
 =cut
 

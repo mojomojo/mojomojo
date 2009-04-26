@@ -2,8 +2,9 @@ package MojoMojo::Formatter::Include;
 
 use base qw/MojoMojo::Formatter/;
 
-use LWP::Simple;
-use URI::Fetch;
+eval "use LWP::Simple;use URI::Fetch;";
+my $eval_res = $@;
+sub module_loaded { $eval_res ? 0 : 1 }
 
 =head1 NAME
 
@@ -11,7 +12,7 @@ MojoMojo::Formatter::Include - Include files in your content.
 
 =head1 DESCRIPTION
 
-Include files verbatim in your content, by writing =<url>.
+Include files verbatim in your content, by writing {{<url>}}.
 
 =head1 METHODS
 
@@ -34,17 +35,9 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
-
-    my @lines = split /\n/, $$content;
-    $$content = "";
-    foreach my $line (@lines) {
-        if ( $line =~ m/^=(http\:\/\/\S+)$/ ) {
-            $$content .= $class->include( $c, $1 );
-        }
-        else {
-            $$content .= $line . "\n";
-        }
-    }
+    return unless $class->module_loaded;
+    my $re=$class->gen_re(qr/(http\:\/\/[^}]+)/);
+    $$content =~ s|$re|$class->include( $c, $1 )|meg;
 }
 
 =item include <c> <url>
@@ -59,7 +52,10 @@ sub include {
     $url = URI->new($url);
     return "$url ".$c->loc('is not a valid url') unless $url;
     my $rel = $url->rel( $c->req->base );
-    return "$url " . $c->loc('is part of own site, cannot include') unless $rel->scheme;
+    unless ($rel->scheme) {
+        warn "Trying to get ".$rel;
+        return $c->subreq( '/inline', { path => '/'.$rel } );
+    }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
     return $c->loc('Could not  retrieve')." $url.\n";

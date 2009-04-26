@@ -1,9 +1,4 @@
-[% PROCESS header.tt %]
-
-<div id="header"><h1>[% loc('Login') %]</h1></div>
-
-[% PROCESS breadcrumbs.tt %]
-        
+[% WRAPPER page/wrapper.tt simple_header=1 title=loc('Login') %]
 <div id="content">
     <p class="end logintext"><span id="logintext">[% message %]</span>
         <br />
@@ -14,13 +9,4 @@
     </p>
     [% form %]
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#loginField').focus();
-  });
-</script>
-
-<div id="bottomnav">&nbsp;</div>
-       
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

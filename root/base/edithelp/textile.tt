@@ -1,0 +1,64 @@
+<h2>[%loc('Textile formatting tips')%] (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_blank">[%loc('Textile2 reference')%]</a>)</h2>
+<table>
+    <tr>
+        <td>_[%loc('your text')%]_</td>
+        <td class="arrow">-></td>
+        <td><em>[%loc('your text')%]</em></td>
+    </tr>
+    <tr>
+        <td>*[%loc('your text')%]*</td>
+        <td class="arrow">-></td>
+        <td><strong>[%loc('your text')%]</strong></td>
+    </tr>
+    <tr>
+        <td>%{color:red}[%loc('hello')%]%</td>
+        <td class="arrow">-></td>
+        <td><span style="color: red;">[%loc('hello')%]</span></td>
+    </tr>
+    <tr>
+        <td>* [%loc('Bulleted list')%]<br />* [%loc('Second item')%]</td>
+        <td class="arrow">-></td>
+        <td>&#8226; [%loc('Bulleted list')%]<br />&#8226; [%loc('Second item')%]</td>
+    </tr>
+    <tr>
+        <td># [%loc('Numbered list')%]<br /># [%loc('Second item')%]</td>
+        <td class="arrow">-></td>
+        <td>1. [%loc('Numbered list')%]<br />2. [%loc('Second item')%]</td>
+    </tr>
+[% IF(INC.exists('MojoMojo/Formatter/Emote.pm')) -%]
+    <tr>
+        <td>:-)</td>
+        <td class="arrow">-></td>
+        <td><em><img src="[%base%]/.static/emote/regular_smile.gif" alt="smile emote" /><br/>[%loc('And others.')%]</em></td>
+    </tr>
+[% END -%]
+    <tr>
+        <td>"[%loc('linkname')%]":[%loc('URL')%]</td>
+        <td class="arrow">-></td>
+        <td><a href="URL">[%loc('linkname')%]</a></td>
+    </tr>
+[% IF(INC.exists('MojoMojo/Formatter/Amazon.pm')) -%]
+    <tr>
+        <td>{{http://amazon/url}}</td>
+        <td class="arrow">-></td>
+        <td><em>[%loc('Show this product')%]</em></td>
+    </tr>
+[% END -%]
+    <tr>
+        <td>[%loc('|a|table|row|')%]<br />[%loc('|b|table|row|')%]</td>
+        <td class="arrow">-></td>
+        <td>[%loc('Table')%]</td>
+    </tr>
+    <tr>
+        <td>!/img/url!</td>
+        <td class="arrow">-></td>
+        <td>[%loc('Image')%]</td>
+    </tr>
+[% IF(INC.exists('MojoMojo/Formatter/RSS.pm')) -%]
+    <tr>
+        <td>{{feed://[%loc('your/url')%]}}</td>
+        <td class="arrow">-></td>
+        <td><em>[%loc('include this rss feed')%]</em></td>
+    </tr>
+[% END -%]
+</table>
