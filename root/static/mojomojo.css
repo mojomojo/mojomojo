@@ -770,6 +770,12 @@ a.footnote:after {
 
 #content img.right {
     margin-left: 1em;
+    float: right;
+}
+
+#content img.left {
+    margin-left: 1em;
+    float: left;
 }
 
 #searchField {
