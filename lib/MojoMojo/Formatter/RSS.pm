@@ -13,7 +13,7 @@ MojoMojo::Formatter::RSS - Include rss feeds on your page.
 
 =head1 DESCRIPTION
 
-This formatter takes a feed in the format =feed://<url>, and 
+This formatter takes a feed in the format {{feed://<url>}}, and 
 passes it through L<XML::Feed> to get a formatted feed suitable
 for inclusion in your page. It also caches them in the chosen 
 Catalyst Cache. By default it will render the first element in 
