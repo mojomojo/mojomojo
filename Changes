@@ -1,3 +1,4 @@
+0.999029 2009-04-26 21:10:00
         - Test Textile some more, basic scrub html test, TODO Markdown tests.
         - Allow html table, definition and list tags through HTML::Srubber.
         - additional theme colors: grey, purple, pink
