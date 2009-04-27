@@ -1,9 +1,11 @@
+0.999029 2009-04-26 21:10:00
         - Test Textile some more, basic scrub html test, TODO Markdown tests.
         - Allow html table, definition and list tags through HTML::Srubber.
         - additional theme colors: grey, purple, pink
         - Add Amazon, RSS, Emote formatter to main distribution.
         - many new tests, including live tests of chained formatters (dandv)
         - main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
+        - Switch email to use Catalyst::View::Email and tests for such (rafl))
 
 0.999028 2009-04-23 11:58:00
         - Use oneshot timer instead of only_every to trigger preview update.

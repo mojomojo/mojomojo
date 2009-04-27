@@ -174,7 +174,7 @@ sub recover_pass : Global {
       $c->model('DBIC::Person')->search( [ email => $id, login => $id ] )
       ->first;
     unless ( $user ) {
-        $c->flash->{message} = 'Could not recover password.';
+        $c->flash->{message} = $c->loc('Could not recover password.');
         return $c->res->redirect( $c->uri_for('login') );
     }
 
@@ -184,7 +184,7 @@ sub recover_pass : Global {
         email    => {
             from     => $c->config->{system_mail},
             to       => $user->login . ' <' . $user->email . '>',
-            subject  => 'Your new password on ' . $c->pref('name'),
+            subject  => $c->loc('Your new password on ') . $c->pref('name'),
             template => 'reset_password.tt',
         },
     );
@@ -247,7 +247,7 @@ sub register : Global FormConfig {
 
         # Need to check if login or email already exists.
         if ( $c->forward('is_account_taken') ) {
-            $c->stash->{account_taken} = 'Account Taken. Try another.';
+            $c->stash->{account_taken} = $c->loc('Account Taken. Try another.');
             $c->detach();
         }
         $c->stash->{newuser}->active(-1);

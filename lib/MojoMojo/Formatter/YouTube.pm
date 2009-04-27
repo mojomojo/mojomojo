@@ -9,7 +9,7 @@ MojoMojo::Formatter::YouTube - Embed YouTube player
 
 =head1 DESCRIPTION
 
-Embed Youtube video player for given video by writing =youtube <url>.
+Embed Youtube video player for given video by writing {{youtube <url>}}.
 
 =head1 METHODS
 

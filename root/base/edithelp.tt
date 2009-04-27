@@ -41,23 +41,23 @@
         </tr>
         <tr>
             <td><em>[%loc('include this page')%]</em></td>
-            <td>=http://[%loc('your/url')%]</td>
+            <td>{{http://[%loc('your/url')%]}}</td>
         </tr>
         <tr>
             <td><em>[%loc('include this rss feed')%]</em></td>
-            <td>=feed://[%loc('your/url')%]</td>
+            <td>{{feed://[%loc('your/url')%]}}</td>
         </tr>
         <tr>
             <td><em>[%loc('Show this product')%]</em></td>
-            <td>=http://amazon/url</td>
+            <td>{{http://amazon/url}}</td>
         </tr>
         <tr>
             <td><em>[%loc('Enable comments on this page.')%]</em></td>
-            <td>=comments</td>
+            <td>{{comments}}</td>
         </tr>
         <tr>
-            <td><em>[%loc('Format content until next =pod as plain old documentation')%]</em></td>
-            <td>=pod</td>
+            <td><em>[%loc('Format content until {{end}} as plain old documentation')%]</em></td>
+            <td>{{pod}}</td>
         </tr>
     </tbody>
     </table>

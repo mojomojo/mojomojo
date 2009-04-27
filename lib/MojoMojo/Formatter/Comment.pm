@@ -9,7 +9,7 @@ MojoMojo::Formatter::Comment - Include comments on your page.
 =head1 DESCRIPTION
 
 This is a hook for the page comment functionality. It allows a 
-comment box to be placed anywhere on your page through the =comments
+comment box to be placed anywhere on your page through the {{comments}}
 tag.
 
 =head1 METHODS
