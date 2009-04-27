@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Markdown;
-use Test::More tests => 11;
+use Test::More tests => 12;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -19,7 +19,7 @@ $test = '<div with="attributes"> in a code span';
 $content = <<'MARKDOWN';
 This is the code: `<div markdown="1">`.
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML');
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
 <p>This is the code: <code>&lt;div markdown="1"&gt;</code>.</p>
 HTML
 
@@ -27,6 +27,7 @@ HTML
 #----------------------------------------------------------------------------
 $test = 'blockquotes';
 #----------------------------------------------------------------------------
+
 $content = <<'MARKDOWN';
 Below is a blockquote:
 
@@ -42,6 +43,18 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 </blockquote>
 
 <p>A quote is above.</p>
+HTML
+
+
+#----------------------------------------------------------------------------
+$test = 'direct <http://url.com> hyperlinks';
+#----------------------------------------------------------------------------
+
+$content = <<'MARKDOWN';
+This should be linked: <http://mojomojo.org>.
+MARKDOWN
+eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+<p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
 HTML
 
 
@@ -203,5 +216,3 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 || this is | a <pre> element ||
 </pre>
 HTML
-
-
