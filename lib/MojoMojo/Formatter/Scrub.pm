@@ -31,10 +31,11 @@ sub format_content_order { 7 }
 my @allow = qw[ p img em strong br hr b a div pre code span
   table tr th td thead tbody tfoot caption colgroup col
   h1 h2 h3 h4 h5 h6 ul ol li dl dt dd
-  ];
+];
 
 my @rules = (
     script => 0,
+    iframe => 0,
     div    => {
         class => 1,
         style => 1,
@@ -47,21 +48,21 @@ my @rules = (
     },
     img => {
         class => 1,
-        src   => qr{^(?!http://)}i,    # only relative image links allowed
-        alt   => 1,                    # alt attribute allowed
-        '*'   => 0,                    # deny all other attributes
+        src   => qr{^(?!http(?:s)?://)}i,    # only relative image links allowed
+        alt => 1,    # alt attribute allowed
+        '*' => 0,    # deny all other attributes
     },
 );
 
 my @default = (
-    0 =>                               # default rule, deny all tags
+    0 =>             # default rule, deny all tags
       {
         '*'    => 1,                        # default rule, allow all attributes
         'href' => qr{^(?!(?:java)?script)}i,
         'src'  => qr{^(?!(?:java)?script)}i,
         'cite'     => '(?i-xsm:^(?!(?:java)?script))',
         'language' => 0,
-        'name'        => 1,                 # could be sneaky, but hey ;
+        'name'        => 1,    # could be sneaky, but hey ;
         'class'       => 1,
         'onblur'      => 0,
         'onchange'    => 0,

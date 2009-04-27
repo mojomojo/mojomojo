@@ -3,10 +3,9 @@ use Test::More tests => 16;
 use HTTP::Request::Common;
 use Test::Differences;
 
-my $original_formatter
-  ;    # used to save/restore whatever formatter is set up in mojomojo.db
-my $c;       # the Catalyst object of this live server
-my $test;    # test description
+my $original_formatter;    # formatter set up in mojomojo.db
+my $c;                     # the Catalyst object of this live server
+my $test;                  # test description
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -30,18 +29,14 @@ ok( $original_formatter = $c->pref('main_formatter'),
 ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ),
     'set preferred formatter to Markdown' );
 
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 $test = "empty body";
-
-#----------------------------------------------------------------------------
 my $content = '';
 my $body = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $body, 'Please type something', $test );
 
-#----------------------------------------------------------------------------
-$test = 'headings';
-
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+$test    = 'headings';
 $content = <<'MARKDOWN';
 # Heading 1
 paragraph
@@ -56,11 +51,9 @@ eq_or_diff( $body, <<'HTML', $test );
 <h2>Heading 2</h2>
 HTML
 
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 $test =
 '<span>s need to be kept because they are the only way to specift text attributes';
-
-#----------------------------------------------------------------------------
 $content = <<'MARKDOWN';
 Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.
 MARKDOWN
@@ -69,10 +62,8 @@ is( $body, <<HTML, $test );
 <p>Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.</p>
 HTML
 
-#----------------------------------------------------------------------------
-$test = 'HTML entities must be preserved in code sections';
-
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+$test    = 'HTML entities must be preserved in code sections';
 $content = <<'MARKDOWN';
 Here's some code:
 
@@ -91,9 +82,7 @@ eq_or_diff( $body, <<'HTML', $test );
 HTML
 
 #----------------------------------------------------------------------------
-$test = '<div> with HTML attribute in a code span';
-
-#----------------------------------------------------------------------------
+$test    = '<div> with HTML attribute in a code span';
 $content = <<'MARKDOWN';
 This is the code: `<div class="content">`.
 MARKDOWN
@@ -105,11 +94,9 @@ HTML
 TODO: {
     local $TODO = "attribute snatcher";
 
-   #----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
     $test =
 '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
-
-   #----------------------------------------------------------------------------
     $content = <<'MARKDOWN';
 This is the code: `<div aria_role="content">`.
 MARKDOWN
@@ -122,10 +109,8 @@ HTML
 TODO: {
     local $TODO = "<br /> suckage";
 
-   #----------------------------------------------------------------------------
-    $test = '<br/>s need to be preserved';
-
-   #----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+    $test    = '<br/>s need to be preserved';
     $content = <<'MARKDOWN';
 Roses are red<br/>Violets are blue
 MARKDOWN
@@ -137,12 +122,10 @@ HTML
 }
 
 TODO: {
+
+#-------------------------------------------------------------------------------
     local $TODO = "blockquote chokage";
-
-   #----------------------------------------------------------------------------
-    $test = 'blockquotes';
-
-   #----------------------------------------------------------------------------
+    $test    = 'blockquotes';
     $content = <<'MARKDOWN';
 Below is a blockquote:
 
@@ -162,10 +145,8 @@ MARKDOWN
 HTML
 }
 
-#----------------------------------------------------------------------------
-$test = 'wikilink to ../new_sibling';
-
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+$test    = 'wikilink to ../new_sibling';
 $content = <<'MARKDOWN';
 This is a child page with a link to a [[../new_sibling]].
 MARKDOWN
@@ -177,10 +158,8 @@ HTML
 TODO: {
     local $TODO = "markdown flag";
 
-   #----------------------------------------------------------------------------
-    $test = '<div> with markdown="1"';
-
-   #----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+    $test    = '<div> with markdown="1"';
     $content = <<'MARKDOWN';
 We want to be able to have Markdown interpreted in `<div markdown="1">` sections
 so that we can build sidebars, photo divs etc.
@@ -220,10 +199,9 @@ TODO: {
     local $TODO =
 "We'd like this test to pass, but it won't until Text::Markdown passes it.";
 
-   #----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
     $test = 'Markdown should not parse block-level markdown in <pre> tags';
 
-   #----------------------------------------------------------------------------
     $content = <<'MARKDOWN';
 <pre lang="Perl">
 # A comment, not a heading
@@ -236,4 +214,3 @@ MARKDOWN
 </pre>
 HTML
 }
-

@@ -1,11 +1,13 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Scrub;
-use Test::More tests => 1;
+use MojoMojo::Formatter::IDS;
+use Test::More tests => 5;
+use Test::Differences;
 
 my ( $content, $got, $expected, $test );
 
-#----------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 $test = 'complete set of html table tags';
 $content = <<'HTML_TABLE';
 <table summary="Vegetable Price List">
@@ -35,7 +37,102 @@ $content = <<'HTML_TABLE';
 HTML_TABLE
 
 # We expect Scrub to leave this table as is.
-$expected = $content;
+#$expected = $content;
 MojoMojo::Formatter::Scrub->format_content( \$content );
-is( $content, $expected, $test );
+is( $content, <<'HTML_TABLE', $test );
+<table summary="Vegetable Price List">
+<caption>Vegetable Price List</caption>
+<colgroup><col /><col align="right" /></colgroup>
+<thead>
+    <tr>
+      <th>Vegetable</th>
+      <th>Cost per kilo</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+      <td>Lettuce</td>
+      <td>$1</td>
+    </tr>
+    <tr>
+      <td>Silver carrots</td>
+      <td>$10.50</td>
+    </tr>
+    <tr>
+      <td>Golden turnips</td>
+      <td>$108.00</td>
+    </tr>
+</tbody>
+</table>
+HTML_TABLE
+
+#-------------------------------------------------------------------------------
+$test = 'iframe not allowed';
+$content = <<'HTML';
+<iframe src="http://dandascalescu.com/bugs/mojomojo/scriptlet.html" />
+HTML
+MojoMojo::Formatter::Scrub->format_content( \$content );
+eq_or_diff( $content, <<'HTML', $test );
+
+HTML
+
+#-------------------------------------------------------------------------------
+$test = 'script not allowed';
+$content = <<'HTML';
+<SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>
+HTML
+my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+eq_or_diff( $content, <<'HTML', $test );
+
+HTML
+
+##-------------------------------------------------------------------------------
+#$test = 'img src javascript not allowed';
+#$content = <<'HTML';
+#<IMG SRC="javascript:alert('XSS');">
+#HTML
+#my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+#eq_or_diff( $content, <<'HTML', $test );
+#
+#HTML
+
+#-------------------------------------------------------------------------------
+$test = 'http external images not allowed';
+$content = <<'HTML';
+<img src="http://youporn.com/hot.jpg" />
+HTML
+my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+eq_or_diff( $content, <<'HTML', $test );
+<img>
+HTML
+
+#-------------------------------------------------------------------------------
+$test = 'https external images not allowed';
+$content = <<'HTML';
+<img src="https://youporn.com/hot.jpg" />
+HTML
+my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+eq_or_diff( $content, <<'HTML', $test );
+<img>
+HTML
+
+
+
+##-------------------------------------------------------------------------------
+#$test = 'iframe not allowed';
+#$content = <<'HTML';
+#<iframe src="http://dandascalescu.com/bugs/mojomojo/scriptlet.html" />
+#HTML
+#my $impact = MojoMojo::Formatter::IDS->format_content( \$content );
+#my $threshold = 0;
+#cmp_ok($impact, '==', $threshold, $test );
+#
+##-------------------------------------------------------------------------------
+#$test = 'obfuscated iframe not allowed';
+#$content = <<'HTML';
+#<iframe src=http://dandascalescu.com/bugs/mojomojo/scriptlet.html &lt;
+#HTML
+#my $impact = MojoMojo::Formatter::IDS->format_content( \$content );
+#my $threshold = 0;
+#cmp_ok($impact, '==', $threshold, $test );
 
