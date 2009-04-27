@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Scrub;
-use MojoMojo::Formatter::IDS;
 use Test::More tests => 5;
 use Test::Differences;
 
@@ -81,7 +80,7 @@ $test = 'script not allowed';
 $content = <<'HTML';
 <SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>
 HTML
-my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+MojoMojo::Formatter::Scrub->format_content( \$content );
 eq_or_diff( $content, <<'HTML', $test );
 
 HTML
@@ -101,7 +100,7 @@ $test = 'http external images not allowed';
 $content = <<'HTML';
 <img src="http://youporn.com/hot.jpg" />
 HTML
-my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+MojoMojo::Formatter::Scrub->format_content( \$content );
 eq_or_diff( $content, <<'HTML', $test );
 <img>
 HTML
@@ -111,28 +110,10 @@ $test = 'https external images not allowed';
 $content = <<'HTML';
 <img src="https://youporn.com/hot.jpg" />
 HTML
-my $impact = MojoMojo::Formatter::Scrub->format_content( \$content );
+MojoMojo::Formatter::Scrub->format_content( \$content );
 eq_or_diff( $content, <<'HTML', $test );
 <img>
 HTML
 
 
-
-##-------------------------------------------------------------------------------
-#$test = 'iframe not allowed';
-#$content = <<'HTML';
-#<iframe src="http://dandascalescu.com/bugs/mojomojo/scriptlet.html" />
-#HTML
-#my $impact = MojoMojo::Formatter::IDS->format_content( \$content );
-#my $threshold = 0;
-#cmp_ok($impact, '==', $threshold, $test );
-#
-##-------------------------------------------------------------------------------
-#$test = 'obfuscated iframe not allowed';
-#$content = <<'HTML';
-#<iframe src=http://dandascalescu.com/bugs/mojomojo/scriptlet.html &lt;
-#HTML
-#my $impact = MojoMojo::Formatter::IDS->format_content( \$content );
-#my $threshold = 0;
-#cmp_ok($impact, '==', $threshold, $test );
 

@@ -11,18 +11,23 @@ BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG}  = 0;
     use_ok('MojoMojo::Formatter::Markdown')
-        and note('Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown');
+      and note(
+'Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown'
+      );
     use_ok( 'Catalyst::Test', 'MojoMojo' );
 }
 
 END {
-    ok( $c->pref( main_formatter => $original_formatter ), 'restore original formatter' );
+    ok( $c->pref( main_formatter => $original_formatter ),
+        'restore original formatter' );
 }
 
 ( undef, $c ) = ctx_request('/');
-ok( $original_formatter = $c->pref('main_formatter'), 'save original formatter' );
+ok( $original_formatter = $c->pref('main_formatter'),
+    'save original formatter' );
 
-ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ), 'set preferred formatter to Markdown' );
+ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ),
+    'set preferred formatter to Markdown' );
 
 #-------------------------------------------------------------------------------
 $test = "empty body";
@@ -46,19 +51,19 @@ eq_or_diff( $body, <<'HTML', $test );
 <h2>Heading 2</h2>
 HTML
 
+TODO: {
+    local $TODO = "direct <http://url.com> hyperlinks";
 
-#----------------------------------------------------------------------------
-$test = 'direct <http://url.com> hyperlinks';
-#----------------------------------------------------------------------------
-$content = <<'MARKDOWN';
+#-------------------------------------------------------------------------------
+    $test = 'direct <http://url.com> hyperlinks';
+    $content = <<'MARKDOWN';
 This should be linked: <http://mojomojo.org>.
 MARKDOWN
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+    $body = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $body, <<'HTML', $test );
 <p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
 HTML
-
-
+}
 
 #-------------------------------------------------------------------------------
 $test =
