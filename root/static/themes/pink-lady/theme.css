@@ -180,7 +180,7 @@ div#pageoptions a.active
         min-height: 50px;
     } .showdiv
     {
-        background: white;
+        background: #f6f6f6;
         font-size: 11px;
         padding-left: 13px;
         padding-bottom: 5px;
@@ -190,7 +190,6 @@ div#pageoptions a.active
     {
         overflow: hidden;
         background-color: #fff2f9;
-        /* background: #ffffff; */
         padding: 2em 13px;
         overflow: hidden;
     } #content strong, b
