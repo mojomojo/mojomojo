@@ -16,24 +16,29 @@ body {
     max-width: 99%;
     width: 99%;
 } #header {
-    height: auto;
-    padding-bottom: 0.1em;
+    height: 4em;
+    padding-bottom: 0.3em; 
     margin: 0;
-    margin-top: 10px;
     background-color: #9595e5;
     -moz-border-radius-topleft: 20px;
     -webkit-border-top-left-radius: 20px;
     -moz-border-radius-topright: 20px;
     -webkit-border-top-right-radius: 20px;
 } #header h1 {
-    background: url(images/mmlogo.png) no-repeat 15px 20px;
-    top: 14px;
-    padding: 13px 0 10px 100px;
+    background-image: url(images/mmlogo.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+    /* top: 0px; */
+	bottom: 0px;
+	padding-top: 8px;
+	padding-right: 150px;
+	padding-bottom: 8px;
+	padding-left: 10px;
     color: #ffffd9;
     font-weight: bold;
     border-width: 1px;
     border-color: #000;
-    margin: 0;
+    margin: 12px;
 } #header h1 a {
     color: #ffffff;
 } #breadcrumbs {
