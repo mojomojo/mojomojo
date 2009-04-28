@@ -6,7 +6,7 @@ my $markdown;
 eval "use Text::MultiMarkdown";
 unless ($@) {
     $markdown = Text::MultiMarkdown->new(
-        markdown_in_html_blocks => 1,    # Allow Markdown syntax within HTML blocks.
+        markdown_in_html_blocks => 0,    # Allow Markdown syntax within HTML blocks.
         use_metadata =>
             0,  # Remove MultiMarkdown behavior change to make the top of the document metadata.
         heading_ids => 0,    # Remove MultiMarkdown behavior change in <hX> tags.
