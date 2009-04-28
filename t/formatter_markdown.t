@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Markdown;
-use Test::More tests => 13;
+use Test::More tests => 12;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -96,6 +96,10 @@ eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
 <p></div></p>
 HTML
 
+$TODO =
+  "All tests below will fail because Markdown doesn't interpret markdown in 
+HTML block elements, and does interpret block-level markdown in <pre> elements";
+
 #----------------------------------------------------------------------------
 $test    = "interpret block-level Markdown in divs without attributes";
 $content = <<'MARKDOWN';
@@ -110,18 +114,6 @@ eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
 
 </div>
 HTML
-$test    = 'direct <http://url.com> hyperlinks';
-$content = <<'MARKDOWN';
-This should be linked: <http://mojomojo.org>.
-MARKDOWN
-eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
-    <<'HTML', $test );
-<p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
-HTML
-
-$TODO =
-  "All tests below will fail because Markdown doesn't interpret markdown in 
-HTML block elements, and does interpret block-level markdown in <pre> elements";
 
 #----------------------------------------------------------------------------
 $test    = "interpret inline Markdown in divs without attributes";
