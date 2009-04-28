@@ -8,7 +8,18 @@ my $content;
 
 my $ib = '{{pod}}';
 my $ie = '{{end}}';
-$content = "\n$ib\n\n\n=head1 FOO\n\nTest message\n\n=cut\n\n$ie\n";
+$content = <<POD;
+$ib
+
+=head1 FOO
+
+Test message
+
+=cut
+
+$ie
+POD
 MojoMojo::Formatter::Pod->format_content(\$content, DummyCatalystObject->new);
-like($content, qr/\<h1\>/, "h1");
-like($content, qr/FOO/, "foo");
+like($content, qr'<h1><a.*FOO.*/h1>'s, "there is an h1 FOO");
+like($content, qr'<p>Test message</p>', "there is a Test message");
+
