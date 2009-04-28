@@ -9,7 +9,7 @@ requires(
     'Archive::Zip'                                 => '1.14',
     'MRO::Compat'                                  => '0.10',
     'Cache::FastMmap'                              => 0,
-    'Catalyst'                                     => '5.7000',
+    'Catalyst'                                     => '5.71001',
     'Catalyst::Action::RenderView'                 => '0.07',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
     'Catalyst::Controller::HTML::FormFu'           => '0.03007',

@@ -1,34 +1,38 @@
 #!/usr/bin/perl -w
-use Test::More tests => 17;
+# Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown
+use Test::More tests => 20;
 use HTTP::Request::Common;
 use Test::Differences;
 
-my $original_formatter;    # formatter set up in mojomojo.db
+my $original_formatter;    # current formatter set up in mojomojo.db
 my $c;                     # the Catalyst object of this live server
 my $test;                  # test description
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG}  = 0;
-    use_ok('MojoMojo::Formatter::Markdown')
-        and note('Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown');
-    use_ok( 'Catalyst::Test', 'MojoMojo' );
+    use_ok 'MojoMojo::Formatter::Markdown';
+    use_ok 'Catalyst::Test', 'MojoMojo';
 }
 
 END {
-    ok( $c->pref( main_formatter => $original_formatter ), 'restore original formatter' );
+    ok( $c->pref( main_formatter => $original_formatter ),
+        'restore original formatter' );
 }
 
 ( undef, $c ) = ctx_request('/');
-ok( $original_formatter = $c->pref('main_formatter'), 'save original formatter' );
+ok( $original_formatter = $c->pref('main_formatter'),
+    'save original formatter' );
 
-ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ), 'set preferred formatter to Markdown' );
+ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ),
+    'set preferred formatter to Markdown' );
 
 #-------------------------------------------------------------------------------
 $test = "empty body";
 my $content = '';
 my $body = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $body, 'Please type something', $test );
+
 
 #-------------------------------------------------------------------------------
 $test    = 'headings';
@@ -47,22 +51,22 @@ eq_or_diff( $body, <<'HTML', $test );
 HTML
 
 
-#----------------------------------------------------------------------------
-$test = 'direct <http://url.com> hyperlinks';
-#----------------------------------------------------------------------------
-$content = <<'MARKDOWN';
+#-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "the HTML scrubber should leave this one alone";
+    $test = 'direct <http://url.com> hyperlinks';
+    $content = <<'MARKDOWN';
 This should be linked: <http://mojomojo.org>.
 MARKDOWN
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+    $body = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $body, <<'HTML', $test );
 <p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
 HTML
-
+}
 
 
 #-------------------------------------------------------------------------------
-$test =
-'<span>s need to be kept because they are the only way to specify text attributes';
+$test = '<span>s need to be kept because they are the only way to specify text attributes';
 $content = <<'MARKDOWN';
 Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.
 MARKDOWN
@@ -71,8 +75,9 @@ is( $body, <<HTML, $test );
 <p>Print media uses <span style="font-family: Times New Roman">Times New Roman</span> fonts.</p>
 HTML
 
+
 #-------------------------------------------------------------------------------
-$test    = 'HTML entities must be preserved in code sections';
+$test = 'HTML entities must be preserved in code sections';
 $content = <<'MARKDOWN';
 Here's some code:
 
@@ -90,8 +95,9 @@ eq_or_diff( $body, <<'HTML', $test );
 <p>HTML entities must be preserved in code sections.</p>
 HTML
 
+
 #----------------------------------------------------------------------------
-$test    = '<div> with HTML attribute in a code span';
+$test  = '<div> with HTML attribute in a code span';
 $content = <<'MARKDOWN';
 This is the code: `<div class="content">`.
 MARKDOWN
@@ -100,12 +106,11 @@ eq_or_diff( $body, <<'HTML', $test );
 <p>This is the code: <code>&lt;div class="content"&gt;</code>.</p>
 HTML
 
-TODO: {
-    local $TODO = "attribute snatcher";
 
 #-------------------------------------------------------------------------------
-    $test =
-'<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
+TODO: {
+    local $TODO = "attribute snatcher";
+    $test = '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
     $content = <<'MARKDOWN';
 This is the code: `<div aria_role="content">`.
 MARKDOWN
@@ -115,10 +120,10 @@ MARKDOWN
 HTML
 }
 
-TODO: {
-    local $TODO = "<br /> suckage";
 
 #-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "<br /> suckage";
     $test    = '<br/>s need to be preserved';
     $content = <<'MARKDOWN';
 Roses are red<br/>Violets are blue
@@ -130,9 +135,9 @@ MARKDOWN
 HTML
 }
 
-TODO: {
 
 #-------------------------------------------------------------------------------
+TODO: {
     local $TODO = "blockquote chokage";
     $test    = 'blockquotes';
     $content = <<'MARKDOWN';
@@ -164,10 +169,10 @@ is( $body, <<'HTML', $test );
 <p>This is a child page with a link to a <span class="newWikiWord">new sibling<a title="Not found. Click to create this page." href="/../new_sibling.edit">?</a></span>.</p>
 HTML
 
-TODO: {
-    local $TODO = "markdown flag";
 
 #-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "markdown flag";
     $test    = '<div> with markdown="1"';
     $content = <<'MARKDOWN';
 We want to be able to have Markdown interpreted in `<div markdown="1">` sections
@@ -204,13 +209,11 @@ so that we can build sidebars, photo divs etc.</p>
 HTML
 }
 
-TODO: {
-    local $TODO =
-"We'd like this test to pass, but it won't until Text::Markdown passes it.";
 
 #-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "We'd like this test to pass, but it won't until Text::Markdown passes it.";
     $test = 'Markdown should not parse block-level markdown in <pre> tags';
-
     $content = <<'MARKDOWN';
 <pre lang="Perl">
 # A comment, not a heading
@@ -223,3 +226,60 @@ MARKDOWN
 </pre>
 HTML
 }
+
+
+#-------------------------------------------------------------------------------
+$test = 'in <pre>, 4 leading spaces should not be interpreted as another <pre>';
+$content = <<'MARKDOWN';
+<pre>
+if (...) {
+
+    foo();
+}
+</pre>
+MARKDOWN
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
+<pre>
+if (...) {
+
+    foo();
+}
+</pre>
+HTML
+
+
+#-------------------------------------------------------------------------------
+$test = 'in <pre lang=...>, 4 leading spaces should not be interpreted as another <pre>';
+$content = <<'MARKDOWN';
+<pre lang="Perl">
+if (...) {
+
+    foo();
+}
+</pre>
+MARKDOWN
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+# Kate has another bug here, that the 'if' should be in a <span class="kateOperator">,
+# not simply in <b>if</b>
+eq_or_diff( $body, <<'HTML', $test );
+<pre>
+<b>if</b>&nbsp;(...)&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;foo();
+}
+</pre>
+HTML
+
+
+#-------------------------------------------------------------------------------
+$test = 'POD while Markdown is the main formatter';
+$content = <<'MARKDOWN';
+{{pod}}
+=head1 NAME
+
+Some POD here
+{{end}}
+MARKDOWN
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+like($body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");

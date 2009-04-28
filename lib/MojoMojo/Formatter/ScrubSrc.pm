@@ -43,7 +43,7 @@ sub format_content {
 
     my @regex_strings_to_remove = (
         '<\w+\s+src=(?:[\'|"])?http.* ',
-        '<img src=(?:[\'|"])?javascript.* ',
+        '<\w+\s+src=(?:[\'|"])?javascript.* ',
     );
     @compiled_regexes_to_remove =
       map { qr/$_/ } @regex_strings_to_remove;
