@@ -107,7 +107,8 @@ sub create_initial_data {
             [qw/ prefkey prefvalue /],
             [ 'name', $custom_values->{wiki_name} ],
             [ 'admins', $custom_values->{admin_username} ],
-            [ 'theme',  $config->{'theme'} || 'default' ]
+            [ 'theme',  $config->{'theme'} || 'default' ],
+            ['open_registration', $config->{'open_registration'} || 1 ],
         ]
     );
 
