@@ -1,10 +1,30 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Scrub;
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Differences;
+use utf8;
 
 my ( $content, $got, $expected, $test );
+
+#-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "the HTML scrubber should not mess with Unicode characters in links";
+    $test = "leave Unicode characters alone in links; they're perfectly valid XHTML 1.0 Strict per W3C";
+    my $unicode_string = 'התפוצצות אוכלוסין';
+    $content = << "HTML";
+Hebrew link title alone: $unicode_string
+
+<a href="http://he.wikipedia.org/wiki/$unicode_string">Some Hebrew link</a>
+HTML
+    MojoMojo::Formatter::Scrub->format_content( \$content );
+    eq_or_diff( $content, <<"HTML", $test );
+Hebrew link title alone: $unicode_string
+
+<a href="http://he.wikipedia.org/wiki/$unicode_string">Some Hebrew link</a>
+HTML
+}
+
 
 #-------------------------------------------------------------------------------
 $test = 'complete set of html table tags';

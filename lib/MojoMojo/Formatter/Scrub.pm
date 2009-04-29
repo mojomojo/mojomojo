@@ -20,15 +20,16 @@ are balaced, using L<XML::Clean>.
 
 =item format_content_order
 
-Format order can be 1-99. The Scrub formatter runs on 7
-in order to catch direct user input, but trusts all subsequently
-ran plugins to not output unsafe HTML.
+Format order can be 1-99. The Scrub formatter runs on 16, just after the main
+formatter, in order to catch direct user input. Scrub trusts the main formatter
+and all subsequently ran plugins to not output unsafe HTML.
 
 =cut
 
-sub format_content_order { 7 }
+sub format_content_order { 16 }
 
-my @allow = qw[ p img em strong br hr b a div pre code span
+my @allow = qw[ p img em strong br hr b a span code
+  div pre blockquote
   table tr th td thead tbody tfoot caption colgroup col
   h1 h2 h3 h4 h5 h6 ul ol li dl dt dd
 ];

@@ -11,11 +11,11 @@ MojoMojo::Formatter::ScrubSrc - Scrub any tag that has an external src:
 
 =head1 DESCRIPTION
 
-This formatter removed string that look like tags with external src 
-attribute values.  The idea is to prevent external source sripts from 
-showing up in iframes, image etc that use invalid xhtml.  However, it probably
-is better to enforce valid xhtml first, then one can rely more on existing
-tools such as HTML::Scrubber.
+This formatter removes strings that look like tags with external C<src >
+attribute values.  The idea is to prevent external source scripts from
+showing up in C<iframe>, C<img> etc. tags that use invalid XHTML.  However, it
+probably is better to enforce valid XHTML first, then one can rely more on
+existing tools such as HTML::Scrubber.
 
 =head1 METHODS
 
@@ -23,9 +23,7 @@ tools such as HTML::Scrubber.
 
 =item format_content_order
 
-Format order can be 1-99. The ScrubSrc formatter runs on 8, 
-just after Scrub.   This is in order to catch direct user input, 
-but trusts all subsequently ran plugins to not output unsafe HTML.
+Format order can be 1-99. The ScrubSrc formatter runs on 16, just after Scrub.
 
 =cut
 
@@ -57,7 +55,7 @@ sub format_content {
 
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<XML::Clean>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<XML::Clean>
 
 =head1 AUTHORS
 

@@ -52,17 +52,14 @@ HTML
 
 
 #-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "the HTML scrubber should leave this one alone";
-    $test = 'direct <http://url.com> hyperlinks';
-    $content = <<'MARKDOWN';
+$test = 'direct <http://url.com> hyperlinks';
+$content = <<'MARKDOWN';
 This should be linked: <http://mojomojo.org>.
 MARKDOWN
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $body, <<'HTML', $test );
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
 <p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
 HTML
-}
 
 
 #-------------------------------------------------------------------------------
@@ -112,11 +109,11 @@ TODO: {
     local $TODO = "attribute snatcher";
     $test = '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
     $content = <<'MARKDOWN';
-This is the code: `<div aria_role="content">`.
+This quoted div has an ARIA role attribute: `<div role="content">`.
 MARKDOWN
     $body = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $body, <<'HTML', $test );
-<p>This is the code: <code>&lt;div aria_role="content"&gt;</code>.</p>
+<p>This quoted div has an ARIA role attribute: <code>&lt;div role="content"&gt;</code>.</p>
 HTML
 }
 
@@ -137,18 +134,16 @@ HTML
 
 
 #-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "blockquote chokage";
-    $test    = 'blockquotes';
-    $content = <<'MARKDOWN';
+$test    = 'blockquotes';
+$content = <<'MARKDOWN';
 Below is a blockquote:
 
 > quoted text
 
 A quote is above.
 MARKDOWN
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $body, <<'HTML', $test );
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
 <p>Below is a blockquote:</p>
 
 <blockquote>
@@ -157,7 +152,7 @@ MARKDOWN
 
 <p>A quote is above.</p>
 HTML
-}
+
 
 #-------------------------------------------------------------------------------
 $test    = 'wikilink to ../new_sibling';
