@@ -2,7 +2,9 @@ package MojoMojo::Formatter::Scrub;
 
 use base qw/MojoMojo::Formatter/;
 
-use HTML::Scrubber;
+use HTML::Defang;
+use strict;
+use warnings;
 
 =head1 NAME
 
@@ -28,72 +30,61 @@ and all subsequently ran plugins to not output unsafe HTML.
 
 sub format_content_order { 16 }
 
-my @allow = qw[ p img em strong br hr b a span code
-  div pre blockquote
-  table tr th td thead tbody tfoot caption colgroup col
-  h1 h2 h3 h4 h5 h6 ul ol li dl dt dd
-];
 
-my @rules = (
-    script => 0,
-    iframe => 0,
-    div    => {
-        class => 1,
-        style => 1,
 
-        #   '*' => 1,  # This would allow any attribute, beware.
-    },
-    span => {
-        class => 1,
-        style => 1,
-    },
-    img => {
-        class => 1,
-        src   => qr{^(?!http(?:s)?://)}i,    # only relative image links allowed
-        alt => 1,    # alt attribute allowed
-        '*' => 0,    # deny all other attributes
-    },
-);
+# Callback for custom handling specific HTML tags
+sub defang_tags_callback {
+    my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
+        $attribute_hash, $close_angle, $html_r, $out_r) = @_;
+    # Explicitly defang this tag, eventhough safe
+    return 1 if $lc_tag eq 'br';    
+    # Explicitly whitelist this tag, eventhough unsafe
+    return 0 if $lc_tag eq 'embed';
+    # I am not sure what to do with this tag, so process as 
+    # HTML::Defang normally would
+    return 2 if $lc_tag eq 'img';
+}
 
-my @default = (
-    0 =>             # default rule, deny all tags
-      {
-        '*'    => 1,                        # default rule, allow all attributes
-        'href' => qr{^(?!(?:java)?script)}i,
-        'src'  => qr{^(?!(?:java)?script)}i,
-        'cite'     => '(?i-xsm:^(?!(?:java)?script))',
-        'language' => 0,
-        'name'        => 1,    # could be sneaky, but hey ;
-        'class'       => 1,
-        'onblur'      => 0,
-        'onchange'    => 0,
-        'onclick'     => 0,
-        'ondblclick'  => 0,
-        'onerror'     => 0,
-        'onfocus'     => 0,
-        'onkeydown'   => 0,
-        'onkeypress'  => 0,
-        'onkeyup'     => 0,
-        'onload'      => 0,
-        'onmousedown' => 0,
-        'onmousemove' => 0,
-        'onmouseout'  => 0,
-        'onmouseover' => 0,
-        'onmouseup'   => 0,
-        'onreset'     => 0,
-        'onselect'    => 0,
-        'onsubmit'    => 0,
-        'onunload'    => 0,
-        'src'         => 0,
-        'type'        => 0,
-      }
-);
+# Callback for custom handling URLs in HTML attributes as well as 
+# styletag/attribute declarations
+sub defang_url_callback {
+    my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, 
+        $attribute_hash, $html_r) = @_;
+    # Explicitly allow this URL in tag attributes or stylesheets
+    return 0 if $$attr_val_r =~ /youtube.com/i; 
+    # Explicitly defang this URL in tag attributes or stylesheets
+    return 1 if $$attr_val_r =~ /youporn.com/i; 
+}
 
-my $scrubber = HTML::Scrubber->new();
-$scrubber->allow(@allow);
-$scrubber->rules(@rules);    # key/value pairs
-$scrubber->default(@default);
-$scrubber->comment(1);       # 1 allow, 0 deny
+# Callback for custom handling style tags/attributes
+sub defang_css_callback {
+    my ($self, $defang, $selectors, $selector_rules, $tag, $is_attr) = @_;
+    my $i = 0;
+    foreach (@$selectors) {
+        my $selector_rule = $$selector_rules[$i];
+        foreach my $key_value_rules (@$selector_rule) {
+            foreach my $key_value_rule (@$key_value_rules) {
+                my ($key, $value) = @$key_value_rule;
+                # Comment out any ’!important’ directive
+                $$key_value_rule[2] = 1 if $value =~ '!important';               
+                # Comment out any ’position=fixed;’ declaration
+                $$key_value_rule[2] = 1 if $key =~ 'position' && $value =~ 'fixed';
+            }
+        }
+        $i++;
+    }
+}
+
+# Callback for custom handling HTML tag attributes
+sub defang_attribs_callback {
+    my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r) = @_;
+    # Change all ’border’ attribute values to zero.
+    $$attr_val_r = '0' if $lc_attr_key eq 'border';  
+    # Defang all ’src’ attributes
+    return 1 if $lc_attr_key eq 'src';             
+    return 0;
+}
+
 
 =item format_content
 
@@ -104,7 +95,18 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
-    $$content = $scrubber->scrub($$content);
+    my $defang = HTML::Defang->new(
+        context             => $c,
+        fix_mismatched_tags => 1,
+        tags_to_callback    => [ qw/br embed img/ ],
+        tags_callback       => \&defang_tags_callback,
+        url_callback        => \&defang_url_callback,
+        css_callback        => \&defang_css_callback,
+        attribs_to_callback => [     qw(border src) ],
+        attribs_callback    => \&defang_attribs_callback
+        );
+    
+    $$content = $defang->defang($$content);
     return;
 }
 
