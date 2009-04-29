@@ -1119,7 +1119,6 @@ li.tabnav {
 }
 
 .message_body {
-	 float: left; 
-	 font-size: 2em; 
-	 line-height: 2em;
+    font-size: 2em; 
+    line-height: 2em;
 }
