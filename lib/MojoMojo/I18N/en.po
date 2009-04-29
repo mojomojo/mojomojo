@@ -874,10 +874,10 @@ msgstr ""
 msgid "No roles created yet."
 msgstr ""
 
-#. ($page->name)
+#. ([ $rev, $page->name ])
 #: lib/MojoMojo/Controller/Page.pm:89
-msgid "No such revision for "
-msgstr ""
+msgid "No revision x for x"
+msgstr "No revision %1 for %2"
 
 #: root/base/page/suggest.tt:13
 msgid "Non-Existent Pages"
@@ -1413,10 +1413,10 @@ msgstr ""
 msgid "The email was sent to x."
 msgstr "The email was sent to %1."
 
-#. ($c->stash->{pre_hacked_uri})
-#: lib/MojoMojo/Controller/Root.pm:46
-msgid "The requested URL (x) was not found"
-msgstr "The requested URL (%1) was not found"
+#. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
+#: lib/MojoMojo/Controller/Root.pm:48
+msgid "The requested URL was not found: x"
+msgstr "The requested URL was not found: %1"
 
 #: root/forms/admin/settings.yml:24
 msgid "Theme name"

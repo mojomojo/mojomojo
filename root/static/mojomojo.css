@@ -1111,3 +1111,8 @@ form.site-configuration .submit {
 
 li.tabnav {
 }
+
+.error_detail {
+    display: block;
+    margin: 1em;
+}

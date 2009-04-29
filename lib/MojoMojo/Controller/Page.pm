@@ -85,8 +85,12 @@ sub view : Global {
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
         unless ( $stash->{rev} ) {
-            $stash->{message} =
-              $c->loc( 'No such revision for ', $page->name );
+            $stash->{message} = $c->loc( 'No revision x for x',
+                $rev,
+                '<span class="error_detail">'
+                  . '<a href="' . $page->path . '">' . $page->name . '</a>'
+               .'</span>'
+            );
             $stash->{template} = 'message.tt';
         }
     }

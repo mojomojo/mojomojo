@@ -16,6 +16,6 @@ BEGIN {
 
 
 #-------------------------------------------------------------------------------
-$test = "specific error message: no such revision";
+$test = "specific error message: no revision x for x";
 $body = get('/?rev=9999');
-like $body, qr/No such revision/, $test;
+like $body, qr'No revision 9999 for <span class="error_detail"><a href="/">/</a></span>', $test;
