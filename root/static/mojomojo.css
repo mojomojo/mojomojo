@@ -1114,5 +1114,12 @@ li.tabnav {
 
 .error_detail {
     display: block;
-    margin: 1em;
+    margin-left: 1em;
+    font-size: 1.2em;
+}
+
+.message_body {
+	 float: left; 
+	 font-size: 2em; 
+	 line-height: 2em;
 }
