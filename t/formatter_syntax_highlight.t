@@ -25,9 +25,6 @@ Ha en god dag
 HTML
 
     $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
-    open( F, ">t1.tmp.out" );
-    print F $$got;
-    close F;
     $expected = <<'HTML';
 <pre>
 <b>&lt;div&gt;</b>
@@ -99,9 +96,6 @@ HTML
 &nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;/form&gt;</b>
 </pre>
 HTML
-    open( F, ">t2.tmp.out" );
-    print F $$got;
-    close F;
     is( $$got, $expected, $test );
 
 }
@@ -158,7 +152,4 @@ PERL
 </pre>
 PERL
     is( $content, $wanted, $test );
-        open( F, ">t.complex-perl.tmp.out" );
-    print F $$got;
-    close F;
 }
