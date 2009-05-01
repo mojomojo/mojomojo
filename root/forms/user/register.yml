@@ -1,15 +1,18 @@
 ---
 load_config_file: __path_to(root/forms/defaults.yml)__
-id: register    
+id: register
 
 elements:
   - type: Text
     name: login
     label_loc: Login
     filters:
+      - HTMLEscape
       - LowerCase
+      - TrimEdges
     constraints:
       - Required
+      - Word
   - type: Password
     name: pass
     label_loc: Password
@@ -30,6 +33,7 @@ elements:
     label_loc: Email
     filters:
       - HTMLEscape
+      - TrimEdges
     constraints:
       - Email
       - Required
@@ -38,6 +42,7 @@ elements:
     label_loc: Name
     filters:
       - HTMLEscape
+      - TrimEdges
     constraints:
       - Required
   - type: Submit

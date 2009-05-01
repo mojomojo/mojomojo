@@ -6,15 +6,19 @@ elements:
   - name: login
     id: loginField
     label_loc: Username
+    filters:
+      - HTMLEscape
+      - LowerCase
+      - TrimEdges
     constraints:
       - Required
-  
+
   - type: Password
     name: pass
     label_loc: Password
     constraints:
       - Required
-  
+
   - type: Submit
     name: submit
     value_loc: Login
