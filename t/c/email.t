@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use Test::More tests => 12;
-use Data::Dump::Streamer;
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
