@@ -30,8 +30,8 @@ Log in through the authentication system.
 
 sub login : Global : FormConfig {
     my ( $self, $c ) = @_;
-    $c->stash->{message} ||= $c->loc('Please enter username and password');
-
+    $c->stash->{message} ||= $c->flash->{message};
+    # $c->loc('Please enter username and password');
     my $form = $c->stash->{form};
 
     if ( $form->submitted_and_valid ) {
@@ -189,17 +189,18 @@ sub recover_pass : Global {
         },
     );
 
-    if ($c->forward( $c->view('Email') )) {
-        $user->pass( $c->stash->{password} );
-        $user->update();
-        $c->stash->{message} = $c->loc('Emailed you your new password.');
-    }
-    else {
+    $c->forward( $c->view('Email') );
+    if ( scalar( @{ $c->error } ) ) {
         $c->clear_errors;
         $c->stash->{message} =
           $c->loc('Error occurred while emailing you your new password.');
     }
-    $c->forward('login');
+    else {
+        $user->pass( $c->stash->{password} );
+        $user->update();
+        $c->flash->{message} = $c->loc('Emailed you your new password.');
+        return $c->res->redirect( $c->uri_for('login') );
+    }
 }
 
 =item register (/.register)
@@ -296,7 +297,8 @@ sub do_register : Private {
         },
     );
 
-    if (!$c->forward( $c->view('Email') )) {
+    $c->forward( $c->view('Email') );
+    if ( scalar( @{ $c->error } ) ) {
         $c->clear_errors;
         $c->stash->{error} = $c->loc('An error occourred. Sorry.');
     }
@@ -322,10 +324,10 @@ sub validate : Global {
                 $c->uri_for( '/', $c->stash->{user}->link, '.edit' ) );
         }
         else {
-            $c->stash->{message} =
+            $c->flash->{message} =
               $c->loc( 'Welcome, x your email is validated. Please log in.',
                 $user->name );
-            $c->stash->{template} = 'user/login.tt';
+            return $c->res->redirect( $c->uri_for('login') );
         }
         return;
     }
