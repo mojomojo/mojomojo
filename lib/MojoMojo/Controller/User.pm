@@ -249,7 +249,6 @@ sub register : Global FormConfig {
 
     $form->model->default_values( $c->stash->{newuser} );
     if ( $form->submitted_and_valid ) {
-
         # Need to check if login or email already exists.
         if ( $c->forward('is_account_taken') ) {
             $c->stash->{account_taken} = $c->loc('Account Taken. Try another.');
