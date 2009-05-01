@@ -308,7 +308,7 @@ sub create_path_pages {
 
         # since SQLite doesn't support sequences, just cheat
         # for now and get the next id by creating a page record
-        my $page = $self->create( { parent => $parent->id } );
+        my $page = $self->create( { parent => $parent->id, content_version => undef } );
         my %version_data = map { $_ => $proto_page->{$_} } @version_columns;
 
         @version_data{qw/page version parent parent_version creator status release_date/} = (
