@@ -315,7 +315,7 @@ msgid "Content size"
 msgstr ""
 
 #: lib/MojoMojo/Formatter/Include.pm:61
-msgid "Could not  retrieve"
+msgid "Could not retrieve"
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:55 root/base/comment/login.tt:6
@@ -684,7 +684,7 @@ msgid "Internal Link"
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:157
-msgid "Invalid password."
+msgid "Invalid password"
 msgstr ""
 
 #: root/base/toolbar.tt:117 root/base/toolbar.tt:85
@@ -1487,7 +1487,7 @@ msgid "User Settings"
 msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:372
-msgid "User not found!"
+msgid "User not found"
 msgstr ""
 
 #. (user.name)
@@ -1497,8 +1497,8 @@ msgstr "User profile for %1"
 
 #. ($login)
 #: lib/MojoMojo/Controller/User.pm:344
-msgid "User x not found!"
-msgstr "User %1 not found!"
+msgid "User not found: x"
+msgstr "User not found: %1"
 
 #: root/base/user/recover_pass.tt:10 root/forms/user/login.yml:8
 msgid "Username"
@@ -1600,6 +1600,11 @@ msgstr ""
 #: lib/MojoMojo/Controller/Jsrpc.pm:40
 msgid "Your input is invalid, please reformat it and try again."
 msgstr ""
+
+#. $c->pref('name')
+#: lib/MojoMojo/Controller/User.pm:191
+msgid "Your new password on x"
+msgstr "Your new password on %1"
 
 #: lib/MojoMojo/Controller/User.pm:162
 msgid "Your password has been updated"

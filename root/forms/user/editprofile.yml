@@ -11,7 +11,7 @@ elements:
     label_loc: Birth Date
     auto_inflate: 1
     year:
-      less: 70 
+      less: 70
       plus: 0
   - type: Select
     name: gender
@@ -34,4 +34,4 @@ elements:
     label_loc: Favorite Movies
   - type: Submit
     name: submit
-    value_loc: Update 
+    value_loc: Update

@@ -153,7 +153,7 @@ sub edit : Global FormConfig {
         # update the search index with the new content
         $c->model("DBIC::Page")->set_paths($page);
         $c->model('Search')->index_page($page)
-          unless $c->pref('disable_search');
+            unless $c->pref('disable_search');
         $page->content->store_links();
         $c->model('DBIC::WantedPage')
           ->search( { to_path => $c->stash->{path} } )->delete();
