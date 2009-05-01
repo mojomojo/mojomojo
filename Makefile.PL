@@ -8,7 +8,7 @@ requires(
     'Algorithm::Merge'                             => 0,
     'Archive::Zip'                                 => '1.14',
     'MRO::Compat'                                  => '0.10',
-    'Cache::FastMmap'                              => 0,
+    'Cache::FastMmap'                              => 1.29,  # fixes Win32 compatibility: http://rt.cpan.org/Public/Bug/Display.html?id=45210
     'Catalyst'                                     => '5.71001',
     'Catalyst::Action::RenderView'                 => '0.07',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
