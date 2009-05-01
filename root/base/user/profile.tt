@@ -4,64 +4,64 @@
 %]
 
 <div id="content">
+  [% IF (user.login == page.name OR user.link == proto_pages.first.path
+     OR ( user.is_admin AND user.get_user(page.name) ) ) +%]
+    <p id="editlink">
+        <a title="[% loc('Change profile content') %]" href="[% c.uri_for( 'editprofile' ) %]" accesskey="P">[% loc('Edit Profile') %]</a>
+    </p>
+  [% END +%]
+
     <dl class="list">
         <dt>[% loc('Name') %]:</dt>
         <dd id="name">[% person.name || loc('Name missing') %]</dd>
-        
-        [% IF person.email %]
-        [% IF user.admin || user.id == person.id %]
-            <dt>[% loc('Email') %]:</dt>
-            <dd id="email">
-            [% person.email %]
-        [% END %]
-        [% END %]
-        </dd>
-        
+
+      [% IF person.email %]
+       [% IF user.admin || user.id == person.id +%]
+        <dt>[% loc('Email') %]:</dt>
+        <dd id="email">[% person.email %]</dd>
+       [% END %]
+      [% END %]
+
         [% IF person.age %]
         <dt>[% loc('Age') %]:</dt>
         <dd>[% person.age %]</dd>
-        [% END %]
-    
-        [% IF person.gender %]   
+        [%+ END +%]
+
+        [% IF person.gender +%]
         <dt>[% loc('Gender') %]:</dt>
         <dd>[% person.gender %]</dd>
-        [% END %]
-        
-        [% IF person.industry %]
+        [%+ END %]
+
+        [% IF person.industry +%]
         <dt>[% loc('Industry') %]:</dt>
         <dd>[% person.industry %]</dd>
-        [% END %]
-        
-        [% IF person.interests_formatted %]
+        [%+ END %]
+
+        [% IF person.interests_formatted +%]
         <dt>[% loc('Interests') %]:</dt>
         <dd>[% person.interests_formatted %]</dd>
-        [% END %]
-        
-        [% IF person.music_formatted %]
+        [%+ END %]
+
+        [% IF person.music_formatted +%]
         <dt>[% loc('Music') %]:</dt>
         <dd>[% person.music_formatted %]</dd>
-        [% END %]
-        
-        [% IF person.movies_formatted %]
+        [%+ END %]
+
+        [% IF person.movies_formatted +%]
         <dt>[% loc('Movies') %]:</dt>
         <dd>[% person.movies_formatted %]</dd>
-        [% END %]
-        
+        [%+ END +%]
         <dt>[% loc('Date registered') %]:</dt>
-        <dd>[%person.registered.ymd%]</dd>
+        <dd>[% person.registered.ymd %]</dd>
 
         <dt>[% loc('Edits') %]:<dt>
         <dd>
-        [% FOREACH  changed IN person.pages -%]
-            [% '&ndash;' UNLESS loop.first %] [% c.wikiword(changed.path,base) -%]
-        [% END %]</dd>
+        [% FOREACH  changed IN person.pages +%]
+            [%+ '&ndash;' UNLESS loop.first %] [% c.wikiword(changed.path, base) %]
+        [% END +%]
+        </dd>
     </dl>
 
-    <p id="editlink">
-    [% IF (user.login == page.name OR user.link==proto_pages.first.path  OR 
-    ( user.is_admin AND user.get_user(page.name) ) ) %]
-    <a title="[% loc('Change profile content') %]" href="[% c.uri_for( 'editprofile' ) %]" accesskey="E">[% loc('Edit Profile') %]</a>
-    [% END %]
 </div>
 
 [% END # WRAPPER %]

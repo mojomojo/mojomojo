@@ -565,17 +565,14 @@ dl {
   clear: both;
 }
 
-#editlink {
-    float:right;
-    padding-right: 10em;
-}
-
+/* Unused? */
 dt {
   float: left;
   width: 80px;
   clear: left;
 }
 
+/* Unused? */
 dd {
   margin: 0 0 5px 90px;
   margin-left: 80px;
@@ -815,14 +812,12 @@ fieldset .textarea
     margin-left: 12em;
 }
 
-/* make the noscript textarea sit below the iframe
-*/
+/* make the noscript textarea sit below the iframe */
 fieldset .recaptcha noscript textarea {
     display: block;
 }
 
-/* override the iframe's height="" - it's seems a bit big
-*/
+/* override the iframe's height="" - it seems a bit big */
 fieldset .recaptcha iframe {
     height: 230px ! important;
 }
@@ -859,19 +854,19 @@ form .form_error_message {
 }
 
 fieldset .error_message {
-       display: block;
-       color: #ff0000;
+    display: block;
+    color: #ff0000;
 }
 
 fieldset .label .error_message {
-       /* padding-left eq label width + padding-right */
-       padding-left: 12em;
+    /* padding-left eq label width + padding-right */
+    padding-left: 12em;
 }
 
 fieldset .error input,
 fieldset .error textarea,
 fieldset .error select {
-       background-color: #ffdddd;
+    background-color: #ffdddd;
 }
 
 fieldset .button label,
@@ -1015,18 +1010,29 @@ fieldset.secondCol {
 }
 
 #powered {
-    float:right;
-    clear:both;
-    margin:1em 0 0 0;
+    float: right;
+    clear: both;
+    margin: 1em 0 0 0;
 }
 
+/* Used in the .profile page */
 dl.list {
-    font-family:Arial,Helvetica,sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
 }
 dl.list dt {
-    font-weight:bold;
-    width:15em;
+    font-weight: bold;
+    width: 15em;
 }
+dl.list dd {
+    margin-left: 16em;
+}
+#editlink {
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+
+
 
 div#tags dl {
     margin: 0;
@@ -1059,16 +1065,16 @@ div#bottomnav { clear:both; }
 }
 
 #progressbar {
-  display:none;
-  height: 18px;
-  background-color: gray;
-  margin: 10px 0;
+    display:none;
+    height: 18px;
+    background-color: gray;
+    margin: 10px 0;
 }
 #progressbar #progress {
-  width: 0%;
-  height: 18px;
-  background-color: white;
-  color: black;
+    width: 0%;
+    height: 18px;
+    background-color: white;
+    color: black;
 }
 
 /* Syntax::Highlight::Engine::Kate */
@@ -1115,10 +1121,10 @@ li.tabnav {
 .error_detail {
     display: block;
     margin-left: 1em;
-	font-style: italic;
+    font-style: italic;
 }
 
 .message_body {
-    font-size: 2em; 
+    font-size: 2em;
     line-height: 1.666em;
 }
