@@ -7,8 +7,8 @@
 /* @group Headlines */
 
 .logintext {
-    font-weight:bold;
-    font-size:1.25em;
+    font-weight: bold;
+    font-size: 1.25em;
     margin: 1em 0 1.5em 13px;
 }
 
@@ -33,26 +33,26 @@ h5, h6 {
 }
 
 .toc {
-  display: inline-block;
-  background-color: #F6F6F6;
-  border: 1px solid #AAAAAA;
-  padding: 1em;
-  margin: 1em;
+    display: inline-block;
+    background-color: #F6F6F6;
+    border: 1px solid #AAAAAA;
+    padding: 1em;
+    margin: 1em;
 }
 
 .toc ul {
-  margin: 0;
-  margin-left: -1em;
-  padding: 0;
+    margin: 0;
+    margin-left: -1em;
+    padding: 0;
 }
 .toc > ul {
-  margin-left: -2em;
+    margin-left: -2em;
 }
 
 .toc li {
-  margin: 0;
-  padding: 0;
-  font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
+    margin: 0;
+    padding: 0;
+    font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
 }
 
 /* @end */
@@ -85,119 +85,119 @@ a:hover, #content a:hover {
 form { margin: 0;}
 
 .navigation {
-  color: #999;
+    color: #999;
 }
 
 div#toplinks a.navOn {
-  color: #3a3a3a;
-  background: #fff;
-  text-decoration: none;
+    color: #3a3a3a;
+    background: #fff;
+    text-decoration: none;
 }
 
 .inputBox {
-  background-color: #eee;
-  padding: 5px;
-  margin-bottom: 20px;
+    background-color: #eee;
+    padding: 5px;
+    margin-bottom: 20px;
 }
 
 blockquote {
-  display: block;
-  width: 80%;
-  background-color: #EEE;
-  border : 1px dotted black;
-  padding-right: 2em;
-  padding-left: 2em;
-  font-style: italic;
-  quotes: "\201C" "\201D";
+    display: block;
+    width: 80%;
+    background-color: #EEE;
+    border : 1px dotted black;
+    padding-right: 2em;
+    padding-left: 2em;
+    font-style: italic;
+    quotes: "\201C" "\201D";
 }
 blockquote:before, blockquote:after {
-  display: block;
-  color: #7aa5d5;
-  font-size: 5em;
+    display: block;
+    color: #7aa5d5;
+    font-size: 5em;
 }
 blockquote:before {
-  content: open-quote;
-  height: 0px;
-  margin-left: -0.45em;
+    content: open-quote;
+    height: 0px;
+    margin-left: -0.45em;
 }
 blockquote:after {
-  content: close-quote;
-  height: 0.6em;
-  margin-left: 99.5%;
-  margin-top: -0.5em;
+    content: close-quote;
+    height: 0.6em;
+    margin-left: 99.5%;
+    margin-top: -0.5em;
 }
 
 pre {
-  width:90%;
-  background-color: #eee;
-  padding: 10px;
-  margin-left: 3em;
-  margin-right:1em ;
-  overflow: auto
+    width: 90%;
+    background-color: #eee;
+    padding: 10px;
+    margin-left: 3em;
+    margin-right: 1em ;
+    overflow: auto
 }
 
 ol.setup {
-  font-size: 1.5em;
-  font-family: georgia, verdana, sans-serif;
-  padding-left: 25px;
+    font-size: 1.5em;
+    font-family: georgia, verdana, sans-serif;
+    padding-left: 25px;
 }
 
 ol.setup li {
-  margin-bottom: 20px
+    margin-bottom: 20px
 }
 
 .byline {
-  color: #999;
-  padding-left: 4px;
-  text-align:right;
-  margin-bottom: 0px;
+    color: #999;
+    padding-left: 4px;
+    text-align: right;
+    margin-bottom: 0px;
 }
 
 p#message {
-  background: #eee;
-  padding: 0.7em;
-  border: 1px solid silver;
-  margin: 1em 0;
+    background: #eee;
+    padding: 0.7em;
+    border: 1px solid silver;
+    margin: 1em 0;
 }
 
 #previewHeading {
-  clear:left;
+    clear: left;
 }
 
 div#content_preview {
-  clear:left;
-  /* max-width: 920px; */
-  border:1px solid #ddd;
-  padding:5px;
-  overflow: auto;
-  height: 250px;
-  margin: 0 0 1em 0;
+    clear: left;
+    /* max-width: 920px; */
+    border: 1px solid #ddd;
+    padding: 5px;
+    overflow: auto;
+    height: 250px;
+    margin: 0 0 1em 0;
 }
 
 textarea#body {
-  height: 280px;
-  /* max-width: 930px; */
-  width: 100%;
+    height: 280px;
+    /* max-width: 930px; */
+    width: 100%;
 }
 
 textarea#comment {
-  height: 150px;
-  width: 400px;
+    height: 150px;
+    width: 400px;
 }
 
 #hidden_info, #edithelp {
-  display:none;
-  position:absolute;
-  z-index:1;
-  width: 800px;
-  overflow: auto;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 800px;
+    overflow: auto;
 }
 
 div.tab-nav,
 .syntax_help {
-  background: #ddd;
-  border: 1px solid #aaa;
-  padding:1em;
+    background: #ddd;
+    border: 1px solid #aaa;
+    padding: 1em;
 }
 
 div.tab-nav {
@@ -228,70 +228,72 @@ div.tab-nav a.close-button {
 }
 
 .syntax_help table {
-  margin-bottom: 0;
-  border-spacing: 0;
+    margin-bottom: 0;
+    border-spacing: 0;
 }
 
 
 .syntax_help table+h3 {
-  margin-top: 11px;
+    margin-top: 11px;
 }
 
 .syntax_help  table td {
-  padding: 3px;
-  vertical-align: top;
-  border-top: 1px dotted #ccc;
+    padding: 3px;
+    vertical-align: top;
+    border-top: 1px dotted #ccc;
 }
 
 .syntax_help table td.arrow {
-  padding-right: 5px;
-  padding-left: 10px;
-  color: #999;
+    padding-right: 5px;
+    padding-left: 10px;
+    color: #999;
 }
 
 .syntax_help table td.label {
-  font-weight: bold;
-  white-space: nowrap;
-  padding-right: 15px;
-  color: #000;
+    font-weight: bold;
+    white-space: nowrap;
+    padding-right: 15px;
+    color: #000;
 }
 
 .syntax_help h3 {
-  font-weight: bold;
-  font-weight: normal;
-  margin: 0 0 5px 0;
-  padding: 5px 0 0 0;
+    font-weight: bold;
+    font-weight: normal;
+    margin: 0 0 5px 0;
+    padding: 5px 0 0 0;
 }
 
-.syntax_help h2 { margin-top:0; }
+.syntax_help h2 {
+    margin-top: 0;
+}
 
 .rightHandSide {
-  float: right;
-  width: 187px;
-  margin-left: 10px;
-  padding-left: 20px;
-  border-left: 1px dotted #ccc;
+    float: right;
+    width: 187px;
+    margin-left: 10px;
+    padding-left: 20px;
+    border-left: 1px dotted #ccc;
 }
 
 .rightHandSide p {
 }
 
 .newsList {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .newsList p {
-  margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .add a {
-  color: green;
-  text-decoration: none;
-  vertical-align: middle;
+    color: green;
+    text-decoration: none;
+    vertical-align: middle;
 }
 
 .add a:hover {
-  color: #003800;
+    color: #003800;
 }
 a.tag {
     text-decoration: none;
@@ -300,10 +302,10 @@ a.tag:hover {
     text-decoration: underline;
 }
 .remove a {
-  color: red;
-  font-size: 1.1em;
-  margin: 0px 1px;
-  text-decoration: none;
+    color: red;
+    font-size: 1.1em;
+    margin: 0px 1px;
+    text-decoration: none;
 }
 
 .remove a:hover {
@@ -311,44 +313,44 @@ a.tag:hover {
 }
 
 .tagedit {
-  float: right;
+    float: right;
 }
 
 #taginput {
-  width: 120px;
+    width: 120px;
 }
 
 .newWikiWord {
-  color: #e33;
-  background: #fee;
+    color: #e33;
+    background: #fee;
 }
 
 .newWikiWord a {
-  vertical-align: super;
-  line-height: 0;
-  font-size: 0.8em;
-  font-weight:bold;
-  text-decoration:none;
-  color:#e33;
-  padding:0 2px;
-  margin:0 0 0 .1em;
+    vertical-align: super;
+    line-height: 0;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #e33;
+    padding: 0 2px;
+    margin: 0 0 0 .1em;
 }
 #content .newWikiWord a:hover {
-  background:#e33;
-  color:#fff;
+    background: #e33;
+    color: #fff;
 }
 
 .protoPage a:link {
-  color: #ab0b0b;
+    color: #ab0b0b;
 }
 
 .protoPage a:visited {
-  color: #666;
+    color: #666;
 }
 
 .protoPage a:hover {
-  color: #fff;
-  background-color:#ab0b0b;
+    color: #fff;
+    background-color: #ab0b0b;
 }
 
 /* @end */
@@ -356,12 +358,12 @@ a.tag:hover {
 /* @group Highlighted keywords in search */
 
 .quoted {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 span#search_hit_score {
-    font-style:italic;
-    font-size:smaller;
+    font-style: italic;
+    font-size: smaller;
 }
 
 /* @end */
@@ -369,60 +371,78 @@ span#search_hit_score {
 /* @group Pagination Links */
 
 #content div.pager {
-    border:1px solid #eee;
-    padding:.25em;
+    border: 1px solid #eee;
+    padding: .25em;
     text-align: center;
-    font-size:1.25em;
+    font-size: 1.25em;
 }
 
 #content div.pager ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-    font-weight:bold;
-    list-style-position:inside;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    list-style-position: inside;
 }
 
-#content div.pager .prev { margin:0; padding:0; float:left; }
-#content div.pager .next { margin:0; padding:0; float:right; }
+#content div.pager .prev { margin: 0; padding: 0; float: left; }
+#content div.pager .next { margin: 0; padding: 0; float: right; }
 
 #content div.pager ul li {
-    display:inline;
-    margin:0;
-    padding:0;
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 div.pager ul li a {
-    text-decoration:none;
-    padding:2px .25em;
+    text-decoration: none;
+    padding: 2px .25em;
 }
 #content div.pager ul li a:hover {
-    color:#fff;
-    background:#2274a8;
+    color: #fff;
+    background: #2274a8;
 }
 
 dl#pageInfoMeta {
-    float:right;
-    width:350px;
-    border-left:2px solid #ccc;
-    padding:0 0 0 1em;
-    font-family:Arial,Helvetica,sans-serif;
+    float: right;
+    width: 350px;
+    border-left: 2px solid #ccc;
+    padding: 0 0 0 1em;
+    font-family: Arial,Helvetica,sans-serif;
 }
-dl#pageInfoMeta dt { line-height:16px; width:150px; font-weight:bold; float:left; clear:left; margin:0;padding:0; }
-dl#pageInfoMeta dd { line-height:16px; width:200px; }
+dl#pageInfoMeta dt {
+    line-height: 16px;
+    width: 150px;
+    font-weight: bold;
+    float: left;
+    clear: left;
+    margin: 0;
+    padding: 0;
+}
+dl#pageInfoMeta dd {
+    line-height: 16px;
+    width: 200px;
+}
 
-dl#authors          { padding:0; margin:1.5em 0; }
+dl#authors {
+    padding: 0;
+    margin: 1.5em 0;
+}
 dl#authors dd,
-dl#authors dt { line-height:16px; }
+dl#authors dt {
+    line-height: 16px;
+}
 
-dl#authors dt { width:200px; }
+dl#authors dt {
+    width: 200px;
+}
 
 /* @end */
 
 /* @group Amazon Plugin */
 
 div.amazon {
-    width:80%;
+    width: 80%;
     padding-left: 2em;
     margin: 1em 4em 1em 4em;
     border: 1px solid #ccc;
@@ -437,82 +457,82 @@ div.amazon img {
 /* @group Lists */
 
 table.recent {
-    width:100%;
+    width: 100%;
 }
-table.recent .page          { width:50%; }
-table.recent .editedBy      { width:20%; }
-table.recent .timeEdited    { width:20%; }
-table.recent .actions       { width:10%; }
+table.recent .page          { width: 50%; }
+table.recent .editedBy      { width: 20%; }
+table.recent .timeEdited    { width: 20%; }
+table.recent .actions       { width: 10%; }
 
 /* @end */
 
 /* @group Diff */
 
 .diff {
-    margin-right:2em;
+    margin-right: 2em;
     overflow: visible;
-    margin-top:1em;
+    margin-top: 1em;
 }
 
 .diffdel, del {
-  background: #fcc;
-  text-decoration: line-through;
+    background: #fcc;
+    text-decoration: line-through;
 }
 
 .diffins, ins {
-  background: #cfc;
+    background: #cfc;
 }
 
 /* @end */
 
 .form dl {
- margin: 13px;
- float: left;
+   margin: 13px;
+   float: left;
 }
 
 .form dt {
-  float: left;
-  width: 10em;
-  line-height: 24px;
+    float: left;
+    width: 10em;
+    line-height: 24px;
 }
 
 .form dd {
-  margin: 0 0 5px 90px;
-  line-height: 24px;
-  margin-left: 80px;
+    margin: 0 0 5px 90px;
+    line-height: 24px;
+    margin-left: 80px;
 }
 
 span.statusmsg {
-  color: #335577;
-  margin-left: 1em;
-  font-size: 1.5em;
+    color: #335577;
+    margin-left: 1em;
+    font-size: 1.5em;
 }
 
 .login form input {
-  width: 120px;
+    width: 120px;
 }
 
 .thumb {
-  border: none;
+    border: none;
 }
 
 .addbutton {
-  margin-right: 0.5em;
-  background: white;
+    margin-right: 0.5em;
+    background: white;
 }
 
 .thumb {
-  background: #ddd;
-  padding: 8px;
-  margin: 8px;
+    background: #ddd;
+    padding: 8px;
+    margin: 8px;
 }
 
 .imageinfo {
-  float: right;
-  padding: 0px;
-  margin: 0px;
-  width: 12em;
-  min-height: 250px;
+    float: right;
+    padding: 0px;
+    margin: 0px;
+    width: 12em;
+    min-height: 250px;
 }
 
 .imageinfo dl {
@@ -528,7 +548,7 @@ span.statusmsg {
 input.dual,textarea.dual {
     width: 500px;
     border: 1px solid #fff;
-    margin:0.1em;
+    margin: 0.1em;
     background: transparent;
     vertical-align: top;
 }
@@ -538,8 +558,8 @@ input.dual:focus, textarea.dual:focus {
 }
 
 .dualbutton {
-    display:none;
-    margin:0.1em;
+    display: none;
+    margin: 0.1em;
 }
 
 #title input {
@@ -553,55 +573,55 @@ big {
 }
 
 .framedpopup {
-  background: #eee;
-  padding: 3px;
-  border: 1px solid silver;
-  width: 440px;
+    background: #eee;
+    padding: 3px;
+    border: 1px solid silver;
+    width: 440px;
 }
 
 dl {
-  margin: 13px;
-  font-family: sans-serif;
-  clear: both;
+    margin: 13px;
+    font-family: sans-serif;
+    clear: both;
 }
 
 /* Unused? */
 dt {
-  float: left;
-  width: 80px;
-  clear: left;
+    float: left;
+    width: 80px;
+    clear: left;
 }
 
 /* Unused? */
 dd {
-  margin: 0 0 5px 90px;
-  margin-left: 80px;
+    margin: 0 0 5px 90px;
+    margin-left: 80px;
 }
 
 div#comments div.comment dd {
-  margin-left: 120px;
+    margin-left: 120px;
 }
 
 /* Common Forms Rules */
 
 .standard_form .fields label {
-  display: block;
-  clear: both;
+    display: block;
+    clear: both;
 }
 .standard_form .fields label span {
-  text-align: right;
-  margin-right: .5em;
+    text-align: right;
+    margin-right: .5em;
 }
 .standard_form .fields label span,
 .standard_form .fields label input {
-  display: block;
-  float: left;
-  margin-bottom: 1ex;
+    display: block;
+    float: left;
+    margin-bottom: 1ex;
 }
 
 /* Role Form */
 .role_form .fields label span {
-  width: 6em;
+    width: 6em;
 }
 
 .role_form #member_input {
@@ -614,98 +634,102 @@ div#comments div.comment dd {
 /** with some slight modifications of colors, widths, etc. by Dave Naughton **/
 
 #sidebar ul {
-  padding: 0;
-  margin: 0;
-  border-bottom: 1px solid silver;
-  font: 1em sans-serif;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid silver;
+    font: 1em sans-serif;
 }
 #sidebar ul li {
-  list-style-type: none;
-  border: 1px solid silver;
-  border-width: 1px 1px 0 3px;
-  position: relative;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    border: 1px solid silver;
+    border-width: 1px 1px 0 3px;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
-#sidebar ul ul {display: none;}
+#sidebar ul ul {
+    display: none;
+}
 #sidebar ul li:hover > ul {
-  display: block;
-  position: absolute;
-  top: -1px;
-  left: 100%;
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 100%;
 }
 #sidebar li a {
-  display: block;
-  padding: 5px 7px;
-  text-decoration: none;
-  background: #FFF;
+    display: block;
+    padding: 5px 7px;
+    text-decoration: none;
+    background: #FFF;
 }
 #sidebar li.menuParent, li.menuParentMissingChildren > a {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #sidebar ul ul {width: 12em;}
 
 #sidebar {
-  position: absolute;
-  right: 0;
-  width: 10em;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+    position: absolute;
+    right: 0;
+    width: 10em;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 #sidebar > ul {
-  width: 11em;
-  margin-left: -1px;
-  font-size: 85%;
+    width: 11em;
+    margin-left: -1px;
+    font-size: 85%;
 }
 #sidebar ul {
-  border: 1px solid silver;
-  border-width: 0 0 0 1px;
+    border: 1px solid silver;
+    border-width: 0 0 0 1px;
 }
 #sidebar ul li {
-  border-width: 1px 0;
-  border-color: white;
-  padding: 0 0 0 5px;
-  line-height: 1.25em;
+    border-width: 1px 0;
+    border-color: white;
+    padding: 0 0 0 5px;
+    line-height: 1.25em;
 }
 #sidebar ul ul {
-  border-width: 0 1px 1px 1px;
-  border-color: gray silver gray gray;
+    border-width: 0 1px 1px 1px;
+    border-color: gray silver gray gray;
 }
 #sidebar ul ul li {
-  border-color: #FEFEFC;
+    border-color: #FEFEFC;
 }
 #sidebar li > a {
-  background-color: transparent;
-  padding: 3px;
+    background-color: transparent;
+    padding: 3px;
 }
-#sidebar li:hover {background-color: #ddf;}
+#sidebar li:hover {
+    background-color: #ddf;
+}
 #sidebar li.menuParent:hover {
-  margin-left: -12.2em;
-  border: 1px solid gray;
-  background: #D7D6D4;
+    margin-left: -12.2em;
+    border: 1px solid gray;
+    background: #D7D6D4;
 }
 #sidebar li.menuParent:hover > a {
-  background: inherit;
+    background: inherit;
 }
 #sidebar li.menuParent:hover > ul {
-  top: 1.75em;
-  left: -1px;
-  background: #FEFEFC;
+    top: 1.75em;
+    left: -1px;
+    background: #FEFEFC;
 }
 
 ul#menuHome {
-  border-bottom: 1px solid silver;
-  font-weight: bold;
+    border-bottom: 1px solid silver;
+    font-weight: bold;
 }
 
 /* end of shamelessly stolen code */
 /* @end */
 
 .spinner {
-    float:right;
-    height:1em;
+    float: right;
+    height: 1em;
 }
 
 #editstatus {
@@ -720,7 +744,7 @@ div.photo img{
 }
 
 .end {
-    clear:both;
+    clear: both;
 }
 
 
@@ -1053,19 +1077,25 @@ div#tags dt {
     clear: left;
 }
 
-div#bottomnav { clear:both; }
+div#bottomnav { clear: both; }
 
-#revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
+#revision_info {
+    background: #ffa;
+    padding: .25em .5em;
+    color: #f60;
+    font-size: 1.1em;
+    float: right;
+}
 
 .attachment {
     background: #eee;
     padding: 3px;
     border: 1px solid silver;
-    width:640px
+    width: 640px
 }
 
 #progressbar {
-    display:none;
+    display: none;
     height: 18px;
     background-color: gray;
     margin: 10px 0;

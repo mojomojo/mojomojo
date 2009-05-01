@@ -58,7 +58,7 @@ sub include {
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
-    return $c->loc('Could not  retrieve')." $url.\n";
+    return $c->loc('Could not retrieve')." $url.\n";
 }
 
 =back
