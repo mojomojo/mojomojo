@@ -541,18 +541,28 @@ sub check_permissions {
 
 my $search_setup_failed = 0;
 
-MojoMojo->config->{index_dir}||=MojoMojo->path_to('index');
-MojoMojo->config->{attachment_dir}||=MojoMojo->path_to('uploads');
+MojoMojo->config->{index_dir} ||= MojoMojo->path_to('index');
+MojoMojo->config->{attachment_dir} ||= MojoMojo->path_to('uploads');
 unless (-e MojoMojo->config->{index_dir}) {
-    mkdir(MojoMojo->config->{index_dir}) || warn 'Could not make index directory <'.MojoMojo->config->{index_dir}.'> FIX IT OR SEARCH WILL NOT WORK!' and $search_setup_failed = 1;
+    if (not mkdir MojoMojo->config->{index_dir}) {
+       warn 'Could not make index directory <'.MojoMojo->config->{index_dir}.'> - FIX IT OR SEARCH WILL NOT WORK!';
+       $search_setup_failed = 1;
+    }
 }
-warn 'Require write access to index <'.MojoMojo->config->{index_dir}.'> - FIX IT OR SEARCH WILL NOT WORK!' and $search_setup_failed = 1 unless (-w MojoMojo->config->{index_dir});
+unless (-w MojoMojo->config->{index_dir}) {
+    warn 'Require write access to index <'.MojoMojo->config->{index_dir}.'> - FIX IT OR SEARCH WILL NOT WORK!';
+    $search_setup_failed = 1;
+}
 
-MojoMojo->model('Search')->prepare_search_index() if not -f MojoMojo->config->{index_dir}.'/segments' and not $search_setup_failed and not MojoMojo->pref('disable_search');
+MojoMojo->model('Search')->prepare_search_index()
+    if not -f MojoMojo->config->{index_dir}.'/segments' and not $search_setup_failed and not MojoMojo->pref('disable_search');
+
 unless (-e MojoMojo->config->{attachment_dir}) {
-    mkdir(MojoMojo->config->{attachment_dir}) || die 'Could not make attachment directory <'.MojoMojo->config->{attachment_dir}.'>';
+    mkdir MojoMojo->config->{attachment_dir}
+        or die 'Could not make attachment directory <'.MojoMojo->config->{attachment_dir}.'>';
 }
-die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_dir}.'>' unless (-w MojoMojo->config->{attachment_dir});
+die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_dir}.'>'
+    unless -w MojoMojo->config->{attachment_dir};
 
 1;
 

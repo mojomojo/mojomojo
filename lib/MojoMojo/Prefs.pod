@@ -14,7 +14,7 @@ Site name. Default value is 'MojoMojo'.
 =head3 main_formatter
 
 This chooses which formatter is to be used as the main text formatter.
-The two options so far is 'MojoMojo::Formatter::Textile' and 
+The two options so far is 'MojoMojo::Formatter::Textile' and
 'MojoMojo::Formatter::Markdown'. Default value is 'MojoMojo::Formatter::Textile'.
 
 =head3 open_registration
@@ -24,7 +24,7 @@ or not. Default is false.
 
 =head3 anonymous_user
 
-If set, users are allowed to post anonymously, and the edit will be 
+If set, users are allowed to post anonymously, and the edit will be
 shown with the username set in this option.
 
 =head3 restricted_user
@@ -52,7 +52,7 @@ Random string used to generate secret keys for mail verification and such.
 =head3 disable_search
 
 Set this to a true value to disable the internal search function. Will
-fall back to try site search using google. Default is false.
+fall back to try site search using Google. Default is false.
 
 =head3 use_captcha
 
