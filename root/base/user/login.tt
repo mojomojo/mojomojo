@@ -3,11 +3,9 @@
     [% IF message %]
     <p class="end logintext"><span id="logintext">[% message %]</span></p>
     [% END %]
-    [% IF form %]
-        [% form %]
-    [% ELSE %]
-        [% INCLUDE 'user/login_form.tt' %]
-    [% END %]       
+    
+    [% form %] 
+        
     <p>
         [% IF( c.pref( 'open_registration' ) ) %]
             <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> or 
