@@ -115,7 +115,7 @@ sub page_user : Private {
             || $user->is_admin() )
       )
     {
-        my $c->stash->{message} = $c->loc('Cannot find that user.');
+        $c->stash->{message} = $c->loc('Cannot find that user.');
         $c->stash->{template} = 'message.tt';
         $c->detach('/default');
     }
