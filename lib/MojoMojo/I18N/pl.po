@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: MojoMojo 0.999026\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2009-05-01 09:20+0100\n"
 "Last-Translator: Robert 'LiNiO' Litwiniec <linio@wonder.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,10 @@ msgstr "Nieskonfigurowana instalacja MojoMojo"
 #:
 msgid "Abstract"
 msgstr "Streszczenie"
+
+#: lib/MojoMojo/Controller/User.pm:250
+msgid "Account Taken. Try another."
+msgstr "Konto już istnieje. Spróbuj wybrać inną nazwę."
 
 #: root/base/page/recent.tt:43
 msgid "Actions"
@@ -138,7 +142,7 @@ msgstr "Alfabetycznie posortowana lista stron"
 msgid "Also try h2,h3 and so on"
 msgstr "Spróbuj również h2, h3 itp."
 
-#: lib/MojoMojo/Controller/User.pm:303
+#: lib/MojoMojo/Controller/User.pm:301
 msgid "An error occourred. Sorry."
 msgstr "Przepraszamy, wystąpił błąd."
 
@@ -338,6 +342,10 @@ msgstr "Treśc komentarza"
 msgid "Comments"
 msgstr "Komentarze"
 
+#: root/base/admin/toplinks.tt:7
+msgid "Configuration"
+msgstr "Konfiguracja"
+
 #: root/base/page/info.tt:16
 msgid "Content size"
 msgstr "Rozmiar treści"
@@ -358,6 +366,10 @@ msgstr "Could not create attachment from %1"
 #:
 msgid "Could not embed player for"
 msgstr "Nie mogę osadzić odtwarzacza dla"
+
+#: lib/MojoMojo/Controller/User.pm:177
+msgid "Could not recover password."
+msgstr "Odzyskiwanie hasła nie powiodło się."
 
 #:
 msgid "Could not retrieve"
@@ -500,7 +512,7 @@ msgstr "Administrator strony"
 msgid "Enum list"
 msgstr "Lista numerowana"
 
-#: lib/MojoMojo/Controller/User.pm:199
+#: lib/MojoMojo/Controller/User.pm:200
 msgid "Error occurred while emailing you your new password."
 msgstr "Wystąpił błąd w czasie wysyłania nowego hasła."
 
@@ -540,9 +552,13 @@ msgstr "Wprowadź adres pocztowy, którego chcesz użyć"
 msgid "Footnotes"
 msgstr "Stopki"
 
-#: root/base/edithelp.tt:59
+#:
 msgid "Format content until next =pod as plain old documentation"
 msgstr "Tworzenie dokumentacji pod(plain old documentation) aż do następnego =pod"
+
+#: root/base/edithelp.tt:59
+msgid "Format content until {{end}} as plain old documentation"
+msgstr "Tworzenie dokumentacji pod(plain old documentation) aż do wystąpienia znacznika końca {{end}}"
 
 #: root/base/page/bottomnav.tt:59
 msgid "Format page for printing"
@@ -580,7 +596,7 @@ msgstr "Zaloguj się"
 msgid "Go"
 msgstr "Znajdź"
 
-#: root/base/message.tt:7
+#: root/base/message.tt:9
 msgid "Go directly to "
 msgstr "Przejdź bezpośrednio na "
 
@@ -629,7 +645,7 @@ msgstr "Nagłówki"
 msgid "Headlines for x"
 msgstr "Nagłówki dla %1"
 
-#: lib/MojoMojo/Schema.pm:119
+#: lib/MojoMojo/Schema.pm:120
 msgid "Help"
 msgstr "Pomoc"
 
@@ -646,7 +662,7 @@ msgstr "Witaj, aby zweryfikować Twój adres email %1, kliknij na link:"
 msgid "Hide changes"
 msgstr "Ukryj zmiany"
 
-#: root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
+#: root/base/admin/toplinks.tt:10 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
 msgstr "Strona domowa"
 
@@ -934,12 +950,16 @@ msgstr "Brak nowych zmian"
 msgid "No results found"
 msgstr "Nie znaleziono"
 
+#. ($rev,                '<span class="error_detail">'                  . '<a href="' . $page->path . '">' . $page->name . '</a>'               .'</span>')
+#: lib/MojoMojo/Controller/Page.pm:93
+msgid "No revision x for x"
+msgstr "Brak wersji %1 dla %2"
+
 #: root/base/admin/role.tt:34
 msgid "No roles created yet."
 msgstr "Nie utworzono jeszcze ról."
 
-#. ($page->name)
-#: lib/MojoMojo/Controller/Page.pm:89
+#:
 msgid "No such revision for "
 msgstr "Brak tej wersji dla "
 
@@ -1095,7 +1115,7 @@ msgstr "Obrazek po prawej"
 msgid "Please enter username and password"
 msgstr "Wprowadź nazwę użytkownika i hasło"
 
-#: lib/MojoMojo/Controller/User.pm:224
+#: lib/MojoMojo/Controller/User.pm:225
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Wprowadź dane, aby się zarejestrować. Wszystkie pola są wymagane."
 
@@ -1204,7 +1224,7 @@ msgstr "Nowe konto"
 msgid "Register new account"
 msgstr "Utwórz nowe konto"
 
-#: lib/MojoMojo/Controller/User.pm:219
+#: lib/MojoMojo/Controller/User.pm:220
 msgid "Registration is closed!"
 msgstr "Tworzenie nowych kont jest wyłaczone!"
 
@@ -1269,7 +1289,7 @@ msgstr "Nazwa roli"
 msgid "Role Name:"
 msgstr "Nazwa roli"
 
-#: root/base/admin/role.tt:9
+#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:9
 msgid "Roles"
 msgstr "Role"
 
@@ -1395,7 +1415,7 @@ msgstr "Ustawienia strony"
 msgid "Smaller"
 msgstr "Mniejsze"
 
-#: lib/MojoMojo/Controller/User.pm:435
+#: lib/MojoMojo/Controller/User.pm:433
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Niektóre pola są nieprawidłowe. Popraw je i spróbuj ponownie:"
 
@@ -1480,7 +1500,7 @@ msgstr "Informacje o formatowaniu Textile"
 msgid "Textile2 reference"
 msgstr "Składnia Textile2"
 
-#: lib/MojoMojo/Controller/User.pm:350
+#: lib/MojoMojo/Controller/User.pm:348
 msgid "That mail is already in use"
 msgstr "Ten adres jest już zajęty"
 
@@ -1493,10 +1513,14 @@ msgstr "Strona wiki"
 msgid "The email was sent to x."
 msgstr "Wiadomość została wysłana na konto %1."
 
-#. ($c->stash->{pre_hacked_uri})
-#: lib/MojoMojo/Controller/Root.pm:46
+#:
 msgid "The requested URL (x) was not found"
 msgstr "Żądany adres URL (%1) nie został znaleziony"
+
+#. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
+#: lib/MojoMojo/Controller/Root.pm:48
+msgid "The requested URL was not found: x"
+msgstr "Żądany URL nie został odnaleziony: %1"
 
 #: root/forms/admin/settings.yml:26
 msgid "Theme name"
@@ -1574,7 +1598,7 @@ msgstr "Profil użytownika"
 msgid "User Settings"
 msgstr "Ustawienia użytkownika"
 
-#: lib/MojoMojo/Controller/User.pm:411
+#: lib/MojoMojo/Controller/User.pm:409
 msgid "User not found!"
 msgstr "Użytkownik nie znaleziony!"
 
@@ -1584,7 +1608,7 @@ msgid "User profile for x"
 msgstr "Profil użytkownika %1"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:383
+#: lib/MojoMojo/Controller/User.pm:381
 msgid "User x not found!"
 msgstr "Użytkownik %1 nie znaleziony!"
 
@@ -1592,7 +1616,7 @@ msgstr "Użytkownik %1 nie znaleziony!"
 msgid "Username"
 msgstr "Login"
 
-#: lib/MojoMojo/Schema.pm:81 root/base/admin/user.tt:9
+#: lib/MojoMojo/Schema.pm:81 root/base/admin/toplinks.tt:8 root/base/admin/user.tt:9
 msgid "Users"
 msgstr "Użytkownicy"
 
@@ -1629,7 +1653,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "Na Twoje konto pocztowe został wysłany link aktywacyjny. Użyj go, aby aktywować konto!"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:329
+#: lib/MojoMojo/Controller/User.pm:327
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "witaj %1, Twój adres pocztowy został zweryfikowany. Proszę się zalogować."
 
@@ -1673,7 +1697,7 @@ msgstr "Możesz zasubskrybować tę wiki poprzez RSS i uzyskać nagłówki zmien
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Nie masz uprawnień do edycji załączników na tej stronie"
 
-#: lib/MojoMojo/Controller/User.pm:429
+#: lib/MojoMojo/Controller/User.pm:427
 msgid "You have to fill in all required fields."
 msgstr "Musisz wypełnić wszystkie wymagane pola."
 
@@ -1693,6 +1717,10 @@ msgstr "Twoje konto"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr "Dane wejściowe są nieprawidłowe, sformatuj je jeszcze raz i spróbuj ponownie."
 
+#: lib/MojoMojo/Controller/User.pm:187
+msgid "Your new password on "
+msgstr "Twoje nowe hasła na "
+
 #: lib/MojoMojo/Controller/User.pm:165
 msgid "Your password has been updated"
 msgstr "Twoje hasło zostało zaktualizowane"
@@ -1708,7 +1736,7 @@ msgid "[[C++]], [[Let's play again!]] ((easy to type))"
 msgstr "[[C++]], [[Link w nawiasach kwadratowych]] ((szybszy sposób na zapis linku))"
 
 #. ($c->pref('name')
-#: lib/MojoMojo/Controller/User.pm:295
+#: lib/MojoMojo/Controller/User.pm:294
 msgid "[x] New User Validation"
 msgstr "[%1] Weryfikacja nowego użytkownika"
 
@@ -1728,10 +1756,10 @@ msgstr "dodaj komentarz"
 msgid "add tag"
 msgstr "dodaj tag"
 
-#: lib/MojoMojo/Schema.pm:162
+#: lib/MojoMojo/Schema.pm:163
 msgid "admin home page"
 msgstr ""
-"h1. Użytkownik Admin.\n"
+"# Użytkownik Admin.\n"
 "\n"
 "To jest standardowa strona domowa administratora. Możesz zmienić ten tekst poprzez kliknęcie na linku _Edytuj stronę_."
 
@@ -1765,7 +1793,7 @@ msgstr "jako %1"
 msgid "at"
 msgstr "o"
 
-#: root/base/admin/toplinks.tt:10
+#:
 msgid "back"
 msgstr "wróć"
 
@@ -1825,11 +1853,11 @@ msgstr "przy podglądzie komentarze zablokowane"
 msgid "common uses"
 msgstr "najczęściej używane"
 
-#: root/base/admin/toplinks.tt:7
+#:
 msgid "configuration"
 msgstr "konfiguracja"
 
-#: lib/MojoMojo/Controller/User.pm:358
+#: lib/MojoMojo/Controller/User.pm:356
 msgid "confirmation message resent"
 msgstr "wysłano wiadomość potwierdzającą"
 
@@ -1853,9 +1881,9 @@ msgstr "usunięto"
 msgid "details"
 msgstr "szczegóły"
 
-#: root/base/message.tt:10
-msgid "do not pass prison, do not collect $ 200..."
-msgstr "Odpocznij chwilkę od komputera..."
+#: root/base/message.tt:12
+msgid "do not pass jail, do not collect $200..."
+msgstr "Zrób sobie przerwę..."
 
 #: root/base/attachments/list.tt:7
 msgid "download"
@@ -1889,18 +1917,18 @@ msgstr "Galeria"
 msgid "hello"
 msgstr "witaj"
 
-#: lib/MojoMojo/Schema.pm:158
+#: lib/MojoMojo/Schema.pm:159
 msgid "help message"
 msgstr ""
-"h1. Indeks pomocy.\n"
+"# Indeks pomocy.\n"
 "\n"
-"h2. Edycja stron\n"
+"## Edycja stron\n"
 "\n"
-"h2. Składnia formatowania\n"
+"## Składnia formatowania\n"
 "\n"
-"h2. Tagi\n"
+"## Tagi\n"
 "\n"
-"h2. Załączniki i zdjęcia\n"
+"## Załączniki i zdjęcia\n"
 
 #: root/base/edithelp/markdown.tt:20 root/base/edithelp/markdown.tt:21 root/base/edithelp/markdown.tt:26
 msgid "http://example.com/"
@@ -1986,7 +2014,7 @@ msgstr "zaloguj"
 msgid "log out"
 msgstr "wyloguj się"
 
-#: root/base/admin/user.tt:14 root/base/comment/login.tt:11 root/base/message.tt:9
+#: root/base/admin/user.tt:14 root/base/comment/login.tt:11 root/base/message.tt:11
 msgid "login"
 msgstr ""
 
@@ -2030,7 +2058,7 @@ msgstr "nie podano"
 msgid "on"
 msgstr "dnia"
 
-#: root/base/edithelp/markdown.tt:152 root/base/message.tt:8
+#: root/base/edithelp/markdown.tt:152 root/base/message.tt:10
 msgid "or"
 msgstr "lub"
 
@@ -2103,7 +2131,7 @@ msgstr "wersja"
 msgid "right justified paragraph"
 msgstr "paragraf wyrównany do prawej"
 
-#: root/base/admin/toplinks.tt:9 root/base/admin/user.tt:15
+#: root/base/admin/user.tt:15
 msgid "roles"
 msgstr "role"
 
@@ -2115,7 +2143,7 @@ msgstr "urwanie głowy"
 msgid "small"
 msgstr "małe"
 
-#: root/base/message.tt:7
+#: root/base/message.tt:9
 msgid "start"
 msgstr ""
 
@@ -2135,7 +2163,7 @@ msgstr "spis treści"
 msgid "tags"
 msgstr "tagi"
 
-#: lib/MojoMojo/Controller/User.pm:430
+#: lib/MojoMojo/Controller/User.pm:428
 msgid "the following are missing:"
 msgstr "brak następujących:"
 
@@ -2147,7 +2175,7 @@ msgstr "Spis treści"
 msgid "url inside paranthesis"
 msgstr "adres w nawiasach"
 
-#: root/base/admin/toplinks.tt:8
+#:
 msgid "users"
 msgstr "użytkownicy"
 
@@ -2160,17 +2188,17 @@ msgid "view"
 msgstr "pokaż"
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:154
+#: lib/MojoMojo/Schema.pm:155
 msgid "welcome message"
 msgstr ""
-"h1. Witaj na MojoMojo!\n"
+"# Witaj na MojoMojo!\n"
 "\n"
 "To jest Twoja strona główna. Aby rozpocząć administrowanie proszę się zalogować przy użyciu\n"
 "nazwy i hasła administratora. Będziesz wtedy mógł zmieniać ustawienia.\n"
 "Jeśli chcesz rozpocząć zabawę z wiki, po prostu utwórz [[Nową stronę]] \n"
 "lub rozpocznij edycję tej strony poprzez przycisk edycji znajdujący się na dole strony.\n"
 "\n"
-"h2. Potrzebujesz pomocy?\n"
+"## Potrzebujesz pomocy?\n"
 "\n"
 "Sprawdź sekcję [[Help|Pomoc]]."
 
