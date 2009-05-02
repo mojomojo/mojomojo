@@ -10,7 +10,7 @@ BEGIN {
     plan skip_all =>
       'Requirements not installed for Syntax Highligher Formatter'
       unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
-    plan tests => 15;
+    plan tests => 16;
     use_ok('MojoMojo::Formatter::Textile');
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     use_ok( 'Catalyst::Test', 'MojoMojo' );
@@ -76,11 +76,6 @@ Ha&nbsp;en&nbsp;god&nbsp;dag
 HTML
 
     is( $$got, $expected, $test );
-
-    # Now run through all formatters.
-    $test .= ' - run through all formatters';
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
 }
 
 {
@@ -128,11 +123,6 @@ Perl
 Perl
 
     is( $$got, $expected, $test );
-
-    # Now run through all formatters.
-    $test .= ' - run through all formatters';
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
 }
 
 {
@@ -152,12 +142,6 @@ SQL
 SQL
 
     is( $$got, $expected, $test );
-
-    # Now run through all formatters.
-    $test .= ' - run through all formatters';
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
-
 }
 
 {

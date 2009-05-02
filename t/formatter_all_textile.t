@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 17;
+use Test::More tests => 20;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -61,7 +61,28 @@ through the edit link at the bottom.</p>
 <p>Check out our <a class="existingWikiWord" href="/help">Help</a> section.</p>
 HTML
 
-$test = 'Test > in <pre lang="HTML"> section.';
+{
+    $test = 'say Perl';
+
+    $content = <<Perl;
+<pre lang="Perl">
+    say "Hola Cabrón";
+</pre>
+Perl
+
+    $expected = <<Perl;
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;<span class="kateOperator">"</span><span class="kateString">Hola&nbsp;Cabrón</span><span class="kateOperator">"</span>;
+</pre>
+Perl
+
+    # Now run through all formatters.
+    $test .= ' - run through all formatters';
+    $got = get( POST '/.jsrpc/render', [ content => $content ] );
+    is( $got, $expected, $test );
+}
+
+$test = 'Test > in <pre lang="Perl"> section.';
 # The behavior of this test is different from what appears on the page
 # when browsing. > is maintained in the test while it's encoded as &gt; in the page.
 # I don't see the encoding as un-desirable here.
@@ -282,3 +303,50 @@ Some POD here
 TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
 like($body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");
+
+{
+    $test = 'Simple SQL SELECT';
+
+    $content = <<SQL;
+<pre lang="SQL">
+select * from foo
+</pre>
+SQL
+
+    $expected = <<SQL;
+<pre>
+<b>select</b>&nbsp;*&nbsp;<b>from</b>&nbsp;foo
+</pre>
+SQL
+
+    $test .= ' - run through all formatters';
+    $got = get( POST '/.jsrpc/render', [ content => $content ] );
+    is( $got, $expected, $test );
+
+}
+
+
+{
+    $test = 'Single <code>';
+
+    $content = <<HTML;
+<pre lang="HTML">
+<code>
+Ha en god dag
+</code>
+</pre>
+HTML
+
+    $expected = <<'HTML';
+<pre>
+<b>&lt;code&gt;</b>
+Ha&nbsp;en&nbsp;god&nbsp;dag
+<b>&lt;/code&gt;</b>
+</pre>
+HTML
+
+    # Now run through all formatters.
+    $test .= ' - run through all formatters';
+    $got = get( POST '/.jsrpc/render', [ content => $content ] );
+    is( $got, $expected, $test );
+}
