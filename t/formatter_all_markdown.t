@@ -271,9 +271,13 @@ HTML
 $test = 'POD while Markdown is the main formatter';
 $content = <<'MARKDOWN';
 {{pod}}
+
 =head1 NAME
 
 Some POD here
+
+=cut
+
 {{end}}
 MARKDOWN
 $body = get( POST '/.jsrpc/render', [ content => $content ] );

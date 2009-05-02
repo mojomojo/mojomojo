@@ -1,4 +1,4 @@
-package MojoMojo::Formatter::Scrub;
+package MojoMojo::Formatter::Defang;
 
 use base qw/MojoMojo::Formatter/;
 
@@ -8,13 +8,12 @@ use warnings;
 
 =head1 NAME
 
-MojoMojo::Formatter::Scrub - Scrub user HTML
+MojoMojo::Formatter::Defang - Scrub user HTML
 1
 =head1 DESCRIPTION
 
 This formatter makes sure only a safe range of tags are
-allowed, using L<HTML::Scrubber>; It also makes sure all tags
-are balaced, using L<XML::Clean>.
+allowed, using L<HTML::Defang>; It also tries to remove XSS attempts.
 
 =head1 METHODS
 
@@ -22,8 +21,8 @@ are balaced, using L<XML::Clean>.
 
 =item format_content_order
 
-Format order can be 1-99. The Scrub formatter runs on 16, just after the main
-formatter, in order to catch direct user input. Scrub trusts the main formatter
+Format order can be 1-99. The Defang formatter runs on 16, just after the main
+formatter, in order to catch direct user input. Defang trusts the main formatter
 and all subsequently ran plugins to not output unsafe HTML.
 
 =cut
@@ -37,7 +36,7 @@ sub defang_tags_callback {
     my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
         $attribute_hash, $close_angle, $html_r, $out_r) = @_;
     # Explicitly defang this tag, eventhough safe
-    return 1 if $lc_tag eq 'br';    
+    return 2 if $lc_tag eq 'br';    
     # Explicitly whitelist this tag, eventhough unsafe
     return 0 if $lc_tag eq 'embed';
     # I am not sure what to do with this tag, so process as 
@@ -95,6 +94,7 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
+    #return;
     my $defang = HTML::Defang->new(
         context             => $c,
         fix_mismatched_tags => 1,
@@ -114,7 +114,7 @@ sub format_content {
 
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<XML::Clean>,L<HTML::Scrubber>
+L<MojoMojo>,L<Module::Pluggable::Ordered>,L<HTML::Defang>
 
 =head1 AUTHORS
 
