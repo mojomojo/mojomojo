@@ -61,7 +61,7 @@ requires(
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
     'Text::Password::Pronounceable'                => 0,
-    'URI'                                          => '1.35',
+    'URI'                                          => '1.37',
     'YAML'                                         => '0.36',
     'Text::Textile'                                => 0,
     'Term::Prompt'                                 => 0,
