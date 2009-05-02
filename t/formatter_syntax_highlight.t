@@ -10,7 +10,7 @@ BEGIN {
     plan skip_all =>
       'Requirements not installed for Syntax Highligher Formatter'
       unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
-    plan tests => 16;
+    plan tests => 15;
     use_ok('MojoMojo::Formatter::Textile');
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     use_ok( 'Catalyst::Test', 'MojoMojo' );
@@ -81,7 +81,7 @@ HTML
 {
     $test = 'Single <div>';
 
-    $content = <<HTML;
+    $content = <<'HTML';
 <pre lang="HTML">
 <div>
 Ha en god dag
@@ -90,15 +90,22 @@ Ha en god dag
 HTML
 
     $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
-    $expected = <<'HTML';
-<pre>
+    $expected = '<pre>
 <b>&lt;div&gt;</b>
 Ha&nbsp;en&nbsp;god&nbsp;dag
-<b>&lt;div&gt;</b>
+<b>&lt;/div&gt;</b>
 </pre>
-HTML
+';
 
     eq_or_diff( $$got, $expected, $test );
+
+    $content = <<'HTML';
+<pre lang="HTML">
+<div>
+Ha en god dag
+</div>
+</pre>
+HTML
 
     # Now run through all formatters.
     $test .= ' - run through all formatters';
