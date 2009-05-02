@@ -275,9 +275,6 @@ $content = <<'MARKDOWN';
 =head1 NAME
 
 Some POD here
-
-=cut
-
 {{end}}
 MARKDOWN
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
