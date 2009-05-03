@@ -18,6 +18,7 @@ requires(
     'Catalyst::Plugin::Cache'                      => 0,
     'Catalyst::Plugin::ConfigLoader'               => '0.13',
     'Catalyst::Plugin::I18N'                       => 0,
+    'Catalyst::Plugin::SubRequest'                 => '0.13',
     'Catalyst::Plugin::Session::State::Cookie'     => 0,
     'Catalyst::Plugin::Session::Store::File'       => '0.15',
     'Catalyst::Plugin::Setenv'                     => 0,

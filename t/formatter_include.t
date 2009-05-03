@@ -15,7 +15,7 @@ my ($content,$exist,$new);
 my $fake_c = DummyCatalystObject->new;
 
 $content = "{{http://github.com/marcusramberg/mojomojo/raw/85605d55158b1e6380457d4ddc31e34b7a77875a/Changes}}\n";
-MojoMojo::Formatter::Include->format_content(\$content, Dummy->new, undef);
+MojoMojo::Formatter::Include->format_content(\$content, $fake_c, undef);
 like($content, qr{0\.999001\s+2007\-08\-29\s16\:29\:00});
 
 BEGIN {

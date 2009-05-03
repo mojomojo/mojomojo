@@ -53,7 +53,7 @@ sub include {
     return "$url ".$c->loc('is not a valid url') unless $url;
     my $rel = $url->rel( $c->req->base );
     unless ($rel->scheme) {
-        warn "Trying to get ".$rel;
+        #warn "Trying to get ".$rel;
         return $c->subreq( '/inline', { path => '/'.$rel } );
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
