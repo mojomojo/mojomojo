@@ -62,6 +62,7 @@ sub convert {
     return (join "\n", @lines) . ($text =~ /(\n+)\z/? $1 : '');  # append the last \n if any, which would be lost by the initial split
 }
 
+=back
 
 =head1 AUTHORS
 

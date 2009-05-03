@@ -30,8 +30,12 @@ and all subsequently ran plugins to not output unsafe HTML.
 sub format_content_order { 16 }
 
 
+=item defang_tags_callback
 
-# Callback for custom handling specific HTML tags
+Callback for custom handling specific HTML tags
+
+=cut 
+
 sub defang_tags_callback {
     my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
         $attribute_hash, $close_angle, $html_r, $out_r) = @_;
@@ -44,8 +48,13 @@ sub defang_tags_callback {
     return 2 if $lc_tag eq 'img';
 }
 
-# Callback for custom handling URLs in HTML attributes as well as 
-# styletag/attribute declarations
+=item defang_url_callback
+
+Callback for custom handling URLs in HTML attributes as well as 
+styletag/attribute declarations
+
+=cut
+
 sub defang_url_callback {
     my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, 
         $attribute_hash, $html_r) = @_;
@@ -55,7 +64,12 @@ sub defang_url_callback {
     return 1 if $$attr_val_r =~ /youporn.com/i; 
 }
 
-# Callback for custom handling style tags/attributes
+=item defang_css_callback
+
+Callback for custom handling style tags/attributes
+
+=cut
+
 sub defang_css_callback {
     my ($self, $defang, $selectors, $selector_rules, $tag, $is_attr) = @_;
     my $i = 0;
@@ -74,7 +88,12 @@ sub defang_css_callback {
     }
 }
 
-# Callback for custom handling HTML tag attributes
+=item
+
+Callback for custom handling HTML tag attributes
+
+=cut
+
 sub defang_attribs_callback {
     my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r) = @_;
     # Change all ’border’ attribute values to zero.
