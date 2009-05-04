@@ -1,5 +1,5 @@
 INSTALLING MOJOMOJO
-  Step 1
+  Step 1 (install)
     Install MojoMojo either using the cpan shell like this:
 
         cpan MojoMojo
@@ -12,7 +12,7 @@ INSTALLING MOJOMOJO
         
     to get all the required modules installed.
 
-  Step 2
+  Step 2 (configure)
     mojomojo.conf is the main configuration file and is in Config::General
     format.
 
@@ -29,7 +29,7 @@ INSTALLING MOJOMOJO
 
         ./script/mojomojo_spawn_db.pl
 
-  Step 3
+  Step 3 (start)
     Do one of these:
 
     Catalyst includes a test server which can be started using:
@@ -52,7 +52,13 @@ INSTALLING MOJOMOJO
 
         using_frontend_proxy 1
 
-  Step 4
+  Step 4 (login)
         Login to your MojoMojo and change the admin password: 
-        login/pass is admin/admin.   
+        login/pass is admin/admin.
+        
+  Step 5 (create)
+        Create a new page.  Decide what URL you would like for the page then 
+        browse to that URL.  You will then be asked to add content.  For example,
+        suppose I want a page about Indiana University basketball.  I might 
+        choose to create it at /Basketball/University/Indiana
 
