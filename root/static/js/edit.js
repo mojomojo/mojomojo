@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    var $split_edit_button  = $('<a>' + _('Split Edit') + '</a>');
-    var $toggle_info_button = $('<a>' + _('Syntax') + '</a>');
+    var $split_edit_button  = $('<a>' + loc('Split Edit') + '</a>');
+    var $toggle_info_button = $('<a>' + loc('Syntax') + '</a>');
     var $content_preview    = $("#content_preview");
     var $edit_help          = $("#edithelp");
 
@@ -91,14 +91,14 @@ _createToolbarSelect = function(id, options) {
     var $select = $('<select/>');
 
     $select.data('opt', options);
-    $select.attr({ 'id': "toolbar_" + id.replace(/\s/g, "_"), 'title': _(id) });
+    $select.attr({ 'id': "toolbar_" + id.replace(/\s/g, "_"), 'title': loc(id) });
 
-    $select.append( $('<option>').append(_(id)) );
+    $select.append( $('<option>').append(loc(id)) );
 
     $(options).each(function(i) {
         var text = options[i].shift();
         options[i].unshift('body'); // txtarea ID
-        $select.append( $('<option>').val(i).append(_(text)) );
+        $select.append( $('<option>').val(i).append(loc(text)) );
     });
 
     $select.change(function(){
@@ -125,19 +125,19 @@ setupFormatterToolbar = function() {
     });
 
     // Formatter
-    $toolbar.append(_createToolbarSelect('Formatter', [
-        [ 'IRC formatter', '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
-        [ 'POD formatter', '\n{{pod}}\n\n','\n\n{{end}}\n\n',_("=head1 Header")]
+    $toolbar.append(_createToolbarSelect(loc('Formatter'), [
+        [ loc('IRC formatter'), '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
+        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n',loc("=head1 Header")]
     ]));
 
     // Insert 
-    $toolbar.append(_createToolbarSelect('Insert', [
-        [ 'comments', '\n{{comments}}\n','',''],
-        [ 'toc', '\n{{toc}}','',''],
-        [ 'redirect', '\n{{redirect ','}}','/new/location'],
-        [ 'include', '\n{{','}}','http://www.google.com'],
-        [ 'youtube', '\n{{youtube ','}}','http://www.youtube.com'],
-        [ 'cpan', '\n{{cpan ','}}','MojoMojo']
+    $toolbar.append(_createToolbarSelect(loc('Insert'), [
+        [ loc('comments'), '\n{{comments}}\n','',''],
+        [ loc('toc'), '\n{{toc}}','',''],
+        [ loc('redirect'), '\n{{redirect ','}}','/new/location'],
+        [ loc('include'), '\n{{','}}','http://www.google.com'],
+        [ loc('youtube'), '\n{{youtube ','}}','http://www.youtube.com'],
+        [ loc('cpan'), '\n{{cpan ','}}','MojoMojo']
     ]));
 
     // make sure it is initialized
@@ -146,9 +146,9 @@ setupFormatterToolbar = function() {
     }
 
     // Syntax highlight
-    $toolbar.append(_createToolbarSelect('Syntax Highlight', 
+    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'), 
         $.map(syntax_formatters, function(n, i) {
-            return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n','say "Howdy partner.";' ]];
+            return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n',loc('say "Howdy partner.";') ]];
         })
     ));
 
@@ -157,44 +157,44 @@ setupFormatterToolbar = function() {
     // main or textile buttons
     if(wiki_type == 'main' || wiki_type == 'textile') {
         buttons = [
-            [ 'heading', 'Main heading', '\n\nh1. ','\n\n',_('Also try h2,h3 and so on')],
-            [ 'list_bullet', 'Bullet list', '\n\n* ','\n\n',_('List item 1')],
-            [ 'list_enum', 'Enum list', '\n\n# ','\n\n',_('Numbered list item')],
-            [ 'code', 'Code', '@','@',_('code')],
-            [ 'quote', 'Block quote', 'bq. ','',_('quote')],
-            [ 'left', 'Left-justified paragraph', '\n\np<. ','\n\n',_('left justified paragraph')],
-            [ 'right', 'Right-justified paragraph', '\n\np>. ','\n\n',_('right justified paragraph')],
-            [ 'center', 'Centered paragraph', '\n\np=. ','\n\n',_('centered paragraph')],
-            [ 'justify', 'Justified paragraph', '\n\np<>. ','\n\n',_('justified paragraph')],
-            [ 'bold', 'Bold', '*','*',_('bold')],
-            [ 'italic', 'Italic', '_','_',_('italic')],
-            [ 'strikethrough', 'Deleted Text', '-','-',_('deleted')],
-            [ 'big', 'Bigger', '++','++',_('bigger')],
-            [ 'small', 'Smaller', '--','--',_('small')],
-            [ 'super', 'Superscript', '^','^',_('superscript')],
-            [ 'sub', 'Subscript', '[~','~]',_('subscript')],
-            [ 'wikilink', 'Internal Link', '[[',']]','/MojoMojo|Interwiki Link'],
-            [ 'hyperlink', 'External Link', '&quot;','&quot;:/','link(hyper)'],
-            [ 'drawing_left', 'Picture left', '<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)'],
-            [ 'drawing', 'Picture', '<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)'],
-            [ 'drawing_right', 'Picture Right', '<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)']
+            [ 'heading', loc('Main heading'), '\n\nh1. ','\n\n',loc('Also try h2,h3 and so on')],
+            [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
+            [ 'list_enum', loc('Enum list'), '\n\n# ','\n\n',loc('Numbered list item')],
+            [ 'code', loc('Code'), '@','@',loc('code')],
+            [ 'quote', loc('Block quote'), 'bq. ','',loc('quote')],
+            [ 'left', loc('Left-justified paragraph'), '\n\np<. ','\n\n',loc('left justified paragraph')],
+            [ 'right', loc('Right-justified paragraph'), '\n\np>. ','\n\n',loc('right justified paragraph')],
+            [ 'center', loc('Centered paragraph'), '\n\np=. ','\n\n',loc('centered paragraph')],
+            [ 'justify', loc('Justified paragraph'), '\n\np<>. ','\n\n',loc('justified paragraph')],
+            [ 'bold', loc('Bold'), '*','*',loc('bold')],
+            [ 'italic', loc('Italic'), '_','_',loc('italic')],
+            [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
+            [ 'big', loc('Bigger'), '++','++',loc('bigger')],
+            [ 'small', loc('Smaller'), '--','--',loc('small')],
+            [ 'super', loc('Superscript'), '^','^',loc('superscript')],
+            [ 'sub', loc('Subscript'), '[~','~]',loc('subscript')],
+            [ 'wikilink', loc('Internal Link'), '[[',']]','/MojoMojo|Interwiki Link'],
+            [ 'hyperlink', loc('External Link'), '&quot;','&quot;:/','link(hyper)'],
+            [ 'drawing_left', loc('Picture left'), '<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)'],
+            [ 'drawing', loc('Picture'), '<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)'],
+            [ 'drawing_right', loc('Picture Right'), '<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)']
         ];
     }
 
     // markdown buttons
     else if(wiki_type = 'markdown') {
         buttons = [
-            [ 'heading', 'Main heading', '\n\n# ',' #\n\n',_('increase # for smaller headline')],
-            [ 'list_bullet', 'Bullet list', '\n\n* ','\n\n',_('List item 1')],
-            [ 'list_enum', 'Enum list', '\n\n1 ','\n\n',_('Numbered list item')],
-            [ 'bold', 'Bold', '**','**',_('bold')],
-            [ 'italic', 'Italic', _('italic')],
-            [ 'strikethrough', 'Deleted Text', '-','-',_('deleted')],
-            [ 'wikilink', 'Internal Link', '[[',']]','/MojoMojo|Interwiki Link'],
-            [ 'hyperlink', 'External Link', '[',']()',_('url inside paranthesis')],
-            [ 'drawing_left', 'Picture left', '<div class=photo style=&quot;float: left&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
-            [ 'drawing', 'Picture', '<div class=photo>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
-            [ 'drawing_right', 'Picture Right', '<div class=photo style=&quot;float: right&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ]
+            [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n',loc('increase # for smaller headline')],
+            [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
+            [ 'list_enum', loc('Enum list'), '\n\n1 ','\n\n',loc('Numbered list item')],
+            [ 'bold', loc('Bold'), '**','**',loc('bold')],
+            [ 'italic', loc('Italic'), loc('italic')],
+            [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
+            [ 'wikilink', loc('Internal Link'), '[[',']]','/MojoMojo|Interwiki Link'],
+            [ 'hyperlink', loc('External Link'), '[',']()',loc('url inside paranthesis')],
+            [ 'drawing_left', loc('Picture left'), '<div class=photo style=&quot;float: left&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
+            [ 'drawing', loc('Picture'), '<div class=photo>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
+            [ 'drawing_right', loc('Picture Right'), '<div class=photo style=&quot;float: right&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ]
         ];
     }
 
@@ -205,7 +205,7 @@ setupFormatterToolbar = function() {
 
         $button.attr({
             'src': $.uri_for('/.static/toolbar/' + data.shift() + '.png'),
-            'title': _(data.shift())
+            'title': loc(data.shift())
         });
 
         data.unshift('body'); // txtarea ID
@@ -216,7 +216,7 @@ setupFormatterToolbar = function() {
     // help text
     $toolbar.append(
           '<br><small>&nbsp;'
-        + _('Mark some text to apply the toolbar actions to that text')
+        + loc('Mark some text to apply the toolbar actions to that text')
         + '</small>'
     );
 };
@@ -257,4 +257,3 @@ setupEditHelp = function() {
 
     return tabs;
 };
-
