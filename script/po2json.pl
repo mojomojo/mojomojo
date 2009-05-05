@@ -24,7 +24,7 @@ sub po2json {
         next unless $k && $v;
         $h{ $k } = $v;
     }
-    io($out)->assert->print( JSON::Syck::Dump(\%h) )
+    io($out)->assert->print("var locale=". JSON::Syck::Dump(\%h) )
 }
 
 if(! $ARGV[1] ) {
