@@ -151,7 +151,7 @@ sub pref_cached {
       if ($setting eq 'main_formatter' ) {
         $prefvalue = defined $c->config->{'main_formatter'}
                      ? $c->config->{'main_formatter'}
-                     : 'MojoMojo::Formatter::Textile';
+                     : 'MojoMojo::Formatter::Markdown';
       } elsif ($setting eq 'default_lang' ) {
         $prefvalue = defined $c->config->{$setting}
                      ? $c->config->{$setting}
