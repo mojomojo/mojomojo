@@ -6,7 +6,7 @@
     IF cloud.tags(1); 
         cloud.html_and_css(50);
     ELSE;
-        "No tags in use.";
+        loc('No tags in use.');
     END;
 %]
 [% IF page.depth %]
