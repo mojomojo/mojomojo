@@ -322,13 +322,14 @@ a.tag:hover {
 
 .newWikiWord {
     color: #e33;
-    background: #fee;
+    background lightyellow;
 }
 
 .newWikiWord a {
-    vertical-align: super;
+   /*  vertical-align: super;; */
+	background: #f6d8b4;
+    border: 1px solid #dddddd;
     line-height: 0;
-    font-size: 0.8em;
     font-weight: bold;
     text-decoration: none;
     color: #e33;

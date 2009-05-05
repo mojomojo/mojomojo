@@ -278,9 +278,9 @@ sub format_link {
     if ( defined $proto_pages && @$proto_pages ) {
         my $proto_page = pop @$proto_pages;
         $url .= $proto_page->{path};
-        return qq{<span class="newWikiWord">$formatted<a title="}
+        return qq{<span class="newWikiWord"><a title="}
           . $c->loc('Not found. Click to create this page.')
-          . qq{" href="$url.edit">?</a></span>};
+          . qq{" href="$url.edit">$formatted?</a></span>};
     }
     else {
         my $page = pop @$path_pages;
