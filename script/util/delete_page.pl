@@ -18,7 +18,7 @@ eval {
 };
 if($@){
     die "Your DSN line in mojomojo.conf doesn't look like a valid DSN.".
-      "  Add one, or pass it on the command line.";
+      "  Add one, or pass it on the command line. $dsn, $user, $pass";
 }
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
@@ -45,27 +45,28 @@ sub delete_page {
     print "Erasing page: ";
     my $page = $schema->resultset('Page')->find( { id => $id } );
     print $page->name_orig, "\n";
-    $page->delete;
     my $page_version_rs =
-      $schema->resultset('PageVersion')->search( { page => $id } )->delete;
+      $schema->resultset('PageVersion')->search( { page => $id } )->delete_all;
     my $content_rs =
-      $schema->resultset('Content')->search( { page => $id } )->delete;
+      $schema->resultset('Content')->search( { page => $id } )->delete_all;
     my $attachment_rs =
-      $schema->resultset('Attachment')->search( { page => $id } )->delete;
+      $schema->resultset('Attachment')->search( { page => $id } )->delete_all;
     my $comment_rs =
-      $schema->resultset('Comment')->search( { page => $id } )->delete;
+      $schema->resultset('Comment')->search( { page => $id } )->delete_all;
     my $link_rs =
       $schema->resultset('Link')
-      ->search( [ { from_page => $id }, { to_page => $id } ] )->delete;
+      ->search( [ { from_page => $id }, { to_page => $id } ] )->delete_all;
     my $role_privilege_rs =
-      $schema->resultset('RolePrivilege')->search( { page => $id } )->delete;
-    my $tag_rs = $schema->resultset('Tag')->search( { page => $id } )->delete;
+      $schema->resultset('RolePrivilege')->search( { page => $id } )->delete_all;
+    my $tag_rs = $schema->resultset('Tag')->search( { page => $id } )->delete_all;
     my $wanted_page =
-      $schema->resultset('WantedPage')->search( { from_page => $id } )->delete;
+      $schema->resultset('WantedPage')->search( { from_page => $id } )->delete_all;
     my $journal_rs =
-      $schema->resultset('Journal')->search( { pageid => $id } )->delete;
+      $schema->resultset('Journal')->search( { pageid => $id } )->delete_all;
     my $entry_rs =
-      $schema->resultset('Entry')->search( { journal => $id } )->delete;
+      $schema->resultset('Entry')->search( { journal => $id } )->delete_all;
+    my $page_rs = $schema->resultset('Page')->search( { id => $id } );
+    $page_rs->delete_all;
 }
 
 __END__
