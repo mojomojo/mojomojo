@@ -2,11 +2,11 @@
 use Test::More tests => 32;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';
-use DummyCatalystObject;
+use FakeCatalystObject;
 
 my ($content,$exist,$new);
 # this fake object returns different path_pages based on whether a wiki link containing the text "existing"
-my $fake_c = DummyCatalystObject->new;
+my $fake_c = FakeCatalystObject->new;
 
 TODO: {
     local $TODO = 'Make this test work.  It fails because of the number, 2. The $content does not get formatted at all so it\'s bypassing format_content.';

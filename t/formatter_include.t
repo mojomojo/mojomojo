@@ -2,7 +2,7 @@
 use Test::More;
 use MojoMojo::Formatter::Include;
 use lib 't/lib';
-use DummyCatalystObject;
+use FakeCatalystObject;
 
 if ($ENV{TEST_LIVE}) {
     plan tests => 3;
@@ -12,7 +12,7 @@ else {
 }
 
 my ($content,$exist,$new);
-my $fake_c = DummyCatalystObject->new;
+my $fake_c = FakeCatalystObject->new;
 
 $content = "{{http://github.com/marcusramberg/mojomojo/raw/85605d55158b1e6380457d4ddc31e34b7a77875a/Changes}}\n";
 MojoMojo::Formatter::Include->format_content(\$content, $fake_c, undef);
