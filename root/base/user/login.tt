@@ -8,7 +8,7 @@
         
     <p>
         [% IF( c.pref( 'open_registration' ) ) %]
-            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> or 
+            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> [% loc('or') %] 
         [% END %] 
         <a href="[%c.uri_for('recover_pass')%]">[% loc('Recover password') %]</a>
     </p>
