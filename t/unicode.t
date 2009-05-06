@@ -49,6 +49,6 @@ my $unicode_string = 'განეკუთვნება';
 $content = "[[$unicode_string]]";
 $mech->post('/.jsrpc/render', { content => $content });
 $mech->content_is(<<"HTML", $test);
-<p><span class="newWikiWord">$unicode_string<a title="Not found. Click to create this page." href="/$unicode_string.edit">?</a></span></p>
+<p><span class="newWikiWord"><a title="Not found. Click to create this page." href="/$unicode_string.edit">$unicode_string?</a></span></p>
 HTML
 

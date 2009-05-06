@@ -53,7 +53,7 @@ is( $body, <<'HTML', $test );
 <h1>Welcome to MojoMojo!</h1>
 
 <p>This is your front page. Create<br />
-a <span class="newWikiWord">New Page<a title="Not found. Click to create this page." href="/New_Page.edit">?</a></span> or edit this one <br />
+a <span class="newWikiWord"><a title="Not found. Click to create this page." href="/New_Page.edit">New Page?</a></span> or edit this one <br />
 through the edit link at the bottom.</p>
 
 <h2>Need some assistance?</h2>
