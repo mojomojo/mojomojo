@@ -26,6 +26,21 @@
 [% loc('None') %].
 [% END %]
 
+[% IF current_perms && current_perms.size > 0 %]
+<h4>[% loc('Current path permissions') %]:</h4>
+    [% FOREACH perm_set IN current_perms %]
+    [% IF perm_set.perms && perm_set.perms.size >0 %]
+<pre><p><strong>[% loc('Role') %] [% perm_set.role_name %]:</strong></p>
+        [% FOREACH current_perm IN perm_set.perms.keys.sort %]
+                [% current_perm %] = [% loc(perm_set.perms.$current_perm) %]<br />
+        [% END %]
+    [% END %]
+</pre>
+    [% END %]
+[% ELSE %]
+[% loc('None') %].
+[% END %]
+
 [% IF user.is_admin %]
 <h4>[% loc('Permissions for this page') %]:</h4>
 <table id="permissions_editor">
