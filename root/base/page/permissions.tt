@@ -11,7 +11,7 @@
     [% FOREACH perm_set IN inherited_perms %]
 <pre><strong>[% loc('From') %] [% perm_set.path %]:</strong>
         [%- perms = perm_set.perms -%]
-        [% FOREACH role IN perms.keys.sort
+        [% FOREACH role IN perms.keys.sort;
             role_perms = perms.$role;
             perms_list = [];
             perms_list.push(loc('read'))  IF role_perms.view == 'yes';
