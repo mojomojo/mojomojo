@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MojoMojo 0.999026\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2009-05-01 09:20+0100\n"
+"PO-Revision-Date: 2009-05-09 12:50+0100\n"
 "Last-Translator: Robert 'LiNiO' Litwiniec <linio@wonder.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -367,7 +367,7 @@ msgstr "Pobierz archiwum zip ze wszystkimi stronami na tej wiki"
 msgid "END OF CONFLICT"
 msgstr "KONIEC KONFLIKTU"
 
-#: root/base/admin/role.tt:27 root/base/page/editbar.tt:10 root/base/page/editbar.tt:16 root/base/page/permissions.tt:51
+#: root/base/admin/role.tt:27 root/base/page/editbar.tt:10 root/base/page/editbar.tt:16 root/base/page/permissions.tt:72
 msgid "Edit"
 msgstr "Edycja"
 
@@ -386,6 +386,10 @@ msgstr "Domyślnie zezwól na edycję"
 #: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
 msgid "Edit page"
 msgstr "Edytuj stronę"
+
+#: root/base/page/permissions.tt:45
+msgid "Edit permissions for this page"
+msgstr "Edytuj uprawnienia dla tej strony"
 
 #: root/base/page/recent.tt:41
 msgid "Edited by"
@@ -807,7 +811,7 @@ msgstr "Brak tagów"
 msgid "Non-Existent Pages"
 msgstr "Strony nieistniejące"
 
-#: root/base/page/permissions.tt:26
+#: root/base/page/permissions.tt:26 root/base/page/permissions.tt:41
 msgid "None"
 msgstr "Brak"
 
@@ -1085,6 +1089,10 @@ msgstr "Wersja edytowana"
 msgid "Revision from x"
 msgstr "Wersja z %1"
 
+#: root/base/page/permissions.tt:33
+msgid "Role"
+msgstr "Rola"
+
 #: root/base/admin/role_form.tt:13
 msgid "Role Members"
 msgstr "Członkowie roli"
@@ -1106,7 +1114,7 @@ msgstr "Role"
 msgid "Rolled Back (Current: x)"
 msgstr "Przywrócono (aktualna: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:163 root/base/admin/role_form.tt:37 root/base/page/edit.tt:58 root/base/page/permissions.tt:52 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:97 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
+#: lib/MojoMojo/Controller/PageAdmin.pm:163 root/base/admin/role_form.tt:37 root/base/page/edit.tt:58 root/base/page/permissions.tt:73 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:97 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
 msgid "Save"
 msgstr "Zapisz"
 
@@ -1354,9 +1362,9 @@ msgstr "Wgraj"
 msgid "Use captcha"
 msgstr "Używaj captchy (testów obrazkowych)"
 
-#: root/base/page/permissions.tt:55
+#: root/base/page/permissions.tt:76
 msgid "Use inherited permissions"
-msgstr "Użyj dziedziczenia uprawnień"
+msgstr "Wyczyść uprawnienia"
 
 #: root/base/navbar.tt:11 root/base/navbar.tt:21
 msgid "User Preferences"
@@ -1505,7 +1513,7 @@ msgstr "[[C++]], [[Link w nawiasach kwadratowych]] ((szybszy sposób na zapis li
 msgid "[x] New User Validation"
 msgstr "[%1] Weryfikacja nowego użytkownika"
 
-#: root/base/page/permissions.tt:38
+#: root/base/page/permissions.tt:56
 msgid "actions"
 msgstr "akcje"
 
@@ -1536,7 +1544,7 @@ msgstr "tekst alternatywny"
 msgid "anonymouscoward"
 msgstr "anonim"
 
-#: root/base/page/permissions.tt:37
+#: root/base/page/permissions.tt:55
 msgid "apply to subpages"
 msgstr "zastosuj do podstron"
 
@@ -1553,6 +1561,10 @@ msgstr "jako %1"
 #: root/base/page/view.tt:15 root/base/tag/recent.tt:27
 msgid "at"
 msgstr "o"
+
+#: root/base/page/permissions.tt:54
+msgid "attachment"
+msgstr "załącznik"
 
 #: root/base/edithelp/markdown.tt:128
 msgid "blocks are wrapped in backticks"
@@ -1602,17 +1614,17 @@ msgstr "najczęściej używane"
 msgid "confirmation message resent"
 msgstr "wysłano wiadomość potwierdzającą"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:87
+#: lib/MojoMojo/Controller/PageAdmin.pm:87 root/base/page/permissions.tt:50
 msgid "create"
-msgstr "utworzenia"
+msgstr "tworzenie"
 
 #: root/forms/pageadmin/edit.yml:12
 msgid "creator"
 msgstr "edytor"
 
-#: root/base/attachments/list.tt:10
+#: root/base/attachments/list.tt:10 root/base/page/permissions.tt:53
 msgid "delete"
-msgstr "usuń"
+msgstr "usuwanie"
 
 #: root/base/edithelp/markdown.tt:156
 msgid "details"
@@ -1628,7 +1640,7 @@ msgstr "pobierz"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:87
 msgid "edit"
-msgstr "edycji"
+msgstr "edycja"
 
 #: root/base/admin/user.tt:17
 msgid "email"
@@ -1735,6 +1747,10 @@ msgstr "Nazwa"
 msgid "newline"
 msgstr "nowa linia"
 
+#: root/base/page/permissions.tt:35
+msgid "no"
+msgstr "nie"
+
 #: root/base/gallery/photo.tt:37
 msgid "no description"
 msgstr "brak opisu"
@@ -1755,7 +1771,7 @@ msgstr "nie podano"
 msgid "on"
 msgstr "dnia"
 
-#: root/base/edithelp/markdown.tt:152 root/base/message.tt:10
+#: root/base/edithelp/markdown.tt:152 root/base/message.tt:10 root/base/user/login.tt:11
 msgid "or"
 msgstr "lub"
 
@@ -1787,7 +1803,7 @@ msgstr "komentator"
 msgid "preferences"
 msgstr "preferencje"
 
-#: root/base/page/permissions.tt:14 root/base/page/permissions.tt:17 root/base/page/permissions.tt:35
+#: root/base/page/permissions.tt:14 root/base/page/permissions.tt:17 root/base/page/permissions.tt:51
 msgid "read"
 msgstr "odczyt"
 
@@ -1838,7 +1854,7 @@ msgstr "brak następujących:"
 
 #: root/base/attachments/list.tt:5
 msgid "view"
-msgstr "pokaż"
+msgstr "przeglądanie"
 
 #. ("test")
 #: lib/MojoMojo/Schema.pm:155
@@ -1855,7 +1871,7 @@ msgstr ""
 "\n"
 "Sprawdź sekcję [[Help|Pomoc]]."
 
-#: root/base/page/permissions.tt:14 root/base/page/permissions.tt:18 root/base/page/permissions.tt:36
+#: root/base/page/permissions.tt:14 root/base/page/permissions.tt:18 root/base/page/permissions.tt:52
 msgid "write"
 msgstr "zapis"
 
@@ -1870,6 +1886,10 @@ msgstr "jeszcze %1"
 #: root/base/page/info.tt:40
 msgid "x revisions"
 msgstr "Wersji: %1"
+
+#: root/base/page/permissions.tt:35
+msgid "yes"
+msgstr "tak"
 
 #: root/base/edithelp/textile.tt:11 root/base/edithelp/textile.tt:4 root/base/edithelp/textile.tt:6 root/base/edithelp/textile.tt:9
 msgid "your text"
