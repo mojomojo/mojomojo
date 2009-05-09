@@ -39,8 +39,6 @@ Callback for custom handling specific HTML tags
 sub defang_tags_callback {
     my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
         $attribute_hash, $close_angle, $html_r, $out_r) = @_;
-    # Explicitly defang this tag, eventhough safe
-    # return 1 if $lc_tag eq 'br';    
     # Explicitly whitelist this tag, eventhough unsafe
     return 0 if $lc_tag eq 'embed';
     return 0 if $lc_tag eq 'pre';
@@ -64,6 +62,7 @@ sub defang_url_callback {
     # Explicitly defang this URL in tag attributes or stylesheets
     return 1 if $$attr_val_r =~ /youporn.com/i; 
 }
+
 
 =item defang_css_callback
 
@@ -99,6 +98,7 @@ sub defang_attribs_callback {
     my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r) = @_;
     # Change all ’border’ attribute values to zero.
     $$attr_val_r = '0' if $lc_attr_key eq 'border';  
+    $$attr_val_r = '0' if $lc_attr_key eq 'lang';  
     # Defang all ’src’ attributes
     return 1 if $lc_attr_key eq 'src';             
     return 0;
