@@ -85,7 +85,7 @@ feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 test_requires 'Email::Send::Test';
 test_requires 'WWW::Mechanize' => '1.54';
-test_requires 'Test::WWW::Mechanize::Catalyst';
+test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ',;
 
 tests( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
