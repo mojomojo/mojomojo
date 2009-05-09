@@ -186,7 +186,7 @@ setupFormatterToolbar = function() {
         buttons = [
             [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n',loc('increase # for smaller headline')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
-            [ 'list_enum', loc('Enum list'), '\n\n1 ','\n\n',loc('Numbered list item')],
+            [ 'list_enum', loc('Enum list'), '\n\n1. ','\n\n',loc('Numbered list item')],
             [ 'bold', loc('Bold'), '**','**',loc('bold')],
             [ 'italic', loc('Italic'), loc('italic')],
             [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
