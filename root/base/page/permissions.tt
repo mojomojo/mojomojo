@@ -11,7 +11,7 @@
     [% FOREACH perm_set IN inherited_perms %]
 <pre><strong>[% loc('From') %] [% perm_set.path %]:</strong>
         [%- perms = perm_set.perms -%]
-        [% FOREACH role IN perms.keys.sort
+        [% FOREACH role IN perms.keys.sort;
             role_perms = perms.$role;
             perms_list = [];
             perms_list.push(loc('read'))  IF role_perms.view == 'yes';
@@ -20,6 +20,21 @@
     <br />
         [% role -%] [% loc('can') %] [% perms_list.join(', ') || loc('not access page') -%]
         [% END %]
+</pre>
+    [% END %]
+[% ELSE %]
+[% loc('None') %].
+[% END %]
+
+[% IF current_perms && current_perms.size > 0 %]
+<h4>[% loc('Current path permissions') %]:</h4>
+    [% FOREACH perm_set IN current_perms %]
+    [% IF perm_set.perms && perm_set.perms.size >0 %]
+<pre><p><strong>[% loc('Role') %] [% perm_set.role_name %]:</strong></p>
+        [% FOREACH current_perm IN perm_set.perms.keys.sort %]
+                [% current_perm %] = [% loc(perm_set.perms.$current_perm) %]<br />
+        [% END %]
+    [% END %]
 </pre>
     [% END %]
 [% ELSE %]
