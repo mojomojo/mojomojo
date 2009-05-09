@@ -8,7 +8,7 @@ fi
 
 if [ -z "$1" ]
 then
-    langs=`ls lib/MojoMojo/I18N/`
+    langs=`ls lib/MojoMojo/I18N/|grep po$`
 else
     langs=$1.po
 fi
