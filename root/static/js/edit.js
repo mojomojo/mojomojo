@@ -188,7 +188,7 @@ setupFormatterToolbar = function() {
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n1. ','\n\n',loc('Numbered list item')],
             [ 'bold', loc('Bold'), '**','**',loc('bold')],
-            [ 'italic', loc('Italic'), loc('italic')],
+            [ 'italic', loc('Italic'),'_','_', loc('italic')],
             [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
             [ 'wikilink', loc('Internal Link'), '[[',']]','/MojoMojo|Interwiki Link'],
             [ 'hyperlink', loc('External Link'), '[',']()',loc('url inside paranthesis')],
