@@ -98,7 +98,6 @@ sub defang_attribs_callback {
     my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r) = @_;
     # Change all ’border’ attribute values to zero.
     $$attr_val_r = '0' if $lc_attr_key eq 'border';  
-    $$attr_val_r = '0' if $lc_attr_key eq 'lang';  
     # Defang all ’src’ attributes
     return 1 if $lc_attr_key eq 'src';             
     return 0;
