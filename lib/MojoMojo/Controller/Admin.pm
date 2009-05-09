@@ -62,6 +62,7 @@ sub settings : Path FormConfig Args(0) {
             open_registration        => $c->pref('open_registration'),
             restricted_user          => $c->pref('restricted_user'),
             disable_search           => $c->pref('disable_search'),
+            enable_emoticons         => $c->pref('enable_emoticons'),
             check_permission_on_view => $c->pref('check_permission_on_view'),
             cache_permission_data    => $c->pref('cache_permission_data'),
             enforce_login            => $c->pref('enforce_login'),
@@ -90,6 +91,7 @@ sub settings : Path FormConfig Args(0) {
     $c->pref( 'restricted_user',          $form->params->{restricted_user}          ?1:0 );
     $c->pref( 'use_captcha',              $form->params->{use_captcha}              ?1:0 );
     $c->pref( 'disable_search',           $form->params->{disable_search}           ?1:0 );
+    $c->pref( 'enable_emoticons',         $form->params->{enable_emoticons}         ?1:0 );
     $c->pref( 'enforce_login',            $form->params->{enforce_login}            ?1:0 );
     $c->pref( 'create_allowed',           $form->params->{create_allowed}           ?1:0 );
     $c->pref( 'delete_allowed',           $form->params->{delete_allowed}           ?1:0 );

@@ -45,6 +45,11 @@ elements:
         value: 1
         default_empty_value: 0
         label_loc: Disable internal search (use Google)
+      - type: Checkbox
+        name: enable_emoticons
+        label_loc: Enable graphical emoticons
+        value: 1
+        default_empty_value: 0
   - type: Fieldset
     elements:
       - type: Checkbox
