@@ -40,7 +40,7 @@ sub defang_tags_callback {
     my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
         $attribute_hash, $close_angle, $html_r, $out_r) = @_;
     # Explicitly defang this tag, eventhough safe
-    # return 2 if $lc_tag eq 'br';    
+    # return 1 if $lc_tag eq 'br';    
     # Explicitly whitelist this tag, eventhough unsafe
     return 0 if $lc_tag eq 'embed';
     return 0 if $lc_tag eq 'pre';

@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 20;
+use Test::More tests => 23;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -83,6 +83,7 @@ Perl
 }
 
 $test = 'Test > in <pre lang="Perl"> section.';
+
 # The behavior of this test is different from what appears on the page
 # when browsing. > is maintained in the test while it's encoded as &gt; in the page.
 # I don't see the encoding as un-desirable here.
@@ -103,8 +104,56 @@ is( $body, <<'HTML', $test );
 HTML
 
 #----------------------------------------------------------------------------
+$test    = 'Only a <pre> section - no attribute';
+$content = <<'TEXTILE';
+<pre>
+Hopen, Norway
+</pre>
+TEXTILE
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $body, $content, $test );
+
+TODO: {
+    local $TODO = 'something  before a pre adds defang_lang attribute to pre.';
+    # We'd like this test to pass, but our current setup with Defang
+    # adds
+    #     defang_lang=""
+    # attribute to <pre> when there is some content before a pre.
+    # (even a pre itself)
+    $test    = 'pre tag - no attribute and some text before pre';
+    $content = <<'HTML';
+Jeg har familie i
+<pre>
+Hopen, Norway
+</pre>
+HTML
+    $expected = $content;
+    $body = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $body, $expected, $test );
+}
+
+$test    = 'pre tag - no attribute and some text after pre';
+$content = <<'HTML';
+<pre>
+Hopen, Norway
+</pre>
+er et sted langt mot nord.
+HTML
+$expected = '<pre>
+Hopen, Norway
+</pre>
+
+
+<p>er et sted langt mot nord.</p>
+';
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, $expected, $test );
+
+
+#----------------------------------------------------------------------------
 $test = "Have <pre> sections behave like normal pre sections.  Don't do entities
 on < and > so one can use <span> and such";
+
 # The behavior of this test is different from what appears on the page
 # when browsing. > is maintained in the test while it's encoded in the page.
 $content = <<'TEXTILE';
@@ -135,27 +184,26 @@ eq_or_diff( $body, <<'HTML', $test );
 <p>Roses are red<br />Violets are blue</p>
 HTML
 
-
 # This test is asking for a bit much perhaps.  Use <pre lang="code"> </pre> instead.
 #----------------------------------------------------------------------------
-$test = '<code> behave like normal wrt to <span> - Use textile escape ==';
+$test    = '<code> behave like normal wrt to <span> - Use textile escape ==';
 $content = <<'TEXTILE';
 ==<code><span style="font-size: 1.5em;">alguna cosa</span></code>
 ==
 TEXTILE
-$body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<'HTML', $test);
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
 <code><span style="font-size: 1.5em;">alguna cosa</span></code>
 HTML
 
 # Check that @ transforms to <code>
 #----------------------------------------------------------------------------
-$test = '@word@ behavior';
+$test    = '@word@ behavior';
 $content = <<'TEXTILE';
 @mot@
 TEXTILE
-$body = get(POST '/.jsrpc/render', [content => $content]);
-eq_or_diff($body, <<'HTML', $test);
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
 <p><code>mot</code></p>
 HTML
 
@@ -198,6 +246,7 @@ HTML
 
 #----------------------------------------------------------------------------
 $test = 'Simple html table tags. Use textile escape ==';
+
 # NOTE: The opening escape string '==' turns into a \n when textile
 #       is applied.  colgroup was moved as it confused Defang.
 $content = <<'TEXTILE';
@@ -222,13 +271,14 @@ $expected = <<'HTML';
     </tr>
 </table>
 HTML
+
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $body, $expected, $test );
 
-
 #----------------------------------------------------------------------------
 $test = 'Maintain complete set of html table tags. Use textile escape ==';
+
 # NOTE: The opening escape string '==' turns into a \n when textile
 #       is applied.  colgroup was removed as it confused Defang.
 $content = <<'TEXTILE';
@@ -283,13 +333,13 @@ $expected = <<'HTML';
 </tbody>
 </table>
 HTML
+
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $body, $expected, $test );
 
-
 #-------------------------------------------------------------------------------
-$test = 'POD while Textile is the main formatter';
+$test    = 'POD while Textile is the main formatter';
 $content = <<'TEXTILE';
 {{pod}}
 
@@ -302,7 +352,7 @@ Some POD here
 {{end}}
 TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-like($body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");
+like( $body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME" );
 
 {
     $test = 'Simple SQL SELECT';
@@ -324,7 +374,6 @@ SQL
     is( $got, $expected, $test );
 
 }
-
 
 {
     $test = 'Single <code>';

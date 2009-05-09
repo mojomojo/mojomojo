@@ -104,33 +104,26 @@ eq_or_diff( $body, <<'HTML', $test );
 HTML
 
 
-#-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "attribute snatcher";
-    $test = '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
-    $content = <<'MARKDOWN';
+$test = '<div> with non-standard HTML attribute> in a code span - the HTML scrubber should leave this alone';
+$content = <<'MARKDOWN';
 This quoted div has an ARIA role attribute: `<div role="content">`.
 MARKDOWN
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $body, <<'HTML', $test );
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
 <p>This quoted div has an ARIA role attribute: <code>&lt;div role="content"&gt;</code>.</p>
 HTML
-}
 
 
-#-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "<br /> suckage";
-    $test    = '<br/>s need to be preserved';
-    $content = <<'MARKDOWN';
-Roses are red<br/>Violets are blue
+$test    = '<br/>s need to be preserved';
+$content = <<'MARKDOWN';
+Roses are red<br/>
+Violets are blue
 MARKDOWN
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $body, <<'HTML', $test );
-<p>Roses are red
-<br/>Violets are blue</p>
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, <<'HTML', $test );
+<p>Roses are red<br/>
+Violets are blue</p>
 HTML
-}
 
 
 #-------------------------------------------------------------------------------
