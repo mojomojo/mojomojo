@@ -210,7 +210,7 @@ we will:
 sub format_link {
 
     #FIXME: why both base and $c?
-    my ( $class, $c, $wikilink, $base, $link_text ) = @_;
+    my ( $class, $c, $wikilink, $base, $link_text, $user_profile_wanted ) = @_;
     $base ||= $c->req->base;
     # prepend the base, unless the wikilink is a relative path
     $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink
@@ -278,13 +278,20 @@ sub format_link {
     if ( defined $proto_pages && @$proto_pages ) {
         my $proto_page = pop @$proto_pages;
         $url .= $proto_page->{path};
-        return qq{<span class="newWikiWord"><a title="}
-          . $c->loc('Not found. Click to create this page.')
-          . qq{" href="$url.edit">$formatted?</a></span>};
+        if ( $user_profile_wanted ) {
+            $url .= '.profile';
+            return qq{<a class="existingWikiWord" href="$url">$formatted</a>};
+        }
+        else {
+            return qq{<span class="newWikiWord"><a title="}
+              . $c->loc('Not found. Click to create this page.')
+              . qq{" href="$url.edit">$formatted?</a></span>};
+        }
     }
     else {
         my $page = pop @$path_pages;
         $url .= $page->path;
+        $url .= '.profile' if $user_profile_wanted;
         $url .= "#$fragment" if $fragment ne '';
         return qq{<a class="existingWikiWord" href="$url">$formatted</a>};
     }

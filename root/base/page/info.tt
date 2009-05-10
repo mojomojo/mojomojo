@@ -41,7 +41,7 @@
 
 <ol>
 [% FOREACH version IN page.versions %]
-    <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] [% loc('by') %] <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a> <a href="[%c.uri_for('view',{rev=>version.version})%]">([%loc('Show revision')%])</a></li>
+    <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] [% loc('by') %] <a href="[%c.uri_for(version.creator.link) _ '.profile' %]">[%version.creator.name%]</a> <a href="[%c.uri_for('view',{rev=>version.version})%]">([%loc('Show revision')%])</a></li>
 [% END %]
 </ol>
 
