@@ -19,7 +19,7 @@ eq_or_diff( $content, $expected, $test );
 $test    = 'pre tag - lang HTML attribute';
 $content = <<'HTML';
 <pre lang="HTML">
-Hopen, Norway
+<strong>Zamość, Poland</strong>
 </pre>
 HTML
 $expected = $content;
@@ -29,7 +29,9 @@ eq_or_diff( $content, $expected, $test );
 $test    = 'pre tag - lang Perl attribute';
 $content = <<'HTML';
 <pre lang="Perl">
-if 'Hopen, Norway';
+if ( $poble eq 'Sant Celoni') {
+    say 'Visca Barça';
+}
 </pre>
 HTML
 $expected = $content;
