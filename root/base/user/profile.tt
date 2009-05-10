@@ -1,5 +1,5 @@
 [%
-    SET title = loc('User profile for x', user.name);
+    SET title = loc('User profile for x',person.name);
     WRAPPER page/wrapper.tt title = title;
 %]
 
