@@ -8,8 +8,8 @@ use warnings;
 
 =head1 NAME
 
-MojoMojo::Formatter::Defang - Scrub user HTML
-1
+MojoMojo::Formatter::Defang - Scrub user HTML and XSS
+
 =head1 DESCRIPTION
 
 This formatter makes sure only a safe range of tags are
