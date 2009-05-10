@@ -1,11 +1,14 @@
 0.999029 2009-05-09 23:59:35
+        - Actual content added to [[Help]]
+        - Tests: XSS, Defang, and more Textile
+        - Defang runs after main formatter instead of before
+        - HTML::Scrub replaced with HTML::Defang for XSS and cleaning HTML
+        - Markdown now default formatter instead of Textile.  Don't ask me why
         - Update page creation to be compatible with latest DBIC (Bernhard Graf)
-        - Test Textile some more, basic scrub html test, TODO Markdown tests.
-        - Allow html table, definition and list tags through HTML::Srubber.
-        - additional theme colors: grey, purple, pink
+        - Additional theme colors: grey, purple, pink
         - Add Amazon, RSS, Emote(optional) formatter to main distribution.
-        - many new tests, including live tests of chained formatters (dandv)
-        - main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
+        - Many new tests, including live tests of chained formatters (dandv)
+        - Main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
         - Switch email to use Catalyst::View::Email and tests for such (rafl))
 
 0.999028 2009-04-23 11:58:00
