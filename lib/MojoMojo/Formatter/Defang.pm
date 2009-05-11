@@ -34,33 +34,33 @@ sub format_content_order { 16 }
 
 Callback for custom handling specific HTML tags
 
-=cut 
+=cut
 
 sub defang_tags_callback {
-    my ($self, $defang, $open_angle, $lc_tag, $is_end_tag, 
+    my ($self, $defang, $open_angle, $lc_tag, $is_end_tag,
         $attribute_hash, $close_angle, $html_r, $out_r) = @_;
-    # Explicitly whitelist this tag, eventhough unsafe
+    # Explicitly whitelist this tag, although unsafe
     return 0 if $lc_tag eq 'embed';
     return 0 if $lc_tag eq 'pre';
-    # I am not sure what to do with this tag, so process as 
+    # I am not sure what to do with this tag, so process as
     # HTML::Defang normally would
     return 2 if $lc_tag eq 'img';
 }
 
 =item defang_url_callback
 
-Callback for custom handling URLs in HTML attributes as well as 
+Callback for custom handling URLs in HTML attributes as well as
 styletag/attribute declarations
 
 =cut
 
 sub defang_url_callback {
-    my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, 
+    my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r,
         $attribute_hash, $html_r) = @_;
     # Explicitly allow this URL in tag attributes or stylesheets
-    return 0 if $$attr_val_r =~ /youtube.com/i; 
+    return 0 if $$attr_val_r =~ /youtube.com/i;
     # Explicitly defang this URL in tag attributes or stylesheets
-    return 1 if $$attr_val_r =~ /youporn.com/i; 
+    return 1 if $$attr_val_r =~ /youporn.com/i;
 }
 
 
@@ -79,7 +79,7 @@ sub defang_css_callback {
             foreach my $key_value_rule (@$key_value_rules) {
                 my ($key, $value) = @$key_value_rule;
                 # Comment out any ’!important’ directive
-                $$key_value_rule[2] = 1 if $value =~ '!important';               
+                $$key_value_rule[2] = 1 if $value =~ '!important';
                 # Comment out any ’position=fixed;’ declaration
                 $$key_value_rule[2] = 1 if $key =~ 'position' && $value =~ 'fixed';
             }
@@ -97,9 +97,9 @@ Callback for custom handling HTML tag attributes
 sub defang_attribs_callback {
     my ($self, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r) = @_;
     # Change all ’border’ attribute values to zero.
-    $$attr_val_r = '0' if $lc_attr_key eq 'border';  
+    $$attr_val_r = '0' if $lc_attr_key eq 'border';
     # Defang all ’src’ attributes
-    return 1 if $lc_attr_key eq 'src';             
+    return 1 if $lc_attr_key eq 'src';
     return 0;
 }
 
@@ -124,7 +124,7 @@ sub format_content {
         attribs_to_callback => [     qw(border src) ],
         attribs_callback    => \&defang_attribs_callback
         );
-    
+
     $$content = $defang->defang($$content);
     return;
 }
