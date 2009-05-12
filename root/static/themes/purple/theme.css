@@ -17,7 +17,7 @@ body {
     width: 99%;
 } #header {
     height: 4em;
-    padding-bottom: 0.3em; 
+    padding-bottom: 0.3em;
     margin: 0;
     background-color: #9595e5;
     -moz-border-radius-topleft: 20px;
@@ -156,8 +156,8 @@ div#pageoptions a.active {
     padding: 5px 13px;
     border-top: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
-    min-height: 50px; 
-    /* 50px is height of catalyst logo that 
+    min-height: 50px;
+    /* 50px is height of catalyst logo that
     I'm putting on the right side of the tags area. */
 } .showdiv {
     background: white;
@@ -272,11 +272,11 @@ p {
 } 
 .toc ul {
     margin: 0;
-    margin-left: -1.25em;
+    margin-left: -1em;
     padding: 0;
 }
 .toc > ul {
-    margin-left: -2.5em;
+    margin-left: -3em;
 	list-style-type: none;
 }
 
