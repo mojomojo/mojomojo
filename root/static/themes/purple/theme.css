@@ -188,7 +188,8 @@ div#pageoptions a.active {
 }
 
 /* The two direct child selectors below take care of that nesting problem, but only for Standards-Compliant Browsers */ #content ul > li {
-    list-style: disc;
+   /* list-style: disc; */
+	list-style-type: none;
 } #content ol > li {
     list-style: decimal;
 } #content li {
@@ -262,21 +263,59 @@ p {
     padding: 0.2em;
 } .toc {
     background-color: #fffff3;
-    border: 1px solid #dddddd;
+    border: 1px solid #f5f5f5;
+	margin: 0.5em;
+	padding: 1em;
+	font-size: 1.1em;
 } .toc a {
     text-decoration: none;
-} #etiquetes {
-    float: left;
-	min-width: 80%;
+} 
+.toc ul {
+    margin: 0;
+    margin-left: -1.25em;
+    padding: 0;
+}
+.toc > ul {
+    margin-left: -2.5em;
+	list-style-type: none;
+}
+
+.toc li {
+    margin: 0;
+    padding: 0;
+	list-style-type: none;
+    font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
+}
+.toc ul li {
+	list-style-type: none;
+}
+.toc ul li ul li {
+	padding-top: 0.3em;
+	line-height: 0.80em;
+	font-size: 0.5em;
+}
+.toc ul li ul li ul li {
+	padding-top: 0.3em;
+    line-height: 0.80em;
+}
+.toc ul li ul li ul li ul li {
+	padding-top:0.3em;
+    line-height: 0.70em;
 }
 
 #cat-logo-container {
 	float:right;
 	/* This min width tied to catalyst logo
-	 * Yes, this sucks.  May it better then.
+	 * Yes, this sucks.  Make it better then.
 	 */
 	min-width: 120px;
-	
 }
+
+#etiquetes {
+    float: left;
+    min-width: 80%;
+}
+
+
 
 /* @end */
