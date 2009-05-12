@@ -16,7 +16,7 @@ body {
     max-width: 99%;
     width: 99%;
 } #header {
-    height: 4em;
+    height: auto;
     padding-bottom: 0.3em;
     margin: 0;
     background-color: #9595e5;
@@ -27,12 +27,12 @@ body {
 } #header h1 {
     background-image: url(images/mmlogo.png);
 	background-repeat: no-repeat;
-	background-position: right center;
+	background-position: right bottom;
     /* top: 0px; */
 	bottom: 0px;
 	padding-top: 8px;
 	padding-right: 150px;
-	padding-bottom: 8px;
+	padding-bottom: 0px;
 	padding-left: 10px;
     color: #ffffd9;
     font-weight: bold;
@@ -264,12 +264,17 @@ p {
 } .toc {
     background-color: #fffff3;
     border: 1px solid #f5f5f5;
-	margin: 0.5em;
-	padding: 1em;
+	margin: 0em;
+	margin-left: 1em;
+	margin-right: 1em;
+	padding: 0em;
+	vertical-align:top;
 	font-size: 1.1em;
+	float:left;
+	width:auto;
 } .toc a {
     text-decoration: none;
-} 
+}
 .toc ul {
     margin: 0;
     margin-left: -1em;
@@ -283,25 +288,9 @@ p {
 .toc li {
     margin: 0;
     padding: 0;
-	list-style-type: none;
-    font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
+    font-size: 1em;  /* !important some rule makes the font smaller as the indentation increases */
 }
-.toc ul li {
-	list-style-type: none;
-}
-.toc ul li ul li {
-	padding-top: 0.3em;
-	line-height: 0.80em;
-	font-size: 0.5em;
-}
-.toc ul li ul li ul li {
-	padding-top: 0.3em;
-    line-height: 0.80em;
-}
-.toc ul li ul li ul li ul li {
-	padding-top:0.3em;
-    line-height: 0.70em;
-}
+
 
 #cat-logo-container {
 	float:right;
@@ -316,6 +305,13 @@ p {
     min-width: 80%;
 }
 
-
+pre {
+    width:auto;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-left: 3em; 
+    margin-right: 1em ;
+    overflow:auto;
+}
 
 /* @end */
