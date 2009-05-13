@@ -99,7 +99,7 @@ sub defang_attribs_callback {
     # Change all ’border’ attribute values to zero.
     $$attr_val_r = '0' if $lc_attr_key eq 'border';
     # Defang all ’src’ attributes
-    return 1 if $lc_attr_key eq 'src';
+    return 2 if $lc_attr_key eq 'src';
     return 0;
 }
 
