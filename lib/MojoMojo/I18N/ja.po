@@ -288,7 +288,7 @@ msgstr ""
 
 #: root/base/admin/toplinks.tt:7
 msgid "Configuration"
-msgstr ""
+msgstr "設定"
 
 #: root/base/page/info.tt:16
 msgid "Content size"
@@ -384,7 +384,7 @@ msgid "Edit"
 msgstr "編集"
 
 #:
-msgid "Edit Page"
+msgid "Edit page"
 msgstr "ページ編集"
 
 #: root/base/user/profile.tt:10
@@ -592,7 +592,7 @@ msgstr "変更部分を非表示"
 
 #: root/base/admin/toplinks.tt:10 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: root/base/edithelp.tt:8
 msgid "HomePage, IBM, School"
@@ -645,7 +645,7 @@ msgstr ""
 
 #: root/base/edithelp/markdown.tt:32 root/base/page/bottomnav.tt:61
 msgid "Inline"
-msgstr ""
+msgstr "インライン表示"
 
 #: root/base/edithelp/markdown.tt:18
 msgid "Inline Links"
@@ -902,7 +902,7 @@ msgstr "このページへリンクするページ"
 
 #: root/base/navbar.tt:51 root/base/navbar.tt:53 root/base/page/recent.tt:40
 msgid "Page"
-msgstr ""
+msgstr "ページ"
 
 #: root/base/page/bottomnav.tt:16 root/base/page/bottomnav.tt:18
 msgid "Page Info"
@@ -1151,7 +1151,7 @@ msgstr ""
 
 #: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:9
 msgid "Roles"
-msgstr ""
+msgstr "権限"
 
 #. (page.content_version)
 #: root/base/page/view.tt:17
@@ -1269,7 +1269,7 @@ msgstr "サイト名"
 
 #: root/base/page/bottomnav.tt:76
 msgid "Site settings"
-msgstr ""
+msgstr "サイト設定"
 
 #: lib/MojoMojo/Controller/User.pm:439
 msgid "Some fields are invalid. Please correct them and try again:"
@@ -1712,7 +1712,7 @@ msgstr ""
 
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:63
 msgid "forget me"
-msgstr ""
+msgstr "クッキー消去"
 
 #: root/base/gallery/photo.tt:1
 msgid "gallery"
@@ -1974,3 +1974,4 @@ msgstr ""
 #: root/base/edithelp/textile.tt:48
 msgid "|b|table|row|"
 msgstr ""
+
