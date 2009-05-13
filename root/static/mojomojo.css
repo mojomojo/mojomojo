@@ -7,8 +7,8 @@
 /* @group Headlines */
 
 .logintext {
-    font-weight:bold;
-    font-size:1.25em;
+    font-weight: bold;
+    font-size: 1.25em;
     margin: 1em 0 1.5em 13px;
 }
 
@@ -33,28 +33,33 @@ h5, h6 {
 }
 
 .toc {
-  border: 1px black dotted;
-  display: inline-block;
-  padding: 1em;
-  margin: 1em;
+    display: inline-block;
+    background-color: #F6F6F6;
+    border: 1px solid #AAAAAA;
+    padding: 1em;
+    margin: 1em;
 }
 
 .toc ul {
-  margin: 0;
-  margin-left: -1em;
-  padding: 0;
+    margin: 0;
+    margin-left: -1em;
+    padding: 0;
 }
 .toc > ul {
-  margin-left: -2em;
+    margin-left: -2em;
 }
 
 .toc li {
-  margin: 0;
-  padding: 0;
-  font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
+    margin: 0;
+    padding: 0;
+    font-size: 1em !important;  /* some rule makes the font smaller as the indentation increases */
 }
 
 /* @end */
+
+#htmltagcloud span {
+    margin: 0 0.4em;
+}
 
 /* @group Links */
 
@@ -80,205 +85,215 @@ a:hover, #content a:hover {
 form { margin: 0;}
 
 .navigation {
-  color: #999;
+    color: #999;
 }
 
-#navigationForm {
-  font-size : 12px;
-}
-
-div#toplinks ul li.navOn {
-  color: #3a3a3a;
-  background:#fff;
-  padding:2px 8px;
-  text-decoration: none;
-}
-
-.help {
-  font-size: 11px;
+div#toplinks a.navOn {
+    color: #3a3a3a;
+    background: #fff;
+    text-decoration: none;
 }
 
 .inputBox {
-  font-size: 11px;
-  background-color: #eee;
-  padding: 5px;
-  margin-bottom: 20px;
+    background-color: #eee;
+    padding: 5px;
+    margin-bottom: 20px;
 }
 
 blockquote {
-  display: block;
-  width: 80%;
-  background-color: #EEE;
-  border : 1px dotted black;
-  padding-right: 2em;
-  padding-left: 2em;
-  font-style: italic;
-  quotes: "\201C" "\201D";
+    display: block;
+    width: 80%;
+    background-color: #EEE;
+    border : 1px dotted black;
+    padding-right: 2em;
+    padding-left: 2em;
+    font-style: italic;
+    quotes: "\201C" "\201D";
 }
 blockquote:before, blockquote:after {
-  display: block;
-  color: #7aa5d5;
-  font-size: 5em;
+    display: block;
+    color: #7aa5d5;
+    font-size: 5em;
 }
 blockquote:before {
-  content: open-quote;
-  height: 0px;
-  margin-left: -0.45em;
+    content: open-quote;
+    height: 0px;
+    margin-left: -0.45em;
 }
 blockquote:after {
-  content: close-quote;
-  height: 0.6em;
-  margin-left: 99.5%;
-  margin-top: -0.5em;
+    content: close-quote;
+    height: 0.6em;
+    margin-left: 99.5%;
+    margin-top: -0.5em;
 }
 
 pre {
-  width:90%;
-  background-color: #eee;
-  padding: 10px;
-  margin-left: 3em;
-  margin-right:1em ;
-  font-size: 11px;
-  overflow: auto
+    width: 90%;
+    background-color: #eee;
+    padding: 10px;
+    margin-left: 3em;
+    margin-right: 1em ;
+    overflow: auto
 }
 
 ol.setup {
-  font-size: 19px;
-  font-family: georgia, verdana, sans-serif;
-  padding-left: 25px;
+    font-size: 1.5em;
+    font-family: georgia, verdana, sans-serif;
+    padding-left: 25px;
 }
 
 ol.setup li {
-  margin-bottom: 20px
+    margin-bottom: 20px
 }
 
 .byline {
-  color: #999;
-  padding-left: 4px;
-  text-align:right;
-}
-
-.references {
-  font-size: 10px;
+    color: #999;
+    padding-left: 4px;
+    text-align: right;
+    margin-bottom: 0px;
 }
 
 p#message {
-  background: #eee;
-  padding: 0.7em;
-  border: 1px solid silver;
-  margin: 1em 0;
+    background: #eee;
+    padding: 0.7em;
+    border: 1px solid silver;
+    margin: 1em 0;
 }
 
 #previewHeading {
-  clear:left;
+    clear: left;
 }
 
-div.preview {
-  clear:left;
-  /* max-width: 920px; */
-  border:1px solid #ddd;
-  padding:5px;
-  overflow: auto;
-  height: 250px;
-  margin:0 0 1em 0;
-  width: 100%;
+div#content_preview {
+    clear: left;
+    /* max-width: 920px; */
+    border: 1px solid #ddd;
+    padding: 5px;
+    overflow: auto;
+    height: 250px;
+    margin: 0 0 1em 0;
 }
 
 textarea#body {
-  height: 280px;
-  /* max-width: 930px; */
-  width: 100%;
+    height: 280px;
+    /* max-width: 930px; */
+    width: 100%;
 }
 
 textarea#comment {
-  height: 150px;
-  width: 400px;
+    height: 150px;
+    width: 400px;
 }
 
-#hidden_info {
-  display:none ;
-  position:absolute;
-  z-index:1;
+#hidden_info, #edithelp {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 800px;
+    overflow: auto;
 }
 
+div.tab-nav,
 .syntax_help {
-  width: 800px;
-  background: #ddd;
-  border: 1px solid #aaa;
-  padding:1em;
+    background: #ddd;
+    border: 1px solid #aaa;
+    padding: 1em;
+}
+
+div.tab-nav {
+    background: #ccc;
+    border-bottom: 0;
+    margin: 0;
+    padding: 0 1em;
+    height: 1.7em;
+}
+
+div.tab-nav a {
+    outline: none;
+    text-decoration: none;
+    float: left;
+    list-style: none;
+    margin: 0 0.3em;
+    padding: 0.2em 0.6em;
+}
+
+div.tab-nav a.active {
+    background: #ddd;
+    color: #222;
+}
+
+div.tab-nav a.close-button {
+    position: absolute;
+    right: 8px;
 }
 
 .syntax_help table {
-  margin-bottom: 0;
-  border-spacing: 0;
+    margin-bottom: 0;
+    border-spacing: 0;
 }
 
 
 .syntax_help table+h3 {
-  margin-top: 11px;
+    margin-top: 11px;
 }
 
 .syntax_help  table td {
-  font-size: 11px;
-  padding: 3px;
-  vertical-align: top;
-  border-top: 1px dotted #ccc;
+    padding: 3px;
+    vertical-align: top;
+    border-top: 1px dotted #ccc;
 }
 
 .syntax_help table td.arrow {
-  padding-right: 5px;
-  padding-left: 10px;
-  color: #999;
+    padding-right: 5px;
+    padding-left: 10px;
+    color: #999;
 }
 
 .syntax_help table td.label {
-  font-weight: bold;
-  white-space: nowrap;
-  font-size: 10px;
-  padding-right: 15px;
-  color: #000;
+    font-weight: bold;
+    white-space: nowrap;
+    padding-right: 15px;
+    color: #000;
 }
 
 .syntax_help h3 {
-  font-size: 11px;
-  font-weight: bold;
-  font-weight: normal;
-  margin: 0 0 5px 0;
-  padding: 5px 0 0 0;
+    font-weight: bold;
+    font-weight: normal;
+    margin: 0 0 5px 0;
+    padding: 5px 0 0 0;
 }
 
-.syntax_help h2 { margin-top:0; }
+.syntax_help h2 {
+    margin-top: 0;
+}
 
 .rightHandSide {
-  float: right;
-  width: 187px;
-  margin-left: 10px;
-  padding-left: 20px;
-  border-left: 1px dotted #ccc;
+    float: right;
+    width: 187px;
+    margin-left: 10px;
+    padding-left: 20px;
+    border-left: 1px dotted #ccc;
 }
 
 .rightHandSide p {
-  font-size: 10px;
 }
 
 .newsList {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .newsList p {
-  margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .add a {
-  color: green;
-    font-size: 13px;
-  text-decoration: none;
-  vertical-align: middle;
+    color: green;
+    text-decoration: none;
+    vertical-align: middle;
 }
 
 .add a:hover {
-  color: #003800;
-    font-size: 13px;
+    color: #003800;
 }
 a.tag {
     text-decoration: none;
@@ -287,10 +302,10 @@ a.tag:hover {
     text-decoration: underline;
 }
 .remove a {
-  color: red;
-  font-size: 1.1em;
-  margin: 0px 1px;
-  text-decoration: none;
+    color: red;
+    font-size: 1.1em;
+    margin: 0px 1px;
+    text-decoration: none;
 }
 
 .remove a:hover {
@@ -298,44 +313,45 @@ a.tag:hover {
 }
 
 .tagedit {
-  float: right;
+    float: right;
 }
 
 #taginput {
-  width: 120px;
+    width: 120px;
 }
 
 .newWikiWord {
-  color: #e33;
-  background: #fee;
+    color: #e33;
+    background lightyellow;
 }
 
 .newWikiWord a {
-  vertical-align: super;
-  line-height: 0;
-  font-size: 0.8em;
-  font-weight:bold;
-  text-decoration:none;
-  color:#e33;
-  padding:0 2px;
-  margin:0 0 0 .1em;
+   /*  vertical-align: super;; */
+	background: #f6d8b4;
+    border: 1px solid #dddddd;
+    line-height: 0;
+    font-weight: bold;
+    text-decoration: none;
+    color: #e33;
+    padding: 0 2px;
+    margin: 0 0 0 .1em;
 }
 #content .newWikiWord a:hover {
-  background:#e33;
-  color:#fff;
+    background: #e33;
+    color: #fff;
 }
 
 .protoPage a:link {
-  color: #ab0b0b;
+    color: #ab0b0b;
 }
 
 .protoPage a:visited {
-  color: #666;
+    color: #666;
 }
 
 .protoPage a:hover {
-  color: #fff;
-  background-color:#ab0b0b;
+    color: #fff;
+    background-color: #ab0b0b;
 }
 
 /* @end */
@@ -343,12 +359,12 @@ a.tag:hover {
 /* @group Highlighted keywords in search */
 
 .quoted {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 span#search_hit_score {
-    font-style:italic;
-    font-size:smaller;
+    font-style: italic;
+    font-size: smaller;
 }
 
 /* @end */
@@ -356,60 +372,78 @@ span#search_hit_score {
 /* @group Pagination Links */
 
 #content div.pager {
-    border:1px solid #eee;
-    padding:.25em;
+    border: 1px solid #eee;
+    padding: .25em;
     text-align: center;
-    font-size:1.25em;
+    font-size: 1.25em;
 }
 
 #content div.pager ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-    font-weight:bold;
-    list-style-position:inside;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    list-style-position: inside;
 }
 
-#content div.pager .prev { margin:0; padding:0; float:left; }
-#content div.pager .next { margin:0; padding:0; float:right; }
+#content div.pager .prev { margin: 0; padding: 0; float: left; }
+#content div.pager .next { margin: 0; padding: 0; float: right; }
 
 #content div.pager ul li {
-    display:inline;
-    margin:0;
-    padding:0;
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 div.pager ul li a {
-    text-decoration:none;
-    padding:2px .25em;
+    text-decoration: none;
+    padding: 2px .25em;
 }
 #content div.pager ul li a:hover {
-    color:#fff;
-    background:#2274a8;
+    color: #fff;
+    background: #2274a8;
 }
 
 dl#pageInfoMeta {
-    float:right;
-    width:350px;
-    border-left:2px solid #ccc;
-    padding:0 0 0 1em;
-    font-family:Arial,Helvetica,sans-serif;
+    float: right;
+    width: 350px;
+    border-left: 2px solid #ccc;
+    padding: 0 0 0 1em;
+    font-family: Arial,Helvetica,sans-serif;
 }
-dl#pageInfoMeta dt { line-height:16px; width:150px; font-weight:bold; float:left; clear:left; margin:0;padding:0; }
-dl#pageInfoMeta dd { line-height:16px; width:200px; }
+dl#pageInfoMeta dt {
+    line-height: 16px;
+    width: 150px;
+    font-weight: bold;
+    float: left;
+    clear: left;
+    margin: 0;
+    padding: 0;
+}
+dl#pageInfoMeta dd {
+    line-height: 16px;
+    width: 200px;
+}
 
-dl#authors          { padding:0; margin:1.5em 0; }
+dl#authors {
+    padding: 0;
+    margin: 1.5em 0;
+}
 dl#authors dd,
-dl#authors dt { line-height:16px; }
+dl#authors dt {
+    line-height: 16px;
+}
 
-dl#authors dt { width:200px; }
+dl#authors dt {
+    width: 200px;
+}
 
 /* @end */
 
 /* @group Amazon Plugin */
 
 div.amazon {
-    width:80%;
+    width: 80%;
     padding-left: 2em;
     margin: 1em 4em 1em 4em;
     border: 1px solid #ccc;
@@ -424,91 +458,98 @@ div.amazon img {
 /* @group Lists */
 
 table.recent {
-    width:100%;
+    width: 100%;
 }
-table.recent .page          { width:50%; }
-table.recent .editedBy      { width:20%; }
-table.recent .timeEdited    { width:20%; }
-table.recent .actions       { width:10%; }
+table.recent .page          { width: 50%; }
+table.recent .editedBy      { width: 20%; }
+table.recent .timeEdited    { width: 20%; }
+table.recent .actions       { width: 10%; }
 
 /* @end */
 
 /* @group Diff */
 
 .diff {
-    margin-right:2em;
+    margin-right: 2em;
     overflow: visible;
-    margin-top:1em;
+    margin-top: 1em;
 }
 
 .diffdel, del {
-  background: #fcc;
-  text-decoration: line-through;
+    background: #fcc;
+    text-decoration: line-through;
 }
 
 .diffins, ins {
-  background: #cfc;
+    background: #cfc;
 }
 
 /* @end */
 
 .form dl {
- margin: 13px;
- float: left;
+   margin: 13px;
+   float: left;
 }
 
 .form dt {
-  float: left;
-  width: 120px;
-  line-height: 24px;
+    float: left;
+    width: 10em;
+    line-height: 24px;
 }
 
 .form dd {
-  margin: 0 0 5px 90px;
-  line-height: 24px;
-  margin-left: 80px;
+    margin: 0 0 5px 90px;
+    line-height: 24px;
+    margin-left: 80px;
 }
 
 span.statusmsg {
-  color: #335577;
-  margin-left: 1em;
-  font-size: 1.5em;
+    color: #335577;
+    margin-left: 1em;
+    font-size: 1.5em;
 }
 
 .login form input {
-  width: 120px;
+    width: 120px;
 }
 
 .thumb {
-  border: none;
+    border: none;
 }
 
 .addbutton {
-  margin-right: 0.5em;
-  background: white;
+    margin-right: 0.5em;
+    background: white;
 }
 
 .thumb {
-  background: #ddd;
-  padding: 8px;
-  margin: 8px;
+    background: #ddd;
+    padding: 8px;
+    margin: 8px;
 }
 
 .imageinfo {
-  float:right;
-  padding:0px;
-  margin:0px;
-  width: 150px;
-  min-height: 250px;
+    float: right;
+    padding: 0px;
+    margin: 0px;
+    width: 12em;
+    min-height: 250px;
 }
 
+.imageinfo dl {
+    margin: 0;
+}
+
+.imageinfo h3 {
+    margin-top: 0;
+}
 
 /* Transparent forms */
 
 input.dual,textarea.dual {
     width: 500px;
     border: 1px solid #fff;
-    margin:0.1em;
+    margin: 0.1em;
     background: transparent;
     vertical-align: top;
 }
@@ -518,11 +559,14 @@ input.dual:focus, textarea.dual:focus {
 }
 
 .dualbutton {
-    display:none;
-    margin:0.1em;
+    display: none;
+    margin: 0.1em;
 }
 
-#title input,big {
+#title input {
+    font-size: 1em;
+}
+big {
     font-size: 1.6em;
 }
 #description textarea,small {
@@ -530,56 +574,55 @@ input.dual:focus, textarea.dual:focus {
 }
 
 .framedpopup {
-  background: #eee;
-  padding: 3px;
-  border: 1px solid silver;
-  width: 440px;
+    background: #eee;
+    padding: 3px;
+    border: 1px solid silver;
+    width: 440px;
 }
 
 dl {
-  margin: 13px;
-  font-family: sans-serif;
-  clear: both;
+    margin: 13px;
+    font-family: sans-serif;
+    clear: both;
 }
 
-#editlink {
-    float:right;
-    padding-right: 10em;
-}
-
+/* Unused? */
 dt {
-  float: left;
-  width: 80px;
-  line-height: 24px;
+    float: left;
+    width: 80px;
+    clear: left;
 }
 
+/* Unused? */
 dd {
-  margin: 0 0 5px 90px;
-  font-size: 11px;
-  line-height: 24px;
-  margin-left: 80px;
+    margin: 0 0 5px 90px;
+    margin-left: 80px;
+}
+
+div#comments div.comment dd {
+    margin-left: 120px;
 }
 
 /* Common Forms Rules */
 
 .standard_form .fields label {
-  display: block;
-  clear: both;
+    display: block;
+    clear: both;
 }
 .standard_form .fields label span {
-  text-align: right;
-  margin-right: .5em;
+    text-align: right;
+    margin-right: .5em;
 }
 .standard_form .fields label span,
 .standard_form .fields label input {
-  display: block;
-  float: left;
-  margin-bottom: 1ex;
+    display: block;
+    float: left;
+    margin-bottom: 1ex;
 }
 
 /* Role Form */
 .role_form .fields label span {
-  width: 6em;
+    width: 6em;
 }
 
 .role_form #member_input {
@@ -592,98 +635,102 @@ dd {
 /** with some slight modifications of colors, widths, etc. by Dave Naughton **/
 
 #sidebar ul {
-  padding: 0;
-  margin: 0;
-  border-bottom: 1px solid silver;
-  font: 1em sans-serif;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid silver;
+    font: 1em sans-serif;
 }
 #sidebar ul li {
-  list-style-type: none;
-  border: 1px solid silver;
-  border-width: 1px 1px 0 3px;
-  position: relative;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    border: 1px solid silver;
+    border-width: 1px 1px 0 3px;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
-#sidebar ul ul {display: none;}
+#sidebar ul ul {
+    display: none;
+}
 #sidebar ul li:hover > ul {
-  display: block;
-  position: absolute;
-  top: -1px;
-  left: 100%;
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 100%;
 }
 #sidebar li a {
-  display: block;
-  padding: 5px 7px;
-  text-decoration: none;
-  background: #FFF;
+    display: block;
+    padding: 5px 7px;
+    text-decoration: none;
+    background: #FFF;
 }
 #sidebar li.menuParent, li.menuParentMissingChildren > a {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #sidebar ul ul {width: 12em;}
 
 #sidebar {
-  position: absolute;
-  right: 0;
-  width: 10em;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+    position: absolute;
+    right: 0;
+    width: 10em;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 #sidebar > ul {
-  width: 11em;
-  margin-left: -1px;
-  font-size: 85%;
+    width: 11em;
+    margin-left: -1px;
+    font-size: 85%;
 }
 #sidebar ul {
-  border: 1px solid silver;
-  border-width: 0 0 0 1px;
+    border: 1px solid silver;
+    border-width: 0 0 0 1px;
 }
 #sidebar ul li {
-  border-width: 1px 0;
-  border-color: white;
-  padding: 0 0 0 5px;
-  line-height: 1.25em;
+    border-width: 1px 0;
+    border-color: white;
+    padding: 0 0 0 5px;
+    line-height: 1.25em;
 }
 #sidebar ul ul {
-  border-width: 0 1px 1px 1px;
-  border-color: gray silver gray gray;
+    border-width: 0 1px 1px 1px;
+    border-color: gray silver gray gray;
 }
 #sidebar ul ul li {
-  border-color: #FEFEFC;
+    border-color: #FEFEFC;
 }
 #sidebar li > a {
-  background-color: transparent;
-  padding: 3px;
+    background-color: transparent;
+    padding: 3px;
 }
-#sidebar li:hover {background-color: #ddf;}
+#sidebar li:hover {
+    background-color: #ddf;
+}
 #sidebar li.menuParent:hover {
-  margin-left: -12.2em;
-  border: 1px solid gray;
-  background: #D7D6D4;
+    margin-left: -12.2em;
+    border: 1px solid gray;
+    background: #D7D6D4;
 }
 #sidebar li.menuParent:hover > a {
-  background: inherit;
+    background: inherit;
 }
 #sidebar li.menuParent:hover > ul {
-  top: 1.75em;
-  left: -1px;
-  background: #FEFEFC;
+    top: 1.75em;
+    left: -1px;
+    background: #FEFEFC;
 }
 
 ul#menuHome {
-  border-bottom: 1px solid silver;
-  font-weight: bold;
+    border-bottom: 1px solid silver;
+    font-weight: bold;
 }
 
 /* end of shamelessly stolen code */
 /* @end */
 
 .spinner {
-    float:right;
-    height:1em;
+    float: right;
+    height: 1em;
 }
 
 #editstatus {
@@ -692,12 +739,13 @@ ul#menuHome {
 
 div.photo img{
     margin: 1em;
-    padding:5px;
-    border:1px solid;border-color: #ccc #666 #666 #ccc
+    padding: 5px;
+    border: 1px solid;
+    border-color: #ccc #666 #666 #ccc
 }
 
 .end {
-    clear:both;
+    clear: both;
 }
 
 
@@ -707,11 +755,22 @@ div.photo img{
 }
 
 acronym {
-  border-bottom: 1px dotted !important;
+    border-bottom: 1px dotted !important;
 }
 
 .inplaceeditor-form input {
     margin: 0px 10px 0px 0px;
+}
+
+a.footnote {
+    vertical-align: .6em;
+    font-size: 75%;
+}
+a.footnote:before {
+    content: "["
+}
+a.footnote:after {
+    content: "]"
 }
 
 .inplaceeditor-form a {
@@ -733,6 +792,12 @@ acronym {
 
 #content img.right {
     margin-left: 1em;
+    float: right;
+}
+
+#content img.left {
+    margin-left: 1em;
+    float: left;
 }
 
 #searchField {
@@ -741,6 +806,9 @@ acronym {
     border: 1px solid #bbb;
     margin-left: 10px;
 }
+
+/* Copied from HTML-FormFu examples/vertically-aligned/vertically-aligned.css */
+
 fieldset {
     padding: 1em;
 }
@@ -748,11 +816,13 @@ fieldset {
 fieldset .button,
 fieldset .checkbox,
 fieldset .contentbutton,
+fieldset .date,
 fieldset .file,
 fieldset .image,
 fieldset .multi,
 fieldset .password,
 fieldset .radio,
+fieldset .recaptcha,
 fieldset .reset,
 fieldset .select,
 fieldset .submit,
@@ -767,14 +837,26 @@ fieldset .textarea
     margin-left: 12em;
 }
 
+/* make the noscript textarea sit below the iframe */
+fieldset .recaptcha noscript textarea {
+    display: block;
+}
+
+/* override the iframe's height="" - it seems a bit big */
+fieldset .recaptcha iframe {
+    height: 230px ! important;
+}
+
 fieldset .button.label,
 fieldset .checkbox.label,
 fieldset .contentbutton.label,
+fieldset .date.label,
 fieldset .file.label,
 fieldset .image.label,
 fieldset .multi.label,
 fieldset .password.label,
 fieldset .radio.label,
+fieldset .recaptcha.label,
 fieldset .reset.label,
 fieldset .select.label,
 fieldset .submit.label,
@@ -790,25 +872,39 @@ fieldset .error.label {
     margin: 0;
 }
 
+form .form_error_message {
+    padding: 0.5em;
+    border: 1px solid #ff0000;
+    background-color: #ffdddd;
+}
+
 fieldset .error_message {
-       display: block;
-       color: #ff0000;
+    display: block;
+    color: #ff0000;
 }
 
 fieldset .label .error_message {
-       /* padding-left eq label width + padding-right */
-       padding-left: 12em;
+    /* padding-left eq label width + padding-right */
+    padding-left: 12em;
+}
+
+fieldset .error input,
+fieldset .error textarea,
+fieldset .error select {
+    background-color: #ffdddd;
 }
 
 fieldset .button label,
 fieldset .contentbutton label,
 fieldset .checkbox label,
+fieldset .date label,
 fieldset .file label,
 fieldset .image label,
 fieldset .multi label,
 fieldset .password label,
 fieldset .radio label,
 fieldset .radiogroup label,
+fieldset .recaptcha label,
 fieldset .select label,
 fieldset .text label,
 fieldset .textarea label
@@ -817,8 +913,7 @@ fieldset .textarea label
     float: left;
     width: 11em;
     text-align: right;
-    padding: 4px 1em 0 0;
-    margin:0 0 1.5em 0;
+    padding-right: 1em;
 }
 
 fieldset .radiogroup span label {
@@ -872,56 +967,148 @@ fieldset .label .comment {
     margin-left: 12em;
 }
 
-fieldset.secondCol {
+/*** Alternative Layouts ***/
+
+fieldset .notes {
+    float: right;
+    width: 30%;
+    border: 1px dotted;
+}
+
+fieldset .multi.vertical input,
+fieldset.checkboxgroup .vertical input,
+fieldset.radiogroup .vertical input
+{
+    display: block;
+    float: left;
+    clear: left;
+    margin-right: 0.5em;
+}
+
+fieldset .multi.vertical select {
+    display: block;
+    float: left;
+    clear: right;
+}
+
+fieldset.checkboxgroup .vertical label,
+fieldset.radiogroup .vertical label
+{
+    display: block;
+    clear: right;
+}
+
+fieldset.radiogroup .vertical .subgroup {
     float: left;
 }
 
-#powered {
-    float:right;
-    clear:both;
-    margin:1em 0 0 0;
+fieldset .fullwidth label
+{
+    display: block;
+    float: left;
+    width: auto;
+    text-align: left;
 }
 
+fieldset .fullwidth .error_message {
+    padding-left: 0em;
+}
+
+fieldset .fullwidth textarea {
+    display: block;
+    clear: left;
+    width: 30em;
+}
+
+fieldset .dojoeditor2 .RichTextEditable { /* Dojo::Editor2 */
+    display: inline;
+    float: left;
+    background-color: #ffc;
+    padding-bottom: 0.1em;
+}
+
+/* end of examples/vertically-aligned/vertically-aligned.css */
+
+fieldset.secondCol {
+    float: left;
+    width: 45%;
+}
+
+#powered {
+    float: right;
+    clear: both;
+    margin: 1em 0 0 0;
+}
+
+/* Used in the .profile page */
 dl.list {
-    font-size:14px;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
 }
 dl.list dt {
-    font-weight:bold;
-    width:15em;
+    font-weight: bold;
+    width: 15em;
+}
+dl.list dd {
+    margin-left: 16em;
+}
+#editlink {
+    margin-left: 1em;
+    font-weight: bold;
 }
 
-div#tags { height:4em; }
 
-div#tags dl { margin:0; padding:0; font-family: Arial,Helvetica,sans-serif; }
-div#tags dt { width:120px; clear:left; margin:0; padding:0; font-size:.8em; font-weight:bold; }
-div#tags dd { margin:0; padding:0; }
 
-div#bottomnav { clear:both; }
 
-#revision_info { background:#ffa; padding:.25em .5em; color:#f60; font-size:1.1em; float:right;  }
+div#tags dl {
+    margin: 0;
+    padding: 0;
+}
+
+div#tags dt,
+div#tags dd {
+    margin: 0;
+    padding: 0;
+    height: 1.6em;
+}
+
+div#tags dt {
+    font-size: .8em;
+    font-weight: bold;
+    width: 120px;
+    clear: left;
+}
+
+div#bottomnav { clear: both; }
+
+#revision_info {
+    background: #ffa;
+    padding: .25em .5em;
+    color: #f60;
+    font-size: 1.1em;
+    float: right;
+}
 
 .attachment {
     background: #eee;
     padding: 3px;
     border: 1px solid silver;
-    width:640px
+    width: 640px
 }
 
 #progressbar {
-  display:none;
-  height: 18px;
-  background-color: gray;
-  margin: 10px 0;
+    display: none;
+    height: 18px;
+    background-color: gray;
+    margin: 10px 0;
 }
 #progressbar #progress {
-  width: 0%;
-  height: 18px;
-  background-color: white;
-  color: black;
+    width: 0%;
+    height: 18px;
+    background-color: white;
+    color: black;
 }
 
-/* Syntax Highlight Engine Kate */
+/* Syntax::Highlight::Engine::Kate */
 .kateAlert { color: #0000ff; }
 .kateBaseN { color: #007f00; }
 .kateBString { color: #c9a7ff; }
@@ -940,3 +1127,35 @@ div#bottomnav { clear:both; }
 .kateString { color: #ff0000; }
 .kateVariable { color: #0000ff; }
 .kateWarning { color: #0000ff; }
+
+#editspinner { display: none; }
+#search_results { text-indent: 1em; }
+
+.display-none { display: none; }
+.float-left { float: left; }
+.float-right { float: right; }
+
+table.roles {
+    min-width: 50%;
+    margin-top: 2em;
+}
+
+form.site-configuration .submit {
+    position: relative;
+    left: -45%;
+    padding-top: 2em;
+}
+
+li.tabnav {
+}
+
+.error_detail {
+    display: block;
+    margin-left: 1em;
+    font-style: italic;
+}
+
+.message_body {
+    font-size: 2em;
+    line-height: 1.666em;
+}

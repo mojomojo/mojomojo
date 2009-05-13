@@ -3,7 +3,6 @@
     <dd>&nbsp;
 [% IF tags %]
     [% FOREACH tag IN tags %]
-
         [%IF tag.tag == highlight %]
 <a id="tag_[% tag.tag %]" class="tag highlight"
         [%ELSE%]
@@ -19,7 +18,6 @@ href="/.gallery/by_tag/[% tag.tag %]">[% tag.tag %]</a> [<span class="remove"><a
     [% FOREACH othertag IN others_tags %]
         [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
         [% NEXT IF taglist.match(tagmatch) %]
-
         [%IF othertag.tag == highlight %]
 <a id="tag_[%tag.tag%]" class="tag highlight" title="[%othertag.refcount%]"
         [%ELSE%]
@@ -27,7 +25,6 @@ href="/.gallery/by_tag/[% tag.tag %]">[% tag.tag %]</a> [<span class="remove"><a
         [%END%]
  href="[% c.uri_for('gallery/by_tag',othertag.tag) %]" >[% othertag.tag %]</a>
         [% IF user.active %]
-
 [<span class="add"><a href="[% c.uri_for('gallery/tag',photo.id,tag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END %]
         [%END%]
     [%END%]

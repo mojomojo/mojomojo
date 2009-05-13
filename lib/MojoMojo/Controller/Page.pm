@@ -45,8 +45,10 @@ sub view : Global {
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
-    $c->stash->{render} = 'highlight'
-      if $c->req->referer && $c->req->referer =~ /.edit$/;
+# NOTE: Highlight has been turned off until someone make is work perfectly in all cases.
+# In particular is sucks with TOC and valid HTML
+# $c->stash->{render} = 'highlight'
+#  if $c->req->referer && $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
@@ -60,9 +62,7 @@ sub view : Global {
     my $page = $stash->{'page'};
 
     my $user;
-    if ( $c->pref('check_permission_on_view') ne""
-         ? $c->pref('check_permission_on_view')
-         : $c->config->{'permissions'}{'check_permission_on_view'} ) {
+    if ( $c->pref('check_permission_on_view') ) {
         if ( $c->user_exists() ) { $user = $c->user->obj; }
         $c->log->info('Checking permissions') if $c->debug;
 
@@ -87,8 +87,12 @@ sub view : Global {
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
         unless ( $stash->{rev} ) {
-            $stash->{message} =
-              $c->loc( 'No such revision for ', $page->name );
+            $stash->{message} = $c->loc( 'No revision x for x',
+                $rev,
+                '<span class="error_detail">'
+                  . '<a href="' . $page->path . '">' . $page->name . '</a>'
+               .'</span>'
+            );
             $stash->{template} = 'message.tt';
         }
     }
@@ -121,9 +125,8 @@ sub search : Global {
     my $results_per_page = 10;
 
     my $page = $c->stash->{page};
-    $stash->{template} = 'page/search.tt';
 
-    my $q           = $c->req->params->{q}           || $c->stash->{query};
+    my $q           = $c->req->params->{q}           || $c->stash->{query} || q();
     my $search_type = $c->req->params->{search_type} || "subtree";
     $stash->{query}       = $q;
     $stash->{search_type} = $search_type;
@@ -150,9 +153,7 @@ sub search : Global {
 
         # skip search result depending on permissions
         my $user;
-        if ( $c->pref('check_permission_on_view') ne""
-             ? $c->pref('check_permission_on_view')
-             : $c->config->{'permissions'}{'check_permission_on_view'} ) {
+        if ( $c->pref('check_permission_on_view') ) {
             if ( $c->user_exists() ) { $user = $c->user->obj; }
             my $perms = $c->check_permissions( $page->path, $user );
             next unless $perms->{'view'};
@@ -221,6 +222,7 @@ sub search : Global {
         $c->stash->{results}       = $results;
         $c->stash->{result_count}  = $result_count;
     }
+    $stash->{template} = 'page/search.tt';
 }
 
 =head2 print
@@ -277,7 +279,22 @@ sub list : Global {
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
-    $c->stash->{pages}    = [ $page->descendants ];
+    
+    if ( $c->pref('check_permission_on_view') ) {
+      my $user;
+      my @pages;
+      my @all_pages = $page->descendants;
+      if ( $c->user_exists() ) { $user = $c->user->obj; }
+      foreach my $page_to_check (@all_pages) {
+        # skip pages without view permissions
+        my $perms = $c->check_permissions( $page_to_check->path, $user );
+        next unless $perms->{'view'};
+        push @pages,$page_to_check;
+      }
+      $c->stash->{pages}    = [ @pages ];
+    } else {
+      $c->stash->{pages}    = [ $page->descendants ];
+    }
 
     # FIXME - real data here please
     $c->stash->{orphans} = [];

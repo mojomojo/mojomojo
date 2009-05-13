@@ -1,10 +1,6 @@
 [%CALL request.content_type('text/xml' )%]<?xml version="1.0" encoding="UTF-8"?>
 <feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
-        <title>[ [%
-              title || c.pref('name') || 
-                       config.name || 
-                       loc("A poorly configured MojoMojo Installation")
-            %] ] [% page.path %]</title>
+<title>[ [% title || c.pref('name') %] ] [% page.path %]</title>
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline> [%loc('Recent changes in x',page.path)%]</tagline>

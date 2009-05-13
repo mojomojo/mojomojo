@@ -11,6 +11,10 @@ use KinoSearch::Index::Term;
 use KinoSearch::Search::Query;
 use KinoSearch::QueryParser::QueryParser;
 
+__PACKAGE__->config->{index_dir} ||= MojoMojo->config->{index_dir};
+# Fall back just in case MojoMojo->config->{index_dir} doesn't exist
+# but it should.  See MojoMojo.pm to verify that we will short circuit
+# on this next line.
 __PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
 =head1 NAME

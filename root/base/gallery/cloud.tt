@@ -1,9 +1,11 @@
-[% PROCESS header.tt index_page=1 %]
-<div id="header"><h1>[%loc('photo tags')%]</h1></div>
-[% PROCESS breadcrumbs.tt %]
-[% PROCESS navbar.tt %]
+[% WRAPPER page/wrapper.tt index_page=1 title=loc('photo tags') %]
 <div id="content">
-[%cloud.html_and_css(50)%]
+[% 
+    IF cloud.tags(1);
+        cloud.html_and_css(50);
+    ELSE;
+        "No tags in use";
+    END;
+%]
 </div>
-        <div id="bottomnav">&nbsp;
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

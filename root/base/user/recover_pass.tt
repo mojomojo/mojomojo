@@ -1,24 +1,12 @@
-[% PROCESS header.tt %]
-
-<div id="header"><h1>[% loc('Recover Password') %]</h1></div>
-
-[% PROCESS breadcrumbs.tt %]
-
+[% WRAPPER page/wrapper.tt simple_header=1 title=loc('Recover Password') %]
 <div id="content">
-    <form id="loginForm" action="[%c.uri_for('recover_pass')%]" method="post">
+<form id="loginForm" action="[%c.uri_for('recover_pass')%]" method="post">
     <dl class="form">
         <dt>[% loc('Username') %]/[% loc('Email') %]:</dt>
         <dd><input id="loginField" type="text" name="recover" /></dd>
         <dt>&nbsp;</dt>
         <dd><input type="submit" value="[% loc('Recover password') %]" /></dd>
     </dl>
-    </form>
+</form>
 </div>
-
-<div id="bottomnav">&nbsp;</div>
-       
-<script language="JavaScript" type="text/javascript">
-    Field.focus( 'loginField' );
-</script>
-
-[% PROCESS footer.tt %]
+[% END # WRAPPER %]

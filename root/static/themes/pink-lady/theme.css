@@ -1,0 +1,334 @@
+/* @override http://localhost:3000/.static/themes/default/theme.css */
+/* @group Document Structure */
+body
+    {
+        background: #544354;
+        margin: 0;
+        font-size: 0.9em;
+        font-family: Arial, Helvetica Neue, Helvetica, Geneva, sans-serif;
+        text-align: center;
+    } .container
+    {
+        max-width: 960px;
+        text-align: left;
+        margin: 0 auto 0;
+    } .maximized-container
+    {
+        max-width: 99%;
+        width: 99%;
+    } #header
+    {
+        height: auto;
+        padding-bottom: 0.1em;
+        margin: 0;
+        margin-top: 10px;
+        background-color: #ffccff;
+        -moz-border-radius-topleft: 20px;
+        -webkit-border-top-left-radius: 20px;
+        -moz-border-radius-topright: 20px;
+        -webkit-border-top-right-radius: 20px;
+    } #header h1
+    {
+        background: url(images/mmlogo.png) no-repeat 15px 20px;
+        top: 14px;
+        padding: 13px 0 10px 100px;
+        color: #999999;
+        font-weight: bold;
+        border-width: 1px;
+        border-color: #000;
+        margin: 0;
+    } #header h1 a
+    {
+        color: #ffffff;
+    } #breadcrumbs
+    {
+        background: #a887a8;
+        height: 12px;
+        font-size: .9em;
+        color: #e3e3e3;
+        margin: 0;
+        padding: 6px 8px;
+    } #breadcrumbs a
+    {
+        padding: 2px 7px;
+        color: white;
+        text-decoration: none;
+    } #breadcrumbs a:hover
+    {
+        color: #ffffff;
+        background-color: #33455c;
+        text-decoration: none;
+        -moz-border-radius-topleft: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-radius-topright: 5px;
+        -webkit-border-top-right-radius: 5px;
+    }
+
+div#toplinks
+    {
+        font-size: .9em;
+        background: #ebeae7;
+        font-weight: bold;
+        color: #000000;
+        padding: 4px 8px;
+        min-height: 1.8em;
+    }
+
+div#toplinks ul li, div#bottomnav ul li
+    {
+        display: block;
+        float: left;
+        height: 1.5em;
+    }
+
+div#toplinks ul li a, div#bottomnav ul li a, div#bottomnav ul li span.title
+    {
+        text-decoration: none;
+        margin: 0px 0 0 5px;
+        padding: 1px 2px;
+    }
+
+div#toplinks ul li a
+    {
+        padding: 4px;
+    }
+
+div#toplinks ul li a:hover, div#bottomnav ul li a:hover
+    {
+        background-color: #fff;
+        color: #333;
+    }
+
+div#toplinks a
+    {
+        position: relative;
+        top: 4px;
+    }
+
+div#pagenav
+    {
+        font-size: .9em;
+        clear: both;
+        padding: 4px 15px;
+        background: #f6f6f6;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+    }
+
+div#pagenav ul li
+    {
+        padding: 2px 14px 2px 0;
+        display: inline;
+    }
+
+div#pagenav ul li a
+    {
+        text-decoration: none;
+    }
+
+div#pagenav ul li a:hover
+    {
+        text-decoration: underline;
+    }
+
+div#pageoptions
+    {
+        padding: 5px 14px;
+        background-color: #ffe5cc;
+    }
+
+div#pageoptions ul li
+    {
+        display: inline;
+        padding: 5px 14px 5px 0;
+        color: black;
+        font-size: 1.1em;
+    }
+
+div#pageoptions a
+    {
+        color: green;
+    }
+
+div#pageoptions a.active
+    {
+        color: #ceebb6;
+        background: green;
+    } #categories
+    {
+        background: #ffffff;
+    } #allPages
+    {
+        float: left;
+        width: 40%;
+        margin-right: 20px;
+    } #wantedPages
+    {
+        float: left;
+        width: 55%;
+    } .wantedBy
+    {
+        color: #999;
+    } #tags
+    {
+        background: #f6f6f6;
+        font-size: 1em;
+        color: #676767;
+        padding: 5px 13px;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        min-height: 50px;
+    } .showdiv
+    {
+        background: #f6f6f6;
+        font-size: 11px;
+        padding-left: 13px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        font-weight: bold;
+    } #content
+    {
+        overflow: hidden;
+        background-color: #fff2f9;
+        padding: 2em 13px;
+        overflow: hidden;
+    } #content strong, b
+    {
+        font-weight: bold;
+    } #content em, i
+    {
+        font-style: italic;
+    } #content ul, #content ol
+    {
+        padding-left: 1.5em;
+    }
+
+/* For IE6, which doesn't support child selectors */ #content ul li
+    {
+        list-style: disc;
+    }
+
+/* this means that the last li in `ol li ul li` will end up with list-style: decimal instead of 'square' */ #content ol li
+    {
+        list-style: decimal;
+    }
+
+/* The two direct child selectors below take care of that nesting problem, but only for Standards-Compliant Browsers */ #content ul > li
+    {
+        list-style: disc;
+    } #content ol > li
+    {
+        list-style: decimal;
+    } #content li
+    {
+        margin-left: 1.5em;
+        margin-bottom: 5px;
+    }
+
+/* tables */ #content table
+    {
+        border-collapse: collapse;
+        border: 2px solid #bbb;
+        background: #fff;
+        margin-bottom: .6em;
+    } #content table td, #content table th
+    {
+        border: 1px dotted #aaa;
+        padding: .5em;
+    } #content table thead th, #content table tfoot th
+    {
+        font-weight: bold;
+        background: #f6f6f6;
+    } #content table tbody th, #content table tbody td
+    {
+        vertical-align: top;
+        text-align: left;
+    } #content table tfoot td
+    {
+        border: 2px solid #000;
+    } #content table tr.odd td, #content table tr.odd th
+    {
+        background: #efefef;
+    } #bottomnav
+    {
+        background: #ebeae7;
+        padding: 6px 8px;
+        color: #000000;
+        margin: 0;
+        margin-bottom: 10px;
+        font-weight: bold;
+        height: 2.8em;
+        font-size: 0.9em;
+        border-top: 1px solid #8899aa;
+        -moz-border-radius-bottomleft: 20px;
+        -webkit-border-bottom-left-radius: 20px;
+        -moz-border-radius-bottomright: 20px;
+        -webkit-border-bottom-right-radius: 20px;
+    } #bottomnav input
+    {
+        font-size: 1em;
+    }
+
+li#site_settings
+    {
+        clear: left;
+    } .formdiv
+    {
+        text-align: left;
+        background: #ffffff;
+        padding-left: 13px;
+        padding-bottom: 5px;
+    }
+
+p
+    {
+        line-height: 1.3em;
+        margin: 1.2em 0;
+    }
+
+pre
+    {
+        background-color: #fffff3;
+    } .hide
+    {
+        display: none;
+    } .clickable
+    {
+        cursor: pointer;
+    } .center, #content .center, #content table .center
+    {
+        text-align: center;
+    } #powered
+    {
+        border-top: 2px solid #33455C;
+        width: 100%;
+        margin: 0;
+        padding: 1em 0;
+        text-align: right;
+    } #content .syntax_help table
+    {
+        width: 100%;
+    } #content .syntax_help table th, #content .syntax_help table td
+    {
+        padding: 0.2em;
+    } .toc
+    {
+        background-color: #fffff3;
+        border: 1px solid #dddddd;
+    } .toc a
+    {
+        text-decoration: none;
+    } #etiquetes
+    {
+        float: left;
+        min-width: 80%;
+    } #cat-logo-container
+    {
+        float: right;
+        /* This min width tied to catalyst logo
+         * Yes, this sucks.  May it better then.
+         */
+        min-width: 120px;
+    }
+
+/* @end */

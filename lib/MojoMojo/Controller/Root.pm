@@ -42,8 +42,10 @@ default action - serve the home node
 sub default : Path {
     my ( $self, $c ) = @_;
     $c->res->status(404);
-    $c->stash->{message} = $c->loc("The requested URL (x) was not found",
-                               $c->stash->{pre_hacked_uri});
+    $c->stash->{message} = $c->loc(
+        'The requested URL was not found: x',
+        '<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>'
+    );
     $c->stash->{template} = 'message.tt';
 }
 
@@ -89,7 +91,7 @@ sub end : Private {
        $c->pref('theme',$theme);
     }
     $c->stash->{additional_template_paths} =
-        [ $c->path_to('root','static','themes',$theme) ];
+        [ $c->path_to('root','themes',$theme) ];
 
     $c->req->uri->path( $c->stash->{pre_hacked_uri}->path )
         if ref $c->stash->{pre_hacked_uri};
@@ -120,6 +122,20 @@ sub auto : Private {
     return 1 if $c->req->action eq 'logout';
     $c->stash->{template} = 'user/validate.tt';
 }
+
+sub exit : Local {
+    my ($self, $c) = @_;
+    if ($ENV{MOJOMOJO_EXIT_OK}) {
+        exit(0);
+    }
+    else {
+       # $c->stash( template => 'error.tt' );
+        $c->res->status (403); # forbidden
+        $c->res->body('EXIT NOT OK');
+        $c->detach();
+    }
+}
+
 
 =back
 

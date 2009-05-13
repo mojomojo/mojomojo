@@ -1,15 +1,14 @@
 ---
-action: 
-indicator: submit
-auto_fieldset: 1
-localize_class: MojoMojo::I18N
+load_config_file: __path_to(root/forms/defaults.yml)__
 
 elements:
   - type: Text
     name: login
     label_loc: Login
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - LowerCase
+      - TrimEdges
     constraints:
       - Required
       - Word
@@ -17,15 +16,17 @@ elements:
     name: name
     label_loc: Name
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - TrimEdges
   - type: Text
     name: email
     label_loc: Email
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - TrimEdges
     constraints:
       - Required
-      - type: Email
+      - Email
   - type: Submit
     name: submit
     value_loc: Save

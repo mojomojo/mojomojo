@@ -33,14 +33,14 @@
   background: #006699;
   margin: 1ex 0;
   padding: 1px;
-} 
+}
 
 .formatter_pod .menubar A {
   padding: 0.8ex;
   font: bold 10pt Arial,Helvetica,sans-serif;
 }
 
-.formatter_pod .menubar A:link, .menubar A:visited {
+.formatter_pod .menubar A:link, .formatter_pod .menubar A:visited {
   color: white;
   text-decoration: none;
 }
@@ -50,7 +50,7 @@
   text-decoration: underline;
 }
 
-.formatter_pod A:link, A:visited {
+.formatter_pod A:link, .formatter_pod A:visited {
   background: transparent;
   color: #006699;
 }
@@ -86,7 +86,7 @@
   color: inherit;
 }
 
-.formatter_pod .s TD, .r TD {
+.formatter_pod .s TD, .formatter_pod .r TD {
   padding: 0.2ex 1ex;
   vertical-align: baseline;
 }
@@ -98,7 +98,7 @@
   text-align: left;
 }
 
-.formatter_pod TH A:link, TH A:visited {
+.formatter_pod TH A:link, .formatter_pod TH A:visited {
   background: transparent;
   color: black;
 }
@@ -127,19 +127,19 @@
   font-weight: normal;
 }
 
-.formatter_pod .t1, .t2, .t3, .t4  {
+.formatter_pod .t1, .formatter_pod .t2, .formatter_pod .t3, .formatter_pod .t4  {
   background: #006699;
   color: white;
 }
 .formatter_pod .t4 {
   padding: 0.2ex 0.4ex;
 }
-.formatter_pod .t1, .t2, .t3  {
+.formatter_pod .t1, .formatter_pod .t2, .formatter_pod .t3  {
   padding: 0.5ex 1ex;
 }
 
 /* IE does not support  .box>.t1  Grrr */
-.formatter_pod .box .t1, .box .t2, .box .t3 {
+.formatter_pod .box .t1, .formatter_pod .box .t2, .formatter_pod .box .t3 {
   margin: 0;
 }
 
@@ -246,371 +246,14 @@
   text-align: right;
 }
 
-.formatter_pod A.m:link, A.m:visited {
+.formatter_pod A.m:link, .formatter_pod A.m:visited {
   background: #006699;
   color: white;
   font: bold 10pt Arial,Helvetica,sans-serif;
   text-decoration: none;
 }
 
-.formatter_pod A.o:link, A.o:visited {
-  background: #006699;
-  color: #ccffcc;
-  font: bold 10pt Arial,Helvetica,sans-serif;
-  text-decoration: none;
-}
-
-.formatter_pod A.o:hover {
-  background: transparent;
-  color: #ff6600;
-  text-decoration: underline;
-}
-
-.formatter_pod A.m:hover {
-  background: transparent;
-  color: #ff6600;
-  text-decoration: underline;
-}
-
-.formatter_pod table.dlsip     {
-  background: #dddddd;
-  border: 0.4ex solid #dddddd;
-}
-
-.formatter_pod PRE     {
-  background: #eeeeee;
-  border: 1px solid #888888;
-  color: black;
-  padding: 1em;
-  white-space: pre;
-}
-
-.formatter_pod H1      {
-  background: transparent;
-  color: #006699;
-  font-size: large;
-  background-color: red;
-}
-
-.formatter_pod H2      {
-  background: transparent;
-  color: #006699;
-  font-size: medium;
-}
-
-.formatter_pod IMG     {
-  vertical-align: top;
-}
-
-.formatter_pod .toc A  {
-  text-decoration: none;
-}
-
-.formatter_pod .toc LI {
-  line-height: 1.2em;
-  list-style-type: none;
-}
-
-.formatter_pod .faq DT {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-.formatter_pod .chmenu {
-  background: black;
-  color: red;
-  font: bold 1.1em Arial,Helvetica,sans-serif;
-  margin: 1ex auto;
-  padding: 0.5ex;
-}
-
-.formatter_pod .chmenu TD {
-  padding: 0.2ex 1ex;
-}
-
-.formatter_pod .chmenu A:link, .chmenu A:visited  {
-  background: transparent;
-  color: white;
-  text-decoration: none;
-}
-
-.formatter_pod .chmenu A:hover {
-  background: transparent;
-  color: #ff6600;
-  text-decoration: underline;
-}
-
-.formatter_pod .column {
-  padding: 0.5ex 1ex;
-  vertical-align: top;
-}
-
-.formatter_pod .datebar {
-  margin: auto;
-  width: 14em;
-}
-
-.formatter_pod .date {
-  background: transparent;
-  color: #008000;
-}
-
-.formatter_pod TABLE {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-width: 0;
-  color: inherit;
-}
-
-.formatter_pod IMG { border: 0; }
-.formatter_pod FORM { margin: 0; }
-.formatter_pod input { margin: 2px; }
-
-.formatter_pod .logo {
-  float: left;
-  width: 264px;
-  height: 77px;
-}
-
-.formatter_pod .front .logo  {
-  float: none;
-  display:block;
-}
-
-.formatter_pod .front .searchbox  {
-  margin: 2ex auto;
-  text-align: center;
-}
-
-.formatter_pod .front .menubar {
-  text-align: center;
-}
-
-.formatter_pod .menubar {
-  background: #006699;
-  margin: 1ex 0;
-  padding: 1px;
-} 
-
-.formatter_pod .menubar A {
-  padding: 0.8ex;
-  font: bold 10pt Arial,Helvetica,sans-serif;
-}
-
-.formatter_pod .menubar A:link, .menubar A:visited {
-  color: white;
-  text-decoration: none;
-}
-
-.formatter_pod .menubar A:hover {
-  color: #ff6600;
-  text-decoration: underline;
-}
-
-.formatter_pod A:link, A:visited {
-  background: transparent;
-  color: #006699;
-}
-
-.formatter_pod A[href="#POD_ERRORS"] {
-  background: transparent;
-  color: #FF0000;
-}
-
-.formatter_pod TD {
-  margin: 0;
-  padding: 0;
-}
-
-.formatter_pod DIV {
-  border-width: 0;
-}
-
-.formatter_pod DT {
-  margin-top: 1em;
-}
-
-.formatter_pod .credits TD {
-  padding: 0.5ex 2ex;
-}
-
-.formatter_pod .huge {
-  font-size: 32pt;
-}
-
-.formatter_pod .s {
-  background: #dddddd;
-  color: inherit;
-}
-
-.formatter_pod .s TD, .r TD {
-  padding: 0.2ex 1ex;
-  vertical-align: baseline;
-}
-
-.formatter_pod TH {
-  background: #bbbbbb;
-  color: inherit;
-  padding: 0.4ex 1ex;
-  text-align: left;
-}
-
-.formatter_pod TH A:link, TH A:visited {
-  background: transparent;
-  color: black;
-}
-
-.formatter_pod .box {
-  border: 1px solid #006699;
-  margin: 1ex 0;
-  padding: 0;
-}
-
-.formatter_pod .distfiles TD {
-  padding: 0 2ex 0 0;
-  vertical-align: baseline;
-}
-
-.formatter_pod .manifest TD {
-  padding: 0 1ex;
-  vertical-align: top;
-}
-
-.formatter_pod .l1 {
-  font-weight: bold;
-}
-
-.formatter_pod .l2 {
-  font-weight: normal;
-}
-
-.formatter_pod .t1, .t2, .t3, .t4  {
-  background: #006699;
-  color: white;
-}
-.formatter_pod .t4 {
-  padding: 0.2ex 0.4ex;
-}
-.formatter_pod .t1, .t2, .t3  {
-  padding: 0.5ex 1ex;
-}
-
-/* IE does not support  .box>.t1  Grrr */
-.formatter_pod .box .t1, .box .t2, .box .t3 {
-  margin: 0;
-}
-
-.formatter_pod .t1 {
-  font-size: 1.4em;
-  font-weight: bold;
-  text-align: center;
-}
-
-.formatter_pod .t2 {
-  font-size: 1.0em;
-  font-weight: bold;
-  text-align: left;
-}
-
-.formatter_pod .t3 {
-  font-size: 1.0em;
-  font-weight: normal;
-  text-align: left;
-}
-
-/* width: 100%; border: 0.1px solid #FFFFFF; */ /* NN4 hack */
-
-.formatter_pod .datecell {
-  text-align: center;
-  width: 17em;
-}
-
-.formatter_pod .cell {
-  padding: 0.2ex 1ex;
-  text-align: left;
-}
-
-.formatter_pod .label {
-  background: #aaaaaa;
-  color: black;
-  font-weight: bold;
-  padding: 0.2ex 1ex;
-  text-align: right;
-  white-space: nowrap;
-  vertical-align: baseline;
-}
-
-.formatter_pod .categories {
-  border-bottom: 3px double #006699;
-  margin-bottom: 1ex;
-  padding-bottom: 1ex;
-}
-
-.formatter_pod .categories TABLE {
-  margin: auto;
-}
-
-.formatter_pod .categories TD {
-  padding: 0.5ex 1ex;
-  vertical-align: baseline;
-}
-
-.formatter_pod .path A {
-  background: transparent;
-  color: #006699;
-  font-weight: bold;
-}
-
-.formatter_pod .pages {
-  background: #dddddd;
-  color: #006699;
-  padding: 0.2ex 0.4ex;
-}
-
-.formatter_pod .path {
-  background: #dddddd;
-  border-bottom: 1px solid #006699;
-  color: #006699;
- /*  font-size: 1.4em;*/
-  margin: 1ex 0;
-  padding: 0.5ex 1ex;
-}
-
-.formatter_pod .menubar TD {
-  background: #006699;
-  color: white;
-}
-
-.formatter_pod .menubar {
-  background: #006699;
-  color: white;
-  margin: 1ex 0;
-  padding: 1px;
-}
-
-.formatter_pod .menubar .links     {
-  background: transparent;
-  color: white;
-  padding: 0.2ex;
-  text-align: left;
-}
-
-.formatter_pod .menubar .searchbar {
-  background: black;
-  color: black;
-  margin: 0px;
-  padding: 2px;
-  text-align: right;
-}
-
-.formatter_pod A.m:link, A.m:visited {
-  background: #006699;
-  color: white;
-  font: bold 10pt Arial,Helvetica,sans-serif;
-  text-decoration: none;
-}
-
-.formatter_pod A.o:link, A.o:visited {
+.formatter_pod A.o:link, .formatter_pod A.o:visited {
   background: #006699;
   color: #ccffcc;
   font: bold 10pt Arial,Helvetica,sans-serif;
@@ -684,7 +327,7 @@
   padding: 0.2ex 1ex;
 }
 
-.formatter_pod .chmenu A:link, .chmenu A:visited  {
+.formatter_pod .chmenu A:link, .formatter_pod .chmenu A:visited  {
   background: transparent;
   color: white;
   text-decoration: none;

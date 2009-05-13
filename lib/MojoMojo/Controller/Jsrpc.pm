@@ -203,9 +203,9 @@ sub set_permissions : Local {
     my @path_elements = $c->_expand_path_elements($c->stash->{path});
     my $current_path = pop @path_elements;
 
-    my ( $read, $write, $subpages) =
+    my ( $create, $read, $write, $delete, $attachment, $subpages) =
         map { $c->req->param($_) ? 'yes' : 'no' }
-            qw/read write subpages/;
+            qw/create read write delete attachment subpages/;
 
     my $role = $c->stash->{role};
 
@@ -213,11 +213,11 @@ sub set_permissions : Local {
         path => $current_path,
         role => $role->id,
         apply_to_subpages   => $subpages,
-        create_allowed      => $write,
-        delete_allowed      => $write,
+        create_allowed      => $create,
+        delete_allowed      => $delete,
         edit_allowed        => $write,
         view_allowed        => $read,
-        attachment_allowed  => $write
+        attachment_allowed  => $attachment
     };
 
     my $model = $c->model('DBIC::PathPermissions');
@@ -247,11 +247,7 @@ sub set_permissions : Local {
     }
 
     # clear cache
-    if ( $c->pref('cache_permission_data') ne""
-         ? $c->pref('cache_permission_data')
-         : defined $c->config->{'permissions'}{'cache_permission_data'}
-           ? $c->config->{'permissions'}{'cache_permission_data'}
-           : 1 ) {
+    if ( $c->pref('cache_permission_data') ) {
         $c->cache->remove( 'page_permission_data' );
     }
 
@@ -284,11 +280,7 @@ sub clear_permissions : Local {
         } )->delete;
 
         # clear cache
-        if ( $c->pref('cache_permission_data') ne""
-             ? $c->pref('cache_permission_data')
-             : defined $c->config->{'permissions'}{'cache_permission_data'}
-               ? $c->config->{'permissions'}{'cache_permission_data'}
-               : 1 ) {
+        if ( $c->pref('cache_permission_data') ) {
             $c->cache->remove( 'page_permission_data' );
         }
 

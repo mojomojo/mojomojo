@@ -6,13 +6,16 @@ then
     exit 0
 fi
 
-if [ ! -z "$1" ]
+if [ -z "$1" ]
 then
-    echo "lang: $1"
-    perl -Ilib `which xgettext.pl` -D lib -D root/forms -D root/base -o lib/MojoMojo/I18N/$1.po
+    langs=`ls lib/MojoMojo/I18N/|grep po$`
 else
-    for i in `ls lib/MojoMojo/I18N` ; do
-        echo "lang: `echo $i|sed 's/.po//'`"
-        perl -Ilib `which xgettext.pl` -D lib -D root/forms -D root/base -o lib/MojoMojo/I18N/$i
-    done
+    langs=$1.po
 fi
+
+for lang in $langs ; do
+    echo "lang: `echo $lang|sed 's/.po//'`"
+    perl -Ilib `which xgettext.pl` -now -D lib -D root/forms -D root/base -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=*  -o lib/MojoMojo/I18N/$lang
+    perl -Ilib `which xgettext.pl` -now -D root/static -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=*  -o lib/MojoMojo/I18N/$lang.json
+    perl -Ilib script/po2json.pl lib/MojoMojo/I18N/$lang.json root/static/json/$lang.json
+done

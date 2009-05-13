@@ -36,3 +36,4 @@
 
 # Skip development tools
 lib\/Locale\/Maketext\/Extract\/Plugin\/FormFu.pm
+script\/po2json\.pl

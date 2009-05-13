@@ -4,14 +4,14 @@ use base qw/MojoMojo::Formatter/;
 
 =head1 NAME
 
-MojoMojo::Formatter::Redirect - Handles =redirect /path.
+MojoMojo::Formatter::Redirect - Handles {{redirect /path}}
 
 =head1 DESCRIPTION
 
 Redirect to another page. Useful if your URL changes and
 you want to make sure bookmarked URLs will still work:
 C</help/tutrial> could contain:
-C<=redirect /help/tutorial>
+C<{{redirect /help/tutorial}}>
 
 To edit a page that redirects, surf to $page_URL . '.edit'
 See also http://mojomojo.ideascale.com/akira/dtd/6415-2416
@@ -37,11 +37,17 @@ context object.
 
 sub format_content {
     my ( $class, $content, $c ) = @_;
-
-    if ( my ($page) = $$content =~ m/^=redirect\s((?:\/\w*)+)/ ) {
+    if ( my ($page) = $$content =~ m/
+    \{\{
+    \s*redirect\s+
+    (\S+)
+    \s*}}/x
+     ) {
         if ($c->action->name eq 'view' && !$c->ajax) {
             $c->flash->{'redirect'}=$c->stash->{'path'};;
             $c->res->redirect( $c->uri_for($page) );
+        } elsif ($c->action->name eq 'render') {
+            $$content=$c->loc("redirect to")." ".$page;
         }
     }
 }

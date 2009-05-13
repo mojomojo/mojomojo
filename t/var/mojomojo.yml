@@ -2,6 +2,9 @@
 Model::DBIC:
   connect_info:
     - dbi:SQLite:t/var/mojomojo.db
+View::Email:
+  sender:
+    mailer: Test
 authentication:
   default_realm: members
   realms:

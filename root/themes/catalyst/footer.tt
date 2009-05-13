@@ -1,0 +1,10 @@
+
+			<div id="powered">
+				<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" /></a>
+			</div>
+			<div id="powered" style="position:absolute">
+				<a href="http://mojomojo.org" target="_blank"><img src="[%c.uri_for_static('gfx/poweredby.png')%]" alt="[%loc('Powered by MojoMojo')%]" title="[%loc('Powered by MojoMojo')%]" /></a>
+			</div>
+		</div>
+	</body>
+</html>

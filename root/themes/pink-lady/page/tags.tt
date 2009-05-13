@@ -1,0 +1,38 @@
+<div id="etiquetes">
+<dl>
+    <dt>[% loc('My tags') %]:</dt>
+    <dd>&nbsp;
+[% IF tags %]
+    [% FOREACH tag IN tags %]
+        [% IF tag.tag == highlight +%]
+        <b id="tag_[% tag.tag %]" class="navOn">[% tag.tag %]</b>
+        [% ELSE +%]
+        <a class="tag" href="[% c.uri_for('recent', tag.tag) %]">[% tag.tag %]</a>
+        [% END %]
+        [<span class="remove"><a href="[%c.uri_for('jsrpc/untag',tag.tag)%]" class="tagaction">x</a></span>][% UNLESS loop.last() %],[% END %]
+    [% END %]
+[% END %]
+    </dd>
+    <dt>[% loc('Popular tags') %]:</dt>
+    <dd>&nbsp;
+[% IF others_tags %]
+    [% FOREACH othertag IN others_tags %]
+        [% SET tagmatch='\b' _ othertag.tag _ '\b' %]
+        [% NEXT IF taglist.match(tagmatch) %]
+        [% IF othertag.tag == highlight +%]
+        <a id="tag_[% tag.tag %]" class="tag highlight" title="[% othertag.refcount %]"
+        [% ELSE -%]
+        <a class="tag" title="[% othertag.refcount %]"
+        [% END -%]
+            href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>
+        [%+ IF user.active +%]
+        [<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END +%]
+        [% END %]
+    [% END %]
+[% END %]
+    </dd>
+</dl>
+</div>
+<div id="cat-logo-container">
+<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" align="right" /></a>
+</div>

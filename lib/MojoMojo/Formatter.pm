@@ -2,6 +2,16 @@ package MojoMojo::Formatter;
 
 sub primary_formatter { 0; }
 
+sub module_loaded { 1; }
+
+sub gen_re {
+    my ($self,$tag,$args)=@_;
+    $args ||= '';
+    return qr{\{\{\s*$tag\s*$args\s*\}\}};
+}
+
+
+
 =head1 NAME
 
 MojoMojo::Formatter - Base class for all formatters
@@ -36,25 +46,25 @@ for the default plugins is currently as follows:
 
 =over 4
 
-=item 1  - L<MojoMojo::Formatter::Redirect> - handles =redirect
+=item 1  - L<MojoMojo::Formatter::Redirect> - handles {{redirect /path}}
 
-=item 6  - L<MojoMojo::Formatter::Include> - handles =http://<url>
+=item 6  - L<MojoMojo::Formatter::Include> - handles {{<url>}}
 
-=item 7  - L<MojoMojo::Formatter::Scrub> - Removes harmful HTML
+=item 10 - L<MojoMojo::Formatter::Wiki> - Handles [[wikilinks]]
 
-=item 10 - L<MojoMojo::Formatter::Wiki> - Handles [[wikiwords]]
+=item 10 - L<MojoMojo::Formatter::Pod> - handles {{pod}} ... {{end}} blocks
 
-=item 10 - L<MojoMojo::Formatter::Pod> - handles =pod ... =pod blocks
-
-=item 14 - L<MojoMojo::Formater::IRCLog> - handles =irc ... =irc blocks
+=item 14 - L<MojoMojo::Formater::IRCLog> - handles {{irc}} ... {{end}} blocks
 
 =item 15 - Main formatter (either L<MojoMojo::Formatter::Textile> or L<MojoMojo::Formatter::Markdown>)
 
-=item 91 - L<MojoMojo::Formatter::Comment> Handles =comments , inserts a comment box
+=item 16  - L<MojoMojo::Formatter::Defang> - Removes harmful HTML and XSS
 
-=item 95 - L<MojoMojo::Formatter::TOC> replace =toc with table of contents
+=item 91 - L<MojoMojo::Formatter::Comment> Handles {{comments}} , inserts a comment box
 
-=item 99  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks (Textile only)
+=item 95 - L<MojoMojo::Formatter::TOC> replace {{toc}} with table of contents
+
+=item 99  - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks
 
 =back
 

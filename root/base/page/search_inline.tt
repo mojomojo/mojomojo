@@ -1,15 +1,19 @@
 <div id="search">
     <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
         [% loc('Search') %]: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %] 
+        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
         <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
     </form>
 </div>
 
-<hr />
-
 [% IF result_count %]
-[% IF search_type != "all"; SET found_within = result.page.path; ELSE; SET found_within = loc('entire site'); END %]
+    [%
+        IF search_type != "all";
+            SET found_within = result.page.path;
+        ELSE;
+            SET found_within = loc('entire site');
+        END;
+    %]
 <h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %].</h3>
 [% ELSIF !result_count %]
 <h3>[% loc('No results found') %].</h3>
@@ -17,18 +21,16 @@
 
 <ul>
 [% FOR result = results %]
- <li>
-    <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikiword(result.page.name) %]</a></strong>
-    <span id="search_hit_score">[% result.score %]%</span>
-    <div class="snippet">
-      [% result.snippet %]
-    </div>
-    <div class="byline" style="margin-bottom: 0px">
-      [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
-      [% loc('on') %] <span style="font-size:smaller;">[% result.page.content.created.ymd("-") %]</span>
-    </div>
-  </li>
-[%END%]
+    <li>
+        <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikilink(result.page.name) %]</a></strong>
+        <span id="search_hit_score">[% result.score %]%</span>
+        <div class="snippet">[% result.snippet %]</div>
+        <div class="byline">
+            [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
+            [% loc('on') %] <small>[% result.page.content.created.ymd("-") %]</small>
+        </div>
+    </li>
+[% END %]
 </ul>
 
 [% IF pager && pager.total_entries > pager.entries_per_page %]
@@ -47,4 +49,3 @@
         </ul>
     </div>
 [% END %]
-
