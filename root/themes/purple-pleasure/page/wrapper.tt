@@ -1,0 +1,64 @@
+[% PROCESS header.tt index_page=index_page +%]
+<div id="header">
+
+
+    <div id="page_title" >
+    [% IF title %]
+        [% title %]
+    [% ELSE %]
+        [% IF pre_title %]
+            [% pre_title %]
+        [% END %]
+        [% IF page.name == "/" %]
+            [% c.pref("name") %] [% loc('Home') %] (/)
+        [% ELSE %]
+            [% c.expand_wikilink(page.name_orig) %]
+        [% END %]
+        [% IF post_title %]
+            [% post_title %]
+        [% END %]
+    [% END %]
+    
+        </div>
+    <div id="search_box">
+    [% IF c.pref('disable_search') -%]
+        <form action="http://www.google.com/search" method="get">
+        <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+    [% ELSE -%]
+        <form action="[% c.uri_for('search') %]" method="get">
+    [% END -%]
+        <input type="hidden" name="search_type" value="all" />
+        <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
+        </form>
+    </div>    
+
+
+</pre>
+</div>
+[%
+    IF admin_header;
+        PROCESS admin/toplinks.tt;
+    ELSIF ! simple_header;
+        PROCESS breadcrumbs.tt;
+      # PROCESS sidebar.tt;
+        PROCESS navbar.tt;
+
+        reverse = c.action.reverse;
+        IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments';
+            PROCESS page/editbar.tt;
+        END;
+    END;
+%]
+
+[%+ content +%]
+
+[%+
+    IF simple_footer;
+        PROCESS footer.tt;
+    ELSIF gallery_footer;
+        PROCESS gallery/footer.tt;
+    ELSE;
+        PROCESS page/bottomnav.tt | indent 4;
+        PROCESS footer.tt;
+    END;
+%]
