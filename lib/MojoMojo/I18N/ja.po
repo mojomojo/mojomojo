@@ -385,7 +385,7 @@ msgstr "編集者"
 
 #: root/base/page/edit.tt:4
 msgid "Editing"
-msgstr "「%1」を編集中"
+msgstr "編集中："
 
 #. (user.name)
 #: root/base/user/editprofile.tt:3
