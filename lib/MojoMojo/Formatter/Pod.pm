@@ -1,6 +1,18 @@
 package MojoMojo::Formatter::Pod;
 
 use base qw/MojoMojo::Formatter/;
+require Pod::Simple::HTML;
+# Pod::Simple::HTML gives warnings for version_tag_comment()
+# because $self->VERSION is empty in the sprintf.  We don't
+# really care about this sub do we?  It's been monkey zapped.
+{
+    no strict 'refs';
+    no warnings;
+    *{"Pod::Simple::HTML::version_tag_comment"} = sub { 
+        my $self = shift;
+          return;
+    }
+}
 
 
 =head1 NAME
@@ -65,7 +77,6 @@ takes some POD documentation, and a base url, and renders it as HTML.
 
 sub to_pod {
     my ( $class, $pod, $base ) = @_;
-    require Pod::Simple::HTML;
     my $result;
     my $parser = MojoMojo::Formatter::Pod::Simple::HTML->new($base);
     $parser->output_string( \$result );
