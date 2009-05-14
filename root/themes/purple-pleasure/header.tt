@@ -29,6 +29,8 @@
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.cookies.2.0.1.min.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
+    [% theme_js_path = 'themes/' _ my_theme_dir _ '/js' _ '/theme.js' %]
+    <script type="text/javascript" src="[%c.uri_for_static(theme_js_path)%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.queue.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('json/') _ lang _ '.po.json' %]"></script>
@@ -44,3 +46,5 @@
 <body id="page">
 <div id="container" class="container[% c.session.maximize_width ? ' maximized-container' : '' %]">
 [% PROCESS top.tt %]
+
+<img src="[% c.uri_for_static('images/mmlogo.png') %]" />

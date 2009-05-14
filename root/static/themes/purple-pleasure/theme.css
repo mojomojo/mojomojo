@@ -191,16 +191,20 @@ div#pageoptions a.active {
     padding-top: 5px;
     font-weight: bold;
 } #content {
-    overflow: hidden;
 	background: white;
     padding: 2em 13px;
     overflow: hidden;
+	width:auto;
+	height:inherit;
 } #content strong, b {
     font-weight: bold;
 } #content em, i {
     font-style: italic;
 } #content ul, #content ol {
     padding-left: 1.5em;
+}
+#content form {
+	overflow: visible;
 }
 
 /* For IE6, which doesn't support child selectors */ #content ul li {
