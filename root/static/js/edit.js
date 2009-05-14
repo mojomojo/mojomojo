@@ -31,7 +31,9 @@ $(document).ready(function() {
         $('<li/>').append($split_edit_button)
     );
 
-    if($.cookies.get('split_edit')=='1'){
+    // Set edit mode to vertical split by default and when cookie is 1.
+    var split_edit_cookie = $.cookies.get('split_edit');
+    if ( split_edit_cookie == 1 || split_edit_cookie == null ){
         $split_edit_button.click();
     }
 });
