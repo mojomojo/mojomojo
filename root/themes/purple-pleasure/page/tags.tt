@@ -34,5 +34,5 @@
 </dl>
 </div>
 <div id="logo-container">
-<a href="http://www.mojomojo.org" target="_blank"><img src="[%c.uri_for_static('mmlogo.png')%]" alt="[%loc('Powered by MojoMojo')%]" title="[%loc('Powered by MojoMojo')%]" align="right" /></a>
+<a href="http://www.mojomojo.org" target="_blank"><img src="[%c.uri_for_static('mm-logo.png')%]" alt="[%loc('Powered by MojoMojo')%]" title="[%loc('Powered by MojoMojo')%]" align="right" /></a>
 </div>

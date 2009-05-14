@@ -171,9 +171,9 @@ div#pageoptions a.active {
 } .wantedBy {
     color: #999;
 } #tags {
-    background: url(images/mmlogo.png) no-repeat 15px 20px;
-    background-position: right center;
-    background: #f6f6f6;
+/*    background: url(images/mmlogo.png) no-repeat 15px 20px;
+    background-position: right center; */
+    background-color: #f6f6f6;
     /* font-size: 1.1em; */
     color: #676767;
     padding: 5px 13px;
