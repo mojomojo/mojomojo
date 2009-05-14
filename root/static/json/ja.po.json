@@ -1,1 +1,1 @@
-var locale={}
+var locale={"Mark some text to apply the toolbar actions to that text":"&#x30C4;&#x30FC;&#x30EB;&#x30D0;&#x30FC;&#x306B;&#x3042;&#x308B;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F7F;&#x3046;&#x306B;&#x306F;&#x5BFE;&#x8C61;&#x306E;&#x6587;&#x5B57;&#x3092;&#x30CF;&#x30A4;&#x30E9;&#x30A4;&#x30C8;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;","Deleted Text":"&#x524A;&#x9664;&#x3055;&#x308C;&#x305F;&#x30C6;&#x30AD;&#x30B9;&#x30C8;","Syntax":"&#x69CB;&#x6587;","External Link":"&#x5916;&#x90E8;&#x30EA;&#x30F3;&#x30AF;","Picture":"&#x753B;&#x50CF;"}
