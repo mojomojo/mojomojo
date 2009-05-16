@@ -48,7 +48,7 @@
             <span id="formatter_toolbar"><!-- This will be replaced with a js generated toolbar --></span>
             <br/>
             <a href="[%c.uri_for('jsrpc','render')%]" id="preview_url"></a>
-            <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body  -%][% append %]</textarea>
+            <textarea id="body" name="body" cols="70">[% merged_body || page.content.encoded_body-%][% append %]</textarea>
 
             <div class="spinner">
                 <span id="editstatus"></span>
