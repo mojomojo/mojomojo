@@ -129,8 +129,7 @@ setupFormatterToolbar = function() {
     // Formatter
     $toolbar.append(_createToolbarSelect(loc('Formatter'), [
         [ loc('IRC formatter'), '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
-        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n',loc("=head1 Header")],
-        [ loc('DocBook formatter'), '\n{{docbook}}\n','{{end}}\n',loc('<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"\n"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">\n<article lang="en">\n  <title>TEST</title>\n  <section id="test">\n    <title>Test programlisting</title>\n    <para>Perl code<programlisting lang="perl">#!/usr/bin/perl\n\nuse feature qw(say);\nsay "Content-type: text/html\\n";\nsay "<H1>Hello World</H1>";\n</programlisting></para>\n</section>\n</article>\n')],
+        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n',loc("=head1 Header")]
     ]));
 
     // Insert 
