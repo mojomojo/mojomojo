@@ -250,7 +250,9 @@ sub insert_content : Chained('attachment') Args(0) {
     my $plugin   = MojoMojo::Formatter::File->plugin($filename);
 
     return unless $c->forward('auth');
-    $c->stash->{append} = "\n\n=file $plugin " . $c->stash->{att}->filename;
+    $c->stash->{append} = "\n\n{{file $plugin " 
+                          . $c->stash->{att}->filename
+			  . "}}\n";
     $c->forward('/pageadmin/edit');
 }
 
