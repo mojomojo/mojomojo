@@ -70,10 +70,7 @@ sub format_content {
 # old school - which works with textile2 (not textile for mxh)
 # drop all lang=""
     $$content =~ s/<\s*pre\s+lang=""\s*>/<pre>/g;
-    while ( $$content =~
-s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si
-      )
-    {
+    while ( $$content =~ s/<\s*pre(?:\s+lang=['"]*(.*?)['"]*")?\s*>(.*?)<\s*\/pre\s*>/$ph_base$ph/si ) {
         my ( $language, $block ) = ( $1, $2 );
 
         # Fix newline issue

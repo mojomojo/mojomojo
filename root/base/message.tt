@@ -1,14 +1,16 @@
 [% WRAPPER page/wrapper.tt title=loc('A message from our sponsors...') simple_header=1 simple_footer=1 -%]
 <div id="content">
-    <div>
-        <img src="[% c.uri_for_static('shrinkedhead.jpg') %]" alt="[% loc('shrinked head') %]" />
-        <h1>[% message %].</h1>
-        <p>
-            [% loc('Go directly to ') %]<a href="[% c.req.base %]/">[% loc('start') %]</a>
-            [% loc('or') %]
-            <a href="[% c.req.base %]/.login">[% loc('login') %]</a>,
-            [% loc('do not pass prison, do not collect $ 200...') %]
-        </p>
+    <div style="float: right;">
+       <img src="[% c.uri_for_static('shrinkedhead.jpg') %]" alt="[% loc('shrinked head') %]" width="150" height="142"/>
+    </div>
+    <div class="message_body">
+        [% message %]
+        <div style="font-size: 0.8em;">
+             [% loc('Go directly to ') %]<a href="[% c.req.base %]/">[% loc('start') %]</a>
+             [% loc('or') %]
+             <a href="[% c.req.base %]/.login">[% loc('login') %]</a>,
+             [% loc('do not pass jail, do not collect $200...') %]
+        </div>
     </div>
 </div>
 [% END %]

@@ -1,32 +1,30 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Markdown;
-use Test::More tests => 11;
+use Test::More tests => 12;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
 
 $content = 'Here is an ![Image alt text](/image.jpg "Image title") image.';
-$expected = '<p>Here is an <img src="/image.jpg" alt="Image alt text" title="Image title" /> image.</p>' . "\n";  # Markdown makes sure there's a final "\n"
-is(MojoMojo::Formatter::Markdown->main_format_content(\$content), $expected, 'basic image');
-
-
+$expected =
+'<p>Here is an <img src="/image.jpg" alt="Image alt text" title="Image title" /> image.</p>'
+  . "\n";    # Markdown makes sure there's a final "\n"
+is( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    $expected, 'basic image' );
 
 #----------------------------------------------------------------------------
-$test = '<div with="attributes"> in a code span';
-#----------------------------------------------------------------------------
-
+$test    = '<div with="attributes"> in a code span';
 $content = <<'MARKDOWN';
 This is the code: `<div markdown="1">`.
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML');
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <p>This is the code: <code>&lt;div markdown="1"&gt;</code>.</p>
 HTML
 
-
 #----------------------------------------------------------------------------
-$test = 'blockquotes';
-#----------------------------------------------------------------------------
+$test    = 'blockquotes';
 $content = <<'MARKDOWN';
 Below is a blockquote:
 
@@ -34,7 +32,8 @@ Below is a blockquote:
 
 A quote is above.
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <p>Below is a blockquote:</p>
 
 <blockquote>
@@ -44,80 +43,80 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 <p>A quote is above.</p>
 HTML
 
+#----------------------------------------------------------------------------
+$test    = 'direct <http://url.com> hyperlinks';
+$content = <<'MARKDOWN';
+This should be linked: <http://mojomojo.org>.
+MARKDOWN
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
+<p>This should be linked: <a href="http://mojomojo.org">http://mojomojo.org</a>.</p>
+HTML
 
 #----------------------------------------------------------------------------
-$test = "don't make a <div> into <p><div></p>, for empty divs";
-#----------------------------------------------------------------------------
-
+$test    = "don't make a <div> into <p><div></p>, for empty divs";
 $content = <<'MARKDOWN';
 <div>
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div>
 
 </div>
 HTML
 
-
 #----------------------------------------------------------------------------
-$test = "don't make a <div> into <p><div></p>, for divs wth attributes";
-#----------------------------------------------------------------------------
-
+$test    = "don't make a <div> into <p><div></p>, for divs wth attributes";
 $content = <<'MARKDOWN';
 <div class="content">
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div class="content">
 
 </div>
 HTML
 
-
 #----------------------------------------------------------------------------
-$test = "if div attributes are not quoted, they're fair game because that's invalid HTML Strict";
-#----------------------------------------------------------------------------
-
+$test =
+"if div attributes are not quoted, they're fair game because that's invalid HTML Strict";
 $content = <<'MARKDOWN';
 <div class=this_must_be_quoted_otherwise_the_whole_div_is_not_HTML_but_junk>
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <p><div class=this_must_be_quoted_otherwise_the_whole_div_is_not_HTML_but_junk></p>
 
 <p></div></p>
 HTML
 
-
-
+$TODO =
+  "All tests below will fail because Markdown doesn't interpret markdown in 
+HTML block elements, and does interpret block-level markdown in <pre> elements";
 
 #----------------------------------------------------------------------------
-$test = "interpret block-level Markdown in divs without attributes";
-#----------------------------------------------------------------------------
-
+$test    = "interpret block-level Markdown in divs without attributes";
 $content = <<'MARKDOWN';
 <div>
 # heading 1
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div>
 <h1>heading 1</h1>
 
 </div>
 HTML
 
-
-
-$TODO = "All tests below will fail because Markdown doesn't interpret markdown in HTML block elements, and does interpret block-level markdown in <pre> elements";
 #----------------------------------------------------------------------------
-$test = "interpret inline Markdown in divs without attributes";
-#----------------------------------------------------------------------------
-
+$test    = "interpret inline Markdown in divs without attributes";
 $content = <<'MARKDOWN';
 <div>
 
@@ -125,7 +124,8 @@ $content = <<'MARKDOWN';
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div>
 
 <em>this should be emphasized</em>
@@ -133,12 +133,8 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 </div>
 HTML
 
-
-
 #----------------------------------------------------------------------------
-$test = "interpret Markdown in divs WITH attributes";
-#----------------------------------------------------------------------------
-
+$test    = "interpret Markdown in divs WITH attributes";
 $content = <<'MARKDOWN';
 <div class="content">
 
@@ -146,7 +142,8 @@ $content = <<'MARKDOWN';
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div class="content">
 
 <em>this should be emphasized</em>
@@ -154,12 +151,8 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 </div>
 HTML
 
-
-
 #----------------------------------------------------------------------------
-$test = "in <divs>, leave alone HTML like <span>s";
-#----------------------------------------------------------------------------
-
+$test    = "in <divs>, leave alone HTML like <span>s";
 $content = <<'MARKDOWN';
 <div class="photo_frame">
 
@@ -168,7 +161,8 @@ $content = <<'MARKDOWN';
 
 </div>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <div class="photo_frame">
 
 <img src="/image.jpg" alt="alt text" title="title" /></p>
@@ -177,12 +171,8 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 </div>
 HTML
 
-
-
 #----------------------------------------------------------------------------
-$test = "in <pres>, not even block-level Markdown should be interpreted";
-#----------------------------------------------------------------------------
-
+$test    = "in <pres>, not even block-level Markdown should be interpreted";
 $content = <<'MARKDOWN';
 <pre lang="Perl">
 # A comment, not a heading
@@ -193,7 +183,8 @@ $content = <<'MARKDOWN';
 || this is | a <pre> element ||
 </pre>
 MARKDOWN
-eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTML', $test);
+eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
+    <<'HTML', $test );
 <pre lang="Perl">
 # A comment, not a heading
 [this isn't](a link)
@@ -203,5 +194,4 @@ eq_or_diff(MojoMojo::Formatter::Markdown->main_format_content(\$content), <<'HTM
 || this is | a <pre> element ||
 </pre>
 HTML
-
 

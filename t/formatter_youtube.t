@@ -2,10 +2,10 @@
 use MojoMojo::Formatter::YouTube;
 use Test::More tests => 5;
 use lib 't/lib';
-use DummyCatalystObject;
+use FakeCatalystObject;
 
 my $content;
-my $fake_c = DummyCatalystObject->new;
+my $fake_c = FakeCatalystObject->new;
 
 $content = " youtube http://www.youtube.com/abc";
 MojoMojo::Formatter::YouTube->format_content(\$content, $fake_c, undef);

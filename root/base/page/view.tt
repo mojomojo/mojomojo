@@ -38,8 +38,9 @@
 </div>
 
 <div class="byline">
+    [% profile_wanted = 1; %]
     <acronym title="[% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]">[% loc('Revision') %]</acronym>
-    [% loc('by') %] [% c.wikiword(content.creator.link, base, content.creator.name) %], [% content.created.ymd %]
+    [% loc('by') %] [% c.wikiword(content.creator.link, base, content.creator.name, profile_wanted) %], [% content.created.ymd %]
 </div>
 
 </div>

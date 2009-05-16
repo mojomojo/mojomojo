@@ -37,13 +37,24 @@
 
 [% page.content.abstract %]
 
-<h3>[% loc('x revisions',page.versions.size)%]</h3>
+<h3>[% loc('x revisions',page.versions.size)%]:</h3>
 
 <ol>
 [% FOREACH version IN page.versions %]
-    <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] [% loc('by') %] <a href="[%c.uri_for(version.creator.link)%]">[%version.creator.name%]</a> <a href="[%c.uri_for('view',{rev=>version.version})%]">([%loc('Show revision')%])</a></li>
+    <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] [% loc('by') %] <a href="[%c.uri_for(version.creator.link) _ '.profile' %]">[%version.creator.name%]</a> <a href="[%c.uri_for('view',{rev=>version.version})%]">([%loc('Show revision')%])</a></li>
 [% END %]
 </ol>
+
+[% IF page.links_to.first ; +%]
+<h3>[% loc('Linked from') %]:</h3>
+        <ul>
+    [% FOR linkitem = page.links_to +%]
+        <li>
+            <a class="existingWikiWord" title="[% linkitem.from_page.name_orig %]" href="[% c.uri_for(linkitem.from_page.path) %]">[% c.expand_wikilink(linkitem.from_page.path) %]</a>
+        </li>
+    [% END %]
+        </ul>
+[% END %]
 
 </div>
 [% END # WRAPPER %]

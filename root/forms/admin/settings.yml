@@ -44,7 +44,12 @@ elements:
         name: disable_search
         value: 1
         default_empty_value: 0
-        label_loc: Disable search
+        label_loc: Disable internal search (use Google)
+      - type: Checkbox
+        name: enable_emoticons
+        label_loc: Enable graphical emoticons
+        value: 1
+        default_empty_value: 0
   - type: Fieldset
     elements:
       - type: Checkbox
@@ -73,7 +78,7 @@ elements:
         default_empty_value: 0
         label_loc: Create allowed by default
       - type: Checkbox
-        name: delete_allowed 
+        name: delete_allowed
         value: 1
         default_empty_value: 0
         label_loc: Delete allowed by default
@@ -83,12 +88,12 @@ elements:
         default_empty_value: 0
         label_loc: Edit allowed by default
       - type: Checkbox
-        name: view_allowed 
+        name: view_allowed
         value: 1
         default_empty_value: 0
         label_loc: View allowed by default
       - type: Checkbox
-        name: attachment_allowed 
+        name: attachment_allowed
         value: 1
         default_empty_value: 0
         label_loc: Attachment allowed by default

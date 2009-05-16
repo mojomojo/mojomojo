@@ -33,6 +33,6 @@
     </dd>
 </dl>
 </div>
-<div id="cat-logo-container">
-<a href="http://www.catalystframework.org" target="_blank"><img src="[%c.uri_for_static('catalyst.png')%]" alt="[%loc('Powered by Catalyst')%]" title="[%loc('Powered by Catalyst')%]" align="right" /></a>
+<div id="logo-container">
+<a href="http://www.mojomojo.org" target="_blank"><img src="[%c.uri_for_static('mm-logo.png')%]" alt="[%loc('Powered by MojoMojo')%]" title="[%loc('Powered by MojoMojo')%]" align="right" /></a>
 </div>

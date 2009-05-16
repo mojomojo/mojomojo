@@ -1,22 +1,87 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::SyntaxHighlight;
-
+use HTTP::Request::Common;
 use Test::More;
+use Test::Differences;
+my ( $content, $got, $expected, $test, $c, $original_formatter );
 
 BEGIN {
     plan skip_all =>
       'Requirements not installed for Syntax Highligher Formatter'
       unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
-    plan tests => 5;
+    plan tests => 15;
+    use_ok('MojoMojo::Formatter::Textile');
+    $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
+    use_ok( 'Catalyst::Test', 'MojoMojo' );
 }
 
-my ( $content, $got, $expected, $test );
+END {
+    ok( $c->pref( main_formatter => $original_formatter ),
+        'restore original formatter' );
+}
+
+( undef, $c ) = ctx_request('/');
+ok( $original_formatter = $c->pref('main_formatter'),
+    'save original formatter' );
+
+ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Textile' ),
+    'set preferred formatter to Textile' );
+
+$test .= 'single word run through all formatters';
+$content = 'palabra';
+
+# We expect to get the word back surrounded with <p> tag and \n added.
+$expected = '<p>' . $content . '</p>
+';
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );
+
+$test = 'single word run through all formatters with textile off';
+$content = '==palabra==';
+
+# We expect to get the word back surrounded with only \n added.
+$expected = 'palabra
+';
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );
+
+$test    = 'two words run through all formatters';
+$content = 'dues palabres';
+
+# We expect to get the two words back surrounded with <p> tag and \n added.
+$expected = '<p>' . $content . '</p>
+';
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );
+
+{
+    $test = 'Single <code>';
+
+    $content = <<HTML;
+<pre lang="HTML">
+<code>
+Ha en god dag
+</code>
+</pre>
+HTML
+
+    $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
+    $expected = <<'HTML';
+<pre>
+<b>&lt;code&gt;</b>
+Ha&nbsp;en&nbsp;god&nbsp;dag
+<b>&lt;/code&gt;</b>
+</pre>
+HTML
+
+    is( $$got, $expected, $test );
+}
 
 {
     $test = 'Single <div>';
 
-    $content = <<HTML;
+    $content = <<'HTML';
 <pre lang="HTML">
 <div>
 Ha en god dag
@@ -25,18 +90,27 @@ Ha en god dag
 HTML
 
     $got = MojoMojo::Formatter::SyntaxHighlight->format_content( \$content );
-    open( F, ">t1.tmp.out" );
-    print F $$got;
-    close F;
-    $expected = <<'HTML';
-<pre>
+    $expected = '<pre>
 <b>&lt;div&gt;</b>
 Ha&nbsp;en&nbsp;god&nbsp;dag
 <b>&lt;/div&gt;</b>
 </pre>
+';
+
+    eq_or_diff( $$got, $expected, $test );
+
+    $content = <<'HTML';
+<pre lang="HTML">
+<div>
+Ha en god dag
+</div>
+</pre>
 HTML
 
-    is( $$got, $expected, $test );
+    # Now run through all formatters.
+    $test .= ' - run through all formatters';
+    $got = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $got, $expected, $test );
 }
 
 {
@@ -75,7 +149,6 @@ SQL
 SQL
 
     is( $$got, $expected, $test );
-
 }
 
 {
@@ -99,9 +172,6 @@ HTML
 &nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;/form&gt;</b>
 </pre>
 HTML
-    open( F, ">t2.tmp.out" );
-    print F $$got;
-    close F;
     is( $$got, $expected, $test );
 
 }
@@ -158,7 +228,4 @@ PERL
 </pre>
 PERL
     is( $content, $wanted, $test );
-        open( F, ">t.complex-perl.tmp.out" );
-    print F $$got;
-    close F;
 }

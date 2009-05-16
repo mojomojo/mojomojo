@@ -2,10 +2,11 @@
 <div id="content">
     [% PROCESS pager.tt %]
 
+    [% user_profile_wanted = 1; %]
     <dl id="authors">
     [% WHILE( u = users.next ) -%]
         <dt>
-            [% c.wikiword( u.link, base ) -%]
+            [% c.wikiword( u.link, base, u.name, user_profile_wanted) -%]
         </dt>
         <dd>
             [% pages = u.pages -%]

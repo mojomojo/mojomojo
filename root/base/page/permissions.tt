@@ -11,7 +11,7 @@
     [% FOREACH perm_set IN inherited_perms %]
 <pre><strong>[% loc('From') %] [% perm_set.path %]:</strong>
         [%- perms = perm_set.perms -%]
-        [% FOREACH role IN perms.keys.sort
+        [% FOREACH role IN perms.keys.sort;
             role_perms = perms.$role;
             perms_list = [];
             perms_list.push(loc('read'))  IF role_perms.view == 'yes';
@@ -26,14 +26,33 @@
 [% loc('None') %].
 [% END %]
 
-[% IF user.is_admin %]
+[% IF current_perms && current_perms.size > 0 %]
 <h4>[% loc('Permissions for this page') %]:</h4>
+    [% FOREACH perm_set IN current_perms %]
+    [% IF perm_set.perms && perm_set.perms.size >0 %]
+<pre><p><strong>[% loc('Role') %] [% perm_set.role_name %]:</strong></p>
+        [% FOREACH current_perm IN perm_set.perms.keys.sort %]
+                <br />[% loc(current_perm) %] = [% loc(perm_set.perms.$current_perm) %]
+                [% # loc('read') loc('write') loc('delete') loc('create') loc('attachment') loc('yes') loc('no') %]
+        [% END %]
+    [% END %]
+</pre>
+    [% END %]
+[% ELSE %]
+[% loc('None') %].
+[% END %]
+
+[% IF user.is_admin %]
+<h4>[% loc('Edit permissions for this page') %]:</h4>
 <table id="permissions_editor">
 <thead>
     <tr>
         <th></th>
+        <th>[% loc('create') %]</th>
         <th>[% loc('read') %]</th>
         <th>[% loc('write') %]</th>
+        <th>[% loc('delete') %]</th>
+        <th>[% loc('attachment') %]</th>
         <th>[% loc('apply to subpages') %]</th>
         <th>[% loc('actions') %]</th>
     </tr>
@@ -43,8 +62,11 @@
     <tr>
         <td>[% perm.role_name %]</td>
         [% perms = perm.perms %]
+        <td class="center"><input type="checkbox" name="create"[% IF perms && perms.create == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="read"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="write"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+        <td class="center"><input type="checkbox" name="delete"[% IF perms && perms.delete == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+        <td class="center"><input type="checkbox" name="attachment"[% IF perms && perms.attachment == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>
         <td>
             <input type="hidden" name="role_name" value="[% perm.role_name %]"/>

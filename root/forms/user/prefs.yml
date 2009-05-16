@@ -6,7 +6,9 @@ elements:
     name: login
     label_loc: Login
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - LowerCase
+      - TrimEdges
     constraints:
       - Required
       - Word
@@ -14,15 +16,17 @@ elements:
     name: name
     label_loc: Name
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - TrimEdges
   - type: Text
     name: email
     label_loc: Email
     filters:
-       - HTMLEscape
+      - HTMLEscape
+      - TrimEdges
     constraints:
       - Required
-      - type: Email
+      - Email
   - type: Submit
     name: submit
     value_loc: Save

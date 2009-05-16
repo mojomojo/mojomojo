@@ -50,8 +50,6 @@ for the default plugins is currently as follows:
 
 =item 6  - L<MojoMojo::Formatter::Include> - handles {{<url>}}
 
-=item 7  - L<MojoMojo::Formatter::Scrub> - Removes harmful HTML
-
 =item 10 - L<MojoMojo::Formatter::Wiki> - Handles [[wikilinks]]
 
 =item 10 - L<MojoMojo::Formatter::Pod> - handles {{pod}} ... {{end}} blocks
@@ -59,6 +57,8 @@ for the default plugins is currently as follows:
 =item 14 - L<MojoMojo::Formater::IRCLog> - handles {{irc}} ... {{end}} blocks
 
 =item 15 - Main formatter (either L<MojoMojo::Formatter::Textile> or L<MojoMojo::Formatter::Markdown>)
+
+=item 16  - L<MojoMojo::Formatter::Defang> - Removes harmful HTML and XSS
 
 =item 91 - L<MojoMojo::Formatter::Comment> Handles {{comments}} , inserts a comment box
 

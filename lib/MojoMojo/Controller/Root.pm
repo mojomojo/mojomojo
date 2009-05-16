@@ -42,8 +42,10 @@ default action - serve the home node
 sub default : Path {
     my ( $self, $c ) = @_;
     $c->res->status(404);
-    $c->stash->{message} = $c->loc("The requested URL (x) was not found",
-                               $c->stash->{pre_hacked_uri});
+    $c->stash->{message} = $c->loc(
+        'The requested URL was not found: x',
+        '<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>'
+    );
     $c->stash->{template} = 'message.tt';
 }
 

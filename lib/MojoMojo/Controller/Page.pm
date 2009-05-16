@@ -45,8 +45,10 @@ sub view : Global {
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
-    $c->stash->{render} = 'highlight'
-      if $c->req->referer && $c->req->referer =~ /.edit$/;
+# NOTE: Highlight has been turned off until someone make is work perfectly in all cases.
+# In particular is sucks with TOC and valid HTML
+# $c->stash->{render} = 'highlight'
+#  if $c->req->referer && $c->req->referer =~ /.edit$/;
 
     my ( $path_pages, $proto_pages, $id ) =
       @$stash{qw/ path_pages proto_pages id /};
@@ -85,8 +87,12 @@ sub view : Global {
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
         unless ( $stash->{rev} ) {
-            $stash->{message} =
-              $c->loc( 'No such revision for ', $page->name );
+            $stash->{message} = $c->loc( 'No revision x for x',
+                $rev,
+                '<span class="error_detail">'
+                  . '<a href="' . $page->path . '">' . $page->name . '</a>'
+               .'</span>'
+            );
             $stash->{template} = 'message.tt';
         }
     }

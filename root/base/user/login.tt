@@ -1,12 +1,16 @@
 [% WRAPPER page/wrapper.tt simple_header=1 title=loc('Login') %]
 <div id="content">
-    <p class="end logintext"><span id="logintext">[% message %]</span>
-        <br />
+    [% IF message %]
+    <p class="end logintext"><span id="logintext">[% message %]</span></p>
+    [% END %]
+    
+    [% form %] 
+        
+    <p>
         [% IF( c.pref( 'open_registration' ) ) %]
-            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> / 
+            <a href="[% c.uri_for('register') %]">[% loc('Register new account') %]</a> [% loc('or') %] 
         [% END %] 
         <a href="[%c.uri_for('recover_pass')%]">[% loc('Recover password') %]</a>
     </p>
-    [% form %]
 </div>
 [% END # WRAPPER %]

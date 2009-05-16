@@ -4,9 +4,9 @@
 [%- END -%]
 <div id="toplinks">
     <ul>
-        [% gen_link('/.admin',    loc('configuration'), 'C', selected) %]
-        [% gen_link('admin/user', loc('users'),         'U', selected) %]
-        [% gen_link('admin/role', loc('roles'),         'R', selected) %]
-        [% gen_link(back,         loc('back'),          'B', selected) %]
+        [% gen_link('/.admin',    loc('Configuration'), 'C', selected) %]
+        [% gen_link('admin/user', loc('Users'),         'U', selected) %]
+        [% gen_link('admin/role', loc('Roles'),         'R', selected) %]
+        [% gen_link(back,         loc('Home'),          'B', selected) %]
     </ul>
 </div>

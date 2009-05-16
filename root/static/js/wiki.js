@@ -1,11 +1,10 @@
 /* make sure we've got a MojoMojo namespace */
 if (typeof(MojoMojo) === 'undefined') MojoMojo = {};
 
-/*
- * i18n function for now - will use asynapse later
- */
-_ = function(text) {
-    return text;
+function loc(str) {
+    if ( (typeof(locale) === 'undefined') || (typeof locale[str] === 'undefined') )
+        return str;
+    return locale[str]
 }
 
 if (window['loadFirebugConsole']) {
@@ -228,20 +227,20 @@ $( function() {
             },
             upload_start_handler : function(file) {
                 $('#progress').width('0')
-                $('#progress_status').html(file.name+' 0% done');
+                $('#progress_status').html(file.name+' 0% ' + loc('done') );
                 $('#progressbar').show();$('#progress_status').show();
                 return true;
             },
             upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
                 if ( $('#progressbar').is(':hidden') ){
                   $('#progress').width('0');
-                  $('#progress_status').html(file.name+' 0% done');
+                  $('#progress_status').html(file.name+' 0% ' + loc('done') );
                   $('#progressbar').show();$('#progress_status').show();
                 }
                 try {
                     var percent = Math.ceil((bytesLoaded / bytesTotal) * 100)+'%';
                     $('#progress').width(percent)
-                    $('#progress_status').html(file.name+' '+percent+' done')
+                    $('#progress_status').html(file.name+' '+percent+' ' + loc('done') )
                 } catch (ex) {
                     this.debug(ex);
                 }
@@ -477,8 +476,8 @@ setupToggleMaximized = function() {
 
     $img.attr({
         'src': img_uri.replace(/X/, max ? 2 : 1),
-        'alt': _('maximize'),
-        'title': _('maximize width')
+        'alt': loc('maximize'),
+        'title': loc('maximize width')
     }).hover(
         function() {this.src = img_uri.replace(/X/, max ? 2 : 1)},
         function() {this.src = img_uri.replace(/X/, max ? 1 : 2)}

@@ -16,27 +16,53 @@ body {
     max-width: 99%;
     width: 99%;
 } #header {
-    height: auto;
-    padding-bottom: 0.1em;
+    height: 4em;
+    padding-bottom: 0.3em;
     margin: 0;
-    margin-top: 10px;
+	margin-top: 1em;
     background-color: #9595e5;
     -moz-border-radius-topleft: 20px;
     -webkit-border-top-left-radius: 20px;
     -moz-border-radius-topright: 20px;
     -webkit-border-top-right-radius: 20px;
-} #header h1 {
-    background: url(images/mmlogo.png) no-repeat 15px 20px;
-    top: 14px;
-    padding: 13px 0 10px 100px;
+} 
+#header #page_title {
+	float:left; 
+	width: auto;
+    bottom: 0px;
+    padding-top: 5px;
+    padding-right: 150px;
+    padding-bottom: 15px;
+    padding-left: 1em;
     color: #ffffd9;
     font-weight: bold;
     border-width: 1px;
     border-color: #000;
-    margin: 0;
-} #header h1 a {
+	font-size: 2.5em;
+} #header #page_title a {
     color: #ffffff;
-} #breadcrumbs {
+}
+
+#header #search_box {
+	float:right;
+	vertical-align: text-bottom;
+	vertical-align:baseline;
+	margin-top: 1em;
+	margin-right: 3em;
+}
+
+#search_box input {
+	border-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+}
+#breadcrumbs {
     background: #6565a8;
     height: 12px;
     font-size: .9em;
@@ -97,8 +123,8 @@ div#pagenav {
     clear: both;
     padding: 4px 15px;
     background: #f6f6f6;
-    border-top: 1px solid #bbb;
-    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 div#pagenav ul li {
@@ -145,14 +171,17 @@ div#pageoptions a.active {
 } .wantedBy {
     color: #999;
 } #tags {
-    background: #f6f6f6;
+/*    background: url(images/mmlogo.png) no-repeat 15px 20px;
+    background-position: right center; */
+    background-color: #f6f6f6;
     /* font-size: 1.1em; */
     color: #676767;
     padding: 5px 13px;
-    border-top: 1px solid #bbb;
-    border-bottom: 1px solid #bbb;
-    min-height: 50px; 
-    /* 50px is height of catalyst logo that 
+    border-top: 1px solid #ccc;
+   /* border-bottom: 1px solid #bbb; */
+    min-height: 3em;
+
+    /* 50px is height of catalyst logo that
     I'm putting on the right side of the tags area. */
 } .showdiv {
     background: white;
@@ -162,16 +191,20 @@ div#pageoptions a.active {
     padding-top: 5px;
     font-weight: bold;
 } #content {
-    overflow: hidden;
 	background: white;
     padding: 2em 13px;
     overflow: hidden;
+	width:auto;
+	height:inherit;
 } #content strong, b {
     font-weight: bold;
 } #content em, i {
     font-style: italic;
 } #content ul, #content ol {
     padding-left: 1.5em;
+}
+#content form {
+	overflow: visible;
 }
 
 /* For IE6, which doesn't support child selectors */ #content ul li {
@@ -183,7 +216,8 @@ div#pageoptions a.active {
 }
 
 /* The two direct child selectors below take care of that nesting problem, but only for Standards-Compliant Browsers */ #content ul > li {
-    list-style: disc;
+   /* list-style: disc; */
+	list-style-type: none;
 } #content ol > li {
     list-style: decimal;
 } #content li {
@@ -257,21 +291,54 @@ p {
     padding: 0.2em;
 } .toc {
     background-color: #fffff3;
-    border: 1px solid #dddddd;
+    border: 1px solid #f5f5f5;
+	margin: 0em;
+	margin-left: 1em;
+	margin-right: 1.5em;
+	padding: 0.3em;
+	vertical-align:top;
+	font-size: 1.1em;
+	float:left;
+	width:auto;
 } .toc a {
     text-decoration: none;
-} #etiquetes {
-    float: left;
-	min-width: 80%;
+}
+.toc ul {
+    margin: 0;
+    margin-left: -1em;
+    padding: 0;
+}
+.toc > ul {
+    margin-left: -3em;
+	list-style-type: none;
 }
 
-#cat-logo-container {
+.toc li {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;  /* !important some rule makes the font smaller as the indentation increases */
+}
+
+
+logo-container {
 	float:right;
-	/* This min width tied to catalyst logo
-	 * Yes, this sucks.  May it better then.
-	 */
-	min-width: 120px;
-	
+	width: auto;
+    padding-top: 1em;
+}
+
+
+#etiquetes {
+    float: left;
+    min-width: 80%;
+}
+
+pre {
+    width:auto;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-left: 3em; 
+    margin-right: 1em ;
+    overflow:auto;
 }
 
 /* @end */

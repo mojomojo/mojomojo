@@ -31,6 +31,7 @@
     <script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.queue.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('json/') _ lang _ '.po.json' %]"></script>
     [% IF (c.action.reverse == 'pageadmin/edit') %]
     <script type="text/javascript" language="JavaScript" src="[%c.uri_for_static('js/edit.js')%]"></script>
     [% END %]

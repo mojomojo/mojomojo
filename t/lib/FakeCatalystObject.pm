@@ -1,4 +1,6 @@
-package DummyCatalystObject;
+# See the difference among Dummy, Stub, Fake and Mock objects at
+# http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html
+package FakeCatalystObject;
 use URI;
 my $reverse;
 my %prefs = (
@@ -78,7 +80,7 @@ sub path_pages {
     my ($self, $path) = @_;
     $path =~ s|^/||;
     if ($path =~ /existing/i && $path !~ /#new/) {
-        my $page = DummyCatalystObject->new;
+        my $page = FakeCatalystObject->new;
         $page->{path} = $path;
         return [$page], undef;
     } else {

@@ -1,7 +1,11 @@
 ---
 auto_fieldset: 1
-indicator: submit
+# indicator not set as it breaks registration test in t/c/email.t
+# indicator: submit
 localize_class: MojoMojo::I18N
+
+# If not set, missing error messages will default to their keys (e.g. "form_constraint_word"), not the corresponding values (e.g. 'Field contains non-word characters')
+localize: 1
 
 # overridden in most forms, but required for auto_id
 id: form
