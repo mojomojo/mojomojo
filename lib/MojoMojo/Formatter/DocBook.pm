@@ -86,7 +86,9 @@ sub to_xhtml {
     # Beurk
     $dbk =~ s/&/_-_amp_-_;/g;
 
-    $dbk =~ s/^\s//;
+    $dbk =~ s/^\s+//;
+    $dbk =~ s/^\n+//;
+
     # 1 - Mark lang
     # <programlisting lang="..."> to <programlisting lang="...">[lang=...] code [/lang]
     my $my_Handler = MojoMojo::Formatter::DocBook::Colorize->new($debug);
