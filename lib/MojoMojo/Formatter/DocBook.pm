@@ -48,22 +48,23 @@ context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
 
-    return unless $class->module_loaded;
     my @lines = split /\n/, $$content;
     my $dbk;
     $$content = "";
+    my $start_re=$class->gen_re(qr/docbook/);
+    my $end_re=$class->gen_re(qr/end/);
     foreach my $line (@lines) {
-
         if ($dbk) {
-            if ( $line =~ m/^=docbook\s*$/ ) {
-                $$content .= $class->to_xhtml( $dbk );
+            if ( $line =~ m/^(.*)$end_re(.*)$/ ) {
+		$$content .= $class->to_xhtml( $dbk );
                 $dbk = "";
             }
             else { $dbk .= $line . "\n"; }
         }
         else {
-            if ( $line =~ m/^=docbook\s*$/ ) {
-                $dbk = " ";    # make it true :)
+            if ( $line =~ m/^(.*)$start_re(.*)$/ ) {
+                $$content .= $1;
+                $dbk = " ".$2;    # make it true :)
             }
             else { $$content .= $line . "\n"; }
         }
