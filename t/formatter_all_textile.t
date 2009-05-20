@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 23;
+use Test::More tests => 26;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -399,3 +399,31 @@ HTML
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
     is( $got, $expected, $test );
 }
+
+
+$test    = 'img src http not allowed';
+$content = <<'HTML';
+<img src="http://malicious.com/foto.jpg" />
+HTML
+$expected = '<p><img defang_src="http://malicious.com/foto.jpg" /></p>
+'; 
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
+$test    = 'img src https not allowed';
+$content = <<'HTML';
+<img src="https://malicious.com/foto.jpg" />
+HTML
+$expected = '<p><img defang_src="https://malicious.com/foto.jpg" /></p>
+'; 
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
+$test    = 'img src with bypass protocol not allowed';
+$content = <<'HTML';
+<img src="//malicious.com/foto.jpg" />
+HTML
+$expected = '<p><img defang_src="//malicious.com/foto.jpg" /></p>
+'; 
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
