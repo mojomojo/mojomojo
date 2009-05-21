@@ -1,7 +1,7 @@
 =head2 MojoMojo Preferences
 
 MojoMojo has a number of things that can be set in the preference system.
-If values are not set in database, they are get from F<mojomojo.conf>, or default varues are taken.
+If values are not set in database, they are taken from F<mojomojo.conf>, or default values are used.
 
 =head3 admins
 
