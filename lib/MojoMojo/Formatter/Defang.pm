@@ -2,7 +2,7 @@ package MojoMojo::Formatter::Defang;
 use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
-use HTML::Defang;
+use HTML::Declaw;
 use URI;
 
 =head1 NAME
@@ -43,11 +43,13 @@ sub defang_tags_callback {
 
     # Explicitly whitelist this tag, although unsafe
     return 0 if $lc_tag eq 'embed';
+    return 0 if $lc_tag eq 'object';
+    return 0 if $lc_tag eq 'param';
     return 0 if $lc_tag eq 'pre';
 
     # I am not sure what to do with this tag, so process as
     # HTML::Defang normally would
-    return 2 if $lc_tag eq 'img';
+    #return 2 if $lc_tag eq 'img';
 }
 
 =item defang_url_callback
@@ -105,13 +107,37 @@ Callback for custom handling HTML tag attributes
 sub defang_attribs_callback {
     my ( $c, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r ) = @_;
 
+    # if $lc_attr_key eq 'value';
+    # Initial Defang effort on attributes applies specifically to 'src'
     if ( $lc_attr_key eq 'src' ) {
         my $src_uri_object = URI->new($$attr_val_r);
+
+        # Allow src URI's from configuration.
+        my @allowed_src_regex;
+
+        # Tests may not have a $c
+        if ( defined $c ) {
+            if ( exists $c->stash->{allowed_src_regexes} ) {
+                @allowed_src_regex = @{ $c->stash->{allowed_src_regexes} };
+            }
+            else {
+                my $allowed_src = $c->config->{allowed}{src};
+                my @allowed_src =
+                  ref $allowed_src ? @{$allowed_src} : ($allowed_src);
+                @allowed_src_regex = map { qr/$_/ } @allowed_src  if $allowed_src[0];
+
+                # TODO: Shouldn't this be using pref cache?
+                $c->stash->{allowed_src_regexes} = \@allowed_src_regex;
+            }
+        }
+        for my $allowed_src_regex (@allowed_src_regex) {
+            return 0 if $$attr_val_r =~ $allowed_src_regex;
+        }
 
         # When $c and src uri authority are defined we want to make sure
         # it matches the server of the img src.  i.e. we allow images from the
         # local server whether the URI is relative or absolute..
-        if ( defined $c && defined $src_uri_object->authority) {
+        if ( defined $c && defined $src_uri_object->authority ) {
             if ( $c->request->uri->authority eq $src_uri_object->authority ) {
                 return 2;
             }
@@ -123,6 +149,7 @@ sub defang_attribs_callback {
             return 1;
         }
     }
+
     return 0;
 }
 
@@ -136,14 +163,14 @@ context object.
 sub format_content {
     my ( $self, $content, $c ) = @_;
 
-    my $defang = HTML::Defang->new(
+    my $defang = HTML::Declaw->new(
         context             => $c,
         fix_mismatched_tags => 1,
-        tags_to_callback    => [qw/br embed img/],
+        tags_to_callback    => [qw/br embed object param img/],
         tags_callback       => \&defang_tags_callback,
         url_callback        => \&defang_url_callback,
         css_callback        => \&defang_css_callback,
-        attribs_to_callback => [qw(border src)],
+        attribs_to_callback => [qw(src value)],
         attribs_callback    => \&defang_attribs_callback,
     );
 

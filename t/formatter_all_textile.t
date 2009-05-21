@@ -284,6 +284,9 @@ $test = 'Maintain complete set of html table tags. Use textile escape ==';
 $content = <<'TEXTILE';
 ==<table>
 <caption>Vegetable Price List</caption>
+<colgroup>
+<col /><col align="char" char="." />
+</colgroup>
 <thead>
     <tr>
       <th>Vegetable</th>
@@ -311,6 +314,9 @@ TEXTILE
 $expected = <<'HTML';
 <table>
 <caption>Vegetable Price List</caption>
+<colgroup>
+<col /><col align="char" char="." />
+</colgroup>
 <thead>
     <tr>
       <th>Vegetable</th>
