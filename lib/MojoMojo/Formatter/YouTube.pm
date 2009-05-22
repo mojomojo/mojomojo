@@ -61,7 +61,7 @@ sub process {
         return $line;
     }
 
-    if ($url =~ m!youtube.com/.*?v=([A-Za-z0-9_]+)!){
+    if ($url =~ m!youtube.com/.*?v=([A-Za-z0-9_-]+)!){
         $video_id=$1;
     } else {
         $line =~ s/$re/"$youtube: $url ".$c->loc('is not a valid link to youtube video')/e;

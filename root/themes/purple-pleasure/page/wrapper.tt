@@ -19,7 +19,7 @@
         [% END %]
     [% END %]
     
-        </div>
+    </div>
     <div id="search_box">
     [% IF c.pref('disable_search') -%]
         <form action="http://www.google.com/search" method="get">
@@ -31,10 +31,8 @@
         <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
         </form>
     </div>    
-
-
-</pre>
 </div>
+
 [%
     IF admin_header;
         PROCESS admin/toplinks.tt;

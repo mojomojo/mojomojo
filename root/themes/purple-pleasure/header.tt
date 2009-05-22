@@ -47,4 +47,3 @@
 <div id="container" class="container[% c.session.maximize_width ? ' maximized-container' : '' %]">
 [% PROCESS top.tt %]
 
-<img src="[% c.uri_for_static('images/mmlogo.png') %]" />

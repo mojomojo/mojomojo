@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Defang;
-use Test::More tests => 7;
+use Test::More tests => 10;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -35,7 +35,7 @@ $expected = "<img defang_src=javascript:alert('XSS')
 MojoMojo::Formatter::Defang->format_content( \$content );
 eq_or_diff( $content, $expected, $test );
 
-$test    = 'img src http not allowed';
+$test    = 'script src http not allowed';
 $content = <<'HTML';
 <SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>
 HTML
@@ -45,15 +45,25 @@ $expected =
 MojoMojo::Formatter::Defang->format_content( \$content );
 eq_or_diff( $content, $expected, $test );
 
-# This test will fails when allowing img and src at default Defang (return 2) setting.
-#$test    = 'unclosed src http not allowed';
-#$content = <<'HTML';
-#<img src=http://malicious.com/xss.js 
-#HTML
-#$expected = '<img defang_src=http://malicious.com/xss.js 
-#>';
-#MojoMojo::Formatter::Defang->format_content( \$content );
-#eq_or_diff( $content, $expected, $test );
+ # This test will fails when allowing img and src at default Defang (return 2) setting.
+$test    = 'img src http not allowed';
+$content = <<'HTML';
+<img src="http://malicious.com/foto.jpg" />
+HTML
+$expected = '<img defang_src="http://malicious.com/foto.jpg" />
+'; 
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
+
+ # This test will fails when allowing img and src at default Defang (return 2) setting.
+$test    = 'unclosed src http not allowed';
+$content = <<'HTML';
+<img src=http://malicious.com/xss.js 
+HTML
+$expected = '<img defang_src=http://malicious.com/xss.js 
+>';
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
 
 $test    = 'No quotes and semicolon img src javascript';
 $content = <<'HTML';
@@ -85,12 +95,12 @@ HTML
 }
 
 # This test will fails when allowing img and src at default Defang (return 2) setting.
-#$test    = 'Protocol Resolution Bypass img src';
-#$content = <<'HTML';
-#<img src="//ha.ckers.org/xss.js" />
-#HTML
-#$expected = '<img defang_src="//ha.ckers.org/xss.js" />
-#';
-#MojoMojo::Formatter::Defang->format_content( \$content );
-#eq_or_diff( $content, $expected, $test );
+$test    = 'Protocol Resolution Bypass img src';
+$content = <<'HTML';
+<img src="//ha.ckers.org/xss.js" />
+HTML
+$expected = '<img defang_src="//ha.ckers.org/xss.js" />
+';
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
 
