@@ -45,7 +45,6 @@ requires(
     'HTML::Entities'                               => '3.60',    # Pod::Simple
     'HTML::FormFu'                                 => '0.02000', # min version with string renderer
     'HTML::FormFu::Model::DBIC'                    => 0,
-    'HTML::Defang'                                 => 0,
     'HTML::Strip'                                  => '1.04',
     'HTML::TagCloud'                               => 0,
     'Image::ExifTool'                              => 0,
