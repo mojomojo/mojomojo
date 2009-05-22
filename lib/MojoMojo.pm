@@ -15,6 +15,7 @@ use Catalyst qw/
     Unicode
     I18N
     Setenv
+    PageCache
     /;
 
 use Storable;
@@ -41,6 +42,22 @@ MojoMojo->config->{cache}{backend} = {
     class => "Cache::FastMmap",
 };
 
+
+MojoMojo->config(
+        'Plugin::PageCache' => {
+            expires          => 300, # only 5 minutes for now
+            set_http_headers => 0,
+            auto_cache       => [
+                               '/.*',
+            ],
+            key_maker => sub {
+                my $c = shift;
+                return $c->stash->{path} . '.' . $c->req->path;
+            },
+            debug => 0 ,
+            cache_hook => 'cache_hook'
+        }
+);
 
 MojoMojo->setup();
 
@@ -82,6 +99,46 @@ L<MojoMojo::Installation> to try it out yourself.
 
 
 =cut
+
+=head2 cache_ie_list
+
+include/exclude list accessor
+
+=cut
+
+# include/exclude pages list to cache
+my $ie;
+$ie = Algorithm::IncludeExclude->new;
+$ie->include(); 
+$ie->exclude(qr/static/);
+$ie->exclude('login');
+$ie->exclude('logout');
+$ie->exclude('edit');
+$ie->exclude('list');
+$ie->exclude('recent');
+
+sub cache_ie_list {
+    return $ie;
+}
+
+=head2 cache_hook
+
+Dont cache if user_exist or CATALYST_NOCACHE is set or
+ if path is exclude from cache_ie_list
+
+=cut
+sub cache_hook {
+  my ( $c ) = @_;
+
+  if ( $c->user_exists        ||
+       $ENV{CATALYST_NOCACHE} ||
+       ! $c->cache_ie_list->evaluate($c->req->path)
+     ) {
+    return 0; # Don't cache
+  }
+  return 1;   # Cache
+}
+
 
 # Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
 

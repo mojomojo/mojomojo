@@ -55,6 +55,7 @@ requires(
     'KinoSearch'                                   => '0.165',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'Catalyst::Plugin::PageCache'                  => 0,
     'parent'                                       => 0,
     'String::Diff'                                 => 0,
     'Template'                                     => '2.20',
