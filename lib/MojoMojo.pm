@@ -25,6 +25,7 @@ use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
 use URI::Escape ();
 use MojoMojo::Formatter::Wiki;
+use Algorithm::IncludeExclude;
 use Module::Pluggable::Ordered
     search_path => 'MojoMojo::Formatter',
     except      => qr/^MojoMojo::Plugin::/,
