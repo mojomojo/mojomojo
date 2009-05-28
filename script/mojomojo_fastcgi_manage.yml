@@ -1,0 +1,8 @@
+---
+- name:            "mojomojo.server"
+  server_class:    "FCGI::Engine::Manager::Server"
+  scriptname:      "script/mojomojo_fastcgi.pl"
+  nproc:            3
+  pidfile:         "/tmp/mojomojo.pid"
+  socket:          "/tmp/mojomojo.socket" 
+  additional_args: [ "-I", "lib/" ]
