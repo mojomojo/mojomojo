@@ -47,7 +47,7 @@ MojoMojo->config->{cache}{backend} = {
 MojoMojo->config(
         'Plugin::PageCache' => {
             expires          => 300, # only 5 minutes for now
-            set_http_headers => 0,
+            set_http_headers => 1,
             auto_cache       => [
                                '/.*',
             ],
