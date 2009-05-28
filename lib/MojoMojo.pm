@@ -65,6 +65,16 @@ MojoMojo->setup();
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
+sub prepare {
+    my $self = shift->next::method(@_);
+    if ( $self->config->{force_ssl} ) {
+        my $request = $self->request;
+        $request->base->scheme('https');
+        $request->uri->scheme('https');
+    }
+    return $self;
+}
+
 =head1 NAME
 
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.
@@ -316,7 +326,9 @@ sub uri_for {
         $_[0] = join('/', map { URI::Escape::uri_escape_utf8($_) } split(/\//, $_[0]) );
     }
 
-    $c->next::method(@_);
+    my $res = $c->next::method(@_);
+    $res->scheme('https') if $c->config->{'force_ssl'};
+    return $res;
 }
 
 sub uri_for_static {
