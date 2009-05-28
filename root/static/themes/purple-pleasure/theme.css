@@ -217,11 +217,11 @@ div#pageoptions a.active {
 
 /* The two direct child selectors below take care of that nesting problem, but only for Standards-Compliant Browsers */ #content ul > li {
    /* list-style: disc; */
-	list-style-type: none;
+	list-style-type: disc;
 } #content ol > li {
     list-style: decimal;
 } #content li {
-    margin-left: 1.5em;
+    margin-left: 2.5em;
     margin-bottom: 5px;
 }
 
@@ -310,7 +310,7 @@ p {
 }
 .toc > ul {
     margin-left: -3em;
-	list-style-type: none;
+	list-style-type: disc;
 }
 
 .toc li {
