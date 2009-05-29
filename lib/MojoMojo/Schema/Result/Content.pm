@@ -12,7 +12,8 @@ use Algorithm::Merge qw/merge/;
 use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
-__PACKAGE__->load_components(qw/DateTime::Epoch UTF8Columns PK::Auto Core/);
+__PACKAGE__->load_components(
+    qw/DateTime::Epoch TimeStamp UTF8Columns PK::Auto Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",
@@ -22,13 +23,33 @@ __PACKAGE__->add_columns(
     "creator",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
     "created",
-    { data_type => "BIGINT", is_nullable => 0, size => 100, epoch => 'ctime' },
+    {
+        data_type        => "BIGINT",
+        is_nullable      => 0,
+        size             => 100,
+        inflate_datetime => 'epoch',
+        set_on_create    => 1,
+    },
     "status",
     { data_type => "VARCHAR", is_nullable => 0, size => 20 },
     "release_date",
-    { data_type => "BIGINT", is_nullable => 0, size => 100, epoch => '1' },
+    {
+        data_type                 => "BIGINT",
+        is_nullable               => 0,
+        size                      => 100,
+        default_value             => undef,
+        inflate_datetime          => 'epoch',
+        datetime_undef_if_invalid => 1,
+    },
     "remove_date",
-    { data_type => "BIGINT", is_nullable => 1, size => 100, epoch => '1' },
+    {
+        data_type                 => "BIGINT",
+        is_nullable               => 1,
+        size                      => 100,
+        default_value             => undef,
+        inflate_datetime          => 'epoch',
+        datetime_undef_if_invalid => 1,
+    },
     "type",
     { data_type => "VARCHAR", is_nullable => 1, size => 200 },
     "abstract",
@@ -44,7 +65,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->utf8_columns(qw/abstract body precompiled/);
 __PACKAGE__->set_primary_key( "version", "page" );
 __PACKAGE__->has_many(
-    "pages", "MojoMojo::Schema::Result::Page",
+    "pages",
+    "MojoMojo::Schema::Result::Page",
     {
         "foreign.content_version" => "self.version",
         "foreign.id"              => "self.page",
@@ -66,8 +88,16 @@ __PACKAGE__->has_many(
         "foreign.page"                 => "self.page",
     },
 );
-__PACKAGE__->belongs_to( "creator", "MojoMojo::Schema::Result::Person", { id => "creator" } );
-__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
+__PACKAGE__->belongs_to(
+    "creator",
+    "MojoMojo::Schema::Result::Person",
+    { id => "creator" }
+);
+__PACKAGE__->belongs_to(
+    "page",
+    "MojoMojo::Schema::Result::Page",
+    { id => "page" }
+);
 
 =head1 NAME
 
@@ -130,8 +160,13 @@ sub formatted_diff {
         : split /\n\n/,
         ( $self->formatted($c) )
     ];
-    my $prev =
-        [ $sparse ? split /\n/, ( $to->encoded_body ) : split /\n\n/, ( $to->formatted($c) ) ];
+    my $prev = [
+        $sparse
+        ? split /\n/,
+        ( $to->encoded_body )
+        : split /\n\n/,
+        ( $to->formatted($c) )
+    ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     for my $line (@diff) {
@@ -146,11 +181,11 @@ sub formatted_diff {
             $diff .= (
                 $sparse
                 ? qq(<div class="diffdel">)
-                    . $$line[1]
-                    . "</div>"
-                    . qq(<div class="diffins">)
-                    . $$line[2]
-                    . "</div>"
+                  . $$line[1]
+                  . "</div>"
+                  . qq(<div class="diffins">)
+                  . $$line[2]
+                  . "</div>"
                 : String::Diff::diff_merge(
                     $$line[1], $$line[2],
                     remove_open  => '<del>',
@@ -177,24 +212,32 @@ Return content after being run through MojoMojo::Formatter::* ,
 
 sub formatted {
     my ( $self, $c ) = @_;
-    my $result = $self->result_source->resultset->format_content( $c, $self->body, $self );
+    my $result =
+      $self->result_source->resultset->format_content( $c, $self->body, $self );
     return $result;
 }
 
 sub merge_content {
-    my ($self,$saved,$content,$h1,$h2,$h3)=@_;
+    my ( $self, $saved, $content, $h1, $h2, $h3 ) = @_;
 
     my $source = [ split /\n/, $self->encoded_body ];
     my $a      = [ split /\n/, $saved->encoded_body ];
     my $b      = [ split /\n/, $content ];
-    my @merged = merge( $source,$a,$b, {
-        CONFLICT => sub ($$){ (
-            "<!-- $h1  -->\n",(@{$_[0]}),
-            "<!-- $h2  -->\n",(@{$_[1]}),
-            "<!-- $h3 -->\n",
-            )}
-            });
-    return join('',@merged);
+    my @merged = merge(
+        $source, $a, $b,
+        {
+            CONFLICT => sub ($$) {
+                (
+                    "<!-- $h1  -->\n",
+                    ( @{ $_[0] } ),
+                    "<!-- $h2  -->\n",
+                    ( @{ $_[1] } ),
+                    "<!-- $h3 -->\n",
+                );
+              }
+        }
+    );
+    return join( '', @merged );
 }
 
 =item max_version 
@@ -262,18 +305,19 @@ sub store_links {
     $page->wantedpages->delete();
     require MojoMojo::Formatter::Wiki;
     my ( $linked_pages, $wanted_pages ) =
-        MojoMojo::Formatter::Wiki->find_links( \$content, $page );
+      MojoMojo::Formatter::Wiki->find_links( \$content, $page );
     return unless ( @$linked_pages || @$wanted_pages );
 
     for (@$linked_pages) {
         my $link =
-            $self->result_source->schema->resultset('Link')
-            ->find_or_create( { from_page => $self->page->id, to_page => $_->id } );
+          $self->result_source->schema->resultset('Link')
+          ->find_or_create(
+            { from_page => $self->page->id, to_page => $_->id } );
     }
     for (@$wanted_pages) {
         my $wanted_page =
-            $self->result_source->schema()->resultset('WantedPage')
-            ->find_or_create( { from_page => $page->id, to_path => $_->{path} } );
+          $self->result_source->schema()->resultset('WantedPage')
+          ->find_or_create( { from_page => $page->id, to_path => $_->{path} } );
     }
 }
 

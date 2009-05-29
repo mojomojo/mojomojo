@@ -13,11 +13,17 @@ my $textile = Text::Textile2->new(
     char_encoding => 1
 );
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
+__PACKAGE__->load_components(
+    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns(
     "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+    {
+        data_type         => "INTEGER",
+        is_nullable       => 0,
+        size              => undef,
+        is_auto_increment => 1
+    },
     "poster",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
     "page",
@@ -25,14 +31,32 @@ __PACKAGE__->add_columns(
     "picture",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
     "posted",
-    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+    {
+        data_type        => "BIGINT",
+        is_nullable      => 0,
+        size             => undef,
+        inflate_datetime => 'epoch',
+        set_on_create    => 1,
+    },
     "body",
     { data_type => "TEXT", is_nullable => 0, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "poster",  "MojoMojo::Schema::Result::Person", { id => "poster" } );
-__PACKAGE__->belongs_to( "page",    "MojoMojo::Schema::Result::Page",   { id => "page" } );
-__PACKAGE__->belongs_to( "picture", "MojoMojo::Schema::Result::Photo",  { id => "picture" } );
+__PACKAGE__->belongs_to(
+    "poster",
+    "MojoMojo::Schema::Result::Person",
+    { id => "poster" }
+);
+__PACKAGE__->belongs_to(
+    "page",
+    "MojoMojo::Schema::Result::Page",
+    { id => "page" }
+);
+__PACKAGE__->belongs_to(
+    "picture",
+    "MojoMojo::Schema::Result::Photo",
+    { id => "picture" }
+);
 __PACKAGE__->utf8_columns(qw/body/);
 
 =head1 NAME

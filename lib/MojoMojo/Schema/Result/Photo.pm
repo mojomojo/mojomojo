@@ -10,12 +10,18 @@ use Image::ExifTool;
 use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
-__PACKAGE__->load_components( "PK::Auto",'DateTime::Epoch', 'Ordered', "Core" );
+__PACKAGE__->load_components( "PK::Auto", 'DateTime::Epoch', 'TimeStamp',
+    'Ordered', "Core" );
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
     "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+    {
+        data_type         => "INTEGER",
+        is_nullable       => 0,
+        size              => undef,
+        is_auto_increment => 1
+    },
     "position",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
     "title",
@@ -25,7 +31,14 @@ __PACKAGE__->add_columns(
     "camera",
     { data_type => "TEXT", is_nullable => 1, size => undef },
     "taken",
-    { data_type => "INTEGER", is_nullable => 1, size => undef, epoch=>1 },
+    {
+        data_type                 => "INTEGER",
+        is_nullable               => 1,
+        size                      => undef,
+        default_value             => undef,
+        inflate_datetime          => 'epoch',
+        datetime_undef_if_invalid => 1,
+    },
     "iso",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
     "lens",
@@ -40,8 +53,16 @@ __PACKAGE__->add_columns(
     { data_type => "INT", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->has_many( "tags",     "MojoMojo::Schema::Result::Tag",     { "foreign.photo"   => "self.id" } );
-__PACKAGE__->has_many( "comments", "MojoMojo::Schema::Result::Comment", { "foreign.picture" => "self.id" } );
+__PACKAGE__->has_many(
+    "tags",
+    "MojoMojo::Schema::Result::Tag",
+    { "foreign.photo" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "comments",
+    "MojoMojo::Schema::Result::Comment",
+    { "foreign.picture" => "self.id" }
+);
 __PACKAGE__->has_one( "attachment", "MojoMojo::Schema::Result::Attachment" );
 
 =head1 NAME
@@ -106,7 +127,10 @@ Return previous image when browsing by a given tag.
 
 sub prev_by_tag {
     my ( $self, $tag ) = @_;
-    return $self->retrieve_previous( 'tags.tag' => $tag, { order_by => 'taken DESC' } )->next;
+    return $self->retrieve_previous(
+        'tags.tag' => $tag,
+        { order_by => 'taken DESC' }
+    )->next;
 }
 
 =item next_by_tag <tag>
@@ -178,7 +202,8 @@ sub make_inline {
     my $constrain = Image::Math::Constrain->new( 800, 600 );
     my $image = $img->scale( constrain => $constrain );
 
-    $image->write( file => $att->filename . '.inline', type => 'jpeg' ) or die $img->errstr;
+    $image->write( file => $att->filename . '.inline', type => 'jpeg' )
+      or die $img->errstr;
 }
 
 =item make_thumb
@@ -215,7 +240,8 @@ sub make_thumb {
             height => 80
         );
     }
-    $result->write( file => $att->filename . '.thumb', type => 'jpeg' ) or die $img->errstr;
+    $result->write( file => $att->filename . '.thumb', type => 'jpeg' )
+      or die $img->errstr;
 }
 
 1;

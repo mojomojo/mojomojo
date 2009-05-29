@@ -11,15 +11,33 @@ use Text::Textile2;
 my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch EncodedColumn PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp EncodedColumn PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+    {
+        data_type         => "INTEGER",
+        is_nullable       => 0,
+        size              => undef,
+        is_auto_increment => 1
+    },
     "active",
-    { data_type => "INTEGER", is_nullable => 0, default_value => -1, size => undef },
+    {
+        data_type     => "INTEGER",
+        is_nullable   => 0,
+        default_value => -1,
+        size          => undef
+    },
     "registered",
-    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+
+#   { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+    {
+        data_type        => "BIGINT",
+        is_nullable      => 0,
+        size             => undef,
+        inflate_datetime => 'epoch',
+        set_on_create    => 1,
+    },
     "views",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
     "photo",
@@ -43,7 +61,15 @@ __PACKAGE__->add_columns(
     "timezone",
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
     "born",
-    { data_type => "BIGINT", is_nullable => 1, size => undef, epoch => 1 },
+    {
+        data_type                 => "BIGINT",
+        is_nullable               => 1,
+        size                      => undef,
+        default_value             => undef,
+        # epoch => 1,
+        inflate_datetime          => 'epoch',
+        datetime_undef_if_invalid => 1,
+    },
     "gender",
     { data_type => "CHAR", is_nullable => 1, size => 1 },
     "occupation",
@@ -60,13 +86,37 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint( login => [qw/login/], );
 __PACKAGE__->add_unique_constraint( email => [qw/email/], );
-__PACKAGE__->has_many( "entries",       "MojoMojo::Schema::Result::Entry",       { "foreign.author"  => "self.id" } );
-__PACKAGE__->has_many( "tags",          "MojoMojo::Schema::Result::Tag",         { "foreign.person"  => "self.id" } );
-__PACKAGE__->has_many( "comments",      "MojoMojo::Schema::Result::Comment",     { "foreign.poster"  => "self.id" } );
-__PACKAGE__->has_many( "role_members",  "MojoMojo::Schema::Result::RoleMember",  { "foreign.person"  => "self.id" }, );
-__PACKAGE__->has_many( "page_versions", "MojoMojo::Schema::Result::PageVersion", { "foreign.creator" => "self.id" }, );
+__PACKAGE__->has_many(
+    "entries",
+    "MojoMojo::Schema::Result::Entry",
+    { "foreign.author" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "tags",
+    "MojoMojo::Schema::Result::Tag",
+    { "foreign.person" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "comments",
+    "MojoMojo::Schema::Result::Comment",
+    { "foreign.poster" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "role_members",
+    "MojoMojo::Schema::Result::RoleMember",
+    { "foreign.person" => "self.id" },
+);
+__PACKAGE__->has_many(
+    "page_versions",
+    "MojoMojo::Schema::Result::PageVersion",
+    { "foreign.creator" => "self.id" },
+);
 __PACKAGE__->many_to_many( roles => 'role_members', 'role' );
-__PACKAGE__->has_many( "contents", "MojoMojo::Schema::Result::Content", { "foreign.creator" => "self.id" } );
+__PACKAGE__->has_many(
+    "contents",
+    "MojoMojo::Schema::Result::Content",
+    { "foreign.creator" => "self.id" }
+);
 __PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
@@ -114,8 +164,10 @@ sub can_edit {
 
     # allow admins
     return 1 if $self->is_admin;
+
     # allow edit unless users are restricted to home page
     return 1 unless MojoMojo->pref('restricted_user');
+
     # allow users editing their pages
     my $link = $self->link;
     return 1 if $page =~ m|^$link\b|i;
@@ -125,17 +177,17 @@ sub can_edit {
 sub pages {
     my ($self) = @_;
     my @pages =
-        $self->result_source->related_source('page_versions')->related_source('page')
-        ->resultset->search(
+      $self->result_source->related_source('page_versions')
+      ->related_source('page')->resultset->search(
         { 'versions.creator' => $self->id, },
         {
-            join            => [qw/versions/],
-            order_by        => ['me.name'],
-            distinct        => 1,
+            join     => [qw/versions/],
+            order_by => ['me.name'],
+            distinct => 1,
         }
-        )->all;
-    return $self->result_source->related_source('page_versions')->related_source('page')
-        ->resultset->set_paths(@pages);
+      )->all;
+    return $self->result_source->related_source('page_versions')
+      ->related_source('page')->resultset->set_paths(@pages);
 }
 
 =item pass_matches <pass1> <pass2>
@@ -162,13 +214,13 @@ sub valid_pass {
 }
 
 sub hashed {
-    my ($self,$secret)=@_;
-    return Digest::SHA1::sha1_hex($self->id.$secret);
+    my ( $self, $secret ) = @_;
+    return Digest::SHA1::sha1_hex( $self->id . $secret );
 }
 
-sub interests_formatted { $textile->process(shift->interests); }
-sub music_formatted { $textile->process(shift->music); }
-sub movies_formatted { $textile->process(shift->movies); }
+sub interests_formatted { $textile->process( shift->interests ); }
+sub music_formatted     { $textile->process( shift->music ); }
+sub movies_formatted    { $textile->process( shift->movies ); }
 
 =item age
 
@@ -178,7 +230,7 @@ Returns age of the user in years.
 
 sub age {
     my ($self) = @_;
-    if (my $birthdate = $self->born) {
+    if ( my $birthdate = $self->born ) {
         my $diff = DateTime->now - $birthdate;
         return $diff->years;
     }

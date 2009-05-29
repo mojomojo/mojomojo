@@ -5,13 +5,25 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components(qw/DateTime::Epoch PK::Auto UTF8Columns Core/);
+__PACKAGE__->load_components(
+    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+    {
+        data_type         => "INTEGER",
+        is_nullable       => 0,
+        size              => undef,
+        is_auto_increment => 1
+    },
     "uploaded",
-    { data_type => "BIGINT", is_nullable => 0, size => undef, epoch => 'ctime' },
+    {
+        data_type        => "BIGINT",
+        is_nullable      => 0,
+        size             => undef,
+        inflate_datetime => 'epoch',
+        set_on_create    => 1
+    },
     "page",
     { data_type => "INTEGER", is_nullable => 0, size => undef },
     "name",
@@ -22,7 +34,11 @@ __PACKAGE__->add_columns(
     { data_type => "VARCHAR", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to( "page", "MojoMojo::Schema::Result::Page", { id => "page" } );
+__PACKAGE__->belongs_to(
+    "page",
+    "MojoMojo::Schema::Result::Page",
+    { id => "page" }
+);
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
 __PACKAGE__->utf8_columns(qw/name/);
 
@@ -38,7 +54,8 @@ MojoMojo::Schema::Result::Attachment
 
 sub delete {
     my ($self) = @_;
-    # we'll delete the inline and thumbnail versions but keep the original version (->filename)
+
+# we'll delete the inline and thumbnail versions but keep the original version (->filename)
     unlink( $self->inline_filename ) if -f $self->inline_filename;
     unlink( $self->thumb_filename )  if -f $self->thumb_filename;
     $self->next::method();
@@ -54,7 +71,7 @@ sub filename {
     my $self           = shift;
     my $attachment_dir = $self->result_source->schema->attachment_dir;
     die(
-        "MojoMojo::Schema->attachment must be set to a writeable directory (Current:$attachment_dir)\n"
+"MojoMojo::Schema->attachment must be set to a writeable directory (Current:$attachment_dir)\n"
     ) unless -d $attachment_dir && -w $attachment_dir;
     return ( $attachment_dir . '/' . $self->id );
 }
