@@ -47,7 +47,7 @@ MojoMojo->config->{cache}{backend} = {
 MojoMojo->config(
         'Plugin::PageCache' => {
             expires          => 300, # only 5 minutes for now
-            set_http_headers => 1,
+            set_http_headers => 0,
             auto_cache       => [
                                '/.*',
             ],
@@ -125,8 +125,8 @@ $ie->exclude(qr/static/);
 $ie->exclude('login');
 $ie->exclude('logout');
 $ie->exclude('edit');
-$ie->exclude('list');
-$ie->exclude('recent');
+#$ie->exclude('list');
+#$ie->exclude('recent');
 
 sub cache_ie_list {
     return $ie;
