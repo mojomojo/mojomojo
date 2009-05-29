@@ -60,15 +60,15 @@ sub create_initial_data {
         'Person',
         [
             [
-                qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
+                qw/ active views photo login name email pass timezone born gender occupation industry interests movies music registered /
             ],
             [
                 1, 0, 0, loc('anonymouscoward'), loc('Anonymous Coward'), $custom_values->{anonymous_email},
-                '', '', 0, '', '', '', '', '', ''
+                '', '', 0, '', '', '', '', '', '', time()
             ],
             [
                 1, 0, 0, $custom_values->{admin_username}, $custom_values->{admin_fullname}, $custom_values->{admin_email},
-                $custom_values->{admin_password}, '', 0, '', '', '', '', '', ''
+                $custom_values->{admin_password}, '', 0, '', '', '', '', '', '', time()
             ],
         ]
     );

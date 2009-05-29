@@ -255,6 +255,12 @@ sub register : Global FormConfig {
             $c->detach();
         }
         $c->stash->{newuser}->active(-1);
+
+        # XXX - need to add this so FormFu->model->update properly populates 
+        # the required registered field. The other way to do this is by using
+        # DBIx::Class::DynamicDefaults, but I've restrained myself from adding
+        # yet another dependency -lestrrat
+        $form->add_valid( registered => time() );
         $form->model->update( $c->stash->{newuser} );
         $c->stash->{newuser}->insert();
         if ( $c->stash->{user} && $c->stash->{user}->is_admin ) {
