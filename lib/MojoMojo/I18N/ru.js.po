@@ -61,15 +61,15 @@ msgstr "Внешняя ссылка"
 
 #: root/static/js/edit.js:138
 msgid "Formatter"
-msgstr ""
+msgstr "Форматировщик"
 
 #: root/static/js/edit.js:139
 msgid "IRC formatter"
-msgstr ""
+msgstr "IRC-форматировщик"
 
 #: root/static/js/edit.js:144
 msgid "Insert"
-msgstr ""
+msgstr "Вставить"
 
 #: root/static/js/edit.js:186 root/static/js/edit.js:203
 msgid "Internal Link"
@@ -105,7 +105,7 @@ msgstr "Пункт нумерованного списка"
 
 #: root/static/js/edit.js:140
 msgid "POD formatter"
-msgstr ""
+msgstr "POD форматировщик"
 
 #: root/static/js/edit.js:189 root/static/js/edit.js:206
 msgid "Picture"
@@ -113,7 +113,7 @@ msgstr "Картинка"
 
 #: root/static/js/edit.js:190 root/static/js/edit.js:207
 msgid "Picture Right"
-msgstr ""
+msgstr "Картинка справа"
 
 #: root/static/js/edit.js:188 root/static/js/edit.js:205
 msgid "Picture left"
@@ -145,7 +145,7 @@ msgstr "Синтаксис"
 
 #: root/static/js/edit.js:159
 msgid "Syntax Highlight"
-msgstr ""
+msgstr "Подсветка синтаксиса"
 
 #: root/static/js/edit.js:182
 msgid "bigger"
@@ -165,7 +165,7 @@ msgstr "код"
 
 #: root/static/js/edit.js:145
 msgid "comments"
-msgstr ""
+msgstr "комментарии"
 
 #: root/static/js/edit.js:150
 msgid "cpan"
@@ -177,11 +177,11 @@ msgstr "удалено"
 
 #: root/static/js/wiki.js:230 root/static/js/wiki.js:237 root/static/js/wiki.js:243
 msgid "done"
-msgstr ""
+msgstr "завершено"
 
 #: root/static/js/edit.js:148
 msgid "include"
-msgstr ""
+msgstr "включить"
 
 #: root/static/js/edit.js:197
 msgid "increase # for smaller headline"
@@ -201,11 +201,11 @@ msgstr "параграф с выравниванием по левому кра�
 
 #: root/static/js/wiki.js:479
 msgid "maximize"
-msgstr ""
+msgstr "максимизировать"
 
 #: root/static/js/wiki.js:480
 msgid "maximize width"
-msgstr ""
+msgstr "максимизировать по ширине"
 
 #: root/static/js/edit.js:174
 msgid "quote"
@@ -213,7 +213,7 @@ msgstr "цитата"
 
 #: root/static/js/edit.js:147
 msgid "redirect"
-msgstr ""
+msgstr "перенаправить"
 
 #: root/static/js/edit.js:176
 msgid "right justified paragraph"
@@ -237,7 +237,7 @@ msgstr "верхний индекс"
 
 #: root/static/js/edit.js:146
 msgid "toc"
-msgstr ""
+msgstr "содержание"
 
 #: root/static/js/edit.js:204
 msgid "url inside paranthesis"
