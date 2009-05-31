@@ -1,7 +1,7 @@
 [% WRAPPER page/wrapper.tt simple_header=1 title=loc('Login') %]
 <div id="content">
     [% IF message %]
-    <p class="end logintext"><span id="logintext">[% message %]</span></p>
+    <p class="logintext"><span id="logintext">[% message %]</span></p>
     [% END %]
     
     [% form %] 

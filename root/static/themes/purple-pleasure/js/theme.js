@@ -11,8 +11,9 @@ $(document).ready(function(){
         $("#search_box").css('display', 'none');
         $("#bottomnav").css('display', 'none');
         $(".container").css('width', '30em');
-		$(".container").css('height', '12em');
+		$(".container").css('height', '16em');
 		$('fieldset').css('margin-left', '-6em');
-		$('p').css('float', 'right');
+		$('p').not(".logintext").css('float', 'right');
+	$("#search_box").remove();
     }
 });
