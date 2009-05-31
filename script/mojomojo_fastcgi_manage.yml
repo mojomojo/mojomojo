@@ -6,3 +6,9 @@
   pidfile:         "/tmp/mojomojo.pid"
   socket:          "/tmp/mojomojo.socket" 
   additional_args: [ "-I", "lib/" ]
+- name:            "mojomojo-dev.server"
+  scriptname:      "script/mojomojo_fastcgi.pl"
+  nproc:           1
+  pidfile:         "/tmp/mojomojo-dev.pid"
+  socket:          "/tmp/mojomojo-dev.socket"
+
