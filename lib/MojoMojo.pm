@@ -46,8 +46,11 @@ MojoMojo->config->{cache}{backend} = {
 
 MojoMojo->config(
         'Plugin::PageCache' => {
-            expires          => 300, # only 5 minutes for now
+            expires          => 300, # 5 minutes
+            # We don't set Cache-Control headers explicitly because
+            # firefox caches pre-login pages.
             set_http_headers => 0,
+            auto_check_user  => 1,
             auto_cache       => [
                                '/.*',
             ],
@@ -121,6 +124,7 @@ include/exclude list accessor
 my $ie;
 $ie = Algorithm::IncludeExclude->new;
 $ie->include(); 
+# static files will be handled via web server or proxy cache control.
 $ie->exclude(qr/static/);
 $ie->exclude('login');
 $ie->exclude('logout');
