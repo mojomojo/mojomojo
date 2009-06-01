@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Defang;
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -53,5 +53,13 @@ eq_or_diff( $content, $expected, $test );
 $test     = 'remote image - should defang it';
 $content  = '<img src="http://far.away.com/imatge.jpg" />';
 $expected = '<img defang_src="http://far.away.com/imatge.jpg" />';
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
+
+$test    = 'img src local tag';
+$content = <<'HTML';
+<img src="/.static/catalyst.png" alt="Powered by Catalyst" title="Powered by Catalyst" />
+HTML
+$expected = $content;
 MojoMojo::Formatter::Defang->format_content( \$content );
 eq_or_diff( $content, $expected, $test );
