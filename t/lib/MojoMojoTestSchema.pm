@@ -55,7 +55,7 @@ sub init_schema {
 
     unlink($db_file) if -e $db_file;
     mkdir($db_dir) unless -d $db_dir;
-
+    
     my $dsn = $ENV{"MOJOMOJO_TEST_SCHEMA_DSN"} || "dbi:SQLite:${db_file}";
     my $dbuser = $ENV{"MOJOMOJO_TEST_SCHEMA_DBUSER"} || '';
     my $dbpass = $ENV{"MOJOMOJO_TEST_SCHEMA_DBPASS"} || '';
@@ -88,6 +88,9 @@ sub init_schema {
                 }
            }
         },
+               'allowed' => {
+           src => [qw(youtube.com youporn.org iusethis.com)] ,
+       },
         'View::Email' => { sender => { mailer => 'Test' } },
     };
     YAML::DumpFile('t/var/mojomojo.yml',$config);

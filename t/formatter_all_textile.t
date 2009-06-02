@@ -1,7 +1,10 @@
 #!/usr/bin/perl -w
-use Test::More tests => 26;
+use Test::More tests => 27;
 use HTTP::Request::Common;
 use Test::Differences;
+use FindBin '$Bin';
+use lib "$Bin/../lib";
+use Data::Dumper;
 
 my $original_formatter
   ;    # used to save/restore whatever formatter is set up in mojomojo.db
@@ -23,6 +26,7 @@ END {
 }
 
 ( undef, $c ) = ctx_request('/');
+#warn Dumper $c->config;
 ok( $original_formatter = $c->pref('main_formatter'),
     'save original formatter' );
 
@@ -433,3 +437,11 @@ $expected = '<p><img defang_src="//malicious.com/foto.jpg" /></p>
 '; 
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
+
+$test    = 'remote img src allowed in .conf';
+$content = <<'HTML';
+<p><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/P_hTFilWY9w&amp;hl=en"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/P_hTFilWY9w&amp;hl=en" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+HTML
+$expected = $content;
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );

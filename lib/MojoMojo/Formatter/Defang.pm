@@ -114,9 +114,9 @@ sub defang_attribs_callback {
 
         # Allow src URI's from configuration.
         my @allowed_src_regex;
-
         # Tests may not have a $c
         if ( defined $c ) {
+          
             if ( exists $c->stash->{allowed_src_regexes} ) {
                 @allowed_src_regex = @{ $c->stash->{allowed_src_regexes} };
             }
@@ -131,7 +131,10 @@ sub defang_attribs_callback {
             }
         }
         for my $allowed_src_regex (@allowed_src_regex) {
-            return 0 if $$attr_val_r =~ $allowed_src_regex;
+            if ( $$attr_val_r =~ $allowed_src_regex ) {
+                return 0;
+            }
+            
         }
 
         # When $c and src uri authority are defined we want to make sure
@@ -145,8 +148,16 @@ sub defang_attribs_callback {
                 return 1;
             }
         }
-        else {
+        # We have an authority but no context.  
+        # Probably means we're testing with just the Defang formatter 
+        # instead of the Full formatter chain.
+        # We will defang any src's left with an authority (defang_src)
+        # since the approved ones were already allowed in above.
+        elsif ( defined $src_uri_object->authority ) {
             return 1;
+        }
+        else {
+            return 2;
         }
     }
 
