@@ -39,8 +39,10 @@ MojoMojo->config->{authentication}{dbic} = {
     password_field => 'pass'
 };
 MojoMojo->config->{default_view}='TT';
-MojoMojo->config->{cache}{backend} = {
+MojoMojo->config->{'Plugin::Cache'}{backend} = {
     class => "Cache::FastMmap",
+    unlink_on_exit => 1,
+
 };
 
 
