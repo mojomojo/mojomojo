@@ -213,8 +213,17 @@ sub pref_cached {
     if ( defined $c->cache->get($setting) and not defined $value ) {
         return $c->cache->get($setting);
     }
+    # Check that we have a database, i.e. script/mojomojo_spawn_db.pl was run.
+    my $row;
+    eval { $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } ); };
+    if ( $@ ) { 
+        my $no_db_message = "ERROR: You don't seem to have a database initialized.
+Initialize one with script/mojomojo_spawn_db.pl\n"; 
+        $c->response->body($no_db_message);
+        warn $no_db_message;
+        $c->detach();
+    }
 
-    my $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } );
 
     # Update database
     $row->update( { prefvalue => $value } ) if defined $value;
