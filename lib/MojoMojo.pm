@@ -128,6 +128,7 @@ $ie = Algorithm::IncludeExclude->new;
 $ie->include(); 
 # static files will be handled via web server or proxy cache control.
 $ie->exclude(qr/static/);
+$ie->exclude(qr/attachment/);
 $ie->exclude('login');
 $ie->exclude('logout');
 $ie->exclude('edit');
