@@ -101,7 +101,7 @@ sub attachment : Chained CaptureArgs(1) {
     $c->detach('default') unless ( $c->stash->{att} );
 }
 
-sub defaultaction : PathPart('') Chained('attachment') Args(0) {
+sub defaultaction : PathPart('') Chained('attachment') Args('') {
     my ( $self, $c ) = @_;
     $c->forward('view');
 }
