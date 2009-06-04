@@ -280,6 +280,9 @@ sub list : Global {
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
     
+    # Cache the list page for short period of time - override default of 300.
+    $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
+    
     if ( $c->pref('check_permission_on_view') ) {
       my $user;
       my @pages;
@@ -320,6 +323,9 @@ sub recent : Global {
     my $page = $c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
     $c->stash->{pages}    = [ $page->descendants_by_date ];
+    
+    # Cache the list page for short period of time - override default of 300.
+    $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
 
     # FIXME - needs to be populated even without tags
 }

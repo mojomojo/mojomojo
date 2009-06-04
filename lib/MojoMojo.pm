@@ -45,10 +45,12 @@ MojoMojo->config->{'Plugin::Cache'}{backend} = {
 
 };
 
-
 MojoMojo->config(
         'Plugin::PageCache' => {
-            expires          => 300, # 5 minutes
+
+            # The expires is set in the .conf for easy edit outside of code.
+            # expires          => 300
+
             # We don't set Cache-Control headers explicitly because
             # firefox caches pre-login pages.
             set_http_headers => 0,
@@ -127,12 +129,14 @@ my $ie;
 $ie = Algorithm::IncludeExclude->new;
 $ie->include(); 
 # static files will be handled via web server or proxy cache control.
-$ie->exclude(qr/static/);
-$ie->exclude(qr/attachment/);
+$ie->exclude(qr{static});
+$ie->exclude(qr{attachment});
+$ie->exclude(qr{export});
 $ie->exclude('login');
 $ie->exclude('logout');
 $ie->exclude('edit');
-#$ie->exclude('list');
+# Short cache time set in controller action for list and view
+#$ie->exclude('list'); 
 #$ie->exclude('recent');
 
 sub cache_ie_list {
@@ -156,7 +160,6 @@ sub cache_hook {
   }
   return 1;   # Cache
 }
-
 
 # Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
 
