@@ -7,8 +7,8 @@ use Digest::SHA1;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-use Text::Textile2;
-my $textile = Text::Textile2->new( flavor => "xhtml1", charset => 'utf-8' );
+use Text::Textile;
+my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
     qw/DateTime::Epoch TimeStamp EncodedColumn PK::Auto UTF8Columns Core/);
