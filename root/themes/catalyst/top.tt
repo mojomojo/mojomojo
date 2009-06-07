@@ -13,13 +13,13 @@
 		<ul id="menu_global">
 			<li id="www"><span><a href="http://www.catalystframework.org/">Home</a></span></li>		            
 			<li id="home"><span><a href="/">Community</a></span></li>
-			<li id="documentation"><span><a href="http://search.cpan.org/dist/Catalyst-Runtime/lib/Catalyst/Manual.pod">Documentation</a></span></li>
+			<li id="documentation"><span><a href="http://search.cpan.org/dist/Catalyst-Manual/">Documentation</a></span></li>
 			<li id="developer"><span><a href="http://dev.catalystframework.org/timeline">Developer</a></span></li>
-			<li id="download"><span><a href="http://search.cpan.org/dist/Catalyst-Runtime/">Download</a></span></li>
-			<li id="support"><span><a href="http://dev.catalystframework.org/wiki/Support">Support</a></span></li>
-			<li id="blog"><span><a href="http://www.catalystframework.org/random/">Blog</a></span></li>
-			<li id="planet"><span><a href="http://planet.catalystframework.org/">Planet</a></span></li>
-			<li id="calendar"><span><a href="http://www.catalystframework.org/calendar/" style="font-weight:bold">Calendar</a></span></li>
+            <li id="download"><span><a href="http://search.cpan.org/dist/Catalyst-Runtime/">Download</a></span></li>
+            <li id="support"><span><a href="http://dev.catalystframework.org/wiki/Support">Support</a></span></li>
+            <li id="blogs"><span><a href="http://planet.catalystframework.org/">Planet (Catalyst blogs)</a></span></li>
+            <li id="advent"><span><a href="http://www.catalystframework.org/calendar">Advent Calendar</a></span></li>
+
 		</ul>
 
 [%template.title%]
