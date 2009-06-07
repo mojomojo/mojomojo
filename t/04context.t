@@ -2,11 +2,14 @@ use strict;
 use warnings;
 use Getopt::Long;
 use Pod::Usage;
-use FindBin;
-use lib "$FindBin::Bin/../lib";
-use Catalyst::Test 'MojoMojo';
+#use FindBin;
 use Data::Dumper;
-use Test::More tests => 2;
+use Test::More tests => 3;
+
+BEGIN {
+    $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
+    use_ok( 'Catalyst::Test', 'MojoMojo' );
+}
 
 my ($response, $c) = ctx_request('/');
 isa_ok( $c, 'MojoMojo');

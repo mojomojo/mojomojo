@@ -5,8 +5,8 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-use Text::Textile2();
-my $textile = Text::Textile2->new(
+use Text::Textile;
+my $textile = Text::Textile->new(
     disable_html  => 1,
     flavor        => 'xhtml2',
     charset       => 'utf8',
