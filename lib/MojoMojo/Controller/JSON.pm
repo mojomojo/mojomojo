@@ -33,11 +33,12 @@ sub tagsearch : Local {
    my $query = $c->req->param('q');
 
    if (defined($query) && length($query)) {
-       my $rs = $c->model('DBIC::Tag')->search_like({
-           tag => $query.'%'
+       my $rs = $c->model('DBIC::Tag')->search({
+           tag => { -like => $query.'%' },
        }, {
-           select => [ { distinct => [ 'tag' ] } ],
-           as => [ 'tag' ]
+           select => [ 'tag' ],
+           as => [ 'tag' ],
+           group_by => [ 'tag' ],
        });
 
        my @tags;
