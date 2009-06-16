@@ -23,7 +23,7 @@ if($@){
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
-my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or 
+my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or
   die "Failed to connect to database";
 
 my $page_id = prompt('n', 'Input ID of Page to Delete:', '', '' );
@@ -33,15 +33,15 @@ if ( $page_id  == 0 ) {
 
 delete_page($page_id);
 
-=head 2 
+=head 2
 
-Delete a page and all its children. Cuidado.
+Delete a page and all its children. Use with caution.
 
 =cut
 
 sub delete_page {
     my $id = shift;
-    
+
     print "Erasing page: ";
     my $page = $schema->resultset('Page')->find( { id => $id } );
     print $page->name_orig, "\n";
