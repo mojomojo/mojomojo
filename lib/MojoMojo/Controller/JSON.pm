@@ -36,8 +36,8 @@ sub tagsearch : Local {
        my $rs = $c->model('DBIC::Tag')->search({
            tag => { -like => $query.'%' },
        }, {
-           select => [ 'tag' ],
-           as => [ 'tag' ],
+           select =>   [ 'tag' ],
+           as =>       [ 'tag' ],
            group_by => [ 'tag' ],
        });
 
