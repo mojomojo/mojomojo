@@ -70,7 +70,7 @@ requires(
     'Term::Prompt'                                 => 0,
 );
 
-feature 'Automatic deployment', 'SQL::Translator';
+feature 'Automatic deployment', 'SQL::Translator' => '0.09006';
 feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
 # XML::LibXSLT depends on the following libraries: libxslt-dev, libgcrypt11-dev (for `lgcrypt`), libgdbm3-dev (for `lgdbm`) and possibly libxml2-dev
 feature 'DocBook formatter', 'XML::LibXSLT' => '1.66',
