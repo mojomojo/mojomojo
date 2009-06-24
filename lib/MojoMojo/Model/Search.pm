@@ -101,7 +101,7 @@ sub index_page {
     $text .= " " . $content->abstract if ( $content->abstract );
     $text .= " " . $content->comments if ( $content->comments );
 
-# translate the path into plain text so we can use it in the search query later
+    # translate the path into plain text so we can use it in the search query later
     my $fixed_path = $key;
     $fixed_path =~ s{/}{X}g;
 
@@ -129,5 +129,16 @@ sub search {
     my $hits = $self->searcher->search( query => $query );
     return $hits;
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as perl itself.
+
+=cut
 
 1;

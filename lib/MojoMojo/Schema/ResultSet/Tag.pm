@@ -64,7 +64,7 @@ sub by_page {
 
 =item by_photo
 
-Tags on photos with counts. Used to make the tag cloud for the gallery. 
+Tags on photos with counts. Used to make the tag cloud for the gallery.
 
 =cut
 
@@ -83,8 +83,7 @@ sub by_photo {
 
 =item related_to [<tag>] [<count>]
 
-Returns popular tags related to this.
-defaults to self.
+Returns popular tags related to this. Defaults to self.
 
 =cut
 
@@ -111,9 +110,13 @@ sub related_to {
 
 =back
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

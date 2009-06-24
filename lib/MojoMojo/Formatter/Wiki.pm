@@ -127,10 +127,12 @@ sub reinsert_pre {
 
 =item format_content
 
-calls the formatter. Takes a ref to the content as well as the
+Calls the formatter. Takes a ref to the content as well as the
 context object.
 
 =cut
+
+# FIXME: should ACCEPT_CONTEXT?
 
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
@@ -188,16 +190,16 @@ Since there is no difference in syntax between new and existing links, some
 abiguities my occur when it comes to characters that are invalid in URLs. For
 example,
 
-* [[say "NO" to #8]] should be rendered as <a href="say_%22NO%22_to_%238">say "NO" to #8</a>
-* [[100% match]] should be rendered as <a href="100%25_match>100% match</a>, URL-escaping the '%'
-* but what about a user pasting an existing link, [[say_%22NO%22_to_%238]]? We shouldn't URL-escape the '%' or '#' here.
-* for links with explicit link text, we should definitiely not URL-escape the link: [[say_%22NO%22_to_%238|say "NO" to #8]]
+* [[say "NO" to #8]] should be rendered as C<< <a href="say_%22NO%22_to_%238">say "NO" to #8</a> >>
+* [[100% match]] should be rendered as C<< <a href="100%25_match>100% match</a> >>, URL-escaping the '%'
+* but what about a user pasting an existing link, C<[[say_%22NO%22_to_%238]]>? We shouldn't URL-escape the '%' or '#' here.
+* for links with explicit link text, we should definitiely not URL-escape the link: C<[[say_%22NO%22_to_%238|say "NO" to #8]]>
 
 This is complicated by the fact that '#' can delimit the start of the anchor portion of a link.
 
-* [[Mambo #5]] - URL-escape '#' => Mambo_%235
-* [[Mambo#origins]] - do not URL-escape
-* [[existing/link#Introduction|See the Introduction]] - definitely do not URL-escape
+* C<[[Mambo #5]]> - URL-escape '#' => Mambo_%235
+* C<[[Mambo#origins]]> - do not URL-escape
+* C<[[existing/link#Introduction|See the Introduction]]> - definitely do not URL-escape
 
 Since escaping is somewhat magic and therefore potentially counter-intuitive,
 we will:
@@ -299,7 +301,7 @@ sub format_link {
 
 =item expand_wikilink <wikilink>
 
-Replace _ with spaces and unescape URL-encoded characters
+Replace C<_> with spaces and unescape URL-encoded characters
 
 =cut
 
@@ -358,7 +360,7 @@ sub find_links {
 
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>
+L<MojoMojo>, L<Module::Pluggable::Ordered>
 
 =head1 AUTHORS
 

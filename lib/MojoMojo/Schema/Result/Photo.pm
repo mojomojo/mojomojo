@@ -10,8 +10,9 @@ use Image::ExifTool;
 use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
-__PACKAGE__->load_components( "PK::Auto", 'DateTime::Epoch', 'TimeStamp',
-    'Ordered', "Core" );
+__PACKAGE__->load_components(
+    qw/PK::Auto DateTime::Epoch TimeStamp Ordered Core/);
+
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
@@ -172,7 +173,7 @@ sub others_tags {
 
 =item user_tags <user>
 
-Tags this user have given to this photo.
+Tags this user has given to this photo.
 
 =cut
 
@@ -190,7 +191,7 @@ sub user_tags {
 
 =item make_inline
 
-create a resized version of a photo suitable for inline usage
+Create a resized version of a photo suitable for inline usage.
 
 =cut
 
@@ -208,7 +209,7 @@ sub make_inline {
 
 =item make_thumb
 
-create a thumbnail version of a photo, for gallery views and linking to pages
+Create a thumbnail version of a photo, for gallery views and linking to pages.
 
 =cut
 
@@ -243,5 +244,16 @@ sub make_thumb {
     $result->write( file => $att->filename . '.thumb', type => 'jpeg' )
       or die $img->errstr;
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as perl itself.
+
+=cut
 
 1;

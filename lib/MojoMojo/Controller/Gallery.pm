@@ -69,7 +69,7 @@ sub by_tag : Local {
     );
 }
 
-=item p ( .p) 
+=item p ( .p)
 
 =cut
 
@@ -145,7 +145,7 @@ sub tag : Local {
 
 =item untag (.gallery/untag)
 
-remove a tag to a page. return list of yours and popular tags.
+Remove a tag from a page. Return a list of yours and popular tags.
 
 =cut
 
@@ -163,8 +163,8 @@ sub untag : Local {
 
 =item inline_tags (.gallery/tags);
 
-make a list of yours and popular tags, or just popular ones if no
-user is logged in. 
+Make a list of yours and popular tags, or just popular ones if no
+user is logged in.
 
 =cut
 
@@ -189,7 +189,7 @@ sub inline_tags : Local {
 
 =item description ( .gallery/description)
 
-Ajax method for updating picture descriptions inline.
+AJAX method for updating picture descriptions inline.
 
 =cut
 
@@ -205,7 +205,7 @@ sub description : Local {
 
 =item title ( .gallery/title )
 
-Ajax method for updating picture titles inline.
+AJAX method for updating picture titles inline.
 
 =cut
 
@@ -246,7 +246,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

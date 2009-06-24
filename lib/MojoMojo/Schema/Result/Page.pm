@@ -277,7 +277,7 @@ sub path {
 
 =item has_photos
 
-return the number of photos attached to this page. use for galleries.
+Return the number of photos attached to this page. Use for galleries.
 
 =cut
 
