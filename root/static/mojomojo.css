@@ -327,7 +327,7 @@ a.tag:hover {
 
 .newWikiWord a {
    /*  vertical-align: super;; */
-	background: #f6d8b4;
+    background: #f6d8b4;
     border: 1px solid #dddddd;
     line-height: 0;
     font-weight: bold;
