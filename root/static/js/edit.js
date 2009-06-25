@@ -76,9 +76,9 @@ toggle_split_mode = function() {
         toggle_split_mode.tbh=$('textarea#body').css('height');
         //toggle_split_mode.dpmw=$('div.preview').css('max-width');
         $("div#edit_form").css('float','left');
-        $("div#edit_form").css('width','49%');
+        $("div#edit_form").css('width','48%');
         $content_preview.css('float','left');
-        $content_preview.css('width','49%');
+        $content_preview.css('width','48%');
         $content_preview.css('height', preview_area_height );
         $("div#container").css("max-width", max_container_width);
         $("div#header").css('background-repeat', 'no-repeat');
