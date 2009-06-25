@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 use Test::More ;
 BEGIN{
-$ENV{CATALYST_CONFIG}='t/var/mojomojo.yml';
-$ENV{CATALYST_DEBUG}=0;
+    $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
+    $ENV{CATALYST_DEBUG}  = 0;
 };
 $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
 

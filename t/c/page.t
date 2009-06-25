@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 use Test::More tests => 16;
 BEGIN{
-$ENV{CATALYST_CONFIG}='t/var/mojomojo.yml';
-$ENV{CATALYST_DEBUG}=0;
+    $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
+    $ENV{CATALYST_DEBUG}  = 0;
 };
 use_ok( Catalyst::Test, 'MojoMojo' );
 use_ok('MojoMojo::Controller::Page');
