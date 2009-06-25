@@ -1,9 +1,9 @@
-
 #container {
     max-width: 960px;
     text-align: left;
     margin: 0 auto 0;
 }
+
 body {
     background: #c1baaa repeat-x url(images/background.png);
     margin: 0;
@@ -11,24 +11,22 @@ body {
     font: 85% Arial, Helvetica, Geneva, sans-serif;
     text-align: left;
 }
-#header {
-	/*  */
-	
 
-	float: right;
+#header {
+    float: right;
     text-align: right;
     height: auto;
     padding-bottom: 2em;
     margin: 2px 0 0 0;
     position: absolute;
     top: 0px;
-	width: 858px;
+    width: 858px;
 }
 
 
 #header h1 {
-	font-size: 1.8em;
-	font-family: Verdana;
+    font-size: 1.8em;
+    font-family: Verdana;
     color: #656060;
     border-width: 1px;
     border-color: #000;
@@ -99,7 +97,7 @@ div#pagenav ul li {
     display: inline;
 }
 div#pagenav ul li a {
-    text-decoration: none;  
+    text-decoration: none;
 }
 div#pagenav ul li a:hover {
     text-decoration: underline;
@@ -128,7 +126,7 @@ div#pageoptions a {
 }
 
 #wantedPages {
-    float:left; 
+    float:left;
     width:55%;
 }
 .wantedBy { color:#999; }
@@ -161,78 +159,78 @@ div#pageoptions a {
 }
 
 #content h1 {
-	font-size: 2.4em;
-	font-family: Georgia, Verdana;
+    font-size: 2.4em;
+    font-family: Georgia, Verdana;
 }
 
 #content h2 {
-	/*color: #58181B;*/
-	font-weight: normal;
-	font-size: 1.9em;
-	font-family: Georgia, Verdana;
-	border-bottom:1px solid #AAAAAA;
-	color:#AF261E;
-/*	border-bottom:1px solid #D8DFEA;
-	margin:-4px 0 0;
-	z-index:0;
+    /*color: #58181B;*/
+    font-weight: normal;
+    font-size: 1.9em;
+    font-family: Georgia, Verdana;
+    border-bottom:1px solid #AAAAAA;
+    color:#AF261E;
+/*    border-bottom:1px solid #D8DFEA;
+    margin:-4px 0 0;
+    z-index:0;
 */}
 
 #content h3 {
-	font-weight: bold;
-	font-size: 1.4em;
-	font-family: Georgia, Verdana;
+    font-weight: bold;
+    font-size: 1.4em;
+    font-family: Georgia, Verdana;
 }
 
 #content h4 {
-	font-weight: bold;
-	font-size: 1.2em;
-	font-family: Georgia, Verdana;
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: Georgia, Verdana;
 }
 
 #content h5 {
-	font-weight: bold;
-	font-variant: small-caps;
-	font-size: 1.2em;
-	font-family: Georgia, Verdana;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 1.2em;
+    font-family: Georgia, Verdana;
 }
 
 #content h6 {
-	font-weight: bold;
-	font-size: 1.1em;
-	font-variant: small-caps;
-	font-family: Georgia, Verdana;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-variant: small-caps;
+    font-family: Georgia, Verdana;
 }
 
 #content .sideline {
-	border-bottom:1px solid #DDDDDD;
-	font-family:"Trebuchet MS","Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
-	font-size:1.4em;
-	font-weight:normal;
-	letter-spacing:1.2pt;
-	padding:25px 0 3px;
-	text-decoration: uppercase;
+    border-bottom:1px solid #DDDDDD;
+    font-family:"Trebuchet MS","Lucida Grande","Lucida Sans",Verdana,Arial,sans-serif;
+    font-size:1.4em;
+    font-weight:normal;
+    letter-spacing:1.2pt;
+    padding:25px 0 3px;
+    text-decoration: uppercase;
 }
 
 /* --------- Links -------- */
 
-#content a {	
-	color: #124286;
-	text-decoration: none;
+#content a {
+    color: #2274A8;
+    text-decoration: none;
 }
 
-#content a:hover {	
-	color: #336699;
-	text-decoration: underline;
+#content a:hover {
+    color: #336699;
+    text-decoration: underline;
 }
 
-#content a:visited {	
-	color: #3D5F86;
-	text-decoration: none;
+#content a:visited {
+    color: #3D5F86;
+    text-decoration: none;
 }
 
-#content a:visited:hover {	
-	color: #3D5F86;
-	text-decoration: underline;
+#content a:visited:hover {
+    color: #3D5F86;
+    text-decoration: underline;
 }
 
 #content strong,b {
@@ -247,7 +245,7 @@ div#pageoptions a {
     padding-left:1.5em;
 }
 
-#content ul li { 
+#content ul li {
     list-style: square;
 }
 
@@ -327,7 +325,7 @@ p {
     margin: 1.2em 0;
 }
 
-.hide { 
+.hide {
     display: none;
 }
 
@@ -344,25 +342,25 @@ p {
 /* @end */
 
 .newWikiWord {
-	background: #FFFFFF none repeat scroll 0 0;
-	color:#EE3333;
+    background: #FFFFFF none repeat scroll 0 0;
+    color:#EE3333;
 }
 
 #content .newWikiWord a {
-	background:#FFFFFF none repeat scroll 0 0;
-	color:#EE3333;
+    background:#FFFFFF none repeat scroll 0 0;
+    color:#EE3333;
 }
 
-textarea#body { 
-height:480px;
-width:100%;
+textarea#body {
+    height:480px;
+    width:100%;
 }
 
 /* -------------------- Generic ----------------------------- */
 
 body {
   font-family: verdana, sans-serif;
-  font-size: .8em;  
+  font-size: .8em;
   background: rgb(234,234,234) url("images/layout/body_bg.png") center repeat-y;
   margin: 0;
   color: rgb(30,30,30);
@@ -372,68 +370,68 @@ a {
   /*color: rgb(0,51,204);*/
   /* color: #336699; */
 color: #c1baaa;
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:link {
-  color: #336699;
+    color: #336699;
 }
 
 a:visited {
-  color: #222629;
-  text-decoration: none;
-  /*color: rgb(68,68,68);*/
+    color: #222629;
+    text-decoration: none;
+    /*color: rgb(68,68,68);*/
 }
 
 a:hover {
-  color: rgb(0,0,0);
-  text-decoration: underline;
+    color: rgb(0,0,0);
+    text-decoration: underline;
 }
 
 img {
-  border: none;
+    border: none;
 }
 
 p {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 h1 a, h2 a, h3 a,
 h1 a:visited, h2 a:visited, h3 a:visited {
-  color: rgb(153,153,153);
+    color: rgb(153,153,153);
 }
 
 h1 a:hover,
 h2 a:hover,
 h3 a:hover {
-  color: rgb(0,0,0);
+    color: rgb(0,0,0);
 }
 
 hr {
-  height: 1px;
-  border-top: solid rgb(220,220,220);
-  border-bottom: solid rgb(255,255,255);
-  border-width: 1px 0 0 0;
+    height: 1px;
+    border-top: solid rgb(220,220,220);
+    border-bottom: solid rgb(255,255,255);
+    border-width: 1px 0 0 0;
 }
 
 table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 th {
-  text-align: left;
+    text-align: left;
 }
 
 ul {
-  padding: 0; 
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .content ul li {
-  list-style-type: none;
-  padding-left: 1.5em;
-  background: url("images/global/list_bullet.png") top left no-repeat;
-  background-position: .55em .55em;
+    list-style-type: none;
+    padding-left: 1.5em;
+    background: url("images/global/list_bullet.png") top left no-repeat;
+    background-position: .55em .55em;
 }
 
 
@@ -441,29 +439,29 @@ ul {
 --------------------------------------- */
 
 .hidden {
-  clear: both;
-  visibility: hidden;
+    clear: both;
+    visibility: hidden;
 }
 
 h2.icon_control {
-  background: url("images/global/icon_control.png") top left no-repeat;
+    background: url("images/global/icon_control.png") top left no-repeat;
 }
 
 h2.icon_model {
-  background: url("images/global/icon_model.png") top left no-repeat;
+    background: url("images/global/icon_model.png") top left no-repeat;
 }
 
 h2.icon_view {
-  background: url("images/global/icon_view.png") top left no-repeat;
+    background: url("images/global/icon_view.png") top left no-repeat;
 }
 
 h2.icon_control,
 h2.icon_model,
 h2.icon_view {
-  margin-top: 1.2em;
-  margin-bottom: .2em;
-  padding: 15px 0 8px 55px;
-  background-position: 0 5px;
+    margin-top: 1.2em;
+    margin-bottom: .2em;
+    padding: 15px 0 8px 55px;
+    background-position: 0 5px;
 }
 
 
@@ -475,21 +473,21 @@ h2.icon_view {
   +-------------------------------------------+*/
 
 #content {
-	background: #fff;
-	margin-top: 7px;
+    background: #fff;
+    margin-top: 7px;
 }
 
-#main { 
-	float: left;
-	width: 640px;
-	margin-left: 10px;
-	background: #fff;
-	padding: 1px;
+#main {
+    float: left;
+    width: 640px;
+    margin-left: 10px;
+    background: #fff;
+    padding: 1px;
 }
 
 #sidebar {
-	margin-left: 585px;
-	padding: 1px 15px 0 0;
+    margin-left: 585px;
+    padding: 1px 15px 0 0;
 }
 
 /*+-------------------------------------------+
@@ -497,7 +495,7 @@ h2.icon_view {
   +-------------------------------------------+*/
 
 a.logo {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 
@@ -507,9 +505,9 @@ a.logo {
 @import "../department/home.html";
 
 #container {
-  width: 860px;
-  margin-left: auto;
-  margin-right: auto;
+    width: 860px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #maximize {
     display: none;
@@ -519,99 +517,99 @@ a.logo {
 --------------------------------------- */
 
 #header-cat {
-  height: 123px;
-  background: url("images/layout/header_bg_catalyst.png") no-repeat;
-  border: solid 1px rgb(255,255,255);
-  border-bottom: solid 1px rgb(238,238,238);
+    height: 123px;
+    background: url("images/layout/header_bg_catalyst.png") no-repeat;
+    border: solid 1px rgb(255,255,255);
+    border-bottom: solid 1px rgb(238,238,238);
 }
 
 .control #header-cat {
-  background: url("images/layout/header_bg_control.png") no-repeat;
+    background: url("images/layout/header_bg_control.png") no-repeat;
 }
 
 .documentation #header-cat {
-  background: url("images/layout/header_bg_documentation.png") no-repeat;
+    background: url("images/layout/header_bg_documentation.png") no-repeat;
 }
 
 .model #header-cat {
-  background: url("images/layout/header_bg_model.png") no-repeat;
+    background: url("images/layout/header_bg_model.png") no-repeat;
 }
 
 .view #header-cat {
-  background: url("images/layout/header_bg_view.png") no-repeat;
+    background: url("images/layout/header_bg_view.png") no-repeat;
 }
 
 #header-cat h1 {
-  position: relative;
-  top: 15px;
-  left: 20px;
-  margin: 0;
-  width: 170px;
-  height: 58px;
-  background: url("images/layout/catalyst_170pix.png");
+    position: relative;
+    top: 15px;
+    left: 20px;
+    margin: 0;
+    width: 170px;
+    height: 58px;
+    background: url("images/layout/catalyst_170pix.png");
 }
 
 #header-cat h1 a {
-  display: block;
-  width: 170px;
-  height: 58px;
+    display: block;
+    width: 170px;
+    height: 58px;
 }
 
 #header-cat h1 img {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 #header-cat form {
-  float: right;
-  margin: -30px 20px 0 0;
+    float: right;
+    margin: -30px 20px 0 0;
 }
 
 #header-cat .submit {
-  visibility: hidden;
-  position: absolute;
+    visibility: hidden;
+    position: absolute;
 }
 
 /* menu_global
 --------------------------------------- */
 
 #menu_global {
-  position: relative;
-  top: 38px;
-  left: 10px;
-  float: left;
-  padding: 0;
-  margin: 0;
+    position: relative;
+    top: 38px;
+    left: 10px;
+    float: left;
+    padding: 0;
+    margin: 0;
 }
 
 #menu_global li,
 #menu_global li a {
-  display: block;
-  list-style-type: none;
+    display: block;
+    list-style-type: none;
 }
 
 #menu_global li {
-  float: left;
-  height: 29px;
-  margin-right: 2px;
+    float: left;
+    height: 29px;
+    margin-right: 2px;
 }
 
 #menu_global a {
-  padding: 8px 10px 5px 10px;
-  text-decoration: none;
-  color: rgb(85,85,85);
+    padding: 8px 10px 5px 10px;
+    text-decoration: none;
+    color: rgb(85,85,85);
 }
 
 #menu_global li a:hover {
-  color: rgb(0,0,0); 
+    color: rgb(0,0,0);
 }
 
- #menu_global #home,
+#menu_global #home,
 .community #menu_global #community,
 .documentation #menu_global #documentation,
 .developer #menu_global #developer,
 .download #menu_global #download,
 .support #menu_global #support {
-  background: rgb(255,255,255) url("images/layout/menu_global_bg_left.png") top left no-repeat;
+    background: rgb(255,255,255) url("images/layout/menu_global_bg_left.png") top left no-repeat;
 }
 
 
@@ -620,50 +618,48 @@ a.logo {
 
 #main {
   /*border-top: solid 1px rgb(220,220,220);*/
-  padding: 0 20px 0 20px;
+    padding: 0 20px 0 20px;
 }
 
 /* content
 --------------------------------------- */
 
 .content {
-  float: left;
-  width: 540px;
+    float: left;
+    width: 540px;
 }
 
 .fullwidth {
-  width: 800px; 
+    width: 800px;
 }
 
 /* catch
 --------------------------------------- */
 
 .catch {
-  height: 258px;
-  width: 480px;
-  margin-bottom: 10px;
-  padding: 20px 320px 20px 20px;
-  color: rgb(51,51,51);
-  font-size: 1.3em;
+    height: 258px;
+    width: 480px;
+    margin-bottom: 10px;
+    padding: 20px 320px 20px 20px;
+    color: rgb(51,51,51);
+    font-size: 1.3em;
 }
 
 .catch h1 {
-  margin-top: .5em;
-  font-family: verdana, sans-serif;
-  color: rgb(30,30,30);
-} 
+    margin-top: .5em;
+    font-family: verdana, sans-serif;
+    color: rgb(30,30,30);
+}
 
 /* footer
 --------------------------------------- */
 
 #footer {
-  height: 30px;
-  margin: 0 20px 10px 20px;
-  padding: 10px 0 0 0;
-  clear: both;
-  border-top: solid 1px rgb(220,220,220);
-  color: rgb(153,153,153);
-  font-size: x-small;
+    height: 30px;
+    margin: 0 20px 10px 20px;
+    padding: 10px 0 0 0;
+    clear: both;
+    border-top: solid 1px rgb(220,220,220);
+    color: rgb(153,153,153);
+    font-size: x-small;
 }
-
-

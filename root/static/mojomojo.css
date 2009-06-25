@@ -170,12 +170,20 @@ div#content_preview {
     border: 1px solid #ddd;
     padding: 5px;
     overflow: auto;
-    height: 250px;
+    height: 35em;
     margin: 0 0 1em 0;
+    float: left;
+    width: 49%;
+}
+div#edit_form {
+    float: left;
+    width: 49%;
+    height: 35em;
 }
 
+
 textarea#body {
-    height: 280px;
+    height: 32em;
     /* max-width: 930px; */
     width: 100%;
 }
@@ -327,7 +335,7 @@ a.tag:hover {
 
 .newWikiWord a {
    /*  vertical-align: super;; */
-	background: #f6d8b4;
+    background: #f6d8b4;
     border: 1px solid #dddddd;
     line-height: 0;
     font-weight: bold;

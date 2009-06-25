@@ -204,7 +204,7 @@ sub pass_matches {
 
 =item  valid_pass <password>
 
-check password against database.
+Check password against database.
 
 =cut
 
@@ -218,6 +218,8 @@ sub hashed {
     return Digest::SHA1::sha1_hex( $self->id . $secret );
 }
 
+# FIXME: the formatter is arbitrarily taken to be Textile; it could be MultiMarkdown
+# http://github.com/marcusramberg/mojomojo/issues/#issue/29
 sub interests_formatted { $textile->process( shift->interests ); }
 sub music_formatted     { $textile->process( shift->music ); }
 sub movies_formatted    { $textile->process( shift->movies ); }
@@ -238,9 +240,13 @@ sub age {
 
 =back
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

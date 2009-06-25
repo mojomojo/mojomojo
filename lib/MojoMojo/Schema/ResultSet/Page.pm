@@ -18,13 +18,14 @@ MojoMojo::Schema::ResultSet::Page
 
 =item path_pages
 
-Accepts a path in url/unix directory format, e.g. "/page1/page2".
-Paths are assumed to be absolute, so a leading slash (/) is not 
+Accepts a path in URL/Unix directory format, e.g. "/page1/page2".
+Paths are assumed to be absolute, so a leading slash (/) is not
 required.
+
 Returns an array of any pages that exist in the path, starting with "/",
 and an additional array of "proto page" hashes for any pages at the end
-of the path that do not exist. All paths include the root (/), which 
-must exist, so a path of at least one element will always be returned. 
+of the path that do not exist. All paths include the root (/), which
+must exist, so a path of at least one element will always be returned.
 The "proto page" hash keys are:
 
 =cut
@@ -149,8 +150,7 @@ sub parse_path {
 
 =item normalize_name <orig_name>
 
-Strip superfluos spaces, and convert the rest to _,
-and lowercase the result.
+Strip superfluous spaces, and convert the rest to _, then lowercase the result.
 
 =cut
 
@@ -165,8 +165,8 @@ sub normalize_name {
     $name =~ s/\s+/_/g;
     $name = lc($name);
     return (
-        Encode::decode_utf8(URI::Escape::uri_unescape($name_orig)), 
-        Encode::decode_utf8(URI::Escape::uri_unescape($name)), 
+        Encode::decode_utf8(URI::Escape::uri_unescape($name_orig)),
+        Encode::decode_utf8(URI::Escape::uri_unescape($name)),
     );
 }
 
@@ -188,7 +188,7 @@ Takes the following args:
 
 =back
 
-returns true if path can be resolved, or false otherwise.
+Returns true if the path can be resolved, or false otherwise.
 
 =cut
 
@@ -223,7 +223,8 @@ sub resolve_path {
 
 __PACKAGE__->set_paths( @pages );
 
-Sets the path TEMP columns for multiple pages, either a subtree or a group of non-adjacent pages.
+Sets the path for multiple pages, either a subtree or a group of
+non-adjacent pages.
 
 =cut
 
@@ -285,7 +286,7 @@ sub set_paths {
 
 =item create_path_pages
 
-find or creates a list of path_pages
+Find or creates a list of path_pages
 
 =cut
 
@@ -368,7 +369,7 @@ sub open_gap {
     my ( $gap_increment, $parent_rgt, $parent_id ) =
         ( $new_page_count * 2, $parent->rgt, $parent->id );
     $self->result_source->schema->storage->dbh->do(
-        qq{ UPDATE page 
+        qq{ UPDATE page
     SET rgt = rgt + ?, lft = CASE
     WHEN lft > ? THEN lft + ?
     ELSE lft

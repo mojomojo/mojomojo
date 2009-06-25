@@ -2,7 +2,7 @@
 /* @group Document Structure */
 body {
     background: #7D7C7A;
-	color: #424242;
+    color: #424242;
     margin: 0;
     font-size: 0.9em;
     font-family: Arial, Helvetica Neue, Helvetica, Geneva, sans-serif;
@@ -39,8 +39,8 @@ body {
     background: #c0c0c0;
     height: 12px;
     font-size: 1.2em;
-	border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
     color: #e3e3e3;
     margin: 0;
     padding: 6px 8px;

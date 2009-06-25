@@ -59,7 +59,7 @@ sub child_menu : Local {
 
 =item diff (/.jsrpc/diff)
 
-Loads diff on demand. takes an absolute revision number as arg,
+Loads diff on demand. Takes an absolute revision number as arg,
 and diffs it against the previous version.
 
 =cut
@@ -107,7 +107,7 @@ sub submittag : Local {
 
 =item tag (/.jsrpc/tag)
 
-add a tag to a page. return list of yours and popular tags.
+Add a tag to a page. Returns a list of yours and popular tags.
 
 =cut
 
@@ -139,7 +139,7 @@ sub tag : Local Args(1) {
 
 =item untag (/.jsrpc/untag)
 
-remove a tag to a page. return list of yours and popular tags.
+Remove a tag from a page. Returns a list of yours and popular tags.
 
 =cut
 
@@ -171,7 +171,7 @@ sub imginfo : Local {
 
 =item usersearch (.jsrpc/usersearch)
 
-Backend which handles jQuery autocomplete requests for users.
+Backend that handles jQuery autocomplete requests for users.
 
 =cut
 

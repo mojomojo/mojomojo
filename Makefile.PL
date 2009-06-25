@@ -9,7 +9,7 @@ requires(
     'Algorithm::IncludeExclude'                    => 0,
     'Archive::Zip'                                 => '1.14',
     'MRO::Compat'                                  => '0.10',
-    'Cache::FastMmap'                              => 1.29,  # fixes Win32 compatibility: http://rt.cpan.org/Public/Bug/Display.html?id=45210
+    'Cache::FastMmap'                              => 1.31,  # deleted /tmp/sharefile-* when MM is killed
     'Catalyst'                                     => '5.71001',
     'Catalyst::Action::RenderView'                 => '0.07',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
@@ -39,7 +39,7 @@ requires(
     'DBIx::Class'                                  => '0.08',
     'DBIx::Class::DateTime::Epoch'                 => '0.04',
     'DBIx::Class::EncodedColumn'                   => 0,
-    'DBIx::Class::TimeStamp'                       => 0,
+    'DBIx::Class::TimeStamp'                       => '0.11',
     'Encode'                                       => '2.31',
     'File::Copy::Recursive'                        => 0,
     'File::MMagic'                                 => '1.27',
@@ -70,7 +70,7 @@ requires(
     'Term::Prompt'                                 => 0,
 );
 
-feature 'Automatic deployment', 'SQL::Translator';
+feature 'Automatic deployment', 'SQL::Translator' => '0.09006';
 feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
 # XML::LibXSLT depends on the following libraries: libxslt-dev, libgcrypt11-dev (for `lgcrypt`), libgdbm3-dev (for `lgdbm`) and possibly libxml2-dev
 feature 'DocBook formatter', 'XML::LibXSLT' => '1.66',

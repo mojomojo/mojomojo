@@ -36,7 +36,7 @@ sub get_user {
 
 =item registration_profile
 
-returns a L<Data::FormValidator> profile for registration.
+Returns a L<Data::FormValidator> profile for registration.
 
 =cut
 
@@ -71,7 +71,7 @@ sub registration_profile {
 
 =item user_free
 
-Check if a username is already in user. Returns 1 for free, 0 for in use.
+Check if a username is available. Returns 1 for available, 0 for in use.
 
 =cut
 
@@ -84,9 +84,13 @@ sub user_free {
 
 =back
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut

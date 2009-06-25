@@ -18,18 +18,18 @@ MojoMojo::Controller::Export - Export / Import related controller
 
 =head1 DESCRIPTION
 
-MojoMojo has an extensive export system. You can download all the 
+MojoMojo has an extensive export system. You can download all the
 nodes of the wiki either as preformatted HTML, for offline reading
 or in a raw format suitable for reimporting into another MojoMojo
-installation. either way, MojoMojo will create and send you a zip 
-file with a directory containing all the files. the filename of the
+installation. either way, MojoMojo will create and send you a zip
+file with a directory containing all the files. The name of the
 directory will contain a timestamp showing when the archive was made.
 
 =head1 ACTIONS
 
 =over 4
 
-=item export_raw 
+=item export_raw
 
 This action will give you a zip file containing the raw wiki source
 for all the nodes of the wiki.
@@ -53,7 +53,7 @@ sub export_raw : Global {
         foreach my $page (@$pages) {
             next unless $page->content;
             # XX - see notes from export_html about encode_utf8
-            $archive->addString( 
+            $archive->addString(
                 Encode::encode_utf8($page->content->body),
                 $prefix . $page->path . ( $page->path eq '/' ? '' : '/' ) . 'index' );
         }
@@ -67,7 +67,7 @@ sub export_raw : Global {
 
 =item export_html (/.export_html)
 
-This action will give you a zip file containing HTML formatted 
+This action will give you a zip file containing HTML formatted
 versions of all the nodes of the wiki.
 
 =cut
@@ -113,8 +113,8 @@ Marcus Ramberg C<marcus@thefeed.no>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.  
+This library is free software. You can redistribute it and/or modify
+it under the same terms as perl itself.
 
 =cut
 

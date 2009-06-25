@@ -66,14 +66,15 @@
             &lt;ol&gt;<br/>
         </td>
         <td>[%loc('Write')%]:<br/>
-            &lt;[% loc('newline') %]><br/>
+            <br/>
             1. Foo<br/>
             2. Bar<br/>
-            &lt;[% loc('newline') %]>
+            <br/>
+            NOTE: you need a new line before and after the list
         </td>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Unordered Lists with Paragraphs')%]</th>
+        <th colspan="2">[%loc('Lists with Paragraphs - add newlines around items')%]</th>
     </tr>
     <tr>
         <td>[%loc('To get')%]:<br/>
@@ -83,15 +84,18 @@
             &lt;ul&gt;<br/>
         </td>
         <td>[%loc('Write')%]:<br/>
-            &lt;[% loc('newline') %]><br/>
+            <br/>
             * Foo<br/>
-            &lt;[% loc('newline') %]><br/>
+            <br/>
             * Bar<br/>
-            &lt;[% loc('newline') %]>
+
         </td>
     </tr>
     <tr>
-        <td colspan="2">[%loc('Lists can be nested by indentation level')%]:
+        <th colspan="2">[%loc('Nested lists: use 3-space indentation per level')%]:</th>
+    </tr>
+    <tr>
+        <td>
             <pre>
 * Foo
 
@@ -103,7 +107,9 @@
 * [%loc('Shapes') +%]
     * [%loc('Circle') +%]
     * [%loc('Square') +%]
-    * [%loc('Rectangle') +%]</pre>
+       * [%loc('Rounded square') +%]
+    * [%loc('Rectangle') +%]
+            </pre>
         </td>
     </tr>
     <tr>

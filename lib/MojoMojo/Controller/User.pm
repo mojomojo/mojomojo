@@ -62,7 +62,7 @@ sub login : Global : FormConfig {
 
 =item logout (/.logout)
 
-Log out the user
+Log out the user.
 
 =cut
 
@@ -75,7 +75,7 @@ sub logout : Global {
 
 =item users (/.users)
 
-Show a list of the active users with a link to their page.
+Show a list of the active users with links to the pages they edited.
 
 =cut
 
@@ -211,7 +211,7 @@ sub recover_pass : Global {
 
 Show new user registration form.
 
-B<template:> user/register.tt
+B<template:> C<user/register.tt>
 
 =cut
 
@@ -256,7 +256,7 @@ sub register : Global FormConfig {
         }
         $c->stash->{newuser}->active(-1);
 
-        # XXX - need to add this so FormFu->model->update properly populates 
+        # XXX - need to add this so FormFu->model->update properly populates
         # the required registered field. The other way to do this is by using
         # DBIx::Class::DynamicDefaults, but I've restrained myself from adding
         # yet another dependency -lestrrat
@@ -288,7 +288,7 @@ sub is_account_taken : Private {
 
 New user registration processing.
 
-B<template:> user/password.tt /  user/validate.tt
+B<templates:> C<user/password.tt>, C<user/validate.tt>
 
 =cut
 
@@ -467,7 +467,7 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify
+This library is free software. You can redistribute it and/or modify
 it under the same terms as perl itself.
 
 =cut
