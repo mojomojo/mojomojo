@@ -1,8 +1,11 @@
+0.999030 2009-06-22 17:01:00
+        - Update Catalyst theme
         -  Defang remote img src - whitelist if you want to allow them
         -  Fixed profile user name when in view mode
         -  Linked from was moved from page/bottomnav.tt to page/info.tt
         -  Forked Defang to Declaw included in our distribution for 
            now
+        - Fix Args("") issue
 
 0.999029 2009-05-09 23:59:35
         - Actual content added to [[Help]]
