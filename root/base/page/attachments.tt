@@ -6,7 +6,7 @@
 <form action="[%c.uri_for('attachments')%]" enctype="multipart/form-data" method="post">
     <input type="hidden" name="plain" value="1"/>
     <input type="file" name="file"/>
-    <input type="submit" name="submit" value="[%loc('Upload')%]"/>
+    <input type="submit" name="submit" value="[%loc('Click Here to Upload Attachments')%]"/>
 </form>
 [% ELSE %]
 <a href="#" id="do_upload">[%loc('Choose attachments')%]</a>
