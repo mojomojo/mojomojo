@@ -26,7 +26,7 @@
         [% END -%]
             href="[% c.uri_for('recent',othertag.tag) %]" >[% othertag.tag %]</a>
         [%+ IF user.active +%]
-        [<span class="add"><a href="[% c.uri_for('jsrpc/tag',tag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END +%]
+        [<span class="add"><a href="[% c.uri_for('jsrpc/tag', othertag.tag) %]" class="tagaction">+</a></span>][% UNLESS loop.last() %],[% END +%]
         [% END %]
     [% END %]
 [% END %]
