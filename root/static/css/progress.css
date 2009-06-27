@@ -1,18 +1,18 @@
-.progressmeter {
+.progressbar {
     font-family: Arial;
     font-size: 10pt;
     text-align: center;
 }
 
-.progressmeter table {
+.progressbar table {
 }
 
-.progressmeter th {
+.progressbar th {
     font-weight: bold;
     text-align: right;
 }
 
-.progressmeter td {
+.progressbar td {
     text-align: left;
 }
 
@@ -24,7 +24,7 @@
     color: red;
 }
 
-.progressmeter .meter {
+.progressbar .bar {
     position: relative;
     background-color: lightgrey;
     border: 2px solid #667799;
@@ -32,13 +32,13 @@
     width: 380px;
 }
 
-.progressmeter .meter .amount {
+.progressbar .bar .amount {
     background-color: #667799;
     width: 0px;
     height: 20px
 }
 
-.progressmeter .meter .percent {
+.progressbar .bar .percent {
     position: absolute;
     top: 0px;
     left: 0px;
