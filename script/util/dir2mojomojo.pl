@@ -10,7 +10,8 @@ use Config::JFDI;
 use MojoMojo::Formatter::File;
 use Path::Class ();
 use Getopt::Long;
-use MojoMojo::Model::Search;
+#use MojoMojo;
+#use MojoMojo::Model::Search;
 
 
 my($DIR, $URL_DIR, $debug, $help);
