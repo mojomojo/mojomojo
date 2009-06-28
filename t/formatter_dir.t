@@ -15,7 +15,7 @@ BEGIN {
 };
 
 
-my $baseuri = "/";
+my $baseuri = "";
 my $path    = "test";
 my $content;
 my $ret;
