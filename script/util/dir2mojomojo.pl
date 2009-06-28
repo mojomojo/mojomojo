@@ -4,10 +4,9 @@ BEGIN { $ENV{CATALYST_DEBUG} = 0 }
 use strict;
 use warnings;
 use FindBin '$Bin';
-use lib "$Bin/../lib";
+use lib "$Bin/../../lib";
 use MojoMojo::Schema;
 use Config::JFDI;
-#use Term::Prompt;
 use  MojoMojo::Formatter::File;
 use Path::Class ();
 use Getopt::Long;
@@ -27,7 +26,8 @@ if ( $help || ! $DIR || ! $URL_DIR ){
   exit 1;
 }
 
-$URL_DIR = "$URL_DIR/";
+$DIR =~ s/\/$//;
+#$URL_DIR = "$URL_DIR/";
 
 my $jfdi = Config::JFDI->new(name => "MojoMojo");
 my $config = $jfdi->get;
@@ -70,10 +70,11 @@ createpage($URL_DIR, "{{dir $DIR}}", $person);
 
 foreach my $f (@files){
 
+  next if ( ! -r $f );
   $urlpage = $f;
   $urlpage =~ s/$DIR//;
   $urlpage =~ s/\./_/;
-  $urlpage = $URL_DIR . $urlpage;
+  $urlpage = "${URL_DIR}${urlpage}";
 
   if ( ref $f eq 'Path::Class::Dir'){
     $body = "{{dir $f}}";
