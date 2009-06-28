@@ -7,9 +7,11 @@ use FindBin '$Bin';
 use lib "$Bin/../../lib";
 use MojoMojo::Schema;
 use Config::JFDI;
-use  MojoMojo::Formatter::File;
+use MojoMojo::Formatter::File;
 use Path::Class ();
 use Getopt::Long;
+use MojoMojo::Model::Search;
+
 
 my($DIR, $URL_DIR, $debug, $help);
 GetOptions (  'dir=s'        => \$DIR,
@@ -27,7 +29,6 @@ if ( $help || ! $DIR || ! $URL_DIR ){
 }
 
 $DIR =~ s/\/$//;
-#$URL_DIR = "$URL_DIR/";
 
 my $jfdi = Config::JFDI->new(name => "MojoMojo");
 my $config = $jfdi->get;
@@ -93,21 +94,9 @@ foreach my $f (@files){
 
   createpage($urlpage,$body, $person);
 }
-exit 0;
 
 
-
-
-
-
-# update the search index with the new content
-#$schema->resultset('Page')->set_paths($page);
-
-#my $search=MojoMojo::Model::Search->new;
-#$search->index_page($page);
-
-
-
+# XXX: Update index_page (Model::Search)
 sub createpage{
   my ($url, $body, $person) = @_;
 
@@ -128,6 +117,7 @@ sub createpage{
 
 
   $page->update_content(%content);
+  #MojoMojo::Model::Search->index_page($page);
   $schema->resultset('Page')->set_paths($page);
   print "$url done\n";
 }
