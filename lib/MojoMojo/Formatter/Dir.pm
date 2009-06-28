@@ -81,12 +81,29 @@ sub format {
   my $dir  = shift;
   my $c    = shift;
 
-  my $pcdir = Path::Class::dir($dir);
+
+  my $baseuri = $c->base_uri;
+
+  my $path    = $c->stash->{path};
+
+  return $self->to_xhtml($dir, $baseuri, $path);
+}
+
+
+=item format
+
+Return Directory and files lists in xhtml
+
+=cut
+sub to_xhtml{
+  my ($self,$dir, $baseuri, $path) = @_;
+
+
+  my $pcdir = Path::Class::dir->new("$dir");
+
   my @subdirs;
   my @files;
   while (my $file = $pcdir->next) {
-
-    # next if file eq $dir or $dir/..
     next if ($file =~ m/^$dir\/?\.*$/ );
 
     if ( -d $file ){
@@ -97,9 +114,7 @@ sub format {
     }
   }
 
-  my $baseuri = $c->base_uri;
-  my $path    = $c->stash->{path};
-  my $url = "$baseuri/$path";
+  my $url = "${baseuri}${path}";
 
   my $ret = '<div id="dirs"><ul>';
   foreach my $d (@subdirs){
@@ -120,6 +135,8 @@ sub format {
 
   return $ret;
 }
+
+
 
 =back
 
