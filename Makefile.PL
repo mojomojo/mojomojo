@@ -40,6 +40,7 @@ requires(
     'DBIx::Class::DateTime::Epoch'                 => '0.04',
     'DBIx::Class::EncodedColumn'                   => 0,
     'DBIx::Class::TimeStamp'                       => '0.11',
+    'Directory::Scratch'                           => '0.14',
     'Encode'                                       => '2.31',
     'File::Copy::Recursive'                        => 0,
     'File::MMagic'                                 => '1.27',
