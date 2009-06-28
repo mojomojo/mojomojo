@@ -1,9 +1,10 @@
 0.999030 2009-06-22 17:01:00
+        - Add Dir formatter (use by script/util/dir2mojomojo.pl )
         - Update Catalyst theme
-        -  Defang remote img src - whitelist if you want to allow them
-        -  Fixed profile user name when in view mode
-        -  Linked from was moved from page/bottomnav.tt to page/info.tt
-        -  Forked Defang to Declaw included in our distribution for 
+        - Defang remote img src - whitelist if you want to allow them
+        - Fixed profile user name when in view mode
+        - Linked from was moved from page/bottomnav.tt to page/info.tt
+        - Forked Defang to Declaw included in our distribution for 
            now
         - Fix Args("") issue
 
