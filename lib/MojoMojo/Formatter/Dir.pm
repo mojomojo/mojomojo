@@ -83,7 +83,6 @@ sub format {
 
 
   my $baseuri = $c->base_uri;
-
   my $path    = $c->stash->{path};
 
   return $self->to_xhtml($dir, $baseuri, $path);
@@ -114,7 +113,8 @@ sub to_xhtml{
     }
   }
 
-  my $url = "${baseuri}${path}";
+  my $url = "${baseuri}/${path}";
+
 
   my $ret = '<div id="dirs"><ul>';
   foreach my $d (@subdirs){
