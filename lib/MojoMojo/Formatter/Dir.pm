@@ -50,12 +50,14 @@ sub format_content {
   $$content = "";
   foreach my $line (@lines) {
 
-    if ( $line =~ m|<p>{{dir\s(.*)}}</p>| ) {
-      my $dir=$1;
+    if ( $line =~ m|<p>{{dir\s(.*)\s(.*)}}</p>| ) {
+      my $dir     = $1;
+      my $exclude = $2;
+      $exclude =~ s/exclude=//;
 
       if ( -d $dir ){
       # format with plugin
-          $$content .= $self->format($dir, $c);
+          $$content .= $self->format($dir, $exclude, $c);
       }
       else {
           $$content .= "'$dir' is not a directory !\n";
@@ -77,15 +79,16 @@ Return the content formatted
 =cut
 
 sub format {
-  my $self = shift;
-  my $dir  = shift;
-  my $c    = shift;
+  my $self    = shift;
+  my $dir     = shift;
+  my $exclude = shift;
+  my $c       = shift;
 
 
   my $baseuri = $c->base_uri;
   my $path    = $c->stash->{path};
 
-  return $self->to_xhtml($dir, $baseuri, $path);
+  return $self->to_xhtml($dir, $exclude, $baseuri, $path);
 }
 
 
@@ -95,7 +98,7 @@ Return Directory and files lists in xhtml
 
 =cut
 sub to_xhtml{
-  my ($self,$dir, $baseuri, $path) = @_;
+  my ($self,$dir, $exclude, $baseuri, $path) = @_;
 
 
   my $pcdir = Path::Class::dir->new("$dir");
@@ -104,6 +107,7 @@ sub to_xhtml{
   my @files;
   while (my $file = $pcdir->next) {
     next if ($file =~ m/^$dir\/?\.*$/ );
+    next if grep(/$exclude/, $file );
 
     if ( -d $file ){
       push @subdirs , $file;

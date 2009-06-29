@@ -14,11 +14,12 @@ use Getopt::Long;
 #use MojoMojo::Model::Search;
 
 
-my($DIR, $URL_DIR, $debug, $help);
+my($DIR, $URL_DIR, $EXCLUDE, $debug, $help);
 GetOptions (  'dir=s'        => \$DIR,
               'urlbase=s'    => \$URL_DIR,
-              'debug'         => \$debug,
-              'help'          => \$help ) or die &Usage;
+              'exclude=s'    => \$EXCLUDE,
+              'debug'        => \$debug,
+              'help'         => \$help ) or die &Usage;
 
 
 $debug=0 if ( ! $debug);
@@ -31,6 +32,10 @@ if ( $help || ! $DIR || ! $URL_DIR ){
 
 $DIR =~ s/\/$//;
 
+
+#-----------------------------------------------------------------------------#
+# Connect to database
+#-----------------------------------------------------------------------------#
 my $jfdi = Config::JFDI->new(name => "MojoMojo");
 my $config = $jfdi->get;
 
@@ -64,11 +69,14 @@ my $body;
 my $urlpage;
 $rootdir->recurse(callback => sub {
             my ($entry) = @_;
+	    return if grep(/$EXCLUDE/, $entry );
             push @files, $entry unless ( $entry eq $DIR );
         });
 
 
-createpage($URL_DIR, "{{dir $DIR}}", $person);
+my $exclude;
+$exclude="exclude=$EXCLUDE" if $EXCLUDE;
+createpage($URL_DIR, "{{dir $DIR $exclude}}", $person);
 
 foreach my $f (@files){
 
@@ -79,7 +87,7 @@ foreach my $f (@files){
   $urlpage = "${URL_DIR}${urlpage}";
 
   if ( ref $f eq 'Path::Class::Dir'){
-    $body = "{{dir $f}}";
+    $body = "{{dir $f $exclude}}";
   }
   else{
     my $plugin   = MojoMojo::Formatter::File->plugin($f);
@@ -100,7 +108,6 @@ foreach my $f (@files){
 # XXX: Update index_page (Model::Search)
 sub createpage{
   my ($url, $body, $person) = @_;
-
 
   my ($path_pages, $proto_pages) = $schema->resultset('Page')->path_pages($url);
 
@@ -128,5 +135,6 @@ sub createpage{
 # Usage
 #-----------------------------------------------------------------------------#
 sub Usage{
-  print "$0 --dir=DIRECTORY --url=URLBASE [--debug] [--help]\n";
+  print "$0 --dir=DIRECTORY --url=URLBASE [--exclude=\"dir1 dir2\"] [--debug] [--help]\n";
+  print "Ex: $0 --dir=/usr/share/perl/5.10/pod/ --url=/pod --exclude='\.svn|\.git'\n";
 }
