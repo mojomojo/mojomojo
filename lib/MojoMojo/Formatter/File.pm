@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
 use File::Slurp;
+use Encode;
 use Module::Pluggable (
     search_path => ['MojoMojo::Formatter::File'],
     require => 1,
@@ -113,6 +114,10 @@ sub format {
   if ( $plugin->can('can_format') ) {
 
     my $text = read_file( $file );
+    utf8::decode($text);
+    $text = encode('utf-8', $text);
+    $text = Encode::decode('utf-8', $text);
+
     return $plugin->to_xhtml($text) . "\n";
   }
   else{
