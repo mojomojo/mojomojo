@@ -1,7 +1,6 @@
 package MojoMojo::Formatter::Text;
 
 use base qw/MojoMojo::Formatter/;
-use Text::Autoformat qw(autoformat break_TeX);
 use URI::Find;
 
 
@@ -11,8 +10,8 @@ MojoMojo::Formatter::Text - format plain text as xhtml
 
 =head1 DESCRIPTION
 
-This formatter will format content between {{txt}} and {{end}} as 
- XHTML.(and nicely-formated plain text via Text::AutoFormat)
+This formatter will format content between {{txt}} and {{end}} as
+ XHTML)
 
 It is based on Angerwhale/Format/PlainText.pm
 
