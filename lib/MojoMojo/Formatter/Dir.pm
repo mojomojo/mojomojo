@@ -16,7 +16,7 @@ MojoMojo::Formatter::Dir - format local directory as XHTML
 This formatter will format the directory argument as XHTML.
 Usage:
 
-    {{dir directory}}
+    {{dir directory exclude_regex}}
 
 
 =head1 METHODS
@@ -50,17 +50,25 @@ sub format_content {
   $$content = "";
   foreach my $line (@lines) {
 
-    if ( $line =~ m|<p>{{dir\s(.*)\s(.*)}}</p>| ) {
+    if ( $line =~ m|<p>{{dir\s*(\S*)\s*(\S*)}}</p>| ) {
       my $dir     = $1;
       my $exclude = $2;
+
       $exclude =~ s/exclude=//;
 
-      if ( -d $dir ){
-      # format with plugin
-          $$content .= $self->format($dir, $exclude, $c);
+      my $path_to = $c->path_to();
+      # use path_to(dir) ?
+      $dir =~ s/path_to\((\S*)\)/${path_to}\/$1/;
+      $dir =~ s/\/$//;
+
+      my $error;
+      if ( $error = $self->checkdir($dir, $c)){
+	$$content .= $error;
       }
-      else {
-          $$content .= "'$dir' is not a directory !\n";
+
+      if ( ! $error ){
+	# format with plugin
+	$$content .= $self->format($dir, $exclude, $c);
       }
     }
     else{
@@ -84,7 +92,6 @@ sub format {
   my $exclude = shift;
   my $c       = shift;
 
-
   my $baseuri = $c->base_uri;
   my $path    = $c->stash->{path};
 
@@ -98,8 +105,7 @@ Return Directory and files lists in xhtml
 
 =cut
 sub to_xhtml{
-  my ($self,$dir, $exclude, $baseuri, $path) = @_;
-
+  my ($self, $dir, $exclude, $baseuri, $path) = @_;
 
   my $pcdir = Path::Class::dir->new("$dir");
 
@@ -107,7 +113,7 @@ sub to_xhtml{
   my @files;
   while (my $file = $pcdir->next) {
     next if ($file =~ m/^$dir\/?\.*$/ );
-    next if grep(/$exclude/, $file );
+    next if ( "$exclude" && grep(/$exclude/, $file ));
 
     if ( -d $file ){
       push @subdirs , $file;
@@ -141,6 +147,43 @@ sub to_xhtml{
 }
 
 
+=item checkdir
+
+Directory must be include in whitelisting
+
+=cut
+sub checkdir{
+  my ($self,$dir,$c) = @_;
+
+  return "Append a directory after 'dir'"
+    if ( ! $dir );
+
+  return "You can't use '..' in the name of directory"
+    if ( $dir =~ /\.\./ );
+
+  my $confwl = $c->config->{'Formatter::Dir'}{whitelisting};
+  my @whitelist = ref $confwl eq 'ARRAY' ?
+                       @$confwl : ( $confwl );
+  # Add '/' if not exist at the end of whitelist directories
+  my @wl =  map { $_ . '/' }            # Add '/'
+                  ( map{ /(\S*[^\/])/ } # Delete '/' if exist
+		    @whitelist );
+
+  # Add '/' if not exist at the end of dierctory
+  $dir =~ s/^(\S*[^\/])$/$1\//;
+
+  # if $dir is not include in whitelisting
+  if ( ! map ( $dir =~ m/^$_/ , @wl) ){
+
+    return "Directory '$dir' must be include in whitelisting ! see Formatter::Dir:whitelisting in mojomojo.conf\n"
+  }
+
+
+  return "'$dir' is not a directory !\n"
+    if ( ! -d $dir );
+
+  return 0;
+}
 
 =back
 
