@@ -175,7 +175,7 @@ sub checkdir{
   # if $dir is not include in whitelisting
   if ( ! map ( $dir =~ m/^$_/ , @wl) ){
 
-    return "Directory '$dir' must be include in whitelisting ! see Formatter::Dir:whitelisting in mojomojo.conf\n"
+    return "Directory '$dir' must be include in whitelisting ! see Formatter::Dir:whitelisting in mojomojo.conf"
   }
 
 

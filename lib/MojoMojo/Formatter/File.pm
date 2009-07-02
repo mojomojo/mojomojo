@@ -72,7 +72,7 @@ sub format_content {
       if ( $error = checkplugin($plugin)){
       	$$content .= $error;
       }
-      if ( ! $error && ( $error = checkfile($file, $c))){
+      if ( ! $error && ( $error = $self->checkfile($file, $c))){
       	$$content .= $error;
       }
 
@@ -159,7 +159,7 @@ Directory must be include in whitelisting
 
 =cut
 sub checkfile{
-  my ($file, $c) = @_;
+  my ($self, $file, $c) = @_;
 
   return "Append a file after 'file'"
     if ( ! $file );
@@ -184,7 +184,7 @@ sub checkfile{
   # if $dir is not include in whitelisting
   if ( ! map ( $dir =~ m/^$_/ , @wl) ){
 
-    return "Directory '$dir' must be include in whitelisting !\nsee Formatter::Dir:whitelisting in mojomojo.conf"
+    return "Directory '$dir' must be include in whitelisting ! see Formatter::Dir:whitelisting in mojomojo.conf"
   }
 
 
