@@ -16,7 +16,7 @@ MojoMojo::Formatter::Dir - format local directory as XHTML
 This formatter will format the directory argument as XHTML.
 Usage:
 
-    {{dir directory exclude_regex}}
+    {{dir directory exclude=exclude_regex}}
 
 
 =head1 METHODS

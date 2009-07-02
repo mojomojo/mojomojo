@@ -10,7 +10,7 @@ BEGIN {
     plan skip_all => 'Requirements not installed for Dir Formatter'
         unless MojoMojo::Formatter::Dir->module_loaded;
 
-    plan tests => 9;
+    plan tests => 10;
 
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG}  = 0;
@@ -48,6 +48,12 @@ $dir->touch('bar.pod', "=head1 NAME\n\ntest");
 $ret = MojoMojo::Formatter::Dir->to_xhtml($dir, $exclude, $baseuri, $path);
 like($ret, qr{<div id="dirs"><ul><li><a href="/test/foo">\[foo\]</a></li></ul></div>\n<div id="files"><ul><li><a href="/test/bar_pod">bar_pod</a></li><li><a href="/test/bar_txt">bar_txt</a></li></ul></div>\n}s,"Return listing foo, bar.txt, bar.pod in xhtml");
 
+# Dir with 'exclude'
+$dir->mkdir('.baz');
+$content = "<p>{{dir $dir exclude=foo|\.git|.baz}}</p>";
+$ret = MojoMojo::Formatter::Dir->format_content(\$content, $c);
+like($$ret, qr|<div id="dirs"><ul></ul></div>\n<div id="files"><ul><li><a href="http://localhost///bar_pod">bar_pod</a></li><li><a href="http://localhost///bar_txt">bar_txt</a></li></ul></div>\n|s, "Use exclude=foo|\.git|.baz");
+
 
 # test checkdir directly
 $ret = MojoMojo::Formatter::Dir->checkdir("/etc/", $c);
@@ -68,6 +74,5 @@ like($$ret, qr|'$dir/test/' is not a directory !|s, "Can not read dir");
 $content = "<p>{{dir $dir/test/../}}</p>";
 $ret = MojoMojo::Formatter::Dir->format_content(\$content, $c);
 like($$ret, qr|You can't use '..' in the name of directory|s, "Can't use '..' in dir name");
-
 
 
