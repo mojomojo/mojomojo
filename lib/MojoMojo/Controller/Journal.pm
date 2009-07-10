@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Journal;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 =head1 NAME
 

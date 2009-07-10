@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Photo;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime;
 use Image::ExifTool;

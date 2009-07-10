@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Attachment;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components(
     qw/DateTime::Epoch TimeStamp UTF8Columns Core/);

@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Wiki;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 use URI;
 use Scalar::Util qw/blessed/;

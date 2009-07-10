@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Role;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "UTF8Columns", "Core" );
 __PACKAGE__->table("role");

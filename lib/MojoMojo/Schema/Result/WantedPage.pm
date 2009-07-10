@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::WantedPage;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("wanted_page");

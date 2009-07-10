@@ -1,7 +1,7 @@
 package MojoMojo::I18N;
 use strict;
 
-use base 'Locale::Maketext';
+use parent 'Locale::Maketext';
 
 *loc = \&localize;
 

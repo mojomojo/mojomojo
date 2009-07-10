@@ -5,7 +5,7 @@ use warnings;
 
 use Digest::SHA1;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use Text::Textile;
 my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );

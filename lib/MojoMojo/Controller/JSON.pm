@@ -1,7 +1,7 @@
 package MojoMojo::Controller::JSON;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 =head1 NAME
 

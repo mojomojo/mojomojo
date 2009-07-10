@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Textile;
 
-use base 'MojoMojo::Formatter';
+use parent 'MojoMojo::Formatter';
 
 use Text::Textile;
 use Text::SmartyPants;

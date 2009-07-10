@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Attachment;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 use IO::File;
 use URI::Escape ();

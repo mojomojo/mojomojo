@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Page;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 use IO::Scalar;
 use URI;
 use Text::Context;

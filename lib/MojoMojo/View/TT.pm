@@ -1,7 +1,7 @@
 package MojoMojo::View::TT;
 
 use strict;
-use base 'Catalyst::View::TT';
+use parent 'Catalyst::View::TT';
 use Template::Constants qw( :debug );
 use Class::C3 ();
 

@@ -2,7 +2,7 @@ package MojoMojo::Formatter::SyntaxHighlight;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 use HTML::Entities;
 
 eval "use Syntax::Highlight::Engine::Kate;";

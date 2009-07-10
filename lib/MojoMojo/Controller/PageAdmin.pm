@@ -2,7 +2,7 @@ package MojoMojo::Controller::PageAdmin;
 use warnings;
 use strict;
 use Data::Dumper;
-use base 'Catalyst::Controller::HTML::FormFu';
+use parent 'Catalyst::Controller::HTML::FormFu';
 use Syntax::Highlight::Engine::Kate;
 
 =head1 NAME

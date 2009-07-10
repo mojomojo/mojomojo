@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Admin;
 
 use strict;
-use base 'Catalyst::Controller::HTML::FormFu';
+use parent 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 

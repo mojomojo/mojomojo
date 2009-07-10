@@ -2,7 +2,7 @@ package MojoMojo::Controller::Comment;
 
 use strict;
 
-use base 'Catalyst::Controller::HTML::FormFu';
+use parent 'Catalyst::Controller::HTML::FormFu';
 
 =head1 NAME
 

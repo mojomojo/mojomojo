@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::YouTube;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 use URI::Fetch;
 
 =head1 NAME

@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Tag;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 use Carp qw/croak/;
 
 __PACKAGE__->load_components( "UTF8Columns", "Core" );

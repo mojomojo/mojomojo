@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Comment;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use Text::Textile;
 my $textile = Text::Textile->new(

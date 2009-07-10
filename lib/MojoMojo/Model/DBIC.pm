@@ -1,7 +1,7 @@
 package MojoMojo::Model::DBIC;
 
 use strict;
-use base 'Catalyst::Model::DBIC::Schema';
+use parent 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config( schema_class => 'MojoMojo::Schema' );
 

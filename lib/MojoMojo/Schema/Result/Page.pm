@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp qw/croak/;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components( "UTF8Columns", "Core");
 __PACKAGE__->table("page");

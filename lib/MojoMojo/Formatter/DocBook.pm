@@ -2,7 +2,7 @@ package MojoMojo::Formatter::DocBook;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 eval "use XML::LibXSLT;use XML::SAX::ParserFactory (); use XML::LibXML::Reader;";
 my $eval_res = $@;

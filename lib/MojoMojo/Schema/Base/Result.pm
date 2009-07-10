@@ -2,7 +2,7 @@ package MojoMojo::Schema::Base::Result;
 
 use strict;
 use warnings;
-use base qw/DBIx::Class/;
+use parent qw/DBIx::Class/;
 
 =head1 NAME
 

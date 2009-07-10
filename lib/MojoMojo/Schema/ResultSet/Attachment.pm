@@ -2,7 +2,7 @@ package MojoMojo::Schema::ResultSet::Attachment;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Schema::Base::ResultSet/;
+use parent qw/MojoMojo::Schema::Base::ResultSet/;
 use Archive::Zip qw(:ERROR_CODES);
 use File::MMagic;
 use FileHandle;
