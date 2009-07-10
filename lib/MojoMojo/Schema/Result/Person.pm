@@ -11,7 +11,7 @@ use Text::Textile;
 my $textile = Text::Textile->new( flavor => "xhtml1", charset => 'utf-8' );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp EncodedColumn PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp EncodedColumn UTF8Columns Core/);
 __PACKAGE__->table("person");
 __PACKAGE__->add_columns(
     "id",

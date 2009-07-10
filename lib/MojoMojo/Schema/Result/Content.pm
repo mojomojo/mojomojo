@@ -13,7 +13,7 @@ use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp UTF8Columns PK::Auto Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",

@@ -6,7 +6,7 @@ use warnings;
 use base qw/MojoMojo::Schema::Base::Result/;
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",

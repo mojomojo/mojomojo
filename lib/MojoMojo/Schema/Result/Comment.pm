@@ -14,7 +14,7 @@ my $textile = Text::Textile->new(
 );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns(
     "id",

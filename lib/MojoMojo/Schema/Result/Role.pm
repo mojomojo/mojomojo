@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "UTF8Columns", "Core" );
+__PACKAGE__->load_components( "UTF8Columns", "Core" );
 __PACKAGE__->table("role");
 __PACKAGE__->add_columns(
     "id",

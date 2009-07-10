@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("link");
 __PACKAGE__->add_columns(
     "id",

@@ -11,7 +11,7 @@ use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
 __PACKAGE__->load_components(
-    qw/PK::Auto DateTime::Epoch TimeStamp Ordered Core/);
+    qw/DateTime::Epoch TimeStamp Ordered Core/);
 
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");

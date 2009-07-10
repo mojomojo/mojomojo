@@ -5,7 +5,7 @@ use warnings;
 
 use base qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("role_member");
 __PACKAGE__->add_columns(
     "role",   { data_type => "INTEGER", is_nullable => 0, size => undef },
