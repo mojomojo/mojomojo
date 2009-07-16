@@ -12,7 +12,7 @@
     # Now, edits are lost.
 %]
 
-[% WRAPPER page/wrapper.tt pre_title=pre_titl %]
+[% WRAPPER page/wrapper.tt pre_title=pre_title %]
 <div id="content">
 
 <script type="text/javascript">
