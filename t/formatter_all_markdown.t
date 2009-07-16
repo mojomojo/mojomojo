@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown
-use Test::More tests => 20;
+use Test::More tests => 21;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -272,3 +272,18 @@ Some POD here
 MARKDOWN
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
 like($body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");
+
+
+#-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "Might be a bug with Text::Markdown";
+    $test = 'Underscore in code in footnotes becomes 128-bit hash';
+    $content = <<'MARKDOWN';
+This is buggy[^bug].
+
+[^bug]: Use `MYAPP_CONFIG_LOCAL_SUFFIX`.
+MARKDOWN
+
+    $body = get( POST '/.jsrpc/render', [ content => $content ] );
+    like($body, qr/MYAPP_CONFIG_LOCAL_SUFFIX/s, "'MYAPP_CONFIG_LOCAL_SUFFIX' in footnote");
+}
