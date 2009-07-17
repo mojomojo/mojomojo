@@ -33,7 +33,7 @@
     END;
 %]
 
-[%+ content |indent 4 +%]
+[%+ content +%]
 
 [%+
     IF simple_footer;
