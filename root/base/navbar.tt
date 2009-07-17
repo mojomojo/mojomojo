@@ -1,6 +1,6 @@
 <div id="toplinks">
   [% IF c.pref('disable_search') +%]
-    <form action="http://www.google.com/search" method="get">
+    <form action="http://google.com/search" method="get">
         <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
   [% ELSE +%]
     <form action="[% c.uri_for('search') %]" method="get">
@@ -39,7 +39,7 @@
             <li><a[% ' class="navOn"' IF template.name == 'feeds.tt' %] href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
             <li><a[% ' class="navOn"' IF template.name == 'export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
             <li>
-                <input type="hidden" name="search_type" value="all" />
+                [% UNLESS c.pref('disable_search') +%]<input type="hidden" name="search_type" value="all" />[% END +%]
                 <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
             </li>
         </ul>
