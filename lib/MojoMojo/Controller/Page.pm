@@ -277,6 +277,21 @@ sub inline_tags :Global {
     }
 }
 
+
+=head2 pages_viewable($c, $user, @pages)
+
+Filters an array of pages, returning only those that the given user has
+permission to view.
+
+=cut
+
+sub pages_viewable {
+    my ($c, $user, @pages) = @_;
+    return grep {
+        $c->check_permissions( $_->path, $user )->{view};
+    } @pages;
+}
+
 =head2 list (.list)
 
 All nodes in this namespace. Computes tags, all pages, backlinks, wanted and
@@ -294,29 +309,26 @@ sub list :Global {
     # Cache the list page for short period of time - override default of 300.
     $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
 
+    my @all_pages_viewable = $page->descendants;
+    my @backlinks_viewable = $c->model("DBIC::Link")->search( to_page => $page->id );
     if ( $c->pref('check_permission_on_view') ) {
-      my $user;
-      my @pages;
-      my @all_pages = $page->descendants;
-      if ( $c->user_exists() ) { $user = $c->user->obj; }
-      foreach my $page_to_check (@all_pages) {
-        # skip pages without view permissions
-        my $perms = $c->check_permissions( $page_to_check->path, $user );
-        next unless $perms->{'view'};
-        push @pages,$page_to_check;
-      }
-      $c->stash->{pages}    = [ @pages ];
-    } else {
-      $c->stash->{pages}    = [ $page->descendants ];
+        my $user;
+        if ( $c->user_exists() ) { $user = $c->user->obj; }
+        @all_pages_viewable = pages_viewable($c, $user, @all_pages_viewable);
+        @backlinks_viewable = grep {
+            # does the user have permission to view the page from which ours is linked?
+            $c->check_permissions( $_->from_page->path, $user )->{view};
+        } @backlinks_viewable;
     }
+    $c->stash->{pages} = \@all_pages_viewable;
+    $c->stash->{backlinks} = \@backlinks_viewable;
 
-    # FIXME - real data here please
-    $c->stash->{orphans} = [];
-    $c->stash->{backlinks} =
-      [ $c->model("DBIC::Link")->search( to_page => $page->id ) ];
+    $c->stash->{orphans} = [];  # FIXME - real data here please
+
+    # no need to check any permissions here because the user already views this page, and wanted pages are redlinks in it
     $c->stash->{wanted} = [
         $c->model("DBIC::WantedPage")->search(
-            { from_page => [ $page->id, map { $_->id } $page->descendants ] }
+            { from_page => [ $page->id, map { $_->id } @all_pages_viewable ] }
         )
     ];
 }
@@ -333,7 +345,14 @@ sub recent :Global {
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used;
     my $page = $c->stash->{page};
     $c->stash->{template} = 'page/recent.tt';
-    $c->stash->{pages}    = [ $page->descendants_by_date ];
+
+    my @pages_viewable = $page->descendants_by_date;
+    if ( $c->pref('check_permission_on_view') ) {
+        my $user;
+        if ( $c->user_exists() ) { $user = $c->user->obj; }
+        @pages_viewable = pages_viewable($c, $user, @pages_viewable);
+    }
+    $c->stash->{pages} = \@pages_viewable;
 
     # Cache the list page for short period of time - override default of 300.
     $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
@@ -430,8 +449,8 @@ sub search_inline :Path('/search/inline') {
 
 =head2 info (.info)
 
-Meta information about the current page: revision list, content size, children
-and descendants, links to/from, attachments.
+Meta information about the current page: revision list, content size, number of
+children and descendants, links to/from, attachments.
 
 =cut
 
