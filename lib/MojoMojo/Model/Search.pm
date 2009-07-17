@@ -19,9 +19,9 @@ __PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
 =head1 NAME
 
-MojoMojo::Controller::Search
+MojoMojo::Model::Search
 
-=head1 ACTIONS
+=head1 METHODS
 
 =over 4
 
@@ -83,11 +83,10 @@ sub prepare_search_index {
 
 =item index_page <page>
 
-Create/update the search index with data from a MojoMojo page.
+Create/update the search index with data from a MojoMojo page when it changes.
 
 =cut
 
-# updates the search index when page data changes
 sub index_page {
     my ( $self, $page ) = @_;
     my $index = $self->indexer;

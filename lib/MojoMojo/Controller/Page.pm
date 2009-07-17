@@ -110,9 +110,9 @@ sub view :Global {
 
 =head2 search (.search)
 
-This action is called as .search on the current page when the user
-performs a search.  The user can choose whether or not to search
-the entire site or a subtree starting from the current page.
+This action is called as C<.search> on the current page when the user
+performs a search.  The user can choose to search the entire site or a
+subtree starting from the current page.
 
 =cut
 
@@ -139,16 +139,15 @@ sub search :Global {
     my $real_query = $q;    # this is for context matching later
     if ( $search_type eq "subtree" ) {
         my $fixed_path = $page->path;
-        $fixed_path =~ s/\//X/g;
+        $fixed_path =~ s{/}{X}g;
         $q = "path:$fixed_path* AND " . $q;
     }
 
     my $hits = $c->model('Search')->search($q);
     my %results_hash;
     while ( my $hit = $hits->fetch_hit_hashref ) {
-        $hit->{path} =~ s/X/\//g;
-        my ($path_pages) =
-          $c->model('DBIC::Page')->path_pages( $hit->{path} );
+        $hit->{path} =~ s{X}{/}g;
+        my ($path_pages) = $c->model('DBIC::Page')->path_pages( $hit->{path} );
         my $page = $path_pages->[ @$path_pages - 1 ];
 
         # skip search result depending on permissions
