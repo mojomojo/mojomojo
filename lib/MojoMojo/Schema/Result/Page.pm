@@ -155,8 +155,8 @@ sub update_content {
 
   @descendants = $page->descendants_by_date;
 
-Like L<descendants>, but returns pages sorted by the dates of their
-last content release dates.
+Like L</descendants>, but returns pages sorted by the dates of their
+last content release dates and pages results (20 per page).
 
 =cut
 
@@ -184,6 +184,15 @@ sub descendants_by_date {
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
+
+
+=item descendants_by_date
+
+  @descendants = $page->descendants;
+
+Returns all descendants of this page (no paging), including the page itself.
+
+=cut
 
 sub descendants {
     my ($self)  = @_;
