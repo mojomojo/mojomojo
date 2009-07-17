@@ -17,7 +17,7 @@ MojoMojo::Controller::Page - Page controller
 
 =head1 DESCRIPTION
 
-This controller is the main juice of MojoMojo. it handles all the
+This controller is the main juice of MojoMojo. It handles all the
 actions related to wiki pages. Actions are redispatched to this
 controller based on a Regex controller in the main MojoMojo class.
 
@@ -30,7 +30,7 @@ can be called with urls like "/page1/page2.action".
 
 This is probably the most common action in MojoMojo. A lot of the
 other actions redispatch to this one. It will prepare the stash
-for page view, and set the template to view.tt, unless another is
+for page view, and set the template to C<view.tt>, unless another is
 already set.
 
 It also takes an optional 'rev' parameter, in which case it will
@@ -38,7 +38,7 @@ load the provided revision instead.
 
 =cut
 
-sub view : Global {
+sub view :Global {
     my ( $self, $c, $path ) = @_;
 
     my $stash = $c->stash;
@@ -116,7 +116,7 @@ the entire site or a subtree starting from the current page.
 
 =cut
 
-sub search : Global {
+sub search :Global {
     my ( $self, $c ) = @_;
 
     my $stash = $c->stash;
@@ -227,17 +227,28 @@ sub search : Global {
 
 =head2 print
 
-this action is the same as the view action, with another template
+This action is the same as the L</view> action, but with a printer-friendly
+template.
 
 =cut
 
-sub print : Global {
+sub print :Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/print.tt';
     $c->forward('view');
 }
 
-sub inline : Global {
+
+=head2 inline
+
+Same as L</view> action, but with a template that only outputs the barebones
+body of the page. There are no headers, footers, or navigation bars. Useful
+for transclusion.
+
+=cut
+
+
+sub inline :Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/inline.tt';
     $c->forward('view');
@@ -250,7 +261,7 @@ Tag list for the bottom of page views.
 
 =cut
 
-sub inline_tags : Global {
+sub inline_tags :Global {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template} ||= 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
@@ -269,11 +280,12 @@ sub inline_tags : Global {
 
 =head2 list (.list)
 
-all nodes in this namespace
+All nodes in this namespace. Computes tags, all pages, backlinks, wanted and
+orphan pages.
 
 =cut
 
-sub list : Global {
+sub list :Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
@@ -312,11 +324,11 @@ sub list : Global {
 
 =head2 recent (.recent)
 
-recently changed nodes in this namespace.
+Recently changed pages in this namespace.
 
 =cut
 
-sub recent : Global {
+sub recent :Global {
     my ( $self, $c, $tag ) = @_;
     $c->detach( '/tag/recent', [$tag] ) if $tag;
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used;
@@ -336,7 +348,7 @@ Overview of available feeds for this node.
 
 =cut
 
-sub feeds : Global {
+sub feeds :Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'feeds.tt';
 }
@@ -347,21 +359,21 @@ RSS feed with headlines of recent nodes in this namespace.
 
 =cut
 
-sub rss : Global {
+sub rss :Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
     $c->res->content_type('application/rss+xml');
 }
 
+
 =head2 atom (.atom)
 
 Full content ATOM feed of recent nodes in this namespace.
 
-
 =cut
 
-sub atom : Global {
+sub atom :Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->res->content_type('application/atom+xml');
@@ -374,12 +386,13 @@ Full content RSS feed of recent nodes in this namespace.
 
 =cut
 
-sub rss_full : Global {
+sub rss_full :Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->res->content_type('application/rss+xml');
     $c->stash->{template} = 'page/rss_full.tt';
 }
+
 
 =head2 export (.export)
 
@@ -387,18 +400,18 @@ Page showing available export options.
 
 =cut
 
-sub export : Global {
+sub export :Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'export.tt';
 }
 
 =head2 suggest (.suggest)
 
-"Page not found" page, suggesting alternatives, and allowing you to create the page.
+"Page not found" page, suggesting alternatives, and allowing creation of the page.
 
 =cut
 
-sub suggest : Global {
+sub suggest :Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'page/suggest.tt';
     $c->res->status(404);
@@ -406,11 +419,11 @@ sub suggest : Global {
 
 =head2 search_inline (.search/inline)
 
-Embedded search results in another page (for use with suggest).
+Search results embeddable in another page (for use with L</suggest>).
 
 =cut
 
-sub search_inline : Path('/search/inline') {
+sub search_inline :Path('/search/inline') {
     my ( $self, $c ) = @_;
     $c->forward('search');
     $c->stash->{template} = 'page/search_inline.tt';
@@ -418,11 +431,12 @@ sub search_inline : Path('/search/inline') {
 
 =head2 info (.info)
 
-Display meta information about the current page.
+Meta information about the current page: revision list, content size, children
+and descendants, links to/from, attachments.
 
 =cut
 
-sub info : Global {
+sub info :Global {
     my ( $self, $c ) = @_;
     $c->stash->{body_length} = length( $c->stash->{page}->content->body );
     $c->stash->{template}    = 'page/info.tt';
@@ -435,7 +449,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 
