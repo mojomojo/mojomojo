@@ -72,11 +72,9 @@ MojoMojo::Schema::Result::Photo
 
 =head1 METHODS
 
-=over 4
-
 =cut
 
-=item extract_exif
+=head2 extract_exif
 
 Extracts EXIF information from a given Attachment and
 populates the Photo object.
@@ -94,7 +92,7 @@ sub extract_exif {
     $self->taken( $self->exif2datetime( $info->{'DateTimeOriginal'} ) );
 }
 
-=item exif2datetime datetime
+=head2 exif2datetime datetime
 
 Creates a L<DateTime> object from a EXIF timestamp.
 
@@ -120,7 +118,7 @@ sub exif2datetime {
     return $dto;
 }
 
-=item prev_by_tag <tag>
+=head2 prev_by_tag <tag>
 
 Return previous image when browsing by a given tag.
 
@@ -134,7 +132,7 @@ sub prev_by_tag {
     )->next;
 }
 
-=item next_by_tag <tag>
+=head2 next_by_tag <tag>
 
 Return next image object after this when browsing by the given tag.
 
@@ -148,7 +146,7 @@ sub next_by_tag {
     )->next;
 }
 
-=item others_tags <user>
+=head2 others_tags <user>
 
 Tags other users have given to this Photo.
 
@@ -171,7 +169,7 @@ sub others_tags {
     return @tags;
 }
 
-=item user_tags <user>
+=head2 user_tags <user>
 
 Tags this user has given to this photo.
 
@@ -189,7 +187,7 @@ sub user_tags {
     return @tags;
 }
 
-=item make_inline
+=head2 make_inline
 
 Create a resized version of a photo suitable for inline usage.
 
@@ -207,7 +205,7 @@ sub make_inline {
       or die $img->errstr;
 }
 
-=item make_thumb
+=head2 make_thumb
 
 Create a thumbnail version of a photo, for gallery views and linking to pages.
 
