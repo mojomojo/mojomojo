@@ -67,8 +67,7 @@ sub tagged_descendants_by_date {
                 'me.id' => \'=ancestor.id',
                 -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
-            'me.id',
-            => \'=tag.page',
+            'me.id'           => \'=tag.page',
             'content.page'    => \'=me.id',
             'content.version' => \'=me.content_version',
         },
@@ -92,8 +91,7 @@ sub tagged_descendants {
                 -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
 
-            'me.id',
-            => \'=tag.page',
+            'me.id'           => \'=tag.page',
             'content.page'    => \'=me.id',
             'content.version' => \'=me.content_version',
         },
@@ -186,7 +184,7 @@ sub descendants_by_date {
 }
 
 
-=item descendants_by_date
+=item descendants
 
   @descendants = $page->descendants;
 
