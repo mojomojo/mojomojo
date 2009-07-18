@@ -2,7 +2,7 @@ package MojoMojo::Formatter::File;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 use File::Slurp;
 use Module::Pluggable (
     search_path => ['MojoMojo::Formatter::File'],

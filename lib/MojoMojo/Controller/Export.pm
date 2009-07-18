@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Export;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 use Archive::Zip;
 use DateTime;

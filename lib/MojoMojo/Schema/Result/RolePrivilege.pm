@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::RolePrivilege;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("role_privilege");
 __PACKAGE__->add_columns(
     "page",      { data_type => "INTEGER", is_nullable => 0, size => undef },

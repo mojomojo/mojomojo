@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Photo;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime;
 use Image::ExifTool;
@@ -11,7 +11,7 @@ use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
 __PACKAGE__->load_components(
-    qw/PK::Auto DateTime::Epoch TimeStamp Ordered Core/);
+    qw/DateTime::Epoch TimeStamp Ordered Core/);
 
 __PACKAGE__->position_column('position');
 __PACKAGE__->table("photo");

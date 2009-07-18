@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::Preference;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "UTF8Columns", "Core" );
+__PACKAGE__->load_components( "UTF8Columns", "Core" );
 __PACKAGE__->table("preference");
 __PACKAGE__->add_columns(
     "prefkey",   { data_type => "VARCHAR", is_nullable => 0, size => 100 },

@@ -1,6 +1,6 @@
 package MojoMojo::Controller::Root;
 
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 __PACKAGE__->config->{namespace} = '';
 

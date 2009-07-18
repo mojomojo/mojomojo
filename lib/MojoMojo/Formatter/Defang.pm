@@ -1,7 +1,7 @@
 package MojoMojo::Formatter::Defang;
 use strict;
 use warnings;
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 use HTML::Declaw;
 use URI;
 

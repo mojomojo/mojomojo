@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Jsrpc;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 use HTML::Entities;
 
 =head1 NAME

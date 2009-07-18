@@ -1,51 +1,57 @@
 <div id="search">
-    <form action="[% base %]/[% UNLESS c.req.args.first == '/'; c.req.args.first; END %].search" method="get">
-        [% loc('Search') %]: <input type="text" name="q" value="[% query %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
-        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') %]
-        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) %]
+
+  [% IF c.pref('disable_search') +%]
+    <form action="http://google.com/search" method="get">
+        <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+        [%+ loc('Search:') %] <input type="text" name="q" value="[% query |html %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
+  [% ELSE +%]
+    <form action="[% c.uri_for('search') %]" method="get">
+        [%+ loc('Search:') %] <input type="text" name="q" value="[% query |html %]" /> <input type="submit" value="[% loc('Go') %]" /><br />
+        <input type="radio" name="search_type" value="all" [% IF search_type == "all" %]checked="checked"[% END %] /> [% loc('Search entire site') +%]
+        <input type="radio" name="search_type" value="subtree" [% IF search_type != "all" %]checked="checked"[% END %] /> [% loc('Search within x', page.path) +%]
+  [% END +%]
     </form>
 </div>
 
-[% IF result_count %]
+[%+ IF result_count %]
     [%
         IF search_type != "all";
             SET found_within = result.page.path;
         ELSE;
             SET found_within = loc('entire site');
         END;
-    %]
-<h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %].</h3>
-[% ELSIF !result_count %]
-<h3>[% loc('No results found') %].</h3>
-[% END %]
+    +%]
+<h3>[% loc('Results x-x of x found within x', [pager.first, pager.last, pager.total_entries, found_within]) %]</h3>
+[% ELSE -%]
+<h3>[% loc('No results found') %]</h3>
+[% END +%]
 
-<ul>
-[% FOR result = results %]
-    <li>
-        <strong><a href="[% c.uri_for(result.page.path) %]">[% c.expand_wikilink(result.page.name) %]</a></strong>
-        <span id="search_hit_score">[% result.score %]%</span>
+<ul id="search_results">
+  [% FOR result = results +%]
+    <li class="search_result">
+        <small>[% result.title_base_nodes %]</small><strong><a href="[% c.uri_for( result.page.path) %]">[% c.expand_wikilink(result.page.name_orig) %]</a></strong> [% result.page.content.abstract %]
         <div class="snippet">[% result.snippet %]</div>
         <div class="byline">
-            [% loc('by') %] [% c.wikiword(result.page.page_version.creator.login,base) %]
+                [% loc('by') %] [% c.wikiword(result.page.content.creator.link, base) %]
             [% loc('on') %] <small>[% result.page.content.created.ymd("-") %]</small>
         </div>
     </li>
-[% END %]
+  [% END +%]
 </ul>
 
 [% IF pager && pager.total_entries > pager.entries_per_page %]
-    <div class="pager">
-        <ul>
-            <li>[% loc('Result Page') %]:</li>
-        [% IF pager.current_page > pager.first_page %]
-            <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.previous_page %]">&lt;&lt; [% loc('Previous') %]</a></li>
-        [% END %]
-        [% FOR num = pages_to_link %]
-            <li>[% UNLESS num == pager.current_page %]<a href="?q=[% query %]&search_type=[% search_type %]&p=[% num %]">[% END %][% num %][% UNLESS num == pager.current_page %]</a>[% END %]</li>
-        [% END %]
-        [% IF pager.current_page < pager.last_page %]
-            <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.next_page %]">[% loc('Next') %] &gt;&gt;</a></li>
-        [% END %]
-        </ul>
-    </div>
+<div class="pager">
+    <ul>
+        <li>[% loc('Result Page:') %]</li>
+      [% IF pager.current_page > pager.first_page %]
+        <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.previous_page %]">&lt;&lt; [% loc('Previous') %]</a></li>
+      [% END %]
+      [% FOR num = pages_to_link %]
+        <li>[% UNLESS num == pager.current_page %]<a href="?q=[% query %]&search_type=[% search_type %]&p=[% num %]">[% END %][% num %][% UNLESS num == pager.current_page %]</a>[% END %]</li>
+      [% END %]
+      [% IF pager.current_page < pager.last_page %]
+        <li><a href="?q=[% query %]&search_type=[% search_type %]&p=[% pager.next_page %]">[% loc('Next') %] &gt;&gt;</a></li>
+      [% END %]
+    </ul>
+</div>
 [% END %]

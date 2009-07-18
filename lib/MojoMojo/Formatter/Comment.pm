@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Comment;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 =head1 NAME
 

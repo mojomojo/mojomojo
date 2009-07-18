@@ -183,7 +183,7 @@ div#edit_form {
 
 
 textarea#body {
-    height: 32em;
+    height: 26em;
     /* max-width: 930px; */
     width: 100%;
 }
@@ -337,7 +337,6 @@ a.tag:hover {
    /*  vertical-align: super;; */
     background: #f6d8b4;
     border: 1px solid #dddddd;
-    line-height: 0;
     font-weight: bold;
     text-decoration: none;
     color: #e33;
@@ -1137,7 +1136,12 @@ div#bottomnav { clear: both; }
 .kateWarning { color: #0000ff; }
 
 #editspinner { display: none; }
-#search_results { text-indent: 1em; }
+#search_results {
+    text-indent: 1em;
+}
+#search_results .search_result {
+    list-style-type: none;
+}
 
 .display-none { display: none; }
 .float-left { float: left; }

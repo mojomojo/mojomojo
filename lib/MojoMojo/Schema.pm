@@ -9,7 +9,7 @@ our $VERSION='1';
 
 has 'attachment_dir' => ( is => 'rw', isa => 'Str' );
 
-use base 'DBIx::Class::Schema';
+use parent 'DBIx::Class::Schema';
 
 __PACKAGE__->load_namespaces( default_resultset_class => '+MojoMojo::Schema::Base::ResultSet' );
 

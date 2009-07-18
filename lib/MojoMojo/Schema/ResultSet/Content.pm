@@ -2,7 +2,7 @@ package MojoMojo::Schema::ResultSet::Content;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Schema::Base::ResultSet/;
+use parent qw/MojoMojo::Schema::Base::ResultSet/;
 
 =head1 NAME
 

@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Main;
 
-use base 'MojoMojo::Formatter';
+use parent 'MojoMojo::Formatter';
 
 =head1 NAME
 

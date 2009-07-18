@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Include;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 eval "use LWP::Simple;use URI::Fetch;";
 my $eval_res = $@;

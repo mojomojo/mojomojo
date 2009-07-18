@@ -1,10 +1,10 @@
-0.999030 2009-06-22 17:01:00
-        - Update Catalyst theme
-        -  Defang remote img src - whitelist if you want to allow them
-        -  Fixed profile user name when in view mode
-        -  Linked from was moved from page/bottomnav.tt to page/info.tt
-        -  Forked Defang to Declaw included in our distribution for 
-           now
+0.999030
+        - fixed vertical split mode to stay side-by-side (mateu, dandv @ YAPC10)
+        - Updated Catalyst theme
+        - Defang remote img src - whitelist if you want to allow them
+        - Fixed profile user name when in view mode
+        - Linked from was moved from page/bottomnav.tt to page/info.tt
+        - Forked Defang to Declaw included in our distribution for now
         - Fix Args("") issue
 
 0.999029 2009-05-09 23:59:35
@@ -158,11 +158,11 @@
         - Restrict search results depending on permissions (plu)
 
 0.999017 2008-07-09 11:59:00
-        - Unbreak search.
+        - Unbreak search
         - Add a default from address for mail
 
 0.999016 2008-06-29 15:01:00
-        - Limit recent feed to 20 entries.
+        - Limit recent feed to 20 entries
         - Add option to disable search
         - Make implicit wikiword linking disabled by default
         - Hash passwords.
@@ -171,7 +171,7 @@
           install. Don't run this more than once! (Script should complain tho)
 
 0.999015 2008-05-03 18:01:00
-        - patches from linio with user related bugfixes
+        - patches from linio with user-related bugfixes
         - fix missing dependencies
 
 0.999014 2008-04-19 00:08:00

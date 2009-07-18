@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Markdown;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 my $markdown;
 eval "use Text::MultiMarkdown";

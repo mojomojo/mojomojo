@@ -127,7 +127,7 @@ include/exclude list accessor
 # include/exclude pages list to cache
 my $ie;
 $ie = Algorithm::IncludeExclude->new;
-$ie->include(); 
+$ie->include();
 # static files will be handled via web server or proxy cache control.
 $ie->exclude(qr{static});
 $ie->exclude(qr{attachment});
@@ -136,7 +136,7 @@ $ie->exclude('login');
 $ie->exclude('logout');
 $ie->exclude('edit');
 # Short cache time set in controller action for list and view
-#$ie->exclude('list'); 
+#$ie->exclude('list');
 #$ie->exclude('recent');
 
 sub cache_ie_list {
@@ -219,9 +219,9 @@ sub pref_cached {
     # Check that we have a database, i.e. script/mojomojo_spawn_db.pl was run.
     my $row;
     eval { $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } ); };
-    if ( $@ ) { 
+    if ( $@ ) {
         my $no_db_message = "ERROR: You don't seem to have a database initialized.
-Initialize one with script/mojomojo_spawn_db.pl\n"; 
+Initialize one with script/mojomojo_spawn_db.pl\n";
         $c->response->body($no_db_message);
         warn $no_db_message;
         $c->detach();
@@ -533,12 +533,12 @@ sub check_permissions {
 
     # if no user is logged in
     unless ($user){
-      # if anonymous user is allowed
-      my $anonymous=$c->pref('anonymous_user');
-      if ($anonymous){
-        # get anonymous user for no logged-in users
-        $user= $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
-      }
+        # if anonymous user is allowed
+        my $anonymous = $c->pref('anonymous_user');
+        if ($anonymous) {
+            # get anonymous user for no logged-in users
+            $user = $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+        }
     }
 
     my @paths_to_check = $c->_expand_path_elements($path);

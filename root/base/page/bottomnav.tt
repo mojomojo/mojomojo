@@ -48,10 +48,10 @@
 [% IF page.content_version && page.content_version > 1 +%]
         <li>
             <span id="show_changes">
-                <a title="[%loc('Show differences from previous version')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" class="toggleChanges">[%loc('See changes')%]</a>
+                <a title="[%loc('Show differences from previous version')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev)%]" rel="nofollow" class="toggleChanges">[%loc('See changes')%]</a>
             </span>
             <span id="hide_changes" class="display-none">
-                <a title="[%loc('Show normal page')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev) %]" class="toggleChanges">[%loc('Hide changes')%]</a>
+                <a title="[%loc('Show normal page')%]" href="[%c.uri_for('jsrpc/diff', page.id , rev) %]" rel="nofollow" class="toggleChanges">[%loc('Hide changes')%]</a>
             </span>
         </li>
 [% END +%]

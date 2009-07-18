@@ -1,7 +1,7 @@
 package MojoMojo::Controller::User;
 
 use strict;
-use base qw/Catalyst::Controller::HTML::FormFu/;
+use parent qw/Catalyst::Controller::HTML::FormFu/;
 
 use Digest::MD5 qw/md5_hex/;
 use Text::Password::Pronounceable;

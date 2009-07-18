@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::Link;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("link");
 __PACKAGE__->add_columns(
     "id",

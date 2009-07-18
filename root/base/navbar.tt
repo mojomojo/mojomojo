@@ -1,77 +1,77 @@
 <div id="toplinks">
-[% IF c.pref('disable_search') -%]
-<form action="http://www.google.com/search" method="get">
-    <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
-[% ELSE -%]
-<form action="[% c.uri_for('search') %]" method="get">
-[% END -%]
-    <ul>
-[% IF (user) %]
-    [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user'))) +%]
-        <li><a class="navOn" href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
-    [% ELSE %]
-        [% IF user.active %]
-            [% IF (!rev OR rev==page.content_version) %]
-                [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-        <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
-                [% END %]
-            [% END +%]
-        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]">[% c.fixw(user.login) %]</a></li>
-        [% ELSE +%]
-        <li><a href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+  [% IF c.pref('disable_search') +%]
+    <form action="http://google.com/search" method="get">
+        <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+  [% ELSE +%]
+    <form action="[% c.uri_for('search') %]" method="get">
+  [% END +%]
+        <ul>
+        [% IF (user) %]
+         [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user'))) +%]
+            <li><a class="navOn" href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+         [% ELSE %]
+          [% IF user.active %]
+           [% IF (!rev OR rev==page.content_version) %]
+            [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
+            <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
+            [% END %]
+           [% END # rev +%]
+            <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]">[% c.fixw(user.login) %]</a></li>
+          [% ELSE # user not active +%]
+            <li><a href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+          [% END # user.active %]
+         [% END # user.login +%]
+            <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
+        [% ELSE # !user +%]
+            <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
+          [%+ IF(c.pref('open_registration')) %]
+            <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
+          [% END %]
         [% END %]
-    [% END +%]
-        <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
-[% ELSE +%]
-        <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
-    [%+ IF(c.pref('open_registration')) %]
-        <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
-    [% END %]
-[% END %]
-        <li><a[% ' class="navOn"' IF template.name == 'page/list.tt' %] href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
-        <li><a[% ' class="navOn"' IF template.name =='page/recent.tt' %] href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
-[% IF (pictures OR photo) +%]
-        <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
-[% ELSE +%]
-        <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]" accesskey="T">[% loc('Tags') %]</a></li>
-[% END %]
-        <li><a[% ' class="navOn"' IF c.req.action == 'users' %] href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
-        <li><a[% ' class="navOn"' IF template.name == 'feeds.tt' %] href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
-        <li><a[% ' class="navOn"' IF template.name =='export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
-        <li>
-            <input type="hidden" name="search_type" value="all" />
-            <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
-        </li>
-    </ul>
-</form>
+            <li><a[% ' class="navOn"' IF template.name == 'page/list.tt' %] href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
+            <li><a[% ' class="navOn"' IF template.name == 'page/recent.tt' %] href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
+          [% IF (pictures OR photo) +%]
+            <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
+          [% ELSE +%]
+            <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]" accesskey="T">[% loc('Tags') %]</a></li>
+          [% END %]
+            <li><a[% ' class="navOn"' IF c.req.action == 'users' %] href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
+            <li><a[% ' class="navOn"' IF template.name == 'feeds.tt' %] href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
+            <li><a[% ' class="navOn"' IF template.name == 'export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
+            <li>
+                [% UNLESS c.pref('disable_search') +%]<input type="hidden" name="search_type" value="all" />[% END +%]
+                <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
+            </li>
+        </ul>
+    </form>
 </div>
 <div id="pagenav">
     <ul>
-[% IF (c.req.action=="view") %]
+      [% IF (c.req.action=="view") +%]
         <li class="navOn">[% loc('Page') %]</li>
-[% ELSE %]
+      [% ELSE +%]
         <li><a title="[ %loc('The Wikilicious page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
-[% END %]
-[% IF (page.has_photos) %]
-    [% IF pictures %]
+      [% END %]
+      [% IF (page.has_photos) %]
+        [% IF pictures +%]
         <li class="navOn">[% loc('Gallery') %]</li>
-    [% ELSE %]
+        [% ELSE +%]
         <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
-    [% END %]
-[% ELSE%]
-    <li>[% loc('Gallery') %]</li>
-[% END %]
-[% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
-    [% IF (c.req.action=="profile") %]
+        [% END %]
+      [% ELSE +%]
+        <li>[% loc('Gallery') %]</li>
+      [% END %]
+      [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
+        [% IF (c.req.action=="profile") +%]
         <li class="navOn">[% loc('Profile') %]</li>
-    [% ELSE %]
+        [% ELSE +%]
         <li><a title="[% loc('User Profile') %]" href="[% c.uri_for('profile') %]">[% loc('Profile') %]</a></li>
-    [% END %]
-    [% IF (c.req.action=="prefs")%]
+        [% END %]
+        [% IF (c.req.action=="prefs") +%]
         <li class="navOn">[% loc('Preferences') %]</li>
-    [% ELSE %]
+        [% ELSE +%]
         <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
-    [% END %]
-[% END %]
+        [% END %]
+      [% END +%]
     </ul>
 </div>

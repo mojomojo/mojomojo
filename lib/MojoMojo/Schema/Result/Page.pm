@@ -4,9 +4,9 @@ use strict;
 use warnings;
 use Carp qw/croak/;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "UTF8Columns", "Core");
+__PACKAGE__->load_components( "UTF8Columns", "Core");
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
     "id",
@@ -67,8 +67,7 @@ sub tagged_descendants_by_date {
                 'me.id' => \'=ancestor.id',
                 -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
-            'me.id',
-            => \'=tag.page',
+            'me.id'           => \'=tag.page',
             'content.page'    => \'=me.id',
             'content.version' => \'=me.content_version',
         },
@@ -92,8 +91,7 @@ sub tagged_descendants {
                 -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
 
-            'me.id',
-            => \'=tag.page',
+            'me.id'           => \'=tag.page',
             'content.page'    => \'=me.id',
             'content.version' => \'=me.content_version',
         },
@@ -155,8 +153,8 @@ sub update_content {
 
   @descendants = $page->descendants_by_date;
 
-Like L<descendants>, but returns pages sorted by the dates of their
-last content release dates.
+Like L</descendants>, but returns pages sorted by the dates of their
+last content release dates and pages results (20 per page).
 
 =cut
 
@@ -184,6 +182,15 @@ sub descendants_by_date {
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
+
+
+=item descendants
+
+  @descendants = $page->descendants;
+
+Returns all descendants of this page (no paging), including the page itself.
+
+=cut
 
 sub descendants {
     my ($self)  = @_;

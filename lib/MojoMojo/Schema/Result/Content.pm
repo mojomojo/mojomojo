@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Content;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime::Format::Mail;
 
@@ -13,7 +13,7 @@ use String::Diff;
 use HTML::Entities qw/encode_entities_numeric/;
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp UTF8Columns PK::Auto Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",

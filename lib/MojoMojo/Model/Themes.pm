@@ -2,7 +2,7 @@ package MojoMojo::Model::Themes;
 
 use strict;
 
-use base 'Catalyst::Model';
+use parent 'Catalyst::Model';
 
 =head1 NAME
 
