@@ -120,7 +120,7 @@ L<MojoMojo::Installation> to try it out yourself.
 
 =head2 cache_ie_list
 
-include/exclude list accessor
+Include/exclude list accessor
 
 =cut
 
@@ -161,27 +161,39 @@ sub cache_hook {
   return 1;   # Cache
 }
 
-# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
-
 sub ajax {
     my ($c) = @_;
     return $c->req->header('x-requested-with')
         && $c->req->header('x-requested-with') eq 'XMLHttpRequest';
 }
 
+=head2 expand_wikilink
+
+Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
+
+=cut
+
 sub expand_wikilink {
     my $c = shift;
     return MojoMojo::Formatter::Wiki->expand_wikilink(@_);
 }
 
-# Format a wikiword as a link or as a wanted page, as appropriate.
+=head2 wikiword
+
+Format a wikiword as a link or as a wanted page, as appropriate.
+
+=cut
 
 sub wikiword {
     return MojoMojo::Formatter::Wiki->format_link(@_);
 }
 
-# Find or create a preference key, update it if you pass a value
-# then return the current setting.
+=head2 pref
+
+Find or create a preference key, update it if you pass a value then return the
+current setting.
+
+=cut
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
@@ -207,7 +219,11 @@ sub pref {
     );
 }
 
-# Get preference key/value from cache if possible.
+=head2 pref_cached
+
+Get preference key/value from cache if possible.
+
+=cut
 
 sub pref_cached {
     my ( $c, $setting, $value ) = @_;
@@ -272,7 +288,12 @@ Initialize one with script/mojomojo_spawn_db.pl\n";
     return $c->cache->get($setting);
 }
 
-# Clean up explicit wiki words.
+=head2 fixw
+
+Clean up wiki words: replace spaces with underscores and remove non-\w, / and .
+characters.
+
+=cut
 
 sub fixw {
     my ( $c, $w ) = @_;
@@ -281,14 +302,18 @@ sub fixw {
     return $w;
 }
 
-# We override this method to work around some of Catalyst's assumptions
-# about dispatching. Since MojoMojo supports page namespaces
-# (e.g. '/parent_page/child_page'), with page paths that
-# always start with '/', we strip the trailing slash from $c->req->base.
-# Also, since MojoMojo indicates actions by appending a '.$action' to
-# the path (e.g. '/parent_page/child_page.edit'), we remove the page
-# path and save it in $c->stash->{path} and reset $c->req->path to $action.
-# We save the original uri in $c->stash->{pre_hacked_uri}.
+=head2 prepare_path
+
+We override this method to work around some of Catalyst's assumptions about
+dispatching. Since MojoMojo supports page namespaces
+(e.g. '/parent_page/child_page'), with page paths that always start with '/',
+we strip the trailing slash from $c->req->base. Also, since MojoMojo indicates
+actions by appending a '.$action' to the path
+(e.g. '/parent_page/child_page.edit'), we remove the page path and save it in
+$c->stash->{path} and reset $c->req->path to $action. We save the original URI
+in $c->stash->{pre_hacked_uri}.
+
+=cut
 
 sub prepare_path {
     my $c = shift;
@@ -315,7 +340,11 @@ sub prepare_path {
     }
 }
 
-# Return the base as an URI object.
+=head2 base_uri
+
+Return $c->req->base as an URI object.
+
+=cut
 
 sub base_uri {
     my $c = shift;
@@ -330,7 +359,11 @@ sub unicode {
     return $string;
 }
 
-# Override $c->uri_for to append path, if relative path is used
+=head2 uri_for
+
+Override $c->uri_for to append path, if a relative path is used.
+
+=cut
 
 sub uri_for {
     my $c = shift;
@@ -355,7 +388,7 @@ sub uri_for_static {
     return ( $self->config->{static_path} || '/.static/' ) . $asset;
 }
 
-#  Permissions are checked prior to most actions. Including view if that is
+#  Permissions are checked prior to most actions, including view if that is
 #  turned on in the configuration. The permission system works as follows.
 #  1. There is a base set of rules which may be defined in the application
 #     config, these are:
@@ -389,7 +422,7 @@ sub _cleanup_path {
     my ( $c, $path ) = @_;
     ## make some changes to the path - We have to do this
     ## because path is not always cleaned up before we get it.
-    ## sometimes we get caps, other times we don't.  permissions are
+    ## sometimes we get caps, other times we don't. Permissions are
     ## set using lowercase paths.
 
     ## lowercase the path - and ensure it has a leading /
@@ -431,7 +464,7 @@ sub get_permissions_data {
 
     my $permdata;
 
-    ## ok - now that we have our path elements to check - we have to figure out how we are accessing them.
+    ## Now that we have our path elements to check, we have to figure out how we are accessing them.
     ## If we have caching turned on, we load the perms from the cache and walk the tree.
     ## otherwise we pull what we need out of the db.
     # structure:   $permdata{$pagepath} = {
@@ -457,9 +490,9 @@ sub get_permissions_data {
         $permdata = $c->cache->get('page_permission_data');
     }
 
-    # if we don't have any permissions data, we have a problem. we need to load it.
-    # we have two options here - if we are caching, we will load everything and cache it.
-    # if we are not - then we load just the bits we need.
+    # If we don't have any permissions data, we have a problem. We need to load it.
+    # We have two options here - if we are caching, we will load everything and cache it.
+    # If we are not - then we load just the bits we need.
     if ( !$permdata ) {
         ## either the data hasn't been loaded, or it's expired since we used it last.
         ## so we need to reload it.
@@ -469,7 +502,7 @@ sub get_permissions_data {
 
         # if we are not caching, we don't return the whole enchilada.
         if ( ! $c->pref('cache_permission_data') ) {
-            ## this seems odd to me - but that's what the dbix::class says to do.
+            ## this seems odd to me - but that's what the DBIx::Class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
                 {
@@ -659,7 +692,7 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org.
+If you want to talk about MojoMojo, there's an IRC channel, L<irc://irc.perl.org/mojomojo>.
 Commercial support and customization for MojoMojo is also provided by Nordaaker
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
 
