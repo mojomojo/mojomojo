@@ -23,8 +23,6 @@ MojoMojo::Model::Search
 
 =head1 METHODS
 
-=over 4
-
 =cut
 
 my $invindexer;
@@ -56,7 +54,7 @@ sub searcher {
     );
 }
 
-=item prepare_search_index
+=head2 prepare_search_index
 
 Create a new search index from all pages in the database.
 Will do nothing if the index already exists.
@@ -81,7 +79,7 @@ sub prepare_search_index {
     MojoMojo->log->info("Indexed $count pages") if MojoMojo->debug;
 }
 
-=item index_page <page>
+=head2 index_page <page>
 
 Create/update the search index with data from a MojoMojo page when it changes.
 
