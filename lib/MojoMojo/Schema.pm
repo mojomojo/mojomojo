@@ -5,6 +5,8 @@ use warnings;
 
 use Moose;
 
+our $VERSION='1';
+
 has 'attachment_dir' => ( is => 'rw', isa => 'Str' );
 
 use base 'DBIx::Class::Schema';
