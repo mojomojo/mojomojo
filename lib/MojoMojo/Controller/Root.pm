@@ -35,7 +35,8 @@ sub begin : Private {
 
 =item default (global)
 
-default action - serve the home node
+Default action - display the error page (message.tt), for example when a
+nonexistent action was requested (like C</parent_page/child_page.fireworks>).
 
 =cut
 

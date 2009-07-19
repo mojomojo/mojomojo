@@ -318,7 +318,7 @@ in $c->stash->{pre_hacked_uri}.
 sub prepare_path {
     my $c = shift;
     $c->next::method(@_);
-    $c->stash->{pre_hacked_uri} = $c->req->uri;
+    $c->stash->{pre_hacked_uri} = URI->new($c->req->uri);
     my $base = $c->req->base;
     $base =~ s|/+$||;
     $c->req->base( URI->new($base) );
