@@ -104,11 +104,11 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 DESCRIPTION
 
-Mojomojo is a sort of content managment system, borrowing many concepts from
+Mojomojo is a sort of content management system, borrowing many concepts from
 wikis and blogs. It allows you to maintain a full tree-structure of pages,
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy AJAX-
-based diff system. There are also a bunch of other features like bult-in
+based diff system. There are also a bunch of other features like built-in
 fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
 To find out more about how you can use MojoMojo, please visit
@@ -711,7 +711,7 @@ A number of other contributors over the years.
 
 =head1 COPYRIGHT 
 
-Copyright 2009, Marcus Ramberg
+Copyright 2005-2009, Marcus Ramberg
 
 =head1 LICENSE
 
