@@ -708,6 +708,11 @@ Jonathan Rockway C<jrockway@jrockway.us>
 
 A number of other contributors over the years.
 
+
+=head1 COPYRIGHT 
+
+Copyright 2009, Marcus Ramberg
+
 =head1 LICENSE
 
 You may distribute this code under the same terms as Perl itself.
