@@ -172,10 +172,9 @@ div#pageoptions a.active {
 }
 
 #content {
-    overflow: hidden;
+    overflow: auto;  /* wide unwrappable content needs to be visible; see test at http://wiki.dandascalescu.com/reviews/food/vitamins */
     background: #ffffff;
     padding: 2em 13px;
-    overflow: hidden;
 }
 
 #content strong,b {
