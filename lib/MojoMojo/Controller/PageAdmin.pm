@@ -179,9 +179,6 @@ sub edit : Global FormConfig {
         # It's just a hash, not blessed into the Content package.
         $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
         $stash->{content}->{creator} = $user;
-        $c->req->params->{body} = $stash->{content}->{body}
-          unless $c->req->params->{body};
-        return;
     }
 }    # end sub edit
 
