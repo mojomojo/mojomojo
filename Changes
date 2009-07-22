@@ -1,3 +1,8 @@
+        - Fix coments (NacMac)
+        - Add license for debian packaging
+        - Fix error page url / pre_hacked_url
+        - POD Fixes
+
 0.999030 2009-07-18 20:25:00
         - fixed vertical split mode to stay side-by-side (mateu, dandv @ YAPC10)
         - Updated Catalyst theme
