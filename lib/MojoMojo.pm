@@ -8,7 +8,7 @@ use Catalyst qw/
     Authentication
     Cache
     Session
-    Session::Store::File
+    Session::Store::Cache
     Session::State::Cookie
     Static::Simple
     SubRequest

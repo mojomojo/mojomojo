@@ -1,3 +1,4 @@
+        - Change to use the current cache as Session store. 
         - Fix coments (NacMac)
         - Add license for debian packaging
         - Fix error page url / pre_hacked_url
