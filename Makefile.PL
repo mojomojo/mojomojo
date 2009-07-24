@@ -21,7 +21,7 @@ requires(
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::Plugin::SubRequest'                 => '0.13',
     'Catalyst::Plugin::Session::State::Cookie'     => 0.11,
-    'Catalyst::Plugin::Session::Store::Cache'      => '0.15',
+    'Catalyst::Plugin::Session::Store::Cache'      => '0',
     'Catalyst::Plugin::Setenv'                     => 0,
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::Unicode'                    => '0.8',
