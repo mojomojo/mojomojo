@@ -24,4 +24,4 @@ BEGIN {
 use_ok( Catalyst::Test, 'MojoMojo' );
 
 $body= get('/.jsrpc/render?content=%7B%7Bhttp://localhost/help%7D%7D');
-like($body, qr/Formatter Synta/,'Can include part of wiki');
+like($body, qr/Wiki Synta/,'Can include part of wiki');
