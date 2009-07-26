@@ -70,7 +70,7 @@ sub tagged_descendants_by_date {
         {
             group_by => [ ('me.id') ],
             from     => "page as me, page as ancestor, tag, content",
-            order_by => 'content.release_date DESC',
+            order_by => 'content.created DESC',
         }
     );
     return $self->result_source->resultset->set_paths(@pages);
@@ -180,7 +180,7 @@ sub descendants_by_date {
             rows     => 20,
             page     => 1,
             from     => 'page as me, page as ancestor, content',
-            order_by => 'content.release_date DESC'
+            order_by => 'content.created DESC'
         }
     );
     return $self->result_source->resultset->set_paths(@pages);

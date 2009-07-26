@@ -77,7 +77,7 @@ perl script/util/delete_page.pl
 
 Then input the id (positive integer) of the page you want to delete.
 This number comes from the id column of the page table.
-This will delete the page and all it's children (if there are any).
+This will delete the page and all its children (if there are any).
 Use with caution.
 
 =cut

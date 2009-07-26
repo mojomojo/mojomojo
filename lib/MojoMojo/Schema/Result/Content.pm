@@ -5,6 +5,27 @@ use warnings;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
+=head1 NAME
+
+MojoMojo::Schema::Result::Content
+
+=head1 DESCRIPTION
+
+This table stores the actual page content; in other words, it's a table of
+page versions (revisions). It has a composite primary key C<(page, version)>,
+where C<page> is the id of a page, and C<version> is its version number. Each
+version has a content C<body>, a C<status> ("released" or "removed"), and a
+C<release_date>. Revisions that have been replaced by a newer revision have a
+C<remove_date> and a C<comments> set to "Replaced by version x.".
+
+The C<type>, C<abstract> and C<precompiled> columns are for future use.
+
+C<created> is essentially equal to C<release_date> (there can be a 1-second
+difference), and is used externally by other modules and in templates.
+C<release_date> and C<remove_date> are used internally.
+
+=cut
+
 use DateTime::Format::Mail;
 
 use Algorithm::Diff;
@@ -99,13 +120,25 @@ __PACKAGE__->belongs_to(
     { id => "page" }
 );
 
-=head1 NAME
 
-MojoMojo::Schema::Result::Content
+=head1 COLUMNS
+
+=head2 page
+
+References L<MojoMojo::Schema::Result::Page>.
+
+=head2 creator
+
+References L<MojoMojo::Schema::Result::Person>.
+
 
 =head1 METHODS
 
-=over 4
+=head2 highlight
+
+Returns an HTML string highlighting the changes between this version and the
+previous version. The changes are in C<< <span> >> or C<< <div> >> tags with
+the class C<fade>.
 
 =cut
 
@@ -143,11 +176,11 @@ sub highlight {
     return $diff;
 }
 
-=item formatted_diff <context> <old_content>
+=head2 formatted_diff <context> <old_content>
 
-Compare this content version to <old_content>, using
-Algorithm::Diff. Show added lines in with diffins css class
-and deleted with diffdel css class.
+Compare this content version to <old_content>, using L<Algorithm::Diff>.
+Sets a C<diffins> CSS class for added lines, and a C<diffdel> CSS class
+for deleted lines. The C<< <ins> >> and C<< <del> >> HTML tags are also used.
 
 =cut
 
@@ -203,10 +236,9 @@ sub formatted_diff {
     return $diff;
 }
 
-=item formatted [<content>]
+=head2 formatted
 
-Return content after being run through MojoMojo::Formatter::* ,
-       either own content or passed <content>
+Return the content after being run through MojoMojo::Formatter::*.
 
 =cut
 
@@ -240,7 +272,7 @@ sub merge_content {
     return join( '', @merged );
 }
 
-=item max_version 
+=head2 max_version
 
 Return the highest numbered revision.
 
@@ -259,9 +291,9 @@ sub max_version {
     return $max->next->get_column('max_ver');
 }
 
-=item previous
+=head2 previous
 
-Return previous version of this content, or undef for first version.
+Return the previous version of this content, or undef for the first version.
 
 =cut
 
@@ -275,9 +307,9 @@ sub previous {
     )->next;
 }
 
-=item  pub_date
+=head2 pub_date
 
-return publish date of this version in a format suitable for RSS 2.0
+Return the publishing date of this version in a format suitable for RSS 2.0.
 
 =cut
 
@@ -286,7 +318,7 @@ sub pub_date {
     return DateTime::Format::Mail->format_datetime( $self->created );
 }
 
-=item store_links
+=head2 store_links
 
 Extract and store all links and wanted paged from a given content
 version.
