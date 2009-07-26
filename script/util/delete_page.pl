@@ -33,7 +33,7 @@ if ( $page_id  == 0 ) {
 
 delete_page($page_id);
 
-=head 2
+=head2
 
 Delete a page and all its children. Use with caution.
 
