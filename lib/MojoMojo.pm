@@ -19,6 +19,7 @@ use Catalyst qw/
     /;
 
 use Storable;
+use Digest::MD5;
 use Data::Dumper;
 use MRO::Compat;
 use DBIx::Class::ResultClass::HashRefInflator;
@@ -42,6 +43,7 @@ MojoMojo->config->{default_view}='TT';
 MojoMojo->config->{'Plugin::Cache'}{backend} = {
     class => "Cache::FastMmap",
     unlink_on_exit => 1,
+    share_file => '/tmp/sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home}),
 
 };
 
