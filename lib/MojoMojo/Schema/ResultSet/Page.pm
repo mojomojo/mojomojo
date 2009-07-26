@@ -12,21 +12,23 @@ MojoMojo::Schema::ResultSet::Page
 
 =head1 METHODS
 
-=over 4
+=head2 path_pages
 
-=cut
-
-=item path_pages
+    ( $path_pages, $proto_pages ) = __PACKAGE__->path_pages( $path, $id )
 
 Accepts a path in URL/Unix directory format, e.g. "/page1/page2".
 Paths are assumed to be absolute, so a leading slash (/) is not
 required.
 
-Returns an array of any pages that exist in the path, starting with "/",
-and an additional array of "proto page" hashes for any pages at the end
-of the path that do not exist. All paths include the root (/), which
-must exist, so a path of at least one element will always be returned.
+Returns a reference to an array of any pages that exist in the path,
+starting with "/", and an additional reference to an array of "proto page"
+hashes for any pages at the end of the path that do not exist. All paths
+include the root (/), which must exist, so a path of at least one element
+will always be returned.
+
 The "proto page" hash keys are:
+
+TODO
 
 =cut
 
@@ -88,9 +90,9 @@ sub path_pages {
     return ( \@path_pages, \@proto_pages );
 }    # end sub get_path
 
-=item path_pages_by_id
+=head2 path_pages_by_id
 
-@path_pages = __PACKAGE__->path_pages_by_id( $id );
+    @path_pages = __PACKAGE__->path_pages_by_id( $id )
 
 Returns all the pages in the path to a page, given that page's id.
 
@@ -112,7 +114,9 @@ sub path_pages_by_id {
     );
 }
 
-=item parse_path <path>
+=head2 parse_path
+
+    @proto_pages = __PACKAGE__->parse_path( $path )
 
 Create prototype page objects for each level in a given path.
 
@@ -148,9 +152,11 @@ sub parse_path {
 
 }    # end sub parse_path
 
-=item normalize_name <orig_name>
+=head2 normalize_name
 
-Strip superfluous spaces, and convert the rest to _, then lowercase the result.
+    ($name_orig, $name) = __PACKAGE__->normalize_name( $name_orig )
+
+Strip superfluous spaces, convert the rest to _, then lowercase the result.
 
 =cut
 
@@ -170,11 +176,13 @@ sub normalize_name {
     );
 }
 
-=item resolve_path <%args>
+=head2 resolve_path
+
+    $an_resolve = __PACKAGE__->resolve_path( %args )
 
 Takes the following args:
 
-=over 8
+=over 4
 
 =item path_pages
 
@@ -219,9 +227,9 @@ sub resolve_path {
 
 }    # end sub resolve_path
 
-=item set_paths
+=head2 set_paths
 
-__PACKAGE__->set_paths( @pages );
+    @pages = __PACKAGE__->set_paths( @pages )
 
 Sets the path for multiple pages, either a subtree or a group of
 non-adjacent pages.
@@ -284,9 +292,13 @@ sub set_paths {
 
 }    # end sub set_paths
 
-=item create_path_pages
 
-Find or creates a list of path_pages
+=head2 create_path_pages
+
+    $path_pages = __PACKAGE__->create_path_pages( %args )
+
+Find or creates a list of path_pages. Returns a reference to an array
+of path_pages.
 
 =cut
 
@@ -314,11 +326,9 @@ sub create_path_pages {
 
         @version_data{qw/page version parent parent_version creator status release_date/} = (
             $page->id,
-            1,
+            1,  # FIXME: the version field remains '1' for all pages in a well-edited wiki, as opposed to content_version
             $page->parent->id,
-
-            # why this? we should always have a parent...
-            ( $page->parent ? $page->parent->version : undef ),
+            ( $page->parent ? $page->parent->version : undef ),  # the '/' page doesn't have a parent
             $creator,
             'released',
             DateTime->now,
@@ -350,7 +360,9 @@ sub create_path_pages {
 
 }    # end sub create_path_pages
 
-=item open_gap
+=head2 open_gap
+
+    $parent = __PACKAGE__->open_gap( $parent, $new_page_count )
 
 Opens a gap in the nested set numbers to allow the inserting
 of new pages into the tree. Since nested sets number each node

@@ -31,19 +31,17 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->utf8_columns("name", "name_orig");
 __PACKAGE__->add_unique_constraint( "page_unique_child_index", [ "parent", "name" ] );
-__PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { "foreign.from_page" => "self.id" }, );
+__PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { "foreign.from_page" => "self.id" } );
 __PACKAGE__->belongs_to( "parent", "MojoMojo::Schema::Result::Page", { id => "parent" } );
 __PACKAGE__->has_many( "children", "MojoMojo::Schema::Result::Page", { "foreign.parent" => "self.id" } );
-__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content", { page => "id", version => "content_version" },
-);
+__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content", { page => "id", version => "content_version" } );
 __PACKAGE__->has_many( "versions", "MojoMojo::Schema::Result::Content", { "foreign.page" => "self.id" } );
-__PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion", { page => "id", version => "version" },
-);
+__PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion", { page => "id", version => "version" } );
 __PACKAGE__->has_many( "tags",       "MojoMojo::Schema::Result::Tag",  { "foreign.page"      => "self.id" } );
-__PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" }, );
+__PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" } );
 __PACKAGE__->has_many( "links_to",   "MojoMojo::Schema::Result::Link", { "foreign.to_page"   => "self.id" } );
-__PACKAGE__->has_many( "roleprivileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.page"   => "self.id" }, );
-__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" },{order_by=>'id desc' } );
+__PACKAGE__->has_many( "roleprivileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.page"   => "self.id" } );
+__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" }, {order_by=>'id desc' } );
 __PACKAGE__->has_many( "comments",       "MojoMojo::Schema::Result::Comment",       { "foreign.page"   => "self.id" } );
 __PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",       { "foreign.pageid" => "self.id" } );
 
@@ -52,8 +50,6 @@ __PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",   
 MojoMojo::Schema::Result::Page
 
 =head1 METHODS
-
-=over 4
 
 =cut
 
@@ -74,11 +70,17 @@ sub tagged_descendants_by_date {
         {
             group_by => [ ('me.id') ],
             from     => "page as me, page as ancestor, tag, content",
-            order_by => 'content.release_date DESC',
+            order_by => 'content.created DESC',
         }
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
+
+=head2 tagged_descendants($tag)
+
+Return descendants with the given tag.
+
+=cut
 
 sub tagged_descendants {
     my ( $self, $tag ) = @_;
@@ -108,11 +110,12 @@ sub tagged_descendants {
 # maybe it can't even be called if the site uses workflow...
 # may need fixing for better conflict handling, too. maybe use a transaction?
 
-=item update_content <%args>
+=head2 update_content <%args>
 
 Create a new content version for this page.
 
-args is each column of L<MojoMojo::M::Core::Content>.
+%args is each column of L<MojoMojo::M::Core::Content>.
+
 =cut
 
 sub update_content {
@@ -149,7 +152,7 @@ sub update_content {
 
 }    # end sub update_content
 
-=item descendants_by_date
+=head2 descendants_by_date
 
   @descendants = $page->descendants_by_date;
 
@@ -177,14 +180,14 @@ sub descendants_by_date {
             rows     => 20,
             page     => 1,
             from     => 'page as me, page as ancestor, content',
-            order_by => 'content.release_date DESC'
+            order_by => 'content.created DESC'
         }
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
 
 
-=item descendants
+=head2 descendants
 
   @descendants = $page->descendants;
 
@@ -213,9 +216,10 @@ sub descendants {
     return $self->result_source->resultset->set_paths(@pages);
 }
 
-=item others_tags <user>
 
-Return popular tags for this page used by other people than <user>.
+=head2 user_tags($user)
+
+Return popular tags for this page used C<$user>.
 
 =cut
 
@@ -236,6 +240,12 @@ sub user_tags {
     return @tags;
 }
 
+=head2 others_tags($user)
+
+Return popular tags for this page used by other people than C<$user>.
+
+=cut
+
 sub others_tags {
     my ( $self, $user ) = @_;
     my (@tags) = $self->result_source->related_source('tags')->resultset->search(
@@ -253,6 +263,12 @@ sub others_tags {
     return @tags;
 }
 
+=head2 tags_with_counts($user)
+
+Return an array of {id, tag, refcount} for the C<$user>'s tags.
+
+=cut
+
 sub tags_with_counts {
     my ( $self, $user ) = @_;
     my (@tags) = $self->result_source->related_source('tags')->resultset->search(
@@ -267,6 +283,12 @@ sub tags_with_counts {
     return @tags;
 }
 
+=head2 path( [$path] )
+
+TODO Accessor?
+
+=cut
+
 sub path {
     my ( $self, $path ) = @_;
     require Carp;
@@ -277,12 +299,12 @@ sub path {
         return '/' if ( $self->depth == 0 );
         $self->result_source->resultset->set_paths($self);
 
-        # croak 'path is not set on the page object:'.$self->name;
+        # croak 'path is not set on the page object: ' . $self->name;
     }
     return $self->{path};
 }
 
-=item has_photos
+=head2 has_photos
 
 Return the number of photos attached to this page. Use for galleries.
 
@@ -290,8 +312,10 @@ Return the number of photos attached to this page. Use for galleries.
 
 sub has_photos {
     my $self = shift;
-    return $self->result_source->schema->resultset('Photo')
-        ->search( { 'attachment.page' => $self->id }, { join => [qw/attachment/] } )->count;
+    return $self->result_source->schema->resultset('Photo')->search(
+        { 'attachment.page' => $self->id },
+        { join => [qw/attachment/] }
+    )->count;
 }
 
 1;
