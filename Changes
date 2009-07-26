@@ -1,4 +1,5 @@
-0.999031 2009-07-24 14:13:00
+0.999031 2009-07-26 15:00:00
+        - Sane default for fastmmap sharefile.
         - Change to use the current cache as Session store. 
         - Fix coments (NacMac)
         - Add license for debian packaging
