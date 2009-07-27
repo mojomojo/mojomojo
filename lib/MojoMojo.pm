@@ -43,8 +43,10 @@ MojoMojo->config->{default_view}='TT';
 MojoMojo->config->{'Plugin::Cache'}{backend} = {
     class => "Cache::FastMmap",
     unlink_on_exit => 1,
-    share_file => '/tmp/sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home}),
-
+    share_file => '' . Path::Class::file(
+        $ENV{TEMP},
+        'sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home})
+    ),
 };
 
 MojoMojo->config(
