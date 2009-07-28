@@ -29,6 +29,9 @@ INSTALLING MOJOMOJO
 
         ./script/mojomojo_spawn_db.pl
 
+    This script has sane defaults for a test install, but you can
+    override these. Run it with --help to see usage information.
+
   Step 3 (start)
     Do one of these:
 
