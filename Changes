@@ -1,5 +1,7 @@
         - mojomojo_spawn_db.pl now has a --help option and takes CLI arguments for all settings (Dave Rolsky)
         - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
+        - lots of improvements to the attachments list (Dave Rolsky)
+        - the gallery link was broken (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
