@@ -20,8 +20,10 @@
 
 <h3 id="progress_status"></h3>
 [% END -%]
-<div id="attachments">[% PROCESS attachments/list.tt %]</div>
-<a href="[% c.uri_for('gallery') %]">[% loc('View as gallery') %]</a>
-
+<div id="attachments">
+[% IF page.attachments.size %]
+[% PROCESS attachments/list.tt %]
+[% END %]
+</div>
 </div>
 [% END # End WRAPPER %]

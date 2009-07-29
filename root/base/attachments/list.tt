@@ -6,7 +6,7 @@
     <th id="date-th">Date</th>
     <th id="actions-th"></th>
   </tr>
-[% FOR attachment IN page.attachments %]
+  [% FOR attachment IN page.attachments %]
   <tr>
     <td>
       <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[%attachment.name%]</a>
@@ -49,3 +49,5 @@
   </tr>
 [% END %]
 </table>
+
+<a href="[% c.uri_for('gallery') %]">[% loc('View as gallery') %]</a>
