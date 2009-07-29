@@ -93,4 +93,16 @@ sub make_photo {
     $photo->insert();
 }
 
+sub is_image {
+    my $self = shift;
+
+    return $self->contenttype =~ m{^image/};
+}
+
+sub is_text {
+    my $self = shift;
+
+    return $self->contenttype =~ m{^text/};
+}
+
 1;
