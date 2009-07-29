@@ -38,12 +38,16 @@
           <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view in your browser')%]</a>
         </li>
         [% END %]
+        [% IF c.check_permissions(page.path,c.user).edit %]
         <li>
           <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
         </li>
+        [% END %]
+        [% IF c.check_permissions(page.path,c.user).attachment %]
         <li>
           <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
         </li>
+        [% END %]
       </ul>
     </td>
   </tr>
