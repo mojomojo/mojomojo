@@ -48,7 +48,6 @@ main attachment screen.  Handles uploading of new attachments.
 
 sub attachments : Global {
     my ( $self, $c ) = @_;
-    $c->forward('auth') ;
     $c->stash->{template} = 'page/attachments.tt';
     $c->forward('check_file');
 }
@@ -57,6 +56,8 @@ sub check_file : Private  {
     my ($self,$c)=@_;
     my $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
+        $c->forward('auth') ;
+
         my $upload = $c->request->upload('file');
         my (@att) =
             $c->model("DBIC::Attachment")
