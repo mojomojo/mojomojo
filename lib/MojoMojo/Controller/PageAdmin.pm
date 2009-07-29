@@ -178,6 +178,23 @@ sub edit : Global FormConfig {
         # Note that this isn't a real Content object, just a proto object!!!
         # It's just a hash, not blessed into the Content package.
         $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
+
+        if ( $c->req->params->{insert_attachment} ) {
+            my $saved_stash = $stash;
+
+            my $attachment = $c->model("DBIC::Attachment")
+                ->find( $c->req->params->{insert_attachment} );
+
+            $c->stash( { att => $attachment } );
+
+            my $insert_text = $c->view('TT')->render( $c, 'page/insert.tt' );
+            $insert_text =~ s/^\s+|\s+$//;
+
+            $c->stash($saved_stash);
+
+            $page->content->body( $page->content->body . "\n\n" . $insert_text . "\n" );
+        }
+
         $stash->{content}->{creator} = $user;
     }
 }    # end sub edit

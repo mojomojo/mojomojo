@@ -210,25 +210,6 @@ sub delete : Chained('attachment') Args(0) {
     $c->forward('/attachment/attachments');
 }
 
-=head2 insert
-
-Insert a link to this attachment in the main text of the node.
-Will show a thumb for images.
-TODO: Write templates for more mime types.
-
-=cut
-
-sub insert : Chained('attachment') Args(0) {
-    my ( $self, $c ) = @_;
-    return unless $c->forward('auth');
-    my $att = $c->stash->{att};
-    my ($family) = $att->contenttype =~ m|^([^/]+)|;
-    $c->stash->{family} = 'mimetypes/' . $family . '.tt';
-    $c->stash->{type}   = 'mimetypes/' . $att->contenttype . '.tt';
-    $c->stash->{append} = $c->view('TT')->render( $c, 'page/insert.tt' );
-    $c->forward('/pageadmin/edit');
-}
-
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@nordaaker.com>

@@ -39,7 +39,7 @@
         </li>
         [% END %]
         <li>
-          <a href="[%c.uri_for('attachment',attachment.id,'insert')%]">[%loc('insert link')%]</a>
+          <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
         </li>
         <li>
           <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
