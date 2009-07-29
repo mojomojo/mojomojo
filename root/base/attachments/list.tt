@@ -14,9 +14,9 @@
       [%attachment.contenttype%]
     </td>
     <td>
-      [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%]</td>
+      [%IF attachment.size%][%attachment.human_size%] [% ELSE %] Unknown[%END%]</td>
     </td>
-    <td colspan="3">
+    <td>
       
       [% IF attachment.is_image %]
       <a href="[%c.uri_for('attachment',attachment.id,'view')%]">

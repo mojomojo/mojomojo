@@ -5,6 +5,8 @@ use warnings;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
+use Number::Format qw( format_bytes );
+
 __PACKAGE__->load_components(
     qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("attachment");
@@ -103,6 +105,12 @@ sub is_text {
     my $self = shift;
 
     return $self->contenttype =~ m{^text/};
+}
+
+sub human_size {
+    my $self = shift;
+
+    return format_bytes( $self->size, precision => 1 );
 }
 
 1;

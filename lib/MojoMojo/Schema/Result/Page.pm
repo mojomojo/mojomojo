@@ -41,7 +41,7 @@ __PACKAGE__->has_many( "tags",       "MojoMojo::Schema::Result::Tag",  { "foreig
 __PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" } );
 __PACKAGE__->has_many( "links_to",   "MojoMojo::Schema::Result::Link", { "foreign.to_page"   => "self.id" } );
 __PACKAGE__->has_many( "roleprivileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.page"   => "self.id" } );
-__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" }, {order_by=>'id desc' } );
+__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" }, {order_by=>'name asc' } );
 __PACKAGE__->has_many( "comments",       "MojoMojo::Schema::Result::Comment",       { "foreign.page"   => "self.id" } );
 __PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",       { "foreign.pageid" => "self.id" } );
 
