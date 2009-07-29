@@ -337,10 +337,13 @@ sub prepare_path {
         $c->req->path('view');
     }
     else {
+        my $new_path = substr( $path, $index + 1 );
+
+        $c->log->debug( "Rewriting path from $path to $new_path" );
 
         # set path in stash, and set req.path to action
-        $c->stash->{path} = '/' . substr( $path, 0, $index );
-        $c->req->path( substr( $path, $index + 1 ) );
+        $c->stash->{path} = '/' . $new_path;
+        $c->req->path($new_path);
     }
 }
 
