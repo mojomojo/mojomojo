@@ -50,7 +50,7 @@
       [% IF (c.req.action=="view") +%]
         <li class="navOn">[% loc('Page') %]</li>
       [% ELSE +%]
-        <li><a title="[ %loc('The Wikilicious page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
+        <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
       [% END %]
       [% IF (page.has_photos) %]
         [% IF pictures +%]
