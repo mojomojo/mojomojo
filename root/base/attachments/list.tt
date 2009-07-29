@@ -38,9 +38,6 @@
           <a href="[%c.uri_for('attachment',attachment.id,'insert')%]">[%loc('insert link')%]</a>
         </li>
         <li>
-          
-        </li>
-        <li>
           <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
         </li>
       </ul>
