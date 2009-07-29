@@ -27,7 +27,7 @@
         PROCESS navbar.tt;
 
         reverse = c.action.reverse;
-        IF reverse == 'pageadmin/edit' || reverse == 'attachment/attachments';
+        IF reverse == 'pageadmin/edit';
             PROCESS page/editbar.tt;
         END;
     END;
