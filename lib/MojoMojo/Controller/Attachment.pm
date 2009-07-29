@@ -48,6 +48,9 @@ main attachment screen.  Handles uploading of new attachments.
 
 sub attachments : Global {
     my ( $self, $c ) = @_;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template} = 'page/attachments.tt';
     $c->forward('check_file');
 }
@@ -91,6 +94,9 @@ sub flash_upload : Local {
 
 sub list : Local {
     my ( $self, $c ) = @_;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template}='attachments/list.tt';
 }
 
@@ -123,6 +129,8 @@ sub default : Private {
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
 
+    return unless $c->check_view_permission;
+
     # avoid broken binary files
     my $io_file = IO::File->new( $c->stash->{att}->filename )
         or $c->detach('default');
@@ -145,6 +153,7 @@ content-disposition. No caching.
 sub download : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att = $c->stash->{att};
+    return unless $c->check_view_permission;
     $c->forward('view');
     $c->res->header( 'content-type', $att->contenttype );
     $c->res->header( "Content-Disposition" => "attachment; filename=" . URI::Escape::uri_escape_utf8( $att->name ) );
@@ -160,6 +169,7 @@ thumb action for attachments. makes 100x100px thumbs
 
 sub thumb : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
@@ -185,6 +195,7 @@ Show 800x600 inline versions of photo attachments.
 
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
