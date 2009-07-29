@@ -254,7 +254,7 @@ $( function() {
     $('.delete_attachment').click(function() {
         link=$(this)
         $.post(link.attr('href'),function() {
-            link.parents('p').remove();
+            link.parents('tr').remove();
         })
         return false;
     })
