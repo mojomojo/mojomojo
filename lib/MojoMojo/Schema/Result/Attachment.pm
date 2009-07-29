@@ -116,7 +116,7 @@ sub human_size {
 # It would be nice to find an external data source for this data,
 # and/or bundle it into a separate module for CPAN.
 my %mime_type_to_description = (
-    'application/javascript' => 'Javascipt',
+    'application/javascript' => 'Javascript',
     'application/json'       => 'JSON data',
     'application/pdf'        => 'PDF document',
     'application/xhtml+xml'  => 'Web page',
