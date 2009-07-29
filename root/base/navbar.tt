@@ -61,11 +61,7 @@
       [% ELSE +%]
         <li>[% loc('Gallery') %]</li>
       [% END %]
-      [% IF page.attachments.size ; +%]
          <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
-      [% ELSE +%]
-        <li>[% loc('Attachments') %]</li>
-      [% END %]
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         [% IF (c.req.action=="profile") +%]
         <li class="navOn">[% loc('Profile') %]</li>
