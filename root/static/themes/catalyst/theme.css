@@ -4,14 +4,6 @@
     margin: 0 auto 0;
 }
 
-body {
-    background: #c1baaa repeat-x url(images/background.png);
-    margin: 0;
-    color: #626262;
-    font: 85% Arial, Helvetica, Geneva, sans-serif;
-    text-align: left;
-}
-
 #header {
     float: right;
     text-align: right;
@@ -234,11 +226,11 @@ div#pageoptions a {
 }
 
 #content strong,b {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #content em,i {
-  font-style: italic;
+    font-style: italic;
 }
 
 #content ul, #content ol {
@@ -250,16 +242,12 @@ div#pageoptions a {
 }
 
 #content ol li {
-  list-style: decimal;
+    list-style: decimal;
 }
 
 #content li{
     margin-left: 1.5em;
     margin-bottom:5px;
-}
-
-#content li li {
-  font-size: 0.95em;
 }
 
 /* tables */
@@ -278,7 +266,7 @@ div#pageoptions a {
 
 #content table thead th, #content table tfoot th {
     font-weight: bold;
-    background:#f6f6f6;
+    background: #f6f6f6;
 }
 
 #content table tbody th, #content table tbody td {
@@ -352,24 +340,28 @@ p {
 }
 
 textarea#body {
-    height:480px;
-    width:100%;
+    height: 28em;
+    width: 100%;
 }
 
 /* -------------------- Generic ----------------------------- */
 
 body {
-  font-family: verdana, sans-serif;
-  font-size: .8em;
-  background: rgb(234,234,234) url("images/layout/body_bg.png") center repeat-y;
-  margin: 0;
-  color: rgb(30,30,30);
+    text-align: left;
+}
+
+body {
+    font-family: verdana, sans-serif;
+    font-size: .8em;
+    background: rgb(234,234,234) url("images/layout/body_bg.png") center repeat-y;
+    margin: 0;
+    color: rgb(30,30,30);
 }
 
 a {
   /*color: rgb(0,51,204);*/
   /* color: #336699; */
-color: #c1baaa;
+    color: #c1baaa;
     text-decoration: none;
 }
 
@@ -378,7 +370,6 @@ a:link {
 }
 
 a:visited {
-    color: #222629;
     text-decoration: none;
     /*color: rgb(68,68,68);*/
 }
