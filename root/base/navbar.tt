@@ -6,29 +6,6 @@
     <form action="[% c.uri_for('search') %]" method="get">
   [% END +%]
         <ul>
-        [% IF (user) %]
-         [% IF (user.login == page_user.login  AND (template.name=="page/view.tt" OR template.name.search('^user'))) +%]
-            <li><a class="navOn" href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
-         [% ELSE %]
-          [% IF user.active %]
-           [% IF (!rev OR rev==page.content_version) %]
-            [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-            <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
-            [% END %]
-           [% END # rev +%]
-            <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]">[% c.fixw(user.login) %]</a></li>
-          [% ELSE # user not active +%]
-            <li><a href="[% c.uri_for(user.link,'.prefs') %]" title="[% loc('User Preferences') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
-          [% END # user.active %]
-         [% END # user.login +%]
-            <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
-        [% ELSE # !user +%]
-            <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
-          [%+ IF(c.pref('open_registration')) %]
-            <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
-          [% END %]
-        [% END %]
-            <li><a[% ' class="navOn"' IF template.name == 'page/list.tt' %] href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
             <li><a[% ' class="navOn"' IF template.name == 'page/recent.tt' %] href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
           [% IF (pictures OR photo) +%]
             <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
@@ -43,12 +20,31 @@
                 <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
             </li>
         </ul>
+
     </form>
+
+    <ul id="toplinks-for-user">
+         [% IF (user) %]
+         <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+         <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
+         [% ELSE %]
+         <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
+           [%+ IF(c.pref('open_registration')) %]
+         <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
+           [% END %]
+         [% END %]
+    </ul>
 </div>
 <div id="pagenav">
     <ul>
-      [% IF (c.req.action=="view") +%]
-        <li class="navOn">[% loc('Page') %]</li>
+      [% IF c.req.action == "view" %]
+        [% IF user.active
+              AND (!rev OR rev == page.content_version)
+              AND (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
+          <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
+        [% ELSE %]
+          <li>[% loc('Edit page') %]</li>
+        [% END %]
       [% ELSE +%]
         <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
       [% END %]
@@ -62,6 +58,7 @@
         <li>[% loc('Gallery') %]</li>
       [% END %]
          <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
+         <li><a href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         [% IF (c.req.action=="profile") +%]
         <li class="navOn">[% loc('Profile') %]</li>

@@ -94,6 +94,10 @@ div#toplinks a.navOn {
     text-decoration: none;
 }
 
+ul#toplinks-for-user {
+    float: right;
+}
+
 .inputBox {
     background-color: #eee;
     padding: 5px;
