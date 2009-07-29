@@ -71,9 +71,7 @@ sub check_file : Private  {
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
 
-        my $redirect_uri = $c->req->base . $c->stash->{path} . '.attachments';
-        $redirect_uri .= '?plain=1' if $c->req->params->{plain};
-
+        my $redirect_uri = $c->uri_for('attachments', {plain => $c->req->params->{plain}});
         $c->res->redirect($redirect_uri)
             unless defined $c->stash->{template} && $c->stash->{template} eq 'message.tt';
     }
