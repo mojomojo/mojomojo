@@ -823,7 +823,7 @@ a.footnote:after {
 }
 
 #attachments table #type-th {
-    width: 15%;
+    width: 25%;
 }
 
 #attachments table #size-th {
@@ -835,7 +835,7 @@ a.footnote:after {
 }
 
 #attachments table #actions-th {
-    width: 40%;
+    width: 30%;
 }
 
 #attachments table #actions {
