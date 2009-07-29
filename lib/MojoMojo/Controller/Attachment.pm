@@ -48,8 +48,16 @@ main attachment screen.  Handles uploading of new attachments.
 
 sub attachments : Global {
     my ( $self, $c ) = @_;
-    $c->forward('auth') ;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template} = 'page/attachments.tt';
+    $c->forward('check_file');
+}
+
+sub plain_upload : Global {
+    my ( $self, $c ) = @_;
+    $c->forward('auth');
     $c->forward('check_file');
 }
 
@@ -65,7 +73,9 @@ sub check_file : Private  {
             $c->stash->{template} = 'message.tt';
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
-        $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
+
+        my $redirect_uri = $c->uri_for('attachments', {plain => $c->req->params->{plain}});
+        $c->res->redirect($redirect_uri)
             unless defined $c->stash->{template} && $c->stash->{template} eq 'message.tt';
     }
 }
@@ -84,6 +94,9 @@ sub flash_upload : Local {
 
 sub list : Local {
     my ( $self, $c ) = @_;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template}='attachments/list.tt';
 }
 
@@ -116,6 +129,8 @@ sub default : Private {
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
 
+    return unless $c->check_view_permission;
+
     # avoid broken binary files
     my $io_file = IO::File->new( $c->stash->{att}->filename )
         or $c->detach('default');
@@ -138,6 +153,7 @@ content-disposition. No caching.
 sub download : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att = $c->stash->{att};
+    return unless $c->check_view_permission;
     $c->forward('view');
     $c->res->header( 'content-type', $att->contenttype );
     $c->res->header( "Content-Disposition" => "attachment; filename=" . URI::Escape::uri_escape_utf8( $att->name ) );
@@ -153,6 +169,7 @@ thumb action for attachments. makes 100x100px thumbs
 
 sub thumb : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
@@ -178,6 +195,7 @@ Show 800x600 inline versions of photo attachments.
 
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {

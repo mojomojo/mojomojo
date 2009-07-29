@@ -3,6 +3,7 @@
         - Lots of improvements to the attachments list (Dave Rolsky)
         - The "insert link" option for an attachment went to a slightly broken version of the edit form (Dave Rolsky)
         - Attachments are now viewable without going to the edit form first (Dave Rolsky)
+        - The gallery link was broken (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
