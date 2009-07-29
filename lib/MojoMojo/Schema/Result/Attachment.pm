@@ -113,4 +113,34 @@ sub human_size {
     return format_bytes( $self->size, precision => 1 );
 }
 
+# It would be nice to find an external data source for this data,
+# and/or bundle it into a separate module for CPAN.
+my %mime_type_to_description = (
+    'application/javascript' => 'Javascipt',
+    'application/json'       => 'JSON data',
+    'application/pdf'        => 'PDF document',
+    'application/xhtml+xml'  => 'Web page',
+
+    'audio/mpeg'   => 'Sound file',
+    'audio/ogg'    => 'Sound file',
+    'audio/vorbis' => 'Sound file',
+
+    'text/css'   => 'Cascading style sheet',
+    'text/csv'   => 'Comma separated values',
+    'text/html'  => 'Web page',
+    'text/plain' => 'Plain text file',
+    'text/xml'   => 'XML file',
+
+    'image/gif'  => 'GIF image',
+    'image/jpeg' => 'JPEG image',
+    'image/png'  => 'PNG image',
+);
+
+sub human_type {
+    my $self = shift;
+
+    return $mime_type_to_description{ $self->contenttype }
+        || $self->contenttype;
+}
+
 1;

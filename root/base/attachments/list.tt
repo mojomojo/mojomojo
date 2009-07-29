@@ -12,7 +12,7 @@
       <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[%attachment.name%]</a>
     </td>
     <td>
-      [%attachment.contenttype%]
+      [% loc(attachment.human_type) %]
     </td>
     <td>
       [%IF attachment.size%][%attachment.human_size%] [% ELSE %] Unknown[%END%]</td>
