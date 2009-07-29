@@ -52,12 +52,16 @@ sub attachments : Global {
     $c->forward('check_file');
 }
 
+sub plain_upload : Global {
+    my ( $self, $c ) = @_;
+    $c->forward('auth');
+    $c->forward('check_file');
+}
+
 sub check_file : Private  {
     my ($self,$c)=@_;
     my $page = $c->stash->{page};
     if ( my $file = $c->req->params->{file} ) {
-        $c->forward('auth') ;
-
         my $upload = $c->request->upload('file');
         my (@att) =
             $c->model("DBIC::Attachment")
@@ -66,7 +70,11 @@ sub check_file : Private  {
             $c->stash->{template} = 'message.tt';
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
-        $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
+
+        my $redirect_uri = $c->req->base . $c->stash->{path} . '.attachments';
+        $redirect_uri .= '?plain=1' if $c->req->params->{plain};
+
+        $c->res->redirect($redirect_uri)
             unless defined $c->stash->{template} && $c->stash->{template} eq 'message.tt';
     }
 }
