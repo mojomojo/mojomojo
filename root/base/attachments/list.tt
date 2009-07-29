@@ -3,6 +3,7 @@
     <th id="filename-th">Filename</th>
     <th id="type-th">Type</th>
     <th id="size-th">Size</th>
+    <th id="date-th">Date</th>
     <th id="actions-th"></th>
   </tr>
 [% FOR attachment IN page.attachments %]
@@ -15,6 +16,9 @@
     </td>
     <td>
       [%IF attachment.size%][%attachment.human_size%] [% ELSE %] Unknown[%END%]</td>
+    </td>
+    <td>
+      [% attachment.uploaded.strftime('%Y-%m-%d') %]
     </td>
     <td>
       

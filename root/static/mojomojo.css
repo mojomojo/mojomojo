@@ -819,7 +819,7 @@ a.footnote:after {
 }
 
 #attachments table #filename-th {
-    width: 30%;
+    width: 25%;
 }
 
 #attachments table #type-th {
@@ -827,11 +827,15 @@ a.footnote:after {
 }
 
 #attachments table #size-th {
-    width: 7%;
+    width: 8%;
+}
+
+#attachments table #date-th {
+    width: 10%;
 }
 
 #attachments table #actions-th {
-    width: 48%;
+    width: 42%;
 }
 
 #attachments table #actions {
