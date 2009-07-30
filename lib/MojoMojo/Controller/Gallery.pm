@@ -28,7 +28,7 @@ Show a gallery page for the current node.
 
 =cut
 
-sub default : Private {
+sub gallery : Path {
     my ( $self, $c, $action, $page ) = @_;
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{pictures} = $c->model("DBIC::Photo")->search(

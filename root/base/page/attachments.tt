@@ -3,7 +3,7 @@
 
 [% IF c.req.params.plain %]
 <p>(<a href="[%c.uri_for('attachments',{plain=>0})%]">[%loc('Switch to flash uploader')%]</a>)
-<form action="[%c.uri_for('attachments')%]" enctype="multipart/form-data" method="post">
+<form action="[%c.uri_for('plain_upload')%]" enctype="multipart/form-data" method="post">
     <input type="hidden" name="plain" value="1"/>
     <input type="file" name="file"/>
     <input type="submit" name="submit" value="[%loc('Click Here to Upload Attachments')%]"/>
@@ -20,8 +20,10 @@
 
 <h3 id="progress_status"></h3>
 [% END -%]
-<div id="attachments">[% PROCESS attachments/list.tt %]</div>
-<a href="[% c.uri_for('gallery') %]">[% loc('View as gallery') %]</a>
-
+<div id="attachments">
+[% IF page.attachments.size %]
+[% PROCESS attachments/list.tt %]
+[% END %]
+</div>
 </div>
 [% END # End WRAPPER %]

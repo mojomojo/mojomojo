@@ -814,6 +814,39 @@ a.footnote:after {
     margin-left: 10px;
 }
 
+#attachments table {
+    width: 100%;
+}
+
+#attachments table #filename-th {
+    width: 25%;
+}
+
+#attachments table #type-th {
+    width: 25%;
+}
+
+#attachments table #size-th {
+    width: 8%;
+}
+
+#attachments table #date-th {
+    width: 12%;
+}
+
+#attachments table #actions-th {
+    width: 30%;
+}
+
+#attachments table #actions {
+    margin: 0;
+}
+
+#attachments table #actions li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 /* Copied from HTML-FormFu examples/vertically-aligned/vertically-aligned.css */
 
 fieldset {

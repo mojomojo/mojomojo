@@ -667,6 +667,29 @@ sub check_permissions {
     return \%perms;
 }
 
+sub check_view_permission {
+    my $c = shift;
+
+    return 1 unless $c->pref('check_permission_on_view');
+
+    my $user;
+    if ( $c->user_exists() ) {
+        $user = $c->user->obj;
+    }
+
+    $c->log->info('Checking permissions') if $c->debug;
+
+    my $perms = $c->check_permissions( $c->stash->{path}, $user );
+    if ( !$perms->{view} ) {
+        $c->stash->{message}
+            = $c->loc( 'Permission Denied to view x', $c->stash->{page}->name );
+        $c->stash->{template} = 'message.tt';
+        return;
+    }
+
+    return 1;
+}
+
 my $search_setup_failed = 0;
 
 MojoMojo->config->{index_dir} ||= MojoMojo->path_to('index');

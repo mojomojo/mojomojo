@@ -50,7 +50,7 @@
       [% IF (c.req.action=="view") +%]
         <li class="navOn">[% loc('Page') %]</li>
       [% ELSE +%]
-        <li><a title="[ %loc('The Wikilicious page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
+        <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
       [% END %]
       [% IF (page.has_photos) %]
         [% IF pictures +%]
@@ -61,6 +61,7 @@
       [% ELSE +%]
         <li>[% loc('Gallery') %]</li>
       [% END %]
+         <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         [% IF (c.req.action=="profile") +%]
         <li class="navOn">[% loc('Profile') %]</li>
