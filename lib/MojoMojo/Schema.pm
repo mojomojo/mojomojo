@@ -110,7 +110,8 @@ sub create_initial_data {
             [ 'name', $custom_values->{wiki_name} ],
             [ 'admins', $custom_values->{admin_username} ],
             [ 'theme',  $config->{'theme'} || 'default' ],
-            ['open_registration', $config->{'open_registration'} || 1 ],
+            [ 'open_registration', $config->{'open_registration'} || 1 ],
+            [ 'anonymous_user', 'anonymouscoward' ],
         ]
     );
 
