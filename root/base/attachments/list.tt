@@ -10,6 +10,14 @@
   <tr>
     <td>
       <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[%attachment.name%]</a>
+      [% IF attachment.is_image %]
+      <br />
+      
+      <a href="[%c.uri_for('attachment',attachment.id,'view')%]">
+        <img src="[%c.uri_for('attachment',attachment.id,'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
+      </a>
+      [% END %]
+
     </td>
     <td>
       [% loc(attachment.human_type) %]
@@ -21,13 +29,6 @@
       [% attachment.uploaded.strftime('%Y-%m-%d') %]
     </td>
     <td>
-      
-      [% IF attachment.is_image %]
-      <a href="[%c.uri_for('attachment',attachment.id,'view')%]">
-        <img src="[%c.uri_for('attachment',attachment.id,'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
-      </a>
-      [% END %]
-
       <ul id="actions">
         [% IF attachment.is_image %]
         <li>
