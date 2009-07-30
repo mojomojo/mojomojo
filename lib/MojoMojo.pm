@@ -157,6 +157,7 @@ sub cache_hook {
   my ( $c ) = @_;
 
   if ( $ENV{CATALYST_NOCACHE} ||
+       $c->response->location ||
        ! $c->cache_ie_list->evaluate($c->req->path)
      ) {
     return 0; # Don't cache

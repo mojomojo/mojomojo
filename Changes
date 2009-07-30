@@ -4,6 +4,10 @@
           left the user able to view the last page they were on. Now
           they are immediately taken to the login screen. (Dave
           Rolsky).
+        - The page cache plugin was caching the empty body before a
+          redirect, and then using that for further requests of the
+          same page. Arguably, this is a bug in PageCache, but for now
+          it is fixed here. (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
