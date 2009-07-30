@@ -149,15 +149,14 @@ sub cache_ie_list {
 
 =head2 cache_hook
 
-Dont cache if user_exist or CATALYST_NOCACHE is set or
- if path is exclude from cache_ie_list
+Dont cache if CATALYST_NOCACHE is set or if the path is excluded from,
+based on the value C<cache_ie_list>.
 
 =cut
 sub cache_hook {
   my ( $c ) = @_;
 
-  if ( $c->user_exists        ||
-       $ENV{CATALYST_NOCACHE} ||
+  if ( $ENV{CATALYST_NOCACHE} ||
        ! $c->cache_ie_list->evaluate($c->req->path)
      ) {
     return 0; # Don't cache
