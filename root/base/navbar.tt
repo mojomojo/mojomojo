@@ -56,8 +56,16 @@
         [% END %]
       [% ELSE +%]
         <li>[% loc('Gallery') %]</li>
+
       [% END %]
          <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
+
+      [% IF c.req.action=='info' +%]
+          <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page History')%]</a></li>
+      [% ELSE +%]
+          <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page History')%]</a></li>
+      [% END %]
+
          <li><a href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         [% IF (c.req.action=="profile") +%]

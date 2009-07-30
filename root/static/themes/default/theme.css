@@ -80,7 +80,7 @@ div#toplinks {
     padding: 4px 8px;
     min-height: 1.8em;
 }
-div#toplinks ul li, div#bottomnav ul li {
+div#toplinks ul li {
     display: block;
     float: left;
     height: 1.5em;
@@ -245,7 +245,6 @@ div#pageoptions a.active {
     color: #000000;
     margin: 0;
     font-weight: bold;
-    height: 2.8em;
     font-size: 0.9em;
     border-top: 1px solid #8899aa;
 }
