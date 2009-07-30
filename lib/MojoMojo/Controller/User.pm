@@ -70,7 +70,8 @@ sub logout : Global {
     my ( $self, $c ) = @_;
     $c->logout;
     undef $c->stash->{user};
-    $c->forward('/page/view');
+
+    $c->response->redirect( $c->uri_for('view') );
 }
 
 =item users (/.users)
