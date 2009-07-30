@@ -1,5 +1,15 @@
-        - mojomojo_spawn_db.pl now has a --help option and takes CLI arguments for all settings (Dave Rolsky)
-        - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
+        - mojomojo_spawn_db.pl now has a --help option and takes CLI
+          arguments for all settings (Dave Rolsky)
+        - A user's active flag is now shown as "yes" or "no" in the UI
+         (Dave Rolsky)
+        - Logging out of a wiki which did not allow anonymous viewing
+          left the user able to view the last page they were on. Now
+          they are immediately taken to the login screen. (Dave
+          Rolsky).
+        - The page cache plugin was caching the empty body before a
+          redirect, and then using that for further requests of the
+          same page. Arguably, this is a bug in PageCache, but for now
+          it is fixed here. (Dave Rolsky)
         - Lots of improvements to the attachments list (Dave Rolsky)
         - The "insert link" option for an attachment went to a slightly broken version of the edit form (Dave Rolsky)
         - Attachments are now viewable without going to the edit form first (Dave Rolsky)
