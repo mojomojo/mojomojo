@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title=c.expand_wikilink(page.name_orig) _ " - attachments" %]
+[% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
 <div id="content">
 
 [% IF c.req.params.plain %]
