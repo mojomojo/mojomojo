@@ -26,7 +26,6 @@ Permission control for mojomojo pages.
 
 sub auth : Private {
     my ( $self, $c ) = @_;
-    $c->detach('/user/login') unless $c->stash->{user};
 
     my $perms =
         $c->check_permissions( $c->stash->{'path'},
@@ -82,13 +81,20 @@ sub check_file : Private  {
 
 sub flash_upload : Local {
     my ( $self, $c ) = @_;
-    my $user=$c->model('DBIC::Person')->find($c->req->params->{id});
-    $c->detach('/default') unless( $user->hashed($c->pref('entropy')) eq $c->req->params->{verify} );
+
+    my $user = $c->model('DBIC::Person')->find( $c->req->params->{id} );
+
+    $c->detach('/default')
+        unless (
+        $user->hashed( $c->pref('entropy') ) eq $c->req->params->{verify} );
+
     $c->forward('check_file');
-    if ($c->res->redirect) {
-        $c->res->redirect(undef,200);
+
+    if ( $c->res->redirect ) {
+        $c->res->redirect( undef, 200 );
         return $c->res->body('1');
     }
+
     $c->res->body('0');
 }
 
