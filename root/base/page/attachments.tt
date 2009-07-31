@@ -16,7 +16,7 @@
 <a href="[%c.uri_for('attachment/list')%]" id="list_link"></a>
 <a href="[%c.uri_for('attachment/flash_upload',{id=>c.user.obj.id,verify=>c.user.obj.hashed(c.pref('entropy'))})%]" id="upload_link"></a>
 
-<div id='progressbar'><div id="progress"></div></div>
+<div id="progressbar"><div id="progress"></div></div>
 
 <h3 id="progress_status"></h3>
 [% END -%]
