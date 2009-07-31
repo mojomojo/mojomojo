@@ -88,9 +88,10 @@ form { margin: 0;}
     color: #999;
 }
 
-div#toplinks a.navOn {
+a.navOn {
     color: #3a3a3a;
     background: #fff;
+    font-weight: bold;
     text-decoration: none;
 }
 
