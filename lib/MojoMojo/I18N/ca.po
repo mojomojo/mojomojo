@@ -39,7 +39,7 @@ msgstr "3 o més guions o asterics"
 msgid "A message from our sponsors..."
 msgstr "Un missatge del nostre patrocinador"
 
-#: lib/MojoMojo/Controller/User.pm:254
+#: lib/MojoMojo/Controller/User.pm:255
 msgid "Account Taken. Try another."
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr "Afegir"
 msgid "Add tag"
 msgstr "Afegir etiqueta"
 
-#: root/base/admin/user.tt:39
+#: root/base/admin/user.tt:54
 msgid "Add user"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr "Llista de pàgines per ordre alfabètic"
 msgid "Also try h2,h3 and so on"
 msgstr "També intenti h2, h3, i més"
 
-#: lib/MojoMojo/Controller/User.pm:312
+#: lib/MojoMojo/Controller/User.pm:313
 msgid "An error occourred. Sorry."
 msgstr "Disculpi, un error ha passat"
 
@@ -174,11 +174,11 @@ msgstr ""
 msgid "Aperture"
 msgstr "Obertura"
 
-#: lib/MojoMojo/Controller/Attachment.pm:112
+#: lib/MojoMojo/Controller/Attachment.pm:125
 msgid "Attachment not found."
 msgstr "No s'ha trobat el fitxer adjunt"
 
-#: root/base/navbar.tt:65 root/base/navbar.tt:67 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Ajuntar"
 
@@ -230,11 +230,11 @@ msgstr ""
 msgid "Camera"
 msgstr "Càmera"
 
-#: lib/MojoMojo/Controller/Attachment.pm:184
+#: lib/MojoMojo/Controller/Attachment.pm:202
 msgid "Can only make inline version of photos"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:159
+#: lib/MojoMojo/Controller/Attachment.pm:176
 msgid "Can only make thumbnails of photos"
 msgstr ""
 
@@ -332,12 +332,12 @@ msgstr ""
 msgid "Could not authenticate that login."
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:66
+#: lib/MojoMojo/Controller/Attachment.pm:74
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
 
-#: lib/MojoMojo/Controller/User.pm:181
+#: lib/MojoMojo/Controller/User.pm:182
 msgid "Could not recover password"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgstr "Correu"
 msgid "Email Validation"
 msgstr "Validació de correu electrònic"
 
-#: lib/MojoMojo/Controller/User.pm:205
+#: lib/MojoMojo/Controller/User.pm:206
 msgid "Emailed you your new password."
 msgstr "T'he enviat la teva nova contrasenya"
 
@@ -481,7 +481,7 @@ msgstr "T'he enviat la teva nova contrasenya"
 msgid "Enable comments on this page."
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:200
+#: lib/MojoMojo/Controller/User.pm:201
 msgid "Error occurred while emailing you your new password."
 msgstr ""
 
@@ -594,7 +594,7 @@ msgstr "Titulars"
 msgid "Headlines for x"
 msgstr "La portada per %1"
 
-#: lib/MojoMojo/Schema.pm:122
+#: lib/MojoMojo/Schema.pm:123
 msgid "Help"
 msgstr ""
 
@@ -684,7 +684,7 @@ msgstr "Interessos"
 msgid "Internal Link"
 msgstr "Enllaç Intern"
 
-#: lib/MojoMojo/Controller/User.pm:164
+#: lib/MojoMojo/Controller/User.pm:165
 msgid "Invalid password"
 msgstr ""
 
@@ -932,7 +932,7 @@ msgstr "Nova contrasenya"
 msgid "New password again"
 msgstr "Nova contrasenya un altre vegada"
 
-#: root/base/page/search_inline.tt:53
+#: root/base/admin/user.tt:50 root/base/page/search_inline.tt:53
 msgid "Next"
 msgstr "Proper"
 
@@ -966,7 +966,7 @@ msgstr ""
 msgid "No results found"
 msgstr "No resultats trobats"
 
-#: lib/MojoMojo/Controller/Page.pm:95
+#: lib/MojoMojo/Controller/Page.pm:83
 #. ($rev,                '<span class="error_detail">'                  . '<a href="' . $page->path . '">' . $page->name . '</a>'               .'</span>')
 msgid "No revision x for x"
 msgstr ""
@@ -1077,8 +1077,8 @@ msgstr ""
 msgid "Password"
 msgstr "Contrasenya"
 
-#: lib/MojoMojo/Controller/Page.pm:72
-#. ($page->name)
+#: lib/MojoMojo.pm:685
+#. ($c->stash->{page}->name)
 msgid "Permission Denied to view x"
 msgstr "Permission Denied to view %1"
 
@@ -1111,7 +1111,7 @@ msgstr "Fotos"
 msgid "Please enter username and password"
 msgstr "Entra nom d'usuari i contrasenya"
 
-#: lib/MojoMojo/Controller/User.pm:230
+#: lib/MojoMojo/Controller/User.pm:231
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr ""
 
@@ -1139,7 +1139,7 @@ msgstr ""
 msgid "Powered by Catalyst"
 msgstr "Poder de Catalyst"
 
-#: root/base/navbar.tt:76 root/base/navbar.tt:78
+#: root/base/navbar.tt:72 root/base/navbar.tt:74
 msgid "Preferences"
 msgstr "Preferències"
 
@@ -1151,7 +1151,7 @@ msgstr ""
 msgid "Preview"
 msgstr "Vista prèvia"
 
-#: root/base/page/search_inline.tt:47
+#: root/base/admin/user.tt:42 root/base/page/search_inline.tt:47
 msgid "Previous"
 msgstr "Anterior"
 
@@ -1159,7 +1159,7 @@ msgstr "Anterior"
 msgid "Print"
 msgstr "Imprimir"
 
-#: root/base/navbar.tt:71 root/base/navbar.tt:73
+#: root/base/navbar.tt:67 root/base/navbar.tt:69
 msgid "Profile"
 msgstr "Perfil"
 
@@ -1216,7 +1216,7 @@ msgstr "Registrar-se"
 msgid "Register new account"
 msgstr "Registrar nou compte"
 
-#: lib/MojoMojo/Controller/User.pm:225
+#: lib/MojoMojo/Controller/User.pm:226
 msgid "Registration is closed!"
 msgstr ""
 
@@ -1515,7 +1515,7 @@ msgstr ""
 msgid "Site settings"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:445
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr ""
 
@@ -1588,7 +1588,7 @@ msgstr ""
 msgid "Textile2 reference"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:359
+#: lib/MojoMojo/Controller/User.pm:360
 msgid "That mail is already in use"
 msgstr ""
 
@@ -1638,7 +1638,7 @@ msgstr "Actualitzar"
 msgid "Update "
 msgstr "Actualitzar "
 
-#: lib/MojoMojo/Controller/User.pm:138
+#: lib/MojoMojo/Controller/User.pm:139
 msgid "Updated preferences"
 msgstr ""
 
@@ -1658,11 +1658,11 @@ msgstr ""
 msgid "User Preferences"
 msgstr "Preferència d'usuari"
 
-#: root/base/navbar.tt:73
+#: root/base/navbar.tt:69
 msgid "User Profile"
 msgstr "Perfil d'usuari"
 
-#: root/base/navbar.tt:78
+#: root/base/navbar.tt:74
 msgid "User Settings"
 msgstr "Paràmetres d'usuari"
 
@@ -1670,7 +1670,7 @@ msgstr "Paràmetres d'usuari"
 msgid "User not found!"
 msgstr "Usuari no trobat"
 
-#: lib/MojoMojo/Controller/User.pm:124 lib/MojoMojo/Controller/User.pm:392 lib/MojoMojo/Controller/User.pm:421
+#: lib/MojoMojo/Controller/User.pm:125 lib/MojoMojo/Controller/User.pm:393 lib/MojoMojo/Controller/User.pm:422
 #. ($login)
 msgid "User not found: x"
 msgstr ""
@@ -1725,7 +1725,7 @@ msgstr "Veure la Diferència"
 msgid "View as files"
 msgstr "Veure com fitges"
 
-#: root/base/attachments/list.tt:53
+#: root/base/attachments/list.tt:62
 msgid "View as gallery"
 msgstr "Veure com galeria"
 
@@ -1745,7 +1745,7 @@ msgstr ""
 msgid "We\\'ve sent you an email with an activation link. Please click on it to activate your account!"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:338
+#: lib/MojoMojo/Controller/User.pm:339
 #. ($user->name)
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Benvingut, %1 el teu correu electrònic is validated. Please log in."
@@ -1790,7 +1790,7 @@ msgstr ""
 msgid "You do not have permissions to edit attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:439
+#: lib/MojoMojo/Controller/User.pm:440
 msgid "You have to fill in all required fields."
 msgstr ""
 
@@ -1810,12 +1810,12 @@ msgstr "El Teu Compte"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:191
+#: lib/MojoMojo/Controller/User.pm:192
 #. ($c->pref('name')
 msgid "Your new password on x"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:169
+#: lib/MojoMojo/Controller/User.pm:170
 msgid "Your password has been updated"
 msgstr "La teva contrasenya ha estat actualizat"
 
@@ -1833,7 +1833,7 @@ msgstr ""
 msgid "[[C++]], [[Let\\'s play again!]] ((easy to type))"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:304
+#: lib/MojoMojo/Controller/User.pm:305
 #. ($c->pref('name')
 msgid "[x] New User Validation"
 msgstr "[%1] New User Validation"
@@ -1854,7 +1854,7 @@ msgstr ""
 msgid "add tag"
 msgstr "afegir etiqueta"
 
-#: lib/MojoMojo/Schema.pm:165
+#: lib/MojoMojo/Schema.pm:166
 msgid "admin home page"
 msgstr ""
 "# Admin User.\n"
@@ -1947,7 +1947,7 @@ msgstr ""
 msgid "configuration"
 msgstr "configuració"
 
-#: lib/MojoMojo/Controller/User.pm:367
+#: lib/MojoMojo/Controller/User.pm:368
 msgid "confirmation message resent"
 msgstr ""
 
@@ -1959,7 +1959,7 @@ msgstr ""
 msgid "creator"
 msgstr "creador"
 
-#: root/base/attachments/list.tt:45 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "suprimir"
 
@@ -1975,7 +1975,7 @@ msgstr ""
 msgid "do not pass jail, do not collect $200..."
 msgstr ""
 
-#: root/base/attachments/list.tt:12
+#: root/base/attachments/list.tt:15
 msgid "download"
 msgstr "descarregar"
 
@@ -2007,7 +2007,7 @@ msgstr "galeria"
 msgid "hello"
 msgstr "hola"
 
-#: lib/MojoMojo/Schema.pm:161
+#: lib/MojoMojo/Schema.pm:162
 msgid "help message"
 msgstr ""
 "# Help Index.\n"
@@ -2036,7 +2036,7 @@ msgstr ""
 msgid "include this rss feed"
 msgstr ""
 
-#: root/base/attachments/list.tt:42
+#: root/base/attachments/list.tt:47
 msgid "insert link"
 msgstr ""
 
@@ -2185,7 +2185,7 @@ msgstr ""
 msgid "tags"
 msgstr "etiquetes"
 
-#: lib/MojoMojo/Controller/User.pm:440
+#: lib/MojoMojo/Controller/User.pm:441
 msgid "the following are missing:"
 msgstr ""
 
@@ -2197,15 +2197,15 @@ msgstr "usuaris"
 msgid "view"
 msgstr "visualitzar"
 
-#: root/base/attachments/list.tt:34
+#: root/base/attachments/list.tt:38
 msgid "view full size"
 msgstr ""
 
-#: root/base/attachments/list.tt:38
+#: root/base/attachments/list.tt:42
 msgid "view in your browser"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:157
+#: lib/MojoMojo/Schema.pm:158
 #. ("test")
 msgid "welcome message"
 msgstr ""
