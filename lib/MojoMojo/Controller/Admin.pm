@@ -121,7 +121,7 @@ sub user : Local {
         {
             page => $c->req->param('page') || 1,
             rows => 20,
-            order_by => 'active, login'
+            order_by => 'active desc, login'
         }
     );
     $c->stash->{users} = $iterator;

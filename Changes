@@ -20,6 +20,7 @@
         - The users list in the admin section only showed the first 20
           users. Added paging links so you can browse all of them
           (Dave Rolsky)
+        - The users list now shows active users first (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
