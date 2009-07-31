@@ -1,7 +1,10 @@
         - mojomojo_spawn_db.pl now has a --help option and takes CLI
           arguments for all settings (Dave Rolsky)
+        - A newly created database now has an anonymous user
+          preference set. Without this, anonymous users are not
+          supported properly  (Dave Rolsky)
         - A user's active flag is now shown as "yes" or "no" in the UI
-         (Dave Rolsky)
+          (Dave Rolsky)
         - Logging out of a wiki which did not allow anonymous viewing
           left the user able to view the last page they were on. Now
           they are immediately taken to the login screen. (Dave
