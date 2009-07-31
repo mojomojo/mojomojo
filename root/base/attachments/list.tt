@@ -46,11 +46,11 @@
           <li>
             <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
           </li>
-          [% IF attachment.is_image %]
+            [% IF attachment.is_image %]
           <li>
             <a href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
           </li>
-          [% END %]          
+            [% END %]          
           [% END %]
           [% IF c.check_permissions(page.path,c.user).attachment %]
           <li>
