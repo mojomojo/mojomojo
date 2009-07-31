@@ -39,7 +39,7 @@
 
     <p>
 [% IF pager.previous_page %]
-        <a href="[% c.uri_for('/.admin/user', {page => pager.previous_page}) %]">[% loc('Previous page') %]</a>
+        <a href="[% c.uri_for('/.admin/user', {page => pager.previous_page}) %]">[% loc('Previous') %]</a>
 [% END %]
 
 [% IF pager.previous_page AND pager.next_page %]
@@ -47,7 +47,7 @@
 [% END %]
 
 [% IF pager.next_page %]
-        <a href="[% c.uri_for('/.admin/user', {page => pager.next_page}) %]">[% loc('Next page') %]</a>
+        <a href="[% c.uri_for('/.admin/user', {page => pager.next_page}) %]">[% loc('Next') %]</a>
 [% END %]
     </p>
 
