@@ -27,11 +27,11 @@ msgstr "Również sprawdź h2, h3, itp."
 msgid "Bigger"
 msgstr "Większe"
 
-#: root/static/js/edit.js:133
+#: root/static/js/edit.js:133 root/static/js/edit.js:159
 msgid "Block quote"
 msgstr "Cytat blokowy"
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:159
+#: root/static/js/edit.js:138 root/static/js/edit.js:161
 msgid "Bold"
 msgstr "Pogrubione"
 
@@ -43,11 +43,11 @@ msgstr "Lista wypunktowana"
 msgid "Centered paragraph"
 msgstr "Akapit wyśrodkowany"
 
-#: root/static/js/edit.js:132
+#: root/static/js/edit.js:132 root/static/js/edit.js:160
 msgid "Code"
 msgstr "Kod"
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:161
+#: root/static/js/edit.js:140 root/static/js/edit.js:163
 msgid "Deleted Text"
 msgstr "Tekst usunięty"
 
@@ -55,7 +55,7 @@ msgstr "Tekst usunięty"
 msgid "Enum list"
 msgstr "Lista numerowana"
 
-#: root/static/js/edit.js:146 root/static/js/edit.js:163
+#: root/static/js/edit.js:146 root/static/js/edit.js:165
 msgid "External Link"
 msgstr "Link zewnętrzny"
 
@@ -71,11 +71,15 @@ msgstr "Formatowanie IRC"
 msgid "Insert"
 msgstr "Wstaw"
 
-#: root/static/js/edit.js:145 root/static/js/edit.js:162
+#: root/static/js/edit.js:145 root/static/js/edit.js:164
 msgid "Internal Link"
 msgstr "Link wewnętrzny"
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:160
+#: root/static/js/edit.js:145 root/static/js/edit.js:164
+msgid "Intrawiki Link"
+msgstr ""
+
+#: root/static/js/edit.js:139 root/static/js/edit.js:162
 msgid "Italic"
 msgstr "Pochylenie"
 
@@ -95,7 +99,7 @@ msgstr "Element listy 1"
 msgid "Main heading"
 msgstr "Główny nagłówek"
 
-#: root/static/js/edit.js:188
+#: root/static/js/edit.js:190
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Zaznacz fragment tekstu, aby wykonać na nim wybraną z menu akcję"
 
@@ -107,15 +111,15 @@ msgstr "Element listy numerowanej"
 msgid "POD formatter"
 msgstr "Formatowanie POD"
 
-#: root/static/js/edit.js:148 root/static/js/edit.js:165
+#: root/static/js/edit.js:148 root/static/js/edit.js:167
 msgid "Picture"
 msgstr "Obrazek"
 
-#: root/static/js/edit.js:149 root/static/js/edit.js:166
+#: root/static/js/edit.js:149 root/static/js/edit.js:168
 msgid "Picture Right"
 msgstr "Obrazek po prawej"
 
-#: root/static/js/edit.js:147 root/static/js/edit.js:164
+#: root/static/js/edit.js:147 root/static/js/edit.js:166
 msgid "Picture left"
 msgstr "Obrazek po lewej"
 
@@ -151,7 +155,7 @@ msgstr "Podświetlenie składni"
 msgid "bigger"
 msgstr "większe"
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:159
+#: root/static/js/edit.js:138 root/static/js/edit.js:161
 msgid "bold"
 msgstr "pogrubione"
 
@@ -159,7 +163,7 @@ msgstr "pogrubione"
 msgid "centered paragraph"
 msgstr "akapit wyjustowany"
 
-#: root/static/js/edit.js:132
+#: root/static/js/edit.js:132 root/static/js/edit.js:160
 msgid "code"
 msgstr "kod"
 
@@ -171,7 +175,7 @@ msgstr "komentarze"
 msgid "cpan"
 msgstr "link cpan"
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:161
+#: root/static/js/edit.js:140 root/static/js/edit.js:163
 msgid "deleted"
 msgstr "usunięty"
 
@@ -187,7 +191,7 @@ msgstr "zawartość strony"
 msgid "increase # for smaller headline"
 msgstr "zwiększ ilość # aby uzyskać mniejszy nagłówek"
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:160
+#: root/static/js/edit.js:139 root/static/js/edit.js:162
 msgid "italic"
 msgstr "pochylenie"
 
@@ -199,6 +203,10 @@ msgstr "akapit wyrównany"
 msgid "left justified paragraph"
 msgstr "akapit wyrównany do lewej"
 
+#: root/static/js/edit.js:146 root/static/js/edit.js:165
+msgid "linked text"
+msgstr ""
+
 #: root/static/js/wiki.js:479
 msgid "maximize"
 msgstr "maksymalizuj"
@@ -207,7 +215,7 @@ msgstr "maksymalizuj"
 msgid "maximize width"
 msgstr "maksymalna szerokość"
 
-#: root/static/js/edit.js:133
+#: root/static/js/edit.js:133 root/static/js/edit.js:159
 msgid "quote"
 msgstr "cytat"
 
@@ -239,7 +247,7 @@ msgstr "indeks górny"
 msgid "toc"
 msgstr "spis treści"
 
-#: root/static/js/edit.js:163
+#:
 msgid "url inside paranthesis"
 msgstr "adres url w nawiasach"
 

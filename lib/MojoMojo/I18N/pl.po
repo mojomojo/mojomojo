@@ -35,7 +35,7 @@ msgstr "Wiadomość sponsorowana..."
 msgid "Abstract"
 msgstr "Streszczenie"
 
-#: lib/MojoMojo/Controller/User.pm:254
+#: lib/MojoMojo/Controller/User.pm:255
 msgid "Account Taken. Try another."
 msgstr "Konto już istnieje. Spróbuj wybrać inną nazwę."
 
@@ -63,7 +63,7 @@ msgstr "Dodaj"
 msgid "Add tag"
 msgstr "Dodaj tag"
 
-#: root/base/admin/user.tt:39
+#: root/base/admin/user.tt:54
 msgid "Add user"
 msgstr "Dodaj użytkownika"
 
@@ -114,7 +114,7 @@ msgstr "Wszystkie tagi na zdjęciach"
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetycznie posortowana lista stron"
 
-#: lib/MojoMojo/Controller/User.pm:312
+#: lib/MojoMojo/Controller/User.pm:313
 msgid "An error occourred. Sorry."
 msgstr "Przepraszamy, wystąpił błąd."
 
@@ -166,11 +166,11 @@ msgstr "Przysłona"
 msgid "Attachment allowed by default"
 msgstr "Domyślnie włącz załączniki"
 
-#: lib/MojoMojo/Controller/Attachment.pm:112
+#: lib/MojoMojo/Controller/Attachment.pm:125
 msgid "Attachment not found."
 msgstr "Załącznik nie został znaleziony"
 
-#: root/base/navbar.tt:65 root/base/navbar.tt:67 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Załączniki"
 
@@ -222,11 +222,11 @@ msgstr "Buforuj uprawnienia"
 msgid "Camera"
 msgstr "Aparat"
 
-#: lib/MojoMojo/Controller/Attachment.pm:184
+#: lib/MojoMojo/Controller/Attachment.pm:202
 msgid "Can only make inline version of photos"
 msgstr "W wersji wbudowanej mogę pokazać wyłącznie zdjęcia"
 
-#: lib/MojoMojo/Controller/Attachment.pm:159
+#: lib/MojoMojo/Controller/Attachment.pm:176
 msgid "Can only make thumbnails of photos"
 msgstr "Miniaturki dostępne wyłącznie dla zdjęć"
 
@@ -316,12 +316,12 @@ msgstr "Rozmiar treści"
 msgid "Could not authenticate that login."
 msgstr "Nie mogę sprawdzić tego loginu."
 
-#: lib/MojoMojo/Controller/Attachment.pm:66
+#: lib/MojoMojo/Controller/Attachment.pm:74
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
 
-#: lib/MojoMojo/Controller/User.pm:181
+#: lib/MojoMojo/Controller/User.pm:182
 msgid "Could not recover password"
 msgstr "Błąd w czasie odzyskiwania hasła"
 
@@ -465,7 +465,7 @@ msgstr "Adres"
 msgid "Email Validation"
 msgstr "Weryfikacja adresu pocztowego"
 
-#: lib/MojoMojo/Controller/User.pm:205
+#: lib/MojoMojo/Controller/User.pm:206
 msgid "Emailed you your new password."
 msgstr "Nowe hasło zostało wysłane."
 
@@ -481,7 +481,7 @@ msgstr "Włącz graficzne emotikonki"
 msgid "Enforce login"
 msgstr "Wymuś logowanie"
 
-#: lib/MojoMojo/Controller/User.pm:200
+#: lib/MojoMojo/Controller/User.pm:201
 msgid "Error occurred while emailing you your new password."
 msgstr "Wystąpił błąd w czasie wysyłania nowego hasła."
 
@@ -598,7 +598,7 @@ msgstr "Nagłówki"
 msgid "Headlines for x"
 msgstr "Nagłówki dla %1"
 
-#: lib/MojoMojo/Schema.pm:122
+#: lib/MojoMojo/Schema.pm:123
 msgid "Help"
 msgstr "Pomoc"
 
@@ -684,7 +684,7 @@ msgstr "Widok przeznaczony dla włączenia treści"
 msgid "Interests"
 msgstr "Zainteresowania"
 
-#: lib/MojoMojo/Controller/User.pm:164
+#: lib/MojoMojo/Controller/User.pm:165
 msgid "Invalid password"
 msgstr "Niepoprawne hasło"
 
@@ -932,7 +932,7 @@ msgstr "Nowe hasło"
 msgid "New password again"
 msgstr "Powtórz nowe hasło"
 
-#: root/base/page/search_inline.tt:53
+#: root/base/admin/user.tt:50 root/base/page/search_inline.tt:53
 msgid "Next"
 msgstr "Następne"
 
@@ -966,7 +966,7 @@ msgstr "Brak nowych zmian"
 msgid "No results found"
 msgstr "Nie znaleziono"
 
-#: lib/MojoMojo/Controller/Page.pm:95
+#: lib/MojoMojo/Controller/Page.pm:83
 #. ($rev,                '<span class="error_detail">'                  . '<a href="' . $page->path . '">' . $page->name . '</a>'               .'</span>')
 msgid "No revision x for x"
 msgstr "Brak wersji %1 dla %2"
@@ -1089,8 +1089,8 @@ msgstr "Podane hasła są różne"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Hasło musi zawierać od 4 do 14 znaków"
 
-#: lib/MojoMojo/Controller/Page.pm:72
-#. ($page->name)
+#: lib/MojoMojo.pm:685
+#. ($c->stash->{page}->name)
 msgid "Permission Denied to view x"
 msgstr "Brak uprawnień do przeglądania %1"
 
@@ -1119,7 +1119,7 @@ msgstr "Zdjęć"
 msgid "Please enter username and password"
 msgstr "Wprowadź nazwę użytkownika i hasło"
 
-#: lib/MojoMojo/Controller/User.pm:230
+#: lib/MojoMojo/Controller/User.pm:231
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Wprowadź dane, aby się zarejestrować. Wszystkie pola są wymagane."
 
@@ -1151,7 +1151,7 @@ msgstr "Zamieść"
 msgid "Powered by Catalyst"
 msgstr "Powered by Catalyst"
 
-#: root/base/navbar.tt:76 root/base/navbar.tt:78
+#: root/base/navbar.tt:72 root/base/navbar.tt:74
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -1163,7 +1163,7 @@ msgstr "Wstępnie sformatowany blok kodu"
 msgid "Preview"
 msgstr "Podgląd"
 
-#: root/base/page/search_inline.tt:47
+#: root/base/admin/user.tt:42 root/base/page/search_inline.tt:47
 msgid "Previous"
 msgstr "Poprzedni"
 
@@ -1171,7 +1171,7 @@ msgstr "Poprzedni"
 msgid "Print"
 msgstr "Drukuj"
 
-#: root/base/navbar.tt:71 root/base/navbar.tt:73
+#: root/base/navbar.tt:67 root/base/navbar.tt:69
 msgid "Profile"
 msgstr "Profil"
 
@@ -1228,7 +1228,7 @@ msgstr "Nowe konto"
 msgid "Register new account"
 msgstr "Utwórz nowe konto"
 
-#: lib/MojoMojo/Controller/User.pm:225
+#: lib/MojoMojo/Controller/User.pm:226
 msgid "Registration is closed!"
 msgstr "Tworzenie nowych kont jest wyłaczone!"
 
@@ -1539,7 +1539,7 @@ msgstr ""
 msgid "Site settings"
 msgstr "Ustawienia strony"
 
-#: lib/MojoMojo/Controller/User.pm:445
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Niektóre pola są nieprawidłowe. Popraw je i spróbuj ponownie:"
 
@@ -1604,7 +1604,7 @@ msgstr "Informacje o formatowaniu Textile"
 msgid "Textile2 reference"
 msgstr "Składnia Textile2"
 
-#: lib/MojoMojo/Controller/User.pm:359
+#: lib/MojoMojo/Controller/User.pm:360
 msgid "That mail is already in use"
 msgstr "Ten adres jest już zajęty"
 
@@ -1658,7 +1658,7 @@ msgstr "Lista nienumerowana z paragrafami"
 msgid "Update"
 msgstr "Aktualizuj"
 
-#: lib/MojoMojo/Controller/User.pm:138
+#: lib/MojoMojo/Controller/User.pm:139
 msgid "Updated preferences"
 msgstr "Dane zaktualizowane"
 
@@ -1682,15 +1682,15 @@ msgstr "Wyczyść uprawnienia"
 msgid "User Preferences"
 msgstr "Preferencje użytkownika"
 
-#: root/base/navbar.tt:73
+#: root/base/navbar.tt:69
 msgid "User Profile"
 msgstr "Profil użytownika"
 
-#: root/base/navbar.tt:78
+#: root/base/navbar.tt:74
 msgid "User Settings"
 msgstr "Ustawienia użytkownika"
 
-#: lib/MojoMojo/Controller/User.pm:124 lib/MojoMojo/Controller/User.pm:392 lib/MojoMojo/Controller/User.pm:421
+#: lib/MojoMojo/Controller/User.pm:125 lib/MojoMojo/Controller/User.pm:393 lib/MojoMojo/Controller/User.pm:422
 #. ($login)
 msgid "User not found: x"
 msgstr "Użytkownik %1 nie został odnaleziony"
@@ -1745,7 +1745,7 @@ msgstr "Domyślne zezwolenie na przeglądanie"
 msgid "View as files"
 msgstr "Widok plików"
 
-#: root/base/attachments/list.tt:53
+#: root/base/attachments/list.tt:62
 msgid "View as gallery"
 msgstr "Widok galerii"
 
@@ -1765,7 +1765,7 @@ msgstr "Na Twoje konto pocztowe został wysłany link aktywacyjny. Użyj go, aby
 msgid "We\\'ve sent you an email with an activation link. Please click on it to activate your account!"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:338
+#: lib/MojoMojo/Controller/User.pm:339
 #. ($user->name)
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "witaj %1, Twój adres pocztowy został zweryfikowany. Proszę się zalogować."
@@ -1806,7 +1806,7 @@ msgstr "Możesz zasubskrybować tę wiki poprzez RSS i uzyskać nagłówki zmien
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Nie masz uprawnień do edycji załączników na tej stronie"
 
-#: lib/MojoMojo/Controller/User.pm:439
+#: lib/MojoMojo/Controller/User.pm:440
 msgid "You have to fill in all required fields."
 msgstr "Musisz wypełnić wszystkie wymagane pola."
 
@@ -1826,12 +1826,12 @@ msgstr "Twoje konto"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr "Dane wejściowe są nieprawidłowe, sformatuj je jeszcze raz i spróbuj ponownie."
 
-#: lib/MojoMojo/Controller/User.pm:191
+#: lib/MojoMojo/Controller/User.pm:192
 #. ($c->pref('name')
 msgid "Your new password on x"
 msgstr "Twoje nowe hasło na %1"
 
-#: lib/MojoMojo/Controller/User.pm:169
+#: lib/MojoMojo/Controller/User.pm:170
 msgid "Your password has been updated"
 msgstr "Twoje hasło zostało zaktualizowane"
 
@@ -1849,7 +1849,7 @@ msgstr "[[C++]], [[Link w nawiasach kwadratowych]] ((szybszy sposób na zapis li
 msgid "[[C++]], [[Let\\'s play again!]] ((easy to type))"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:304
+#: lib/MojoMojo/Controller/User.pm:305
 #. ($c->pref('name')
 msgid "[x] New User Validation"
 msgstr "[%1] Weryfikacja nowego użytkownika"
@@ -1870,7 +1870,7 @@ msgstr "dodaj komentarz"
 msgid "add tag"
 msgstr "dodaj tag"
 
-#: lib/MojoMojo/Schema.pm:165
+#: lib/MojoMojo/Schema.pm:166
 msgid "admin home page"
 msgstr ""
 "# Użytkownik Admin.\n"
@@ -1951,7 +1951,7 @@ msgstr "przy podglądzie komentarze zablokowane"
 msgid "common uses"
 msgstr "najczęściej używane"
 
-#: lib/MojoMojo/Controller/User.pm:367
+#: lib/MojoMojo/Controller/User.pm:368
 msgid "confirmation message resent"
 msgstr "wysłano wiadomość potwierdzającą"
 
@@ -1963,7 +1963,7 @@ msgstr "tworzenie"
 msgid "creator"
 msgstr "edytor"
 
-#: root/base/attachments/list.tt:45 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "usuwanie"
 
@@ -1975,7 +1975,7 @@ msgstr "szczegóły"
 msgid "do not pass jail, do not collect $200..."
 msgstr "Zrób sobie przerwę..."
 
-#: root/base/attachments/list.tt:12
+#: root/base/attachments/list.tt:15
 msgid "download"
 msgstr "pobierz"
 
@@ -2007,7 +2007,7 @@ msgstr "Galeria"
 msgid "hello"
 msgstr "witaj"
 
-#: lib/MojoMojo/Schema.pm:161
+#: lib/MojoMojo/Schema.pm:162
 msgid "help message"
 msgstr ""
 "# Indeks pomocy.\n"
@@ -2044,7 +2044,7 @@ msgstr "widok wbudowany"
 msgid "insert content"
 msgstr "wstaw zawartość"
 
-#: root/base/attachments/list.tt:42
+#: root/base/attachments/list.tt:47
 msgid "insert link"
 msgstr "wstaw link"
 
@@ -2189,7 +2189,7 @@ msgstr "spis treści"
 msgid "tags"
 msgstr "tagi"
 
-#: lib/MojoMojo/Controller/User.pm:440
+#: lib/MojoMojo/Controller/User.pm:441
 msgid "the following are missing:"
 msgstr "brak następujących:"
 
@@ -2197,15 +2197,15 @@ msgstr "brak następujących:"
 msgid "view"
 msgstr "przeglądanie"
 
-#: root/base/attachments/list.tt:34
+#: root/base/attachments/list.tt:38
 msgid "view full size"
 msgstr ""
 
-#: root/base/attachments/list.tt:38
+#: root/base/attachments/list.tt:42
 msgid "view in your browser"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:157
+#: lib/MojoMojo/Schema.pm:158
 #. ("test")
 msgid "welcome message"
 msgstr ""

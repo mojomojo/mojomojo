@@ -39,7 +39,7 @@ msgstr "三つ以上のハイフン、もしくはアスタリスク"
 msgid "A message from our sponsors..."
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:254
+#: lib/MojoMojo/Controller/User.pm:255
 msgid "Account Taken. Try another."
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr "追加"
 msgid "Add tag"
 msgstr "タグを追加"
 
-#: root/base/admin/user.tt:39
+#: root/base/admin/user.tt:54
 msgid "Add user"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr ""
 msgid "Alphabetically sorted list of pages"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:312
+#: lib/MojoMojo/Controller/User.pm:313
 msgid "An error occourred. Sorry."
 msgstr ""
 
@@ -166,11 +166,11 @@ msgstr ""
 msgid "Aperture"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:112
+#: lib/MojoMojo/Controller/Attachment.pm:125
 msgid "Attachment not found."
 msgstr "添付ファイルが見つかりません。"
 
-#: root/base/navbar.tt:65 root/base/navbar.tt:67 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "添付ファイル"
 
@@ -218,11 +218,11 @@ msgstr ""
 msgid "Camera"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:184
+#: lib/MojoMojo/Controller/Attachment.pm:202
 msgid "Can only make inline version of photos"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:159
+#: lib/MojoMojo/Controller/Attachment.pm:176
 msgid "Can only make thumbnails of photos"
 msgstr ""
 
@@ -304,12 +304,12 @@ msgstr ""
 msgid "Could not authenticate that login."
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:66
+#: lib/MojoMojo/Controller/Attachment.pm:74
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
 
-#: lib/MojoMojo/Controller/User.pm:181
+#: lib/MojoMojo/Controller/User.pm:182
 msgid "Could not recover password"
 msgstr ""
 
@@ -449,7 +449,7 @@ msgstr "メールアドレス"
 msgid "Email Validation"
 msgstr "メールアドレスの確認"
 
-#: lib/MojoMojo/Controller/User.pm:205
+#: lib/MojoMojo/Controller/User.pm:206
 msgid "Emailed you your new password."
 msgstr ""
 
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Enable comments on this page."
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:200
+#: lib/MojoMojo/Controller/User.pm:201
 msgid "Error occurred while emailing you your new password."
 msgstr ""
 
@@ -578,7 +578,7 @@ msgstr "ヘッドライン"
 msgid "Headlines for x"
 msgstr "Headlines for %1"
 
-#: lib/MojoMojo/Schema.pm:122
+#: lib/MojoMojo/Schema.pm:123
 msgid "Help"
 msgstr ""
 
@@ -664,7 +664,7 @@ msgstr ""
 msgid "Interests"
 msgstr "好きな物"
 
-#: lib/MojoMojo/Controller/User.pm:164
+#: lib/MojoMojo/Controller/User.pm:165
 msgid "Invalid password"
 msgstr ""
 
@@ -904,7 +904,7 @@ msgstr "ユーザーの新規登録"
 msgid "New User Registration open"
 msgstr "ユーザーの新規登録を許可"
 
-#: root/base/page/search_inline.tt:53
+#: root/base/admin/user.tt:50 root/base/page/search_inline.tt:53
 msgid "Next"
 msgstr ""
 
@@ -938,7 +938,7 @@ msgstr "最近の更新はありません"
 msgid "No results found"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Page.pm:95
+#: lib/MojoMojo/Controller/Page.pm:83
 #. ($rev,                '<span class="error_detail">'                  . '<a href="' . $page->path . '">' . $page->name . '</a>'               .'</span>')
 msgid "No revision x for x"
 msgstr ""
@@ -1057,8 +1057,8 @@ msgstr "パスワードが一致しませんでした"
 msgid "Password must be between 4 and 14 chars"
 msgstr "パスワードは4文字から14文字である必要があります"
 
-#: lib/MojoMojo/Controller/Page.pm:72
-#. ($page->name)
+#: lib/MojoMojo.pm:685
+#. ($c->stash->{page}->name)
 msgid "Permission Denied to view x"
 msgstr "「%1」の閲覧権限がありません"
 
@@ -1091,7 +1091,7 @@ msgstr "画像"
 msgid "Please enter username and password"
 msgstr "ユーザー名とパスワードを入力してください"
 
-#: lib/MojoMojo/Controller/User.pm:230
+#: lib/MojoMojo/Controller/User.pm:231
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr ""
 
@@ -1123,7 +1123,7 @@ msgstr "投稿"
 msgid "Powered by Catalyst"
 msgstr ""
 
-#: root/base/navbar.tt:76 root/base/navbar.tt:78
+#: root/base/navbar.tt:72 root/base/navbar.tt:74
 msgid "Preferences"
 msgstr "設定"
 
@@ -1139,7 +1139,7 @@ msgstr "フォーマット済みテキスト"
 msgid "Preview"
 msgstr "プレビュー"
 
-#: root/base/page/search_inline.tt:47
+#: root/base/admin/user.tt:42 root/base/page/search_inline.tt:47
 msgid "Previous"
 msgstr "前"
 
@@ -1147,7 +1147,7 @@ msgstr "前"
 msgid "Print"
 msgstr "印刷"
 
-#: root/base/navbar.tt:71 root/base/navbar.tt:73
+#: root/base/navbar.tt:67 root/base/navbar.tt:69
 msgid "Profile"
 msgstr "プロフィール"
 
@@ -1204,7 +1204,7 @@ msgstr "新規登録"
 msgid "Register new account"
 msgstr "新規登録"
 
-#: lib/MojoMojo/Controller/User.pm:225
+#: lib/MojoMojo/Controller/User.pm:226
 msgid "Registration is closed!"
 msgstr "新規登録は行っておりません"
 
@@ -1503,7 +1503,7 @@ msgstr ""
 msgid "Site settings"
 msgstr "サイト設定"
 
-#: lib/MojoMojo/Controller/User.pm:445
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr ""
 
@@ -1572,7 +1572,7 @@ msgstr ""
 msgid "Textile2 reference"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:359
+#: lib/MojoMojo/Controller/User.pm:360
 msgid "That mail is already in use"
 msgstr ""
 
@@ -1614,7 +1614,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:138
+#: lib/MojoMojo/Controller/User.pm:139
 msgid "Updated preferences"
 msgstr ""
 
@@ -1630,15 +1630,15 @@ msgstr ""
 msgid "User Preferences"
 msgstr ""
 
-#: root/base/navbar.tt:73
+#: root/base/navbar.tt:69
 msgid "User Profile"
 msgstr ""
 
-#: root/base/navbar.tt:78
+#: root/base/navbar.tt:74
 msgid "User Settings"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:124 lib/MojoMojo/Controller/User.pm:392 lib/MojoMojo/Controller/User.pm:421
+#: lib/MojoMojo/Controller/User.pm:125 lib/MojoMojo/Controller/User.pm:393 lib/MojoMojo/Controller/User.pm:422
 #. ($login)
 msgid "User not found: x"
 msgstr ""
@@ -1693,7 +1693,7 @@ msgstr "差分"
 msgid "View as files"
 msgstr "リスト形式"
 
-#: root/base/attachments/list.tt:53
+#: root/base/attachments/list.tt:62
 msgid "View as gallery"
 msgstr "ギャラリー形式"
 
@@ -1713,7 +1713,7 @@ msgstr "アクティベーションリンクを記載したメールをお送り
 msgid "We\\'ve sent you an email with an activation link. Please click on it to activate your account!"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:338
+#: lib/MojoMojo/Controller/User.pm:339
 #. ($user->name)
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Welcome, %1 your email is validated. Please log in."
@@ -1754,7 +1754,7 @@ msgstr "このWikiの変更をRSS経由で購読する事が可能です。編�
 msgid "You do not have permissions to edit attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:439
+#: lib/MojoMojo/Controller/User.pm:440
 msgid "You have to fill in all required fields."
 msgstr ""
 
@@ -1774,12 +1774,12 @@ msgstr "アカウント情報"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:191
+#: lib/MojoMojo/Controller/User.pm:192
 #. ($c->pref('name')
 msgid "Your new password on x"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:169
+#: lib/MojoMojo/Controller/User.pm:170
 msgid "Your password has been updated"
 msgstr ""
 
@@ -1797,7 +1797,7 @@ msgstr ""
 msgid "[[C++]], [[Let\\'s play again!]] ((easy to type))"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:304
+#: lib/MojoMojo/Controller/User.pm:305
 #. ($c->pref('name')
 msgid "[x] New User Validation"
 msgstr "[%1] New User Validation"
@@ -1818,7 +1818,7 @@ msgstr ""
 msgid "add tag"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:165
+#: lib/MojoMojo/Schema.pm:166
 msgid "admin home page"
 msgstr ""
 "# Admin User.\n"
@@ -1899,7 +1899,7 @@ msgstr ""
 msgid "common uses"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:367
+#: lib/MojoMojo/Controller/User.pm:368
 msgid "confirmation message resent"
 msgstr ""
 
@@ -1907,7 +1907,7 @@ msgstr ""
 msgid "create"
 msgstr ""
 
-#: root/base/attachments/list.tt:45 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "削除"
 
@@ -1919,7 +1919,7 @@ msgstr ""
 msgid "do not pass jail, do not collect $200..."
 msgstr ""
 
-#: root/base/attachments/list.tt:12
+#: root/base/attachments/list.tt:15
 msgid "download"
 msgstr "ダウンロード"
 
@@ -1951,7 +1951,7 @@ msgstr "ギャラリー形式"
 msgid "hello"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:161
+#: lib/MojoMojo/Schema.pm:162
 msgid "help message"
 msgstr ""
 "# Help Index.\n"
@@ -1988,7 +1988,7 @@ msgstr "インラインで表示"
 msgid "insert"
 msgstr "ページに挿入"
 
-#: root/base/attachments/list.tt:42
+#: root/base/attachments/list.tt:47
 msgid "insert link"
 msgstr ""
 
@@ -2129,7 +2129,7 @@ msgstr ""
 msgid "tags"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:440
+#: lib/MojoMojo/Controller/User.pm:441
 msgid "the following are missing:"
 msgstr ""
 
@@ -2137,15 +2137,15 @@ msgstr ""
 msgid "view"
 msgstr "閲覧"
 
-#: root/base/attachments/list.tt:34
+#: root/base/attachments/list.tt:38
 msgid "view full size"
 msgstr ""
 
-#: root/base/attachments/list.tt:38
+#: root/base/attachments/list.tt:42
 msgid "view in your browser"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:157
+#: lib/MojoMojo/Schema.pm:158
 #. ("test")
 msgid "welcome message"
 msgstr ""

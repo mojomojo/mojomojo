@@ -28,11 +28,11 @@ msgstr "Prøv også h2, h3 osv."
 msgid "Bigger"
 msgstr "Større"
 
-#: root/static/js/edit.js:133
+#: root/static/js/edit.js:133 root/static/js/edit.js:159
 msgid "Block quote"
 msgstr "Sitat-blokk"
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:159
+#: root/static/js/edit.js:138 root/static/js/edit.js:161
 msgid "Bold"
 msgstr "Uthevet"
 
@@ -44,11 +44,11 @@ msgstr "Punktliste"
 msgid "Centered paragraph"
 msgstr "Sentrert paragraf"
 
-#: root/static/js/edit.js:132
+#: root/static/js/edit.js:132 root/static/js/edit.js:160
 msgid "Code"
 msgstr "Koder"
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:161
+#: root/static/js/edit.js:140 root/static/js/edit.js:163
 msgid "Deleted Text"
 msgstr "Slettet tekst"
 
@@ -56,7 +56,7 @@ msgstr "Slettet tekst"
 msgid "Enum list"
 msgstr "Numerert liste"
 
-#: root/static/js/edit.js:146 root/static/js/edit.js:163
+#: root/static/js/edit.js:146 root/static/js/edit.js:165
 msgid "External Link"
 msgstr "Ekstern lenke"
 
@@ -72,11 +72,15 @@ msgstr "IRC Formaterer"
 msgid "Insert"
 msgstr "Sett Inn"
 
-#: root/static/js/edit.js:145 root/static/js/edit.js:162
+#: root/static/js/edit.js:145 root/static/js/edit.js:164
 msgid "Internal Link"
 msgstr "Intern lenke"
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:160
+#: root/static/js/edit.js:145 root/static/js/edit.js:164
+msgid "Intrawiki Link"
+msgstr ""
+
+#: root/static/js/edit.js:139 root/static/js/edit.js:162
 msgid "Italic"
 msgstr "Kursiv"
 
@@ -96,7 +100,7 @@ msgstr "Første gjenstand i listen"
 msgid "Main heading"
 msgstr "Hovedoverskrift"
 
-#: root/static/js/edit.js:188
+#: root/static/js/edit.js:190
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Marker teksten du ønsker at ikon-handlingen skal gjelde for"
 
@@ -108,15 +112,15 @@ msgstr "Numerert liste-punkt"
 msgid "POD formatter"
 msgstr "POD-Formattering"
 
-#: root/static/js/edit.js:148 root/static/js/edit.js:165
+#: root/static/js/edit.js:148 root/static/js/edit.js:167
 msgid "Picture"
 msgstr "Bilde"
 
-#: root/static/js/edit.js:149 root/static/js/edit.js:166
+#: root/static/js/edit.js:149 root/static/js/edit.js:168
 msgid "Picture Right"
 msgstr ""
 
-#: root/static/js/edit.js:147 root/static/js/edit.js:164
+#: root/static/js/edit.js:147 root/static/js/edit.js:166
 msgid "Picture left"
 msgstr "Bilde til venstre"
 
@@ -152,7 +156,7 @@ msgstr "Fargekoding"
 msgid "bigger"
 msgstr "større"
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:159
+#: root/static/js/edit.js:138 root/static/js/edit.js:161
 msgid "bold"
 msgstr "uthevet"
 
@@ -160,7 +164,7 @@ msgstr "uthevet"
 msgid "centered paragraph"
 msgstr "Senter-justert paragraf"
 
-#: root/static/js/edit.js:132
+#: root/static/js/edit.js:132 root/static/js/edit.js:160
 msgid "code"
 msgstr "kode"
 
@@ -172,7 +176,7 @@ msgstr "kommentarer"
 msgid "cpan"
 msgstr "cpan"
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:161
+#: root/static/js/edit.js:140 root/static/js/edit.js:163
 msgid "deleted"
 msgstr "slettet"
 
@@ -188,7 +192,7 @@ msgstr "inkluder"
 msgid "increase # for smaller headline"
 msgstr "Øk antall # for mindre overskrifter"
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:160
+#: root/static/js/edit.js:139 root/static/js/edit.js:162
 msgid "italic"
 msgstr "kursiv"
 
@@ -200,6 +204,10 @@ msgstr "blokk-justert paragraf"
 msgid "left justified paragraph"
 msgstr "venstre-justert paragraf"
 
+#: root/static/js/edit.js:146 root/static/js/edit.js:165
+msgid "linked text"
+msgstr ""
+
 #: root/static/js/wiki.js:479
 msgid "maximize"
 msgstr "maksimer"
@@ -208,7 +216,7 @@ msgstr "maksimer"
 msgid "maximize width"
 msgstr "maksimer vidde"
 
-#: root/static/js/edit.js:133
+#: root/static/js/edit.js:133 root/static/js/edit.js:159
 msgid "quote"
 msgstr "sitat"
 
@@ -240,7 +248,7 @@ msgstr "superskript"
 msgid "toc"
 msgstr "toc"
 
-#: root/static/js/edit.js:163
+#:
 msgid "url inside paranthesis"
 msgstr "url mellom parantesene"
 

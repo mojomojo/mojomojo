@@ -52,7 +52,7 @@ msgstr "En melding fra våre sponsorer..."
 msgid "A poorly configured MojoMojo Installation"
 msgstr "En dårlig konfigurert MojoMojo-installasjon"
 
-#: lib/MojoMojo/Controller/User.pm:254
+#: lib/MojoMojo/Controller/User.pm:255
 msgid "Account Taken. Try another."
 msgstr "Brukernavnet er tatt. Prøv et annet"
 
@@ -80,7 +80,7 @@ msgstr "Legg til"
 msgid "Add tag"
 msgstr "Legg til nøkkelord"
 
-#: root/base/admin/user.tt:39
+#: root/base/admin/user.tt:54
 msgid "Add user"
 msgstr "Legg til bruker"
 
@@ -139,7 +139,7 @@ msgstr "Alfabetisk sortert liste over sider"
 msgid "Also try h2,h3 and so on"
 msgstr "Prøv også h2, h3 osv."
 
-#: lib/MojoMojo/Controller/User.pm:312
+#: lib/MojoMojo/Controller/User.pm:313
 msgid "An error occourred. Sorry."
 msgstr "Unnskyld. En feil har oppstått."
 
@@ -191,11 +191,11 @@ msgstr "Blender"
 msgid "Attachment allowed by default"
 msgstr "Vedlegg tillatt som standard"
 
-#: lib/MojoMojo/Controller/Attachment.pm:112
+#: lib/MojoMojo/Controller/Attachment.pm:125
 msgid "Attachment not found."
 msgstr "Vedlegg kunne ikke finnes"
 
-#: root/base/navbar.tt:65 root/base/navbar.tt:67 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Vedlegg"
 
@@ -263,11 +263,11 @@ msgstr "Cache rettighetsdata."
 msgid "Camera"
 msgstr "Kamera"
 
-#: lib/MojoMojo/Controller/Attachment.pm:184
+#: lib/MojoMojo/Controller/Attachment.pm:202
 msgid "Can only make inline version of photos"
 msgstr "Kan bare legge inn bilder"
 
-#: lib/MojoMojo/Controller/Attachment.pm:159
+#: lib/MojoMojo/Controller/Attachment.pm:176
 msgid "Can only make thumbnails of photos"
 msgstr "Kan bare lage forhåndsvisning for bilder"
 
@@ -373,12 +373,12 @@ msgstr "Kunne ikke hente"
 msgid "Could not authenticate that login."
 msgstr "Kunne ikke autentisere brukernavnet."
 
-#: lib/MojoMojo/Controller/Attachment.pm:66
+#: lib/MojoMojo/Controller/Attachment.pm:74
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Kunne ikke opprette vedlegg fra %1"
 
-#: lib/MojoMojo/Controller/User.pm:181
+#: lib/MojoMojo/Controller/User.pm:182
 msgid "Could not recover password"
 msgstr "Kunne ikke finne den brukeren"
 
@@ -542,7 +542,7 @@ msgstr "E-post"
 msgid "Email Validation"
 msgstr "Epostvalidering"
 
-#: lib/MojoMojo/Controller/User.pm:205
+#: lib/MojoMojo/Controller/User.pm:206
 msgid "Emailed you your new password."
 msgstr "Sendt deg ditt nye passord"
 
@@ -566,7 +566,7 @@ msgstr "Einar Root"
 msgid "Enum list"
 msgstr "Numerert liste"
 
-#: lib/MojoMojo/Controller/User.pm:200
+#: lib/MojoMojo/Controller/User.pm:201
 msgid "Error occurred while emailing you your new password."
 msgstr "En feil oppsto under utsending av ditt nye passord."
 
@@ -699,7 +699,7 @@ msgstr "Overskrifter"
 msgid "Headlines for x"
 msgstr "Overskrifter for %1"
 
-#: lib/MojoMojo/Schema.pm:122
+#: lib/MojoMojo/Schema.pm:123
 msgid "Help"
 msgstr "Hjelp"
 
@@ -805,7 +805,7 @@ msgstr "Interesser"
 msgid "Internal Link"
 msgstr "Intern lenke"
 
-#: lib/MojoMojo/Controller/User.pm:164
+#: lib/MojoMojo/Controller/User.pm:165
 msgid "Invalid password"
 msgstr "Ugyldig passord"
 
@@ -1089,7 +1089,7 @@ msgstr "Nytt passord"
 msgid "New password again"
 msgstr "Gjenta nytt passord"
 
-#: root/base/page/search_inline.tt:53
+#: root/base/admin/user.tt:50 root/base/page/search_inline.tt:53
 msgid "Next"
 msgstr "Neste"
 
@@ -1123,7 +1123,7 @@ msgstr "Ingen nylige endringer"
 msgid "No results found"
 msgstr "Fant ingen resultater"
 
-#: lib/MojoMojo/Controller/Page.pm:95
+#: lib/MojoMojo/Controller/Page.pm:83
 #. ($rev,                '<span class="error_detail">'                  . '<a href="' . $page->path . '">' . $page->name . '</a>'               .'</span>')
 msgid "No revision x for x"
 msgstr "%1 er ikke en gyldig revisjon for %2"
@@ -1258,8 +1258,8 @@ msgstr "Passordet ble ikke gjentatt korrekt"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Passordet må være mellom 4 og 4 tegn"
 
-#: lib/MojoMojo/Controller/Page.pm:72
-#. ($page->name)
+#: lib/MojoMojo.pm:685
+#. ($c->stash->{page}->name)
 msgid "Permission Denied to view x"
 msgstr "Du har ikke rettigheter til å se %1"
 
@@ -1300,7 +1300,7 @@ msgstr "Bilde til høyre"
 msgid "Please enter username and password"
 msgstr "Skriv inn brukernavn og passord"
 
-#: lib/MojoMojo/Controller/User.pm:230
+#: lib/MojoMojo/Controller/User.pm:231
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Fyll inn følgende informasjon for å registrere deg. Alle feltene er obligatoriske."
 
@@ -1332,7 +1332,7 @@ msgstr "Lagre"
 msgid "Powered by Catalyst"
 msgstr "Drevet av Catalyst"
 
-#: root/base/navbar.tt:76 root/base/navbar.tt:78
+#: root/base/navbar.tt:72 root/base/navbar.tt:74
 msgid "Preferences"
 msgstr "Instillinger"
 
@@ -1348,7 +1348,7 @@ msgstr "Forhåndsformattert tekst"
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: root/base/page/search_inline.tt:47
+#: root/base/admin/user.tt:42 root/base/page/search_inline.tt:47
 msgid "Previous"
 msgstr "Forrige"
 
@@ -1356,7 +1356,7 @@ msgstr "Forrige"
 msgid "Print"
 msgstr "Utskrift"
 
-#: root/base/navbar.tt:71 root/base/navbar.tt:73
+#: root/base/navbar.tt:67 root/base/navbar.tt:69
 msgid "Profile"
 msgstr "Profil"
 
@@ -1413,7 +1413,7 @@ msgstr "Registrering"
 msgid "Register new account"
 msgstr "Registrerer ny bruker"
 
-#: lib/MojoMojo/Controller/User.pm:225
+#: lib/MojoMojo/Controller/User.pm:226
 msgid "Registration is closed!"
 msgstr "Registrering er stengt!"
 
@@ -1732,7 +1732,7 @@ msgstr "Systeminstillinger"
 msgid "Smaller"
 msgstr "Mindre"
 
-#: lib/MojoMojo/Controller/User.pm:445
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Formen var ikke riktig fylt ut. Rett feilene og prøv igjen:"
 
@@ -1817,7 +1817,7 @@ msgstr "Formatteringstips for Textile"
 msgid "Textile2 reference"
 msgstr "Hjelp for Textile"
 
-#: lib/MojoMojo/Controller/User.pm:359
+#: lib/MojoMojo/Controller/User.pm:360
 msgid "That mail is already in use"
 msgstr "Det finnes allerede en bruker med den epostadressen"
 
@@ -1883,7 +1883,7 @@ msgstr "Oppdater"
 msgid "Update "
 msgstr "Oppdater "
 
-#: lib/MojoMojo/Controller/User.pm:138
+#: lib/MojoMojo/Controller/User.pm:139
 msgid "Updated preferences"
 msgstr "Oppdaterte instillinger"
 
@@ -1907,11 +1907,11 @@ msgstr "Bruk arvede rettigheter"
 msgid "User Preferences"
 msgstr "Brukerinstillinger"
 
-#: root/base/navbar.tt:73
+#: root/base/navbar.tt:69
 msgid "User Profile"
 msgstr "Brukerprofil"
 
-#: root/base/navbar.tt:78
+#: root/base/navbar.tt:74
 msgid "User Settings"
 msgstr "Brukerinstillinger"
 
@@ -1919,7 +1919,7 @@ msgstr "Brukerinstillinger"
 msgid "User not found!"
 msgstr "Brukeren kunne ikke finnes"
 
-#: lib/MojoMojo/Controller/User.pm:124 lib/MojoMojo/Controller/User.pm:392 lib/MojoMojo/Controller/User.pm:421
+#: lib/MojoMojo/Controller/User.pm:125 lib/MojoMojo/Controller/User.pm:393 lib/MojoMojo/Controller/User.pm:422
 #. ($login)
 msgid "User not found: x"
 msgstr "Brukernav %1 finnes ikke på systemet."
@@ -1978,7 +1978,7 @@ msgstr "Visning tillatt som standard"
 msgid "View as files"
 msgstr "Vis som filer"
 
-#: root/base/attachments/list.tt:53
+#: root/base/attachments/list.tt:62
 msgid "View as gallery"
 msgstr "Vis som galleri"
 
@@ -1998,7 +1998,7 @@ msgstr "Vi har sendt deg en epost med aktiveringslenke. Vennligst følg lenken f
 msgid "We\\'ve sent you an email with an activation link. Please click on it to activate your account!"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:338
+#: lib/MojoMojo/Controller/User.pm:339
 #. ($user->name)
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Velkommen, %1, din e-post er godkjent. Vennligst logg inn."
@@ -2043,7 +2043,7 @@ msgstr "Du kan abbonere på denne wikien med RS og enten bare få overskriften p
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Du har ikke rettigheter til å endre vedlegg for denne siden"
 
-#: lib/MojoMojo/Controller/User.pm:439
+#: lib/MojoMojo/Controller/User.pm:440
 msgid "You have to fill in all required fields."
 msgstr "Du må fylle inn alle de påkrevde feltene."
 
@@ -2063,12 +2063,12 @@ msgstr "Din konto"
 msgid "Your input is invalid, please reformat it and try again."
 msgstr "Teksten din er ugyldig, reformatter den og prøv igjen."
 
-#: lib/MojoMojo/Controller/User.pm:191
+#: lib/MojoMojo/Controller/User.pm:192
 #. ($c->pref('name')
 msgid "Your new password on x"
 msgstr "Ditt nye passord for %1"
 
-#: lib/MojoMojo/Controller/User.pm:169
+#: lib/MojoMojo/Controller/User.pm:170
 msgid "Your password has been updated"
 msgstr "Ditt passord er nå endret"
 
@@ -2086,7 +2086,7 @@ msgstr "[C++]], [[Skal vi leke mer?]] ((lett å skrive))"
 msgid "[[C++]], [[Let\\'s play again!]] ((easy to type))"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:304
+#: lib/MojoMojo/Controller/User.pm:305
 #. ($c->pref('name')
 msgid "[x] New User Validation"
 msgstr "[%1] Bekreft din e-postadresse"
@@ -2107,7 +2107,7 @@ msgstr "legg til en kommentar"
 msgid "add tag"
 msgstr "legg til nøkkelord"
 
-#: lib/MojoMojo/Schema.pm:165
+#: lib/MojoMojo/Schema.pm:166
 msgid "admin home page"
 msgstr ""
 "# Admin User.\n"
@@ -2212,7 +2212,7 @@ msgstr "vanlige bruksområder"
 msgid "configuration"
 msgstr "konfigurasjon"
 
-#: lib/MojoMojo/Controller/User.pm:367
+#: lib/MojoMojo/Controller/User.pm:368
 msgid "confirmation message resent"
 msgstr "bekreftelsesmelding ble sendt på nytt"
 
@@ -2228,7 +2228,7 @@ msgstr "opprett"
 msgid "creator"
 msgstr "skaper"
 
-#: root/base/attachments/list.tt:45 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "slett"
 
@@ -2248,7 +2248,7 @@ msgstr "passer ikke start, motta ikke $200..."
 msgid "do not pass prison, do not collect $ 200..."
 msgstr "Gå direkte til fengsel, motta ikke $100 om du passerer start..."
 
-#: root/base/attachments/list.tt:12
+#: root/base/attachments/list.tt:15
 msgid "download"
 msgstr "last ned"
 
@@ -2280,7 +2280,7 @@ msgstr "galleri"
 msgid "hello"
 msgstr "hallo"
 
-#: lib/MojoMojo/Schema.pm:161
+#: lib/MojoMojo/Schema.pm:162
 msgid "help message"
 msgstr ""
 "# Help Index.\n"
@@ -2333,7 +2333,7 @@ msgstr "sett inn"
 msgid "insert content"
 msgstr "sett inn innhold"
 
-#: root/base/attachments/list.tt:42
+#: root/base/attachments/list.tt:47
 msgid "insert link"
 msgstr "sett inn lenke"
 
@@ -2530,7 +2530,7 @@ msgstr "innhold"
 msgid "tags"
 msgstr "nøkkelord"
 
-#: lib/MojoMojo/Controller/User.pm:440
+#: lib/MojoMojo/Controller/User.pm:441
 msgid "the following are missing:"
 msgstr "følgende mangler:"
 
@@ -2554,11 +2554,11 @@ msgstr "brukere"
 msgid "view"
 msgstr "vis"
 
-#: root/base/attachments/list.tt:34
+#: root/base/attachments/list.tt:38
 msgid "view full size"
 msgstr ""
 
-#: root/base/attachments/list.tt:38
+#: root/base/attachments/list.tt:42
 msgid "view in your browser"
 msgstr ""
 
@@ -2572,7 +2572,7 @@ msgstr ""
 # "## Need some assistance?\n"
 # "\n"
 # "Check out our [[Help]] section."
-#: lib/MojoMojo/Schema.pm:157
+#: lib/MojoMojo/Schema.pm:158
 #. ("test")
 msgid "welcome message"
 msgstr "# Velkommen til MojoMojo!Dette er forsiden din. For å begynne å bruke wikien din, logg deg inn medbrukernavn admin/passord admin. Du vil da ha mulighet til å endre instillinger fra bunn-menyen  Hvis du vil teste litt kan du lage en [[Ny Side]] eller redigere denne ved å velge 'Rediger' lenken.## Trenger du hjelp?Sjekk ut [[Hjelp|Help]]-siden."
