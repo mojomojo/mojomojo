@@ -15,7 +15,7 @@ use Catalyst qw/
     Unicode
     I18N
     Setenv
-
+    PageCache
     /;
 
 use Storable;
