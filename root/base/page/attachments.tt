@@ -12,6 +12,8 @@
     <input type="submit" name="submit" value="[%loc('Click Here to Upload Attachments')%]"/>
 </form>
 
+<br />
+
 [% ELSE %]
 <a href="#" id="do_upload">[%loc('Choose attachments')%]</a>
 <p>[%loc('Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window.')%] </p>
