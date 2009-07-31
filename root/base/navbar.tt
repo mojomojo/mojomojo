@@ -66,7 +66,6 @@
           <li><a title="[%loc('Page meta information')%]" href="[% c.uri_for('info')%]" accesskey="I">[%loc('Page History')%]</a></li>
       [% END %]
 
-         <li><a href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         [% IF (c.req.action=="profile") +%]
         <li class="navOn">[% loc('Profile') %]</li>
@@ -79,5 +78,18 @@
         <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
         [% END %]
       [% END +%]
+
+        <li>
+            <a id="page_tools_toggle" href="#" title="More Page Tools">Tools</a>
+        </li>
+    </ul>
+</div>
+
+<div id="page_tools" style="display: none">
+    <ul>
+        <li><a href="[% c.uri_for('list') %]" title="[% loc('List of pages under this page') %]">[% loc('Sub pages') %]</a></li>
+        <li><a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print view')%]</a></li>
+        <li><a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a></li>
+        <li><a title="[%loc('Inline view for including content')%]" href="[%c.uri_for('inline')%]">[%loc('Inline')%]</a></li>
     </ul>
 </div>

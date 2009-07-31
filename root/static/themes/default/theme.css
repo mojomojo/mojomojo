@@ -253,8 +253,8 @@ div#pageoptions a.active {
     font-size: 1em;
 }
 
-li#site_settings {
-    clear: left;
+#site_settings {
+    float: right;
 }
 
 .formdiv {

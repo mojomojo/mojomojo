@@ -98,6 +98,27 @@ ul#toplinks-for-user {
     float: right;
 }
 
+#page_tools {
+    background: white;
+    border: 1px solid black;
+    position: absolute;
+    z-index: 10;
+}
+
+#page_tools ul {
+    margin: 0;
+    padding: 0;
+}
+
+#page_tools ul li {
+    font-size: .9em;
+    padding: 4px 10px;
+}
+
+#page_tools ul li a {
+    text-decoration: none;
+}
+
 .inputBox {
     background-color: #eee;
     padding: 5px;
