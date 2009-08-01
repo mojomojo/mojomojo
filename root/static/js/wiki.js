@@ -216,22 +216,22 @@ $( function() {
             button_image_url: $.uri_for("/.static/gfx/uploadbutton.png"),
             button_width: 61,
             button_height: 22,
-            flash_url : $.uri_for('/.static/flash/swfupload.swf'),
+            flash_url: $.uri_for('/.static/flash/swfupload.swf'),
             upload_url: $('#upload_link').attr('href'),	// Relative to the SWF file
-            file_size_limit : "100 MB",
+            file_size_limit: "100 MB",
             file_post_name: 'file' ,
-            file_types : "*",
-            file_types_description : "Any files",
-            file_dialog_complete_handler : function(numFilesSelected, numFilesQueued) {
+            file_types: "*",
+            file_types_description: "Any files",
+            file_dialog_complete_handler: function(numFilesSelected, numFilesQueued) {
                     this.startUpload();
             },
-            upload_start_handler : function(file) {
+            upload_start_handler: function(file) {
                 $('#progress').width('0')
                 $('#progress_status').html(file.name+' 0% ' + loc('done') );
                 $('#progressbar').show();$('#progress_status').show();
                 return true;
             },
-            upload_progress_handler : function(file, bytesLoaded, bytesTotal) {
+            upload_progress_handler: function(file, bytesLoaded, bytesTotal) {
                 if ( $('#progressbar').is(':hidden') ){
                   $('#progress').width('0');
                   $('#progress_status').html(file.name+' 0% ' + loc('done') );
@@ -245,7 +245,7 @@ $( function() {
                     this.debug(ex);
                 }
             },
-            queue_complete_handler : function(numfiles) {
+            queue_complete_handler: function(numfiles) {
                 $('#progressbar').hide();$('#progress_status').hide();
                 $('#attachments').load($('#list_link').attr('href'))
             }

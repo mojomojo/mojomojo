@@ -84,6 +84,13 @@ $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
 my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or 
   die "Failed to connect to database";
+  
+# Check if database is already deployed by  
+# examining if the table Person exists and has a record.
+eval {  $schema->resultset('MojoMojo::Schema::Result::Person')->count };
+if (!$@ ) {
+    die "You have already deployed your database\n";
+}
 
 print <<"EOF";
 

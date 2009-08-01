@@ -17,6 +17,25 @@
         - The "insert link" option for an attachment went to a slightly broken version of the edit form (Dave Rolsky)
         - Attachments are now viewable without going to the edit form first (Dave Rolsky)
         - The gallery link was broken (Dave Rolsky)
+        - The users list in the admin section only showed the first 20
+          users. Added paging links so you can browse all of them
+          (Dave Rolsky)
+        - The users list now shows active users first (Dave Rolsky)
+        - Reorganized the navigation menus to try to group site-wide
+          and page-specific options together. Top-level menu links
+          (like Recent and Tags) are now always site-wide. For
+          path-specific versions, go to the "Sub pages" view of a
+          path. (Dave Rolsky)
+        - Recent changes now shows user's names, not their logins (Dave Rolsky)
+        - Revised MultiMarkdown syntax help tips (Dave Rolsky)
+        - The edit page incorrectly labeled a button "Create and View"
+          for a page that only had one revision, when it should have
+          been labeled "Save and View" (Dave Rolsky)
+        - Removed the delete action, which was broken with Pg, and not
+          checking permissions (Dave Rolsky)
+        - mojomojo_spawn_db won't attempt deploy if db already exists (mateu)
+        - Exit MojoMojo on startup attempt if mojomojo_spawn_db.pl was not run (mateu)
+        - The revisions list is now a nicely formatted table (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.

@@ -299,4 +299,13 @@ p {
     padding: 0.2em;
 }
 
+#path_links, #path_links li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.syntax_help table th {
+    background-color: #f6f6f6;
+}
+
 /* @end */

@@ -5,22 +5,19 @@
   [% ELSE +%]
     <form action="[% c.uri_for('search') %]" method="get">
   [% END +%]
+        [% FILTER nav %]
         <ul>
-            <li><a[% ' class="navOn"' IF template.name == 'page/recent.tt' %] href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
-          [% IF (pictures OR photo) +%]
-            <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
-          [% ELSE +%]
-            <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]" accesskey="T">[% loc('Tags') %]</a></li>
-          [% END %]
-            <li><a[% ' class="navOn"' IF c.req.action == 'users' %] href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
-            <li><a[% ' class="navOn"' IF template.name == 'feeds.tt' %] href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
-            <li><a[% ' class="navOn"' IF template.name == 'export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
+            <li><a href="[% c.uri_for('/.recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
+            <li><a href="[% c.uri_for('/.tags') %]" title="[% loc('All tags in this wiki') %]" accesskey="T">[% loc('Tags') %]</a></li>
+            <li><a href="[% c.uri_for('/.users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
+            <li><a href="[% c.uri_for('/.feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
+            <li><a href="[% c.uri_for('/.export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
             <li>
                 [% UNLESS c.pref('disable_search') +%]<input type="hidden" name="search_type" value="all" />[% END +%]
                 <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
             </li>
         </ul>
-
+        [% END # FILTER nav %]
     </form>
 
     <ul id="toplinks-for-user">
@@ -28,14 +25,15 @@
          <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
          <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
          [% ELSE %]
-         <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
            [%+ IF(c.pref('open_registration')) %]
-         <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
+           <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
            [% END %]
+         <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
          [% END %]
     </ul>
 </div>
 <div id="pagenav">
+    [% FILTER nav %]
     <ul>
       [% IF c.req.action == "view" %]
         [% IF user.active
@@ -49,11 +47,7 @@
         <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
       [% END %]
       [% IF (page.has_photos) %]
-        [% IF pictures +%]
-        <li class="navOn">[% loc('Gallery') %]</li>
-        [% ELSE +%]
         <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
-        [% END %]
       [% ELSE +%]
         <li>[% loc('Gallery') %]</li>
 
@@ -67,14 +61,8 @@
       [% END %]
 
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
-        [% IF (c.req.action=="profile") +%]
-        <li class="navOn">[% loc('Profile') %]</li>
-        [% ELSE +%]
         <li><a title="[% loc('User Profile') %]" href="[% c.uri_for('profile') %]">[% loc('Profile') %]</a></li>
-        [% END %]
-        [% IF (c.req.action=="prefs") +%]
-        <li class="navOn">[% loc('Preferences') %]</li>
-        [% ELSE +%]
+        [% IF user.login == page.name %]
         <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
         [% END %]
       [% END +%]
@@ -92,4 +80,5 @@
         <li><a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a></li>
         <li><a title="[%loc('Inline view for including content')%]" href="[%c.uri_for('inline')%]">[%loc('Inline')%]</a></li>
     </ul>
+    [% END # FILTER nav %]
 </div>

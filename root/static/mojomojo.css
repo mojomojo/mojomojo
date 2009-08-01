@@ -88,9 +88,10 @@ form { margin: 0;}
     color: #999;
 }
 
-div#toplinks a.navOn {
+a.navOn {
     color: #3a3a3a;
     background: #fff;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -270,6 +271,11 @@ div.tab-nav a.close-button {
     margin-top: 11px;
 }
 
+.syntax_help table th {
+    font-size: 120%;
+    font-weight: bold;
+}
+
 .syntax_help  table td {
     padding: 3px;
     vertical-align: top;
@@ -298,6 +304,14 @@ div.tab-nav a.close-button {
 
 .syntax_help h2 {
     margin-top: 0;
+}
+
+.syntax_help pre {
+    line-height: 90%;
+    font-size: 120%;
+    margin-left: 0;
+    padding: 5px;
+    width: 80%;
 }
 
 .rightHandSide {
@@ -436,10 +450,11 @@ div.pager ul li a {
     background: #2274a8;
 }
 
+#revisions {
+    width: 100%;
+}
+
 dl#pageInfoMeta {
-    float: right;
-    width: 350px;
-    border-left: 2px solid #ccc;
     padding: 0 0 0 1em;
     font-family: Arial,Helvetica,sans-serif;
 }

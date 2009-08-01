@@ -13,6 +13,7 @@ __PACKAGE__->config->{POST_CHOMP}         = 2;
 __PACKAGE__->config->{CONTEXT}            = undef;
 __PACKAGE__->config->{TEMPLATE_EXTENSION} = '.tt';
 __PACKAGE__->config->{PRE_PROCESS}        = 'global.tt';
+__PACKAGE__->config->{FILTERS}            = { nav => [ \&_nav_filter, 1 ] };
 
 sub new {
     my $class  = shift;
@@ -25,6 +26,22 @@ sub new {
     ];
 
     return $class->next::method(@_);
+}
+
+sub _nav_filter {
+    my ( $context, @args ) = @_;
+
+    my $c = $context->stash()->{c};
+
+    return sub {
+        my $html = shift;
+
+        my $uri = $c->req->uri;
+
+        $html =~ s{<a([^>]+)(href="\Q$uri\E")}{<a class="navOn" $1$2};
+
+        return $html;
+    };
 }
 
 1;

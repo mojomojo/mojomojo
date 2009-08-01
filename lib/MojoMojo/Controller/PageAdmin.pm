@@ -175,20 +175,27 @@ sub edit : Global FormConfig {
         # this will always happen on the initial request
         $stash->{page} = $page;
 
-        if ( $c->req->params->{insert_attachment} ) {
-            my $saved_stash = $stash;
-
-            my $attachment = $c->model("DBIC::Attachment")
-                ->find( $c->req->params->{insert_attachment} );
-
-            $c->stash( { att => $attachment } );
-
-            my $insert_text = $c->view('TT')->render( $c, 'page/insert.tt' );
-            $insert_text =~ s/^\s+|\s+$//;
-
-            $c->stash($saved_stash);
-
-            $page->content->body( $page->content->body . "\n\n" . $insert_text . "\n" );
+        # Insert an attachment, or inline an image.
+        my %attachment_template = (
+            insert_attachment       => 'page/insert.tt',
+            inline_image_attachment => 'page/inline_image.tt',
+        );
+        foreach my $attachment_action ( keys %attachment_template ) {
+            if (my $attachment_id = $c->req->query_params->{$attachment_action} ) {
+                my $saved_stash = $stash;
+    
+                my $attachment = $c->model("DBIC::Attachment")
+                                   ->find( { id => $attachment_id } );
+    
+                $c->stash( { att => $attachment } );
+    
+                my $insert_text = $c->view('TT')->render( $c, $attachment_template{$attachment_action} );
+                $insert_text =~ s/^\s+|\s+$//;
+    
+                $c->stash($saved_stash);
+    
+                $page->content->body( $page->content->body . "\n\n" . $insert_text . "\n\n" );
+            }
         }
     }
 }    # end sub edit
@@ -280,18 +287,6 @@ sub rollback : Global {
         undef $c->req->params->{rev};
         $c->forward('/page/view');
     }
-}
-
-=head2 delete
-
-This action will delete a page.
-
-=cut
-
-sub delete : Global {
-    my ( $self, $c, $page ) = @_;
-    $c->stash->{page}->delete;
-    $c->forward('/page/view');
 }
 
 =head1 AUTHOR
