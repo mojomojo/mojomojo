@@ -67,7 +67,7 @@ msgstr "Dodaj tag"
 msgid "Add user"
 msgstr "Dodaj użytkownika"
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Added"
 msgstr "Dodano"
 
@@ -1308,7 +1308,7 @@ msgstr "Tworzenie nowych kont jest wyłaczone!"
 msgid "Related Tags"
 msgstr "Tagi powiązane"
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Removed"
 msgstr "Usunięto"
 
@@ -1338,13 +1338,13 @@ msgstr ""
 msgid "Results x-x of x found within x"
 msgstr "Wyniki %1-%2 z %3 znalezione na %4"
 
-#: root/base/page/print.tt:13 root/base/page/view.tt:42
+#: root/base/page/print.tt:13 root/base/page/view.tt:39
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
 msgid "Revised on x at x by x"
 msgstr "Wersja z dnia  %1 z godziny %2 edytowana przez %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:42
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:39
 msgid "Revision"
 msgstr "Wersja edytowana"
 
@@ -1391,14 +1391,13 @@ msgstr "Nazwa roli"
 msgid "Roles"
 msgstr "Role"
 
-#: root/base/page/view.tt:17
-#. (page.content_version)
+#:
 msgid "Rolled Back (Current: x)"
 msgstr "Przywrócono (aktualna: %1)"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:315
 #. ($c->req->params->{rev})
-msgid "Rolled back to revision x"
+msgid "Rolled back to version x"
 msgstr ""
 
 #:
@@ -1486,7 +1485,7 @@ msgstr "Pokaż wersję"
 msgid "Show this product"
 msgstr "Pokaż ten produkt"
 
-#: root/base/page/view.tt:33
+#: root/base/page/view.tt:30
 msgid "Showing changes from previous revision."
 msgstr "Zmiany w stosunku do poprzedniej wersji."
 
@@ -2008,7 +2007,7 @@ msgstr "pogrubienie"
 msgid "busy spinner"
 msgstr "wskaźnik zajętości"
 
-#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:43 root/base/tag/recent.tt:26
+#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:40 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "przez"
 

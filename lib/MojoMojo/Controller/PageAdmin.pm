@@ -311,7 +311,7 @@ sub rollback : Global {
         body     => $content->body,
         creator  => $user,
         comments => $c->loc(
-            'Rolled back to revision x', $c->req->params->{rev}
+            'Rolled back to version x', $c->req->params->{rev}
         ),
     );
 

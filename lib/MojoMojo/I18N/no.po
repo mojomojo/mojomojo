@@ -84,7 +84,7 @@ msgstr "Legg til nøkkelord"
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Added"
 msgstr "Lagt til"
 
@@ -1481,7 +1481,7 @@ msgstr "Registrering er stengt!"
 msgid "Related Tags"
 msgstr "Relaterte nøkkelord"
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Removed"
 msgstr "Fjernet"
 
@@ -1511,13 +1511,13 @@ msgstr ""
 msgid "Results x-x of x found within x"
 msgstr "Resultater %1-%2 av %3 funnet innen %4"
 
-#: root/base/page/print.tt:13 root/base/page/view.tt:42
+#: root/base/page/print.tt:13 root/base/page/view.tt:39
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
 msgid "Revised on x at x by x"
 msgstr "Revidert den %1 klokken %2 av %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:42
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:39
 msgid "Revision"
 msgstr "Revisjon"
 
@@ -1568,14 +1568,13 @@ msgstr "Rollenavn:"
 msgid "Roles"
 msgstr "Roller"
 
-#: root/base/page/view.tt:17
-#. (page.content_version)
+#:
 msgid "Rolled Back (Current: x)"
 msgstr "Rullet tilbake (Aktiv: %1)"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:315
 #. ($c->req->params->{rev})
-msgid "Rolled back to revision x"
+msgid "Rolled back to version x"
 msgstr ""
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:158 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74
@@ -1659,7 +1658,7 @@ msgstr "Vis revisjon"
 msgid "Show this product"
 msgstr "Vis dette produktet"
 
-#: root/base/page/view.tt:33
+#: root/base/page/view.tt:30
 msgid "Showing changes from previous revision."
 msgstr "Viser endringer mot forrige revisjon."
 
@@ -2241,7 +2240,7 @@ msgstr "uthevet"
 msgid "busy spinner"
 msgstr "Jobber"
 
-#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:43 root/base/tag/recent.tt:26
+#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:40 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "laget av"
 

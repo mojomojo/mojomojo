@@ -78,7 +78,7 @@ msgstr "Tag hinzufügen"
 msgid "Add user"
 msgstr ""
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Added"
 msgstr "Hinzugefügt"
 
@@ -1391,7 +1391,7 @@ msgstr "Die Registrierung ist nicht möglich!"
 msgid "Related Tags"
 msgstr "Verwandte Tags"
 
-#: root/base/page/view.tt:34
+#: root/base/page/view.tt:31
 msgid "Removed"
 msgstr "Entfernt"
 
@@ -1421,13 +1421,13 @@ msgstr ""
 msgid "Results x-x of x found within x"
 msgstr "Treffer %1-%2 von %3 gefunden unterhalb von: %4"
 
-#: root/base/page/print.tt:13 root/base/page/view.tt:42
+#: root/base/page/print.tt:13 root/base/page/view.tt:39
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
 msgid "Revised on x at x by x"
 msgstr "Geändert am %1 um %2 von %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:42
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:39
 msgid "Revision"
 msgstr "Revision"
 
@@ -1478,14 +1478,13 @@ msgstr "Name der Rolle:"
 msgid "Roles"
 msgstr "Rollen"
 
-#: root/base/page/view.tt:17
-#. (page.content_version)
+#:
 msgid "Rolled Back (Current: x)"
 msgstr "Zurückgesetzt (aktuelle Revision: %1)"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:315
 #. ($c->req->params->{rev})
-msgid "Rolled back to revision x"
+msgid "Rolled back to version x"
 msgstr ""
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:158 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74
@@ -1569,7 +1568,7 @@ msgstr "Revision anzeigen"
 msgid "Show this product"
 msgstr "dieses Produkt anzeigen"
 
-#: root/base/page/view.tt:33
+#: root/base/page/view.tt:30
 msgid "Showing changes from previous revision."
 msgstr "Zeige Veränderungen seit der letzten Revision."
 
@@ -2115,7 +2114,7 @@ msgstr "fett"
 msgid "busy spinner"
 msgstr ""
 
-#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:43 root/base/tag/recent.tt:26
+#: root/base/page/info.tt:44 root/base/page/search_inline.tt:35 root/base/page/view.tt:40 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "von"
 
