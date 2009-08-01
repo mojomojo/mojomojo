@@ -37,7 +37,7 @@
 
 [% page.content.abstract %]
 
-<h3>[% loc('x revisions',page.versions.size)%]:</h3>
+<h3>[% loc('x revisions',page.versions_rs)%]:</h3>
 
 <ol>
 [% FOREACH version IN page.versions %]
