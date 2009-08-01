@@ -56,7 +56,7 @@ msgstr "En dårlig konfigurert MojoMojo-installasjon"
 msgid "Account Taken. Try another."
 msgstr "Brukernavnet er tatt. Prøv et annet"
 
-#: root/base/page/recent.tt:43
+#: root/base/page/recent.tt:47
 msgid "Actions"
 msgstr "Handlinger"
 
@@ -119,11 +119,15 @@ msgstr "Alle sider med nøkkelordet %1 alfabetisk sortert"
 msgid "All tags"
 msgstr "Alle nøkkelord"
 
-#: root/base/navbar.tt:36
+#: root/base/page/list.tt:33
 msgid "All tags in this path"
 msgstr "Alle nøkkelord i bruk under denne siden"
 
-#: root/base/navbar.tt:34
+#: root/base/navbar.tt:11
+msgid "All tags in this wiki"
+msgstr ""
+
+#:
 msgid "All tags on photos"
 msgstr "Alle nøkkelord i bruk på bilder"
 
@@ -131,7 +135,7 @@ msgstr "Alle nøkkelord i bruk på bilder"
 msgid "Allow comments on this page."
 msgstr "Tillat kommentarer på denne siden"
 
-#: root/base/navbar.tt:31
+#: root/base/navbar.tt:55
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetisk sortert liste over sider"
 
@@ -191,27 +195,31 @@ msgstr "Blender"
 msgid "Attachment allowed by default"
 msgstr "Vedlegg tillatt som standard"
 
-#: lib/MojoMojo/Controller/Attachment.pm:125
+#: lib/MojoMojo/Controller/Attachment.pm:131
 msgid "Attachment not found."
 msgstr "Vedlegg kunne ikke finnes"
 
-#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:54 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Vedlegg"
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12
 msgid "Authors"
 msgstr "Forfattere"
+
+#: root/base/page/list.tt:34
+msgid "Authors in this path"
+msgstr ""
 
 #: root/base/page/bottomnav.tt:22 root/base/page/bottomnav.tt:39
 msgid "Back in time"
 msgstr "Tilbake i tid"
 
-#: root/base/navbar.tt:53 root/base/page/bottomnav.tt:44
+#: root/base/navbar.tt:47 root/base/page/bottomnav.tt:44
 msgid "Back to the page"
 msgstr "Tilbake til siden"
 
-#: root/base/page/list.tt:29
+#: root/base/page/list.tt:39
 msgid "Backlinks"
 msgstr "Lenker tilbake"
 
@@ -263,11 +271,11 @@ msgstr "Cache rettighetsdata."
 msgid "Camera"
 msgstr "Kamera"
 
-#: lib/MojoMojo/Controller/Attachment.pm:202
+#: lib/MojoMojo/Controller/Attachment.pm:208
 msgid "Can only make inline version of photos"
 msgstr "Kan bare legge inn bilder"
 
-#: lib/MojoMojo/Controller/Attachment.pm:176
+#: lib/MojoMojo/Controller/Attachment.pm:182
 msgid "Can only make thumbnails of photos"
 msgstr "Kan bare lage forhåndsvisning for bilder"
 
@@ -283,7 +291,7 @@ msgstr "Kan ikke finne admin brukeren:"
 msgid "Centered paragraph"
 msgstr "Sentrert paragraf"
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Endre sideinnhold"
 
@@ -307,7 +315,7 @@ msgstr "Sjekk rettigheter ved visning"
 msgid "Children"
 msgstr "Barn"
 
-#: root/base/page/attachments.tt:12
+#: root/base/page/attachments.tt:18
 msgid "Choose attachments"
 msgstr "Velg vedlegg"
 
@@ -315,7 +323,7 @@ msgstr "Velg vedlegg"
 msgid "Circle"
 msgstr "Sirkel"
 
-#: root/base/page/attachments.tt:9
+#: root/base/page/attachments.tt:12
 msgid "Click Here to Upload Attachments"
 msgstr ""
 
@@ -357,7 +365,7 @@ msgstr ""
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: root/base/admin/toplinks.tt:7
+#: root/base/admin/toplinks.tt:8
 msgid "Configuration"
 msgstr "Konfigurasjon"
 
@@ -373,7 +381,7 @@ msgstr "Kunne ikke hente"
 msgid "Could not authenticate that login."
 msgstr "Kunne ikke autentisere brukernavnet."
 
-#: lib/MojoMojo/Controller/Attachment.pm:74
+#: lib/MojoMojo/Controller/Attachment.pm:73
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Kunne ikke opprette vedlegg fra %1"
@@ -477,7 +485,11 @@ msgstr "Skru av innebygget søk (bruk google site søk)"
 msgid "Disable search"
 msgstr "Skru av søk"
 
-#: root/base/navbar.tt:40
+#: root/base/page/list.tt:36
+msgid "Download a zip with all the pages in this path"
+msgstr ""
+
+#: root/base/navbar.tt:14
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Last ned en zip-fil med alle sidene i denne wikien"
 
@@ -509,7 +521,7 @@ msgstr "Rediger instillinger"
 msgid "Edit allowed by default"
 msgstr "Redigering tillatt som standard"
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/navbar.tt:44 root/base/page/bottomnav.tt:13
 msgid "Edit page"
 msgstr "Rediger side"
 
@@ -517,7 +529,7 @@ msgstr "Rediger side"
 msgid "Edit permissions for this page"
 msgstr "Rediger rettighetene for denne siden"
 
-#: root/base/page/recent.tt:41
+#: root/base/page/recent.tt:45
 msgid "Edited by"
 msgstr "Redigert av"
 
@@ -578,7 +590,7 @@ msgstr "EXIF-data"
 msgid "Existent Pages"
 msgstr "Sider som finnes"
 
-#: root/base/export.tt:1 root/base/navbar.tt:40
+#: root/base/export.tt:1 root/base/navbar.tt:14 root/base/page/list.tt:36
 msgid "Export"
 msgstr "Eksport"
 
@@ -594,7 +606,7 @@ msgstr "Favorittalbum"
 msgid "Favorite Movies"
 msgstr "Favorittfilmer"
 
-#: root/base/feeds.tt:1 root/base/navbar.tt:39
+#: root/base/feeds.tt:1 root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Feeds"
 msgstr "Strømmer"
 
@@ -634,7 +646,7 @@ msgstr "Fra"
 msgid "Full content"
 msgstr "Fullt innhold"
 
-#: root/base/navbar.tt:57 root/base/navbar.tt:59 root/base/navbar.tt:62
+#: root/base/navbar.tt:50 root/base/navbar.tt:52
 msgid "Gallery"
 msgstr "Galleri"
 
@@ -642,7 +654,7 @@ msgstr "Galleri"
 msgid "Gender"
 msgstr "Kjønn"
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Get in there"
 msgstr "Kom inn"
 
@@ -658,7 +670,7 @@ msgstr "Gå rett til "
 msgid "Go to home page"
 msgstr "Gå til hjemmesiden"
 
-#: root/base/navbar.tt:19
+#: root/base/navbar.tt:25
 msgid "Go to your user page"
 msgstr "Gå til din brukerside"
 
@@ -716,7 +728,7 @@ msgstr "Hei. Dette er en e-post for å validere din e-postadresse, %1. For å be
 msgid "Hide changes"
 msgstr "Skjul endringer"
 
-#: root/base/admin/toplinks.tt:10 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
+#: root/base/admin/toplinks.tt:11 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
 msgstr "Hjem"
 
@@ -756,7 +768,7 @@ msgstr "ISO"
 msgid "IdLabel"
 msgstr "IdLabel"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "If the flash uploader gives you problems, switch to the"
 msgstr "Hvis flashuploaderen ikke virker for deg kan du bytte til"
 
@@ -869,7 +881,7 @@ msgstr "Lenker fra"
 msgid "Links to"
 msgstr "Lenker til"
 
-#: root/base/page/list.tt:40
+#: root/base/page/list.tt:50
 msgid "Links to non-existent pages."
 msgstr "Lenker til ikke-eksisterende sider."
 
@@ -890,11 +902,11 @@ msgstr "Lister kan ha underlister ved hjelper av indentering"
 msgid "Lists with Paragraphs - add newlines around items"
 msgstr ""
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Log in"
 msgstr "Logg inn"
 
-#: root/base/navbar.tt:24
+#: root/base/navbar.tt:26
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -1152,7 +1164,7 @@ msgstr "Ingen"
 msgid "Normal Paragraph"
 msgstr "Normal paragraf"
 
-#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:46
+#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:56
 msgid "Not found. Click to create this page."
 msgstr "Finnes ikke. Klikk for å opprette denne siden."
 
@@ -1189,7 +1201,7 @@ msgstr "Eller sjekk %1 isteden"
 msgid "Ordered Lists"
 msgstr "Sortert liste"
 
-#: root/base/page/list.tt:53
+#: root/base/page/list.tt:63
 msgid "Orphaned Pages"
 msgstr "Foreldreløse sider"
 
@@ -1197,7 +1209,7 @@ msgstr "Foreldreløse sider"
 msgid "Other Suggestions"
 msgstr "Andre forslag"
 
-#: root/base/page/list.tt:30
+#: root/base/page/list.tt:40
 msgid "Other pages that link to this page."
 msgstr "Andre sider som linker til denne siden."
 
@@ -1205,7 +1217,7 @@ msgstr "Andre sider som linker til denne siden."
 msgid "POD formatter"
 msgstr "POD-Formattering"
 
-#: root/base/navbar.tt:51 root/base/navbar.tt:53 root/base/page/recent.tt:40
+#: root/base/navbar.tt:47 root/base/page/recent.tt:44
 msgid "Page"
 msgstr "Side"
 
@@ -1238,11 +1250,11 @@ msgid ""
 "    name: submit\n"
 msgstr ""
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Pages sorted by when they were last changed"
 msgstr "Sider sortert etter når de ble endret sist."
 
-#: root/base/page/list.tt:54
+#: root/base/page/list.tt:64
 msgid "Pages to which no other pages link."
 msgstr "Sider som ikke har noen lenker til seg"
 
@@ -1276,7 +1288,7 @@ msgstr "Rettigheter"
 msgid "Permissions for this page"
 msgstr "Rettigheter for denne siden"
 
-#: root/base/navbar.tt:59
+#: root/base/navbar.tt:50
 msgid "Photo Album"
 msgstr "Fotoalbum"
 
@@ -1304,7 +1316,7 @@ msgstr "Skriv inn brukernavn og passord"
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Fyll inn følgende informasjon for å registrere deg. Alle feltene er obligatoriske."
 
-#: root/base/page/attachments.tt:13
+#: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
 msgstr ""
 
@@ -1332,7 +1344,7 @@ msgstr "Lagre"
 msgid "Powered by Catalyst"
 msgstr "Drevet av Catalyst"
 
-#: root/base/navbar.tt:72 root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "Preferences"
 msgstr "Instillinger"
 
@@ -1356,7 +1368,7 @@ msgstr "Forrige"
 msgid "Print"
 msgstr "Utskrift"
 
-#: root/base/navbar.tt:67 root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "Profile"
 msgstr "Profil"
 
@@ -1364,7 +1376,7 @@ msgstr "Profil"
 msgid "Raw markup"
 msgstr "Uformattert text"
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Recent"
 msgstr "Nylig"
 
@@ -1372,18 +1384,22 @@ msgstr "Nylig"
 msgid "Recent Pages"
 msgstr "Nylige sider"
 
-#: root/base/page/atom.tt:6 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
+#: root/base/page/atom.tt:6 root/base/page/list.tt:32 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
 #. (page.path)
 msgid "Recent changes in x"
 msgstr "Nylige endringer i %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:2 root/base/tag/list.tt:23
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:3
+msgid "Recent pages in this wiki"
+msgstr ""
+
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 #. (activetag)
 #. (page.path)
 msgid "Recent pages in x"
 msgstr "Nye side i %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:4
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:8
 #. ([page.path, activetag])
 #. ([ page.path, activetag ])
 msgid "Recent pages in x tagged with x"
@@ -1405,7 +1421,7 @@ msgstr "Rektangel"
 msgid "Redirected from"
 msgstr "Videresendt fra"
 
-#: root/base/navbar.tt:28
+#: root/base/navbar.tt:30
 msgid "Register"
 msgstr "Registrering"
 
@@ -1504,7 +1520,7 @@ msgstr ""
 msgid "Role Name:"
 msgstr "Rollenavn:"
 
-#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:9
+#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:10
 msgid "Roles"
 msgstr "Roller"
 
@@ -1525,7 +1541,7 @@ msgstr "Lagre"
 msgid "Save and View"
 msgstr "Lagre og vis"
 
-#: root/base/navbar.tt:43
+#: root/base/navbar.tt:17
 msgid "Search"
 msgstr "Søk"
 
@@ -1748,11 +1764,15 @@ msgstr "Rediger(vertikal)"
 msgid "Square"
 msgstr "Firkant"
 
-#: root/base/navbar.tt:31
+#: root/base/page/list.tt:29
+msgid "Sub Page Tools"
+msgstr ""
+
+#: root/base/navbar.tt:55
 msgid "Sub pages"
 msgstr "Undersider"
 
-#: root/base/navbar.tt:39
+#: root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Subscribe to changes by RSS"
 msgstr "Abbonner på endringer med RSS"
 
@@ -1768,7 +1788,7 @@ msgstr "Subskript"
 msgid "Superscript"
 msgstr "Superskript"
 
-#: root/base/page/attachments.tt:5
+#: root/base/page/attachments.tt:6
 msgid "Switch to flash uploader"
 msgstr "Bytt til flash-uploaderen"
 
@@ -1788,7 +1808,7 @@ msgstr "DERES ENDRINGER"
 msgid "Table"
 msgstr "Tabell"
 
-#: root/base/navbar.tt:34 root/base/navbar.tt:36 root/base/page/list.tt:7 root/base/page/recent.tt:14 root/base/tag/recent.tt:7
+#: root/base/navbar.tt:11 root/base/page/list.tt:33 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
 msgid "Tags"
 msgstr "Nøkkelord"
 
@@ -1851,7 +1871,7 @@ msgstr "Dette er en forhåndsformattert kodeblokk"
 msgid "This is the first revision! Nothing to diff against."
 msgstr "Dette er den første revisjonen! Ingen å sjekke endringer mot."
 
-#: root/base/page/recent.tt:42
+#: root/base/page/recent.tt:46
 msgid "Time edited"
 msgstr "Sist redigert"
 
@@ -1903,15 +1923,15 @@ msgstr "Brul captcha"
 msgid "Use inherited permissions"
 msgstr "Bruk arvede rettigheter"
 
-#: root/base/navbar.tt:11 root/base/navbar.tt:21
+#:
 msgid "User Preferences"
 msgstr "Brukerinstillinger"
 
-#: root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "User Profile"
 msgstr "Brukerprofil"
 
-#: root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "User Settings"
 msgstr "Brukerinstillinger"
 
@@ -1958,7 +1978,7 @@ msgid ""
 "    value_loc: Login\n"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:8 root/base/admin/user.tt:9
+#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:9 root/base/admin/user.tt:9
 msgid "Users"
 msgstr "Brukere"
 
@@ -1966,7 +1986,7 @@ msgstr "Brukere"
 msgid "Validation"
 msgstr "Validering"
 
-#: root/base/page/recent.tt:59
+#: root/base/page/recent.tt:63
 msgid "View Diff"
 msgstr "Vis forskjeller"
 
@@ -1978,7 +1998,7 @@ msgstr "Visning tillatt som standard"
 msgid "View as files"
 msgstr "Vis som filer"
 
-#: root/base/attachments/list.tt:62
+#: root/base/attachments/list.tt:67
 msgid "View as gallery"
 msgstr "Vis som galleri"
 
@@ -1986,7 +2006,7 @@ msgstr "Vis som galleri"
 msgid "Views"
 msgstr "Visninger"
 
-#: root/base/page/list.tt:39
+#: root/base/page/list.tt:49
 msgid "Wanted Pages"
 msgstr "Ønskede Sider"
 
@@ -2003,7 +2023,7 @@ msgstr ""
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Velkommen, %1, din e-post er godkjent. Vennligst logg inn."
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12 root/base/page/list.tt:34
 msgid "Who wrote what"
 msgstr "Hvem skrev hva"
 
@@ -2039,7 +2059,7 @@ msgstr "Du kan eksportere alle sidene i denne wikien som en zip fil enten som HT
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Du kan abbonere på denne wikien med RS og enten bare få overskriften på sider som endrer seg eller hele siden."
 
-#: lib/MojoMojo/Controller/Attachment.pm:39
+#: lib/MojoMojo/Controller/Attachment.pm:38
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Du har ikke rettigheter til å endre vedlegg for denne siden"
 
@@ -2228,7 +2248,7 @@ msgstr "opprett"
 msgid "creator"
 msgstr "skaper"
 
-#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:57 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "slett"
 
@@ -2337,6 +2357,10 @@ msgstr "sett inn innhold"
 msgid "insert link"
 msgstr "sett inn lenke"
 
+#: root/base/attachments/list.tt:51
+msgid "insert thumbnail"
+msgstr ""
+
 #: lib/MojoMojo/Formatter/YouTube.pm:67
 msgid "is not a valid link to youtube video"
 msgstr "er ikke en gyldig youtube lenke"
@@ -2441,7 +2465,7 @@ msgstr "passord"
 msgid "photo tags"
 msgstr "nøkkelord for bilde"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "plain uploader"
 msgstr "den vanlige uploaderen"
 
@@ -2477,7 +2501,7 @@ msgstr "redirekt"
 msgid "redirect to"
 msgstr "redirekt til"
 
-#: root/base/page/list.tt:47
+#: root/base/page/list.tt:57
 #. (wanted.from_page.path)
 msgid "referenced by x"
 msgstr "refert til av %1"

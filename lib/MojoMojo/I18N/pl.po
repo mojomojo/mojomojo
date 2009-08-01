@@ -39,7 +39,7 @@ msgstr "Streszczenie"
 msgid "Account Taken. Try another."
 msgstr "Konto już istnieje. Spróbuj wybrać inną nazwę."
 
-#: root/base/page/recent.tt:43
+#: root/base/page/recent.tt:47
 msgid "Actions"
 msgstr "Akcje"
 
@@ -102,15 +102,19 @@ msgstr "Wszystkie strony oznaczone %1 posortowane alfabetycznie"
 msgid "All tags"
 msgstr "wszystkie tagi"
 
-#: root/base/navbar.tt:36
+#: root/base/page/list.tt:33
 msgid "All tags in this path"
 msgstr "Wszystkie tagi w tej ścieżce"
 
-#: root/base/navbar.tt:34
+#: root/base/navbar.tt:11
+msgid "All tags in this wiki"
+msgstr ""
+
+#:
 msgid "All tags on photos"
 msgstr "Wszystkie tagi na zdjęciach"
 
-#: root/base/navbar.tt:31
+#: root/base/navbar.tt:55
 msgid "Alphabetically sorted list of pages"
 msgstr "Alfabetycznie posortowana lista stron"
 
@@ -166,27 +170,31 @@ msgstr "Przysłona"
 msgid "Attachment allowed by default"
 msgstr "Domyślnie włącz załączniki"
 
-#: lib/MojoMojo/Controller/Attachment.pm:125
+#: lib/MojoMojo/Controller/Attachment.pm:131
 msgid "Attachment not found."
 msgstr "Załącznik nie został znaleziony"
 
-#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:54 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Załączniki"
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12
 msgid "Authors"
 msgstr "Autorzy"
+
+#: root/base/page/list.tt:34
+msgid "Authors in this path"
+msgstr ""
 
 #: root/base/page/bottomnav.tt:22 root/base/page/bottomnav.tt:39
 msgid "Back in time"
 msgstr "Wersja poprzednia"
 
-#: root/base/navbar.tt:53 root/base/page/bottomnav.tt:44
+#: root/base/navbar.tt:47 root/base/page/bottomnav.tt:44
 msgid "Back to the page"
 msgstr "Powrót na stronę"
 
-#: root/base/page/list.tt:29
+#: root/base/page/list.tt:39
 msgid "Backlinks"
 msgstr "Linki zwrotne"
 
@@ -222,11 +230,11 @@ msgstr "Buforuj uprawnienia"
 msgid "Camera"
 msgstr "Aparat"
 
-#: lib/MojoMojo/Controller/Attachment.pm:202
+#: lib/MojoMojo/Controller/Attachment.pm:208
 msgid "Can only make inline version of photos"
 msgstr "W wersji wbudowanej mogę pokazać wyłącznie zdjęcia"
 
-#: lib/MojoMojo/Controller/Attachment.pm:176
+#: lib/MojoMojo/Controller/Attachment.pm:182
 msgid "Can only make thumbnails of photos"
 msgstr "Miniaturki dostępne wyłącznie dla zdjęć"
 
@@ -234,7 +242,7 @@ msgstr "Miniaturki dostępne wyłącznie dla zdjęć"
 msgid "Cant find admin user: "
 msgstr "Nie mogę znaleźć administratora: "
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Zmień zawartość strony"
 
@@ -258,7 +266,7 @@ msgstr "Sprawdzaj uprawnienia przy przeglądaniu"
 msgid "Children"
 msgstr "Podrzędnych"
 
-#: root/base/page/attachments.tt:12
+#: root/base/page/attachments.tt:18
 msgid "Choose attachments"
 msgstr "Wybierz załączniki"
 
@@ -266,7 +274,7 @@ msgstr "Wybierz załączniki"
 msgid "Circle"
 msgstr "Kółko"
 
-#: root/base/page/attachments.tt:9
+#: root/base/page/attachments.tt:12
 msgid "Click Here to Upload Attachments"
 msgstr ""
 
@@ -304,7 +312,7 @@ msgstr ""
 msgid "Comments"
 msgstr "Komentarze"
 
-#: root/base/admin/toplinks.tt:7
+#: root/base/admin/toplinks.tt:8
 msgid "Configuration"
 msgstr "Konfiguracja"
 
@@ -316,7 +324,7 @@ msgstr "Rozmiar treści"
 msgid "Could not authenticate that login."
 msgstr "Nie mogę sprawdzić tego loginu."
 
-#: lib/MojoMojo/Controller/Attachment.pm:74
+#: lib/MojoMojo/Controller/Attachment.pm:73
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
@@ -408,7 +416,11 @@ msgstr ""
 msgid "Disable internal search (use Google)"
 msgstr "Wyłącz wbudowane wyszukiwanie (użyj Google)"
 
-#: root/base/navbar.tt:40
+#: root/base/page/list.tt:36
+msgid "Download a zip with all the pages in this path"
+msgstr ""
+
+#: root/base/navbar.tt:14
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Pobierz archiwum zip ze wszystkimi stronami na tej wiki"
 
@@ -432,7 +444,7 @@ msgstr "Edycja roli"
 msgid "Edit allowed by default"
 msgstr "Domyślnie zezwól na edycję"
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/navbar.tt:44 root/base/page/bottomnav.tt:13
 msgid "Edit page"
 msgstr "Edytuj stronę"
 
@@ -440,7 +452,7 @@ msgstr "Edytuj stronę"
 msgid "Edit permissions for this page"
 msgstr "Edytuj uprawnienia dla tej strony"
 
-#: root/base/page/recent.tt:41
+#: root/base/page/recent.tt:45
 msgid "Edited by"
 msgstr "Edytowana przez"
 
@@ -493,7 +505,7 @@ msgstr "Dane Exif"
 msgid "Existent Pages"
 msgstr "Strony istniejące"
 
-#: root/base/export.tt:1 root/base/navbar.tt:40
+#: root/base/export.tt:1 root/base/navbar.tt:14 root/base/page/list.tt:36
 msgid "Export"
 msgstr "Eksport"
 
@@ -505,7 +517,7 @@ msgstr "Ulubione albumy"
 msgid "Favorite Movies"
 msgstr "Ulubione filmy"
 
-#: root/base/feeds.tt:1 root/base/navbar.tt:39
+#: root/base/feeds.tt:1 root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Feeds"
 msgstr "Źródła RSS"
 
@@ -537,7 +549,7 @@ msgstr "Od ścieżki"
 msgid "Full content"
 msgstr "Pełna treść"
 
-#: root/base/navbar.tt:57 root/base/navbar.tt:59 root/base/navbar.tt:62
+#: root/base/navbar.tt:50 root/base/navbar.tt:52
 msgid "Gallery"
 msgstr "Galeria"
 
@@ -545,7 +557,7 @@ msgstr "Galeria"
 msgid "Gender"
 msgstr "Płeć"
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Get in there"
 msgstr "Zaloguj się"
 
@@ -557,7 +569,7 @@ msgstr "Znajdź"
 msgid "Go directly to "
 msgstr "Przejdź bezpośrednio na "
 
-#: root/base/navbar.tt:19
+#: root/base/navbar.tt:25
 msgid "Go to your user page"
 msgstr "Przejdź do strony użytkownika"
 
@@ -615,7 +627,7 @@ msgstr "Witaj, aby zweryfikować Twój adres email %1, kliknij na link:"
 msgid "Hide changes"
 msgstr "Ukryj zmiany"
 
-#: root/base/admin/toplinks.tt:10 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
+#: root/base/admin/toplinks.tt:11 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
 msgstr "Strona domowa"
 
@@ -643,7 +655,7 @@ msgstr "ISO"
 msgid "IdLabel"
 msgstr "IdentyfikatorEtykiety"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "If the flash uploader gives you problems, switch to the"
 msgstr "Jeśli masz problemy z wgrywaniem plików przez flasha, przejdź do "
 
@@ -728,7 +740,7 @@ msgstr "Linków ze strony"
 msgid "Links to"
 msgstr "Linków do strony"
 
-#: root/base/page/list.tt:40
+#: root/base/page/list.tt:50
 msgid "Links to non-existent pages."
 msgstr "Linki do nieistniejących stron."
 
@@ -745,11 +757,11 @@ msgstr "Listy mogą być zagnieżdżane przez poziom akapitu"
 msgid "Lists with Paragraphs - add newlines around items"
 msgstr "Listy z akapitami - dodaj nowe linie wokół pozycji"
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Log in"
 msgstr "Zaloguj"
 
-#: root/base/navbar.tt:24
+#: root/base/navbar.tt:26
 msgid "Log out"
 msgstr "Wyloguj"
 
@@ -991,7 +1003,7 @@ msgstr "Brak"
 msgid "Normal Paragraph"
 msgstr "Zwykły paragraf"
 
-#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:46
+#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:56
 msgid "Not found. Click to create this page."
 msgstr "Nie znaleziono. Kliknij aby utworzyć stronę."
 
@@ -1020,7 +1032,7 @@ msgstr "Możesz również sprawdzić %1"
 msgid "Ordered Lists"
 msgstr "Lista uporządkowana"
 
-#: root/base/page/list.tt:53
+#: root/base/page/list.tt:63
 msgid "Orphaned Pages"
 msgstr "Strony opuszczone"
 
@@ -1028,11 +1040,11 @@ msgstr "Strony opuszczone"
 msgid "Other Suggestions"
 msgstr "Inne propozycje"
 
-#: root/base/page/list.tt:30
+#: root/base/page/list.tt:40
 msgid "Other pages that link to this page."
 msgstr "Inne strony linkujące do tej strony"
 
-#: root/base/navbar.tt:51 root/base/navbar.tt:53 root/base/page/recent.tt:40
+#: root/base/navbar.tt:47 root/base/page/recent.tt:44
 msgid "Page"
 msgstr "Strona"
 
@@ -1069,11 +1081,11 @@ msgid ""
 "    name: submit\n"
 msgstr ""
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Pages sorted by when they were last changed"
 msgstr "Strony ułożone według ostatniej zmiany"
 
-#: root/base/page/list.tt:54
+#: root/base/page/list.tt:64
 msgid "Pages to which no other pages link."
 msgstr "Strony do których nie linkują inne strony."
 
@@ -1107,7 +1119,7 @@ msgstr "Uprawnienia"
 msgid "Permissions for this page"
 msgstr "Uprawnienia dla tej strony"
 
-#: root/base/navbar.tt:59
+#: root/base/navbar.tt:50
 msgid "Photo Album"
 msgstr "Album fotografii"
 
@@ -1123,7 +1135,7 @@ msgstr "Wprowadź nazwę użytkownika i hasło"
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Wprowadź dane, aby się zarejestrować. Wszystkie pola są wymagane."
 
-#: root/base/page/attachments.tt:13
+#: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
 msgstr ""
 
@@ -1151,7 +1163,7 @@ msgstr "Zamieść"
 msgid "Powered by Catalyst"
 msgstr "Powered by Catalyst"
 
-#: root/base/navbar.tt:72 root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "Preferences"
 msgstr "Preferencje"
 
@@ -1171,7 +1183,7 @@ msgstr "Poprzedni"
 msgid "Print"
 msgstr "Drukuj"
 
-#: root/base/navbar.tt:67 root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "Profile"
 msgstr "Profil"
 
@@ -1179,7 +1191,7 @@ msgstr "Profil"
 msgid "Raw markup"
 msgstr "Surowe dane"
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Recent"
 msgstr "Ostatnie"
 
@@ -1187,18 +1199,22 @@ msgstr "Ostatnie"
 msgid "Recent Pages"
 msgstr "Ostatnie strony"
 
-#: root/base/page/atom.tt:6 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
+#: root/base/page/atom.tt:6 root/base/page/list.tt:32 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
 #. (page.path)
 msgid "Recent changes in x"
 msgstr "Ostatnie zmiany w %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:2 root/base/tag/list.tt:23
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:3
+msgid "Recent pages in this wiki"
+msgstr ""
+
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 #. (activetag)
 #. (page.path)
 msgid "Recent pages in x"
 msgstr "Ostatnio zmieniane strony w %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:4
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:8
 #. ([page.path, activetag])
 #. ([ page.path, activetag ])
 msgid "Recent pages in x tagged with x"
@@ -1220,7 +1236,7 @@ msgstr "Prostokąt"
 msgid "Redirected from"
 msgstr "Przekierowano z"
 
-#: root/base/navbar.tt:28
+#: root/base/navbar.tt:30
 msgid "Register"
 msgstr "Nowe konto"
 
@@ -1315,7 +1331,7 @@ msgstr ""
 msgid "Role Name:"
 msgstr "Nazwa roli"
 
-#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:9
+#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:10
 msgid "Roles"
 msgstr "Role"
 
@@ -1336,7 +1352,7 @@ msgstr "Zapisz"
 msgid "Save and View"
 msgstr "Zapisz i pokaż"
 
-#: root/base/navbar.tt:43
+#: root/base/navbar.tt:17
 msgid "Search"
 msgstr "Szukaj"
 
@@ -1551,11 +1567,15 @@ msgstr "W czasie gdy edytowałeś tę stronę ktoś inny również ją zmienił.
 msgid "Square"
 msgstr "Kwadrat"
 
-#: root/base/navbar.tt:31
+#: root/base/page/list.tt:29
+msgid "Sub Page Tools"
+msgstr ""
+
+#: root/base/navbar.tt:55
 msgid "Sub pages"
 msgstr "Podstrony"
 
-#: root/base/navbar.tt:39
+#: root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Subscribe to changes by RSS"
 msgstr "Subskrybuj zmiany przez RSS"
 
@@ -1563,7 +1583,7 @@ msgstr "Subskrybuj zmiany przez RSS"
 msgid "Subscribe to page changes"
 msgstr "Subskrybuj zmiany na stronie"
 
-#: root/base/page/attachments.tt:5
+#: root/base/page/attachments.tt:6
 msgid "Switch to flash uploader"
 msgstr "Przełącz na wgrywanie przy pomocy flasha"
 
@@ -1575,7 +1595,7 @@ msgstr "ICH ZMIANY"
 msgid "Table"
 msgstr "Tabela"
 
-#: root/base/navbar.tt:34 root/base/navbar.tt:36 root/base/page/list.tt:7 root/base/page/recent.tt:14 root/base/tag/recent.tt:7
+#: root/base/navbar.tt:11 root/base/page/list.tt:33 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
 msgid "Tags"
 msgstr "Tagi"
 
@@ -1634,7 +1654,7 @@ msgstr "To jest preformatowany blok kodu"
 msgid "This is the first revision! Nothing to diff against."
 msgstr "To jest pierwsza wersja!"
 
-#: root/base/page/recent.tt:42
+#: root/base/page/recent.tt:46
 msgid "Time edited"
 msgstr "Data edycji"
 
@@ -1678,15 +1698,15 @@ msgstr "Używaj captchy (testów obrazkowych)"
 msgid "Use inherited permissions"
 msgstr "Wyczyść uprawnienia"
 
-#: root/base/navbar.tt:11 root/base/navbar.tt:21
+#:
 msgid "User Preferences"
 msgstr "Preferencje użytkownika"
 
-#: root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "User Profile"
 msgstr "Profil użytownika"
 
-#: root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "User Settings"
 msgstr "Ustawienia użytkownika"
 
@@ -1725,7 +1745,7 @@ msgid ""
 "    value_loc: Login\n"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:8 root/base/admin/user.tt:9
+#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:9 root/base/admin/user.tt:9
 msgid "Users"
 msgstr "Użytkownicy"
 
@@ -1733,7 +1753,7 @@ msgstr "Użytkownicy"
 msgid "Validation"
 msgstr "Weryfikacja"
 
-#: root/base/page/recent.tt:59
+#: root/base/page/recent.tt:63
 msgid "View Diff"
 msgstr "Pokaż różnice"
 
@@ -1745,7 +1765,7 @@ msgstr "Domyślne zezwolenie na przeglądanie"
 msgid "View as files"
 msgstr "Widok plików"
 
-#: root/base/attachments/list.tt:62
+#: root/base/attachments/list.tt:67
 msgid "View as gallery"
 msgstr "Widok galerii"
 
@@ -1753,7 +1773,7 @@ msgstr "Widok galerii"
 msgid "Views"
 msgstr "Widok"
 
-#: root/base/page/list.tt:39
+#: root/base/page/list.tt:49
 msgid "Wanted Pages"
 msgstr "Potrzebne strony"
 
@@ -1770,7 +1790,7 @@ msgstr ""
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "witaj %1, Twój adres pocztowy został zweryfikowany. Proszę się zalogować."
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12 root/base/page/list.tt:34
 msgid "Who wrote what"
 msgstr "Osoby, które tworzyły stronę"
 
@@ -1802,7 +1822,7 @@ msgstr "Możesz wyeksportować wszystkie strony jako archiwum zip w formacie HTM
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Możesz zasubskrybować tę wiki poprzez RSS i uzyskać nagłówki zmienionych stron lub całą stronę"
 
-#: lib/MojoMojo/Controller/Attachment.pm:39
+#: lib/MojoMojo/Controller/Attachment.pm:38
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Nie masz uprawnień do edycji załączników na tej stronie"
 
@@ -1963,7 +1983,7 @@ msgstr "tworzenie"
 msgid "creator"
 msgstr "edytor"
 
-#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:57 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "usuwanie"
 
@@ -2048,6 +2068,10 @@ msgstr "wstaw zawartość"
 msgid "insert link"
 msgstr "wstaw link"
 
+#: root/base/attachments/list.tt:51
+msgid "insert thumbnail"
+msgstr ""
+
 #: lib/MojoMojo/Formatter/YouTube.pm:67
 msgid "is not a valid link to youtube video"
 msgstr "nie jest prawidłowym linkiem do filmu video na youtube"
@@ -2128,7 +2152,7 @@ msgstr "haslo"
 msgid "photo tags"
 msgstr "tagi dla zdjęć"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "plain uploader"
 msgstr "zwykłego wgrywania"
 
@@ -2152,7 +2176,7 @@ msgstr "odczyt"
 msgid "redirect to"
 msgstr "przekierowanie do"
 
-#: root/base/page/list.tt:47
+#: root/base/page/list.tt:57
 #. (wanted.from_page.path)
 msgid "referenced by x"
 msgstr "odnośnik w %1"

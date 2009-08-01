@@ -51,7 +51,7 @@ msgstr "Плохо настроенная инсталляция MojoMojo"
 msgid "Account Taken. Try another."
 msgstr "Аккаунт уже используется. Попробуйте другой."
 
-#: root/base/page/recent.tt:43
+#: root/base/page/recent.tt:47
 msgid "Actions"
 msgstr "Действия"
 
@@ -114,11 +114,15 @@ msgstr "Все страницы помеченные %1, отсортирова�
 msgid "All tags"
 msgstr "Все теги"
 
-#: root/base/navbar.tt:36
+#: root/base/page/list.tt:33
 msgid "All tags in this path"
 msgstr "Все теги на этой странице"
 
-#: root/base/navbar.tt:34
+#: root/base/navbar.tt:11
+msgid "All tags in this wiki"
+msgstr ""
+
+#:
 msgid "All tags on photos"
 msgstr "Все теги на фотографии"
 
@@ -126,7 +130,7 @@ msgstr "Все теги на фотографии"
 msgid "Allow comments on this page."
 msgstr "Разрешить комментарии на этой странице"
 
-#: root/base/navbar.tt:31
+#: root/base/navbar.tt:55
 msgid "Alphabetically sorted list of pages"
 msgstr "Отсортированный в алфавитном порядке список страниц"
 
@@ -186,27 +190,31 @@ msgstr "Размер"
 msgid "Attachment allowed by default"
 msgstr "Вложения разрешены по-умолчанию"
 
-#: lib/MojoMojo/Controller/Attachment.pm:125
+#: lib/MojoMojo/Controller/Attachment.pm:131
 msgid "Attachment not found."
 msgstr "Вложение не найдено."
 
-#: root/base/navbar.tt:64 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
+#: root/base/navbar.tt:54 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:31
 msgid "Attachments"
 msgstr "Вложения"
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12
 msgid "Authors"
 msgstr "Авторы"
+
+#: root/base/page/list.tt:34
+msgid "Authors in this path"
+msgstr ""
 
 #: root/base/page/bottomnav.tt:22 root/base/page/bottomnav.tt:39
 msgid "Back in time"
 msgstr "Предыдущая версия"
 
-#: root/base/navbar.tt:53 root/base/page/bottomnav.tt:44
+#: root/base/navbar.tt:47 root/base/page/bottomnav.tt:44
 msgid "Back to the page"
 msgstr "Назад на страницу"
 
-#: root/base/page/list.tt:29
+#: root/base/page/list.tt:39
 msgid "Backlinks"
 msgstr "Обратные ссылки"
 
@@ -258,11 +266,11 @@ msgstr "Разрешения на данные кеша"
 msgid "Camera"
 msgstr "Фотоаппарат"
 
-#: lib/MojoMojo/Controller/Attachment.pm:202
+#: lib/MojoMojo/Controller/Attachment.pm:208
 msgid "Can only make inline version of photos"
 msgstr "Можно сделать лишь встроенную версию фотографии"
 
-#: lib/MojoMojo/Controller/Attachment.pm:176
+#: lib/MojoMojo/Controller/Attachment.pm:182
 msgid "Can only make thumbnails of photos"
 msgstr "Можно сделать лишь миниатюры фотографий"
 
@@ -278,7 +286,7 @@ msgstr "Не могу найти администратора: "
 msgid "Centered paragraph"
 msgstr "Параграф по центру"
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/page/bottomnav.tt:13
 msgid "Change page content"
 msgstr "Изменить содержимое страницы"
 
@@ -302,7 +310,7 @@ msgstr "Проверить разрешения на просмотр"
 msgid "Children"
 msgstr "Дети"
 
-#: root/base/page/attachments.tt:12
+#: root/base/page/attachments.tt:18
 msgid "Choose attachments"
 msgstr "Выберите вложение"
 
@@ -310,7 +318,7 @@ msgstr "Выберите вложение"
 msgid "Circle"
 msgstr "Круг"
 
-#: root/base/page/attachments.tt:9
+#: root/base/page/attachments.tt:12
 msgid "Click Here to Upload Attachments"
 msgstr ""
 
@@ -352,7 +360,7 @@ msgstr ""
 msgid "Comments"
 msgstr "Комментарии"
 
-#: root/base/admin/toplinks.tt:7
+#: root/base/admin/toplinks.tt:8
 msgid "Configuration"
 msgstr "Конфигурация"
 
@@ -364,7 +372,7 @@ msgstr "Размер содержимого"
 msgid "Could not authenticate that login."
 msgstr "Не удалось аутентифицировать эту учетную запись."
 
-#: lib/MojoMojo/Controller/Attachment.pm:74
+#: lib/MojoMojo/Controller/Attachment.pm:73
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Не удалось создать вложение от %1"
@@ -460,7 +468,11 @@ msgstr ""
 msgid "Disable internal search (use Google)"
 msgstr "Запретить встроенный поиск (используйте Google)"
 
-#: root/base/navbar.tt:40
+#: root/base/page/list.tt:36
+msgid "Download a zip with all the pages in this path"
+msgstr ""
+
+#: root/base/navbar.tt:14
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Загрузить архив со всеми страницами на этом вики"
 
@@ -492,7 +504,7 @@ msgstr "Редактировать настройки"
 msgid "Edit allowed by default"
 msgstr "Редактирование разрешено по-умолчанию"
 
-#: root/base/navbar.tt:16 root/base/page/bottomnav.tt:13
+#: root/base/navbar.tt:42 root/base/navbar.tt:44 root/base/page/bottomnav.tt:13
 msgid "Edit page"
 msgstr "Редактировать страницу"
 
@@ -500,7 +512,7 @@ msgstr "Редактировать страницу"
 msgid "Edit permissions for this page"
 msgstr "Редактировать разрешения для этой страницы"
 
-#: root/base/page/recent.tt:41
+#: root/base/page/recent.tt:45
 msgid "Edited by"
 msgstr "Отредактировано"
 
@@ -557,7 +569,7 @@ msgstr "Данные Exif"
 msgid "Existent Pages"
 msgstr "Существующие страницы"
 
-#: root/base/export.tt:1 root/base/navbar.tt:40
+#: root/base/export.tt:1 root/base/navbar.tt:14 root/base/page/list.tt:36
 msgid "Export"
 msgstr "Экспорт"
 
@@ -573,7 +585,7 @@ msgstr "Любимые альбомы"
 msgid "Favorite Movies"
 msgstr "Любимые фильмы"
 
-#: root/base/feeds.tt:1 root/base/navbar.tt:39
+#: root/base/feeds.tt:1 root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Feeds"
 msgstr "RSS"
 
@@ -609,7 +621,7 @@ msgstr "От"
 msgid "Full content"
 msgstr "Полное содержимое"
 
-#: root/base/navbar.tt:57 root/base/navbar.tt:59 root/base/navbar.tt:62
+#: root/base/navbar.tt:50 root/base/navbar.tt:52
 msgid "Gallery"
 msgstr "Галерея"
 
@@ -617,7 +629,7 @@ msgstr "Галерея"
 msgid "Gender"
 msgstr "Пол"
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Get in there"
 msgstr "Войти"
 
@@ -633,7 +645,7 @@ msgstr "Перейти на "
 msgid "Go to home page"
 msgstr "Перейти на домашнюю страницу"
 
-#: root/base/navbar.tt:19
+#: root/base/navbar.tt:25
 msgid "Go to your user page"
 msgstr "Перейти на вашу личную страницу"
 
@@ -691,7 +703,7 @@ msgstr "Привет. Это сообщение послано для прове
 msgid "Hide changes"
 msgstr "Скрыть изменения"
 
-#: root/base/admin/toplinks.tt:10 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
+#: root/base/admin/toplinks.tt:11 root/base/page/suggest.tt:8 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
 msgstr "Домашняя страница"
 
@@ -727,7 +739,7 @@ msgstr "ISO"
 msgid "IdLabel"
 msgstr "Ярлык идентификатора"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "If the flash uploader gives you problems, switch to the"
 msgstr "В случае проблем с загрузкой флешки, перейти к"
 
@@ -836,7 +848,7 @@ msgstr "Ссылки от"
 msgid "Links to"
 msgstr "Ссылки на"
 
-#: root/base/page/list.tt:40
+#: root/base/page/list.tt:50
 msgid "Links to non-existent pages."
 msgstr "Ссылки на несуществующие страницы."
 
@@ -857,11 +869,11 @@ msgstr "Списки могут быть вложенными по уровню 
 msgid "Lists with Paragraphs - add newlines around items"
 msgstr ""
 
-#: root/base/navbar.tt:26
+#: root/base/navbar.tt:28
 msgid "Log in"
 msgstr "Войти"
 
-#: root/base/navbar.tt:24
+#: root/base/navbar.tt:26
 msgid "Log out"
 msgstr "Выйти"
 
@@ -1119,7 +1131,7 @@ msgstr "Отсутствует"
 msgid "Normal Paragraph"
 msgstr "Обычный параграф"
 
-#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:46
+#: lib/MojoMojo/Formatter/Wiki.pm:289 root/base/page/list.tt:56
 msgid "Not found. Click to create this page."
 msgstr "Не найдено. Кликните для создания этой страницы"
 
@@ -1156,7 +1168,7 @@ msgstr "Или взамен вы можете снять отметку %1"
 msgid "Ordered Lists"
 msgstr "Упорядоченные списки"
 
-#: root/base/page/list.tt:53
+#: root/base/page/list.tt:63
 msgid "Orphaned Pages"
 msgstr "Страницы без предков"
 
@@ -1164,11 +1176,11 @@ msgstr "Страницы без предков"
 msgid "Other Suggestions"
 msgstr "Другие предложения"
 
-#: root/base/page/list.tt:30
+#: root/base/page/list.tt:40
 msgid "Other pages that link to this page."
 msgstr "Другие страницы, ссылающиеся на эту страницу."
 
-#: root/base/navbar.tt:51 root/base/navbar.tt:53 root/base/page/recent.tt:40
+#: root/base/navbar.tt:47 root/base/page/recent.tt:44
 msgid "Page"
 msgstr "Страница"
 
@@ -1201,11 +1213,11 @@ msgid ""
 "    name: submit\n"
 msgstr ""
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Pages sorted by when they were last changed"
 msgstr "Страницы отсортированные по времени последнего изменения"
 
-#: root/base/page/list.tt:54
+#: root/base/page/list.tt:64
 msgid "Pages to which no other pages link."
 msgstr "Страницы, на которые нет ссылок"
 
@@ -1239,7 +1251,7 @@ msgstr "Разрешения"
 msgid "Permissions for this page"
 msgstr "Разрешения для этой страницы"
 
-#: root/base/navbar.tt:59
+#: root/base/navbar.tt:50
 msgid "Photo Album"
 msgstr "Фотоальбом"
 
@@ -1267,7 +1279,7 @@ msgstr "Введите, пожалуйста, имя пользователя и
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Пожалуйста, введите следующую информацию для регистрации. Все поля обязательны."
 
-#: root/base/page/attachments.tt:13
+#: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
 msgstr ""
 
@@ -1295,7 +1307,7 @@ msgstr "Отправить"
 msgid "Powered by Catalyst"
 msgstr "Powered by Catalyst"
 
-#: root/base/navbar.tt:72 root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "Preferences"
 msgstr "Предпочтения"
 
@@ -1319,7 +1331,7 @@ msgstr "Предыдущие"
 msgid "Print"
 msgstr "Печать"
 
-#: root/base/navbar.tt:67 root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "Profile"
 msgstr "Профиль"
 
@@ -1327,7 +1339,7 @@ msgstr "Профиль"
 msgid "Raw markup"
 msgstr "Неформатированные данные"
 
-#: root/base/navbar.tt:32
+#: root/base/navbar.tt:10
 msgid "Recent"
 msgstr "Недавние"
 
@@ -1335,18 +1347,22 @@ msgstr "Недавние"
 msgid "Recent Pages"
 msgstr "Недавние страницы"
 
-#: root/base/page/atom.tt:6 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
+#: root/base/page/atom.tt:6 root/base/page/list.tt:32 root/base/page/rss.tt:6 root/base/page/rss_full.tt:7
 #. (page.path)
 msgid "Recent changes in x"
 msgstr "Последние изменения в %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:2 root/base/tag/list.tt:23
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:3
+msgid "Recent pages in this wiki"
+msgstr ""
+
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 #. (activetag)
 #. (page.path)
 msgid "Recent pages in x"
 msgstr "Последние страницы в %1"
 
-#: root/base/page/recent.tt:1-7 root/base/page/recent.tt:4
+#: root/base/page/recent.tt:1-11 root/base/page/recent.tt:8
 #. ([page.path, activetag])
 #. ([ page.path, activetag ])
 msgid "Recent pages in x tagged with x"
@@ -1368,7 +1384,7 @@ msgstr "Прямоугольник"
 msgid "Redirected from"
 msgstr "Перенаправлено с"
 
-#: root/base/navbar.tt:28
+#: root/base/navbar.tt:30
 msgid "Register"
 msgstr "Регистрация"
 
@@ -1467,7 +1483,7 @@ msgstr ""
 msgid "Role Name:"
 msgstr "Название роли:"
 
-#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:9
+#: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:10
 msgid "Roles"
 msgstr "Роли"
 
@@ -1488,7 +1504,7 @@ msgstr "Сохранить"
 msgid "Save and View"
 msgstr "Сохранить и просмотреть"
 
-#: root/base/navbar.tt:43
+#: root/base/navbar.tt:17
 msgid "Search"
 msgstr "Искать"
 
@@ -1711,11 +1727,15 @@ msgstr "Совмещенное редактирование"
 msgid "Square"
 msgstr "Квадрат"
 
-#: root/base/navbar.tt:31
+#: root/base/page/list.tt:29
+msgid "Sub Page Tools"
+msgstr ""
+
+#: root/base/navbar.tt:55
 msgid "Sub pages"
 msgstr "Подстраницы"
 
-#: root/base/navbar.tt:39
+#: root/base/navbar.tt:13 root/base/page/list.tt:35
 msgid "Subscribe to changes by RSS"
 msgstr "Подписаться на изменения по RSS"
 
@@ -1731,7 +1751,7 @@ msgstr "Нижний индекс"
 msgid "Superscript"
 msgstr "Верхний индекс"
 
-#: root/base/page/attachments.tt:5
+#: root/base/page/attachments.tt:6
 msgid "Switch to flash uploader"
 msgstr "Переключиться на flash-загрузчик"
 
@@ -1747,7 +1767,7 @@ msgstr "ИХ ИЗМЕНЕНИЯ"
 msgid "Table"
 msgstr "Таблица"
 
-#: root/base/navbar.tt:34 root/base/navbar.tt:36 root/base/page/list.tt:7 root/base/page/recent.tt:14 root/base/tag/recent.tt:7
+#: root/base/navbar.tt:11 root/base/page/list.tt:33 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
 msgid "Tags"
 msgstr "Теги"
 
@@ -1810,7 +1830,7 @@ msgstr "Это блок преформатированного текста"
 msgid "This is the first revision! Nothing to diff against."
 msgstr "Это первая версия! Не с чем сравнивать."
 
-#: root/base/page/recent.tt:42
+#: root/base/page/recent.tt:46
 msgid "Time edited"
 msgstr "Время изменения"
 
@@ -1862,15 +1882,15 @@ msgstr "Использовать CAPTCHA"
 msgid "Use inherited permissions"
 msgstr "Использовать унаследованные разрешения"
 
-#: root/base/navbar.tt:11 root/base/navbar.tt:21
+#:
 msgid "User Preferences"
 msgstr "Предпочтения пользователя"
 
-#: root/base/navbar.tt:69
+#: root/base/navbar.tt:57
 msgid "User Profile"
 msgstr "Профиль пользователя"
 
-#: root/base/navbar.tt:74
+#: root/base/navbar.tt:58
 msgid "User Settings"
 msgstr "Настройки пользователя"
 
@@ -1917,7 +1937,7 @@ msgid ""
 "    value_loc: Login\n"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:8 root/base/admin/user.tt:9
+#: lib/MojoMojo/Schema.pm:83 root/base/admin/toplinks.tt:9 root/base/admin/user.tt:9
 msgid "Users"
 msgstr "Пользователи"
 
@@ -1925,7 +1945,7 @@ msgstr "Пользователи"
 msgid "Validation"
 msgstr "Проверка"
 
-#: root/base/page/recent.tt:59
+#: root/base/page/recent.tt:63
 msgid "View Diff"
 msgstr "Посмотреть различия"
 
@@ -1937,7 +1957,7 @@ msgstr "Просмотр разрешен по-умолчанию"
 msgid "View as files"
 msgstr "Посмотреть как файлы"
 
-#: root/base/attachments/list.tt:62
+#: root/base/attachments/list.tt:67
 msgid "View as gallery"
 msgstr "Посмотреть как галерею"
 
@@ -1945,7 +1965,7 @@ msgstr "Посмотреть как галерею"
 msgid "Views"
 msgstr "Просмотры"
 
-#: root/base/page/list.tt:39
+#: root/base/page/list.tt:49
 msgid "Wanted Pages"
 msgstr "Нужные страницы"
 
@@ -1962,7 +1982,7 @@ msgstr ""
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Добро пожаловать, %1 ваш почтовый адрес подтвержден. Войдите."
 
-#: root/base/navbar.tt:38
+#: root/base/navbar.tt:12 root/base/page/list.tt:34
 msgid "Who wrote what"
 msgstr "Кто написал это"
 
@@ -1998,7 +2018,7 @@ msgstr "Вы можете экспортировать все страницы �
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Вы можете подписаться на эту вики посредством RSS и получать либо только заголовки изменившихся страниц, либо страницы целиком."
 
-#: lib/MojoMojo/Controller/Attachment.pm:39
+#: lib/MojoMojo/Controller/Attachment.pm:38
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "У вас нет полномочий на редактирование вложений для этой страницы"
 
@@ -2179,7 +2199,7 @@ msgstr "создать"
 msgid "creator"
 msgstr "создатель"
 
-#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:57 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "удалить"
 
@@ -2276,6 +2296,10 @@ msgstr "вставить содержимое"
 msgid "insert link"
 msgstr "вставить ссылку"
 
+#: root/base/attachments/list.tt:51
+msgid "insert thumbnail"
+msgstr ""
+
 #: lib/MojoMojo/Formatter/YouTube.pm:67
 msgid "is not a valid link to youtube video"
 msgstr "это не корректная ссылка на YouTube видео"
@@ -2368,7 +2392,7 @@ msgstr "пароль"
 msgid "photo tags"
 msgstr "фото-теги"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "plain uploader"
 msgstr "простому загрузчику"
 
@@ -2396,7 +2420,7 @@ msgstr "читать"
 msgid "redirect to"
 msgstr "перенаправить на"
 
-#: root/base/page/list.tt:47
+#: root/base/page/list.tt:57
 #. (wanted.from_page.path)
 msgid "referenced by x"
 msgstr "ссылается из: %1"
