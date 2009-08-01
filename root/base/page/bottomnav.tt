@@ -9,9 +9,8 @@
 <div id="bottomnav">
     <ul>
 [% IF (!rev OR rev==page.content_version) %]
-    [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-        <li><a title="[%loc('Change page content')%]" href="[% c.uri_for('edit') %]" rel="nofollow">[%loc('Edit page')%]</a></li>
-    [% END %]
+    [% PROCESS this_page_link.tt, accesskey = 0 %]
+
     [% IF c.req.action=='info' +%]
         <li><a title="[%loc('Page meta information')%]" class="navOn">[%loc('Page Info')%]</a></li>
     [% ELSE +%]

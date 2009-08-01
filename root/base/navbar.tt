@@ -35,17 +35,7 @@
 <div id="pagenav">
     [% FILTER nav %]
     <ul>
-      [% IF c.req.action == "view" %]
-        [% IF user.active
-              AND (!rev OR rev == page.content_version)
-              AND (c.pref('anonymous_user') OR user.can_edit(page.path)) +%]
-          <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit')%]" accesskey="E" rel="nofollow">[% loc('Edit page') %]</a></li>
-        [% ELSE %]
-          <li>[% loc('Edit page') %]</li>
-        [% END %]
-      [% ELSE +%]
-        <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
-      [% END %]
+      [% PROCESS this_page_link.tt, accesskey = 1 %]
       [% IF (page.has_photos) %]
         <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
       [% ELSE +%]
