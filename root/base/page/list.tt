@@ -18,8 +18,8 @@
     <h2>[%loc('All Pages')%]</h2>
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
-      [% FOREACH page IN pages +%]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.path %]</a> [% page.content.abstract %]</li>
+      [% FOREACH subpage IN pages +%]
+        <li><a href="[% c.uri_for(subpage.path) %]">[% subpage.path %]</a> [% subpage.content.abstract %]</li>
       [% END +%]
     </ul>
 </div>
