@@ -55,7 +55,9 @@
          <li><a href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
       [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
         <li><a title="[% loc('User Profile') %]" href="[% c.uri_for('profile') %]">[% loc('Profile') %]</a></li>
+        [% IF user.login == page.name %]
         <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
+        [% END %]
       [% END +%]
     </ul>
     [% END # FILTER nav %]
