@@ -1,5 +1,9 @@
 [%
-    SET title = loc('Recent pages in x', page.path);
+    IF page.path == '/';
+        SET title = loc('Recent pages in this wiki');
+    ELSE;
+        SET title = loc('Recent pages in x', page.path);
+    END;
     IF activetag;
         SET title = loc('Recent pages in x tagged with x', [page.path, activetag]);
     END;

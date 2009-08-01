@@ -7,15 +7,11 @@
   [% END +%]
         [% FILTER nav %]
         <ul>
-            <li><a href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
-          [% IF (pictures OR photo) +%]
-            <li><a href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
-          [% ELSE +%]
-            <li><a href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]" accesskey="T">[% loc('Tags') %]</a></li>
-          [% END %]
-            <li><a href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
-            <li><a href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
-            <li><a href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
+            <li><a href="[% c.uri_for('/.recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
+            <li><a href="[% c.uri_for('/.tags') %]" title="[% loc('All tags in this wiki') %]" accesskey="T">[% loc('Tags') %]</a></li>
+            <li><a href="[% c.uri_for('/.users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
+            <li><a href="[% c.uri_for('/.feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
+            <li><a href="[% c.uri_for('/.export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
             <li>
                 [% UNLESS c.pref('disable_search') +%]<input type="hidden" name="search_type" value="all" />[% END +%]
                 <input type="text" id="searchField" name="q" style="" value="[% loc('Search') %]"/>
