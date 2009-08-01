@@ -4,6 +4,7 @@ $(document).ready(function() {
     var $content_preview    = $("#content_preview");
     var $edit_help          = $("#edithelp");
 
+    _set_edit_styles();
     setupFormatterToolbar();
     setupEditHelp();
     toggleDefaultValue($("#authorName"));
@@ -40,27 +41,36 @@ $(document).ready(function() {
 
 // toggles between horizontal and vertical splitting of the preview and edit areas
 toggle_split_mode = function() {
-  
-    // if already vertically splitted 
-    if ($("div#edit_form").css('float')=='left'){
-    	
-        $("div#content_preview").css('width','100%');
-        $("div#edit_form").css('width','100%');
-        $("div#edit_form").css('float','right');
-        $("div#content_preview").css('height', '36em');
-//        $("div#edit_form").css('height','32');
-        $("textarea#body").css('height', '30em');        
-        
-        $.cookies.set('split_edit',0);
+    _set_edit_styles();
+};
+
+_set_edit_styles = function() {
+    var window_height = $(window).height();
+
+    // if already vertically split
+    if ( $("#edit_form").css('float') == 'left' ){
+
+        $("#content_preview").css('width', '100%');
+        $("#edit_form").css('width', '100%');
+        $("#edit_form").css('float', 'right');
+
+        $("#content_preview").height( window_height * 0.32 );
+        $("#body").height( window_height * 0.30 );
+
+        $("#edit_form").css('margin-left', '0');
+
+        $.cookies.set('split_edit', 0);
     } else {
         // switch to vertical split: preview area to the left of edit area
-        $("div#content_preview").css('width','49%');
-        $("div#edit_form").css('float','left');
-        $("div#edit_form").css('width','49%');
-        $("div#content_preview").css('height', '50em');
-//        $("div#edit_form").css('height', '45em');
-        $("textarea#body").css('height', '40em');
-        $.cookies.set('split_edit',1);
+        $("#content_preview").css('width', '49%');
+        $("#edit_form").css('float', 'left');
+        $("#edit_form").css('margin-left', '1%');
+        $("#edit_form").css('width', '48%');
+
+        $("#content_preview").height( window_height * 0.65 );
+        $("#body").height( window_height * 0.58 );
+
+        $.cookies.set('split_edit', 1);
     }
 };
 
@@ -107,7 +117,7 @@ setupFormatterToolbar = function() {
         [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n', loc("=head1 Header")]
     ]));
 
-    // Insert 
+    // Insert
     $toolbar.append(_createToolbarSelect(loc('Insert'), [
         [ loc('comments'), '\n{{comments}}\n', '', ''],
         [ loc('toc'), '\n{{toc}}','',''],
@@ -123,7 +133,7 @@ setupFormatterToolbar = function() {
     }
 
     // Syntax highlight
-    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'), 
+    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'),
         $.map(syntax_formatters, function(n, i) {
             return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n',loc('say "Howdy partner.";') ]];
         })
