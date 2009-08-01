@@ -289,18 +289,6 @@ sub rollback : Global {
     }
 }
 
-=head2 delete
-
-This action will delete a page.
-
-=cut
-
-sub delete : Global {
-    my ( $self, $c, $page ) = @_;
-    $c->stash->{page}->delete;
-    $c->forward('/page/view');
-}
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
