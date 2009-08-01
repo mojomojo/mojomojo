@@ -444,8 +444,6 @@ children and descendants, links to/from, attachments.
 
 sub info :Global {
     my ( $self, $c ) = @_;
-    warn $c->stash->{page}->versions;
-    warn $c->stash->{page}->versions_rs;
     $c->stash->{body_length} = length( $c->stash->{page}->content->body );
     $c->stash->{template}    = 'page/info.tt';
 }
