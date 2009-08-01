@@ -1,5 +1,3 @@
-[%IF !c.pref('main_formatter') || c.pref('main_formatter') == 'MojoMojo::Formatter::Textile'%]
-<div class="photo">"![%c.uri_for("attachment",att.id,'thumb')%]!":[%c.uri_for("attachment",att.id)%]</div>
-[% ELSIF (c.pref('main_formatter') == 'MojoMojo::Formatter::Markdown')%]
-<div class="photo">![alt text]([% c.uri_for("attachment",att.id,'thumb') %] "Optional title goes here" )</div>
-[% END %]
+<a href="[% c.uri_for('attachment',att.id,'view') %]" >
+  <img src="[% c.uri_for('attachment',att.id,'thumb') %]" />
+</a>

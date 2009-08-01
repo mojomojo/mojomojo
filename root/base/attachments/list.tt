@@ -5,7 +5,7 @@
       <th id="type-th">Type</th>
       <th id="size-th">Size</th>
       <th id="date-th">Date</th>
-      <th id="actions-th"></th>
+      <th id="actions-th">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -46,6 +46,11 @@
           <li>
             <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
           </li>
+            [% IF attachment.is_image %]
+          <li>
+            <a href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
+          </li>
+            [% END %]          
           [% END %]
           [% IF c.check_permissions(page.path,c.user).attachment %]
           <li>
