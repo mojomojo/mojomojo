@@ -55,7 +55,7 @@
                 <div class="diff display-none"></div>
             </td>
             <td>
-            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.login %]</a>
+            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.name %]</a>
              </td>
             <td>
                 [% page.content.created.hms(":") %]

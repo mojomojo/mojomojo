@@ -55,8 +55,8 @@
                 <img id="editspinner" src="[% c.uri_for_static('spinner.gif') %]" alt="[% loc('busy spinner') %]"/>
             </div>
 
+            <input type="submit" name="submit" value="[% IF page.content && page.content.version >= 1; loc('Save and View'); ELSE; loc('Create and View'); END %]" />
             <input type="submit" name="submit" value="[% loc('Save') %]"/>
-            <input type="submit" name="submit" value="[% IF page.content && page.content.version > 1; loc('Save and View'); ELSE; loc('Create and View'); END %]" />
             [% loc('as') %]
             [% IF user.id %]
                 [% SET user_profile_wanted =1 %]
