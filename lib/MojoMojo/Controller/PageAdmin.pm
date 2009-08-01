@@ -148,15 +148,10 @@ sub edit : Global FormConfig {
             return;
         }
 
-        $page->update_content(%$valid);
+        $self->_update_page_content( $c, $page, $valid );
 
-        # update the search index with the new content
-        $c->model("DBIC::Page")->set_paths($page);
-        $c->model('Search')->index_page($page)
-            unless $c->pref('disable_search');
-        $page->content->store_links();
         $c->model('DBIC::WantedPage')
-          ->search( { to_path => $c->stash->{path} } )->delete();
+            ->search( { to_path => $c->stash->{path} } )->delete();
 
         # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
@@ -200,6 +195,16 @@ sub edit : Global FormConfig {
     }
 }    # end sub edit
 
+sub _update_page_content {
+    my ( $self, $c, $page, $update ) = @_;
+
+    $page->update_content( %{$update} );
+
+    $c->model("DBIC::Page")->set_paths($page);
+    $c->model('Search')->index_page($page)
+        unless $c->pref('disable_search');
+    $page->content->store_links();
+}
 
 =head2 permissions
 
@@ -281,12 +286,40 @@ This action will revert a page to a older revision.
 
 sub rollback : Global {
     my ( $self, $c, $page ) = @_;
-    if ( $c->req->param('rev') ) {
-        $c->stash->{page}->content_version( $c->req->param('rev') );
-        $c->stash->{page}->update;
-        undef $c->req->params->{rev};
-        $c->forward('/page/view');
-    }
+
+    my $rev = $c->req->params->{rev};
+
+    $c->detach('/page/view')
+        unless $rev;
+
+    my ( $path_pages, $proto_pages )
+        = @{ $c->stash }{qw/ path_pages proto_pages /};
+
+    my $page = $path_pages->[-1];
+
+    $c->detach('/')
+        unless $page;
+
+    my $content = $c->model('DBIC::Content')
+        ->find( { page => $page->id, version => $rev } );
+
+    $c->detach('/page/view')
+        unless $content;
+
+    my $user = $c->user_exists ? $c->user->obj->id : 1;
+    my %update = (
+        body     => $content->body,
+        creator  => $user,
+        comments => $c->loc(
+            'Rolled back to revision x', $c->req->params->{rev}
+        ),
+    );
+
+    $self->_update_page_content( $c, $c->stash->{page}, \%update );
+
+    undef $c->req->params->{rev};
+
+    $c->forward('/page/view');
 }
 
 =head1 AUTHOR
