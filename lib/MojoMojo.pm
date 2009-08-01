@@ -73,12 +73,12 @@ MojoMojo->config(
 
 MojoMojo->setup();
 
-# Check that we've spawned a DB.
-eval {  MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
+eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
 if ($@ ) {
     print "
-    ERROR. Looks like you need to DEPLOY A DATABASE.
-    Run: script/mojomojo_spawn_db.pl\n\n";
+    ***********************************************
+    ERROR. Looks like you need to deploy a database.
+    Run script/mojomojo_spawn_db.pl\n\n";
     exit();
 }
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
