@@ -30,7 +30,7 @@ msgstr "**gras** ou __gras__"
 msgid "*italic* or _italic_"
 msgstr "*italique* ou _italique_"
 
-#: root/base/edithelp/markdown.tt:158
+#: root/base/edithelp/markdown.tt:144
 msgid "3 or more dashes or asterisks"
 msgstr "3 ou plus tirets ou astérisques"
 
@@ -130,15 +130,15 @@ msgstr "Liste des pages par ordre alphabétique"
 msgid "An error occourred. Sorry."
 msgstr "Une erreur s'est produite. Désolé."
 
-#: root/base/edithelp/markdown.tt:123
+#: root/base/edithelp/markdown.tt:133
 msgid "An h2 tag in a blockquote"
 msgstr "Un tag h2"
 
-#: root/base/edithelp/markdown.tt:126
+#: root/base/edithelp/markdown.tt:136
 msgid "An unordered list"
 msgstr "Une liste non ordonée"
 
-#: root/base/edithelp/markdown.tt:125
+#: root/base/edithelp/markdown.tt:135
 msgid "And additional Markdown formatting"
 msgstr "Un autre type de formatage"
 
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Aperture"
 msgstr "Ouverture"
 
-#: lib/MojoMojo/Controller/Attachment.pm:125
+#: lib/MojoMojo/Controller/Attachment.pm:131
 msgid "Attachment not found."
 msgstr "Pèce jointe introuvable"
 
@@ -202,11 +202,11 @@ msgstr "Backlinks"
 msgid "Birth Date"
 msgstr "Date de naissance"
 
-#: root/base/edithelp/markdown.tt:116
+#: root/base/edithelp/markdown.tt:126
 msgid "Block quotes"
 msgstr "Bloc entre quotes"
 
-#: root/base/edithelp/markdown.tt:122
+#: root/base/edithelp/markdown.tt:132
 msgid "Blockquotes can be nested"
 msgstr "Bloc entre quotes peuvent être imbriqués"
 
@@ -230,11 +230,11 @@ msgstr ""
 msgid "Camera"
 msgstr "Appareil-Photo"
 
-#: lib/MojoMojo/Controller/Attachment.pm:202
+#: lib/MojoMojo/Controller/Attachment.pm:208
 msgid "Can only make inline version of photos"
 msgstr "Peut uniquement faire une version inline avec des photos"
 
-#: lib/MojoMojo/Controller/Attachment.pm:176
+#: lib/MojoMojo/Controller/Attachment.pm:182
 msgid "Can only make thumbnails of photos"
 msgstr "Peut uniquement faire des vignettes avec des photos"
 
@@ -270,15 +270,15 @@ msgstr "Modifier les paramètres du site"
 msgid "Children"
 msgstr "Enfant"
 
-#: root/base/page/attachments.tt:12
+#: root/base/page/attachments.tt:18
 msgid "Choose attachments"
 msgstr "Choisir la pièce jointes"
 
-#: root/base/edithelp/markdown.tt:108
+#:
 msgid "Circle"
 msgstr "Cercle"
 
-#: root/base/page/attachments.tt:9
+#: root/base/page/attachments.tt:12
 msgid "Click Here to Upload Attachments"
 msgstr ""
 
@@ -290,11 +290,11 @@ msgstr "Cliquer pour la version originale"
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
 msgstr ""
 
-#:
+#: root/base/edithelp/markdown.tt:148
 msgid "Code"
 msgstr "Code"
 
-#: root/base/edithelp/markdown.tt:131
+#:
 msgid "Code Spans"
 msgstr "Code Spans"
 
@@ -332,7 +332,7 @@ msgstr "Taille du contenu"
 msgid "Could not authenticate that login."
 msgstr "Identification impossible."
 
-#: lib/MojoMojo/Controller/Attachment.pm:74
+#: lib/MojoMojo/Controller/Attachment.pm:73
 #. ($file)
 msgid "Could not create attachment from x"
 msgstr "Création de la pièce jointe impossible à partir de %1"
@@ -357,11 +357,11 @@ msgstr "Créer un Rôle"
 msgid "Create a new role"
 msgstr "Créer un nouveau rôle"
 
-#: root/base/page/edit.tt:59
+#: root/base/page/edit.tt:58
 msgid "Create and View"
 msgstr "Créer et Voir"
 
-#: root/base/edithelp/markdown.tt:159
+#: root/base/edithelp/markdown.tt:145
 msgid "Creates"
 msgstr "Créees"
 
@@ -525,8 +525,16 @@ msgstr "Feeds"
 msgid "Fill in the email address you want to use here"
 msgstr "2crire l'adresse mail que vous voulez utiliser ici"
 
-#: root/base/edithelp/markdown.tt:162
+#: root/base/edithelp/markdown.tt:172
 msgid "Footnotes"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:102
+msgid "For nested lists, indent each level by 3 spaces"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:93
+msgid "For numbered lists, just use numbers instead of asterisks"
 msgstr ""
 
 #:
@@ -581,7 +589,7 @@ msgstr "Allez à la page d'accueil"
 msgid "Go to your user page"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:151
+#: root/base/edithelp/markdown.tt:168
 msgid "Going back to normal formatting"
 msgstr "Retourner au formatage normal"
 
@@ -593,19 +601,19 @@ msgstr "HTML"
 msgid "Have a nice day"
 msgstr "Bonne journée"
 
-#: root/base/edithelp/markdown.tt:39 root/base/edithelp/markdown.tt:40 root/base/edithelp/markdown.tt:43 root/base/edithelp/markdown.tt:44
+#:
 msgid "Header 1"
 msgstr "Titre 1"
 
-#: root/base/edithelp/markdown.tt:47 root/base/edithelp/markdown.tt:48 root/base/edithelp/markdown.tt:51 root/base/edithelp/markdown.tt:52 root/base/edithelp/markdown.tt:56
+#:
 msgid "Header 2"
 msgstr "Titre 2"
 
-#: root/base/edithelp/markdown.tt:55 root/base/edithelp/markdown.tt:56
+#:
 msgid "Header 6"
 msgstr "Titre 6"
 
-#: root/base/edithelp/markdown.tt:36
+#: root/base/edithelp/markdown.tt:42
 msgid "Headers"
 msgstr "Titres"
 
@@ -647,7 +655,7 @@ msgstr ""
 msgid "HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))"
 msgstr "PageAccueil, TroisMotsEnsemble, [[C++]], [[Laisser moi encore jouer !]], ((facile à typer))"
 
-#: root/base/edithelp/markdown.tt:155
+#: root/base/edithelp/markdown.tt:141
 msgid "Horizontal Rules"
 msgstr "Règles Horizontales"
 
@@ -667,11 +675,11 @@ msgstr "ID"
 msgid "ISO"
 msgstr "ISO"
 
-#: root/base/edithelp/markdown.tt:26
+#:
 msgid "IdLabel"
 msgstr "IdLabel"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "If the flash uploader gives you problems, switch to the"
 msgstr "Si l'uploader flash ne fonctionne pas, changez pour le"
 
@@ -684,7 +692,7 @@ msgstr "Si vous êtes incapables de valider, s'il vous plaît %1 "
 msgid "Image"
 msgstr "Image"
 
-#: root/base/edithelp/markdown.tt:29
+#: root/base/edithelp/markdown.tt:181
 msgid "Images"
 msgstr "Images"
 
@@ -696,11 +704,11 @@ msgstr "Industrie"
 msgid "Inherited permissions"
 msgstr "Permissions héritées"
 
-#: root/base/edithelp/markdown.tt:32 root/base/page/bottomnav.tt:61
+#: root/base/edithelp/markdown.tt:184 root/base/page/bottomnav.tt:61
 msgid "Inline"
 msgstr "En ligne"
 
-#: root/base/edithelp/markdown.tt:18
+#:
 msgid "Inline Links"
 msgstr "Liens en ligne"
 
@@ -728,11 +736,31 @@ msgstr "Mot de passe invalide."
 msgid "Italic"
 msgstr "Italique"
 
-#: root/base/edithelp/markdown.tt:127
+#: root/base/edithelp/markdown.tt:137
 msgid "Item"
 msgstr "Elément"
 
-#: root/base/edithelp/markdown.tt:121
+#: root/base/edithelp/markdown.tt:104 root/base/edithelp/markdown.tt:116
+msgid "Item 1"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:106 root/base/edithelp/markdown.tt:117
+msgid "Item 1.1"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:107 root/base/edithelp/markdown.tt:118
+msgid "Item 1.2"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:109 root/base/edithelp/markdown.tt:119
+msgid "Item 1.2.1"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:112 root/base/edithelp/markdown.tt:120
+msgid "Item 2"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:131
 msgid "Just like email quoting!"
 msgstr "Just like email quoting!"
 
@@ -740,7 +768,7 @@ msgstr "Just like email quoting!"
 msgid "Last changes"
 msgstr "Derniers changements"
 
-#: root/base/edithelp/markdown.tt:26
+#:
 msgid "Later in the document"
 msgstr "Plus loin dans le document"
 
@@ -752,9 +780,13 @@ msgstr "Laisser le deuxième champ vide si vous ne voulez pas de mot de passe"
 msgid "Lens"
 msgstr "Lentille"
 
-#: root/base/edithelp/markdown.tt:21 root/base/edithelp/markdown.tt:26
+#: root/base/edithelp/markdown.tt:33 root/base/edithelp/markdown.tt:36
 msgid "Link Title"
 msgstr "Titre du Lien"
+
+#: root/base/edithelp/markdown.tt:18
+msgid "Link to Another Page"
+msgstr ""
 
 #: root/base/page/info.tt:49
 msgid "Linked from"
@@ -772,6 +804,10 @@ msgstr "Lié depuis"
 msgid "Links to"
 msgstr "Liés à"
 
+#: root/base/edithelp/markdown.tt:24
+msgid "Links to Other Sites"
+msgstr ""
+
 #: root/base/page/list.tt:40
 msgid "Links to non-existent pages."
 msgstr "Liens vers des pages inexistantes."
@@ -781,13 +817,13 @@ msgstr "Liens vers des pages inexistantes."
 msgid "List by x"
 msgstr ""
 
+#: root/base/edithelp/markdown.tt:74
+msgid "Lists"
+msgstr ""
+
 #:
 msgid "Lists can be nested by indentation level"
 msgstr "Les listes peuvent être imbriqués par niveau d'indentation"
-
-#: root/base/edithelp/markdown.tt:77
-msgid "Lists with Paragraphs - add newlines around items"
-msgstr ""
 
 #: root/base/navbar.tt:26
 msgid "Log in"
@@ -878,6 +914,10 @@ msgid ""
 "    value_loc: Save\n"
 msgstr ""
 
+#: root/base/edithelp/markdown.tt:45 root/base/edithelp/markdown.tt:46 root/base/edithelp/markdown.tt:51 root/base/edithelp/markdown.tt:52
+msgid "Main Header"
+msgstr ""
+
 #:
 msgid "Main heading"
 msgstr "Titre principal"
@@ -913,6 +953,10 @@ msgstr "Musiques"
 #: root/base/gallery/tags.tt:2 root/base/page/tags.tt:2
 msgid "My tags"
 msgstr "Mes tags"
+
+#: root/base/edithelp/markdown.tt:87
+msgid "NOTE: you need a blank line before and after the list"
+msgstr ""
 
 #: root/base/admin/role.tt:16 root/base/user/profile.tt:15
 msgid "Name"
@@ -956,13 +1000,9 @@ msgstr ""
 msgid "Name missing"
 msgstr "Nom manquant"
 
-#: root/base/edithelp/markdown.tt:137
+#: root/base/edithelp/markdown.tt:154
 msgid "Nested backticks"
 msgstr "Nested backticks"
-
-#: root/base/edithelp/markdown.tt:95
-msgid "Nested lists: use 3-space indentation per level"
-msgstr ""
 
 #: root/base/user/register.tt:1
 msgid "New User Registration"
@@ -1039,7 +1079,7 @@ msgstr "Page inexistante"
 msgid "None"
 msgstr "Aucun"
 
-#: root/base/edithelp/markdown.tt:147
+#: root/base/edithelp/markdown.tt:164
 msgid "Normal Paragraph"
 msgstr "Paragraphe normal "
 
@@ -1067,7 +1107,7 @@ msgstr "Liste numérotée"
 msgid "One or more pages in the requested path do not exist."
 msgstr "Une ou plusieurs pages de la requête sont inexistante"
 
-#: root/base/edithelp/markdown.tt:33
+#: root/base/edithelp/markdown.tt:185
 msgid "Optional Title"
 msgstr "Titre optionnel"
 
@@ -1076,7 +1116,7 @@ msgstr "Titre optionnel"
 msgid "Or you can check out x instead"
 msgstr "Vous pouvez aussi vérifier %1"
 
-#: root/base/edithelp/markdown.tt:59
+#:
 msgid "Ordered Lists"
 msgstr "Listes ordonnées"
 
@@ -1099,6 +1139,10 @@ msgstr "Page"
 #: root/base/page/bottomnav.tt:16 root/base/page/bottomnav.tt:18
 msgid "Page Info"
 msgstr "Infos Page"
+
+#: root/base/edithelp/markdown.tt:20
+msgid "Page Name Here"
+msgstr ""
 
 #: root/base/page/info.tt:9
 #. (page.path)
@@ -1191,7 +1235,7 @@ msgstr "Merci de saisir votre identifiant et vote mot de passe"
 msgid "Please fill in the following information to register. All fields are mandatory."
 msgstr "Merci de renseigner les informations suivantes pour être enregistré. Tous les champs sont obligatoires."
 
-#: root/base/page/attachments.tt:13
+#: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
 msgstr ""
 
@@ -1223,7 +1267,7 @@ msgstr "Propulsé par Catalyst"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: root/base/edithelp/markdown.tt:141
+#: root/base/edithelp/markdown.tt:158
 msgid "Preformatted Code Blocks"
 msgstr "Bloc de Code préformater"
 
@@ -1284,7 +1328,7 @@ msgstr "Retrouver son mot de passe"
 msgid "Recover password"
 msgstr "Retrouver son mot de passe"
 
-#: root/base/edithelp/markdown.tt:111
+#:
 msgid "Rectangle"
 msgstr "Rectangle"
 
@@ -1396,15 +1440,11 @@ msgstr "Rôles"
 msgid "Rolled Back (Current: x)"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:110
-msgid "Rounded square"
-msgstr ""
-
-#: lib/MojoMojo/Controller/PageAdmin.pm:163 root/base/admin/role_form.tt:37 root/base/page/edit.tt:58 root/base/page/permissions.tt:74
+#: lib/MojoMojo/Controller/PageAdmin.pm:163 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74
 msgid "Save"
 msgstr "Enregistrer"
 
-#: root/base/page/edit.tt:59
+#: root/base/page/edit.tt:58
 msgid "Save and View"
 msgstr ""
 
@@ -1457,7 +1497,7 @@ msgstr "Définir un mot-clé pour cette page"
 msgid "Set language"
 msgstr "Définir le langage"
 
-#: root/base/edithelp/markdown.tt:107
+#:
 msgid "Shapes"
 msgstr "Formes"
 
@@ -1497,7 +1537,7 @@ msgstr "Entrées %1-%2 de %3 dans %4"
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Voir %1 (%2-%3) sur %4 images sur %5"
 
-#: root/base/edithelp/markdown.tt:145
+#: root/base/edithelp/markdown.tt:162
 msgid "Simply indent every line of a code block by 4"
 msgstr "Indente chaque ligne code par bloc de 4"
 
@@ -1619,9 +1659,17 @@ msgstr "Certains champs sont invalides. Merci de les corriger et de réessayer:"
 msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:109
+#:
 msgid "Square"
 msgstr "Carré"
+
+#: root/base/edithelp/markdown.tt:55 root/base/edithelp/markdown.tt:56 root/base/edithelp/markdown.tt:60 root/base/edithelp/markdown.tt:61 root/base/edithelp/markdown.tt:62
+msgid "Sub Header"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:66 root/base/edithelp/markdown.tt:70 root/base/edithelp/markdown.tt:71
+msgid "Sub Sub ... Header"
+msgstr ""
 
 #: root/base/navbar.tt:31
 msgid "Sub pages"
@@ -1635,7 +1683,7 @@ msgstr "S'abonner aux modifications par flux RSS"
 msgid "Subscribe to page changes"
 msgstr "S'abonner aux modifications de pages"
 
-#: root/base/page/attachments.tt:5
+#: root/base/page/attachments.tt:6
 msgid "Switch to flash uploader"
 msgstr "Changer pour l'upload flash"
 
@@ -1702,7 +1750,7 @@ msgstr "L'URL demandée (%1) est introuvable"
 msgid "The requested URL was not found: x"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:149
+#: root/base/edithelp/markdown.tt:166
 msgid "This is a pre formatted code block"
 msgstr "C'est un bloc de code préformaté"
 
@@ -1714,7 +1762,7 @@ msgstr "C'est la première révision! Aucune autre version à comparer."
 msgid "Time edited"
 msgstr "Heure de la modification"
 
-#: root/base/edithelp.tt:33 root/base/edithelp/markdown.tt:62 root/base/edithelp/markdown.tt:80
+#: root/base/edithelp.tt:33 root/base/edithelp/markdown.tt:77
 msgid "To get"
 msgstr "Pour avoir"
 
@@ -1825,7 +1873,7 @@ msgstr "Voir les différences"
 msgid "View as files"
 msgstr "Voir comme des fichiers"
 
-#: root/base/attachments/list.tt:62
+#: root/base/attachments/list.tt:67
 msgid "View as gallery"
 msgstr "Voir comme une gallerie"
 
@@ -1862,11 +1910,7 @@ msgstr "mots Wiki"
 msgid "With a second line"
 msgstr "Avec une deuxième ligne"
 
-#: root/base/edithelp/markdown.tt:104
-msgid "With a second paragraph"
-msgstr ""
-
-#: root/base/edithelp.tt:34 root/base/edithelp/markdown.tt:68 root/base/edithelp/markdown.tt:86
+#: root/base/edithelp.tt:34 root/base/edithelp/markdown.tt:83
 msgid "Write"
 msgstr "Ecrire"
 
@@ -1886,7 +1930,7 @@ msgstr "Vous pouvez exporter toutes les pages de ce site dans un fichier ZIP soi
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Vous pouvez vous abonner à ce wiki par flux RSS et recevoir uniquement les titres des pages qui ont changées ou les pages entières."
 
-#: lib/MojoMojo/Controller/Attachment.pm:39
+#: lib/MojoMojo/Controller/Attachment.pm:38
 msgid "You do not have permissions to edit attachments for this page"
 msgstr "Vous n'avez pas les permissions pour éditer les pièces jointes pour cette page"
 
@@ -1965,7 +2009,7 @@ msgstr ""
 msgid "advanced"
 msgstr "avancée"
 
-#: root/base/edithelp/markdown.tt:33
+#: root/base/edithelp/markdown.tt:185
 msgid "alt text"
 msgstr "texte alt"
 
@@ -1999,7 +2043,7 @@ msgstr ""
 msgid "back"
 msgstr "retour"
 
-#: root/base/edithelp/markdown.tt:134
+#: root/base/edithelp/markdown.tt:151
 msgid "blocks are wrapped in backticks"
 msgstr "les blocs sont encadrés par des quotes"
 
@@ -2027,7 +2071,7 @@ msgstr "peut"
 msgid "chars"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:134
+#: root/base/edithelp/markdown.tt:151
 msgid "code"
 msgstr "code"
 
@@ -2059,11 +2103,11 @@ msgstr ""
 msgid "creator"
 msgstr "Créateur"
 
-#: root/base/attachments/list.tt:52 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
+#: root/base/attachments/list.tt:57 root/base/page/permissions.tt:36 root/base/page/permissions.tt:54
 msgid "delete"
 msgstr "supprimer"
 
-#: root/base/edithelp/markdown.tt:162
+#: root/base/edithelp/markdown.tt:172
 msgid "details"
 msgstr ""
 
@@ -2091,7 +2135,7 @@ msgstr "email"
 msgid "entire site"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:20 root/base/edithelp/markdown.tt:21 root/base/edithelp/markdown.tt:26
+#: root/base/edithelp/markdown.tt:26 root/base/edithelp/markdown.tt:28 root/base/edithelp/markdown.tt:33 root/base/edithelp/markdown.tt:36
 msgid "example"
 msgstr "exemple"
 
@@ -2120,11 +2164,19 @@ msgstr ""
 "\n"
 "## Attachments & Photos\n"
 
-#: root/base/edithelp/markdown.tt:20 root/base/edithelp/markdown.tt:21 root/base/edithelp/markdown.tt:26
+#: root/base/edithelp/markdown.tt:38
+msgid "hover over the link to see the title"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:28 root/base/edithelp/markdown.tt:36
+msgid "http://example.com"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:26 root/base/edithelp/markdown.tt:33
 msgid "http://example.com/"
 msgstr "http://exemple.fr/"
 
-#: root/base/edithelp/markdown.tt:138
+#: root/base/edithelp/markdown.tt:155
 msgid "in the wrapping block"
 msgstr "dans le bloc imbriqué"
 
@@ -2148,6 +2200,14 @@ msgstr "insérer"
 msgid "insert link"
 msgstr ""
 
+#: root/base/attachments/list.tt:51
+msgid "insert thumbnail"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:27 root/base/edithelp/markdown.tt:35
+msgid "is formatted as:"
+msgstr ""
+
 #: lib/MojoMojo/Formatter/YouTube.pm:67
 msgid "is not a valid link to youtube video"
 msgstr ""
@@ -2160,7 +2220,7 @@ msgstr ""
 msgid "italics"
 msgstr "italique"
 
-#: root/base/edithelp/markdown.tt:138
+#: root/base/edithelp/markdown.tt:155
 msgid "just use `2`"
 msgstr "utiliser juste `2`"
 
@@ -2212,7 +2272,11 @@ msgstr "non spécifié"
 msgid "on"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:158 root/base/message.tt:10 root/base/user/login.tt:11
+#: root/base/edithelp/markdown.tt:63
+msgid "optionally, you can add the same number of trailing # marks"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:144 root/base/message.tt:10 root/base/user/login.tt:11
 msgid "or"
 msgstr "ou"
 
@@ -2228,7 +2292,7 @@ msgstr "mot de passe"
 msgid "photo tags"
 msgstr "tags photo"
 
-#: root/base/page/attachments.tt:14
+#: root/base/page/attachments.tt:20
 msgid "plain uploader"
 msgstr "Upload simple"
 
@@ -2300,6 +2364,10 @@ msgstr "les champs suivants sont manquants"
 #:
 msgid "this is the string"
 msgstr "c'est une chaîne de caractère"
+
+#: root/base/edithelp/markdown.tt:68
+msgid "up to 6 levels of headers"
+msgstr ""
 
 #:
 msgid "users"
