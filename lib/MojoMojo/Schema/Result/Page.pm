@@ -35,7 +35,7 @@ __PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { 
 __PACKAGE__->belongs_to( "parent", "MojoMojo::Schema::Result::Page", { id => "parent" } );
 __PACKAGE__->has_many( "children", "MojoMojo::Schema::Result::Page", { "foreign.parent" => "self.id" } );
 __PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content", { page => "id", version => "content_version" } );
-__PACKAGE__->has_many( "versions", "MojoMojo::Schema::Result::Content", { "foreign.page" => "self.id" } );
+__PACKAGE__->has_many( "versions", "MojoMojo::Schema::Result::Content", { "foreign.page" => "self.id" }, { order_by => 'version desc' } );
 __PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion", { page => "id", version => "version" } );
 __PACKAGE__->has_many( "tags",       "MojoMojo::Schema::Result::Tag",  { "foreign.page"      => "self.id" } );
 __PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" } );
