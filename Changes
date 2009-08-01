@@ -26,6 +26,8 @@
         - The edit page incorrectly labeled a button "Create and View"
           for a page that only had one revision, when it should have
           been labeled "Save and View" (Dave Rolsky)
+        - Removed the delete action, which was broken with Pg, and not
+          checking permissions (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
