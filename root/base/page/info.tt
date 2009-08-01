@@ -9,7 +9,7 @@
 [% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
 <div id="content">
 
-<h3>[% loc('x revisions',page.versions_rs)%]:</h3>
+<h3>[% loc( 'x revisions', page.versions_rs.count )%]:</h3>
 
 <table id="revisions">
     <thead>
