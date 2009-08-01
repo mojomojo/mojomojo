@@ -21,8 +21,11 @@
           users. Added paging links so you can browse all of them
           (Dave Rolsky)
         - The users list now shows active users first (Dave Rolsky)
-        - Reorganized the navigation menus to try to group site-wide
-          and page-specific options together (Dave Rolsky)
+v        - Reorganized the navigation menus to try to group site-wide
+          and page-specific options together. Top-level menu links
+          (like Recent and Tags) are now always site-wide. For
+          path-specific versions, go to the "Sub pages" view of a
+          path. (Dave Rolsky)
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
