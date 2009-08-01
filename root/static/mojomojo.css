@@ -175,7 +175,7 @@ div#content_preview {
     border: 1px solid #ddd;
     padding: 5px;
     overflow: auto;
-    height: 35em;
+    height: 50em;
     margin: 0 0 1em 0;
     float: left;
     width: 49%;
@@ -183,12 +183,11 @@ div#content_preview {
 div#edit_form {
     float: left;
     width: 49%;
-    height: 35em;
+    height: 50em;
 }
 
-
 textarea#body {
-    height: 26em;
+    height: 40em;
     /* max-width: 930px; */
     width: 100%;
 }
