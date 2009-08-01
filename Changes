@@ -28,6 +28,8 @@
           been labeled "Save and View" (Dave Rolsky)
         - Removed the delete action, which was broken with Pg, and not
           checking permissions (Dave Rolsky)
+        - mojomojo_spawn_db won't attempt deploy if db already exists
+        - exit MojoMojo on startup attempt if mojomojo_spawn_db.pl was not run      
 
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
