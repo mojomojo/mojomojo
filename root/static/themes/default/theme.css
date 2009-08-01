@@ -300,4 +300,8 @@ p {
     padding: 0.2em;
 }
 
+.syntax_help table th {
+    background-color: #f6f6f6;
+}
+
 /* @end */

@@ -245,6 +245,11 @@ div.tab-nav a.close-button {
     margin-top: 11px;
 }
 
+.syntax_help table th {
+    font-size: 120%;
+    font-weight: bold;
+}
+
 .syntax_help  table td {
     padding: 3px;
     vertical-align: top;
@@ -273,6 +278,14 @@ div.tab-nav a.close-button {
 
 .syntax_help h2 {
     margin-top: 0;
+}
+
+.syntax_help pre {
+    line-height: 90%;
+    font-size: 120%;
+    margin-left: 0;
+    padding: 5px;
+    width: 80%;
 }
 
 .rightHandSide {
