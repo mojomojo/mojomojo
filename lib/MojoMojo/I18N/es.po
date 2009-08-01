@@ -1480,7 +1480,12 @@ msgstr "Rols"
 msgid "Rolled Back (Current: x)"
 msgstr "Deshecho (Actual: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:163 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74
+#: lib/MojoMojo/Controller/PageAdmin.pm:315
+#. ($c->req->params->{rev})
+msgid "Rolled back to revision x"
+msgstr ""
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:158 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74
 msgid "Save"
 msgstr "Guardar"
 
