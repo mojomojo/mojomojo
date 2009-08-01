@@ -14,8 +14,10 @@
           same page. Arguably, this is a bug in PageCache, but for now
           it is fixed here. (Dave Rolsky)
         - Lots of improvements to the attachments list (Dave Rolsky)
-        - The "insert link" option for an attachment went to a slightly broken version of the edit form (Dave Rolsky)
-        - Attachments are now viewable without going to the edit form first (Dave Rolsky)
+        - The "insert link" option for an attachment went to a
+          slightly broken version of the edit form (Dave Rolsky)
+        - Attachments are now viewable without going to the edit form
+          first (Dave Rolsky)
         - The gallery link was broken (Dave Rolsky)
         - The users list in the admin section only showed the first 20
           users. Added paging links so you can browse all of them
