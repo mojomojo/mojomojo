@@ -180,8 +180,8 @@ sub usersearch : Local {
     $c->stash->{template} = "user/user_search.tt";
 
     if (defined($query) && length($query)) {
-        my $rs = $c->model('DBIC::Person')->search_like({
-            login => '%'.$query.'%'
+        my $rs = $c->model('DBIC::Person')->search({
+            login => { -like => '%'.$query.'%'}
         });
         $c->stash->{users} = [ $rs->all ];
     }
