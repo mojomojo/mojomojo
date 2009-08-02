@@ -1,14 +1,30 @@
-  - Reformatted Changes (dandv)
+  - The page cache plugin was caching the empty body before a redirect, and
+    then using that for further requests of the same page. Arguably, this is a
+    bug in PageCache, but for now it is fixed here. (Dave Rolsky)
 
-  - Textile no longer converts non-ASCII characters into HTML entities (dandv)
+  - Logging out of a wiki which did not allow anonymous viewing left the user
+    able to view the last page they were on. Now they are immediately taken to
+    the login screen. (Dave Rolsky)
 
-  - All methods are documented in POD with =head2 instead of =item, so that
-    they appear in the module's TOC. Uniform LICENSE for all modules. (dandv)
+  - Reorganized the navigation menus to try to group site-wide and
+    page-specific options together. Top-level menu links (like Recent and
+    Tags) are now always site-wide. For path-specific versions, go to the "Sub
+    pages" view of a path.  (Dave Rolsky)
 
-  - Major documentation updates to Prefs.pod, Schema::Result*::Page*,
-    Formatter/WRITING YOUR OWN FORMATTER, (dandv)
+  - The gallery link was broken (Dave Rolsky)
 
-  - Fixed Catalyst theme so that Save buttons are visible (dandv)
+  - Redesigned the attachments list as a nicely formatted table. Images now
+    include a thumbnail preview, and the actions available for each attachment
+    are context-sensitive based on the type of attachment and user
+    permissions. (Dave Rolsky)
+
+  - Attachments are now viewable without going to the edit form first (Dave
+    Rolsky)
+
+  - The "insert link" option for an attachment went to a slightly broken
+    version of the edit form (Dave Rolsky)
+
+  - The revisions list is now a nicely formatted table (Dave Rolsky)
 
   - mojomojo_spawn_db.pl now has a --help option and takes CLI arguments for
     all settings (Dave Rolsky)
@@ -18,45 +34,26 @@
   - A newly created database now has an anonymous user preference set. Without
     this, anonymous users are not supported properly (Dave Rolsky)
 
-  - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
-
-  - Logging out of a wiki which did not allow anonymous viewing left the user
-    able to view the last page they were on. Now they are immediately taken to
-    the login screen. (Dave Rolsky)
-
-  - The page cache plugin was caching the empty body before a redirect, and
-    then using that for further requests of the same page. Arguably, this is a
-    bug in PageCache, but for now it is fixed here. (Dave Rolsky)
-
-  - Redesigned the attachments list (Dave Rolsky)
-
-  - Fixed markup inserted by edit toolbar buttons for images and links (dandv)
-
-  - The "insert link" option for an attachment went to a slightly broken
-    version of the edit form (Dave Rolsky)
+  - Recent changes now shows user's names, not their logins (Dave Rolsky)
 
   - The users list in the admin section only showed the first 20 users. Added
     paging links so you can browse all of them (Dave Rolsky)
 
   - The users list now shows active users first (Dave Rolsky)
 
-  - Reorganized the navigation menus to try to group site-wide and
-    page-specific options together. Top-level menu links (like Recent and
-    Tags) are now always site-wide. For path-specific versions, go to the "Sub
-    pages" view of a path.  (Dave Rolsky)
+  - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
 
-  - Attachments are now viewable without going to the edit form first (Dave
-    Rolsky)
-
-  - The gallery link was broken (Dave Rolsky)
-
-  - Recent changes now shows user's names, not their logins (Dave Rolsky)
-
-  - Revised MultiMarkdown syntax help tips (Dave Rolsky)
+  - Fixed markup inserted by edit toolbar buttons for images and links (dandv)
 
   - The edit page incorrectly labeled a button "Create and View" for a page
     that only had one revision, when it should have been labeled "Save and
     View" (Dave Rolsky)
+
+  - In edit mode, the preview & form should now always fit in the browser
+    viewport together without scrolling, in both horizontal & vertical split
+    modes. (Dave Rolsky)
+
+  - Revised MultiMarkdown syntax help tips (Dave Rolsky)
 
   - Removed the page delete action, which was broken with PostgreSQL, and not
     checking permissions. This will come back in a better form in the future
@@ -65,11 +62,17 @@
   - MojoMojo warn on startup if mojomojo_spawn_db.pl was not run, and all
     requests return a 404 (mateu)
 
-  - The revisions list is now a nicely formatted table (Dave Rolsky)
+  - Textile no longer converts non-ASCII characters into HTML entities (dandv)
 
-  - In edit mode, the preview & form should now always fit in the browser
-    viewport together without scrolling, in both horizontal & vertical split
-    modes. (Dave Rolsky)
+  - Fixed Catalyst theme so that Save buttons are visible (dandv)
+
+  - All methods are documented in POD with =head2 instead of =item, so that
+    they appear in the module's TOC. Uniform LICENSE for all modules. (dandv)
+
+  - Major documentation updates to Prefs.pod, Schema::Result*::Page*,
+    Formatter/WRITING YOUR OWN FORMATTER, (dandv)
+
+  - Reformatted Changes, but you probably noticed that by now (dandv)
 
 
 0.999031 2009-07-26 15:00:00
