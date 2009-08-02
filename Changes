@@ -16,7 +16,7 @@
   - mojomojo_spawn_db won't attempt deploy if db already exists (mateu)
 
   - A newly created database now has an anonymous user preference set. Without
-    this, anonymous users are not supported properly  (Dave Rolsky)
+    this, anonymous users are not supported properly (Dave Rolsky)
 
   - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
 
@@ -40,13 +40,13 @@
 
   - The users list now shows active users first (Dave Rolsky)
 
-  - Reorganized the navigation menus to try to group site-wide and page-specific
-    options together. Top-level menu links (like Recent and Tags) are now always
-    site-wide. For path-specific versions, go to the "Sub pages" view of a path.
-    (Dave Rolsky)
+  - Reorganized the navigation menus to try to group site-wide and
+    page-specific options together. Top-level menu links (like Recent and
+    Tags) are now always site-wide. For path-specific versions, go to the "Sub
+    pages" view of a path.  (Dave Rolsky)
 
-  - Attachments are now viewable without going to the edit form first
-    (Dave Rolsky)
+  - Attachments are now viewable without going to the edit form first (Dave
+    Rolsky)
 
   - The gallery link was broken (Dave Rolsky)
 
@@ -55,8 +55,8 @@
   - Revised MultiMarkdown syntax help tips (Dave Rolsky)
 
   - The edit page incorrectly labeled a button "Create and View" for a page
-    that only had one revision, when it should have been labeled "Save and View"
-    (Dave Rolsky)
+    that only had one revision, when it should have been labeled "Save and
+    View" (Dave Rolsky)
 
   - Removed the page delete action, which was broken with PostgreSQL, and not
     checking permissions. This will come back in a better form in the future
