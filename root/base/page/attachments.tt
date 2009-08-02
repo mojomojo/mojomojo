@@ -4,7 +4,6 @@
 [% IF c.req.params.plain || ! c.user.obj %]
   [% IF c.user.obj %]
 <p>(<a href="[%c.uri_for('attachments',{plain=>0})%]">[%loc('Switch to flash uploader')%]</a>)
-  [% END %]
 
 <form action="[%c.uri_for('plain_upload')%]" enctype="multipart/form-data" method="post">
     <input type="hidden" name="plain" value="1"/>
@@ -12,6 +11,7 @@
     <input type="submit" name="submit" value="[%loc('Click Here to Upload Attachments')%]"/>
 </form>
 
+  [% END %]
 <br />
 
 [% ELSE %]
