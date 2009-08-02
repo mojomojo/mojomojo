@@ -1,3 +1,5 @@
+0.999032 2009-08-02 22:39:00
+
   - The page cache plugin was caching the empty body before a redirect, and
     then using that for further requests of the same page. Arguably, this is a
     bug in PageCache, but for now it is fixed here. (Dave Rolsky)
@@ -73,6 +75,9 @@
     Formatter/WRITING YOUR OWN FORMATTER, (dandv)
 
   - Reformatted Changes, but you probably noticed that by now (dandv)
+  
+  - Move some settings into MojoMojo.pm to make mojomojo.conf more 
+    friendly. (marcus)
 
 
 0.999031 2009-07-26 15:00:00

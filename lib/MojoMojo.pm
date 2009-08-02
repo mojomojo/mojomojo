@@ -32,7 +32,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999031';
+our $VERSION = '0.999032';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -70,6 +70,30 @@ MojoMojo->config(
             cache_hook => 'cache_hook'
         }
 );
+
+__PACKAGE__->config( authentication => {
+    default_realm => 'members',
+    use_session   => 1,
+    realms => {
+        members => {
+            credential => {
+                class               => 'Password',
+                password_field      => 'pass',
+                password_type       => 'hashed',
+                password_hash_type  => 'SHA-1',
+            },
+            store => {
+                class      => 'DBIx::Class',
+                user_class => 'DBIC::Person',
+            },
+        },
+    }
+});
+
+__PACKAGE__->config('Controller::HTML::FormFu' => {
+    languages_from_context => 1,
+    localize_from_context  => 1,
+});
 
 MojoMojo->setup();
 
