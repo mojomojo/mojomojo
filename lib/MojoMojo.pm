@@ -74,6 +74,7 @@ MojoMojo->config(
 MojoMojo->setup();
 
 # Check for deployed database
+my $has_DB = 1;
 my $NO_DB_MESSAGE =<<"EOF";
 
     ***********************************************
@@ -82,8 +83,9 @@ my $NO_DB_MESSAGE =<<"EOF";
     *********************************************** 
     
 EOF
-eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
+eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->next };
 if ($@ ) {
+    $has_DB = 0;
     warn $NO_DB_MESSAGE;
 }
 
@@ -314,15 +316,14 @@ sub fixw {
 
 sub prepare_action {
     my $c = shift;
-
-    eval { $c->model('DBIC::Person')->count; };
-    if ($@) {
+    
+    if ($has_DB) {
+        $c->next::method(@_);
+    }
+    else {
         $c->res->status( 404 );
         $c->response->body($NO_DB_MESSAGE);
         return;
-    }
-    else {
-        $c->next::method(@_);
     }
 }
 
