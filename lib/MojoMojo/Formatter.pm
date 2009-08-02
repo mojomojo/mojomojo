@@ -10,10 +10,12 @@ MojoMojo::Formatter - Base class for all formatters
 
     use parent qw/MojoMojo::Formatter/;
 
-    sub format_content_order { 1 }
+    sub format_content_order { 14 }
+    # so that it runs after inclusion of obscene web sites
+    # (MojoMojo::Formatter::Include runs at 6)
 
     sub format_content {
-        my ($class,$content,$c)=@_;
+        my ($class, $content, $c) = @_;
         $$content =~ s/fuck/f**k/g;
         return $content;
     }
@@ -59,32 +61,40 @@ for the default plugins is currently as follows:
 Note that if your formatter expects a HTML body, it should run after the
 main formatter.
 
+
+=head1 METHODS
+
+=head2 format_content
+
 If you want your formatter to do something, you also need to override
 C<format_content>. It gets passed its classname, a scalar ref to the content,
 and the context object. It should return the scalar ref.
 
-=head1 METHODS
+=head2 main_format_content
 
-You can also override further methods of your formatter:
+Override this method if your formatter is a primary one (equivalent to Markdown or
+Textile). It gets passed the same arguments as L</format_content>. Also make sure
+to update "Site settings" (/.admin).
 
-=head2 primary_formatter
-
-Primary formatters are those who handle the basic job of translating markup to HTML.
-In the default distribution there are currently two, Textile and Markdown, with Markdown
-being the default setting. You can change this through "Site settings" (/.admin).
-Override this method to return 1 to contend for as a primary formatter.
-Note that primary formatters should run at 15.
+Note that the main formatter runs at 15.
 
 =cut
 
-sub primary_formatter { 0; }
 
 sub module_loaded { 1; }
 
+=head2
+
+    gen_re(qr/irc/)
+
+Returns a regular expression for the given tag between matching double braces.
+
+=cut
+
 sub gen_re {
-    my ($self,$tag,$args)=@_;
+    my ($self, $tag, $args)=@_;
     $args ||= '';
-    return qr{\{\{\s*$tag\s*$args\s*\}\}};
+    return qr[{{\s*$tag\s*$args\s*}}];
 }
 
 
