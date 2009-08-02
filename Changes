@@ -1,331 +1,387 @@
-        - mojomojo_spawn_db.pl now has a --help option and takes CLI
-          arguments for all settings (Dave Rolsky)
-        - mojomojo_spawn_db won't attempt deploy if db already exists
-          (mateu)
-        - A newly created database now has an anonymous user
-          preference set. Without this, anonymous users are not
-          supported properly  (Dave Rolsky)
-        - A user's active flag is now shown as "yes" or "no" in the UI
-          (Dave Rolsky)
-        - Logging out of a wiki which did not allow anonymous viewing
-          left the user able to view the last page they were on. Now
-          they are immediately taken to the login screen. (Dave
-          Rolsky).
-        - The page cache plugin was caching the empty body before a
-          redirect, and then using that for further requests of the
-          same page. Arguably, this is a bug in PageCache, but for now
-          it is fixed here. (Dave Rolsky)
-        - Redesigned the attachments list (Dave Rolsky)
-        - The "insert link" option for an attachment went to a
-          slightly broken version of the edit form (Dave Rolsky)
-        - The users list in the admin section only showed the first 20
-          users. Added paging links so you can browse all of them
-          (Dave Rolsky)
-        - The users list now shows active users first (Dave Rolsky)
-        - Reorganized the navigation menus to try to group site-wide
-          and page-specific options together. Top-level menu links
-          (like Recent and Tags) are now always site-wide. For
-          path-specific versions, go to the "Sub pages" view of a
-          path. (Dave Rolsky)
-          - Attachments are now viewable without going to the edit
-            form first (Dave Rolsky)
-          - The gallery link was broken (Dave Rolsky)
-        - Recent changes now shows user's names, not their logins
-          (Dave Rolsky)
-        - Revised MultiMarkdown syntax help tips (Dave Rolsky)
-        - The edit page incorrectly labeled a button "Create and View"
-          for a page that only had one revision, when it should have
-          been labeled "Save and View" (Dave Rolsky)
-        - Removed the page delete action, which was broken with Pg,
-          and not checking permissions. This will come back in a
-          better form in the future (Dave Rolsky)
-        - MojoMojo warn on startup if mojomojo_spawn_db.pl was not
-          run, and all requests return a 404 (mateu)
-        - The revisions list is now a nicely formatted table (Dave Rolsky)
-        - In edit mode, the preview & form should now always fit in
-          the browser viewport together without scrolling, in both
-          horizontal & vertical split modes (Dave Rolsky).
+  - Reformatted Changes (dandv)
+
+  - Textile no longer converts non-ASCII characters into HTML entities (dandv)
+
+  - All methods are documented in POD with =head2 instead of =item, so that
+    they appear in the module's TOC. Uniform LICENSE for all modules. (dandv)
+
+  - Major documentation updates to Prefs.pod, Schema::Resullt*::Page*,
+    Formatter/WRITING YOUR OWN FORMATTER, (dandv)
+
+  - Fixed Catalyst theme so that Save buttons are visible (dandv)
+
+  - mojomojo_spawn_db.pl now has a --help option and takes CLI arguments for
+    all settings (Dave Rolsky)
+
+  - mojomojo_spawn_db won't attempt deploy if db already exists (mateu)
+
+  - A newly created database now has an anonymous user preference set. Without
+    this, anonymous users are not supported properly  (Dave Rolsky)
+
+  - A user's active flag is now shown as "yes" or "no" in the UI (Dave Rolsky)
+
+  - Logging out of a wiki which did not allow anonymous viewing left the user
+    able to view the last page they were on. Now they are immediately taken to
+    the login screen. (Dave Rolsky)
+
+  - The page cache plugin was caching the empty body before a redirect, and
+    then using that for further requests of the same page. Arguably, this is a
+    bug in PageCache, but for now it is fixed here. (Dave Rolsky)
+
+  - Redesigned the attachments list (Dave Rolsky)
+
+  - Fixed markup inserted by edit toolbar buttons for images and links (dandv)
+
+  - The "insert link" option for an attachment went to a slightly broken
+    version of the edit form (Dave Rolsky)
+
+  - The users list in the admin section only showed the first 20 users. Added
+    paging links so you can browse all of them (Dave Rolsky)
+
+  - The users list now shows active users first (Dave Rolsky)
+
+  - Reorganized the navigation menus to try to group site-wide and page-specific
+    options together. Top-level menu links (like Recent and Tags) are now always
+    site-wide. For path-specific versions, go to the "Sub pages" view of a path.
+    (Dave Rolsky)
+
+  - Attachments are now viewable without going to the edit form first
+    (Dave Rolsky)
+
+  - The gallery link was broken (Dave Rolsky)
+
+  - Recent changes now shows user's names, not their logins (Dave Rolsky)
+
+  - Revised MultiMarkdown syntax help tips (Dave Rolsky)
+
+  - The edit page incorrectly labeled a button "Create and View" for a page
+    that only had one revision, when it should have been labeled "Save and View"
+    (Dave Rolsky)
+
+  - Removed the page delete action, which was broken with PostgreSQL, and not
+    checking permissions. This will come back in a better form in the future
+    (Dave Rolsky)
+
+  - MojoMojo warn on startup if mojomojo_spawn_db.pl was not run, and all
+    requests return a 404 (mateu)
+
+  - The revisions list is now a nicely formatted table (Dave Rolsky)
+
+  - In edit mode, the preview & form should now always fit in the browser
+    viewport together without scrolling, in both horizontal & vertical split
+    modes. (Dave Rolsky)
+
 
 0.999031 2009-07-26 15:00:00
-        - Sane default for fastmmap sharefile.
-        - Change to use the current cache as Session store. 
-        - Fix comments (NacMac)
-        - Add license for debian packaging
-        - Fix error page url / pre_hacked_url
-        - POD Fixes
+  - Sane default for FastMmap sharefile.
+  - Change to use the current cache as Session store.
+  - Fix comments (NacMac)
+  - Add license for debian packaging
+  - Fix incorred URL displayed by the error page (pre_hacked_url)
+  - POD Fixes
+
 
 0.999030 2009-07-18 20:25:00
-        - fixed vertical split mode to stay side-by-side (mateu, dandv @ YAPC10)
-        - Updated Catalyst theme
-        - Defang remote img src - whitelist if you want to allow them
-        - Fixed profile user name when in view mode
-        - Linked from was moved from page/bottomnav.tt to page/info.tt
-        - Forked Defang to Declaw included in our distribution for now
-        - Fix Args("") issue
+  - Fixed vertical split mode to stay side-by-side (mateu, dandv @ YAPC10)
+  - Updated Catalyst theme
+  - Defang remote img src - whitelist if you want to allow them
+  - Fixed profile user name when in view mode
+  - Linked from was moved from page/bottomnav.tt to page/info.tt
+  - Forked Defang to Declaw included in our distribution for now
+  - Fix Args("") issue
+
 
 0.999029 2009-05-09 23:59:35
-        - Actual content added to [[Help]]
-        - Tests: XSS, Defang, and more Textile
-        - Defang runs after main formatter instead of before
-        - HTML::Scrub replaced with HTML::Defang for XSS and cleaning HTML
-        - Markdown now default formatter instead of Textile. Reasons at
-          http://mojomojo.org/documentation/cheatsheet#Choosing_between_Textile2_and_MultiMarkdown
-        - Update page creation to be compatible with latest DBIC (Bernhard Graf)
-        - Additional theme colors: grey, purple, pink
-        - Add Amazon, RSS, Emote (optional) formatters to main distribution
-        - Many new tests, including live tests of chained formatters (dandv)
-        - Main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
-        - Switch email to use Catalyst::View::Email and tests for such (rafl)
+  - Actual content added to [[Help]]
+  - Tests: XSS, Defang, and more Textile
+  - Defang runs after main formatter instead of before
+  - HTML::Scrub replaced with HTML::Defang for XSS and cleaning HTML
+  - Markdown now default formatter instead of Textile. Reasons at
+    http://mojomojo.org/documentation/cheatsheet#Choosing_between_Textile2_and_MultiMarkdown
+  - Update page creation to be compatible with latest DBIC (Bernhard Graf)
+  - Additional theme colors: grey, purple, pink
+  - Add Amazon, RSS, Emote (optional) formatters to main distribution
+  - Many new tests, including live tests of chained formatters (dandv)
+  - Main formatters (Textile, MultiMarkdown) are independent and clearly dispatched now (dandv)
+  - Switch email to use Catalyst::View::Email and tests for such (rafl)
+
 
 0.999028 2009-04-23 11:58:00
-        - Use oneshot timer instead of only_every to trigger preview update
-        - Make .profile smarter and link to it from .recent
-        - Clean up extra // in .recent URLs
-        - New formatter: {{cpan Some::Module}} auto-hyperlinks (dandv)
-        - Use package scope for $kate syntax highlight object to reduce memory leak (mateu)
-        - Use jquery cookie to make split edit state sticky
-        - Added maximization of the edit page (linio)
-        - Instant edit window split mode toggle (horiz./vert.) preserves content (linio)
-        - Drop-downs for syntax highlighters, plugins and formatters (linio)
-        - Set default theme directory when theme preference is NULL
-        - Add inline view
-        - reCAPTCHA support (linio)
-        - localize: help message, admin home page, anonymous name and login ('anonymous coward')
-        - Fixed displaying multiple user roles
-        - Now FormFu label_loc can be localized by MojoMojo I18N
-        - MojoMojo habla español (guikubivan)
-        - Add polish translation (linio)
-        - Improved wikilinks (UTF-8, parentheses, anchors) and added tests
-        - Fixes for paragraphs in toolbar (linio)
-        - Add Catalan language support (mateu)
-        - expand_wikiword() only replaces underscores with spaces now.
-        - match display name of page title, breadcrumb final node, and search results
-        - Make search results byline for last edit author
-        - Limit preview width so that long <pre> lines don't squash edit area
-        - Fix security check for attachments
-        - Add Catalyst theme
-        - Add tabs to "Syntax help" popup (batman)
-        - Improved "Syntax help": does not cover textarea and features tabbed navigation (batman)
-        - Improved templates: removed js, inline css and most templates use wrapper (batman)
-        - Changed font-size: Removed ever px-based font-size, and set default to 0.9em (batman)
-        - Improved w3c validation (batman)
-        - improved navigation, removed unused and out of place links (dandv)
+  - Use oneshot timer instead of only_every to trigger preview update
+  - Make .profile smarter and link to it from .recent
+  - Clean up extra // in .recent URLs
+  - New formatter: {{cpan Some::Module}} auto-hyperlinks (dandv)
+  - Use package scope for $kate syntax highlight object to reduce memory leak (mateu)
+  - Use jquery cookie to make split edit state sticky
+  - Added maximization of the edit page (linio)
+  - Instant edit window split mode toggle (horiz./vert.) preserves content (linio)
+  - Drop-downs for syntax highlighters, plugins and formatters (linio)
+  - Set default theme directory when theme preference is NULL
+  - Add inline view
+  - reCAPTCHA support (linio)
+  - localize: help message, admin home page, anonymous name and login ('anonymous coward')
+  - Fixed displaying multiple user roles
+  - Now FormFu label_loc can be localized by MojoMojo I18N
+  - MojoMojo habla español (guikubivan)
+  - Add polish translation (linio)
+  - Improved wikilinks (UTF-8, parentheses, anchors) and added tests
+  - Fixes for paragraphs in toolbar (linio)
+  - Add Catalan language support (mateu)
+  - expand_wikiword() only replaces underscores with spaces now.
+  - match display name of page title, breadcrumb final node, and search results
+  - Make search results byline for last edit author
+  - Limit preview width so that long <pre> lines don't squash edit area
+  - Fix security check for attachments
+  - Add Catalyst theme
+  - Add tabs to "Syntax help" popup (batman)
+  - Improved "Syntax help": does not cover textarea and features tabbed navigation (batman)
+  - Improved templates: removed js, inline css and most templates use wrapper (batman)
+  - Changed font-size: Removed ever px-based font-size, and set default to 0.9em (batman)
+  - Improved w3c validation (batman)
+  - improved navigation, removed unused and out of place links (dandv)
+
 
 0.999027 2009-01-30 23:17:00
-        - Fixed broken authors (users) pager links
-        - Added "Split Edit" for side-by-side view/edit
-        - Switched from Cache::Store::Memory to Cache::FastMmap
-        - Change search results by link to link to ROOT/$author instead of author at page level
-        - Show bread crumb path on search results, linking the terminal node
-        - List one link for each page by an author via .users (instead of all revisions)
-        - Support merge for overlapping edits
-        - Add Japanese translation
+  - Fixed broken authors (users) pager links
+  - Added "Split Edit" for side-by-side view/edit
+  - Switched from Cache::Store::Memory to Cache::FastMmap
+  - Change search results by link to link to ROOT/$author instead of author at page level
+  - Show bread crumb path on search results, linking the terminal node
+  - List one link for each page by an author via .users (instead of all revisions)
+  - Support merge for overlapping edits
+  - Add Japanese translation
+
 
 0.999026 2009-01-08 00:21:00
-        - Fix a javascript issue with insert attachment
-        - Fix comments formatter
-        - Make wantedpage list only apply to current subtree
-        - Make tagged_descendant work for PostgreSQL
-        - Changed default search to AND using default_boolop of QueryParser
-        - Edit search_inline.tt to display like search.tt
-        - Improved search result layout and added content creation date
-        - Search results sorted by Kinosearch hit object score
-        - Fix create photo for pics with EXIF
-        - Fixed chars count in page info
-        - Resolve some fastcgi encoding issues
-        - Link to revision in info page
+  - Fix a JavaScript issue with insert attachment
+  - Fix comments formatter
+  - Make wantedpage list only apply to current subtree
+  - Make tagged_descendant work for PostgreSQL
+  - Changed default search to AND using default_boolop of QueryParser
+  - Edit search_inline.tt to display like search.tt
+  - Improved search result layout and added content creation date
+  - Search results sorted by Kinosearch hit object score
+  - Fix create photo for pics with EXIF
+  - Fixed chars count in page info
+  - Resolve some fastcgi encoding issues
+  - Link to revision in info page
+
 
 0.999025  2009-01-04 23:39:00
-        - Updated language selector, added FR to choices
-        - Improved search setup error handling on startup
-        - New formatter: SyntaxHighlight
-        - Fixed /.users to show logout-link correctly if user is logged in
+  - Updated language selector, added FR to choices
+  - Improved search setup error handling on startup
+  - New formatter: SyntaxHighlight
+  - Fixed /.users to show logout-link correctly if user is logged in
+
 
 0.999024  2008-12-31 18:04:00
-        - Get preference key/value from cache if possible
-        - Fix wanted pages
-        - Fix password dialog
-        - Autocomplete for tags (Sachin Sebastian)
-        - Update SWFUpload to support flash 10. Add plain fallback
-        - Resolve a unicode issue in some installations when editing text
-        - Add support for i18n (no, fr, de translations so far)
-          *Warning* Forms will not be localized correctly with Locale::Maketext
-          1.10 and above.
+  - Get preference key/value from cache if possible
+  - Fix wanted pages
+  - Fix password dialog
+  - Autocomplete for tags (Sachin Sebastian)
+  - Update SWFUpload to support flash 10. Add plain fallback
+  - Resolve a unicode issue in some installations when editing text
+  - Add support for i18n (no, fr, de translations so far)
+    *Warning* Forms will not be localized correctly with Locale::Maketext
+    1.10 and above.
+
 
 0.999023  2008-11-23 10:35:00
-        - Added  GUI Permissions editor (nilsonsfj)
-        - Finished porting MojoMojo to HTML::FormFu
-        - Added TOC plugin using HTML::GenToc + anchor names that are
-          XHTML compliant and human/SEO-friendly (dandv)
-        - Fixed formatting of profile
-        - Fix recent list to not display implicit links
-        - Fix bind issue in .list
-        - Set noindex for most pages
+  - Added  GUI Permissions editor (nilsonsfj)
+  - Finished porting MojoMojo to HTML::FormFu
+  - Added TOC plugin using HTML::GenToc + anchor names that are
+    XHTML compliant and human/SEO-friendly (dandv)
+  - Fixed formatting of profile
+  - Fix recent list to not display implicit links
+  - Fix bind issue in .list
+  - Set noindex for most pages
+
 
 0.999022  2008-11-14 17:28:00
-        - Fix validation check (sachinjsk)
-        - Fix javascript toolbar
-        - Fix various Pg specific issues
-        - Change to use flash uploader.
-        - Update search not to cache objects
-        - Fix unicode issue with preview
-        - rewrite javascript to use jquery, remove inline JS
-        - Fix indexer to use correct content version
+  - Fix validation check (sachinjsk)
+  - Fix javascript toolbar
+  - Fix various Pg specific issues
+  - Change to use flash uploader.
+  - Update search not to cache objects
+  - Fix unicode issue with preview
+  - rewrite javascript to use jquery, remove inline JS
+  - Fix indexer to use correct content version
+
 
 0.999021  2008-11-01 01:47:00
-        - Move search to KinoSearch
-        - Make startup checks for permissions
-        - Remove BindLex
-        - Fix lingering 'query' search name which should be 'q'
-        - add Edit Pages link to navbar
-        - Some spawn DB fixes
-        - Fix session config, removed colonos (plu)
-        - liquid layout for less than 1024px wide view
+  - Move search to KinoSearch
+  - Make startup checks for permissions
+  - Remove BindLex
+  - Fix lingering 'query' search name which should be 'q'
+  - add Edit Pages link to navbar
+  - Some spawn DB fixes
+  - Fix session config, removed colonos (plu)
+  - liquid layout for less than 1024px wide view
+
 
 0.999020  2008-07-28 15:45:00
-        - Replaced favicon (soulchild)
-        - Make attachment_dir configurable
-        - Major CSS/XHTML overhaul (soulchild)
-        - Update default expires for session to 1 week
-        - default to searchtype=all (mateu)
-        - Fix highlight causing layout being broken (plu)
-        - Replace Crypt::PassGen with Text::Password::Pronounceable
-        - Make mech tests optional
+  - Replaced favicon (soulchild)
+  - Make attachment_dir configurable
+  - Major CSS/XHTML overhaul (soulchild)
+  - Update default expires for session to 1 week
+  - default to searchtype=all (mateu)
+  - Fix highlight causing layout being broken (plu)
+  - Replace Crypt::PassGen with Text::Password::Pronounceable
+  - Make mech tests optional
+
 
 0.999019 2008-07-19 19:45:00
-        - Eval plucene to let mojomojo work if it fails
-        - Support for re-requesting validation mails
-        - Fix for TT syntax error
-        - Fix recover password (plu)
-        - Fix prefs button label
-        - Fix: /foo.photo/1 was broken (plu)
-        - Add new config option to enforce login:
-          <permissions>enforce_login 1</permissions> (plu)
+  - Eval plucene to let mojomojo work if it fails
+  - Support for re-requesting validation mails
+  - Fix for TT syntax error
+  - Fix recover password (plu)
+  - Fix prefs button label
+  - Fix: /foo.photo/1 was broken (plu)
+  - Add new config option to enforce login:
+    <permissions>enforce_login 1</permissions> (plu)
+
 
 0.999018 2008-07-16 19:45:00
-        - Fix selenium tests
-        - Add redirect formatter
-        - Update dependencies
-        - Fix change password after switching to hashed passwords (plu)
-        - Fix warning in navbar.tt
-        - Fix: If you're logged in, page doesn't exist yet and you don't
-          have the permission to create it there was an exception thrown (plu)
-        - Add table CSS (plu)
-        - Restrict search results depending on permissions (plu)
+  - Fix selenium tests
+  - Add redirect formatter
+  - Update dependencies
+  - Fix change password after switching to hashed passwords (plu)
+  - Fix warning in navbar.tt
+  - Fix: If you're logged in, page doesn't exist yet and you don't
+    have the permission to create it there was an exception thrown (plu)
+  - Add table CSS (plu)
+  - Restrict search results depending on permissions (plu)
+
 
 0.999017 2008-07-09 11:59:00
-        - Unbreak search
-        - Add a default from address for mail
+  - Unbreak search
+  - Add a default from address for mail
+
 
 0.999016 2008-06-29 15:01:00
-        - Limit recent feed to 20 entries
-        - Add option to disable search
-        - Make implicit wikiword linking disabled by default
-        - Hash passwords.
-          WARNING! if you have an old installtion, you will need to run
-          ./script/hash_passwords.pl to hash the passwords for an existing
-          install. Don't run this more than once! (Script should complain tho)
+  - Limit recent feed to 20 entries
+  - Add option to disable search
+  - Make implicit wikiword linking disabled by default
+  - Hash passwords.
+    WARNING! if you have an old installtion, you will need to run
+    ./script/hash_passwords.pl to hash the passwords for an existing
+    install. Don't run this more than once! (Script should complain tho)
+
 
 0.999015 2008-05-03 18:01:00
-        - patches from linio with user-related bugfixes
-        - fix missing dependencies
+  - patches from linio with user-related bugfixes
+  - fix missing dependencies
+
 
 0.999014 2008-04-19 00:08:00
-        - Fixed preview for Unicode
-        - Fixed styling issues with lists/strong/em
-        - Redirect to edit for missing pages higher up in the path
-        - Respect formatter pref in edithelp/toolbar
-        - Markdown formatter toolbar
-        - Recover password function
+  - Fixed preview for Unicode
+  - Fixed styling issues with lists/strong/em
+  - Redirect to edit for missing pages higher up in the path
+  - Respect formatter pref in edithelp/toolbar
+  - Markdown formatter toolbar
+  - Recover password function
+
 
 0.999013 2008-02-06 00:08:00
-        - renovated skin (arne)
-        - syntax fixes, registration/login (jshirley)
-        - fix email validation template (jshirley)
+  - renovated skin (arne)
+  - syntax fixes, registration/login (jshirley)
+  - fix email validation template (jshirley)
+
 
 0.999012 2008-02-06 00:08:00
-        - Fix multiline pre render error
-        - Further updates for layout
-        - Flexible auth framework added (No UI yet) (jayk)
-        - More validation fixes
-        - Updated dependencies
-        - Updated auth to use new plugins
-        - Updated user profile
+  - Fix multiline pre render error
+  - Further updates for layout
+  - Flexible auth framework added (No UI yet) (jayk)
+  - More validation fixes
+  - Updated dependencies
+  - Updated auth to use new plugins
+  - Updated user profile
+
 
 0.999011 2008-01-20 20:16:00
-        - uri_for_static for static assets
-        - Fix header layout
-        - Fix tags in gallery view when not logged in
-        - Fix render bug in preview
-        - Various markup fixes (gphat)
-        - Escape wiki formatting inside pre
-        - Markdown formatter now using MultiMarkdown
-        - Fix JS for highlight + focus in register
-        - Fixed profile, added Last Changed.
+  - uri_for_static for static assets
+  - Fix header layout
+  - Fix tags in gallery view when not logged in
+  - Fix render bug in preview
+  - Various markup fixes (gphat)
+  - Escape wiki formatting inside pre
+  - Markdown formatter now using MultiMarkdown
+  - Fix JS for highlight + focus in register
+  - Fixed profile, added Last Changed.
+
 
 0.999010 2008-01-20 20:16:00
-        - Fix registration form
-        - Update several base _ ... to uri_for
-        - Put admin link on every page if admin
-        - Fix incorrect URL for change password
-        - Update minimum version for Controller::HTML::Widget
+  - Fix registration form
+  - Update several base _ ... to uri_for
+  - Put admin link on every page if admin
+  - Fix incorrect URL for change password
+  - Update minimum version for Controller::HTML::Widget
+
 
 0.999008 2007-11-12 22:43:00
-        - Fix AJAX for tagging
-        - Fix tag galleries
-        - Fix AJAX for user activation
+  - Fix AJAX for tagging
+  - Fix tag galleries
+  - Fix AJAX for user activation
+
 
 0.999007 2007-09-24 00:01:00
-        - Really fix deploy script for MySQL
-        - Fix deploy script for PostgreSQL
-        - Refactor test data so it only exists once
-        - Updated main class POD (removed developer docs and added to description)
+  - Really fix deploy script for MySQL
+  - Fix deploy script for PostgreSQL
+  - Refactor test data so it only exists once
+  - Updated main class POD (removed developer docs and added to description)
+
 
 0.999006 2007-09-23 12:12:00
-        - Fix deploy script to work with mysql constraints
-        - Fix comment formatter in preview
-        - Updated photo exif formatting
-        - Renamed photo action from p to photo
+  - Fix deploy script to work with mysql constraints
+  - Fix comment formatter in preview
+  - Updated photo exif formatting
+  - Renamed photo action from p to photo
+
 
 0.999005 2007-09-19 21:31:00
-        - Better error reporting for upload dir
-        - More dependency fixes
+  - Better error reporting for upload dir
+  - More dependency fixes
+
 
 0.999005 2007-09-18 09:56:04
-        - Really fix tests if Markdown isn't installed
+  - Really fix tests if Markdown isn't installed
+
 
 0.999004 2007-09-18 09:29:04
-        - Create t/var/upload if needed
-        - Prefs form redone in FormFu
-        - Use Mech to test page editing
-        - Fixed test suite again
-        - Restore search
-        - Bad scope for attachment dir
+  - Create t/var/upload if needed
+  - Prefs form redone in FormFu
+  - Use Mech to test page editing
+  - Fixed test suite again
+  - Restore search
+  - Bad scope for attachment dir
+
 
 0.999003  2007-09-13 14:32:00
-        - Fixed Comment formatter
-        - Fixed Gallery tags (Invalid constraint)
-        - Actually remove all the c.prototype stuff (Unbreaking all the JS)
-        - Fix preferences link
-        - Fix links in navbar and header
-        - Made the insert attachment system template based and easily extensible
-        - Set up default page for admin
+  - Fixed Comment formatter
+  - Fixed Gallery tags (Invalid constraint)
+  - Actually remove all the c.prototype stuff (Unbreaking all the JS)
+  - Fix preferences link
+  - Fix links in navbar and header
+  - Made the insert attachment system template based and easily extensible
+  - Set up default page for admin
+
 
 0.999002  2007-09-12 23:08:00
-        - Fixed relative linking ([[../Sibling]])/
-        - Cleaned up attachments
-        - Wrote database tests for attachments
-        - Add Formatter Base Class
-        - Add support for different Primary Formatters
-        - Update default to be Path, rather than Private
-        - Fix tests is t/c/
-        - More documentation
-        - Updated Installation instructions. lib/MojoMojo/Installation.pod is
-          now the master.
+  - Fixed relative linking ([[../Sibling]])/
+  - Cleaned up attachments
+  - Wrote database tests for attachments
+  - Add Formatter Base Class
+  - Add support for different Primary Formatters
+  - Update default to be Path, rather than Private
+  - Fix tests is t/c/
+  - More documentation
+  - Updated Installation instructions. lib/MojoMojo/Installation.pod is
+    now the master.
+
 
 0.999001  2007-08-29 16:29:00
-       - Initial Release. There are bugs, but the basic functionality works,
-         and the test suite passes all tests here. Please contribute
-         tests for bugs you want fixed.
+  - Initial Release. There are bugs, but the basic functionality works,
+    and the test suite passes all tests here. Please contribute
+    tests for bugs you want fixed.
 
-         Once we fix it all, we'll consider it 1.0
+    Once we fix it all, we'll consider it 1.0
