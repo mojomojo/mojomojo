@@ -59,8 +59,14 @@ leakguard {
 
 #exclude => 'MojoMojo::I18N*';
 # TODO: remove sync requirements of expect and tolerance (build expect from tolerance)
-expect => { 'MojoMojo::I18N::i_default' => [ 0, 1 ] };
-my %tolerance = ( 'MojoMojo::I18N::i_default' => 1 );
+expect => {
+    'MojoMojo::I18N::i_default' => [ 0, 1 ],
+    'MojoMojo::I18N::en'        => [ 0, 1 ],
+};
+my %tolerance = (
+    'MojoMojo::I18N::i_default' => 1,
+    'MojoMojo::I18N::en'        => 1,
+);
 
 =head2 on_leak
 
@@ -86,8 +92,10 @@ the leak report by parsing the class, object count hash.
 my %nonzero_report;
 my %report_hash = %{ leakstate() };
 foreach my $class ( keys %report_hash ) {
+
     # Do we have non-zero objects reported for a class
     if ( my $object_count = $report_hash{$class} > 0 ) {
+
         # Do we care if there are non-zero objects of smaller values.
         if ( $object_count > $tolerance{$class} ) {
             $nonzero_report{$class} = $report_hash{$class};
