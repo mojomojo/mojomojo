@@ -84,7 +84,7 @@ my $NO_DB_MESSAGE =<<"EOF";
 EOF
 eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
 if ($@ ) {
-    print $NO_DB_MESSAGE; 
+    warn $NO_DB_MESSAGE;
 }
 
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
