@@ -78,8 +78,9 @@ HTML
     is( $$got, $expected, $test );
 }
 
+#-------------------------------------------------------------------------------
 {
-    $test = 'Single <div>';
+    $test = 'Single <div> from SyntaxHighlight->format_content';
 
     $content = <<'HTML';
 <pre lang="HTML">
@@ -108,7 +109,7 @@ Ha en god dag
 HTML
 
     # Now run through all formatters.
-    $test .= ' - run through all formatters';
+    $test = 'The same single <div> from the JSRPC renderer';
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $got, $expected, $test );
 }
@@ -229,3 +230,4 @@ PERL
 PERL
     is( $content, $wanted, $test );
 }
+
