@@ -49,7 +49,7 @@
 0.999031 2009-07-26 15:00:00
         - Sane default for fastmmap sharefile.
         - Change to use the current cache as Session store. 
-        - Fix coments (NacMac)
+        - Fix comments (NacMac)
         - Add license for debian packaging
         - Fix error page url / pre_hacked_url
         - POD Fixes
