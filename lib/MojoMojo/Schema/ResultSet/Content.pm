@@ -31,7 +31,7 @@ sub format_content {
 # create_proto: create a "proto content version" that may
 # be the basis for a new revision
 
-=item create_proto <page>
+=head2 create_proto <page>
 
 Create a content prototype object, as the basis for a new revision.
 
