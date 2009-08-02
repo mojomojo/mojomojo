@@ -73,14 +73,20 @@ MojoMojo->config(
 
 MojoMojo->setup();
 
-eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
-if ($@ ) {
-    print "
+# Check for deployed database
+my $NO_DB_MESSAGE =<<"EOF";
+
     ***********************************************
     ERROR. Looks like you need to deploy a database.
-    Run script/mojomojo_spawn_db.pl\n\n";
-    exit();
+    Run script/mojomojo_spawn_db.pl
+    *********************************************** 
+    
+EOF
+eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->count };
+if ($@ ) {
+    print $NO_DB_MESSAGE; 
 }
+
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
@@ -246,15 +252,7 @@ sub pref_cached {
     }
     # Check that we have a database, i.e. script/mojomojo_spawn_db.pl was run.
     my $row;
-    eval { $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } ); };
-    if ( $@ ) {
-        my $no_db_message = "ERROR: You don't seem to have a database initialized.
-Initialize one with script/mojomojo_spawn_db.pl\n";
-        $c->response->body($no_db_message);
-        warn $no_db_message;
-        $c->detach();
-    }
-
+    $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } );
 
     # Update database
     $row->update( { prefvalue => $value } ) if defined $value;
@@ -312,6 +310,20 @@ sub fixw {
     $w =~ s/\s/\_/g;
     $w =~ s/[^\w\/\.]//g;
     return $w;
+}
+
+sub prepare_action {
+    my $c = shift;
+
+    eval { $c->model('DBIC::Person')->count; };
+    if ($@) {
+        $c->res->status( 404 );
+        $c->response->body($NO_DB_MESSAGE);
+        return;
+    }
+    else {
+        $c->next::method(@_);
+    }
 }
 
 =head2 prepare_path
