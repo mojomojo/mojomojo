@@ -10,9 +10,9 @@ MojoMojo::Controller::Root
 
 =head1 ACTIONS
 
-=over 4
+=head2 begin (builtin)
 
-=item begin (builtin)
+TODO
 
 =cut
 
@@ -33,7 +33,7 @@ sub begin : Private {
     }
 }
 
-=item default (global)
+=head2 default (global)
 
 Default action - display the error page (message.tt), for example when a
 nonexistent action was requested (like C</parent_page/child_page.fireworks>).
@@ -50,7 +50,7 @@ sub default : Path {
     $c->stash->{template} = 'message.tt';
 }
 
-=item set_lang
+=head2 set_lang
 
 (Re)set language of current session.
 
@@ -62,9 +62,9 @@ sub set_lang :Global {
     $c->res->redirect($c->req->params->{redir});
 }
 
-=item render
+=head2 render
 
-Finally use ActionClass RenderView to render the content.
+Finally, use ActionClass RenderView to render the content.
 
 =cut
 
@@ -74,7 +74,7 @@ sub render : ActionClass('RenderView') {
     $c->stash->{path} ||= '/';
 }
 
-=item end (builtin)
+=head2 end (builtin)
 
 At the end of any request, forward to view unless there is a template
 or response, then render the template. If param 'die' is passed,
@@ -99,7 +99,7 @@ sub end : Private {
     $c->forward('render');
 }
 
-=item auto
+=head2 auto
 
 Runs for all requests, checks if user is in need of validation, and
 intercepts the request if so.
@@ -138,12 +138,14 @@ sub exit : Local {
 }
 
 
-=back
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

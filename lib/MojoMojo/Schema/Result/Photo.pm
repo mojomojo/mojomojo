@@ -13,7 +13,7 @@ my $exif = Image::ExifTool->new();
 __PACKAGE__->load_components(
     qw/DateTime::Epoch TimeStamp Ordered Core/);
 
-__PACKAGE__->position_column('position');
+__PACKAGE__->position_column("position");
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
     "id",
@@ -94,7 +94,7 @@ sub extract_exif {
 
 =head2 exif2datetime datetime
 
-Creates a L<DateTime> object from a EXIF timestamp.
+Creates a L<DateTime> object from an EXIF timestamp.
 
 =cut
 
@@ -120,7 +120,7 @@ sub exif2datetime {
 
 =head2 prev_by_tag <tag>
 
-Return previous image when browsing by a given tag.
+Return previous image when browsing by the given tag.
 
 =cut
 
@@ -134,7 +134,7 @@ sub prev_by_tag {
 
 =head2 next_by_tag <tag>
 
-Return next image object after this when browsing by the given tag.
+Return the next image when browsing by the given tag.
 
 =cut
 
@@ -148,7 +148,7 @@ sub next_by_tag {
 
 =head2 others_tags <user>
 
-Tags other users have given to this Photo.
+Tags other users have given to this photo.
 
 =cut
 
@@ -250,7 +250,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

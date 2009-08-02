@@ -16,9 +16,7 @@ allowed, using L<HTML::Defang>; It also tries to remove XSS attempts.
 
 =head1 METHODS
 
-=over 4
-
-=item format_content_order
+=head2 format_content_order
 
 Format order can be 1-99. The Defang formatter runs on 16, just after the main
 formatter, in order to catch direct user input. Defang trusts the main formatter
@@ -28,7 +26,7 @@ and all subsequently ran plugins to not output unsafe HTML.
 
 sub format_content_order { 16 }
 
-=item defang_tags_callback
+=head2 defang_tags_callback
 
 Callback for custom handling specific HTML tags
 
@@ -52,7 +50,7 @@ sub defang_tags_callback {
     #return 2 if $lc_tag eq 'img';
 }
 
-=item defang_url_callback
+=head2 defang_url_callback
 
 Callback for custom handling URLs in HTML attributes as well as
 styletag/attribute declarations
@@ -71,9 +69,9 @@ sub defang_url_callback {
     return 1 if $$attr_val_r =~ /youporn.com/i;
 }
 
-=item defang_css_callback
+=head2 defang_css_callback
 
-Callback for custom handling style tags/attributes
+Callback for custom handling style tags/attributes.
 
 =cut
 
@@ -98,9 +96,9 @@ sub defang_css_callback {
     }
 }
 
-=item
+=head2
 
-Callback for custom handling HTML tag attributes
+Callback for custom handling HTML tag attributes.
 
 =cut
 
@@ -116,7 +114,7 @@ sub defang_attribs_callback {
         my @allowed_src_regex;
         # Tests may not have a $c
         if ( defined $c ) {
-          
+
             if ( exists $c->stash->{allowed_src_regexes} ) {
                 @allowed_src_regex = @{ $c->stash->{allowed_src_regexes} };
             }
@@ -134,7 +132,7 @@ sub defang_attribs_callback {
             if ( $$attr_val_r =~ $allowed_src_regex ) {
                 return 0;
             }
-            
+
         }
 
         # When $c and src uri authority are defined we want to make sure
@@ -148,8 +146,8 @@ sub defang_attribs_callback {
                 return 1;
             }
         }
-        # We have an authority but no context.  
-        # Probably means we're testing with just the Defang formatter 
+        # We have an authority but no context.
+        # Probably means we're testing with just the Defang formatter
         # instead of the Full formatter chain.
         # We will defang any src's left with an authority (defang_src)
         # since the approved ones were already allowed in above.
@@ -164,9 +162,9 @@ sub defang_attribs_callback {
     return 0;
 }
 
-=item format_content
+=head2 format_content
 
-calls the formatter. Takes a ref to the content as well as the
+Calls the formatter. Takes a ref to the content as well as the
 context object.
 
 =cut
@@ -189,11 +187,9 @@ sub format_content {
     return;
 }
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<HTML::Defang>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<HTML::Defang>
 
 =head1 AUTHORS
 
@@ -201,7 +197,8 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

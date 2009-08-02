@@ -23,9 +23,7 @@ This formatter will format the file argument as XHTML. Usage:
 
 =head1 METHODS
 
-=over 4
-
-=item format_content_order
+=head2 format_content_order
 
 Format order can be 1-99. The File formatter runs on 92.
 
@@ -33,7 +31,7 @@ Format order can be 1-99. The File formatter runs on 92.
 
 sub format_content_order { 92 }
 
-=item format_content
+=head2 format_content
 
 Calls the formatter. Takes a ref to the content as well as the
 context object.
@@ -73,7 +71,7 @@ sub format_content {
 }
 
 
-=item plugin
+=head2 plugin
 
 Return the plugin to use with file attachment
 
@@ -97,7 +95,7 @@ sub plugin {
 }
 
 
-=item format
+=head2 format
 
 Return the content formatted
 
@@ -120,11 +118,9 @@ sub format {
   }
 }
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>
+L<MojoMojo>, L<Module::Pluggable::Ordered>
 
 =head1 AUTHORS
 
@@ -132,7 +128,8 @@ Daniel Brosseau <dab@catapulse.org>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

@@ -27,9 +27,7 @@ directory will contain a timestamp showing when the archive was made.
 
 =head1 ACTIONS
 
-=over 4
-
-=item export_raw
+=head2 export_raw
 
 This action will give you a zip file containing the raw wiki source
 for all the nodes of the wiki.
@@ -65,7 +63,7 @@ sub export_raw : Global {
     $c->res->headers->header( "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
 
-=item export_html (/.export_html)
+=head2 export_html (/.export_html)
 
 This action will give you a zip file containing HTML formatted
 versions of all the nodes of the wiki.
@@ -105,8 +103,6 @@ sub export_html : Global {
     $c->res->headers->header( "Content-Disposition" => "attachment; filename=$prefix.zip" );
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg C<marcus@thefeed.no>
@@ -114,7 +110,7 @@ Marcus Ramberg C<marcus@thefeed.no>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

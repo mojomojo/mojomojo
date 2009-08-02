@@ -23,12 +23,16 @@ __PACKAGE__->belongs_to( "to_page",   "MojoMojo::Schema::Result::Page", { id => 
 
 MojoMojo::Schema::Result::Link
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
-1;
 
+1;

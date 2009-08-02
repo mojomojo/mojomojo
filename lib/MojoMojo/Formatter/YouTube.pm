@@ -15,15 +15,15 @@ Embed Youtube video player for given video by writing {{youtube <url>}}.
 
 =over 4
 
-=item format_content_order
+=head2 format_content_order
 
-Format order can be 1-99. The YouTube formatter runs on 6
+Format order can be 1-99. The YouTube formatter runs on 6.
 
 =cut
 
 sub format_content_order { 6 }
 
-=item format_content
+=head2 format_content
 
 calls the formatter. Takes a ref to the content as well as the
 context object.
@@ -35,12 +35,12 @@ sub format_content {
 
     my @lines = split /\n/, $$content;
     $$content = "";
-    my $re=$class->gen_re(qr/youtube\s+(.*?)/);
-    my $lang=$c->session->{lang} || $c->pref('default_lang') || 'en';
+    my $re = $class->gen_re(qr/youtube\s+(.*?)/);
+    my $lang = $c->session->{lang} || $c->pref('default_lang') || 'en';
 
     foreach my $line (@lines) {
         if ( $line =~ m/$re/ ) {
-            $line=$class->process($c,$line,$re,$lang);
+            $line = $class->process($c, $line, $re, $lang);
         }
         $$content .= $line . "\n";
     }
@@ -51,7 +51,7 @@ sub format_content {
 sub process {
     my ( $class, $c, $line, $re, $lang) = @_;
 
-    my $youtube=$c->loc('YouTube Video');
+    my $youtube = $c->loc('YouTube Video');
     my $video_id;
     $line =~ m/$re/;
     $url = URI->new($1);
@@ -76,19 +76,18 @@ sub process {
     return $line;
 }
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<URI::Fetch>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<URI::Fetch>
 
 =head1 AUTHORS
 
 Robert 'LiNiO' Litwiniec <linio@wonder.pl>
 
-=head1 License
+=head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

@@ -19,11 +19,16 @@ __PACKAGE__->utf8_columns(qw/prefvalue/);
 
 MojoMojo::Schema::Result::Preference
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
+
 
 1;

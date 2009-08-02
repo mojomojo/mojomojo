@@ -17,12 +17,9 @@ See L<MojoMojo>
 
 Controller for page photo galleries.
 
-
 =head1 METHODS
 
-=over 4
-
-=item default ( .gallery )
+=head2 default ( .gallery )
 
 Show a gallery page for the current node.
 
@@ -42,7 +39,7 @@ sub gallery : Path {
     );
 }
 
-=item by_tag ( .gallery/by_tag )
+=head2 by_tag ( .gallery/by_tag )
 
 show a gallery by a given tag. Will also show photos in the
 descendants of the page with the given tag.
@@ -69,7 +66,7 @@ sub by_tag : Local {
     );
 }
 
-=item p ( .p)
+=head2 p ( .p )
 
 =cut
 
@@ -83,7 +80,7 @@ sub photo : Global {
     $c->stash->{prev}     = $photo->previous_sibling;
 }
 
-=item (/p_by_tag/\d+)
+=head2 ( /p_by_tag/\d+ )
 
 show a picture in tag gallery.
 
@@ -100,7 +97,7 @@ sub photo_by_tag : Global {
     $c->stash->{prev}     = $photo->prev_by_tag($tag);
 }
 
-=item submittag (/gallery/submittag)
+=head2 submittag ( /gallery/submittag )
 
 Add a tag through form submit
 
@@ -111,7 +108,7 @@ sub submittag : Local {
     $c->forward( 'tag', [ $photo, $c->req->params->{tag} ] );
 }
 
-=item tag (/.jsrpc/tag)
+=head2 tag ( /.jsrpc/tag )
 
 add a tag to a page. return list of yours and popular tags.
 
@@ -143,7 +140,7 @@ sub tag : Local {
     $c->forward( 'inline_tags', [$tagname] );
 }
 
-=item untag (.gallery/untag)
+=head2 untag ( .gallery/untag )
 
 Remove a tag from a page. Return a list of yours and popular tags.
 
@@ -161,7 +158,7 @@ sub untag : Local {
     $c->forward( 'inline_tags', [$tagname] );
 }
 
-=item inline_tags (.gallery/tags);
+=head2 inline_tags ( .gallery/tags )
 
 Make a list of yours and popular tags, or just popular ones if no
 user is logged in.
@@ -187,7 +184,7 @@ sub inline_tags : Local {
     }
 }
 
-=item description ( .gallery/description)
+=head2 description ( .gallery/description )
 
 AJAX method for updating picture descriptions inline.
 
@@ -203,7 +200,7 @@ sub description : Local {
     $c->res->body( $img->description );
 }
 
-=item title ( .gallery/title )
+=head2 title ( .gallery/title )
 
 AJAX method for updating picture titles inline.
 
@@ -238,8 +235,6 @@ sub tags : Local {
     $c->stash->{template} = 'gallery/cloud.tt';
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
@@ -247,7 +242,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

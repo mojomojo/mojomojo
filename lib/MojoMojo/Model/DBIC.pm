@@ -7,22 +7,23 @@ __PACKAGE__->config( schema_class => 'MojoMojo::Schema' );
 
 =head1 NAME
 
-mojomojo::Model::DBIC - Catalyst DBIC Schema Model
+MojoMojo::Model::DBIC - L<DBIC::Schema> Catalyst model
+
 =head1 SYNOPSIS
 
-See L<mojomojo>
+See L<MojoMojo>
 
 =head1 DESCRIPTION
 
-L<Catalyst::Model::DBIC::Schema> Model using schema L<MojoMojo::Schema>
+L<Catalyst::Model::DBIC::Schema> Model using schema in L<MojoMojo::Schema>.
 
 =head1 AUTHOR
 
-marcus,,,
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software, you can redistribute it and/or modify
+This library is free software. You can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut

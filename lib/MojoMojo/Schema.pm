@@ -1,11 +1,7 @@
 package MojoMojo::Schema;
-
-use strict;
-use warnings;
-
 use Moose;
 
-our $VERSION='1';
+our $VERSION = '1';
 
 has 'attachment_dir' => ( is => 'rw', isa => 'Str' );
 
@@ -19,9 +15,7 @@ MojoMojo::Schema
 
 =head1 METHODS
 
-=over 4
-
-=item create_initial_data
+=head2 create_initial_data
 
 Creates initial set of data in the database which is necessary to run MojoMojo.
 
@@ -44,9 +38,9 @@ sub create_initial_data {
     my $lang = $config->{'default_lang'} || 'en';
     $lang =~ s/\..*$//;
     loc_lang($lang);
-    
+
     my $default_user = $ENV{USER} || 'admin';
-    
+
     $custom_values ||= {
         wiki_name       => 'MojoMojo',
         admin_username  => 'admin',
@@ -177,12 +171,14 @@ sub create_initial_data {
     print "Success!\n";
 }
 
-=back
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

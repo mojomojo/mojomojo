@@ -65,11 +65,11 @@ MojoMojo::Schema::Result::Comment
 
 =head1 METHODS
 
-=over 4
+=head2 formatted
 
-=item formatted
+Returns a Textile formatted version of the given comment.
 
-Returns a textile formatted version of the given comment.
+TODO: the default formatter may not be Textile.
 
 =cut
 
@@ -77,5 +77,16 @@ sub formatted {
     my $self = shift;
     return $textile->process( $self->body );
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;

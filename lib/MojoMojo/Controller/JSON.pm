@@ -9,22 +9,18 @@ MojoMojo::Controller::JSON - Various functions that return JSON data.
 
 =head1 SYNOPSIS
 
-This is the Mojo for various functions that return json data.
+This is the Mojo for various functions that return JSON data.
 
 =head1 DESCRIPTION
 
-This controller dispatches various json data to ajax methods in mojomojo
-These methods will be called indirectly through javascript functions.
+This controller dispatches various JSON data to AJAX methods in MojoMojo.
+These methods will be called indirectly through JavaScript functions.
 
 =head1 ACTIONS
 
-=over 4
-
-=item tagsearch (json/tagsearch)
+=head2 tagsearch (json/tagsearch)
 
 Backend which handles jQuery autocomplete requests for tag.
-
-=back
 
 =cut
 
@@ -50,33 +46,26 @@ sub tagsearch : Local {
    }
 }
 
-=over 4
+=head2 container_set_default_width (json/container_set_default_width)
 
-=item container_set_default_width (json/container_set_default_width)
-
-Store width in session variable I<container_default_width>
-
-=back
+Store width in session variable I<container_default_width>.
 
 =cut
 
 sub container_set_default_width : Local {
    my ($self, $c, $width) = @_;
-   $c->session->{container_default_width}=$width;
-   $c->stash->{json}->{width}=$width;
+   $c->session->{container_default_width} = $width;
+   $c->stash->{json}->{width} = $width;
 }
 
 
-=over 4
+=head2 container_maximize_width (json/container_maximize_width)
 
-=item container_maximize_width (json/container_maximize_width)
-
-Set or unset session variable I<maximize_width>, which is used to maximize
-width 
-
-=back
+Set or unset session variable I<maximize_width>, which is used to toggle maximum
+width when displaying the page.
 
 =cut
+
 sub container_maximize_width : Local {
    my ($self, $c, $width) = @_;
    if ($width){
@@ -111,8 +100,7 @@ Robert Litwiniec <linio at wonder.pl>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify it under
-the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
-

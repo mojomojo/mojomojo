@@ -30,17 +30,17 @@ DocBook document.
 
 =over 4
 
-=item format_content_order
+=head2 format_content_order
 
-Format order can be 1-99. The DocBook formatter runs on 10
+Format order can be 1-99. The DocBook formatter runs on 10.
 
 =cut
 
 sub format_content_order { 10 }
 
-=item format_content
+=head2 format_content
 
-calls the formatter. Takes a ref to the content as well as the
+Calls the formatter. Takes a ref to the content as well as the
 context object.
 
 =cut
@@ -72,9 +72,9 @@ sub format_content {
 }
 
 
-=item to_xhtml <dbk>
+=head2 to_xhtml <dbk>
 
-takes DocBook documentation and renders it as XHTML.
+Takes DocBook documentation and renders it as XHTML.
 
 =cut
 
@@ -163,11 +163,9 @@ sub to_xhtml {
 }
 
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>
+L<MojoMojo>, L<Module::Pluggable::Ordered>
 
 =head1 AUTHORS
 
@@ -175,7 +173,8 @@ Daniel Brosseau <dab@catapulse.org>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

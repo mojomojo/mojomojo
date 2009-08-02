@@ -3,7 +3,7 @@ package HTML::Declaw;
 =head1 NAME
 
 HTML::Declaw - Cleans HTML as well as CSS of scripting and other executable contents, and neutralises XSS attacks.
-Derived from HTML::Defang version 1.01. 
+Derived from HTML::Defang version 1.01.
 
 =head1 SYNOPSIS
 
@@ -22,7 +22,7 @@ Derived from HTML::Defang version 1.01.
 
   my $SanitizedHtml = $Defang->defang($InputHtml);
 
-  # Callback for custom handling specific HTML tags  
+  # Callback for custom handling specific HTML tags
   sub DefangTagsCallback {
     my ($Self, $Defang, $OpenAngle, $lcTag, $IsEndTag, $AttributeHash, $CloseAngle, $HtmlR, $OutR) = @_;
     return 1 if $lcTag eq 'br';    # Explicitly defang this tag, eventhough safe
@@ -903,7 +903,7 @@ Reference to the URL value that is currently being parsed.
 
 =item I<$AttributeHash>
 
-A reference to a hash containing the attributes of the current tag and their values. Each value is a scalar reference to the value, 
+A reference to a hash containing the attributes of the current tag and their values. Each value is a scalar reference to the value,
 rather than just a scalar value. You can add attributes (remember to make it a scalar ref, eg $AttributeHash{"newattr"} = \"newval"), delete attributes, or modify attribute values in this hash, and any changes you make will be incorporated into the output HTML stream. Will be set to I<undef> if the callback is made due to URL in a <style> tag or attribute.
 
 =back
@@ -998,7 +998,7 @@ True if the currently processed item is a style attribute. False if the currentl
 
 Cleans up $InputHtml of any executable code including scripting, embedded objects, applets, etc., and defang any XSS attacks.
 
-=over 4 
+=over 4
 
 =item B<Method parameters>
 
@@ -1374,7 +1374,7 @@ sub defang_and_add_to_output {
 
 =item B<INTERNAL METHODS>
 
-Generally these methods never need to be called by users of the class, because they'll be called internally as the appropriate tags are 
+Generally these methods never need to be called by users of the class, because they'll be called internally as the appropriate tags are
 encountered, but they may be useful for some users in some cases.
 
 =over 4
@@ -2237,7 +2237,7 @@ s/(?:($AttrKeyStartLineRE)(\s*))?(?:(=\s*)($AttrValRE)(\s*))?//so
 
 =head1 SEE ALSO
 
-I<HTML::Defang>,L<http://mailtools.anomy.net/>, L<http://htmlcleaner.sourceforge.net/>, I<HTML::StripScripts>, I<HTML::Detoxifier>, I<HTML::Sanitizer>, I<HTML::Scrubber>
+I<HTML::Defang>, L<http://mailtools.anomy.net/>, L<http://htmlcleaner.sourceforge.net/>, I<HTML::StripScripts>, I<HTML::Detoxifier>, I<HTML::Sanitizer>, I<HTML::Scrubber>
 
 =cut
 
@@ -2259,4 +2259,3 @@ it under the same terms as Perl itself.
 =cut
 
 1;
-

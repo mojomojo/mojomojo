@@ -4,7 +4,7 @@ use parent qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::DocBook;
 
-sub module_loaded { 
+sub module_loaded {
     return MojoMojo::Formatter::DocBook->module_loaded();
 }
 
@@ -19,13 +19,13 @@ MojoMojo::Formatter::File::DocBook - format Docbook in xhtml
 
 =over 4
 
-=item can_format
+=head2 can_format
 
 Can format DocBook (xml)
 
 =cut
 
-sub can_format { 
+sub can_format {
   my $self = shift;
   my $type = shift;
 
@@ -34,9 +34,9 @@ sub can_format {
 }
 
 
-=item to_xhtml <dbk>
+=head2 to_xhtml <dbk>
 
-takes DocBook documentation and renders it as XHTML.
+Takes DocBook documentation and renders it as XHTML.
 
 =cut
 
@@ -48,13 +48,9 @@ sub to_xhtml {
 }
 
 
-
-
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>
+L<MojoMojo>, L<Module::Pluggable::Ordered>
 
 =head1 AUTHORS
 

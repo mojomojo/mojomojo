@@ -25,7 +25,7 @@ This formatter performs syntax highlighting on code blocks.
 
 =over 4
 
-=item format_content_order
+=head2 format_content_order
 
 The syntax highlight formatter is based on E<lt>preE<gt> tags and
 therefore it's elementary to get those unchanged. So we need to run
@@ -36,7 +36,7 @@ those tags.
 
 sub format_content_order { 99 }
 
-=item format_content
+=head2 format_content
 
 This formatter uses L<Syntax::Highlight::Engine::Kate> to highlight code
 syntax inside of <pre lang="my_lang"> </pre>tags. To let the formatter know which language
@@ -144,8 +144,6 @@ sub _kate {
     );
 }
 
-=back
-
 =head1 SEE ALSO
 
 L<MojoMojo>, L<Module::Pluggable::Ordered> and L<Syntax::Highlight::Engine::Kate>.
@@ -156,7 +154,8 @@ Johannes Plunien E<lt>plu@cpan.orgE<gt>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

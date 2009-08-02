@@ -16,9 +16,7 @@ Controller for Page comments.
 
 =head1 METHODS
 
-=over 4
-
-=item comment
+=head2 comment
 
 display comments for embedding in a page
 
@@ -44,9 +42,9 @@ sub comment : Global FormConfig {
         ->search( { page => $c->stash->{page}->id }, { order_by => 'posted' } );
 }
 
-=item login (.comment/login)
+=head2 login ( .comment/login )
 
-inline login for comments.
+Inline login for comments.
 
 =cut
 
@@ -59,7 +57,7 @@ sub login : Local {
     }
 }
 
-=item remove (.comment/remove)
+=head2 remove ( .comment/remove )
 
 Remove comments, provided user can edit the page the comment is on.
 
@@ -78,16 +76,14 @@ sub remove : Local {
 
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

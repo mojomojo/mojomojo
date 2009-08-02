@@ -125,9 +125,7 @@ MojoMojo::Schema::Result::Person
 
 =head1 METHODS
 
-=over 4
-
-=item is_admin
+=head2 is_admin
 
 Checks if user belongs to list of admins.
 
@@ -141,9 +139,9 @@ sub is_admin {
     return 0;
 }
 
-=item link
+=head2 link
 
-Returns relative link to users home node.
+Returns a relative link to the user's home node.
 
 =cut
 
@@ -152,7 +150,7 @@ sub link {
     return lc "/" . ( $self->login || MojoMojo->pref('anonymous_user') );
 }
 
-=item can_edit <path>
+=head2 can_edit <path>
 
 Checks if a user has rights to edit a given path.
 
@@ -174,6 +172,12 @@ sub can_edit {
     return 0;
 }
 
+=head2 pages
+
+Return the pages created by the user.
+
+=cut
+
 sub pages {
     my ($self) = @_;
     my @pages =
@@ -190,10 +194,9 @@ sub pages {
       ->related_source('page')->resultset->set_paths(@pages);
 }
 
-=item pass_matches <pass1> <pass2>
+=head2 pass_matches <pass1> <pass2>
 
-Returns true if pass1 eq pass2. For
-validation
+Returns true if pass1 eq pass2.
 
 =cut
 
@@ -202,7 +205,7 @@ sub pass_matches {
     return 0;
 }
 
-=item  valid_pass <password>
+=head2 valid_pass <password>
 
 Check password against database.
 
@@ -224,7 +227,7 @@ sub interests_formatted { $textile->process( shift->interests ); }
 sub music_formatted     { $textile->process( shift->music ); }
 sub movies_formatted    { $textile->process( shift->movies ); }
 
-=item age
+=head2 age
 
 Returns age of the user in years.
 
@@ -238,7 +241,9 @@ sub age {
     }
 }
 
-=back
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 AUTHOR
 
@@ -247,7 +252,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

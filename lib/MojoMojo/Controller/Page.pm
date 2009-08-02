@@ -26,7 +26,7 @@ can be called with urls like "/page1/page2.action".
 
 =head1 ACTIONS
 
-=head2  view (.view)
+=head2 view (.view)
 
 This is probably the most common action in MojoMojo. A lot of the
 other actions redispatch to this one. It will prepare the stash

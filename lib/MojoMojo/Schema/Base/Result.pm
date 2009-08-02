@@ -10,12 +10,12 @@ MojoMojo::Schema::Base::Result
 
 =head1 DESCRIPTION
 
-Base class for all result classes below MojoMojo::Schema::Result::* namespace.
+Base class for all result classes below the MojoMojo::Schema::Result::* namespace.
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

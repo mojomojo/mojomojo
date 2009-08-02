@@ -41,7 +41,7 @@ In anticipation of future plugin syntax, you can optionally add a trailing slash
 
 =over 4
 
-=item format_content_order
+=head2 format_content_order
 
 The CPANHyperlink formatter has no special requirements in terms of the order
 it gets run in, so it has a priority of 10.
@@ -50,7 +50,7 @@ it gets run in, so it has a priority of 10.
 
 sub format_content_order { 10 }
 
-=item format_content
+=head2 format_content
 
 Calls the formatter. Takes a ref to the content as well as the context object.
 
@@ -77,8 +77,6 @@ sub format_content {
 }
 
 
-=back
-
 =head1 SEE ALSO
 
 L<MojoMojo> and L<Module::Pluggable::Ordered>.
@@ -89,7 +87,8 @@ Dan Dascalescu, L<http://dandascalescu.com>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

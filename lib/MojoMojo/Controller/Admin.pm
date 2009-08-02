@@ -8,18 +8,16 @@ use parent 'Catalyst::Controller::HTML::FormFu';
 MojoMojo::Controller::Admin - Site Administration
 
 =head1 DESCRIPTION
- 
-Action to handle management of MojoMojo. Click the admin link at the 
-bottom of the page while logged in as admin to access these functions. 
+
+Action to handle management of MojoMojo. Click the admin link at the
+bottom of the page while logged in as admin to access these functions.
 
 
 =head1 METHODS
 
-=over 4
+=head2 auto
 
-=item auto
-
-Access control. Only administrators should access functions in this controller
+Access control. Only administrators should access functions in this controller.
 
 =cut
 
@@ -34,7 +32,7 @@ sub auto : Private {
     return 1;
 }
 
-=item settings ( /.admin )
+=head2 settings ( /.admin )
 
 Show settings screen.
 
@@ -45,13 +43,13 @@ sub settings : Path FormConfig Args(0) {
 
     my $form = $c->stash->{form};
     my $user = $c->stash->{user}->login;
-   
+
     my $admins = $c->pref('admins');
     $admins =~ s/\b$user\b//g;
     my $select_theme = $form->get_all_element({name => 'theme'});
     my @themes;
     foreach my $theme (MojoMojo::Model::Themes->list){
-        push @themes,[$theme,$theme]; 
+        push @themes,[$theme,$theme];
     };
     $select_theme->options(\@themes);
     unless( $form->submitted ) {
@@ -108,7 +106,7 @@ sub settings : Path FormConfig Args(0) {
     $c->stash->{message} = $c->loc("Updated successfully.");
 }
 
-=item user ( .admin/user )
+=head2 user ( .admin/user )
 
 User listing with pager, for enabling/disabling users.
 
@@ -128,7 +126,7 @@ sub user : Local {
     $c->stash->{pager} = $iterator->pager;
 }
 
-=item role ( .admin/role )
+=head2 role ( .admin/role )
 
 Role listing, creation and assignment.
 
@@ -139,7 +137,7 @@ sub role : Local Args(0) {
     $c->stash->{roles} = [ $c->model('DBIC::Role')->search(undef,{order_by=>['id asc']}) ];
 }
 
-=item create_role ( .admin/create_role )
+=head2 create_role ( .admin/create_role )
 
 Role creation page.
 
@@ -150,7 +148,7 @@ sub create_role : Local Args(0) FormConfig('admin/role_form.yml')  {
     $c->forward('handle_role_form');
 }
 
-=item edit_role ( .admin/role/ )
+=head2 edit_role ( .admin/role/ )
 
 Role edit page.
 
@@ -161,7 +159,7 @@ sub edit_role : Path('role') Args(1) FormConfig('admin/role_form.yml') {
     my $form = $c->stash->{form};
 
     my $role = $c->model('DBIC::Role')->find( { name => $role_name } );
-    
+
     if ($role) {
         # load stash parameters if the page is only being displayed
         unless ( $c->forward('handle_role_form', [$role]) ) {
@@ -174,7 +172,7 @@ sub edit_role : Path('role') Args(1) FormConfig('admin/role_form.yml') {
     }
 }
 
-=item handle_role_form 
+=head2 handle_role_form
 
 Handle role form processing.
 Returns true when a submitted form was actually processed.
@@ -195,36 +193,36 @@ sub handle_role_form : Private {
 
         # make sure updating works
         $fields->{id} = $role->id if $role;
-        
+
         $role = $c->model('DBIC::Role')->update_or_create( $fields );
 
         if ($role) {
             # in order to safely update the role members, they're removed and
-            # then reinserted - this is a bit inefficient but updating role 
+            # then reinserted - this is a bit inefficient but updating role
             # members shouldn't be a frequent operation
             $role->role_members->delete;
-            
+
             if ($params->{role_members}) {
-                my @role_members = 
-                    ref $params->{role_members} eq 'ARRAY' ? 
+                my @role_members =
+                    ref $params->{role_members} eq 'ARRAY' ?
                         @{$params->{role_members}} : $params->{role_members};
 
                 for my $person_id (@role_members) {
-                    $role->add_to_role_members( { 
-                        person => $person_id, 
-                        admin  => 0 
+                    $role->add_to_role_members( {
+                        person => $person_id,
+                        admin  => 0
                     });
                 }
             }
 
             $c->res->redirect( $c->uri_for('admin/role') );
         }
-        
+
         return 1;
     }
 }
 
-=item update_user ( *private*)
+=head2 update_user ( *private*)
 
 Update user based on user listing.
 
@@ -242,8 +240,6 @@ sub update_user : Local {
     $c->stash->{user} = $user;
 }
 
-=back
-
 
 =head1 AUTHOR
 
@@ -251,8 +247,8 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

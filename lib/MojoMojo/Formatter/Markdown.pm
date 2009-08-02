@@ -33,7 +33,7 @@ syntax for writing human-friendly formatted text.
 
 =over 4
 
-=item main_format_content
+=head2 main_format_content
 
 Calls the formatter. Takes a ref to the content as well as the
 context object. Note that this is different from the format_content method
@@ -53,8 +53,6 @@ sub main_format_content {
     $$content = $markdown->markdown($$content);
 }
 
-=back
-
 =head1 SEE ALSO
 
 L<MojoMojo>, L<Module::Pluggable::Ordered>, L<Text::MultiMarkdown>
@@ -63,9 +61,10 @@ L<MojoMojo>, L<Module::Pluggable::Ordered>, L<Text::MultiMarkdown>
 
 Marcus Ramberg <mramberg@cpan.org>
 
-=head1 License
+=head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

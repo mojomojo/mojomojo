@@ -21,9 +21,7 @@ This controller handles tag-related actions
 
 =head1 ACTIONS
 
-=over 4
-
-=item list
+=hea2 list
 
 This is a private action, and is dispatched from /.list when it's
 supplied with a tag argument. it will list all pages belonging
@@ -42,10 +40,10 @@ sub list : Private {
     $c->stash->{related}   = [ $c->model("DBIC::Tag")->related_to($tag) ];
 }
 
-=item recent
+=head2 recent
 
-This is a private action, and is dispatched from /.recent when it's
-supplied with a tag argument. it will list recent pages belonging
+This is a private action, and is dispatched from C</.recent> when it's
+supplied with a tag argument. It will list recent pages belonging
 to a certain tag.
 
 =cut
@@ -59,9 +57,9 @@ sub recent : Private {
 
 }
 
-=item tags (/.tags)
+=head2 tags (/.tags)
 
-tag cloud for pages.
+Tag cloud for pages.
 
 =cut
 
@@ -77,16 +75,14 @@ sub tags : Global {
     $c->stash->{template} = 'tag/cloud.tt';
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

@@ -33,9 +33,7 @@ MojoMojo::Schema::Result::Tag
 
 =head1 METHODS
 
-=over 4
-
-=item refcount
+=head2 refcount
 
 Convenience method to return get_column('refcount') if this column
 is available.
@@ -48,12 +46,14 @@ sub refcount {
     croak 'Tried to call refcount on resultset without column';
 }
 
-=back
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
