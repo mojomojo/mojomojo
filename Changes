@@ -39,8 +39,8 @@
         - Removed the page delete action, which was broken with Pg,
           and not checking permissions. This will come back in a
           better form in the future (Dave Rolsky)
-        - MojoMojo exits on startup if mojomojo_spawn_db.pl was not
-          run (mateu)
+        - MojoMojo warn on startup if mojomojo_spawn_db.pl was not
+          run, and all requests return a 404 (mateu)
         - The revisions list is now a nicely formatted table (Dave Rolsky)
         - In edit mode, the preview & form should now always fit in
           the browser viewport together without scrolling, in both
