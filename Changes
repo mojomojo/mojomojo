@@ -5,7 +5,7 @@
   - All methods are documented in POD with =head2 instead of =item, so that
     they appear in the module's TOC. Uniform LICENSE for all modules. (dandv)
 
-  - Major documentation updates to Prefs.pod, Schema::Resullt*::Page*,
+  - Major documentation updates to Prefs.pod, Schema::Result*::Page*,
     Formatter/WRITING YOUR OWN FORMATTER, (dandv)
 
   - Fixed Catalyst theme so that Save buttons are visible (dandv)
