@@ -10,9 +10,7 @@ MojoMojo::Schema::ResultSet::Person
 
 =head1 METHODS
 
-=over 4
-
-=item get_person
+=head2 get_person
 
 Get a person by login.
 
@@ -23,7 +21,7 @@ sub get_person {
     my ($person) = $self->search( { login => $login } );
 }
 
-=item get_user
+=head2 get_user
 
 Same as L</get_person>.
 
@@ -34,7 +32,7 @@ sub get_user {
     return $self->search( { login => $user } )->next();
 }
 
-=item registration_profile
+=head2 registration_profile
 
 Returns a L<Data::FormValidator> profile for registration.
 
@@ -69,7 +67,7 @@ sub registration_profile {
     };
 }
 
-=item user_free
+=head2 user_free
 
 Check if a username is available. Returns 1 for available, 0 for in use.
 
@@ -82,8 +80,6 @@ sub user_free {
     return ( $user ? 0 : 1 );
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
@@ -91,7 +87,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

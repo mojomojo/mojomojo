@@ -23,8 +23,6 @@ url, and it will make a thumb link instead of a blurb.
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 Format order can be 1-99. The Amazon formatter runs on 5.

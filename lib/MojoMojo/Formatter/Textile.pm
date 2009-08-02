@@ -29,8 +29,6 @@ Textile reference: <http://hobix.com/textile/>
 
 =head1 METHODS
 
-=over 4
-
 =head2 main_format_content
 
 Calls the formatter. Takes a ref to the content as well as the

@@ -22,8 +22,6 @@ elements.
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 Format order can be 1-99. The RSS formatter runs on 4

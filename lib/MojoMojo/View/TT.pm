@@ -45,7 +45,7 @@ sub new {
 Add a "navOn" class to all HTML links that point to the current request URI.
 Use by navbar TT code.
 
-=end
+=cut
 
 sub _nav_filter {
     my ( $context, @args ) = @_;

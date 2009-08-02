@@ -21,8 +21,6 @@ make it have C<class="notoc">
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 The TOC formatter expects HTML input so it needs to run after the main

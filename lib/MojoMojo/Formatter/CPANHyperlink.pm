@@ -39,8 +39,6 @@ In anticipation of future plugin syntax, you can optionally add a trailing slash
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 The CPANHyperlink formatter has no special requirements in terms of the order

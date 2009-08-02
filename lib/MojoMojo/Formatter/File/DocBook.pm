@@ -17,8 +17,6 @@ MojoMojo::Formatter::File::DocBook - format Docbook in xhtml
 
 =head1 METHODS
 
-=over 4
-
 =head2 can_format
 
 Can format DocBook (xml)

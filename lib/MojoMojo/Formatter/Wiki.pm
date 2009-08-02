@@ -25,8 +25,6 @@ Note that external links have a different syntax: [Link text](http://foo.com).
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 Format order can be 1-99. The Wiki formatter runs on 10.

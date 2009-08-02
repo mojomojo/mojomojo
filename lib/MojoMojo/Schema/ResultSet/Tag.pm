@@ -10,9 +10,7 @@ MojoMojo::Schema::ResultSet::Tag
 
 =head1 METHODS
 
-=over 4
-
-=item most_used
+=head2 most_used
 
 Returns a list of all tags and the amount each of these tags
 is used on any page.
@@ -32,7 +30,7 @@ sub most_used {
     );
 }
 
-=item by_page
+=head2 by_page
 
 Same as L</most_used> but for a particular page.
 
@@ -62,7 +60,7 @@ sub by_page {
     );
 }
 
-=item by_photo
+=head2 by_photo
 
 Tags on photos with counts. Used to make the tag cloud for the gallery.
 
@@ -81,7 +79,7 @@ sub by_photo {
     );
 }
 
-=item related_to [<tag>] [<count>]
+=head2 related_to [<tag>] [<count>]
 
 Returns popular tags related to this. Defaults to self.
 
@@ -108,8 +106,6 @@ sub related_to {
     );
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
@@ -117,7 +113,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

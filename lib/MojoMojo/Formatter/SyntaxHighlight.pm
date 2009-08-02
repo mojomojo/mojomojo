@@ -23,8 +23,6 @@ This formatter performs syntax highlighting on code blocks.
 
 =head1 METHODS
 
-=over 4
-
 =head2 format_content_order
 
 The syntax highlight formatter is based on E<lt>preE<gt> tags and

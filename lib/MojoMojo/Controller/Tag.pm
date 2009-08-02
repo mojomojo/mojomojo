@@ -21,7 +21,7 @@ This controller handles tag-related actions
 
 =head1 ACTIONS
 
-=hea2 list
+=head2 list
 
 This is a private action, and is dispatched from /.list when it's
 supplied with a tag argument. it will list all pages belonging

@@ -31,8 +31,6 @@ syntax for writing human-friendly formatted text.
 
 =head1 METHODS
 
-=over 4
-
 =head2 main_format_content
 
 Calls the formatter. Takes a ref to the content as well as the
