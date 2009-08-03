@@ -34,7 +34,7 @@
             <img width="700" src="[% c.uri_for('attachment',photo.id,'inline') %]">
         </a>
     </div>
-    <p id="description" >[% photo.description||loc('no description') %]<p>
+    <p id="description" >[% photo.description.remove('^\s+$') || loc('no description') %]<p>
     [% END %]
 </div>
 
