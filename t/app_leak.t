@@ -3,7 +3,8 @@ use strict;
 use warnings;
 use Test::More;
 
-my ( $URL, $REQUEST_COUNT, $leaks );
+my ( $URL, $REQUEST_COUNT, %tolerance, $expected_leaks );
+my $leaks = 0;
 
 =head1 Methods
 
@@ -16,7 +17,6 @@ See if we have modules necessary for testing.  Set arguments.
 sub BEGIN {
     $URL           = $ARGV[0] || '/';
     $REQUEST_COUNT = $ARGV[1] || 1;
-    $leaks         = 0;
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 
     eval 'use Devel::LeakGuard::Object qw(leakguard leakstate)';
@@ -26,6 +26,37 @@ sub BEGIN {
     plan skip_all => 'need Catalyst::Test' if $@;
 
     plan tests => 2;
+}
+
+=head2 Class Tolerance Threshold Hash
+
+This is the Control Interface as to what we will tolerate.
+The key is a class name and the value represents the 
+maximum number of objects you allow to leak from the class.
+
+=cut
+
+%tolerance = (
+    'MojoMojo::I18N::i_default' => 1,
+    'MojoMojo::I18N::en'        => 1,
+);
+
+=pod
+
+Build a proper data structure for C<expect> which takes a range.
+An example is:
+
+    'MojoMojo::I18N::en'        => [ 0, 1 ]
+
+This says we'll tolerate between 0 and 1 objects leaking 
+from the class MojoMojo::I18N::en.  
+
+=cut
+
+foreach my $class (keys %tolerance) {
+    my $tolerance_range         = [0]; # start at zero
+    $tolerance_range->[1]       = $tolerance{$class};
+    $expected_leaks->{$class}   = $tolerance_range;    
 }
 
 =pod
@@ -48,37 +79,20 @@ leakguard {
     request($URL) for 1 .. $REQUEST_COUNT;
 }
 
-#exclude => 'MojoMojo::I18N*';
-# TODO: remove sync requirements of expect and tolerance (build expect from tolerance)
-expect => {
-    'MojoMojo::I18N::i_default' => [ 0, 1 ],
-    'MojoMojo::I18N::en'        => [ 0, 1 ],
-};
-my %tolerance = (
-    'MojoMojo::I18N::i_default' => 1,
-    'MojoMojo::I18N::en'        => 1,
-);
+expect => $expected_leaks;
+
 
 =head2 on_leak
 
 When there is a object memory leak this anonymous sub will be run.
-Would like to use on_leak, but when I combined it with expect I got:
-  Useless use of a constant in void context at t/app_leak.t line 72.
-  Useless use of reference constructor in void context at t/app_leak.t line 72.
-Just warnings, yes I don't really like warnings from other people's
-modules when building tests.  Using leakstate() API gift to get at
-the leak report by parsing the class, object count hash.
+Would like to use on_leak(), but when I combined it with expect I got:
 
+  Useless use of a constant in void context
+  Useless use of reference constructor in void context
+  
+An alternative approach using C<leakstate()> has been implemented.  
+  
 =cut
-
-#on_leak => sub {
-#    my $report = shift;
-#    print "We got some memory leaks: \n";
-#    for my $pkg ( sort keys %$report ) {
-#        printf "%s %d %d\n", $pkg, @{ $report->{$pkg} };
-#    }
-#    $leaks++;
-#};
 
 my %nonzero_report;
 my %report_hash = %{ leakstate() };
