@@ -8,13 +8,8 @@ use Test::More;
 
 $ENV{MOJOMOJO_CONFIG} = 't/app/mojomojo.yml';
 eval "use Test::WWW::Selenium::Catalyst 'MojoMojo'";
-my $selenium_test = !$@;
-if ($selenium_test) {
-    plan tests => 22;
-}
-else {
-    plan skip_all => 'Test needs Selenium.';
-}
+plan skip_all => 'need Test::WWW::Selenium::Catalyst' if $@;
+plan tests => 22;
 
 my $sel = Test::WWW::Selenium::Catalyst->start;
 
@@ -42,4 +37,3 @@ $sel->is_text_present_ok("Log out");
 $sel->open_ok(".list");
 $sel->is_text_present_ok("Log out");
 $sel->click_ok("link=Log out");
-

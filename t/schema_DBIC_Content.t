@@ -4,16 +4,16 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    eval "use DBD::SQLite";
-    my $sqlite = ! $@;
-    eval "use SQL::Translator";
-    my $translator = ! $@;
-    plan $sqlite && $translator
-    ? ( tests => 10 )
-    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
+    eval 'use DBD::SQLite';
+    plan skip_all => 'need DBD::SQLite' if $@;
+
+    eval 'use SQL::Translator';
+    plan skip_all => 'need SQL::Translator' if $@;
+
+    plan tests => 10;
 }
 
-use lib qw(t/lib);
+use lib 't/lib';
 use MojoMojoTestSchema;
 
 my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
@@ -34,7 +34,7 @@ is_deeply(\@links_from, [], 'no links from root page yet');
 my @wantedpages= $root_page->wantedpages;
 is_deeply(\@wantedpages, [], 'no wanted pages from root page yet');
 
-# Test that store_links generates the link_from and wantedpage 
+# Test that store_links generates the link_from and wantedpage
 # In the default content.
 
 $root_page->content->store_links();

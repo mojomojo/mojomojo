@@ -4,16 +4,16 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    eval "use DBD::SQLite";
-    my $sqlite = ! $@;
-    eval "use SQL::Translator";
-    my $translator = ! $@;
-    plan $sqlite && $translator
-    ? ( tests => 5 )
-    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
+    eval 'use DBD::SQLite';
+    plan skip_all => 'need DBD::SQLite' if $@;
+
+    eval 'use SQL::Translator';
+    plan skip_all => 'need SQL::Translator' if $@;
+
+    plan tests => 5;
 }
 
-use lib qw(t/lib);
+use lib 't/lib';
 use_ok( 'MojoMojoTestSchema' );
 
 
@@ -28,4 +28,3 @@ is( $page->name, '/', 'retrieved the root page' );
 
 my $content = $page->content;
 like( $content->body, qr/\w+/, 'retrieved the root page content' );
-

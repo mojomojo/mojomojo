@@ -4,20 +4,19 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    eval "use DBD::SQLite";
-    my $sqlite = ! $@;
-    eval "use SQL::Translator";
-    my $translator = ! $@;
+    eval 'use DBD::SQLite';
+    plan skip_all => 'need DBD::SQLite' if $@;
+
+    eval 'use SQL::Translator';
+    plan skip_all => 'need SQL::Translator' if $@;
+
     eval "use Imager";
-    my $imager = ! $@;
-    if ($sqlite && $translator && $imager) {
-         if (grep /^jpeg$/, Imager->read_types()) {
-             plan tests => 13
-         } else {
-             plan skip_all => 'Imager needs JPEG support'
-         }
+    plan skip_all => 'need Imager' if $@;
+
+    if (grep /^jpeg$/, Imager->read_types()) {
+        plan tests => 13
     } else {
-        plan skip_all => 'need DBD::SQLite and SQL::Translator for testing';
+        plan skip_all => 'Imager needs JPEG support'
     }
 }
 

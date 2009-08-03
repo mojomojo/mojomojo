@@ -4,13 +4,13 @@ use warnings;
 use Test::More;
 
 BEGIN {
-    eval "use DBD::SQLite";
-    my $sqlite = ! $@;
-    eval "use SQL::Translator";
-    my $translator = ! $@;
-    plan $sqlite && $translator
-    ? ( tests => 1 )
-    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
+    eval 'use DBD::SQLite';
+    plan skip_all => 'need DBD::SQLite' if $@;
+
+    eval 'use SQL::Translator';
+    plan skip_all => 'need SQL::Translator' if $@;
+
+    plan tests => 1;
 }
 
 use lib qw(t/lib);
