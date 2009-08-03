@@ -8,12 +8,20 @@ BEGIN {
     my $sqlite = ! $@;
     eval "use SQL::Translator";
     my $translator = ! $@;
-    plan $sqlite && $translator
-    ? ( tests => 13 )
-    : ( skip_all => 'needs DBD::SQLite and SQL::Translator for testing' ) ;
+    eval "use Imager";
+    my $imager = ! $@;
+    if ($sqlite && $translator && $imager) {
+         if (grep /^jpeg$/, Imager->read_types()) {
+             plan tests => 13
+         } else {
+             plan skip_all => 'Imager needs JPEG support'
+         }
+    } else {
+        plan skip_all => 'need DBD::SQLite and SQL::Translator for testing';
+    }
 }
 
-use lib qw(t/lib);
+use lib 't/lib';
 use MojoMojoTestSchema;
 
 my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);

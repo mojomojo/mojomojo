@@ -135,7 +135,7 @@ sub tag : Local Args(1) {
     $c->forward('/page/inline_tags');
 }
 
-=head2 untag (/.jsrpc/untag)
+=head2 untag ( /.jsrpc/untag )
 
 Remove a tag from a page. Returns a list of yours and popular tags.
 
@@ -167,7 +167,7 @@ sub imginfo : Local {
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
 
-=head2 usersearch (.jsrpc/usersearch)
+=head2 usersearch ( .jsrpc/usersearch )
 
 Backend that handles jQuery autocomplete requests for users.
 
