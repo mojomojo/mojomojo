@@ -31,15 +31,18 @@
   - mojomojo_spawn_db.pl now has a --help option and takes CLI arguments for
     all settings (Dave Rolsky)
 
-  - mojomojo_spawn_db won't attempt deploy if db already exists (mateu)
+  - mojomojo_spawn_db won't attempt deploy if DB already exists (mateu)
+
+  - MojoMojo warns on startup if mojomojo_spawn_db.pl was not run, and all
+    requests return a 404 (mateu)
 
   - A newly created database now has an anonymous user preference set. Without
     this, anonymous users are not supported properly (Dave Rolsky)
 
-  - Recent changes now shows user's names, not their logins (Dave Rolsky)
+  - Recent changes now shows users' names, not their logins (Dave Rolsky)
 
   - The users list in the admin section only showed the first 20 users. Added
-    paging links so you can browse all of them (Dave Rolsky)
+    paging links so you can browse all of them. (Dave Rolsky)
 
   - The users list now shows active users first (Dave Rolsky)
 
@@ -61,8 +64,8 @@
     checking permissions. This will come back in a better form in the future
     (Dave Rolsky)
 
-  - MojoMojo warn on startup if mojomojo_spawn_db.pl was not run, and all
-    requests return a 404 (mateu)
+  - HTML entities are now escaped in code blocks and "# comments" are rendered
+    correctly in Perl syntax blocks (GitHub issues #41, #11) (dandv)
 
   - Textile no longer converts non-ASCII characters into HTML entities (dandv)
 
@@ -75,8 +78,8 @@
     Formatter/WRITING YOUR OWN FORMATTER, (dandv)
 
   - Reformatted Changes, but you probably noticed that by now (dandv)
-  
-  - Move some settings into MojoMojo.pm to make mojomojo.conf more 
+
+  - Move some settings into MojoMojo.pm to make mojomojo.conf more
     friendly. (marcus)
 
 
