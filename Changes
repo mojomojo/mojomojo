@@ -81,6 +81,8 @@
 
   - Move some settings into MojoMojo.pm to make mojomojo.conf more
     friendly. (marcus)
+    
+  - Experimental basic search and replace script. (mateu)
 
 
 0.999031 2009-07-26 15:00:00
