@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 27;
+use Test::More tests => 30;
 use HTTP::Request::Common;
 use Test::Differences;
 use FindBin '$Bin';
@@ -45,7 +45,7 @@ $content = <<'TEXTILE';
 h1. Welcome to MojoMojo!
 
 This is your front page. Create
-a [[New Page]] or edit this one 
+a [[New Page]] or edit this one
 through the edit link at the bottom.
 
 h2. Need some assistance?
@@ -53,11 +53,11 @@ h2. Need some assistance?
 Check out our [[Help]] section.
 TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, <<'HTML', $test );
+eq_or_diff( $body, <<'HTML', $test );
 <h1>Welcome to MojoMojo!</h1>
 
 <p>This is your front page. Create<br />
-a <span class="newWikiWord"><a title="Not found. Click to create this page." href="/New_Page.edit">New Page?</a></span> or edit this one <br />
+a <span class="newWikiWord"><a title="Not found. Click to create this page." href="/New_Page.edit">New Page?</a></span> or edit this one<br />
 through the edit link at the bottom.</p>
 
 <h2>Need some assistance?</h2>
@@ -68,29 +68,28 @@ HTML
 {
     $test = 'say Perl';
 
-    $content = <<Perl;
+    $content = <<'TEXTILE';
 <pre lang="Perl">
     say "Hola Cabrón";
 </pre>
-Perl
+TEXTILE
 
-    $expected = <<Perl;
+    $expected = <<HTML;
 <pre>
 &nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;<span class="kateOperator">"</span><span class="kateString">Hola&nbsp;Cabrón</span><span class="kateOperator">"</span>;
 </pre>
-Perl
+HTML
 
     # Now run through all formatters.
     $test .= ' - run through all formatters';
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
+    eq_or_diff( $got, $expected, $test );
 }
 
+
+#----------------------------------------------------------------------------
 $test = 'Test > in <pre lang="Perl"> section.';
 
-# The behavior of this test is different from what appears on the page
-# when browsing. > is maintained in the test while it's encoded as &gt; in the page.
-# I don't see the encoding as un-desirable here.
 $content = <<'TEXTILE';
 <pre lang="Perl">
 if (1 > 2) {
@@ -99,9 +98,9 @@ if (1 > 2) {
 </pre>
 TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, <<'HTML', $test );
+eq_or_diff( $body, <<'HTML', $test );
 <pre>
-<b>if</b>&nbsp;(<span class="kateFloat">1</span>&nbsp;>&nbsp;<span class="kateFloat">2</span>)&nbsp;{
+<b>if</b>&nbsp;(<span class="kateFloat">1</span>&nbsp;&gt;&nbsp;<span class="kateFloat">2</span>)&nbsp;{
 &nbsp;&nbsp;<span class="kateFunction">print</span>&nbsp;<span class="kateOperator">"</span><span class="kateString">test</span><span class="kateOperator">"</span>;
 }
 </pre>
@@ -115,23 +114,28 @@ Hopen, Norway
 </pre>
 TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, $content, $test );
+eq_or_diff( $body, $content, $test );
 
 TODO: {
-    local $TODO = 'something  before a pre adds defang_lang attribute to pre.';
+    local $TODO = 'something before a pre adds defang_lang attribute to pre';
     # We'd like this test to pass, but our current setup with Defang
     # adds
     #     defang_lang=""
     # attribute to <pre> when there is some content before a pre.
     # (even a pre itself)
     $test    = 'pre tag - no attribute and some text before pre';
-    $content = <<'HTML';
+    $content = <<'TEXTILE';
 Jeg har familie i
 <pre>
 Hopen, Norway
 </pre>
+TEXTILE
+    $expected = <<'HTML';
+<p>Jeg har familie i</p>
+<pre>
+Hopen, Norway
+</pre>
 HTML
-    $expected = $content;
     $body = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $body, $expected, $test );
 }
@@ -155,11 +159,8 @@ eq_or_diff( $body, $expected, $test );
 
 
 #----------------------------------------------------------------------------
-$test = "Have <pre> sections behave like normal pre sections.  Don't do entities
-on < and > so one can use <span> and such";
+$test = "HTML tags inside <pre> sections should be preserved. Also test for GIGO: a stray '<'.";
 
-# The behavior of this test is different from what appears on the page
-# when browsing. > is maintained in the test while it's encoded in the page.
 $content = <<'TEXTILE';
 <pre>
 <span>
@@ -169,8 +170,19 @@ if (1 < 2) {
 </span>
 </pre>
 TEXTILE
+
+$expected= <<'HTML';
+<pre>
+<span>
+if (1  2) {
+  print "pre section & no lang specified";
+}
+</span>
+</pre>
+HTML
+
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, $content, $test );
+eq_or_diff( $body, $expected, $test );
 
 #----------------------------------------------------------------------------
 $test = 'Is <br /> preserved?';
@@ -278,7 +290,7 @@ HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, $expected, $test );
+eq_or_diff( $body, $expected, $test );
 
 #----------------------------------------------------------------------------
 $test = 'Maintain complete set of html table tags. Use textile escape ==';
@@ -346,7 +358,7 @@ HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, $expected, $test );
+eq_or_diff( $body, $expected, $test );
 
 #-------------------------------------------------------------------------------
 $test    = 'POD while Textile is the main formatter';
@@ -381,42 +393,112 @@ SQL
 
     $test .= ' - run through all formatters';
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
+    eq_or_diff( $got, $expected, $test );
 
 }
 
-{
-    $test = 'Single <code>';
+#-------------------------------------------------------------------------------
+$test = 'XML tag in <pre lang="HTML"> run through the JSRPC renderer';
 
-    $content = <<HTML;
-<pre lang="HTML">
-<code>
-Ha en god dag
-</code>
+$content = <<TEXTILE;
+<pre lang="XML">
+<foo>
+some text here
+</foo>
+</pre>
+TEXTILE
+
+$expected = <<'HTML';
+<pre>
+<b>&lt;foo&gt;</b>
+some&nbsp;text&nbsp;here
+<b>&lt;/foo&gt;</b>
 </pre>
 HTML
+
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
+
+
+#-------------------------------------------------------------------------------
+$test = 'HTML tag in <pre lang="HTML"> run through the JSRPC renderer';
+
+$content = <<TEXTILE;
+<pre lang="HTML">
+<textarea>
+some text here
+</textarea>
+</pre>
+TEXTILE
+
+$expected = <<'HTML';
+<pre>
+<b>&lt;textarea&gt;</b>
+some&nbsp;text&nbsp;here
+<b>&lt;/textarea&gt;</b>
+</pre>
+HTML
+
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
+
+
+#-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "Textile processes '<code>' tags specially; even '&lt;code&gt;' gets converted to '<code>'";
+
+    $test = '<code> tag in <pre lang="HTML"> run through the JSRPC renderer';
+
+    $content = <<TEXTILE;
+<pre lang="HTML">
+<code>
+some text here
+</code>
+</pre>
+TEXTILE
 
     $expected = <<'HTML';
 <pre>
 <b>&lt;code&gt;</b>
-Ha&nbsp;en&nbsp;god&nbsp;dag
+some&nbsp;text&nbsp;here
 <b>&lt;/code&gt;</b>
 </pre>
 HTML
 
-    # Now run through all formatters.
-    $test .= ' - run through all formatters';
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    is( $got, $expected, $test );
+    eq_or_diff( $got, $expected, $test );
+
+
+    #-------------------------------------------------------------------------------
+    $test = 'For comparison, "<code>" and "<tt>" strings in <pre lang="Perl"> run through the JSRPC renderer';
+
+    $content = <<TEXTILE;
+<pre lang="Perl">
+"Monotype: use <tt>.";
+"Source code: <code>.";
+</pre>
+TEXTILE
+
+    $expected = <<'HTML';
+<pre>
+<span class="kateOperator">"</span><span class="kateString">Monotype:&nbsp;use&nbsp;&lt;tt&gt;.</span><span class="kateOperator">"</span>;
+<span class="kateOperator">"</span><span class="kateString">Source&nbsp;code:&nbsp;&lt;code&gt;.</span><span class="kateOperator">"</span>;
+</pre>
+HTML
+
+    $got = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $got, $expected, $test );
 }
 
-
+#-------------------------------------------------------------------------------
 $test    = 'img src http not allowed';
 $content = <<'HTML';
 <img src="http://malicious.com/foto.jpg" />
 HTML
 $expected = '<p><img defang_src="http://malicious.com/foto.jpg" /></p>
-'; 
+';
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
 
@@ -425,7 +507,7 @@ $content = <<'HTML';
 <img src="https://malicious.com/foto.jpg" />
 HTML
 $expected = '<p><img defang_src="https://malicious.com/foto.jpg" /></p>
-'; 
+';
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
 
@@ -434,7 +516,7 @@ $content = <<'HTML';
 <img src="//malicious.com/foto.jpg" />
 HTML
 $expected = '<p><img defang_src="//malicious.com/foto.jpg" /></p>
-'; 
+';
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
 

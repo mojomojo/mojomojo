@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::RolePrivilege;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("role_privilege");
 __PACKAGE__->add_columns(
     "page",      { data_type => "INTEGER", is_nullable => 0, size => undef },
@@ -20,11 +20,16 @@ __PACKAGE__->belongs_to( "role", "MojoMojo::Schema::Result::Role", { id => "role
 
 MojoMojo::Schema::Result::RolePrivilege
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
+
 
 1;

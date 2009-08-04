@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 960px;
+    max-width: 1080px;
     text-align: left;
     margin: 0 auto 0;
 }
@@ -172,10 +172,9 @@ div#pageoptions a.active {
 }
 
 #content {
-    overflow: hidden;
+    overflow: auto;  /* wide unwrappable content needs to be visible; see test at http://wiki.dandascalescu.com/reviews/food/vitamins */
     background: #ffffff;
     padding: 2em 13px;
-    overflow: hidden;
 }
 
 #content strong,b {
@@ -299,6 +298,15 @@ p {
 #content .syntax_help table th,
 #content .syntax_help table td {
     padding: 0.2em;
+}
+
+#path_links, #path_links li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.syntax_help table th {
+    background-color: #f6f6f6;
 }
 
 /* @end */

@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Textile;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -27,7 +27,7 @@ Hopen, Norway
 </pre>
 HTML
 
-$expected = '<p>Tinc fam&Atilde;&shy;lia a</p>
+$expected = '<p>Tinc família a</p>
 
 
 <pre>
@@ -41,3 +41,12 @@ $content  = '<img src="http://far.away.com/imatge.jpg" />';
 $expected = '<p><img src="http://far.away.com/imatge.jpg" /></p>';
 MojoMojo::Formatter::Textile->main_format_content( \$content );
 eq_or_diff( $content, $expected, $test );
+
+#----------------------------------------------------------------------------
+$test    = "Do not encode non-markup Unicode characters";
+$content = <<'TEXTILE';
+Odd as they may be, leave these characters alone:
+להפסיק להשתמש המזוין שפות זרות
+áéíóú¿¡üñ
+TEXTILE
+eq_or_diff( MojoMojo::Formatter::Textile->main_format_content( \$content ), $content, $test );

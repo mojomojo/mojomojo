@@ -9,6 +9,36 @@
 [% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
 <div id="content">
 
+<h3>[% loc( 'x revisions', page.versions_rs.count )%]:</h3>
+
+<table id="revisions">
+    <thead>
+        <tr>
+            <th>[% loc('Version') %]</th>
+            <th>[% loc('Date') %]</th>
+            <th>[% loc('Created by') %]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+[% FOREACH version IN page.versions %]
+        <tr>
+            <td>[% version.version %]</td>
+            <td>[% version.created.strftime( '%Y-%m-%d %H:%M:%S' ) %]</td>
+            <td>
+                <a href="[% c.uri_for( version.creator.link ) _ '.profile' %]"
+                   title="[% loc('Profile for x', version.creator.name ) %]"
+                   >[% version.creator.name %]</a> 
+            </td>
+            <td>
+                <a href="[% c.uri_for('view', { rev => version.version } ) %]">[% loc('Show revision') %]</a>
+            </td>
+        </tr>
+[% END %]
+    </tbody>
+</table>
+
+
 <dl id="pageInfoMeta">
     <dt>[%loc('Active version')%]:</dt>
     <dd>[% page.content_version %]</dd>
@@ -36,14 +66,6 @@
 </dl>
 
 [% page.content.abstract %]
-
-<h3>[% loc('x revisions',page.versions.size)%]:</h3>
-
-<ol>
-[% FOREACH version IN page.versions %]
-    <li>[%version.created.ymd('-')%] [%version.created.hms(':')%] [% loc('by') %] <a href="[%c.uri_for(version.creator.link) _ '.profile' %]">[%version.creator.name%]</a> <a href="[%c.uri_for('view',{rev=>version.version})%]">([%loc('Show revision')%])</a></li>
-[% END %]
-</ol>
 
 [% IF page.links_to.first ; +%]
 <h3>[% loc('Linked from') %]:</h3>

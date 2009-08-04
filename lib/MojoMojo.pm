@@ -8,7 +8,7 @@ use Catalyst qw/
     Authentication
     Cache
     Session
-    Session::Store::File
+    Session::Store::Cache
     Session::State::Cookie
     Static::Simple
     SubRequest
@@ -19,6 +19,7 @@ use Catalyst qw/
     /;
 
 use Storable;
+use Digest::MD5;
 use Data::Dumper;
 use MRO::Compat;
 use DBIx::Class::ResultClass::HashRefInflator;
@@ -31,7 +32,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999029';
+our $VERSION = '0.999032';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -42,7 +43,10 @@ MojoMojo->config->{default_view}='TT';
 MojoMojo->config->{'Plugin::Cache'}{backend} = {
     class => "Cache::FastMmap",
     unlink_on_exit => 1,
-
+    share_file => '' . Path::Class::file(
+        File::Spec->tmpdir,
+        'mojomojo-sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home})
+    ),
 };
 
 MojoMojo->config(
@@ -67,7 +71,47 @@ MojoMojo->config(
         }
 );
 
+__PACKAGE__->config( authentication => {
+    default_realm => 'members',
+    use_session   => 1,
+    realms => {
+        members => {
+            credential => {
+                class               => 'Password',
+                password_field      => 'pass',
+                password_type       => 'hashed',
+                password_hash_type  => 'SHA-1',
+            },
+            store => {
+                class      => 'DBIx::Class',
+                user_class => 'DBIC::Person',
+            },
+        },
+    }
+});
+
+__PACKAGE__->config('Controller::HTML::FormFu' => {
+    languages_from_context => 1,
+    localize_from_context  => 1,
+});
+
 MojoMojo->setup();
+
+# Check for deployed database
+my $has_DB = 1;
+my $NO_DB_MESSAGE =<<"EOF";
+
+    ***********************************************
+    ERROR. Looks like you need to deploy a database.
+    Run script/mojomojo_spawn_db.pl
+    *********************************************** 
+    
+EOF
+eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->next };
+if ($@ ) {
+    $has_DB = 0;
+    warn $NO_DB_MESSAGE;
+}
 
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
@@ -104,11 +148,11 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 DESCRIPTION
 
-Mojomojo is a sort of content managment system, borrowing many concepts from
+Mojomojo is a sort of content management system, borrowing many concepts from
 wikis and blogs. It allows you to maintain a full tree-structure of pages,
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy AJAX-
-based diff system. There are also a bunch of other features like bult-in
+based diff system. There are also a bunch of other features like built-in
 fulltext search, live AJAX preview of editing, and RSS feeds for every wiki page.
 
 To find out more about how you can use MojoMojo, please visit
@@ -120,14 +164,14 @@ L<MojoMojo::Installation> to try it out yourself.
 
 =head2 cache_ie_list
 
-include/exclude list accessor
+Include/exclude list accessor
 
 =cut
 
 # include/exclude pages list to cache
 my $ie;
 $ie = Algorithm::IncludeExclude->new;
-$ie->include(); 
+$ie->include();
 # static files will be handled via web server or proxy cache control.
 $ie->exclude(qr{static});
 $ie->exclude(qr{attachment});
@@ -136,7 +180,7 @@ $ie->exclude('login');
 $ie->exclude('logout');
 $ie->exclude('edit');
 # Short cache time set in controller action for list and view
-#$ie->exclude('list'); 
+#$ie->exclude('list');
 #$ie->exclude('recent');
 
 sub cache_ie_list {
@@ -145,15 +189,15 @@ sub cache_ie_list {
 
 =head2 cache_hook
 
-Dont cache if user_exist or CATALYST_NOCACHE is set or
- if path is exclude from cache_ie_list
+Dont cache if CATALYST_NOCACHE is set or if the path is excluded from,
+based on the value C<cache_ie_list>.
 
 =cut
 sub cache_hook {
   my ( $c ) = @_;
 
-  if ( $c->user_exists        ||
-       $ENV{CATALYST_NOCACHE} ||
+  if ( $ENV{CATALYST_NOCACHE} ||
+       $c->response->location ||
        ! $c->cache_ie_list->evaluate($c->req->path)
      ) {
     return 0; # Don't cache
@@ -161,27 +205,39 @@ sub cache_hook {
   return 1;   # Cache
 }
 
-# Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
-
 sub ajax {
     my ($c) = @_;
     return $c->req->header('x-requested-with')
         && $c->req->header('x-requested-with') eq 'XMLHttpRequest';
 }
 
+=head2 expand_wikilink
+
+Proxy method for the L<MojoMojo::Formatter::Wiki> expand_wikilink method.
+
+=cut
+
 sub expand_wikilink {
     my $c = shift;
     return MojoMojo::Formatter::Wiki->expand_wikilink(@_);
 }
 
-# Format a wikiword as a link or as a wanted page, as appropriate.
+=head2 wikiword
+
+Format a wikiword as a link or as a wanted page, as appropriate.
+
+=cut
 
 sub wikiword {
     return MojoMojo::Formatter::Wiki->format_link(@_);
 }
 
-# Find or create a preference key, update it if you pass a value
-# then return the current setting.
+=head2 pref
+
+Find or create a preference key, update it if you pass a value then return the
+current setting.
+
+=cut
 
 sub pref {
     my ( $c, $setting, $value ) = @_;
@@ -207,7 +263,11 @@ sub pref {
     );
 }
 
-# Get preference key/value from cache if possible.
+=head2 pref_cached
+
+Get preference key/value from cache if possible.
+
+=cut
 
 sub pref_cached {
     my ( $c, $setting, $value ) = @_;
@@ -218,15 +278,7 @@ sub pref_cached {
     }
     # Check that we have a database, i.e. script/mojomojo_spawn_db.pl was run.
     my $row;
-    eval { $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } ); };
-    if ( $@ ) { 
-        my $no_db_message = "ERROR: You don't seem to have a database initialized.
-Initialize one with script/mojomojo_spawn_db.pl\n"; 
-        $c->response->body($no_db_message);
-        warn $no_db_message;
-        $c->detach();
-    }
-
+    $row = $c->model('DBIC::Preference')->find_or_create( { prefkey => $setting } );
 
     # Update database
     $row->update( { prefvalue => $value } ) if defined $value;
@@ -272,7 +324,12 @@ Initialize one with script/mojomojo_spawn_db.pl\n";
     return $c->cache->get($setting);
 }
 
-# Clean up explicit wiki words.
+=head2 fixw
+
+Clean up wiki words: replace spaces with underscores and remove non-\w, / and .
+characters.
+
+=cut
 
 sub fixw {
     my ( $c, $w ) = @_;
@@ -281,19 +338,36 @@ sub fixw {
     return $w;
 }
 
-# We override this method to work around some of Catalyst's assumptions
-# about dispatching. Since MojoMojo supports page namespaces
-# (e.g. '/parent_page/child_page'), with page paths that
-# always start with '/', we strip the trailing slash from $c->req->base.
-# Also, since MojoMojo indicates actions by appending a '.$action' to
-# the path (e.g. '/parent_page/child_page.edit'), we remove the page
-# path and save it in $c->stash->{path} and reset $c->req->path to $action.
-# We save the original uri in $c->stash->{pre_hacked_uri}.
+sub prepare_action {
+    my $c = shift;
+    
+    if ($has_DB) {
+        $c->next::method(@_);
+    }
+    else {
+        $c->res->status( 404 );
+        $c->response->body($NO_DB_MESSAGE);
+        return;
+    }
+}
+
+=head2 prepare_path
+
+We override this method to work around some of Catalyst's assumptions about
+dispatching. Since MojoMojo supports page namespaces
+(e.g. '/parent_page/child_page'), with page paths that always start with '/',
+we strip the trailing slash from $c->req->base. Also, since MojoMojo indicates
+actions by appending a '.$action' to the path
+(e.g. '/parent_page/child_page.edit'), we remove the page path and save it in
+$c->stash->{path} and reset $c->req->path to $action. We save the original URI
+in $c->stash->{pre_hacked_uri}.
+
+=cut
 
 sub prepare_path {
     my $c = shift;
     $c->next::method(@_);
-    $c->stash->{pre_hacked_uri} = $c->req->uri;
+    $c->stash->{pre_hacked_uri} = $c->req->uri->clone;
     my $base = $c->req->base;
     $base =~ s|/+$||;
     $c->req->base( URI->new($base) );
@@ -315,7 +389,11 @@ sub prepare_path {
     }
 }
 
-# Return the base as an URI object.
+=head2 base_uri
+
+Return $c->req->base as an URI object.
+
+=cut
 
 sub base_uri {
     my $c = shift;
@@ -330,7 +408,11 @@ sub unicode {
     return $string;
 }
 
-# Override $c->uri_for to append path, if relative path is used
+=head2 uri_for
+
+Override $c->uri_for to append path, if a relative path is used.
+
+=cut
 
 sub uri_for {
     my $c = shift;
@@ -355,7 +437,7 @@ sub uri_for_static {
     return ( $self->config->{static_path} || '/.static/' ) . $asset;
 }
 
-#  Permissions are checked prior to most actions. Including view if that is
+#  Permissions are checked prior to most actions, including view if that is
 #  turned on in the configuration. The permission system works as follows.
 #  1. There is a base set of rules which may be defined in the application
 #     config, these are:
@@ -389,7 +471,7 @@ sub _cleanup_path {
     my ( $c, $path ) = @_;
     ## make some changes to the path - We have to do this
     ## because path is not always cleaned up before we get it.
-    ## sometimes we get caps, other times we don't.  permissions are
+    ## sometimes we get caps, other times we don't. Permissions are
     ## set using lowercase paths.
 
     ## lowercase the path - and ensure it has a leading /
@@ -431,7 +513,7 @@ sub get_permissions_data {
 
     my $permdata;
 
-    ## ok - now that we have our path elements to check - we have to figure out how we are accessing them.
+    ## Now that we have our path elements to check, we have to figure out how we are accessing them.
     ## If we have caching turned on, we load the perms from the cache and walk the tree.
     ## otherwise we pull what we need out of the db.
     # structure:   $permdata{$pagepath} = {
@@ -457,9 +539,9 @@ sub get_permissions_data {
         $permdata = $c->cache->get('page_permission_data');
     }
 
-    # if we don't have any permissions data, we have a problem. we need to load it.
-    # we have two options here - if we are caching, we will load everything and cache it.
-    # if we are not - then we load just the bits we need.
+    # If we don't have any permissions data, we have a problem. We need to load it.
+    # We have two options here - if we are caching, we will load everything and cache it.
+    # If we are not - then we load just the bits we need.
     if ( !$permdata ) {
         ## either the data hasn't been loaded, or it's expired since we used it last.
         ## so we need to reload it.
@@ -469,7 +551,7 @@ sub get_permissions_data {
 
         # if we are not caching, we don't return the whole enchilada.
         if ( ! $c->pref('cache_permission_data') ) {
-            ## this seems odd to me - but that's what the dbix::class says to do.
+            ## this seems odd to me - but that's what the DBIx::Class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
             $rs = $rs->search(
                 {
@@ -533,12 +615,12 @@ sub check_permissions {
 
     # if no user is logged in
     unless ($user){
-      # if anonymous user is allowed
-      my $anonymous=$c->pref('anonymous_user');
-      if ($anonymous){
-        # get anonymous user for no logged-in users
-        $user= $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
-      }
+        # if anonymous user is allowed
+        my $anonymous = $c->pref('anonymous_user');
+        if ($anonymous) {
+            # get anonymous user for no logged-in users
+            $user = $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+        }
     }
 
     my @paths_to_check = $c->_expand_path_elements($path);
@@ -630,6 +712,29 @@ sub check_permissions {
     return \%perms;
 }
 
+sub check_view_permission {
+    my $c = shift;
+
+    return 1 unless $c->pref('check_permission_on_view');
+
+    my $user;
+    if ( $c->user_exists() ) {
+        $user = $c->user->obj;
+    }
+
+    $c->log->info('Checking permissions') if $c->debug;
+
+    my $perms = $c->check_permissions( $c->stash->{path}, $user );
+    if ( !$perms->{view} ) {
+        $c->stash->{message}
+            = $c->loc( 'Permission Denied to view x', $c->stash->{page}->name );
+        $c->stash->{template} = 'message.tt';
+        return;
+    }
+
+    return 1;
+}
+
 my $search_setup_failed = 0;
 
 MojoMojo->config->{index_dir} ||= MojoMojo->path_to('index');
@@ -659,7 +764,7 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's a irc channel, #mojomojo@irc.perl.org.
+If you want to talk about MojoMojo, there's an IRC channel, L<irc://irc.perl.org/mojomojo>.
 Commercial support and customization for MojoMojo is also provided by Nordaaker
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
 
@@ -674,6 +779,11 @@ Andy Grundman C<andy@hybridized.org>
 Jonathan Rockway C<jrockway@jrockway.us>
 
 A number of other contributors over the years.
+
+
+=head1 COPYRIGHT
+
+Copyright 2005-2009, Marcus Ramberg
 
 =head1 LICENSE
 

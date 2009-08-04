@@ -2,7 +2,7 @@ package MojoMojo::Model::Search;
 
 use strict;
 
-use base 'Catalyst::Model';
+use parent 'Catalyst::Model';
 
 use KinoSearch::InvIndexer;
 use KinoSearch::Searcher;
@@ -19,11 +19,9 @@ __PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
 =head1 NAME
 
-MojoMojo::Controller::Search
+MojoMojo::Model::Search
 
-=head1 ACTIONS
-
-=over 4
+=head1 METHODS
 
 =cut
 
@@ -56,7 +54,7 @@ sub searcher {
     );
 }
 
-=item prepare_search_index
+=head2 prepare_search_index
 
 Create a new search index from all pages in the database.
 Will do nothing if the index already exists.
@@ -81,13 +79,12 @@ sub prepare_search_index {
     MojoMojo->log->info("Indexed $count pages") if MojoMojo->debug;
 }
 
-=item index_page <page>
+=head2 index_page <page>
 
-Create/update the search index with data from a MojoMojo page.
+Create/update the search index with data from a MojoMojo page when it changes.
 
 =cut
 
-# updates the search index when page data changes
 sub index_page {
     my ( $self, $page ) = @_;
     my $index = $self->indexer;
@@ -137,7 +134,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

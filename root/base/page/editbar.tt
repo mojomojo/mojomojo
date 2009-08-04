@@ -2,9 +2,6 @@
     <ul>
 [% IF c.action.reverse == 'pageadmin/edit' +%]
         <li>[%loc('Preview')%]</li>
-[% IF page.content_version ; +%]
-        <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
-[% END +%]
         <li><a href="[% c.uri_for('permissions') %]">[%loc('Permissions')%]</a></li>
 [% ELSIF c.action.reverse == 'pageadmin/permissions' +%]
         <li><a href="[% c.uri_for('edit') %]">[%loc('Edit')%]</a></li>

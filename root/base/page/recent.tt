@@ -1,5 +1,9 @@
 [%
-    SET title = loc('Recent pages in x', page.path);
+    IF page.path == '/';
+        SET title = loc('Recent pages in this wiki');
+    ELSE;
+        SET title = loc('Recent pages in x', page.path);
+    END;
     IF activetag;
         SET title = loc('Recent pages in x tagged with x', [page.path, activetag]);
     END;
@@ -51,7 +55,7 @@
                 <div class="diff display-none"></div>
             </td>
             <td>
-            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.login %]</a>
+            <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.name %]</a>
              </td>
             <td>
                 [% page.content.created.hms(":") %]

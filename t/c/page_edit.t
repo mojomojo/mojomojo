@@ -8,12 +8,12 @@ $ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
 
 BEGIN {
     eval "use Test::WWW::Mechanize::Catalyst 'MojoMojo'";
-    my $catmech = ! $@;
+    plan skip_all => 'need Test::WWW::Mechanize::Catalyst' if $@;
+
     eval "use WWW::Mechanize::TreeBuilder";
-    my $mech_treebuilder = ! $@;
-    plan $catmech && $mech_treebuilder
-    ? ( tests => 6 )
-    : ( skip_all => 'needs Test::WWW::Mechanize::Catalyst and WWW::Mechanize::TreeBuilder for this test' ) ;
+    plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
+
+    plan tests => 6;
 }
 
 use_ok('MojoMojo::Controller::Page');

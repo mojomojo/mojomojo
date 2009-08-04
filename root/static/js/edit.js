@@ -4,6 +4,7 @@ $(document).ready(function() {
     var $content_preview    = $("#content_preview");
     var $edit_help          = $("#edithelp");
 
+    _set_edit_styles();
     setupFormatterToolbar();
     setupEditHelp();
     toggleDefaultValue($("#authorName"));
@@ -40,19 +41,36 @@ $(document).ready(function() {
 
 // toggles between horizontal and vertical splitting of the preview and edit areas
 toggle_split_mode = function() {
-  
-    // if already vertically splitted 
-    if ($("div#edit_form").css('float')=='left'){
-        $("div#content_preview").css('width','100%');
-        $("div#edit_form").css('width','100%');
-        $("div#edit_form").css('float','right');
-        $.cookies.set('split_edit',0);
+    _set_edit_styles();
+};
+
+_set_edit_styles = function() {
+    var window_height = $(window).height();
+
+    // if already vertically split
+    if ( $("#edit_form").css('float') == 'left' ){
+
+        $("#content_preview").css('width', '100%');
+        $("#edit_form").css('width', '100%');
+        $("#edit_form").css('float', 'right');
+
+        $("#content_preview").height( window_height * 0.32 );
+        $("#body").height( window_height * 0.30 );
+
+        $("#edit_form").css('margin-left', '0');
+
+        $.cookies.set('split_edit', 0);
     } else {
         // switch to vertical split: preview area to the left of edit area
-        $("div#edit_form").css('float','left');
-        $("div#content_preview").css('width','49%');
-        $("div#edit_form").css('width','49%');
-        $.cookies.set('split_edit',1);
+        $("#content_preview").css('width', '49%');
+        $("#edit_form").css('float', 'left');
+        $("#edit_form").css('margin-left', '1%');
+        $("#edit_form").css('width', '48%');
+
+        $("#content_preview").height( window_height * 0.65 );
+        $("#body").height( window_height * 0.58 );
+
+        $.cookies.set('split_edit', 1);
     }
 };
 
@@ -96,17 +114,17 @@ setupFormatterToolbar = function() {
     // Formatter
     $toolbar.append(_createToolbarSelect(loc('Formatter'), [
         [ loc('IRC formatter'), '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
-        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n',loc("=head1 Header")]
+        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n', loc("=head1 Header")]
     ]));
 
-    // Insert 
+    // Insert
     $toolbar.append(_createToolbarSelect(loc('Insert'), [
-        [ loc('comments'), '\n{{comments}}\n','',''],
+        [ loc('comments'), '\n{{comments}}\n', '', ''],
         [ loc('toc'), '\n{{toc}}','',''],
-        [ loc('redirect'), '\n{{redirect ','}}','/new/location'],
-        [ loc('include'), '\n{{','}}','http://www.google.com'],
-        [ loc('youtube'), '\n{{youtube ','}}','http://www.youtube.com'],
-        [ loc('cpan'), '\n{{cpan ','}}','MojoMojo']
+        [ loc('redirect'), '\n{{redirect ', '}}', '/new/location'],
+        [ loc('include'), '\n{{', '}}', 'http://www.google.com'],
+        [ loc('youtube'), '\n{{youtube ','}}', 'http://www.youtube.com'],
+        [ loc('cpan'), '\n{{cpan ', '}}', 'MojoMojo::Formatter']
     ]));
 
     // make sure it is initialized
@@ -115,7 +133,7 @@ setupFormatterToolbar = function() {
     }
 
     // Syntax highlight
-    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'), 
+    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'),
         $.map(syntax_formatters, function(n, i) {
             return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n',loc('say "Howdy partner.";') ]];
         })
@@ -127,43 +145,45 @@ setupFormatterToolbar = function() {
     if(wiki_type == 'main' || wiki_type == 'textile') {
         buttons = [
             [ 'heading', loc('Main heading'), '\n\nh1. ','\n\n',loc('Also try h2,h3 and so on')],
-            [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
-            [ 'list_enum', loc('Enum list'), '\n\n# ','\n\n',loc('Numbered list item')],
-            [ 'code', loc('Code'), '@','@',loc('code')],
-            [ 'quote', loc('Block quote'), 'bq. ','',loc('quote')],
-            [ 'left', loc('Left-justified paragraph'), '\n\np<. ','\n\n',loc('left justified paragraph')],
-            [ 'right', loc('Right-justified paragraph'), '\n\np>. ','\n\n',loc('right justified paragraph')],
-            [ 'center', loc('Centered paragraph'), '\n\np=. ','\n\n',loc('centered paragraph')],
-            [ 'justify', loc('Justified paragraph'), '\n\np<>. ','\n\n',loc('justified paragraph')],
-            [ 'bold', loc('Bold'), '*','*',loc('bold')],
-            [ 'italic', loc('Italic'), '_','_',loc('italic')],
-            [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
-            [ 'big', loc('Bigger'), '++','++',loc('bigger')],
-            [ 'small', loc('Smaller'), '--','--',loc('small')],
-            [ 'super', loc('Superscript'), '^','^',loc('superscript')],
-            [ 'sub', loc('Subscript'), '[~','~]',loc('subscript')],
-            [ 'wikilink', loc('Internal Link'), '[[',']]','/MojoMojo|Interwiki Link'],
-            [ 'hyperlink', loc('External Link'), '&quot;','&quot;:/','link(hyper)'],
-            [ 'drawing_left', loc('Picture left'), '<div class=photo>!<','!</div>','/.static/catalyst.png(Catalyst)'],
-            [ 'drawing', loc('Picture'), '<div class=photo>!','!</div>','/.static/catalyst.png(Catalyst)'],
-            [ 'drawing_right', loc('Picture Right'), '<div class=photo>!>','!</div>','/.static/catalyst.png(Catalyst)']
+            [ 'list_bullet', loc('Bullet list'), '\n\n* ', '\n\n', loc('List item 1')],
+            [ 'list_enum', loc('Enum list'), '\n\n# ', '\n\n', loc('Numbered list item')],
+            [ 'code', loc('Code'), '@', '@', loc('code')],
+            [ 'quote', loc('Block quote'), 'bq. ','', loc('quote')],
+            [ 'left', loc('Left-justified paragraph'), '\n\np<. ','\n\n', loc('left justified paragraph')],
+            [ 'right', loc('Right-justified paragraph'), '\n\np>. ','\n\n', loc('right justified paragraph')],
+            [ 'center', loc('Centered paragraph'), '\n\np=. ','\n\n', loc('centered paragraph')],
+            [ 'justify', loc('Justified paragraph'), '\n\np<>. ','\n\n', loc('justified paragraph')],
+            [ 'bold', loc('Bold'), '*', '*', loc('bold')],
+            [ 'italic', loc('Italic'), '_','_', loc('italic')],
+            [ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
+            [ 'big', loc('Bigger'), '++','++', loc('bigger')],
+            [ 'small', loc('Smaller'), '--','--', loc('small')],
+            [ 'super', loc('Superscript'), '^','^', loc('superscript')],
+            [ 'sub', loc('Subscript'), '[~','~]', loc('subscript')],
+            [ 'wikilink', loc('Internal Link'), '[[/path/to/page|', ']]', loc('Intrawiki Link')],
+            [ 'hyperlink', loc('External Link'), '"', '":URL', loc('linked text')],
+            [ 'drawing_left',  loc('Picture left'),  '<div class=photo style="float: left">!<',  '!</div>','/.static/catalyst.png(Catalyst)'],
+            [ 'drawing',       loc('Picture'),       '<div class=photo>!',                       '!</div>','/.static/catalyst.png(Catalyst)'],
+            [ 'drawing_right', loc('Picture Right'), '<div class=photo style="float: right">!>', '!</div>','/.static/catalyst.png(Catalyst)']
         ];
     }
 
     // markdown buttons
     else if(wiki_type = 'markdown') {
         buttons = [
-            [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n',loc('increase # for smaller headline')],
-            [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n',loc('List item 1')],
-            [ 'list_enum', loc('Enum list'), '\n\n1. ','\n\n',loc('Numbered list item')],
-            [ 'bold', loc('Bold'), '**','**',loc('bold')],
+            [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n', loc('increase # for smaller headline')],
+            [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n', loc('List item 1')],
+            [ 'list_enum', loc('Enum list'), '\n\n1. ', '\n\n', loc('Numbered list item')],
+            [ 'quote', loc('Block quote'), '> ','', loc('quote')],
+            [ 'code', loc('Code'), '`', '`', loc('code')],
+            [ 'bold', loc('Bold'), '**','**', loc('bold')],
             [ 'italic', loc('Italic'),'_','_', loc('italic')],
-            [ 'strikethrough', loc('Deleted Text'), '-','-',loc('deleted')],
-            [ 'wikilink', loc('Internal Link'), '[[',']]','/MojoMojo|Interwiki Link'],
-            [ 'hyperlink', loc('External Link'), '[',']()',loc('url inside paranthesis')],
-            [ 'drawing_left', loc('Picture left'), '<div class=photo style=&quot;float: left&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
-            [ 'drawing', loc('Picture'), '<div class=photo>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ],
-            [ 'drawing_right', loc('Picture Right'), '<div class=photo style=&quot;float: right&quot;>![alt text](', ' &quot;Title&quot;)</div>', '/.static/catalyst.png' ]
+            [ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
+            [ 'wikilink', loc('Internal Link'), '[[/path/to/page|', ']]', loc('Intrawiki Link')],
+            [ 'hyperlink', loc('External Link'), '[', '](URL)', loc('linked text')],
+            [ 'drawing_left',  loc('Picture left'),  '<div class=photo style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing',       loc('Picture'),       '<div class=photo>![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing_right', loc('Picture Right'), '<div class=photo style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]
         ];
     }
 

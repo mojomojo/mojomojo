@@ -18,48 +18,58 @@
     <h2>[%loc('All Pages')%]</h2>
     [%loc('All pages in x listed alphabetically', page.name )%]
     <ul>
-[% FOREACH page IN pages +%]
-        <li><a href="[% c.uri_for(page.path) %]">[% page.path %]</a> [% page.content.abstract %]</li>
-[% END +%]
+      [% FOREACH subpage IN pages +%]
+        <li><a href="[% c.uri_for(subpage.path) %]">[% subpage.path %]</a> [% subpage.content.abstract %]</li>
+      [% END +%]
     </ul>
 </div>
 
 [% IF ! activetag +%]
 <div id="wantedPages">
+    <h2>[%loc('Sub Page Tools')%]</h2>
+
+    <ul id="path_links">
+        <li><a href="[% c.uri_for('recent') %]">[% loc('Recent changes in x', page.path) %]</a></li>
+        <li><a href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]">[% loc('Tags') %]</a></li>
+        <li><a href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors in this path') %]</a></li>
+        <li><a href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]">[% loc('Feeds') %]</a></li>
+        <li><a href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this path') %]">[% loc('Export') %]</a></li>
+    </ul>
+
     <h2>[%loc('Backlinks')%]</h2>
-    [%loc('Other pages that link to this page.')%]
+    [% loc('Other pages that link to this page.') %]
     [% IF backlinks.size +%]
     <ul style="margin-bottom: 10px">
-        [% FOR backlink = backlinks.list +%]
+      [% FOR backlink IN backlinks.list +%]
         <li>[% c.wikiword( backlink.from_page.path, base ) %]</li>
-        [% END +%]
+      [% END +%]
     </ul>
     [% END +%]
 
     <h2>[%loc('Wanted Pages')%]</h2>
-    [%loc('Links to non-existent pages.')%]
+    [% loc('Links to non-existent pages.') %]
 
-    [% IF wanted.size +%]
+  [% IF wanted.size +%]
     <ul style="margin-bottom: 10px">
-        [% FOR wanted = wanted.list +%]
+      [% FOR wanted IN wanted.list +%]
         <li>
             <span class="newWikiWord">[% wanted.to_path %]<a title="[%loc('Not found. Click to create this page.')%]" href="[%c.uri_for(wanted.to_path,'.edit')%]" rel="nofollow">?</a></span>
             <span class="wantedBy">[% loc('referenced by x', wanted.from_page.path) %]</a></span>
         </li>
-        [% END +%]
+      [% END +%]
     </ul>
-    [% END +%]
+  [% END +%]
 
     <h2>[% loc('Orphaned Pages') %]</h2>
     [% loc('Pages to which no other pages link.') %]
 
-    [% IF orphans.size +%]
+  [% IF orphans.size +%]
     <ul style="margin-bottom: 35px">
-        [% FOR orphan = orphans.list %]
+      [% FOR orphan IN orphans.list %]
         <li><a href="[% c.uri_for( orphan.path) %]">[%orphan.path%]<a href="[%c.uri_for(_orphan.path,edit)%]" rel="nofollow">_</a></span></li>
-        [% END +%]
+      [% END +%]
     </ul>
-    [% END +%]
+  [% END +%]
 </div>
 
 [%+ END # !activetag +%]

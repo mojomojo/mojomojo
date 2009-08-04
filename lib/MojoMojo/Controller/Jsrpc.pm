@@ -1,12 +1,12 @@
 package MojoMojo::Controller::Jsrpc;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 use HTML::Entities;
 
 =head1 NAME
 
-MojoMojo::Controller::Jsrpc - Various JsRPC functions.
+MojoMojo::Controller::Jsrpc - Various JSRPC functions.
 
 =head1 SYNOPSIS
 
@@ -19,9 +19,7 @@ These methods will be called indirectly through javascript functions.
 
 =head1 ACTIONS
 
-=over 4
-
-=item render (/.jsrpc/render)
+=head2 render ( /.jsrpc/render )
 
 Edit uses this to get live preview. It gets some content in
 params->{content} and runs it through the formatter chain.
@@ -44,7 +42,7 @@ sub render : Local {
     $c->res->output($output);
 }
 
-=item child_menu (/.jsrpc/child_menu?page_id=$page_id)
+=head2 child_menu ( /.jsrpc/child_menu?page_id=$page_id )
 
 Returns a list of children for the page given by the page_id parameter,
 formatted for inclusion in a vertical tree navigation menu.
@@ -57,7 +55,7 @@ sub child_menu : Local {
     $c->stash->{template}    = 'child_menu.tt';
 }
 
-=item diff (/.jsrpc/diff)
+=head2 diff ( /.jsrpc/diff )
 
 Loads diff on demand. Takes an absolute revision number as arg,
 and diffs it against the previous version.
@@ -94,7 +92,7 @@ sub diff : Local {
     }
 }
 
-=item submittag (/.jsrpc/submittag)
+=head2 submittag ( /.jsrpc/submittag )
 
 Add a tag through form submit
 
@@ -105,7 +103,7 @@ sub submittag : Local {
     $c->forward( '/jsrpc/tag', [ $c->req->params->{tag} ] );
 }
 
-=item tag (/.jsrpc/tag)
+=head2 tag ( /.jsrpc/tag )
 
 Add a tag to a page. Returns a list of yours and popular tags.
 
@@ -137,7 +135,7 @@ sub tag : Local Args(1) {
     $c->forward('/page/inline_tags');
 }
 
-=item untag (/.jsrpc/untag)
+=head2 untag ( /.jsrpc/untag )
 
 Remove a tag from a page. Returns a list of yours and popular tags.
 
@@ -157,7 +155,7 @@ sub untag : Local Args(1) {
     $c->forward('/page/inline_tags');
 }
 
-=item imginfo (.jsrpc/imginfo)
+=head2 imginfo ( .jsrpc/imginfo )
 
 Inline info on hover for gallery photos.
 
@@ -169,7 +167,7 @@ sub imginfo : Local {
     $c->stash->{template} = 'gallery/imginfo.tt';
 }
 
-=item usersearch (.jsrpc/usersearch)
+=head2 usersearch ( .jsrpc/usersearch )
 
 Backend that handles jQuery autocomplete requests for users.
 
@@ -182,14 +180,14 @@ sub usersearch : Local {
     $c->stash->{template} = "user/user_search.tt";
 
     if (defined($query) && length($query)) {
-        my $rs = $c->model('DBIC::Person')->search_like({
-            login => '%'.$query.'%'
+        my $rs = $c->model('DBIC::Person')->search({
+            login => { -like => '%'.$query.'%'}
         });
         $c->stash->{users} = [ $rs->all ];
     }
 }
 
-=item set_permissions (.jsrpc/ser_permissions)
+=head2 set_permissions ( .jsrpc/set_permissions )
 
 Sets page permissions.
 
@@ -255,7 +253,7 @@ sub set_permissions : Local {
     $c->res->status(200);
 }
 
-=item clear_permissions (.jsrpc/clear_permissions)
+=head2 clear_permissions ( .jsrpc/clear_permissions )
 
 Clears this page permissions for a given role (making permissions inherited).
 
@@ -291,7 +289,7 @@ sub clear_permissions : Local {
 
 }
 
-=item validate_perm_edit
+=head2 validate_perm_edit
 
 Validates if the user is able to edit permissions and if a role was supplied.
 
@@ -322,16 +320,14 @@ sub validate_perm_edit : Private {
     $c->stash->{role} = $role;
 }
 
-=back
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>, David Naughton <naughton@cpan.org>
 
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify it under
-the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
 

@@ -1,1 +1,1 @@
-[% user.active || '0' %]
+[% user.active ? 'yes' : 'no' %]

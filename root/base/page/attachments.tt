@@ -1,13 +1,19 @@
 [% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
 <div id="content">
 
-[% IF c.req.params.plain %]
+[% IF c.req.params.plain || ! c.user.obj %]
+  [% IF c.user.obj %]
 <p>(<a href="[%c.uri_for('attachments',{plain=>0})%]">[%loc('Switch to flash uploader')%]</a>)
-<form action="[%c.uri_for('attachments')%]" enctype="multipart/form-data" method="post">
+
+<form action="[%c.uri_for('plain_upload')%]" enctype="multipart/form-data" method="post">
     <input type="hidden" name="plain" value="1"/>
     <input type="file" name="file"/>
     <input type="submit" name="submit" value="[%loc('Click Here to Upload Attachments')%]"/>
 </form>
+
+  [% END %]
+<br />
+
 [% ELSE %]
 <a href="#" id="do_upload">[%loc('Choose attachments')%]</a>
 <p>[%loc('Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window.')%] </p>
@@ -16,12 +22,18 @@
 <a href="[%c.uri_for('attachment/list')%]" id="list_link"></a>
 <a href="[%c.uri_for('attachment/flash_upload',{id=>c.user.obj.id,verify=>c.user.obj.hashed(c.pref('entropy'))})%]" id="upload_link"></a>
 
-<div id='progressbar'><div id="progress"></div></div>
+<div id="progressbar"><div id="progress"></div></div>
 
 <h3 id="progress_status"></h3>
-[% END -%]
-<div id="attachments">[% PROCESS attachments/list.tt %]</div>
-<a href="[% c.uri_for('gallery') %]">[% loc('View as gallery') %]</a>
 
+[% END -%]
+
+<div id="attachments">
+
+[% IF page.attachments.size %]
+[% PROCESS attachments/list.tt %]
+[% END %]
+
+</div>
 </div>
 [% END # End WRAPPER %]

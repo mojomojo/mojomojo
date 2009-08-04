@@ -1,14 +1,14 @@
 package MojoMojo::Formatter::Pod;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 # Pod::Simple::HTML gives warnings for version_tag_comment()
 # because $self->VERSION is empty in the sprintf.  We don't
 # really care about this sub do we?  It's been monkey zapped.
-BEGIN 
+BEGIN
 {
     use Pod::Simple::HTML;
     no warnings 'redefine';
-    *{"Pod::Simple::HTML::version_tag_comment"} = sub { 
+    *{"Pod::Simple::HTML::version_tag_comment"} = sub {
         my $self = shift;
         return;
     }
@@ -21,22 +21,20 @@ MojoMojo::Formatter::Pod - format part of content as POD
 
 =head1 DESCRIPTION
 
-This formatter will format content between {{pod}} and {{end}} as 
+This formatter will format content between {{pod}} and {{end}} as
 POD (Plain Old Documentation).
 
 =head1 METHODS
 
-=over 4
+=head2 format_content_order
 
-=item format_content_order
-
-Format order can be 1-99. The Pod formatter runs on 10
+Format order can be 1-99. The POD formatter runs on 10.
 
 =cut
 
 sub format_content_order { 10 }
 
-=item format_content
+=head2 format_content
 
 calls the formatter. Takes a ref to the content as well as the
 context object.
@@ -69,9 +67,9 @@ sub format_content {
     }
 }
 
-=item to_pod <pod> <base>
+=head2 to_pod <pod> <base>
 
-takes some POD documentation, and a base url, and renders it as HTML.
+Takes some POD documentation, a base URL, and renders it as HTML.
 
 =cut
 
@@ -91,11 +89,11 @@ package MojoMojo::Formatter::Pod::Simple::HTML;
 
 # base class for doing links
 
-use base 'Pod::Simple::HTML';
+use parent 'Pod::Simple::HTML';
 
-=item Pod::Simple::HTML::new
+=head2 Pod::Simple::HTML::new
 
-extended for setting base
+Extended for setting C<base>.
 
 =cut
 
@@ -106,7 +104,7 @@ sub new {
     return $self;
 }
 
-=item Pod::Simple::HTML::do_link
+=head2 Pod::Simple::HTML::do_link
 
 Set links based on base
 
@@ -124,11 +122,9 @@ sub do_link {
     $self->{base} . "$link$section";
 }
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<POD::Tree::HTML>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<POD::Tree::HTML>
 
 =head1 AUTHORS
 
@@ -136,7 +132,8 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

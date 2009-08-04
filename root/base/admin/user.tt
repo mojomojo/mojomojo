@@ -21,7 +21,7 @@
 [% WHILE (user=users.next) %]
         <tr>
             [% activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
-            [% active=user.active || 0 %]
+            [% active=user.active ? 'yes' : 'no' %]
             <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
             <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
             <td>[% role.name FOR role=user.roles %]</td>
@@ -36,6 +36,21 @@
         </tr>
 [% END %]
     </table>
+
+    <p>
+[% IF pager.previous_page %]
+        <a href="[% c.uri_for('/.admin/user', {page => pager.previous_page}) %]">[% loc('Previous') %]</a>
+[% END %]
+
+[% IF pager.previous_page AND pager.next_page %]
+|
+[% END %]
+
+[% IF pager.next_page %]
+        <a href="[% c.uri_for('/.admin/user', {page => pager.next_page}) %]">[% loc('Next') %]</a>
+[% END %]
+    </p>
+
     <a href="[% c.uri_for('/.register') %]">[% loc('Add user') %]</a>
 </div>
 [% END # WRAPPER %]

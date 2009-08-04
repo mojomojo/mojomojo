@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::File::Pod;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::Pod;
 

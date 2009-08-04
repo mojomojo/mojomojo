@@ -12,7 +12,7 @@
     # Now, edits are lost.
 %]
 
-[% WRAPPER page/wrapper.tt pre_title=pre_titl %]
+[% WRAPPER page/wrapper.tt pre_title=pre_title %]
 <div id="content">
 
 <script type="text/javascript">
@@ -55,8 +55,8 @@
                 <img id="editspinner" src="[% c.uri_for_static('spinner.gif') %]" alt="[% loc('busy spinner') %]"/>
             </div>
 
+            <input type="submit" name="submit" value="[% IF page.content && page.content.version >= 1; loc('Save and View'); ELSE; loc('Create and View'); END %]" />
             <input type="submit" name="submit" value="[% loc('Save') %]"/>
-            <input type="submit" name="submit" value="[% IF page.content && page.content.version > 1; loc('Save and View'); ELSE; loc('Create and View'); END %]" />
             [% loc('as') %]
             [% IF user.id %]
                 [% SET user_profile_wanted =1 %]
@@ -64,9 +64,9 @@
                 (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
             [% ELSE %]
             <input type="text" name="login" id="authorName" value="[% c.pref('anonymous_user')%]" />
-            <input type="password" name="pass" id="userAuth" />
+            <input type="password" name="pass" id="userAuth" value="f**k" size="16" />
             <br/>
-            ([% loc('Leave second blank if you do not want a password') %].
+            ([% loc('Leave the second field blank if you do not want a password)') %]
             [% END %]
             [% captcha +%]
         </form>

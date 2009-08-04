@@ -1,6 +1,11 @@
 use inc::Module::Install;
 
 name 'MojoMojo';
+resources bugtracker => 'http://github.com/marcusramberg/mojomojo/issues';
+resources homepage => 'http://mojomojo.org';
+resources Repository => 'http://github.com/marcusramberg/mojomojo/';
+resources MailingList => 'http://n2.nabble.com/mojomojo-f2358427.html';
+
 all_from 'lib/MojoMojo.pm';
 
 requires(
@@ -21,7 +26,7 @@ requires(
     'Catalyst::Plugin::I18N'                       => 0,
     'Catalyst::Plugin::SubRequest'                 => '0.13',
     'Catalyst::Plugin::Session::State::Cookie'     => 0.11,
-    'Catalyst::Plugin::Session::Store::File'       => '0.15',
+    'Catalyst::Plugin::Session::Store::Cache'      => '0',
     'Catalyst::Plugin::Setenv'                     => 0,
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::Unicode'                    => '0.8',
@@ -58,6 +63,7 @@ requires(
     'KinoSearch'                                   => '0.165',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'Number::Format'                               => 0,
     'Catalyst::Plugin::PageCache'                  => '0.21',
     'parent'                                       => 0,
     'String::Diff'                                 => 0,
@@ -86,6 +92,7 @@ feature 'RSS Formatter', 'XML::Feed';
 feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 
+test_requires 'Test::More' => '0.82';
 test_requires 'Email::Send::Test';
 test_requires 'WWW::Mechanize' => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ',;

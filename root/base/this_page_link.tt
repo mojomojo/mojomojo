@@ -1,0 +1,19 @@
+    [%- IF c.req.action == "view" %]
+      [%- IF    (!rev OR rev == page.content_version)
+            AND (
+                   c.pref('anonymous_user')
+                OR
+                   (user.active AND user.can_edit(page.path))
+            )
+      %]
+        <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit') %]"
+               [% IF accesskey %]
+               accesskey="E"
+               [% END %]
+               rel="nofollow">[% loc('Edit page') %]</a></li>
+      [% ELSE +%]
+        <li>[% loc('Edit page') %]</li>
+      [% END %]
+    [% ELSE +%]
+        <li><a title="[% loc('Back to the page') %]" href="[% c.uri_for('view') %]">[% loc('Page') %]</a></li>
+    [% END %]

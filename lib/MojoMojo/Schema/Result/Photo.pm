@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Photo;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use DateTime;
 use Image::ExifTool;
@@ -11,9 +11,9 @@ use Image::Math::Constrain;
 my $exif = Image::ExifTool->new();
 
 __PACKAGE__->load_components(
-    qw/PK::Auto DateTime::Epoch TimeStamp Ordered Core/);
+    qw/DateTime::Epoch TimeStamp Ordered Core/);
 
-__PACKAGE__->position_column('position');
+__PACKAGE__->position_column("position");
 __PACKAGE__->table("photo");
 __PACKAGE__->add_columns(
     "id",
@@ -72,11 +72,9 @@ MojoMojo::Schema::Result::Photo
 
 =head1 METHODS
 
-=over 4
-
 =cut
 
-=item extract_exif
+=head2 extract_exif
 
 Extracts EXIF information from a given Attachment and
 populates the Photo object.
@@ -94,9 +92,9 @@ sub extract_exif {
     $self->taken( $self->exif2datetime( $info->{'DateTimeOriginal'} ) );
 }
 
-=item exif2datetime datetime
+=head2 exif2datetime datetime
 
-Creates a L<DateTime> object from a EXIF timestamp.
+Creates a L<DateTime> object from an EXIF timestamp.
 
 =cut
 
@@ -120,9 +118,9 @@ sub exif2datetime {
     return $dto;
 }
 
-=item prev_by_tag <tag>
+=head2 prev_by_tag <tag>
 
-Return previous image when browsing by a given tag.
+Return previous image when browsing by the given tag.
 
 =cut
 
@@ -134,9 +132,9 @@ sub prev_by_tag {
     )->next;
 }
 
-=item next_by_tag <tag>
+=head2 next_by_tag <tag>
 
-Return next image object after this when browsing by the given tag.
+Return the next image when browsing by the given tag.
 
 =cut
 
@@ -148,9 +146,9 @@ sub next_by_tag {
     )->next;
 }
 
-=item others_tags <user>
+=head2 others_tags <user>
 
-Tags other users have given to this Photo.
+Tags other users have given to this photo.
 
 =cut
 
@@ -171,7 +169,7 @@ sub others_tags {
     return @tags;
 }
 
-=item user_tags <user>
+=head2 user_tags <user>
 
 Tags this user has given to this photo.
 
@@ -189,7 +187,7 @@ sub user_tags {
     return @tags;
 }
 
-=item make_inline
+=head2 make_inline
 
 Create a resized version of a photo suitable for inline usage.
 
@@ -207,7 +205,7 @@ sub make_inline {
       or die $img->errstr;
 }
 
-=item make_thumb
+=head2 make_thumb
 
 Create a thumbnail version of a photo, for gallery views and linking to pages.
 
@@ -252,7 +250,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

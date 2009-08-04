@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::Journal;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("journal");
 __PACKAGE__->add_columns(
     "pageid",
@@ -25,12 +25,15 @@ __PACKAGE__->belongs_to( "pageid", "MojoMojo::Schema::Result::Page", { id => "pa
 
 MojoMojo::Schema::Result::Journal
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
 1;
-

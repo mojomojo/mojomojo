@@ -1,7 +1,7 @@
 package MojoMojo::Controller::User;
 
 use strict;
-use base qw/Catalyst::Controller::HTML::FormFu/;
+use parent qw/Catalyst::Controller::HTML::FormFu/;
 
 use Digest::MD5 qw/md5_hex/;
 use Text::Password::Pronounceable;
@@ -21,9 +21,7 @@ password recovery and profile editing.
 
 =head1 ACTIONS
 
-=over 4
-
-=item login (/.login)
+=head2 login (/.login)
 
 Log in through the authentication system.
 
@@ -60,7 +58,7 @@ sub login : Global : FormConfig {
     $c->stash->{template} ||= "user/login.tt";
 }
 
-=item logout (/.logout)
+=head2 logout ( /.logout )
 
 Log out the user.
 
@@ -70,10 +68,11 @@ sub logout : Global {
     my ( $self, $c ) = @_;
     $c->logout;
     undef $c->stash->{user};
-    $c->forward('/page/view');
+
+    $c->response->redirect( $c->uri_for('view') );
 }
 
-=item users (/.users)
+=head2 users ( /.users )
 
 Show a list of the active users with links to the pages they edited.
 
@@ -93,13 +92,6 @@ sub users : Global {
     $c->stash->{pager}    = $res->pager;
     $c->stash->{template} = 'user/list.tt';
 }
-
-=item prefs
-
-Main user preferences screen.
-
-=cut
-
 
 sub page_user : Private {
     my ( $self, $c ) = @_;
@@ -126,6 +118,13 @@ sub page_user : Private {
     }
 }
 
+=head2 prefs ( .prefs )
+
+Main user preferences screen.
+
+=cut
+
+
 sub prefs : Global FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
@@ -144,7 +143,7 @@ sub prefs : Global FormConfig {
     }
 }
 
-=item password (/prefs/password')
+=head2 password ( .prefs/password )
 
 Change password action.
 
@@ -207,7 +206,7 @@ sub recover_pass : Global {
     }
 }
 
-=item register (/.register)
+=head2 register ( /.register )
 
 Show new user registration form.
 
@@ -237,13 +236,11 @@ sub register : Global FormConfig {
         && ( !( $c->stash->{user} && $c->stash->{user}->is_admin ) ) )
     {
         my $captcha_lang = $c->session->{lang} || $c->pref('default_lang');
-        my $captcha = $form->element(
-            {
+        my $captcha = $form->element({
                 type              => 'reCAPTCHA',
                 name              => 'captcha',
                 recaptcha_options => { lang => $captcha_lang, theme => 'white' }
-            }
-        );
+        });
         $form->process;
     }
 
@@ -284,7 +281,7 @@ sub is_account_taken : Private {
     return $person_rs->count;
 }
 
-=item do_register (/.register)
+=head2 do_register ( /.register )
 
 New user registration processing.
 
@@ -315,7 +312,7 @@ sub do_register : Private {
     $c->stash->{template} = 'user/validate.tt';
 }
 
-=item validate (/.validate)
+=head2 validate ( /.validate )
 
 Validation of user email. Will accept a md5_hex mailed to the user
 earlier. Non-validated users will only be able to log out.
@@ -343,7 +340,7 @@ sub validate : Global {
     $c->stash->{template} = 'user/validate.tt';
 }
 
-=item reconfirm
+=head2 reconfirm
 
 Send the confirmation mail again to another address.
 
@@ -368,7 +365,7 @@ sub reconfirm : Local {
     $c->res->redirect( $c->uri_for('/') );
 }
 
-=item profile .profile
+=head2 profile ( .profile )
 
 Show user profile.
 
@@ -458,8 +455,6 @@ sub do_editprofile : Global {
     $c->forward('editprofile');
 }
 
-=back
-
 =head1 AUTHOR
 
 David Naughton <naughton@cpan.org>,
@@ -468,7 +463,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

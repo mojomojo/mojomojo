@@ -2,7 +2,7 @@ package MojoMojo::Controller::PageAdmin;
 use warnings;
 use strict;
 use Data::Dumper;
-use base 'Catalyst::Controller::HTML::FormFu';
+use parent 'Catalyst::Controller::HTML::FormFu';
 use Syntax::Highlight::Engine::Kate;
 
 =head1 NAME
@@ -99,13 +99,20 @@ sub edit : Global FormConfig {
 
     # for anonymous users, use CAPTCHA, if enabled
     if ( $user == 1 && $c->pref('use_captcha') ) {
-       my $captcha_lang= $c->session->{lang} || $c->pref('default_lang') ;
-       $c->stash->{captcha}=$form->element({ type=>'reCAPTCHA', name=>'captcha', recaptcha_options=>{ lang => $captcha_lang , theme=>'white' } });
-       $form->process;
+        my $captcha_lang = $c->session->{lang} || $c->pref('default_lang') ;
+        $c->stash->{captcha} = $form->element({
+            type => 'reCAPTCHA',
+            name => 'captcha',
+            recaptcha_options => {
+                lang  => $captcha_lang,
+                theme => 'white'
+            }
+        });
+        $form->process;
     }
 
-    my $syntax=new Syntax::Highlight::Engine::Kate;
-    $c->stash->{syntax_formatters}=[ $syntax->languageList() ];
+    my $syntax = new Syntax::Highlight::Engine::Kate;
+    $c->stash->{syntax_formatters} = [ $syntax->languageList() ];
 
     if ( $form->submitted_and_valid ) {
 
@@ -126,7 +133,7 @@ sub edit : Global FormConfig {
         $stash->{content} = $page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
-# refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
+        # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
         #$page = $c->model("DBIC::Page")->find( $page->id );
         $page->discard_changes;
 
@@ -175,13 +182,28 @@ sub edit : Global FormConfig {
         # this will always happen on the initial request
         $stash->{page} = $page;
 
-        # Note that this isn't a real Content object, just a proto object!!!
-        # It's just a hash, not blessed into the Content package.
-        $stash->{content} = $c->model("DBIC::Content")->create_proto($page);
-        $stash->{content}->{creator} = $user;
-        $c->req->params->{body} = $stash->{content}->{body}
-          unless $c->req->params->{body};
-        return;
+        # Insert an attachment, or inline an image.
+        my %attachment_template = (
+            insert_attachment       => 'page/insert.tt',
+            inline_image_attachment => 'page/inline_image.tt',
+        );
+        foreach my $attachment_action ( keys %attachment_template ) {
+            if (my $attachment_id = $c->req->query_params->{$attachment_action} ) {
+                my $saved_stash = $stash;
+
+                my $attachment = $c->model("DBIC::Attachment")
+                                   ->find( { id => $attachment_id } );
+
+                $c->stash( { att => $attachment } );
+
+                my $insert_text = $c->view('TT')->render( $c, $attachment_template{$attachment_action} );
+                $insert_text =~ s/^\s+|\s+$//;
+
+                $c->stash($saved_stash);
+
+                $page->content->body( $page->content->body . "\n\n" . $insert_text . "\n\n" );
+            }
+        }
     }
 }    # end sub edit
 
@@ -274,18 +296,6 @@ sub rollback : Global {
     }
 }
 
-=head2 delete
-
-This action will delete a page.
-
-=cut
-
-sub delete : Global {
-    my ( $self, $c, $page ) = @_;
-    $c->stash->{page}->delete;
-    $c->forward('/page/view');
-}
-
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
@@ -293,7 +303,7 @@ Marcus Ramberg <mramberg@cpan.org>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 

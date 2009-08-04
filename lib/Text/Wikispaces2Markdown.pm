@@ -12,9 +12,7 @@ Do a rough conversion of Wikispaces.com markup into Markdown.
 
 =head1 METHODS
 
-=over 4
-
-=item convert
+=head2 convert
 
 Does the conversion using dumb regexp rules. Would fare better with a proper parser.
 
@@ -62,17 +60,14 @@ sub convert {
     return (join "\n", @lines) . ($text =~ /(\n+)\z/? $1 : '');  # append the last \n if any, which would be lost by the initial split
 }
 
-=back
-
 =head1 AUTHORS
 
-Author: Dan Dascalescu (dandv), L<http://dandascalescu.com>
+Dan Dascalescu (dandv), L<http://dandascalescu.com>
 
 =head1 License
 
 This module is licensed under the same terms as Perl itself.
 
 =cut
-
 
 1;

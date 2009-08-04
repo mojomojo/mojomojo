@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::File::Test;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 
 =head1 NAME

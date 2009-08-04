@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Comment;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
 use Text::Textile;
 my $textile = Text::Textile->new(
@@ -14,7 +14,7 @@ my $textile = Text::Textile->new(
 );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("comment");
 __PACKAGE__->add_columns(
     "id",
@@ -65,11 +65,11 @@ MojoMojo::Schema::Result::Comment
 
 =head1 METHODS
 
-=over 4
+=head2 formatted
 
-=item formatted
+Returns a Textile formatted version of the given comment.
 
-Returns a textile formatted version of the given comment.
+TODO: the default formatter may not be Textile.
 
 =cut
 
@@ -77,5 +77,16 @@ sub formatted {
     my $self = shift;
     return $textile->process( $self->body );
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;

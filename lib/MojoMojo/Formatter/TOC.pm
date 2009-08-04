@@ -21,9 +21,7 @@ make it have C<class="notoc">
 
 =head1 METHODS
 
-=over 4
-
-=item format_content_order
+=head2 format_content_order
 
 The TOC formatter expects HTML input so it needs to run after the main
 formatter. Since comment-type formatters (order 91) could add a heading
@@ -33,7 +31,7 @@ for the comment section, the TOC formatter will run with a priority of 95.
 
 sub format_content_order { 95 }
 
-=item format_content
+=head2 format_content
 
 Calls the formatter. Takes a ref to the content as well as the context object.
 The syntax for the TOC plugin invocation is:
@@ -87,7 +85,7 @@ sub format_content {
     }
 }
 
-=item SEO-friendly anchors
+=head2 SEO-friendly anchors
 
 Anchors should be generated with SEO- (and human-) friendly names, i.e. out of the entire
 token text, instead of being numeric or reduced to the first word(s) of the token.
@@ -150,8 +148,6 @@ sub assembleAnchorName {
 }
 
 
-=back
-
 =head1 SEE ALSO
 
 L<MojoMojo> and L<Module::Pluggable::Ordered>.
@@ -162,7 +158,8 @@ Dan Dascalescu, L<http://dandascalescu.com>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

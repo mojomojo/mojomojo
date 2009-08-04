@@ -1,6 +1,6 @@
 package MojoMojo::Formatter::Wiki;
 
-use base qw/MojoMojo::Formatter/;
+use parent qw/MojoMojo::Formatter/;
 
 use URI;
 use Scalar::Util qw/blessed/;
@@ -25,11 +25,9 @@ Note that external links have a different syntax: [Link text](http://foo.com).
 
 =head1 METHODS
 
-=over 4
+=head2 format_content_order
 
-=item format_content_order
-
-Format order can be 1-99. The Wiki formatter runs on 10
+Format order can be 1-99. The Wiki formatter runs on 10.
 
 =cut
 
@@ -125,7 +123,7 @@ sub reinsert_pre {
     return $$content;
 }
 
-=item format_content
+=head2 format_content
 
 Calls the formatter. Takes a ref to the content as well as the
 context object.
@@ -180,7 +178,7 @@ sub format_content {
     $$content = reinsert_pre( $content, @parts );
 }
 
-=item format_link <c> <wikilink> <base> [<link_text>]
+=head2 format_link <c> <wikilink> <base> [<link_text>]
 
 Format a wikilink as an HTML hyperlink with the given link_text. If the wikilink
 doesn't exist, it will be rendered as a hyperlink to an .edit page ready to be
@@ -299,7 +297,7 @@ sub format_link {
     }
 }
 
-=item expand_wikilink <wikilink>
+=head2 expand_wikilink <wikilink>
 
 Replace C<_> with spaces and unescape URL-encoded characters
 
@@ -314,7 +312,7 @@ sub expand_wikilink {
     return $wikilink;
 }
 
-=item find_links <content> <page>
+=head2 find_links <content> <page>
 
 Find wiki links in content.
 
@@ -356,8 +354,6 @@ sub find_links {
     return ( \@linked_pages, \@wanted_pages );
 }
 
-=back
-
 =head1 SEE ALSO
 
 L<MojoMojo>, L<Module::Pluggable::Ordered>
@@ -368,7 +364,8 @@ Marcus Ramberg <mramberg@cpan.org>
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

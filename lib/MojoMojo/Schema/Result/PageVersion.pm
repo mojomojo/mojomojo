@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::PageVersion;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("page_version");
 __PACKAGE__->add_columns(
     "page",                  { data_type => "INTEGER", is_nullable => 0, size => undef },
@@ -21,6 +21,10 @@ __PACKAGE__->add_columns(
     "release_date",          { data_type => "VARCHAR", is_nullable => 0, size => 100 },
     "remove_date",           { data_type => "VARCHAR", is_nullable => 1, size => 100 },
     "comments",              { data_type => "TEXT",    is_nullable => 1, size => 4000 },
+
+    # FIXME: consider for 2 simple pages that both have only 1 revision, and there has been no
+    # making a second revision current. In the page_version table, some such pages have
+    # content_version_first and content_version_last (1, 1) and others (NULL, NULL)
     "content_version_first", { data_type => "INTEGER", is_nullable => 1, size => undef },
     "content_version_last",  { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
@@ -52,11 +56,16 @@ __PACKAGE__->has_many(
 
 MojoMojo::Schema::Result::PageVersion
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
+
 
 1;

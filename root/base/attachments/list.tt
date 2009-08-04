@@ -1,13 +1,67 @@
-[% FOR attachment IN page.attachments %]
-<p class="attachment">
-    <small>[%attachment.name%] ([%attachment.contenttype%]) |
-    [%IF attachment.size%][%attachment.size div 1024%]k [% ELSE %] Unknown[%END%] |
-       <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view')%]</a> |
-       <a href="[%c.uri_for('attachment',attachment.id,'inline')%]">[%loc('inline view')%]</a> |
-       <a href="[%c.uri_for('attachment',attachment.id,'download')%]">[%loc('download')%]</a> |
-       <a href="[%c.uri_for('attachment',attachment.id,'insert')%]">[%loc('insert link')%]</a> |
-       <a href="[%c.uri_for('attachment',attachment.id,'insert_content')%]">[%loc('insert content')%]</a> |
-       <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a> |
-    </small>
-</p>
-[% END %]
+<table>
+  <thead>
+    <tr>
+      <th id="filename-th">Filename</th>
+      <th id="type-th">Type</th>
+      <th id="size-th">Size</th>
+      <th id="date-th">Date</th>
+      <th id="actions-th">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  [% FOR attachment IN page.attachments %]
+    <tr>
+      <td>
+        <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[%attachment.name%]</a>
+        [% IF attachment.is_image %]
+        <br />
+      
+        <a href="[%c.uri_for('attachment',attachment.id,'view')%]">
+          <img src="[%c.uri_for('attachment',attachment.id,'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
+        </a>
+        [% END %]
+
+      </td>
+      <td>
+        [% loc(attachment.human_type) %]
+      </td>
+      <td>
+        [%IF attachment.size%][%attachment.human_size%] [% ELSE %] Unknown[%END%]
+      </td>
+      <td>
+        [% attachment.uploaded.strftime('%Y-%m-%d') %]
+      </td>
+      <td>
+        <ul id="actions">
+          [% IF attachment.is_image %]
+          <li>
+            <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view full size')%]</a>
+          </li>
+          [% ELSIF attachment.is_text %]
+          <li>
+            <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view in your browser')%]</a>
+          </li>
+          [% END %]
+          [% IF c.check_permissions(page.path,c.user).edit %]
+          <li>
+            <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
+          </li>
+            [% IF attachment.is_image %]
+          <li>
+            <a href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
+          </li>
+            [% END %]          
+          [% END %]
+          [% IF c.check_permissions(page.path,c.user).attachment %]
+          <li>
+            <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
+          </li>
+          [% END %]
+        </ul>
+      </td>
+    </tr>
+    [% END %]
+  </tbody>
+</table>
+
+<a href="[% c.uri_for('gallery') %]">[% loc('View as gallery') %]</a>

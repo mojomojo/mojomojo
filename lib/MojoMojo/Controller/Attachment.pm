@@ -1,7 +1,7 @@
 package MojoMojo::Controller::Attachment;
 
 use strict;
-use base 'Catalyst::Controller';
+use parent 'Catalyst::Controller';
 
 use IO::File;
 use URI::Escape ();
@@ -26,7 +26,6 @@ Permission control for mojomojo pages.
 
 sub auth : Private {
     my ( $self, $c ) = @_;
-    $c->detach('/user/login') unless $c->stash->{user};
 
     my $perms =
         $c->check_permissions( $c->stash->{'path'},
@@ -48,8 +47,16 @@ main attachment screen.  Handles uploading of new attachments.
 
 sub attachments : Global {
     my ( $self, $c ) = @_;
-    $c->forward('auth') ;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template} = 'page/attachments.tt';
+    $c->forward('check_file');
+}
+
+sub plain_upload : Global {
+    my ( $self, $c ) = @_;
+    $c->forward('auth');
     $c->forward('check_file');
 }
 
@@ -65,25 +72,37 @@ sub check_file : Private  {
             $c->stash->{template} = 'message.tt';
             $c->stash->{message}  = $c->loc("Could not create attachment from x",$file);
         }
-        $c->res->redirect( $c->req->base . $c->stash->{path} . '.attachments' )
+
+        my $redirect_uri = $c->uri_for('attachments', {plain => $c->req->params->{plain}});
+        $c->res->redirect($redirect_uri)
             unless defined $c->stash->{template} && $c->stash->{template} eq 'message.tt';
     }
 }
 
 sub flash_upload : Local {
     my ( $self, $c ) = @_;
-    my $user=$c->model('DBIC::Person')->find($c->req->params->{id});
-    $c->detach('/default') unless( $user->hashed($c->pref('entropy')) eq $c->req->params->{verify} );
+
+    my $user = $c->model('DBIC::Person')->find( $c->req->params->{id} );
+
+    $c->detach('/default')
+        unless (
+        $user->hashed( $c->pref('entropy') ) eq $c->req->params->{verify} );
+
     $c->forward('check_file');
-    if ($c->res->redirect) {
-        $c->res->redirect(undef,200);
+
+    if ( $c->res->redirect ) {
+        $c->res->redirect( undef, 200 );
         return $c->res->body('1');
     }
+
     $c->res->body('0');
 }
 
 sub list : Local {
     my ( $self, $c ) = @_;
+
+    return unless $c->check_view_permission;
+
     $c->stash->{template}='attachments/list.tt';
 }
 
@@ -116,6 +135,8 @@ sub default : Private {
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
 
+    return unless $c->check_view_permission;
+
     # avoid broken binary files
     my $io_file = IO::File->new( $c->stash->{att}->filename )
         or $c->detach('default');
@@ -138,6 +159,7 @@ content-disposition. No caching.
 sub download : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att = $c->stash->{att};
+    return unless $c->check_view_permission;
     $c->forward('view');
     $c->res->header( 'content-type', $att->contenttype );
     $c->res->header( "Content-Disposition" => "attachment; filename=" . URI::Escape::uri_escape_utf8( $att->name ) );
@@ -153,6 +175,7 @@ thumb action for attachments. makes 100x100px thumbs
 
 sub thumb : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
@@ -178,6 +201,7 @@ Show 800x600 inline versions of photo attachments.
 
 sub inline : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
+    return unless $c->check_view_permission;
     my $att = $c->stash->{att};
     my $photo;
     unless ( $photo = $att->photo ) {
@@ -208,52 +232,6 @@ sub delete : Chained('attachment') Args(0) {
     return unless $c->forward('auth');
     $c->stash->{att}->delete();
     $c->forward('/attachment/attachments');
-}
-
-=head2 insert
-
-Insert a link to this attachment in the main text of the node.
-Will show a thumb for images.
-TODO: Write templates for more mime types.
-
-=cut
-
-sub insert : Chained('attachment') Args(0) {
-    my ( $self, $c ) = @_;
-    return unless $c->forward('auth');
-    my $att = $c->stash->{att};
-    my ($family) = $att->contenttype =~ m|^([^/]+)|;
-    $c->stash->{family} = 'mimetypes/' . $family . '.tt';
-    $c->stash->{type}   = 'mimetypes/' . $att->contenttype . '.tt';
-    $c->stash->{append} = $c->view('TT')->render( $c, 'page/insert.tt' );
-    $c->forward('/pageadmin/edit');
-}
-
-
-=head2 insert_content
-
-Insert a plugin File link to this attachment in the main text of the node.
-
-=cut
-
-sub insert_content : Chained('attachment') Args(0) {
-    my ( $self, $c ) = @_;
-
-    # avoid broken binary files
-#      my $io_file = IO::File->new( $c->stash->{att}->filename )
-#          or $c->detach('default');
-#      $io_file->binmode;
-
-#     my @content = <$io_file>;
-    my $filename = $c->stash->{att}->name;
-    use  MojoMojo::Formatter::File;
-    my $plugin   = MojoMojo::Formatter::File->plugin($filename);
-
-    return unless $c->forward('auth');
-    $c->stash->{append} = "\n\n{{file $plugin " 
-                          . $c->stash->{att}->filename
-			  . "}}\n";
-    $c->forward('/pageadmin/edit');
 }
 
 =head1 AUTHOR

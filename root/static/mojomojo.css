@@ -88,10 +88,15 @@ form { margin: 0;}
     color: #999;
 }
 
-div#toplinks a.navOn {
+a.navOn {
     color: #3a3a3a;
     background: #fff;
+    font-weight: bold;
     text-decoration: none;
+}
+
+ul#toplinks-for-user {
+    float: right;
 }
 
 .inputBox {
@@ -170,7 +175,6 @@ div#content_preview {
     border: 1px solid #ddd;
     padding: 5px;
     overflow: auto;
-    height: 35em;
     margin: 0 0 1em 0;
     float: left;
     width: 49%;
@@ -178,12 +182,9 @@ div#content_preview {
 div#edit_form {
     float: left;
     width: 49%;
-    height: 35em;
 }
 
-
 textarea#body {
-    height: 32em;
     /* max-width: 930px; */
     width: 100%;
 }
@@ -245,6 +246,11 @@ div.tab-nav a.close-button {
     margin-top: 11px;
 }
 
+.syntax_help table th {
+    font-size: 120%;
+    font-weight: bold;
+}
+
 .syntax_help  table td {
     padding: 3px;
     vertical-align: top;
@@ -273,6 +279,14 @@ div.tab-nav a.close-button {
 
 .syntax_help h2 {
     margin-top: 0;
+}
+
+.syntax_help pre {
+    line-height: 90%;
+    font-size: 120%;
+    margin-left: 0;
+    padding: 5px;
+    width: 80%;
 }
 
 .rightHandSide {
@@ -337,7 +351,6 @@ a.tag:hover {
    /*  vertical-align: super;; */
     background: #f6d8b4;
     border: 1px solid #dddddd;
-    line-height: 0;
     font-weight: bold;
     text-decoration: none;
     color: #e33;
@@ -412,10 +425,11 @@ div.pager ul li a {
     background: #2274a8;
 }
 
+#revisions {
+    width: 100%;
+}
+
 dl#pageInfoMeta {
-    float: right;
-    width: 350px;
-    border-left: 2px solid #ccc;
     padding: 0 0 0 1em;
     font-family: Arial,Helvetica,sans-serif;
 }
@@ -815,6 +829,39 @@ a.footnote:after {
     margin-left: 10px;
 }
 
+#attachments table {
+    width: 100%;
+}
+
+#attachments table #filename-th {
+    width: 25%;
+}
+
+#attachments table #type-th {
+    width: 25%;
+}
+
+#attachments table #size-th {
+    width: 8%;
+}
+
+#attachments table #date-th {
+    width: 12%;
+}
+
+#attachments table #actions-th {
+    width: 30%;
+}
+
+#attachments table #actions {
+    margin: 0;
+}
+
+#attachments table #actions li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 /* Copied from HTML-FormFu examples/vertically-aligned/vertically-aligned.css */
 
 fieldset {
@@ -1137,7 +1184,12 @@ div#bottomnav { clear: both; }
 .kateWarning { color: #0000ff; }
 
 #editspinner { display: none; }
-#search_results { text-indent: 1em; }
+#search_results {
+    text-indent: 1em;
+}
+#search_results .search_result {
+    list-style-type: none;
+}
 
 .display-none { display: none; }
 .float-left { float: left; }

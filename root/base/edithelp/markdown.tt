@@ -1,170 +1,186 @@
-<h2>[%loc('MultiMarkdown formatting tips')%] (<a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference') %]</a>, <a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">MultiMarkdown reference</a>)</h2>
-<table>
+<h2>[% loc('MultiMarkdown formatting tips') %] (<a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference') %]</a>, <a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">MultiMarkdown reference</a>)</h2>
+<table id="syntax">
     <tr>
-        <th colspan="2">[%loc('Text Formatting')%]</th>
+        <th colspan="2">[% loc('Text Formatting') %]</th>
     </tr>
     <tr>
-        <td>[%loc('Text in')%] <em>[%loc('italics')%]</em></td>
-        <td>[%loc('*italic* or _italic_')%]</td>
+        <td>[% loc('Text in') %] <em>[% loc('italics') %]</em></td>
+        <td>[% loc('*italic* or _italic_') %]</td>
     </tr>
     <tr>
-        <td>[%loc('Text in')%] <b>[%loc('bold')%]</b></td>
-        <td>[%loc('**bold** or __bold__')%]</td>
+        <td>[% loc('Text in') %] <b>[% loc('bold') %]</b></td>
+        <td>[% loc('**bold** or __bold__') %]</td>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Links')%]</th>
+        <th colspan="2">[% loc('Links') %]</th>
     </tr>
     <tr>
-        <td>[%loc('Inline Links')%]:</td>
+        <td>[% loc('Link to Another Page') %]</td>
         <td>
-            [[%loc('example')%]]([%loc('http://example.com/')%])<br/>
-            [[%loc('example')%]]([%loc('http://example.com/')%] "[%loc('Link Title')%]")
+            <pre>[[[% loc('Page Name Here') %]]]</pre>
         </td>
     </tr>
     <tr>
-        <td>&nbsp;</td>
-        <td>[[%loc('example')%]][[%loc('IdLabel')%]]<br/>[%loc('Later in the document')%]:<br/>[[%loc('IdLabel')%]]: [%loc('http://example.com/')%] "[%loc('Link Title')%]"</td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Images')%]</th>
-    </tr>
-    <tr>
-        <td>[%loc('Inline')%]</td>
-        <td>![[%loc('alt text')%]](/image/path/file.jpg "[%loc('Optional Title')%]")</td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Headers')%]</th>
-    </tr>
-    <tr>
-        <td>[%loc('Header 1')%] (&lt;h1&gt;)</td>
-        <td>[%loc('Header 1')%]<br/>==========</td>
-    </tr>
-    <tr>
-        <td>[%loc('Header 1')%] (&lt;h1&gt;)</td>
-        <td># [%loc('Header 1')%]</td>
-    </tr>
-    <tr>
-        <td>[%loc('Header 2')%] (&lt;h2&gt;)</td>
-        <td>[%loc('Header 2')%]<br/>---------</td>
-    </tr>
-    <tr>
-        <td>[%loc('Header 2')%] (&lt;h2&gt;)</td>
-        <td>## [%loc('Header 2')%]<br/>## [%loc('Header 2')%] ## - optionally, you can add the same number of trailing #'s</td>
-    </tr>
-    <tr>
-        <td>[%loc('Header 6')%] (&lt;h6&gt;)</td>
-        <td>###### [%loc('Header 6')%]<br/>###### [%loc('Header 2')%] ###### - optional trailing #'s</td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Ordered Lists')%]</th>
-    </tr>
-    <tr>
-        <td>[%loc('To get')%]:<br/>
-            &lt;ol&gt;<br/>
-            &nbsp;&lt;li&gt;Foo&lt;/li&gt;<br/>
-            &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
-            &lt;ol&gt;<br/>
+        <td rowspan="2">[% loc('Links to Other Sites') %]:</td>
+        <td>
+            <pre>[[% loc('example') %]]([% loc('http://example.com/') %])</pre>
+            [% loc('is formatted as:') %]
+            <a href="{% loc('http://example.com') %]">[% loc('example') %]</a>
         </td>
-        <td>[%loc('Write')%]:<br/>
-            <br/>
-            1. Foo<br/>
-            2. Bar<br/>
-            <br/>
-            NOTE: you need a new line before and after the list
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Lists with Paragraphs - add newlines around items')%]</th>
-    </tr>
-    <tr>
-        <td>[%loc('To get')%]:<br/>
-            &lt;ul&gt;<br/>
-            &nbsp;&lt;li&gt;Foo&lt;/li&gt;<br/>
-            &nbsp;&lt;li&gt;Bar&lt;/li&gt;<br/>
-            &lt;ul&gt;<br/>
-        </td>
-        <td>[%loc('Write')%]:<br/>
-            <br/>
-            * Foo<br/>
-            <br/>
-            * Bar<br/>
-
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Nested lists: use 3-space indentation per level')%]:</th>
     </tr>
     <tr>
         <td>
-            <pre>
-* Foo
-
-    1. Bar
-
-    [%+ loc('With a second paragraph') +%]
-
-    2. Baz
-* [%loc('Shapes') +%]
-    * [%loc('Circle') +%]
-    * [%loc('Square') +%]
-       * [%loc('Rounded square') +%]
-    * [%loc('Rectangle') +%]
-            </pre>
+            <pre>[[% loc('example') %]]([% loc('http://example.com/') %] "[% loc('Link Title') %]")</pre>
+            [% loc('is formatted as:') %]
+            <a href="{% loc('http://example.com') %]" title="[% loc('Link Title') %]">[% loc('example') %]</a>
+            <br />
+            [% loc('hover over the link to see the title') %]
         </td>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Block quotes')%]</th>
+        <th colspan="2">[% loc('Headers') %]</th>
+    </tr>
+    <tr>
+        <td>[% loc('Main Header') %]</td>
+        <td><pre>[% loc('Main Header') %]<br/>
+========</pre>
+        </td>
+    </tr>
+    <tr>
+        <td>[% loc('Main Header') %]</td>
+        <td><pre># [% loc('Main Header') %]</pre></td>
+    </tr>
+    <tr>
+        <td>[% loc('Sub Header') %]</td>
+        <td><pre>[% loc('Sub Header') %]<br />
+--------</pre>
+    </tr>
+    <tr>
+        <td>[% loc('Sub Header') %]</td>
+        <td><pre>## [% loc('Sub Header') %]<br/>
+## [% loc('Sub Header') %] ##</pre>
+            [% loc('optionally, you can add the same number of trailing # marks') %]</td>
+    </tr>
+    <tr>
+        <td>[% loc('Sub Sub ... Header') %]
+            <br />
+            [% loc('up to 6 levels of headers') %]
+        </td>
+        <td><pre>###### [% loc('Sub Sub ... Header') %]<br/>
+###### [% loc('Sub Sub ... Header') %] ######</pre></td>
+    </tr>
+    <tr>
+        <th colspan="2">[% loc('Lists') %]</th>
+    </tr>
+    <tr>
+        <td>[% loc('To get') %]:
+            <ul>
+                <li>Foo</li>
+                <li>Bar</li>
+            </ul>
+        </td>
+        <td>[% loc('Write') %]:
+          <pre>* Foo<br />
+* Bar
+</pre>
+            [% loc('NOTE: you need a blank line before and after the list') %]
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            [% loc('For numbered lists, just use numbers instead of asterisks') %]
+            <br />
+            <pre>1. Foo<br />
+2. Foo
+</pre>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            [% loc('For nested lists, indent each level by 3 spaces') %]
+            <ul>
+              <li>[% loc('Item 1') %]
+                <ul>
+                  <li>[% loc('Item 1.1') %]</li>
+                  <li>[% loc('Item 1.2') %]</li>
+                  <ul>
+                    <li>[% loc('Item 1.2.1') %]</li>
+                  </ul>
+              </li>
+              <li>[% loc('Item 2') %]</li>
+            </ul>
+        </td>
+        <td>
+            <pre>* [% loc('Item 1') %]<br />
+   * [% loc('Item 1.1') %]<br />
+   * [% loc('Item 1.2') %]<br />
+      * [% loc('Item 1.2.1') %]<br />
+* [% loc('Item 2') %]
+</pre>
+        </td>
+     
+    </tr>
+    <tr>
+        <th colspan="2">[% loc('Block quotes') %]</th>
     </tr>
     <tr>
         <td colspan="2">
             <pre>
-&gt; [%loc('Just like email quoting!')%]<br/>
-&gt; &gt; [%loc('Blockquotes can be nested')%]<br/>
-&gt;  ## [%loc('An h2 tag in a blockquote')%]<br/>
+&gt; [% loc('Just like email quoting!') %]<br/>
+&gt; &gt; [% loc('Blockquotes can be nested') %]<br/>
+&gt;  ## [% loc('An h2 tag in a blockquote') %]<br/>
 &gt;  <br/>
-&gt;  [%loc('And additional Markdown formatting')%]:<br/>
-&gt;  * [%loc('An unordered list')%]<br/>
-&gt;  * [%loc('Item')%]</pre>
+&gt;  [% loc('And additional Markdown formatting') %]:<br/>
+&gt;  * [% loc('An unordered list') %]<br/>
+&gt;  * [% loc('Item') %]</pre>
         </td>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Code Spans')%]</th>
+        <th colspan="2">[% loc('Horizontal Rules') %] (&lt;hr&gt;)</th>
     </tr>
     <tr>
-        <td colspan="2">`&lt;[%loc('code')%]&gt;` [%loc('blocks are wrapped in backticks')%].</td>
+        <td>[% loc('3 or more dashes or asterisks') %]:<br/>--- [% loc('or') %] *** [% loc('or') %] * * *</td>
+        <td>[% loc('Creates') %]: <hr/></td>
     </tr>
     <tr>
-        <td>[%loc('Nested backticks')%]:</td>
-        <td><code>`` [%loc('just use `2`')%] ``</code> [%loc('in the wrapping block')%]</td>
+        <th colspan="2">[% loc('Code') %]</th>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Preformatted Code Blocks')%]</th>
+        <td colspan="2">`&lt;[% loc('code') %]&gt;` [% loc('blocks are wrapped in backticks') %].</td>
+    </tr>
+    <tr>
+        <td>[% loc('Nested backticks') %]:</td>
+        <td><code>`` [% loc('just use `2`') %] ``</code> [% loc('in the wrapping block') %]</td>
+    </tr>
+    <tr>
+        <th colspan="2">[% loc('Preformatted Code Blocks') %]</th>
     </tr>
     <tr>
         <td colspan="2">
-            [%loc('Simply indent every line of a code block by 4')%]:
+            [% loc('Simply indent every line of a code block by 4') %]:
             <pre>
-        [%loc('Normal Paragraph')%]
+        [% loc('Normal Paragraph') %]
 
-            [%loc('This is a pre formatted code block')%]
+            [% loc('This is a pre formatted code block') %]
 
-        [%loc('Going back to normal formatting')%]</pre>
+        [% loc('Going back to normal formatting') %]</pre>
         </td>
     </tr>
     <tr>
-        <th colspan="2">[%loc('Horizontal Rules')%] (&lt;hr&gt;)</th>
+        <th colspan="2">[% loc('Footnotes') %] (<a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/#footnotes">[% loc('details') %]</a>)</th>
     </tr>
     <tr>
-        <td>[%loc('3 or more dashes or asterisks')%]:<br/>--- [%loc('or')%] *** [%loc('or')%] * * *</td>
-        <td>[%loc('Creates')%]: <hr/></td>
-    </tr>
-    <tr>
-        <th colspan="2">[%loc('Footnotes')%] (<a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/#footnotes">[% loc('details') %]</a>)</th>
-    </tr>
-    <tr>
-        <td colspan="2">As detailed in the book[^footnote], we will now show that...<br/>
+        <td colspan="2">As detailed in the book[^footnote1], we will now show that...<br/>
         ...later in the document...<br/>
-        [^footnote]: Conway, Damian - Perl Best Practices, p. 117
+        [^footnote1]: Conway, Damian - Perl Best Practices, p. 117
         </td>
+    </tr>
+    <tr>
+        <th colspan="2">[% loc('Images') %]</th>
+    </tr>
+    <tr>
+        <td>[% loc('Inline') %]</td>
+        <td>![[% loc('alt text') %]](/image/path/file.jpg "[% loc('Optional Title') %]")</td>
     </tr>
 </table>

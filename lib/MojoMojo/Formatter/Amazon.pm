@@ -13,27 +13,25 @@ MojoMojo::Formatter::Amazon - Include Amazon objects on your page.
 
 =head1 DESCRIPTION
 
-This is an url formatter. it takes urls containing amazon and 
-/-/ or /ASIN/ and make a pretty formatted link to that object 
+This is an url formatter. it takes urls containing amazon and
+/-/ or /ASIN/ and make a pretty formatted link to that object
 in the amazon web store.
 
 It automatically handles books/movies/dvds and formats them as
-apropriate. You can also pass 'small' as a parameter after the 
+apropriate. You can also pass 'small' as a parameter after the
 url, and it will make a thumb link instead of a blurb.
 
 =head1 METHODS
 
-=over 4
+=head2 format_content_order
 
-=item format_content_order
-
-Format order can be 1-99. The Amazon formatter runs on 5
+Format order can be 1-99. The Amazon formatter runs on 5.
 
 =cut
 
-sub format_content_order { 5}
+sub format_content_order { 5 }
 
-=item format_content
+=head2 format_content
 
 calls the formatter. Takes a ref to the content as well as the
 context object.
@@ -46,7 +44,7 @@ sub format_content {
     my @lines=split /\n/,$$content;
     my $pod;$$content="";
     foreach my $line (@lines) {
-      if ($line =~ m/(\{\{?:http:\/\/(?:www\.){0,1}amazon\.com(?:\/.*){0,1}(?:\/dp\/|\/gp\/product\/))(.*?)(?:\/.*|$)\}\}/) { 
+      if ($line =~ m/(\{\{?:http:\/\/(?:www\.){0,1}amazon\.com(?:\/.*){0,1}(?:\/dp\/|\/gp\/product\/))(.*?)(?:\/.*|$)\}\}/) {
           my $item=$class->get($1,$c->config->{amazon_id});
           unless (ref($item)) {
               $$content.=$line."\n";
@@ -65,10 +63,10 @@ sub format_content {
 
 }
 
-=item get <asin>
+=head2 get <asin>
 
-Connects to amazon and retrieves a L<Net::Amazon> object 
-based on the supplied ASIN number
+Connects to amazon and retrieves a L<Net::Amazon> object
+based on the supplied ASIN number.
 
 =cut
 
@@ -83,9 +81,9 @@ sub get {
   return $property;
 }
 
-=item small <property>
+=head2 small <property>
 
-renders a small version of the formatter.
+Renders a small version of the formatter.
 
 =cut
 
@@ -95,7 +93,7 @@ sub small {
   '!:http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n";
 }
 
-=item blurb <property>
+=head2 blurb <property>
 
 renders a full width blurb of the product, suitable for reviews and
 such.
@@ -104,7 +102,7 @@ such.
 
 sub blurb {
   my ($class,$property)=@_;
-  my $method=ref $property; 
+  my $method=ref $property;
   $method =~ s/.*:://;
   return "<div class=\"amazon\">!<".$property->ImageUrlSmall.
   '!:http://www.amazon.com/exec/obidos/ASIN/'.$property->Asin."/feed-20\n\n".
@@ -115,7 +113,7 @@ sub blurb {
   "</div>";
 }
 
-=item DVD <property>
+=head2 DVD <property>
 
 Product information suitable for DVD movies.
 
@@ -126,7 +124,7 @@ sub DVD {
   return " -- ??".join(',',$property->directors).'?? ('.$property->year .")\n\n";
 }
 
-=item Book <property>
+=head2 Book <property>
 
 Product information suitable for books.
 
@@ -137,9 +135,9 @@ sub Book {
   return " -- ??".join(',',$property->authors).'?? ('.$property->year .")\n\n";
 }
 
-=item Music <property>
+=head2 Music <property>
 
-Product information suitable for music cds.
+Product information suitable for music CDs.
 
 =cut
 
@@ -148,11 +146,9 @@ sub Music {
   return " -- ??".join(',',$property->artists).'?? ('.$property->year .")\n\n";
 }
 
-=back
-
 =head1 SEE ALSO
 
-L<MojoMojo>,L<Module::Pluggable::Ordered>,L<Net::Amazon>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<Net::Amazon>.
 
 =head1 AUTHORS
 
@@ -160,7 +156,8 @@ Marcus Ramberg <mramberg@cpan.org
 
 =head1 LICENSE
 
-This module is licensed under the same terms as Perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

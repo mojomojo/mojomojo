@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title=c.pref("name") _ "gallery - " _ c.expand_wikilink(page.name_orig) _ (tag ? tag : "") simple_footer=1 %]
+[% WRAPPER page/wrapper.tt title=c.pref("name") _ " gallery - " _ c.expand_wikilink(page.name_orig) _ (tag ? tag : "") simple_footer=1 %]
 
 <div id="content">
     [% PROCESS gallery/pager.tt pager=pictures.pager %]

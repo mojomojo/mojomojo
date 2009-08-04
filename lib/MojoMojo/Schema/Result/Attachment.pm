@@ -3,10 +3,12 @@ package MojoMojo::Schema::Result::Attachment;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
+
+use Number::Format qw( format_bytes );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp PK::Auto UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",
@@ -48,20 +50,22 @@ MojoMojo::Schema::Result::Attachment
 
 =head1 METHODS
 
-=over 4
+=head2 delete
+
+Delete the inline and thumbnail versions but keep the original version
+(C<$self->filename>).
 
 =cut
 
 sub delete {
     my ($self) = @_;
 
-# we'll delete the inline and thumbnail versions but keep the original version (->filename)
     unlink( $self->inline_filename ) if -f $self->inline_filename;
     unlink( $self->thumb_filename )  if -f $self->thumb_filename;
     $self->next::method();
 }
 
-=item filename
+=head2 filename
 
 Full path to this attachment.
 
@@ -70,9 +74,8 @@ Full path to this attachment.
 sub filename {
     my $self           = shift;
     my $attachment_dir = $self->result_source->schema->attachment_dir;
-    die(
-"MojoMojo::Schema->attachment must be set to a writeable directory (Current:$attachment_dir)\n"
-    ) unless -d $attachment_dir && -w $attachment_dir;
+    die "MojoMojo::Schema->attachment must be set to a writeable directory (Current:$attachment_dir)\n"
+        unless -d $attachment_dir && -w $attachment_dir;
     return ( $attachment_dir . '/' . $self->id );
 }
 
@@ -92,5 +95,65 @@ sub make_photo {
     $photo->extract_exif($self) if $self->contenttype eq 'image/jpeg';
     $photo->insert();
 }
+
+sub is_image {
+    my $self = shift;
+
+    return $self->contenttype =~ m{^image/};
+}
+
+sub is_text {
+    my $self = shift;
+
+    return $self->contenttype =~ m{^text/};
+}
+
+sub human_size {
+    my $self = shift;
+
+    return format_bytes( $self->size, precision => 1 );
+}
+
+# It would be nice to find an external module/data source for this data,
+# e.g. http://en.kioskea.net/contents/courrier-electronique/mime.php3
+# and/or bundle it into a separate module for CPAN.
+my %mime_type_to_description = (
+    'application/javascript' => 'Javascript',
+    'application/json'       => 'JSON data',
+    'application/pdf'        => 'PDF document',
+    'application/xhtml+xml'  => 'Web page',
+
+    'audio/mpeg'   => 'Sound file',
+    'audio/ogg'    => 'Sound file',
+    'audio/vorbis' => 'Sound file',
+
+    'text/css'   => 'Cascading style sheet',
+    'text/csv'   => 'Comma separated values',
+    'text/html'  => 'Web page',
+    'text/plain' => 'Plain text file',
+    'text/xml'   => 'XML file',
+
+    'image/gif'  => 'GIF image',
+    'image/jpeg' => 'JPEG image',
+    'image/png'  => 'PNG image',
+);
+
+sub human_type {
+    my $self = shift;
+
+    return $mime_type_to_description{ $self->contenttype }
+        || $self->contenttype;
+}
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;

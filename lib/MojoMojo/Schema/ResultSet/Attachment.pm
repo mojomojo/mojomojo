@@ -2,7 +2,7 @@ package MojoMojo::Schema::ResultSet::Attachment;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Schema::Base::ResultSet/;
+use parent qw/MojoMojo::Schema::Base::ResultSet/;
 use Archive::Zip qw(:ERROR_CODES);
 use File::MMagic;
 use FileHandle;
@@ -16,15 +16,13 @@ MojoMojo::Schema::ResultSet::Attachment
 
 =head1 METHODS
 
-=over 4
-
 =cut
 
-=item create_from_file (page,filename,storage_callback)
+=head2 create_from_file (page, filename, storage_callback)
 
-function to create an instance from a given file. Takes a filename,
-a page to attach to, and a storage callback. The storage-callback will
-be called with a full path to where the file should be stored
+Create an instance from a given file. Takes a filename, a page to attach to,
+and a storage callback. The storage callback will be called with a full path
+to where the file should be stored.
 
 =cut
 
@@ -61,5 +59,16 @@ sub create_from_file {
     $self->make_photo if ( $self->contenttype =~ m|^image/| );
     return $self;
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;

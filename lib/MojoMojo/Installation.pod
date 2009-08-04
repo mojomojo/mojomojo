@@ -15,7 +15,7 @@ running perl Makefile.PL on it manually.
 
 =head2 Step 2
 
-C<mojomojo.conf> is the main configuration file and is in Config::General format.
+C<mojomojo.conf> is the main configuration file and is in L<Config::General> format.
 
 First make sure your config file has a valid DSN for your database (You can use
 SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the
@@ -42,6 +42,9 @@ or for PostgreSQL:
 Once the DSN is setup, create the table structure by running the following script:
 
     ./script/mojomojo_spawn_db.pl
+
+This script has sane defaults for a test install, but you can override
+these. Run it with --help to see usage information.
 
 =head2 Step 3
 
@@ -81,7 +84,7 @@ line to the main config block:
 
 =head2 Step 4
 
-Login to your MojoMojo and change the admin password:
-    login/pass is admin/admin
+Login to your MojoMojo and change the admin password. The defaul login/pass is
+C<admin>/C<admin>.
 
 For troubleshooting, see L<http://mojomojo.org/troubleshooting>.

@@ -2,7 +2,7 @@ package MojoMojo::Schema::ResultSet::Content;
 
 use strict;
 use warnings;
-use base qw/MojoMojo::Schema::Base::ResultSet/;
+use parent qw/MojoMojo::Schema::Base::ResultSet/;
 
 =head1 NAME
 
@@ -10,11 +10,12 @@ MojoMojo::Schema::ResultSet::Content
 
 =head1 METHODS
 
-=over 4
+=head2 format_content
 
-=item format_content
+    $formatted_content = format_content($c, $content, $page);
 
-Uses all available formatters of MojoMojo to format content.
+Call all available formatters to format content, according to their
+format_content_order.
 
 =cut
 
@@ -30,7 +31,7 @@ sub format_content {
 # create_proto: create a "proto content version" that may
 # be the basis for a new revision
 
-=item create_proto <page>
+=head2 create_proto <page>
 
 Create a content prototype object, as the basis for a new revision.
 
@@ -59,5 +60,16 @@ sub create_proto {
     }
     return \%proto_content;
 }
+
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
 
 1;

@@ -3,9 +3,9 @@ package MojoMojo::Schema::Result::Link;
 use strict;
 use warnings;
 
-use base qw/MojoMojo::Schema::Base::Result/;
+use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "PK::Auto", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("link");
 __PACKAGE__->add_columns(
     "id",
@@ -23,12 +23,16 @@ __PACKAGE__->belongs_to( "to_page",   "MojoMojo::Schema::Result::Page", { id => 
 
 MojoMojo::Schema::Result::Link
 
+=head1 AUTHOR
+
+Marcus Ramberg <mramberg@cpan.org>
+
 =head1 LICENSE
 
-This library is free software . You can redistribute it and/or modify 
-it under the same terms as perl itself.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
-1;
 
+1;
