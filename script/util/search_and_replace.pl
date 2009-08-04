@@ -18,7 +18,8 @@ General Form:
 Concrete Example:
   perl script/util/search_and_replace.pl --search 'Cata\sliscious' --replace 'Dog man was here.'
 
-The concrete example will replace 'Cata liscious' with 'Dog man was here.' 
+The concrete example will replace 'Cata liscious' with 'Dog man was here.'
+Note the use of \s to match a space in the search term.
 
 =cut
 
