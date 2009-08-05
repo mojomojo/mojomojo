@@ -119,7 +119,7 @@
 * [% loc('Item 2') %]
 </pre>
         </td>
-     
+
     </tr>
     <tr>
         <th colspan="2">[% loc('Block quotes') %]</th>
@@ -154,17 +154,21 @@
         <td><code>`` [% loc('just use `2`') %] ``</code> [% loc('in the wrapping block') %]</td>
     </tr>
     <tr>
-        <th colspan="2">[% loc('Preformatted Code Blocks') %]</th>
+        <th colspan="2">[% loc('Preformatted Code Blocks') %] (&lt;pre&gt;)</th>
     </tr>
     <tr>
         <td colspan="2">
             [% loc('Simply indent every line of a code block by 4') %]:
             <pre>
-        [% loc('Normal Paragraph') %]
+[%- loc('Normal paragraph') +%]
 
-            [% loc('This is a pre formatted code block') %]
+    [%+ loc('Spaces on the left
+    render text in monospace
+    like this example') +%]
 
-        [% loc('Going back to normal formatting') %]</pre>
+[%+ loc('Going back to normal formatting') %]</pre>
+
+[% loc('Note that for programming language code, it may be better to use the Syntax highlight plugin.') %]
         </td>
     </tr>
     <tr>
