@@ -91,7 +91,7 @@ feature 'RSS Formatter', 'XML::Feed';
 feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 
-test_requires 'Test::More' => '0.82';
+test_requires 'Test::More' => '0.88';
 test_requires 'Email::Send::Test';
 test_requires 'WWW::Mechanize' => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ',;
