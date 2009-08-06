@@ -1,3 +1,7 @@
+  
+  - Bump up Test::More test_requires version to 0.88 so we can use done_testing()
+  - Add a basic search and replace script
+
 0.999032 2009-08-02 22:39:00
 
   - The page cache plugin was caching the empty body before a redirect, and
