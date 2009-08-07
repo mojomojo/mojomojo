@@ -4,7 +4,7 @@
         [%loc("Any phrase surrounded by double brackets or parentheses is a wiki word (camel-case wiki words are not supported for good reasons, one being that some languages don't have the concept of case).")%]
     </p>
     <p>
-        [%loc('Wiki words')%]: <i>[%loc("~[~[C++~]~], ~[~[Let's play again!~]~] ((easy to type))")%]</i><br/>
+        [%loc('Wiki words')%]: <i>[%loc("~[~[C++~]~], ~[~[Let's rock!~]~] ((easy to type))")%]</i><br/>
         [%loc('Not wiki words')%]: <i>[%loc('HomePage, IBM, School')%]</i><br/>
         [%loc("By default, a wiki word will reference it's children. To reference a sibling, you can do ~[~[../Node~]~], or to reference a toplevel node do ~[~[/Node~]~]")%]
     </p>

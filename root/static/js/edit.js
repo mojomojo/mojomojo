@@ -222,8 +222,6 @@ setupEditHelp = function() {
         var title = $tab.children('h2:first').text();
         var id    = this.id;
 
-        title = title.replace(/\s*\(.*/, '');
-
         $a.append(title).attr('href', "tab://" + title).click(function() {
             $.each(tabs, function() {
                 this[0].removeClass('active');

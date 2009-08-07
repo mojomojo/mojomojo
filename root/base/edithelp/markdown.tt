@@ -1,4 +1,10 @@
-<h2>[% loc('MultiMarkdown formatting tips') %] (<a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference') %]</a>, <a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">MultiMarkdown reference</a>)</h2>
+<h2>[% loc('Markdow help') %]</h2>
+<p>
+    <ul>
+        <li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference - the basics') %]</a>
+        <li><a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">[% loc('MultiMarkdown reference - the extended syntax') %]</a>
+    </ul>
+</p>
 <table id="syntax">
     <tr>
         <th colspan="2">[% loc('Text Formatting') %]</th>
