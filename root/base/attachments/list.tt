@@ -12,12 +12,12 @@
   [% FOR attachment IN page.attachments %]
     <tr>
       <td>
-        <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[% attachment.name %]</a>
+        <a href="[%c.uri_for('attachment', attachment.id, 'download')%]" title="[%loc('download')%]">[% attachment.name %]</a>
         [% IF attachment.is_image %]
         <br />
 
-        <a href="[%c.uri_for('attachment',attachment.id,'view')%]">
-          <img src="[%c.uri_for('attachment',attachment.id,'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
+        <a href="[%c.uri_for('attachment', attachment.id, 'view')%]">
+          <img src="[%c.uri_for('attachment', attachment.id, 'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
         </a>
         [% END %]
 
@@ -35,26 +35,26 @@
         <ul id="actions">
           [% IF attachment.is_image %]
           <li>
-            <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view full size')%]</a>
+            <a href="[%c.uri_for('attachment', attachment.id, 'view')%]">[% loc('view full size') %]</a>
           </li>
           [% ELSIF attachment.is_text %]
           <li>
-            <a href="[%c.uri_for('attachment',attachment.id,'view')%]">[%loc('view in your browser')%]</a>
+            <a href="[%c.uri_for('attachment', attachment.id, 'view')%]">[% loc('view in your browser') %]</a>
           </li>
           [% END %]
           [% IF c.check_permissions(page.path,c.user).edit %]
           <li>
-            <a rel="nofollow" href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('edit', {insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
           </li>
             [% IF attachment.is_image %]
           <li>
-            <a rel="nofollow" href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('edit', {inline_image_attachment => attachment.id})%]">[% loc('insert thumbnail') %]</a>
           </li>
             [% END %]
           [% END %]
           [% IF c.check_permissions(page.path, c.user).attachment %]
           <li>
-            <a rel="nofollow" href="[%c.uri_for('attachment', attachment.id, 'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('attachment', attachment.id, 'delete')%]" class="delete_attachment">[% loc('delete') %]</a>
           </li>
           [% END %]
         </ul>
