@@ -6,7 +6,10 @@ use warnings;
 use MojoMojo::Schema;
 use YAML;
 
-my $attrs          = {add_drop_table => 1, no_comments => 1};
+my $attrs = {
+    add_drop_table => 1,
+    no_comments => 1
+};
 
 
 =head1 NAME
@@ -15,25 +18,26 @@ MojoMojoTestSchema - Library to be used by DBIx::Class test scripts.
 
 =head1 SYNOPSIS
 
-  use lib qw(t/lib);
-  use MojoMojoTestSchema;
-  use Test::More;
+    use lib qw(t/lib);
+    use MojoMojoTestSchema;
+    use Test::More;
 
-  my $schema = MojoMojoTestSchema->init_schema();
+    my $schema = MojoMojoTestSchema->init_schema();
 
 =head1 DESCRIPTION
 
 This module provides the basic utilities to write tests against
-MojoMojo::Schema. Shamelessly stolen from DBICTest in the DBIx::Class test suite.
+L<MojoMojo::Schema>. Shamelessly stolen from DBICTest in the
+L<DBIx::Class> test suite.
 
 =head1 METHODS
 
 =head2 init_schema
 
-  my $schema = MojoMojoTestSchema->init_schema(
-    no_deploy=>1,
-    no_populate=>1,
-  );
+    my $schema = MojoMojoTestSchema->init_schema(
+        no_deploy => 1,
+        no_populate => 1,
+    );
 
 This method removes the test SQLite database in t/var/mojomojo.db
 and then creates a new, empty database.
@@ -41,8 +45,8 @@ and then creates a new, empty database.
 This method will call deploy_schema() by default, unless the
 no_deploy flag is set.
 
-Also, by default, this method will call populate_schema() by
-default, unless the no_deploy or no_populate flags are set.
+Also, this method will call populate_schema() by default, unless the
+C<no_deploy> or C<no_populate> flags are set.
 
 =cut
 
@@ -55,7 +59,7 @@ sub init_schema {
 
     unlink($db_file) if -e $db_file;
     mkdir($db_dir) unless -d $db_dir;
-    
+
     my $dsn = $ENV{"MOJOMOJO_TEST_SCHEMA_DSN"} || "dbi:SQLite:${db_file}";
     my $dbuser = $ENV{"MOJOMOJO_TEST_SCHEMA_DBUSER"} || '';
     my $dbpass = $ENV{"MOJOMOJO_TEST_SCHEMA_DBPASS"} || '';
@@ -93,7 +97,7 @@ sub init_schema {
        },
         'View::Email' => { sender => { mailer => 'Test' } },
     };
-    YAML::DumpFile('t/var/mojomojo.yml',$config);
+    YAML::DumpFile('t/var/mojomojo.yml', $config);
 
 
     return $schema;
@@ -101,13 +105,13 @@ sub init_schema {
 
 =head2 deploy_schema
 
-  MojoMojoTestSchema->deploy_schema( $schema );
+    MojoMojoTestSchema->deploy_schema( $schema );
 
 This method does one of two things to the schema.  It can either call
-the experimental $schema->deploy() if the DBICTEST_SQLT_DEPLOY environment
-variable is set, otherwise the default is to read in the db/sqlite/mojomojo.sql
-file and execute the SQL within. Either way you end up with a fresh set
-of tables for testing.
+the experimental C<< $schema->deploy() >> if the C<DBICTEST_SQLT_DEPLOY>
+environment variable is set, otherwise the default is to read in the
+F<db/sqlite/mojomojo.sql> file and execute the SQL within. Either way
+you end up with a fresh set of tables for testing.
 
 =cut
 
@@ -120,7 +124,7 @@ sub deploy_schema {
 
 =head2 populate_schema
 
-  DBICTest->populate_schema( $schema );
+    DBICTest->populate_schema( $schema );
 
 After you deploy your schema you can use this method to populate
 the tables with test data.
