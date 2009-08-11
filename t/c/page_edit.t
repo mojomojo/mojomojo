@@ -13,7 +13,7 @@ BEGIN {
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 6;
+    plan tests => 8;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -21,20 +21,36 @@ use_ok('MojoMojo::Controller::Page');
 my $mech = Test::WWW::Mechanize::Catalyst->new;
 WWW::Mechanize::TreeBuilder->meta->apply($mech);
 
-$mech->get_ok('http://localhost:3000/.login?login=admin&password=admin', 'can log in as admin via URL');
+my ($elem);
+
+$mech->post('/.login', {
+    login => 'admin',
+    pass => 'admin'
+});
+ok $mech->success, 'logging in as admin';
+
+ok(($elem) = $mech->look_down(
+   _tag => 'a',
+   'href' => qr'/admin$'
+), 'admin link');
+if ($elem) {
+    is $elem->as_trimmed_text, 'admin', 'logged in as admin';
+}
+
 $mech->get_ok('/.edit', 'can edit root page');
-SKIP: {
-    skip 'currently broken?', 3;
+diag $mech->content;
+
 ok( $mech->look_down(
-      _tag => 'input',
-      name => 'parent',
-      type => 'hidden',
-      value => '' ), "root page has null parent in edit form");
+    _tag => 'input',
+    name => 'parent',
+    type => 'hidden',
+    value => ''
+), "root page has null parent in edit form");
 
 $mech->get_ok('/help.edit', 'can edit help page');
 ok( $mech->look_down(
-      _tag => 'input',
-      name => 'parent',
-      type => 'hidden',
-      value => '1' ), "help page has root parent in edit form");
-};
+    _tag => 'input',
+    name => 'parent',
+    type => 'hidden',
+    value => '1'
+), "help page has root parent in edit form");
