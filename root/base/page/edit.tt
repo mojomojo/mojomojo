@@ -39,7 +39,7 @@
 
         [% FOREACH column IN ['id','depth','name','name_orig','path'] +%]
             <input type="hidden" name="[% column %]" value="[% page.$column %]" />
-        [% END %]
+        [% END +%]
             <input type="hidden" name="parent" value="[% page.parent.id %]" />
             <input type="hidden" name="version" value="[% page.content.version %]" />
         [% IF message %]
