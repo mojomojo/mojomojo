@@ -21,7 +21,7 @@ use_ok('MojoMojo::Controller::Page');
 my $mech = Test::WWW::Mechanize::Catalyst->new;
 WWW::Mechanize::TreeBuilder->meta->apply($mech);
 
-$mech->get_ok('http://localhost:3000/.login?login=admin&password=admin','Can log in ok');
+$mech->get_ok('http://localhost:3000/.login?login=admin&password=admin', 'can log in as admin via URL');
 $mech->get_ok('/.edit', 'can edit root page');
 SKIP: {
     skip 'currently broken?', 3;

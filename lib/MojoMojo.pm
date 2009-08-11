@@ -104,8 +104,8 @@ my $NO_DB_MESSAGE =<<"EOF";
     ***********************************************
     ERROR. Looks like you need to deploy a database.
     Run script/mojomojo_spawn_db.pl
-    *********************************************** 
-    
+    ***********************************************
+
 EOF
 eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->next };
 if ($@ ) {
@@ -340,7 +340,7 @@ sub fixw {
 
 sub prepare_action {
     my $c = shift;
-    
+
     if ($has_DB) {
         $c->next::method(@_);
     }
@@ -614,7 +614,7 @@ sub check_permissions {
     } if ($user && $user->is_admin);
 
     # if no user is logged in
-    unless ($user){
+    if (not $user) {
         # if anonymous user is allowed
         my $anonymous = $c->pref('anonymous_user');
         if ($anonymous) {

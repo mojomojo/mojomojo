@@ -46,13 +46,13 @@ sub login : Global : FormConfig {
 
             $c->stash->{user} = $c->user->obj;
             $c->res->redirect( $c->uri_for( $c->stash->{path} ) )
-              unless $c->stash->{template};
+                unless $c->stash->{template};
             return;
         }
         else {
             $c->stash->{fail} = 1;
             $c->stash->{message} =
-              $c->loc('Could not authenticate that login.');
+                $c->loc('Could not authenticate that login.');
         }
     }
     $c->stash->{template} ||= "user/login.tt";
