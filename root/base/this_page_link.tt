@@ -5,7 +5,7 @@
                 OR
                    (user.active AND user.can_edit(page.path))
             )
-      %]
+      +%]
         <li><a title="[% loc('Change page content') %]" href="[% c.uri_for('edit') %]"
                [% IF accesskey %]
                accesskey="E"

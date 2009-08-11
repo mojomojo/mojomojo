@@ -21,21 +21,21 @@
     </form>
 
     <ul id="toplinks-for-user">
-         [% IF (user) %]
-         <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
-         <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
-         [% ELSE %]
-           [%+ IF(c.pref('open_registration')) %]
-           <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
-           [% END %]
-         <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
-         [% END %]
+      [%+ IF (user) %]
+        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+        <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
+      [% ELSE %]
+       [%+ IF(c.pref('open_registration')) %]
+        <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
+       [% END %]
+        <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
+      [% END +%]
     </ul>
 </div>
 <div id="pagenav">
     [%- FILTER nav +%]
     <ul>
-      [%- PROCESS this_page_link.tt, accesskey = 1 %]
+      [% PROCESS this_page_link.tt, accesskey = 1 %]
       [% IF (page.has_photos) +%]
         <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
       [% ELSE +%]
