@@ -12,10 +12,10 @@
   [% FOR attachment IN page.attachments %]
     <tr>
       <td>
-        <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[%attachment.name%]</a>
+        <a href="[%c.uri_for('attachment',attachment.id,'download')%]" title="[%loc('download')%]">[% attachment.name %]</a>
         [% IF attachment.is_image %]
         <br />
-      
+
         <a href="[%c.uri_for('attachment',attachment.id,'view')%]">
           <img src="[%c.uri_for('attachment',attachment.id,'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
         </a>
@@ -26,7 +26,7 @@
         [% loc(attachment.human_type) %]
       </td>
       <td>
-        [%IF attachment.size%][%attachment.human_size%] [% ELSE %] Unknown[%END%]
+        [%IF attachment.size %][% attachment.human_size %] [% ELSE %] Unknown[%END%]
       </td>
       <td>
         [% attachment.uploaded.strftime('%Y-%m-%d') %]
@@ -44,17 +44,17 @@
           [% END %]
           [% IF c.check_permissions(page.path,c.user).edit %]
           <li>
-            <a href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('edit',{insert_attachment => attachment.id})%]">[%loc('insert link')%]</a>
           </li>
             [% IF attachment.is_image %]
           <li>
-            <a href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('edit',{inline_image_attachment => attachment.id})%]">[%loc('insert thumbnail')%]</a>
           </li>
-            [% END %]          
+            [% END %]
           [% END %]
-          [% IF c.check_permissions(page.path,c.user).attachment %]
+          [% IF c.check_permissions(page.path, c.user).attachment %]
           <li>
-            <a href="[%c.uri_for('attachment',attachment.id,'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
+            <a rel="nofollow" href="[%c.uri_for('attachment', attachment.id, 'delete')%]" class="delete_attachment">[%loc('delete')%]</a>
           </li>
           [% END %]
         </ul>
