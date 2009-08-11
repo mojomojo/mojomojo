@@ -709,6 +709,12 @@ sub check_permissions {
     }
 
     my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
+
+    # Fast fix for security issue of attachments being deletable by non-authenticated users
+    # Overrides permissions for anonymous users to fix http://mojomojo.ideascale.com/akira/dtd/22284-2416
+    # TODO "attachment" is a rather vague permission: it seems to apply to creating, editing and deleting attachments
+    @perms{'attachment', 'delete'} = (0, 0) if not $user;
+
     return \%perms;
 }
 

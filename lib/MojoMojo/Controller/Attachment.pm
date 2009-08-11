@@ -36,12 +36,13 @@ sub auth : Private {
 
     $c->stash->{template} = 'message.tt';
     $c->stash->{message}  = $c->loc('You do not have permissions to edit attachments for this page');
+    $c->response->status(403);  # 403 Forbidden
     return 0;
 }
 
 =head2 attachments
 
-main attachment screen.  Handles uploading of new attachments.
+Main attachment screen.  Handles uploading of new attachments.
 
 =cut
 
@@ -152,7 +153,7 @@ sub view : Chained('attachment') Args(0) {
 =head2 download
 
 Force the attachment to be downloaded, through the use of
-content-disposition. No caching.
+C<content-disposition>. No caching.
 
 =cut
 
@@ -169,7 +170,7 @@ sub download : Chained('attachment') Args(0) {
 
 =head2 thumb
 
-thumb action for attachments. makes 100x100px thumbs
+Thumb action for attachments. Makes 100x100px thumbnails.
 
 =cut
 
@@ -193,7 +194,7 @@ sub thumb : Chained('attachment') Args(0) {
 
 }
 
-=head2  inline (private);
+=head2 inline
 
 Show 800x600 inline versions of photo attachments.
 
@@ -241,7 +242,7 @@ Marcus Ramberg C<marcus@nordaaker.com>
 =head1 LICENSE
 
 This library is free software. You can redistribute it and/or modify
-it under the same terms as perl itself.
+it under the same terms as Perl itself.
 
 =cut
 
