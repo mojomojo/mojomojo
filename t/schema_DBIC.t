@@ -17,7 +17,7 @@ use lib 't/lib';
 use_ok( 'MojoMojoTestSchema' );
 
 
-ok( my $schema = MojoMojoTestSchema->init_schema(no_populate => 0), 'created a test schema object' );
+ok( my $schema = MojoMojoTestSchema->init_schema(populate => 1), 'created a test schema object' );
 
 my $person = $schema->resultset('Person')->find(1);
 like( $person->login, qr/\w+/, 'retrieved the default user' );
