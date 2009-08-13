@@ -4,7 +4,6 @@ BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG}  = 0;
 };
-$ENV{MOJOMOJO_CONFIG}='t/app/mojomojo.yml';
 
 BEGIN {
     eval "use Test::WWW::Mechanize::Catalyst 'MojoMojo'";
@@ -38,7 +37,6 @@ if ($elem) {
 }
 
 $mech->get_ok('/.edit', 'can edit root page');
-diag $mech->content;
 
 ok( $mech->look_down(
     _tag => 'input',
