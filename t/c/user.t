@@ -13,7 +13,6 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 #----------------------------------------------------------------------------
 $mech->get('/.login?login=admin&pass=admin');
 ok !$mech->success, 'non-POST logins return 400 and the login form';
-#diag 'Response after GET login: ', $mech->response->as_string;
 ok !$mech->find_link(
     text => 'admin',
     url_regex => qr'/admin$'
@@ -23,7 +22,7 @@ ok !$mech->find_link(
 #----------------------------------------------------------------------------
 $mech->get_ok('/.users', 'got user list');
 ok $mech->find_link(
-    text => 'admin',
+    text => $ENV{USER} || 'admin',  # that's how MojoMojo::Schema sets the admin user's name
     url => '/admin.profile'
 ), 'found admin in the user list';
 ok $mech->find_link(
