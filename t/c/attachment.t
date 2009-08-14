@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 27;
+use Test::More tests => 29;
 use Test::Differences;
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -49,11 +49,21 @@ for (1..2) {
         text_regex => qr/$file_to_upload_RE/
     ), 'the uploaded file (matching $file_to_upload_RE) is in the attachment list');
 
-    $mech->get_ok($links[-1]->url, 'download the uploaded file');
+    my $url_download = $links[-1]->url;
+    (my $url_delete = $url_download) =~ s/download$/delete/;
+
+    ok $mech->find_link(
+        class => 'delete_attachment',
+        text => 'delete',
+        url => $url_delete
+    ), 'found corresponding delete link';
+
+    $mech->get_ok($url_download, 'download the uploaded file');
     eq_or_diff $mech->content, $expected, "text file upload/download roundtrip";
+
 }
 
-($url = $mech->uri) =~ s/download$/delete/;
+($url = $links[0]->url) =~ s/download$/delete/;
 $mech->get_ok($url, 'delete attachment while logged in as admin');
 $mech->get($url);
 ok !$mech->success, 'cannot delete the same attachment again';
@@ -76,9 +86,6 @@ $mech->content_unlike(qr'/.attachment/\d+/delete/', 'no links to delete attachme
 # While logged out, make sure we can't delete attachments
 # This has been a serious security flaw: http://mojomojo.ideascale.com/akira/dtd/22284-2416
 
-TODO: {
-    local $TODO = "for some odd reason, the test fails on Ubuntu, works on Windows, and the code works when tested against de dev. server";
-    ($url = $links[0]->url) =~ s/download$/delete/;
-    $mech->get($url);  # use a known 'delete' URL even if the page has no links
-    ok !$mech->success, 'attachment deletion forbidden while NOT logged in';
-}
+($url = $links[0]->url) =~ s/download$/delete/;
+ $mech->get($url);  # use a known 'delete' URL even if the page has no links
+ok !$mech->success, 'attachment deletion forbidden while NOT logged in';

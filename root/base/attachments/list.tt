@@ -11,8 +11,8 @@
     <tbody>
       [%
           can_edit = c.check_permissions(page.path, c.user).edit;
-          can_atachment = c.check_permissions(page.path, c.user).attachment;
-      
+          can_attachment = c.check_permissions(page.path, c.user).attachment;
+
       %]
       [% FOR attachment IN page.attachments +%]
         <tr>
@@ -20,7 +20,7 @@
                 <a href="[%c.uri_for('attachment', attachment.id, 'download')%]" title="[%loc('download')%]">[% attachment.name %]</a>
                 [% IF attachment.is_image %]
                 <br />
-        
+
                 <a href="[%c.uri_for('attachment', attachment.id, 'view')%]">
                   <img src="[%c.uri_for('attachment', attachment.id, 'thumb')%]" alt="thumbnail for [%attachment.name%]"/>
                 </a>
