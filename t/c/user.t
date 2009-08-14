@@ -2,7 +2,6 @@
 use Test::More tests => 13;
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
     use_ok('Catalyst::Test', 'MojoMojo');
     use_ok('MojoMojo::Controller::User');
     use_ok('Test::WWW::Mechanize::Catalyst', 'MojoMojo');

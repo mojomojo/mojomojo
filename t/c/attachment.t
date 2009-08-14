@@ -3,7 +3,6 @@ use Test::More tests => 29;
 use Test::Differences;
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
 };
 use_ok('Test::WWW::Mechanize::Catalyst', 'MojoMojo' );
 use_ok('MojoMojo::Controller::Attachment');

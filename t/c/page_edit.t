@@ -2,7 +2,6 @@
 use Test::More ;
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
 };
 
 BEGIN {
