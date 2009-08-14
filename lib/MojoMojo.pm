@@ -64,7 +64,7 @@ MojoMojo->config(
             ],
             key_maker => sub {
                 my $c = shift;
-                return $c->stash->{path} . '.' . $c->req->path;
+                return $c->request->base . '.' . $c->req->path;
             },
             debug => 0 ,
             cache_hook => 'cache_hook'
