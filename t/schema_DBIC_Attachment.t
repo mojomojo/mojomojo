@@ -46,5 +46,5 @@ ok(!-f $att->thumb_filename, "thumb file doesn't exist");
 ok($att->photo->make_thumb, 'make_thumb called ok');
 ok(-f $att->thumb_filename, 'thumb file exists');
 ok($att->delete(), 'Can delete attachment');
-ok(unlink($fn));
+ok(unlink($fn), 'deleting the file from disk');
 ok(! -f $fn, 'file cleaned up ok');

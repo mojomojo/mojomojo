@@ -33,11 +33,11 @@ my $tag2 = $schema->resultset('Tag')->create({
     page => $page->id,
     person => 1
 });
-is($schema->resultset('Tag')->most_used()->count(), 2);
+is($schema->resultset('Tag')->most_used()->count(), 2, 'added one more, 2 now');
 
 my $tag3 = $schema->resultset('Tag')->create({
     tag => 'test3',
     page => $page->id,
     person => 1
 });
-is($schema->resultset('Tag')->by_page($page->id)->count(), 3);
+is($schema->resultset('Tag')->by_page($page->id)->count(), 3, 'added one more, 3 now');
