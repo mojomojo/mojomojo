@@ -1,6 +1,18 @@
-  
-  - Bump up Test::More test_requires version to 0.88 so we can use done_testing()
-  - Add a basic search and replace script
+0.999033 2009-08-14 12:40:00 UTC
+
+  - Fixed security issue allowing anonymous users to delete attachments (dandv)
+
+  - Cleared the RT bug queue (5 bugs) (dandv)
+
+  - Added 'resource' metadata to META.yml to indicate bug tracking, source code
+    repo and mailing list URLs at http://search.cpan.org/dist/MojoMojo (dandv)
+
+  - Added 40+ tests to t/c/{attachment, page_edit, user}.t, fixed email.t to
+    restore admin's password, better handling of missing test prereqs. (dandv)
+  - Refactored C::Attachment, MojoMojoTestSchema, attachments/list.tt (dandv)
+  - Bump up test_requires Test::More version to 0.88 so we can use done_testing()
+
+
 
 0.999032 2009-08-02 22:39:00
 
@@ -85,8 +97,9 @@
 
   - Move some settings into MojoMojo.pm to make mojomojo.conf more
     friendly. (marcus)
-    
+
   - Experimental basic search and replace script. (mateu)
+
 
 
 0.999031 2009-07-26 15:00:00
