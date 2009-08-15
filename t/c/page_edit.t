@@ -66,7 +66,8 @@ It was submitted via {{cpan Test::WWW::Mechanize::Catalyst}} with a random strin
 It also links to [[/|the root page]] and [[/help]].
 PAGE_CONTENT
 ), 'set the "body" value';
-ok $mech->click_button(value => 'Save and View'), 'click the "Save and View" button';
+# we should click 'Save and View' but that causes WWW::Mechanize to die with `Can't call method "header" on an undefined value at /usr/local/share/perl/5.8.8/WWW/Mechanize.pm line 2381`
+ok $mech->click_button(value => 'Save'), 'click the "Save" button';
 
 $mech->content_contains(<<RENDERED_CONTENT, 'content rendered correctly');
 <h1>This is a test page</h1>
