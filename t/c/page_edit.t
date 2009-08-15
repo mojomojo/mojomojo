@@ -11,7 +11,7 @@ BEGIN {
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 8;
+    plan tests => 13;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -20,6 +20,7 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 WWW::Mechanize::TreeBuilder->meta->apply($mech);
 
 my ($elem);
+my $random = rand;  # unique string to be inserted in created pages so that repeated runs of this test don't accidentally pass thanks to previously submitted page contents
 
 $mech->post('/.login', {
     login => 'admin',
@@ -51,3 +52,26 @@ ok( $mech->look_down(
     type => 'hidden',
     value => '1'
 ), "help page has root parent in edit form");
+
+
+#----------------------------------------------------------------------------
+# Create a page
+$mech->get_ok('/test.edit', 'edit a test page');
+ok $mech->form_with_fields('body'), 'find the edit form';
+ok $mech->field(body => <<PAGE_CONTENT,
+# This is a test page
+
+It was submitted via {{cpan Test::WWW::Mechanize::Catalyst}} with a random string of '$random'.
+
+It also links to [[/|the root page]] and [[/help]].
+PAGE_CONTENT
+), 'set the "body" value';
+ok $mech->click_button(value => 'Save and View'), 'click the "Save and View" button';
+
+$mech->content_contains(<<RENDERED_CONTENT, 'content rendered correctly');
+<h1>This is a test page</h1>
+
+<p>It was submitted via <a href="http://search.cpan.org/perldoc?Test::WWW::Mechanize::Catalyst" class="external">Test::WWW::Mechanize::Catalyst</a> with a random string of '$random'.</p>
+
+<p>It also links to <a class="existingWikiWord" href="/">the root page</a> and <a class="existingWikiWord" href="/help">help</a>.</p>
+RENDERED_CONTENT
