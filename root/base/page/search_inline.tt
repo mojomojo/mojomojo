@@ -16,7 +16,7 @@
 [%+ IF result_count %]
     [%
         IF search_type != "all";
-            SET found_within = result.page.path;
+            SET found_within = '<em>' _ page.path _ '</em>';
         ELSE;
             SET found_within = loc('entire site');
         END;
