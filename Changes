@@ -1,3 +1,7 @@
+  
+  - Simplify 404 page handling in suggest.tt (mateu)
+  - Make subtree search work (mateu)
+
 0.999033 2009-08-14 12:40:00 UTC
 
   - Fixed security issue allowing anonymous users to delete attachments (dandv)
