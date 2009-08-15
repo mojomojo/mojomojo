@@ -1219,3 +1219,11 @@ li.tabnav {
     font-size: 2em;
     line-height: 1.666em;
 }
+
+#nonexistent_pages {
+	font-size:1.666em; 
+	background-color:lightyellow; 
+	border:1px solid black; 
+	padding: 5px; 
+	max-width: 25em;
+}
