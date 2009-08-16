@@ -14,119 +14,119 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: root/static/js/edit.js:99
+#: root/static/js/edit.js:117
 msgid "=head1 Header"
 msgstr ""
 
-#: root/static/js/edit.js:129
+#: root/static/js/edit.js:147
 msgid "Also try h2,h3 and so on"
 msgstr "Es funktioniert auch h2, h3 und so weiter"
 
-#: root/static/js/edit.js:141
+#: root/static/js/edit.js:159
 msgid "Bigger"
 msgstr ""
 
-#: root/static/js/edit.js:133 root/static/js/edit.js:159
+#: root/static/js/edit.js:151 root/static/js/edit.js:177
 msgid "Block quote"
 msgstr ""
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:161
+#: root/static/js/edit.js:156 root/static/js/edit.js:179
 msgid "Bold"
 msgstr "Fett"
 
-#: root/static/js/edit.js:130 root/static/js/edit.js:157
+#: root/static/js/edit.js:148 root/static/js/edit.js:175
 msgid "Bullet list"
 msgstr "Aufzählung"
 
-#: root/static/js/edit.js:136
+#: root/static/js/edit.js:154
 msgid "Centered paragraph"
 msgstr "Zentriert"
 
-#: root/static/js/edit.js:132 root/static/js/edit.js:160
+#: root/static/js/edit.js:150 root/static/js/edit.js:178
 msgid "Code"
 msgstr ""
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:163
+#: root/static/js/edit.js:158 root/static/js/edit.js:181
 msgid "Deleted Text"
 msgstr "Durchgestrichen"
 
-#: root/static/js/edit.js:131 root/static/js/edit.js:158
+#: root/static/js/edit.js:149 root/static/js/edit.js:176
 msgid "Enum list"
 msgstr "Nummerierte Liste"
 
-#: root/static/js/edit.js:146 root/static/js/edit.js:165
+#: root/static/js/edit.js:164 root/static/js/edit.js:183
 msgid "External Link"
 msgstr "Externer Verweis"
 
-#: root/static/js/edit.js:97
+#: root/static/js/edit.js:115
 msgid "Formatter"
 msgstr ""
 
-#: root/static/js/edit.js:98
+#: root/static/js/edit.js:116
 msgid "IRC formatter"
 msgstr ""
 
-#: root/static/js/edit.js:103
+#: root/static/js/edit.js:121
 msgid "Insert"
 msgstr ""
 
-#: root/static/js/edit.js:145 root/static/js/edit.js:164
+#: root/static/js/edit.js:163 root/static/js/edit.js:182
 msgid "Internal Link"
 msgstr "Interner Verweis"
 
-#: root/static/js/edit.js:145 root/static/js/edit.js:164
+#: root/static/js/edit.js:163 root/static/js/edit.js:182
 msgid "Intrawiki Link"
 msgstr ""
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:162
+#: root/static/js/edit.js:157 root/static/js/edit.js:180
 msgid "Italic"
 msgstr "Kursiv"
 
-#: root/static/js/edit.js:137
+#: root/static/js/edit.js:155
 msgid "Justified paragraph"
 msgstr "Blocksatz"
 
-#: root/static/js/edit.js:134
+#: root/static/js/edit.js:152
 msgid "Left-justified paragraph"
 msgstr "Linksbündig"
 
-#: root/static/js/edit.js:130 root/static/js/edit.js:157
+#: root/static/js/edit.js:148 root/static/js/edit.js:175
 msgid "List item 1"
 msgstr "Eintrag in Liste"
 
-#: root/static/js/edit.js:129 root/static/js/edit.js:156
+#: root/static/js/edit.js:147 root/static/js/edit.js:174
 msgid "Main heading"
 msgstr "Überschrift"
 
-#: root/static/js/edit.js:190
+#: root/static/js/edit.js:208
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Text markieren um anschließend eine Aktion aus der Toolbar darauf anzuwenden"
 
-#: root/static/js/edit.js:131 root/static/js/edit.js:158
+#: root/static/js/edit.js:149 root/static/js/edit.js:176
 msgid "Numbered list item"
 msgstr "Eintrag in nummerierter Liste"
 
-#: root/static/js/edit.js:99
+#: root/static/js/edit.js:117
 msgid "POD formatter"
 msgstr ""
 
-#: root/static/js/edit.js:148 root/static/js/edit.js:167
+#: root/static/js/edit.js:166 root/static/js/edit.js:185
 msgid "Picture"
 msgstr "Bild"
 
-#: root/static/js/edit.js:149 root/static/js/edit.js:168
+#: root/static/js/edit.js:167 root/static/js/edit.js:186
 msgid "Picture Right"
 msgstr ""
 
-#: root/static/js/edit.js:147 root/static/js/edit.js:166
+#: root/static/js/edit.js:165 root/static/js/edit.js:184
 msgid "Picture left"
 msgstr ""
 
-#: root/static/js/edit.js:135
+#: root/static/js/edit.js:153
 msgid "Right-justified paragraph"
 msgstr "Rechtsbündig"
 
-#: root/static/js/edit.js:142
+#: root/static/js/edit.js:160
 msgid "Smaller"
 msgstr ""
 
@@ -134,11 +134,11 @@ msgstr ""
 msgid "Split Edit"
 msgstr "Seite bearbeiten (Split)"
 
-#: root/static/js/edit.js:144
+#: root/static/js/edit.js:162
 msgid "Subscript"
 msgstr ""
 
-#: root/static/js/edit.js:143
+#: root/static/js/edit.js:161
 msgid "Superscript"
 msgstr ""
 
@@ -146,35 +146,35 @@ msgstr ""
 msgid "Syntax"
 msgstr "Syntax"
 
-#: root/static/js/edit.js:118
+#: root/static/js/edit.js:136
 msgid "Syntax Highlight"
 msgstr ""
 
-#: root/static/js/edit.js:141
+#: root/static/js/edit.js:159
 msgid "bigger"
 msgstr ""
 
-#: root/static/js/edit.js:138 root/static/js/edit.js:161
+#: root/static/js/edit.js:156 root/static/js/edit.js:179
 msgid "bold"
 msgstr "fett"
 
-#: root/static/js/edit.js:136
+#: root/static/js/edit.js:154
 msgid "centered paragraph"
 msgstr "zentrierter Paragraph"
 
-#: root/static/js/edit.js:132 root/static/js/edit.js:160
+#: root/static/js/edit.js:150 root/static/js/edit.js:178
 msgid "code"
 msgstr "Code"
 
-#: root/static/js/edit.js:104
+#: root/static/js/edit.js:122
 msgid "comments"
 msgstr ""
 
-#: root/static/js/edit.js:109
+#: root/static/js/edit.js:127
 msgid "cpan"
 msgstr ""
 
-#: root/static/js/edit.js:140 root/static/js/edit.js:163
+#: root/static/js/edit.js:158 root/static/js/edit.js:181
 msgid "deleted"
 msgstr "durchgestrichen"
 
@@ -182,27 +182,27 @@ msgstr "durchgestrichen"
 msgid "done"
 msgstr ""
 
-#: root/static/js/edit.js:107
+#: root/static/js/edit.js:125
 msgid "include"
 msgstr ""
 
-#: root/static/js/edit.js:156
+#: root/static/js/edit.js:174
 msgid "increase # for smaller headline"
 msgstr "mehr # eingeben um die Überschrift zu verkleinern"
 
-#: root/static/js/edit.js:139 root/static/js/edit.js:162
+#: root/static/js/edit.js:157 root/static/js/edit.js:180
 msgid "italic"
 msgstr "kursiv"
 
-#: root/static/js/edit.js:137
+#: root/static/js/edit.js:155
 msgid "justified paragraph"
 msgstr "Blocksatz"
 
-#: root/static/js/edit.js:134
+#: root/static/js/edit.js:152
 msgid "left justified paragraph"
 msgstr "linksbündig"
 
-#: root/static/js/edit.js:146 root/static/js/edit.js:165
+#: root/static/js/edit.js:164 root/static/js/edit.js:183
 msgid "linked text"
 msgstr ""
 
@@ -214,35 +214,35 @@ msgstr ""
 msgid "maximize width"
 msgstr ""
 
-#: root/static/js/edit.js:133 root/static/js/edit.js:159
+#: root/static/js/edit.js:151 root/static/js/edit.js:177
 msgid "quote"
 msgstr ""
 
-#: root/static/js/edit.js:106
+#: root/static/js/edit.js:124
 msgid "redirect"
 msgstr ""
 
-#: root/static/js/edit.js:135
+#: root/static/js/edit.js:153
 msgid "right justified paragraph"
 msgstr "rechtsbündig"
 
-#: root/static/js/edit.js:120
+#: root/static/js/edit.js:138
 msgid "say \"Howdy partner.\";"
 msgstr ""
 
-#: root/static/js/edit.js:142
+#: root/static/js/edit.js:160
 msgid "small"
 msgstr ""
 
-#: root/static/js/edit.js:144
+#: root/static/js/edit.js:162
 msgid "subscript"
 msgstr ""
 
-#: root/static/js/edit.js:143
+#: root/static/js/edit.js:161
 msgid "superscript"
 msgstr ""
 
-#: root/static/js/edit.js:105
+#: root/static/js/edit.js:123
 msgid "toc"
 msgstr ""
 
@@ -250,6 +250,6 @@ msgstr ""
 msgid "url inside paranthesis"
 msgstr "URL in Klammern"
 
-#: root/static/js/edit.js:108
+#: root/static/js/edit.js:126
 msgid "youtube"
 msgstr ""
