@@ -1,6 +1,5 @@
 	<div id="header-cat">
 		<h1>
-			<a class="logo" href="http://www.catalystframework.org/"><img src="images/layout/catalyst_130pix.html" alt="Catalyst - Web Framework" /></a>
 		</h1>
 		<!--
 		<form method="get" action="/search" id="form">
