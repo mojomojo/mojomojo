@@ -58,7 +58,7 @@ ok( $mech->look_down(
 # Create a page
 $mech->get_ok('/test.edit', 'edit a test page');
 ok $mech->form_with_fields('body'), 'find the edit form';
-ok $mech->field(body => <<PAGE_CONTENT,
+ok defined $mech->field(body => <<PAGE_CONTENT,
 # This is a test page
 
 It was submitted via {{cpan Test::WWW::Mechanize::Catalyst}} with a random string of '$random'.
