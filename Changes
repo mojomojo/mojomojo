@@ -1,6 +1,8 @@
+  - Make subtree search work (mateu)
+  
+  - Added paging for .list (dandv)
   
   - Simplify 404 page handling in suggest.tt (mateu)
-  - Make subtree search work (mateu)
 
 0.999033 2009-08-14 12:40:00 UTC
 

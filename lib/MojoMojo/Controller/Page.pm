@@ -290,6 +290,8 @@ orphan pages.
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
+    my $resultset_page = $c->req->param('page') || 1;
+    
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
@@ -297,7 +299,11 @@ sub list : Global {
     # Cache the list page for short period of time - override default of 300.
     $c->cache_page( $c->config->{'Plugin::PageCache'}{page_cache_short_life} );
 
-    my @all_pages_viewable = $page->descendants;
+    my $rs = $page->descendants($resultset_page);
+    $c->stash->{pager} = $rs->pager;
+    my @all_pages_viewable = $rs->all;
+    
+    
     my @backlinks_viewable =
       $c->model("DBIC::Link")->search( to_page => $page->id );
     if ( $c->pref('check_permission_on_view') ) {
