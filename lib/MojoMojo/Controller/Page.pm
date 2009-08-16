@@ -329,6 +329,22 @@ sub list : Global {
     ];
 }
 
+=head2 subtree (.subtree)
+
+Display all pages that are part of the subtree for the current node.
+
+=cut
+
+sub subtree : Global {
+    my ( $self, $c ) = @_;
+    
+    my $page = $c->stash->{page};
+    my @all_pages_viewable = sort { $a->{path} cmp $b->{path} } $page->descendants;
+    $c->stash->{pages}     = \@all_pages_viewable;
+    $c->stash->{template} = 'page/subtree.tt';
+}
+
+
 =head2 recent (.recent)
 
 Recently changed pages in this namespace.
