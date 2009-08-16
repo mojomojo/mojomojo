@@ -22,7 +22,7 @@
         <li><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
     [% END %]
 [% END %]
-        <li><a[% ' class="navOn"' IF template.name == 'page/list.tt' %] href="[% c.uri_for('list') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
+        <li><a[% ' class="navOn"' IF template.name == 'page/subtree.tt' %] href="[% c.uri_for('subtree') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
         <li><a[% ' class="navOn"' IF template.name =='page/recent.tt' %] href="[% c.uri_for('recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
 [% IF (pictures OR photo) +%]
         <li><a[% ' class="navOn"' IF c.req.action == 'tags' %] href="[% c.uri_for('gallery','tags') %]" title="[% loc('All tags on photos') %]" accesskey="T">[% loc('Tags') %]</a></li>
