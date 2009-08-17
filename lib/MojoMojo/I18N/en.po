@@ -734,7 +734,7 @@ msgid "Make current"
 msgstr ""
 
 #: root/base/edithelp/markdown.tt:1
-msgid "Markdow help"
+msgid "Markdown help"
 msgstr ""
 
 #: root/base/edithelp/markdown.tt:4
@@ -1038,8 +1038,8 @@ msgstr "Recent changes in %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Recent pages in %1"

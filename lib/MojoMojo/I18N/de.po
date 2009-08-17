@@ -900,13 +900,13 @@ msgstr "Als aktuelle Version speichern"
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Text markieren um anschließend eine Aktion aus der Toolbar darauf anzuwenden"
 
-#: root/base/edithelp/markdown.tt:1
-msgid "Markdow help"
-msgstr ""
-
 #:
 msgid "Markdown formatting tips"
 msgstr "Tips zur Formatierung mit Markdown"
+
+#: root/base/edithelp/markdown.tt:1
+msgid "Markdown help"
+msgstr ""
 
 #: root/base/edithelp/markdown.tt:4
 msgid "Markdown reference - the basics"
@@ -1261,8 +1261,8 @@ msgstr "Letzte Änderungen in %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Letzte Änderungen in %1"
