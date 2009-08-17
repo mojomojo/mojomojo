@@ -66,7 +66,7 @@
             <input type="text" name="login" id="authorName" value="[% c.pref('anonymous_user')%]" />
             <input type="password" name="pass" id="userAuth" value="f**k" size="16" />
             <br/>
-            ([% loc('Leave the second field blank if you do not want a password)') %]
+            ([% loc('Leave the second field blank if you do not want a password') %])
             [% END %]
             [% captcha +%]
         </form>
