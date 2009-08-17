@@ -235,7 +235,7 @@ sub print : Global {
 
 Same as L</view> action, but with a template that only outputs the barebones
 body of the page. There are no headers, footers, or navigation bars. Useful
-for transclusion.
+for transclusion (see L<MojoMojo::Formatter::Include>).
 
 =cut
 
