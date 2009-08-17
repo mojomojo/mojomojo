@@ -373,9 +373,14 @@ msgstr "Kunne ikke opprette vedlegg fra %1"
 msgid "Could not recover password"
 msgstr "Kunne ikke finne den brukeren"
 
-#: lib/MojoMojo/Formatter/Include.pm:59
+#:
 msgid "Could not retrieve"
 msgstr "Kunne ikke hente"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
+msgstr ""
 
 #:
 msgid "Create"
@@ -846,7 +851,7 @@ msgid "Leave second blank if you do not want a password"
 msgstr "La andre være tom hvis du ikke vil ha passord"
 
 #: root/base/page/edit.tt:69
-msgid "Leave the second field blank if you do not want a password)"
+msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
 #:
@@ -2198,7 +2203,7 @@ msgstr ""
 msgid "is not a valid link to youtube video"
 msgstr "er ikke en gyldig youtube lenke"
 
-#: lib/MojoMojo/Formatter/Include.pm:51 lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "is not a valid url"
 msgstr "er ikke en gyldig lenke"
 
@@ -2449,6 +2454,11 @@ msgstr "skrive"
 #:
 msgid "x hits"
 msgstr "%1 treff"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

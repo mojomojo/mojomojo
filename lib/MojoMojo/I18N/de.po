@@ -355,8 +355,9 @@ msgstr "Konnte Anhang von %1 nicht erstellen"
 msgid "Could not recover password"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Include.pm:59
-msgid "Could not retrieve"
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
 msgstr ""
 
 #:
@@ -808,7 +809,7 @@ msgid "Leave second blank if you do not want a password"
 msgstr "Wenn du kein Passwort willst musst du das zweite Feld leer lassen"
 
 #: root/base/page/edit.tt:69
-msgid "Leave the second field blank if you do not want a password)"
+msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
 #:
@@ -2088,7 +2089,7 @@ msgstr ""
 msgid "is not a valid link to youtube video"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Include.pm:51 lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "is not a valid url"
 msgstr ""
 
@@ -2293,6 +2294,11 @@ msgstr "Schreiben"
 #:
 msgid "x hits"
 msgstr "%1 Treffer"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

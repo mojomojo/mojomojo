@@ -320,9 +320,14 @@ msgstr "Could not create attachment from %1"
 msgid "Could not recover password"
 msgstr "Błąd w czasie odzyskiwania hasła"
 
-#: lib/MojoMojo/Formatter/Include.pm:59
+#:
 msgid "Could not retrieve"
 msgstr "Nie mogę pobrać"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
+msgstr ""
 
 #: root/base/admin/create_role.tt:10
 msgid "Create Role"
@@ -1150,8 +1155,8 @@ msgstr "Ostatnie zmiany w %1"
 msgid "Recent pages in this wiki"
 msgstr "Ostatnio zmieniane strony w wiki"
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Ostatnio zmieniane strony w %1"
@@ -1928,7 +1933,7 @@ msgstr "zostanie sformatowany jako:"
 msgid "is not a valid link to youtube video"
 msgstr "nie jest prawidłowym linkiem do filmu video na youtube"
 
-#: lib/MojoMojo/Formatter/Include.pm:51 lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "is not a valid url"
 msgstr "nie jest prawidłowym adresem"
 
@@ -2107,6 +2112,11 @@ msgstr ""
 #: root/base/page/permissions.tt:14 root/base/page/permissions.tt:18 root/base/page/permissions.tt:36 root/base/page/permissions.tt:53
 msgid "write"
 msgstr "zapis"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

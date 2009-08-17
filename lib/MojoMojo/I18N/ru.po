@@ -364,9 +364,14 @@ msgstr "Не удалось создать вложение от %1"
 msgid "Could not recover password"
 msgstr "Не удалось восстановить пароль"
 
-#: lib/MojoMojo/Formatter/Include.pm:59
+#:
 msgid "Could not retrieve"
 msgstr "Не удалось получить"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
+msgstr ""
 
 #: root/base/admin/create_role.tt:10
 msgid "Create Role"
@@ -813,7 +818,7 @@ msgid "Leave second blank if you do not want a password"
 msgstr "Оставьте второе поле незаполненным, если не хотите использовать пароль"
 
 #: root/base/page/edit.tt:69
-msgid "Leave the second field blank if you do not want a password)"
+msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
 #:
@@ -2133,7 +2138,7 @@ msgstr ""
 msgid "is not a valid link to youtube video"
 msgstr "это не корректная ссылка на YouTube видео"
 
-#: lib/MojoMojo/Formatter/Include.pm:51 lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "is not a valid url"
 msgstr "это не корректный адрес"
 
@@ -2356,6 +2361,11 @@ msgstr "писать"
 #:
 msgid "x hits"
 msgstr "%1 очков"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

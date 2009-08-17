@@ -50,7 +50,7 @@ C<< $c->cache >>.
 sub include {
     my ( $class, $c, $url ) = @_;
     $url = URI->new($url);
-    return "$url ".$c->loc('is not a valid url') unless $url;
+    return $c->loc('x is not a valid URL', $url) unless $url;
     # check if we're including a page from the same wiki
     my $rel = $url->rel( $c->req->base );
     if (not $rel->scheme) {
@@ -59,7 +59,7 @@ sub include {
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;
-    return $c->loc('Could not retrieve')." $url.\n";
+    return $c->loc('Could not retrieve x', $url);
 }
 
 =head1 SEE ALSO
