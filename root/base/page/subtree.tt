@@ -10,7 +10,7 @@
 
       [% FOREACH subpage IN pages +%]
         <div style="text-indent: [% subpage.depth %]em;">
-        <a href="[% c.uri_for(subpage.path) %]">[% subpage.path %]</a>
+        <a href="[% c.uri_for(subpage.path) %]" title="[% subpage.name_orig %]">[% subpage.path %]</a>
         </div>
       [% END +%]
 
