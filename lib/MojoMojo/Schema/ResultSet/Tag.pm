@@ -54,7 +54,7 @@ sub by_page {
             from     => 'page as ancestor, page as descendant, tag as me',
             select   => [ 'me.page', 'me.tag', 'count(me.tag) as refcount' ],
             as       => [ 'page', 'tag', 'refcount' ],
-            group_by => [ 'me.page','me.tag'],
+            group_by => [ 'me.tag'],
             order_by => ['refcount'],
         }
     );
