@@ -543,6 +543,11 @@ sub get_permissions_data {
     # We have two options here - if we are caching, we will load everything and cache it.
     # If we are not - then we load just the bits we need.
     if ( !$permdata ) {
+        # Initialize $permdata as a reference or we end up with an error
+        # when we try to dereference it further down.  The error we're avoiding is:
+        # Can't use string ("") as a HASH ref while "strict refs"
+        $permdata = {};
+        
         ## either the data hasn't been loaded, or it's expired since we used it last.
         ## so we need to reload it.
         my $rs =
