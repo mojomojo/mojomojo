@@ -16,7 +16,7 @@ BEGIN {
 use lib 't/lib';
 use MojoMojoTestSchema;
 
-my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
+my $schema = MojoMojoTestSchema->init_schema(populate => 1);
 
 my ($path_pages, $proto_pages) = $schema->resultset('Page')->path_pages('/');
 my $root_page = $path_pages->[0];

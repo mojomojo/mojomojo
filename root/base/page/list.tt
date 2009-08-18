@@ -22,6 +22,22 @@
         <li><a href="[% c.uri_for(subpage.path) %]">[% subpage.path %]</a> [% subpage.content.abstract %]</li>
       [% END +%]
     </ul>
+    
+
+    <p>
+      [% IF pager.previous_page %]
+        <a href="[% c.uri_for('/.list', {page => pager.previous_page}) %]">[% loc('Previous page') %]</a>
+      [% END %]
+
+      [% IF pager.previous_page AND pager.next_page %]
+        |
+      [% END %]
+
+      [% IF pager.next_page %]
+        <a href="[% c.uri_for('/.list', {page => pager.next_page}) %]">[% loc('Next page') %]</a>
+      [% END %]
+    </p>
+  
 </div>
 
 [% IF ! activetag +%]

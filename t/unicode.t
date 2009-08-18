@@ -14,7 +14,6 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
     use_ok 'MojoMojo::Formatter::Markdown';
     
     use_ok 'Catalyst::Test', 'MojoMojo';

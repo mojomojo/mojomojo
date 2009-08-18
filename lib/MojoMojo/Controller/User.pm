@@ -30,11 +30,13 @@ Log in through the authentication system.
 sub login : Global : FormConfig {
     my ( $self, $c ) = @_;
     $c->stash->{message} ||= $c->flash->{message};
-    # $c->loc('Please enter username and password');
     my $form = $c->stash->{form};
 
     if ( $form->submitted_and_valid ) {
-        if (
+        if ($c->req->method ne 'POST') {
+            # general error - we want a POST
+            $c->res->status(400);
+        } elsif (
             $c->authenticate(
                 {
                     login => $form->param_value('login'),
@@ -46,13 +48,17 @@ sub login : Global : FormConfig {
 
             $c->stash->{user} = $c->user->obj;
             $c->res->redirect( $c->uri_for( $c->stash->{path} ) )
-              unless $c->stash->{template};
+                unless $c->stash->{template};
             return;
         }
         else {
             $c->stash->{fail} = 1;
             $c->stash->{message} =
-              $c->loc('Could not authenticate that login.');
+                $c->loc('Could not authenticate that login.');
+            # big debate in #catalyst on the status code that should be returned if authentication failed
+            # 400 is too vague, 401 says "MUST supply WWW-Authenticate", 451 is a M$ extension
+            # also note that IE doesn't display the error page if it's shorter than 512 bytes (not the case here)
+            $c->res->status(403);  # works fine with IE6
         }
     }
     $c->stash->{template} ||= "user/login.tt";
@@ -226,7 +232,7 @@ sub register : Global FormConfig {
 
     $c->stash->{template} = 'user/register.tt';
     $c->stash->{message}  = $c->loc(
-'Please fill in the following information to register. All fields are mandatory.'
+        'Please fill in the following information to register. All fields are mandatory.'
     );
     my $form = $c->stash->{form};
     $c->stash->{newuser} = $c->model('DBIC::Person')->new_result( {} );

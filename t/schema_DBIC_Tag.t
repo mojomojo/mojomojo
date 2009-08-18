@@ -16,7 +16,7 @@ BEGIN {
 use lib 't/lib';
 use MojoMojoTestSchema;
 
-my $schema = MojoMojoTestSchema->init_schema(no_populate => 0);
+my $schema = MojoMojoTestSchema->init_schema(populate => 1);
 my ($page_ref) = $schema->resultset('Page')->path_pages('/');
 my $page = $page_ref->[0];
 is(scalar $page->tags, 0, 'no tags for root page');
@@ -33,11 +33,11 @@ my $tag2 = $schema->resultset('Tag')->create({
     page => $page->id,
     person => 1
 });
-is($schema->resultset('Tag')->most_used()->count(), 2);
+is($schema->resultset('Tag')->most_used()->count(), 2, 'added one more, 2 now');
 
 my $tag3 = $schema->resultset('Tag')->create({
     tag => 'test3',
     page => $page->id,
     person => 1
 });
-is($schema->resultset('Tag')->by_page($page->id)->count(), 3);
+is($schema->resultset('Tag')->by_page($page->id)->count(), 3, 'added one more, 3 now');

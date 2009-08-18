@@ -114,7 +114,7 @@ sub tagged_descendants {
 
 Create a new content version for this page.
 
-%args is each column of L<MojoMojo::M::Core::Content>.
+%args is each column of L<MojoMojo::Schema::Result::Content>.
 
 =cut
 
@@ -189,15 +189,20 @@ sub descendants_by_date {
 
 =head2 descendants
 
-  @descendants = $page->descendants;
+  @descendants = $page->descendants( [$resultset_page] );
 
-Returns all descendants of this page (no paging), including the page itself.
+In list context, returns all descendants of this page (no paging), including 
+the page itself. In scalar context, returns the resultset object.
+
+If the optional $resultset_page is passed, returns that page from the
+L<resultset|DBIx::Class::ResultSet>.
 
 =cut
 
 sub descendants {
-    my ($self)  = @_;
-    my (@pages) = $self->result_source->resultset->search(
+    my ($self, $resultset_page)  = @_;
+    
+    my $rs = $self->result_source->resultset->search(
         {
             'ancestor.id' => $self->id,
             -or           => [
@@ -209,11 +214,15 @@ sub descendants {
             ],
         },
         {
+            $resultset_page? (page => $resultset_page || 1, rows => 20) : (),
             from     => 'page me, page ancestor',
             order_by => ['me.name']
         }
-    );
-    return $self->result_source->resultset->set_paths(@pages);
+    );  # an empty arrayref if there are no results because we'll dereference in the 'return'
+
+    return wantarray?
+        $self->result_source->resultset->set_paths($rs->all)
+      : $rs
 }
 
 

@@ -74,7 +74,7 @@ Full path to this attachment.
 sub filename {
     my $self           = shift;
     my $attachment_dir = $self->result_source->schema->attachment_dir;
-    die "MojoMojo::Schema->attachment must be set to a writeable directory (Current:$attachment_dir)\n"
+    die "MojoMojo::Schema->attachment_dir must be set to a writable directory (Current: $attachment_dir)\n"
         unless -d $attachment_dir && -w $attachment_dir;
     return ( $attachment_dir . '/' . $self->id );
 }

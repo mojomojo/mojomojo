@@ -48,34 +48,46 @@ these. Run it with --help to see usage information.
 
 =head2 Step 3
 
-Do one of these:
+MojoMojo is a Catalyst application Catalyst and works with Catalyst's built-in
+web server, or with an external one.
 
-=over 4
+=head3 Using the Catalyst built-in server
 
-=item Catalyst includes a test server which can be started using:
+Catalyst includes a test server which can be started using:
 
     ./script/mojomojo_server -p 3000
 
 where 3000 is the port number and the default if no port is specified. Note
 that if you install it through the cpan shell, mojomojo_server will be found
-in your bin directory. Alternatively:
+in your F<bin> directory.
 
-=item Use a lightweight web server
+=head3 Use an external web server
 
-C<nginx> and C<lighttpd> are way easier to setup than Apache, and faster. Unless
-you need some specific features of Apache, nginx is a better choice.
+MojoMojo has been tested with Apache, lighttpd and nginx. If you need to make
+a choice, nginx and lighttpd are much lighter in terms of resource consumption,
+and faster at serving static files, while Apache is more popular and powerful.
+
+Comparison information can be found at WikiVs:
+
+=over 4
+
+=item * L<http://www.wikivs.com/wiki/Apache_vs_nginx>
+
+=item * L<http://www.wikivs.com/wiki/Lighttpd_vs_nginx>
+
+=item * L<http://www.wikivs.com/wiki/Apache_vs_Lighttpd>
+
+=back
 
 See L<http://mojomojo.org/documentation/deployment> for how to setup MojoMojo
 with various web servers.
 
-=item Set up Apache using either mod_perl or FastCGI.
+=head4 Set up Apache using either mod_perl or FastCGI.
 
 See
 http://search.cpan.org/dist/Catalyst/lib/Catalyst/Manual/Cookbook.pod#Using_FastCGI
 for further information on FastCGI, or you can look at L<Catalyst::Engine::Apache>
 for info on setting up Catalyst apps in Apache.
-
-=back
 
 If your server is connected to a http proxy you may need to add the following
 line to the main config block:
@@ -84,7 +96,7 @@ line to the main config block:
 
 =head2 Step 4
 
-Login to your MojoMojo and change the admin password. The defaul login/pass is
+Login to your MojoMojo and change the admin password. The default login/pass is
 C<admin>/C<admin>.
 
 For troubleshooting, see L<http://mojomojo.org/troubleshooting>.

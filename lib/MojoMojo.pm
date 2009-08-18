@@ -32,7 +32,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '0.999032';
+our $VERSION = '0.999033';
 
 MojoMojo->config->{authentication}{dbic} = {
     user_class     => 'DBIC::Person',
@@ -104,8 +104,8 @@ my $NO_DB_MESSAGE =<<"EOF";
     ***********************************************
     ERROR. Looks like you need to deploy a database.
     Run script/mojomojo_spawn_db.pl
-    *********************************************** 
-    
+    ***********************************************
+
 EOF
 eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Person')->next };
 if ($@ ) {
@@ -340,7 +340,7 @@ sub fixw {
 
 sub prepare_action {
     my $c = shift;
-    
+
     if ($has_DB) {
         $c->next::method(@_);
     }
@@ -543,6 +543,11 @@ sub get_permissions_data {
     # We have two options here - if we are caching, we will load everything and cache it.
     # If we are not - then we load just the bits we need.
     if ( !$permdata ) {
+        # Initialize $permdata as a reference or we end up with an error
+        # when we try to dereference it further down.  The error we're avoiding is:
+        # Can't use string ("") as a HASH ref while "strict refs"
+        $permdata = {};
+        
         ## either the data hasn't been loaded, or it's expired since we used it last.
         ## so we need to reload it.
         my $rs =
@@ -614,7 +619,7 @@ sub check_permissions {
     } if ($user && $user->is_admin);
 
     # if no user is logged in
-    unless ($user){
+    if (not $user) {
         # if anonymous user is allowed
         my $anonymous = $c->pref('anonymous_user');
         if ($anonymous) {
@@ -709,6 +714,12 @@ sub check_permissions {
     }
 
     my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
+
+    # Fast fix for security issue of attachments being deletable by non-authenticated users
+    # Overrides permissions for anonymous users to fix http://mojomojo.ideascale.com/akira/dtd/22284-2416
+    # TODO "attachment" is a rather vague permission: it seems to apply to creating, editing and deleting attachments
+    @perms{'attachment', 'delete'} = (0, 0) if not $user;
+
     return \%perms;
 }
 

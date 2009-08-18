@@ -1,6 +1,8 @@
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More tests => 14;
+use lib 't/lib';
+use MojoMojoTestSchema;
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -25,6 +27,11 @@ is( Email::Send::Test->emails, 1, 'new password emailed' );
 my ($mail) = Email::Send::Test->emails;
 like( $mail->header('To'), qr/^admin/,        'right recipient' );
 like( $mail->body,         qr/new password/i, 'email contains a new password' );
+
+# After requesting password recovery, restore the original password
+ok my $schema = MojoMojoTestSchema->get_schema, 'get the schema in order to...';
+ok $schema->resultset('Person')->find({login => 'admin'})->update({pass=>"admin"}), "...reset admin's password to 'admin'";
+
 
 # Clear email trap before next test per doc recommendation.
 Email::Send::Test->clear;

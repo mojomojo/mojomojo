@@ -10,7 +10,6 @@ my $body;                  # the MojoMojo page body as fetched by get()
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
     use_ok 'Catalyst::Test', 'MojoMojo';
 }
 

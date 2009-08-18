@@ -1,0 +1,20 @@
+[% SET title = loc('All Pages in x',  page.path) %]
+
+[% WRAPPER page/wrapper.tt title = title %]
+<div id="content">
+
+<div>
+
+    [% styled_page_name = '<em>' _ page.name _ '</em>' %]
+    <h2>[% loc('All pages in x listed alphabetically', styled_page_name ) %]</h2>
+
+      [% FOREACH subpage IN pages +%]
+        <div style="text-indent: [% subpage.depth %]em;">
+        <a href="[% c.uri_for(subpage.path) %]" title="[% subpage.name_orig %]">[% subpage.path %]</a>
+        </div>
+      [% END +%]
+
+</div>
+
+</div>
+[% END # WRAPPER %]

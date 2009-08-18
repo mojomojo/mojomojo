@@ -16,6 +16,6 @@ BEGIN {
 use lib qw(t/lib);
 use MojoMojoTestSchema;
 
-my $schema = MojoMojoTestSchema->init_schema(no_populate => 1);
+my $schema = MojoMojoTestSchema->init_schema(populate => 0);
 
-is(ref $schema->resultset('Person')->registration_profile,'HASH');
+is(ref $schema->resultset('Person')->registration_profile, 'HASH', 'very basic registration_profile test');

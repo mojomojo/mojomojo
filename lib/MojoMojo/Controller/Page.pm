@@ -38,13 +38,14 @@ load the provided revision instead.
 
 =cut
 
-sub view :Global {
+sub view : Global {
     my ( $self, $c, $path ) = @_;
 
     my $stash = $c->stash;
     $stash->{template} ||= 'page/view.tt';
 
     $c->forward('inline_tags');
+
 # FIXME NOTE: Highlight has been turned off until someone makes it work perfectly in all cases.
 # In particular it sucks with TOC and valid HTML
 # $c->stash->{render} = 'highlight'
@@ -75,11 +76,14 @@ sub view :Global {
         );
         $stash->{rev} = ( defined $content ? $content->version : undef );
         unless ( $stash->{rev} ) {
-            $stash->{message} = $c->loc( 'No revision x for x',
+            $stash->{message} = $c->loc(
+                'No revision x for x',
                 $rev,
                 '<span class="error_detail">'
-                  . '<a href="' . $page->path . '">' . $page->name . '</a>'
-               .'</span>'
+                  . '<a href="'
+                  . $page->path . '">'
+                  . $page->name . '</a>'
+                  . '</span>'
             );
             $stash->{template} = 'message.tt';
         }
@@ -104,7 +108,7 @@ subtree starting from the current page.
 
 =cut
 
-sub search :Global {
+sub search : Global {
     my ( $self, $c ) = @_;
 
     my $stash = $c->stash;
@@ -114,7 +118,8 @@ sub search :Global {
 
     my $page = $c->stash->{page};
 
-    my $q           = $c->req->params->{q}           || $c->stash->{query} || q();
+    # $q represents the search query
+    my $q = $c->req->params->{q} || $c->stash->{query} || q();
     my $search_type = $c->req->params->{search_type} || "subtree";
     $stash->{query}       = $q;
     $stash->{search_type} = $search_type;
@@ -123,17 +128,23 @@ sub search :Global {
 
     my $results = [];
 
-    # for subtree searches, add the path info to the query, replacing slashes with X
-    my $real_query = $q;    # this is for context matching later
+# For subtree searches, we'll use the (modified) page path to restrict the search hits.
+    my $fixed_path;
     if ( $search_type eq "subtree" ) {
-        my $fixed_path = $page->path;
+        $fixed_path = $page->path;
+
+# Replace slashes with X so fixed path format matches hit path format.
         $fixed_path =~ s{/}{X}g;
-        $q = "path:$fixed_path* AND " . $q;
     }
 
     my $hits = $c->model('Search')->search($q);
     my %results_hash;
     while ( my $hit = $hits->fetch_hit_hashref ) {
+
+        # Filter out hits that aren't part of subtree
+        if ( $search_type eq 'subtree' ) {
+            next if $hit->{path} !~ m/$fixed_path/mx;
+        }
         $hit->{path} =~ s{X}{/}g;
         my ($path_pages) = $c->model('DBIC::Page')->path_pages( $hit->{path} );
         my $page = $path_pages->[ @$path_pages - 1 ];
@@ -150,28 +161,23 @@ sub search :Global {
         my $content = $strip->parse( $page->content->formatted($c) );
         $strip->eof;
 
-# FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
-        my $snippet =
-          Text::Context->new( $content, split( / /, $real_query ) );
-
-        # Convert Kinosearch hit score from decimal to percent.
-        # my $score = sprintf( "%.0f", $hit->{score} * 1000 );
+ # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
+        my $snippet = Text::Context->new( $content, split( / /, $q ) );
 
         # Store goods to be used in search results listing
         # NOTE: $page->path is '/' for app root,
         # but $c->request->path is empty for app root.
         my $title_base_nodes;
         if ( $page->path ne '/' ) {
-            ( $title_base_nodes ) =
-              $page->path =~ m{(.*/).*$};
+            ($title_base_nodes) = $page->path =~ m{(.*/).*$};
             $title_base_nodes =~ s{^/}{};
             $title_base_nodes =~ s{/}{ > }g;
         }
         $results_hash{ $hit->{path} } = {
-            snippet             => $snippet->as_html,
-            page                => $page,
-            score               => $hit->{score},
-            title_base_nodes    => $title_base_nodes,
+            snippet          => $snippet->as_html,
+            page             => $page,
+            score            => $hit->{score},
+            title_base_nodes => $title_base_nodes,
         };
 
     }
@@ -219,28 +225,25 @@ template.
 
 =cut
 
-sub print :Global {
+sub print : Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/print.tt';
     $c->forward('view');
 }
 
-
 =head2 inline
 
 Same as L</view> action, but with a template that only outputs the barebones
 body of the page. There are no headers, footers, or navigation bars. Useful
-for transclusion.
+for transclusion (see L<MojoMojo::Formatter::Include>).
 
 =cut
 
-
-sub inline :Global {
+sub inline : Global {
     my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'page/inline.tt';
     $c->forward('view');
 }
-
 
 =head2 inline_tags (.inline_tags)
 
@@ -248,7 +251,7 @@ Tag list for the bottom of page views.
 
 =cut
 
-sub inline_tags :Global {
+sub inline_tags : Global {
     my ( $self, $c, $highlight ) = @_;
     $c->stash->{template} ||= 'page/tags.tt';
     $c->stash->{highlight} = $highlight;
@@ -265,7 +268,6 @@ sub inline_tags :Global {
     }
 }
 
-
 =head2 pages_viewable($c, $user, @pages)
 
 Filters an array of pages, returning only those that the given user has
@@ -274,10 +276,8 @@ permission to view.
 =cut
 
 sub pages_viewable {
-    my ($c, $user, @pages) = @_;
-    return grep {
-        $c->check_permissions( $_->path, $user )->{view};
-    } @pages;
+    my ( $c, $user, @pages ) = @_;
+    return grep { $c->check_permissions( $_->path, $user )->{view}; } @pages;
 }
 
 =head2 list (.list)
@@ -287,33 +287,41 @@ orphan pages.
 
 =cut
 
-sub list :Global {
+sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
+    my $resultset_page = $c->req->param('page') || 1;
+    
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
 
     # Cache the list page for short period of time - override default of 300.
-    $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
+    $c->cache_page( $c->config->{'Plugin::PageCache'}{page_cache_short_life} );
 
-    my @all_pages_viewable = $page->descendants;
-    my @backlinks_viewable = $c->model("DBIC::Link")->search( to_page => $page->id );
+    my $rs = $page->descendants($resultset_page);
+    $c->stash->{pager} = $rs->pager;
+    my @all_pages_viewable = $rs->all;
+    
+    
+    my @backlinks_viewable =
+      $c->model("DBIC::Link")->search( to_page => $page->id );
     if ( $c->pref('check_permission_on_view') ) {
         my $user;
         if ( $c->user_exists() ) { $user = $c->user->obj; }
-        @all_pages_viewable = pages_viewable($c, $user, @all_pages_viewable);
+        @all_pages_viewable = pages_viewable( $c, $user, @all_pages_viewable );
         @backlinks_viewable = grep {
-            # does the user have permission to view the page from which ours is linked?
+
+     # does the user have permission to view the page from which ours is linked?
             $c->check_permissions( $_->from_page->path, $user )->{view};
         } @backlinks_viewable;
     }
-    $c->stash->{pages} = \@all_pages_viewable;
+    $c->stash->{pages}     = \@all_pages_viewable;
     $c->stash->{backlinks} = \@backlinks_viewable;
 
-    $c->stash->{orphans} = [];  # FIXME - real data here please
+    $c->stash->{orphans} = [];    # FIXME - real data here please
 
-    # no need to check any permissions here because the user already views this page, and wanted pages are redlinks in it
+# no need to check any permissions here because the user already views this page, and wanted pages are redlinks in it
     $c->stash->{wanted} = [
         $c->model("DBIC::WantedPage")->search(
             { from_page => [ $page->id, map { $_->id } @all_pages_viewable ] }
@@ -321,13 +329,29 @@ sub list :Global {
     ];
 }
 
+=head2 subtree (.subtree)
+
+Display all pages that are part of the subtree for the current node.
+
+=cut
+
+sub subtree : Global {
+    my ( $self, $c ) = @_;
+    
+    my $page = $c->stash->{page};
+    my @all_pages_viewable = sort { $a->{path} cmp $b->{path} } $page->descendants;
+    $c->stash->{pages}     = \@all_pages_viewable;
+    $c->stash->{template} = 'page/subtree.tt';
+}
+
+
 =head2 recent (.recent)
 
 Recently changed pages in this namespace.
 
 =cut
 
-sub recent :Global {
+sub recent : Global {
     my ( $self, $c, $tag ) = @_;
     $c->detach( '/tag/recent', [$tag] ) if $tag;
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used;
@@ -338,12 +362,12 @@ sub recent :Global {
     if ( $c->pref('check_permission_on_view') ) {
         my $user;
         if ( $c->user_exists() ) { $user = $c->user->obj; }
-        @pages_viewable = pages_viewable($c, $user, @pages_viewable);
+        @pages_viewable = pages_viewable( $c, $user, @pages_viewable );
     }
     $c->stash->{pages} = \@pages_viewable;
 
     # Cache the list page for short period of time - override default of 300.
-    $c->cache_page($c->config->{'Plugin::PageCache'}{page_cache_short_life});
+    $c->cache_page( $c->config->{'Plugin::PageCache'}{page_cache_short_life} );
 
     # FIXME - needs to be populated even without tags
 }
@@ -354,7 +378,7 @@ Overview of available feeds for this node.
 
 =cut
 
-sub feeds :Global {
+sub feeds : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'feeds.tt';
 }
@@ -365,13 +389,12 @@ RSS feed with headlines of recent nodes in this namespace.
 
 =cut
 
-sub rss :Global {
+sub rss : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->stash->{template} = 'page/rss.tt';
     $c->res->content_type('application/rss+xml');
 }
-
 
 =head2 atom (.atom)
 
@@ -379,7 +402,7 @@ Full content ATOM feed of recent nodes in this namespace.
 
 =cut
 
-sub atom :Global {
+sub atom : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->res->content_type('application/atom+xml');
@@ -392,13 +415,12 @@ Full content RSS feed of recent nodes in this namespace.
 
 =cut
 
-sub rss_full :Global {
+sub rss_full : Global {
     my ( $self, $c ) = @_;
     $c->forward('recent');
     $c->res->content_type('application/rss+xml');
     $c->stash->{template} = 'page/rss_full.tt';
 }
-
 
 =head2 export (.export)
 
@@ -406,7 +428,7 @@ Page showing available export options.
 
 =cut
 
-sub export :Global {
+sub export : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'export.tt';
 }
@@ -417,7 +439,7 @@ sub export :Global {
 
 =cut
 
-sub suggest :Global {
+sub suggest : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'page/suggest.tt';
     $c->res->status(404);
@@ -429,7 +451,7 @@ Search results embeddable in another page (for use with L</suggest>).
 
 =cut
 
-sub search_inline :Path('/search/inline') {
+sub search_inline : Path('/search/inline') {
     my ( $self, $c ) = @_;
     $c->forward('search');
     $c->stash->{template} = 'page/search_inline.tt';
@@ -442,7 +464,7 @@ children and descendants, links to/from, attachments.
 
 =cut
 
-sub info :Global {
+sub info : Global {
     my ( $self, $c ) = @_;
     $c->stash->{body_length} = length( $c->stash->{page}->content->body );
     $c->stash->{template}    = 'page/info.tt';

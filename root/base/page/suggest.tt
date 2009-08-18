@@ -1,17 +1,7 @@
 [% WRAPPER page/wrapper.tt title = c.expand_wikilink(proto_pages.last.name_orig) %]
 <div id="content">
-    <p>[% loc('One or more pages in the requested path do not exist.') %]</p>
-    <h2>[% loc('Existent Pages') %]</h2>
-    <p>
-    [% FOREACH page IN path_pages %]
-        [% IF loop.first %]
-        <a href="[% c.uri_for( page.path )%]">[% c.pref("name") %] [% loc('Home') %]</a>
-        [% ELSE %]
-        / <a href="[% c.uri_for( page.path )%]">[% page.name_orig %]</a>
-        [% END %]
-    [% END %] ...
-    </p>
-    <h2>[% loc('Non-Existent Pages') %]</h2>
+    <div id="nonexistent_pages">
+    <p>[% loc('The following pages in the requested path do not exist:') %]</p>
     <p>
     ...
     [% FOREACH page IN proto_pages %]
@@ -19,9 +9,8 @@
     [% END %]
     </p>
     <p>
-        [% loc('Click on any non-existent page to create it. Any missing pages above it will be created automatically.') %]
+        [% loc('Click on a link above to create that page.') %]
     </p>
-    <h2>[% loc('Other Suggestions') %]</h2>
-    [% c.subreq('/search/inline',page=>path_pages.first,query=>proto_pages.first.name) %]
+    </div>
 </div>
 [% END %]

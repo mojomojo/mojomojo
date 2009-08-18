@@ -3,7 +3,6 @@ use Test::More tests => 5;
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
-    $ENV{CATALYST_DEBUG}  = 0;
 }
 use_ok( Catalyst::Test, 'MojoMojo' );
 use_ok('MojoMojo::Controller::Jsrpc');

@@ -1,4 +1,5 @@
-<h2>[%loc('Textile formatting tips')%] (<a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_blank">[%loc('Textile2 reference')%]</a>)</h2>
+<h2>[%loc('Textile help')%]</h2>
+<p><a href="http://www.bradchoate.com/mt/docs/mtmanual_textile2.html" target="_blank">[%loc('Textile2 complete reference')%]</a></p>
 <table>
     <tr>
         <td>_[%loc('your text')%]_</td>
