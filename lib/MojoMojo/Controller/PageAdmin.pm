@@ -155,6 +155,9 @@ sub edit : Global FormConfig {
             return;
         }
 
+        my $precompiled_body = $valid->{'body'};
+        MojoMojo->call_plugins( "format_content", \$precompiled_body, $c, $page );
+        $valid->{'precompiled'} = $precompiled_body;
         $page->update_content(%$valid);
 
         # update the search index with the new content
