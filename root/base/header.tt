@@ -42,5 +42,5 @@
 </head>
 
 <body id="page">
-<div id="container" class="container[% c.session.maximize_width ? ' maximized-container' : '' %]">
+<div id="container" class="container[% c.sessionid && c.session.maximize_width ? ' maximized-container' : '' %]">
 [% PROCESS top.tt %]
