@@ -266,7 +266,9 @@ For 2000 page versions on a 2.4 GHz desktop this script took about 3 minutes to 
 
 sub precompile_pages : Global {
     my ( $self, $c, $user ) = @_;
-
+    $c->response->body('Precompile currently disabled until it co-exists harmoniously with set_paths');
+    return;
+    
     my $content_rs = $c->model('DBIC::Content');
     while ( my $content_record = $content_rs->next ) {
         my $body = $content_record->body;
