@@ -1,0 +1,99 @@
+@import blueprint/reset.sass
+@import blueprint.sass
+@import blueprint/modules/scaffolding.sass
+@import compass/utilities.sass
+
++blueprint-typography
+
+// Maximize Width
+//.maximized-container
+//  max-width: 99%
+//  width: 99%
+
+=mj-horizontal-list
+  +horizontal-list
+  border: 0px solid #777
+  margin: 3px
+  padding: 3px
+  font-family: sans-serif
+  a
+    border: 1px solid #000
+    color: #OOO
+    -moz-border-radius: 5px
+    -webkit-border-radius: 5px
+    background-color: #ADD8E6
+    text-decoration: none
+    padding: 2px
+
+body
+  color: #FFFFFF
+  background-color: #083e61
+
+
+
+#container
+  +container
+  h1, h2, h3, h4
+    color: #FFFF00
+
+#header, #breadcrumbs, #toplinks, #pagenav, #content, #showtag, #tags, #bottomnav, #powered
+  +column(24)
+
+#toplinks, #pagenav, #pageoptions, #bottomnav
+  +mj-horizontal-list
+
+
+
+#header
+  h1
+    color: #ADD8E6
+
+#breadcrumbs
+  a
+    color: #0F0
+
+
+#content
+  #current
+    background: #aaa
+    color: #000  
+    border: 1px solid #bbb
+    padding: 15px
+    a
+      color: #900
+    pre
+      -moz-border-radius: 10px
+      color: #F5DEB3
+      background: #083e61
+      padding: 10px
+  pre
+    color: #000
+  .toc
+    +no-bullets
+    background-color: #788086
+    border: 1px solid #000
+    padding: 2em
+    float: right
+    position: relative
+    margin: 1em
+    ul
+      margin: 0
+      margin-left: 0px
+      padding: 0 
+    > ul
+      margin-left: -1em
+    li
+      margin: 0
+      padding: 0
+      font-size: 1em !important
+
+
+table
+  thead
+    color: #000
+
+#nonexistent_pages
+  background-color: #F00
+
+
+
