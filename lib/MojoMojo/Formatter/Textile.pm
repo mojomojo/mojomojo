@@ -52,6 +52,10 @@ sub main_format_content {
 
     $$content = $textile->process($$content);
     $$content = Text::SmartyPants->process($$content);
+    # for uniformity with Markdown, make sure the output ends with *one* newline.
+    # See justification in L<MojoMojo::Formatter::Markdown/format_content>.
+    $$content =~ s/\n*$/\n/;
+    return $$content;
 }
 
 =head1 SEE ALSO

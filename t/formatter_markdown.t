@@ -1,11 +1,24 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Markdown;
-use Test::More tests => 12;
+use Test::More tests => 14;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
 
+#----------------------------------------------------------------------------
+$test = 'extra EOL at EOF';
+$content  = 'foo';
+$expected = "<p>foo</p>\n";
+is( MojoMojo::Formatter::Markdown->main_format_content( \$content ), $expected, $test );
+
+$test = 'consecutive EOL at EOF collapsed into one';
+$content  = "foo\n\n";
+$expected = "<p>foo</p>\n";
+is( MojoMojo::Formatter::Markdown->main_format_content( \$content ), $expected, $test );
+
+
+#----------------------------------------------------------------------------
 $content = 'Here is an ![Image alt text](/image.jpg "Image title") image.';
 $expected =
 '<p>Here is an <img src="/image.jpg" alt="Image alt text" title="Image title" /> image.</p>'

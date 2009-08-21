@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown
-use Test::More tests => 24;
+use Test::More tests => 26;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -338,12 +338,12 @@ MARKDOWN
 #-------------------------------------------------------------------------------
 $test = '"<code>" and "<tt>" strings in <pre lang="Perl"> run through the JSRPC renderer';
 
-$content = <<TEXTILE;
+$content = <<MARKDOWN;
 <pre lang="Perl">
 "Monotype: use <tt>.";
 "Source code: <code>.";
 </pre>
-TEXTILE
+MARKDOWN
 
 $expected = <<'HTML';
 <pre>
@@ -354,3 +354,20 @@ HTML
 
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
+
+
+#-------------------------------------------------------------------------------
+$test = "newline present before EOF";
+
+$content = 'Markdown ensures the output ends with a newline';
+$expected = "<p>Markdown ensures the output ends with a newline</p>\n";
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is $got, $expected, $test;
+
+
+$test = "multiple newlines at EOF collapsed into one";
+
+$content = "Markdown ensures the output ends with *one* newline\n\n\n";
+$expected = "<p>Markdown ensures the output ends with <em>one</em> newline</p>\n";
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is $got, $expected, $test;
