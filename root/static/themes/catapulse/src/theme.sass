@@ -6,28 +6,29 @@
 +blueprint-typography
 
 // Maximize Width
-//.maximized-container
-//  max-width: 99%
-//  width: 99%
+// .maximized-container
+//   max-width: 99%
+//   width: 99%
 
 =mj-horizontal-list
   +horizontal-list
   border: 0px solid #777
-  margin: 3px
+  margin: 5px 0px 5px 0px
   padding: 3px
   font-family: sans-serif
   a
     border: 1px solid #000
-    color: #OOO
+    color: #000
     -moz-border-radius: 5px
     -webkit-border-radius: 5px
-    background-color: #ADD8E6
+    background-color: #939396
     text-decoration: none
     padding: 2px
 
 body
+  margin: 0px 0px
+  background: #083e61 url(images/bg.gif) repeat-x
   color: #FFFFFF
-  background-color: #083e61
 
 
 
@@ -47,18 +48,26 @@ body
 #header
   h1
     color: #ADD8E6
-
+  h1:before
+    content: url(images/catalyst_logo.png)
+    margin: 10px
 #breadcrumbs
+  padding: 10px
   a
     color: #0F0
 
 
 #content
+  background: #aaa
+  color: #000  
+  border: 1px solid #bbb
+  padding: 15px
+  margin: 10px
+  font-size: 1.3em
+  a
+    +hover-link
+    +link-colors(#900, #900, #900, #900, #900)
   #current
-    background: #aaa
-    color: #000  
-    border: 1px solid #bbb
-    padding: 15px
     a
       color: #900
     pre
@@ -95,5 +104,11 @@ table
 #nonexistent_pages
   background-color: #F00
 
+#powered
+  img
+    float: right
+    position: relative
 
 
+.byline
+  color: #FFF

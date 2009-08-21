@@ -87,7 +87,7 @@ caption { background: #eee; }
 
 .loud { color: #111111; }
 
-body { color: #FFFFFF; background-color: #083e61; }
+body { margin: 0px 0px; background: #083e61 url(images/bg.gif) repeat-x; color: #FFFFFF; }
 
 #container { width: 950px; margin: 0 auto; overflow: hidden; display: inline-block; }
 #container { display: block; }
@@ -96,18 +96,26 @@ body { color: #FFFFFF; background-color: #083e61; }
 #header, #breadcrumbs, #toplinks, #pagenav, #content, #showtag, #tags, #bottomnav, #powered { display: inline; float: left; margin-right: 10px; width: 950px; }
 * html #header, * html #breadcrumbs, * html #toplinks, * html #pagenav, * html #content, * html #showtag, * html #tags, * html #bottomnav, * html #powered { overflow-x: hidden; }
 
-#toplinks, #pagenav, #pageoptions, #bottomnav { margin: 0; padding: 0; border: 0; outline: 0; overflow: hidden; display: inline-block; border: 0px solid #777; margin: 3px; padding: 3px; font-family: sans-serif; }
+#toplinks, #pagenav, #pageoptions, #bottomnav { margin: 0; padding: 0; border: 0; outline: 0; overflow: hidden; display: inline-block; border: 0px solid #777; margin: 5px 0px 5px 0px; padding: 3px; font-family: sans-serif; }
 #toplinks, #pagenav, #pageoptions, #bottomnav { display: block; }
 #toplinks li, #pagenav li, #pageoptions li, #bottomnav li { list-style-type: none; margin-left: 0px; white-space: nowrap; display: inline; float: left; padding-left: 4px; padding-right: 4px; }
 #toplinks li.first, #pagenav li.first, #pageoptions li.first, #bottomnav li.first { padding-left: 0px; }
 #toplinks li.last, #pagenav li.last, #pageoptions li.last, #bottomnav li.last { padding-right: 0px; }
-#toplinks a, #pagenav a, #pageoptions a, #bottomnav a { border: 1px solid #000; color: #OOO; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #ADD8E6; text-decoration: none; padding: 2px; }
+#toplinks a, #pagenav a, #pageoptions a, #bottomnav a { border: 1px solid #000; color: #000; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #939396; text-decoration: none; padding: 2px; }
 
 #header h1 { color: #ADD8E6; }
+#header h1:before { content: url(images/catalyst_logo.png); margin: 10px; }
 
+#breadcrumbs { padding: 10px; }
 #breadcrumbs a { color: #0F0; }
 
-#content #current { background: #aaa; color: #000; border: 1px solid #bbb; padding: 15px; }
+#content { background: #aaa; color: #000; border: 1px solid #bbb; padding: 15px; margin: 10px; font-size: 1.3em; }
+#content a { text-decoration: none; color: #990000; }
+#content a:hover { text-decoration: underline; }
+#content a:visited { color: #990000; }
+#content a:focus { color: #990000; }
+#content a:hover { color: #990000; }
+#content a:active { color: #990000; }
 #content #current a { color: #900; }
 #content #current pre { -moz-border-radius: 10px; color: #F5DEB3; background: #083e61; padding: 10px; }
 #content pre { color: #000; }
@@ -120,3 +128,7 @@ body { color: #FFFFFF; background-color: #083e61; }
 table thead { color: #000; }
 
 #nonexistent_pages { background-color: #F00; }
+
+#powered img { float: right; position: relative; }
+
+.byline { color: #FFF; }
