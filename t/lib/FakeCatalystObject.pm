@@ -122,4 +122,8 @@ sub pref {
     $prefs{$setting} = $value;
 }
 
+sub sessionid {
+    return 0;
+}
+
 1;

@@ -34,7 +34,7 @@ sub format_content {
     my @lines = split /\n/, $$content;
     $$content = "";
     my $re = $class->gen_re(qr/youtube\s+(.*?)/);
-    my $lang = $c->session->{lang} || $c->pref('default_lang') || 'en';
+    my $lang = $c->sessionid ? $c->session->{lang} : $c->pref('default_lang') || 'en';
 
     foreach my $line (@lines) {
         if ( $line =~ m/$re/ ) {
