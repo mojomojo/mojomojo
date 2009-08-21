@@ -19,6 +19,14 @@ Usage:
     {{dir directory exclude=exclude_regex}}
 
 
+For security reasons the dierctory must be include in 'whitelisting'. You can use path_to(DIR) to describe directory in mojomojo.conf:
+
+<Formatter::Dir>
+    whitelisting __path_to(uploads)__
+    whitelisting /tmp/test
+</Formatter::Dir>
+
+
 =head1 METHODS
 
 =over 4

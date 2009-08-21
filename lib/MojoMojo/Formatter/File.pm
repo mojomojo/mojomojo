@@ -27,6 +27,42 @@ Usage: {{file TYPE filename}}
        {{file Text path_to(uploads/Files)test.txt}}
 
 
+TYPE is a plugin present in Formatter/File/ directory.
+
+Currently there are only three: Pod, DocBook and Text
+
+The plugin TYPE format only the file which the extension match with 'can_format' method. Respectively pod, xml and txt for existing plugins.
+
+For security reasons the path of file must be include in 'whitelisting' directory. You can use path_to(DIR) to describe directory in mojomojo.conf:
+
+
+Just an example to view the test pod file t/var/files/test.pod :
+
+Add this to mojomojo.conf :
+
+<Formatter::Dir>
+    whitelisting __path_to(t/var/files)__
+
+</Formatter::Dir>
+
+To see the pod content formatted in xhtml, write in the text area:
+
+{{file Pod path_to(t/var/files)test.pod}}
+
+
+To show recursively all files of directory see script/util/dir2mojomojo.pl script. To test it:
+
+# start mojomojo
+
+./script/mojomojo_server.pl
+
+# run dir2mojomojo script
+
+./script/util/dir2mojomojo.pl --dir=~/dev/mojomojo/t/var/files/ --url=/myfiles
+
+
+Connect to http://server:3000/myfiles/
+
 
 =head1 METHODS
 
