@@ -201,7 +201,7 @@ This is a child page with a link to a [[../new_sibling]].
 MARKDOWN
 $body = get( POST '/parent/child.jsrpc/render', [ content => $content ] );
 is( $body, <<'HTML', $test );
-<p>This is a child page with a link to a <span class="newWikiWord"><a title="Not found. Click to create this page." href="/../new_sibling.edit">new sibling?</a></span>.</p>
+<p>This is a child page with a link to a <span class="newWikiWord"><a title="Not found. Click to create this page." href="/parent/new_sibling.edit">new sibling?</a></span>.</p>
 HTML
 
 

@@ -265,19 +265,27 @@ For 2000 page versions on a 2.4 GHz desktop this script took about 3 minutes to 
 =cut
 
 sub precompile_pages : Global {
-    my ( $self, $c, $user ) = @_;
-    $c->response->body('Precompile currently disabled until it co-exists harmoniously with set_paths');
-    return;
-    
+    my ( $self, $c ) = @_;
+
     my $content_rs = $c->model('DBIC::Content');
     while ( my $content_record = $content_rs->next ) {
         my $body = $content_record->body;
         next if !$body;
-        $c->call_plugins( "format_content", \$body, $c, $content_record->page );
-        $content_record->precompiled( $body );
+        my $page       = $content_record->page;
+        # Get path from path_pages_by_id().
+        my @path_pages = $c->model('DBIC::Page')->path_pages_by_id( $page->id );
+        my @node_names = map { $_->name } @path_pages;
+        my $path       = join( '/', @node_names );
+        # Collapse leading '//' into '/' since '/' is first in path
+        # since we just joined with '/'.
+        $path =~ s{^//}{/};
+        $c->stash->{path} = $path;
+
+        $c->call_plugins( "format_content", \$body, $c, $page );
+        $content_record->precompiled($body);
         $content_record->update;
-    }   
-    
+    }
+
     $c->response->body('Precompile Done.');
     return;
 }
