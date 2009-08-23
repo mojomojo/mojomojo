@@ -15,7 +15,6 @@ use Catalyst qw/
     Unicode
     I18N
     Setenv
-    PageCache
     /;
 
 use Storable;
@@ -26,7 +25,6 @@ use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
 use URI::Escape ();
 use MojoMojo::Formatter::Wiki;
-use Algorithm::IncludeExclude;
 use Module::Pluggable::Ordered
     search_path => 'MojoMojo::Formatter',
     except      => qr/^MojoMojo::Plugin::/,
@@ -48,28 +46,6 @@ MojoMojo->config->{'Plugin::Cache'}{backend} = {
         'mojomojo-sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home})
     ),
 };
-
-MojoMojo->config(
-        'Plugin::PageCache' => {
-
-            # The expires is set in the .conf for easy edit outside of code.
-            # expires          => 300
-
-            # We don't set Cache-Control headers explicitly because
-            # firefox caches pre-login pages.
-            set_http_headers => 0,
-            auto_check_user  => 1,
-            auto_cache       => [
-                               '/.*',
-            ],
-            key_maker => sub {
-                my $c = shift;
-                return $c->stash->{path} . '.' . $c->req->path;
-            },
-            debug => 0 ,
-            cache_hook => 'cache_hook'
-        }
-);
 
 __PACKAGE__->config( authentication => {
     default_realm => 'members',
@@ -161,49 +137,6 @@ L<MojoMojo::Installation> to try it out yourself.
 
 
 =cut
-
-=head2 cache_ie_list
-
-Include/exclude list accessor
-
-=cut
-
-# include/exclude pages list to cache
-my $ie;
-$ie = Algorithm::IncludeExclude->new;
-$ie->include();
-# static files will be handled via web server or proxy cache control.
-$ie->exclude(qr{static});
-$ie->exclude(qr{attachment});
-$ie->exclude(qr{export});
-$ie->exclude('login');
-$ie->exclude('logout');
-$ie->exclude('edit');
-# Short cache time set in controller action for list and view
-#$ie->exclude('list');
-#$ie->exclude('recent');
-
-sub cache_ie_list {
-    return $ie;
-}
-
-=head2 cache_hook
-
-Dont cache if CATALYST_NOCACHE is set or if the path is excluded from,
-based on the value C<cache_ie_list>.
-
-=cut
-sub cache_hook {
-  my ( $c ) = @_;
-
-  if ( $ENV{CATALYST_NOCACHE} ||
-       $c->response->location ||
-       ! $c->cache_ie_list->evaluate($c->req->path)
-     ) {
-    return 0; # Don't cache
-  }
-  return 1;   # Cache
-}
 
 sub ajax {
     my ($c) = @_;
