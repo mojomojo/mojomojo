@@ -4,10 +4,6 @@ use parent qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::Pod;
 
-sub formatter_loaded { 
-    return MojoMojo::Formatter::DocBook->formatter_loaded;
-}
-
 
 =head1 NAME
 

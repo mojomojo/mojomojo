@@ -4,10 +4,6 @@ use base qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::Text;
 
-sub formatter_loaded { 
-    return MojoMojo::Formatter::Text->formatter_loaded;
-}
-
 
 =head1 NAME
 

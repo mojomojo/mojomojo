@@ -4,9 +4,6 @@ use parent qw/MojoMojo::Formatter/;
 
 use MojoMojo::Formatter::DocBook;
 
-sub module_loaded {
-    return MojoMojo::Formatter::DocBook->module_loaded();
-}
 
 =head1 NAME
 
