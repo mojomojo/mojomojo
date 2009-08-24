@@ -94,11 +94,14 @@ sub format_content {
   my @lines = split /\n/, $$content;
 
   $$content = "";
+  my $is_image = 0;
   foreach my $line (@lines) {
 
     if ( $line =~ m|<p>{{file\s*(\w+)\s*(.*)}}</p>| ) {
       my $plugin=$1; # DocBook, Pod, ...
       my $file=$2;   # File, Attachment
+
+      $is_image = 1 if ( $plugin eq 'Image' );
 
       # use path_to(dir)/filename ?
       my $path_to = $c->path_to();
@@ -118,7 +121,10 @@ sub format_content {
       }
     }
     else{
-      $$content .= $line  . "\n";
+      # Image have not more content
+      if ( ! $is_image ){
+	$$content .= $line  . "\n";
+      }
     }
   }
   return $content;
