@@ -77,7 +77,7 @@ msgstr "Añadir etiqueta"
 
 #: root/base/admin/user.tt:54
 msgid "Add user"
-msgstr ""
+msgstr "Añadir usuario"
 
 #: root/base/page/view.tt:33
 msgid "Added"
@@ -85,7 +85,7 @@ msgstr "Añadido"
 
 #: lib/MojoMojo/Schema.pm:76
 msgid "Admins"
-msgstr ""
+msgstr "Administradores"
 
 #: root/base/user/profile.tt:26
 msgid "Age"
@@ -121,7 +121,7 @@ msgstr "Todas las etiquetas en esta ruta"
 
 #: root/base/navbar.tt:11
 msgid "All tags in this wiki"
-msgstr ""
+msgstr "Todas las etiquetas en este wiki"
 
 #:
 msgid "All tags on photos"
@@ -161,15 +161,15 @@ msgstr "Y otros."
 
 #: lib/MojoMojo/Schema.pm:78
 msgid "Anonymous"
-msgstr ""
+msgstr "Anónimo"
 
 #: lib/MojoMojo/Schema.pm:62
 msgid "Anonymous Coward"
-msgstr ""
+msgstr "Un cobarde anónimo"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:96
 msgid "Anonymous Edit disabled"
-msgstr ""
+msgstr "Desactivada la edición anónima"
 
 #: root/forms/admin/settings.yml:23
 msgid "Anonymous User (blank to disable)"
@@ -177,7 +177,7 @@ msgstr "Usuario anónimo (omitir para desactivar)"
 
 #: root/base/edithelp.tt:4
 msgid "Any phrase surrounded by double brackets or parentheses is a wiki word (camel-case wiki words are not supported for good reasons, one being that some languages don't have the concept of case)."
-msgstr ""
+msgstr "Cualquier frase entre cochetes dobles o paréntesis es una palabra wiki (palabras 'camel-case' no estan soportadas como palabras wiki por buenas razonas, una es que algunos lenguajes no tienen el concepto de mayúsculas)"
 
 #: root/base/gallery/photo_info.tt:7
 msgid "Aperture"
@@ -185,7 +185,7 @@ msgstr "Apertura"
 
 #: root/forms/admin/settings.yml:99
 msgid "Attachment allowed by default"
-msgstr ""
+msgstr "Ficheros adjuntos permitidos por defecto"
 
 #: lib/MojoMojo/Controller/Attachment.pm:150
 msgid "Attachment not found."
@@ -201,7 +201,7 @@ msgstr "Autores"
 
 #: root/base/page/list.tt:50
 msgid "Authors in this path"
-msgstr ""
+msgstr "Autores en esta ruta"
 
 #: root/base/page/bottomnav.tt:21 root/base/page/bottomnav.tt:38
 msgid "Back in time"
@@ -241,11 +241,11 @@ msgstr "Lista"
 
 #: root/base/edithelp.tt:9
 msgid "By default, a wiki word will reference it's children. To reference a sibling, you can do [[../Node]], or to reference a toplevel node do [[/Node]]"
-msgstr ""
+msgstr "Por defecto, una palabra wiki referenciará a su sucesor en la ruta. Para referenciar al predecesor puedes usar [[../Nodo]] o si quieres referenciar a uno de primer nivel usa [[/Nodo]]"
 
 #: root/forms/admin/settings.yml:74
 msgid "Cache permission data"
-msgstr ""
+msgstr "Cachear datos de permisos"
 
 #: root/base/gallery/photo_info.tt:4
 msgid "Camera"
@@ -289,7 +289,7 @@ msgstr "Cambiar configuración de sitio"
 
 #: root/forms/admin/settings.yml:69
 msgid "Check permission on view"
-msgstr ""
+msgstr "Verificar permisos en la vista"
 
 #: root/base/page/info.tt:49
 msgid "Children"
@@ -301,7 +301,7 @@ msgstr "Escoger documentos adjuntos"
 
 #:
 msgid "Circle"
-msgstr "Circulo"
+msgstr "Círculo"
 
 #: root/base/gallery/photo.tt:33
 msgid "Click for original version"
@@ -309,7 +309,7 @@ msgstr "Haga clic para la versión original"
 
 #: root/base/page/suggest.tt:12
 msgid "Click on a link above to create that page."
-msgstr ""
+msgstr "Haz click en el enlace de arriba para crear la página."
 
 #:
 msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
@@ -317,11 +317,11 @@ msgstr "Haga clic en cualquier página no existente para crearla. Páginas encim
 
 #: root/base/edithelp/markdown.tt:153
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #:
 msgid "Code Spans"
-msgstr "Código se extiende sobre"
+msgstr "El código se extiende sobre"
 
 #: root/base/comment.tt:6
 msgid "Comment"
@@ -329,7 +329,7 @@ msgstr "Comentario"
 
 #: root/forms/comment/comment.yml:8
 msgid "Comment body"
-msgstr "Corpus de comentario"
+msgstr "Cuerpo del comentario"
 
 #: root/base/comment.tt:6
 msgid "Comments"
@@ -337,11 +337,11 @@ msgstr "Comentarios"
 
 #: root/base/admin/toplinks.tt:8
 msgid "Configuration"
-msgstr ""
+msgstr "Configuración"
 
 #: root/base/page/info.tt:46
 msgid "Content size"
-msgstr "Tamaño de contenido"
+msgstr "Tamaño del contenido"
 
 #: lib/MojoMojo/Controller/User.pm:57 root/base/comment/login.tt:8
 msgid "Could not authenticate that login."
@@ -354,16 +354,16 @@ msgstr "No se puede crear archivo adjunto de %1"
 
 #: lib/MojoMojo/Controller/User.pm:186
 msgid "Could not recover password"
-msgstr ""
+msgstr "No se puede recuperar el la contraseña"
 
 #. ($url)
 #: lib/MojoMojo/Formatter/Include.pm:62
 msgid "Could not retrieve x"
-msgstr ""
+msgstr "No se puede recuperar %1"
 
 #: root/base/admin/create_role.tt:10
 msgid "Create Role"
-msgstr "Crear Rol"
+msgstr "Crear el rol"
 
 #: root/base/admin/role.tt:11 root/base/admin/role.tt:35
 msgid "Create a new role"
@@ -371,7 +371,7 @@ msgstr "Crear un rol nuevo"
 
 #: root/forms/admin/settings.yml:79
 msgid "Create allowed by default"
-msgstr ""
+msgstr "Permitir la creación por defecto"
 
 #: root/base/page/edit.tt:58
 msgid "Create and View"
@@ -379,7 +379,7 @@ msgstr "Crear y ver"
 
 #: root/base/page/info.tt:19
 msgid "Created by"
-msgstr ""
+msgstr "Creada por"
 
 #: root/base/edithelp/markdown.tt:150
 msgid "Creates"
@@ -399,7 +399,7 @@ msgstr "Contranseña actual"
 
 #: root/base/page/info.tt:18
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: root/base/user/profile.tt:54
 msgid "Date registered"
@@ -407,7 +407,7 @@ msgstr "Fecha de registración"
 
 #: root/forms/admin/settings.yml:84
 msgid "Delete allowed by default"
-msgstr ""
+msgstr "Pemitir el borrado por defecto"
 
 #:
 msgid "Deleted Text"
@@ -423,11 +423,11 @@ msgstr "¿No recibió un correo electrónico?"
 
 #: root/forms/admin/settings.yml:47
 msgid "Disable internal search (use Google)"
-msgstr ""
+msgstr "Desactivar el buscador interno (usar Google)"
 
 #: root/base/page/list.tt:52
 msgid "Download a zip with all the pages in this path"
-msgstr ""
+msgstr "Descargar un zip con todas las Páginas de esta ruta"
 
 #: root/base/navbar.tt:14
 msgid "Download a zip with all the pages in this wiki"
@@ -435,15 +435,11 @@ msgstr "Descargue un archivo zip con todas las páginas en este wiki"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:154
 msgid "END OF CONFLICT"
-msgstr "TERMINO DE CONFLICTO"
+msgstr "FIN DEL CONFLICTO"
 
 #: root/base/admin/role.tt:27 root/base/page/editbar.tt:13 root/base/page/editbar.tt:7 root/base/page/permissions.tt:73
 msgid "Edit"
 msgstr "Editar"
-
-#:
-msgid "Edit Page"
-msgstr "Editar Página"
 
 #: root/base/user/profile.tt:10
 msgid "Edit Profile"
@@ -459,15 +455,15 @@ msgstr "Editar Configuración"
 
 #: root/forms/admin/settings.yml:89
 msgid "Edit allowed by default"
-msgstr ""
+msgstr "Permitir la edición por defecto"
 
 #: root/base/this_page_link.tt:13 root/base/this_page_link.tt:15
 msgid "Edit page"
-msgstr ""
+msgstr "Editar página"
 
 #: root/base/page/permissions.tt:46
 msgid "Edit permissions for this page"
-msgstr ""
+msgstr "Editar permisos para esta página"
 
 #: root/base/page/recent.tt:45
 msgid "Edited by"
@@ -484,7 +480,7 @@ msgstr "Editando perfil de %1"
 
 #: root/base/user/profile.tt:57
 msgid "Edits"
-msgstr ""
+msgstr "Páginas editadas"
 
 #: root/base/user/profile.tt:20 root/base/user/recover_pass.tt:5 root/base/user/validate.tt:16 root/forms/user/prefs.yml:23 root/forms/user/register.yml:33
 msgid "Email"
@@ -500,15 +496,15 @@ msgstr "Se le ha enviado una contraseña nueva por correo electrónico."
 
 #: root/base/edithelp.tt:55
 msgid "Enable comments on this page."
-msgstr ""
+msgstr "Activar comentarios en esta página."
 
 #: root/forms/admin/settings.yml:50
 msgid "Enable graphical emoticons"
-msgstr ""
+msgstr "Activar emoticones gráficos"
 
 #: root/forms/admin/settings.yml:64
 msgid "Enforce login"
-msgstr ""
+msgstr "Forzár login"
 
 #:
 msgid "Enum list"
@@ -544,7 +540,7 @@ msgstr "Películas Favoritas"
 
 #: root/base/feeds.tt:1 root/base/navbar.tt:13 root/base/page/list.tt:51
 msgid "Feeds"
-msgstr "Fuentes"
+msgstr ""
 
 #: root/base/user/validate.tt:13
 msgid "Fill in the email address you want to use here"
@@ -552,23 +548,23 @@ msgstr "Rellene la dirección electrónica que quiere usar aquí"
 
 #: root/base/edithelp/markdown.tt:181
 msgid "Footnotes"
-msgstr ""
+msgstr "Notas al pie"
 
 #: root/base/edithelp/markdown.tt:107
 msgid "For nested lists, indent each level by 3 spaces"
-msgstr ""
+msgstr "Para listas enlazadas, identa cada nivel con 3 espacios"
 
 #: root/base/edithelp/markdown.tt:98
 msgid "For numbered lists, just use numbers instead of asterisks"
-msgstr ""
+msgstr "Para listas numeradas, pon numeros en lugar de asteriscos"
 
 #:
 msgid "Format content until next =pod as plain old documentation"
-msgstr "Formatear contenido como documentación sencilla hasta el próximo =pod"
+msgstr "Formatear contenido como documentación sencilla (POD) hasta el próximo =pod"
 
 #: root/base/edithelp.tt:59
 msgid "Format content until {{end}} as plain old documentation"
-msgstr ""
+msgstr "Formatear contenido como documentación sencilla (POD) hasta el próximo {{end}}"
 
 #: root/base/page/bottomnav.tt:58
 msgid "Format page for printing"
@@ -612,7 +608,7 @@ msgstr "Ir a página inicial"
 
 #: root/base/navbar.tt:25
 msgid "Go to your user page"
-msgstr ""
+msgstr "Ir a tu página de usuario"
 
 #: root/base/edithelp/markdown.tt:175
 msgid "Going back to normal formatting"
@@ -653,7 +649,7 @@ msgstr "Titulares para %1"
 
 #: lib/MojoMojo/Schema.pm:117
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: root/base/mail/reset_password.tt:1
 msgid "Hi there."
@@ -662,11 +658,11 @@ msgstr "Saludos."
 #. (user.name)
 #: root/base/mail/validate.tt:1
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
-msgstr "Hola. Este es un correo pequeño para validar tu correo electrónico, %1. Para confirmar, por favor oprima el url de abajo:"
+msgstr "Hola. Este es un correo para validar tu correo electrónico, %1. Para confirmar, por favor oprime la siguiente url:"
 
 #: root/base/page/bottomnav.tt:53
 msgid "Hide changes"
-msgstr "Esconder cambios"
+msgstr "Ocultar cambios"
 
 #: root/base/admin/toplinks.tt:11 root/base/page/wrapper.tt:11 root/base/sidebar.tt:3
 msgid "Home"
@@ -674,7 +670,7 @@ msgstr "Página Principal"
 
 #: root/base/edithelp.tt:8
 msgid "HomePage, IBM, School"
-msgstr ""
+msgstr "PáginaPrincipal, IBM, Escuela"
 
 #:
 msgid "HomePage, ThreeWordsTogether, [[C++]], [[Lets play again!]] ((easy to type))"
@@ -682,7 +678,7 @@ msgstr "PáginaPrincipal, TresPalabrasJuntas, [[C++]], [[¡Juguemos de nuevo!]] 
 
 #: root/base/edithelp/markdown.tt:146
 msgid "Horizontal Rules"
-msgstr "Regla Horizontal"
+msgstr "Linea Horizontal"
 
 #: root/base/gallery.tt:6
 msgid "Hover over an image to get more info."
@@ -739,7 +735,7 @@ msgstr "Enlaces en línea"
 
 #: root/base/page/bottomnav.tt:60
 msgid "Inline for including content"
-msgstr ""
+msgstr "En linea para ser incluido"
 
 #: root/base/user/profile.tt:41 root/forms/user/editprofile.yml:28
 msgid "Interests"
@@ -751,11 +747,7 @@ msgstr "Enlace interno"
 
 #: lib/MojoMojo/Controller/User.pm:169
 msgid "Invalid password"
-msgstr ""
-
-#:
-msgid "Invalid password."
-msgstr "Contraseña invalida."
+msgstr "Contraseña invalida"
 
 #:
 msgid "Italic"
@@ -807,7 +799,7 @@ msgstr "Deje el segundo en blanco si no quiere una contraseña"
 
 #: root/base/page/edit.tt:69
 msgid "Leave the second field blank if you do not want a password"
-msgstr ""
+msgstr "Deja el segundo campo en blanco si no quieres una contraseña"
 
 #:
 msgid "Left-justified paragraph"
@@ -823,7 +815,7 @@ msgstr "Título de enlace"
 
 #: root/base/edithelp/markdown.tt:24
 msgid "Link to Another Page"
-msgstr ""
+msgstr "Enlazar a otra página"
 
 #: root/base/page/info.tt:71
 msgid "Linked from"
@@ -843,7 +835,7 @@ msgstr "Enlaces a"
 
 #: root/base/edithelp/markdown.tt:30
 msgid "Links to Other Sites"
-msgstr ""
+msgstr "Enlaces a otros sitios"
 
 #: root/base/page/list.tt:66
 msgid "Links to non-existent pages."
@@ -860,7 +852,7 @@ msgstr "Listar artículo 1"
 
 #: root/base/edithelp/markdown.tt:79
 msgid "Lists"
-msgstr ""
+msgstr "Listas"
 
 #:
 msgid "Lists can be nested by indentation level"
@@ -880,15 +872,11 @@ msgstr "Entra al sistema"
 
 #: root/base/edithelp/markdown.tt:50 root/base/edithelp/markdown.tt:51 root/base/edithelp/markdown.tt:56 root/base/edithelp/markdown.tt:57
 msgid "Main Header"
-msgstr ""
+msgstr "Encabezado principal"
 
 #: root/forms/admin/settings.yml:29
 msgid "Main formatter"
-msgstr ""
-
-#:
-msgid "Main heading"
-msgstr "Encabezamiento principal"
+msgstr "Formateador principal"
 
 #: root/base/page/rollback.tt:4
 msgid "Make current"
@@ -904,11 +892,11 @@ msgstr "Sugerencias para formato de Markdown"
 
 #: root/base/edithelp/markdown.tt:1
 msgid "Markdown help"
-msgstr ""
+msgstr "Ayuda de Markdown"
 
 #: root/base/edithelp/markdown.tt:4
 msgid "Markdown reference - the basics"
-msgstr ""
+msgstr "Referencia de Markdown - Lo básico"
 
 #:
 msgid "MojoMojo - Spirit in a box"
@@ -916,15 +904,19 @@ msgstr "MojoMojo - Espíritu en una caja"
 
 #: root/base/mail/reset_password.tt:9
 msgid "MojoMojo - The elegant wiki, Catalyst-powered"
-msgstr ""
+msgstr "MojoMojo - El wiki elegante, Catalyst-powered"
 
 #: root/base/user/profile.tt:51
 msgid "Movies"
 msgstr "Películas"
 
+#: root/base/edithelp/markdown.tt:1
+msgid "MultiMarkdown formatting tips"
+msgstr "Concejos de formateo con MultiMarkdown"
+
 #: root/base/edithelp/markdown.tt:5
 msgid "MultiMarkdown reference - the extended syntax"
-msgstr ""
+msgstr "Referencia de MultiMarkdown - Sintaxis extendida"
 
 #: root/base/user/profile.tt:46
 msgid "Music"
@@ -936,7 +928,7 @@ msgstr "Mis etiquetas"
 
 #: root/base/edithelp/markdown.tt:92
 msgid "NOTE: you need a blank line before and after the list"
-msgstr ""
+msgstr "NOTA: es necesario una linea en blanco antes y despues de la lista"
 
 #: root/base/admin/role.tt:16 root/base/user/profile.tt:15 root/forms/user/editprofile.yml:8 root/forms/user/prefs.yml:17 root/forms/user/register.yml:42
 msgid "Name"
@@ -972,7 +964,7 @@ msgstr "Siguiente"
 
 #: root/base/page/list.tt:37
 msgid "Next page"
-msgstr ""
+msgstr "Siguiente página"
 
 #: root/base/admin/role.tt:26
 msgid "No"
@@ -980,7 +972,7 @@ msgstr "No"
 
 #: root/base/comment.tt:25
 msgid "No Comments posted"
-msgstr "Ningún Comentario entrado"
+msgstr "Ningún Comentario dejado"
 
 #. (c.pref('main_formatter')
 #. (c.pref("main_formatter"))
@@ -994,24 +986,24 @@ msgstr "Ningún miembro añadido aún."
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:40
 msgid "No permissions to edit this page"
-msgstr "No permisos para editar esta página"
+msgstr "No tienes permisos para editar esta página"
 
 #: root/base/user/list.tt:14
 msgid "No recent changes"
-msgstr "No cambios recientes"
+msgstr "No hay cambios recientes"
 
 #: root/base/page/search_inline.tt:26
 msgid "No results found"
-msgstr "Ningún resultado encontrado"
+msgstr "No se ha encontrado ningún resultado"
 
 #. ($rev,                '<span class="error_detail">'                  . '<a href="'                  . $page->path . '">'                  . $page->name . '</a>'                  . '</span>')
 #: lib/MojoMojo/Controller/Page.pm:87
 msgid "No revision x for x"
-msgstr ""
+msgstr "No existe la revision %1 para %2"
 
 #: root/base/admin/role.tt:34
 msgid "No roles created yet."
-msgstr "No rols creados aún."
+msgstr "No hay roles creados aún."
 
 #:
 msgid "No such revision for "
@@ -1019,7 +1011,7 @@ msgstr "Ninguna edición para "
 
 #: root/base/tag/cloud.tt:5 root/base/tag/cloud.tt:9
 msgid "No tags in use."
-msgstr ""
+msgstr "No se esta usando ninguna etiqueta."
 
 #:
 msgid "Non-Existent Pages"
@@ -1035,7 +1027,7 @@ msgstr "Párrafo Normal"
 
 #: root/base/edithelp/markdown.tt:169
 msgid "Normal paragraph"
-msgstr ""
+msgstr "Párrafo normal"
 
 #: lib/MojoMojo/Formatter/Wiki.pm:287 root/base/page/list.tt:72
 msgid "Not found. Click to create this page."
@@ -1047,7 +1039,7 @@ msgstr "No son palabras wiki"
 
 #: root/base/edithelp/markdown.tt:177
 msgid "Note that for programming language code, it may be better to use the Syntax highlight plugin."
-msgstr ""
+msgstr "Ten en cuenta que para código en algun lenguaje de programación puede ser mejor usar el plugin de Syntax highlight."
 
 #:
 msgid "Nothing entered"
@@ -1100,7 +1092,7 @@ msgstr "Información de Página"
 
 #: root/base/edithelp/markdown.tt:26
 msgid "Page Name Here"
-msgstr ""
+msgstr "Aqui el numero de la página"
 
 #. (page.path)
 #: root/base/page/info.tt:9
@@ -1175,7 +1167,7 @@ msgstr "Por favor llene la siguiente información para registrarse. Todos los ca
 
 #: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
-msgstr ""
+msgstr "Selecciona un fichero para anexar a esta página. Para subir varios ficheros, manten pulsada la tecla CTRL mientras seleccionas varios ficheros en la ventana de seleccion."
 
 #:
 msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
@@ -1187,7 +1179,7 @@ msgstr "Por favor teclee algo"
 
 #: root/base/edithelp.tt:29
 msgid "Plugin syntax"
-msgstr ""
+msgstr "Sintaxis para plugins"
 
 #: root/base/gallery/tags.tt:15 root/base/page/tags.tt:15
 msgid "Popular tags"
@@ -1199,7 +1191,7 @@ msgstr "Entrada de Blog"
 
 #: root/base/footer.tt:2
 msgid "Powered by Catalyst"
-msgstr "Propulsado por Catalyst"
+msgstr "Powered by Catalyst"
 
 #: root/base/navbar.tt:49
 msgid "Preferences"
@@ -1223,7 +1215,7 @@ msgstr "Anterior"
 
 #: root/base/page/list.tt:29
 msgid "Previous page"
-msgstr ""
+msgstr "Página anterior"
 
 #: root/base/page/bottomnav.tt:58
 msgid "Print"
@@ -1236,7 +1228,7 @@ msgstr "Perfil"
 #. (version.creator.name)
 #: root/base/page/info.tt:30
 msgid "Profile for x"
-msgstr ""
+msgstr "Perfil de %1"
 
 #: root/base/export.tt:7
 msgid "Raw markup"
@@ -1257,7 +1249,7 @@ msgstr "Cambios recientes en %1"
 
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:3
 msgid "Recent pages in this wiki"
-msgstr ""
+msgstr "Páginas recientes en este wiki"
 
 #. (activetag)
 #. (page.path)
@@ -1285,19 +1277,19 @@ msgstr "Rectángulo"
 
 #: root/base/page/view.tt:5
 msgid "Redirected from"
-msgstr ""
+msgstr "Redirigido desde"
 
 #: root/base/navbar.tt:29 root/forms/comment/comment.yml:13 root/forms/user/register.yml:50
 msgid "Register"
-msgstr "Registrar"
+msgstr "Registrarse"
 
 #: root/base/user/login.tt:11
 msgid "Register new account"
-msgstr "Registrar cuenta nueva"
+msgstr "Registrar una cuenta nueva"
 
 #: lib/MojoMojo/Controller/User.pm:230
 msgid "Registration is closed!"
-msgstr "!Registración cerrada!"
+msgstr "!El registro esta cerrado!"
 
 #: root/base/tag/list.tt:34
 msgid "Related Tags"
@@ -1319,13 +1311,9 @@ msgstr "Restringir editaciones de usuarios a directorio de inicio"
 msgid "Restricted area. Admin access required"
 msgstr "Área restringida. Acceso de nivel administrativo es necesario."
 
-#:
-msgid "Result Page"
-msgstr "Página de Resultados"
-
 #: root/base/page/search_inline.tt:45
 msgid "Result Page:"
-msgstr ""
+msgstr "Página de Resultados"
 
 #. ([pager.first, pager.last, pager.total_entries, found_within])
 #. ([ pager.first, pager.last, pager.total_entries, found_within ])
@@ -1354,23 +1342,23 @@ msgstr "Párrafo justificado derecha"
 
 #: root/base/page/permissions.tt:33
 msgid "Role"
-msgstr ""
+msgstr "Rol"
 
 #: root/base/admin/role_form.tt:13
 msgid "Role Members"
-msgstr "Miembros de Rol"
+msgstr "Miembros del Rol"
 
 #: root/forms/admin/role_form.yml:8
 msgid "Role Name"
-msgstr "Nombre de Rol"
+msgstr "Nombre del Rol"
 
 #: root/base/admin/role_form.tt:4
 msgid "Role Name:"
-msgstr "Nombre de Rol:"
+msgstr "Nombre del Rol:"
 
 #: root/base/admin/role.tt:9 root/base/admin/toplinks.tt:10
 msgid "Roles"
-msgstr "Rols"
+msgstr "Roles"
 
 #. (page.content_version)
 #: root/base/page/view.tt:17
@@ -1391,11 +1379,11 @@ msgstr "Buscar"
 
 #: root/base/page/search.tt:1
 msgid "Search Results"
-msgstr "Buscar Resultados"
+msgstr "Resultados de la busqueda"
 
 #: root/base/page/search_inline.tt:10
 msgid "Search entire site"
-msgstr "Buscar sitio entero"
+msgstr "Buscar en todo el sitio"
 
 #: root/base/admin/role_form.tt:16
 msgid "Search for users:"
@@ -1408,11 +1396,11 @@ msgstr "Buscar dentro de %1"
 
 #: root/base/page/search_inline.tt:6 root/base/page/search_inline.tt:9
 msgid "Search:"
-msgstr ""
+msgstr "Buscar:"
 
 #: root/base/edithelp/textile.tt:20 root/base/edithelp/textile.tt:22 root/base/edithelp/textile.tt:25 root/base/edithelp/textile.tt:27
 msgid "Second item"
-msgstr "Artículo segundo"
+msgstr "Segundo artículo"
 
 #: root/base/page/bottomnav.tt:50
 msgid "See changes"
@@ -1492,7 +1480,7 @@ msgstr "Nombre de sitio"
 
 #: root/base/page/bottomnav.tt:67
 msgid "Site settings"
-msgstr ""
+msgstr "Opciones globales"
 
 #: lib/MojoMojo/Controller/User.pm:448
 msgid "Some fields are invalid. Please correct them and try again:"
@@ -1508,6 +1496,9 @@ msgid ""
 "    render text in monospace\n"
 "    like this example"
 msgstr ""
+"Espacion a la izquierda\n"
+"    mostrar el texto monoespaceado\n"
+"    como este ejemplo"
 
 #:
 msgid "Split Edit"
@@ -1732,7 +1723,7 @@ msgstr "Ver Dif"
 
 #: root/forms/admin/settings.yml:94
 msgid "View allowed by default"
-msgstr ""
+msgstr "Permitir vista por defecto"
 
 #: root/base/gallery.tt:19
 msgid "View as files"
@@ -1777,7 +1768,7 @@ msgstr "Escriba"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:153
 msgid "YOUR CHANGES"
-msgstr "CAMBIOS SUYOS"
+msgstr "TUS CAMBIOS"
 
 #: root/base/admin/role.tt:26
 msgid "Yes"
@@ -1806,11 +1797,11 @@ msgstr "Tiene que llenar todos los campos mandatorios."
 
 #: root/base/comment/login.tt:4
 msgid "You have to log in to post a comment."
-msgstr "Tiene que entrar al sistema para entrar un comentario."
+msgstr "Tiene que entrar para dejar un comentario."
 
 #: lib/MojoMojo/Formatter/YouTube.pm:52
 msgid "YouTube Video"
-msgstr ""
+msgstr "Video de YouTube"
 
 #: root/base/user/prefs.tt:4
 msgid "Your Account"
@@ -1823,7 +1814,7 @@ msgstr "Entrada inválida, por favor reformateelo e intente de nuevo."
 #. ($c->pref('name')
 #: lib/MojoMojo/Controller/User.pm:196
 msgid "Your new password on x"
-msgstr ""
+msgstr "Su nueva contraseña en %1"
 
 #: lib/MojoMojo/Controller/User.pm:174
 msgid "Your password has been updated"
@@ -1885,7 +1876,7 @@ msgstr "aplicar a sub-páginas"
 
 #: root/base/page/edit.tt:60
 msgid "as"
-msgstr ""
+msgstr "como"
 
 #. (c.wikiword(user.link,base)
 #. (c.wikiword(user.link, base))
@@ -2200,7 +2191,7 @@ msgstr "leer"
 
 #: lib/MojoMojo/Formatter/Redirect.pm:48
 msgid "redirect to"
-msgstr ""
+msgstr "redirigida a"
 
 #. (wanted.from_page.path)
 #: root/base/page/list.tt:73
@@ -2297,7 +2288,7 @@ msgstr "%1 aciertos"
 #. ($url)
 #: lib/MojoMojo/Formatter/Include.pm:53
 msgid "x is not a valid URL"
-msgstr ""
+msgstr "%1 no es una URL válida"
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)
@@ -2317,11 +2308,11 @@ msgstr "sí"
 
 #: root/base/edithelp/textile.tt:10 root/base/edithelp/textile.tt:12 root/base/edithelp/textile.tt:5 root/base/edithelp/textile.tt:7
 msgid "your text"
-msgstr "su texto"
+msgstr "tu texto"
 
 #: root/base/edithelp.tt:44 root/base/edithelp.tt:48 root/base/edithelp/textile.tt:60
 msgid "your/url"
-msgstr "su/url"
+msgstr "tu/url"
 
 #: root/base/edithelp/textile.tt:49
 msgid "|a|table|row|"

@@ -17,7 +17,7 @@ msgstr ""
 
 #: root/static/js/edit.js:117
 msgid "=head1 Header"
-msgstr ""
+msgstr "=head1 Encabezado"
 
 #: root/static/js/edit.js:147
 msgid "Also try h2,h3 and so on"
@@ -25,11 +25,11 @@ msgstr "También intente h2, h3, y demás"
 
 #: root/static/js/edit.js:159
 msgid "Bigger"
-msgstr ""
+msgstr "Más grande"
 
 #: root/static/js/edit.js:151 root/static/js/edit.js:177
 msgid "Block quote"
-msgstr ""
+msgstr "Cita de párrafo"
 
 #: root/static/js/edit.js:156 root/static/js/edit.js:179
 msgid "Bold"
@@ -45,7 +45,7 @@ msgstr "Párrafo en el centro"
 
 #: root/static/js/edit.js:150 root/static/js/edit.js:178
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #: root/static/js/edit.js:158 root/static/js/edit.js:181
 msgid "Deleted Text"
@@ -61,15 +61,15 @@ msgstr "Enlace externo"
 
 #: root/static/js/edit.js:115
 msgid "Formatter"
-msgstr ""
+msgstr "Formateador"
 
 #: root/static/js/edit.js:116
 msgid "IRC formatter"
-msgstr ""
+msgstr "Formateador de IRC"
 
 #: root/static/js/edit.js:121
 msgid "Insert"
-msgstr ""
+msgstr "Instertar"
 
 #: root/static/js/edit.js:163 root/static/js/edit.js:182
 msgid "Internal Link"
@@ -77,7 +77,7 @@ msgstr "Enlace interno"
 
 #: root/static/js/edit.js:163 root/static/js/edit.js:182
 msgid "Intrawiki Link"
-msgstr ""
+msgstr "Enlace inter-wiki"
 
 #: root/static/js/edit.js:157 root/static/js/edit.js:180
 msgid "Italic"
@@ -109,7 +109,7 @@ msgstr "Artículo de lista enumerada"
 
 #: root/static/js/edit.js:117
 msgid "POD formatter"
-msgstr ""
+msgstr "Formateador POD"
 
 #: root/static/js/edit.js:166 root/static/js/edit.js:185
 msgid "Picture"
@@ -117,11 +117,11 @@ msgstr "Foto"
 
 #: root/static/js/edit.js:167 root/static/js/edit.js:186
 msgid "Picture Right"
-msgstr ""
+msgstr "Foto derecha"
 
 #: root/static/js/edit.js:165 root/static/js/edit.js:184
 msgid "Picture left"
-msgstr ""
+msgstr "Foto izquierda"
 
 #: root/static/js/edit.js:153
 msgid "Right-justified paragraph"
@@ -129,7 +129,7 @@ msgstr "Párrafo justificado derecha"
 
 #: root/static/js/edit.js:160
 msgid "Smaller"
-msgstr ""
+msgstr "Mas chico"
 
 #: root/static/js/edit.js:2
 msgid "Split Edit"
@@ -137,11 +137,11 @@ msgstr "Editar en Dos"
 
 #: root/static/js/edit.js:162
 msgid "Subscript"
-msgstr ""
+msgstr "Subíndice"
 
 #: root/static/js/edit.js:161
 msgid "Superscript"
-msgstr ""
+msgstr "Superíndice"
 
 #: root/static/js/edit.js:3
 msgid "Syntax"
@@ -149,11 +149,11 @@ msgstr "Sintaxis"
 
 #: root/static/js/edit.js:136
 msgid "Syntax Highlight"
-msgstr ""
+msgstr "Resaltador de sintaxis"
 
 #: root/static/js/edit.js:159
 msgid "bigger"
-msgstr ""
+msgstr "mas grande"
 
 #: root/static/js/edit.js:156 root/static/js/edit.js:179
 msgid "bold"
@@ -169,23 +169,23 @@ msgstr "código"
 
 #: root/static/js/edit.js:122
 msgid "comments"
-msgstr ""
+msgstr "comentarios"
 
 #: root/static/js/edit.js:127
 msgid "cpan"
-msgstr ""
+msgstr "cpan"
 
 #: root/static/js/edit.js:158 root/static/js/edit.js:181
 msgid "deleted"
-msgstr "borrar"
+msgstr "borrado"
 
 #: root/static/js/wiki.js:230 root/static/js/wiki.js:237 root/static/js/wiki.js:243
 msgid "done"
-msgstr ""
+msgstr "hecho"
 
 #: root/static/js/edit.js:125
 msgid "include"
-msgstr ""
+msgstr "incluir"
 
 #: root/static/js/edit.js:174
 msgid "increase # for smaller headline"
@@ -205,23 +205,23 @@ msgstr "párrafo justificado izquierda"
 
 #: root/static/js/edit.js:164 root/static/js/edit.js:183
 msgid "linked text"
-msgstr ""
+msgstr "texto enlazado"
 
 #: root/static/js/wiki.js:479
 msgid "maximize"
-msgstr ""
+msgstr "maximizar"
 
 #: root/static/js/wiki.js:480
 msgid "maximize width"
-msgstr ""
+msgstr "maximizar a lo ancho"
 
 #: root/static/js/edit.js:151 root/static/js/edit.js:177
 msgid "quote"
-msgstr ""
+msgstr "cita"
 
 #: root/static/js/edit.js:124
 msgid "redirect"
-msgstr ""
+msgstr "redirigir"
 
 #: root/static/js/edit.js:153
 msgid "right justified paragraph"
@@ -233,15 +233,15 @@ msgstr ""
 
 #: root/static/js/edit.js:160
 msgid "small"
-msgstr ""
+msgstr "chico"
 
 #: root/static/js/edit.js:162
 msgid "subscript"
-msgstr ""
+msgstr "subíndice"
 
 #: root/static/js/edit.js:161
 msgid "superscript"
-msgstr ""
+msgstr "superíndice"
 
 #: root/static/js/edit.js:123
 msgid "toc"
@@ -253,4 +253,4 @@ msgstr "url dentro de paréntesis"
 
 #: root/static/js/edit.js:126
 msgid "youtube"
-msgstr ""
+msgstr "youtube"
