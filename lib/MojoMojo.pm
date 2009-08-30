@@ -333,14 +333,6 @@ sub base_uri {
     return URI->new( $c->req->base );
 }
 
-# format for unicode template use.
-
-sub unicode {
-    my ( $c, $string ) = @_;
-    utf8::decode($string);
-    return $string;
-}
-
 =head2 uri_for
 
 Override $c->uri_for to append path, if a relative path is used.

@@ -3,8 +3,6 @@ package MojoMojo::Controller::Gallery;
 use strict;
 use parent 'Catalyst::Controller';
 
-use HTML::Entities;
-
 =head1 NAME
 
 MojoMojo::Controller::Gallery - Page gallery.
@@ -194,7 +192,7 @@ sub description : Local {
     my ( $self, $c, $photo ) = @_;
     my $img = $c->model("DBIC::Photo")->find($photo);
     if ( $c->req->param('update_value') ) {
-        $img->description( encode_entities( $c->req->param('update_value') ) );
+        $img->description( $c->req->param('update_value') );
         $img->update;
     }
     $c->res->body( $img->description );
@@ -210,7 +208,7 @@ sub title : Local {
     my ( $self, $c, $photo ) = @_;
     my $img = $c->model("DBIC::Photo")->find($photo);
     if ( $c->req->param('update_value') ) {
-        $img->title( encode_entities( $c->req->param('update_value') ) );
+        $img->title( $c->req->param('update_value') );
         $img->update;
     }
     $c->res->body( $img->title );
