@@ -340,8 +340,9 @@ msgstr "Création de la pièce jointe impossible à partir de %1"
 msgid "Could not recover password"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Include.pm:59
-msgid "Could not retrieve"
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
 msgstr ""
 
 #:
@@ -781,7 +782,7 @@ msgid "Leave second blank if you do not want a password"
 msgstr "Laisser le deuxième champ vide si vous ne voulez pas de mot de passe"
 
 #: root/base/page/edit.tt:69
-msgid "Leave the second field blank if you do not want a password)"
+msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
 #: root/base/gallery/photo_info.tt:5
@@ -861,13 +862,13 @@ msgstr "Titre principal"
 msgid "Make current"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:1
-msgid "Markdow help"
-msgstr ""
-
 #:
 msgid "Markdown formatting tips"
 msgstr "Astuces pour le formatage"
+
+#: root/base/edithelp/markdown.tt:1
+msgid "Markdown help"
+msgstr ""
 
 #: root/base/edithelp/markdown.tt:4
 msgid "Markdown reference - the basics"
@@ -1230,8 +1231,8 @@ msgstr "Changements récents dans %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Pages récentes dans %1"
@@ -2037,7 +2038,7 @@ msgstr ""
 msgid "is not a valid link to youtube video"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Include.pm:51 lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "is not a valid url"
 msgstr ""
 
@@ -2218,6 +2219,11 @@ msgstr ""
 #: root/base/page/permissions.tt:14 root/base/page/permissions.tt:18 root/base/page/permissions.tt:36 root/base/page/permissions.tt:53
 msgid "write"
 msgstr "écrire"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)

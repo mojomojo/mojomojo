@@ -1,4 +1,4 @@
-<h2>[% loc('Markdow help') %]</h2>
+<h2>[% loc('Markdown help') %]</h2>
 <p>
     <ul>
         <li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference - the basics') %]</a>

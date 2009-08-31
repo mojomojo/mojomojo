@@ -371,10 +371,16 @@ msgstr "Kunne ikke opprette vedlegg fra %1"
 msgid "Could not recover password"
 msgstr "Kunne ikke finne den brukeren"
 
-#: lib/MojoMojo/Formatter/Include.pm:59
+#:
 msgid "Could not retrieve"
 msgstr "Kunne ikke hente"
 
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:62
+msgid "Could not retrieve x"
+msgstr ""
+
+#:
 msgid "Create"
 msgstr "Opprett"
 
@@ -846,7 +852,7 @@ msgid "Leave second blank if you do not want a password"
 msgstr "La andre være tom hvis du ikke vil ha passord"
 
 #: root/base/page/edit.tt:69
-msgid "Leave the second field blank if you do not want a password)"
+msgid "Leave the second field blank if you do not want a password"
 msgstr "La det andre feltet forbli tomt hvis du ikke ønsker deg et passord."
 
 msgid "Left-justified paragraph"
@@ -940,13 +946,15 @@ msgstr "Gjør aktiv"
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Marker teksten du ønsker at ikon-handlingen skal gjelde for"
 
-#: root/base/edithelp/markdown.tt:1
-msgid "Markdow help"
-msgstr ""
-
+#:
 msgid "Markdown formatting tips"
 msgstr "Tips for Markdown-formattering"
 
+#: root/base/edithelp/markdown.tt:1
+msgid "Markdown help"
+msgstr ""
+
+#:
 msgid "Markdown reference"
 msgstr "Markdown-hjelp"
 
@@ -1325,7 +1333,6 @@ msgstr "Nylige endringer i %1"
 msgid "Recent pages in this wiki"
 msgstr "Nylig redigerte side i denne wikien"
 
-#. (page.path)
 #. (activetag)
 #: root/base/page/recent.tt:1
 #: root/base/page/recent.tt:5
@@ -2477,6 +2484,11 @@ msgstr "skrive"
 
 msgid "x hits"
 msgstr "%1 treff"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/Include.pm:53
+msgid "x is not a valid URL"
+msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)
