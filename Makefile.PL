@@ -67,25 +67,29 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
+    'Text::MultiMarkdown'                          => '1.0.17',
     'Text::Password::Pronounceable'                => 0,
+    'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
     'YAML'                                         => '0.36',
-    'Text::Textile'                                => 0,
     'Term::Prompt'                                 => 0,
 );
 
-feature 'Automatic deployment', 'SQL::Translator' => '0.09006';
-feature 'Markdown Formatter', 'Text::MultiMarkdown', '1.0.17';
+feature 'Create new database', 'SQL::Translator' => '0.09006';
+feature 'Table of Contents generator','HTML::Toc' => '1.10';
+feature 'reCAPTCHA for anonymous edits', 'HTML::FormFu::Element::reCAPTCHA' => 0;
+feature 'Syntax highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
+
+feature 'RSS formatter', 'XML::Feed' => 0;
 # XML::LibXSLT depends on the following libraries: libxslt-dev, libgcrypt11-dev (for `lgcrypt`), libgdbm3-dev (for `lgdbm`) and possibly libxml2-dev
-feature 'DocBook formatter', 'XML::LibXSLT' => '1.66',
-                             'XML::LibXML'  => '1.66';
-feature 'Table Of Contents Generator','HTML::Toc' => '1.10';
+feature 'DocBook formatter',
+    'XML::LibXSLT' => '1.66',
+    'XML::LibXML'  => '1.66';
 feature 'POD formatter', 'Pod::Simple::HTML' => '3.01';
-feature 'Syntax Highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
-feature 'Transclusion support','LWP::Simple' => 0,
-        'URI::Fetch'                         => 0;
+feature 'Transclusion support',
+    'LWP::Simple' => 0,
+    'URI::Fetch'  => 0;
 feature 'Amazon boxes', 'Net::Amazon' => 0;
-feature 'RSS Formatter', 'XML::Feed';
 feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 
