@@ -18,7 +18,7 @@ Get a person by login.
 
 sub get_person {
     my ( $self, $login ) = @_;
-    my ($person) = $self->search( { login => $login } );
+    return $self->search( { login => $login } )->single;
 }
 
 =head2 get_user
