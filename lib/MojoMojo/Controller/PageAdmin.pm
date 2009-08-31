@@ -1,7 +1,6 @@
 package MojoMojo::Controller::PageAdmin;
 use warnings;
 use strict;
-use Data::Dumper;
 use parent 'Catalyst::Controller::HTML::FormFu';
 use Syntax::Highlight::Engine::Kate;
 
@@ -15,7 +14,7 @@ See L<MojoMojo>
 
 =head1 DESCRIPTION
 
-methods for administration of pages.
+Methods for updating pages: edit, rollback, permissions change, rename.
 
 =head1 METHODS
 
@@ -42,7 +41,7 @@ sub unauthorized : Private {
 sub auto : Private {
     my ( $self, $c ) = @_;
     $c->forward('/user/login')
-      if $c->req->params->{pass}
+        if $c->req->params->{pass}  # XXX use case?
           && !$c->stash->{user};
 
     # everyone can edit with anon mode enabled.
@@ -96,17 +95,22 @@ sub edit : Global FormConfig {
       $c->check_permissions( $stash->{'path'},
         ( $c->user_exists ? $c->user->obj : undef ) );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
-    my $loc_permtocheck=$permtocheck eq 'create'?$c->loc('create'):$c->loc('edit');
+    my $loc_permtocheck = $permtocheck eq 'create'
+      ? $c->loc('create')
+      : $c->loc('edit');
+      
+    # TODO this should be caught in the auto action. To reproduce, disable "Edit allowed by default"
+    # in Site settings, then go to /.edit
     if ( !$perms->{$permtocheck} ) {
         my $name = ref($page) eq 'HASH' ? $page->{name} : $page->name;
         $stash->{message} =
-          $c->loc( 'Permission Denied to x x', [ $loc_permtocheck, $name ] );
-        $stash->{template} = 'message.tt';
-        return;
+          $c->loc( 'Permission denied to x x', [ $loc_permtocheck, $name ] );
+        $c->detach('unauthorized');
     }
-    if ( $user == 1 && !$c->pref('anonymous_user') ) {
-        $c->stash->{message} ||= $c->loc('Anonymous Edit disabled');
-        return;
+    # TODO in the use case above, the message below should be displayed. However, that never happens
+    if ( $user_id == 1 && !$c->pref('anonymous_user') ) {
+        $c->stash->{message} = $c->loc('Anonymous edit disabled');
+        $c->detach('unauthorized');
     }
 
     # for anonymous users, use CAPTCHA, if enabled
