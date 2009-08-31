@@ -30,7 +30,7 @@ requires(
     'Catalyst::Plugin::Static::Simple'             => '0.07',
     'Catalyst::Plugin::Unicode'                    => '0.8',
     'Catalyst::View::TT'                           => '0.23',
-    'Catalyst::View::JSON'                         => 0,
+    'Catalyst::View::JSON'                         => '0.26',
     'Catalyst::View::Email::Template'              => 0,
     'Config::General'                              => 0,
     'Config::JFDI'                                 => 0,
