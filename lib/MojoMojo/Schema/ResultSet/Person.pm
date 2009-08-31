@@ -32,41 +32,6 @@ sub get_user {
     return $self->search( { login => $user } )->next();
 }
 
-=head2 registration_profile
-
-Returns a L<Data::FormValidator> profile for registration.
-
-=cut
-
-sub registration_profile {
-    my ( $self, $schema ) = @_;
-    return {
-        email => {
-            constraint => 'email',
-            name       => 'Invalid format'
-        },
-        login => [
-            {
-                constraint => qr/^\w{3,10}$/,
-                name       => 'only letters, 3-10 chars'
-            },
-            {
-                constraint => sub { $self->user_free( $schema, @_ ) },
-                name       => 'Username taken'
-            }
-        ],
-        name => {
-            constraint => qr/^\S+\s+\S+/,
-            name       => 'Full name please'
-        },
-        pass => {
-            constraint => \&pass_matches,
-            params     => [qw( pass confirm)],
-            name       => "Password doesn't match"
-        }
-    };
-}
-
 =head2 user_free
 
 Check if a username is available. Returns 1 for available, 0 for in use.
