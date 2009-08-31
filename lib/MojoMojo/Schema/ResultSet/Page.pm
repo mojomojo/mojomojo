@@ -326,8 +326,9 @@ sub create_path_pages {
 
         @version_data{qw/page version parent parent_version creator status release_date/} = (
             $page->id,
-            1,  # FIXME: the version field remains '1' for all pages in a well-edited wiki, as opposed to content_version
+            1,  # FIXME: the version field remains '1' for all pages in a well-edited wiki
             $page->parent->id,
+            # FIXME: the parent_version field remains '1' for all pages in a well-edited wiki
             ( $page->parent ? $page->parent->version : undef ),  # the '/' page doesn't have a parent
             $creator,
             'released',
@@ -335,6 +336,7 @@ sub create_path_pages {
         );
 
         my $page_version = $self->related_resultset('page_version')->create( \%version_data );
+        # copy $page columns form $page_version
         for ( $page->columns ) {
             next if $_ eq 'id';                 # page already exists
             next if $_ eq 'content_version';    # no content yet

@@ -135,6 +135,7 @@ sub update_content {
         $self->result_source->related_source('content')->resultset->create( \%content_data );
     $self->content_version( $content->version );
     $self->update;
+    
     $self->page_version->content_version_first($content_version)
         unless defined $self->page_version->content_version_first;
     $self->page_version->content_version_last($content_version);
