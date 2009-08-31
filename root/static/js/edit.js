@@ -4,7 +4,7 @@ $(document).ready(function() {
     var content_preview    = $("#content_preview");
     var edit_help          = $("#edithelp");
 
-    _set_edit_styles();
+    set_split_mode( $.cookies.get('split_edit') );
     setupFormatterToolbar();
     setupEditHelp();
     toggleDefaultValue($("#authorName"));
@@ -32,24 +32,22 @@ $(document).ready(function() {
         $('<li/>').append(split_edit_button)
     );
 
-    // Set edit mode to normal view (not splitted), if cookie is 0.
-    var split_edit_cookie = $.cookies.get('split_edit');
-    if ( split_edit_cookie == 0 ){
-        split_edit_button.click();
-    }
 });
 
 // toggles between horizontal and vertical splitting of the preview and edit areas
-toggle_split_mode = function() {
-    _set_edit_styles();
+var toggle_split_mode = function() {
+    if ($.cookies.get('split_edit') == 'horizontal') {
+        $.cookies.set('split_edit', 'vertical');
+    } else {
+        $.cookies.set('split_edit', 'horizontal');
+    }
+    set_split_mode( $.cookies.get('split_edit') );
 };
 
-_set_edit_styles = function() {
+var set_split_mode = function(split_mode) {
     var window_height = $(window).height();
-
-    // if already vertically split
-    if ( $("#edit_form").css('float') == 'left' ){
-
+    
+    if ( split_mode == 'horizontal' ) {
         $("#content_preview").css('width', '100%');
         $("#edit_form").css('width', '100%');
         $("#edit_form").css('float', 'right');
@@ -58,10 +56,8 @@ _set_edit_styles = function() {
         $("#body").height( window_height * 0.30 );
 
         $("#edit_form").css('margin-left', '0');
-
-        $.cookies.set('split_edit', 0);
     } else {
-        // switch to vertical split: preview area to the left of edit area
+        // split vertically: preview area to the left of edit area
         $("#content_preview").css('width', '49%');
         $("#edit_form").css('float', 'left');
         $("#edit_form").css('margin-left', '1%');
@@ -69,8 +65,6 @@ _set_edit_styles = function() {
 
         $("#content_preview").height( window_height * 0.65 );
         $("#body").height( window_height * 0.58 );
-
-        $.cookies.set('split_edit', 1);
     }
 };
 
