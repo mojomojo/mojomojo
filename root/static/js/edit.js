@@ -1,41 +1,41 @@
 $(document).ready(function() {
-    var $split_edit_button  = $('<a>' + loc('Split Edit') + '</a>');
-    var $toggle_info_button = $('<a>' + loc('Syntax') + '</a>');
-    var $content_preview    = $("#content_preview");
-    var $edit_help          = $("#edithelp");
+    var split_edit_button  = $('<a>' + loc('Split Edit') + '</a>');
+    var toggle_info_button = $('<a>' + loc('Syntax') + '</a>');
+    var content_preview    = $("#content_preview");
+    var edit_help          = $("#edithelp");
 
     _set_edit_styles();
     setupFormatterToolbar();
     setupEditHelp();
     toggleDefaultValue($("#authorName"));
 
-    $split_edit_button
+    split_edit_button
         .attr('href', 'action://' + 'split_edit')
         .click(function() {
             toggle_split_mode();
-            $edit_help.width($content_preview.innerWidth());
-            $edit_help.height($content_preview.innerHeight());
+            edit_help.width(content_preview.innerWidth());
+            edit_help.height(content_preview.innerHeight());
             return false;
         });
 
-    $toggle_info_button
+    toggle_info_button
         .attr('href', 'action://' + 'show/syntax_help')
         .click(function() {
             $("#edithelp").toggle();
-            $edit_help.width($content_preview.innerWidth());
-            $edit_help.height($content_preview.innerHeight());
+            edit_help.width(content_preview.innerWidth());
+            edit_help.height(content_preview.innerHeight());
             return false;
         });
 
     $("#pageoptions ul:first").append(
-        $('<li/>').append($toggle_info_button),
-        $('<li/>').append($split_edit_button)
+        $('<li/>').append(toggle_info_button),
+        $('<li/>').append(split_edit_button)
     );
 
     // Set edit mode to normal view (not splitted), if cookie is 0.
     var split_edit_cookie = $.cookies.get('split_edit');
     if ( split_edit_cookie == 0 ){
-        $split_edit_button.click();
+        split_edit_button.click();
     }
 });
 
@@ -75,21 +75,21 @@ _set_edit_styles = function() {
 };
 
 _createToolbarSelect = function(id, options) {
-    var $select = $('<select/>');
+    var select = $('<select/>');
 
-    $select.data('opt', options);
-    $select.attr({ 'id': "toolbar_" + id.replace(/\s/g, "_"), 'title': loc(id) });
+    select.data('opt', options);
+    select.attr({ 'id': "toolbar_" + id.replace(/\s/g, "_"), 'title': loc(id) });
 
-    $select.append( $('<option>').append(loc(id)) );
+    select.append( $('<option>').append(loc(id)) );
 
     $(options).each(function(i) {
         var text = options[i].shift();
-        options[i].unshift('body'); // txtarea ID
-        $select.append( $('<option>').val(i).append(loc(text)) );
+        options[i].unshift('body');  // txtarea ID
+        select.append( $('<option>').val(i).append(loc(text)) );
     });
 
-    $select.change(function(){
-        var options = $select.data('opt');
+    select.change(function(){
+        var options = select.data('opt');
         if(options[ this.selectedIndex - 1  ]) {
             insertTags.apply(this, options[ this.selectedIndex - 1 ]);
         }
@@ -97,11 +97,11 @@ _createToolbarSelect = function(id, options) {
         return false;
     });
 
-    return $select;
+    return select;
 }
 
 setupFormatterToolbar = function() {
-    var $toolbar = $("#formatter_toolbar");
+    var toolbar = $("#formatter_toolbar");
     var wiki_type, buttons;
 
     $.each(['main', 'textile', 'markdown'], function() {
@@ -112,13 +112,13 @@ setupFormatterToolbar = function() {
     });
 
     // Formatter
-    $toolbar.append(_createToolbarSelect(loc('Formatter'), [
+    toolbar.append(_createToolbarSelect(loc('Formatter'), [
         [ loc('IRC formatter'), '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
         [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n', loc("=head1 Header")]
     ]));
 
     // Insert
-    $toolbar.append(_createToolbarSelect(loc('Insert'), [
+    toolbar.append(_createToolbarSelect(loc('Insert'), [
         [ loc('comments'), '\n{{comments}}\n', '', ''],
         [ loc('toc'), '\n{{toc}}','',''],
         [ loc('redirect'), '\n{{redirect ', '}}', '/new/location'],
@@ -133,13 +133,13 @@ setupFormatterToolbar = function() {
     }
 
     // Syntax highlight
-    $toolbar.append(_createToolbarSelect(loc('Syntax Highlight'),
+    toolbar.append(_createToolbarSelect(loc('Syntax Highlight'),
         $.map(syntax_formatters, function(n, i) {
             return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n',loc('say "Howdy partner.";') ]];
         })
     ));
 
-    $toolbar.append('<br>');
+    toolbar.append('<br>');
 
     // main or textile buttons
     if(wiki_type == 'main' || wiki_type == 'textile') {
@@ -190,20 +190,20 @@ setupFormatterToolbar = function() {
     // create and apply buttons
     $(buttons).each(function() {
         var data = this;
-        var $button = $('<input type="image">');
+        var button = $('<input type="image">');
 
-        $button.attr({
+        button.attr({
             'src': $.uri_for('/.static/toolbar/' + data.shift() + '.png'),
             'title': loc(data.shift())
         });
 
         data.unshift('body'); // txtarea ID
-        $button.click(function() { return insertTags.apply(this, data); });
-        $toolbar.append($button);
+        button.click(function() { return insertTags.apply(this, data); });
+        toolbar.append(button);
     });
 
     // help text
-    $toolbar.append(
+    toolbar.append(
           '<br><small>&nbsp;'
         + loc('Mark some text to apply the toolbar actions to that text')
         + '</small>'
@@ -211,36 +211,36 @@ setupFormatterToolbar = function() {
 };
 
 setupEditHelp = function() {
-    var $edithelp = $('#edithelp');
-    var $nav      = $('<div class="tab-nav"/>');
-    var $close    = $('<a href="action://close" class="close-button"><span>X</span></a>');
+    var edithelp = $('#edithelp');
+    var nav      = $('<div class="tab-nav"/>');
+    var close    = $('<a href="action://close" class="close-button"><span>X</span></a>');
     var tabs      = [];
 
-    $edithelp.children('.syntax_help').each(function() {
-        var $tab  = $(this);
-        var $a    = $('<a/>');
-        var title = $tab.children('h2:first').text();
+    edithelp.children('.syntax_help').each(function() {
+        var tab  = $(this);
+        var a    = $('<a/>');
+        var title = tab.children('h2:first').text();
         var id    = this.id;
 
-        $a.append(title).attr('href', "tab://" + title).click(function() {
+        a.append(title).attr('href', "tab://" + title).click(function() {
             $.each(tabs, function() {
                 this[0].removeClass('active');
                 this[1].hide();
             });
-            $tab.show();
-            $a.addClass('active');
+            tab.show();
+            a.addClass('active');
             return false;
         });
 
-        tabs.push([$a, $tab]);
-        $nav.append($a);
+        tabs.push([a, tab]);
+        nav.append(a);
     });
 
-    $close.click(function() { $edithelp.hide(); return false });
+    close.click(function() { edithelp.hide(); return false });
 
     tabs[0][0].click();
-    $nav.append($close);
-    $edithelp.prepend($nav);
+    nav.append(close);
+    edithelp.prepend(nav);
 
     return tabs;
 };
