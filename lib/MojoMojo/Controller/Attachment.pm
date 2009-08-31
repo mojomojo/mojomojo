@@ -24,7 +24,7 @@ Return whether the current user has attachment manipulation rights (upload/delet
 
 =cut
 
-sub auth :Private {
+sub auth : Private {
     my ( $self, $c ) = @_;
 
     my $perms =
@@ -39,11 +39,24 @@ Private action to return a 403 with an explanatory template.
 
 =cut
 
-sub unauthorized :Private {
+sub unauthorized : Private {
     my ( $self, $c, $operation ) = @_;
     $c->stash->{template} = 'message.tt';
     $c->stash->{message}  = $c->loc('You do not have permissions to x attachments for this page', $operation);
     $c->response->status(403);  # 403 Forbidden
+}
+
+=head2 default
+
+Private action to return a 404 not found page.
+
+=cut
+
+sub default : Private {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'message.tt';
+    $c->stash->{message}  = $c->loc("Attachment not found.");
+    return ( $c->res->status(404) );
 }
 
 =head2 attachments
@@ -67,6 +80,7 @@ Display the list of attachments if the user has view permissions.
 B<template>: F<attachments/list.tt>
 
 =cut
+
 sub list : Local {
     my ( $self, $c ) = @_;
 
@@ -127,28 +141,13 @@ sub flash_upload : Local {
 
 sub attachment : Chained CaptureArgs(1) {
     my ( $self, $c, $att ) = @_;
-    $c->stash->{att} = $c->model("DBIC::Attachment")->find($att);
-    $c->detach('default') if not ( $c->stash->{att} );
+    $c->stash->{att} = $c->model("DBIC::Attachment")->find($att)
+        or $c->detach('default');
 }
 
 sub defaultaction : PathPart('') Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('view');
-}
-
-=head2 default
-
-This action dispatches to the other private actions in this controller
-based on the second argument. The first argument is expected to be
-an attachment id.
-
-=cut
-
-sub default : Private {
-    my ( $self, $c ) = @_;
-    $c->stash->{template} = 'message.tt';
-    $c->stash->{message}  = $c->loc("Attachment not found.");
-    return ( $c->res->status(404) );
 }
 
 =head2 view
@@ -157,6 +156,7 @@ Render the attachment in the browser (C<Content-Disposition: inline>), with
 caching for 1 day.
 
 =cut
+
 sub view : Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;
     my $att = $c->stash->{att};
@@ -205,7 +205,7 @@ sub thumb : Chained('attachment') Args(0) {
     }
     $photo->make_thumb() unless -f $att->thumb_filename;
     my $io_file = IO::File->new( $att->thumb_filename )
-        or detach('default');
+        or $c->detach('default');
     $io_file->binmode;
 
     $c->res->output( $io_file );
@@ -231,7 +231,7 @@ sub inline : Chained('attachment') Args(0) {
     }
     $photo->make_inline unless -f $att->inline_filename;
     my $io_file = IO::File->new( $att->inline_filename )
-        or detach('default');
+        or $c->detach('default');
     $io_file->binmode;
 
     $c->res->output( $io_file );

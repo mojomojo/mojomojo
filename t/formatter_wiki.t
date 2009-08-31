@@ -89,7 +89,7 @@ is($content, '<span class="newWikiWord"><a title="Faking localization... Not fou
 
 $content = 'Check this [[../sibling]] page';
 MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-is($content, 'Check this <span class="newWikiWord"><a title="Faking localization... Not found. Click to create this page. ...fake complete." href="http://example.com/sibling.edit">sibling?</a></span> page', 'links to siblings via ../');
+is($content, 'Check this <span class="newWikiWord"><a title="Faking localization... Not found. Click to create this page. ...fake complete." href="sibling.edit">sibling?</a></span> page', 'links to siblings via ../');
 
 TODO: {
     local $TODO = 'This fails because the dummy Catalyst object needs to fake a base path deeper than /';

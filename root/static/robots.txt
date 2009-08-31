@@ -1,0 +1,6 @@
+# make sure to have a web server alias for /robots.txt to .../.static/robots.txt
+# examples and details at http://mojomojo.org/documentation/deployment
+
+User-agent: *
+Disallow: /.jsrpc/
+Allow: /

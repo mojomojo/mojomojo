@@ -22,13 +22,13 @@ __PACKAGE__->add_columns(
     "remove_date",           { data_type => "VARCHAR", is_nullable => 1, size => 100 },
     "comments",              { data_type => "TEXT",    is_nullable => 1, size => 4000 },
 
-    # FIXME: consider for 2 simple pages that both have only 1 revision, and there has been no
-    # making a second revision current. In the page_version table, some such pages have
-    # content_version_first and content_version_last (1, 1) and others (NULL, NULL)
+    # FIXME: in a wiki in which I had never rolled back a page (that is, never made a second
+    # revision current, I see in the page_version table that some pages have
+    # content_version_first and content_version_last (1, 1) and others (NULL, NULL). --dandv
     "content_version_first", { data_type => "INTEGER", is_nullable => 1, size => undef },
     "content_version_last",  { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
-__PACKAGE__->set_primary_key( "version", "page" );
+__PACKAGE__->set_primary_key( "page", "version" );
 __PACKAGE__->has_many( "pages", "MojoMojo::Schema::Result::Page",
     { "foreign.id" => "self.page", "foreign.version" => "self.version" },
 );

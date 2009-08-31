@@ -25,7 +25,7 @@ use MojoMojoTestSchema;
 
 my $schema = MojoMojoTestSchema->init_schema(populate => 1);
 
-my $uploads_dir = 't/var/upload';
+my $uploads_dir = 't/var/uploads';
 $schema->attachment_dir($uploads_dir);  # TODO duplicate setting, in MojoMojo::Schema and in the .conf/.yml file
 mkdir($uploads_dir) unless -d $uploads_dir;
 

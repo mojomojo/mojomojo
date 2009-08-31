@@ -10,7 +10,7 @@ META.yml
 pm_to_blib
 t/var/mojomojo.db
 t/var/mojomojo.yml
-t/var/upload
+t/var/uploads
 mojomojos.kpf
 MojoMojo-*
 .includepath

@@ -79,8 +79,8 @@ sub path_pages {
     # If there are any proto pages, put the original
     # page names back into the paths, so they will
     # be preserved upon page creation:
-    if (@proto_pages) {
-        my $proto_path = $path_pages[ @path_pages - 1 ]->{path};
+    if (@path_pages) {
+        my $proto_path = $path_pages[-1]->{path};
         for (@proto_pages) {
             ( $proto_path =~ /\/$/ ) || ( $proto_path .= '/' );
             $proto_path .= $_->{name_orig};
@@ -326,8 +326,9 @@ sub create_path_pages {
 
         @version_data{qw/page version parent parent_version creator status release_date/} = (
             $page->id,
-            1,  # FIXME: the version field remains '1' for all pages in a well-edited wiki, as opposed to content_version
+            1,  # FIXME: the version field remains '1' for all pages in a well-edited wiki
             $page->parent->id,
+            # FIXME: the parent_version field remains '1' for all pages in a well-edited wiki
             ( $page->parent ? $page->parent->version : undef ),  # the '/' page doesn't have a parent
             $creator,
             'released',
@@ -335,6 +336,7 @@ sub create_path_pages {
         );
 
         my $page_version = $self->related_resultset('page_version')->create( \%version_data );
+        # copy $page columns form $page_version
         for ( $page->columns ) {
             next if $_ eq 'id';                 # page already exists
             next if $_ eq 'content_version';    # no content yet

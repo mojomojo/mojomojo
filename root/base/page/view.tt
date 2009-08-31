@@ -1,7 +1,7 @@
 [% WRAPPER page/wrapper.tt index_page=(c.req.params.rev ? 0 : 1) +%]
 <div id="content">
 
-[%- IF c.flash.redirect %]
+[%- IF c.sessionid && c.flash.redirect %]
     [% loc('Redirected from') %]
     [% IF (c.pref('anonymous_user') OR user.can_edit(page.path)) %]
 <a href="[% c.req.base %]/[% c.flash.redirect %].edit" rel="nofollow">[% c.flash.redirect %]</a>
@@ -22,7 +22,7 @@
       [%- IF render == 'highlight' +%]
         [%+ content.highlight(c) %]
       [% ELSE +%]
-        [%+ content.formatted(c) %]
+        [%+ content.precompiled || content.formatted(c) %]
       [% END %]
     </div>
 

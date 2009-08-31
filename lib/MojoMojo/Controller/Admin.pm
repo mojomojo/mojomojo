@@ -23,9 +23,11 @@ Access control. Only administrators should access functions in this controller.
 
 sub auto : Private {
     my ( $self, $c ) = @_;
+    
     my $user = $c->stash->{user};
     unless ( $user && $user->is_admin ) {
-        $c->stash->{message}  = $c->loc('Restricted area. Admin access required');
+        $c->stash->{message} =
+          $c->loc('Restricted area. Admin access required');
         $c->stash->{template} = 'message.tt';
         return 0;
     }
@@ -46,33 +48,36 @@ sub settings : Path FormConfig Args(0) {
 
     my $admins = $c->pref('admins');
     $admins =~ s/\b$user\b//g;
-    my $select_theme = $form->get_all_element({name => 'theme'});
+    my $select_theme = $form->get_all_element( { name => 'theme' } );
     my @themes;
-    foreach my $theme (MojoMojo::Model::Themes->list){
-        push @themes,[$theme,$theme];
-    };
-    $select_theme->options(\@themes);
-    unless( $form->submitted ) {
-        $form->default_values({
-            name                     => $c->pref('name'),
-            admins                   => $admins,
-            anonymous_user           => $c->pref('anonymous_user'),
-            open_registration        => $c->pref('open_registration'),
-            restricted_user          => $c->pref('restricted_user'),
-            disable_search           => $c->pref('disable_search'),
-            enable_emoticons         => $c->pref('enable_emoticons'),
-            check_permission_on_view => $c->pref('check_permission_on_view'),
-            cache_permission_data    => $c->pref('cache_permission_data'),
-            enforce_login            => $c->pref('enforce_login'),
-            create_allowed           => $c->pref('create_allowed'),
-            delete_allowed           => $c->pref('delete_allowed'),
-            edit_allowed             => $c->pref('edit_allowed'),
-            view_allowed             => $c->pref('view_allowed'),
-            attachment_allowed       => $c->pref('attachment_allowed'),
-            use_captcha              => $c->pref('use_captcha'),
-            theme                    => $c->pref('theme'),
-            main_formatter           => $c->pref('main_formatter')
-        });
+    foreach my $theme ( MojoMojo::Model::Themes->list ) {
+        push @themes, [ $theme, $theme ];
+    }
+    $select_theme->options( \@themes );
+    unless ( $form->submitted ) {
+        $form->default_values(
+            {
+                name              => $c->pref('name'),
+                admins            => $admins,
+                anonymous_user    => $c->pref('anonymous_user'),
+                open_registration => $c->pref('open_registration'),
+                restricted_user   => $c->pref('restricted_user'),
+                disable_search    => $c->pref('disable_search'),
+                enable_emoticons  => $c->pref('enable_emoticons'),
+                check_permission_on_view =>
+                  $c->pref('check_permission_on_view'),
+                cache_permission_data => $c->pref('cache_permission_data'),
+                enforce_login         => $c->pref('enforce_login'),
+                create_allowed        => $c->pref('create_allowed'),
+                delete_allowed        => $c->pref('delete_allowed'),
+                edit_allowed          => $c->pref('edit_allowed'),
+                view_allowed          => $c->pref('view_allowed'),
+                attachment_allowed    => $c->pref('attachment_allowed'),
+                use_captcha           => $c->pref('use_captcha'),
+                theme                 => $c->pref('theme'),
+                main_formatter        => $c->pref('main_formatter')
+            }
+        );
         $form->process();
         return;
     }
@@ -83,21 +88,24 @@ sub settings : Path FormConfig Args(0) {
             return;
         }
     }
-    $c->pref( 'check_permission_on_view', $form->params->{check_permission_on_view} ?1:0 );
-    $c->pref( 'cache_permission_data',    $form->params->{cache_permission_data}    ?1:0 );
-    $c->pref( 'open_registration',        $form->params->{open_registration}        ?1:0 );
-    $c->pref( 'restricted_user',          $form->params->{restricted_user}          ?1:0 );
-    $c->pref( 'use_captcha',              $form->params->{use_captcha}              ?1:0 );
-    $c->pref( 'disable_search',           $form->params->{disable_search}           ?1:0 );
-    $c->pref( 'enable_emoticons',         $form->params->{enable_emoticons}         ?1:0 );
-    $c->pref( 'enforce_login',            $form->params->{enforce_login}            ?1:0 );
-    $c->pref( 'create_allowed',           $form->params->{create_allowed}           ?1:0 );
-    $c->pref( 'delete_allowed',           $form->params->{delete_allowed}           ?1:0 );
-    $c->pref( 'edit_allowed',             $form->params->{edit_allowed}             ?1:0 );
-    $c->pref( 'view_allowed',             $form->params->{view_allowed}             ?1:0 );
-    $c->pref( 'attachment_allowed',       $form->params->{attachment_allowed}       ?1:0 );
+    $c->pref( 'check_permission_on_view',
+        $form->params->{check_permission_on_view} ? 1 : 0 );
+    $c->pref( 'cache_permission_data',
+        $form->params->{cache_permission_data} ? 1 : 0 );
+    $c->pref( 'open_registration', $form->params->{open_registration} ? 1 : 0 );
+    $c->pref( 'restricted_user',   $form->params->{restricted_user}   ? 1 : 0 );
+    $c->pref( 'use_captcha',       $form->params->{use_captcha}       ? 1 : 0 );
+    $c->pref( 'disable_search',    $form->params->{disable_search}    ? 1 : 0 );
+    $c->pref( 'enable_emoticons',  $form->params->{enable_emoticons}  ? 1 : 0 );
+    $c->pref( 'enforce_login',     $form->params->{enforce_login}     ? 1 : 0 );
+    $c->pref( 'create_allowed',    $form->params->{create_allowed}    ? 1 : 0 );
+    $c->pref( 'delete_allowed',    $form->params->{delete_allowed}    ? 1 : 0 );
+    $c->pref( 'edit_allowed',      $form->params->{edit_allowed}      ? 1 : 0 );
+    $c->pref( 'view_allowed',      $form->params->{view_allowed}      ? 1 : 0 );
+    $c->pref( 'attachment_allowed',
+        $form->params->{attachment_allowed} ? 1 : 0 );
 
-    $c->pref( 'admins',         join( ' ', @users, $c->stash->{user}->login ) );
+    $c->pref( 'admins', join( ' ', @users, $c->stash->{user}->login ) );
     $c->pref( 'name',           $form->params->{name} );
     $c->pref( 'anonymous_user', $form->params->{anonymous_user} || '' );
     $c->pref( 'theme',          $form->params->{theme} || 'default' );
@@ -133,8 +141,9 @@ Role listing, creation and assignment.
 =cut
 
 sub role : Local Args(0) {
-    my ($self, $c) = @_;
-    $c->stash->{roles} = [ $c->model('DBIC::Role')->search(undef,{order_by=>['id asc']}) ];
+    my ( $self, $c ) = @_;
+    $c->stash->{roles} =
+      [ $c->model('DBIC::Role')->search( undef, { order_by => ['id asc'] } ) ];
 }
 
 =head2 create_role ( .admin/create_role )
@@ -143,8 +152,8 @@ Role creation page.
 
 =cut
 
-sub create_role : Local Args(0) FormConfig('admin/role_form.yml')  {
-    my ($self, $c) = @_;
+sub create_role : Local Args(0) FormConfig('admin/role_form.yml') {
+    my ( $self, $c ) = @_;
     $c->forward('handle_role_form');
 }
 
@@ -155,14 +164,15 @@ Role edit page.
 =cut
 
 sub edit_role : Path('role') Args(1) FormConfig('admin/role_form.yml') {
-    my ($self, $c, $role_name) = @_;
+    my ( $self, $c, $role_name ) = @_;
     my $form = $c->stash->{form};
 
     my $role = $c->model('DBIC::Role')->find( { name => $role_name } );
 
     if ($role) {
+
         # load stash parameters if the page is only being displayed
-        unless ( $c->forward('handle_role_form', [$role]) ) {
+        unless ( $c->forward( 'handle_role_form', [$role] ) ) {
             $c->stash->{members} = [ $role->members->all ];
             $c->stash->{role}    = $role;
         }
@@ -180,7 +190,7 @@ Returns true when a submitted form was actually processed.
 =cut
 
 sub handle_role_form : Private {
-    my ($self, $c, $role) = @_;
+    my ( $self, $c, $role ) = @_;
     my $form = $c->stash->{form};
 
     if ( $form->submitted_and_valid ) {
@@ -194,24 +204,28 @@ sub handle_role_form : Private {
         # make sure updating works
         $fields->{id} = $role->id if $role;
 
-        $role = $c->model('DBIC::Role')->update_or_create( $fields );
+        $role = $c->model('DBIC::Role')->update_or_create($fields);
 
         if ($role) {
+
             # in order to safely update the role members, they're removed and
             # then reinserted - this is a bit inefficient but updating role
             # members shouldn't be a frequent operation
             $role->role_members->delete;
 
-            if ($params->{role_members}) {
+            if ( $params->{role_members} ) {
                 my @role_members =
-                    ref $params->{role_members} eq 'ARRAY' ?
-                        @{$params->{role_members}} : $params->{role_members};
+                  ref $params->{role_members} eq 'ARRAY'
+                  ? @{ $params->{role_members} }
+                  : $params->{role_members};
 
                 for my $person_id (@role_members) {
-                    $role->add_to_role_members( {
-                        person => $person_id,
-                        admin  => 0
-                    });
+                    $role->add_to_role_members(
+                        {
+                            person => $person_id,
+                            admin  => 0
+                        }
+                    );
                 }
             }
 
@@ -240,6 +254,41 @@ sub update_user : Local {
     $c->stash->{user} = $user;
 }
 
+=head2 precompile_pages
+
+Make a formatted version of content body and store it in content.precompiled.
+This makes MojoMojo go zing, when loading content for page requests.
+
+Depending on the number of pages, and versions of them, this could take some minutes.
+For 2000 page versions on a 2.4 GHz desktop this script took about 3 minutes to run.
+
+=cut
+
+sub precompile_pages : Global {
+    my ( $self, $c ) = @_;
+
+    my $content_rs = $c->model('DBIC::Content');
+    while ( my $content_record = $content_rs->next ) {
+        my $body = $content_record->body;
+        next if !$body;
+        my $page       = $content_record->page;
+        # Get path from path_pages_by_id().
+        my @path_pages = $c->model('DBIC::Page')->path_pages_by_id( $page->id );
+        my @node_names = map { $_->name } @path_pages;
+        my $path       = join( '/', @node_names );
+        # Collapse leading '//' into '/' since '/' is first in path
+        # since we just joined with '/'.
+        $path =~ s{^//}{/};
+        $c->stash->{path} = $path;
+
+        $c->call_plugins( "format_content", \$body, $c, $page );
+        $content_record->precompiled($body);
+        $content_record->update;
+    }
+
+    $c->response->body('Precompile Done.');
+    return;
+}
 
 =head1 AUTHOR
 

@@ -41,13 +41,19 @@ L<MojoMojo::Schema::ResultSet::Content::format_content>.
 
 C<main_format_content> will only be called by <MojoMojo::Formatter::Main>.
 
+Note that L<Text::Markdown> ensures that the output always ends with B<one>
+newline. The fact that multiple newlines are collapsed into one makese sense,
+because this is the behavior of HTML towards whispace. The fact that there's
+always a newline at the end makes sense again, given that the output will always
+be nested in a B<block>-level element, be it a C<< <p> >> (most often),
+C<< <table> >>, or C<< <div> >> (when passing HTML through).
+
 =cut
 
 sub main_format_content {
     my ( $class, $content ) = @_;
     return unless $markdown;
 
-    # Let markdown handle the rest
     $$content = $markdown->markdown($$content);
 }
 

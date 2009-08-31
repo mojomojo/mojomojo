@@ -212,9 +212,37 @@ sub format_link {
     #FIXME: why both base and $c?
     my ( $class, $c, $wikilink, $base, $link_text, $user_profile_wanted ) = @_;
     $base ||= $c->req->base;
-    # prepend the base, unless the wikilink is a relative path
-    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink
-        unless $wikilink =~ m'^(\.\.)?/';
+   
+    # The following control structures are used to build the wikilink
+    # from the stashed path and $wikilink passed to this function.
+     
+    # May as well smoke the page stash from MojoMojo.pm since we got it eh?
+    my $stashed_path = $c->stash->{path};
+    
+    # If the wikilink starts with a slash the pass it on through
+    my $pass_wikilink_through;
+    if ( $wikilink =~ m{^/} ) { 
+        $pass_wikilink_through = 1; 
+    }
+
+    # Make sure the $stashed_path starts with a bang, uh I mean slash.
+    elsif ( $stashed_path ) {
+        $stashed_path = '/' . $stashed_path if $stashed_path !~ m{^/};
+    }
+    else { $stashed_path = '/'; }
+    
+    # Handle sibling case by making look it like the rest.
+    if ( my ($sibling) = $wikilink =~ m'^\.\./(.*)$' ) {
+        my ($parent) = $stashed_path =~ m'(.*)/.*$';
+        $wikilink = $parent . '/' . $sibling;
+    }
+    elsif ( !$pass_wikilink_through ) {
+        $wikilink = $stashed_path . '/' . $wikilink;
+        
+        # Old School Method:
+        #    $wikilink = ( blessed $c->stash->{page} ? $c->stash->{page}->path : $c->stash->{page}->{path}  ). '/' . $wikilink
+        #        unless $wikilink =~ m'^(\.\.)?/';
+    }
     $c = MojoMojo->context unless ref $c;
 
     # keep the original wikilink for display, stripping leading slashes
