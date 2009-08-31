@@ -25,6 +25,20 @@ Check that user is logged in and has rights to this page.
 
 =cut
 
+=head2 unauthorized
+
+Private action to return a 403 with an explanatory template.
+
+=cut
+
+sub unauthorized : Private {
+    my ( $self, $c, $operation ) = @_;
+    $c->stash->{template} = 'message.tt';
+    $c->stash->{message} ||= $c->loc('No permissions to x this page', $operation || $c->loc('update'));
+    $c->response->status(403) unless $c->response->status;  # 403 Forbidden
+    return 0;
+}
+
 sub auto : Private {
     my ( $self, $c ) = @_;
     $c->forward('/user/login')
@@ -36,9 +50,7 @@ sub auto : Private {
     my $user = $c->stash->{user};
     return 1 if $user && $user->can_edit( $c->stash->{path} );
     return 1 if $user && !$c->pref('restricted_user');
-    $c->stash->{template} = 'message.tt';
-    $c->stash->{message}  = $c->loc('No permissions to edit this page');
-    return 0;
+    $c->detach('unauthorized', [$c->loc('edit')]);
 }
 
 =head2 edit
@@ -57,7 +69,7 @@ sub edit : Global FormConfig {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
-    my $user = $c->user_exists ? $c->user->obj->id : 1;    # Anon edit
+    my $user_id = $c->user_exists ? $c->user->obj->id : 1;    # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
@@ -72,12 +84,12 @@ sub edit : Global FormConfig {
     # proto_pages, depending on whether or not the page already exists
     my $page = (
           @$proto_pages > 0
-        ? $proto_pages->[ @$proto_pages - 1 ]
-        : $path_pages->[ @$path_pages - 1 ]
+        ? $proto_pages->[-1]
+        : $path_pages->[-1]
     );
 
     # this should never happen!
-    $c->detach('/default') unless $page;
+    $c->detach('/default') unless $page;  # TODO there is no default action, BTW
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     my $perms =
@@ -98,7 +110,7 @@ sub edit : Global FormConfig {
     }
 
     # for anonymous users, use CAPTCHA, if enabled
-    if ( $user == 1 && $c->pref('use_captcha') ) {
+    if ( $user_id == 1 && $c->pref('use_captcha') ) {
         my $captcha_lang = $c->session->{lang} || $c->pref('default_lang') ;
         $c->stash->{captcha} = $form->element({
             type => 'reCAPTCHA',
@@ -116,18 +128,17 @@ sub edit : Global FormConfig {
 
     if ( $form->submitted_and_valid ) {
 
-
         my $valid = $form->params;
-        $valid->{creator} = $user;
+        $valid->{creator} = $user_id;
 
         if (@$proto_pages) {    # page doesn't exist yet
 
             $path_pages = $c->model('DBIC::Page')->create_path_pages(
                 path_pages  => $path_pages,
                 proto_pages => $proto_pages,
-                creator     => $user,
+                creator     => $user_id,
             );
-            $page = $path_pages->[ @$path_pages - 1 ];
+            $page = $path_pages->[-1];
         }
 
         $stash->{content} = $page->content;
@@ -289,7 +300,17 @@ This action will revert a page to a older revision.
 
 sub rollback : Global {
     my ( $self, $c, $page ) = @_;
+    if ($c->req->method ne 'POST') {
+        # general error - we want a POST
+        $c->res->status(400);
+        $c->detach('unauthorized', [$c->loc('rollback')]);
+    }
+    
     if ( $c->req->param('rev') ) {
+        # TODO this needs to do a proper versioned rollback, via
+        # $page->add_version( content_version => $c->req->param('rev')
+        # The problem is that the page_version table doesn't have a content_version field
+        # We could cannibalize the parent_version field, which is dummily always '1'
         $c->stash->{page}->content_version( $c->req->param('rev') );
         $c->stash->{page}->update;
         undef $c->req->params->{rev};

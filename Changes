@@ -14,6 +14,7 @@
   - Make subtree KinoSearch work. (mateu)
   - Added paging for .list (dandv)
   - Simplify 404 page handling in suggest.tt. (mateu)
+  - .rollback now only works via POST (dandv)
   - Updated jQuery inplace editor and related code; fixed '&'-encoding bug (dandv)
   - Main formatter now guaranteed to end the content with *one* newline (dandv)
 
