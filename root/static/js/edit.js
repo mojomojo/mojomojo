@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var split_edit_button  = $('<a>' + loc('Split Edit') + '</a>');
     var toggle_info_button = $('<a>' + loc('Syntax') + '</a>');
-    var content_preview    = $("#content_preview");
-    var edit_help          = $("#edithelp");
+    var content_preview    = $('#content_preview');
+    var edit_help          = $('#edithelp');
 
     set_split_mode( $.cookies.get('split_edit') );
-    setupFormatterToolbar();
-    setupEditHelp();
-    toggleDefaultValue($("#authorName"));
+    setup_formatter_toolbar();
+    setup_edit_help();
+    toggleDefaultValue($('#authorName'));  // auto-clear the 'anonymous_user' name for anon edits
 
     split_edit_button
         .attr('href', 'action://' + 'split_edit')
@@ -21,13 +21,13 @@ $(document).ready(function() {
     toggle_info_button
         .attr('href', 'action://' + 'show/syntax_help')
         .click(function() {
-            $("#edithelp").toggle();
+            $('#edithelp').toggle();
             edit_help.width(content_preview.innerWidth());
             edit_help.height(content_preview.innerHeight());
             return false;
         });
 
-    $("#pageoptions ul:first").append(
+    $('#pageoptions ul:first').append(
         $('<li/>').append(toggle_info_button),
         $('<li/>').append(split_edit_button)
     );
@@ -46,56 +46,57 @@ var toggle_split_mode = function() {
 
 var set_split_mode = function(split_mode) {
     var window_height = $(window).height();
-    
+
     if ( split_mode == 'horizontal' ) {
-        $("#content_preview").css('width', '100%');
-        $("#edit_form").css('width', '100%');
-        $("#edit_form").css('float', 'right');
+        $('#content_preview').css('width', '100%');
+        $('#edit_form').css('width', '100%');
+        $('#edit_form').css('float', 'right');
 
-        $("#content_preview").height( window_height * 0.32 );
-        $("#body").height( window_height * 0.30 );
+        $('#content_preview').height( window_height * 0.32 );
+        $('#body').height( window_height * 0.30 );
 
-        $("#edit_form").css('margin-left', '0');
+        $('#edit_form').css('margin-left', '0');
+
     } else {
         // split vertically: preview area to the left of edit area
-        $("#content_preview").css('width', '49%');
-        $("#edit_form").css('float', 'left');
-        $("#edit_form").css('margin-left', '1%');
-        $("#edit_form").css('width', '48%');
+        $('#content_preview').css('width', '49%');
+        $('#edit_form').css('float', 'left');
+        $('#edit_form').css('margin-left', '1%');
+        $('#edit_form').css('width', '48%');
 
-        $("#content_preview").height( window_height * 0.65 );
-        $("#body").height( window_height * 0.58 );
+        $('#content_preview').height( window_height * 0.65 );
+        $('#body').height( window_height * 0.58 );
     }
 };
 
-_createToolbarSelect = function(id, options) {
-    var select = $('<select/>');
-
-    select.data('opt', options);
-    select.attr({ 'id': "toolbar_" + id.replace(/\s/g, "_"), 'title': loc(id) });
-
-    select.append( $('<option>').append(loc(id)) );
-
-    $(options).each(function(i) {
-        var text = options[i].shift();
-        options[i].unshift('body');  // txtarea ID
-        select.append( $('<option>').val(i).append(loc(text)) );
-    });
-
-    select.change(function(){
-        var options = select.data('opt');
-        if(options[ this.selectedIndex - 1  ]) {
-            insertTags.apply(this, options[ this.selectedIndex - 1 ]);
-        }
-        this.selectedIndex = 0;
-        return false;
-    });
-
-    return select;
-}
-
-setupFormatterToolbar = function() {
-    var toolbar = $("#formatter_toolbar");
+setup_formatter_toolbar = function() {
+    var _create_tolbar_select = function(id, options) {
+        var select = $('<select/>');
+    
+        select.data('opt', options);
+        select.attr({ 'id': 'toolbar_' + id.replace(/\s/g, '_'), 'title': loc(id) });
+    
+        select.append( $('<option>').append(loc(id)) );
+    
+        $(options).each(function(i) {
+            var text = options[i].shift();
+            options[i].unshift('body');  // txtarea ID
+            select.append( $('<option>').val(i).append(loc(text)) );
+        });
+    
+        select.change(function(){
+            var options = select.data('opt');
+            if(options[ this.selectedIndex - 1  ]) {
+                insertTags.apply(this, options[ this.selectedIndex - 1 ]);
+            }
+            this.selectedIndex = 0;
+            return false;
+        });
+    
+        return select;
+    }
+    
+    var toolbar = $('#formatter_toolbar');
     var wiki_type, buttons;
 
     $.each(['main', 'textile', 'markdown'], function() {
@@ -106,13 +107,13 @@ setupFormatterToolbar = function() {
     });
 
     // Formatter
-    toolbar.append(_createToolbarSelect(loc('Formatter'), [
+    toolbar.append(_create_tolbar_select(loc('Formatter'), [
         [ loc('IRC formatter'), '\n{{irc}}\n',  '\n{{end}}\n\n',  '12:00 <nick> Hello #mojomojo!'],
-        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n', loc("=head1 Header")]
+        [ loc('POD formatter'), '\n{{pod}}\n\n','\n\n{{end}}\n\n', loc('=head1 Header')]
     ]));
 
     // Insert
-    toolbar.append(_createToolbarSelect(loc('Insert'), [
+    toolbar.append(_create_tolbar_select(loc('Insert'), [
         [ loc('comments'), '\n{{comments}}\n', '', ''],
         [ loc('toc'), '\n{{toc}}','',''],
         [ loc('redirect'), '\n{{redirect ', '}}', '/new/location'],
@@ -127,7 +128,7 @@ setupFormatterToolbar = function() {
     }
 
     // Syntax highlight
-    toolbar.append(_createToolbarSelect(loc('Syntax Highlight'),
+    toolbar.append(_create_tolbar_select(loc('Syntax Highlight'),
         $.map(syntax_formatters, function(n, i) {
             return [[ n, '\n\n<pre lang=\"' + n + '\">\n','\n</pre>\n\n',loc('say "Howdy partner.";') ]];
         })
@@ -204,7 +205,7 @@ setupFormatterToolbar = function() {
     );
 };
 
-setupEditHelp = function() {
+var setup_edit_help = function() {
     var edithelp = $('#edithelp');
     var nav      = $('<div class="tab-nav"/>');
     var close    = $('<a href="action://close" class="close-button"><span>X</span></a>');
@@ -216,7 +217,7 @@ setupEditHelp = function() {
         var title = tab.children('h2:first').text();
         var id    = this.id;
 
-        a.append(title).attr('href', "tab://" + title).click(function() {
+        a.append(title).attr('href', 'tab://' + title).click(function() {
             $.each(tabs, function() {
                 this[0].removeClass('active');
                 this[1].hide();
