@@ -205,7 +205,7 @@ sub thumb : Chained('attachment') Args(0) {
     }
     $photo->make_thumb() unless -f $att->thumb_filename;
     my $io_file = IO::File->new( $att->thumb_filename )
-        or detach('default');
+        or $c->detach('default');
     $io_file->binmode;
 
     $c->res->output( $io_file );
@@ -231,7 +231,7 @@ sub inline : Chained('attachment') Args(0) {
     }
     $photo->make_inline unless -f $att->inline_filename;
     my $io_file = IO::File->new( $att->inline_filename )
-        or detach('default');
+        or $c->detach('default');
     $io_file->binmode;
 
     $c->res->output( $io_file );
