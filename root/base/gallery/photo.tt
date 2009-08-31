@@ -38,11 +38,11 @@
     [% END %]
 </div>
 
+[%+ IF c.user.obj.can_edit(page)  # FIXME: inline editing needs to be formatted same as viewing the element.%]
 <script type="text/javascript"><!--
-    [%+ IF c.user.obj.can_edit(page) # FIXME: inline editing needs to be formatted same as viewing the element.%]
     $('#title').editInPlace({ show_buttons: true, url: '[% c.uri_for('gallery/title',photo.id) %]'});
     $('#description').editInPlace({ show_buttons: true, url: '[% c.uri_for('gallery/description',photo.id) %]',field_type:'textarea'});
-    [%+ END %]
 --></script>
+[%+ END %]
 
 [% END # WRAPPER %]
