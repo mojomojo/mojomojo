@@ -53,63 +53,6 @@ MojoMojo::Schema::Result::Page
 
 =cut
 
-sub tagged_descendants_by_date {
-    my ( $self, $tag ) = @_;
-    my (@pages) = $self->result_source->resultset->search(
-        {
-            'ancestor.id' => $self->id,
-            'tag'         => $tag,
-            -or           => [
-                'me.id' => \'=ancestor.id',
-                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
-            ],
-            'me.id'           => \'=tag.page',
-            'content.page'    => \'=me.id',
-            'content.version' => \'=me.content_version',
-        },
-        {
-            group_by => [ ('me.id') ],
-            from     => "page as me, page as ancestor, tag, content",
-            order_by => 'content.created DESC',
-        }
-    );
-    return $self->result_source->resultset->set_paths(@pages);
-}
-
-=head2 tagged_descendants($tag)
-
-Return descendants with the given tag.
-
-=cut
-
-sub tagged_descendants {
-    my ( $self, $tag ) = @_;
-    my (@pages) = $self->result_source->resultset->search(
-        {
-            'ancestor.id' => $self->id,
-            'tag'         => $tag,
-            -or           => [
-                'me.id' => \'=ancestor.id',
-                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
-            ],
-
-            'me.id'           => \'=tag.page',
-            'content.page'    => \'=me.id',
-            'content.version' => \'=me.content_version',
-        },
-        {
-            distinct => 1,
-            from     => "page as me, page as ancestor, tag, content",
-            order_by => 'me.name',
-        }
-    )->all;
-    return $self->result_source->resultset->set_paths(@pages);
-}
-
-# update_content: this whole method may need work to deal with workflow.
-# maybe it can't even be called if the site uses workflow...
-# may need fixing for better conflict handling, too. maybe use a transaction?
-
 =head2 update_content <%args>
 
 Create a new content version for this page.
@@ -117,6 +60,10 @@ Create a new content version for this page.
 %args is each column of L<MojoMojo::Schema::Result::Content>.
 
 =cut
+
+# update_content: this whole method may need work to deal with workflow.
+# maybe it can't even be called if the site uses workflow...
+# may need fixing for better conflict handling, too. maybe use a transaction?
 
 sub update_content {
     my ( $self, %args ) = @_;
@@ -153,39 +100,66 @@ sub update_content {
 
 }    # end sub update_content
 
-=head2 descendants_by_date
+=head2 tagged_descendants($tag)
 
-  @descendants = $page->descendants_by_date;
-
-Like L</descendants>, but returns pages sorted by the dates of their
-last content release dates and pages results (20 per page).
+Return descendants with the given tag, ordered by name.
 
 =cut
 
-sub descendants_by_date {
-    my $self  = shift;
-    my @pages = $self->result_source->resultset->search(
+sub tagged_descendants {
+    my ( $self, $tag ) = @_;
+    my (@pages) = $self->result_source->resultset->search(
         {
-            'ancestor.id'     => $self->id,
-            'content.page'    => \'= me.id',
-            'content.version' => \'= me.content_version',
-            -or               => [
-                -and => [
-                    'me.lft' => \'> ancestor.lft',
-                    'me.rgt' => \'< ancestor.rgt'
-                ],
-                'ancestor.id' => \'= me.id',
-            ]
+            'ancestor.id' => $self->id,
+            'tag'         => $tag,
+            -or           => [
+                'me.id' => \'=ancestor.id',
+                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
+            ],
+
+            'me.id'           => \'=tag.page',
+            'content.page'    => \'=me.id',
+            'content.version' => \'=me.content_version',
         },
         {
-            rows     => 20,
-            page     => 1,
-            from     => 'page as me, page as ancestor, content',
-            order_by => 'content.created DESC'
+            distinct => 1,
+            from     => "page as me, page as ancestor, tag, content",
+            order_by => 'me.name',
+        }
+    )->all;
+    return $self->result_source->resultset->set_paths(@pages);
+}
+
+=head2 tagged_descendants_by_date
+
+Return descendants with the given tag, ordered by creation time, most
+recent first.
+
+=cut
+
+sub tagged_descendants_by_date {
+    my ( $self, $tag ) = @_;
+    my (@pages) = $self->result_source->resultset->search(
+        {
+            'ancestor.id' => $self->id,
+            'tag'         => $tag,
+            -or           => [
+                'me.id' => \'=ancestor.id',
+                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
+            ],
+            'me.id'           => \'=tag.page',
+            'content.page'    => \'=me.id',
+            'content.version' => \'=me.content_version',
+        },
+        {
+            group_by => [ ('me.id') ],
+            from     => "page as me, page as ancestor, tag, content",
+            order_by => 'content.created DESC',
         }
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
+
 
 
 =head2 descendants
@@ -224,6 +198,41 @@ sub descendants {
     return wantarray?
         $self->result_source->resultset->set_paths($rs->all)
       : $rs
+}
+
+
+=head2 descendants_by_date
+
+  @descendants = $page->descendants_by_date;
+
+Like L</descendants>, but returns pages sorted by the dates of their
+last content release dates and pages results (20 per page).
+
+=cut
+
+sub descendants_by_date {
+    my $self  = shift;
+    my @pages = $self->result_source->resultset->search(
+        {
+            'ancestor.id'     => $self->id,
+            'content.page'    => \'= me.id',
+            'content.version' => \'= me.content_version',
+            -or               => [
+                -and => [
+                    'me.lft' => \'> ancestor.lft',
+                    'me.rgt' => \'< ancestor.rgt'
+                ],
+                'ancestor.id' => \'= me.id',
+            ]
+        },
+        {
+            rows     => 20,
+            page     => 1,
+            from     => 'page as me, page as ancestor, content',
+            order_by => 'content.created DESC'
+        }
+    );
+    return $self->result_source->resultset->set_paths(@pages);
 }
 
 
