@@ -155,7 +155,7 @@ sub edit : Global FormConfig {
             return;
         }
         # Format content body and store the result in content.precompiled 
-        # This gives "go juice" to MojoMojo page delivery.
+        # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
         MojoMojo->call_plugins( 'format_content', \$precompiled_body, $c, $page );
         $valid->{'precompiled'} = $precompiled_body;
@@ -174,10 +174,6 @@ sub edit : Global FormConfig {
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq $c->localize('Save') ) {
             $redirect .= '.edit';
-            if ( $c->req->params->{split} &&
-                 $c->req->params->{'split'} eq 'vertical' ) {
-                $redirect .= '?split=vertical';
-            }
         }
         $c->res->redirect($redirect);
     }
