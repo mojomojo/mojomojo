@@ -17,7 +17,23 @@ Controller for page photo galleries.
 
 =head1 METHODS
 
-=head2 default ( .gallery )
+=cut
+
+=head2 default
+
+Private action to return a 404 not found page.
+
+=cut
+
+sub default : Private {
+    my ( $self, $c ) = @_;
+    $c->stash->{template} = 'message.tt';
+    $c->stash->{message}  ||= $c->loc('Photo not found');
+    return ( $c->res->status(404) );
+}
+
+
+=head2 gallery ( .gallery )
 
 Show a gallery page for the current node.
 
@@ -39,7 +55,7 @@ sub gallery : Path {
 
 =head2 by_tag ( .gallery/by_tag )
 
-show a gallery by a given tag. Will also show photos in the
+Show a gallery by a given tag. Will also show photos in the
 descendants of the page with the given tag.
 
 =cut
@@ -47,6 +63,11 @@ descendants of the page with the given tag.
 sub by_tag : Local {
     my ( $self, $c, $tag, $page ) = @_;
     $tag = $c->model("DBIC::Tag")->search( tag => $tag )->next;
+    if (not $tag) {
+        $c->stash->{message} = $c->loc('Tag not found');
+        $c->detach('default');
+    }
+    
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{tag}      = $tag->tag;
     my $conditions = { 'tags.tag' => $tag->tag };
@@ -64,13 +85,16 @@ sub by_tag : Local {
     );
 }
 
-=head2 p ( .p )
+=head2 photo ( .photo/<id> )
+
+Show a gallery photo page.
 
 =cut
 
 sub photo : Global {
     my ( $self, $c, $photo ) = @_;
-    $photo = $c->model("DBIC::Photo")->find($photo);
+    $photo = $c->model("DBIC::Photo")->find($photo)
+        or $c->detach('default');
     $c->stash->{photo} = $photo;
     $c->forward('inline_tags');
     $c->stash->{template} = 'gallery/photo.tt';
@@ -78,15 +102,16 @@ sub photo : Global {
     $c->stash->{prev}     = $photo->previous_sibling;
 }
 
-=head2 ( /p_by_tag/\d+ )
+=head2 ( /photo_by_tag/<id> )
 
-show a picture in tag gallery.
+Show a picture in tag gallery.
 
 =cut
 
 sub photo_by_tag : Global {
     my ( $self, $c, $tag, $photo ) = @_;
-    $photo             = $c->model("DBIC::Photo")->find($photo);
+    $photo             = $c->model("DBIC::Photo")->find($photo)
+        or $c->detach('default');
     $c->stash->{photo} = $photo;
     $c->stash->{tag}   = $tag;
     $c->forward('inline_tags');
@@ -97,7 +122,7 @@ sub photo_by_tag : Global {
 
 =head2 submittag ( /gallery/submittag )
 
-Add a tag through form submit
+Add a tag through form submit.
 
 =cut
 
@@ -108,7 +133,8 @@ sub submittag : Local {
 
 =head2 tag ( /.jsrpc/tag )
 
-add a tag to a page. return list of yours and popular tags.
+Add a tag to a page. Forwards to
+L<< inline_tags|/inline_tags ( .gallery/tags ) >>.
 
 =cut
 
@@ -140,7 +166,8 @@ sub tag : Local {
 
 =head2 untag ( .gallery/untag )
 
-Remove a tag from a page. Return a list of yours and popular tags.
+Remove a tag from a page. Forwards to
+L<< inline_tags|/inline_tags ( .gallery/tags ) >>.
 
 =cut
 
@@ -158,8 +185,8 @@ sub untag : Local {
 
 =head2 inline_tags ( .gallery/tags )
 
-Make a list of yours and popular tags, or just popular ones if no
-user is logged in.
+Make a list of the user's tags and popular tags, or just popular tags
+if no user is logged in.
 
 =cut
 
@@ -190,7 +217,8 @@ AJAX method for updating picture descriptions inline.
 
 sub description : Local {
     my ( $self, $c, $photo ) = @_;
-    my $img = $c->model("DBIC::Photo")->find($photo);
+    my $img = $c->model("DBIC::Photo")->find($photo)
+        or $c->detach('default');
     if ( $c->req->param('update_value') ) {
         $img->description( $c->req->param('update_value') );
         $img->update;
@@ -206,7 +234,8 @@ AJAX method for updating picture titles inline.
 
 sub title : Local {
     my ( $self, $c, $photo ) = @_;
-    my $img = $c->model("DBIC::Photo")->find($photo);
+    my $img = $c->model("DBIC::Photo")->find($photo)
+        or $c->detach('default');
     if ( $c->req->param('update_value') ) {
         $img->title( $c->req->param('update_value') );
         $img->update;
