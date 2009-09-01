@@ -106,6 +106,28 @@ __PACKAGE__->has_many(
 
 =cut
 
+=head2 latest_version
+
+Return the L<PageVersion|MojoMojo::Schema::Result::PageVersion> object
+having the latest version of this page.
+
+=cut
+
+sub latest_version {
+    my $self = shift;
+    my $latest = $self->result_source->resultset->search(
+        {
+            page => $self->page->id
+        },
+        {
+            order_by => 'version DESC',
+            rows => 1
+        }    
+    )->single;
+    
+    return $latest;
+}
+
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>
