@@ -100,6 +100,65 @@ sub update_content {
 
 }    # end sub update_content
 
+=head2 add_version
+
+    my $page_version_new = $page->add_version(
+        creator => $user_id,
+        name_orig => $page_new_name,
+    );
+
+Arguments: %replacementdata
+
+Returns: The new L<PageVersion|MojoMojo::Schema::Result::PageVersion>
+object.
+    
+Creates a new page version by cloning the latest version (hence pointing
+to the same content), and replacing its values with data in the replacement
+hash.
+
+Used for renaming pages.
+
+=cut
+
+sub add_version {
+    my ( $self, %args ) = @_;
+    my $now = DateTime->now;
+
+    my $page_version_last = $self->page_version->latest_version();
+    
+    # clone the last version and update fields passed in %args
+    my %page_version_data = map {
+        exists $args{$_}
+      ? ( $_ => $args{$_} )
+      : ( $_ => $page_version_last->$_ )
+    } $self->result_source->related_source('page_version')->columns;
+    
+    delete $args{creator};  # creator is a field in page_version, not in page
+
+    # for the new version, set the version number, status, and release date
+    @page_version_data{qw/
+          version                           status     release_date/} =
+        ( $page_version_last->version + 1, 'released', $now );
+
+    my $page_version_new;
+    # commit the new version to the database and update the previously last version to indicate its removal
+    $self->result_source->schema->txn_do(sub {
+    
+        $page_version_new = 
+            $self->result_source->related_source('page_version')->resultset->create( \%page_version_data );
+        
+        $page_version_last->update({
+            remove_date => $now,
+            status => 'removed',
+            comments => 'Replaced by version ' . $page_version_data{version}
+        });
+        
+        $self->update(\%args);
+    });
+    
+    return $page_version_new;
+}
+
 =head2 tagged_descendants($tag)
 
 Return descendants with the given tag, ordered by name.
