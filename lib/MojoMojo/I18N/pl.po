@@ -327,7 +327,7 @@ msgstr "Nie mogę pobrać"
 #. ($url)
 #: lib/MojoMojo/Formatter/Include.pm:62
 msgid "Could not retrieve x"
-msgstr ""
+msgstr "Nie mogę pobrać %1"
 
 #: root/base/admin/create_role.tt:10
 msgid "Create Role"
@@ -1414,15 +1414,15 @@ msgstr "Kwadrat"
 
 #: root/base/edithelp/markdown.tt:60 root/base/edithelp/markdown.tt:61 root/base/edithelp/markdown.tt:65 root/base/edithelp/markdown.tt:66 root/base/edithelp/markdown.tt:67
 msgid "Sub Header"
-msgstr ""
+msgstr "Nagłówek niższego rzędu"
 
 #: root/base/page/list.tt:45
 msgid "Sub Page Tools"
-msgstr ""
+msgstr "Narzędzia podstron"
 
 #: root/base/edithelp/markdown.tt:71 root/base/edithelp/markdown.tt:75 root/base/edithelp/markdown.tt:76
 msgid "Sub Sub ... Header"
-msgstr ""
+msgstr "Jeszcze niższy nagłówek"
 
 #: root/base/navbar.tt:45
 msgid "Sub pages"
