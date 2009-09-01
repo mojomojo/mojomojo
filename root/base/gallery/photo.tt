@@ -31,7 +31,7 @@
     </div>
     <div class="photo">
         <a href="[% c.uri_for('attachment',photo.id) %]" title="[% loc('Click for original version') %]">
-            <img width="700" src="[% c.uri_for('attachment',photo.id,'inline') %]">
+            <img src="[% c.uri_for('attachment',photo.id,'inline') %]">
         </a>
     </div>
     <p id="description" >[% photo.description.remove('^\s+$') || loc('no description') | html %]<p>
