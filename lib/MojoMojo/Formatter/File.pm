@@ -97,7 +97,7 @@ sub format_content {
   my $is_image = 0;
   foreach my $line (@lines) {
 
-    if ( $line =~ m|<p>{{file\s*(\w+)\s*(.*)}}</p>| ) {
+    if ( $line =~ m|{{file\s*(\w+)\s*(.*)}}.*| ) {
       my $plugin=$1; # DocBook, Pod, ...
       my $file=$2;   # File, Attachment
 
@@ -176,7 +176,7 @@ sub format {
   $text = Encode::decode('utf-8', $text);
 
   my $plugin = __PACKAGE__ . "::$pluginname";
-  return $plugin->to_xhtml($text) . "\n";
+  return $plugin->to_xhtml($text,$file) . "\n";
 }
 
 
