@@ -9,6 +9,8 @@
 [% WRAPPER page/wrapper.tt title = loc('Page info for x', page.path) %]
 <div id="content">
 
+<h2 id="title" class="editable">[% page.name_orig | html %]</h2>
+
 <h3>[% loc( 'x revisions', page.versions_rs.count )%]:</h3>
 
 <table id="revisions">
@@ -79,4 +81,11 @@
 [% END %]
 
 </div>
+
+[%+ IF c.user.obj.can_edit(page)  # FIXME: inline editing needs to be formatted same as viewing the element.%]
+<script type="text/javascript"><!--
+    $('#title').editInPlace({ show_buttons: true, url: '[% c.uri_for('info/title') %]'});
+--></script>
+[%+ END %]
+
 [% END # WRAPPER %]

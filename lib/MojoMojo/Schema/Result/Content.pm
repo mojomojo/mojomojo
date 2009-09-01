@@ -7,7 +7,7 @@ use parent qw/MojoMojo::Schema::Base::Result/;
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Content
+MojoMojo::Schema::Result::Content - Versioned page content
 
 =head1 DESCRIPTION
 
