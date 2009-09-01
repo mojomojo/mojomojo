@@ -276,14 +276,19 @@ sub precompile_pages : Global {
         my @path_pages = $c->model('DBIC::Page')->path_pages_by_id( $page->id );
         my @node_names = map { $_->name } @path_pages;
         my $path       = join( '/', @node_names );
+        
         # Collapse leading '//' into '/' since '/' is first in path
         # since we just joined with '/'.
         $path =~ s{^//}{/};
         $c->stash->{path} = $path;
 
         $c->call_plugins( "format_content", \$body, $c, $page );
+        $body = '' if $c->stash->{precompile_off};
         $content_record->precompiled($body);
         $content_record->update;
+        
+        # Reset precompile_off
+        $c->stash->{precompile_off} = 0;
     }
 
     $c->response->body('Precompile Done.');

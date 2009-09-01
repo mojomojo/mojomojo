@@ -32,7 +32,10 @@ context object.
 sub format_content {
     my ( $class, $content, $c, $self ) = @_;
     my $re=$class->gen_re('comments');
-    $$content =~ s|$re|show_comments($c,$c->stash->{page})|xme;
+    if ( $$content =~ s|$re|show_comments($c,$c->stash->{page})|xme ) {
+        # We don't want to precompile a page with comments so turn it off
+        $c->stash->{precompile_off} = 1;
+    }
 }
 
 =head2 show_comments

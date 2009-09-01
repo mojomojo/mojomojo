@@ -173,7 +173,9 @@ sub edit : Global FormConfig {
         # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
         MojoMojo->call_plugins( 'format_content', \$precompiled_body, $c, $page );
-        $valid->{'precompiled'} = $precompiled_body;
+        
+        # Make precompiled empty when we have any of: redirect, comment or include
+        $valid->{'precompiled'} = $c->stash->{precompile_off} ? '' : $precompiled_body;
 
         $page->update_content(%$valid);
 

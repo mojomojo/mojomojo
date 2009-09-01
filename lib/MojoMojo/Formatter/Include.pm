@@ -37,7 +37,10 @@ sub format_content {
     my ( $class, $content, $c ) = @_;
     return unless $class->module_loaded;
     my $re=$class->gen_re(qr/(http\:\/\/[^}]+)/);
-    $$content =~ s|$re|$class->include( $c, $1 )|meg;
+    if ( $$content =~ s|$re|$class->include( $c, $1 )|meg ) {
+        # We don't want to precompile a page with comments so turn it off
+        $c->stash->{precompile_off} = 1;
+    }
 }
 
 =head2 include <c> <url>
