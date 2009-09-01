@@ -24,7 +24,7 @@
             [% active=user.active ? 'yes' : 'no' %]
             <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
             <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
-            <td>[% role.name FOR role=user.roles %]</td>
+            <td>[% FOR role=user.roles %] [% role.name %] [% END %]</td>
             <td>[% user.name %]</td>
             <td>
                 [% IF user.email %]
