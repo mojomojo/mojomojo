@@ -47,7 +47,11 @@ sub format_content {
         } elsif ($c->action->name eq 'render') {
             $$content=$c->loc("redirect to")." ".$page;
         }
+        # We don't want to precompile a redirected page so turn it off
+        $c->stash->{precompile_off} = 1;
     }
+    
+
 }
 
 =head1 SEE ALSO

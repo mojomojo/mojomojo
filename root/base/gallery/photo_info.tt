@@ -1,6 +1,6 @@
 <h3>[% loc('Exif Data') %]</h3>
 <dl>
-    <dt>[% loc('Taken') %]:</dt><dd>[% IF photo.taken %][% photo.taken.replace('T',' ') %][% ELSE %][% loc('not specified') %][% END %]</dd>
+    <dt>[% loc('Taken') %]:</dt><dd>[% IF photo.taken %][% USE taken=String(photo.taken); taken.replace('T',' ') %][% ELSE %][% loc('not specified') %][% END %]</dd>
     <dt>[% loc('Camera') %]:</dt><dd>[% photo.camera || loc('not specified') %]</dd>
     <dt>[% loc('Lens') %]:</dt><dd>[% photo.lens.replace('\.\d+mm$','mm') || loc('not specified') %]</dd>
     <dt>[% loc('ISO') %]:</dt><dd>[% photo.iso|| loc('not specified') %]</dd>

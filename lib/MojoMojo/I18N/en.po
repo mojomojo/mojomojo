@@ -139,12 +139,12 @@ msgstr ""
 msgid "Anonymous Coward"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:96
-msgid "Anonymous Edit disabled"
-msgstr ""
-
 #: root/forms/admin/settings.yml:23
 msgid "Anonymous User (blank to disable)"
+msgstr ""
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:112
+msgid "Anonymous edit disabled"
 msgstr ""
 
 #: root/base/edithelp.tt:4
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Attachment allowed by default"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Attachment.pm:150
+#: lib/MojoMojo/Controller/Attachment.pm:58
 msgid "Attachment not found."
 msgstr ""
 
@@ -223,7 +223,7 @@ msgstr ""
 msgid "Can only make thumbnails of photos"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:82
+#: lib/MojoMojo/Controller/Admin.pm:87
 msgid "Cant find admin user: "
 msgstr ""
 
@@ -292,7 +292,7 @@ msgid "Could not authenticate that login."
 msgstr ""
 
 #. ($file)
-#: lib/MojoMojo/Controller/Attachment.pm:100
+#: lib/MojoMojo/Controller/Attachment.pm:114
 msgid "Could not create attachment from x"
 msgstr "Could not create attachment from %1"
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "Download a zip with all the pages in this wiki"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:154
+#: lib/MojoMojo/Controller/PageAdmin.pm:169
 msgid "END OF CONFLICT"
 msgstr ""
 
@@ -820,9 +820,10 @@ msgstr "No help yet for %1"
 msgid "No members added yet."
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:40
-msgid "No permissions to edit this page"
-msgstr ""
+#. ($operation || $c->loc('update')
+#: lib/MojoMojo/Controller/PageAdmin.pm:36
+msgid "No permissions to x this page"
+msgstr "No permissions to %1 this page"
 
 #: root/base/user/list.tt:14
 msgid "No recent changes"
@@ -853,7 +854,7 @@ msgstr ""
 msgid "Normal paragraph"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Wiki.pm:287 root/base/page/list.tt:72
+#: lib/MojoMojo/Formatter/Wiki.pm:315 root/base/page/list.tt:72
 msgid "Not found. Click to create this page."
 msgstr ""
 
@@ -932,14 +933,18 @@ msgid "Password must be between 4 and 14 chars"
 msgstr ""
 
 #. ($c->stash->{page}->name)
-#: lib/MojoMojo.pm:736
+#: lib/MojoMojo.pm:666
 msgid "Permission Denied to view x"
 msgstr "Permission Denied to view %1"
 
-#. ([ $loc_permtocheck, $name ])
-#: lib/MojoMojo/Controller/PageAdmin.pm:91
+#:
 msgid "Permission Denied to x x"
 msgstr "Permission Denied to %1 %2"
+
+#. ([ $loc_permtocheck, $name ])
+#: lib/MojoMojo/Controller/PageAdmin.pm:107
+msgid "Permission denied to x x"
+msgstr ""
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -951,6 +956,10 @@ msgstr ""
 
 #: root/base/navbar.tt:40
 msgid "Photo Album"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Gallery.pm:31
+msgid "Photo not found"
 msgstr ""
 
 #: root/base/page/info.tt:64
@@ -1091,7 +1100,7 @@ msgstr ""
 msgid "Restrict user editing to home directory"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:28
+#: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
 msgstr ""
 
@@ -1145,7 +1154,7 @@ msgstr ""
 msgid "Rolled Back (Current: x)"
 msgstr "Rolled Back (Current: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:170 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:102 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
+#: lib/MojoMojo/Controller/PageAdmin.pm:190 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:102 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
 msgid "Save"
 msgstr ""
 
@@ -1262,7 +1271,7 @@ msgstr ""
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:142
+#: lib/MojoMojo/Controller/PageAdmin.pm:157
 msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
 msgstr ""
 
@@ -1301,12 +1310,16 @@ msgstr ""
 msgid "Switch to flash uploader"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:152
+#: lib/MojoMojo/Controller/PageAdmin.pm:167
 msgid "THEIR CHANGES"
 msgstr ""
 
 #: root/base/edithelp/textile.tt:51
 msgid "Table"
+msgstr ""
+
+#: lib/MojoMojo/Controller/Gallery.pm:67
+msgid "Tag not found"
 msgstr ""
 
 #: root/base/navbar.tt:11 root/base/page/list.tt:49 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
@@ -1388,7 +1401,7 @@ msgstr ""
 msgid "Updated preferences"
 msgstr ""
 
-#: lib/MojoMojo/Controller/Admin.pm:106
+#: lib/MojoMojo/Controller/Admin.pm:114
 msgid "Updated successfully."
 msgstr ""
 
@@ -1483,7 +1496,7 @@ msgstr ""
 msgid "Write"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:153
+#: lib/MojoMojo/Controller/PageAdmin.pm:168
 msgid "YOUR CHANGES"
 msgstr ""
 
@@ -1649,7 +1662,7 @@ msgstr ""
 msgid "confirmation message resent"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:87 root/base/page/permissions.tt:36 root/base/page/permissions.tt:51
+#: lib/MojoMojo/Controller/PageAdmin.pm:99 root/base/page/permissions.tt:36 root/base/page/permissions.tt:51
 msgid "create"
 msgstr ""
 
@@ -1673,7 +1686,7 @@ msgstr ""
 msgid "download"
 msgstr ""
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:87
+#: lib/MojoMojo/Controller/PageAdmin.pm:100 lib/MojoMojo/Controller/PageAdmin.pm:52
 msgid "edit"
 msgstr ""
 
@@ -1879,6 +1892,10 @@ msgstr ""
 
 #: root/base/admin/user.tt:15
 msgid "roles"
+msgstr ""
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:310
+msgid "rollback"
 msgstr ""
 
 #: root/base/message.tt:4

@@ -25,7 +25,7 @@
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.form.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.livequery.js')%]"></script>
-    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.inplace.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/jquery.editinplace.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.cookies.2.0.1.min.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
@@ -46,4 +46,3 @@
 <body id="page">
 <div id="container" class="container[% c.session.maximize_width ? ' maximized-container' : '' %]">
 [% PROCESS top.tt %]
-

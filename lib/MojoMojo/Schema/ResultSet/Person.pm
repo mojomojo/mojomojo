@@ -18,7 +18,7 @@ Get a person by login.
 
 sub get_person {
     my ( $self, $login ) = @_;
-    my ($person) = $self->search( { login => $login } );
+    return $self->search( { login => $login } )->single;
 }
 
 =head2 get_user
@@ -30,41 +30,6 @@ Same as L</get_person>.
 sub get_user {
     my ( $self, $user ) = @_;
     return $self->search( { login => $user } )->next();
-}
-
-=head2 registration_profile
-
-Returns a L<Data::FormValidator> profile for registration.
-
-=cut
-
-sub registration_profile {
-    my ( $self, $schema ) = @_;
-    return {
-        email => {
-            constraint => 'email',
-            name       => 'Invalid format'
-        },
-        login => [
-            {
-                constraint => qr/^\w{3,10}$/,
-                name       => 'only letters, 3-10 chars'
-            },
-            {
-                constraint => sub { $self->user_free( $schema, @_ ) },
-                name       => 'Username taken'
-            }
-        ],
-        name => {
-            constraint => qr/^\S+\s+\S+/,
-            name       => 'Full name please'
-        },
-        pass => {
-            constraint => \&pass_matches,
-            params     => [qw( pass confirm)],
-            name       => "Password doesn't match"
-        }
-    };
 }
 
 =head2 user_free

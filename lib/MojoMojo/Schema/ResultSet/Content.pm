@@ -28,12 +28,9 @@ sub format_content {
     return $content;
 }
 
-# create_proto: create a "proto content version" that may
-# be the basis for a new revision
-
 =head2 create_proto <page>
 
-Create a content prototype object, as the basis for a new revision.
+Create a content prototype hash, as the basis for a new revision.
 
 =cut
 

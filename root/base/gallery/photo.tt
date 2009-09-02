@@ -16,7 +16,7 @@
 
 <div id="content">
     [% IF photo %]
-    <h2 id="title">[% c.unicode(photo.title) %]</span></h2>
+    <h2 id="title">[% photo.title | html %]</span></h2>
     <div class="navigation" id="nav">
     [% IF prev %]
         <a href="[% c.uri_for('photo') %][% IF tag%]_by_tag/[% tag%][% END%]/[% prev.id%]#nav">&lt;</a>
@@ -31,18 +31,18 @@
     </div>
     <div class="photo">
         <a href="[% c.uri_for('attachment',photo.id) %]" title="[% loc('Click for original version') %]">
-            <img width="700" src="[% c.uri_for('attachment',photo.id,'inline') %]">
+            <img src="[% c.uri_for('attachment',photo.id,'inline') %]">
         </a>
     </div>
-    <p id="description" >[% photo.description.remove('^\s+$') || loc('no description') %]<p>
+    <p id="description" >[% photo.description.remove('^\s+$') || loc('no description') | html %]<p>
     [% END %]
 </div>
 
+[%+ IF c.user.obj.can_edit(page)  # FIXME: inline editing needs to be formatted same as viewing the element.%]
 <script type="text/javascript"><!--
-    [%+ IF c.user.obj.can_edit(page) # FIXME: inline editing needs to be formatted same as viewing the element.%]
-    $('#title').editInPlace({ url: '[% c.uri_for('gallery/title',photo.id) %]'});
-    $('#description').editInPlace({ url: '[% c.uri_for('gallery/description',photo.id) %]',field_type:'textarea'});
-    [%+ END %]
+    $('#title').editInPlace({ show_buttons: true, url: '[% c.uri_for('gallery/title',photo.id) %]'});
+    $('#description').editInPlace({ show_buttons: true, url: '[% c.uri_for('gallery/description',photo.id) %]',field_type:'textarea'});
 --></script>
+[%+ END %]
 
 [% END # WRAPPER %]

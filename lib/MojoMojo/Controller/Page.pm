@@ -296,9 +296,6 @@ sub list : Global {
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
 
-    # Cache the list page for short period of time - override default of 300.
-    $c->cache_page( $c->config->{'Plugin::PageCache'}{page_cache_short_life} );
-
     my $rs = $page->descendants($resultset_page);
     $c->stash->{pager} = $rs->pager;
     my @all_pages_viewable = $rs->all;
@@ -365,9 +362,6 @@ sub recent : Global {
         @pages_viewable = pages_viewable( $c, $user, @pages_viewable );
     }
     $c->stash->{pages} = \@pages_viewable;
-
-    # Cache the list page for short period of time - override default of 300.
-    $c->cache_page( $c->config->{'Plugin::PageCache'}{page_cache_short_life} );
 
     # FIXME - needs to be populated even without tags
 }

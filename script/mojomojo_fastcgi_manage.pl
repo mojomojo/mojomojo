@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 eval { use FCGI::Engine::Manager };
-if ($@) { print "You need to install FCGI::Engine to run this script\n"; }
+if ($@) { die "You need to install FCGI::Engine to run this script\n"; }
 
 my $m =
   FCGI::Engine::Manager->new( conf => 'script/mojomojo_fastcgi_manage.yml' );

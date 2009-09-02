@@ -22,7 +22,7 @@
       [%- IF render == 'highlight' +%]
         [%+ content.highlight(c) %]
       [% ELSE +%]
-        [%+ content.formatted(c) %]
+        [%+ content.precompiled || content.formatted(c) %]
       [% END %]
     </div>
 

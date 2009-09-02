@@ -205,7 +205,7 @@ msgstr "akapit wyrównany do lewej"
 
 #: root/static/js/edit.js:164 root/static/js/edit.js:183
 msgid "linked text"
-msgstr ""
+msgstr "opis linku"
 
 #: root/static/js/wiki.js:479
 msgid "maximize"

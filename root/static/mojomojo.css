@@ -585,14 +585,8 @@ input.dual:focus, textarea.dual:focus {
     margin: 0.1em;
 }
 
-#title input {
-    font-size: 1em;
-}
 big {
     font-size: 1.6em;
-}
-#description textarea,small {
-    font-size: 0.9em;
 }
 
 .framedpopup {
@@ -780,10 +774,6 @@ acronym {
     border-bottom: 1px dotted !important;
 }
 
-.inplaceeditor-form input {
-    margin: 0px 10px 0px 0px;
-}
-
 a.footnote {
     vertical-align: .6em;
     font-size: 75%;
@@ -795,12 +785,8 @@ a.footnote:after {
     content: "]"
 }
 
-.inplaceeditor-form a {
-    border: 1px solid black;
-    background: #eee;
-    padding: 5px 6px 1px 6px;
-    margin: 0px 0px 0px 0px;
-    text-decoration: none;
+.inplace_field, .inplace_save, .inplace_cancel {
+    font-size: 1em;
 }
 
 #title {
@@ -1221,9 +1207,9 @@ li.tabnav {
 }
 
 #nonexistent_pages {
-	font-size:1.666em; 
-	background-color:lightyellow; 
-	border:1px solid black; 
-	padding: 5px; 
-	max-width: 25em;
+    font-size: 1.666em; 
+    background-color: lightyellow; 
+    border: 1px solid black; 
+    padding: 5px; 
+    max-width: 25em;
 }
