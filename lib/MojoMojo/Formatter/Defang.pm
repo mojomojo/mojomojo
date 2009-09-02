@@ -62,11 +62,16 @@ sub defang_url_callback {
         $html_r )
       = @_;
 
-    # Explicitly allow this URL in tag attributes or stylesheets
-    return 0 if $$attr_val_r =~ /youtube.com/i;
+    # Do not allow javascript to start a URL in tag attributes or stylesheets
+    return 1 if $$attr_val_r =~ /^javascript/i;
+    # Do not allow bypassing of protocol
+    return 1 if $$attr_val_r =~ m{^//}i;
 
     # Explicitly defang this URL in tag attributes or stylesheets
     return 1 if $$attr_val_r =~ /youporn.com/i;
+    
+    # Allow URL's otherwise
+    return 0;
 }
 
 =head2 defang_css_callback
@@ -158,7 +163,6 @@ sub defang_attribs_callback {
             return 2;
         }
     }
-
     return 0;
 }
 
@@ -179,7 +183,7 @@ sub format_content {
         tags_callback       => \&defang_tags_callback,
         url_callback        => \&defang_url_callback,
         css_callback        => \&defang_css_callback,
-        attribs_to_callback => [qw(src value)],
+        attribs_to_callback => [qw(src value title)],
         attribs_callback    => \&defang_attribs_callback,
     );
 

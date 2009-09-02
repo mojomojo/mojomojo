@@ -68,7 +68,7 @@ sub edit : Global FormConfig {
     my $stash = $c->stash;
     $stash->{template} = 'page/edit.tt';
 
-    my $user_id = $c->user_exists ? $c->user->obj->id : 1;  # Anon edit
+    my $user_id = $c->user_exists ? $c->user->obj->id : 1;    # Anon edit
 
     my ( $path_pages, $proto_pages ) = @$stash{qw/ path_pages proto_pages /};
 
@@ -173,7 +173,9 @@ sub edit : Global FormConfig {
         # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
         MojoMojo->call_plugins( 'format_content', \$precompiled_body, $c, $page );
-        $valid->{'precompiled'} = $precompiled_body;
+        
+        # Make precompiled empty when we have any of: redirect, comment or include
+        $valid->{'precompiled'} = $c->stash->{precompile_off} ? '' : $precompiled_body;
 
         $page->update_content(%$valid);
 
@@ -322,38 +324,6 @@ sub rollback : Global {
     }
 }
 
-=head2 title ( .info/title )
-
-AJAX method for renaming a page. Creates a new 
-L<PageVersion|MojoMojo::Schema::Result::PageVersion> with the rename,
-so that the renaming itself could in the future be shown in the page
-history.
-
-=cut
-
-sub title : Path('/info/title') {
-    my ( $self, $c ) = @_;
-    my $page = $c->stash->{page};
-    my $user_id = $c->user_exists ? $c->user->obj->id : 1;  # Anon edit
-    
-    if ($c->req->method ne 'POST') {
-        # general error - we want a POST
-        $c->res->status(400);
-        $c->detach('unauthorized', [$c->loc('rename via non-POST method')]);
-    }
-    
-    if ( $c->req->param('update_value') ) {
-        my $page_version_new = $page->add_version(
-            creator => $user_id,
-            name_orig => $c->req->param('update_value'),
-        );
-        $c->res->body( $page_version_new->name_orig );
-    } else {
-        # User attempted to rename the page to ''. Deny that.
-        $c->res->body( $page->name_orig );
-    }    
-    
-}
 =head1 AUTHOR
 
 Marcus Ramberg <mramberg@cpan.org>

@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use MojoMojo::Formatter::Defang;
-use Test::More tests => 10;
+use Test::More tests => 11;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -83,16 +83,12 @@ $expected =
 MojoMojo::Formatter::Defang->format_content( \$content );
 eq_or_diff( $content, $expected, $test );
 
-TODO: {
-    local $TODO = 'Are we concerned about by passing protocol in href?';
-    $test    = 'Protocol Resolution Bypass a href';
-    $content = <<'HTML';
-<A HREF="//www.google.com/">XSS</A>
-HTML
-    $expected = "NOT SURE WHAT TO EXPECT";
-    MojoMojo::Formatter::Defang->format_content( \$content );
-    eq_or_diff( $content, $expected, $test );
-}
+$test    = 'Protocol Resolution Bypass a href';
+$content = '<A HREF="//www.google.com/">XSS</A>';
+$expected = '<A defang_HREF="//www.google.com/">XSS</A>';
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
+
 
 # This test will fails when allowing img and src at default Defang (return 2) setting.
 $test    = 'Protocol Resolution Bypass img src';
@@ -104,3 +100,8 @@ $expected = '<img defang_src="//ha.ckers.org/xss.js" />
 MojoMojo::Formatter::Defang->format_content( \$content );
 eq_or_diff( $content, $expected, $test );
 
+$test = 'javascript in href';
+$content = "<A HREF='javascript:SomeEvilStuff'>XSS</A>";
+$expected = "<A defang_HREF='javascript:SomeEvilStuff'>XSS</A>";
+MojoMojo::Formatter::Defang->format_content( \$content );
+eq_or_diff( $content, $expected, $test );
