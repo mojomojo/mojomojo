@@ -3,10 +3,10 @@
     title = page.name == '/' ? c.pref("name")
           :                    c.expand_wikilink(page.name_orig);
 
-    title = title _ loc('gallery') _ " - " _ photo.title;
+    title = title _ " " _ loc('gallery') _ " - " _ photo.title;
 
     IF tag;
-        title = title _ '(<a href="' _ c.uri_for('gallery/by_tag',tag) _ '">' _ tag _ '</a>';
+        title = title _ ' (<a href="' _ c.uri_for('gallery/by_tag',tag) _ '">' _ tag _ '</a>)';
     END;
 
     gallery_footer = 1;
