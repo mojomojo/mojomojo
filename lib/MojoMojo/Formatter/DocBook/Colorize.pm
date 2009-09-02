@@ -207,11 +207,12 @@ sub ColorizeCode{
     my @LANGS=$hl->languageList;
 
     # check lang
-    if ( !  grep(/$lang/i, @LANGS) ) {
-        die "Language '$lang' unknown !!! in :\n". "-"x80 . "\n${code}\n" ."-"x80 . "\n" . "Authaurized language : @LANGS\n";
+    my @goodlang = grep(/$lang/i, @LANGS );
+    if ( ! $goodlang[0]  ) {
+        return "{<span class=\"kateError\">Language '$lang' unknown !!! in :\n". "-"x80 . "\n${code}\n" ."-"x80 . "\n" . "Authorized languages : @LANGS</span>";
     }
 
-    $hl->language($lang);
+    $hl->language($goodlang[0]);
     my $result = $hl->highlightText($code);
 
     return $result;
