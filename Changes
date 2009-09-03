@@ -1,6 +1,6 @@
-0.999040
+0.999040 2009-09-04 19:53:00
   
-e - Format content body and store in content.precompile
+  - Format content body and store in content.precompile
     Use this precompiled body when available for page delivery (see page/view.tt).
     /.precompile_pages action for precompiling all page versions.
     This action can take a few minutes for the catalyst wiki (~2000 page versions).
