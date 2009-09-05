@@ -26,7 +26,7 @@ MojoMojo::Model::Search
 =cut
 
 my $invindexer;
-my $analyzer = KinoSearch::Analysis::PolyAnalyzer->new( language => 'en' );
+my $analyzer = KinoSearch::Analysis::PolyAnalyzer->new( language => _get_language() );
 
 sub indexer {
     my $self       = shift;
@@ -124,7 +124,15 @@ sub search {
     );
     my $query = $qp->parse($q);
     my $hits = $self->searcher->search( query => $query );
+
     return $hits;
+}
+
+sub _get_language {
+    my %supported_lang = map { $_ => 1 } qw( en da de es fi fr it nl no pt ru sv );
+    my $default_lang   = __PACKAGE__->config->{default_lang} || MojoMojo->config->{default_lang} || 'en';
+
+    return exists $supported_lang{$default_lang} ? $default_lang : 'en'; 
 }
 
 =head1 AUTHOR
