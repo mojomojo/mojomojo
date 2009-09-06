@@ -87,21 +87,23 @@ pre span.kateFunction { color: #00cc00; }
 div#toplinks {
     position:absolute;
     top:20px;
-    left:50%;
+    left:60%;
     border:2px solid #222;
     max-width:420px;
     font-size: .9em;
     background: #e0e0e0;
-    font-weight: bold;
     color: #000000;
-    padding: 4px 10px 10px;
-    min-height: 1.8em;
+    padding: 4px 10px;
 }
 
 div#toplinks ul li, div#bottomnav ul li {
     display: block;
     float: left;
-    height: 1.5em;
+}
+
+div#bottomnav ul li {
+    min-height: 1.4em;
+    _height: 1.4em;
 }
 
 div#toplinks ul li a, div#bottomnav ul li a, div#bottomnav ul li span.title {
@@ -110,8 +112,12 @@ div#toplinks ul li a, div#bottomnav ul li a, div#bottomnav ul li span.title {
     padding: 1px 2px;
 }
 
+div#toplinks ul {
+    margin:6px 0 0 0;
+}
+
 div#toplinks ul li a {
-    padding: 4px;
+    padding: 2px;
 }
 
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
@@ -119,9 +125,26 @@ div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     color: #333;
 }
 
-div#toplinks a {
-    position: relative;
-    top: 4px;
+ul#toplinks-for-user { 
+    position:absolute;
+    top:-22px;
+    right:0; 
+}
+ul#toplinks-for-user li {
+    margin-right:5px;
+}
+ul#toplinks-for-user li.register {
+    border-left:1px dotted #eee;
+    margin-right:0;
+}
+ul#toplinks-for-user li a {
+    color:#ccc; 
+}
+
+a.navOn {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding:2px;
 }
 
 div#pagenav {
