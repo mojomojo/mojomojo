@@ -62,12 +62,12 @@ body { background: #083e61 url(images/bg.gif) repeat-x; color: #FFFFFF; }
 
 #header, #breadcrumbs, #toplinks, #pagenav, #content, #showtag, #tags, #bottomnav, #powered { display: inline; float: left; overflow: hidden; width: 100%; margin-right: 0.833em; margin: 10px; }
 
-#toplinks, #pagenav, #pageoptions, #bottomnav { margin: 0; padding: 0; border: 0; outline: 0; overflow: hidden; display: inline-block; border: 0px solid #777; margin: 5px 0px 5px 0px; padding: 3px; font-family: sans-serif; }
+#toplinks, #pagenav, #pageoptions, #bottomnav { margin: 0; padding: 0; border: 0; outline: 0; overflow: hidden; display: inline-block; border: 0px solid #777; padding: 3px; font-family: sans-serif; }
 #toplinks, #pagenav, #pageoptions, #bottomnav { display: block; }
 #toplinks li, #pagenav li, #pageoptions li, #bottomnav li { list-style-type: none; margin-left: 0px; white-space: nowrap; display: inline; float: left; padding-left: 4px; padding-right: 4px; }
 #toplinks li.first, #pagenav li.first, #pageoptions li.first, #bottomnav li.first { padding-left: 0px; }
 #toplinks li.last, #pagenav li.last, #pageoptions li.last, #bottomnav li.last { padding-right: 0px; }
-#toplinks a, #pagenav a, #pageoptions a, #bottomnav a { border: 1px solid #000; color: #000; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #939396; text-decoration: none; padding: 2px; }
+#toplinks a, #pagenav a, #pageoptions a, #bottomnav a { -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 1px solid #000; color: #000; padding: 2px; margin: 5px 0px 5px 0px; background-color: #939396; text-decoration: none; }
 
 #header h1 { color: #ADD8E6; }
 #header h1:before { content: url(images/catalyst_logo.png); }
@@ -91,6 +91,10 @@ body { background: #083e61 url(images/bg.gif) repeat-x; color: #FFFFFF; }
 #content .toc ul { margin: 0; margin-left: 0px; padding: 0; }
 #content .toc > ul { margin-left: -1em; }
 #content .toc li { margin: 0; padding: 0; font-size: 1em; }
+
+#comments { margin: 10px; }
+#comments h4 { color: #0F7815; }
+#comments .comment { -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 1px solid #000; color: #000; padding: 2px; margin: 5px 0px 5px 0px; background: #DBDBE2; }
 
 table { border: 1px solid #000; padding: 10px; background: #9C9C9C; }
 table thead tr { background: #8C8C8C; }

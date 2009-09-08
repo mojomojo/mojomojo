@@ -2,7 +2,6 @@
 @import blueprint.sass
 @import blueprint/modules/scaffolding.sass
 @import compass/utilities.sass
-@import blueprint/modules/fancy_type.sass
 @import blueprint/modules/liquid.sass
 
 +blueprint-typography("body.blueprint")
@@ -12,25 +11,27 @@
 //   max-width: 99%
 //   width: 99%
 
+=rounded
+  -moz-border-radius: 5px
+  -webkit-border-radius: 5px
+  border: 1px solid #000
+  color: #000
+  padding: 2px
+  margin: 5px 0px 5px 0px
+
 =mj-horizontal-list
   +horizontal-list
   border: 0px solid #777
-  margin: 5px 0px 5px 0px
   padding: 3px
   font-family: sans-serif
   a
-    border: 1px solid #000
-    color: #000
-    -moz-border-radius: 5px
-    -webkit-border-radius: 5px
+    +rounded
     background-color: #939396
     text-decoration: none
-    padding: 2px
 
 body
   background: #083e61 url(images/bg.gif) repeat-x
   color: #FFFFFF
-
 
 
 #container
@@ -99,6 +100,14 @@ body
       margin: 0
       padding: 0
       font-size: 1em
+
+#comments
+  margin: 10px
+  h4
+    color: #0F7815
+  .comment
+    +rounded
+    background: #DBDBE2
 
 table
   border: 1px solid #000
