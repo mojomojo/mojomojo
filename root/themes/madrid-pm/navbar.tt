@@ -1,0 +1,53 @@
+<div id="toplinks">
+  [% IF c.pref('disable_search') +%]
+    <form action="http://google.com/search" method="get">
+        <input type="hidden" name="q" value="site:[% c.req.base.replace('https?://') | html %]" />
+  [% ELSE +%]
+    <form action="[% c.uri_for('search') %]" method="get">
+  [% END +%]
+        [% UNLESS c.pref('disable_search') +%]<input type="hidden" name="search_type" value="all" />[% END +%]
+        <input type="text" id="searchField" name="q" value="[% loc('Search') %]"/>
+        <input type="submit" value="[% loc('Search') %]"/>
+    </form>
+        [% FILTER nav %]
+        <ul>
+            <li><a href="[% c.uri_for('/.recent') %]" title="[% loc('Pages sorted by when they were last changed') %]" accesskey="U">[% loc('Recent') %]</a></li>
+            <li><a href="[% c.uri_for('/.tags') %]" title="[% loc('All tags in this wiki') %]" accesskey="T">[% loc('Tags') %]</a></li>
+            <li><a href="[% c.uri_for('/.users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
+            <li><a href="[% c.uri_for('/.feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
+            <li><a href="[% c.uri_for('/.export') %]" title="[% loc('Download a zip with all the pages in this wiki') %]" accesskey="X">[% loc('Export') %]</a></li>
+        </ul>
+        [% END # FILTER nav %]
+
+    <ul id="toplinks-for-user">
+      [%+ IF (user) %]
+        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+        <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
+      [% ELSE %]
+        <li><a href="[% c.uri_for('login') %]" title="[% loc('Get in there') %]" accesskey="L">[% loc('Log in') %]</a></li>
+       [%+ IF(c.pref('open_registration')) %]
+        <li class="register"><a href="[% c.uri_for('register') %]">[% loc('Register') %]</a></li>
+       [% END %]
+      [% END +%]
+    </ul>
+</div>
+<div id="pagenav">
+    [%- FILTER nav +%]
+    <ul>
+      [% PROCESS this_page_link.tt, accesskey = 1 %]
+      [% IF (page.has_photos) +%]
+        <li><a title="[% loc('Photo Album') %]" href="[% c.uri_for('gallery') %]">[% loc('Gallery') %]</a></li>
+      [% ELSE +%]
+        <li>[% loc('Gallery') %]</li>
+      [% END +%]
+        <li><a href="[% c.uri_for('attachments') %]">[%loc('Attachments')%]</a></li>
+        <li><a href="[% c.uri_for('subtree') %]" title="[% loc('Alphabetically sorted list of pages') %]" accesskey="A">[% loc('Sub pages') %]</a></li>
+      [% IF ( c.model('DBIC::Person').get_user(page.name) )  %]
+        <li><a title="[% loc('User Profile') %]" href="[% c.uri_for('profile') %]">[% loc('Profile') %]</a></li>
+        [% IF user.login == page.name %]
+        <li><a title="[% loc('User Settings') %]" href="[% c.uri_for(user.link,'.prefs') %]">[% loc('Preferences') %]</a></li>
+        [% END %]
+      [% END +%]
+    </ul>
+    [%- END # FILTER nav +%]
+</div>

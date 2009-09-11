@@ -40,7 +40,7 @@ Show a gallery page for the current node.
 =cut
 
 sub gallery : Path {
-    my ( $self, $c, $action, $page ) = @_;
+    my ( $self, $c, $page ) = @_;
     $c->stash->{template} = 'gallery.tt';
     $c->stash->{pictures} = $c->model("DBIC::Photo")->search(
         { 'attachment.page' => $c->stash->{page}->id },
