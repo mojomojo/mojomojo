@@ -53,11 +53,10 @@ foreach my $line (@lines) {
 ok defined $cloud_class{foo}, 'saw foo tag';
 ok defined $cloud_class{bar}, 'saw bar tag';
 ok defined $cloud_class{baz}, 'saw baz tag';
-ok $cloud_class{bar} > $cloud_class{baz}, 'bar > baz';
 
 TODO: {
   local $TODO = "tag cloud currently broken (github issue 6)";
-
+  ok $cloud_class{bar} > $cloud_class{baz}, 'bar > baz';
   ok $cloud_class{foo} > $cloud_class{bar}, 'foo > bar';
   ok $cloud_class{foo} > $cloud_class{bar}, 'foo > bar';
 

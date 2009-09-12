@@ -1,3 +1,5 @@
+  - Fixes for Pg Compability (depesz)
+
 0.999040 2009-09-04 19:53:00
   
   - Format content body and store in content.precompile

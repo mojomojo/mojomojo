@@ -95,7 +95,8 @@ feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 test_requires 'Test::More' => '0.88';
 test_requires 'Email::Send::Test';
 test_requires 'WWW::Mechanize' => '1.54';
-test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ',;
+test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ';
+test_requires 'WWW::Mechanize::TreeBuilder'   =>  '1.10000';
 
 tests( join ' ', ( glob('t/*.t'), glob('t/*/*.t') ) );
 
