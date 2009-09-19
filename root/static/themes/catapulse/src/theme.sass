@@ -54,6 +54,12 @@ body
   +column(24)
   margin: 10px
 
+#content_preview
+  +column(10)
+
+#edit_form
+  +column(10, true)
+
 #toplinks, #pagenav, #pageoptions, #bottomnav
   +mj-horizontal-list
 
@@ -75,19 +81,23 @@ body
   background: #aaa
   color: #000  
   border: 1px solid #bbb
-  padding: 15px
   a
     +hover-link
     +link-colors(#900, #900, #900, #900, #900)
   #current
+    margin: 10px
     padding: 0 2em 0 0
     a
       color: #900
+    p
+      margin: 0 0 10px 0
     pre
       -moz-border-radius: 10px
       color: #F5DEB3
       background: #083e61
       padding: 10px
+      margin: 10px
+      border: 1px solid #000
     em
       font-style: italic
     img
@@ -96,20 +106,17 @@ body
 
   pre
     color: #000
-    margin: 15px 0 15px 0
   .toc
-    +no-bullets
     background-color: #788086
     border: 1px solid #000
-    padding: 2em
+    padding: 10px
+    margin: 10px
     float: right
     position: relative
     ul
       margin: 0
-      margin-left: 0px
-      padding: 0 
-    > ul
-      margin-left: -1em
+      padding: 0
+      margin-left: +1em
     li
       margin: 0
       padding: 0
