@@ -215,16 +215,6 @@ div#pageoptions a {
     text-decoration: underline;
 }
 
-#content a:visited {
-    color: #3D5F86;
-    text-decoration: none;
-}
-
-#content a:visited:hover {
-    color: #3D5F86;
-    text-decoration: underline;
-}
-
 #content strong,b {
     font-weight: bold;
 }
