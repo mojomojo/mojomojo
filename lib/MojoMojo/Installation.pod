@@ -59,7 +59,7 @@ web server, or with an external one.
 
 Catalyst includes a test server which can be started using:
 
-    ./script/mojomojo_server -p 3000
+    ./script/mojomojo_server.pl -p 3000
 
 where 3000 is the port number and the default if no port is specified. Note
 that if you install it through the cpan shell, mojomojo_server will be found
