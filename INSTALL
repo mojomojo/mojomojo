@@ -1,1 +1,3 @@
-Please refer to lib/mojomojo/Installation.pod
+Please refer to lib/MojoMojo/Installation.pod
+
+    perldoc lib/MojoMojo/Installation.pod
