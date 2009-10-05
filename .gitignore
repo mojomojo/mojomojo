@@ -16,3 +16,4 @@ MojoMojo-*
 .includepath
 .project
 *.out
+.directory
