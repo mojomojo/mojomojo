@@ -71,7 +71,7 @@
 [% SET redir = c.uri_for(c.req.path) +%]
         <li class="set-language-navbar">
             <span class="title">[% loc('Set language') %]:</span>
-[% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl','ru'] +%]
+[% FOREACH lang IN ['en','de','fr','ja','no','ca','es','pl','ru','it'] +%]
             <a href="[% c.uri_for('set_lang',{lang=>lang,redir=>redir}) | html %]">[%lang%]</a>
 [% END +%]
         </li>
