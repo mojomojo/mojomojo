@@ -66,7 +66,7 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
-    'Text::MultiMarkdown'                          => '1.0.27',
+    'Text::MultiMarkdown'                          => '1.0.29',
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
