@@ -8,7 +8,7 @@
         <div style="font-size: 0.8em;">
              [% loc('Go directly to ') %]<a href="[% c.req.base %]/">[% loc('start') %]</a>
              [% loc('or') %]
-             <a href="[% c.req.base %]/.login">[% loc('login') %]</a>,
+             <a href="[% c.uri_for('login') %]">[% loc('login') %]</a>,
              [% loc('do not pass jail, do not collect $200...') %]
         </div>
     </div>
