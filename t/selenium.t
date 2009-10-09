@@ -15,12 +15,15 @@ $ENV{MOJOMOJO_CONFIG} = 't/app/mojomojo.yml';
 
 eval {
     require Test::WWW::Selenium::Catalyst;
-    Test::WWW::Selenium::Catalyst->import('MojoMojo');
 };
+if ( $@ ) {
+    plan skip_all => 'Need: Test::WWW::Selenium::Catalyst';
+}
+else {
+    plan tests => 22;
+}
 
-plan skip_all => 'Need: Test::WWW::Selenium::Catalyst' if $@;
-plan tests => 22;
-
+Test::WWW::Selenium::Catalyst->import('MojoMojo');
 my $sel = Test::WWW::Selenium::Catalyst->start;
 
 $sel->open_ok("/");
