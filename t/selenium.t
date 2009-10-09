@@ -3,7 +3,7 @@ use Test::More;
 
 # This test requires that a Selenium server be running.  A Selenium server
 # is included in Alien::SeleniumRC which is a dependency of
-# Test::WWW::Selenium::Catalyst so having it installed should be 
+# Test::WWW::Selenium::Catalyst so having it installed should be
 # sufficient to run this test.
 #
 # The selenium server is a java application that can also be started like:
@@ -12,7 +12,12 @@ use Test::More;
 # which includes a selenium server.
 
 $ENV{MOJOMOJO_CONFIG} = 't/app/mojomojo.yml';
-eval { use Test::WWW::Selenium::Catalyst 'MojoMojo'; };
+
+eval {
+    require Test::WWW::Selenium::Catalyst;
+    Test::WWW::Selenium::Catalyst->import('MojoMojo');
+};
+
 plan skip_all => 'Need: Test::WWW::Selenium::Catalyst' if $@;
 plan tests => 22;
 
