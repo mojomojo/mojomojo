@@ -1,20 +1,27 @@
+  New features:
+  - add markdown="1" to block-level HTML elements to interpret Markdown (dandv)
+  
   Translation:
-  - Italian.  MojoMojo ora parla italiano (enrico)
+  - Italian. MojoMojo ora parla italiano (enrico)
   
   Bug fixes:
   - Fixes for Pg Compability (depesz)
+  
+  Documentation:
+  - improved and centralized installation docs into lib/MojoMojo/Installation.pod
 
 0.999040 2009-09-04 19:53:00
   
   - Format content body and store in content.precompile
     Use this precompiled body when available for page delivery (see page/view.tt).
     /.precompile_pages action for precompiling all page versions.
-    This action can take a few minutes for the catalyst wiki (~2000 page versions).
-    Fix [[child]] and [[../sibling]] display bug when first creating a page. 
-    Adjust tests to reflect that [[../sibling]] format to parent/sibling
+    This action can take a few minutes for the Catalyst wiki (~2000 page versions).
+    
+  - Fixed [[child]] and [[../sibling]] display bug when first creating a page.
+    Adjust tests to reflect that [[../sibling]] formats to parent/sibling
     instead of ../sibling.  (mateu)
   
-  - Simplified and improved sub-pages. Speed and layout enhanced (mateu)
+  - Simplified and improved sub-pages. Speed and layout enhanced. (mateu)
   - Made subtree KinoSearch work (mateu)
   - Added paging for .list (dandv)
   
