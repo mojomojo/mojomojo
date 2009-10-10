@@ -290,13 +290,13 @@ orphan pages.
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
-    my $resultset_page = $c->req->param('page') || 1;
+    my $resultset_page_number = $c->req->param('page') || 1;
     
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
 
-    my $rs = $page->descendants($resultset_page);
+    my $rs = $page->descendants($resultset_page_number);
     $c->stash->{pager} = $rs->pager;
     my @all_pages_viewable = $rs->all;
     
