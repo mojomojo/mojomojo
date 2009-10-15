@@ -325,10 +325,9 @@ version.
 
 =cut
 
-use Data::Dumper;
-
 sub store_links {
     my ($self) = @_;
+
     return unless ( $self->status eq 'released' );
     my $content = $self->body;
     my $page    = $self->page;

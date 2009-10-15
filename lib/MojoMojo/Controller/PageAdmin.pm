@@ -143,6 +143,26 @@ sub edit : Global FormConfig {
                 creator     => $user_id,
             );
             $page = $path_pages->[-1];
+
+            # update the pages that wanted the new one
+            foreach my $want_me ($c->model('DBIC::WantedPage')->search( { to_path => $c->stash->{path} } ) ) {
+                my $wantme_page = $want_me->from_page;
+
+                # convert the wanted into links
+                $c->model('DBIC::Link')->create({
+                    from_page => $wantme_page,
+                    to_page   => $page,
+                });
+
+                # clear the precompiled (will be recompiled on view)
+                if ( my $wantme_content = $wantme_page->content ) {
+                    $wantme_content->precompiled(undef);
+                    $wantme_content->update;
+                }
+
+                # ok, she don't want me anymore ;)
+                $want_me->delete();
+            }
         }
 
         $stash->{content} = $page->content;
@@ -184,9 +204,7 @@ sub edit : Global FormConfig {
         $c->model('Search')->index_page($page)
             unless $c->pref('disable_search');
         $page->content->store_links();
-        $c->model('DBIC::WantedPage')
-          ->search( { to_path => $c->stash->{path} } )->delete();
-
+        
         # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq $c->localize('Save') ) {

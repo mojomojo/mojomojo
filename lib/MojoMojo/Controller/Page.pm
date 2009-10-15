@@ -96,8 +96,16 @@ sub view : Global {
         }
         $stash->{rev} = $content->version;
     }
-    $stash->{content} = $content;
 
+    # cache a precompiled version when missing 
+    unless ( defined $content->precompiled ) {
+        my $precomp_body = $content->body;
+        MojoMojo->call_plugins( 'format_content', \$precomp_body, $c, $page );
+        $content->precompiled( $precomp_body );
+        $content->update;
+    }
+
+    $stash->{content} = $content;
 }
 
 =head2 search (.search)
