@@ -6,7 +6,8 @@
   
   Bug fixes:
   - Fixes for Pg Compability (depesz)
-  - Users 'Active' field now correctly shows not validated users as inactive
+  - Users 'Active' field now correctly shows not validated users as inactive.
+    (linio)
   
   Documentation:
   - improved and centralized installation docs into lib/MojoMojo/Installation.pod

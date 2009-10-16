@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Default setting
-PERL_DEFAULT=/usr/local/perl-5.10.1/bin/perl
+PERL_DEFAULT=`which perl`
+MOJOMOJO_DIR="."
  
 # Process command line options
 while getopts ":hl:m:jp:" Option
@@ -45,14 +46,18 @@ if [ -z "$PERL" ] || [ ! -x "$PERL" ]; then
 fi
 
 # Check MojoMojo dir
-if [ -z "$MOJOMOJO_DIR" ] || [ ! -e "$MOJOMOJO_DIR/I18N" ]; then
-	MOJOMOJO_DIR=$(dirname $($PERL\doc -l MojoMojo))/MojoMojo
+if [ ! -d "$MOJOMOJO_DIR/lib/MojoMojo/I18N" ]; then
+	echo "$MOJOMOJO_DIR directory: lib/MojoMojo/I18N not found."
+	exit 1
+else
+	cd $MOJOMOJO_DIR
+	MOJOMOJO_DIR="."
 fi
 
 # Check language(s)
 if [ -z "$langs" ]
 then
-	langs=$(ls $MOJOMOJO_DIR/I18N|grep ^..\.po$)
+	langs=$(ls $MOJOMOJO_DIR/lib/MojoMojo/I18N|grep ^..\.po$)
 else
 	langs=$langs.po
 fi
@@ -62,10 +67,10 @@ for lang in $langs ; do
 	lang_=`echo $lang|sed 's/.po//'`
 	echo "lang: $lang_"
 	if [ -z "$JSON_ONLY" ]; then
-		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/lib -D $MOJOMOJO_DIR/root/forms -D $MOJOMOJO_DIR/root/base -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=* -o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.po
-		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/root/static -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=* 	-o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.js.po
+		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/lib/MojoMojo -D $MOJOMOJO_DIR/root/forms -D $MOJOMOJO_DIR/root/base -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=* -o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.po
+		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/root/static/js -P perl=* -P tt2=* -P yaml=* -P formfu=* -P text=* 	-o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.js.po
 	fi
-	$PERL -Ilib $MOJOMOJO_DIR/script/po2json.pl $MOJOMOJO_DIR/I18N/$lang_.js.po $MOJOMOJO_DIR/root/static/json/$lang_.po.json
+	$PERL -Ilib $MOJOMOJO_DIR/script/po2json.pl $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.js.po $MOJOMOJO_DIR/root/static/json/$lang_.po.json
 done
 
 # All is OK
