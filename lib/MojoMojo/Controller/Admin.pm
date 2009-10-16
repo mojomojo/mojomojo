@@ -247,7 +247,7 @@ sub update_user : Local {
     $user = $c->model("DBIC::Person")->find($user) || return;
 
     #  if ($action eq 'active') {
-    $user->active( $user->active ? 0 : 1 );
+    $user->active( ($user->active == 1) ? 0 : 1 );
 
     #  }
     $user->update;
