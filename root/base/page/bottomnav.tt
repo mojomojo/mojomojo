@@ -19,7 +19,7 @@
     [% IF page.content_version && page.content_version > 1 +%]
         <li>
             <a title="[%loc('See previous revision')%]" href="[% c.uri_for('view', {rev=> page.content_version - 1}) %]" accesskey="R">[%loc('Back in time')%]</a>
-            ([% page.content.max_version%] [% loc('revision') %][% IF page.content_version > 1; "s" ; END %])
+            ([% page.content.max_version%] [% loc('revision') %][% IF page.content_version > 1 && !(lang=="pl"||lang=="ru"); "s" ; END %])
         </li>
     [% END %]
     [% IF  (page.content_version AND page.content.max_version AND page.content_version < page.content.max_version) +%]
