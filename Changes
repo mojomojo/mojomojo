@@ -8,6 +8,7 @@
   - Fixes for Pg Compability (depesz)
   - Users 'Active' field now correctly shows not validated users as inactive.
     (linio)
+  - Sub pages - do not show pages with no permission to view (linio)
   
   Documentation:
   - improved and centralized installation docs into lib/MojoMojo/Installation.pod
