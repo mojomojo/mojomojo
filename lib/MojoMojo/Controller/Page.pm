@@ -98,7 +98,7 @@ sub view : Global {
     }
 
     # cache a precompiled version when missing 
-    unless ( defined $content->precompiled ) {
+    if ( $content && not defined $content->precompiled ) {
         my $precomp_body = $content->body;
         MojoMojo->call_plugins( 'format_content', \$precomp_body, $c, $page );
         $content->precompiled( $precomp_body );
