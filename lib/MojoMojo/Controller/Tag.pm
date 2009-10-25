@@ -65,11 +65,15 @@ Tag cloud for pages.
 
 sub tags : Global {
     my ( $self, $c, $tag ) = @_;
-    $c->stash->{tags} = [ $c->model("DBIC::Tag")->by_page( $c->stash->{page}->id ) ];
+    my $tags = [ $c->model("DBIC::Tag")->by_page( $c->stash->{page}->id ) ];
+    my %tags;
+    map {
+        $tags{$_->tag}++;
+    }@$tags;
     my $cloud = HTML::TagCloud->new();
-    foreach my $tag ( @{ $c->stash->{tags} } ) {
-        $cloud->add( $tag->tag, $c->req->base . $c->stash->{path} . '.list/' . $tag->tag,
-            $tag->refcount );
+    foreach my $tag (keys %tags) {
+    	$cloud->add($tag, $c->req->base . $c->stash->{path} . '.list/' . $tag,
+            $tags{$tag});
     }
     $c->stash->{cloud}    = $cloud;
     $c->stash->{template} = 'tag/cloud.tt';

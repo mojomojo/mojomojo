@@ -345,6 +345,20 @@ sub subtree : Global {
     
     my $page = $c->stash->{page};
     my @all_pages_viewable = sort { $a->{path} cmp $b->{path} } $page->descendants;
+    if ( $c->pref('check_permission_on_view') ) {
+        my $user;
+        if ( $c->user_exists() ) {
+            $user = $c->user->obj;
+        } else {
+            # if anonymous user is allowed
+            my $anonymous = $c->pref('anonymous_user');
+            if ($anonymous) {
+                # get anonymous user for no logged-in users
+                $user = $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+            }
+        }
+        @all_pages_viewable = pages_viewable( $c, $user, @all_pages_viewable );
+    }
     $c->stash->{pages}     = \@all_pages_viewable;
     $c->stash->{template} = 'page/subtree.tt';
 }

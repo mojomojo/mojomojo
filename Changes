@@ -12,7 +12,9 @@
     (linio)
   - login is now page sensitive
   - Change RSS Formatter to use summary
-
+  - Sub pages - do not show pages with no permission to view (linio)
+  - Fixed issue with incorrectly calculated cloud size (linio)
+  
   Documentation:
   - improved and centralized installation docs into lib/MojoMojo/Installation.pod
 
