@@ -67,7 +67,7 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
-    'Text::MultiMarkdown'                          => '1.0.17',
+    'Text::MultiMarkdown'                          => '1.0.29',
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
@@ -76,6 +76,7 @@ requires(
 );
 
 feature 'Create new database', 'SQL::Translator' => '0.09006';
+feature 'FastCGI support', 'FCGI::ProcManager' => 0;
 feature 'Table of Contents generator','HTML::Toc' => '1.10';
 feature 'reCAPTCHA for anonymous edits', 'HTML::FormFu::Element::reCAPTCHA' => 0;
 feature 'Syntax highlighter', 'Syntax::Highlight::Engine::Kate' => 0;

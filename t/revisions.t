@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # Revision tests
-use Test::More tests => 2;
+use Test::More tests => 3;
 use Test::Differences;
 
 my $original_formatter;    # current formatter set up in mojomojo.db
@@ -15,6 +15,14 @@ BEGIN {
 
 
 #-------------------------------------------------------------------------------
+
 $test = "specific error message: no revision x for x";
 $body = get('/?rev=9999');
 like $body, qr'No revision 9999 for <span class="error_detail"><a href="/">/</a></span>', $test;
+
+# .login doesn't really care about the rev query string
+# but heh, purl told me to write a test since all tests were passing.
+$test = 'get login page revision 1.';
+$body = get('.login/?rev=1');
+like $body, qr'sername', $test;
+

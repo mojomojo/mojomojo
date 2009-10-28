@@ -96,8 +96,16 @@ sub view : Global {
         }
         $stash->{rev} = $content->version;
     }
-    $stash->{content} = $content;
 
+    # cache a precompiled version when missing 
+    if ( $content && not defined $content->precompiled ) {
+        my $precomp_body = $content->body;
+        MojoMojo->call_plugins( 'format_content', \$precomp_body, $c, $page );
+        $content->precompiled( $precomp_body );
+        $content->update;
+    }
+
+    $stash->{content} = $content;
 }
 
 =head2 search (.search)
@@ -290,13 +298,13 @@ orphan pages.
 sub list : Global {
     my ( $self, $c, $tag ) = @_;
     my $page = $c->stash->{page};
-    my $resultset_page = $c->req->param('page') || 1;
+    my $resultset_page_number = $c->req->param('page') || 1;
     
     $c->stash->{tags} = $c->model("DBIC::Tag")->most_used();
     $c->detach('/tag/list') if $tag;
     $c->stash->{template} = 'page/list.tt';
 
-    my $rs = $page->descendants($resultset_page);
+    my $rs = $page->descendants($resultset_page_number);
     $c->stash->{pager} = $rs->pager;
     my @all_pages_viewable = $rs->all;
     
@@ -337,6 +345,20 @@ sub subtree : Global {
     
     my $page = $c->stash->{page};
     my @all_pages_viewable = sort { $a->{path} cmp $b->{path} } $page->descendants;
+    if ( $c->pref('check_permission_on_view') ) {
+        my $user;
+        if ( $c->user_exists() ) {
+            $user = $c->user->obj;
+        } else {
+            # if anonymous user is allowed
+            my $anonymous = $c->pref('anonymous_user');
+            if ($anonymous) {
+                # get anonymous user for no logged-in users
+                $user = $c->model('DBIC::Person') ->search( {login => $anonymous} )->first;
+            }
+        }
+        @all_pages_viewable = pages_viewable( $c, $user, @all_pages_viewable );
+    }
     $c->stash->{pages}     = \@all_pages_viewable;
     $c->stash->{template} = 'page/subtree.tt';
 }

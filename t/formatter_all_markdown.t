@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown
-use Test::More tests => 26;
+use Test::More tests => 27;
 use HTTP::Request::Common;
 use Test::Differences;
 
@@ -140,6 +140,33 @@ HTML&nbsp;<b>&lt;b&gt;</b>text<b>&lt;/b&gt;</b>&nbsp;here&nbsp;with&nbsp;some&nb
 HTML
 
 
+#-------------------------------------------------------------------------------
+TODO: {
+    local $TODO = "priority of wiki link interpretation must be tweak with regards to <pre>";
+    $test    = "no wiki link hyperlinking in multi-line <pre> sections";
+    $content = <<'MARKDOWN';
+<pre lang="Perl">
+# A comment, not a heading
+[this isn't](a link)
+[[this isn't a wikilink]]
+
+|| this is not | a table ||
+|| this is | a <pre> element ||
+</pre>
+MARKDOWN
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+    eq_or_diff( $body, <<'HTML', $test );
+<pre><span class="kateComment"><i>#&nbsp;A&nbsp;comment,&nbsp;not&nbsp;a&nbsp;heading</i></span><span class="kateComment"><i>
+</i></span>[this&nbsp;isn<span class="kateOperator">'</span><span class="kateString">t](a&nbsp;link)</span><span class="kateString">
+</span><span class="kateString">[[this&nbsp;isn</span><span class="kateOperator">'</span>t&nbsp;a&nbsp;wikilink]]
+
+||&nbsp;this&nbsp;is&nbsp;<span class="kateOperator">not</span>&nbsp;|&nbsp;a&nbsp;table&nbsp;||
+||&nbsp;this&nbsp;is&nbsp;|&nbsp;a&nbsp;&lt;pre&gt;&nbsp;element&nbsp;||
+
+</pre>
+HTML
+}
+
 #----------------------------------------------------------------------------
 $test  = '<div> with HTML attribute in a code span';
 $content = <<'MARKDOWN';
@@ -206,10 +233,8 @@ HTML
 
 
 #-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "markdown flag";
-    $test    = '<div> with markdown="1"';
-    $content = <<'MARKDOWN';
+$test    = '<div> with markdown="1"';
+$content = <<'MARKDOWN';
 We want to be able to have Markdown interpreted in `<div markdown="1">` sections
 so that we can build sidebars, photo divs etc.
 
@@ -224,25 +249,24 @@ so that we can build sidebars, photo divs etc.
 
 The above should render as a list of items with an image and caption below.
 MARKDOWN
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $body, <<'HTML', $test );
 <p>We want to be able to have Markdown interpreted in <code>&lt;div markdown="1"&gt;</code> sections
 so that we can build sidebars, photo divs etc.</p>
 
 <div class="navbar">
 <ul>
-<li><span class="newWikiWord">Home<a title="Not found. Click to create this page." href="/Home.edit">?</a></span>
-<li><span class="newWikiWord">Products<a title="Not found. Click to create this page." href="/Products.edit">?</a></span>
-<li><span class="newWikiWord">About<a title="Not found. Click to create this page." href="/About.edit">?</a></span>
+<li><span class="newWikiWord"><a title="Not found. Click to create this page." href="/Home.edit">Home?</a></span></li>
+<li><span class="newWikiWord"><a title="Not found. Click to create this page." href="/Products.edit">Products?</a></span></li>
+<li><span class="newWikiWord"><a title="Not found. Click to create this page." href="/About.edit">About?</a></span></li>
 </ul>
 
-<img src="/.static/catalyst.png" alt="alt text]" "Image title" ./>
-<span style="color: green">This is an image caption</span>
+<p><img src="/.static/catalyst.png" alt="alt text" title="Image title" />
+<span style="color: green">This is an image caption</span></p>
 </div>
 
 <p>The above should render as a list of items with an image and caption below.</p>
 HTML
-}
 
 
 #-------------------------------------------------------------------------------
@@ -321,18 +345,16 @@ like($body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");
 
 
 #-------------------------------------------------------------------------------
-TODO: {
-    local $TODO = "Text::MultiMarkdown bug, see http://github.com/bobtfish/text-multimarkdown/commit/6600cef8e22a988b9a87750f1a144c7706784548";
-    $test = 'Underscore in code in footnotes becomes 128-bit hash';
-    $content = <<'MARKDOWN';
+# Formerly: Text::MultiMarkdown bug, see http://github.com/bobtfish/text-multimarkdown/commit/6600cef8e22a988b9a87750f1a144c7706784548";
+$test = 'Underscore in code in footnotes becomes 128-bit hash';
+$content = <<'MARKDOWN';
 This is buggy[^bug].
 
 [^bug]: Use `MYAPP_CONFIG_LOCAL_SUFFIX`.
 MARKDOWN
 
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    like($body, qr/MYAPP_CONFIG_LOCAL_SUFFIX/s, "'MYAPP_CONFIG_LOCAL_SUFFIX' in footnote");
-}
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+like($body, qr/MYAPP_CONFIG_LOCAL_SUFFIX/s, "'MYAPP_CONFIG_LOCAL_SUFFIX' in footnote");
 
 
 #-------------------------------------------------------------------------------

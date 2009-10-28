@@ -175,7 +175,7 @@ setup_formatter_toolbar = function() {
             [ 'italic', loc('Italic'),'_','_', loc('italic')],
             [ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
             [ 'wikilink', loc('Internal Link'), '[[/path/to/page|', ']]', loc('Intrawiki Link')],
-            [ 'hyperlink', loc('External Link'), '[', '](URL)', loc('linked text')],
+            [ 'hyperlink', loc('External Link'), '['+loc('linked text')+'](', ')', 'URL'],
             [ 'drawing_left',  loc('Picture left'),  '<div class=photo style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
             [ 'drawing',       loc('Picture'),       '<div class=photo>![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
             [ 'drawing_right', loc('Picture Right'), '<div class=photo style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]

@@ -4,16 +4,20 @@
 
 Install MojoMojo's prerequisites. See L<http://mojomojo.org/documentation/installation>.
 
-=head2 Step 1
+=head2 Step 1 - install
 
 Install MojoMojo either using the cpan shell like this:
 
     cpan MojoMojo
 
 or by downloading the tarball from L<http://search.cpan.org/dist/MojoMojo> and
-running perl Makefile.PL on it manually.
+running perl Makefile.PL on it manually. If you do this, run
 
-=head2 Step 2
+    make installdeps 
+        
+to get all the required modules installed.
+
+=head2 Step 2 - configure
 
 C<mojomojo.conf> is the main configuration file and is in L<Config::General> format.
 
@@ -46,22 +50,22 @@ Once the DSN is setup, create the table structure by running the following scrip
 This script has sane defaults for a test install, but you can override
 these. Run it with --help to see usage information.
 
-=head2 Step 3
+=head2 Step 3 - launch
 
-MojoMojo is a Catalyst application Catalyst and works with Catalyst's built-in
+MojoMojo is a Catalyst application and works with Catalyst's built-in
 web server, or with an external one.
 
 =head3 Using the Catalyst built-in server
 
 Catalyst includes a test server which can be started using:
 
-    ./script/mojomojo_server -p 3000
+    ./script/mojomojo_server.pl -p 3000
 
 where 3000 is the port number and the default if no port is specified. Note
 that if you install it through the cpan shell, mojomojo_server will be found
 in your F<bin> directory.
 
-=head3 Use an external web server
+=head3 Using an external web server
 
 MojoMojo has been tested with Apache, lighttpd and nginx. If you need to make
 a choice, nginx and lighttpd are much lighter in terms of resource consumption,
@@ -94,9 +98,15 @@ line to the main config block:
 
     using_frontend_proxy 1
 
-=head2 Step 4
+=head2 Step 4 - login
 
 Login to your MojoMojo and change the admin password. The default login/pass is
 C<admin>/C<admin>.
 
 For troubleshooting, see L<http://mojomojo.org/troubleshooting>.
+
+=head2 Step 5 - create pages
+
+Create a new page.  Decide what URL you would like for the page then 
+browse to that URL.  You will then be asked to add content.  For example,
+if you want to create a page about food, go to /food.

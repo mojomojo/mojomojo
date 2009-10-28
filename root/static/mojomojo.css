@@ -69,7 +69,7 @@ a, a:visited {
 }
 
 #content a:visited {
-    color: #4496ca;
+    color: #996699;  /* per accessibility guidelines. See http://universalusability.com/access_by_design/links/differentiate.html */
 }
 
 a:hover, #content a:hover {

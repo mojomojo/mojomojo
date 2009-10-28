@@ -21,7 +21,7 @@
 [% WHILE (user=users.next) %]
         <tr>
             [% activeurl= c.uri_for('/.admin/update_user',  user.id , 'active') %]
-            [% active=user.active ? 'yes' : 'no' %]
+            [% active=(user.active==1) ? 'yes' : 'no' %]
             <td><a class="activelink" href="[% activeurl %]">[% active %]</a></td>
             <td><a href="[% c.uri_for(user.link) %].profile">[% user.login %]</a></td>
             <td>[% FOR role=user.roles %] [% role.name %] [% END %]</td>
