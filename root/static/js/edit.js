@@ -142,8 +142,12 @@ setup_formatter_toolbar = function() {
             [ 'heading', loc('Main heading'), '\n\nh1. ','\n\n',loc('Also try h2,h3 and so on')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ', '\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n# ', '\n\n', loc('Numbered list item')],
-            [ 'code', loc('Code'), '@', '@', loc('code')],
-            [ 'quote', loc('Block quote'), 'bq. ','', loc('quote')],
+            [ 'insert_table',  loc('Insert Table'),  '\n'+
+                                                     '|','|||\n'+
+                                                     '|cell|cell|cell|\n'
+				               ,loc('Table')],
+         [ 'code', loc('Code'), '@', '@', loc('code')],
+            [ 'quote', loc('Block quote'), '\nbq. ','', loc('quote')],
             [ 'left', loc('Left-justified paragraph'), '\n\np<. ','\n\n', loc('left justified paragraph')],
             [ 'right', loc('Right-justified paragraph'), '\n\np>. ','\n\n', loc('right justified paragraph')],
             [ 'center', loc('Centered paragraph'), '\n\np=. ','\n\n', loc('centered paragraph')],
