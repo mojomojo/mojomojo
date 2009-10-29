@@ -169,6 +169,12 @@ setup_formatter_toolbar = function() {
             [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n', loc('increase # for smaller headline')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n1. ', '\n\n', loc('Numbered list item')],
+            [ 'insert_table',  loc('Insert Table'),  '\n|             |          Grouping           ||\n'+
+				 'First Header  | Second Header | Third Header |\n'+
+				 ' ------------ | :-----------: | -----------: |\n'+
+				 'Content       |          *Long Cell*        ||\n'+
+				 'Content       |   **Cell**    |         Cell |\n'+
+				 '[',']\n\n',loc('Table Title')],
             [ 'quote', loc('Block quote'), '> ','', loc('quote')],
             [ 'code', loc('Code'), '`', '`', loc('code')],
             [ 'bold', loc('Bold'), '**','**', loc('bold')],
