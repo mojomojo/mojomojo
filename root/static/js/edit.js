@@ -144,7 +144,7 @@ setup_formatter_toolbar = function() {
             [ 'list_enum', loc('Enum list'), '\n\n# ', '\n\n', loc('Numbered list item')],
             [ 'insert_table',  loc('Insert Table'),  '\n'+
                                                      '|','|||\n'+
-                                                     '|cell|cell|cell|\n'
+                                                     '|'+loc('Cell')+'|'+loc('Cell')+'|'+loc('Cell')+'|\n'
 				               ,loc('Table')],
          [ 'code', loc('Code'), '@', '@', loc('code')],
             [ 'quote', loc('Block quote'), '\nbq. ','', loc('quote')],
@@ -173,11 +173,11 @@ setup_formatter_toolbar = function() {
             [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n', loc('increase # for smaller headline')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n1. ', '\n\n', loc('Numbered list item')],
-            [ 'insert_table',  loc('Insert Table'),  '\n|             |          Grouping           ||\n'+
-				 'First Header  | Second Header | Third Header |\n'+
+            [ 'insert_table',  loc('Insert Table'),  '\n|             |          '+loc('Grouping')+'           ||\n'+
+				 loc('First Header')+'  | '+loc('Second Header')+' | '+loc('Third Header')+' |\n'+
 				 ' ------------ | :-----------: | -----------: |\n'+
-				 'Content       |          *Long Cell*        ||\n'+
-				 'Content       |   **Cell**    |         Cell |\n'+
+				 loc('Content')+'       |          *'+loc('Long Cell')+'*        ||\n'+
+				 loc('Content')+'       |   **'+loc('Cell')+'**    |         '+loc('Cell')+' |\n'+
 				 '[',']\n\n',loc('Table Title')],
             [ 'quote', loc('Block quote'), '> ','', loc('quote')],
             [ 'code', loc('Code'), '`', '`', loc('code')],
