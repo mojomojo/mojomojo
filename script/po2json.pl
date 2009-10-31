@@ -4,7 +4,7 @@ use warnings;
 use Locale::PO;
 use JSON::Syck;
 $JSON::Syck::ImplicitUnicode = 1;
-use IO::All;
+use IO::All -utf8;
 use HTML::Entities;
 use Encode;
 use utf8;
@@ -18,7 +18,7 @@ sub po2json {
     for my $msgid (keys %$po_href) {
         my ($k, $v) = map {
             my $s = $po->dequote($_);
-            $s =~ s/(.)/encode_entities($1)/ge;
+	    #$s =~ s/(.)/encode_entities($1)/ge;
             $s
            } ($msgid, $po_href->{$msgid}->{msgstr});
         next unless $k && $v;

@@ -142,8 +142,12 @@ setup_formatter_toolbar = function() {
             [ 'heading', loc('Main heading'), '\n\nh1. ','\n\n',loc('Also try h2,h3 and so on')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ', '\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n# ', '\n\n', loc('Numbered list item')],
-            [ 'code', loc('Code'), '@', '@', loc('code')],
-            [ 'quote', loc('Block quote'), 'bq. ','', loc('quote')],
+            [ 'insert_table',  loc('Insert Table'),  '\n'+
+                                                     '|','|||\n'+
+                                                     '|'+loc('Cell')+'|'+loc('Cell')+'|'+loc('Cell')+'|\n'
+				               ,loc('Table')],
+         [ 'code', loc('Code'), '@', '@', loc('code')],
+            [ 'quote', loc('Block quote'), '\nbq. ','', loc('quote')],
             [ 'left', loc('Left-justified paragraph'), '\n\np<. ','\n\n', loc('left justified paragraph')],
             [ 'right', loc('Right-justified paragraph'), '\n\np>. ','\n\n', loc('right justified paragraph')],
             [ 'center', loc('Centered paragraph'), '\n\np=. ','\n\n', loc('centered paragraph')],
@@ -169,16 +173,22 @@ setup_formatter_toolbar = function() {
             [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n', loc('increase # for smaller headline')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n1. ', '\n\n', loc('Numbered list item')],
+            [ 'insert_table',  loc('Insert Table'),  '\n|             |          '+loc('Grouping')+'           ||\n'+
+				 loc('First Header')+'  | '+loc('Second Header')+' | '+loc('Third Header')+' |\n'+
+				 ' ------------ | :-----------: | -----------: |\n'+
+				 loc('Content')+'       |          *'+loc('Long Cell')+'*        ||\n'+
+				 loc('Content')+'       |   **'+loc('Cell')+'**    |         '+loc('Cell')+' |\n'+
+				 '[',']\n\n',loc('Table Title')],
             [ 'quote', loc('Block quote'), '> ','', loc('quote')],
             [ 'code', loc('Code'), '`', '`', loc('code')],
             [ 'bold', loc('Bold'), '**','**', loc('bold')],
             [ 'italic', loc('Italic'),'_','_', loc('italic')],
-            [ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
+            //[ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
             [ 'wikilink', loc('Internal Link'), '[[/path/to/page|', ']]', loc('Intrawiki Link')],
             [ 'hyperlink', loc('External Link'), '['+loc('linked text')+'](', ')', 'URL'],
-            [ 'drawing_left',  loc('Picture left'),  '<div class=photo style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
-            [ 'drawing',       loc('Picture'),       '<div class=photo>![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
-            [ 'drawing_right', loc('Picture Right'), '<div class=photo style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]
+            [ 'drawing_left',  loc('Picture left'),  '&nbsp;<div class=photo style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing',       loc('Picture'),       '&nbsp;<div class=photo>![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing_right', loc('Picture Right'), '&nbsp;<div class=photo style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]
         ];
     }
 
