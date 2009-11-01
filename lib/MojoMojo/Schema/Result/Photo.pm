@@ -88,6 +88,7 @@ sub extract_exif {
     $self->lens( $info->{'FocalLength'} );
     $self->iso( $info->{'ISO'} );
     $self->aperture( $info->{'Aperture'} );
+    $self->flash( $info->{'Flash'} );
     $self->description( $info->{'UserComment'} );
     $self->taken( $self->exif2datetime( $info->{'DateTimeOriginal'} ) );
 }
