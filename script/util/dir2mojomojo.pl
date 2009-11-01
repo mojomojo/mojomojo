@@ -10,6 +10,7 @@ use Config::JFDI;
 use MojoMojo::Formatter::File;
 use Path::Class ();
 use Getopt::Long;
+use MojoMojo::Formatter::File::Image;
 #use MojoMojo;
 #use MojoMojo::Model::Search;
 
@@ -81,9 +82,12 @@ createpage($URL_DIR, "{{dir $DIR $exclude}}", $person);
 foreach my $f (@files){
 
   next if ( ! -r $f );
+
   $urlpage = $f;
   $urlpage =~ s/$DIR//;
-  $urlpage =~ s/\./_/;
+  $f =~ /.*\.(.*)$/;
+  $urlpage =~ s/\./_/
+    if ( ! MojoMojo::Formatter::File::Image->can_format($1) );
   $urlpage = "${URL_DIR}${urlpage}";
 
   if ( ref $f eq 'Path::Class::Dir'){
@@ -97,7 +101,7 @@ foreach my $f (@files){
     }
     else {
       print STDERR "Can't find plugin for $f !!!\n";
-      $body = "{{file UNKOWN_PLUGIN $f}}";
+      $body = "{{ file UNKOWN_PLUGIN $f}}";
     }
   }
 
@@ -135,6 +139,15 @@ sub createpage{
 # Usage
 #-----------------------------------------------------------------------------#
 sub Usage{
-  print "$0 --dir=DIRECTORY --url=URLBASE [--exclude=\"dir1 dir2\"] [--debug] [--help]\n";
-  print "Ex: $0 --dir=/usr/share/perl/5.10/pod/ --url=/pod --exclude='\.svn|\.git'\n";
+
+  my $usage;
+  $usage .= "$0 --dir=DIRECTORY --url=URLBASE [--exclude=\"dir1 dir2\"] [--debug] [--help]\n";
+  $usage .= "Ex: $0 --dir=t/var/files --url=/myfiles --exclude='\.svn|\.git'\n";
+  $usage .= "Add these lines to your mojomojo.conf:\n";
+  $usage .= "<Formatter::Dir>\n";
+  $usage .= "    prefix_url /myfiles\n";
+  $usage .= "    whitelisting t/var/files\n";
+  $usage .= "</Formatter::Dir>\n";
+
+  print $usage;
 }
