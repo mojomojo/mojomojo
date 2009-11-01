@@ -24,7 +24,7 @@ This formatter will format the file argument as XHTML.
 Usage: {{file TYPE filename}}
 
 
-       {{file Text path_to(uploads/Files)test.txt}}
+       {{file Text uploads/Files/test.txt}}
 
 
 TYPE is a plugin present in Formatter/File/ directory.
@@ -97,7 +97,7 @@ sub format_content {
   my $is_image = 0;
   foreach my $line (@lines) {
 
-    if ( $line =~ m|{{file\s*(\w+)\s*(.*)}}.*| ) {
+    if ( $line =~ m|{{\s*file\s*(\w+)\s*(.*)}}.*| ) {
       my $plugin=$1; # DocBook, Pod, ...
       my $file=$2;   # File, Attachment
 
@@ -105,10 +105,10 @@ sub format_content {
 
       # use path_to(dir)/filename ?
       my $path_to = $c->path_to();
-      $file =~ s/path_to\((\S*)\)(\S*)/${path_to}\/$1\/$2/;
+      $file =~ s/path_to\([\s|\/]*(\S*)[\s|\/]*\)\s*(\S*)\s*/${path_to}\/$1\/$2/;
 
       my $error;
-      if ( $error = checkplugin($plugin)){
+      if ( $error = checkplugin($plugin, $file)){
       	$$content .= $error;
       }
       if ( ! $error && ( $error = $self->checkfile($file, $c))){
@@ -187,12 +187,13 @@ Return 0 if plugin exist
 =cut
 sub checkplugin{
   my $pluginname = shift;
+  my $file       = shift;
 
   my $plugin = __PACKAGE__ . "::$pluginname";
 
   return 0 if $plugin->can('can_format');
 
-  return "Can't find plugin '$plugin' !";
+  return "Can't find plugin for $file !";
 }
 
 =item checkfile

@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use base qw/MojoMojo::Formatter/;
 use Path::Class ();
+use MojoMojo::Formatter::File::Image;
 
 my $debug=0;
 
@@ -131,6 +132,8 @@ sub to_xhtml{
     }
   }
 
+  $path =~ s/^\///;
+  $path =~ s/\/$//;
   my $url = "${baseuri}/${path}";
 
 
@@ -138,6 +141,8 @@ sub to_xhtml{
   foreach my $d (@subdirs){
     next if ( ! -r $d);
     $d =~ s/$dir\///;
+
+    print STDERR "url=$url dir=$d $url/$d\n";
     $ret .= "<li><a href=\"$url/$d\">[$d]</a></li>";
   }
   $ret .= "</ul></div>\n";
@@ -146,7 +151,15 @@ sub to_xhtml{
   foreach my $f (@files){
     next if ( ! -r $f);
     $f =~ s/$dir\///;
-    $f =~ s/\./_/;
+    $f =~ s/^\///;
+    print STDERR "url=$url file=$f $url/$f\n";
+    # Use Image controller if it is a image
+    $f =~ /.*\.(.*)$/;
+
+    # replace dot with '_' if it's not a image
+    $f =~ s/\./_/
+      if ( ! MojoMojo::Formatter::File::Image->can_format($1) );
+
     $ret .= "<li><a href=\"$url/$f\">$f</a></li>";
   }
   $ret .= "</ul></div>\n";
