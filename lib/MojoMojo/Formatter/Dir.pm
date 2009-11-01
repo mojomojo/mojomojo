@@ -142,7 +142,6 @@ sub to_xhtml{
     next if ( ! -r $d);
     $d =~ s/$dir\///;
 
-    print STDERR "url=$url dir=$d $url/$d\n";
     $ret .= "<li><a href=\"$url/$d\">[$d]</a></li>";
   }
   $ret .= "</ul></div>\n";
@@ -152,7 +151,7 @@ sub to_xhtml{
     next if ( ! -r $f);
     $f =~ s/$dir\///;
     $f =~ s/^\///;
-    print STDERR "url=$url file=$f $url/$f\n";
+
     # Use Image controller if it is a image
     $f =~ /.*\.(.*)$/;
 

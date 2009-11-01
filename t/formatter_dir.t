@@ -52,7 +52,7 @@ like($ret, qr{<div id="dirs"><ul><li><a href="/test/foo">\[foo\]</a></li></ul></
 $dir->mkdir('.baz');
 $content = "<p>{{dir $dir exclude=foo|\.git|.baz}}</p>";
 $ret = MojoMojo::Formatter::Dir->format_content(\$content, $c);
-like($$ret, qr|<div id="dirs"><ul></ul></div>\n<div id="files"><ul><li><a href="http://localhost///bar_pod">bar_pod</a></li><li><a href="http://localhost///bar_txt">bar_txt</a></li></ul></div>\n|s, "Use exclude=foo|\.git|.baz");
+like($$ret, qr|<div id="dirs"><ul></ul></div>\n<div id="files"><ul><li><a href="http://localhost//bar_pod">bar_pod</a></li><li><a href="http://localhost//bar_txt">bar_txt</a></li></ul></div>\n|s, "Use exclude=foo|\.git|.baz");
 
 
 # test checkdir directly

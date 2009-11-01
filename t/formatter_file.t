@@ -79,6 +79,6 @@ like($$ret, qr/{{file \$dir\/test.txt}}/s, "No plugin is provided");
 # Check bad plugin
 $content = "<p>{{file Bla $dir/test.txt}}</p>";
 $ret = MojoMojo::Formatter::File->format_content(\$content, $c);
-like($$ret, qr/Can't find plugin 'MojoMojo::Formatter::File::Bla' !/s, "This is a bad plugin");
+like($$ret, qr/Can't find plugin for $dir\/test.txt !/s, "This is a bad plugin");
 
 

@@ -17,3 +17,4 @@ MojoMojo-*
 .project
 *.out
 .directory
+root/static/themes/catapulse/src/.sass-cache
