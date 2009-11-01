@@ -134,8 +134,15 @@ function startPopupProgressBar(form, options) {
       <para></para>
     </section>
   </section>
-  <section id="test2">
-    <title>test2</title>
+  <section id="image">
+    <title>Image png</title>
+      <para><mediaobject>
+          <imageobject>
+            <imagedata fileref="catalyst.png" />
+          </imageobject>
+        </mediaobject>
+      </para>
+
     bla bla bla
   </section>
 
