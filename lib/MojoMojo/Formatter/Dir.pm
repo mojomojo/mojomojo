@@ -136,8 +136,8 @@ sub to_xhtml{
   $path =~ s/\/$//;
   my $url = "${baseuri}/${path}";
 
-
   my $ret = '<div id="dirs"><ul>';
+  $ret .= "<li><a href=\"$url\">..</a></li>";
   foreach my $d (@subdirs){
     next if ( ! -r $d);
     $d =~ s/$dir\///;
