@@ -68,6 +68,16 @@ sub gif : Global {
 
 }
 
+=head2 tiff
+
+=cut
+
+sub tiff : Global {
+    my ( $self, $c, $path ) = @_;
+    $c->forward('view');
+
+}
+
 =head2 view
 
 png/jpg/gif are forwarded here. This action  is used to see images
