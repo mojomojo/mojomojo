@@ -28,7 +28,7 @@ sub can_format {
   my $self = shift;
   my $type = shift;
 
-  return 1 if ( $type eq "png" );
+  return 1 if ( $type =~ /png|jpg|gif|tiff/ );
   return 0;
 }
 
