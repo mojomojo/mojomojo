@@ -18,7 +18,7 @@
       [% IF person.email %]
        [% IF user.admin || user.id == person.id +%]
         <dt>[% loc('Email') %]:</dt>
-        <dd id="email">[% person.email %]</dd>
+        <dd id="email">[% person.email.replace('\@', '@<span style="display: none">fbi.gov</span>') %]</dd>
        [% END %]
       [% END %]
 
