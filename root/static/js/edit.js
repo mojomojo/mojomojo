@@ -186,9 +186,9 @@ setup_formatter_toolbar = function() {
             //[ 'strikethrough', loc('Deleted Text'), '-', '-', loc('deleted')],
             [ 'wikilink', loc('Internal Link'), '[[/path/to/page|', ']]', loc('Intrawiki Link')],
             [ 'hyperlink', loc('External Link'), '['+loc('linked text')+'](', ')', 'URL'],
-            [ 'drawing_left',  loc('Picture left'),  '&nbsp;<div class=photo style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
-            [ 'drawing',       loc('Picture'),       '&nbsp;<div class=photo>![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
-            [ 'drawing_right', loc('Picture Right'), '&nbsp;<div class=photo style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]
+            [ 'drawing_left',  loc('Picture left'),  '<div markdown="1" class="photo" style="float: left">![alt text](',  ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing',       loc('Picture'),       '<div markdown="1" class="photo">![alt text](',                      ' "Title")</div>', '/.static/catalyst.png' ],
+            [ 'drawing_right', loc('Picture Right'), '<div markdown="1" class="photo" style="float: right">![alt text](', ' "Title")</div>', '/.static/catalyst.png' ]
         ];
     }
 
