@@ -72,7 +72,11 @@ sub delete : Global FormConfig {
         can_delete => $c->check_permissions($_->path, $c->user)->{delete},
     } for sort { $a->{path} cmp $b->{path} } $c->stash->{'page'}->descendants;
 
-    if ( $form->submitted_and_valid ) {
+    $stash->{descendants}       = \@descendants;
+    $stash->{allowed_to_delete} = ( grep {$_->{can_delete} == 0} @descendants )
+                                ? 0 : 1;
+
+    if ( $form->submitted_and_valid && $stash->{allowed_to_delete} ) {
         my @deleted_pages;
         my @ids_to_delete;
         for my $page ( $c->stash->{'page'}->descendants ) {
@@ -111,10 +115,6 @@ sub delete : Global FormConfig {
         $stash->{'deleted_pages'} = \@deleted_pages;
         $stash->{'template'}      = 'page/deleted.tt';
     }
-
-    $stash->{descendants}       = \@descendants;
-    $stash->{allowed_to_delete} = ( grep {$_->{can_delete} == 0} @descendants )
-                                ? 0 : 1;
 }
 
 =head2 edit
