@@ -1,0 +1,6 @@
+---
+load_config_file: __path_to(root/forms/defaults.yml)__
+
+elements:
+  - type: Submit
+    name: confirm

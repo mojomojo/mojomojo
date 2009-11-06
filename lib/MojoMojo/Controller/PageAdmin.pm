@@ -52,6 +52,71 @@ sub auto : Private {
     $c->detach('unauthorized', [$c->loc('edit')]);
 }
 
+=head2 delete
+
+Delete a page and it's descendants.
+
+=cut
+
+sub delete : Global FormConfig {
+    my ( $self, $c, $path ) = @_;
+
+    my $form  = $c->stash->{form};
+    my $stash = $c->stash;
+    $stash->{template} = 'page/delete.tt';
+
+    my @descendants;
+    push @descendants, {
+        name       => $_->name_orig,
+        id         => $_->id,
+        can_delete => $c->check_permissions($_->path, $c->user)->{delete},
+    } for sort { $a->{path} cmp $b->{path} } $c->stash->{'page'}->descendants;
+
+    if ( $form->submitted_and_valid ) {
+        my @deleted_pages;
+        my @ids_to_delete;
+        for my $page ( $c->stash->{'page'}->descendants ) {
+            push @deleted_pages, $page->name_orig;
+            push @ids_to_delete, $page->id;
+        }
+
+        my @tables = (
+            { module => 'DBIC::PageVersion', column => 'page' },
+            { module => 'DBIC::Attachment', column => 'page' },
+            { module => 'DBIC::Comment', column => 'page' },
+            { module => 'DBIC::Link', column => [ qw(from_page to_page) ] },
+            { module => 'DBIC::RolePrivilege', column => 'page' },
+            { module => 'DBIC::Tag', column => 'page' },
+            { module => 'DBIC::WantedPage', column => 'from_page' },
+            { module => 'DBIC::Journal', column => 'pageid' },
+            { module => 'DBIC::Entry', column => 'journal' },
+            { module => 'DBIC::Content', column => 'page' },
+            { module => 'DBIC::Page', column => 'id' },
+        );
+
+        for my $descendant ( reverse @descendants ) {
+            for my $table ( @tables ) {
+                my $search;
+                if( ref $table->{column} ) {
+                    push @{$search}, { $_ => $descendant->{id} }
+                        for(@{$table->{column}});
+                } else {
+                    $search = { $table->{column} => $descendant->{id} }
+                }
+
+                $c->model( $table->{module} )->search( $search )->delete_all;
+            }
+        }
+
+        $stash->{'deleted_pages'} = \@deleted_pages;
+        $stash->{'template'}      = 'page/deleted.tt';
+    }
+
+    $stash->{descendants}       = \@descendants;
+    $stash->{allowed_to_delete} = ( grep {$_->{can_delete} == 0} @descendants )
+                                ? 0 : 1;
+}
+
 =head2 edit
 
 This action will display the edit form, then save the previous
@@ -98,7 +163,7 @@ sub edit : Global FormConfig {
     my $loc_permtocheck = $permtocheck eq 'create'
       ? $c->loc('create')
       : $c->loc('edit');
-      
+
     # TODO this should be caught in the auto action. To reproduce, disable "Edit allowed by default"
     # in Site settings, then go to /.edit
     if ( !$perms->{$permtocheck} ) {
@@ -193,7 +258,7 @@ sub edit : Global FormConfig {
         # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
         MojoMojo->call_plugins( 'format_content', \$precompiled_body, $c, $page );
-        
+
         # Make precompiled empty when we have any of: redirect, comment or include
         $valid->{'precompiled'} = $c->stash->{precompile_off} ? '' : $precompiled_body;
 
@@ -204,7 +269,7 @@ sub edit : Global FormConfig {
         $c->model('Search')->index_page($page)
             unless $c->pref('disable_search');
         $page->content->store_links();
-        
+
         # Redirect back to edits or view page mode.
         my $redirect = $c->uri_for( $c->stash->{path} );
         if ( $form->params->{submit} eq $c->localize('Save') ) {
@@ -329,7 +394,7 @@ sub rollback : Global {
         $c->res->status(400);
         $c->detach('unauthorized', [$c->loc('rollback')]);
     }
-    
+
     if ( $c->req->param('rev') ) {
         # TODO this needs to do a proper versioned rollback, via
         # $page->add_version( content_version => $c->req->param('rev')
