@@ -5,7 +5,7 @@ use Test::More tests => 6;                      # last test to print
 
 
 BEGIN {
- use_ok('Text::WordDiff::MojoMojo');   
+ use_ok('MojoMojo::WordDiff');   
 }
 
 sub test_diff {
