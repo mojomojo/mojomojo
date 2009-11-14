@@ -62,7 +62,6 @@ requires(
     'Moose'                                        => 0,
     'Number::Format'                               => 0,
     'parent'                                       => 0,
-    'String::Diff'                                 => 0,
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
