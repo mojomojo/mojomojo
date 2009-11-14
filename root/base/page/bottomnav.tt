@@ -11,7 +11,7 @@
 [% IF (!rev OR rev==page.content_version) %]
     [% PROCESS this_page_link.tt, accesskey = 0 %]
 
-    [% IF c.check_permissions(page.path, c.user).delete && page.id > 1 +%]
+    [% IF c.check_permissions(page.path, c.user).delete && page.id && page.id > 1 +%]
         <li id="delete_page"><a title="[%loc('Delete page')%]" href="[%c.uri_for('delete')%]" rel="nofollow">[%loc('Delete page')%]</a></li>
     [% END %]
     [% IF c.req.action=='info' +%]
