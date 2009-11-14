@@ -51,7 +51,7 @@ sub word_diff {
 
 =head1 NAME
 
-MojoMojo::WordDiff
+MojoMojo::WordDiff - generate inline word-based HTML diffs
 
 =head1 DESCRIPTION
 
