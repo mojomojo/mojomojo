@@ -30,7 +30,7 @@ use DateTime::Format::Mail;
 
 use Algorithm::Diff;
 use Algorithm::Merge qw/merge/;
-use Text::WordDiff::MojoMojo;
+use MojoMojo::WordDiff;
 use HTML::Entities qw/encode_entities_numeric/;
 
 __PACKAGE__->load_components(

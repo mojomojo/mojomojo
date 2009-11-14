@@ -2,7 +2,7 @@ package MojoMojo::Formatter::Defang;
 use strict;
 use warnings;
 use parent qw/MojoMojo::Formatter/;
-use HTML::Declaw;
+use MojoMojo::Declaw;
 use URI;
 
 =head1 NAME
@@ -12,7 +12,7 @@ MojoMojo::Formatter::Defang - Scrub user HTML and XSS
 =head1 DESCRIPTION
 
 This formatter makes sure only a safe range of tags are
-allowed, using L<HTML::Defang>; It also tries to remove XSS attempts.
+allowed, using L<MojoMojo::Defang>; It also tries to remove XSS attempts.
 
 =head1 METHODS
 
@@ -176,7 +176,7 @@ context object.
 sub format_content {
     my ( $self, $content, $c ) = @_;
 
-    my $defang = HTML::Declaw->new(
+    my $defang = MojoMojo::Declaw->new(
         context             => $c,
         fix_mismatched_tags => 1,
         tags_to_callback    => [qw/br embed object param img/],
@@ -193,7 +193,7 @@ sub format_content {
 
 =head1 SEE ALSO
 
-L<MojoMojo>, L<Module::Pluggable::Ordered>, L<HTML::Defang>
+L<MojoMojo>, L<Module::Pluggable::Ordered>, L<MojoMojo::Defang>
 
 =head1 AUTHORS
 
