@@ -1,6 +1,7 @@
   New Features:
   - Added (versioned) page renaming in Page Info (dandv)))
   - Add delete page function
+  - Replaced String::Diff with word diff (Ryan52)
 
   Bug fixes:
   - fixed inserting images via the toolbar after markdown="1" support (dandv)
