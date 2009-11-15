@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use MojoMojo::Formatter::Include;
 use lib 't/lib';
 use FakeCatalystObject;
@@ -14,6 +14,8 @@ my $fake_c = FakeCatalystObject->new;
 my ($content);
 
 content_like '/.jsrpc/render?content=%7B%7Bhttp://localhost/help%7D%7D', qr/Wiki.*Syntax/,
+    'include part of wiki';
+content_like '/help.jsrpc/render?content=%7B%7Bhttp://localhost/%7D%7D', qr/Welcome\sto\sMojoMojo/,
     'include part of wiki';
 
 SKIP: {
