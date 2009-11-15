@@ -154,14 +154,10 @@ sub edit : Global FormConfig {
         ? $proto_pages->[-1]
         : $path_pages->[-1]
     );
-
-    # this should never happen!
-    $c->detach('/default') unless $page;  # TODO there is no default action, BTW
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     my $perms =
-      $c->check_permissions( $stash->{'path'},
-        ( $c->user_exists ? $c->user->obj : undef ) );
+      $c->check_permissions( $stash->{'path'},  $c->user->obj );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     my $loc_permtocheck = $permtocheck eq 'create'
       ? $c->loc('create')
@@ -211,26 +207,10 @@ sub edit : Global FormConfig {
                 creator     => $user_id,
             );
             $page = $path_pages->[-1];
+            
 
             # update the pages that wanted the new one
-            foreach my $want_me ($c->model('DBIC::WantedPage')->search( { to_path => $c->stash->{path} } ) ) {
-                my $wantme_page = $want_me->from_page;
 
-                # convert the wanted into links
-                $c->model('DBIC::Link')->create({
-                    from_page => $wantme_page,
-                    to_page   => $page,
-                });
-
-                # clear the precompiled (will be recompiled on view)
-                if ( my $wantme_content = $wantme_page->content ) {
-                    $wantme_content->precompiled(undef);
-                    $wantme_content->update;
-                }
-
-                # ok, she don't want me anymore ;)
-                $want_me->delete();
-            }
         }
 
         $stash->{content} = $page->content;

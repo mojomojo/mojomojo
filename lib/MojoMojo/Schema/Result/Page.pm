@@ -97,6 +97,25 @@ sub update_content {
     else {
         $self->result_source->resultset->set_paths($self);
     }
+    foreach my $want_me ($self->result_source->schema->resultset('WantedPage')
+                              ->search( { to_path => $self->path } ) ) {
+        my $wantme_page = $want_me->from_page;
+
+        # convert the wanted into links
+        $self->result_source->schema->resultset('Link')->create({
+            from_page => $wantme_page,
+            to_page   => $self,
+        });
+
+        # clear the precompiled (will be recompiled on view)
+        if ( my $wantme_content = $wantme_page->content ) {
+            $wantme_content->precompiled(undef);
+            $wantme_content->update;
+        }
+
+        # ok, she don't want me anymore ;)
+        $want_me->delete();
+    }
 
 }    # end sub update_content
 
