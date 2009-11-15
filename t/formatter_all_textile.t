@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 30;
+use Test::More;
 use HTTP::Request::Common;
 use Test::Differences;
 use FindBin '$Bin';
@@ -116,29 +116,26 @@ TEXTILE
 $body = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $body, $content, $test );
 
-TODO: {
-    local $TODO = 'something before a pre adds defang_lang attribute to pre';
-    # We'd like this test to pass, but our current setup with Defang
-    # adds
-    #     defang_lang=""
-    # attribute to <pre> when there is some content before a pre.
-    # (even a pre itself)
-    $test    = 'pre tag - no attribute and some text before pre';
-    $content = <<'TEXTILE';
+#$TODO = 'something before a pre adds defang_lang attribute to pre';
+# This test is passing now (November 15, 2009, but requires some extra line returns.
+# in order to get input and output matched up
+$test    = 'pre tag - no attribute and some text before pre';
+$content = <<'TEXTILE';
 Jeg har familie i
 <pre>
 Hopen, Norway
 </pre>
 TEXTILE
-    $expected = <<'HTML';
+$expected = <<'HTML';
 <p>Jeg har familie i</p>
+
+
 <pre>
 Hopen, Norway
 </pre>
 HTML
-    $body = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $body, $expected, $test );
-}
+$body = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $body, $expected, $test );
 
 $test    = 'pre tag - no attribute and some text after pre';
 $content = <<'HTML';
@@ -527,3 +524,19 @@ HTML
 $expected = $content;
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $got, $expected, $test );
+
+$test = 'relative local img src';
+$content = '<img src="/blog/Meetup_com_thinks_that_July_28,_2009,_is_a_Wednesday.attachment/1/view" />';
+$expected = '<p>' . $content . '</p>
+';
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );
+
+$test = 'code';
+$content = q(<code>is some code, "isn't it"</code>.);
+$expected = '<p>'. $content . '</p>
+';
+$got  = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, $expected, $test );
+
+done_testing(32);
