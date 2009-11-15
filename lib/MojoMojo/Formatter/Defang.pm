@@ -109,7 +109,7 @@ Callback for custom handling HTML tag attributes.
 
 sub defang_attribs_callback {
     my ( $c, $defang, $lc_tag, $lc_attr_key, $attr_val_r, $html_r ) = @_;
-
+    
     # if $lc_attr_key eq 'value';
     # Initial Defang effort on attributes applies specifically to 'src'
     if ( $lc_attr_key eq 'src' ) {
@@ -145,7 +145,7 @@ sub defang_attribs_callback {
         # local server whether the URI is relative or absolute..
         if ( defined $c && defined $src_uri_object->authority ) {
             if ( $c->request->uri->authority eq $src_uri_object->authority ) {
-                return 2;
+                return 0;
             }
             else {
                 return 1;
@@ -159,8 +159,12 @@ sub defang_attribs_callback {
         elsif ( defined $src_uri_object->authority ) {
             return 1;
         }
+        # Explicitly defang javascript in img src.
+        elsif ( $$attr_val_r =~ m{javascript}i ) {
+            return 1;
+        }
         else {
-            return 2;
+            return 0;
         }
     }
     return 0;
@@ -175,7 +179,7 @@ context object.
 
 sub format_content {
     my ( $self, $content, $c ) = @_;
-
+    
     my $defang = MojoMojo::Declaw->new(
         context             => $c,
         fix_mismatched_tags => 1,
