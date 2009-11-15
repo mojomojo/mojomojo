@@ -498,19 +498,20 @@ table.recent .actions       { width: 10%; }
 }
 
 .diffdel, del {
-    background: #bbb;
-    font-size: 1.08em;
-    text-decoration: none;
-    color: white;
+/*    background: #bbb; 
+    color: white; */
+    border: dotted thin #fbbc08;
+    color: #555;
+    text-decoration: line-through;
     padding-left: 1px;
     padding-right: 1px;
 }
 
 .diffins, ins {
-    background: cornsilk;
+    border: dotted thin #fbbc08;
+    background: yellow;
     color: black;
     text-decoration: none;
-    font-size: 1.22em;
     padding-left: 1px;
     padding-right: 1px;
 }
