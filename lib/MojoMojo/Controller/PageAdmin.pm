@@ -82,6 +82,9 @@ sub delete : Global FormConfig {
         for my $page ( $c->stash->{'page'}->descendants ) {
             push @deleted_pages, $page->name_orig;
             push @ids_to_delete, $page->id;
+
+            # remove page from search index
+            $c->model('Search')->delete_page($page);
         }
 
         my @tables = (
