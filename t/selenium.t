@@ -35,7 +35,7 @@ $sel->is_text_present_ok("Log in");
 $sel->open_ok(".list");
 $sel->is_text_present_ok("Log in");
 $sel->click_ok("link=Log in");
-$sel->wait_for_page_to_load_ok( "15000", 'wait' );
+$sel->wait_for_page_to_load_ok( "15000");
 $sel->type_ok( "loginField", "admin" );
 $sel->type_ok( "pass",       "admin" );
 $sel->click_ok("//input[\@value='Login']");
