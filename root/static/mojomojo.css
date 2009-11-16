@@ -763,6 +763,17 @@ ul#menuHome {
     color: red;
 }
 
+/* color values for errors copied from those for form elements */
+img[defang_src] {
+    border: 1px solid #ff0000;
+    background-color: #ffdddd;
+    color: #ff0000;
+}
+
+img[defang_src]:after {
+    content: "External image forbidden due to its URL. Please contact your wiki administrator.";
+}
+
 div.photo img{
     margin: 1em;
     padding: 5px;
