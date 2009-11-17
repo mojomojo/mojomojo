@@ -69,7 +69,7 @@ sub delete : Global FormConfig {
     push @descendants, {
         name       => $_->name_orig,
         id         => $_->id,
-        can_delete => $c->check_permissions($_->path, $c->user)->{delete},
+        can_delete => ($_->id == 1) ? 0 : $c->check_permissions($_->path, $c->user)->{delete},
     } for sort { $a->{path} cmp $b->{path} } $c->stash->{'page'}->descendants;
 
     $stash->{descendants}       = \@descendants;
