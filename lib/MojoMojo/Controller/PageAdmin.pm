@@ -157,7 +157,7 @@ sub edit : Global FormConfig {
     @$stash{qw/ path_pages proto_pages /} = ( $path_pages, $proto_pages );
 
     my $perms =
-      $c->check_permissions( $stash->{'path'},  $c->user->obj );
+      $c->check_permissions( $stash->{'path'},  $c->user_exists ? $c->user->obj : undef );
     my $permtocheck = ( @$proto_pages > 0 ? 'create' : 'edit' );
     my $loc_permtocheck = $permtocheck eq 'create'
       ? $c->loc('create')
