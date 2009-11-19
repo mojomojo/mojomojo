@@ -11,7 +11,7 @@ BEGIN {
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 18;
+    plan tests => 19;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -83,6 +83,7 @@ ok defined $mech->field(body => <<PAGE_CONTENT,
 # This is a test page
 PAGE_CONTENT
 ),'Set page content';
+ok $mech->click_button(value => 'Save'), 'click the "Save" button';
 
 $mech->get_ok('/test');
 $mech->content_contains('<a class="existingWikiWord" href="/totally_new_page">','Link was updated');
