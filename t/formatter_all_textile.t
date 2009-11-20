@@ -1,22 +1,24 @@
 #!/usr/bin/perl -w
-use Test::More;
+use strict;
+use Test::More tests => 32;
 use HTTP::Request::Common;
 use Test::Differences;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
 use Data::Dumper;
 
-my $original_formatter
-  ;    # used to save/restore whatever formatter is set up in mojomojo.db
-my $c;       # the Catalyst object of this live server
-my $test;    # test description
+my $original_formatter;  # used to save/restore the existing formatter set up in mojomojo.db
+my $c;                   # the Catalyst object of this live server
+my $test;                # test description
+my $content;             # the markup content that is being rendered
+my $got;                 # the rendered result
+my $expected;            # the expected rendered result
+
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     use_ok('MojoMojo::Formatter::Textile')
-      and note(
-'Comprehensive/chained test of formatters, with the main formatter set to Textile'
-      );
+        and note('Comprehensive/chained test of formatters, with the main formatter set to Textile');
     use_ok( 'Catalyst::Test', 'MojoMojo' );
 }
 
@@ -33,9 +35,9 @@ ok( $original_formatter = $c->pref('main_formatter'),
 ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Textile' ),
     'set preferred formatter to Textile' );
 
-my $content = '';
-my $body = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $body, 'Please type something', 'empty body' );
+$content = '';
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+is( $got, 'Please type something', 'empty body' );
 
 #----------------------------------------------------------------------------
 $test = 'headings';
@@ -52,8 +54,8 @@ h2. Need some assistance?
 
 Check out our [[Help]] section.
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <h1>Welcome to MojoMojo!</h1>
 
 <p>This is your front page. Create<br />
@@ -97,8 +99,8 @@ if (1 > 2) {
 }
 </pre>
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <pre>
 <b>if</b>&nbsp;(<span class="kateFloat">1</span>&nbsp;&gt;&nbsp;<span class="kateFloat">2</span>)&nbsp;{
 &nbsp;&nbsp;<span class="kateFunction">print</span>&nbsp;<span class="kateOperator">"</span><span class="kateString">test</span><span class="kateOperator">"</span>;
@@ -113,8 +115,8 @@ $content = <<'TEXTILE';
 Hopen, Norway
 </pre>
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $content, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $content, $test );
 
 #$TODO = 'something before a pre adds defang_lang attribute to pre';
 # This test is passing now (November 15, 2009, but requires some extra line returns.
@@ -134,8 +136,8 @@ $expected = <<'HTML';
 Hopen, Norway
 </pre>
 HTML
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $expected, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
 
 $test    = 'pre tag - no attribute and some text after pre';
 $content = <<'HTML';
@@ -151,8 +153,8 @@ Hopen, Norway
 
 <p>er et sted langt mot nord.</p>
 ';
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $expected, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
 
 
 #----------------------------------------------------------------------------
@@ -178,8 +180,8 @@ if (1  2) {
 </pre>
 HTML
 
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $expected, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
 
 #----------------------------------------------------------------------------
 $test = 'Is <br /> preserved?';
@@ -192,8 +194,8 @@ $test = 'Is <br /> preserved?';
 $content = <<'TEXTILE';
 Roses are red<br />Violets are blue
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <p>Roses are red<br />Violets are blue</p>
 HTML
 
@@ -204,8 +206,8 @@ $content = <<'TEXTILE';
 ==<code><span style="font-size: 1.5em;">alguna cosa</span></code>
 ==
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <code><span style="font-size: 1.5em;">alguna cosa</span></code>
 HTML
 
@@ -215,8 +217,8 @@ $test    = '@word@ behavior';
 $content = <<'TEXTILE';
 @mot@
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <p><code>mot</code></p>
 HTML
 
@@ -231,8 +233,8 @@ bq. quoted text
 
 A quote is above.
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <p>Below is a blockquote:</p>
 
 <blockquote><p>quoted text</p></blockquote>
@@ -250,8 +252,8 @@ $content = <<'TEXTILE';
 # comment
 </pre>
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, <<'HTML', $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, <<'HTML', $test );
 <pre>
 <span class="kateComment"><i>#&nbsp;comment</i></span><span class="kateComment"><i>
 </i></span></pre>
@@ -286,8 +288,8 @@ $expected = <<'HTML';
 HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $expected, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
 
 #----------------------------------------------------------------------------
 $test = 'Maintain complete set of html table tags. Use textile escape ==';
@@ -354,8 +356,8 @@ $expected = <<'HTML';
 HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $body, $expected, $test );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
 
 #-------------------------------------------------------------------------------
 $test    = 'POD while Textile is the main formatter';
@@ -370,8 +372,8 @@ Some POD here
 
 {{end}}
 TEXTILE
-$body = get( POST '/.jsrpc/render', [ content => $content ] );
-like( $body, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME" );
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+like( $got, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME" );
 
 {
     $test = 'Simple SQL SELECT';
@@ -538,5 +540,3 @@ $expected = '<p>'. $content . '</p>
 ';
 $got  = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $got, $expected, $test );
-
-done_testing(32);
