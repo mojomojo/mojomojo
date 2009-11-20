@@ -39,10 +39,10 @@ $content = '';
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 is( $got, 'Please type something', 'empty body' );
 
+
 #----------------------------------------------------------------------------
 $test = 'headings';
 
-#----------------------------------------------------------------------------
 $content = <<'TEXTILE';
 h1. Welcome to MojoMojo!
 
@@ -67,26 +67,33 @@ through the edit link at the bottom.</p>
 <p>Check out our <a class="existingWikiWord" href="/help">Help</a> section.</p>
 HTML
 
-{
-    $test = 'say Perl';
 
-    $content = <<'TEXTILE';
+#----------------------------------------------------------------------------
+$test = 'syntax highlight, Perl';
+
+$content = <<'TEXTILE';
 <pre lang="Perl">
     say "Hola Cabrón";
 </pre>
 TEXTILE
 
-    $expected = <<HTML;
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML';
 <pre>
 &nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;<span class="kateOperator">"</span><span class="kateString">Hola&nbsp;Cabrón</span><span class="kateOperator">"</span>;
 </pre>
 HTML
-
-    # Now run through all formatters.
-    $test .= ' - run through all formatters';
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $got, $expected, $test );
+} else {
+    $expected = <<'HTML';
+<pre lang="Perl">
+    say "Hola Cabrón";
+</pre>
+HTML
 }
+
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
 
 
 #----------------------------------------------------------------------------
@@ -99,14 +106,28 @@ if (1 > 2) {
 }
 </pre>
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML';
 <pre>
 <b>if</b>&nbsp;(<span class="kateFloat">1</span>&nbsp;&gt;&nbsp;<span class="kateFloat">2</span>)&nbsp;{
 &nbsp;&nbsp;<span class="kateFunction">print</span>&nbsp;<span class="kateOperator">"</span><span class="kateString">test</span><span class="kateOperator">"</span>;
 }
 </pre>
 HTML
+} else {
+    $expected = <<'HTML';
+<pre lang="Perl">
+if (1 > 2) {
+  print "test";
+}
+</pre>
+HTML
+}
+
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
 
 #----------------------------------------------------------------------------
 $test    = 'Only a <pre> section - no attribute';
@@ -242,8 +263,9 @@ eq_or_diff( $got, <<'HTML', $test );
 <p>A quote is above.</p>
 HTML
 
+
 #----------------------------------------------------------------------------
-$test = 'Handle # as first character in a line while using Perl highlight';
+$test = 'Syntax highlight, Perl - handle "#" at start of line as comment, not heading';
 
 # TODO: This test demonstrates that Syntax Highlight is adding an empty span.
 #       Investigate further and clean it up.
@@ -252,12 +274,24 @@ $content = <<'TEXTILE';
 # comment
 </pre>
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML'
 <pre>
 <span class="kateComment"><i>#&nbsp;comment</i></span><span class="kateComment"><i>
 </i></span></pre>
 HTML
+} else {
+    $expected = <<'HTML'
+<pre lang="Perl">
+# comment
+</pre>
+HTML
+}
+
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
 
 #----------------------------------------------------------------------------
 $test = 'Simple html table tags. Use textile escape ==';
@@ -359,6 +393,7 @@ HTML
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
 
+
 #-------------------------------------------------------------------------------
 $test    = 'POD while Textile is the main formatter';
 $content = <<'TEXTILE';
@@ -375,29 +410,38 @@ TEXTILE
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 like( $got, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME" );
 
-{
-    $test = 'Simple SQL SELECT';
 
-    $content = <<SQL;
+
+#-------------------------------------------------------------------------------
+$test = 'Syntax highlight, SQL';
+
+$content = <<SQL;
 <pre lang="SQL">
 select * from foo
 </pre>
 SQL
 
-    $expected = <<SQL;
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML'
 <pre>
 <b>select</b>&nbsp;*&nbsp;<b>from</b>&nbsp;foo
 </pre>
-SQL
-
-    $test .= ' - run through all formatters';
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $got, $expected, $test );
-
+HTML
+} else {
+    $expected = <<'HTML'
+<pre lang="SQL">
+select * from foo
+</pre>
+HTML
 }
 
+$got = get( POST '/.jsrpc/render', [ content => $content ] );
+eq_or_diff( $got, $expected, $test );
+
+
+
 #-------------------------------------------------------------------------------
-$test = 'XML tag in <pre lang="HTML"> run through the JSRPC renderer';
+$test = 'Syntax highlight, XML';
 
 $content = <<TEXTILE;
 <pre lang="XML">
@@ -407,13 +451,23 @@ some text here
 </pre>
 TEXTILE
 
-$expected = <<'HTML';
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML';
 <pre>
 <b>&lt;foo&gt;</b>
 some&nbsp;text&nbsp;here
 <b>&lt;/foo&gt;</b>
 </pre>
 HTML
+} else {
+    $expected = <<'HTML';
+<pre lang="XML">
+<foo>
+some text here
+</foo>
+</pre>
+HTML
+}
 
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
@@ -421,7 +475,7 @@ eq_or_diff( $got, $expected, $test );
 
 
 #-------------------------------------------------------------------------------
-$test = 'HTML tag in <pre lang="HTML"> run through the JSRPC renderer';
+$test = 'Syntax highlight, HTML';
 
 $content = <<TEXTILE;
 <pre lang="HTML">
@@ -431,13 +485,23 @@ some text here
 </pre>
 TEXTILE
 
-$expected = <<'HTML';
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML';
 <pre>
 <b>&lt;textarea&gt;</b>
 some&nbsp;text&nbsp;here
 <b>&lt;/textarea&gt;</b>
 </pre>
 HTML
+} else {
+    $expected = <<'HTML';
+<pre lang="HTML">
+<textarea>
+some text here
+</textarea>
+</pre>
+HTML
+}
 
 $got = get( POST '/.jsrpc/render', [ content => $content ] );
 eq_or_diff( $got, $expected, $test );
@@ -458,13 +522,24 @@ some text here
 </pre>
 TEXTILE
 
-    $expected = <<'HTML';
+
+    if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+        $expected = <<'HTML'
 <pre>
 <b>&lt;code&gt;</b>
 some&nbsp;text&nbsp;here
 <b>&lt;/code&gt;</b>
 </pre>
 HTML
+    } else {
+        $expected = <<'HTML'
+<pre lang="HTML">
+<code>
+some text here
+</code>
+</pre>
+HTML
+    }
 
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $got, $expected, $test );
@@ -480,16 +555,26 @@ HTML
 </pre>
 TEXTILE
 
-    $expected = <<'HTML';
+    if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+        $expected = <<'HTML'
 <pre>
 <span class="kateOperator">"</span><span class="kateString">Monotype:&nbsp;use&nbsp;&lt;tt&gt;.</span><span class="kateOperator">"</span>;
 <span class="kateOperator">"</span><span class="kateString">Source&nbsp;code:&nbsp;&lt;code&gt;.</span><span class="kateOperator">"</span>;
 </pre>
 HTML
-
+    } else {
+        $expected = <<'HTML'
+<pre lang="Perl">
+"Monotype: use <tt>.";
+"Source code: <code>.";
+</pre>
+HTML
+    }
+    
     $got = get( POST '/.jsrpc/render', [ content => $content ] );
     eq_or_diff( $got, $expected, $test );
 }
+
 
 #-------------------------------------------------------------------------------
 $test    = 'img src http not allowed';

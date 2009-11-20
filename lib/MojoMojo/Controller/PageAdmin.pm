@@ -2,7 +2,9 @@ package MojoMojo::Controller::PageAdmin;
 use warnings;
 use strict;
 use parent 'Catalyst::Controller::HTML::FormFu';
-use Syntax::Highlight::Engine::Kate;
+
+eval {require Syntax::Highlight::Engine::Kate};
+my $kate_installed = !$@;
 
 =head1 NAME
 
@@ -191,8 +193,11 @@ sub edit : Global FormConfig {
         $form->process;
     }
 
-    my $syntax = new Syntax::Highlight::Engine::Kate;
-    $c->stash->{syntax_formatters} = [ $syntax->languageList() ];
+    # prepare the list of available syntax highlighters
+    if ($kate_installed) {
+        my $syntax = new Syntax::Highlight::Engine::Kate;
+        $c->stash->{syntax_formatters} = [ $syntax->languageList() ];
+    }    
 
     if ( $form->submitted_and_valid ) {
 

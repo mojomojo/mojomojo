@@ -17,10 +17,14 @@
 
 <script type="text/javascript">
     var append='[% append | js %]';
-    var syntax_formatters = ["[% syntax_formatters.join('","') %]"];
+    [% IF syntax_formatters %]
+        var syntax_formatters = ["[% syntax_formatters.join('","') %]"];
+    [% ELSE %]
+        syntax_formatters = ["Please install Syntax::Highlight::Engine::Kate"];
+    [% END %]    
     [% UNLESS user %]
     $('#editForm').submit(function() { return cleanAuthorName("[%c.pref('anonymous_user')%]")});
-    [% END %]
+    [% END +%]
 </script>
 
 <div id="edithelp">[% PROCESS edithelp.tt %]</div>
