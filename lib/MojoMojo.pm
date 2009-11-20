@@ -88,6 +88,7 @@ eval { MojoMojo->model('DBIC')->schema->resultset('MojoMojo::Schema::Result::Per
 if ($@ ) {
     $has_DB = 0;
     warn $NO_DB_MESSAGE;
+    warn "(Error: $@)";
 }
 
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
