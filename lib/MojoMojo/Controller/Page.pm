@@ -19,7 +19,7 @@ MojoMojo::Controller::Page - Page controller
 
 This controller is the main juice of MojoMojo. It handles all the
 actions related to wiki pages. Actions are redispatched to this
-controller based on a Regex controller in the main MojoMojo class.
+controller based on MojoMojo's custom prepare_path method.
 
 Every private action here expects to have a page path in args. They
 can be called with urls like "/page1/page2.action".
