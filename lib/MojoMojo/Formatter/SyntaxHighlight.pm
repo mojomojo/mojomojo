@@ -25,7 +25,7 @@ This formatter performs syntax highlighting on code blocks.
 
 =head2 format_content_order
 
-The syntax highlight formatter is based on C<< <pre> >>tags entered by the
+The syntax highlight formatter is based on C<< <pre> >> tags entered by the
 user, so it must run before other formatters that produce C<< <pre> >> tags.
 The earliest such formatter is the main formatter.
 

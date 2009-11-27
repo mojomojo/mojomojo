@@ -326,7 +326,8 @@ sub list : Global {
 
     $c->stash->{orphans} = [];    # FIXME - real data here please
 
-# no need to check any permissions here because the user already views this page, and wanted pages are redlinks in it
+    # no need to check any permissions here because the user already
+    # views this page, and wanted pages are redlinks in it
     $c->stash->{wanted} = [
         $c->model("DBIC::WantedPage")->search(
             { from_page => [ $page->id, map { $_->id } @all_pages_viewable ] }
