@@ -1,11 +1,15 @@
+  Syntax change - please update affected wiki pages:
+  - {{include <url>}} and {{feed <url>}} instead of the implicit syntax
+    {{<url>}} and {{feed://<url_without_protocol>}}
+
   New Features:
-  - Added (versioned) page renaming in Page Info (dandv)))
+  - Added (versioned) page renaming in Page Info (dandv)
   - Add delete page function
   - Replaced String::Diff with word diff (Ryan52)
+  - e-mail addresses in user .profile-s are now protected against spambots (dandv)
 
   Bug fixes:
   - fixed inserting images via the toolbar after markdown="1" support (dandv)
-  - e-mail addresses in user .profile-s are now protected against spambots (dandv)
   
 
 0.999041 2009-10-26 11:55:00
