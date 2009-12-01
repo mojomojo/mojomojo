@@ -1,3 +1,5 @@
+0.999042 2009-12-01 21:42:00
+  
   Syntax change - please update affected wiki pages:
   - {{include <url>}} and {{feed <url>}} instead of the implicit syntax
     {{<url>}} and {{feed://<url_without_protocol>}}
