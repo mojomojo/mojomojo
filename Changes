@@ -1,4 +1,10 @@
 0.999042 2009-12-01 21:42:00
+
+  WARNING: there are some issues with the Defang formatter, which will
+    corrupt certain kinds of markup. The simple fix is to remove
+    lib/MojoMojo/Formatter/Defang.pm, but that may open the door to
+    XSS attacks. Please see for details
+    http://n2.nabble.com/Defang-issues-td4078508.html
   
   Syntax change - please update affected wiki pages:
   - {{include <url>}} and {{feed <url>}} instead of the implicit syntax
