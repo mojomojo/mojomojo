@@ -1,7 +1,8 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use strict;
-use MojoMojo::Formatter::Include;
+use warnings;
 use Test::More;
+use MojoMojo::Formatter::Include;
 use lib 't/lib';
 use FakeCatalystObject;
 

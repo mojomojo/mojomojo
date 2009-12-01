@@ -1,12 +1,14 @@
-#!/usr/bin/perl -w
-use Test::More ;
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Test::More;
+
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 };
 
 BEGIN {
     eval "use Test::WWW::Mechanize::Catalyst 'MojoMojo'";
-print $@;
     plan skip_all => 'need Test::WWW::Mechanize::Catalyst' if $@;
 
     eval "use WWW::Mechanize::TreeBuilder";

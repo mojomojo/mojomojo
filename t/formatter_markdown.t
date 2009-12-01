@@ -1,7 +1,8 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use strict;
-use MojoMojo::Formatter::Markdown;
+use warnings;
 use Test::More tests => 15;
+use MojoMojo::Formatter::Markdown;
 use Test::Differences;
 
 my ( $content, $got, $expected, $test );
@@ -210,5 +211,3 @@ eq_or_diff( MojoMojo::Formatter::Markdown->main_format_content( \$content ),
 <span class="caption">Caption</span></p>
 </div>
 HTML
-
-

@@ -1,4 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More tests => 32;
 use MojoMojo::Formatter::Wiki;
 use lib 't/lib';

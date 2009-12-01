@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use strict;
+use warnings;
 use MojoMojo::Formatter::SyntaxHighlight;
 use HTTP::Request::Common;
 use Test::More;
@@ -229,4 +230,3 @@ PERL
 PERL
     is( $content, $wanted, $test );
 }
-

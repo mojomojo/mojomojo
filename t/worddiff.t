@@ -1,11 +1,12 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 
-use Test::More tests => 6;                      # last test to print
+use Test::More tests => 6;
 
 
 BEGIN {
- use_ok('MojoMojo::WordDiff');   
+    use_ok('MojoMojo::WordDiff');   
 }
 
 sub test_diff {

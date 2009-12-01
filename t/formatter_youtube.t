@@ -1,4 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use MojoMojo::Formatter::YouTube;
 use Test::More tests => 5;
 use lib 't/lib';

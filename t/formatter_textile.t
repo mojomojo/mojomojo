@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use strict;
+use warnings;
 use MojoMojo::Formatter::Textile;
 use Test::More tests => 6;
 use Test::Differences;

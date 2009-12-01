@@ -1,6 +1,7 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 # Comprehensive/chained test of formatters, with the main formatter set to MultiMarkdown
 use strict;
+use warnings;
 use Test::More tests => 27;
 use HTTP::Request::Common;
 use Test::Differences;

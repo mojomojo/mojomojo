@@ -1,10 +1,14 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More tests => 14;
+
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 };
-use_ok( Catalyst::Test, 'MojoMojo' );
-use_ok('MojoMojo::Controller::Page');
+
+use_ok( 'Catalyst::Test', 'MojoMojo' );
+use_ok( 'MojoMojo::Controller::Page' );
 
 ok( request('/.view')->is_success, 'view root' );
 ok( request('/.inline_tags')->is_success, 'show inline tags' );

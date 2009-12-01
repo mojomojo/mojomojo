@@ -1,5 +1,8 @@
-#!/usr/bin/perl -w
-use Test::More ;
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Test::More;
+
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 };
@@ -58,14 +61,14 @@ ok( $mech->look_down(
 # Create a page
 $mech->get_ok('/test.edit', 'edit a test page');
 ok $mech->form_with_fields('body'), 'find the edit form';
-ok defined $mech->field(body => <<PAGE_CONTENT,
+ok defined $mech->field(body => <<PAGE_CONTENT), 'set the "body" value';
 # This is a test page
 
 It was submitted via {{cpan Test::WWW::Mechanize::Catalyst}} with a random string of '$random'.
 
 It also links to [[/|the root page]] and [[/help]] as well as a [[/totally_new_page]].
 PAGE_CONTENT
-), 'set the "body" value';
+
 # we should click 'Save and View' but that causes WWW::Mechanize to die with `Can't call method "header" on an undefined value at /usr/local/share/perl/5.8.8/WWW/Mechanize.pm line 2381`
 ok $mech->click_button(value => 'Save'), 'click the "Save" button';
 
@@ -79,10 +82,10 @@ RENDERED_CONTENT
 
 $mech->get_ok('/totally_new_page.edit', 'make the new page');
 ok $mech->form_with_fields('body'), 'find the edit form';
-ok defined $mech->field(body => <<PAGE_CONTENT,
+ok defined $mech->field(body => <<PAGE_CONTENT), 'Set page content';
 # This is a test page
 PAGE_CONTENT
-),'Set page content';
+
 ok $mech->click_button(value => 'Save'), 'click the "Save" button';
 
 $mech->get_ok('/test');
