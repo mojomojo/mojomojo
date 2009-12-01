@@ -15,7 +15,7 @@
             <li><a href="[% c.uri_for('/.tags') %]" title="[% loc('All tags in this wiki') %]" accesskey="T">[% loc('Tags') %]</a></li>
             <li><a href="[% c.uri_for('/.users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
             <li><a href="[% c.uri_for('/.feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
-            <li><a href="[% c.uri_for('export') %]" title="[% loc('Download a ZIP of this page and its subpages') %]" accesskey="X">[% loc('Export') %]</a></li>
+            <li><a href="[% c.uri_for('export') %]" title="[% loc('Download a ZIP of this page and its subpages') %]" accesskey="X" rel="nofollow">[% loc('Export') %]</a></li>
         </ul>
         [% END # FILTER nav %]
 

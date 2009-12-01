@@ -3,8 +3,8 @@
 <div id="content">
     [%loc('You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki).')%]
     <ul id="feedsList">
-        <li><a href="[% c.uri_for('export_html') %]">[%loc('HTML')%]</a></li>
-        <li><a href="[% c.uri_for('export_raw') %]">[%loc('Raw markup')%]</a></li>
+        <li><a href="[% c.uri_for('export_html') %]" rel="nofollow">[%loc('HTML')%]</a></li>
+        <li><a href="[% c.uri_for('export_raw') %]" rel="nofollow">[%loc('Raw markup')%]</a></li>
     </ul>
 </div>
 

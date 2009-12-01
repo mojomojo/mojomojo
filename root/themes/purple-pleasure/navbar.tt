@@ -32,7 +32,7 @@
 [% END %]
         <li><a[% ' class="navOn"' IF c.req.action == 'users' %] href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors') %]</a></li>
         <li><a[% ' class="navOn"' IF template.name == 'feeds.tt' %] href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]" accesskey="">[% loc('Feeds') %]</a></li>
-        <li><a[% ' class="navOn"' IF template.name =='export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a ZIP of this page and its subpages') %]" accesskey="X">[% loc('Export') %]</a></li>
+        <li><a[% ' class="navOn"' IF template.name =='export.tt' %] href="[% c.uri_for('export') %]" title="[% loc('Download a ZIP of this page and its subpages') %]" accesskey="X" rel="nofollow">[% loc('Export') %]</a></li>
     </ul>
 </div>
 <div id="pagenav">
