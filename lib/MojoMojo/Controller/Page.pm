@@ -367,7 +367,8 @@ sub subtree : Global {
 
 =head2 recent (.recent)
 
-Recently changed pages in this namespace.
+Recently changed pages in this namespace. Also computes the most used
+tags.
 
 =cut
 
@@ -385,8 +386,6 @@ sub recent : Global {
         @pages_viewable = pages_viewable( $c, $user, @pages_viewable );
     }
     $c->stash->{pages} = \@pages_viewable;
-
-    # FIXME - needs to be populated even without tags
 }
 
 =head2 feeds (.feeds)
