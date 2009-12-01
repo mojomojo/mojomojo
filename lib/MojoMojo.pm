@@ -43,8 +43,7 @@ MojoMojo->config->{'Plugin::Cache'}{backend} = {
     unlink_on_exit => 1,
     share_file => '' . Path::Class::file(
         File::Spec->tmpdir,
-        'mojomojo-sharefile-'.
-        Digest::MD5::md5_hex(__PACKAGE__->config->{'name'} || $$)
+        'mojomojo-sharefile-'.Digest::MD5::md5_hex(MojoMojo->config->{home})
     ),
 };
 
