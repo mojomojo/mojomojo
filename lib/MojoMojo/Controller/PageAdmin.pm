@@ -196,7 +196,8 @@ sub edit : Global FormConfig {
     # prepare the list of available syntax highlighters
     if ($kate_installed) {
         my $syntax = new Syntax::Highlight::Engine::Kate;
-        $c->stash->{syntax_formatters} = [ $syntax->languageList() ];
+	# 'Alerts' is hidden Kate module, so delete it from list!
+        $c->stash->{syntax_formatters} = [ grep ( !/^Alerts$/ , $syntax->languageList() ) ];
     }    
 
     if ( $form->submitted_and_valid ) {
