@@ -482,6 +482,14 @@ children and descendants, links to/from, attachments.
 
 sub info : Global {
     my ( $self, $c ) = @_;
+    my $attachments_size = 0;
+    my $attachments_count = 0;
+    foreach my $attachment ( $c->stash->{page}->attachments ){
+        $attachments_size+=$attachment->size;
+	$attachments_count++;
+    }
+    $c->stash->{attachments} = $attachments_count;
+    $c->stash->{attachments_size} = $attachments_size;
     $c->stash->{body_length} = length( $c->stash->{page}->content->body );
     $c->stash->{template}    = 'page/info.tt';
 }
