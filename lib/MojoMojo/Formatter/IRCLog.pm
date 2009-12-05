@@ -84,7 +84,7 @@ sub format_content {
             else {
                 my $count = 0;
                 foreach my $nick ( keys %nicks ) {
-                    $count += ( $line =~ s/$nick/[[$nick]]/g );
+                    $count += ( $line =~ s!$nick(</d.>)![[$nick]]$1!g );
                 }
                 $$content .= "$line\n";
             }
