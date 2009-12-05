@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 8;
+use Test::More tests => 9;
 
 use MojoMojo::Formatter::IRCLog;
 
@@ -16,6 +16,9 @@ my $oe = "</dl>\n==\n";
 $content = "${ib}<nick> text$ie";
 MojoMojo::Formatter::IRCLog->format_content(\$content);
 is($content, "$ob<dt>[[nick]]</dt>\n<dd>text</dd>\n$oe", "basic");
+$content = "${ib}<nick> nick2$ie";
+MojoMojo::Formatter::IRCLog->format_content(\$content);
+is($content, "$ob<dt>[[nick]]</dt>\n<dd>nick2</dd>\n$oe", "nick nick2");
 $content = "${ib}12:00 <nick> text$ie";
 MojoMojo::Formatter::IRCLog->format_content(\$content);
 is($content, "$ob<dt>[[nick]]</dt>\n<dd>text</dd>\n$oe", "with timestamp");
