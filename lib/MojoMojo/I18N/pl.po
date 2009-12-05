@@ -181,9 +181,13 @@ msgstr "Domyślnie włącz załączniki"
 msgid "Attachment not found."
 msgstr "Załącznik nie został znaleziony"
 
-#: root/base/navbar.tt:44 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:63
+#: root/base/navbar.tt:44 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:66
 msgid "Attachments"
 msgstr "Załączniki"
+
+#: root/base/page/info.tt:63
+msgid "Attachments size"
+msgstr "Rozmiar załączników"
 
 #: root/base/navbar.tt:12
 msgid "Authors"
@@ -773,7 +777,7 @@ msgstr "Tytuł linku"
 msgid "Link to Another Page"
 msgstr "Link do innej strony"
 
-#: root/base/page/info.tt:73
+#: root/base/page/info.tt:76
 msgid "Linked from"
 msgstr "Linkowane z"
 
@@ -1109,7 +1113,7 @@ msgstr "Album fotografii"
 msgid "Photo not found"
 msgstr "Zdjęcie nie zostało odnalezione"
 
-#: root/base/page/info.tt:66
+#: root/base/page/info.tt:69
 msgid "Photos"
 msgstr "Zdjęć"
 
@@ -1448,7 +1452,7 @@ msgstr "W czasie gdy edytowałeś tę stronę ktoś inny również ją zmienił.
 
 #: root/base/page/delete.tt:8
 msgid "Sorry"
-msgstr ""
+msgstr "Przepraszam"
 
 #: root/base/edithelp/markdown.tt:171
 msgid ""
@@ -1749,7 +1753,7 @@ msgstr "Musisz się zalogować, aby zamieścić komentarz."
 
 #: root/base/page/delete.tt:9
 msgid "You lack permissions to delete this page (or any of the sub pages)."
-msgstr ""
+msgstr "Nie posiadasz uprawnień do usunięcia tej strony (lub jednej z jej podstron)."
 
 #: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "YouTube Video"

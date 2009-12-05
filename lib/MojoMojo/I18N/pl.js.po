@@ -69,10 +69,6 @@ msgstr "Tekst usunięty"
 msgid "Enum list"
 msgstr "Lista numerowana"
 
-#:
-msgid "External Link"
-msgstr "Link zewnętrzny"
-
 #: root/static/js/edit.js:164 root/static/js/edit.js:190
 msgid "External link"
 msgstr "Link zewnętrzny"
@@ -97,25 +93,13 @@ msgstr "Formatowanie IRC"
 msgid "Insert"
 msgstr "Wstaw"
 
-#:
-msgid "Insert Table"
-msgstr "Wstaw tabelę"
-
 #: root/static/js/edit.js:145 root/static/js/edit.js:177
 msgid "Insert table"
 msgstr "Wstaw tabelę"
 
-#:
-msgid "Internal Link"
-msgstr "Link wewnętrzny"
-
 #: root/static/js/edit.js:163 root/static/js/edit.js:189
 msgid "Internal link"
 msgstr "Link wewnętrzny"
-
-#:
-msgid "Intrawiki Link"
-msgstr "Link Intrawiki"
 
 #: root/static/js/edit.js:163 root/static/js/edit.js:189
 msgid "Intrawiki link"
