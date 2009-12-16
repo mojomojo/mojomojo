@@ -173,6 +173,15 @@ msgstr "Przysłona"
 msgid "Are you sure you want to delete"
 msgstr "Na pewno chcesz usunąć"
 
+#: root/base/edithelp/markdown.tt:184
+msgid ""
+"As detailed in the book&#91;^footnote1&#93;, we will now show that...<br/>\n"
+"        ...later in the document...<br/>\n"
+"        &#91;^footnote1&#93;: Conway, Damian - Perl Best Practices, p. 117"
+msgstr "Informacje wymienione w książce [^stopka1]<br>\n"
+"        ... w dalszej części dokumentu ...<br/>\n"
+"        [^stopka1]: Autor - Tytuł, strona 123"
+
 #: root/forms/admin/settings.yml:99
 msgid "Attachment allowed by default"
 msgstr "Domyślnie włącz załączniki"
