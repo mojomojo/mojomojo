@@ -180,7 +180,7 @@ sub recover_pass : Global {
     return unless ( $c->req->method eq 'POST' );
     my $id = $c->req->param('recover');
     my $user =
-      $c->model('DBIC::Person')->search( [ email => $id ] )
+      $c->model('DBIC::Person')->search( [ email => $id, login => $id ] )
       ->first;
     unless ( $user ) {
         $c->flash->{message} = $c->loc('Could not recover password');

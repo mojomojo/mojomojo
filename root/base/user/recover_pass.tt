@@ -2,7 +2,7 @@
 <div id="content">
 <form id="loginForm" action="[%c.uri_for('recover_pass')%]" method="post">
     <dl class="form">
-        <dt>[% loc('Email') %]:</dt>
+        <dt>[% loc('Username') %]/[% loc('Email') %]:</dt>
         <dd><input id="loginField" type="text" name="recover" /></dd>
         <dt>&nbsp;</dt>
         <dd><input type="submit" value="[% loc('Recover password') %]" /></dd>

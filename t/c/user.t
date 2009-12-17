@@ -24,7 +24,7 @@ ok !$mech->find_link(
 #----------------------------------------------------------------------------
 $mech->get_ok('/.users', 'got user list');
 ok $mech->find_link(
-    text => 'admin',  # MojoMojoTestSchema sets the admin user's name to admin
+    text => $ENV{USER} || 'admin',  # that's how MojoMojo::Schema sets the admin user's name
     url => '/admin.profile'
 ), 'found admin in the user list';
 ok $mech->find_link(
