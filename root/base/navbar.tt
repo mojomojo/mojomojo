@@ -22,7 +22,7 @@
 
     <ul id="toplinks-for-user">
       [%+ IF (user) %]
-        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% c.fixw(user.login) %]</a></li>
+        <li><a href="[% c.uri_for(user.link) %]" title="[% loc('Go to your user page') %]" rel="nofollow">[% user.name || c.fixw(user.login) %]</a></li>
         <li><a href="[% base %]/.logout">[% loc('Log out') %]</a></li>
       [% ELSE %]
        [%+ IF(c.pref('open_registration')) %]
