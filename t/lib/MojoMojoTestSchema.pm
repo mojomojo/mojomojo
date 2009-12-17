@@ -135,7 +135,17 @@ sub populate_schema {
 
     $schema->storage->ensure_connected;
 
-    $schema->create_initial_data;
+	# Pass known (fixed) values so admin email is known for testing 
+	# and not based on $ENV{USER}.
+	my $custom_values = {
+        wiki_name       => 'MojoMojo',
+        admin_username  => 'admin',
+        admin_password  => 'admin',
+        admin_fullname  => 'admin',
+        admin_email     => "admin\@localhost",
+        anonymous_email => 'anonymous.coward@localhost',
+    };
+    $schema->create_initial_data(undef, $custom_values);
     $self->create_test_data($schema);
 }
 

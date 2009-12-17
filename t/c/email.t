@@ -19,7 +19,7 @@ Email::Send::Test->clear;
 is( Email::Send::Test->emails, 0, 'no mails sent yet' );
 
 $mech->get_ok('/.recover_pass');
-$mech->submit_form_ok( { fields => { recover => 'admin', }, },
+$mech->submit_form_ok( { fields => { recover => 'admin@localhost', }, },
     'recover submit' );
 
 is( Email::Send::Test->emails, 1, 'new password emailed' );
