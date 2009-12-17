@@ -171,7 +171,7 @@ setup_formatter_toolbar = function() {
     // markdown buttons
     else if(wiki_type = 'markdown') {
         buttons = [
-            [ 'heading', loc('Main heading'), '\n\n# ',' #\n\n', loc('increase # for smaller headline')],
+            [ 'heading', loc('Main heading'), '\n# ',' #\n', loc('increase # for smaller headline')],
             [ 'list_bullet', loc('Bullet list'), '\n\n* ','\n\n', loc('List item 1')],
             [ 'list_enum', loc('Enum list'), '\n\n1. ', '\n\n', loc('Numbered list item')],
             [ 'insert_table',  loc('Insert table'),  '\n|             |          '+loc('Grouping')+'           ||\n'+
