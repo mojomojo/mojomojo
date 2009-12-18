@@ -36,7 +36,7 @@ ok(($elem) = $mech->look_down(
    'href' => qr'/admin$'
 ), 'admin link');
 if ($elem) {
-    is $elem->as_trimmed_text, 'admin', 'logged in as admin';
+    is $elem->as_trimmed_text, $ENV{USER} || 'admin', 'logged in as admin';
 }
 
 $mech->get_ok('/.delete', 'can request delete page');
