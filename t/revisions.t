@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w
-# Revision tests
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More tests => 3;
 use Test::Differences;
 
@@ -25,4 +26,3 @@ like $body, qr'No revision 9999 for <span class="error_detail"><a href="/">/</a>
 $test = 'get login page revision 1.';
 $body = get('.login/?rev=1');
 like $body, qr'sername', $test;
-

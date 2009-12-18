@@ -181,9 +181,9 @@
         <th colspan="2">[% loc('Footnotes') %] (<a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/#footnotes">[% loc('details') %]</a>)</th>
     </tr>
     <tr>
-        <td colspan="2">As detailed in the book[^footnote1], we will now show that...<br/>
+        <td colspan="2">[% loc('As detailed in the book&#91;^footnote1&#93;, we will now show that...<br/>
         ...later in the document...<br/>
-        [^footnote1]: Conway, Damian - Perl Best Practices, p. 117
+        &#91;^footnote1&#93;: Conway, Damian - Perl Best Practices, p. 117') %]
         </td>
     </tr>
     <tr>

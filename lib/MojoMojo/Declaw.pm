@@ -1,15 +1,15 @@
-package HTML::Declaw;
+package MojoMojo::Declaw;
 
 =head1 NAME
 
-HTML::Declaw - Cleans HTML as well as CSS of scripting and other executable contents, and neutralises XSS attacks.
+MojoMojo::Declaw - Cleans HTML as well as CSS of scripting and other executable contents, and neutralises XSS attacks.
 Derived from HTML::Defang version 1.01.
 
 =head1 SYNOPSIS
 
   my $InputHtml = "<html><body></body></html>";
 
-  my $Defang = HTML::Declaw->new(
+  my $Defang = MojoMojo::Declaw->new(
     context => $Self,
     fix_mismatched_tags => 1,
     tags_to_callback => [ br embed img ],
@@ -640,7 +640,7 @@ $_ = { default => $_->[0], map { $_ => 1 } @$_ } for values %ImplicitOpenTags;
 
 =cut
 
-=item I<HTML::Declaw-E<gt>new(%Options)>
+=item I<MojoMojo::Declaw-E<gt>new(%Options)>
 
 Constructs a new HTML::Declaw object. The following options are supported:
 

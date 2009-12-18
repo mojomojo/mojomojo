@@ -1,5 +1,7 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More;
-
 
 BEGIN {
     use MojoMojo::Formatter::Amazon;

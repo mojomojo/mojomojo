@@ -498,12 +498,22 @@ table.recent .actions       { width: 10%; }
 }
 
 .diffdel, del {
-    background: #fcc;
+/*    background: #bbb; 
+    color: white; */
+    border: dotted thin #fbbc08;
+    color: #555;
     text-decoration: line-through;
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
 .diffins, ins {
-    background: #cfc;
+    border: dotted thin #fbbc08;
+    background: yellow;
+    color: black;
+    text-decoration: none;
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
 /* @end */
@@ -751,6 +761,17 @@ ul#menuHome {
 
 #editstatus {
     color: red;
+}
+
+/* color values for errors copied from those for form elements */
+img[defang_src] {
+    border: 1px solid #ff0000;
+    background-color: #ffdddd;
+    color: #ff0000;
+}
+
+img[defang_src]:after {
+    content: "External image forbidden due to its URL. Please contact your wiki administrator.";
 }
 
 div.photo img{

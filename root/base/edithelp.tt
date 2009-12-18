@@ -37,7 +37,7 @@
     <tbody>
         <tr>
             <td>[% loc('table of contents') %]</td>
-            <td>{{toc [level1]-[level2]}}<br/>Examples: {{toc}}, {{toc 2-}}, {{toc 2-4}}</td>
+            <td>{{toc [[% loc('level') %]1]-[[%loc('level')%]2]}}<br/>[% loc('Examples') %]: {{toc}}, {{toc 2-}}, {{toc 2-4}}</td>
         </tr>
         <tr>
             <td><em>[%loc('include this page')%]</em></td>

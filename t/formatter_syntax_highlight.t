@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use strict;
+use warnings;
 use MojoMojo::Formatter::SyntaxHighlight;
 use HTTP::Request::Common;
 use Test::More;
@@ -7,9 +8,8 @@ use Test::Differences;
 my ( $content, $got, $expected, $test, $c, $original_formatter );
 
 BEGIN {
-    plan skip_all =>
-      'Requirements not installed for Syntax Highligher Formatter'
-      unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
+    plan skip_all => 'Requirements not installed for the Syntax Highlighter formatter'
+        unless MojoMojo::Formatter::SyntaxHighlight->module_loaded;
     plan tests => 15;
     use_ok('MojoMojo::Formatter::Textile');
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -230,4 +230,3 @@ PERL
 PERL
     is( $content, $wanted, $test );
 }
-

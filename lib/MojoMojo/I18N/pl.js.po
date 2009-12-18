@@ -22,54 +22,58 @@ msgid "=head1 Header"
 msgstr "=head1 Opis"
 
 #: root/static/js/edit.js:142
-msgid "Also try h2,h3 and so on"
+msgid "Also try h2, h3 and so on"
 msgstr "Również sprawdź h2, h3, itp."
 
-#: root/static/js/edit.js:158
+#: root/static/js/edit.js:159
 msgid "Bigger"
 msgstr "Większe"
 
-#: root/static/js/edit.js:150 root/static/js/edit.js:182
+#: root/static/js/edit.js:151 root/static/js/edit.js:184
 msgid "Block quote"
 msgstr "Cytat blokowy"
 
-#: root/static/js/edit.js:155 root/static/js/edit.js:184
+#: root/static/js/edit.js:156 root/static/js/edit.js:186
 msgid "Bold"
 msgstr "Pogrubione"
 
-#: root/static/js/edit.js:143 root/static/js/edit.js:174
+#: root/static/js/edit.js:143 root/static/js/edit.js:175
 msgid "Bullet list"
 msgstr "Lista wypunktowana"
 
-#: root/static/js/edit.js:147 root/static/js/edit.js:180
+#: root/static/js/edit.js:147 root/static/js/edit.js:181
 msgid "Cell"
 msgstr "Komórka"
 
-#: root/static/js/edit.js:153
+#: root/static/js/edit.js:154
 msgid "Centered paragraph"
 msgstr "Akapit wyśrodkowany"
 
-#: root/static/js/edit.js:149 root/static/js/edit.js:183
+#: root/static/js/edit.js:150 root/static/js/edit.js:185
 msgid "Code"
 msgstr "Kod"
 
-#: root/static/js/edit.js:179 root/static/js/edit.js:180
+#: root/static/js/edit.js:180 root/static/js/edit.js:181
 msgid "Content"
 msgstr "Treść"
 
-#: root/static/js/edit.js:157 root/static/js/edit.js:186
+#: root/static/js/edit.js:188
 msgid "Deleted Text"
 msgstr "Tekst usunięty"
 
-#: root/static/js/edit.js:144 root/static/js/edit.js:175
+#: root/static/js/edit.js:158
+msgid "Deleted text"
+msgstr "Tekst usunięty"
+
+#: root/static/js/edit.js:144 root/static/js/edit.js:176
 msgid "Enum list"
 msgstr "Lista numerowana"
 
-#: root/static/js/edit.js:163 root/static/js/edit.js:188
-msgid "External Link"
+#: root/static/js/edit.js:164 root/static/js/edit.js:190
+msgid "External link"
 msgstr "Link zewnętrzny"
 
-#: root/static/js/edit.js:177
+#: root/static/js/edit.js:178
 msgid "First Header"
 msgstr "Pierwszy Nagłówek"
 
@@ -77,7 +81,7 @@ msgstr "Pierwszy Nagłówek"
 msgid "Formatter"
 msgstr "Formatowanie"
 
-#: root/static/js/edit.js:176
+#: root/static/js/edit.js:177
 msgid "Grouping"
 msgstr "Grupowanie"
 
@@ -89,47 +93,47 @@ msgstr "Formatowanie IRC"
 msgid "Insert"
 msgstr "Wstaw"
 
-#: root/static/js/edit.js:145 root/static/js/edit.js:176
-msgid "Insert Table"
+#: root/static/js/edit.js:145 root/static/js/edit.js:177
+msgid "Insert table"
 msgstr "Wstaw tabelę"
 
-#: root/static/js/edit.js:162 root/static/js/edit.js:187
-msgid "Internal Link"
+#: root/static/js/edit.js:163 root/static/js/edit.js:189
+msgid "Internal link"
 msgstr "Link wewnętrzny"
 
-#: root/static/js/edit.js:162 root/static/js/edit.js:187
-msgid "Intrawiki Link"
+#: root/static/js/edit.js:163 root/static/js/edit.js:189
+msgid "Intrawiki link"
 msgstr "Link Intrawiki"
 
-#: root/static/js/edit.js:156 root/static/js/edit.js:185
+#: root/static/js/edit.js:157 root/static/js/edit.js:187
 msgid "Italic"
 msgstr "Pochylenie"
 
-#: root/static/js/edit.js:154
+#: root/static/js/edit.js:155
 msgid "Justified paragraph"
 msgstr "Paragraf wyjustowany"
 
-#: root/static/js/edit.js:151
+#: root/static/js/edit.js:152
 msgid "Left-justified paragraph"
 msgstr "Paragraf wyrównany do lewej"
 
-#: root/static/js/edit.js:143 root/static/js/edit.js:174
+#: root/static/js/edit.js:143 root/static/js/edit.js:175
 msgid "List item 1"
 msgstr "Element listy 1"
 
-#: root/static/js/edit.js:179
+#: root/static/js/edit.js:180
 msgid "Long Cell"
 msgstr "Długa komórka"
 
-#: root/static/js/edit.js:142 root/static/js/edit.js:173
+#: root/static/js/edit.js:142 root/static/js/edit.js:174
 msgid "Main heading"
 msgstr "Główny nagłówek"
 
-#: root/static/js/edit.js:213
+#: root/static/js/edit.js:215
 msgid "Mark some text to apply the toolbar actions to that text"
 msgstr "Zaznacz fragment tekstu, aby wykonać na nim wybraną z menu akcję"
 
-#: root/static/js/edit.js:144 root/static/js/edit.js:175
+#: root/static/js/edit.js:144 root/static/js/edit.js:176
 msgid "Numbered list item"
 msgstr "Element listy numerowanej"
 
@@ -137,27 +141,27 @@ msgstr "Element listy numerowanej"
 msgid "POD formatter"
 msgstr "Formatowanie POD"
 
-#: root/static/js/edit.js:165 root/static/js/edit.js:190
+#: root/static/js/edit.js:166 root/static/js/edit.js:192
 msgid "Picture"
 msgstr "Obrazek"
 
-#: root/static/js/edit.js:166 root/static/js/edit.js:191
-msgid "Picture Right"
-msgstr "Obrazek po prawej"
-
-#: root/static/js/edit.js:164 root/static/js/edit.js:189
+#: root/static/js/edit.js:165 root/static/js/edit.js:191
 msgid "Picture left"
 msgstr "Obrazek po lewej"
 
-#: root/static/js/edit.js:152
+#: root/static/js/edit.js:167 root/static/js/edit.js:193
+msgid "Picture right"
+msgstr "Obrazek po prawej"
+
+#: root/static/js/edit.js:153
 msgid "Right-justified paragraph"
 msgstr "Akapit wyrównany do prawej"
 
-#: root/static/js/edit.js:177
+#: root/static/js/edit.js:178
 msgid "Second Header"
 msgstr "Drugi nagłówek"
 
-#: root/static/js/edit.js:159
+#: root/static/js/edit.js:160
 msgid "Smaller"
 msgstr "Mniejsze"
 
@@ -165,11 +169,11 @@ msgstr "Mniejsze"
 msgid "Split Edit"
 msgstr "Edycja podzielona"
 
-#: root/static/js/edit.js:161
+#: root/static/js/edit.js:162
 msgid "Subscript"
 msgstr "Indeks dolny"
 
-#: root/static/js/edit.js:160
+#: root/static/js/edit.js:161
 msgid "Superscript"
 msgstr "Indeks górny"
 
@@ -185,27 +189,27 @@ msgstr "Podświetlenie składni"
 msgid "Table"
 msgstr "Tabela"
 
-#: root/static/js/edit.js:181
+#: root/static/js/edit.js:182
 msgid "Table Title"
 msgstr "Tytuł tabeli"
 
-#: root/static/js/edit.js:177
+#: root/static/js/edit.js:178
 msgid "Third Header"
 msgstr "Trzeci nagłówek"
 
-#: root/static/js/edit.js:158
+#: root/static/js/edit.js:159
 msgid "bigger"
 msgstr "większe"
 
-#: root/static/js/edit.js:155 root/static/js/edit.js:184
+#: root/static/js/edit.js:156 root/static/js/edit.js:186
 msgid "bold"
 msgstr "pogrubione"
 
-#: root/static/js/edit.js:153
+#: root/static/js/edit.js:154
 msgid "centered paragraph"
 msgstr "akapit wyjustowany"
 
-#: root/static/js/edit.js:149 root/static/js/edit.js:183
+#: root/static/js/edit.js:150 root/static/js/edit.js:185
 msgid "code"
 msgstr "kod"
 
@@ -217,7 +221,7 @@ msgstr "komentarze"
 msgid "cpan"
 msgstr "link cpan"
 
-#: root/static/js/edit.js:157 root/static/js/edit.js:186
+#: root/static/js/edit.js:158 root/static/js/edit.js:188
 msgid "deleted"
 msgstr "usunięty"
 
@@ -229,23 +233,23 @@ msgstr "zrobione"
 msgid "include"
 msgstr "zawartość strony"
 
-#: root/static/js/edit.js:173
+#: root/static/js/edit.js:174
 msgid "increase # for smaller headline"
 msgstr "zwiększ ilość # aby uzyskać mniejszy nagłówek"
 
-#: root/static/js/edit.js:156 root/static/js/edit.js:185
+#: root/static/js/edit.js:157 root/static/js/edit.js:187
 msgid "italic"
 msgstr "pochylenie"
 
-#: root/static/js/edit.js:154
+#: root/static/js/edit.js:155
 msgid "justified paragraph"
 msgstr "akapit wyrównany"
 
-#: root/static/js/edit.js:151
+#: root/static/js/edit.js:152
 msgid "left justified paragraph"
 msgstr "akapit wyrównany do lewej"
 
-#: root/static/js/edit.js:163 root/static/js/edit.js:188
+#: root/static/js/edit.js:164 root/static/js/edit.js:190
 msgid "linked text"
 msgstr "opis linku"
 
@@ -257,7 +261,7 @@ msgstr "maksymalizuj"
 msgid "maximize width"
 msgstr "maksymalna szerokość"
 
-#: root/static/js/edit.js:150 root/static/js/edit.js:182
+#: root/static/js/edit.js:151 root/static/js/edit.js:184
 msgid "quote"
 msgstr "cytat"
 
@@ -265,7 +269,7 @@ msgstr "cytat"
 msgid "redirect"
 msgstr "przekieruj"
 
-#: root/static/js/edit.js:152
+#: root/static/js/edit.js:153
 msgid "right justified paragraph"
 msgstr "paragraf wyrównany do prawej"
 
@@ -273,15 +277,15 @@ msgstr "paragraf wyrównany do prawej"
 msgid "say \"Howdy partner.\";"
 msgstr "print \"Witaj.\";"
 
-#: root/static/js/edit.js:159
+#: root/static/js/edit.js:160
 msgid "small"
 msgstr "mniejszy"
 
-#: root/static/js/edit.js:161
+#: root/static/js/edit.js:162
 msgid "subscript"
 msgstr "indeks dolny"
 
-#: root/static/js/edit.js:160
+#: root/static/js/edit.js:161
 msgid "superscript"
 msgstr "indeks górny"
 

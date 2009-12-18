@@ -1,3 +1,29 @@
+  - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
+  - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
+  - Remove 'Alerts' from Syntax Highligt list - it's Kate's hidden module (Github issue #52) (linio)
+
+0.999042 2009-12-01 21:42:00
+
+  WARNING: there are some issues with the Defang formatter, which will
+    corrupt certain kinds of markup. The simple fix is to remove
+    lib/MojoMojo/Formatter/Defang.pm, but that may open the door to
+    XSS attacks. Please see for details
+    http://n2.nabble.com/Defang-issues-td4078508.html
+  
+  Syntax change - please update affected wiki pages:
+  - {{include <url>}} and {{feed <url>}} instead of the implicit syntax
+    {{<url>}} and {{feed://<url_without_protocol>}}
+
+  New Features:
+  - Added (versioned) page renaming in Page Info (dandv)
+  - Add delete page function
+  - Replaced String::Diff with word diff (Ryan52)
+  - e-mail addresses in user .profile-s are now protected against spambots (dandv)
+
+  Bug fixes:
+  - fixed inserting images via the toolbar after markdown="1" support (dandv)
+  
+
 0.999041 2009-10-26 11:55:00
 
   New features:
@@ -7,16 +33,18 @@
   - Italian. MojoMojo ora parla italiano (enrico)
   
   Bug fixes:
+  - Exports now export the entire subtree (dandv)
+  - Sub pages do not show pages without view permission (linio)
   - Fixes for Pg Compability (depesz)
-  - Users 'Active' field now correctly shows not validated users as inactive.
-    (linio)
-  - login is now page sensitive
-  - Change RSS Formatter to use summary
-  - Sub pages - do not show pages with no permission to view (linio)
+  - Users 'Active' field now shows users not validated yet as inactive (linio)
+  - Login is now page-sensitive (marcus)
+  - Changed RSS Formatter to use entry summary instead of body (marcus)
   - Fixed issue with incorrectly calculated cloud size (linio)
-  
+
   Documentation:
   - improved and centralized installation docs into lib/MojoMojo/Installation.pod
+
+  
 
 0.999040 2009-09-04 19:53:00
   
@@ -47,6 +75,8 @@
   - Fixed bug in MojoMojo::get_permissions_data (uninitialized hashref) (mateu)
   - Main formatter now guaranteed to end the content with *one* newline (dandv)
   - Remove some obsolete crud (dandv/marcus)
+
+  
 
 0.999033 2009-08-14 12:40:00 UTC
 

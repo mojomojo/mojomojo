@@ -67,7 +67,7 @@ sub _generate_explicit_path {
 
 sub _generate_explicit_text {
     # non-greedily match characters that don't match the start-end delimiters
-    my $not_an_end_delimiter = '(?:(?!' . join '|', _explicit_end_delims() . ').)';  # produces (?: (?! ]] | \)\) ) .)  # a character in a place where neither a ]] nor a )) starts
+    my $not_an_end_delimiter = '(?:(?!' . ( join '|', _explicit_end_delims() ) . ').)';  # produces (?: (?! ]] | \)\) ) .)  # a character in a place where neither a ]] nor a )) starts
     return qr{$not_an_end_delimiter+?};
 }
 

@@ -1,0 +1,15 @@
+[% WRAPPER page/wrapper.tt title = loc('Deleted') %]
+<div id="content">
+
+<h3>[% loc('Deleted') %]</h3>
+
+<div>[% loc('The following pages have been deleted') %].</div>
+
+<ul>
+[% FOREACH page IN deleted_pages %]
+    <li>[% page %]</li>
+[% END %]
+</ul>
+
+</div>
+[% END # WRAPPER %]

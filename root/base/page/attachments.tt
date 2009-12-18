@@ -1,4 +1,4 @@
-[% WRAPPER page/wrapper.tt title="Attachments for " _ page.name %]
+[% WRAPPER page/wrapper.tt title=loc('Attachments for') _ " " _ page.name %]
 <div id="content">
 
   [% IF c.req.params.plain || ! c.user.obj %]

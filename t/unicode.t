@@ -1,5 +1,7 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 # Unicode tests: Unicode text in page content, wiki links, tags etc.
+use strict;
+use warnings;
 use Test::More tests => 9;
 use HTTP::Request::Common;
 use Test::Differences;
@@ -50,4 +52,3 @@ $mech->post('/.jsrpc/render', { content => $content });
 $mech->content_is(<<"HTML", $test);
 <p><span class="newWikiWord"><a title="Not found. Click to create this page." href="/$unicode_string.edit">$unicode_string?</a></span></p>
 HTML
-

@@ -1,0 +1,26 @@
+[% WRAPPER page/wrapper.tt title = loc('Delete', page.path) %]
+<div id="content">
+
+[% IF allowed_to_delete %]
+<h3>[% loc('Are you sure you want to delete') %] <em>[% page.name_orig %]?</em></h3>
+<div>[% loc('The following pages will be deleted. This can not be undone') %].</div>
+[% ELSE %]
+<h3>[% loc('Sorry') %]</h3>
+<div>[% loc('You lack permissions to delete this page (or any of the sub pages).') %]</div>
+[% END %]
+
+<ul>
+[% FOREACH descendant IN descendants %]
+    <li>[% descendant.name %] <span style="color: [% descendant.can_delete ? 'green' : 'red' %]">[% descendant.can_delete ? '&#10004;' : '&#10006' %]</span>
+    </li>
+[% END %]
+</ul>
+
+[% IF allowed_to_delete %]
+<form action="[% c.uri_for('delete') %]" method="post">
+    <input type="submit" name="confirm" value="[% loc('Yes') %]" />
+</form>
+[% END %]
+
+</div>
+[% END # WRAPPER %]

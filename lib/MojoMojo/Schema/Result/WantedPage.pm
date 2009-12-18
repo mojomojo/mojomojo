@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "Core" );
+__PACKAGE__->load_components( "UTF8Columns","Core" );
 __PACKAGE__->table("wanted_page");
 __PACKAGE__->add_columns(
     "id",
@@ -16,6 +16,7 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 0, size => 4000 },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->utf8_columns("to_path");
 __PACKAGE__->belongs_to( "from_page", "MojoMojo::Schema::Result::Page", { id => "from_page" } );
 
 =head1 NAME

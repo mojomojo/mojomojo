@@ -5,4 +5,5 @@
     <dt>[% loc('Lens') %]:</dt><dd>[% photo.lens.replace('\.\d+mm$','mm') || loc('not specified') %]</dd>
     <dt>[% loc('ISO') %]:</dt><dd>[% photo.iso|| loc('not specified') %]</dd>
     <dt>[% loc('Aperture') %]:</dt><dd>[% IF photo.aperture %]f/[% photo.aperture %][% ELSE %][% loc('not specified') %][% END %]</dd>
+    <dt>[% loc('Flash') %]:</dt><dd>[% photo.flash|| loc('not specified') %]</dd>
 </dl>

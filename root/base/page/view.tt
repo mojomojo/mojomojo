@@ -30,7 +30,7 @@
         <p id="message">
             <small>
                 [% loc('Showing changes from previous revision.') %]
-                <ins class="diffins">[% loc('Added') %]</ins> | <del class="diffdel">[% loc('Removed') %]</del>
+                <del class="diffdel">[% loc('Removed') %]</del> | <ins class="diffins">[% loc('Added') %]</ins>
             </small>
         </p>
         <div id="diff"></div>

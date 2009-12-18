@@ -1,10 +1,16 @@
 package MojoMojo::Formatter::Include;
 
-use parent qw/MojoMojo::Formatter/;
+use strict;
+use parent 'MojoMojo::Formatter';
 
-eval "use LWP::Simple;use URI::Fetch;";
-my $eval_res = $@;
-sub module_loaded { $eval_res ? 0 : 1 }
+eval {
+    require URI::Fetch;
+    require LWP::Simple;  # LWP::Simple is indeed required, and URI::Fetch doesn't depend on it
+};
+my $dependencies_installed = !$@;
+sub module_loaded { $dependencies_installed }
+
+our $VERSION = '0.01';
 
 =head1 NAME
 
@@ -12,19 +18,25 @@ MojoMojo::Formatter::Include - Include files in your content.
 
 =head1 DESCRIPTION
 
-Include files verbatim in your content, by writing {{<url>}}. Can be used for
-transclusion from the same wiki, in which case the
+Include files verbatim in your content, by writing {{include <url>}}. Can
+be used for transclusion from the same wiki, in which case the
 L<inline|MojoMojo::Controller::Page/inline> version of the page is pulled.
 
 =head1 METHODS
 
 =head2 format_content_order
 
-Format order can be 1-99. The Include formatter runs on 6
+Format order can be 1-99. The Include formatter runs on 5, before all
+formatters (except L<Redirect|MojoMojo::Formatter::Redirect>), so that
+included content (most often from the same wiki) can be parsed for markup.
+To avoid markup interpretation, surround the {{include <url>}} with a
+C<< <div> >>:
+
+    <div>Some uninterpreted Markdown: {{include http://mysite.com/rawmarkdown.txt}}</div>
 
 =cut
 
-sub format_content_order { 6 }
+sub format_content_order { 5 }
 
 =head2 format_content
 
@@ -36,16 +48,19 @@ context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
     return unless $class->module_loaded;
-    my $re=$class->gen_re(qr/(http\:\/\/[^}]+)/);
-    if ( $$content =~ s|$re|$class->include( $c, $1 )|meg ) {
-        # We don't want to precompile a page with comments so turn it off
+    # Regexp::Common::URI is overkill
+    my $re = $class->gen_re(qr(
+        include \s+ (\S+)
+    )x);
+    if ( $$content =~ s/$re/$class->include( $c, $1 )/eg ) {
+        # we don't want to precompile a page with comments so turn it off
         $c->stash->{precompile_off} = 1;
     }
 }
 
 =head2 include <c> <url>
 
-Returns the content of URL. Will store a cached version in
+Returns the content at the URL. Will store a cached version in
 C<< $c->cache >>.
 
 =cut
@@ -58,7 +73,7 @@ sub include {
     my $rel = $url->rel( $c->req->base );
     if (not $rel->scheme) {
         # if so, then return the inline version of the page is requests
-        return $c->subreq( '/inline', { path => '/'.$rel } );
+        return $c->subreq( '/inline', { path => $rel.'' eq './' ? '/' : '/'.$rel } );
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;

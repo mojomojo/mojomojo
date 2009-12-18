@@ -89,8 +89,12 @@ sub init_schema {
     # due to a BUG in SQL::Translator: https://rt.cpan.org/Ticket/Display.html?id=48688
     # This will cause failures if the tables don't exist (i.e. when you first deploy):
     #     ("DBI Exception: DBD::$driver::db do failed: no such table")
+    #
+    #-mxh This is fragile because it relies on fixed output in the regex.
+    #     Recently, the output changed to include a "\n" and broke this code.
+    #     I added the s (and i) regex modifiers, but it still needs a better implementation.
     local $SIG{__WARN__} = sub {
-        die @_ unless $_[0] =~ /no such table.*DROP TABLE/;
+        die @_ unless $_[0] =~ /no such table.*DROP TABLE/is;
     };
     $schema->deploy( $attrs );
 

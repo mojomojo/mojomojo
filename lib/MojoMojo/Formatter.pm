@@ -38,27 +38,35 @@ for the default plugins is currently as follows:
 
 =item 1  - L<MojoMojo::Formatter::Redirect> - handles {{redirect /path}}
 
-=item 6  - L<MojoMojo::Formatter::Include> - handles {{<url>}}
+=item 5  - L<MojoMojo::Formatter::Include> - handles {{include <url>}} before
+all other plugins, so that transcluded sections from the same wiki get parsed
+for markup
 
-=item 10 - L<MojoMojo::Formatter::Wiki> - Handles [[wikilinks]]
+=item 10 - L<MojoMojo::Formatter::CPANHyperlink> - handles {{cpan My::Module}}
+
+=item 10 - L<MojoMojo::Formatter::YouTube> - handles {{youtube <url>}}
+
+=item 10 - L<MojoMojo::Formatter::Wiki> - handles [[wikilinks]]
 
 =item 10 - L<MojoMojo::Formatter::Pod> - handles {{pod}} ... {{end}} blocks
 
 =item 14 - L<MojoMojo::Formater::IRCLog> - handles {{irc}} ... {{end}} blocks
 
-=item 15 - Main formatter (either L<MojoMojo::Formatter::Textile> or L<MojoMojo::Formatter::Markdown>)
+=item 14 - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting
+on code blocks
 
-=item 16 - L<MojoMojo::Formatter::Defang> - Removes harmful HTML and XSS
+=item 15 - Main formatter (L<MojoMojo::Formatter::Markdown> or
+L<MojoMojo::Formatter::Textile>)
 
-=item 91 - L<MojoMojo::Formatter::Comment> Handles {{comments}} , inserts a comment box
+=item 16 - L<MojoMojo::Formatter::Defang> - removes harmful HTML and XSS
 
-=item 95 - L<MojoMojo::Formatter::TOC> replace {{toc}} with table of contents
+=item 91 - L<MojoMojo::Formatter::Comment> - handles {{comments}}, inserts a comment box
 
-=item 99 - L<MojoMojo::Formatter::SyntaxHighlight> - Performs syntax highlighting on code blocks
+=item 95 - L<MojoMojo::Formatter::TOC> - replaces {{toc}} with a table of contents
 
 =back
 
-Note that if your formatter expects a HTML body, it should run after the
+Note that if your formatter expects HTML text, it should run after the
 main formatter.
 
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use Test::More tests => 14;
@@ -69,4 +70,3 @@ is( Email::Send::Test->emails, 1, 'regisration validation email sent' );
 ($mail) = Email::Send::Test->emails;
 like( $mail->header('To'), qr/^mojam/,        'right recipient' );
 like( $mail->body,         qr/validate your email address/i, 'email contains validate email address' );
-

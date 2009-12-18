@@ -1,4 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More tests => 16;
 
 BEGIN{
@@ -56,4 +58,3 @@ ok defined $cloud_class{baz}, 'saw baz tag';
 
 ok $cloud_class{bar} > $cloud_class{baz}, 'bar > baz';
 ok $cloud_class{foo} == $cloud_class{bar}, 'foo = bar';
-

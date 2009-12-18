@@ -83,8 +83,11 @@ sub format_content {
             }
             else {
                 my $count = 0;
+                my @colours=( 'navy', 'green' , 'maroon', 'blue', 'lime', 'red', 'silver', 'gray', 'teal', 'olive', 'purple', 'fuchsia'  );
+                my $counter;
                 foreach my $nick ( keys %nicks ) {
-                    $count += ( $line =~ s/$nick/[[$nick]]/g );
+                    $colour=$colours[$counter++];
+                    $count += ( $line =~ s!(<d.>)$nick(</d.>)!$1<font color="$colour">[[$nick]]</font>$2!g );
                 }
                 $$content .= "$line\n";
             }

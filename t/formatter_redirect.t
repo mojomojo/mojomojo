@@ -1,4 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use strict;
+use warnings;
 use Test::More tests => 4;
 use MojoMojo::Formatter::Redirect;
 use lib 't/lib';

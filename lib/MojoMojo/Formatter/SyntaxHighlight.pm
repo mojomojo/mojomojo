@@ -5,9 +5,9 @@ use warnings;
 use parent qw/MojoMojo::Formatter/;
 use HTML::Entities;
 
-eval "use Syntax::Highlight::Engine::Kate;";
-my $eval_res = $@;
-sub module_loaded { $eval_res ? 0 : 1 }
+eval {require Syntax::Highlight::Engine::Kate};
+my $kate_installed = !$@;
+sub module_loaded { $kate_installed }
 
 my $main_formatter;
 eval { $main_formatter = MojoMojo->pref('main_formatter'); };
@@ -25,7 +25,7 @@ This formatter performs syntax highlighting on code blocks.
 
 =head2 format_content_order
 
-The syntax highlight formatter is based on C<< <pre> >>tags entered by the
+The syntax highlight formatter is based on C<< <pre> >> tags entered by the
 user, so it must run before other formatters that produce C<< <pre> >> tags.
 The earliest such formatter is the main formatter.
 
@@ -48,7 +48,7 @@ languages.
 =cut
 
 # The $kate formatter is scoped outside of format_content. Otherwise, memory
-# leaks have occurred. This is alos faster, as it avoids instantiation for every
+# leaks have occurred. This is also faster, as it avoids instantiation for every
 # request.
 my $kate;
 
@@ -89,40 +89,41 @@ sub format_content {
     return $content;
 }
 
-$kate = Syntax::Highlight::Engine::Kate->new(
-    language      => 'Perl',
-    substitutions => {
-        "<" => "&lt;",
-        ">" => "&gt;",
-        "&" => "&amp;",
-        " "  => "&nbsp;",
-        "\t" => "&nbsp;&nbsp;&nbsp;&nbsp;",
-        "\n" => "\n",
-    },
-    format_table => {
-        Alert    => [ q{<span class="kateAlert">},      "</span>" ],
-        BaseN    => [ q{<span class="kateBaseN">},      "</span>" ],
-        BString  => [ q{<span class="kateBString">},    "</span>" ],
-        Char     => [ q{<span class="kateChar">},       "</span>" ],
-        Comment  => [ q{<span class="kateComment"><i>}, "</i></span>" ],
-        DataType => [ q{<span class="kateDataType">},   "</span>" ],
-        DecVal   => [ q{<span class="kateDecVal">},     "</span>" ],
-        Error    => [ q{<span class="kateError"><b><i>}, "</i></b></span>" ],
-        Float    => [ q{<span class="kateFloat">},       "</span>" ],
-        Function => [ q{<span class="kateFunction">}, "</span>" ],
-        IString  => [ q{<span class="kateIString">},  "" ],
-        Keyword  => [ q{<b>},                         "</b>" ],
-        Normal   => [ q{},                            "" ],
-        Operator => [ q{<span class="kateOperator">}, "</span>" ],
-        Others   => [ q{<span class="kateOthers">},   "</span>" ],
-        RegionMarker => [ q{<span class="kateRegionMarker"><i>}, "</i></span>" ],
-        Reserved => [ q{<span class="kateReserved"><b>}, "</b></span>" ],
-        String   => [ q{<span class="kateString">},      "</span>" ],
-        Variable => [ q{<span class="kateVariable"><b>}, "</b></span>" ],
-        Warning  => [ q{<span class="kateWarning"><b><i>}, "</b></i></span>" ],
-    },
-);
-
+if (module_loaded) {
+    $kate = Syntax::Highlight::Engine::Kate->new(
+        language      => 'Perl',
+        substitutions => {
+            "<" => "&lt;",
+            ">" => "&gt;",
+            "&" => "&amp;",
+            " "  => "&nbsp;",
+            "\t" => "&nbsp;&nbsp;&nbsp;&nbsp;",
+            "\n" => "\n",
+        },
+        format_table => {
+            Alert    => [ q{<span class="kateAlert">},      "</span>" ],
+            BaseN    => [ q{<span class="kateBaseN">},      "</span>" ],
+            BString  => [ q{<span class="kateBString">},    "</span>" ],
+            Char     => [ q{<span class="kateChar">},       "</span>" ],
+            Comment  => [ q{<span class="kateComment"><i>}, "</i></span>" ],
+            DataType => [ q{<span class="kateDataType">},   "</span>" ],
+            DecVal   => [ q{<span class="kateDecVal">},     "</span>" ],
+            Error    => [ q{<span class="kateError"><b><i>}, "</i></b></span>" ],
+            Float    => [ q{<span class="kateFloat">},       "</span>" ],
+            Function => [ q{<span class="kateFunction">}, "</span>" ],
+            IString  => [ q{<span class="kateIString">},  "" ],
+            Keyword  => [ q{<b>},                         "</b>" ],
+            Normal   => [ q{},                            "" ],
+            Operator => [ q{<span class="kateOperator">}, "</span>" ],
+            Others   => [ q{<span class="kateOthers">},   "</span>" ],
+            RegionMarker => [ q{<span class="kateRegionMarker"><i>}, "</i></span>" ],
+            Reserved => [ q{<span class="kateReserved"><b>}, "</b></span>" ],
+            String   => [ q{<span class="kateString">},      "</span>" ],
+            Variable => [ q{<span class="kateVariable"><b>}, "</b></span>" ],
+            Warning  => [ q{<span class="kateWarning"><b><i>}, "</b></i></span>" ],
+        },
+    );
+}    
 
 =head1 SEE ALSO
 

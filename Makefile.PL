@@ -63,7 +63,6 @@ requires(
     'Moose'                                        => 0,
     'Number::Format'                               => 0,
     'parent'                                       => 0,
-    'String::Diff'                                 => 0,
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
@@ -95,6 +94,9 @@ feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 
 test_requires 'Test::More' => '0.88';
+test_requires 'Test::Differences';
+# all tests require a database to be deployed, even though SQLT is not necessary for producton if a DB exists
+test_requires 'SQL::Translator' => '0.09006';
 test_requires 'Email::Send::Test';
 test_requires 'WWW::Mechanize' => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ';

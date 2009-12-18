@@ -13,13 +13,13 @@ id: form
 # ensure checkboxes + radio buttons have an ID
 # so the label gets a for="" attribute
 # which makes the whole label clickable
-auto_id: %f_%n
+auto_id: "%f_%n"
 
 # 'group' elements - multiple input fields with the same name
 # ensure they get unique IDs
 default_args:
   elements:
     Radiogroup:
-      auto_id: $f_%n_%c
+      auto_id: "$f_%n_%c"
     Checkboxgroup:
-      auto_id: %f_%n_%c
+      auto_id: "%f_%n_%c"
