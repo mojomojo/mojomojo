@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 use Test::More;
+use lib 't/lib';
+use MojoMojoTestSchema;
 
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -14,7 +16,7 @@ BEGIN {
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 19;
+    plan tests => 21;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -35,8 +37,12 @@ ok(($elem) = $mech->look_down(
    _tag => 'a',
    'href' => qr'/admin$'
 ), 'admin link');
+
+# Get the name of the admin user. Then test against it.
+ok my $schema = MojoMojoTestSchema->get_schema, 'get the schema to get the name of admin user.';
+ok my $admin_user = $schema->resultset('Person')->find({login => 'admin'}), 'get admin user Person row object';
 if ($elem) {
-    is $elem->as_trimmed_text, 'admin', 'logged in as admin';
+    is $elem->as_trimmed_text, $admin_user->name, 'logged in as admin';
 }
 
 $mech->get_ok('/.edit', 'can edit root page');
