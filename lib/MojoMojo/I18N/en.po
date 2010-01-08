@@ -314,7 +314,7 @@ msgstr "Could not create attachment from %1"
 #. ($url)
 #: lib/MojoMojo/Formatter/RSS.pm:77
 msgid "Could not parse feed x"
-msgstr ""
+msgstr "Could not parse feed %1"
 
 #: lib/MojoMojo/Controller/User.pm:186
 msgid "Could not recover password"
@@ -977,14 +977,10 @@ msgstr ""
 msgid "Permission Denied to view x"
 msgstr "Permission Denied to view %1"
 
-#:
-msgid "Permission Denied to x x"
-msgstr "Permission Denied to %1 %2"
-
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
-msgstr ""
+msgstr "Permission denied to %1 %2"
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1065,7 +1061,7 @@ msgstr ""
 #. (version.creator.name)
 #: root/base/page/info.tt:32
 msgid "Profile for x"
-msgstr ""
+msgstr "Profile for %1"
 
 #: root/base/export.tt:7
 msgid "Raw markup"
