@@ -1,15 +1,13 @@
-[% WRAPPER page/wrapper.tt title=loc('A message from our sponsors...') simple_header=1 simple_footer=1 -%]
+[% WRAPPER page/wrapper.tt title=loc('Error') simple_header=1 simple_footer=1 -%]
 <div id="content">
     <div style="float: right;">
-       <img src="[% c.uri_for_static('shrinkedhead.jpg') %]" alt="[% loc('shrinked head') %]" width="150" height="142"/>
+       <img src="[% c.uri_for_static('Crystal_Clear_action_stop.png') %]" alt="[% loc('Stop') %]" width="128" height="128"/>
     </div>
     <div class="message_body">
         [% message %]
         <div style="font-size: 0.8em;">
-             [% loc('Go directly to ') %]<a href="[% c.req.base %]/">[% loc('start') %]</a>
-             [% loc('or') %]
-             <a href="[% c.uri_for('login') %]">[% loc('login') %]</a>,
-             [% loc('do not pass jail, do not collect $200...') %]
+             [% loc('You can go to the') %] <a href="[% c.req.base %]/">[% loc('home page') %]</a>
+             [% loc('or you can try to') %] <a href="[% c.uri_for('login') %]">[% loc('login') %]</a>
         </div>
     </div>
 </div>
