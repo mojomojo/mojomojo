@@ -490,7 +490,7 @@ msgstr "Wymuś logowanie"
 
 #: root/base/message.tt:1
 msgid "Error"
-msgstr ""
+msgstr "Błąd"
 
 #: lib/MojoMojo/Controller/User.pm:205
 msgid "Error occurred while emailing you your new password."
@@ -997,7 +997,7 @@ msgstr "Hasło musi zawierać od 4 do 14 znaków"
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
-msgstr "Brak uprawnień do %1 %2"
+msgstr "Brak uprawnień do akcji %1 na stronie %2"
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1582,7 +1582,7 @@ msgstr "Możesz wyeksportować wszystkie strony jako archiwum zip w formacie HTM
 
 #: root/base/message.tt:9
 msgid "You can go to the"
-msgstr ""
+msgstr "Możesz przejść na"
 
 #: root/base/feeds.tt:4
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
@@ -1809,7 +1809,7 @@ msgstr ""
 
 #: root/base/message.tt:9
 msgid "home page"
-msgstr ""
+msgstr "stronę główną"
 
 #: root/base/edithelp/markdown.tt:43
 msgid "hover over the link to see the title"
@@ -1921,7 +1921,7 @@ msgstr "lub"
 
 #: root/base/message.tt:10
 msgid "or you can try to"
-msgstr ""
+msgstr "lub podać inny "
 
 #: root/base/page/info.tt:58 root/base/page/info.tt:61
 msgid "pages"
