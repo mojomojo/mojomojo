@@ -16,7 +16,7 @@ BEGIN {
 	eval "use WWW::Mechanize::TreeBuilder";
 	plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-	plan tests => 33;
+	plan tests => 32;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -119,9 +119,6 @@ is $mech->look_down( _tag => 'h3' )->as_trimmed_text,
 # Make sure Logged out
 $mech->get_ok('/.logout');
 
-# Get registration page
-$mech->get_ok('/.register');
-
 # Post registration
 # Create a random login and email:
 # This test has very small chance of failing if it's been run
@@ -133,29 +130,28 @@ my $email_domain = '@bogusness.org';
 my $email = $login . $email_domain;
 my $pass  = 'jake';
 
-$mech->submit_form_ok(
-	{
-		fields => {
-			login            => $login,
-			pass             => $pass,
-			confirm_password => $pass,
-			email            => $email,
-			name             => 'Avatar',
-			submit           => 'Register',
-
-		},
-	},
-	'Register submit'
+# Create non-admin user for testing page delete
+my @people = $schema->populate(
+    'Person',
+    [
+        [
+            qw/ active views photo login name email pass timezone born gender occupation industry interests movies music /
+        ],
+        [
+            1, 0, 0, $login, 'Avatar', $email,
+            $pass, '', undef, '', '', '', '', '', ''
+        ],
+    ]
 );
 
-# Activate registration
+# Check user exists and is active 
 my $non_admin_user = $schema->resultset('Person')->find(
 	{
 		login => $login,
 		key   => 'login'
 	}
 );
-$non_admin_user->update({active => 1});
+is($non_admin_user->active, 1, 'Avatar user active');
 
 # Login as non-admin user
 $mech->post(
@@ -184,8 +180,8 @@ $mech->content_contains( <<RENDERED_CONTENT, 'content rendered correctly' );
 RENDERED_CONTENT
 
 # Attempt to delete a page
-$mech->get_ok( '/attempt_to_delete.delete', 'can NOT delete a page' );
-ok( ($elem) = $mech->look_down( _tag => 'h3', ), 'Can NOT delete header' );
+$mech->get_ok( '/attempt_to_delete.delete', 'make request to delete a page' );
+ok( ($elem) = $mech->look_down( _tag => 'h3', ), 'Found h3 delete header' );
 if ($elem) {
 	is $elem->as_trimmed_text, 'Sorry',
 	  'page can NOT be deleted';
