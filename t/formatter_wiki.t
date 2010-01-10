@@ -10,13 +10,10 @@ my ($content, $test, $exist, $new);
 # this fake object returns different path_pages based on whether a wiki link containing the text "existing"
 my $fake_c = FakeCatalystObject->new;
 
-TODO: {
-    $test = 'number at the end of the link text';
-    local $TODO = 'Fails because of the number, 2. The $content does not get formatted at all so it\'s bypassing format_content.';
-    $content = '[[existing|MojoMojo 2]]';
-    MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
-    is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', $test);
-}
+$test = 'number at the end of the link text';
+$content = '[[existing|MojoMojo 2]]';
+MojoMojo::Formatter::Wiki->format_content(\$content, $fake_c, undef);
+is($content, '<a class="existingWikiWord" href="/existing">MojoMojo 2</a>', $test);
 
 
 $test = 'escaping opening [[';

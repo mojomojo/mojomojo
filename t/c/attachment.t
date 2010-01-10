@@ -25,7 +25,7 @@ $mech->post('/.login', {
 ok $mech->success, 'logging in as admin'
     or BAIL_OUT('must be able to login in order to upload attachments');
 ok $mech->find_link(
-    text => 'admin',
+   # text => 'admin',
     url_regex => qr'/admin$'
 ), 'can log in as admin via URL'
     or BAIL_OUT('must be able to login in order to upload attachments');

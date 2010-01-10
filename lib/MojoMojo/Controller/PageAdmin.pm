@@ -85,6 +85,12 @@ sub delete : Global FormConfig {
             push @deleted_pages, $page->name_orig;
             push @ids_to_delete, $page->id;
 
+            # Handling Circular Constraints:
+            # Must set page version column to NULL (undef in Perl speak)
+            # to remove the page(id, version) -> page_version(page, version)
+            # constraint which then allows a page_version record to be deleted.
+            $page->update({version => undef});
+
             # remove page from search index
             $c->model('Search')->delete_page($page);
         }

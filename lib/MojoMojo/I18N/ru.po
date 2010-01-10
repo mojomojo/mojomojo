@@ -39,7 +39,7 @@ msgstr "3 или более дефиса или звездочки"
 msgid "<xml> and such.\\nor pure text."
 msgstr "<xml> и такое.\\nили чистый текст"
 
-#: root/base/message.tt:1
+#:
 msgid "A message from our sponsors..."
 msgstr "Сообщение от спонсоров..."
 
@@ -59,7 +59,7 @@ msgstr "Действия"
 msgid "Active"
 msgstr "Активный"
 
-#: root/base/page/info.tt:43
+#: root/base/page/info.tt:45
 msgid "Active version"
 msgstr "Активная версия"
 
@@ -167,13 +167,17 @@ msgstr "Аноним"
 msgid "Anonymous Coward"
 msgstr "Неизвестный трус"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:96
+#:
 msgid "Anonymous Edit disabled"
 msgstr "Анонимное редактирование запрещено"
 
 #: root/forms/admin/settings.yml:23
 msgid "Anonymous User (blank to disable)"
 msgstr "Анонимный пользователь (оставьте незаполненным для отключения)"
+
+#: lib/MojoMojo/Controller/PageAdmin.pm:184
+msgid "Anonymous edit disabled"
+msgstr ""
 
 #: root/base/edithelp.tt:4
 msgid "Any phrase surrounded by double brackets or parentheses is a wiki word (camel-case wiki words are not supported for good reasons, one being that some languages don't have the concept of case)."
@@ -183,17 +187,36 @@ msgstr "Любая фраза, окаймленная двойными скоб�
 msgid "Aperture"
 msgstr "Размер"
 
+#: root/base/page/delete.tt:5
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: root/base/edithelp/markdown.tt:184
+msgid ""
+"As detailed in the book&#91;^footnote1&#93;, we will now show that...<br/>\n"
+"        ...later in the document...<br/>\n"
+"        &#91;^footnote1&#93;: Conway, Damian - Perl Best Practices, p. 117"
+msgstr ""
+
 #: root/forms/admin/settings.yml:99
 msgid "Attachment allowed by default"
 msgstr "Вложения разрешены по-умолчанию"
 
-#: lib/MojoMojo/Controller/Attachment.pm:150
+#: lib/MojoMojo/Controller/Attachment.pm:58
 msgid "Attachment not found."
 msgstr "Вложение не найдено."
 
-#: root/base/navbar.tt:44 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:61
+#: root/base/navbar.tt:44 root/base/page/editbar.tt:14 root/base/page/editbar.tt:9 root/base/page/info.tt:66
 msgid "Attachments"
 msgstr "Вложения"
+
+#: root/base/page/attachments.tt:1
+msgid "Attachments for"
+msgstr ""
+
+#: root/base/page/info.tt:63
+msgid "Attachments size"
+msgstr ""
 
 #: root/base/navbar.tt:12
 msgid "Authors"
@@ -203,11 +226,11 @@ msgstr "Авторы"
 msgid "Authors in this path"
 msgstr ""
 
-#: root/base/page/bottomnav.tt:21 root/base/page/bottomnav.tt:38
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:41
 msgid "Back in time"
 msgstr "Предыдущая версия"
 
-#: root/base/page/bottomnav.tt:43 root/base/this_page_link.tt:18
+#: root/base/page/bottomnav.tt:46 root/base/this_page_link.tt:18
 msgid "Back to the page"
 msgstr "Назад на страницу"
 
@@ -271,7 +294,7 @@ msgstr "Можно сделать лишь миниатюры фотографи
 msgid "Cannot find that user."
 msgstr "Не могу найти такого пользователя."
 
-#: lib/MojoMojo/Controller/Admin.pm:82
+#: lib/MojoMojo/Controller/Admin.pm:87
 msgid "Cant find admin user: "
 msgstr "Не могу найти администратора: "
 
@@ -291,7 +314,7 @@ msgstr "Изменить пароль"
 msgid "Change profile content"
 msgstr "Изменить содержимое профиля"
 
-#: root/base/page/bottomnav.tt:67
+#: root/base/page/bottomnav.tt:70
 msgid "Change site settings"
 msgstr "Изменить настройки сайта"
 
@@ -299,7 +322,7 @@ msgstr "Изменить настройки сайта"
 msgid "Check permission on view"
 msgstr "Проверить разрешения на просмотр"
 
-#: root/base/page/info.tt:49
+#: root/base/page/info.tt:51
 msgid "Children"
 msgstr "Дети"
 
@@ -347,7 +370,7 @@ msgstr "Комментарии"
 msgid "Configuration"
 msgstr "Конфигурация"
 
-#: root/base/page/info.tt:46
+#: root/base/page/info.tt:48
 msgid "Content size"
 msgstr "Размер содержимого"
 
@@ -356,9 +379,14 @@ msgid "Could not authenticate that login."
 msgstr "Не удалось аутентифицировать эту учетную запись."
 
 #. ($file)
-#: lib/MojoMojo/Controller/Attachment.pm:100
+#: lib/MojoMojo/Controller/Attachment.pm:114
 msgid "Could not create attachment from x"
 msgstr "Не удалось создать вложение от %1"
+
+#. ($url)
+#: lib/MojoMojo/Formatter/RSS.pm:77
+msgid "Could not parse feed x"
+msgstr ""
 
 #: lib/MojoMojo/Controller/User.pm:186
 msgid "Could not recover password"
@@ -369,7 +397,7 @@ msgid "Could not retrieve"
 msgstr "Не удалось получить"
 
 #. ($url)
-#: lib/MojoMojo/Formatter/Include.pm:62
+#: lib/MojoMojo/Formatter/Include.pm:80 lib/MojoMojo/Formatter/RSS.pm:74
 msgid "Could not retrieve x"
 msgstr ""
 
@@ -385,11 +413,11 @@ msgstr "Создать новую роль"
 msgid "Create allowed by default"
 msgstr "Создание разрешено по-умолчанию"
 
-#: root/base/page/edit.tt:58
+#: root/base/page/edit.tt:62
 msgid "Create and View"
 msgstr "Создать и посмотреть"
 
-#: root/base/page/info.tt:19
+#: root/base/page/info.tt:21
 msgid "Created by"
 msgstr ""
 
@@ -401,7 +429,7 @@ msgstr "Создает"
 msgid "Creating"
 msgstr "Создание"
 
-#: root/base/page/bottomnav.tt:43
+#: root/base/page/bottomnav.tt:46
 msgid "Current Revision"
 msgstr "Текущая версия"
 
@@ -409,7 +437,7 @@ msgstr "Текущая версия"
 msgid "Current password"
 msgstr "Текущий пароль"
 
-#: root/base/page/info.tt:18
+#: root/base/page/info.tt:20
 msgid "Date"
 msgstr ""
 
@@ -417,15 +445,28 @@ msgstr ""
 msgid "Date registered"
 msgstr "Дата регистрации"
 
+#. (page.path)
+#: root/base/page/delete.tt:1
+msgid "Delete"
+msgstr ""
+
 #: root/forms/admin/settings.yml:84
 msgid "Delete allowed by default"
 msgstr "Удаление разрешено по-умолчанию"
+
+#: root/base/page/bottomnav.tt:15
+msgid "Delete page"
+msgstr ""
+
+#: root/base/page/deleted.tt:1 root/base/page/deleted.tt:4
+msgid "Deleted"
+msgstr ""
 
 #:
 msgid "Deleted Text"
 msgstr "Удаленный текст"
 
-#: root/base/page/info.tt:52
+#: root/base/page/info.tt:54
 msgid "Descendants"
 msgstr "Потомки"
 
@@ -437,15 +478,19 @@ msgstr "Не получили почтовое сообщение?"
 msgid "Disable internal search (use Google)"
 msgstr "Запретить встроенный поиск (используйте Google)"
 
+#: root/base/navbar.tt:14
+msgid "Download a ZIP of this page and its subpages"
+msgstr ""
+
 #: root/base/page/list.tt:52
 msgid "Download a zip with all the pages in this path"
 msgstr ""
 
-#: root/base/navbar.tt:14
+#:
 msgid "Download a zip with all the pages in this wiki"
 msgstr "Загрузить архив со всеми страницами на этом вики"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:154
+#: lib/MojoMojo/Controller/PageAdmin.pm:249
 msgid "END OF CONFLICT"
 msgstr "КОНЕЦ КОНФЛИКТА"
 
@@ -526,9 +571,17 @@ msgstr "Форсировать вход"
 msgid "Enum list"
 msgstr "Нумерованный список"
 
+#: root/base/message.tt:1
+msgid "Error"
+msgstr ""
+
 #: lib/MojoMojo/Controller/User.pm:205
 msgid "Error occurred while emailing you your new password."
 msgstr "Произошла ошибка при отправке пароля по почте."
+
+#: root/base/edithelp.tt:40
+msgid "Examples"
+msgstr ""
 
 #: root/base/gallery/photo_info.tt:1
 msgid "Exif Data"
@@ -562,6 +615,10 @@ msgstr "RSS"
 msgid "Fill in the email address you want to use here"
 msgstr "Введите адрес электронной почты, которым вы хотите здесь пользоваться"
 
+#: root/base/gallery/photo_info.tt:8
+msgid "Flash"
+msgstr ""
+
 #: root/base/edithelp/markdown.tt:181
 msgid "Footnotes"
 msgstr "Сноски"
@@ -582,11 +639,11 @@ msgstr "Отформатировать содержимое до следующ�
 msgid "Format content until {{end}} as plain old documentation"
 msgstr "Отформатировать содержимое до {{end}} как POD документацию"
 
-#: root/base/page/bottomnav.tt:58
+#: root/base/page/bottomnav.tt:61
 msgid "Format page for printing"
 msgstr "Отформатировать страницу для печати"
 
-#: root/base/page/bottomnav.tt:27 root/base/page/bottomnav.tt:33
+#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:36
 msgid "Forward in time"
 msgstr "Следующая версия"
 
@@ -614,7 +671,7 @@ msgstr "Войти"
 msgid "Go"
 msgstr "Найти"
 
-#: root/base/message.tt:9
+#:
 msgid "Go directly to "
 msgstr "Перейти на "
 
@@ -676,7 +733,7 @@ msgstr "Привет."
 msgid "Hi. This is a mail to validate your email address, x. To confirm, please click the url below:"
 msgstr "Привет. Это сообщение послано для проверки действительности вашего почтового адреса, x. Для подтверждения кликните по ссылке внизу: "
 
-#: root/base/page/bottomnav.tt:53
+#: root/base/page/bottomnav.tt:56
 msgid "Hide changes"
 msgstr "Скрыть изменения"
 
@@ -741,7 +798,7 @@ msgstr "Род занятий"
 msgid "Inherited permissions"
 msgstr "Унаследованные разрешения"
 
-#: root/base/edithelp/markdown.tt:193 root/base/page/bottomnav.tt:60
+#: root/base/edithelp/markdown.tt:193 root/base/page/bottomnav.tt:63
 msgid "Inline"
 msgstr "Встроить"
 
@@ -749,7 +806,7 @@ msgstr "Встроить"
 msgid "Inline Links"
 msgstr "Встроенные ссылки"
 
-#: root/base/page/bottomnav.tt:60
+#: root/base/page/bottomnav.tt:63
 msgid "Inline for including content"
 msgstr "Встроенный для включения содержимого"
 
@@ -817,7 +874,7 @@ msgstr "Далее в документе"
 msgid "Leave second blank if you do not want a password"
 msgstr "Оставьте второе поле незаполненным, если не хотите использовать пароль"
 
-#: root/base/page/edit.tt:69
+#: root/base/page/edit.tt:73
 msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
@@ -837,7 +894,7 @@ msgstr "Название ссылки"
 msgid "Link to Another Page"
 msgstr ""
 
-#: root/base/page/info.tt:71
+#: root/base/page/info.tt:76
 msgid "Linked from"
 msgstr "Прилинковано от"
 
@@ -845,11 +902,11 @@ msgstr "Прилинковано от"
 msgid "Links"
 msgstr "Ссылки"
 
-#: root/base/page/info.tt:58
+#: root/base/page/info.tt:60
 msgid "Links from"
 msgstr "Ссылки от"
 
-#: root/base/page/info.tt:55
+#: root/base/page/info.tt:57
 msgid "Links to"
 msgstr "Ссылки на"
 
@@ -1012,9 +1069,14 @@ msgstr "Пока нет помощи для %1"
 msgid "No members added yet."
 msgstr "Нет участников."
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:40
+#:
 msgid "No permissions to edit this page"
 msgstr "У Вас нет разрешения на редактирование этой страницы"
+
+#. ($operation || $c->loc('update')
+#: lib/MojoMojo/Controller/PageAdmin.pm:38
+msgid "No permissions to x this page"
+msgstr ""
 
 #: root/base/user/list.tt:14
 msgid "No recent changes"
@@ -1057,7 +1119,7 @@ msgstr "Обычный параграф"
 msgid "Normal paragraph"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/Wiki.pm:287 root/base/page/list.tt:72
+#: lib/MojoMojo/Formatter/Wiki.pm:315 root/base/page/list.tt:72
 msgid "Not found. Click to create this page."
 msgstr "Не найдено. Кликните для создания этой страницы"
 
@@ -1114,7 +1176,7 @@ msgstr "Другие страницы, ссылающиеся на эту стр
 msgid "Page"
 msgstr "Страница"
 
-#: root/base/page/bottomnav.tt:15 root/base/page/bottomnav.tt:17
+#: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page Info"
 msgstr "Информация о странице"
 
@@ -1127,7 +1189,7 @@ msgstr ""
 msgid "Page info for x"
 msgstr "Информация о странице для %1"
 
-#: root/base/page/bottomnav.tt:15 root/base/page/bottomnav.tt:17
+#: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page meta information"
 msgstr "Метаинформация о странице"
 
@@ -1155,15 +1217,18 @@ msgstr "Пароль не совпадает"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Пароль должен содержать от 4 до 14 символов"
 
-#. ($c->stash->{page}->name)
-#: lib/MojoMojo.pm:736
+#:
 msgid "Permission Denied to view x"
 msgstr "Запрещено просматривать %1"
 
-#. ([ $loc_permtocheck, $name ])
-#: lib/MojoMojo/Controller/PageAdmin.pm:91
+#:
 msgid "Permission Denied to x x"
 msgstr "Закрыт доступ к %1 %2"
+
+#. ([ $loc_permtocheck, $name ])
+#: lib/MojoMojo/Controller/PageAdmin.pm:179
+msgid "Permission denied to x x"
+msgstr ""
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1177,7 +1242,11 @@ msgstr "Разрешения для этой страницы"
 msgid "Photo Album"
 msgstr "Фотоальбом"
 
-#: root/base/page/info.tt:64
+#: lib/MojoMojo/Controller/Gallery.pm:31
+msgid "Photo not found"
+msgstr ""
+
+#: root/base/page/info.tt:69
 msgid "Photos"
 msgstr "Фотографии"
 
@@ -1253,7 +1322,7 @@ msgstr "Предыдущие"
 msgid "Previous page"
 msgstr ""
 
-#: root/base/page/bottomnav.tt:58
+#: root/base/page/bottomnav.tt:61
 msgid "Print"
 msgstr "Печать"
 
@@ -1262,7 +1331,7 @@ msgid "Profile"
 msgstr "Профиль"
 
 #. (version.creator.name)
-#: root/base/page/info.tt:30
+#: root/base/page/info.tt:32
 msgid "Profile for x"
 msgstr ""
 
@@ -1287,8 +1356,8 @@ msgstr "Последние изменения в %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Последние страницы в %1"
@@ -1343,7 +1412,7 @@ msgstr "Повторите пароль"
 msgid "Restrict user editing to home directory"
 msgstr "Ограничить пользователя редактированием домашнего каталога"
 
-#: lib/MojoMojo/Controller/Admin.pm:28
+#: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
 msgstr "Доступ ограничен. Требуются полномочия администратора"
 
@@ -1405,11 +1474,11 @@ msgstr "Роли"
 msgid "Rolled Back (Current: x)"
 msgstr "Откат назад (Текущая: %1)"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:170 root/base/admin/role_form.tt:37 root/base/page/edit.tt:59 root/base/page/permissions.tt:74 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:102 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
+#: lib/MojoMojo/Controller/PageAdmin.pm:270 root/base/admin/role_form.tt:37 root/base/page/edit.tt:63 root/base/page/permissions.tt:74 root/forms/admin/role_form.yml:21 root/forms/admin/settings.yml:102 root/forms/user/password.yml:26 root/forms/user/prefs.yml:32
 msgid "Save"
 msgstr "Сохранить"
 
-#: root/base/page/edit.tt:58
+#: root/base/page/edit.tt:62
 msgid "Save and View"
 msgstr "Сохранить и просмотреть"
 
@@ -1442,15 +1511,15 @@ msgstr ""
 msgid "Second item"
 msgstr "Второй элемент"
 
-#: root/base/page/bottomnav.tt:50
+#: root/base/page/bottomnav.tt:53
 msgid "See changes"
 msgstr "Посмотреть изменения"
 
-#: root/base/page/bottomnav.tt:27 root/base/page/bottomnav.tt:33
+#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:36
 msgid "See next revision"
 msgstr "Посмотреть следующую версию"
 
-#: root/base/page/bottomnav.tt:21 root/base/page/bottomnav.tt:38
+#: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:41
 msgid "See previous revision"
 msgstr "Посмотреть предыдущую версию"
 
@@ -1458,7 +1527,7 @@ msgstr "Посмотреть предыдущую версию"
 msgid "Set a keyword for this page"
 msgstr "Установить ключевое слово для этой страницы"
 
-#: root/base/page/bottomnav.tt:73
+#: root/base/page/bottomnav.tt:76
 msgid "Set language"
 msgstr "Установить язык"
 
@@ -1466,11 +1535,11 @@ msgstr "Установить язык"
 msgid "Shapes"
 msgstr "Формы"
 
-#: root/base/page/bottomnav.tt:50
+#: root/base/page/bottomnav.tt:53
 msgid "Show differences from previous version"
 msgstr "Показать отличия от предыдущей версии"
 
-#: root/base/page/bottomnav.tt:53
+#: root/base/page/bottomnav.tt:56
 msgid "Show normal page"
 msgstr "Показать обычную страницу"
 
@@ -1478,7 +1547,7 @@ msgstr "Показать обычную страницу"
 msgid "Show picture"
 msgstr "Показать картинку"
 
-#: root/base/page/info.tt:34
+#: root/base/page/info.tt:36
 msgid "Show revision"
 msgstr "Показать версию"
 
@@ -1518,7 +1587,7 @@ msgstr "Конфигурация сайта"
 msgid "Site name"
 msgstr "Имя сайта"
 
-#: root/base/page/bottomnav.tt:67
+#: root/base/page/bottomnav.tt:70
 msgid "Site settings"
 msgstr "Найстройки сайта"
 
@@ -1530,9 +1599,13 @@ msgstr "Меньше"
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Некоторые поля неверно заполнены. Исправьте и попробуйте снова:"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:142
+#: lib/MojoMojo/Controller/PageAdmin.pm:237
 msgid "Someone else changed the page while you edited. Your changes has been merged. Please review and save again"
 msgstr "Кто-то другой изменил страницу, пока вы ее редактировали. Изменения будут объединены. Просмотрите и сохраните снова"
+
+#: root/base/page/delete.tt:8
+msgid "Sorry"
+msgstr ""
 
 #: root/base/edithelp/markdown.tt:171
 msgid ""
@@ -1548,6 +1621,10 @@ msgstr "Совмещенное редактирование"
 #:
 msgid "Square"
 msgstr "Квадрат"
+
+#: root/base/message.tt:4
+msgid "Stop"
+msgstr ""
 
 #: root/base/edithelp/markdown.tt:60 root/base/edithelp/markdown.tt:61 root/base/edithelp/markdown.tt:65 root/base/edithelp/markdown.tt:66 root/base/edithelp/markdown.tt:67
 msgid "Sub Header"
@@ -1569,7 +1646,7 @@ msgstr "Подстраницы"
 msgid "Subscribe to changes by RSS"
 msgstr "Подписаться на изменения по RSS"
 
-#: root/base/page/bottomnav.tt:59
+#: root/base/page/bottomnav.tt:62
 msgid "Subscribe to page changes"
 msgstr "Подписаться на изменения страниц"
 
@@ -1589,13 +1666,17 @@ msgstr "Переключиться на flash-загрузчик"
 msgid "Syntax"
 msgstr "Синтаксис"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:152
+#: lib/MojoMojo/Controller/PageAdmin.pm:247
 msgid "THEIR CHANGES"
 msgstr "ИХ ИЗМЕНЕНИЯ"
 
 #: root/base/edithelp/textile.tt:51
 msgid "Table"
 msgstr "Таблица"
+
+#: lib/MojoMojo/Controller/Gallery.pm:67
+msgid "Tag not found"
+msgstr ""
 
 #: root/base/navbar.tt:11 root/base/page/list.tt:49 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
 msgid "Tags"
@@ -1647,8 +1728,16 @@ msgstr "Викистраница"
 msgid "The email was sent to x."
 msgstr "Сообщение было отправлено %1."
 
+#: root/base/page/deleted.tt:6
+msgid "The following pages have been deleted"
+msgstr ""
+
 #: root/base/page/suggest.tt:4
 msgid "The following pages in the requested path do not exist:"
+msgstr ""
+
+#: root/base/page/delete.tt:6
+msgid "The following pages will be deleted. This can not be undone"
 msgstr ""
 
 #:
@@ -1680,7 +1769,7 @@ msgstr "Время изменения"
 msgid "To get"
 msgstr "Получить"
 
-#: root/base/page/edit.tt:33
+#: root/base/page/edit.tt:37
 msgid "To start editing this page, write in the text area below this preview. To find out what kind of codes you can use click the syntax link above."
 msgstr "Чтобы начать редактирование этой страницы, напишите в поле ввода под этим текстом. Чтобы выяснить, какие виды кодов можно использовать, кликните ссылку синтаксиса вверху."
 
@@ -1708,7 +1797,7 @@ msgstr "Обновить "
 msgid "Updated preferences"
 msgstr "Обновить предпочтения"
 
-#: lib/MojoMojo/Controller/Admin.pm:106
+#: lib/MojoMojo/Controller/Admin.pm:114
 msgid "Updated successfully."
 msgstr "Успешно обновлено"
 
@@ -1766,7 +1855,7 @@ msgstr "Пользователи"
 msgid "Validation"
 msgstr "Проверка"
 
-#: root/base/page/info.tt:17
+#: root/base/page/info.tt:19
 msgid "Version"
 msgstr ""
 
@@ -1786,7 +1875,7 @@ msgstr "Посмотреть как файлы"
 msgid "View as gallery"
 msgstr "Посмотреть как галерею"
 
-#: root/base/page/bottomnav.tt:58
+#: root/base/page/bottomnav.tt:61
 msgid "Views"
 msgstr "Просмотры"
 
@@ -1823,17 +1912,21 @@ msgstr "Второй параграф"
 msgid "Write"
 msgstr "Писать"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:153
+#: lib/MojoMojo/Controller/PageAdmin.pm:248
 msgid "YOUR CHANGES"
 msgstr "ВАШИ ИЗМЕНЕНИЯ"
 
-#: root/base/admin/role.tt:26
+#: root/base/admin/role.tt:26 root/base/page/delete.tt:21
 msgid "Yes"
 msgstr "Да"
 
 #: root/base/export.tt:4
 msgid "You can export all the pages in this web as a zip file in either HTML (with working links and all) or the pure markup (to import in another wiki)."
 msgstr "Вы можете экспортировать все страницы сайта как zip файл либо в HTML (с работающими ссылками и прочим), либо в чистой разметке (для импорта в другую вики)."
+
+#: root/base/message.tt:9
+msgid "You can go to the"
+msgstr ""
 
 #: root/base/feeds.tt:4
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
@@ -1856,7 +1949,11 @@ msgstr "Вы должны заполнить все обязательные п�
 msgid "You have to log in to post a comment."
 msgstr "Вы должны войти, чтобы иметь возможность оставлять комментарии."
 
-#: lib/MojoMojo/Formatter/YouTube.pm:52
+#: root/base/page/delete.tt:9
+msgid "You lack permissions to delete this page (or any of the sub pages)."
+msgstr ""
+
+#: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "YouTube Video"
 msgstr ""
 
@@ -1931,7 +2028,7 @@ msgstr "неизвестныйтрус"
 msgid "apply to subpages"
 msgstr "применить к подстраницам"
 
-#: root/base/page/edit.tt:60
+#: root/base/page/edit.tt:64
 msgid "as"
 msgstr "как"
 
@@ -1965,7 +2062,7 @@ msgstr "блоки заключены в обратные кавычки"
 msgid "bold"
 msgstr "жирный"
 
-#: root/base/page/edit.tt:55
+#: root/base/page/edit.tt:59
 msgid "busy spinner"
 msgstr ""
 
@@ -1973,7 +2070,7 @@ msgstr ""
 msgid "by"
 msgstr " "
 
-#: root/base/page/info.tt:62
+#: root/base/page/info.tt:64
 msgid "bytes"
 msgstr "байт"
 
@@ -1985,7 +2082,7 @@ msgstr ":"
 msgid "centered paragraph"
 msgstr "параграф по центру"
 
-#: root/base/page/info.tt:47
+#: root/base/page/info.tt:49
 msgid "chars"
 msgstr "символов"
 
@@ -2013,7 +2110,7 @@ msgstr "конфигурация"
 msgid "confirmation message resent"
 msgstr "отправка сообщения подтверждена"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:87 root/base/page/permissions.tt:36 root/base/page/permissions.tt:51
+#: lib/MojoMojo/Controller/PageAdmin.pm:171 root/base/page/permissions.tt:36 root/base/page/permissions.tt:51
 msgid "create"
 msgstr "создать"
 
@@ -2033,10 +2130,6 @@ msgstr "удалено"
 msgid "details"
 msgstr "подробности"
 
-#: root/base/message.tt:12
-msgid "do not pass jail, do not collect $200..."
-msgstr ""
-
 #:
 msgid "do not pass prison, do not collect $ 200..."
 msgstr "не нужно нервничать..."
@@ -2045,7 +2138,7 @@ msgstr "не нужно нервничать..."
 msgid "download"
 msgstr "загрузить"
 
-#: lib/MojoMojo/Controller/PageAdmin.pm:87
+#: lib/MojoMojo/Controller/PageAdmin.pm:172 lib/MojoMojo/Controller/PageAdmin.pm:54
 msgid "edit"
 msgstr "редактировать"
 
@@ -2061,7 +2154,7 @@ msgstr "весь сайт"
 msgid "example"
 msgstr "пример"
 
-#: root/base/comment/post.tt:5 root/base/page/edit.tt:64
+#: root/base/comment/post.tt:5 root/base/page/edit.tt:68
 msgid "forget me"
 msgstr "забыть меня"
 
@@ -2085,6 +2178,10 @@ msgstr ""
 "## Использование меток\n"
 "\n"
 "## Вложения и фотографии\n"
+
+#: root/base/message.tt:9
+msgid "home page"
+msgstr ""
 
 #: root/base/edithelp/markdown.tt:43
 msgid "hover over the link to see the title"
@@ -2134,11 +2231,11 @@ msgstr ""
 msgid "is formatted as:"
 msgstr ""
 
-#: lib/MojoMojo/Formatter/YouTube.pm:65
+#: lib/MojoMojo/Formatter/YouTube.pm:71
 msgid "is not a valid link to youtube video"
 msgstr "это не корректная ссылка на YouTube видео"
 
-#: lib/MojoMojo/Formatter/YouTube.pm:58
+#: lib/MojoMojo/Formatter/YouTube.pm:64
 msgid "is not a valid url"
 msgstr "это не корректный адрес"
 
@@ -2162,6 +2259,10 @@ msgstr "параграф с выравниванием по краям"
 msgid "left justified paragraph"
 msgstr "параграф с выравниванием по левому краю"
 
+#: root/base/edithelp.tt:40
+msgid "level"
+msgstr ""
+
 #: root/base/edithelp/textile.tt:37 root/base/edithelp/textile.tt:39
 msgid "linkname"
 msgstr "название ссылки"
@@ -2174,7 +2275,7 @@ msgstr "войти"
 msgid "log out"
 msgstr "выйти"
 
-#: root/base/admin/user.tt:14 root/base/comment/login.tt:11 root/base/message.tt:11
+#: root/base/admin/user.tt:14 root/base/comment/login.tt:11 root/base/message.tt:10
 msgid "login"
 msgstr "логин"
 
@@ -2202,7 +2303,7 @@ msgstr "нет почтового адреса"
 msgid "not access page"
 msgstr "нет доступа к странице"
 
-#: root/base/gallery/photo_info.tt:3 root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:7
+#: root/base/gallery/photo_info.tt:3 root/base/gallery/photo_info.tt:4 root/base/gallery/photo_info.tt:5 root/base/gallery/photo_info.tt:6 root/base/gallery/photo_info.tt:7 root/base/gallery/photo_info.tt:8
 msgid "not specified"
 msgstr "не определено"
 
@@ -2214,11 +2315,15 @@ msgstr "на"
 msgid "optionally, you can add the same number of trailing # marks"
 msgstr ""
 
-#: root/base/edithelp/markdown.tt:149 root/base/message.tt:10 root/base/user/login.tt:11
+#: root/base/edithelp/markdown.tt:149 root/base/user/login.tt:11
 msgid "or"
 msgstr "или"
 
-#: root/base/page/info.tt:56 root/base/page/info.tt:59
+#: root/base/message.tt:10
+msgid "or you can try to"
+msgstr ""
+
+#: root/base/page/info.tt:58 root/base/page/info.tt:61
 msgid "pages"
 msgstr "страниц"
 
@@ -2271,7 +2376,11 @@ msgstr "регистрация"
 msgid "remove"
 msgstr "удалить"
 
-#: root/base/page/bottomnav.tt:22
+#: lib/MojoMojo/Controller/PageAdmin.pm:422
+msgid "rename via non-POST method"
+msgstr ""
+
+#: root/base/page/bottomnav.tt:25
 msgid "revision"
 msgstr "версия"
 
@@ -2283,7 +2392,11 @@ msgstr "параграф выровненный по правому краю"
 msgid "roles"
 msgstr "роли"
 
-#: root/base/message.tt:4
+#: lib/MojoMojo/Controller/PageAdmin.pm:390
+msgid "rollback"
+msgstr ""
+
+#:
 msgid "shrinked head"
 msgstr "сжатый заголовок"
 
@@ -2291,7 +2404,7 @@ msgstr "сжатый заголовок"
 msgid "small"
 msgstr "маленький"
 
-#: root/base/message.tt:9
+#:
 msgid "start"
 msgstr "начало"
 
@@ -2363,19 +2476,19 @@ msgid "x hits"
 msgstr "%1 очков"
 
 #. ($url)
-#: lib/MojoMojo/Formatter/Include.pm:53
+#: lib/MojoMojo/Formatter/Include.pm:71 lib/MojoMojo/Formatter/RSS.pm:71
 msgid "x is not a valid URL"
 msgstr ""
 
 #. (page.content.max_version - page.content_version)
 #. (page.content.max_version - rev)
 #. (rev - 1)
-#: root/base/page/bottomnav.tt:27 root/base/page/bottomnav.tt:33 root/base/page/bottomnav.tt:38
+#: root/base/page/bottomnav.tt:30 root/base/page/bottomnav.tt:36 root/base/page/bottomnav.tt:41
 msgid "x more"
 msgstr "еще %1"
 
 #. (page.versions_rs.count)
-#: root/base/page/info.tt:12
+#: root/base/page/info.tt:14
 msgid "x revisions"
 msgstr "версий: %1"
 

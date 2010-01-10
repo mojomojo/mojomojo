@@ -58,6 +58,6 @@ $mech->submit_form(
 );
 ok $mech->success, 'trying to login as admin via POST';
 ok $mech->find_link(
-    text => 'admin',
+    #text => 'admin',
     url_regex => qr'/admin$'
 ), 'can log in as admin via URL';
