@@ -16,7 +16,7 @@ BEGIN {
 	eval "use WWW::Mechanize::TreeBuilder";
 	plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-	plan tests => 32;
+	plan tests => 33;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -152,6 +152,15 @@ my $non_admin_user = $schema->resultset('Person')->find(
 	}
 );
 is($non_admin_user->active, 1, 'Avatar user active');
+
+# non_admin_user have role User (permissions is based on user role)
+ok($schema->resultset('RoleMember')->create(
+        {
+         role   => 2,
+         person => $non_admin_user->id,
+         admin  => 0,
+        }
+    ), "non_admin_user have role User");
 
 # Login as non-admin user
 $mech->post(
