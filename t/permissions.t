@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 19;
+use Test::More tests => 32;
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
@@ -12,6 +12,9 @@ use_ok( 'Test::WWW::Mechanize::Catalyst', 'MojoMojo' );
 my $m = Test::WWW::Mechanize::Catalyst->new;
 
 my(undef, $c) = ctx_request('/');
+
+# do not use the cache
+$c->cache->set( cache_permission_data => 0 );
 
 my $anon_login = $c->pref('anonymous_user');
 my $anonymous = $c->model('DBIC::Person') ->search( {login => $anon_login} )->first;
@@ -47,10 +50,11 @@ ok(my $usertest = $schema->resultset('Person')->create(
 ok($schema->resultset('RoleMember')->create(
         {
          role   => 2,
-         person => 3,
+         person => $usertest->id,
          admin  => 0,
         }
     ), "test is a User");
+
 
 # Create page /foo and /foo/bar
 my $person = $schema->resultset('Person')->find( 1 );
@@ -63,35 +67,38 @@ ok($schema->resultset('Page')->create_path_pages(
 
 
 
- # # User have no permission on /foo only
-  ok( $schema->resultset('PathPermissions')->create(
-          {
-           path                => '/foo',
-           role                => 2,
-           apply_to_subpages   => 'no',
-           create_allowed      => 'no',
-           delete_allowed      => 'no',
-           edit_allowed        => 'no',
-           view_allowed        => 'no',
-           attachment_allowed  => 'no',
-          }
-      ), "User test have no permission on '/foo'");
+  # # User have no permission on /foo only
+   ok( $schema->resultset('PathPermissions')->create(
+           {
+            path                => '/foo',
+            role                => 2,
+            apply_to_subpages   => 'no',
+            create_allowed      => 'no',
+            delete_allowed      => 'no',
+            edit_allowed        => 'no',
+            view_allowed        => 'no',
+            attachment_allowed  => 'no',
+           }
+       ), "User test have no permission on '/foo'");
 
-  ok( $schema->resultset('PathPermissions')->create(
-          {
-           path                => '/foo',
-           role                => 2,
-           apply_to_subpages   => 'yes',
-           create_allowed      => 'yes',
-           delete_allowed      => 'yes',
-           edit_allowed        => 'yes',
-           view_allowed        => 'yes',
-           attachment_allowed  => 'yes',
-          }
-      ), "User test have all permissions on subpages '/foo'");
+   ok( $schema->resultset('PathPermissions')->create(
+           {
+            path                => '/foo',
+            role                => 2,
+            apply_to_subpages   => 'yes',
+            create_allowed      => 'yes',
+            delete_allowed      => 'yes',
+            edit_allowed        => 'yes',
+            view_allowed        => 'yes',
+            attachment_allowed  => 'yes',
+           }
+       ), "User test have all permissions on subpages '/foo'");
 
-# Admin on '/'
-check_perms('/foo', $usertest, [qw/create attachment view edit delete/], []);
+# User test on '/foo'
+check_perms('/foo', $usertest, [], [qw/create attachment view edit delete/]);
+
+# User test on '/foo/bar'
+check_perms('/foo/bar', $usertest, [qw/create attachment view edit/], [ 'delete']);
 
 
 sub check_perms{
@@ -103,8 +110,6 @@ sub check_perms{
   my $username = $user->login;
 
   my $perms = $c->check_permissions( $path,  $user );
-  use Data::Dumper;
-  print Dumper($perms);
 
   foreach my $p (@$allowed){
     is($$perms{$p}, 1, "$username can $p on $path");
@@ -130,11 +135,8 @@ sub login{
 
 END{
   # Delete user test
-  $schema->resultset('Person')->find(3)->delete;
+  $schema->resultset('Person')->search({ login => 'test'})->first->delete;
   $schema->resultset('PathPermissions')->search({ path => '/foo'})->delete;
-
-  #$m->get( '/foo/bar.delete');
-  #$m->get( '/foo.delete');
 
   $schema->resultset('Page')->search({ name => 'bar'})->delete;
   $schema->resultset('Page')->search({ name => 'foo'})->delete;
@@ -142,33 +144,5 @@ END{
   $schema->resultset('PageVersion')->search({ name => 'foo'})->delete;
 }
 
-# use_ok( 'Test::WWW::Mechanize::Catalyst', 'MojoMojo' );
-
-# my $m = Test::WWW::Mechanize::Catalyst->new;
-# my $user = 'anonymous';
-
-# is_denied('/.admin');
-
-# is_allowed('/');
-
-# #login($m, 'admin', 'admin');
-# ## Make sure Logged out
-# #$mech->get_ok('/.logout');
-
-
-
-
- 
-# sub is_denied {
-#     my $path = shift;
-#     $m->get("$path");
-#     $m->content_contains('Error', "$user is denied to '$path'");
-#     #is($m->res->code, '401', "$user is denied to '$path'");
-# }
-
-# sub is_allowed {
-#     my $path = shift;
-#     $m->get_ok("$path");
-# }
 
 
