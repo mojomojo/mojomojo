@@ -21,10 +21,10 @@ my $anonymous = $c->model('DBIC::Person') ->search( {login => $anon_login} )->fi
 
 # Test check_permissions on page ------------------------------------
 # Anonymous on '/'
-check_perms('/', $anonymous, [qw/create attachment view edit/], [ 'delete' ]);
+check_perms('/', $anonymous, [qw/create view edit/], [ 'attachment', 'delete' ]);
 
 # Anonymous on subpage /foo/bar
-check_perms('/foo/bar', $anonymous, [qw/create attachment view edit/], [ 'delete' ]);
+check_perms('/foo/bar', $anonymous, [qw/create view edit/], [ 'attachment', 'delete' ]);
 
 
 my $admin = $c->model('DBIC::Person') ->search( {login => 'admin'} )->first;
