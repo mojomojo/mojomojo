@@ -96,8 +96,8 @@ sub create_initial_data {
              [ '/', $roles[0]->id, qw/yes yes yes yes yes yes / ],
              [ '/', $roles[1]->id, qw/ no yes no  yes yes yes / ],
              [ '/', $roles[1]->id, qw/yes yes no  yes yes yes / ],
-             [ '/', $roles[2]->id, qw/ no yes no  yes yes no  / ],
-             [ '/', $roles[2]->id, qw/yes yes no  yes yes no  / ]
+             [ '/', $roles[2]->id, qw/ no yes no  yes yes yes / ],
+             [ '/', $roles[2]->id, qw/yes yes no  yes yes yes / ]
          ]
      );
 

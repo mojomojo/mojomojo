@@ -98,7 +98,7 @@ ok($schema->resultset('Page')->create_path_pages(
 check_perms('/foo', $usertest, [], [qw/create attachment view edit delete/]);
 
 # User test on '/foo/bar'
-check_perms('/foo/bar', $usertest, [qw/create attachment view edit/], [ 'delete']);
+check_perms('/foo/bar', $usertest, [qw/create attachment view edit delete/], []);
 
 
 sub check_perms{
