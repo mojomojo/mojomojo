@@ -148,6 +148,8 @@ Populate the schema with some test data. For now, path permissions.
 sub create_test_data {
     my ($self, $schema)=@_;
     my @roles = $schema->resultset('Role')->search();
+
+
     $schema->populate('PathPermissions',
         [
             [ qw/path role apply_to_subpages create_allowed delete_allowed edit_allowed view_allowed attachment_allowed / ],
@@ -156,7 +158,7 @@ sub create_test_data {
             [ '/help', $roles[0]->id, qw/no yes yes yes yes yes / ],
             [ '/help', $roles[0]->id, qw/ yes yes yes yes yes yes/ ],
         ]
-    )
+    );
 }
 
 1;

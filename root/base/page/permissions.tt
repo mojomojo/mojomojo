@@ -63,8 +63,8 @@
         <td>[% perm.role_name %]</td>
         [% perms = perm.perms %]
         <td class="center"><input type="checkbox" name="create"[% IF perms && perms.create == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
-        <td class="center"><input type="checkbox" name="read"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
-        <td class="center"><input type="checkbox" name="write"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+        <td class="center"><input type="checkbox" name="view"[% IF perms && perms.view == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
+        <td class="center"><input type="checkbox" name="edit"[% IF perms && perms.edit == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="delete"[% IF perms && perms.delete == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="attachment"[% IF perms && perms.attachment == 'yes' %] checked="checked"[% END %] disabled="disabled"/></td>
         <td class="center"><input type="checkbox" name="subpages"[% IF perm.subpages %] checked="checked"[% END %] disabled="disabled"/></td>

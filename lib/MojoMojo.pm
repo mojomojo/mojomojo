@@ -71,6 +71,10 @@ __PACKAGE__->config('Controller::HTML::FormFu' => {
     localize_from_context  => 1,
 });
 
+__PACKAGE__->config( setup_components => {
+    search_extra => [ '::Extensions' ],
+});
+
 MojoMojo->setup();
 
 # Check for deployed database
@@ -308,19 +312,25 @@ sub prepare_path {
     $c->req->base( URI->new($base) );
     my ( $path, $action );
     $path = $c->req->path;
-    my $index = index( $path, '.' );
 
-    if ( $index == -1 ) {
-
-        # no action found, default to view
+    if( $path =~ /^special(?:\/|$)(.*)/ ) {
         $c->stash->{path} = $path || '/';
-        $c->req->path('view');
-    }
-    else {
+        $c->req->path($1);
+    } else {
+        my $index = index( $path, '.' );
 
-        # set path in stash, and set req.path to action
-        $c->stash->{path} = '/' . substr( $path, 0, $index );
-        $c->req->path( substr( $path, $index + 1 ) );
+        if ( $index == -1 ) {
+
+            # no action found, default to view
+            $c->stash->{path} = $path || '/';
+            $c->req->path('view');
+        }
+        else {
+
+            # set path in stash, and set req.path to action
+            $c->stash->{path} = '/' . substr( $path, 0, $index );
+            $c->req->path( substr( $path, $index + 1 ) );
+        }
     }
 }
 
