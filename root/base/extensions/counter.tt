@@ -1,0 +1,6 @@
+[% WRAPPER page/wrapper.tt index_page=(c.req.params.rev ? 0 : 1) +%]
+<p id='count'>[% count -%]</p>
+<a href='[% c.uri_for('/special/counter.add') -%]'>+</a>
+<br />
+<a href='[% c.uri_for('/special/counter.subtract') -%]'>-</a>
+[% END # WRAPPER %]

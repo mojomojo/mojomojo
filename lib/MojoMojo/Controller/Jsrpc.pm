@@ -198,56 +198,7 @@ sub set_permissions : Local {
 
     $c->forward('validate_perm_edit');
 
-    my @path_elements = $c->_expand_path_elements($c->stash->{path});
-    my $current_path = pop @path_elements;
-
-    my ( $create, $read, $write, $delete, $attachment, $subpages) =
-        map { $c->req->param($_) ? 'yes' : 'no' }
-            qw/create read write delete attachment subpages/;
-
-    my $role = $c->stash->{role};
-
-    my $params = {
-        path => $current_path,
-        role => $role->id,
-        apply_to_subpages   => $subpages,
-        create_allowed      => $create,
-        delete_allowed      => $delete,
-        edit_allowed        => $write,
-        view_allowed        => $read,
-        attachment_allowed  => $attachment
-    };
-
-    my $model = $c->model('DBIC::PathPermissions');
-
-    # when subpages should inherit permissions we actually need to update two
-    # entries: one for the subpages and one for the current page
-    if ($subpages eq 'yes') {
-        # update permissions for subpages
-        $model->update_or_create( $params );
-
-        # update permissions for the current page
-        $params->{apply_to_subpages} = 'no';
-        $model->update_or_create( $params );
-    }
-    # otherwise, we must remove the subpages permissions entry and update the
-    # entry for the current page
-    else {
-        # delete permissions for subpages
-        $model->search( {
-            path              => $current_path,
-            role              => $role->id,
-            apply_to_subpages => 'yes'
-        } )->delete;
-
-        # update permissions for the current page
-        $model->update_or_create($params);
-    }
-
-    # clear cache
-    if ( $c->pref('cache_permission_data') ) {
-        $c->cache->remove( 'page_permission_data' );
-    }
+    $c->set_permissions($c->stash->{path}, $c->stash->{role}, $c->req->params );
 
     $c->res->body("OK");
     $c->res->status(200);
@@ -264,29 +215,10 @@ sub clear_permissions : Local {
 
     $c->forward('validate_perm_edit');
 
-    my @path_elements = $c->_expand_path_elements($c->stash->{path});
-    my $current_path = pop @path_elements;
-
-    my $role = $c->stash->{role};
-
-    if ($role) {
-
-        # delete permissions for subpages
-        $c->model('DBIC::PathPermissions')->search( {
-            path              => $current_path,
-            role              => $role->id
-        } )->delete;
-
-        # clear cache
-        if ( $c->pref('cache_permission_data') ) {
-            $c->cache->remove( 'page_permission_data' );
-        }
-
-    }
+    $c->clear_permissions($c->stash->{path}, $c->stash->{role});
 
     $c->res->body("OK");
     $c->res->status(200);
-
 }
 
 =head2 validate_perm_edit

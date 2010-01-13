@@ -110,6 +110,20 @@ sub init_schema {
            src => [qw(youtube.com youporn.org iusethis.com)] ,
         },
         'View::Email' => { sender => { mailer => 'Test' } },
+        'permissions' => { admin_role_name => 'Admins',
+			   role_members    => 'role_members',
+			   user_field_name => 'login',
+			   anonymous_allowed => 1,
+			   anonymous_user_name => 'anonymouscoward',
+			   check_permission_on_view => 1,
+                           cache_permission_data    => 1,
+                           enforce_login            => 0,
+                           create_allowed           => 1,
+                           delete_allowed           => 0,
+                           edit_allowed             => 1,
+                           view_allowed             => 1,
+                           attachment_allowed       => 0,
+			 },
     };
     YAML::DumpFile('t/var/mojomojo.yml', $config);
 
@@ -148,15 +162,50 @@ Populate the schema with some test data. For now, path permissions.
 sub create_test_data {
     my ($self, $schema)=@_;
     my @roles = $schema->resultset('Role')->search();
+
+
     $schema->populate('PathPermissions',
         [
-            [ qw/path role apply_to_subpages create_allowed delete_allowed edit_allowed view_allowed attachment_allowed / ],
-            [ '/admin', $roles[0]->id, qw/ no yes yes yes yes yes yes/ ],
-            [ '/admin', $roles[0]->id, qw/ yes yes yes yes yes yes yes/ ],
-            [ '/help', $roles[0]->id, qw/no yes yes yes yes yes yes/ ],
-            [ '/help', $roles[0]->id, qw/ yes yes yes yes yes yes yes/ ],
+            [ qw/id path   role           apply_to_subpages / ],
+            [ 3, '/admin', $roles[0]->id, 'no'  ],
+            [ 4, '/admin', $roles[0]->id, 'yes' ],
+            [ 5, '/help',  $roles[0]->id,  'no'  ],
+            [ 6, '/help',  $roles[0]->id,  'yes' ],
         ]
-    )
+    );
+
+     $schema->populate(
+         'RightToPath',
+         [
+             [ qw/ pathperm right allowed/ ],
+                                         # Admin on page /admin
+             [     3,       1,    1  ],  # create
+             [     3,       2,    1  ],  # delete
+             [     3,       3,    1  ],  # edit
+             [     3,       4,    1  ],  # view
+             [     3,       5,    1  ],  # attachment
+                                      # Admin on / subpages
+             [     4,       1,    1  ],  # create
+             [     4,       2,    1  ],  # delete
+             [     4,       3,    1  ],  # edit
+             [     4,       4,    1  ],  # view
+             [     4,       5,    1  ],  # attachment
+                                      # Admin on /help
+             [     5,       1,    1  ],  # create
+             [     5,       2,    1  ],  # delete
+             [     5,       3,    1  ],  # edit
+             [     5,       4,    1  ],  # view
+             [     5,       5,    1  ],  # attachment
+                                      # Admin on /help subpages
+             [     6,       1,    1  ],  # create
+             [     6,       2,    1  ],  # delete
+             [     6,       3,    1  ],  # edit
+             [     6,       4,    1  ],  # view
+             [     6,       5,    1  ],  # attachment
+
+         ]
+     );
+    
 }
 
 1;

@@ -71,6 +71,10 @@ __PACKAGE__->config('Controller::HTML::FormFu' => {
     localize_from_context  => 1,
 });
 
+__PACKAGE__->config( setup_components => {
+    search_extra => [ '::Extensions' ],
+});
+
 MojoMojo->setup();
 
 # Check for deployed database
@@ -308,19 +312,25 @@ sub prepare_path {
     $c->req->base( URI->new($base) );
     my ( $path, $action );
     $path = $c->req->path;
-    my $index = index( $path, '.' );
 
-    if ( $index == -1 ) {
-
-        # no action found, default to view
+    if( $path =~ /^special(?:\/|$)(.*)/ ) {
         $c->stash->{path} = $path || '/';
-        $c->req->path('view');
-    }
-    else {
+        $c->req->path($1);
+    } else {
+        my $index = index( $path, '.' );
 
-        # set path in stash, and set req.path to action
-        $c->stash->{path} = '/' . substr( $path, 0, $index );
-        $c->req->path( substr( $path, $index + 1 ) );
+        if ( $index == -1 ) {
+
+            # no action found, default to view
+            $c->stash->{path} = $path || '/';
+            $c->req->path('view');
+        }
+        else {
+
+            # set path in stash, and set req.path to action
+            $c->stash->{path} = '/' . substr( $path, 0, $index );
+            $c->req->path( substr( $path, $index + 1 ) );
+        }
     }
 }
 
@@ -641,14 +651,6 @@ sub check_permissions {
     }
 
     my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
-
-    # Fast fix for security issue of attachments being deletable by non-authenticated users
-    # Overrides permissions for anonymous users to fix http://mojomojo.ideascale.com/akira/dtd/22284-2416
-    # TODO "attachment" is a rather vague permission: it seems to apply to creating, editing and deleting attachments
-    @perms{'attachment', 'delete'} = (0, 0) if not $user;
-    
-    # Don't allow non-admin users to delete pages.
-    $perms{'delete'} = 0 if ( $user && !$user->is_admin);
 
     return \%perms;
 }
