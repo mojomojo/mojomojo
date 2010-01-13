@@ -16,7 +16,7 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 $mech->get('/.login?login=admin&pass=admin');
 ok !$mech->success, 'non-POST logins return 400 and the login form';
 ok !$mech->find_link(
-    text => $ENV{USER} || 'admin',
+    text => 'admin',
     url_regex => qr'/admin$'
 ), 'must login via POST';
 
@@ -44,7 +44,7 @@ $mech->submit_form(
 
 ok !$mech->success, 'failing to login with wrong password';
 ok !$mech->find_link(
-    text => $ENV{USER} || 'admin',
+    text => 'admin',
     url_regex => qr'/admin$'
 ), 'can log in as admin via URL';
 
