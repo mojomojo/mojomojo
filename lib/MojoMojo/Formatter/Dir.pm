@@ -136,33 +136,37 @@ sub to_xhtml{
   $path =~ s/\/$//;
   my $url = "${baseuri}/${path}";
 
-  my $ret = '<div id="dirs"><ul>';
-  $ret .= "<li><a href=\"$url\">..</a></li>";
-  foreach my $d (@subdirs){
-    next if ( ! -r $d);
-    $d =~ s/$dir\///;
+  my $ret;
+  if ( $subdirs[0] ){
+    $ret = '<div id="dirs"><ul>';
+    $ret .= "<li><a href=\"$url\">..</a></li>" if ( $url =! "/$path");
+    foreach my $d (@subdirs){
+      next if ( ! -r $d);
+      $d =~ s/$dir\///;
 
-    $ret .= "<li><a href=\"$url/$d\">[$d]</a></li>";
+      $ret .= "<li><a href=\"$url/$path/$d\">[$d]</a></li>";
+    }
+    $ret .= "</ul></div>\n";
   }
-  $ret .= "</ul></div>\n";
 
-  $ret .= '<div id="files"><ul>';
-  foreach my $f (@files){
-    next if ( ! -r $f);
-    $f =~ s/$dir\///;
-    $f =~ s/^\///;
+  if ( $files[0] ){
+    $ret .= '<div id="files"><ul>';
+    foreach my $f (@files){
+      next if ( ! -r $f);
+      $f =~ s/$dir\///;
+      $f =~ s/^\///;
 
-    # Use Image controller if it is a image
-    $f =~ /.*\.(.*)$/;
+      # Use Image controller if it is a image
+      $f =~ /.*\.(.*)$/;
 
-    # replace dot with '_' if it's not a image
-    $f =~ s/\./_/
-      if ( ! MojoMojo::Formatter::File::Image->can_format($1) );
+      # replace dot with '_' if it's not a image
+      $f =~ s/\./_/
+        if ( ! MojoMojo::Formatter::File::Image->can_format($1) );
 
-    $ret .= "<li><a href=\"$url/$f\">$f</a></li>";
+      $ret .= "<li><a href=\"$url/$f\">$f</a></li>";
+    }
+    $ret .= "</ul></div>\n";
   }
-  $ret .= "</ul></div>\n";
-
   return $ret;
 }
 
@@ -190,11 +194,10 @@ sub checkdir{
 		    @whitelist );
 
   # Add '/' if not exist at the end of dierctory
-  $dir =~ s/^(\S*[^\/])$/$1\//;
+  $dir =~ s|^(\S*[^/])$|$1\/|;
 
   # if $dir is not include in whitelisting
-  if ( ! map ( $dir =~ m/^$_/ , @wl) ){
-
+  if ( ! map ( $dir =~ m|^$_| , @wl) ){
     return "Directory '$dir' must be include in whitelisting ! see Formatter::Dir:whitelisting in mojomojo.conf"
   }
 
