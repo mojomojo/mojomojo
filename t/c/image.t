@@ -1,10 +1,13 @@
 #!/usr/bin/perl -w
-use Test::More tests => 5;
+use Test::More tests => 4;
 BEGIN{
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 };
 use_ok( Catalyst::Test, 'MojoMojo' );
-use_ok('MojoMojo::Controller::Page');
+
+my ( $res, $c ) = ctx_request('/');
+$c->config->{'Formatter::Dir'}{whitelisting} = 't/var/files';
+$c->config->{'Formatter::Dir'}{prefix_url} = '/myfiles';
 
 is( request('/badurl/catalyst.png')->code,'404', 'bad prefix_url, do 404' );
 ok( request('/myfiles/catalyst.png')->is_success, 'view image' );
