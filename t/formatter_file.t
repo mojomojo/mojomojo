@@ -9,7 +9,7 @@ BEGIN {
     plan skip_all => 'Requirements not installed for Dir Formatter'
         unless MojoMojo::Formatter::File->module_loaded;
 
-    plan tests => 16;
+    plan tests => 14;
 
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     $ENV{CATALYST_DEBUG}  = 0;
@@ -25,7 +25,6 @@ my $dir       = "t/var/files/";
 my $content;
 
 my %files = (
-    'test.xml' => 'DocBook',
     'test.pod' => 'Pod',
     'test.txt' => 'Text',
 );
