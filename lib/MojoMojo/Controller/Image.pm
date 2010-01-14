@@ -106,19 +106,19 @@ sub view : Private {
 
 
     my $file = $c->stash->{path};
+    my $suffix =  $c->req->uri->path;
+    $suffix =~ s|^\/||;
     if ( $file !~ s/^$prefix_url// ){
       $c->stash->{message} = $c->loc(
-			 'The requested URL was not found: x');
+			 'The requested URL was not found: x',
+                         "$file.$suffix");
 
       $c->stash->{template} = 'message.tt';
       return ( $c->res->status(404) );
     }
 
 
-    my $suffix =  $c->req->uri->path;
-    $suffix =~ s|^\/||;
     my $filename = "$file.$suffix";
-
     my $dir = $c->config->{'Formatter::Dir'}{whitelisting};
 
     my $io_file = IO::File->new("$dir/$filename")
