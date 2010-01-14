@@ -20,11 +20,11 @@ Usage:
     {{dir directory exclude=exclude_regex}}
 
 
-For security reasons the dierctory must be include in 'whitelisting'. You can use path_to(DIR) to describe directory in mojomojo.conf:
+For security reasons the directory must be include in 'whitelisting'. You can use path_to(DIR) to describe directory in mojomojo.conf:
 
 <Formatter::Dir>
+    prefix_url /myfiles
     whitelisting __path_to(uploads)__
-    whitelisting /tmp/test
 </Formatter::Dir>
 
 

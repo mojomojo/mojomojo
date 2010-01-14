@@ -41,8 +41,8 @@ Just an example to view the test pod file t/var/files/test.pod :
 Add this to mojomojo.conf :
 
 <Formatter::Dir>
+    prefix_url /myfiles
     whitelisting __path_to(t/var/files)__
-
 </Formatter::Dir>
 
 To see the pod content formatted in xhtml, write in the text area:

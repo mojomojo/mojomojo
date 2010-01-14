@@ -649,7 +649,7 @@ sub check_permissions {
             }
         }
     }
-
+  
     my %perms = map { $_ => $rulescomparison{$_}{'allowed'} } keys %rulescomparison;
 
     return \%perms;
