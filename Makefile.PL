@@ -46,7 +46,6 @@ requires(
     'Encode'                                       => '2.31',
     'File::Copy::Recursive'                        => 0,
     'File::MMagic'                                 => '1.27',
-    'File::Slurp'                                  => '9999.13', # Markdown
     'HTML::Entities'                               => '3.60',    # Pod::Simple
     'HTML::FormFu'                                 => '0.02000', # min version with string renderer
     'HTML::FormFu::Model::DBIC'                    => 0,
@@ -65,7 +64,7 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
-    'Text::MultiMarkdown'                          => '1.0.29',
+    'Text::MultiMarkdown'                          => '1.000032',
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',

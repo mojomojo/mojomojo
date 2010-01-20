@@ -5,6 +5,8 @@
     http://n2.nabble.com/Defang-issues-td4078508.html
 
     
+  - Removed File::Slurp dependency after removing it from Text::(Multi)Markdown
+    because it fails installation under Strawberry Perl  (dandv)
   - Replaced creepy shrunken-head image with a sane "Stop" sign (dandv)
   - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
   - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
