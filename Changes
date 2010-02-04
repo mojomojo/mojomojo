@@ -5,8 +5,11 @@
     http://n2.nabble.com/Defang-issues-td4078508.html
 
 
+  New Features:
   - Create a default page for new users.
   - Replaced creepy shrunken-head image with a sane "Stop" sign (dandv)
+  
+  Bug fixes:
   - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
   - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
   - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (Github issue #52) (linio)
