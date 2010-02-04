@@ -107,7 +107,25 @@ sub init_schema {
         },
         attachment_dir => '__path_to(t/var/uploads)__',
         allowed => {
-           src => [qw(youtube.com youporn.org iusethis.com)] ,
+            src => [qw(youtube.com youporn.org iusethis.com)] ,
+        },
+        'View::Email' => { 
+            sender => { mailer => 'Test' } 
+        },
+        'permissions' => { 
+            admin_role_name          => 'Admins',
+            role_members             => 'role_members',
+            user_field_name          => 'login',
+            anonymous_allowed        => 1,
+            anonymous_user_name      => 'anonymouscoward',
+            check_permission_on_view => 1,
+            cache_permission_data    => 1,
+            enforce_login            => 0,
+            create_allowed           => 1,
+            delete_allowed           => 0,
+            edit_allowed             => 1,
+            view_allowed             => 1,
+            attachment_allowed       => 0,
         },
         'View::Email' => { sender => { mailer => 'Test' } },
     };

@@ -10,5 +10,5 @@ $c->config->{'Formatter::Dir'}{whitelisting} = 't/var/files';
 $c->config->{'Formatter::Dir'}{prefix_url} = '/myfiles';
 
 is( request('/badurl/catalyst.png')->code,'404', 'bad prefix_url, do 404' );
-ok( request('/myfiles/catalyst.png')->is_success, 'view image' );
-contenttype_is('/myfiles/catalyst.png', 'image/png', 'show image type' )
+ok( request('/.static/catalyst.png')->is_success, 'view image' );
+contenttype_is('/.static/catalyst.png', 'image/png', 'show image type' )
