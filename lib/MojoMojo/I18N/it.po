@@ -15,6 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#. ($user->name)
+#: lib/MojoMojo/Controller/User.pm:310
+msgid ""
+"# Home node for x\n"
+"\n"
+"Put whatever you like here."
+msgstr ""
+
 #: root/base/edithelp/markdown.tt:18
 msgid "**bold** or __bold__"
 msgstr "**grassetto** o __grassetto__"
@@ -111,7 +119,7 @@ msgstr "Tutti i tag in questo wiki"
 msgid "Alphabetically sorted list of pages"
 msgstr "Lista delle pagine in ordine alfabetico"
 
-#: lib/MojoMojo/Controller/User.pm:315
+#: lib/MojoMojo/Controller/User.pm:318
 msgid "An error occourred. Sorry."
 msgstr "Si è verificato un errore. Siamo spiacenti"
 
@@ -604,7 +612,7 @@ msgstr "Titoli"
 msgid "Headlines for x"
 msgstr "Titolo per %1"
 
-#: lib/MojoMojo/Schema.pm:117
+#: lib/MojoMojo/Schema.pm:122
 msgid "Help"
 msgstr "Aiuto"
 
@@ -1100,8 +1108,8 @@ msgstr "Cambianenti recenti in %1"
 msgid "Recent pages in this wiki"
 msgstr "Pagine recenti in questo wiki"
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Pagine recenti in %1"
@@ -1319,7 +1327,7 @@ msgstr "Nome dei sito"
 msgid "Site settings"
 msgstr "Impostazioni del sito"
 
-#: lib/MojoMojo/Controller/User.pm:448
+#: lib/MojoMojo/Controller/User.pm:451
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Alcuni campi non sono validi. Sei pregati di correggerli e riprovare:"
 
@@ -1414,7 +1422,7 @@ msgstr "Aiuto su Textile"
 msgid "Textile2 complete reference"
 msgstr "Manuale di riferimento completo di Textile2"
 
-#: lib/MojoMojo/Controller/User.pm:362
+#: lib/MojoMojo/Controller/User.pm:365
 msgid "That mail is already in use"
 msgstr "Questo indirizzo e-mail è già utlizzato"
 
@@ -1435,8 +1443,9 @@ msgstr "Le seguenti pagine nel percorso richiesto non eisistono:"
 msgid "The following pages will be deleted. This can not be undone"
 msgstr ""
 
+#. ("$file.$suffix")
 #. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
-#: lib/MojoMojo/Controller/Root.pm:49
+#: lib/MojoMojo/Controller/Image.pm:114 lib/MojoMojo/Controller/Root.pm:49
 msgid "The requested URL was not found: x"
 msgstr "Il seguente URL non è stato trovato: %1"
 
@@ -1497,7 +1506,7 @@ msgid "User Settings"
 msgstr "Impostazioni utente"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:395 lib/MojoMojo/Controller/User.pm:424
+#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:398 lib/MojoMojo/Controller/User.pm:427
 msgid "User not found: x"
 msgstr "Utente non trovato: %1"
 
@@ -1551,7 +1560,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "Ti abbiamo inviato una e-mail contenente il link di attivazione. Sei pregato di cliccare sul link per attivare il tuo account!"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:341
+#: lib/MojoMojo/Controller/User.pm:344
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Benvenuto, %1 la tua e-mail è stata validata. Ora puoi effettuare il l'accesso."
 
@@ -1592,7 +1601,7 @@ msgstr "Puoi sottoscriverti a questo wiki tramite RSS e prendere solo i titoli d
 msgid "You do not have permissions to x attachments for this page"
 msgstr "Non hai privilegi per %1 gli allegati per questa pagina"
 
-#: lib/MojoMojo/Controller/User.pm:442
+#: lib/MojoMojo/Controller/User.pm:445
 msgid "You have to fill in all required fields."
 msgstr "Devi compilare tutti i campi richiesti."
 
@@ -1656,7 +1665,7 @@ msgstr "aggiungi un commento"
 msgid "add tag"
 msgstr "aggiungi un tag"
 
-#: lib/MojoMojo/Schema.pm:160
+#: lib/MojoMojo/Schema.pm:165
 msgid "admin home page"
 msgstr ""
 "# Utene Amministratore .\n"
@@ -1737,7 +1746,7 @@ msgstr "commenti disabilitati nell'anteprima"
 msgid "common uses"
 msgstr "utilizzi comuni"
 
-#: lib/MojoMojo/Controller/User.pm:370
+#: lib/MojoMojo/Controller/User.pm:373
 msgid "confirmation message resent"
 msgstr "messagio di conferma inviato nuovamente"
 
@@ -1781,6 +1790,10 @@ msgstr "intero sito"
 msgid "example"
 msgstr "esempio"
 
+#: lib/MojoMojo/Controller/Image.pm:37
+msgid "file not found."
+msgstr ""
+
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:68
 msgid "forget me"
 msgstr "dimenticami"
@@ -1793,7 +1806,7 @@ msgstr "galleria"
 msgid "hello"
 msgstr "ciao"
 
-#: lib/MojoMojo/Schema.pm:156
+#: lib/MojoMojo/Schema.pm:161
 msgid "help message"
 msgstr ""
 "<h1>Sommario</h1>\n"
@@ -2009,7 +2022,7 @@ msgstr "tavola dei contenuti"
 msgid "tags"
 msgstr "tag"
 
-#: lib/MojoMojo/Controller/User.pm:443
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "the following are missing:"
 msgstr "i seguenti sono mancanti:"
 
@@ -2026,7 +2039,7 @@ msgid "view in your browser"
 msgstr "visualizza nel tuo browser"
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:152
+#: lib/MojoMojo/Schema.pm:157
 msgid "welcome message"
 msgstr ""
 "# Bevenuto in MojoMojo!\n"

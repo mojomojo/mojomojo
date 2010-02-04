@@ -105,34 +105,11 @@ foreach my $f (@files){
     }
   }
 
-  createpage($urlpage,$body, $person);
+  $schema->resultset('Page')->create_page($urlpage,$body, $person);
 }
 
 
-# XXX: Update index_page (Model::Search)
-sub createpage{
-  my ($url, $body, $person) = @_;
 
-  my ($path_pages, $proto_pages) = $schema->resultset('Page')->path_pages($url);
-
-  $path_pages = $schema->resultset('Page')->create_path_pages(
-    path_pages => $path_pages,
-    proto_pages => $proto_pages,
-    creator => $person->id,
-  );
-
-  my $page = $path_pages->[ @$path_pages - 1 ];
-
-  my %content;
-  $content{creator} = $person->id;
-  $content{body}    = $body;
-
-
-  $page->update_content(%content);
-  #MojoMojo::Model::Search->index_page($page);
-  $schema->resultset('Page')->set_paths($page);
-  print "$url done\n";
-}
 
 
 #-----------------------------------------------------------------------------#

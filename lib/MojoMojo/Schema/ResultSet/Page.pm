@@ -397,4 +397,28 @@ sub open_gap {
     return $parent;
 }
 
+# XXX: Update index_page (Model::Search)
+sub create_page {
+  my ($self,$url, $body, $person) = @_;
+
+  my ($path_pages, $proto_pages) = $self->path_pages($url);
+
+  $path_pages = $self->create_path_pages(
+    path_pages => $path_pages,
+    proto_pages => $proto_pages,
+    creator => $person->id,
+  );
+
+  my $page = $path_pages->[ @$path_pages - 1 ];
+
+  my %content;
+  $content{creator} = $person->id;
+  $content{body}    = $body;
+
+
+  $page->update_content(%content);
+  #$c->model('Search')->index_page($page);
+  $self->set_paths($page);
+}
+
 1;

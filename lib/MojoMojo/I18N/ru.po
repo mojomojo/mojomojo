@@ -15,6 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8    \n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. ($user->name)
+#: lib/MojoMojo/Controller/User.pm:310
+msgid ""
+"# Home node for x\n"
+"\n"
+"Put whatever you like here."
+msgstr ""
+
 #:
 msgid "(Private)"
 msgstr "(Личный)"
@@ -139,7 +147,7 @@ msgstr "Отсортированный в алфавитном порядке с
 msgid "Also try h2,h3 and so on"
 msgstr "Попробуйте также h2,h3 и так далее"
 
-#: lib/MojoMojo/Controller/User.pm:315
+#: lib/MojoMojo/Controller/User.pm:318
 msgid "An error occourred. Sorry."
 msgstr "Возникла ошибка. Извините."
 
@@ -720,7 +728,7 @@ msgstr "Заголовки"
 msgid "Headlines for x"
 msgstr "Заголовки для %1"
 
-#: lib/MojoMojo/Schema.pm:117
+#: lib/MojoMojo/Schema.pm:122
 msgid "Help"
 msgstr "Помощь"
 
@@ -1356,8 +1364,8 @@ msgstr "Последние изменения в %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Последние страницы в %1"
@@ -1595,7 +1603,7 @@ msgstr "Найстройки сайта"
 msgid "Smaller"
 msgstr "Меньше"
 
-#: lib/MojoMojo/Controller/User.pm:448
+#: lib/MojoMojo/Controller/User.pm:451
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Некоторые поля неверно заполнены. Исправьте и попробуйте снова:"
 
@@ -1715,7 +1723,7 @@ msgstr ""
 msgid "Textile2 reference"
 msgstr "Справочник по Textile2"
 
-#: lib/MojoMojo/Controller/User.pm:362
+#: lib/MojoMojo/Controller/User.pm:365
 msgid "That mail is already in use"
 msgstr "Этот почтовый ящик уже используется"
 
@@ -1744,8 +1752,9 @@ msgstr ""
 msgid "The requested URL (x) was not found"
 msgstr "Запрошенный URL (%1) не был найден"
 
+#. ("$file.$suffix")
 #. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
-#: lib/MojoMojo/Controller/Root.pm:49
+#: lib/MojoMojo/Controller/Image.pm:114 lib/MojoMojo/Controller/Root.pm:49
 msgid "The requested URL was not found: x"
 msgstr "Запрошенный URL не был найден: %1"
 
@@ -1830,7 +1839,7 @@ msgid "User not found!"
 msgstr "Пользователь не найден!"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:395 lib/MojoMojo/Controller/User.pm:424
+#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:398 lib/MojoMojo/Controller/User.pm:427
 msgid "User not found: x"
 msgstr "Пользователь не найден: %1"
 
@@ -1888,7 +1897,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "Мы выслали Вам письмо с ссылкой активации. Кликните на ней для активации Вашей учетной записи!"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:341
+#: lib/MojoMojo/Controller/User.pm:344
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Добро пожаловать, %1 ваш почтовый адрес подтвержден. Войдите."
 
@@ -1941,7 +1950,7 @@ msgstr "У вас нет полномочий на редактирование 
 msgid "You do not have permissions to x attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:442
+#: lib/MojoMojo/Controller/User.pm:445
 msgid "You have to fill in all required fields."
 msgstr "Вы должны заполнить все обязательные поля."
 
@@ -2005,7 +2014,7 @@ msgstr "добавить комментарий"
 msgid "add tag"
 msgstr "добавить тег"
 
-#: lib/MojoMojo/Schema.pm:160
+#: lib/MojoMojo/Schema.pm:165
 msgid "admin home page"
 msgstr ""
 "# Администратор.\n"
@@ -2106,7 +2115,7 @@ msgstr "общее использование"
 msgid "configuration"
 msgstr "конфигурация"
 
-#: lib/MojoMojo/Controller/User.pm:370
+#: lib/MojoMojo/Controller/User.pm:373
 msgid "confirmation message resent"
 msgstr "отправка сообщения подтверждена"
 
@@ -2154,6 +2163,10 @@ msgstr "весь сайт"
 msgid "example"
 msgstr "пример"
 
+#: lib/MojoMojo/Controller/Image.pm:37
+msgid "file not found."
+msgstr ""
+
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:68
 msgid "forget me"
 msgstr "забыть меня"
@@ -2166,7 +2179,7 @@ msgstr "галерея"
 msgid "hello"
 msgstr "привет"
 
-#: lib/MojoMojo/Schema.pm:156
+#: lib/MojoMojo/Schema.pm:161
 msgid "help message"
 msgstr ""
 "# Индекс помощи.\n"
@@ -2424,7 +2437,7 @@ msgstr "содержание"
 msgid "tags"
 msgstr "теги"
 
-#: lib/MojoMojo/Controller/User.pm:443
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "the following are missing:"
 msgstr "отсутствует следующее:"
 
@@ -2453,7 +2466,7 @@ msgid "view in your browser"
 msgstr ""
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:152
+#: lib/MojoMojo/Schema.pm:157
 msgid "welcome message"
 msgstr ""
 "# Добро пожаловать в MojoMojo!\n"

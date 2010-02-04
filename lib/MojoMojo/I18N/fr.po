@@ -14,6 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. ($user->name)
+#: lib/MojoMojo/Controller/User.pm:310
+msgid ""
+"# Home node for x\n"
+"\n"
+"Put whatever you like here."
+msgstr ""
+
 #:
 msgid "(Private)"
 msgstr "(Privée)"
@@ -131,7 +139,7 @@ msgid "Alphabetically sorted list of pages"
 msgstr "Liste des pages par ordre alphabétique"
 
 # lib/MojoMojo/Controller/User.pm:261
-#: lib/MojoMojo/Controller/User.pm:315
+#: lib/MojoMojo/Controller/User.pm:318
 msgid "An error occourred. Sorry."
 msgstr "Une erreur s'est produite. Désolé."
 
@@ -684,7 +692,7 @@ msgstr "Sous-Titres"
 msgid "Headlines for x"
 msgstr ""
 
-#: lib/MojoMojo/Schema.pm:117
+#: lib/MojoMojo/Schema.pm:122
 msgid "Help"
 msgstr ""
 
@@ -1296,8 +1304,8 @@ msgstr "Changements récents dans %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Pages récentes dans %1"
@@ -1527,7 +1535,7 @@ msgstr "Nom du site"
 msgid "Site settings"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:448
+#: lib/MojoMojo/Controller/User.pm:451
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr "Certains champs sont invalides. Merci de les corriger et de réessayer:"
 
@@ -1631,7 +1639,7 @@ msgstr ""
 msgid "Textile2 complete reference"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:362
+#: lib/MojoMojo/Controller/User.pm:365
 msgid "That mail is already in use"
 msgstr "Cet email est déjà utilisé"
 
@@ -1660,8 +1668,9 @@ msgstr ""
 msgid "The requested URL (x) was not found"
 msgstr "L'URL demandée (%1) est introuvable"
 
+#. ("$file.$suffix")
 #. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
-#: lib/MojoMojo/Controller/Root.pm:49
+#: lib/MojoMojo/Controller/Image.pm:114 lib/MojoMojo/Controller/Root.pm:49
 msgid "The requested URL was not found: x"
 msgstr ""
 
@@ -1746,7 +1755,7 @@ msgid "User not found!"
 msgstr "Utilisateur introuvable!"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:395 lib/MojoMojo/Controller/User.pm:424
+#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:398 lib/MojoMojo/Controller/User.pm:427
 msgid "User not found: x"
 msgstr ""
 
@@ -1804,7 +1813,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr "Un mail d'activation vous a été transmis. Merci de cliquer sur le lien pour activer votre compte"
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:341
+#: lib/MojoMojo/Controller/User.pm:344
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Bienvenue, %1 votre email est validé. Merci de vous identifiez"
 
@@ -1853,7 +1862,7 @@ msgstr "Vous n'avez pas les permissions pour éditer les pièces jointes pour ce
 msgid "You do not have permissions to x attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:442
+#: lib/MojoMojo/Controller/User.pm:445
 msgid "You have to fill in all required fields."
 msgstr "Vous devez remplir tous les champs obligatoires."
 
@@ -1917,7 +1926,7 @@ msgstr "ajouter un commentaire"
 msgid "add tag"
 msgstr "ajouter un tag"
 
-#: lib/MojoMojo/Schema.pm:160
+#: lib/MojoMojo/Schema.pm:165
 msgid "admin home page"
 msgstr ""
 "# Admin User.\n"
@@ -2010,7 +2019,7 @@ msgstr ""
 msgid "configuration"
 msgstr "configuration"
 
-#: lib/MojoMojo/Controller/User.pm:370
+#: lib/MojoMojo/Controller/User.pm:373
 msgid "confirmation message resent"
 msgstr "Le message de confirmation a été renvoyé"
 
@@ -2054,6 +2063,10 @@ msgstr ""
 msgid "example"
 msgstr "exemple"
 
+#: lib/MojoMojo/Controller/Image.pm:37
+msgid "file not found."
+msgstr ""
+
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:68
 msgid "forget me"
 msgstr "m'oublier"
@@ -2066,7 +2079,7 @@ msgstr "gallerie"
 msgid "hello"
 msgstr "bonjour"
 
-#: lib/MojoMojo/Schema.pm:156
+#: lib/MojoMojo/Schema.pm:161
 msgid "help message"
 msgstr ""
 "# Help Index.\n"
@@ -2292,7 +2305,7 @@ msgstr ""
 msgid "tags"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:443
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "the following are missing:"
 msgstr "les champs suivants sont manquants"
 
@@ -2321,7 +2334,7 @@ msgid "view in your browser"
 msgstr ""
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:152
+#: lib/MojoMojo/Schema.pm:157
 msgid "welcome message"
 msgstr ""
 

@@ -15,6 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8    \n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. ($user->name)
+#: lib/MojoMojo/Controller/User.pm:310
+msgid ""
+"# Home node for x\n"
+"\n"
+"Put whatever you like here."
+msgstr ""
+
 #:
 msgid "(Private)"
 msgstr "(Privat)"
@@ -131,7 +139,7 @@ msgstr "Llista de pàgines per ordre alfabètic"
 msgid "Also try h2,h3 and so on"
 msgstr "També intenti h2, h3, i més"
 
-#: lib/MojoMojo/Controller/User.pm:315
+#: lib/MojoMojo/Controller/User.pm:318
 msgid "An error occourred. Sorry."
 msgstr "Disculpi, un error ha passat"
 
@@ -660,7 +668,7 @@ msgstr "Titulars"
 msgid "Headlines for x"
 msgstr "La portada per %1"
 
-#: lib/MojoMojo/Schema.pm:117
+#: lib/MojoMojo/Schema.pm:122
 msgid "Help"
 msgstr ""
 
@@ -1184,8 +1192,8 @@ msgstr "Recent changes in %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Recent pages in %1"
@@ -1411,7 +1419,7 @@ msgstr "Nom del lloc web"
 msgid "Site settings"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:448
+#: lib/MojoMojo/Controller/User.pm:451
 msgid "Some fields are invalid. Please correct them and try again:"
 msgstr ""
 
@@ -1515,7 +1523,7 @@ msgstr ""
 msgid "Textile2 complete reference"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:362
+#: lib/MojoMojo/Controller/User.pm:365
 msgid "That mail is already in use"
 msgstr ""
 
@@ -1540,8 +1548,9 @@ msgstr ""
 msgid "The requested URL (x) was not found"
 msgstr "The requested URL (%1) was not found"
 
+#. ("$file.$suffix")
 #. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
-#: lib/MojoMojo/Controller/Root.pm:49
+#: lib/MojoMojo/Controller/Image.pm:114 lib/MojoMojo/Controller/Root.pm:49
 msgid "The requested URL was not found: x"
 msgstr ""
 
@@ -1614,7 +1623,7 @@ msgid "User not found!"
 msgstr "Usuari no trobat"
 
 #. ($login)
-#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:395 lib/MojoMojo/Controller/User.pm:424
+#: lib/MojoMojo/Controller/User.pm:122 lib/MojoMojo/Controller/User.pm:398 lib/MojoMojo/Controller/User.pm:427
 msgid "User not found: x"
 msgstr ""
 
@@ -1672,7 +1681,7 @@ msgid "We've sent you an email with an activation link. Please click on it to ac
 msgstr ""
 
 #. ($user->name)
-#: lib/MojoMojo/Controller/User.pm:341
+#: lib/MojoMojo/Controller/User.pm:344
 msgid "Welcome, x your email is validated. Please log in."
 msgstr "Benvingut, %1 el teu correu electrònic is validated. Please log in."
 
@@ -1717,7 +1726,7 @@ msgstr ""
 msgid "You do not have permissions to x attachments for this page"
 msgstr ""
 
-#: lib/MojoMojo/Controller/User.pm:442
+#: lib/MojoMojo/Controller/User.pm:445
 msgid "You have to fill in all required fields."
 msgstr ""
 
@@ -1781,7 +1790,7 @@ msgstr ""
 msgid "add tag"
 msgstr "afegir etiqueta"
 
-#: lib/MojoMojo/Schema.pm:160
+#: lib/MojoMojo/Schema.pm:165
 msgid "admin home page"
 msgstr ""
 "# Admin User.\n"
@@ -1874,7 +1883,7 @@ msgstr ""
 msgid "configuration"
 msgstr "configuració"
 
-#: lib/MojoMojo/Controller/User.pm:370
+#: lib/MojoMojo/Controller/User.pm:373
 msgid "confirmation message resent"
 msgstr ""
 
@@ -1918,6 +1927,10 @@ msgstr ""
 msgid "example"
 msgstr "exemple"
 
+#: lib/MojoMojo/Controller/Image.pm:37
+msgid "file not found."
+msgstr ""
+
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:68
 msgid "forget me"
 msgstr "oblida'm"
@@ -1930,7 +1943,7 @@ msgstr "galeria"
 msgid "hello"
 msgstr "hola"
 
-#: lib/MojoMojo/Schema.pm:156
+#: lib/MojoMojo/Schema.pm:161
 msgid "help message"
 msgstr ""
 "# Help Index.\n"
@@ -2144,7 +2157,7 @@ msgstr ""
 msgid "tags"
 msgstr "etiquetes"
 
-#: lib/MojoMojo/Controller/User.pm:443
+#: lib/MojoMojo/Controller/User.pm:446
 msgid "the following are missing:"
 msgstr ""
 
@@ -2169,7 +2182,7 @@ msgid "view in your browser"
 msgstr ""
 
 #. ("test")
-#: lib/MojoMojo/Schema.pm:152
+#: lib/MojoMojo/Schema.pm:157
 msgid "welcome message"
 msgstr ""
 "# Welcome to MojoMojo!\n"

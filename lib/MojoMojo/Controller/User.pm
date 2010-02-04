@@ -308,6 +308,9 @@ sub do_register : Private {
             template => 'validate.tt',
         },
     );
+    $c->model('DBIC::Page')->create_page($user->link,
+        $c->loc("# Home node for x\n\nPut whatever you like here.",$user->name),
+        $user);
 
     $c->forward( $c->view('Email') );
     if ( scalar( @{ $c->error } ) ) {
