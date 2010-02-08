@@ -16,30 +16,30 @@
 #pageoptions li
 #header h1,
 form {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding:0 ;
 }
 table {
-    border-collapse:collapse;
-    border-spacing:0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 fieldset,img {
-    border:0;
+    border: 0;
 }
-address,caption,cite,code,dfn,em,strong,th,var :not #content {
-    font-style:normal;
-    font-weight:normal;
+address, caption, cite, code, dfn, em, strong, th, var:not(#content) {
+    font-style: normal;
+    font-weight: normal;
 }
 
 ol,ul {
-    list-style:none;
+    list-style: none;
 }
 caption,th {
-    text-align:left;
+    text-align: left;
 }
-q:before,q:after {
-    content:'';
+q:before,q: after {
+    content: '';
 }
 abbr,acronym {
-    border:0;
+    border: 0;
 }

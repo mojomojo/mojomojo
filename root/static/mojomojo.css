@@ -344,7 +344,7 @@ a.tag:hover {
 
 .newWikiWord {
     color: #e33;
-    background lightyellow;
+    background: lightyellow;
 }
 
 .newWikiWord a {
