@@ -18,3 +18,4 @@ MojoMojo-*
 *.out
 .directory
 root/static/themes/catapulse/src/.sass-cache
+*.swp
