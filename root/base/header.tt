@@ -37,7 +37,7 @@
     [% END %]
     <script type="text/javascript">
         jQuery.uri_for = function(path) { return '[%c.req.base%]' + path }
-        jQuery.uri_for_img = function(path) { return '[%c.uri_for('/.static/images',c.config.platform)%]/' + path }
+        jQuery.uri_for_static= function(path) { return '[%c.uri_for_static(c.config.platform)%]/' + path }
     </script>
 </head>
 

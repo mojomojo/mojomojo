@@ -200,7 +200,7 @@ setup_formatter_toolbar = function() {
         var button = $('<input type="image">');
 
         button.attr({
-            'src': $.uri_for('/.static/toolbar/' + data.shift() + '.png'),
+            'src': $.uri_for_static('/toolbar/' + data.shift() + '.png'),
             'title': loc(data.shift())
         });
 
