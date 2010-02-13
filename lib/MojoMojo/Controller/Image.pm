@@ -91,7 +91,7 @@ sub view : Private {
     $c->detach('unauthorized', ['view']) if not $c->check_view_permission;
 
     if ( ! defined $c->config->{'Formatter::Dir'}{prefix_url} ||
-	 ! defined $c->config->{'Formatter::Dir'}{whitelisting} ){
+         ! defined $c->config->{'Formatter::Dir'}{whitelisting} ){
 
       $c->stash->{message} = "Formatter::Dir is not configured";
       $c->stash->{template} = 'message.tt';
@@ -110,7 +110,7 @@ sub view : Private {
     $suffix =~ s|^\/||;
     if ( $file !~ s/^$prefix_url// ){
       $c->stash->{message} = $c->loc(
-			 'The requested URL was not found: x',
+                         'The requested URL was not found: x',
                          "$file.$suffix");
 
       $c->stash->{template} = 'message.tt';

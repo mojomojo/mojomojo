@@ -72,12 +72,12 @@ sub format_content {
 
       my $error;
       if ( $error = $self->checkdir($dir, $c)){
-	$$content .= $error;
+        $$content .= $error;
       }
 
       if ( ! $error ){
-	# format with plugin
-	$$content .= $self->format($dir, $exclude, $c);
+        # format with plugin
+        $$content .= $self->format($dir, $exclude, $c);
       }
     }
     else{
@@ -191,7 +191,7 @@ sub checkdir{
   # Add '/' if not exist at the end of whitelist directories
   my @wl =  map { $_ . '/' }            # Add '/'
                   ( map{ /(\S*[^\/])/ } # Delete '/' if exist
-		    @whitelist );
+                    @whitelist );
 
   # Add '/' if not exist at the end of dierctory
   $dir =~ s|^(\S*[^/])$|$1\/|;

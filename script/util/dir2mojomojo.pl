@@ -70,7 +70,7 @@ my $body;
 my $urlpage;
 $rootdir->recurse(callback => sub {
             my ($entry) = @_;
-	    return if ( defined $EXCLUDE && grep(/$EXCLUDE/, $entry ));
+            return if ( defined $EXCLUDE && grep(/$EXCLUDE/, $entry ));
             push @files, $entry unless ( $entry eq $DIR );
         });
 

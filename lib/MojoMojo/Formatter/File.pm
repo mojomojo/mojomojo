@@ -109,21 +109,21 @@ sub format_content {
 
       my $error;
       if ( $error = checkplugin($plugin, $file)){
-      	$$content .= $error;
+        $$content .= $error;
       }
       if ( ! $error && ( $error = $self->checkfile($file, $c))){
-      	$$content .= $error;
+        $$content .= $error;
       }
 
       if ( ! $error ){
 	# format with plugin
-	$$content .= $self->format($plugin,$file);
+        $$content .= $self->format($plugin,$file);
       }
     }
     else{
       # Image have not more content
       if ( ! $is_image ){
-	$$content .= $line  . "\n";
+        $$content .= $line  . "\n";
       }
     }
   }
@@ -218,7 +218,7 @@ sub checkfile{
   # Add '/' if not exist at the end of whitelist directories
   my @wl =  map { $_ . '/' }            # Add '/'
                   ( map{ /(\S*[^\/])/ } # Delete '/' if exist
-		    @whitelist );
+                    @whitelist );
 
 
   # Add '/' if not exist at the end of dierctory

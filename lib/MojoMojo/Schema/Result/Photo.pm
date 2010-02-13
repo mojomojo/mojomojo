@@ -128,12 +128,12 @@ Return previous image when browsing by the given tag.
 sub prev_by_tag {
     my ( $self, $tag ) = @_;
     return $self->result_source->resultset->search(
-	{ 'me.id' => { '>', $self->id },
-	  	'tags.tag' => $tag 
-	},
+        { 'me.id' => { '>', $self->id },
+          'tags.tag' => $tag 
+        },
         { order_by => 'taken',
-		join => [qw/tags/],rows=>1
-       	}
+          join => [qw/tags/],rows=>1
+        }
     )->next;
 }
 
@@ -146,11 +146,11 @@ Return the next image when browsing by the given tag.
 sub next_by_tag {
     my ( $self, $tag ) = @_;
     return $self->result_source->resultset->search(
-	{ 'me.id' => { '<', $self->id },
-	       	'tags.tag' => $tag 
-	},
+        { 'me.id' => { '<', $self->id },
+          'tags.tag' => $tag
+        },
         { order_by => 'taken DESC',
-	       	join => [qw/tags/], rows => 1 }
+          join => [qw/tags/], rows => 1 }
     )->next;
 }
 
