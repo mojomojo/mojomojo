@@ -8,4 +8,6 @@
     <a href="[%c.uri_for('gallery',pager.last_page)%]">&#187;</a>
 [% END %]
 </div>
-<p><em>[%loc('Showing x (x-x) of x pictures in x', [pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)])%]</em></p>
+[% SET link= c.wikiword(page.path,base, loc('gallery') ,'gallery') _ " " _ c.wikiword(page.path,base) %]
+<p><em>[%loc( 'Showing x (x-x) of x pictures in x', [pager.entries_on_this_page,pager.first,pager.last,pager.total_entries, link ]) 
+%]</em></p>
