@@ -314,7 +314,7 @@ sub prepare_path {
     $path = $c->req->path;
 
     if( $path =~ /^special(?:\/|$)(.*)/ ) {
-        $c->stash->{path} = $path || '/';
+        $c->stash->{path} = $path;
         $c->req->path($1);
     } else {
         my $index = index( $path, '.' );
@@ -322,16 +322,17 @@ sub prepare_path {
         if ( $index == -1 ) {
 
             # no action found, default to view
-            $c->stash->{path} = $path || '/';
+            $c->stash->{path} = $path;
             $c->req->path('view');
         }
         else {
 
             # set path in stash, and set req.path to action
-            $c->stash->{path} = '/' . substr( $path, 0, $index );
+            $c->stash->{path} = substr( $path, 0, $index );
             $c->req->path( substr( $path, $index + 1 ) );
         }
     }
+    $c->stash->{path}='/'.$c->stash->{path} unless ($path=~m!^/!);
 }
 
 =head2 base_uri
