@@ -206,7 +206,7 @@ $( function() {
         return false;
     });
    $('.image img').hover(function() {
-        var info_url=$(this).parent().attr('href').replace(/.photo\//,'.jsrpc/imginfo/');
+        var info_url=$(this).parent().attr('href').replace(/.photo.*\//,'.jsrpc/imginfo/');
         $('#imageinfo').load(info_url)
     },function() {})
 
