@@ -63,8 +63,7 @@
             <input type="submit" name="submit" value="[% loc('Save') %]"/>
             [% loc('as') %]
             [% IF user.id %]
-                [% SET user_profile_wanted =1 %]
-                [% c.wikiword(user.link, base, user.login, user_profile_wanted) %]
+                [% c.wikiword(user.link, base, user.login, 'profile') %]
                 (<a href="[% c.uri_for('/.logout')%]">[%loc('forget me')%]</a>)
             [% ELSE %]
             <input type="text" name="login" id="authorName" value="[% c.pref('anonymous_user')%]" />
