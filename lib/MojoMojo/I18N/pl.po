@@ -1002,6 +1002,10 @@ msgstr "Podane hasła są różne"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Hasło musi zawierać od 4 do 14 znaków"
 
+#:
+msgid "Permission Denied to view x"
+msgstr "Brak uprawnień do przeglądania %1"
+
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
