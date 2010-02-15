@@ -33,7 +33,7 @@
 <pre><p><strong>[% loc('Role') %] [% perm_set.role_name %]:</strong></p>
         [% FOREACH current_perm IN perm_set.perms.keys.sort %]
                 <br />[% loc(current_perm) %] = [% loc(perm_set.perms.$current_perm) %]
-                [% # loc('read') loc('write') loc('delete') loc('create') loc('attachment') loc('yes') loc('no') %]
+                [% # loc('view') loc('read') loc('write') loc('delete') loc('create') loc('attachment') loc('yes') loc('no') %]
         [% END %]
     [% END %]
 </pre>
