@@ -862,7 +862,7 @@ msgstr "Después en el documento"
 msgid "Leave second blank if you do not want a password"
 msgstr "Deje el segundo en blanco si no quiere una contraseña"
 
-#: root/base/page/edit.tt:73
+#: root/base/page/edit.tt:72
 msgid "Leave the second field blank if you do not want a password"
 msgstr "Deja el segundo campo en blanco si no quieres una contraseña"
 
@@ -1058,7 +1058,7 @@ msgstr "No tienes permisos para editar esta página"
 msgid "No permissions to x this page"
 msgstr ""
 
-#: root/base/user/list.tt:14
+#: root/base/user/list.tt:13
 msgid "No recent changes"
 msgstr "No hay cambios recientes"
 
@@ -1197,7 +1197,8 @@ msgstr "La contraseña no coincidió"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Contraseña debe ser entre 4 y 14 carácteres"
 
-#:
+#. ($c->stash->{page}->name)
+#: lib/MojoMojo.pm:674
 msgid "Permission Denied to view x"
 msgstr "Permiso Negado para ver %1"
 
@@ -1328,8 +1329,8 @@ msgstr "Cambios recientes en %1"
 msgid "Recent pages in this wiki"
 msgstr "Páginas recientes en este wiki"
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Páginas recientes en %1"
@@ -1400,11 +1401,11 @@ msgstr "Resultado %1-%2 de %3 encontrados en %4"
 
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
-#: root/base/page/print.tt:13 root/base/page/view.tt:41
+#: root/base/page/print.tt:13 root/base/page/view.tt:40
 msgid "Revised on x at x by x"
 msgstr "Editado el %1 a las %2 por %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:41
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:40
 msgid "Revision"
 msgstr "Editado"
 
@@ -1533,9 +1534,9 @@ msgstr "Mostrando cambios de edición anterior."
 msgid "Showing entries x-x of x in x"
 msgstr "Mostrando entradas %1-%2 de %3 en %4"
 
-#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
-#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
-#: root/base/gallery/pager.tt:11
+#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries, link ])
+#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, link ])
+#: root/base/gallery/pager.tt:12
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Mostrando %1 (%2-%3) de %4 fotos en %5"
 
@@ -2014,7 +2015,7 @@ msgstr "negrita"
 msgid "busy spinner"
 msgstr ""
 
-#: root/base/page/search_inline.tt:35 root/base/page/view.tt:42 root/base/tag/recent.tt:26
+#: root/base/page/search_inline.tt:35 root/base/page/view.tt:41 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "por"
 
@@ -2106,11 +2107,11 @@ msgstr "ejemplo"
 msgid "file not found."
 msgstr ""
 
-#: root/base/comment/post.tt:5 root/base/page/edit.tt:68
+#: root/base/comment/post.tt:5 root/base/page/edit.tt:67
 msgid "forget me"
 msgstr "olvideme"
 
-#: root/base/gallery/photo.tt:1
+#: root/base/gallery/pager.tt:11 root/base/gallery/photo.tt:1
 msgid "gallery"
 msgstr "galería"
 

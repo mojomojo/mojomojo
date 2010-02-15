@@ -882,7 +882,7 @@ msgstr "Далее в документе"
 msgid "Leave second blank if you do not want a password"
 msgstr "Оставьте второе поле незаполненным, если не хотите использовать пароль"
 
-#: root/base/page/edit.tt:73
+#: root/base/page/edit.tt:72
 msgid "Leave the second field blank if you do not want a password"
 msgstr ""
 
@@ -1086,7 +1086,7 @@ msgstr "У Вас нет разрешения на редактирование 
 msgid "No permissions to x this page"
 msgstr ""
 
-#: root/base/user/list.tt:14
+#: root/base/user/list.tt:13
 msgid "No recent changes"
 msgstr "Новых изменений нет"
 
@@ -1225,7 +1225,8 @@ msgstr "Пароль не совпадает"
 msgid "Password must be between 4 and 14 chars"
 msgstr "Пароль должен содержать от 4 до 14 символов"
 
-#:
+#. ($c->stash->{page}->name)
+#: lib/MojoMojo.pm:674
 msgid "Permission Denied to view x"
 msgstr "Запрещено просматривать %1"
 
@@ -1364,8 +1365,8 @@ msgstr "Последние изменения в %1"
 msgid "Recent pages in this wiki"
 msgstr ""
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Последние страницы в %1"
@@ -1440,11 +1441,11 @@ msgstr "Результаты %1-%2 of %3 найдены на %4"
 
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
-#: root/base/page/print.tt:13 root/base/page/view.tt:41
+#: root/base/page/print.tt:13 root/base/page/view.tt:40
 msgid "Revised on x at x by x"
 msgstr "Пересмотрено %1 в %2 %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:41
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:40
 msgid "Revision"
 msgstr "Версия"
 
@@ -1573,9 +1574,9 @@ msgstr "Показ изменений от предыдущей версии"
 msgid "Showing entries x-x of x in x"
 msgstr "Показ пунктов %1-%2 из %3 в %4"
 
-#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
-#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
-#: root/base/gallery/pager.tt:11
+#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries, link ])
+#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, link ])
+#: root/base/gallery/pager.tt:12
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Показ %1 (%2-%3) из %4 картинок в %5"
 
@@ -2075,7 +2076,7 @@ msgstr "жирный"
 msgid "busy spinner"
 msgstr ""
 
-#: root/base/page/search_inline.tt:35 root/base/page/view.tt:42 root/base/tag/recent.tt:26
+#: root/base/page/search_inline.tt:35 root/base/page/view.tt:41 root/base/tag/recent.tt:26
 msgid "by"
 msgstr " "
 
@@ -2167,11 +2168,11 @@ msgstr "пример"
 msgid "file not found."
 msgstr ""
 
-#: root/base/comment/post.tt:5 root/base/page/edit.tt:68
+#: root/base/comment/post.tt:5 root/base/page/edit.tt:67
 msgid "forget me"
 msgstr "забыть меня"
 
-#: root/base/gallery/photo.tt:1
+#: root/base/gallery/pager.tt:11 root/base/gallery/photo.tt:1
 msgid "gallery"
 msgstr "галерея"
 
