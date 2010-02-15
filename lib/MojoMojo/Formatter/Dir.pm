@@ -132,6 +132,10 @@ sub to_xhtml{
     }
   }
 
+  #-mxh Sort the array for predictable ordering in formatter_dir.t
+  @subdirs = sort @subdirs;
+  @files   = sort @files;
+
   $path =~ s/^\///;
   $path =~ s/\/$//;
   my $url = "${baseuri}/${path}";
