@@ -67,7 +67,7 @@ for lang in $langs ; do
 	lang_=`echo $lang|sed 's/.po//'`
 	echo "lang: $lang_"
 	if [ -z "$JSON_ONLY" ]; then
-		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/lib/MojoMojo -D $MOJOMOJO_DIR/root/forms -D $MOJOMOJO_DIR/root/base -P perl=* -P tt2=* -P yaml=yml -P formfu=* -P text=* -o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.po
+		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/lib/MojoMojo $MOJOMOJO_DIR/lib/MojoMojo.pm -D $MOJOMOJO_DIR/root/forms -D $MOJOMOJO_DIR/root/base -P perl=* -P tt2=* -P yaml=yml -P formfu=* -P text=* -o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.po
 		$PERL -Ilib `which xgettext.pl` -now -D $MOJOMOJO_DIR/root/static/js -P perl=* -P tt2=* -P yaml=yml -P formfu=* -P text=* 	-o $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.js.po
 	fi
 	$PERL -Ilib $MOJOMOJO_DIR/script/po2json.pl $MOJOMOJO_DIR/lib/MojoMojo/I18N/$lang_.js.po $MOJOMOJO_DIR/root/static/json/$lang_.po.json
