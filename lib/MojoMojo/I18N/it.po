@@ -2031,6 +2031,10 @@ msgstr "i seguenti sono mancanti:"
 msgid "up to 6 levels of headers"
 msgstr "fino a 6 livelli di intestazioni"
 
+#: root/base/page/permissions.tt:36
+msgid "view"
+msgstr ""
+
 #: root/base/attachments/list.tt:46
 msgid "view full size"
 msgstr "visualizza formato pieno"

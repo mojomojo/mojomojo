@@ -2002,6 +2002,10 @@ msgstr ""
 msgid "up to 6 levels of headers"
 msgstr ""
 
+#: root/base/page/permissions.tt:36
+msgid "view"
+msgstr ""
+
 #: root/base/attachments/list.tt:46
 msgid "view full size"
 msgstr ""

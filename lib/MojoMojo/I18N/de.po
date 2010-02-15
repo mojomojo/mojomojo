@@ -2393,7 +2393,7 @@ msgstr "URL in Klammern"
 msgid "users"
 msgstr "Benutzer"
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "ansehen"
 

@@ -2074,7 +2074,7 @@ msgstr ""
 msgid "up to 6 levels of headers"
 msgstr ""
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "閲覧"
 

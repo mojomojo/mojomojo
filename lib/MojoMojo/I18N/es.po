@@ -2377,7 +2377,7 @@ msgstr "url dentro de paréntesis"
 msgid "users"
 msgstr "usuarios"
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "ver"
 

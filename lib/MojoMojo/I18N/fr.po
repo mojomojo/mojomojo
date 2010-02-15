@@ -2322,7 +2322,7 @@ msgstr ""
 msgid "users"
 msgstr "utilisateurs"
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "voir"
 

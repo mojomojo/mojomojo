@@ -2026,6 +2026,10 @@ msgstr "brak następujących:"
 msgid "up to 6 levels of headers"
 msgstr "do 6 poziomów nagłowka"
 
+#: root/base/page/permissions.tt:36
+msgid "view"
+msgstr "podgląd"
+
 #: root/base/attachments/list.tt:46
 msgid "view full size"
 msgstr "zobacz pełny rozmiar"

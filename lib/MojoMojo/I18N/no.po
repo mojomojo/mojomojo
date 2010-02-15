@@ -2563,7 +2563,7 @@ msgstr "url mellom parantesene"
 msgid "users"
 msgstr "brukere"
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "vis"
 

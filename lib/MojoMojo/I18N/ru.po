@@ -2454,7 +2454,7 @@ msgstr "адрес в скобках"
 msgid "users"
 msgstr "пользователи"
 
-#:
+#: root/base/page/permissions.tt:36
 msgid "view"
 msgstr "просмотр"
 
