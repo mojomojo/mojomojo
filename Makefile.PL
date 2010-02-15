@@ -69,6 +69,7 @@ requires(
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
+    'URI::Find'                                    => 0,
     'YAML'                                         => '0.36',
     'Term::Prompt'                                 => 0,
 );
