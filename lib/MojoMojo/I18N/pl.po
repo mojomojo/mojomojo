@@ -727,7 +727,7 @@ msgstr "Pozycja 2"
 msgid "Just like email quoting!"
 msgstr "Cytat z wiadomości pocztowej!"
 
-#: root/base/page/edit.tt:73
+#: root/base/page/edit.tt:72
 msgid "Leave the second field blank if you do not want a password"
 msgstr "Jeśli nie chcesz używać hasła, drugie pole pozostaw puste"
 
@@ -891,7 +891,7 @@ msgstr "Brak członków."
 msgid "No permissions to x this page"
 msgstr "Brak uprawnień do %1 na tej stronie"
 
-#: root/base/user/list.tt:14
+#: root/base/user/list.tt:13
 msgid "No recent changes"
 msgstr "Brak nowych zmian"
 
@@ -1109,8 +1109,8 @@ msgstr "Ostatnie zmiany w %1"
 msgid "Recent pages in this wiki"
 msgstr "Ostatnio zmieniane strony w wiki"
 
-#. (activetag)
 #. (page.path)
+#. (activetag)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Ostatnio zmieniane strony w %1"
@@ -1177,11 +1177,11 @@ msgstr "Wyniki %1-%2 z %3 znalezione na %4"
 
 #. ([content.created.ymd, content.created.hms, content.creator.name])
 #. ([ content.created.ymd, content.created.hms, content.creator.name ])
-#: root/base/page/print.tt:13 root/base/page/view.tt:41
+#: root/base/page/print.tt:13 root/base/page/view.tt:40
 msgid "Revised on x at x by x"
 msgstr "Wersja z dnia  %1 z godziny %2 edytowana przez %3"
 
-#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:41
+#: root/base/page/print.tt:7 root/base/page/view.tt:15 root/base/page/view.tt:40
 msgid "Revision"
 msgstr "Wersja edytowana"
 
@@ -1302,9 +1302,9 @@ msgstr "Zmiany w stosunku do poprzedniej wersji."
 msgid "Showing entries x-x of x in x"
 msgstr "Pokazuję wyniki %1-%2 z %3 w %4"
 
-#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries,c.wikiword(page.path,base)
-#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, c.wikiword(page.path, base) ])
-#: root/base/gallery/pager.tt:11
+#. ([pager.entries_on_this_page,pager.first,pager.last,pager.total_entries, link ])
+#. ([ pager.entries_on_this_page, pager.first, pager.last, pager.total_entries, link ])
+#: root/base/gallery/pager.tt:12
 msgid "Showing x (x-x) of x pictures in x"
 msgstr "Widok %1 (%2-%3) z %4 obrazków w %5"
 
@@ -1715,7 +1715,7 @@ msgstr "pogrubienie"
 msgid "busy spinner"
 msgstr "wskaźnik zajętości"
 
-#: root/base/page/search_inline.tt:35 root/base/page/view.tt:42 root/base/tag/recent.tt:26
+#: root/base/page/search_inline.tt:35 root/base/page/view.tt:41 root/base/tag/recent.tt:26
 msgid "by"
 msgstr "przez"
 
@@ -1793,13 +1793,13 @@ msgstr "przykład"
 
 #: lib/MojoMojo/Controller/Image.pm:37
 msgid "file not found."
-msgstr ""
+msgstr "plik nie został znaleziony."
 
-#: root/base/comment/post.tt:5 root/base/page/edit.tt:68
+#: root/base/comment/post.tt:5 root/base/page/edit.tt:67
 msgid "forget me"
 msgstr "wyloguj mnie"
 
-#: root/base/gallery/photo.tt:1
+#: root/base/gallery/pager.tt:11 root/base/gallery/photo.tt:1
 msgid "gallery"
 msgstr "Galeria"
 
