@@ -26,7 +26,7 @@ my $content;
 my $ret;
 
 ( undef, $c )       = ctx_request('/');
-my $dir             = Directory::Scratch->new(CLEANUP => 1);
+my $dir             = Directory::Scratch->new( DIR => 't/var', CLEANUP => 1);
 $c->config->{'Formatter::Dir'}{whitelisting} = [ $dir ];
 
 
