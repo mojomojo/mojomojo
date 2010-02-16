@@ -19,6 +19,8 @@ BEGIN {
     eval {require Test::WWW::Selenium::Catalyst};
     plan skip_all => 'Selenium tests need Test::WWW::Selenium::Catalyst'
         if $@;
+    plan skip_all => 'Set SELENIUM_TESTS ENV variable  to enable Selenium tests'
+        unless $ENV{SELENIUM_TESTS};
     plan tests => 22;
     $ENV{MOJOMOJO_CONFIG} = 't/app/mojomojo.yml';
 }
