@@ -74,6 +74,7 @@ sub process {
 
     if ( ($c->action->reverse eq 'pageadmin/edit') || ($c->action->reverse eq 'jsrpc/render') ){
         $line =~ s!$re!<div style='width: 425px;height: 344px; border: 1px black dotted;'>$youtube<br /><a href="$url">$url</a></div>!;
+        $c->stash->{precompile_off} = 1;
      } else {
         $line =~ s!$re!<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/$video_id&amp;hl=$lang"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/$video_id&amp;hl=$lang" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>!;
     }
