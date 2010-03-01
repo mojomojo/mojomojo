@@ -1,7 +1,9 @@
+[% SET link = c.uri_for("attachment",att.id) %]
+[% SET link = link.replace ('.+//.+?/','/') %]
 [% IF c.pref('main_formatter') == "MojoMojo::Formatter::Textile" +%]
-"[%att.name%]":[%c.uri_for("attachment",att.id)%]
+"[%att.name%]":[% link %]
 [% ELSIF c.pref('main_formatter') == "MojoMojo::Formatter::Markdown" +%]
-[[%att.name%]]([%c.uri_for("attachment",att.id)%])
+[[%att.name%]]([% link %])
 [% ELSE %]
-"[%att.name%]":[%c.uri_for("attachment",att.id)%]
+"[%att.name%]":[% link %]
 [% END %]
