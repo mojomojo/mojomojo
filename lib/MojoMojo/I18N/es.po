@@ -22,6 +22,9 @@ msgid ""
 "\n"
 "Put whatever you like here."
 msgstr ""
+"# Nodo principal para %1\n"
+"\n"
+"Pon lo que quieras aquí."
 
 #:
 msgid "(Private)"
@@ -57,7 +60,7 @@ msgstr "Una Instalacíon de MojoMojo mal configurada"
 
 #: lib/MojoMojo/Controller/User.pm:257
 msgid "Account Taken. Try another."
-msgstr ""
+msgstr "La cuenta ya está usada. Prueba otra."
 
 #: root/base/page/recent.tt:47
 msgid "Actions"
@@ -175,17 +178,13 @@ msgstr "Anónimo"
 msgid "Anonymous Coward"
 msgstr "Un cobarde anónimo"
 
-#:
-msgid "Anonymous Edit disabled"
-msgstr "Desactivada la edición anónima"
-
 #: root/forms/admin/settings.yml:23
 msgid "Anonymous User (blank to disable)"
 msgstr "Usuario anónimo (omitir para desactivar)"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:184
 msgid "Anonymous edit disabled"
-msgstr ""
+msgstr "Desactivada la edición anónima"
 
 #: root/base/edithelp.tt:4
 msgid "Any phrase surrounded by double brackets or parentheses is a wiki word (camel-case wiki words are not supported for good reasons, one being that some languages don't have the concept of case)."
@@ -197,7 +196,7 @@ msgstr "Apertura"
 
 #: root/base/page/delete.tt:5
 msgid "Are you sure you want to delete"
-msgstr ""
+msgstr "Estas seguro que quieres borrar"
 
 #: root/base/edithelp/markdown.tt:184
 msgid ""
@@ -220,11 +219,11 @@ msgstr "Archivos Adjuntos"
 
 #: root/base/page/attachments.tt:1
 msgid "Attachments for"
-msgstr ""
+msgstr "Archivos adjuntos para"
 
 #: root/base/page/info.tt:63
 msgid "Attachments size"
-msgstr ""
+msgstr "Tamaño de los archivos adjuntos"
 
 #: root/base/navbar.tt:12
 msgid "Authors"
@@ -290,17 +289,9 @@ msgstr "Solo puede crear fotos en version en línea"
 msgid "Can only make thumbnails of photos"
 msgstr "Solo puede crear miniaturas de imagenes"
 
-#:
-msgid "Cannot find that user."
-msgstr "No se puede encontrar ese usuario."
-
 #: lib/MojoMojo/Controller/Admin.pm:87
 msgid "Cant find admin user: "
 msgstr "No se puede encontrar el usuario administrativo: "
-
-#:
-msgid "Centered paragraph"
-msgstr "Párrafo en el centro"
 
 #: root/base/this_page_link.tt:9
 msgid "Change page content"
@@ -330,10 +321,6 @@ msgstr "Hijos"
 msgid "Choose attachments"
 msgstr "Escoge los ficheros adjuntos"
 
-#:
-msgid "Circle"
-msgstr "Círculo"
-
 #: root/base/gallery/photo.tt:33
 msgid "Click for original version"
 msgstr "Haga clic para la versión original"
@@ -342,17 +329,9 @@ msgstr "Haga clic para la versión original"
 msgid "Click on a link above to create that page."
 msgstr "Haz click en el enlace de arriba para crear la página."
 
-#:
-msgid "Click on any non-existent page to create it. Any missing pages above it will be created automatically."
-msgstr "Haga clic en cualquier página no existente para crearla. Páginas encima que estén ausentes serán creadas automáticamente."
-
 #: root/base/edithelp/markdown.tt:153
 msgid "Code"
 msgstr "Código"
-
-#:
-msgid "Code Spans"
-msgstr "El código se extiende sobre"
 
 #: root/base/comment.tt:6
 msgid "Comment"
@@ -386,7 +365,7 @@ msgstr "No se puede crear archivo adjunto de %1"
 #. ($url)
 #: lib/MojoMojo/Formatter/RSS.pm:77
 msgid "Could not parse feed x"
-msgstr ""
+msgstr "No se puede parsear el feed x"
 
 #: lib/MojoMojo/Controller/User.pm:186
 msgid "Could not recover password"
@@ -444,7 +423,7 @@ msgstr "Fecha de registración"
 #. (page.path)
 #: root/base/page/delete.tt:1
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 #: root/forms/admin/settings.yml:84
 msgid "Delete allowed by default"
@@ -452,15 +431,11 @@ msgstr "Pemitir el borrado por defecto"
 
 #: root/base/page/bottomnav.tt:15
 msgid "Delete page"
-msgstr ""
+msgstr "Borrar página"
 
 #: root/base/page/deleted.tt:1 root/base/page/deleted.tt:4
 msgid "Deleted"
-msgstr ""
-
-#:
-msgid "Deleted Text"
-msgstr "Texto borrado"
+msgstr "Borrada"
 
 #: root/base/page/info.tt:54
 msgid "Descendants"
@@ -476,15 +451,11 @@ msgstr "Desactivar el buscador interno (usar Google)"
 
 #: root/base/navbar.tt:14
 msgid "Download a ZIP of this page and its subpages"
-msgstr ""
+msgstr "Descargar un zip de esta página y sus sub-páginas"
 
 #: root/base/page/list.tt:52
 msgid "Download a zip with all the pages in this path"
 msgstr "Descargar un zip con todas las Páginas de esta ruta"
-
-#:
-msgid "Download a zip with all the pages in this wiki"
-msgstr "Descargue un archivo zip con todas las páginas en este wiki"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:249
 msgid "END OF CONFLICT"
@@ -501,10 +472,6 @@ msgstr "Editar Perfil"
 #: root/base/admin/edit_role.tt:10
 msgid "Edit Role"
 msgstr "Editar Rol"
-
-#:
-msgid "Edit Settings"
-msgstr "Editar Configuración"
 
 #: root/forms/admin/settings.yml:89
 msgid "Edit allowed by default"
@@ -573,7 +540,7 @@ msgstr "Un error ocurrió mientras se le enviaba su contraseña nueva por correo
 
 #: root/base/edithelp.tt:40
 msgid "Examples"
-msgstr ""
+msgstr "Ejemplos"
 
 #: root/base/gallery/photo_info.tt:1
 msgid "Exif Data"
@@ -669,7 +636,7 @@ msgstr "Ir directamente a "
 
 #:
 msgid "Go to home page"
-msgstr "Ir a página inicial"
+msgstr "Ir a la portada"
 
 #: root/base/navbar.tt:25
 msgid "Go to your user page"
@@ -1056,7 +1023,7 @@ msgstr "No tienes permisos para editar esta página"
 #. ($operation || $c->loc('update')
 #: lib/MojoMojo/Controller/PageAdmin.pm:38
 msgid "No permissions to x this page"
-msgstr ""
+msgstr "No tienes permisos para %1 esta página"
 
 #: root/base/user/list.tt:13
 msgid "No recent changes"
@@ -1202,14 +1169,10 @@ msgstr "Contraseña debe ser entre 4 y 14 carácteres"
 msgid "Permission Denied to view x"
 msgstr "Permiso Negado para ver %1"
 
-#:
-msgid "Permission Denied to x x"
-msgstr "Permiso Negado a %1 %2"
-
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
-msgstr ""
+msgstr "Permiso negado a %1 %2"
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1225,19 +1188,11 @@ msgstr "Álbum de Fotos"
 
 #: lib/MojoMojo/Controller/Gallery.pm:31
 msgid "Photo not found"
-msgstr ""
+msgstr "No se ha encontrado la foto"
 
 #: root/base/page/info.tt:69
 msgid "Photos"
 msgstr "Fotos"
-
-#:
-msgid "Picture"
-msgstr "Foto"
-
-#:
-msgid "Please enter username and password"
-msgstr "Por favor introduzca su usuario y contraseña"
 
 #: lib/MojoMojo/Controller/User.pm:235
 msgid "Please fill in the following information to register. All fields are mandatory."
@@ -1246,10 +1201,6 @@ msgstr "Por favor llene la siguiente información para registrarse. Todos los ca
 #: root/base/page/attachments.tt:19
 msgid "Please select a file to attach to this page. To upload multiple files, hold CTRL while selecting multiple files in the file selection pop up window."
 msgstr "Selecciona un fichero para anexar a esta página. Para subir varios ficheros, manten pulsada la tecla CTRL mientras seleccionas varios ficheros en la ventana de seleccion."
-
-#:
-msgid "Please select a file to attach to this page. To upload multiple files, put them in a zip."
-msgstr "Por favor seleccione un archivo para adjuntar a esta página. Para subir archivos multiples, póngalos en un zip."
 
 #: lib/MojoMojo/Controller/Jsrpc.pm:31
 msgid "Please type something"
@@ -1570,7 +1521,7 @@ msgstr "Alguien más cambio la página mientras usted la editaba. Sus cambios fu
 
 #: root/base/page/delete.tt:8
 msgid "Sorry"
-msgstr ""
+msgstr "Perdon"
 
 #: root/base/edithelp/markdown.tt:171
 msgid ""
@@ -1578,21 +1529,13 @@ msgid ""
 "    render text in monospace\n"
 "    like this example"
 msgstr ""
-"Espacion a la izquierda\n"
+"Espacios a la izquierda\n"
 "    mostrar el texto monoespaceado\n"
 "    como este ejemplo"
 
-#:
-msgid "Split Edit"
-msgstr "Edición separada"
-
-#:
-msgid "Square"
-msgstr "Cuadro"
-
 #: root/base/message.tt:4
 msgid "Stop"
-msgstr ""
+msgstr "Detener"
 
 #: root/base/edithelp/markdown.tt:60 root/base/edithelp/markdown.tt:61 root/base/edithelp/markdown.tt:65 root/base/edithelp/markdown.tt:66 root/base/edithelp/markdown.tt:67
 msgid "Sub Header"
@@ -1636,7 +1579,7 @@ msgstr "Tabla"
 
 #: lib/MojoMojo/Controller/Gallery.pm:67
 msgid "Tag not found"
-msgstr ""
+msgstr "No se ha encontrado el tag"
 
 #: root/base/navbar.tt:11 root/base/page/list.tt:49 root/base/page/list.tt:7 root/base/page/recent.tt:18 root/base/tag/recent.tt:7
 msgid "Tags"
@@ -1686,7 +1629,7 @@ msgstr "El correo electrónico fue enviado a %1."
 
 #: root/base/page/deleted.tt:6
 msgid "The following pages have been deleted"
-msgstr ""
+msgstr "Se han borrado las siguientes páginas"
 
 #: root/base/page/suggest.tt:4
 msgid "The following pages in the requested path do not exist:"
@@ -1694,11 +1637,7 @@ msgstr "Las siguentes páginas no existien el la ruta solicitada"
 
 #: root/base/page/delete.tt:6
 msgid "The following pages will be deleted. This can not be undone"
-msgstr ""
-
-#:
-msgid "The requested URL (x) was not found"
-msgstr "La URL solicitada (%1) no se encontró"
+msgstr "Se borraran las siguientes páginas. Esto no se podrá deshacer"
 
 #. ("$file.$suffix")
 #. ('<span class="error_detail">' . $c->stash->{pre_hacked_uri} . '</span>')
@@ -1842,7 +1781,7 @@ msgstr "Páginas requeridas"
 
 #: root/base/user/validate.tt:7
 msgid "We've sent you an email with an activation link. Please click on it to activate your account!"
-msgstr "Le hemos enviado un correo electrónico con un enlace de activación. !Por favor abralo para activar su cuenta!"
+msgstr "Te hemos enviado un correo electrónico con un enlace de activación. !Por favor abrelo para activar tu cuenta!"
 
 #. ($user->name)
 #: lib/MojoMojo/Controller/User.pm:344
@@ -1879,15 +1818,11 @@ msgstr "Puede exportar todas las páginas en esta web como un archivo zip conten
 
 #: root/base/message.tt:9
 msgid "You can go to the"
-msgstr ""
+msgstr "Puedes ir a"
 
 #: root/base/feeds.tt:4
 msgid "You can subscribe to this wiki by RSS and get either just the headlines of the pages that change or the entire page."
 msgstr "Puede suscribirse a este wiki por medio de RSS y obtener o solo los titulares de las páginas cambiantes o la página entera."
-
-#:
-msgid "You do not have permissions to edit attachments for this page"
-msgstr "No tiene permiso para editar archivos adjuntados a esta página"
 
 #. ($operation)
 #: lib/MojoMojo/Controller/Attachment.pm:45
@@ -1904,7 +1839,7 @@ msgstr "Tienes que entrar para dejar un comentario."
 
 #: root/base/page/delete.tt:9
 msgid "You lack permissions to delete this page (or any of the sub pages)."
-msgstr ""
+msgstr "No tienes permisos para borrar esta página (ni las sub-páginas)."
 
 #: lib/MojoMojo/Formatter/YouTube.pm:58
 msgid "YouTube Video"
@@ -1935,7 +1870,7 @@ msgstr "Su contraseña en %1 fue restaurada. Esta es su contraseña nueva:"
 
 #: root/base/edithelp.tt:7
 msgid "[[C++]], [[Let's rock!]] ((easy to type))"
-msgstr ""
+msgstr "[[C++]], [[Let's rock!]] ((facil de escribir))"
 
 #. ($c->pref('name')
 #: lib/MojoMojo/Controller/User.pm:307
@@ -1975,7 +1910,7 @@ msgstr "texto alternativo"
 
 #: lib/MojoMojo/Schema.pm:62
 msgid "anonymouscoward"
-msgstr ""
+msgstr "un cobarde anónimo"
 
 #: root/base/page/permissions.tt:56
 msgid "apply to subpages"
@@ -2105,7 +2040,7 @@ msgstr "ejemplo"
 
 #: lib/MojoMojo/Controller/Image.pm:37
 msgid "file not found."
-msgstr ""
+msgstr "No se ha encontrado el fichero."
 
 #: root/base/comment/post.tt:5 root/base/page/edit.tt:67
 msgid "forget me"
@@ -2134,7 +2069,7 @@ msgstr ""
 
 #: root/base/message.tt:9
 msgid "home page"
-msgstr ""
+msgstr "portada"
 
 #: root/base/edithelp/markdown.tt:43
 msgid "hover over the link to see the title"
@@ -2178,7 +2113,7 @@ msgstr "insertar miniatura"
 
 #: root/base/edithelp/markdown.tt:33 root/base/edithelp/markdown.tt:40
 msgid "is formatted as:"
-msgstr ""
+msgstr "tiene el siguiente formato:"
 
 #: lib/MojoMojo/Formatter/YouTube.pm:71
 msgid "is not a valid link to youtube video"
@@ -2187,10 +2122,6 @@ msgstr "no es un enlace a un video de youtube válido"
 #: lib/MojoMojo/Formatter/YouTube.pm:64
 msgid "is not a valid url"
 msgstr "no es una url válida"
-
-#:
-msgid "italic"
-msgstr "italica"
 
 #: root/base/edithelp/markdown.tt:13
 msgid "italics"
@@ -2201,16 +2132,12 @@ msgid "just use `2`"
 msgstr "use simplemente `2`"
 
 #:
-msgid "justified paragraph"
-msgstr "párrafo justificado"
-
-#:
 msgid "left justified paragraph"
 msgstr "párrafo justificado izquierda"
 
 #: root/base/edithelp.tt:40
 msgid "level"
-msgstr ""
+msgstr "nivel"
 
 #: root/base/edithelp/textile.tt:37 root/base/edithelp/textile.tt:39
 msgid "linkname"
@@ -2270,7 +2197,7 @@ msgstr "o"
 
 #: root/base/message.tt:10
 msgid "or you can try to"
-msgstr ""
+msgstr "o puedes intentar"
 
 #: root/base/page/info.tt:58 root/base/page/info.tt:61
 msgid "pages"
@@ -2327,7 +2254,7 @@ msgstr "eliminar"
 
 #: lib/MojoMojo/Controller/PageAdmin.pm:422
 msgid "rename via non-POST method"
-msgstr ""
+msgstr "renombrar via un metodo no-POST"
 
 #: root/base/page/bottomnav.tt:25
 msgid "revision"
@@ -2406,7 +2333,7 @@ msgstr ""
 
 #: root/base/page/permissions.tt:14 root/base/page/permissions.tt:18 root/base/page/permissions.tt:36 root/base/page/permissions.tt:53
 msgid "write"
-msgstr "escribe"
+msgstr "escribir"
 
 #:
 msgid "x hits"
