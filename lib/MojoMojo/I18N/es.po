@@ -900,7 +900,7 @@ msgstr "Salir"
 
 #: root/base/user/login.tt:1 root/forms/user/login.yml:24 root/forms/user/prefs.yml:7 root/forms/user/register.yml:8
 msgid "Login"
-msgstr "Nombre de usuario"
+msgstr "Login"
 
 #: root/base/edithelp/markdown.tt:50 root/base/edithelp/markdown.tt:51 root/base/edithelp/markdown.tt:56 root/base/edithelp/markdown.tt:57
 msgid "Main Header"
@@ -1125,20 +1125,20 @@ msgstr "Página"
 
 #: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page Info"
-msgstr "Información de Página"
+msgstr "Información de esta página"
 
 #: root/base/edithelp/markdown.tt:26
 msgid "Page Name Here"
-msgstr "Aqui el numero de la página"
+msgstr "Nombre de la página aquí"
 
 #. (page.path)
 #: root/base/page/info.tt:9
 msgid "Page info for x"
-msgstr "Información de página para %1"
+msgstr "Información de la página para %1"
 
 #: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page meta information"
-msgstr "Información de metaetiquetas de página"
+msgstr "Meta información de la página"
 
 #: root/forms/pageadmin/edit.yml:7
 msgid "Page text"
@@ -1146,11 +1146,11 @@ msgstr "Texto de página"
 
 #: root/base/navbar.tt:10
 msgid "Pages sorted by when they were last changed"
-msgstr "Páginas organizadas por tiempo de su último cambio"
+msgstr "Páginas ordenadas por la fecha del último cambio"
 
 #: root/base/page/list.tt:80
 msgid "Pages to which no other pages link."
-msgstr "Páginas a las que n páginas no se enlazan"
+msgstr "Páginas a las que no enlaza ninguna otra página."
 
 #: root/forms/user/login.yml:18 root/forms/user/register.yml:18
 msgid "Password"
@@ -1162,17 +1162,17 @@ msgstr "La contraseña no coincidió"
 
 #: root/forms/user/register.yml:27
 msgid "Password must be between 4 and 14 chars"
-msgstr "Contraseña debe ser entre 4 y 14 carácteres"
+msgstr "La contraseña debe tener entre 4 y 14 carácteres"
 
 #. ($c->stash->{page}->name)
 #: lib/MojoMojo.pm:674
 msgid "Permission Denied to view x"
-msgstr "Permiso Negado para ver %1"
+msgstr "Permiso denegado para ver %1"
 
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
-msgstr "Permiso negado a %1 %2"
+msgstr "Permiso denegado para %1 %2"
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1280,8 +1280,8 @@ msgstr "Cambios recientes en %1"
 msgid "Recent pages in this wiki"
 msgstr "Páginas recientes en este wiki"
 
-#. (page.path)
 #. (activetag)
+#. (page.path)
 #: root/base/page/recent.tt:1 root/base/page/recent.tt:5 root/base/tag/list.tt:23
 msgid "Recent pages in x"
 msgstr "Páginas recientes en %1"
@@ -1334,11 +1334,11 @@ msgstr "Repetir contraseña"
 
 #: root/forms/admin/settings.yml:59
 msgid "Restrict user editing to home directory"
-msgstr "Restringir editaciones de usuarios a directorio de inicio"
+msgstr "Restringir ediciones de los usuarios a su directorio raíz"
 
 #: lib/MojoMojo/Controller/Admin.pm:30
 msgid "Restricted area. Admin access required"
-msgstr "Área restringida. Acceso de nivel administrativo es necesario."
+msgstr "Área restringida. Se necesita permiso administrativo."
 
 #: root/base/page/search_inline.tt:45
 msgid "Result Page:"
