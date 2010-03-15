@@ -68,8 +68,11 @@ div#toplinks {
     min-height: 1.8em;
 }
 div#toplinks ul li, div#bottomnav ul li {
-    display: inline;
+    display: block;
+    float: left;
+    height: 1.5em;
 }
+
 div#toplinks ul li a:hover, div#bottomnav ul li a:hover {
     background-color: #fff;
     color: #000;
