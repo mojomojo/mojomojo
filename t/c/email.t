@@ -1,33 +1,34 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use Test::More tests => 14;
+use Test::More;
 use lib 't/lib';
 use MojoMojoTestSchema;
 
 BEGIN {
+    $ENV{EMAIL_SENDER_TRANSPORT} = 'Test';
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
 }
 
-use Email::Send::Test;
+use Email::Sender::Simple;
 use Test::WWW::Mechanize::Catalyst 'MojoMojo';
 
 my $mech = Test::WWW::Mechanize::Catalyst->new;
-
+my $sender = Email::Sender::Simple->default_transport;
 # Clear out emails even though there shouldn't be any yet.
-Email::Send::Test->clear;
-is( Email::Send::Test->emails, 0, 'no mails sent yet' );
+
+is( scalar( @{$sender->deliveries} ), 0, 'no mails sent yet' );
 
 $mech->get_ok('/.recover_pass');
 $mech->submit_form_ok( { fields => { recover => 'admin', }, },
     'recover submit' );
 
-is( Email::Send::Test->emails, 1, 'new password emailed' );
+is( scalar( @{$sender->deliveries} ), 1, 'new password emailed' );
 
 # NOTE: The email body content checks are looking for English
-my ($mail) = Email::Send::Test->emails;
-like( $mail->header('To'), qr/^admin/,        'right recipient' );
-like( $mail->body,         qr/new password/i, 'email contains a new password' );
+my ($mail) = $sender->deliveries->[0];
+like( $mail->{email}->get_header( 'to' ), qr/^admin/, 'right recipient' );
+like( $mail->{email}->get_body,           qr/new password/i, 'email contains a new password' );
 
 # After requesting password recovery, restore the original password
 ok my $schema = MojoMojoTestSchema->get_schema, 'get the schema in order to...';
@@ -35,8 +36,8 @@ ok $schema->resultset('Person')->find({login => 'admin'})->update({pass=>"admin"
 
 
 # Clear email trap before next test per doc recommendation.
-Email::Send::Test->clear;
-is( Email::Send::Test->emails, 0, 'email trap reset' );
+$sender->clear_deliveries;
+is( scalar( @{$sender->deliveries} ), 0, 'email trap reset' );
 
 $mech->get_ok('/.register');
 
@@ -66,7 +67,9 @@ $mech->submit_form_ok(
 
 # NOTE: This test will fail if the user already exists in t/var/mojomojo.db
 # Run: prove --lib /lib t/01app.t to start with fresh database and then run this test.
-is( Email::Send::Test->emails, 1, 'regisration validation email sent' );
-($mail) = Email::Send::Test->emails;
-like( $mail->header('To'), qr/^mojam/,        'right recipient' );
-like( $mail->body,         qr/validate your email address/i, 'email contains validate email address' );
+is( scalar( @{$sender->deliveries} ), 1, 'regisration validation email sent' );
+($mail) = $sender->deliveries->[0];
+like( $mail->{email}->get_header('to'), qr/^mojam/,        'right recipient' );
+like( $mail->{email}->get_body,         qr/validate your email address/i, 'email contains validate email address' );
+
+done_testing();

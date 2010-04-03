@@ -125,6 +125,7 @@ sub init_schema {
             attachment_allowed       => 0,
         },
         'View::Email' => { sender => { mailer => 'Test' } },
+        'system_mail' => 'admin@localhost',
     };
     YAML::DumpFile('t/var/mojomojo.yml', $config);
 
