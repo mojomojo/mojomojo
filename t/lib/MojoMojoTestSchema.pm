@@ -109,9 +109,6 @@ sub init_schema {
         allowed => {
             src => [qw(youtube.com youporn.org iusethis.com)] ,
         },
-        'View::Email' => { 
-            sender => { mailer => 'Test' } 
-        },
         'permissions' => { 
             admin_role_name          => 'Admins',
             role_members             => 'role_members',
