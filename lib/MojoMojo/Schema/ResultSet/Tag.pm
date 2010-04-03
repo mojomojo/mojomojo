@@ -36,6 +36,7 @@ Same as L</most_used> but for a particular page.
 
 =cut
 
+# TODO: Use join instead of from which is undocumented (on purpose)
 sub by_page {
     my ( $self, $page ) = @_;
     return $self->search(
@@ -54,7 +55,7 @@ sub by_page {
             from     => 'page as ancestor, page as descendant, tag as me',
             select   => [ 'me.page', 'me.tag', 'count(me.tag) as refcount' ],
             as       => [ 'page', 'tag', 'refcount' ],
-            group_by => [ 'me.page', 'me.tag'],
+            group_by => [ \'me.page', \'me.tag'],
             order_by => ['refcount'],
         }
     );
