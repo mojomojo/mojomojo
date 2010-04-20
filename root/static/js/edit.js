@@ -117,7 +117,7 @@ setup_formatter_toolbar = function() {
         [ loc('comments'), '\n{{comments}}\n', '', ''],
         [ loc('toc'), '\n{{toc}}','',''],
         [ loc('redirect'), '\n{{redirect ', '}}', '/new/location'],
-        [ loc('include'), '\n{{', '}}', 'http://www.google.com'],
+        [ loc('include'), '\n{{include ', '}}', 'http://www.google.com'],
         [ loc('youtube'), '\n{{youtube ','}}', 'http://www.youtube.com'],
         [ loc('cpan'), '\n{{cpan ', '}}', 'MojoMojo::Formatter']
     ]));
