@@ -12,6 +12,9 @@
   - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (Github issue #52) (linio)
   - Fixed formatter_all_textile tests to work without Syntax plugin
   
+  Improvements:
+  - Refine POD so lintian is happy (debian build tool)
+  
   Misc:
   - Test::Notabs is now optional
   - HTML::Toc is now required
