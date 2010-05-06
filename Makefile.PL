@@ -96,10 +96,10 @@ feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
 
 test_requires 'Test::More' => '0.88';
 test_requires 'Test::Differences';
-test_requires 'Test::NoTabs';
+#-mxh make the tabs tests optional
+#test_requires 'Test::NoTabs';
 # all tests require a database to be deployed, even though SQLT is not necessary for producton if a DB exists
 test_requires 'SQL::Translator' => '0.09006';
-#test_requires 'Email::Send::Test';
 test_requires 'Email::Sender::Simple' => '0.100110';
 test_requires 'WWW::Mechanize' => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst'   =>  '0.51 ';
