@@ -78,8 +78,6 @@ requires(
 
 feature 'Create new database', 'SQL::Translator' => '0.09006';
 feature 'FastCGI support', 'FCGI::ProcManager' => 0;
-#-mxh Made HTML::Toc a required dependency
-#feature 'Table of Contents generator','HTML::Toc' => '1.10';
 feature 'reCAPTCHA for anonymous edits', 'HTML::FormFu::Element::reCAPTCHA' => 0;
 feature 'Syntax highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
 
