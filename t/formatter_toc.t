@@ -1,9 +1,13 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use MojoMojo::Formatter::TOC;
+use Test::More;
+eval 'use HTML::Toc';
+if ($@) {
+     plan skip_all => "need HTML::Toc to run this test\n";
+}
 
-use Test::More tests => 8;
+use MojoMojo::Formatter::TOC;
 use Test::Differences;
 
 #--- Basic functionality --------------------------------------------
@@ -350,3 +354,5 @@ HTML
 HTML
 
 }  # TODO tests
+
+done_testing();
