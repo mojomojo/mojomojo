@@ -29,7 +29,7 @@ __PACKAGE__->utf8_columns(qw/tag/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Tag
+MojoMojo::Schema::Result::Tag - store page tags
 
 =head1 METHODS
 

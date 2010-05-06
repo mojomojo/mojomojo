@@ -17,7 +17,7 @@ __PACKAGE__->utf8_columns(qw/prefvalue/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Preference
+MojoMojo::Schema::Result::Preference - store preferences
 
 =head1 AUTHOR
 

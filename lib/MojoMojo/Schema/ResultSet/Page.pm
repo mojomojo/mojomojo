@@ -8,7 +8,7 @@ use URI::Escape ();
 
 =head1 NAME
 
-MojoMojo::Schema::ResultSet::Page
+MojoMojo::Schema::ResultSet::Page - resultset methods on pages
 
 =head1 METHODS
 

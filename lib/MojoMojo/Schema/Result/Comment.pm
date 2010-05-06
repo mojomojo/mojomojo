@@ -61,7 +61,7 @@ __PACKAGE__->utf8_columns(qw/body/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Comment
+MojoMojo::Schema::Result::Comment - store comments
 
 =head1 METHODS
 

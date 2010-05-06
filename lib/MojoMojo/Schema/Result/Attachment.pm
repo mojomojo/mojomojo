@@ -46,7 +46,7 @@ __PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Attachment
+MojoMojo::Schema::Result::Attachment - store attachments
 
 =head1 METHODS
 

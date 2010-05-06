@@ -25,7 +25,7 @@ __PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Role
+MojoMojo::Schema::Result::Role - store user roles
 
 =head1 AUTHOR
 

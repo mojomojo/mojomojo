@@ -29,7 +29,7 @@ __PACKAGE__->belongs_to( "author",  "MojoMojo::Schema::Result::Person",  { id   
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Entry
+MojoMojo::Schema::Result::Entry - store journal entries
 
 =head1 AUTHOR
 

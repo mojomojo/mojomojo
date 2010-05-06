@@ -121,7 +121,7 @@ __PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Person
+MojoMojo::Schema::Result::Person - store user info
 
 =head1 METHODS
 

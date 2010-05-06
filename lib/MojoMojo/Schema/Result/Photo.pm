@@ -68,7 +68,7 @@ __PACKAGE__->has_one( "attachment", "MojoMojo::Schema::Result::Attachment" );
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Photo
+MojoMojo::Schema::Result::Photo - store photos
 
 =head1 METHODS
 

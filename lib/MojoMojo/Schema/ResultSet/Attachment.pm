@@ -12,7 +12,7 @@ use Imager;
 
 =head1 NAME
 
-MojoMojo::Schema::ResultSet::Attachment
+MojoMojo::Schema::ResultSet::Attachment - resulset methods on attachments
 
 =head1 METHODS
 

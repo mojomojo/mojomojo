@@ -47,7 +47,7 @@ __PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",   
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Page
+MojoMojo::Schema::Result::Page - store pages
 
 =head1 METHODS
 

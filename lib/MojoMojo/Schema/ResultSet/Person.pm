@@ -6,7 +6,7 @@ use parent qw/MojoMojo::Schema::Base::ResultSet/;
 
 =head1 NAME
 
-MojoMojo::Schema::ResultSet::Person
+MojoMojo::Schema::ResultSet::Person - resultset methods on users
 
 =head1 METHODS
 

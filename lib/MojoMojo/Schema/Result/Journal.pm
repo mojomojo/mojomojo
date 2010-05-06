@@ -23,7 +23,7 @@ __PACKAGE__->belongs_to( "pageid", "MojoMojo::Schema::Result::Page", { id => "pa
 
 =head1 NAME
 
-MojoMojo::Schema::Result::Journal
+MojoMojo::Schema::Result::Journal - store journals
 
 =head1 AUTHOR
 

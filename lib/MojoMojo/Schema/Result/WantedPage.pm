@@ -21,7 +21,7 @@ __PACKAGE__->belongs_to( "from_page", "MojoMojo::Schema::Result::Page", { id => 
 
 =head1 NAME
 
-MojoMojo::Schema::Result::WantedPage
+MojoMojo::Schema::Result::WantedPage - store pages that are wanted
 
 =head1 AUTHOR
 

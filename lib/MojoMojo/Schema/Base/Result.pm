@@ -6,7 +6,7 @@ use parent qw/DBIx::Class/;
 
 =head1 NAME
 
-MojoMojo::Schema::Base::Result
+MojoMojo::Schema::Base::Result - base class for Result classes
 
 =head1 DESCRIPTION
 

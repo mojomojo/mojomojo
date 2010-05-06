@@ -23,7 +23,7 @@ __PACKAGE__->belongs_to( "role", "MojoMojo::Schema::Result::Role", { id => "role
 
 =head1 NAME
 
-MojoMojo::Schema::Result::PathPermissions
+MojoMojo::Schema::Result::PathPermissions - store path permissions
 
 =head1 AUTHOR
 

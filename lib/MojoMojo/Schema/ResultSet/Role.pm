@@ -4,6 +4,12 @@ use strict;
 use warnings;
 use parent qw/MojoMojo::Schema::Base::ResultSet/;
 
+=head1 NAME
+
+MojoMojo::Schema::ResultSet::Role - resultset methods on roles
+
+=head1 METHODS
+
 =head2 active_roles
 
 Filter inactive roles.

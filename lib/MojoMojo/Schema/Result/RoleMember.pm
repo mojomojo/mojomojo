@@ -18,7 +18,7 @@ __PACKAGE__->belongs_to( "person", "MojoMojo::Schema::Result::Person", { id => "
 
 =head1 NAME
 
-MojoMojo::Schema::Result::RoleMember
+MojoMojo::Schema::Result::RoleMember - store members of roles
 
 =head1 AUTHOR
 

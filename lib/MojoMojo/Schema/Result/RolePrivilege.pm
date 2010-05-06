@@ -18,7 +18,7 @@ __PACKAGE__->belongs_to( "role", "MojoMojo::Schema::Result::Role", { id => "role
 
 =head1 NAME
 
-MojoMojo::Schema::Result::RolePrivilege
+MojoMojo::Schema::Result::RolePrivilege - store role privileges
 
 =head1 AUTHOR
 
