@@ -1,4 +1,4 @@
-=head NAME
+=head1 NAME
 
 MojoMojo::Installation - Installation instructions for MojoMojo
 
