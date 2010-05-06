@@ -53,6 +53,7 @@ requires(
     'HTML::FormFu::Model::DBIC'                    => 0,
     'HTML::Strip'                                  => '1.04',
     'HTML::TagCloud'                               => 0,
+    'HTML::Toc'                                    => 0,
     'Image::ExifTool'                              => 0,
     'Imager'                                       => 0,
     'Image::Math::Constrain'                       => 0,
@@ -66,7 +67,10 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
-    'Text::MultiMarkdown'                          => '1.000032',
+#-mxh Dropped Text::MultiMarkdown version requirement to latest debian package available
+# This will cause File::Slurp test to fail on Windows, but moves us forward
+# towards a Debian distribution of MojoMojo. Tradeoff deemed worthy.    
+    'Text::MultiMarkdown'                          => '1.000030',
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
@@ -77,7 +81,8 @@ requires(
 
 feature 'Create new database', 'SQL::Translator' => '0.09006';
 feature 'FastCGI support', 'FCGI::ProcManager' => 0;
-feature 'Table of Contents generator','HTML::Toc' => '1.10';
+#-mxh Made HTML::Toc a required dependency
+#feature 'Table of Contents generator','HTML::Toc' => '1.10';
 feature 'reCAPTCHA for anonymous edits', 'HTML::FormFu::Element::reCAPTCHA' => 0;
 feature 'Syntax highlighter', 'Syntax::Highlight::Engine::Kate' => 0;
 
@@ -91,13 +96,15 @@ feature 'Transclusion support',
     'LWP::Simple' => 0,
     'URI::Fetch'  => 0;
 feature 'Amazon boxes', 'Net::Amazon' => 0;
-feature 'Emoticons', 'Text::Emoticon::MSN' => 0;
+feature ('Emoticons' => ['Text::Emoticon::MSN' => 0, -default => 0]);
 
 
 test_requires 'Test::More' => '0.88';
 test_requires 'Test::Differences';
+
 #-mxh make the tabs tests optional
 #test_requires 'Test::NoTabs';
+
 # all tests require a database to be deployed, even though SQLT is not necessary for producton if a DB exists
 test_requires 'SQL::Translator' => '0.09006';
 test_requires 'Email::Sender::Simple' => '0.100110';
