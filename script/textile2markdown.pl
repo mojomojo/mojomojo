@@ -1,6 +1,4 @@
-#!/usr/bin/perl -w
-# Attempt to automatically convert Textile to Markdown through HTML.
-# Author: Dan Dascalescu (dandv), http://dandascalescu.com
+#!/usr/bin/env perl
 use strict;
 
 use HTML::WikiConverter;
@@ -34,3 +32,13 @@ for my $filename (@ARGV) {
     open my $file_out, '>', "$filename_out.markdown" or die $!;
     print $file_out $markdown_text or die $!;
 }
+
+=head1 NAME
+
+textile2markdown.pl - rough draft of converting textile to markdown
+
+=head1 AUTHOR
+
+Dan Dascalescu (dandv), http://dandascalescu.com
+
+=cut

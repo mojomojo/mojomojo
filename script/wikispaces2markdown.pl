@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
-# Attempt to automatically convert Wikispaces.com markup to Markdown
-# Very crude attempt (regexp search/replace)
-# Author: Dan Dascalescu (dandv), http://dandascalescu.com
+
 use strict;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
@@ -22,3 +20,13 @@ for my $filename (@ARGV) {
     open my $file_out, '>', "$filename_out.markdown" or die $!;
     print $file_out Text::Wikispaces2Markdown::convert($text) or die $!;
 }
+
+=head1 NAME
+
+wikispaces2markdown.pl - rough draft of converting wikispaces to markdown
+
+=head1 AUTHOR
+
+Dan Dascalescu (dandv), http://dandascalescu.com
+
+=cut

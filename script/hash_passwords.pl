@@ -17,6 +17,19 @@
 #      CREATED:  06/27/2008 22:59:39 CEST
 #     REVISION:  ---
 #===============================================================================
+=head1 NAME
+
+hash_passwords.pl - hash plain text passwords
+
+=head1 AUTHOR
+
+Marcus Ramberg (MRAMBERG), <mramberg@cpan.org>
+
+=head1 COPYRIGHT
+
+2007 Marcus Ramberg (MRAMBERG), <mramberg@cpan.org>
+
+=cut
 
 use strict;
 use warnings;

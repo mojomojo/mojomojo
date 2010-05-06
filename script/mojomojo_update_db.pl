@@ -1,6 +1,18 @@
-#!/usr/bin/perl 
+#!/usr/bin/env perl
+ 
+=head1 NAME
 
-# DBIx Versionning see on catapulse.org http://www.catapulse.org/articles/view/75
+mojomojo_update_db.pl - DBIC versioning
+
+=head1 AUTHOR
+
+dab
+
+=head1 DESCRIPTION
+
+DBIx Versionning see on catapulse.org http://www.catapulse.org/articles/view/75
+
+=cut
 
 use strict;
 use warnings;

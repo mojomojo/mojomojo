@@ -1,5 +1,17 @@
 #!/usr/bin/env perl
-# Copyright (c) 2007 Jonathan Rockway <jrockway@cpan.org>
+=head1 NAME
+
+mojomojo_spawn_db.pl - hash plain text passwords
+
+=head1 AUTHOR
+
+Jonathan Rockway <jrockway@cpan.org>
+
+=head1 COPYRIGHT
+
+2007 Jonathan Rockway <jrockway@cpan.org>
+
+=cut
 
 BEGIN { $ENV{CATALYST_DEBUG} = 0 }
 use strict;
