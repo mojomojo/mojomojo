@@ -28,10 +28,13 @@ Run a Catalyst application as a cgi script.
 
 Catalyst Contributors, see Catalyst.pm
 
+=head1 LICENSE
+
+You may distribute this code under the same terms as Perl itself.
+
 =head1 COPYRIGHT
 
+Please refer to Catalyst.pm for copyright details.
 
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut

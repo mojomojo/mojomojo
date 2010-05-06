@@ -25,10 +25,6 @@ hash_passwords.pl - hash plain text passwords
 
 Marcus Ramberg (MRAMBERG), <mramberg@cpan.org>
 
-=head1 COPYRIGHT
-
-2007 Marcus Ramberg (MRAMBERG), <mramberg@cpan.org>
-
 =cut
 
 use strict;

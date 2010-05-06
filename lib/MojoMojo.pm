@@ -729,7 +729,8 @@ https://www.ohloh.net/p/mojomojo/contributors
 
 =head1 COPYRIGHT
 
-Copyright 2005-2009, Marcus Ramberg
+Unless explicitly stated otherwise, all modules and scripts in this distribution are:
+Copyright 2005-2010, Marcus Ramberg
 
 =head1 LICENSE
 

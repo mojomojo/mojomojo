@@ -152,10 +152,4 @@ include also browser name and version.
 
 MojoMojo
 
-=head1 COPYRIGHT
-
-MojoMojo team,
-
-=cut
-
 PODUSAGE
