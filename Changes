@@ -1,12 +1,8 @@
-  WARNING: there are some issues with the Defang formatter, which will
-    corrupt certain kinds of markup. The simple fix is to remove
-    lib/MojoMojo/Formatter/Defang.pm, but that may open the door to
-    XSS attacks. Please see for details
-    http://n2.nabble.com/Defang-issues-td4078508.html
+0.999043 ?
 
   New Features:
   - Create a default page for new users.
-  - Replaced creepy shrunken-head image with a sane "Stop" sign (dandv)
+  - Replaced shrunken-head image with a sane "Stop" sign (dandv)
   
   Bug fixes:
   - Removed File::Slurp dependency after removing it from Text::(Multi)Markdown
@@ -14,6 +10,12 @@
   - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
   - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
   - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (Github issue #52) (linio)
+  - Fixed formatter_all_textile tests to work without Syntax plugin
+  
+  Misc:
+  - Test::Notabs is now optional
+  - HTML::Toc is now required
+  
 
 0.999042 2009-12-01 21:42:00
 
