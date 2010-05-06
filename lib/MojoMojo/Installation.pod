@@ -1,3 +1,7 @@
+=head NAME
+
+MojoMojo::Installation - Installation instructions for MojoMojo
+
 =head1 INSTALLING MOJOMOJO
 
 =head2 Step 0

@@ -1,5 +1,11 @@
 #!/usr/bin/perl
 
+=head1 NAME
+
+mojomojo_fastcgi_manage.pl - script to start/stop/restart mojomojo fastcgi instance
+
+=cut
+
 eval { use FCGI::Engine::Manager };
 if ($@) { die "You need to install FCGI::Engine to run this script\n"; }
 
@@ -13,7 +19,7 @@ $m->restart($server_name)      if $command eq 'restart';
 $m->graceful($server_name)     if $command eq 'graceful';
 print $m->status($server_name) if $command eq 'status';
 
-=head1 Usage
+=head1 USAGE
 
 NOTE: Run this script from the parent directory so path to configuration is correct.
 

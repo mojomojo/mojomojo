@@ -5,7 +5,9 @@ use parent 'Catalyst::View::TT';
 use Template::Constants qw( :debug );
 use Class::C3 ();
 
-=head1 MojoMojo::V::TT - Template Toolkit views for MojoMojo
+=head1 NAME
+
+MojoMojo::V::TT - Template Toolkit views for MojoMojo
 
 =head1 SYNOPSIS
 

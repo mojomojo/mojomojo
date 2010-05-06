@@ -1,4 +1,6 @@
-=head1 MojoMojo Preferences
+=head1 NAME
+
+MojoMojo::Prefs - info on MojoMojo configurable preferences
 
 MojoMojo has a number of preferences that can be set in "Site settings"
 (C</.admin>). If values are not set in the database, they are read from
@@ -18,7 +20,7 @@ Default: 'MojoMojo'.
 
 =head2 main_formatter
 
-Sepcify which formatter to use as the main text formatter. The two options
+Specify which formatter to use as the main text formatter. The two options
 so far ares L<Markdown|MojoMojo::Formatter::Markdown> and
 L<Textile|MojoMojo::Formatter::Textile>, with Markdown being default thanks to
 its versatility. For a comparison between the two, see

@@ -6,7 +6,7 @@ __PACKAGE__->config->{namespace} = '';
 
 =head1 NAME
 
-MojoMojo::Controller::Root
+MojoMojo::Controller::Root - Controller to run before all others
 
 =head1 ACTIONS
 

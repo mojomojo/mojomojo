@@ -11,7 +11,7 @@ __PACKAGE__->load_namespaces( default_resultset_class => '+MojoMojo::Schema::Bas
 
 =head1 NAME
 
-MojoMojo::Schema
+MojoMojo::Schema - DBIC Schema
 
 =head1 METHODS
 

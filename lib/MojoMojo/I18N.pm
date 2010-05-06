@@ -11,6 +11,10 @@ sub localize {
     return $self->maketext(@_);
 }
 
+=head1 NAME
+
+MojoMojo::I18N - support for language localization
+
 =head1 AUTHORS
 
 Marcus Ramberg <mramberg@cpan.org>

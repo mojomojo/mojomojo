@@ -19,7 +19,7 @@ __PACKAGE__->config->{index_dir} ||= MojoMojo->path_to('/index');
 
 =head1 NAME
 
-MojoMojo::Model::Search
+MojoMojo::Model::Search - support for searching pages
 
 =head1 METHODS
 

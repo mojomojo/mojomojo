@@ -4,7 +4,7 @@ our $VERSION = "0.1";
 
 =head1 NAME
 
-B<Wikispaces2Markdown>
+Text::Wikispaces2Markdown - convert wikispaces pages to markdown
 
 =head1 SYNOPSIS
 

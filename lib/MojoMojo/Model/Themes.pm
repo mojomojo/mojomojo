@@ -6,7 +6,7 @@ use parent 'Catalyst::Model';
 
 =head1 NAME
 
-MojoMojo::Model::Themes
+MojoMojo::Model::Themes - support for Thematic styles
 
 =head1 ACTIONS
 

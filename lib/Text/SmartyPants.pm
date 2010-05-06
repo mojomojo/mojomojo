@@ -639,7 +639,7 @@ __END__
 
 =head1 Name
 
-B<SmartyPants>
+Text::SmartyPants - cute little punctuation assistant
 
 =head1 Synopsis
 
