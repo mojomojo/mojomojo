@@ -8,38 +8,35 @@ use FindBin '$Bin';
 use lib "$Bin/../lib";
 use Data::Dumper;
 
-my $original_formatter;  # used to save/restore the existing formatter set up in mojomojo.db
-my $c;                   # the Catalyst object of this live server
-my $test;                # test description
-my $content;             # the markup content that is being rendered
-my $got;                 # the rendered result
-my $expected;            # the expected rendered result
-
+my $original_formatter;    # used to save/restore the existing formatter set up in mojomojo.db
+my $c;                     # the Catalyst object of this live server
+my $test;                  # test description
+my $content;               # the markup content that is being rendered
+my $got;                   # the rendered result
+my $expected;              # the expected rendered result
 
 BEGIN {
     $ENV{CATALYST_CONFIG} = 't/var/mojomojo.yml';
     use_ok('MojoMojo::Formatter::Textile')
-        and note('Comprehensive/chained test of formatters, with the main formatter set to Textile');
-    use_ok( 'Catalyst::Test', 'MojoMojo' );
+      and note('Comprehensive/chained test of formatters, with the main formatter set to Textile');
+    use_ok('Catalyst::Test', 'MojoMojo');
 }
 
 END {
-    ok( $c->pref( main_formatter => $original_formatter ),
-        'restore original formatter' );
+    ok($c->pref(main_formatter => $original_formatter), 'restore original formatter');
 }
 
-( undef, $c ) = ctx_request('/');
-#warn Dumper $c->config;
-ok( $original_formatter = $c->pref('main_formatter'),
-    'save original formatter' );
+(undef, $c) = ctx_request('/');
 
-ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Textile' ),
-    'set preferred formatter to Textile' );
+#warn Dumper $c->config;
+ok($original_formatter = $c->pref('main_formatter'), 'save original formatter');
+
+ok($c->pref(main_formatter => 'MojoMojo::Formatter::Textile'),
+    'set preferred formatter to Textile');
 
 $content = '';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $got, 'Please type something', 'empty body' );
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+is($got, 'Please type something', 'empty body');
 
 #----------------------------------------------------------------------------
 $test = 'headings';
@@ -55,8 +52,8 @@ h2. Need some assistance?
 
 Check out our [[Help]] section.
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, <<'HTML', $test);
 <h1>Welcome to MojoMojo!</h1>
 
 <p>This is your front page. Create<br />
@@ -67,7 +64,6 @@ through the edit link at the bottom.</p>
 
 <p>Check out our <a class="existingWikiWord" href="/help">Help</a> section.</p>
 HTML
-
 
 #----------------------------------------------------------------------------
 $test = 'syntax highlight, Perl';
@@ -84,7 +80,8 @@ if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
 &nbsp;&nbsp;&nbsp;&nbsp;say&nbsp;<span class="kateOperator">"</span><span class="kateString">Hola&nbsp;Cabrón</span><span class="kateOperator">"</span>;
 </pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML';
 <pre lang="Perl">
     say "Hola Cabrón";
@@ -92,10 +89,8 @@ HTML
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test = 'Test > in <pre lang="Perl"> section.';
@@ -116,7 +111,8 @@ if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
 }
 </pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML';
 <pre lang="Perl">
 if (1 > 2) {
@@ -126,9 +122,8 @@ if (1 > 2) {
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test    = 'Only a <pre> section - no attribute';
@@ -137,8 +132,8 @@ $content = <<'TEXTILE';
 Hopen, Norway
 </pre>
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $content, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $content, $test);
 
 #$TODO = 'something before a pre adds defang_lang attribute to pre';
 # This test is passing now (November 15, 2009, but requires some extra line returns.
@@ -150,7 +145,8 @@ Jeg har familie i
 Hopen, Norway
 </pre>
 TEXTILE
-$expected = <<'HTML';
+if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
+    $expected = <<'HTML';
 <p>Jeg har familie i</p>
 
 
@@ -158,8 +154,19 @@ $expected = <<'HTML';
 Hopen, Norway
 </pre>
 HTML
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+}
+else {
+    $expected = <<'HTML';
+<p>Jeg har familie i</p>
+
+
+<pre defang_lang="">
+Hopen, Norway
+</pre>
+HTML
+}
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 $test    = 'pre tag - no attribute and some text after pre';
 $content = <<'HTML';
@@ -175,9 +182,8 @@ Hopen, Norway
 
 <p>er et sted langt mot nord.</p>
 ';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test = "HTML tags inside <pre> sections should be preserved. Also test for GIGO: a stray '<'.";
@@ -192,7 +198,7 @@ if (1 < 2) {
 </pre>
 TEXTILE
 
-$expected= <<'HTML';
+$expected = <<'HTML';
 <pre>
 <span>
 if (1  2) {
@@ -202,8 +208,8 @@ if (1  2) {
 </pre>
 HTML
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test = 'Is <br /> preserved?';
@@ -216,8 +222,8 @@ $test = 'Is <br /> preserved?';
 $content = <<'TEXTILE';
 Roses are red<br />Violets are blue
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, <<'HTML', $test);
 <p>Roses are red<br />Violets are blue</p>
 HTML
 
@@ -228,8 +234,8 @@ $content = <<'TEXTILE';
 ==<code><span style="font-size: 1.5em;">alguna cosa</span></code>
 ==
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, <<'HTML', $test);
 <code><span style="font-size: 1.5em;">alguna cosa</span></code>
 HTML
 
@@ -239,8 +245,8 @@ $test    = '@word@ behavior';
 $content = <<'TEXTILE';
 @mot@
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, <<'HTML', $test);
 <p><code>mot</code></p>
 HTML
 
@@ -255,15 +261,14 @@ bq. quoted text
 
 A quote is above.
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, <<'HTML', $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, <<'HTML', $test);
 <p>Below is a blockquote:</p>
 
 <blockquote><p>quoted text</p></blockquote>
 
 <p>A quote is above.</p>
 HTML
-
 
 #----------------------------------------------------------------------------
 $test = 'Syntax highlight, Perl - handle "#" at start of line as comment, not heading';
@@ -282,7 +287,8 @@ if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
 <span class="kateComment"><i>#&nbsp;comment</i></span><span class="kateComment"><i>
 </i></span></pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML'
 <pre lang="Perl">
 # comment
@@ -290,9 +296,8 @@ HTML
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test = 'Simple html table tags. Use textile escape ==';
@@ -323,8 +328,8 @@ $expected = <<'HTML';
 HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #----------------------------------------------------------------------------
 $test = 'Maintain complete set of html table tags. Use textile escape ==';
@@ -391,9 +396,8 @@ $expected = <<'HTML';
 HTML
 
 # We expect textile to leave this table as is, EXCPEPT for the escape lines (==).
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #-------------------------------------------------------------------------------
 $test    = 'POD while Textile is the main formatter';
@@ -408,10 +412,8 @@ Some POD here
 
 {{end}}
 TEXTILE
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-like( $got, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME" );
-
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+like($got, qr'<h1><a.*NAME.*/h1>'s, "POD: there is an h1 NAME");
 
 #-------------------------------------------------------------------------------
 $test = 'Syntax highlight, SQL';
@@ -428,7 +430,8 @@ if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
 <b>select</b>&nbsp;*&nbsp;<b>from</b>&nbsp;foo
 </pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML'
 <pre lang="SQL">
 select * from foo
@@ -436,10 +439,8 @@ select * from foo
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #-------------------------------------------------------------------------------
 $test = 'Syntax highlight, XML';
@@ -460,20 +461,19 @@ some&nbsp;text&nbsp;here
 <b>&lt;/foo&gt;</b>
 </pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML';
 <pre lang="XML">
-<foo>
+<!--defang_foo-->
 some text here
-</foo>
+<!--/defang_foo-->
 </pre>
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #-------------------------------------------------------------------------------
 $test = 'Syntax highlight, HTML';
@@ -494,7 +494,8 @@ some&nbsp;text&nbsp;here
 <b>&lt;/textarea&gt;</b>
 </pre>
 HTML
-} else {
+}
+else {
     $expected = <<'HTML';
 <pre lang="HTML">
 <textarea>
@@ -504,14 +505,13 @@ some text here
 HTML
 }
 
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
-
-
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 #-------------------------------------------------------------------------------
 TODO: {
-    local $TODO = "Textile processes '<code>' tags specially; even '&lt;code&gt;' gets converted to '<code>'";
+    local $TODO =
+      "Textile processes '<code>' tags specially; even '&lt;code&gt;' gets converted to '<code>'";
 
     $test = '<code> tag in <pre lang="HTML"> run through the JSRPC renderer';
 
@@ -523,7 +523,6 @@ some text here
 </pre>
 TEXTILE
 
-
     if (MojoMojo::Formatter::SyntaxHighlight->module_loaded) {
         $expected = <<'HTML'
 <pre>
@@ -532,7 +531,8 @@ some&nbsp;text&nbsp;here
 <b>&lt;/code&gt;</b>
 </pre>
 HTML
-    } else {
+    }
+    else {
         $expected = <<'HTML'
 <pre lang="HTML">
 <code>
@@ -542,12 +542,12 @@ some text here
 HTML
     }
 
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $got, $expected, $test );
-
+    $got = get(POST '/.jsrpc/render', [ content => $content ]);
+    eq_or_diff($got, $expected, $test);
 
     #-------------------------------------------------------------------------------
-    $test = 'For comparison, "<code>" and "<tt>" strings in <pre lang="Perl"> run through the JSRPC renderer';
+    $test =
+      'For comparison, "<code>" and "<tt>" strings in <pre lang="Perl"> run through the JSRPC renderer';
 
     $content = <<TEXTILE;
 <pre lang="Perl">
@@ -563,7 +563,8 @@ TEXTILE
 <span class="kateOperator">"</span><span class="kateString">Source&nbsp;code:&nbsp;&lt;code&gt;.</span><span class="kateOperator">"</span>;
 </pre>
 HTML
-    } else {
+    }
+    else {
         $expected = <<'HTML'
 <pre lang="Perl">
 "Monotype: use <tt>.";
@@ -571,11 +572,10 @@ HTML
 </pre>
 HTML
     }
-    
-    $got = get( POST '/.jsrpc/render', [ content => $content ] );
-    eq_or_diff( $got, $expected, $test );
-}
 
+    $got = get(POST '/.jsrpc/render', [ content => $content ]);
+    eq_or_diff($got, $expected, $test);
+}
 
 #-------------------------------------------------------------------------------
 $test    = 'img src http not allowed';
@@ -584,8 +584,8 @@ $content = <<'HTML';
 HTML
 $expected = '<p><img defang_src="http://malicious.com/foto.jpg" /></p>
 ';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 $test    = 'img src https not allowed';
 $content = <<'HTML';
@@ -593,8 +593,8 @@ $content = <<'HTML';
 HTML
 $expected = '<p><img defang_src="https://malicious.com/foto.jpg" /></p>
 ';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 $test    = 'img src with bypass protocol not allowed';
 $content = <<'HTML';
@@ -602,27 +602,28 @@ $content = <<'HTML';
 HTML
 $expected = '<p><img defang_src="//malicious.com/foto.jpg" /></p>
 ';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-eq_or_diff( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+eq_or_diff($got, $expected, $test);
 
 $test    = 'remote img src allowed in .conf';
 $content = <<'HTML';
 <p><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/P_hTFilWY9w&amp;hl=en"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/P_hTFilWY9w&amp;hl=en" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
 HTML
 $expected = $content;
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+is($got, $expected, $test);
 
-$test = 'relative local img src';
-$content = '<img src="/blog/Meetup_com_thinks_that_July_28,_2009,_is_a_Wednesday.attachment/1/view" />';
+$test    = 'relative local img src';
+$content =
+  '<img src="/blog/Meetup_com_thinks_that_July_28,_2009,_is_a_Wednesday.attachment/1/view" />';
 $expected = '<p>' . $content . '</p>
 ';
-$got = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+is($got, $expected, $test);
 
-$test = 'code';
-$content = q(<code>is some code, "isn't it"</code>.);
-$expected = '<p>'. $content . '</p>
+$test     = 'code';
+$content  = q(<code>is some code, "isn't it"</code>.);
+$expected = '<p>' . $content . '</p>
 ';
-$got  = get( POST '/.jsrpc/render', [ content => $content ] );
-is( $got, $expected, $test );
+$got = get(POST '/.jsrpc/render', [ content => $content ]);
+is($got, $expected, $test);
