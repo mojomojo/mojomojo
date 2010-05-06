@@ -726,7 +726,6 @@ Jonathan Rockway C<jrockway@jrockway.us>
 A number of other contributors over the years:
 https://www.ohloh.net/p/mojomojo/contributors
 
-
 =head1 COPYRIGHT
 
 Unless explicitly stated otherwise, all modules and scripts in this distribution are:
