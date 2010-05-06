@@ -67,10 +67,7 @@ requires(
     'Template'                                     => '2.20',
     'Template::Plugin::JavaScript'                 => 0,
     'Text::Context'                                => '3.5',
-#-mxh Dropped Text::MultiMarkdown version requirement to latest debian package available
-# This will cause File::Slurp test to fail on Windows, but moves us forward
-# towards a Debian distribution of MojoMojo. Tradeoff deemed worthy.    
-    'Text::MultiMarkdown'                          => '1.000030',
+    'Text::MultiMarkdown'                          => '1.000032',
     'Text::Password::Pronounceable'                => 0,
     'Text::Textile'                                => 0,
     'URI'                                          => '1.37',
