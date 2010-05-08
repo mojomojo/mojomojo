@@ -14,6 +14,8 @@
   
   Improvements:
   - Refine POD so lintian is happy (debian build tool)
+  - Add unicode code option to DB connect string.  This allows us to remove
+    the use of UTF8Columns which is deprecated.  Hook in CHARTSET=utf8 for MySQL deploy
   
   Misc:
   - Test::Notabs is now optional
