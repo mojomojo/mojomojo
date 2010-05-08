@@ -39,7 +39,7 @@ requires(
     'Data::Page'                                   => '2.00',
     'DateTime'                                     => '0.28',
     'DateTime::Format::Mail'                       => 0,
-    'DBD::SQLite'                                  => '1.08',
+    'DBD::SQLite'                                  => '1.27',
     'DBIx::Class'                                  => '0.08',
     'DBIx::Class::DateTime::Epoch'                 => '0.04',
     'DBIx::Class::EncodedColumn'                   => 0,
