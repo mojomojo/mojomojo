@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 =head1 NAME
 
 mojomojo_spawn_db.pl - hash plain text passwords
@@ -22,7 +23,7 @@ use MojoMojo::Schema;
 use Config::JFDI;
 use Getopt::Long;
 
-my ( $dsn, $user, $pass );
+my ($dsn, $user, $pass);
 
 my $default_user = $ENV{USER} || 'unknown';
 my %opts = (
@@ -74,33 +75,45 @@ EOF
     exit;
 }
 
-my $jfdi = Config::JFDI->new(name => "MojoMojo");
+my $jfdi   = Config::JFDI->new(name => "MojoMojo");
 my $config = $jfdi->get;
 
 eval {
-    if (!$dsn) {
+    if (!$dsn)
+    {
         if (ref $config->{'Model::DBIC'}->{'connect_info'}) {
-            ($dsn, $user, $pass) =
-                @{ $config->{'Model::DBIC'}->{'connect_info'} };
-        } else {
+            $dsn  = $config->{'Model::DBIC'}->{'connect_info'}->{dsn};
+            $user = $config->{'Model::DBIC'}->{'connect_info'}->{user};
+            $pass = $config->{'Model::DBIC'}->{'connect_info'}->{password};
+
+            # Determine database type amongst: SQLite, Pg or MySQL
+            my $db_type = lc($dsn =~ m/^dbi:(\w+)/);
+            my %unicode_connection_for_db = (
+                'sqlite' => { sqlite_unicode    => 1 },
+                'pg'     => { pg_enable_utf8    => 1 },
+                'mysql'  => { mysql_enable_utf8 => 1 },
+            );
+            my $unicode_option = $unicode_connection_for_db{$db_type};
+        }
+        else {
             $dsn = $config->{'Model::DBIC'}->{'connect_info'};
         }
-    };
+    }
 };
-if($@){
-    die "Your DSN line in mojomojo.conf doesn't look like a valid DSN.".
-      "  Add one, or pass it on the command line.";
+if ($@) {
+    die "Your DSN line in mojomojo.conf doesn't look like a valid DSN."
+      . "  Add one, or pass it on the command line.";
 }
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
-my $schema = MojoMojo::Schema->connect($dsn, $user, $pass) or 
-  die "Failed to connect to database";
-  
-# Check if database is already deployed by  
+my $schema = MojoMojo::Schema->connect($dsn, $user, $pass)
+  or die "Failed to connect to database";
+
+# Check if database is already deployed by
 # examining if the table Person exists and has a record.
-eval {  $schema->resultset('MojoMojo::Schema::Result::Person')->count };
-if (!$@ ) {
+eval { $schema->resultset('MojoMojo::Schema::Result::Person')->count };
+if (!$@) {
     die "You have already deployed your database\n";
 }
 
