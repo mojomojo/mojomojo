@@ -117,7 +117,6 @@ __PACKAGE__->has_many(
     "MojoMojo::Schema::Result::Content",
     { "foreign.creator" => "self.id" }
 );
-__PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 

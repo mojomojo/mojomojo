@@ -57,7 +57,6 @@ __PACKAGE__->belongs_to(
     "MojoMojo::Schema::Result::Photo",
     { id => "picture" }
 );
-__PACKAGE__->utf8_columns(qw/body/);
 
 =head1 NAME
 

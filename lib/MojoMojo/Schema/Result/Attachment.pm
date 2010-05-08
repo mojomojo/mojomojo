@@ -42,7 +42,6 @@ __PACKAGE__->belongs_to(
     { id => "page" }
 );
 __PACKAGE__->might_have( "photo", "MojoMojo::Schema::Result::Photo" );
-__PACKAGE__->utf8_columns(qw/name/);
 
 =head1 NAME
 

@@ -12,8 +12,6 @@ __PACKAGE__->add_columns(
     "prefvalue", { data_type => "VARCHAR", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("prefkey");
-__PACKAGE__->utf8_columns(qw/prefvalue/);
-
 
 =head1 NAME
 

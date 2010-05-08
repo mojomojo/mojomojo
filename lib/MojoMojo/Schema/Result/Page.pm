@@ -29,7 +29,6 @@ __PACKAGE__->add_columns(
     { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->utf8_columns("name", "name_orig");
 __PACKAGE__->add_unique_constraint( "page_unique_child_index", [ "parent", "name" ] );
 __PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { "foreign.from_page" => "self.id" } );
 __PACKAGE__->belongs_to( "parent", "MojoMojo::Schema::Result::Page", { id => "parent" } );
