@@ -5,7 +5,7 @@ use warnings;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "UTF8Columns", "Core" );
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("preference");
 __PACKAGE__->add_columns(
     "prefkey",   { data_type => "VARCHAR", is_nullable => 0, size => 100 },

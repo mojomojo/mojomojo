@@ -8,7 +8,7 @@ use parent qw/MojoMojo::Schema::Base::Result/;
 use Number::Format qw( format_bytes );
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp Core/);
 __PACKAGE__->table("attachment");
 __PACKAGE__->add_columns(
     "id",

@@ -6,7 +6,7 @@ use Carp qw/croak/;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "UTF8Columns", "Core");
+__PACKAGE__->load_components( "Core" );
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
     "id",

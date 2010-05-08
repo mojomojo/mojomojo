@@ -34,7 +34,7 @@ use MojoMojo::WordDiff;
 use HTML::Entities qw/encode_entities_numeric/;
 
 __PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp UTF8Columns Core/);
+    qw/DateTime::Epoch TimeStamp Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",
