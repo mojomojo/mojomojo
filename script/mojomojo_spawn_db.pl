@@ -23,7 +23,7 @@ use MojoMojo::Schema;
 use Config::JFDI;
 use Getopt::Long;
 
-my ($dsn, $user, $pass);
+my ($dsn, $user, $password, $unicode_option);
 
 my $default_user = $ENV{USER} || 'unknown';
 my %opts = (
@@ -40,7 +40,7 @@ GetOptions(
     'help'             => \$help,
     'dsn:s'            => \$dsn,
     'db-user:s'        => \$user,
-    'db-password:s'    => \$pass,
+    'db-password:s'    => \$password,
     'wiki:s'           => \$opts{wiki_name},
     'admin-username:s' => \$opts{admin_username},
     'admin-password:s' => \$opts{admin_password},
@@ -84,7 +84,7 @@ eval {
         if (ref $config->{'Model::DBIC'}->{'connect_info'}) {
             $dsn  = $config->{'Model::DBIC'}->{'connect_info'}->{dsn};
             $user = $config->{'Model::DBIC'}->{'connect_info'}->{user};
-            $pass = $config->{'Model::DBIC'}->{'connect_info'}->{password};
+            $password = $config->{'Model::DBIC'}->{'connect_info'}->{password};
 
             # Determine database type amongst: SQLite, Pg or MySQL
             my $db_type = lc($dsn =~ m/^dbi:(\w+)/);
@@ -93,7 +93,7 @@ eval {
                 'pg'     => { pg_enable_utf8    => 1 },
                 'mysql'  => { mysql_enable_utf8 => 1 },
             );
-            my $unicode_option = $unicode_connection_for_db{$db_type};
+            $unicode_option = $unicode_connection_for_db{$db_type};
         }
         else {
             $dsn = $config->{'Model::DBIC'}->{'connect_info'};
@@ -107,7 +107,7 @@ if ($@) {
 die "No valid Data Source Name (DSN).\n" if !$dsn;
 $dsn =~ s/__HOME__/$FindBin::Bin\/\.\./g;
 
-my $schema = MojoMojo::Schema->connect($dsn, $user, $pass)
+my $schema = MojoMojo::Schema->connect($dsn, $user, $password, $unicode_option)
   or die "Failed to connect to database";
 
 # Check if database is already deployed by
