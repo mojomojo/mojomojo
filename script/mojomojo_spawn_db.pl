@@ -23,11 +23,14 @@ use MojoMojo::Schema;
 use Config::JFDI;
 use Getopt::Long;
 
+my $jfdi   = Config::JFDI->new(name => "MojoMojo");
+my $config = $jfdi->get;
+
 my ($dsn, $user, $password, $unicode_option);
 
 my $default_user = $ENV{USER} || 'unknown';
 my %opts = (
-    wiki_name       => 'MojoMojo',
+    wiki_name       => $config->{name},
     admin_username  => 'admin',
     admin_password  => 'admin',
     admin_fullname  => $default_user,
@@ -63,7 +66,7 @@ Accepts the following options:
   --dsn              Default taken from mojomojo.conf
   --db-user          Default taken from mojomojo.conf
   --db-password      Default taken from mojomojo.conf
-  --wiki             Wiki name, default is MojoMojo
+  --wiki             Wiki name, default taken from mojomojo.conf
   --admin-username   Admin username, default is admin
   --admin-password   Admin password, default is admin
   --admin-fullname   Admin name, default is $default_user
@@ -75,8 +78,6 @@ EOF
     exit;
 }
 
-my $jfdi   = Config::JFDI->new(name => "MojoMojo");
-my $config = $jfdi->get;
 
 eval {
     if (!$dsn)
