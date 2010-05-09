@@ -5,6 +5,7 @@
   - Replaced shrunken-head image with a sane "Stop" sign (dandv)
   
   Bug fixes:
+  - Fix WantedLink to use normalize_page to match links
   - Removed File::Slurp dependency after removing it from Text::(Multi)Markdown
     because it fails installation under Strawberry Perl  (dandv)
   - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 

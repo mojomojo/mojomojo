@@ -339,6 +339,9 @@ sub store_links {
             { from_page => $self->page->id, to_page => $_->id } );
     }
     for (@$wanted_pages) {
+		$_->{path} = join('/', map {  
+			($self->result_source->schema->resultset('Page')->normalize_name($_))[1];
+		} split(m|/|, $_->{path}));
         my $wanted_page =
           $self->result_source->schema()->resultset('WantedPage')
           ->find_or_create( { from_page => $page->id, to_path => $_->{path} } );
