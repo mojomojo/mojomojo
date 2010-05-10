@@ -33,8 +33,7 @@ use Algorithm::Merge qw/merge/;
 use MojoMojo::WordDiff;
 use HTML::Entities qw/encode_entities_numeric/;
 
-__PACKAGE__->load_components(
-    qw/DateTime::Epoch TimeStamp Core/);
+__PACKAGE__->load_components(qw/DateTime::Epoch TimeStamp Core/);
 __PACKAGE__->table("content");
 __PACKAGE__->add_columns(
     "page",
@@ -83,7 +82,7 @@ __PACKAGE__->add_columns(
     { data_type => "TEXT", is_nullable => 1, size => undef },
 
 );
-__PACKAGE__->set_primary_key( "version", "page" );
+__PACKAGE__->set_primary_key("version", "page");
 __PACKAGE__->has_many(
     "pages",
     "MojoMojo::Schema::Result::Page",
@@ -108,17 +107,8 @@ __PACKAGE__->has_many(
         "foreign.page"                 => "self.page",
     },
 );
-__PACKAGE__->belongs_to(
-    "creator",
-    "MojoMojo::Schema::Result::Person",
-    { id => "creator" }
-);
-__PACKAGE__->belongs_to(
-    "page",
-    "MojoMojo::Schema::Result::Page",
-    { id => "page" }
-);
-
+__PACKAGE__->belongs_to("creator", "MojoMojo::Schema::Result::Person", { id => "creator" });
+__PACKAGE__->belongs_to("page",    "MojoMojo::Schema::Result::Page",   { id => "page" });
 
 =head1 COLUMNS
 
@@ -142,7 +132,7 @@ the class C<fade>.
 =cut
 
 sub highlight {
-    my ( $self, $c ) = @_;
+    my ($self, $c) = @_;
     my $this_content = $self->formatted($c);
 
     my $previous_content = (
@@ -151,9 +141,9 @@ sub highlight {
         : $this_content
     );
 
-    my $this = [ split /\n/, $this_content ];
-    my $prev = [ split /\n/, $previous_content ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my $this = [ split /\n/,                 $this_content ];
+    my $prev = [ split /\n/,                 $previous_content ];
+    my @diff = Algorithm::Diff::sdiff($prev, $this);
     my $diff;
     my $hi           = 0;
     my $pre_tag_open = 0;
@@ -161,14 +151,14 @@ sub highlight {
         $pre_tag_open = 1 if $$line[2] =~ qr{<pre>} and $$line[2] !~ qr{</pre>};
         my $tag = $pre_tag_open ? 'span' : 'div';
         $hi++;
-        if ( $$line[0] eq "+" ) {
+        if ($$line[0] eq "+") {
             $diff .= qq(<$tag id="hi$hi" class="fade">) . $$line[2] . "</$tag>";
         }
-        elsif ( $$line[0] eq "c" ) {
+        elsif ($$line[0] eq "c") {
             $diff .= qq(<$tag id="hi$hi" class="fade">) . $$line[2] . "</$tag>";
         }
-        elsif ( $$line[0] eq "-" ) { }
-        else                       { $diff .= $$line[1] }
+        elsif ($$line[0] eq "-") { }
+        else { $diff .= $$line[1] }
         $diff .= "\n";
         $pre_tag_open = 0 if $$line[2] =~ qr{</pre>} and $$line[2] !~ qr{<pre>};
     }
@@ -184,31 +174,27 @@ for deleted lines. The C<< <ins> >> and C<< <del> >> HTML tags are also used.
 =cut
 
 sub formatted_diff {
-    my ( $self, $c, $to, $sparse ) = @_;
+    my ($self, $c, $to, $sparse) = @_;
     my $this = [
         $sparse
-        ? split /\n/,
-        ( $self->encoded_body )
-        : split /\n\n/,
-        ( $self->formatted($c) )
+        ? split /\n/, ($self->encoded_body)
+        : split /\n\n/, ($self->formatted($c))
     ];
     my $prev = [
         $sparse
-        ? split /\n/,
-        ( $to->encoded_body )
-        : split /\n\n/,
-        ( $to->formatted($c) )
+        ? split /\n/, ($to->encoded_body)
+        : split /\n\n/, ($to->formatted($c))
     ];
-    my @diff = Algorithm::Diff::sdiff( $prev, $this );
+    my @diff = Algorithm::Diff::sdiff($prev, $this);
     my $diff;
     for my $line (@diff) {
-        if ( $$line[0] eq "+" ) {
+        if ($$line[0] eq "+") {
             $diff .= qq(<div class="diffins">) . $$line[2] . "</div>";
         }
-        elsif ( $$line[0] eq "-" ) {
+        elsif ($$line[0] eq "-") {
             $diff .= qq(<div class="diffdel">) . $$line[1] . "</div>";
         }
-        elsif ( $$line[0] eq "c" ) {
+        elsif ($$line[0] eq "c") {
 
             $diff .= (
                 $sparse
@@ -221,8 +207,8 @@ sub formatted_diff {
                 : word_diff($$line[1], $$line[2])
             );
         }
-        elsif ( $$line[0] eq "u" ) {
-            $diff .= ( $sparse ? '<div> ' . $$line[1] . '<div>' : $$line[1] );
+        elsif ($$line[0] eq "u") {
+            $diff .= ($sparse ? '<div> ' . $$line[1] . '<div>' : $$line[1]);
         }
         else { $diff .= "Unknown operator " . $$line[0] }
     }
@@ -236,14 +222,13 @@ Return the content after being run through MojoMojo::Formatter::*.
 =cut
 
 sub formatted {
-    my ( $self, $c ) = @_;
-    my $result =
-      $self->result_source->resultset->format_content( $c, $self->body, $self );
+    my ($self, $c) = @_;
+    my $result = $self->result_source->resultset->format_content($c, $self->body, $self);
     return $result;
 }
 
 sub merge_content {
-    my ( $self, $saved, $content, $h1, $h2, $h3 ) = @_;
+    my ($self, $saved, $content, $h1, $h2, $h3) = @_;
 
     my $source = [ split /\n/, $self->encoded_body ];
     my $a      = [ split /\n/, $saved->encoded_body ];
@@ -254,15 +239,15 @@ sub merge_content {
             CONFLICT => sub ($$) {
                 (
                     "<!-- $h1  -->\n",
-                    ( @{ $_[0] } ),
+                    (@{ $_[0] }),
                     "<!-- $h2  -->\n",
-                    ( @{ $_[1] } ),
+                    (@{ $_[1] }),
                     "<!-- $h3 -->\n",
                 );
               }
         }
     );
-    return join( '', @merged );
+    return join('', @merged);
 }
 
 =head2 max_version
@@ -308,7 +293,7 @@ Return the publishing date of this version in a format suitable for RSS 2.0.
 
 sub pub_date {
     my $self = shift;
-    return DateTime::Format::Mail->format_datetime( $self->created );
+    return DateTime::Format::Mail->format_datetime($self->created);
 }
 
 =head2 store_links
@@ -321,34 +306,32 @@ version.
 sub store_links {
     my ($self) = @_;
 
-    return unless ( $self->status eq 'released' );
+    return unless ($self->status eq 'released');
     my $content = $self->body;
     my $page    = $self->page;
     $page->result_source->resultset->set_paths($page);
     $page->links_from->delete();
     $page->wantedpages->delete();
     require MojoMojo::Formatter::Wiki;
-    my ( $linked_pages, $wanted_pages ) =
-      MojoMojo::Formatter::Wiki->find_links( \$content, $page );
-    return unless ( @$linked_pages || @$wanted_pages );
+    my ($linked_pages, $wanted_pages) = MojoMojo::Formatter::Wiki->find_links(\$content, $page);
+    return unless (@$linked_pages || @$wanted_pages);
 
     for (@$linked_pages) {
         my $link =
           $self->result_source->schema->resultset('Link')
-          ->find_or_create(
-            { from_page => $self->page->id, to_page => $_->id } );
+          ->find_or_create({ from_page => $self->page->id, to_page => $_->id });
     }
     for (@$wanted_pages) {
-		$_->{path} = join('/', map {  
-			($self->result_source->schema->resultset('Page')->normalize_name($_))[1];
-		} split(m|/|, $_->{path}));
+        $_->{path} = join('/',
+            map { ($self->result_source->schema->resultset('Page')->normalize_name($_))[1]; }
+              split(m|/|, $_->{path}));
         my $wanted_page =
           $self->result_source->schema()->resultset('WantedPage')
-          ->find_or_create( { from_page => $page->id, to_path => $_->{path} } );
+          ->find_or_create({ from_page => $page->id, to_path => $_->{path} });
     }
 }
 
-sub encoded_body { return encode_entities_numeric( shift->body ); }
+sub encoded_body { return encode_entities_numeric(shift->body); }
 
 =head1 AUTHOR
 
