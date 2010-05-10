@@ -26,33 +26,39 @@ to get all the required modules installed.
 C<mojomojo.conf> is the main configuration file and is in L<Config::General> format.
 
 First make sure your config file has a valid DSN for your database (You can use
-SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is the
-C<connect_info> array in the C<Model::DBIC> block.
+SQLite, MySQL or PostgreSQL - SQLite by default). The setting you change is in the
+C<connect_info> hash in the C<Model::DBIC> block.
 
 For instance, for MySQL:
 
-    connect_info dbi:mysql:database=mojo_database;host=localhost
-    connect_info mojo_user
-    connect_info mojo_password
+    dsn         dbi:mysql:database=mojomojo;host=localhost
+    user        db_user
+    password    db_password
 
 or for SQLite:
 
-    connect_info dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
-    connect_info db_user
-    connect_info db_password
+    dsn         dbi:SQLite:__HOME__/db/sqlite/mojomojo.db
+    user        db_user
+    passwrd     db_password
 
 or for PostgreSQL:
 
-    connect_info   dbi:Pg:dbname=mojomojo;host=localhost;port=5432
-    connect_info   mojo_user
-    connect_info   mojo_password
+    dsn         dbi:Pg:dbname=mojomojo;host=localhost;port=5432
+    user        db_user
+    password    db_password
 
-Once the DSN is setup, create the table structure by running the following script:
+For MySQL and PostgreSQL you want to create the database first (SQLite does this automatically)
+
+    create database mojomojo;
+    
+Once the DSN is setup, we "deploy" the schema and some initial data to the mojomojo database
+by running the following script:
 
     ./script/mojomojo_spawn_db.pl
 
 This script has sane defaults for a test install, but you can override
-these. Run it with --help to see usage information.
+these. Run it with --help to see usage information.  
+
 
 =head2 Step 3 - launch
 
