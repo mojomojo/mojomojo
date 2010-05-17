@@ -37,7 +37,7 @@ ol,ul {
 caption,th {
     text-align: left;
 }
-q:before,q: after {
+q:before,q:after {
     content: '';
 }
 abbr,acronym {
