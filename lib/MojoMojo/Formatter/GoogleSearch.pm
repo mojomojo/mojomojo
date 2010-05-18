@@ -59,8 +59,6 @@ Calls the formatter. Takes a ref to the content as well as the context object.
 sub format_content {
     my ( $class, $content, $c ) = @_;
 
-    return unless $class->module_loaded;
-
     my @lines = split /\n/, $$content;
     $$content = '';
 
