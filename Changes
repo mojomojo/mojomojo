@@ -3,6 +3,10 @@
 
   Bug fixes: 
   - Minor CSS fix (tcaine)
+  
+  Improvements:
+  - All Methods/subs now documented
+  - POD Coverage test on by default
 
 1.00 2010-05-09 00:04:20
 
