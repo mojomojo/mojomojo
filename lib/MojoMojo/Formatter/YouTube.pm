@@ -5,6 +5,13 @@ use parent 'MojoMojo::Formatter';
 
 eval {require URI::Fetch};
 my $dependencies_installed = !$@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $dependencies_installed }
 
 our $VERSION = '0.01';
@@ -51,6 +58,11 @@ sub format_content {
 
 }
 
+=head2 process
+
+Do the meat of inserting a youtube movie into a wiki page.
+
+=cut
 
 sub process {
     my ( $class, $c, $line, $re, $lang) = @_;

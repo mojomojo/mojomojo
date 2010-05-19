@@ -398,6 +398,13 @@ sub open_gap {
 }
 
 # XXX: Update index_page (Model::Search)
+
+=head2 create_page
+
+Create a new page in the wiki.
+
+=cut
+
 sub create_page {
   my ($self,$url, $body, $person) = @_;
 

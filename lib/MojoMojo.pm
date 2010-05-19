@@ -98,6 +98,12 @@ if ($@ ) {
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
+=head2 prepare
+
+Accomdate a forcing of SSL if needed in a reverse proxing setup
+
+=cut
+
 sub prepare {
     my $self = shift->next::method(@_);
     if ( $self->config->{force_ssl} ) {
@@ -142,6 +148,10 @@ To find out more about how you can use MojoMojo, please visit
 http://mojomojo.org or read the installation instructions in
 L<MojoMojo::Installation> to try it out yourself.
 
+
+=head2 ajax
+
+ajax request header
 
 =cut
 
@@ -371,6 +381,12 @@ sub uri_for {
     return $res;
 }
 
+=head2 uri_for_static
+
+static has been remapped to .static
+
+=cut
+
 sub uri_for_static {
     my ( $self, $asset ) = @_;
     return ( $self->config->{static_path} || '/.static/' ) . $asset;
@@ -414,35 +430,39 @@ sub _expand_path_elements {
     return @paths_to_check;
 }
 
-#  Permissions are checked prior to most actions, including view if that is
-#  turned on in the configuration. The permission system works as follows.
-#  1. There is a base set of rules which may be defined in the application
-#     config, these are:
-#          $c->config->{permissions}{view_allowed} = 1; # or 0
-#     similar entries exist for delete, edit, create and attachment.
-#     if these config variables are not defined, default is to allow
-#     anyone to do anything.
-#
-#   2. Global rules that apply to everyone may be specified by creating a
-#      record with a role-id of 0.
-#
-#   3. Rules are defined using a combination of path, and role and may be
-#      applied to subpages or not.
-#
-#   4. All rules matching a given user's roles and the current path are used to
-#      determine the final yes/no on each permission. Rules are evaluated from
-#      least-specific path to most specific. This means that when checking
-#      permissions on /foo/bar/baz, permission rules set for /foo will be
-#      overridden by rules set on /foo/bar when editing /foo/bar/baz. When two
-#      rules (from different roles) are found for the same path prefix, explicit
-#      allows override denys. Null entries for a given permission are always
-#      ignored and do not effect the permissions defined at earlier level. This
-#      allows you to change certain permissions (such as create) only while not
-#      affecting previously determined permissions for the other actions. Finally -
-#      apply_to_subpages yes/no is exclusive. Meaning that a rule for /foo with
-#      apply_to_subpages set to yes will apply to /foo/bar but not to /foo alone.
-#      The endpoint in the path is always checked for a rule explicitly for that
-#      page - meaning apply_to_subpages = no.
+=head2 get_permissions_data
+
+  Permissions are checked prior to most actions, including view if that is
+  turned on in the configuration. The permission system works as follows.
+  1. There is a base set of rules which may be defined in the application
+     config, these are:
+          $c->config->{permissions}{view_allowed} = 1; # or 0
+     similar entries exist for delete, edit, create and attachment.
+     if these config variables are not defined, default is to allow
+     anyone to do anything.
+
+   2. Global rules that apply to everyone may be specified by creating a
+      record with a role-id of 0.
+
+   3. Rules are defined using a combination of path, and role and may be
+      applied to subpages or not.
+
+   4. All rules matching a given user's roles and the current path are used to
+      determine the final yes/no on each permission. Rules are evaluated from
+      least-specific path to most specific. This means that when checking
+      permissions on /foo/bar/baz, permission rules set for /foo will be
+      overridden by rules set on /foo/bar when editing /foo/bar/baz. When two
+      rules (from different roles) are found for the same path prefix, explicit
+      allows override denys. Null entries for a given permission are always
+      ignored and do not effect the permissions defined at earlier level. This
+      allows you to change certain permissions (such as create) only while not
+      affecting previously determined permissions for the other actions. Finally -
+      apply_to_subpages yes/no is exclusive. Meaning that a rule for /foo with
+      apply_to_subpages set to yes will apply to /foo/bar but not to /foo alone.
+      The endpoint in the path is always checked for a rule explicitly for that
+      page - meaning apply_to_subpages = no.
+      
+=cut
 
 sub get_permissions_data {
     my ( $c, $current_path, $paths_to_check, $role_ids ) = @_;
@@ -536,6 +556,12 @@ sub get_permissions_data {
     return $permdata;
 }
 
+=head2 user_role_ids
+
+Get the list of role ids for a user
+
+=cut
+
 sub user_role_ids {
     my ( $c, $user ) = @_;
 
@@ -548,6 +574,12 @@ sub user_role_ids {
 
     return @role_ids;
 }
+
+=head2 check_permissions
+
+Check user permissions for a path
+
+=cut
 
 sub check_permissions {
     my ( $c, $path, $user ) = @_;
@@ -656,6 +688,12 @@ sub check_permissions {
 
     return \%perms;
 }
+
+=head2 check_view_permission
+
+Check if a user can view a path
+
+=cut
 
 sub check_view_permission {
     my $c = shift;

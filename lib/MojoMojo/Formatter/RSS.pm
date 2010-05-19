@@ -5,6 +5,13 @@ use parent 'MojoMojo::Formatter';
 
 eval {require LWP::Simple; require URI::Fetch; require XML::Feed};
 my $dependencies_installed = !$@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $dependencies_installed }
 
 our $VERSION = '0.01';

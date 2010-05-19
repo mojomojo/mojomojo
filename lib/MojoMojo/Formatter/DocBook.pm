@@ -12,6 +12,12 @@ use MojoMojo::Formatter::DocBook::Colorize;
 my $xsltfile =
   "/usr/share/sgml/docbook/stylesheet/xsl/nwalsh/xhtml/docbook.xsl";
 
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded
 {
     return 0 unless -f $xsltfile;

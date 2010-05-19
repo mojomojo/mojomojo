@@ -1367,6 +1367,12 @@ sub add_to_output {
     $Self->{AppendOutput} = shift;
 }
 
+=item defang_and_add_to_output
+
+defang and add result to output
+
+=cut
+
 sub defang_and_add_to_output {
     my $Self = shift;
     $Self->add_to_output( $Self->defang(shift) );
@@ -2196,6 +2202,12 @@ s/(?:&)(quot|apos|amp|lt|gt);?/$EntityToChar{lc($1)} || warn "no entity for: $1"
     warn "cleanup_attribute AttrValStripped=$AttrVal" if $Self->{Debug};
     return ( $AttrVal, $AttrValStripped );
 }
+
+=head2 get_applicable_charset
+
+Get the charset from the content meta attribute?
+
+=cut
 
 sub get_applicable_charset {
 

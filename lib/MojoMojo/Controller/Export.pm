@@ -27,6 +27,10 @@ directory will contain a timestamp showing when the archive was made.
 
 =head1 ACTIONS
 
+=head2 generate_export_filename
+
+Create the filename under which we export pages.
+
 =cut
 
 sub generate_export_filename {

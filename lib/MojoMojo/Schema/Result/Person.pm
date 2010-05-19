@@ -215,6 +215,12 @@ sub valid_pass {
     return $self->check_password($pass);
 }
 
+=head2 hashed
+
+Apply a sha1 hash to the inpout string.
+
+=cut
+
 sub hashed {
     my ( $self, $secret ) = @_;
     return Digest::SHA1::sha1_hex( $self->id . $secret );
@@ -222,8 +228,28 @@ sub hashed {
 
 # FIXME: the formatter is arbitrarily taken to be Textile; it could be MultiMarkdown
 # http://github.com/marcusramberg/mojomojo/issues/#issue/29
+
+=head2 interests_formatted
+
+Format a person's interests.
+
+=cut
+
 sub interests_formatted { $textile->process( shift->interests ); }
+
+=head2 music_formatted
+
+Format a person's music preferences.
+
+=cut
 sub music_formatted     { $textile->process( shift->music ); }
+
+=head2 movies_formatted
+
+Format a person's movies tastes.
+
+=cut
+
 sub movies_formatted    { $textile->process( shift->movies ); }
 
 =head2 age

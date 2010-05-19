@@ -2,6 +2,13 @@ package MojoMojo::Formatter::Amazon;
 
 eval "use Net::Amazon";
 my $eval_res=$@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $eval_res ? 0 : 1 }
 
 

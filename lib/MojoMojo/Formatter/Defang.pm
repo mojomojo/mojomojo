@@ -101,7 +101,7 @@ sub defang_css_callback {
     }
 }
 
-=head2
+=head2 defang_attribs_callback
 
 Callback for custom handling HTML tag attributes.
 

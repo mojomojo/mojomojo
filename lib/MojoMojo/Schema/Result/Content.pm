@@ -227,6 +227,12 @@ sub formatted {
     return $result;
 }
 
+=head2 merge_content
+
+Show the merge conflict of the content for two different edit sessions of the same page.
+
+=cut
+
 sub merge_content {
     my ( $self, $saved, $content, $h1, $h2, $h3 ) = @_;
 
@@ -330,6 +336,12 @@ sub store_links {
           ->find_or_create( { from_page => $page->id, to_path => $_->{path} } );
     }
 }
+
+=head2 encoded_body
+
+Encode content body using numeric entities.
+
+=cut
 
 sub encoded_body { return encode_entities_numeric( shift->body ); }
 

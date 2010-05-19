@@ -88,6 +88,12 @@ sub _generate_non_wikiword_check {
 
 my $non_wikiword_check = _generate_non_wikiword_check();
 
+=head2 strip_pre
+
+Replace <pre ... with a placeholder
+
+=cut
+
 sub strip_pre {
     my $content = shift;
     my ( @parts, $res );
@@ -114,6 +120,12 @@ sub strip_pre {
     $res .= $$content;
     return $res, @parts;
 }
+
+=head2 reinsert_pre
+
+Put pre and lang back into place.
+
+=cut
 
 sub reinsert_pre {
     my ( $content, @parts ) = @_;

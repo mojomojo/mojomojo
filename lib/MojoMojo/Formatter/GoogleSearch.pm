@@ -77,7 +77,11 @@ sub format_content {
 
 }
 
+=head2 process
 
+Here the actual formatting is done.
+
+=cut
 sub process {
     my $class = shift;
     my ($c, $line, $re, $lang) = @_;

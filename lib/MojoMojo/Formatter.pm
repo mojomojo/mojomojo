@@ -86,12 +86,15 @@ to update "Site settings" (/.admin).
 
 Note that the main formatter runs at 15.
 
-=cut
+=head2 module_loaded
 
+Return true if a formatter module is loaded.
+
+=cut
 
 sub module_loaded { 1; }
 
-=head2
+=head2 gen_re
 
     gen_re(qr/irc/)
 

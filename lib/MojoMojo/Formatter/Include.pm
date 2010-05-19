@@ -8,6 +8,13 @@ eval {
     require LWP::Simple;  # LWP::Simple is indeed required, and URI::Fetch doesn't depend on it
 };
 my $dependencies_installed = !$@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $dependencies_installed }
 
 our $VERSION = '0.01';

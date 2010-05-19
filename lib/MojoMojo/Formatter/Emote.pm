@@ -2,6 +2,13 @@ package MojoMojo::Formatter::Emote;
 
 eval "use Text::Emoticon::MSN";
 my $eval_res = $@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $eval_res ? 0 : 1 }
 
 our $VERSION = '0.01';

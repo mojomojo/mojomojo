@@ -99,6 +99,12 @@ sub users : Global {
     $c->stash->{template} = 'user/list.tt';
 }
 
+=head2 page_user
+
+Show a user's preferences
+
+=cut
+
 sub page_user : Private {
     my ( $self, $c ) = @_;
     my $user = $c->stash->{user};
@@ -174,6 +180,12 @@ sub password : Path('/prefs/password') FormConfig {
         $c->stash->{message} = $c->loc('Your password has been updated');
     }
 }
+
+=head2 recover_pass
+
+Email a user a new password
+
+=cut
 
 sub recover_pass : Global {
     my ( $self, $c ) = @_;
@@ -274,6 +286,12 @@ sub register : Global FormConfig {
         }
     }
 }
+
+=head2 is_account_taken
+
+Test to see if a login or email is already in use.
+
+=cut
 
 sub is_account_taken : Private {
     my ( $self, $c ) = @_;
@@ -399,6 +417,12 @@ sub profile : Global {
     }
 }
 
+=head2 editprofile
+
+Form to edit a person's profile
+
+=cut
+
 sub editprofile : Global FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
@@ -428,6 +452,12 @@ sub editprofile : Global FormConfig {
     }
 
 }
+
+=head2 do_editprofile
+
+Apply the edits to a person's profile
+
+=cut
 
 sub do_editprofile : Global {
     my ( $self, $c ) = @_;

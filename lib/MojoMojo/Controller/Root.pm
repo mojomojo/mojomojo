@@ -124,6 +124,12 @@ sub auto : Private {
     $c->stash->{template} = 'user/validate.tt';
 }
 
+=head2 exit
+
+A way to exit from MojoMojo.  Useful when testing leaks.
+
+=cut
+
 sub exit : Local {
     my ($self, $c) = @_;
     if ($ENV{MOJOMOJO_EXIT_OK}) {

@@ -89,6 +89,11 @@ sub list : Local {
     $c->stash->{template}='attachments/list.tt';
 }
 
+=head2 plain_upload
+
+Upload feature that uses the traditional upload technique.
+
+=cut
 
 sub plain_upload : Global {
     my ( $self, $c ) = @_;
@@ -120,6 +125,12 @@ sub check_file : Private  {
     }
 }
 
+=head2 flash_upload
+
+Upload feature that uses flash
+
+=cut
+
 sub flash_upload : Local {
     my ( $self, $c ) = @_;
 
@@ -139,11 +150,23 @@ sub flash_upload : Local {
     $c->res->body('0');
 }
 
+=head2 attachment
+
+Find and stash an attachment.
+
+=cut
+
 sub attachment : Chained CaptureArgs(1) {
     my ( $self, $c, $att ) = @_;
     $c->stash->{att} = $c->model("DBIC::Attachment")->find($att)
         or $c->detach('default');
 }
+
+=head2 defaultaction
+
+Set the default action for an attachment which is forwarding to a view.
+
+=cut
 
 sub defaultaction : PathPart('') Chained('attachment') Args(0) {
     my ( $self, $c ) = @_;

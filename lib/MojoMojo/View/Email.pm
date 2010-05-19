@@ -14,3 +14,11 @@ __PACKAGE__->config(
 );
 
 1;
+
+__END__
+
+=head1 Name
+
+MojoMojo::View::Email - Email Templates
+
+=cut

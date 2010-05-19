@@ -7,6 +7,13 @@ use HTML::Entities;
 
 eval {require Syntax::Highlight::Engine::Kate};
 my $kate_installed = !$@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $kate_installed }
 
 my $main_formatter;

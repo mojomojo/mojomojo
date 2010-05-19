@@ -108,11 +108,12 @@ sub format {
 }
 
 
-=item format
+=item to_xhtml
 
 Return Directory and files lists in xhtml
 
 =cut
+
 sub to_xhtml{
   my ($self, $dir, $exclude, $baseuri, $path) = @_;
 

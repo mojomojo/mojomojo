@@ -14,6 +14,14 @@ my $smartypants_attr = "1";
 # Globals:
 my $tags_to_skip = qr!<(/?)(?:pre|code|kbd|script)[\s>]!;
 
+=head1 Methods
+
+=head2 process
+
+Do the bulk of the conversion work.
+
+=cut
+
 sub process {
     shift if ( $_[0] eq __PACKAGE__ );    # oops, called in OOP fashion.
 
@@ -118,8 +126,7 @@ sub process {
         }
         else {
             my $t = $cur_token->[1];
-            my $last_char =
-                substr( $t, -1 );    # Remember last char of this token before processing.
+            my $last_char = substr( $t, -1 );    # Remember last char of this token before processing.
             if ( !$in_pre ) {
                 $t = ProcessEscapes($t);
 
@@ -179,6 +186,12 @@ sub process {
     return $result;
 }
 
+=head2 SmartQuotes
+
+Quotes to entities.
+
+=cut
+
 sub SmartQuotes {
 
     # Paramaters:
@@ -232,8 +245,7 @@ sub SmartQuotes {
         }
         else {
             my $t = $cur_token->[1];
-            my $last_char =
-                substr( $t, -1 );    # Remember last char of this token before processing.
+            my $last_char = substr( $t, -1 );    # Remember last char of this token before processing.
             if ( !$in_pre ) {
                 $t = ProcessEscapes($t);
                 if ($do_backticks) {
@@ -277,6 +289,12 @@ sub SmartQuotes {
     }
     return $result;
 }
+
+=head2 SmartDashes
+
+Call the individual dash conversion to entities functions.
+
+=cut
 
 sub SmartDashes {
 
@@ -329,6 +347,12 @@ sub SmartDashes {
     return $result;
 }
 
+=head2 SmartEllipses
+
+Call the individual ellipse conversion to entities functions.
+
+=cut
+
 sub SmartEllipses {
 
     # Paramaters:
@@ -367,17 +391,18 @@ sub SmartEllipses {
     return $result;
 }
 
+=head2 EducateQuotes
+
+   Parameter:  String.
+
+   Returns:    The string, with "educated" curly quote HTML entities.
+
+   Example input:  "Isn't this fun?"
+   Example output: &#8220;Isn&#8217;t this fun?&#8221;
+
+=cut
+
 sub EducateQuotes {
-
-    #
-    #   Parameter:  String.
-    #
-    #   Returns:    The string, with "educated" curly quote HTML entities.
-    #
-    #   Example input:  "Isn't this fun?"
-    #   Example output: &#8220;Isn&#8217;t this fun?&#8221;
-    #
-
     local $_ = shift;
 
     # Tell perl not to gripe when we use $1 in substitutions,
@@ -429,6 +454,12 @@ sub EducateQuotes {
     return $_;
 }
 
+=head2 EducateBackticks
+
+Replace double (back)ticks w/ HTML entities.
+
+=cut
+
 sub EducateBackticks {
 
     #
@@ -445,6 +476,12 @@ sub EducateBackticks {
     s/''/&#8221;/g;
     return $_;
 }
+
+=head2 EducateSingleBackticks
+
+Replace single (back)ticks w/ HTML entities.
+
+=cut
 
 sub EducateSingleBackticks {
 
@@ -463,29 +500,39 @@ sub EducateSingleBackticks {
     return $_;
 }
 
-sub EducateDashes {
+=head2 EducateDashes
 
-    #
-    #   Parameter:  String.
-    #
-    #   Returns:    The string, with each instance of "--" translated to
-    #               an em-dash HTML entity.
-    #
+Dashes to HTML entity
+
+   Parameter:  String.
+
+   Returns:    The string, with each instance of "--" translated to
+               an em-dash HTML entity.
+
+=cut
+
+sub EducateDashes {
 
     local $_ = shift;
     s/--/&#8212;/g;
     return $_;
 }
 
-sub EducateDashesOldSchool {
+=head2 EducateDashesOldSchool
 
-    #
-    #   Parameter:  String.
-    #
-    #   Returns:    The string, with each instance of "--" translated to
-    #               an en-dash HTML entity, and each "---" translated to
-    #               an em-dash HTML entity.
-    #
+Dashes to entities.
+
+
+   Parameter:  String.
+
+   Returns:    The string, with each instance of "--" translated to
+               an en-dash HTML entity, and each "---" translated to
+               an em-dash HTML entity.
+
+
+=cut
+
+sub EducateDashesOldSchool {
 
     local $_ = shift;
     s/---/&#8212;/g;    # em
@@ -493,22 +540,26 @@ sub EducateDashesOldSchool {
     return $_;
 }
 
-sub EducateDashesOldSchoolInverted {
+=head2 EducateDashesOldSchoolInverted
 
-    #
-    #   Parameter:  String.
-    #
-    #   Returns:    The string, with each instance of "--" translated to
-    #               an em-dash HTML entity, and each "---" translated to
-    #               an en-dash HTML entity. Two reasons why: First, unlike the
-    #               en- and em-dash syntax supported by
-    #               EducateDashesOldSchool(), it's compatible with existing
-    #               entries written before SmartyPants 1.1, back when "--" was
-    #               only used for em-dashes.  Second, em-dashes are more
-    #               common than en-dashes, and so it sort of makes sense that
-    #               the shortcut should be shorter to type. (Thanks to Aaron
-    #               Swartz for the idea.)
-    #
+
+   Parameter:  String.
+
+   Returns:    The string, with each instance of "--" translated to
+               an em-dash HTML entity, and each "---" translated to
+               an en-dash HTML entity. Two reasons why: First, unlike the
+               en- and em-dash syntax supported by
+               EducateDashesOldSchool(), it's compatible with existing
+               entries written before SmartyPants 1.1, back when "--" was
+               only used for em-dashes.  Second, em-dashes are more
+               common than en-dashes, and so it sort of makes sense that
+               the shortcut should be shorter to type. (Thanks to Aaron
+               Swartz for the idea.)
+
+    
+=cut
+
+sub EducateDashesOldSchoolInverted {
 
     local $_ = shift;
     s/---/&#8211;/g;    # en
@@ -516,32 +567,36 @@ sub EducateDashesOldSchoolInverted {
     return $_;
 }
 
-sub EducateEllipses {
+=head2 EducateEllipses
 
-    #
-    #   Parameter:  String.
-    #   Returns:    The string, with each instance of "..." translated to
-    #               an ellipsis HTML entity.
-    #
-    #   Example input:  Huh...?
-    #   Example output: Huh&#8230;?
-    #
+   Parameter:  String.
+   Returns:    The string, with each instance of "..." translated to
+               an ellipsis HTML entity.
+
+   Example input:  Huh...?
+   Example output: Huh&#8230;?
+
+=cut
+
+sub EducateEllipses {
 
     local $_ = shift;
     s/\.\.\./&#8230;/g;
     return $_;
 }
 
-sub StupefyEntities {
+=head2 StupefyEntities
 
-    #
-    #   Parameter:  String.
-    #   Returns:    The string, with each SmartyPants HTML entity translated to
-    #               its ASCII counterpart.
-    #
-    #   Example input:  &#8220;Hello &#8212; world.&#8221;
-    #   Example output: "Hello -- world."
-    #
+   Parameter:  String.
+   Returns:    The string, with each SmartyPants HTML entity translated to
+               its ASCII counterpart.
+
+   Example input:  &#8220;Hello &#8212; world.&#8221;
+   Example output: "Hello -- world."
+
+=cut
+
+sub StupefyEntities {
 
     local $_ = shift;
 
@@ -559,27 +614,36 @@ sub StupefyEntities {
     return $_;
 }
 
+=head2 SmartyPantsVersion
+
+Return the version of SmartyPants.
+
+=cut
+
 sub SmartyPantsVersion {
     return $VERSION;
 }
 
+=head2 ProcessEscapes
+
+   Parameter:  String.
+   Returns:    The string, with after processing the following backslash
+               escape sequences. This is useful if you want to force a "dumb"
+               quote or other character to appear.
+
+               Escape  Value
+               ------  -----
+               \\      &#92;
+               \"      &#34;
+               \'      &#39;
+               \.      &#46;
+               \-      &#45;
+               \`      &#96;
+
+=cut
+
 sub ProcessEscapes {
 
-    #
-    #   Parameter:  String.
-    #   Returns:    The string, with after processing the following backslash
-    #               escape sequences. This is useful if you want to force a "dumb"
-    #               quote or other character to appear.
-    #
-    #               Escape  Value
-    #               ------  -----
-    #               \\      &#92;
-    #               \"      &#34;
-    #               \'      &#39;
-    #               \.      &#46;
-    #               \-      &#45;
-    #               \`      &#96;
-    #
     local $_ = shift;
 
     s! \\\\ !&#92;!gx;

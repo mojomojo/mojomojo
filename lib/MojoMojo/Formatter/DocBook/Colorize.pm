@@ -9,6 +9,13 @@ package MojoMojo::Formatter::DocBook::Colorize;
 use strict;
 eval "use Syntax::Highlight::Engine::Kate;";
 my $eval_res = $@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $eval_res ? 0 : 1 }
 
 my $hl_node="programlisting|screen";

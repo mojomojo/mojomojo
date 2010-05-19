@@ -7,6 +7,13 @@ use Encode;
 
 eval "use HTML::Toc;use HTML::TocInsertor;";
 my $eval_res = $@;
+
+=head2 module_loaded
+
+Return true if the module is loaded.
+
+=cut
+
 sub module_loaded { $eval_res ? 0 : 1 }
 
 =head1 NAME
@@ -106,10 +113,12 @@ This is currently a problem with L<HTML::Toc> v1.11, which doesn't have
 support for passing the already existing anchors to the C<templateAnchorName>
 sub.
 
+=head2 assembleAnchorName
+
+ http://search.cpan.org/dist/HTML-Toc/Toc.pod#templateAnchorName
+ 
 =cut
 
-
-# http://search.cpan.org/dist/HTML-Toc/Toc.pod#templateAnchorName
 sub assembleAnchorName {
     my ($aFile, $aGroupId, $aLevel, $aNode, $text, $children) = @_;
 
