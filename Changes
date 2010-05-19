@@ -1,37 +1,37 @@
   New features:
   - Google search formatter (bayashi)
+  - Utility scripts to import/export raw page markup from file/to STDOUT (dandv)
 
-  Bug fixes: 
+  Bug fixes:
   - Minor CSS fix (tcaine)
-  
+
   Improvements:
-  - All Methods/subs now documented
-  - POD Coverage test on by default
+  - All method must be documented from now on - POD coverage test is on by default
 
 1.00 2010-05-09 00:04:20
 
   New Features:
   - Create a default page for new users.
   - Replaced shrunken-head image with a sane "Stop" sign (dandv)
-  
+
   Bug fixes:
   - Fix WantedLink to use normalize_page to match links
   - Removed File::Slurp dependency after removing it from Text::(Multi)Markdown
     because it fails installation under Strawberry Perl  (dandv)
-  - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
+  - IRC Formatter auto-color nicknames (GitHub issue #27) (linio)
   - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
   - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (Github issue #52) (linio)
   - Fixed formatter_all_textile tests to work without Syntax plugin
-  
+
   Improvements:
   - Refine POD so lintian is happy (debian build tool)
-  - Add unicode code option to DB connect string.  This allows us to remove
-    the use of UTF8Columns which is deprecated.  Hook in CHARTSET=utf8 for MySQL deploy
-  
+  - Forced SQLite, MySQL and PostgreSQL database connections to use Unicode,
+    eliminating dependency on DBIx::Class::UTF8Columns, which is now strongly deprecated. (mateu)
+
   Misc:
   - Test::Notabs is now optional
   - HTML::Toc is now required
-  
+
 
 0.999042 2009-12-01 21:42:00
 
@@ -47,16 +47,16 @@
 
   Bug fixes:
   - fixed inserting images via the toolbar after markdown="1" support (dandv)
-  
+
 
 0.999041 2009-10-26 11:55:00
 
   New features:
   - add markdown="1" to block-level HTML elements to interpret Markdown (dandv)
-  
+
   Translation:
   - Italian. MojoMojo ora parla italiano (enrico)
-  
+
   Bug fixes:
   - Exports now export the entire subtree (dandv)
   - Sub pages do not show pages without view permission (linio)
@@ -69,30 +69,30 @@
   Documentation:
   - improved and centralized installation docs into lib/MojoMojo/Installation.pod
 
-  
+
 
 0.999040 2009-09-04 19:53:00
-  
+
   - Format content body and store in content.precompile
     Use this precompiled body when available for page delivery (see page/view.tt).
     /.precompile_pages action for precompiling all page versions.
     This action can take a few minutes for the Catalyst wiki (~2000 page versions).
-    
+
   - Fixed [[child]] and [[../sibling]] display bug when first creating a page.
     Adjust tests to reflect that [[../sibling]] formats to parent/sibling
     instead of ../sibling.  (mateu)
-  
+
   - Simplified and improved sub-pages. Speed and layout enhanced. (mateu)
   - Made subtree KinoSearch work (mateu)
   - Added paging for .list (dandv)
-  
+
   - Catapulse theme (dab)
   - Madrid.pm theme (diegok) 
   - More español (diegok)
-  
+
   - Updated jQuery inplace editor and related code; fixed '&'-encoding bug
     which caused any text after the '&' to be lost when editing in-place (dandv)
-  
+
   - Simplified 404 page handling in suggest.tt (mateu)
   - No cookie for anonymous user requests, and cookie test (mateu)
   - Removed PageCache (mateu)
@@ -101,7 +101,7 @@
   - Main formatter now guaranteed to end the content with *one* newline (dandv)
   - Remove some obsolete crud (dandv/marcus)
 
-  
+
 
 0.999033 2009-08-14 12:40:00 UTC
 
@@ -418,9 +418,9 @@
 
 
 0.999013 2008-02-06 00:08:00
-  - renovated skin (arne)
-  - syntax fixes, registration/login (jshirley)
-  - fix email validation template (jshirley)
+  - Renovated skin (arne)
+  - Syntax fixes, registration/login (jshirley)
+  - Fix email validation template (jshirley)
 
 
 0.999012 2008-02-06 00:08:00
