@@ -5,7 +5,7 @@ use parent qw/MojoMojo::Formatter/;
 
 =head1 NAME
 
-MojoMojo::Formatter::WikipediaLink - Linked Wikipedia by writing {{w:<lang> <word>}}
+MojoMojo::Formatter::WikipediaLink - Linked Wikipedia by writing {{wikipedia:<lang> <word>}}
 
 =head1 DESCRIPTION
 
@@ -15,14 +15,14 @@ Normally, to hyperlink to the Wikipedia, you'd write:
 
 This plugin lets you write just
 
-    {{w Hello}}
+    {{wikipedia Hello}}
 
 not just Link to Wikipedia in English page, you can use many languages
 
-    {{w:ja こんにちは}}
-    {{w:fr Salut}}
+    {{wikipedia:ja こんにちは}}
+    {{wikipedia:fr Salut}}
 
-Actually, if you wrote this without a language ex.{{w Foo}},
+Actually, if you wrote this without a language ex.{{wikipedia Foo}},
 select location of Wikipedia Link
 is getting default-language setting of MojoMojo.
 
