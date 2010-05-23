@@ -5,6 +5,7 @@
 
   Bug fixes:
   - Minor CSS fix (tcaine)
+  - default uri_for_static to use uri_for to make it work correctly for non-root-mounted wikis.
 
   Improvements:
   - All method must be documented from now on - POD coverage test is on by default

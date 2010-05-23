@@ -394,7 +394,9 @@ C</static/> has been remapped to C</.static/>.
 
 sub uri_for_static {
     my ( $self, $asset ) = @_;
-    return ( $self->config->{static_path} || '/.static/' ) . $asset;
+    return ( defined($self->config->{static_path}) ? 
+			$self->config->{static_path} . $asset : 
+			$self->uri_for('/.static', $asset) );
 }
 
 =head2 _cleanup_path
