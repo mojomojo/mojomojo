@@ -1,6 +1,7 @@
   New features:
   - Google search formatter (bayashi)
   - Utility scripts to import/export raw page markup from file/to STDOUT (dandv)
+  - Add wikipedia link generator. (bayashi)
 
   Bug fixes:
   - Minor CSS fix (tcaine)
