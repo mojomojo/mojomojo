@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 =head1 NAME
 
@@ -6,8 +6,10 @@ mojomojo_fastcgi_manage.pl - script to start/stop/restart mojomojo fastcgi insta
 
 =cut
 
-eval { use FCGI::Engine::Manager };
-if ($@) { die "You need to install FCGI::Engine to run this script\n"; }
+BEGIN {
+    eval { require FCGI::Engine::Manager };
+    if ($@) { die "\n    NOTICE: You need to install FCGI::Engine to run this script\n\n"; }
+}
 
 my $m =
   FCGI::Engine::Manager->new( conf => 'script/mojomojo_fastcgi_manage.yml' );
