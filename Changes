@@ -3,6 +3,7 @@
 
   Bug fixes: 
   - Minor CSS fix (tcaine)
+  - default uri_for_static to use uri_for to make it work correctly for non-root-mounted wikis.
   - Restrict page deletion to admin users only
   
   Improvements:
