@@ -3,6 +3,7 @@
 
   Bug fixes: 
   - Minor CSS fix (tcaine)
+  - Restrict page deletion to admin users only
   
   Improvements:
   - All Methods/subs now documented

@@ -18,7 +18,7 @@ BEGIN
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 33;
+    plan tests => 32;
 }
 use_ok('MojoMojo::Controller::Page');
 
@@ -198,11 +198,5 @@ RENDERED_CONTENT
 
 # Attempt to delete a page
 $mech->get_ok('/attempt_to_delete.delete', 'make request to delete a page');
-ok(($elem) = $mech->look_down(_tag => 'h3',), 'Found h3 delete header');
-if ($elem)
-{
-    is $elem->as_trimmed_text, 'Sorry', 'page can NOT be deleted';
-}
-
-#$mech->form_number(2);
-#ok $mech->click_button( value => 'Yes' ), 'click the "Yes" button';
+my $content = $mech->content;
+like($content, qr/Restricted area. Admin access required/, 'Delete a page restricted to admins');
