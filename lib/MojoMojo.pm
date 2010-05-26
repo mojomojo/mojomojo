@@ -290,6 +290,12 @@ sub fixw {
     return $w;
 }
 
+=head2 prepare_action
+
+Provide No DB message when one needs to spawn the db (script/mojomojo_spawn.pl)
+
+=cut
+
 sub prepare_action {
     my $c = shift;
 
