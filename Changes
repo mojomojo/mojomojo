@@ -1,5 +1,7 @@
   New features:
   - Google search formatter (bayashi)
+  - Utility scripts to import/export raw page markup from file/to STDOUT (dandv)
+  - Add wikipedia link generator. (bayashi)
 
   Bug fixes: 
   - Minor CSS fix (tcaine)
@@ -14,7 +16,7 @@
 
   New Features:
   - Create a default page for new users.
-  - Replaced shrunken-head image with a sane "Stop" sign (dandv)
+  - Replaced shrunken-head image with a "Stop" sign (dandv)
   
   Bug fixes:
   - Fix WantedLink to use normalize_page to match links

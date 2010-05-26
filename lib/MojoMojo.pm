@@ -98,6 +98,8 @@ if ($@ ) {
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
+=head1 METHODS
+
 =head2 prepare
 
 Accomdate a forcing of SSL if needed in a reverse proxing setup
