@@ -1,3 +1,8 @@
+
+  Bug fixes: 
+  - Fix tagged descendants by date for postgresql
+
+1.01 2010-05-26 10:04:20
   New features:
   - Google search formatter (bayashi)
   - Utility scripts to import/export raw page markup from file/to STDOUT (dandv)
