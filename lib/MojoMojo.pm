@@ -733,6 +733,7 @@ my $search_setup_failed = 0;
 
 MojoMojo->config->{index_dir} ||= MojoMojo->path_to('index');
 MojoMojo->config->{attachment_dir} ||= MojoMojo->path_to('uploads');
+MojoMojo->config->{root} ||= MojoMojo->path_to('root');
 unless (-e MojoMojo->config->{index_dir}) {
     if (not mkdir MojoMojo->config->{index_dir}) {
        warn 'Could not make index directory <'.MojoMojo->config->{index_dir}.'> - FIX IT OR SEARCH WILL NOT WORK!';

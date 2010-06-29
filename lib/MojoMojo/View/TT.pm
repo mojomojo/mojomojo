@@ -4,6 +4,7 @@ use strict;
 use parent 'Catalyst::View::TT';
 use Template::Constants qw( :debug );
 use Class::C3 ();
+use Path::Class qw/dir/;
 
 =head1 NAME
 
@@ -41,8 +42,8 @@ sub new {
     my ( $c, $arg_ref ) = @_;
 
     $class->config->{INCLUDE_PATH}=[
-        $c->path_to('root'),
-        $c->path_to('root','base'),
+        $c->config->{root},
+        dir($c->config->{root})->subdir('base'),
     ];
 
     return $class->next::method(@_);

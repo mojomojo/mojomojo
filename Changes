@@ -1,6 +1,7 @@
 
   Bug fixes: 
   - Fix tagged descendants by date for postgresql
+  - Fix root setting to actually be used.
 
 1.01 2010-05-26 10:04:20
   New features:
