@@ -166,7 +166,7 @@ sub search : Global {
         }
 
         # add a snippet of text containing the search query
-        my $content = $strip->parse( $page->content->formatted($c) );
+        my $content = $strip->parse( $page->content->precompiled || $page->content->formatted($c) );
         $strip->eof;
 
  # FIXME: Bug? Some snippet text doesn't get displayed properly by Text::Context
