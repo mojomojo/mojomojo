@@ -4,12 +4,12 @@ use strict;
 
 use parent 'Catalyst::Model';
 
-use KinoSearch::InvIndexer;
-use KinoSearch::Searcher;
-use KinoSearch::Analysis::PolyAnalyzer;
-use KinoSearch::Index::Term;
-use KinoSearch::Search::Query;
-use KinoSearch::QueryParser::QueryParser;
+use KinoSearch1::InvIndexer;
+use KinoSearch1::Searcher;
+use KinoSearch1::Analysis::PolyAnalyzer;
+use KinoSearch1::Index::Term;
+use KinoSearch1::Search::Query;
+use KinoSearch1::QueryParser::QueryParser;
 
 __PACKAGE__->config->{index_dir} ||= MojoMojo->config->{index_dir};
 # Fall back just in case MojoMojo->config->{index_dir} doesn't exist
@@ -26,7 +26,7 @@ MojoMojo::Model::Search - support for searching pages
 =cut
 
 my $invindexer;
-my $analyzer = KinoSearch::Analysis::PolyAnalyzer->new( language => _get_language() );
+my $analyzer = KinoSearch1::Analysis::PolyAnalyzer->new( language => _get_language() );
 
 =head2 indexer
 
@@ -36,7 +36,7 @@ Index the search data
 
 sub indexer {
     my $self       = shift;
-    my $invindexer = KinoSearch::InvIndexer->new(
+    my $invindexer = KinoSearch1::InvIndexer->new(
         invindex => __PACKAGE__->config->{index_dir},
         create =>
           ( -f __PACKAGE__->config->{index_dir} . '/segments' ? 0 : 1 ),
@@ -60,7 +60,7 @@ sub searcher {
     my $self = shift;
     $self->prepare_search_index
       unless -f __PACKAGE__->config->{index_dir} . '/segments';
-    return KinoSearch::Searcher->new(
+    return KinoSearch1::Searcher->new(
         invindex => __PACKAGE__->config->{index_dir},
         analyzer => $analyzer,
     );
@@ -114,7 +114,7 @@ sub index_page {
     my $fixed_path = $key;
     $fixed_path =~ s{/}{X}g;
 
-    my $term = KinoSearch::Index::Term->new( path => $fixed_path );
+    my $term = KinoSearch1::Index::Term->new( path => $fixed_path );
     $index->delete_docs_by_term($term);
     my $doc = $index->new_doc();
     $doc->set_value( author => $content->creator->login );
@@ -135,7 +135,7 @@ Search for a term or phrase.
 
 sub search {
     my ( $self, $q ) = @_;
-    my $qp = KinoSearch::QueryParser::QueryParser->new(
+    my $qp = KinoSearch1::QueryParser::QueryParser->new(
         analyzer       => $analyzer,
         fields         => [ 'text', 'tags' ],
         default_boolop => 'AND'
@@ -161,7 +161,7 @@ sub delete_page {
     my $path  = $page->path;
     $path  =~ s{/}{X}g;
 
-    my $term = KinoSearch::Index::Term->new( path => $path );
+    my $term = KinoSearch1::Index::Term->new( path => $path );
     $index->delete_docs_by_term($term);
     $index->finish( optimize => 1 );
 }

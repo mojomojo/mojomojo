@@ -59,7 +59,7 @@ requires(
     'Image::Math::Constrain'                       => 0,
     'IO::Scalar'                                   => 0,
     'IO::File'                                     => '1.14',
-    'KinoSearch'                                   => '0.165',
+    'KinoSearch1'                                  => '1.00',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
     'Number::Format'                               => 0,
