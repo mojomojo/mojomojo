@@ -1,4 +1,4 @@
-
+1.02 2010-08-30 04:20
   Bug fixes: 
   - Fix tagged descendants by date for postgresql
   - Fix root setting to actually be used.
