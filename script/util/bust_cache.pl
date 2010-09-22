@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
 =head1 NAME
 
-dump_content.pl - Dump the raw (markup) content of a page.
+bust_cache.pl - Delete the precompiled content of a page. MojoMojo
+will recompile the page next time it is requested.
 
 =head1 SYNOPSIS
 
-    script/util/dump_content.pl /path/to/page > page.markdown
+    script/util/bust_cache.pl /path/to/page
 
 =head1 AUTHORS
 
@@ -31,7 +32,8 @@ my ($page_path, $filename_content, $dsn, $user, $pass) = @ARGV;
 
 if (!$page_path) {
     die "USAGE: $0 /path/to/page [dsn user pass]
-Dump the raw (markup) contents of the last version of a page.
+Delete the precompiled content of a page. MojoMojo
+will recompile the page next time it is requested.
 \n";
 }
 
@@ -78,4 +80,6 @@ my $page_content = $schema->resultset('Content')->single(
     }
 );
 
-print $page_content->body;
+$page_content->update({
+    precompiled => ''
+});

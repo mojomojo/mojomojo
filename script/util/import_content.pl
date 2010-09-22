@@ -76,7 +76,7 @@ my ($page_path, $filename_content, $dsn, $user, $pass) = @ARGV;
 
 if (!$page_path) {
     die "USAGE: $0 /path/to/page filename [dsn user pass]
-Replace the contents of the last version of a page with the content from a file
+Replace the contents of the last version of a page with the content from a file.
 \n";
 }
 
@@ -88,7 +88,7 @@ if (!$dsn) {
     die "Couldn't read config file" if not keys %{$config};
     
     eval {
-        if (ref $config->{'Model::DBIC'}->{'connect_info'}) {
+        if (ref $config->{'Model::DBIC'}->{'connect_info'} eq 'HASH') {
             $dsn  = $config->{'Model::DBIC'}->{'connect_info'}->{dsn};
             $user = $config->{'Model::DBIC'}->{'connect_info'}->{user};
             $pass = $config->{'Model::DBIC'}->{'connect_info'}->{password};
@@ -96,7 +96,7 @@ if (!$dsn) {
             ($dsn, $user, $pass) = @{$config->{'Model::DBIC'}->{connect_info}};
         }
     };
-    die "Your DSN settings in mojomojo.conf seem invalid\n" if $@;
+    die "Your DSN settings in mojomojo.conf seem invalid: $@\n" if $@;
 }    
 die "Couldn't find a valid Data Source Name (DSN).\n" if !$dsn;
 
