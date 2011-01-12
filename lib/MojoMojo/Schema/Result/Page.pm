@@ -229,6 +229,8 @@ sub tagged_descendants_by_date {
             'content.version' => \'=me.content_version',
         },
         {
+			columns => ['me.id', 'me.version', 'me.parent', 'me.name', 'me.name_orig',
+			'me.depth', 'me.lft', 'me.rgt', 'me.content_version', 'content.created'],
             distinct => 1,
             from     => "page as me, page as ancestor, tag, content",
             order_by => 'content.created DESC',
@@ -327,10 +329,10 @@ sub user_tags {
             person => $user,
         },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => [ 'me.id','me.tag'],
+            group_by => [ 'me.tag'],
         }
     );
     return @tags;
@@ -350,10 +352,10 @@ sub others_tags {
             person => { '!=', $user }
         },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => ['me.tag','me.id'],
+            group_by => ['me.tag'],
         }
     );
     return @tags;
@@ -370,10 +372,10 @@ sub tags_with_counts {
     my (@tags) = $self->result_source->related_source('tags')->resultset->search(
         { page => $self->id, },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => [ 'me.id', 'me.tag'],
+            group_by => [ 'me.tag'],
         }
     );
     return @tags;
