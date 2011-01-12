@@ -1,4 +1,7 @@
-1.03
+1.03  2011-01-12 11:36
+  New features:
+  - Google Calendar formatter
+
   Bug fixes:
   - Really fix tagged descendants by date for postgres
   
@@ -7,6 +10,7 @@
   - popular account link formatter via {{id:$service $account_name}} <bayashi>
     e.g. {{id::cpan bayashi}} gets rendered as <a href="http://search.cpan.org/~bayashi/">bayashi</a>
   - Show tags only once for 'Popular' and 'My' categories
+
   
 1.02 2010-08-30 04:20
   Bug fixes: 
