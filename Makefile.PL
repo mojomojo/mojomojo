@@ -12,7 +12,6 @@ requires(
     'Algorithm::Diff'              => '1.1901',
     'Algorithm::Merge'             => 0,
     'Archive::Zip'                 => '1.14',
-    'MRO::Compat'                  => '0.10',
     'Cache::FastMmap'              => 1.31,        # deleted /tmp/sharefile-* when MM is killed
     'Catalyst'                     => '5.71001',
     'Catalyst::Action::RenderView' => '0.07',
@@ -62,6 +61,7 @@ requires(
     'KinoSearch1'                                  => '1.00',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'MRO::Compat'                                  => '0.10',
     'Number::Format'                               => 0,
     'parent'                                       => 0,
     'Template'                                     => '2.20',
