@@ -1,3 +1,13 @@
+1.03
+  Bug fixes:
+  - Really fix tagged descendants by date for postgres
+  
+  Improvements:
+  - Korean Translation <JEEN>
+  - popular account link formatter via {{id:$service $account_name}} <bayashi>
+    e.g. {{id::cpan bayashi}} gets rendered as <a href="http://search.cpan.org/~bayashi/">bayashi</a>
+  - Show tags only once for 'Popular' and 'My' categories
+  
 1.02 2010-08-30 04:20
   Bug fixes: 
   - Fix tagged descendants by date for postgresql
