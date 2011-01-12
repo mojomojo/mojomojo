@@ -310,7 +310,7 @@ sub list : Global {
     
     
     my @backlinks_viewable =
-      $c->model("DBIC::Link")->search( to_page => $page->id );
+      $c->model("DBIC::Link")->search( {to_page => $page->id} );
     if ( $c->pref('check_permission_on_view') ) {
         my $user;
         if ( $c->user_exists() ) { $user = $c->user->obj; }
