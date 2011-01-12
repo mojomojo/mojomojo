@@ -99,7 +99,7 @@ test_requires 'Test::Differences';
 
 # all tests require a database to be deployed, even though SQLT is not necessary for producton if a DB exists
 test_requires 'SQL::Translator'                => '0.09006';
-test_requires 'Email::Sender::Simple'          => '0.100110';
+test_requires 'Email::Sender::Simple'          => '0.102370';
 test_requires 'WWW::Mechanize'                 => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst' => '0.51';
 test_requires 'WWW::Mechanize::TreeBuilder'    => '1.10000';
