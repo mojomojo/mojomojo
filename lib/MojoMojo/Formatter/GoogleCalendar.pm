@@ -47,7 +47,6 @@ sub format_content {
     my @lines = split /\n/, $$content;
     my $re = $class->gen_re(qr/gcal\s+(.*?)\s+(\d+),(\d+)\s+(\w+)/);
     $$content = "";
-    $c->stash->{precompile_off} = 1;
 
     foreach my $line (@lines) {
         if ( $line =~ m/$re/ ) {
