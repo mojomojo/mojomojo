@@ -154,10 +154,24 @@ sub edit : Global FormConfig {
         $stash->{content} = $page->content;
         $c->model("DBIC::Page")->set_paths(@$path_pages);
 
-        # refetch page to have ->content available, else it will break in DBIC 0.08099_05 and later
-        #$page = $c->model("DBIC::Page")->find( $page->id );
+        # setup redirect back to edits or view page mode.
+        my $redirect = $c->uri_for( $c->stash->{path} );
+        if ( $form->params->{submit} eq $c->localize('Save') ) {
+            $redirect .= '.edit';
+        }
+        
+        # No need to update if we have no difference between browser and db.
+        if ( $c->stash->{content} && ($c->stash->{content}->body eq $form->params->{body}) ) {
+            $c->res->redirect($redirect);
+            return;
+        }
+        
+        # If we get here it means we have some difference between wiki page in browser and db.
+        # TODO: Is the discard_changes necessary?  Why are we discarding local changes?
+        #       Are there even any local changes to $page?
         $page->discard_changes;
 
+        # Check for changes made by another user to the same base revision.
         if( $c->stash->{content} &&
             $c->req->params->{version} != $c->stash->{content}->version ) {
             $c->stash->{message}=$c->loc('Someone else changed the page while you edited. Your changes has been merged. Please review and save again');
@@ -175,6 +189,7 @@ sub edit : Global FormConfig {
                 $c->loc('END OF CONFLICT'));
             return;
         }
+        
         # Format content body and store the result in content.precompiled 
         # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
@@ -191,11 +206,6 @@ sub edit : Global FormConfig {
             unless $c->pref('disable_search');
         $page->content->store_links();
 
-        # Redirect back to edits or view page mode.
-        my $redirect = $c->uri_for( $c->stash->{path} );
-        if ( $form->params->{submit} eq $c->localize('Save') ) {
-            $redirect .= '.edit';
-        }
         $c->res->redirect($redirect);
     }
     else {
