@@ -16,7 +16,7 @@ BEGIN {
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 21;
+    plan tests => 31;
 }
 
 use_ok('MojoMojo::Controller::Page');
@@ -93,6 +93,24 @@ ok defined $mech->field(body => <<PAGE_CONTENT), 'Set page content';
 PAGE_CONTENT
 
 ok $mech->click_button(value => 'Save'), 'click the "Save" button';
+
+# This totally new page should start with revision 1.
+is($schema->resultset('Page')->find({ id => 5 })->content_version, 1, 'first version of a page');
+
+# If we save the page with the same content, then the revision should not change.
+$mech->get_ok('/totally_new_page.edit', 'save the new page with same content');
+ok $mech->form_with_fields('body'), 'find the edit form';
+ok $mech->click_button(value => 'Save'), 'click the "Save" button';
+is($schema->resultset('Page')->find({ id => 5 })->content_version, 1, 'no diff on save, no version incrementing');
+
+# If we save the page with the different content, then the revision increase by 1.
+$mech->get_ok('/totally_new_page.edit', 'change content of the new page');
+ok $mech->form_with_fields('body'), 'find the edit form';
+ok defined $mech->field(body => <<PAGE_CONTENT), 'save the page with different content';
+# This is NOT THE SAME page that it was before
+PAGE_CONTENT
+ok $mech->click_button(value => 'Save'), 'click the "Save" button';
+is($schema->resultset('Page')->find({ id => 5 })->content_version, 2, 'different content new version');
 
 $mech->get_ok('/test');
 $mech->content_contains('<a class="existingWikiWord" href="/totally_new_page">','Link was updated');
