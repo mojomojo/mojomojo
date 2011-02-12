@@ -1,9 +1,8 @@
-   New features:
-  - github gist formatter (bayashi)
-  
+1.04  2011-02-12 10:24
   Improvements:
   - Don't save a page when there is no change even if we push the save button.
     This prevents the revision number from being incremented.
+  - Added gist formatter (bayashi)
   
   Fixes:
   - Amazon requires a secret key now to access it's API.
