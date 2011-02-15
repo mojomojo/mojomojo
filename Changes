@@ -1,3 +1,6 @@
+   New features:
+  - github gist formatter (bayashi)
+  
   Improvements:
   - Don't save a page when there is no change even if we push the save button.
     This prevents the revision number from being incremented.
