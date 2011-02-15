@@ -1,20 +1,7 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
-use Getopt::Long;
-use Pod::Usage;
-use FindBin;
-use lib "$FindBin::Bin/../lib";
-use Catalyst::Test 'MojoMojo';
-
-my $help = 0;
-
-GetOptions( 'help|?' => \$help );
-
-pod2usage(1) if ( $help || !$ARGV[0] );
-
-print request($ARGV[0])->content . "\n";
+use Catalyst::ScriptRunner;
+Catalyst::ScriptRunner->run('MojoMojo', 'Test');
 
 1;
 
@@ -27,7 +14,7 @@ mojomojo_test.pl - Catalyst Test
 mojomojo_test.pl [options] uri
 
  Options:
-   -help    display this help and exits
+   --help    display this help and exits
 
  Examples:
    mojomojo_test.pl http://localhost/some_action
@@ -45,12 +32,9 @@ Run a Catalyst action from the command line.
 
 Catalyst Contributors, see Catalyst.pm
 
-=head1 LICENSE
-
-You may distribute this code under the same terms as Perl itself.
-
 =head1 COPYRIGHT
 
-Please refer to Catalyst.pm for copyright details.
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
