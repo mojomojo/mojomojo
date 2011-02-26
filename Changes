@@ -13,7 +13,7 @@
 
 1.03  2011-01-12 11:36
   New features:
-  - Google Calendar formatter
+  - Google Calendar formatter (jcockhren)
 
   Bug fixes:
   - Really fix tagged descendants by date for postgres
