@@ -94,6 +94,8 @@ feature 'Transclusion support',
 feature 'Amazon boxes', 'Net::Amazon' => 0;
 feature('Emoticons' => [ 'Text::Emoticon::MSN' => 0, -default => 0 ]);
 
+configure_requires 'File::Copy::Recursive';
+
 test_requires 'Test::More' => '0.88';
 test_requires 'Test::Differences';
 
