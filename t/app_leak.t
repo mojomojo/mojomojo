@@ -23,7 +23,7 @@ sub BEGIN {
     plan skip_all => 'need Devel::LeakGuard::Object' if $@;
 
     eval "use Catalyst::Test 'MojoMojo'";
-    plan skip_all => 'need Catalyst::Test' if $@;
+    plan skip_all => 'need Catalyst::Test' . $@ if $@;
 
     plan tests => 2;
 }
