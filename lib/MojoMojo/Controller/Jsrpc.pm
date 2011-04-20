@@ -117,9 +117,11 @@ sub tag : Local Args(1) {
         if (
             $tag
             && !$c->model("DBIC::Tag")->search(
-                page   => $page->id,
-                person => $c->req->{user_id},
-                tag    => $tagname
+                {
+                    page   => $page->id,
+                    person => $c->req->{user_id},
+                    tag    => $tagname,
+                }
             )->next()
             )
         {

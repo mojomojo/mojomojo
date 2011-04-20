@@ -78,9 +78,9 @@ based on the supplied ASIN number.
 =cut
 
 sub get {
-  my ($class,$id,$amazon_id)=@_;
+  my ($class,$id,$amazon_id,$secret_key)=@_;
   #FIXME: devel token should be set in formatter config.
-  my $amazon=Net::Amazon->new(token=>$amazon_id);
+  my $amazon=Net::Amazon->new(token=>$amazon_id,secret_key=>$secret_key);
   my $response=$amazon->search(asin=>$id);
   return "Unable to connect to amazon." unless $response->is_success;
   ($property)=$response->properties;

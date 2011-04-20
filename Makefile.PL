@@ -12,7 +12,6 @@ requires(
     'Algorithm::Diff'              => '1.1901',
     'Algorithm::Merge'             => 0,
     'Archive::Zip'                 => '1.14',
-    'MRO::Compat'                  => '0.10',
     'Cache::FastMmap'              => 1.31,        # deleted /tmp/sharefile-* when MM is killed
     'Catalyst'                     => '5.71001',
     'Catalyst::Action::RenderView' => '0.07',
@@ -62,6 +61,7 @@ requires(
     'KinoSearch1'                                  => '1.00',
     'Module::Pluggable::Ordered'                   => '1.4',
     'Moose'                                        => 0,
+    'MRO::Compat'                                  => '0.10',
     'Number::Format'                               => 0,
     'parent'                                       => 0,
     'Template'                                     => '2.20',
@@ -94,12 +94,14 @@ feature 'Transclusion support',
 feature 'Amazon boxes', 'Net::Amazon' => 0;
 feature('Emoticons' => [ 'Text::Emoticon::MSN' => 0, -default => 0 ]);
 
+configure_requires 'File::Copy::Recursive';
+
 test_requires 'Test::More' => '0.88';
 test_requires 'Test::Differences';
 
 # all tests require a database to be deployed, even though SQLT is not necessary for producton if a DB exists
 test_requires 'SQL::Translator'                => '0.09006';
-test_requires 'Email::Sender::Simple'          => '0.100110';
+test_requires 'Email::Sender::Simple'          => '0.102370';
 test_requires 'WWW::Mechanize'                 => '1.54';
 test_requires 'Test::WWW::Mechanize::Catalyst' => '0.51';
 test_requires 'WWW::Mechanize::TreeBuilder'    => '1.10000';

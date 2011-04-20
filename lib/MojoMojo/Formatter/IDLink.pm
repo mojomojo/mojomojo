@@ -93,7 +93,6 @@ sub process {
     my $url = sprintf($CONF->{$site}, $id);
 
     $line =~ s!$re!<a href="$url">$id</a>!;
-    $c->stash->{precompile_off} = 1;
 
     return $line;
 }

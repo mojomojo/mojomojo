@@ -6,11 +6,16 @@ use Carp qw/croak/;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
-__PACKAGE__->load_components( "Core" );
+__PACKAGE__->load_components("Core");
 __PACKAGE__->table("page");
 __PACKAGE__->add_columns(
     "id",
-    { data_type => "INTEGER", is_nullable => 0, size => undef, is_auto_increment => 1 },
+    {
+        data_type         => "INTEGER",
+        is_nullable       => 0,
+        size              => undef,
+        is_auto_increment => 1
+    },
     "version",
     { data_type => "INTEGER", is_nullable => 1, size => undef },
     "parent",
@@ -29,20 +34,75 @@ __PACKAGE__->add_columns(
     { data_type => "INTEGER", is_nullable => 1, size => undef },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->add_unique_constraint( "page_unique_child_index", [ "parent", "name" ] );
-__PACKAGE__->has_many( "wantedpages", "MojoMojo::Schema::Result::WantedPage", { "foreign.from_page" => "self.id" } );
-__PACKAGE__->belongs_to( "parent", "MojoMojo::Schema::Result::Page", { id => "parent" } );
-__PACKAGE__->has_many( "children", "MojoMojo::Schema::Result::Page", { "foreign.parent" => "self.id" } );
-__PACKAGE__->belongs_to( "content", "MojoMojo::Schema::Result::Content", { page => "id", version => "content_version" } );
-__PACKAGE__->has_many( "versions", "MojoMojo::Schema::Result::Content", { "foreign.page" => "self.id" }, { order_by => 'version desc' } );
-__PACKAGE__->belongs_to( "page_version", "MojoMojo::Schema::Result::PageVersion", { page => "id", version => "version" } );
-__PACKAGE__->has_many( "tags",       "MojoMojo::Schema::Result::Tag",  { "foreign.page"      => "self.id" } );
-__PACKAGE__->has_many( "links_from", "MojoMojo::Schema::Result::Link", { "foreign.from_page" => "self.id" } );
-__PACKAGE__->has_many( "links_to",   "MojoMojo::Schema::Result::Link", { "foreign.to_page"   => "self.id" } );
-__PACKAGE__->has_many( "roleprivileges", "MojoMojo::Schema::Result::RolePrivilege", { "foreign.page"   => "self.id" } );
-__PACKAGE__->has_many( "attachments",    "MojoMojo::Schema::Result::Attachment",    { "foreign.page"   => "self.id" }, {order_by=>'name asc' } );
-__PACKAGE__->has_many( "comments",       "MojoMojo::Schema::Result::Comment",       { "foreign.page"   => "self.id" } );
-__PACKAGE__->has_many( "journals",       "MojoMojo::Schema::Result::Journal",       { "foreign.pageid" => "self.id" } );
+__PACKAGE__->add_unique_constraint( "page_unique_child_index",
+    [ "parent", "name" ] );
+__PACKAGE__->has_many(
+    "wantedpages",
+    "MojoMojo::Schema::Result::WantedPage",
+    { "foreign.from_page" => "self.id" }
+);
+__PACKAGE__->belongs_to(
+    "parent",
+    "MojoMojo::Schema::Result::Page",
+    { id => "parent" }
+);
+__PACKAGE__->has_many(
+    "children",
+    "MojoMojo::Schema::Result::Page",
+    { "foreign.parent" => "self.id" }
+);
+__PACKAGE__->belongs_to(
+    "content",
+    "MojoMojo::Schema::Result::Content",
+    { page => "id", version => "content_version" }
+);
+__PACKAGE__->has_many(
+    "versions",
+    "MojoMojo::Schema::Result::Content",
+    { "foreign.page" => "self.id" },
+    { order_by       => 'version desc' }
+);
+__PACKAGE__->belongs_to(
+    "page_version",
+    "MojoMojo::Schema::Result::PageVersion",
+    { page => "id", version => "version" }
+);
+__PACKAGE__->has_many(
+    "tags",
+    "MojoMojo::Schema::Result::Tag",
+    { "foreign.page" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "links_from",
+    "MojoMojo::Schema::Result::Link",
+    { "foreign.from_page" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "links_to",
+    "MojoMojo::Schema::Result::Link",
+    { "foreign.to_page" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "roleprivileges",
+    "MojoMojo::Schema::Result::RolePrivilege",
+    { "foreign.page" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "attachments",
+    "MojoMojo::Schema::Result::Attachment",
+    { "foreign.page" => "self.id" },
+    { order_by       => 'name asc' }
+);
+__PACKAGE__->has_many(
+    "comments",
+    "MojoMojo::Schema::Result::Comment",
+    { "foreign.page" => "self.id" }
+);
+__PACKAGE__->has_many(
+    "journals",
+    "MojoMojo::Schema::Result::Journal",
+    { "foreign.pageid" => "self.id" }
+);
 
 =head1 NAME
 
@@ -73,17 +133,21 @@ sub update_content {
         : undef
     );
     my %content_data =
-        map { $_ => $args{$_} } $self->result_source->related_source('content')->columns;
+      map { $_ => $args{$_} }
+      $self->result_source->related_source('content')->columns;
     my $now = DateTime->now;
-    @content_data{qw/page version status release_date/} =
-        ( $self->id, ( $content_version ? $content_version + 1 : 1 ), 'released', $now, );
+    @content_data{qw/page version status release_date/} = (
+        $self->id, ( $content_version ? $content_version + 1 : 1 ),
+        'released', $now,
+    );
     my $content =
-        $self->result_source->related_source('content')->resultset->create( \%content_data );
+      $self->result_source->related_source('content')
+      ->resultset->create( \%content_data );
     $self->content_version( $content->version );
     $self->update;
-    
+
     $self->page_version->content_version_first($content_version)
-        unless defined $self->page_version->content_version_first;
+      unless defined $self->page_version->content_version_first;
     $self->page_version->content_version_last($content_version);
     $self->page_version->update;
 
@@ -96,15 +160,18 @@ sub update_content {
     else {
         $self->result_source->resultset->set_paths($self);
     }
-    foreach my $want_me ($self->result_source->schema->resultset('WantedPage')
-                              ->search( { to_path => $self->path } ) ) {
+    foreach my $want_me ( $self->result_source->schema->resultset('WantedPage')
+        ->search( { to_path => $self->path } ) )
+    {
         my $wantme_page = $want_me->from_page;
 
         # convert the wanted into links
-        $self->result_source->schema->resultset('Link')->create({
-            from_page => $wantme_page,
-            to_page   => $self,
-        });
+        $self->result_source->schema->resultset('Link')->create(
+            {
+                from_page => $wantme_page,
+                to_page   => $self,
+            }
+        );
 
         # clear the precompiled (will be recompiled on view)
         if ( my $wantme_content = $wantme_page->content ) {
@@ -143,37 +210,46 @@ sub add_version {
     my $now = DateTime->now;
 
     my $page_version_last = $self->page_version->latest_version();
-    
+
     # clone the last version and update fields passed in %args
     my %page_version_data = map {
         exists $args{$_}
-      ? ( $_ => $args{$_} )
-      : ( $_ => $page_version_last->$_ )
+          ? ( $_ => $args{$_} )
+          : ( $_ => $page_version_last->$_ )
     } $self->result_source->related_source('page_version')->columns;
-    
-    delete $args{creator};  # creator is a field in page_version, not in page
+
+    delete $args{creator};    # creator is a field in page_version, not in page
 
     # for the new version, set the version number, status, and release date
-    @page_version_data{qw/
-          version                           status     release_date/} =
-        ( $page_version_last->version + 1, 'released', $now );
+    @page_version_data{
+        qw/
+          version                           status     release_date/
+      }
+      = ( $page_version_last->version + 1, 'released', $now );
 
     my $page_version_new;
-    # commit the new version to the database and update the previously last version to indicate its removal
-    $self->result_source->schema->txn_do(sub {
-    
-        $page_version_new = 
-            $self->result_source->related_source('page_version')->resultset->create( \%page_version_data );
-        
-        $page_version_last->update({
-            remove_date => $now,
-            status => 'removed',
-            comments => 'Replaced by version ' . $page_version_data{version}
-        });
-        
-        $self->update(\%args);
-    });
-    
+
+# commit the new version to the database and update the previously last version to indicate its removal
+    $self->result_source->schema->txn_do(
+        sub {
+
+            $page_version_new =
+              $self->result_source->related_source('page_version')
+              ->resultset->create( \%page_version_data );
+
+            $page_version_last->update(
+                {
+                    remove_date => $now,
+                    status      => 'removed',
+                    comments    => 'Replaced by version '
+                      . $page_version_data{version}
+                }
+            );
+
+            $self->update( \%args );
+        }
+    );
+
     return $page_version_new;
 }
 
@@ -191,7 +267,8 @@ sub tagged_descendants {
             'tag'         => $tag,
             -or           => [
                 'me.id' => \'=ancestor.id',
-                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
+                -and =>
+                  [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
 
             'me.id'           => \'=tag.page',
@@ -222,13 +299,21 @@ sub tagged_descendants_by_date {
             'tag'         => $tag,
             -or           => [
                 'me.id' => \'=ancestor.id',
-                -and    => [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
+                -and =>
+                  [ 'me.lft', \'> ancestor.lft', 'me.rgt', \'< ancestor.rgt', ],
             ],
             'me.id'           => \'=tag.page',
             'content.page'    => \'=me.id',
             'content.version' => \'=me.content_version',
         },
         {
+            columns => [
+                'me.id',              'me.version',
+                'me.parent',          'me.name',
+                'me.name_orig',       'me.depth',
+                'me.lft',             'me.rgt',
+                'me.content_version', 'content.created'
+            ],
             distinct => 1,
             from     => "page as me, page as ancestor, tag, content",
             order_by => 'content.created DESC',
@@ -236,8 +321,6 @@ sub tagged_descendants_by_date {
     );
     return $self->result_source->resultset->set_paths(@pages);
 }
-
-
 
 =head2 descendants
 
@@ -252,8 +335,8 @@ L<resultset|DBIx::Class::ResultSet>.
 =cut
 
 sub descendants {
-    my ($self, $resultset_page)  = @_;
-    
+    my ( $self, $resultset_page ) = @_;
+
     my $rs = $self->result_source->resultset->search(
         {
             'ancestor.id' => $self->id,
@@ -266,17 +349,17 @@ sub descendants {
             ],
         },
         {
-            $resultset_page? (page => $resultset_page || 1, rows => 20) : (),
+            $resultset_page ? ( page => $resultset_page || 1, rows => 20 ) : (),
             from     => 'page me, page ancestor',
             order_by => ['me.name']
         }
-    );  # an empty arrayref if there are no results because we'll dereference in the 'return'
+      )
+      ; # an empty arrayref if there are no results because we'll dereference in the 'return'
 
-    return wantarray?
-        $self->result_source->resultset->set_paths($rs->all)
-      : $rs
+    return wantarray
+      ? $self->result_source->resultset->set_paths( $rs->all )
+      : $rs;
 }
-
 
 =head2 descendants_by_date
 
@@ -312,7 +395,6 @@ sub descendants_by_date {
     return $self->result_source->resultset->set_paths(@pages);
 }
 
-
 =head2 user_tags($user)
 
 Return popular tags for this page used C<$user>.
@@ -321,18 +403,19 @@ Return popular tags for this page used C<$user>.
 
 sub user_tags {
     my ( $self, $user ) = @_;
-    my (@tags) = $self->result_source->related_source('tags')->resultset->search(
+    my (@tags) =
+      $self->result_source->related_source('tags')->resultset->search(
         {
             page   => $self->id,
             person => $user,
         },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => [ 'me.id','me.tag'],
+            group_by => ['me.tag'],
         }
-    );
+      );
     return @tags;
 }
 
@@ -344,18 +427,19 @@ Return popular tags for this page used by other people than C<$user>.
 
 sub others_tags {
     my ( $self, $user ) = @_;
-    my (@tags) = $self->result_source->related_source('tags')->resultset->search(
+    my (@tags) =
+      $self->result_source->related_source('tags')->resultset->search(
         {
             page   => $self->id,
             person => { '!=', $user }
         },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => ['me.tag','me.id'],
+            group_by => ['me.tag'],
         }
-    );
+      );
     return @tags;
 }
 
@@ -367,15 +451,16 @@ Return an array of {id, tag, refcount} for the C<$user>'s tags.
 
 sub tags_with_counts {
     my ( $self, $user ) = @_;
-    my (@tags) = $self->result_source->related_source('tags')->resultset->search(
+    my (@tags) =
+      $self->result_source->related_source('tags')->resultset->search(
         { page => $self->id, },
         {
-            select   => [ 'me.id', 'me.tag', 'count(me.tag) as refcount' ],
-            as       => [ 'id',    'tag',    'refcount' ],
+            select   => [ 'me.tag', 'count(me.tag) as refcount' ],
+            as       => [ 'tag',    'refcount' ],
             order_by => ['refcount'],
-            group_by => [ 'me.id', 'me.tag'],
+            group_by => ['me.tag'],
         }
-    );
+      );
     return @tags;
 }
 
@@ -408,10 +493,9 @@ Return the number of photos attached to this page. Use for galleries.
 
 sub has_photos {
     my $self = shift;
-    return $self->result_source->schema->resultset('Photo')->search(
-        { 'attachment.page' => $self->id },
-        { join => [qw/attachment/] }
-    )->count;
+    return $self->result_source->schema->resultset('Photo')
+      ->search( { 'attachment.page' => $self->id },
+        { join => [qw/attachment/] } )->count;
 }
 
 =head1 AUTHOR

@@ -60,7 +60,7 @@
         <li class="views-navbar">
             <span class="title">[% loc('Views') %]: <a title="[%loc('Format page for printing')%]" href="[%c.uri_for('print')%]">[%loc('Print')%]</a></span>
             <a title="[%loc('Subscribe to page changes')%]" href="[%c.uri_for('rss')%]">RSS</a>
-            <a title="[%loc('Inline for including content')%]" href="[%c.uri_for('inline')%]">[%loc('Inline')%]</a>
+            <a title="[%loc('Inline for including content')%]" href="[%c.uri_for('inline')%]" rel="nofollow">[%loc('Inline')%]</a>
 [% IF c.req.params.rev %]
 [% PROCESS page/rollback.tt | indent 6 %]
 [% END %]

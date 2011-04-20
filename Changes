@@ -1,3 +1,29 @@
+1.04  2011-02-12 10:24
+  Improvements:
+  - Don't save a page when there is no change even if we push the save button.
+    This prevents the revision number from being incremented.
+  - Added gist formatter (bayashi)
+  
+  Fixes:
+  - Amazon requires a secret key now to access it's API.
+    Make the Amazon formatter aware of that.
+  - Google calendar formatter was setting precomple_off = 1 always 
+    (even when it wasn't a calendar page).
+
+1.03  2011-01-12 11:36
+  New features:
+  - Google Calendar formatter (jcockhren)
+
+  Bug fixes:
+  - Really fix tagged descendants by date for postgres
+  
+  Improvements:
+  - Korean Translation <JEEN>
+  - popular account link formatter via {{id:$service $account_name}} <bayashi>
+    e.g. {{id::cpan bayashi}} gets rendered as <a href="http://search.cpan.org/~bayashi/">bayashi</a>
+  - Show tags only once for 'Popular' and 'My' categories
+
+  
 1.02 2010-08-30 04:20
   Bug fixes: 
   - Fix tagged descendants by date for postgresql
