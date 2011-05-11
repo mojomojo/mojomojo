@@ -98,24 +98,6 @@ if ($@ ) {
 MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_dir}
         || MojoMojo->path_to('uploads') . '' );
 
-=head1 METHODS
-
-=head2 prepare
-
-Accomdate a forcing of SSL if needed in a reverse proxing setup
-
-=cut
-
-sub prepare {
-    my $self = shift->next::method(@_);
-    if ( $self->config->{force_ssl} ) {
-        my $request = $self->request;
-        $request->base->scheme('https');
-        $request->uri->scheme('https');
-    }
-    return $self;
-}
-
 =head1 NAME
 
 MojoMojo - A Catalyst & DBIx::Class powered Wiki.
@@ -149,6 +131,24 @@ for every wiki page.
 To find out more about how you can use MojoMojo, please visit
 http://mojomojo.org or read the installation instructions in
 L<MojoMojo::Installation> to try it out yourself.
+
+=head1 METHODS
+
+=head2 prepare
+
+Accomdate a forcing of SSL if needed in a reverse proxing setup
+
+=cut
+
+sub prepare {
+    my $self = shift->next::method(@_);
+    if ( $self->config->{force_ssl} ) {
+        my $request = $self->request;
+        $request->base->scheme('https');
+        $request->uri->scheme('https');
+    }
+    return $self;
+}
 
 
 =head2 ajax
