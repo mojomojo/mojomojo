@@ -102,12 +102,20 @@ sub end : Private {
 =head2 auto
 
 Runs for all requests, checks if user is in need of validation, and
-intercepts the request if so.
+intercepts the request if so. Also, if the requested page doesn't exist,
+prevents any other actions from running, and detaches straight to
+L<MojoMojo::Controller::Page/suggest>.
 
 =cut
 
 sub auto : Private {
     my ( $self, $c ) = @_;
+    
+    # Prevent most actions from running on non-existent pages. This fixes issues #36 and #80.
+    my $proto_pages = $c->stash->{proto_pages};
+    $c->detach('MojoMojo::Controller::Page', 'suggest')
+        if ($proto_pages && @$proto_pages && $c->action->name !~ /^(edit|login|logout|register|recover_pass)$/);
+    
     if ( $c->pref('enforce_login') ) {
         # allow a few actions
         if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {

@@ -452,6 +452,7 @@ sub export : Global {
 =head2 suggest (.suggest)
 
 "Page not found" page, suggesting alternatives, and allowing creation of the page.
+Root::auto detaches here for actions on nonexistent pages (e.g. c<bogus.export>).
 
 =cut
 
@@ -459,6 +460,8 @@ sub suggest : Global {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'page/suggest.tt';
     $c->res->status(404);
+    # force the Catalyst flow to jump straight to the most specific 'end' action, which is Root::end
+    return 0;  # otherwise, when Root::auto detaches here, we'd call the original action (e.g. 'export') too
 }
 
 =head2 search_inline (.search/inline)

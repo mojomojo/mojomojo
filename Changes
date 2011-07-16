@@ -1,15 +1,21 @@
+  Bug fixes: 
+  - Prevent actions from being run on non-existent pages (e.g. '/bogus.export').
+    '.edit' is allowed, to create the page. Fixes issues #36 and #80. (dandv)
+
+
 1.04  2011-02-12 10:24
   Improvements:
   - Don't save a page when there is no change even if we push the save button.
     This prevents the revision number from being incremented.
   - Added gist formatter (bayashi)
   
-  Fixes:
-  - Amazon requires a secret key now to access it's API.
+  Bug fixes:
+  - Amazon requires a secret key now to access its API.
     Make the Amazon formatter aware of that.
-  - Google calendar formatter was setting precomple_off = 1 always 
+  - Google calendar formatter was always setting precompile_off = 1
     (even when it wasn't a calendar page).
 
+    
 1.03  2011-01-12 11:36
   New features:
   - Google Calendar formatter (jcockhren)
@@ -35,9 +41,10 @@
     a butt-load and then some.  Thanks to <sauber> and <Khisanth>.
     
   Migration:
- - Moved to using KinoSearch1 instead of KinoSearch.  The former has 
-   replaced the latter.
+  - Moved to using KinoSearch1 instead of KinoSearch.  The former has
+    replaced the latter.
 
+   
 1.01 2010-05-26 10:04:20
   New features:
   - Google search formatter (bayashi)
@@ -53,6 +60,7 @@
   - All Methods/subs now documented
   - POD Coverage test on by default
 
+  
 1.00 2010-05-09 00:04:20
 
   New Features:
