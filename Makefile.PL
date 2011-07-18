@@ -9,6 +9,7 @@ resources MailingList => 'http://n2.nabble.com/mojomojo-f2358427.html';
 all_from 'lib/MojoMojo.pm';
 
 requires(
+    'Plack'      => 0.9974,
     'Algorithm::Diff'              => '1.1901',
     'Algorithm::Merge'             => 0,
     'Archive::Zip'                 => '1.14',
@@ -17,6 +18,7 @@ requires(
     'Catalyst::Action::RenderView' => '0.07',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
     'Catalyst::Controller::HTML::FormFu'           => '0.03007',
+    'Catalyst::Engine::PSGI'                       => '0',
     'Catalyst::Model::DBIC::Schema'                => '0.01',
     'Catalyst::Plugin::Authentication'             => '0.10005',
     'Catalyst::Plugin::Cache'                      => 0.08,

@@ -1,0 +1,5 @@
+www:
+    type: perl
+db:
+    type: postgresql
+
