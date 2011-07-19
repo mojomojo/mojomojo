@@ -1,8 +1,9 @@
   Bug fixes:
-  - Ensure all 'jsrpc/diff' links have rel=nofollow. Avoid bogus search engine indexing.
+  - Check input for gallery pages (be numeric) and jsrpc/diff (page must exist). Fixes issue #83.  (dandv)
+  - Ensure all 'jsrpc/diff' links have rel=nofollow. Avoid bogus search engine indexing.  (dandv)
   - Allow only logged-in users to export. Alleviates issue #39.  (dandv)
   - Prevent actions from being run on non-existent pages (e.g. '/bogus.export').
-    '.edit' is allowed, to create the page. Fixes issues #36 and #80. (dandv)
+    '.edit' is allowed, to create the page. Fixes issues #36 and #80.  (dandv)
 
 
 1.04  2011-02-12 10:24
@@ -73,9 +74,9 @@
   - Fix WantedLink to use normalize_page to match links
   - Removed File::Slurp dependency after removing it from Text::(Multi)Markdown
     because it fails installation under Strawberry Perl  (dandv)
-  - IRC Formatter auto-color nicknames (GitHub issue #27) (linio) 
-  - Attachments size in Page info is now correctly displayed (GitHub issue #53) (linio)
-  - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (Github issue #52) (linio)
+  - IRC Formatter auto-color nicknames (issue #27) (linio)  [his last commit, RIP now]
+  - Attachments size in Page info is now correctly displayed (issue #53) (linio)
+  - Remove 'Alerts' from Syntax Highlight list - it's Kate's hidden module (issue #52) (linio)
   - Fixed formatter_all_textile tests to work without Syntax plugin
   
   Improvements:

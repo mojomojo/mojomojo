@@ -60,7 +60,7 @@ sub view : Global {
     return $c->forward('suggest')
       if $proto_pages && @$proto_pages;
 
-    my $page = $stash->{'page'};
+    my $page = $stash->{page};
 
     return unless $c->check_view_permission;
 
@@ -162,7 +162,7 @@ sub search : Global {
         if ( $c->pref('check_permission_on_view') ) {
             if ( $c->user_exists() ) { $user = $c->user->obj; }
             my $perms = $c->check_permissions( $page->path, $user );
-            next unless $perms->{'view'};
+            next unless $perms->{view};
         }
 
         # add a snippet of text containing the search query
@@ -193,7 +193,7 @@ sub search : Global {
     # Order hits by score.
     my @results;
     foreach my $hit_path (
-        sort { $results_hash{$b}->{'score'} <=> $results_hash{$a}->{'score'} }
+        sort { $results_hash{$b}->{score} <=> $results_hash{$a}->{score} }
         keys %results_hash
       )
     {
