@@ -136,7 +136,7 @@ L<MojoMojo::Installation> to try it out yourself.
 
 =head2 prepare
 
-Accomdate a forcing of SSL if needed in a reverse proxing setup
+Accomodate a forcing of SSL if needed in a reverse proxy setup.
 
 =cut
 
@@ -153,7 +153,9 @@ sub prepare {
 
 =head2 ajax
 
-ajax request header
+Return whether the request is an AJAX one (used by the live preview,
+for example), as opposed to a rgular request (such as one used to view
+a page).
 
 =cut
 
@@ -186,8 +188,8 @@ sub wikiword {
 
 =head2 pref
 
-Find or create a preference key, update it if you pass a value then return the
-current setting.
+Find or create a preference key. Update it if a value is passed, then
+return the current setting.
 
 =cut
 
@@ -292,7 +294,7 @@ sub fixw {
 
 =head2 prepare_action
 
-Provide No DB message when one needs to spawn the db (script/mojomojo_spawn.pl)
+Provide "No DB" message when one needs to spawn the db (script/mojomojo_spawn.pl).
 
 =cut
 
@@ -313,12 +315,12 @@ sub prepare_action {
 
 We override this method to work around some of Catalyst's assumptions about
 dispatching. Since MojoMojo supports page namespaces
-(e.g. '/parent_page/child_page'), with page paths that always start with '/',
-we strip the trailing slash from $c->req->base. Also, since MojoMojo indicates
-actions by appending a '.$action' to the path
-(e.g. '/parent_page/child_page.edit'), we remove the page path and save it in
-$c->stash->{path} and reset $c->req->path to $action. We save the original URI
-in $c->stash->{pre_hacked_uri}.
+(e.g. C</parent_page/child_page>), with page paths that always start with C</>,
+we strip the trailing slash from C<< $c->req->base >>. Also, since MojoMojo
+indicates actions by appending a C<.$action> to the path
+(e.g. C</parent_page/child_page.edit>), we remove the page path and save it in
+C<< $c->stash->{path} >> and reset C<< $c->req->path >> to C<< $action >>.
+We save the original URI in C<< $c->stash->{pre_hacked_uri} >>.
 
 =cut
 
@@ -336,6 +338,8 @@ sub prepare_path {
         $c->stash->{path} = $path;
         $c->req->path($1);
     } else {
+        # find the *last* period, so that pages can have periods in their name.
+        # This fixes http://github.com/marcusramberg/mojomojo/issues/#issue/58
         my $index = index( $path, '.' );
 
         if ( $index == -1 ) {
@@ -356,7 +360,7 @@ sub prepare_path {
 
 =head2 base_uri
 
-Return $c->req->base as an URI object.
+Return C<< $c->req->base >> as an URI object.
 
 =cut
 
@@ -367,7 +371,7 @@ sub base_uri {
 
 =head2 uri_for
 
-Override $c->uri_for to append path, if a relative path is used.
+Override C<< $c->uri_for >> to append path, if a relative path is used.
 
 =cut
 
@@ -391,7 +395,7 @@ sub uri_for {
 
 =head2 uri_for_static
 
-static has been remapped to .static
+C</static/> has been remapped to C</.static/>.
 
 =cut
 
@@ -402,11 +406,16 @@ sub uri_for_static {
      ?  $self->config->{static_path} . $asset 
      :  $self->uri_for('/.static', $asset) );
 }
+=head2 _cleanup_path
+
+Lowercase the path and remove any double-slashes.
+
+=cut
 
 sub _cleanup_path {
     my ( $c, $path ) = @_;
-    ## make some changes to the path - We have to do this
-    ## because path is not always cleaned up before we get it.
+    ## Make some changes to the path - we have to do this
+    ## because path is not always cleaned up before we get it:
     ## sometimes we get caps, other times we don't. Permissions are
     ## set using lowercase paths.
 
@@ -418,6 +427,19 @@ sub _cleanup_path {
 
     return $searchpath;
 }
+
+=head2 _expand_path_elements
+
+Generate all the intermediary paths to C</path/to/a/page>, starting from C</>
+and ending with the complete path:
+
+    /
+    /path
+    /path/to
+    /path/to/a
+    /path/to/a/page
+
+=cut    
 
 sub _expand_path_elements {
     my ( $c, $path ) = @_;
@@ -431,7 +453,7 @@ sub _expand_path_elements {
 
     my @paths_to_check = ('/');
 
-    my $current_path;
+    my $current_path = '';
 
     foreach my $pathitem (@pathelements) {
         $current_path .= "/" . $pathitem;
@@ -443,36 +465,53 @@ sub _expand_path_elements {
 
 =head2 get_permissions_data
 
-  Permissions are checked prior to most actions, including view if that is
-  turned on in the configuration. The permission system works as follows.
-  1. There is a base set of rules which may be defined in the application
-     config, these are:
-          $c->config->{permissions}{view_allowed} = 1; # or 0
-     similar entries exist for delete, edit, create and attachment.
-     if these config variables are not defined, default is to allow
-     anyone to do anything.
+Permissions are checked prior to most actions, including C<view> if that is
+turned on in the configuration. The permission system works as follows:
 
-   2. Global rules that apply to everyone may be specified by creating a
-      record with a role-id of 0.
+=over
 
-   3. Rules are defined using a combination of path, and role and may be
-      applied to subpages or not.
+=item 1.
 
-   4. All rules matching a given user's roles and the current path are used to
-      determine the final yes/no on each permission. Rules are evaluated from
-      least-specific path to most specific. This means that when checking
-      permissions on /foo/bar/baz, permission rules set for /foo will be
-      overridden by rules set on /foo/bar when editing /foo/bar/baz. When two
-      rules (from different roles) are found for the same path prefix, explicit
-      allows override denys. Null entries for a given permission are always
-      ignored and do not effect the permissions defined at earlier level. This
-      allows you to change certain permissions (such as create) only while not
-      affecting previously determined permissions for the other actions. Finally -
-      apply_to_subpages yes/no is exclusive. Meaning that a rule for /foo with
-      apply_to_subpages set to yes will apply to /foo/bar but not to /foo alone.
-      The endpoint in the path is always checked for a rule explicitly for that
-      page - meaning apply_to_subpages = no.
-      
+There is a base set of rules which may be defined in the application
+config. These are:
+
+    $c->config->{permissions}{view_allowed} = 1; # or 0
+    
+Similar entries exist for C<delete>, C<edit>, C<create> and C<attachment>.
+If these config variables are not defined, the default is to allow anyone 
+to do anything.
+
+=item 2.
+
+Global rules that apply to everyone may be specified by creating a
+record with a role id of 0.
+
+=item 3.
+
+Rules are defined using a combination of path(s)?, and role and may be
+applied to subpages or not.
+
+TODO: clarify.
+
+=item 4.
+
+All rules matching a given user's roles and the current path are used to
+determine the final yes/no on each permission. Rules are evaluated from
+least-specific path to most specific. This means that when checking
+permissions on C</foo/bar/baz>, permission rules set for C</foo> will be
+overridden by rules set on C</foo/bar> when editing C</foo/bar/baz>. When two
+rules (from different roles) are found for the same path prefix, explicit
+C<allow>s override C<deny>s. Null entries for a given permission are always
+ignored and do not affect the permissions defined at earlier level. This
+allows you to change certain permissions (such as C<create>) only while not
+affecting previously determined permissions for the other actions. Finally -
+C<apply_to_subpages> C<yes>/C<no> is exclusive, meaning that a rule for C</foo> with
+C<apply_to_subpages> set to C<yes> will apply to C</foo/bar> but not to C</foo>
+alone. The endpoint in the path is always checked for a rule explicitly for that
+page - meaning C<apply_to_subpages = no>.
+
+=back
+
 =cut
 
 sub get_permissions_data {
@@ -485,26 +524,26 @@ sub get_permissions_data {
 
     ## Now that we have our path elements to check, we have to figure out how we are accessing them.
     ## If we have caching turned on, we load the perms from the cache and walk the tree.
-    ## otherwise we pull what we need out of the db.
-    # structure:   $permdata{$pagepath} = {
-    #                                         admin => {
-    #                                                   page => {
-    #                                                               create => 'yes',
-    #                                                               delete => 'yes',
-    #                                                               view => 'yes',
-    #                                                               edit => 'yes',
-    #                                                               attachment => 'yes',
-    #                                                           },
-    #                                                   subpages => {
-    #                                                               create => 'yes',
-    #                                                               delete => 'yes',
-    #                                                               view => 'yes',
-    #                                                               edit => 'yes',
-    #                                                               attachment => 'yes',
-    #                                                           },
-    #                                                  },
-    #                                         users => .....
-    #                                     }
+    ## Otherwise we pull what we need out of the DB. The structure is:
+    # $permdata{$pagepath} = {
+    #     admin => {
+    #         page => {
+    #             create => 'yes',
+    #             delete => 'yes',
+    #             view => 'yes',
+    #             edit => 'yes',
+    #             attachment => 'yes',
+    #         },
+    #         subpages => {
+    #             create => 'yes',
+    #             delete => 'yes',
+    #             view => 'yes',
+    #             edit => 'yes',
+    #             attachment => 'yes',
+    #         },
+    #     },
+    #     users => .....
+    # }
     if ( $c->pref('cache_permission_data') ){
         $permdata = $c->cache->get('page_permission_data');
     }
@@ -518,13 +557,13 @@ sub get_permissions_data {
         # Can't use string ("") as a HASH ref while "strict refs"
         $permdata = {};
         
-        ## either the data hasn't been loaded, or it's expired since we used it last.
+        ## Either the data hasn't been loaded, or it's expired since we used it last,
         ## so we need to reload it.
         my $rs =
             $c->model('DBIC::PathPermissions')
             ->search( undef, { order_by => 'length(path),role,apply_to_subpages' } );
 
-        # if we are not caching, we don't return the whole enchilada.
+        # If we are not caching, we don't return the whole enchilada.
         if ( ! $c->pref('cache_permission_data') ) {
             ## this seems odd to me - but that's what the DBIx::Class says to do.
             $rs = $rs->search( { role => $role_ids } ) if $role_ids;
@@ -569,7 +608,7 @@ sub get_permissions_data {
 
 =head2 user_role_ids
 
-Get the list of role ids for a user
+Get the list of role ids for a user.
 
 =cut
 
@@ -588,7 +627,7 @@ sub user_role_ids {
 
 =head2 check_permissions
 
-Check user permissions for a path
+Check user permissions for a path.
 
 =cut
 
@@ -647,8 +686,8 @@ sub check_permissions {
         },
     );
 
-    ## the outcome of this loop is a combined permission set.
-    ## The rule orders are basically based on how specific the path
+    ## The outcome of this loop is a combined permission set.
+    ## The rule orders are essentially based on how specific the path
     ## match is.  More specific paths override less specific paths.
     ## When conflicting rules at the same level of path hierarchy
     ## (with different roles) are discovered, the grant is given precedence
@@ -702,7 +741,7 @@ sub check_permissions {
 
 =head2 check_view_permission
 
-Check if a user can view a path
+Check if a user can view a path.
 
 =cut
 
@@ -759,9 +798,26 @@ die 'Require write access to attachment_dir: <'.MojoMojo->config->{attachment_di
 
 =head1 SUPPORT
 
-If you want to talk about MojoMojo, there's an IRC channel, L<irc://irc.perl.org/mojomojo>.
+=over
+
+=item *
+
+L<http://mojomojo.org>
+
+=item *
+
+IRC: L<irc://irc.perl.org/mojomojo>.
+
+=item *
+
+Mailing list: L<http://mojomojo.2358427.n2.nabble.com/>
+
+=item *
+
 Commercial support and customization for MojoMojo is also provided by Nordaaker
 Ltd. Contact C<arneandmarcus@nordaaker.com> for details.
+
+=back
 
 =head1 AUTHORS
 

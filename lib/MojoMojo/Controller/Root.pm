@@ -24,6 +24,7 @@ sub begin : Private {
     else {
         $c->languages([$c->pref('default_lang')]) if $c->pref('default_lang');
     }
+    # $c->stash->{path} is set by MojoMojo::prepare_path, which overrides the built-in Catalyst method
     if ( $c->stash->{path} ) {
         my ( $path_pages, $proto_pages ) =
             $c->model('DBIC::Page')->path_pages( $c->stash->{path} );

@@ -26,9 +26,15 @@ hashes for any pages at the end of the path that do not exist. All paths
 include the root (/), which must exist, so a path of at least one element
 will always be returned.
 
-The "proto page" hash keys are:
+The "proto page" hash keys are shown in the example below, where we assume
+that C</blog> exists and C</blog/My_New_Entry> doesn't exist yet:
 
-TODO
+    {
+        depth => 2,
+        name => "my_new_entry",
+        name_orig => "My_New_Entry",
+        path => "/blog/My_New_Entry",
+    },
 
 =cut
 
