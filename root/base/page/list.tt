@@ -49,7 +49,7 @@
         <li><a href="[% c.uri_for('tags') %]" title="[% loc('All tags in this path') %]">[% loc('Tags') %]</a></li>
         <li><a href="[% c.uri_for('users') %]" title="[% loc('Who wrote what') %]" accesskey="">[% loc('Authors in this path') %]</a></li>
         <li><a href="[% c.uri_for('feeds') %]" title="[% loc('Subscribe to changes by RSS') %]">[% loc('Feeds') %]</a></li>
-        <li><a href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this path') %]" accesskey="X" rel="nofollow">[% loc('Export') %]</a></li>
+        [%+ IF (user) %]<li><a href="[% c.uri_for('export') %]" title="[% loc('Download a zip with all the pages in this path') %]" accesskey="X" rel="nofollow">[% loc('Export') %]</a></li>[% END %]
     </ul>
 
     <h2>[%loc('Backlinks')%]</h2>
