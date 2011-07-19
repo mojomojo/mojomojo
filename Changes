@@ -1,4 +1,5 @@
-  Bug fixes: 
+  Bug fixes:
+  - Ensure all 'jsrpc/diff' links have rel=nofollow. Avoid bogus search engine indexing.
   - Allow only logged-in users to export. Alleviates issue #39.  (dandv)
   - Prevent actions from being run on non-existent pages (e.g. '/bogus.export').
     '.edit' is allowed, to create the page. Fixes issues #36 and #80. (dandv)
