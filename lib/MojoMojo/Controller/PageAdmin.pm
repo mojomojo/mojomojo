@@ -189,7 +189,7 @@ sub edit : Global FormConfig {
                 $c->loc('END OF CONFLICT'));
             return;
         }
-        
+
         # Format content body and store the result in content.precompiled 
         # This speeds up MojoMojo page rendering on /.view actions
         my $precompiled_body = $valid->{'body'};
