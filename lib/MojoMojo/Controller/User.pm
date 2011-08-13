@@ -85,7 +85,7 @@ Show a list of the active users with links to the pages they edited.
 =cut
 
 sub users : Global {
-    my ( $elf, $c, $tag ) = @_;
+    my ( $elf, $c ) = @_;
     my $res = $c->model("DBIC::Person")->search(
         { active => 1 },
         {

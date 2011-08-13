@@ -121,8 +121,8 @@ User listing with pager, for enabling/disabling users.
 =cut
 
 sub user : Local {
-    my ( $self, $c, $user ) = @_;
-    my $iterator = $c->model("DBIC::Person")->search(
+    my ( $self, $c ) = @_;
+    my $res = $c->model("DBIC::Person")->search(
         {},
         {
             page => $c->req->param('page') || 1,
@@ -130,8 +130,9 @@ sub user : Local {
             order_by => 'active desc, login'
         }
     );
-    $c->stash->{users} = $iterator;
-    $c->stash->{pager} = $iterator->pager;
+    $c->stash->{users}    = $res;
+    $c->stash->{pager}    = $res->pager;
+    $c->stash->{template} = 'admin/user.tt';  # TT finds the template by default; added line for clarity
 }
 
 =head2 role ( .admin/role )
