@@ -1,4 +1,7 @@
 #!/usr/bin/env perl
+# TODO: this should call MojoMojo::Controller::Admin::delete() after 
+# that method gets moved to the Model. There's no reason to reinvent
+# a poor-man's version of page deletion here (issue #87).
 use strict;
 use warnings;
 # WARNING: This script will delete all the children of the page you are deleting.

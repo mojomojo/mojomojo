@@ -297,29 +297,31 @@ sub precompile_pages : Global {
 
 =head2 delete
 
-Delete a page and it's descendants.  This is in Admin.pm because
-we are restricting page deletion to admins only for the time being.
+Delete a page and its descendants.  This is in L<MojoMojo::Controller::Admin>
+because we are restricting page deletion to admins only for the time being.
+
+TODO: this method should reside in the Model, not in a Controller (issue #87).
 
 =cut
 
 sub delete : Global FormConfig {
-    my ( $self, $c, $path ) = @_;
-    my $form  = $c->stash->{form};
+    my ( $self, $c ) = @_;
     my $stash = $c->stash;
+    my $form  = $stash->{form};
     $stash->{template} = 'page/delete.tt';
     my @descendants;
     push @descendants, {
         name       => $_->name_orig,
         id         => $_->id,
         can_delete => ($_->id == 1) ? 0 : $c->check_permissions($_->path, $c->user)->{delete},
-    } for sort { $a->{path} cmp $b->{path} } $c->stash->{'page'}->descendants;
+    } for sort { $a->{path} cmp $b->{path} } $c->stash->{page}->descendants;
     $stash->{descendants}       = \@descendants;
     $stash->{allowed_to_delete} = ( grep {$_->{can_delete} == 0} @descendants )
                                 ? 0 : 1;
     if ( $form->submitted_and_valid && $stash->{allowed_to_delete} ) {
         my @deleted_pages;
         my @ids_to_delete;
-        for my $page ( $c->stash->{'page'}->descendants ) {
+        for my $page ( $c->stash->{page}->descendants ) {
             push @deleted_pages, $page->name_orig;
             push @ids_to_delete, $page->id;
             # Handling Circular Constraints:
@@ -355,8 +357,8 @@ sub delete : Global FormConfig {
                 $c->model( $table->{module} )->search( $search )->delete_all;
             }
         }
-        $stash->{'deleted_pages'} = \@deleted_pages;
-        $stash->{'template'}      = 'page/deleted.tt';
+        $stash->{deleted_pages} = \@deleted_pages;
+        $stash->{template}      = 'page/deleted.tt';
     }
 }
 
