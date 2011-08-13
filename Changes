@@ -1,3 +1,6 @@
+  New features:
+  - script to delete inactive users and their page revisions, useful to clear spam  (dandv)
+
   Bug fixes:
   - Check input for gallery pages (be numeric) and jsrpc/diff (page must exist). Fixes issue #83.  (dandv)
   - Ensure all 'jsrpc/diff' links have rel=nofollow. Avoid bogus search engine indexing.  (dandv)
