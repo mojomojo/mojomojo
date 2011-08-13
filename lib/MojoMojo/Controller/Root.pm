@@ -113,10 +113,11 @@ sub auto : Private {
     my ( $self, $c ) = @_;
     
     # Prevent most actions from running on non-existent pages. This fixes issues #36 and #80.
+    # 'render' should be allowed so that jsrpc/render can be used to preview newly created pages while the first version is being typed in
     my $proto_pages = $c->stash->{proto_pages};
     $c->detach('MojoMojo::Controller::Page', 'suggest')
-        if ($proto_pages && @$proto_pages && $c->action->name !~ /^(edit|login|logout|register|recover_pass)$/);
-    
+        if ($proto_pages && @$proto_pages && $c->action->name !~ /^(edit|render|login|logout|register|recover_pass)$/);
+
     if ( $c->pref('enforce_login') ) {
         # allow a few actions
         if ( grep $c->action->name eq $_, qw/login logout recover_pass register/ ) {
