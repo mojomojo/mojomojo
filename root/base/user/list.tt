@@ -18,5 +18,7 @@
         </dd>
     [% END -%]
     </dl>
+
+    [% PROCESS pager.tt %]
 </div>
 [% END # WRAPPER -%]

@@ -1,5 +1,6 @@
   New features:
-  - script to delete inactive users and their page revisions, useful to clear spam  (dandv)
+  - Script to delete inactive users and their page revisions, useful to clear spam  (dandv)
+  - Navigation bar for /.users both at top and bottom of the page now  (dandv)
 
   Bug fixes:
   - Check input for gallery pages (be numeric) and jsrpc/diff (page must exist). Fixes issue #83.  (dandv)
