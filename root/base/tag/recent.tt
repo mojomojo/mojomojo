@@ -1,5 +1,5 @@
 [% PROCESS header.tt %]
-[% SET now=pages.first.updated.ymd; %]
+[% SET now=c.tz(pages.first.updated).ymd; %]
 <div id="header"><h1 id="pageName"> [% loc('Recent Pages') %] </h1></div>
 [% PROCESS breadcrumbs.tt %]
 [% PROCESS navbar.tt %]
@@ -16,15 +16,15 @@
 <b>[% now %]</b>
 <ul>
 [% FOREACH page IN pages %]
-[% IF now != page.content.created.ymd; %]
-  [% SET now = page.content.created.ymd; %]
+[% IF now != c.tz(page.content.created).ymd; %]
+  [% SET now = c.tz(page.content.created).ymd; %]
   </ul><b>[% now %]</b><ul>
 [% END %]
  <li>
     <a href="[% c.uri_for( page.path )%]">[% c.expand_wikilink(page.name) %]</a>
     <div class="byline" style="margin-bottom: 0px">
       [% loc('by') %] <a class="existingWikiWord" href="[% c.uri_for( page.content.creator.link) %]">[% page.content.creator.name %]</a>
-      [% loc('at') %] [% page.content.created.hms(':') %]
+      [% loc('at') %] [% c.tz(page.content.created).hms(':') %]
     </div>
   </li>
 [% END %]

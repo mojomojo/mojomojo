@@ -10,7 +10,7 @@
             [% content.formatted(c) %]
         </div>
         <div class="byline">
-            [% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]
+            [% loc('Revised on x at x by x', [c.tz(content.created).ymd, c.tz(content.created).hms, content.creator.name]) %]
         </div>
     </div>
 </div>

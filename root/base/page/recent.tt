@@ -7,7 +7,7 @@
     IF activetag;
         SET title = loc('Recent pages in x tagged with x', [page.path, activetag]);
     END;
-    SET now = objects.first.content.created.ymd;
+    SET now = c.tz(objects.first.content.created).ymd;
 %]
 
 [% WRAPPER page/wrapper.tt title = title %]
@@ -31,12 +31,12 @@
 [% first = 1 %]
 [% FOREACH page IN pages %]
   [% IF c.check_permissions(page.path,c.user).view %]
-    [% IF now != page.content.created.ymd; %]
+    [% IF now != c.tz(page.content.created).ymd; %]
         [% IF first; first = 0; ELSE %]
         </tbody></table>
         [% END %]
 
-        [% SET now = page.content.created.ymd %]
+        [% SET now = c.tz(page.content.created).ymd %]
         <h3>[% now %]</h3>
         <table class="recent">
             <thead>
@@ -58,7 +58,7 @@
             <a href="[% c.req.base; page.content.creator.link  _ '.profile'; %]">[% page.content.creator.name %]</a>
              </td>
             <td>
-                [% page.content.created.hms(":") %]
+                [% c.tz(page.content.created).hms(":") %]
             </td>
             <td><a rel="nofollow" href="[% c.uri_for('jsrpc/diff', page.id , 0, 0, 1) %]" class="diff_link">[% loc('View Diff') %]</a></td>
         </tr>

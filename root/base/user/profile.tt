@@ -32,6 +32,11 @@
         <dd>[% person.gender %]</dd>
         [%+ END %]
 
+        [% IF person.timezone +%]
+        <dt>[% loc('Timezone') %]:</dt>
+        <dd>[% person.timezone %]</dd>
+        [%+ END %]
+
         [% IF person.industry +%]
         <dt>[% loc('Industry') %]:</dt>
         <dd>[% person.industry %]</dd>
@@ -52,7 +57,7 @@
         <dd>[% person.movies_formatted %]</dd>
         [%+ END +%]
         <dt>[% loc('Date registered') %]:</dt>
-        <dd>[% person.registered.ymd %]</dd>
+        <dd>[% c.tz(person.registered).ymd %]</dd>
 
         <dt>[% loc('Edits') %]:<dt>
         <dd>
