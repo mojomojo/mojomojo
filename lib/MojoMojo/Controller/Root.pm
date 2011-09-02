@@ -124,7 +124,11 @@ sub auto : Private {
             return 1;
         }
         if ( !$c->user_exists ) {
-            $c->res->redirect( $c->uri_for('/.login') );
+                $c->res->redirect(
+                        $c->uri_for(     
+                                $c->stash->{path} . '.login' # send them to the login for this page
+                        )
+                );
         }
     }
 
