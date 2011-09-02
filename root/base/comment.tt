@@ -10,7 +10,7 @@
         <dt>[% loc('poster') %]</dt>
         <dd><a href="[%comment.poster.link%]">[%comment.poster.name%]</a></dd>
         <dt>[% loc('posted') %]</dt>
-        <dd>[% comment.posted.ymd %] [% comment.posted.hms %]</dd>
+        <dd>[% c.tz(comment.posted).ymd %] [% c.tz(comment.posted).hms %]</dd>
         <dt>
             [% loc('comment') %]:
             [% IF user.can_edit(page.path) %]

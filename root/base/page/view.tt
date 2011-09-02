@@ -12,7 +12,7 @@
 
   [%- IF c.req.params.rev %]
     <div id="revision_info">
-      [% loc('Revision') %] [% c.req.params.rev %] - [% content.created.ymd %] [% loc('at') %] [% content.created.hms %]
+      [% loc('Revision') %] [% c.req.params.rev %] - [% c.tz(content.created).ymd %] [% loc('at') %] [% c.tz(content.created).hms %]
       [% IF c.req.params.rev > page.content_version %]
         <em>[% loc('Rolled Back (Current: x)', page.content_version) %]</em>
       [% END %]
@@ -37,8 +37,8 @@
     </div>
 
     <div class="byline">
-        <acronym title="[% loc('Revised on x at x by x', [content.created.ymd, content.created.hms, content.creator.name]) %]">[% loc('Revision') %]</acronym>
-        [% loc('by') %] [% c.wikiword(content.creator.link, base, content.creator.name, 'profile') %], [% content.created.ymd %]
+        <acronym title="[% loc('Revised on x at x by x', [c.tz(content.created).ymd, c.tz(content.created).hms, content.creator.name]) %]">[% loc('Revision') %]</acronym>
+        [% loc('by') %] [% c.wikiword(content.creator.link, base, content.creator.name, 'profile') %], [% c.tz(content.created).ymd %]
     </div>
 
 </div>

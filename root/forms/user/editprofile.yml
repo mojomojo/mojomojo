@@ -21,6 +21,9 @@ elements:
         - [ 'f', 'Female' ]
         - [ '?', 'Rather not say' ]
   - type: Text
+    name: timezone
+    label_loc: Timezone
+  - type: Text
     name: industry
     label_loc: Industry
   - type: Textarea

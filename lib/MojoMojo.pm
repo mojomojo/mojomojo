@@ -20,6 +20,7 @@ use Catalyst qw/
 use Storable;
 use Digest::MD5;
 use Data::Dumper;
+use DateTime;
 use MRO::Compat;
 use DBIx::Class::ResultClass::HashRefInflator;
 use Encode ();
@@ -290,6 +291,20 @@ sub fixw {
     $w =~ s/\s/\_/g;
     $w =~ s/[^\w\/\.]//g;
     return $w;
+}
+
+=head2 tz
+
+Convert timezone
+
+=cut
+
+sub tz {
+    my ( $c, $dt ) = @_;
+    if ( $c->user && $c->user->timezone ) {
+        eval { $dt->set_time_zone( $c->user->timezone ) };
+    }
+    return $dt;
 }
 
 =head2 prepare_action
