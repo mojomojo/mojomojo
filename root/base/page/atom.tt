@@ -4,7 +4,7 @@
 <link rel="alternate" type="text/html" href="[% c.uri_for('view') %]" />
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <tagline> [%loc('Recent changes in x',page.path)%]</tagline>
-<id>tag:[%c.base_uri.host%],[%page.content.created.ymd('-')%]:[%page.path%]</id>
+<id>tag:[%c.base_uri.host%],[%c.tz(page.content.created).ymd('-')%]:[%page.path%]</id>
 <generator url="[%base%]" version="0.1">[% title || "MojoMojo"%]</generator>
 [%FOREACH page IN pages %]
   [% IF c.check_permissions(page.path,c.user).view %]
@@ -14,7 +14,7 @@
 <modified>[% page.content.created.datetime %]-00:00</modified>
 <issued>[%IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</issued>
-<id>tag:[% c.base_uri.host %],[% page.content.created.ymd('-') %]:[% page.path %]</id>
+<id>tag:[% c.base_uri.host %],[% c.tz(page.content.created).ymd('-') %]:[% page.path %]</id>
 <created>[% IF page.revisions %][% page.revisions.last.updated.datetime %][%
 	ELSE %][% page.content.created.datetime %][% END %]-00:00</created>
 <summary type="text/plain">[% page.content.body %]</summary>
