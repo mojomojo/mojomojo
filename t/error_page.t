@@ -9,7 +9,7 @@ BEGIN {
     use_ok 'Catalyst::Test', 'MojoMojo';
 }
 
-my $url = '/page_doesnt_exist.invalid_action';
+my $url = '/.invalid_action';
 my $url_RE = quotemeta $url;
 
 content_like $url, qr/not found.*$url_RE\W/, 'error page URL';
