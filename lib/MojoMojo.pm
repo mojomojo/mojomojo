@@ -101,7 +101,7 @@ MojoMojo->model('DBIC')->schema->attachment_dir( MojoMojo->config->{attachment_d
 
 =head1 NAME
 
-MojoMojo - A Catalyst & DBIx::Class powered Wiki.
+MojoMojo - A Wiki with a tree
 
 =head1 SYNOPSIS
 
@@ -121,16 +121,16 @@ MojoMojo - A Catalyst & DBIx::Class powered Wiki.
 
 =head1 DESCRIPTION
 
-Mojomojo is a sort of content management system, borrowing many concepts from
+Mojomojo is a content management system, borrowing many concepts from
 wikis and blogs. It allows you to maintain a full tree-structure of pages,
 and to interlink them in various ways. It has full version support, so you can
 always go back to a previous version and see what's changed with an easy diff
-system. There are also a bunch of other features like live AJAX preview while
-editing, page tags, built-in fulltext search, image galleries, and RSS feeds
+system. There are also a some of useful features like live AJAX preview while
+editing, tagging, built-in fulltext search, image galleries, and RSS feeds
 for every wiki page.
 
 To find out more about how you can use MojoMojo, please visit
-http://mojomojo.org or read the installation instructions in
+L<http://mojomojo.org/> or read the installation instructions in
 L<MojoMojo::Installation> to try it out yourself.
 
 =head1 METHODS
