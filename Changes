@@ -1,6 +1,8 @@
+1.05  2011-09-02 14:02
   New features:
   - Script to delete inactive users and their page revisions, useful to clear spam  (dandv)
   - Navigation bar for /.users both at top and bottom of the page now  (dandv)
+  - Logged in users can set local time zone (keedi).
 
   Bug fixes:
   - Check input for gallery pages (be numeric) and jsrpc/diff (page must exist). Fixes issue #83.  (dandv)
@@ -8,6 +10,7 @@
   - Allow only logged-in users to export. Alleviates issue #39.  (dandv)
   - Prevent actions from being run on non-existent pages (e.g. '/bogus.export').
     '.edit' is allowed, to create the page. Fixes issues #36 and #80.  (dandv)
+  -  Make redirect login content sensitive (f00lish)
 
 
 1.04  2011-02-12 10:24

@@ -14,6 +14,9 @@
     <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
+    [% IF (c.action.reverse == 'page/view') %]
+    <link rel="canonical" href="[%c.uri_for('view') | lower %]" />
+    [% END %]
     <link rel="shortcut icon" href="[%c.uri_for_static('favicon.ico')%]" />
     <style type="text/css">
         [% my_theme_dir = (c.pref('theme') ) %]
