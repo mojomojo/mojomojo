@@ -45,6 +45,17 @@ elements:
       - TrimEdges
     constraints:
       - Required
+  - type: Text
+    name: antispam
+    label_loc: What is this wiki powered by (look at the bottom; 8 letters, all lowercase)?
+    filters:
+      - HTMLEscape
+      - TrimEdges
+    constraints:
+      - Required
+      - type: Regex
+        regex: mojomojo
+        message_loc: Go away spammer!
   - type: Submit
     name: submit
     value_loc: Register
