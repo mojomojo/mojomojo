@@ -141,8 +141,8 @@ sub highlight {
         : $this_content
     );
 
-    my $this = [ split /\n/,                  $this_content ];
-    my $prev = [ split /\n/,                  $previous_content ];
+    my $this = [ split /\n/, $this_content ];
+    my $prev = [ split /\n/, $previous_content ];
     my @diff = Algorithm::Diff::sdiff( $prev, $this );
     my $diff;
     my $hi           = 0;
