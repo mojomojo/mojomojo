@@ -33,7 +33,7 @@
 [% ELSE %]
     [% IF (rev AND page.content.max_version AND rev < page.content.max_version) +%]
         <li>
-            <a "title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - rev) %])
+            <a title="[%loc('See next revision')%]" href="[% c.uri_for('view',{ rev => rev + 1 }) %]" accesskey="R">[%loc('Forward in time')%]</a> ([% loc('x more',page.content.max_version - rev) %])
         </li>
     [% END %]
     [% IF rev AND rev > 1 +%]
