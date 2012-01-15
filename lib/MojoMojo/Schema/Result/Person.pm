@@ -3,7 +3,7 @@ package MojoMojo::Schema::Result::Person;
 use strict;
 use warnings;
 
-use Digest::SHA1;
+use Digest::SHA;
 
 use parent qw/MojoMojo::Schema::Base::Result/;
 
@@ -228,7 +228,7 @@ Apply a SHA1 hash to the input string.
 
 sub hashed {
     my ( $self, $secret ) = @_;
-    return Digest::SHA1::sha1_hex( $self->id . $secret );
+    return Digest::SHA::sha1_hex( $self->id . $secret );
 }
 
 # FIXME: the formatter is arbitrarily taken to be Textile; it could be MultiMarkdown
