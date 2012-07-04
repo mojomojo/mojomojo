@@ -2,7 +2,7 @@
 <p>
     <ul>
         <li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">[% loc('Markdown reference - the basics') %]</a>
-        <li><a href="http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide">[% loc('MultiMarkdown reference - the extended syntax') %]</a>
+        <li><a href="http://fletcherpenney.net/multimarkdown/">[% loc('MultiMarkdown reference - the extended syntax') %]</a>
     </ul>
 </p>
 <table id="syntax">
