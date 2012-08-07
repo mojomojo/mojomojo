@@ -45,6 +45,8 @@ $mech->get_ok('/.register');
 # This test has very small chance of failing if it's been run
 # before and the random digit is repeated.
 my $login = 'mojam';
+my $user=$schema->resultset('Person')->find({login =>'mojam'});
+$user->delete if $user;
 my $random_digit = int(rand(1000000));
 $login .= $random_digit;
 my $email_domain = '@bogusness.org';
@@ -59,6 +61,7 @@ $mech->submit_form_ok(
             email            => $email,
             name             => 'Writer',
             submit           => 'Register',
+            antispam         => 'mojomojo',
 
         },
     },
@@ -67,7 +70,7 @@ $mech->submit_form_ok(
 
 # NOTE: This test will fail if the user already exists in t/var/mojomojo.db
 # Run: prove --lib /lib t/01app.t to start with fresh database and then run this test.
-is( scalar( @{$sender->deliveries} ), 1, 'regisration validation email sent' );
+is( scalar( @{$sender->deliveries} ), 1, 'registerration validation email sent' );
 ($mail) = $sender->deliveries->[0];
 like( $mail->{email}->get_header('to'), qr/^mojam/,        'right recipient' );
 like( $mail->{email}->get_body,         qr/validate your email address/i, 'email contains validate email address' );
