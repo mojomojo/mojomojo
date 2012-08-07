@@ -80,7 +80,7 @@ sub include {
     my $rel = $url->rel( $c->req->base );
     if (not $rel->scheme) {
         # if so, then return the inline version of the page is requests
-        return $c->subreq( '/inline', { path => $rel.'' eq './' ? '/' : '/'.$rel } );
+        return $c->subreq( ($rel.'' eq './' ? '/' : '/'.$rel).'.inline'  );
     }
     my $res = URI::Fetch->fetch( $url, Cache => $c->cache );
     return $res->content if defined $res;

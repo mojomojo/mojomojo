@@ -31,7 +31,7 @@ use Module::Pluggable::Ordered
     except      => qr/^MojoMojo::Plugin::/,
     require     => 1;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 use 5.008004;
 
 MojoMojo->config->{authentication}{dbic} = {
