@@ -1,4 +1,9 @@
-1.06  2012-09-07 12:13
+
+1.07
+  Bug fixes:
+   - Fix unicode test failure.
+
+1.06  2012-08-07 12:13
   New features
   - Simple yet effective anti-bot registration measure: signup question  (dandv)
  
