@@ -2,6 +2,7 @@ package MojoMojo::Formatter::WikipediaLink;
 use strict;
 use warnings;
 use parent qw/MojoMojo::Formatter/;
+use utf8;
 
 =head1 NAME
 
