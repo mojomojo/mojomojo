@@ -92,7 +92,7 @@ When style data is parsed, as part of an HTML style attribute, or as part of an 
 
 The callbacks include details about the current tag/attribute that is being parsed, and also gives a scalar reference to the input HTML. Querying pos() on the input HTML should indicate where the module is with parsing. This gives the client code flexibility in working with HTML::Declaw.
 
-HTML::Declaw can defang whole tags, any attribute in a tag, any URL that appear as an attribute or style property, or any CSS declaration in a declaration block in a style rule. This helps to precisely block the most specific unwanted elements in the contents(for example, block just an offending attribute instead of the whole tag), while retaining any safe HTML/CSS.
+HTML::Declaw can defang whole tags, any attribute in a tag, any URL that appear as an attribute or style property, or any CSS declaration in a declaration block in a style rule. This helps one to precisely block the most specific unwanted elements in the contents(for example, block just an offending attribute instead of the whole tag), while retaining any safe HTML/CSS.
 
 =cut
 
