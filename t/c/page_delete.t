@@ -18,7 +18,7 @@ BEGIN
     eval "use WWW::Mechanize::TreeBuilder";
     plan skip_all => 'need WWW::Mechanize::TreeBuilder' if $@;
 
-    plan tests => 31;
+    plan tests => 32;
 }
 use_ok('MojoMojo::Controller::Page');
 
@@ -106,7 +106,7 @@ ok $mech->click_button(value => 'Yes'), 'click the "Yes" button';
 
 #----------------------------------------------------------------------------
 # Search for deleted page
-$mech->post( '/.search',
+$mech->post_ok( '/.search',
     {
         form_number => 1,
         fields      => { q => $random }
