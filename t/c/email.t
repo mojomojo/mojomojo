@@ -17,16 +17,16 @@ my $mech = Test::WWW::Mechanize::Catalyst->new;
 my $sender = Email::Sender::Simple->default_transport;
 # Clear out emails even though there shouldn't be any yet.
 
-is( scalar( @{$sender->deliveries} ), 0, 'no mails sent yet' );
+is( () = $sender->deliveries, 0, 'no mails sent yet' );
 
 $mech->get_ok('/.recover_pass');
 $mech->submit_form_ok( { fields => { recover => 'admin', }, },
     'recover submit' );
 
-is( scalar( @{$sender->deliveries} ), 1, 'new password emailed' );
+is( () = $sender->deliveries, 1, 'new password emailed' );
 
 # NOTE: The email body content checks are looking for English
-my ($mail) = $sender->deliveries->[0];
+my ($mail) = ($sender->deliveries)[0];
 like( $mail->{email}->get_header( 'to' ), qr/^admin/, 'right recipient' );
 like( $mail->{email}->get_body,           qr/new password/i, 'email contains a new password' );
 
@@ -37,7 +37,7 @@ ok $schema->resultset('Person')->find({login => 'admin'})->update({pass=>"admin"
 
 # Clear email trap before next test per doc recommendation.
 $sender->clear_deliveries;
-is( scalar( @{$sender->deliveries} ), 0, 'email trap reset' );
+is( () = $sender->deliveries, 0, 'email trap reset' );
 
 $mech->get_ok('/.register');
 
@@ -70,8 +70,8 @@ $mech->submit_form_ok(
 
 # NOTE: This test will fail if the user already exists in t/var/mojomojo.db
 # Run: prove --lib /lib t/01app.t to start with fresh database and then run this test.
-is( scalar( @{$sender->deliveries} ), 1, 'registerration validation email sent' );
-($mail) = $sender->deliveries->[0];
+is( () = $sender->deliveries, 1, 'registerration validation email sent' );
+($mail) = ($sender->deliveries)[0];
 like( $mail->{email}->get_header('to'), qr/^mojam/,        'right recipient' );
 like( $mail->{email}->get_body,         qr/validate your email address/i, 'email contains validate email address' );
 
