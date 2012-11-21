@@ -1,9 +1,9 @@
 use inc::Module::Install;
 
 name 'MojoMojo';
-resources bugtracker  => 'http://github.com/marcusramberg/mojomojo/issues';
+resources bugtracker  => 'http://github.com/mojomojo/mojomojo/issues';
 resources homepage    => 'http://mojomojo.org';
-resources repository  => 'http://github.com/marcusramberg/mojomojo/';
+resources repository  => 'http://github.com/mojomojo/mojomojo/';
 resources MailingList => 'http://n2.nabble.com/mojomojo-f2358427.html';
 
 all_from 'lib/MojoMojo.pm';
