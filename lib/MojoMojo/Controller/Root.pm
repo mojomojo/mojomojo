@@ -137,6 +137,7 @@ sub auto : Private {
     return 1 if $c->stash->{user}->active != -1;
     return 1 if $c->req->action eq 'logout';
     $c->stash->{template} = 'user/validate.tt';
+    return 0;
 }
 
 =head2 exit
