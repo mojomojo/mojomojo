@@ -25,7 +25,7 @@ tagged with a given tag.
 =head2 list
 
 This is a private action, and is dispatched from
-L</.list|MojoMojo::Controller::Page/list> when supplied with a tag
+L<E<47>.list|MojoMojo::Controller::Page/list> when supplied with a tag
 argument. It will list all pages tagged with the given tag.
 
 =cut
@@ -44,7 +44,7 @@ sub list : Private {
 =head2 recent
 
 This is a private action, and is dispatched from
-L</.recent|MojoMojo::Controller::Page/recent> when supplied with a tag
+L<E<47>.recent|MojoMojo::Controller::Page/recent> when supplied with a tag
 argument. It will list recent pages tagged with the given tag.
 
 =cut

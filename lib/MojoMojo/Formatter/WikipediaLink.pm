@@ -4,6 +4,8 @@ use warnings;
 use parent qw/MojoMojo::Formatter/;
 use utf8;
 
+=encoding utf8
+
 =head1 NAME
 
 MojoMojo::Formatter::WikipediaLink - Linked Wikipedia by writing {{wikipedia:<lang> <word>}}
