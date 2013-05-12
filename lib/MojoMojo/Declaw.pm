@@ -825,15 +825,15 @@ If $Defang->{tags_callback} exists, and HTML::Declaw has parsed a tag preset in 
 
 =over 4
 
-=item 0
+=item I<0>
 
 The current tag will not be defanged.
 
-=item 1
+=item I<1>
 
 The current tag will be defanged.
 
-=item 2
+=item I<2>
 
 The current tag will be processed normally by HTML:Defang as if there was no callback method specified.
 
@@ -867,15 +867,15 @@ See $AttributeHash for details of decoding.
 
 =over 4
 
-=item 0
+=item I<0>
 
 The current attribute will not be defanged.
 
-=item 1
+=item I<1>
 
 The current attribute will be defanged.
 
-=item 2
+=item I<2>
 
 The current attribute will be processed normally by HTML:Defang as if there was no callback method specified.
 
@@ -912,15 +912,15 @@ rather than just a scalar value. You can add attributes (remember to make it a s
 
 =over 4
 
-=item 0
+=item I<0>
 
 The current URL will not be defanged.
 
-=item 1
+=item I<1>
 
 The current URL will be defanged.
 
-=item 2
+=item I<2>
 
 The current URL will be processed normally by HTML:Defang as if there was no callback method specified.
 
