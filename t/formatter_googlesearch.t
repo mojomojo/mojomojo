@@ -50,7 +50,7 @@ my $content;
     MojoMojo::Formatter::GoogleSearch->format_content(\$content, $fake_c, undef);
     is(
         $content,
-        qq|see <a href="http://www.google.com/search?tbs=vid%3A1&q=MojoMojo">MojoMojo</a>\n|,
+        qq|see <a href="http://www.google.com/search?q=MojoMojo&tbs=vid%3A1">MojoMojo</a>\n|,
         'ASCII movie search',
     );
 }
@@ -60,7 +60,7 @@ my $content;
     MojoMojo::Formatter::GoogleSearch->format_content(\$content, $fake_c, undef);
     is(
         $content,
-        qq|see <a href="http://www.google.com/search?tbs=vid%3A1&q=Perl+MojoMojo">Perl MojoMojo</a>\n|,
+        qq|see <a href="http://www.google.com/search?q=Perl+MojoMojo&tbs=vid%3A1">Perl MojoMojo</a>\n|,
         'ASCII movie search (two keywords)',
     );
 }

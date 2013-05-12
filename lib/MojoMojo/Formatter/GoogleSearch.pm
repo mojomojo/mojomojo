@@ -106,7 +106,7 @@ sub process {
     }
 
     my $uri = URI->new($CONF->{$kind}->{base});
-    $uri->query_form( %param );
+    $uri->query_form( map {$_ => $param{$_} } sort keys %param );
 
     $line =~ s!$re!<a href="$uri">$keyword</a>!;
     $c->stash->{precompile_off} = 1;

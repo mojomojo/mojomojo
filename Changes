@@ -1,3 +1,7 @@
+1.10  2013-05-12
+
+  - Sort Google Search formatter params to prevent issues with hash ordering.
+
 1.09  2013-01-25 11:39
    - Explicit false return in auto to avoid running actions for disabled users.
 
