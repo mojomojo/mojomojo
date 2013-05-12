@@ -103,6 +103,7 @@ if (module_loaded) {
             "<" => "&lt;",
             ">" => "&gt;",
             "&" => "&amp;",
+            "^" => "&circ;",
             " "  => "&nbsp;",
             "\t" => "&nbsp;&nbsp;&nbsp;&nbsp;",
             "\n" => "\n",
