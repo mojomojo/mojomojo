@@ -90,7 +90,7 @@ sub include_rss {
         $content .= '<div class="feed">'
           . '<h3><a href="'.$entry->link.'">'
           . ($entry->title||"no title").'</a></h3>'
-          . ($entry->summary->body||"")."</div>\n";
+          . ($entry->summary->body||$entry->summary->body||"")."</div>\n";
         return $content if $count==$entries;
     }
     return $content;
