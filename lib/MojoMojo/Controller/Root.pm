@@ -60,7 +60,7 @@ sub default : Path {
 sub set_lang :Global {
     my ($self,$c) = @_;
     $c->session->{lang}=$c->req->params->{lang};
-    $c->res->redirect($c->req->params->{redir});
+    $c->res->redirect( $c->uri_for( $c->stash->{path} ) );
 }
 
 =head2 render
