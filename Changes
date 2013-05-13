@@ -1,3 +1,7 @@
+1.11
+  - Fix rss bug from prev release (#68)
+  - Enable admin created users by default. (#90)
+
 1.10  2013-05-13 00:52:00
 
   - Sort Google Search formatter params to fix issues with ordering. (#113)

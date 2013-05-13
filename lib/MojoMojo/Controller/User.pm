@@ -279,6 +279,7 @@ sub register : Global FormConfig {
         $form->model->update( $c->stash->{newuser} );
         $c->stash->{newuser}->insert();
         if ( $c->stash->{user} && $c->stash->{user}->is_admin ) {
+            $c->stash->{newuser}->update({active=>1});
             $c->res->redirect( $c->uri_for('/.admin/user') );
         }
         else {
@@ -350,8 +351,7 @@ sub validate : Global {
     my ( $self, $c, $user, $check ) = @_;
     $user = $c->model("DBIC::Person")->find( { login => $user } );
     if ( $user and $check eq md5_hex( $user->email . $c->pref('entropy') ) ) {
-        $user->active(1);
-        $user->update();
+        $user->update({active=>1});
         if ( $c->stash->{user} ) {
             $c->res->redirect(
                 $c->uri_for( '/', $c->stash->{user}->link, '.edit' ) );
