@@ -54,7 +54,7 @@ elements:
     constraints:
       - Required
       - type: Regex
-        regex: mojomojo
+        regex: mojomojo|catalyst
         message_loc: Go away spammer!
   - type: Submit
     name: submit
