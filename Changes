@@ -1,3 +1,5 @@
+  - Add valid answer to registration captcha
+
 1.11
   - Fix rss bug from prev release (#68)
   - Enable admin created users by default. (#90)
