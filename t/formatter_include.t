@@ -35,7 +35,7 @@ SKIP: {
     skip "set TEST_LIVE to run tests that requires a live Internet connection", 1
         if not $ENV{TEST_LIVE};
 
-    $content = "{{include http://github.com/marcusramberg/mojomojo/raw/85605d55158b1e6380457d4ddc31e34b7a77875a/Changes}}\n";
+    $content = "{{include http://github.com/mojomojo/mojomojo/raw/85605d55158b1e6380457d4ddc31e34b7a77875a/Changes}}\n";
     MojoMojo::Formatter::Include->format_content(\$content, $fake_c, undef);
     like($content, qr{0\.999001\s+2007\-08\-29\s16\:29\:00}, 'include Changes file from GitHub');
 }
