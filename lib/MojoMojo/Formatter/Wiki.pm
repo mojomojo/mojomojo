@@ -83,7 +83,7 @@ sub _generate_non_wikiword_check {
     # but why the question mark ('\?') at the end?
     my $non_wikiword_chars =
         ( join '', _explicit_start_delims() ) . $wikiword_escape . '\/' . '\?';
-    return qr{( ?<! [$non_wikiword_chars] )}x;
+    return qr{(?<! [$non_wikiword_chars])}x;
 }
 
 my $non_wikiword_check = _generate_non_wikiword_check();
