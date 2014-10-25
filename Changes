@@ -1,6 +1,7 @@
-  - Add valid answer to registration captcha
 
 1.11
+  - Apply patch from debian downstream to use current PSGI engine
+  - Add valid answer to registration captcha
   - Fix rss bug from prev release (#68)
   - Enable admin created users by default. (#90)
 

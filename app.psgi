@@ -4,6 +4,5 @@ use warnings;
 use lib 'lib';
 use MojoMojo;
 
-MojoMojo->setup_engine('PSGI');
-my $app = sub { MojoMojo->run(@_) };
+my $app = MojoMojo->psgi_app(@_);
 

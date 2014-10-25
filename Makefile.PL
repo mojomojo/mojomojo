@@ -18,7 +18,6 @@ requires(
     'Catalyst::Action::RenderView' => '0.07',
     'Catalyst::Authentication::Store::DBIx::Class' => '0.101',
     'Catalyst::Controller::HTML::FormFu'           => '0.03007',
-    'Catalyst::Engine::PSGI'                       => '0',
     'Catalyst::Model::DBIC::Schema'                => '0.01',
     'Catalyst::Plugin::Authentication'             => '0.10005',
     'Catalyst::Plugin::Cache'                      => 0.08,
