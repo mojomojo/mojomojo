@@ -1,5 +1,5 @@
 
-1.11
+1.11 2014-10-25 20:24:00
   - Apply patch from debian downstream to use current PSGI engine
   - Add valid answer to registration captcha
   - Fix rss bug from prev release (#68)
