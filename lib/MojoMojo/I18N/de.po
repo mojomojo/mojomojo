@@ -203,7 +203,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:99
 msgid "Attachment allowed by default"
-msgstr ""
+msgstr "Anhang standardmäßig erlaubt"
 
 #: lib/MojoMojo/Controller/Attachment.pm:58
 msgid "Attachment not found."
@@ -223,11 +223,11 @@ msgstr ""
 
 #: root/base/navbar.tt:12
 msgid "Authors"
-msgstr "Authoren"
+msgstr "Autoren"
 
 #: root/base/page/list.tt:50
 msgid "Authors in this path"
-msgstr ""
+msgstr "Autoren von Seiten unterhalb dieses Pfades"
 
 #: root/base/page/bottomnav.tt:24 root/base/page/bottomnav.tt:41
 msgid "Back in time"
@@ -271,7 +271,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:74
 msgid "Cache permission data"
-msgstr ""
+msgstr "Berechtigungsdaten zwischenspeichern"
 
 #: root/base/gallery/photo_info.tt:4
 msgid "Camera"
@@ -315,7 +315,7 @@ msgstr "Einstellungen des Wikis verändern"
 
 #: root/forms/admin/settings.yml:69
 msgid "Check permission on view"
-msgstr ""
+msgstr "Berechtigungen bei Anzeige prüfen"
 
 #: root/base/page/info.tt:51
 msgid "Children"
@@ -406,7 +406,7 @@ msgstr "Rolle hinzufügen"
 
 #: root/forms/admin/settings.yml:79
 msgid "Create allowed by default"
-msgstr ""
+msgstr "Erstellen standardmäßig erlaubt"
 
 #: root/base/page/edit.tt:62
 msgid "Create and View"
@@ -414,7 +414,7 @@ msgstr "Erstellen und anzeigen"
 
 #: root/base/page/info.tt:21
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #: root/base/edithelp/markdown.tt:150
 msgid "Creates"
@@ -447,7 +447,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:84
 msgid "Delete allowed by default"
-msgstr ""
+msgstr "Löschen standardmäßig erlaubt"
 
 #: root/base/page/bottomnav.tt:15
 msgid "Delete page"
@@ -471,7 +471,7 @@ msgstr "Kein eMail erhalten?"
 
 #: root/forms/admin/settings.yml:47
 msgid "Disable internal search (use Google)"
-msgstr ""
+msgstr "Interne Suche deaktivieren (Google benutzen)"
 
 #: root/base/navbar.tt:14
 msgid "Download a ZIP of this page and its subpages"
@@ -494,7 +494,7 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #:
-msgid "Edit Page"
+msgid "Edit page"
 msgstr "Seite bearbeiten"
 
 #: root/base/user/profile.tt:10
@@ -511,15 +511,15 @@ msgstr "Einstellungen"
 
 #: root/forms/admin/settings.yml:89
 msgid "Edit allowed by default"
-msgstr ""
+msgstr "Editieren standardmäßig erlaubt"
 
 #: root/base/this_page_link.tt:13 root/base/this_page_link.tt:15
 msgid "Edit page"
-msgstr ""
+msgstr "Seite bearbeiten"
 
 #: root/base/page/permissions.tt:46
 msgid "Edit permissions for this page"
-msgstr ""
+msgstr "Berechtigungen für diese Seite bearbeiten"
 
 #: root/base/page/recent.tt:45
 msgid "Edited by"
@@ -556,11 +556,11 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:50
 msgid "Enable graphical emoticons"
-msgstr ""
+msgstr "Grafische Emoticons verwenden"
 
 #: root/forms/admin/settings.yml:64
 msgid "Enforce login"
-msgstr ""
+msgstr "Anmeldung erzwingen"
 
 #:
 msgid "Enum list"
@@ -948,7 +948,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:29
 msgid "Main formatter"
-msgstr ""
+msgstr "Haupt-Format"
 
 #:
 msgid "Main heading"
@@ -1088,7 +1088,7 @@ msgstr "Diese Revision existiert nicht für "
 
 #: root/base/tag/cloud.tt:5 root/base/tag/cloud.tt:9
 msgid "No tags in use."
-msgstr ""
+msgstr "Keine Tags in Benutzung"
 
 #:
 msgid "Non-Existent Pages"
@@ -1165,7 +1165,7 @@ msgstr "Seite"
 
 #: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page Info"
-msgstr "Seiten-Informationen"
+msgstr "Seiteninformationen"
 
 #: root/base/edithelp/markdown.tt:26
 msgid "Page Name Here"
@@ -1174,7 +1174,7 @@ msgstr ""
 #. (page.path)
 #: root/base/page/info.tt:9
 msgid "Page info for x"
-msgstr "Seiten-Informationen von %1"
+msgstr "Seiteninformationen von %1"
 
 #: root/base/page/bottomnav.tt:18 root/base/page/bottomnav.tt:20
 msgid "Page meta information"
@@ -1182,7 +1182,7 @@ msgstr "Meta-Informationen dieser Seite anzeigen"
 
 #: root/forms/pageadmin/edit.yml:7
 msgid "Page text"
-msgstr "Seiten-Text"
+msgstr "Seitentext"
 
 #: root/base/navbar.tt:10
 msgid "Pages sorted by when they were last changed"
@@ -1206,17 +1206,13 @@ msgstr "Das Passwort muss zwischen 4 und 14 Zeichen lang sein"
 
 #. ($c->stash->{page}->name)
 #: lib/MojoMojo.pm:674
-msgid "Permission Denied to view x"
+msgid "Permission denied to view x"
 msgstr "Keine Berechtigung um %1 anzusehen"
-
-#:
-msgid "Permission Denied to x x"
-msgstr "Zugriff verweigert zu %1 %2"
 
 #. ([ $loc_permtocheck, $name ])
 #: lib/MojoMojo/Controller/PageAdmin.pm:179
 msgid "Permission denied to x x"
-msgstr ""
+msgstr "Zugriff verweigert für Aktion '%1' auf Seite '%2'"
 
 #: root/base/page/editbar.tt:11 root/base/page/editbar.tt:15 root/base/page/editbar.tt:5
 msgid "Permissions"
@@ -1431,7 +1427,7 @@ msgstr "Rechtsbündig"
 
 #: root/base/page/permissions.tt:33
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 #: root/base/admin/role_form.tt:13
 msgid "Role Members"
@@ -1569,7 +1565,7 @@ msgstr "Name der Seite"
 
 #: root/base/page/bottomnav.tt:70
 msgid "Site settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: lib/MojoMojo/Controller/User.pm:451
 msgid "Some fields are invalid. Please correct them and try again:"
@@ -1716,7 +1712,7 @@ msgstr ""
 
 #: root/forms/admin/settings.yml:26
 msgid "Theme name"
-msgstr ""
+msgstr "Aktuelles Theme"
 
 #:
 msgid "This is a pre formatted code block"
@@ -1772,7 +1768,7 @@ msgstr "Upload"
 
 #: root/forms/admin/settings.yml:40
 msgid "Use captcha"
-msgstr ""
+msgstr "CAPTCHA benutzen"
 
 #: root/base/page/permissions.tt:77
 msgid "Use inherited permissions"
@@ -1830,7 +1826,7 @@ msgstr "Änderungen anzeigen"
 
 #: root/forms/admin/settings.yml:94
 msgid "View allowed by default"
-msgstr ""
+msgstr "Anzeigen standardmäßig erlaubt"
 
 #: root/base/gallery.tt:19
 msgid "View as files"
