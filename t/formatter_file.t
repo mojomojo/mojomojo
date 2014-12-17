@@ -48,7 +48,7 @@ ok(! MojoMojo::Formatter::File->checkfile("$dir/test.txt", $c));
 # Check good text file
 $content = "<p>{{file Text $dir/test.txt}}</p>";
 $ret = MojoMojo::Formatter::File->format_content(\$content, $c);
-like($$ret, qr{<div class="formatter_txt">\n<p>Text file</p> <p><a href="http://mojomojo.org/">http://mojomojo.org</a></p></div>}s, "Text file is formated");
+like($$ret, qr{<div class="formatter_txt">\n<p>Text file</p> <p><a href="http://mojomojo.org">http://mojomojo.org</a></p></div>}s, "Text file is formated");
 
 # check checkfile with file not include in whitelist
 $ret = MojoMojo::Formatter::File->checkfile("/etc/passwd", $c);
