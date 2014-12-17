@@ -75,6 +75,7 @@ requires(
     'URI::Find'                                    => 0,
     'YAML'                                         => '0.36',
     'Term::Prompt'                                 => 0,
+    'Text::Emoticon::MSN'                          => 0,
 );
 
 feature 'Create new database',           'SQL::Translator'                  => '0.09006';
