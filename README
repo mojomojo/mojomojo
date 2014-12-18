@@ -1,6 +1,0 @@
-Installation: See INSTALL or lib/MojoMojo/Installation.pod
-
-After Installation: Run script/mojomojo_server.pl to test the application.
-
-License: This is free software. You can redistribute it and/or modify 
-it under the same terms as perl itself.
