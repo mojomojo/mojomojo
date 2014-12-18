@@ -75,6 +75,7 @@ requires(
     'URI::Find'                                    => 0,
     'YAML'                                         => '0.36',
     'Term::Prompt'                                 => 0,
+    'Text::Emoticon::MSN'                          => 0,
 );
 
 feature 'Create new database',           'SQL::Translator'                  => '0.09006';
@@ -110,7 +111,7 @@ test_requires 'WWW::Mechanize::TreeBuilder'    => '1.10000';
 tests(join ' ', (glob('t/*.t'), glob('t/*/*.t')));
 
 catalyst;
-catalyst_par_script('script/mojomojo_server.pl');
+#catalyst_par_script('script/mojomojo_server.pl');
 
 install_script glob('script/*.pl');
 auto_install;
