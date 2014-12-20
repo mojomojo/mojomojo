@@ -1,6 +1,6 @@
 # MojoMojo -- A Catalyst & DBIx::Class powered Wiki
 
-[![Build Status](https://travis-ci.org/simonaw/mojomojo.svg?branch=master)](https://travis-ci.org/simonaw/mojomojo)
+[![Build Status](https://travis-ci.org/mojomojo/mojomojo.svg?branch=master)](https://travis-ci.org/mojomojo/mojomojo)
 
 Website located at http://mojomojo.org/
 

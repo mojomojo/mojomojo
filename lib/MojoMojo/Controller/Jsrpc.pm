@@ -51,7 +51,12 @@ formatted for inclusion in a vertical tree navigation menu.
 
 sub child_menu : Local {
     my ( $self, $c, $page_id ) = @_;
-    $c->stash->{parent_page} = $c->model("DBIC::Page")->find( $c->req->params->{page_id} );
+
+    # DBIC complains if find argument is not numeric
+    if ( $c->req->params->{page_id} =~ /^\d+$/ ) {
+      $c->stash->{parent_page} = $c->model("DBIC::Page")->find( $c->req->params->{page_id} );
+    }
+
     $c->stash->{template}    = 'child_menu.tt';
 }
 

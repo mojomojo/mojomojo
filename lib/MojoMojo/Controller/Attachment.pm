@@ -158,6 +158,11 @@ Find and stash an attachment.
 
 sub attachment : Chained CaptureArgs(1) {
     my ( $self, $c, $att ) = @_;
+
+    # DBIC complains if find argument is not numeric
+    if ( $att !~ /^\d+$/ ) {
+      $c->detach('default');
+    }
     $c->stash->{att} = $c->model("DBIC::Attachment")->find($att)
         or $c->detach('default');
 }
