@@ -176,8 +176,8 @@ sub normalize_name {
     $name =~ s/\s+/_/g;
     $name = lc($name);
     return (
-        URI::Escape::uri_unescape($name_orig),
-        URI::Escape::uri_unescape($name),
+      Encode::decode_utf8(URI::Escape::uri_unescape(Encode::encode_utf8($name_orig))),
+      Encode::decode_utf8(URI::Escape::uri_unescape(Encode::encode_utf8($name)))
     );
 }
 
