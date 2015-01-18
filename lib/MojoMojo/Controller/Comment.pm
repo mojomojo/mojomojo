@@ -33,7 +33,7 @@ sub comment : Global FormConfig {
                 page   => $c->stash->{page}->id,
                 poster => $c->stash->{user}->id,
                 posted => DateTime->now(),
-                body   => $c->req->param('body'),
+                body   => scalar $c->req->param('body'),
             }
         );
     }
