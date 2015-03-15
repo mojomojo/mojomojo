@@ -15,8 +15,7 @@ my $attrs = {
     no_comments => 1
 };
 my $db_dir = 't/var';
-my $db_file = "$db_dir/mojomojo.db";
-
+my $db_file = "$db_dir/mojomojo-$$.db";
 
 =head1 NAME
 
