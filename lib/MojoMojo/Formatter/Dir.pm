@@ -59,7 +59,7 @@ sub format_content {
   $$content = "";
   foreach my $line (@lines) {
 
-    if ( $line =~ m|<p>{{dir\s*(\S*)\s*(\S*)}}</p>| ) {
+    if ( $line =~ m|<p>\{\{dir\s*(\S*)\s*(\S*)}}</p>| ) {
       my $dir     = $1;
       my $exclude = $2;
 

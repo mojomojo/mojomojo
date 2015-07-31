@@ -72,7 +72,7 @@ like($$ret, qr|Can not read 't/var/files//bla.txt' !|s, "Can not read file");
 # format with no plugin
 $content = '<p>{{file $dir/test.txt}}</p>';
 $ret = MojoMojo::Formatter::File->format_content(\$content, $c);
-like($$ret, qr/{{file \$dir\/test.txt}}/s, "No plugin is provided");
+like($$ret, qr/\{\{file \$dir\/test.txt}}/s, "No plugin is provided");
 
 
 # Check bad plugin

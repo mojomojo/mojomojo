@@ -17,7 +17,7 @@ BEGIN {
 my $fake_c = FakeCatalystObject->new;
 my ($content);
 
-content_like '/.jsrpc/render?content=%7B%7Bhttp://localhost/.rss%7D%7D', qr'{{http://localhost/.rss}}',
+content_like '/.jsrpc/render?content=%7B%7Bhttp://localhost/.rss%7D%7D', qr'\{\{http://localhost/.rss}}',
     'invalidate the old "syntax"';
 
 SKIP: {
