@@ -65,7 +65,7 @@ sub format_content {
     while (
         # replace the {{toc ..}} markup tag and parse potential parameters
         $$content =~ s[
-            {{ toc (?:$toc_params_RE)? \s* \/? }}
+            \{\{ toc (?:$toc_params_RE)? \s* \/? }}
         ][<div class="toc">\n<!--mojomojoTOCwillgohere-->\n</div>]ix) {
         my ($toc_h_min, $toc_h_max);
         $toc_h_min = $1 || 1;

@@ -105,7 +105,7 @@ Returns a regular expression for the given tag between matching double braces.
 sub gen_re {
     my ($self, $tag, $args)=@_;
     $args ||= '';
-    return qr[{{\s*$tag\s*$args\s*}}];
+    return qr[\{\{\s*$tag\s*$args\s*}}];
 }
 
 

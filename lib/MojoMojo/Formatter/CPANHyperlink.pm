@@ -62,7 +62,7 @@ sub format_content {
     my $section = qr[ .*? (?= \s* /? }} ) ]x;
 
     $$content =~ s[
-        {{cpan \s+ ($cpan_module) (?: / ($section))? \s* \/? }}
+        \{\{cpan \s+ ($cpan_module) (?: / ($section))? \s* \/? }}
     ]  [
         my ($module, $section) = ($1, $2);
         if (defined $section) {

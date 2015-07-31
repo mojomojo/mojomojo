@@ -97,7 +97,7 @@ sub format_content {
   my $is_image = 0;
   foreach my $line (@lines) {
 
-    if ( $line =~ m|{{\s*file\s*(\w+)\s*(.*)}}.*| ) {
+    if ( $line =~ m|\{\{\s*file\s*(\w+)\s*(.*)}}.*| ) {
       my $plugin=$1; # DocBook, Pod, ...
       my $file=$2;   # File, Attachment
 

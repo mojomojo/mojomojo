@@ -139,7 +139,7 @@ my $Executables =
   . '|vbs?|vbe|hta|shb|shs|hlp|chm|eml|wsf|wsh|js'
   . '|asx|wm.|mdb|mht|msi|msp|cpl|lib|reg))';
 my $SrcBanStd =
-qr/^([A-Za-z]*script|.*\&{|mocha|about|opera|mailto:|hcp:|\/(dev|proc)|\\|file|smb|cid:${Executables}(@|\?|$))/i;
+qr/^([A-Za-z]*script|.*\&\{|mocha|about|opera|mailto:|hcp:|\/(dev|proc)|\\|file|smb|cid:${Executables}(@|\?|$))/i;
 
 my %Rules = (
 
@@ -162,7 +162,7 @@ my %Rules = (
     "frame"       => qr/^(void|above|below|hsides|vsides|lhs|rhs|box|border)$/i,
 
     # href: Not javascript, vbs or vbscript
-    "href" => qr/^([A-Za-z]*script|.*\&{|mocha|hcp|opera|about|smb|\/dev\/)/i,
+    "href" => qr/^([A-Za-z]*script|.*\&\{|mocha|hcp|opera|about|smb|\/dev\/)/i,
     "usemap-href" => qr/^#[A-Za-z0-9_.-]+$/, # this is not really a href at all!
     "input-size" =>
       qr/^(\d{1,4})$/,    # some browsers freak out with very large widgets
@@ -199,7 +199,7 @@ qr/^(none,a,i,upper-alpha,lower-alpha,upper-roman,lower-roman,decimal,disc,squar
     "style" => qr/^.*$/s,
 
 #kc In addition to this, we could strip all 'javascript:|expression|' etc. from all attributes(in attribute_cleanup())
-    "stylesheet" => qr/expression|eval|script:|mocha:|\&{|\@import/i
+    "stylesheet" => qr/expression|eval|script:|mocha:|\&\{|\@import/i
     , # stylesheets are forbidden if Embedded => 1.  css positioning can be allowed in an iframe.
       # NB see also `process_stylesheet' below
     "style-type"   => qr/script|mocha/i,
