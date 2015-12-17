@@ -124,6 +124,7 @@ sub init_schema {
             view_allowed             => 1,
             attachment_allowed       => 0,
         },
+        'encoding' => undef,
         'View::Email' => { sender => { mailer => 'Test' } },
         'system_mail' => 'admin@localhost',
     };
