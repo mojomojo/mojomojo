@@ -3,4 +3,5 @@
 
 User-agent: *
 Disallow: /.jsrpc/
+Disallow: /*.inline$
 Allow: /
