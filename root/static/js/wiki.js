@@ -313,6 +313,7 @@ var fetch_preview = function() {
         success: function(r) {
             $('#content_preview').html(r);
             $('#editspinner').hide();
+            Prism.highlightAll(false, null);
         }
     })
   }

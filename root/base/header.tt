@@ -11,6 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="powered by" content="MojoMojo [%c.VERSION%]" />
     <link href="[% c.uri_for_static('css/jquery.autocomplete.css')%]" type="text/css" rel="stylesheet" />
+    <link href="[% c.uri_for_static('css/prism.css')%]" type="text/css" rel="stylesheet" />
     <link rel="alternate" type="application/atom+xml" title="Atom" href="[%c.uri_for('atom')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Headlines" href="[%c.uri_for('rss')%]" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Full" href="[%c.uri_for('rss_full')%]" />
@@ -31,6 +32,7 @@
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.editinplace.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.autocomplete.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/jquery.cookies.2.0.1.min.js')%]"></script>
+    <script type="text/javascript" src="[%c.uri_for_static('js/prism.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/wiki.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.js')%]"></script>
     <script type="text/javascript" src="[%c.uri_for_static('js/swfupload.queue.js')%]"></script>

@@ -2,6 +2,18 @@ package MojoMojo::Formatter::Markdown;
 
 use parent qw/MojoMojo::Formatter/;
 
+my %replace_map = (
+  '&' => '&amp;',
+  '<' => '&lt;',
+  '>' => '&gt;'
+);
+
+sub esc {
+  my $source = shift;
+  $source =~ s/([&<>])/$replace_map{$1}/eg;
+  return $source;
+}
+
 my $markdown;
 eval "use Text::MultiMarkdown";
 unless ($@) {
@@ -54,6 +66,7 @@ sub main_format_content {
     my ( $class, $content ) = @_;
     return unless $markdown;
 
+    $$content =~ s/```(.+?)\n(.+?)```/"<pre><code class=\"language-$1\">\n".esc($2)."<\/code><\/pre>";/seg;
     $$content = $markdown->markdown($$content);
 }
 
