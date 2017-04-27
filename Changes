@@ -1,4 +1,4 @@
-1.12 Not released
+1.12 2017-04-17 15:16:50
   - Switch syntax highlighting from Kate to prism.js (simonaw)
   - Add missing dependencies, fix for tag deletion (simonaw)
 
