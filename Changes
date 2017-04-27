@@ -1,3 +1,4 @@
+  - Switch syntax highlighting from Kate to prism.js (simonaw)
   - Add missing dependencies, fix for tag deletion (simonaw)
   
 1.11 2014-10-25 20:24:00
