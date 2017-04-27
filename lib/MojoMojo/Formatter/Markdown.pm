@@ -2,18 +2,6 @@ package MojoMojo::Formatter::Markdown;
 
 use parent qw/MojoMojo::Formatter/;
 
-my %replace_map = (
-  '&' => '&amp;',
-  '<' => '&lt;',
-  '>' => '&gt;'
-);
-
-sub esc {
-  my $source = shift;
-  $source =~ s/([&<>])/$replace_map{$1}/eg;
-  return $source;
-}
-
 my $markdown;
 eval "use Text::MultiMarkdown";
 unless ($@) {
@@ -42,6 +30,26 @@ This formatter processes content using L<Text::MultiMarkdown> This is a
 syntax for writing human-friendly formatted text.
 
 =head1 METHODS
+
+
+=head2 esc
+
+Escape HTML special characters given as a replace map.
+
+=cut
+
+sub esc {
+  my %replace_map = (
+    '&' => '&amp;',
+    '<' => '&lt;',
+    '>' => '&gt;'
+  );
+
+  my $source = shift;
+  $source =~ s/([&<>])/$replace_map{$1}/eg;
+  return $source;
+}
+
 
 =head2 main_format_content
 
