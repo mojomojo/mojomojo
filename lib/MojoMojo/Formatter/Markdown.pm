@@ -31,6 +31,26 @@ syntax for writing human-friendly formatted text.
 
 =head1 METHODS
 
+
+=head2 esc
+
+Escape HTML special characters given as a replace map.
+
+=cut
+
+sub esc {
+  my %replace_map = (
+    '&' => '&amp;',
+    '<' => '&lt;',
+    '>' => '&gt;'
+  );
+
+  my $source = shift;
+  $source =~ s/([&<>])/$replace_map{$1}/eg;
+  return $source;
+}
+
+
 =head2 main_format_content
 
 Calls the formatter. Takes a ref to the content as well as the
@@ -54,6 +74,7 @@ sub main_format_content {
     my ( $class, $content ) = @_;
     return unless $markdown;
 
+    $$content =~ s/```(.+?)\n(.+?)```/"<pre><code class=\"language-$1\">\n".esc($2)."<\/code><\/pre>";/seg;
     $$content = $markdown->markdown($$content);
 }
 
