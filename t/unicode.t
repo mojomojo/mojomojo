@@ -2,10 +2,16 @@
 # Unicode tests: Unicode text in page content, wiki links, tags etc.
 use strict;
 use warnings;
+use utf8;
+
 use Test::More tests => 9;
 use HTTP::Request::Common;
 use Test::Differences;
-use utf8;
+use Encode;
+
+binmode Test::More->builder->output,         ':encoding(utf-8)';
+binmode Test::More->builder->failure_output, ':encoding(utf-8)';
+binmode Test::More->builder->todo_output,    ':encoding(utf-8)';
 
 my $original_formatter;    # current formatter set up in mojomojo.db
 my $c;                     # the Catalyst object of this live server
@@ -41,14 +47,17 @@ ok( $c->pref( main_formatter => 'MojoMojo::Formatter::Markdown' ),
 $test = "basic Unicode: page content";
 $content = 'ებრაული ენა (עברית, ივრით), განეკუთვნება სემიტურ ენათა ქანაანურ ჯგუფს.';
 $mech->post_ok('/.jsrpc/render', { content => $content });
-$mech->content_is('<p>ებრაული ენა (עברית, ივრით), განეკუთვნება სემიტურ ენათა ქანაანურ ჯგუფს.</p>' . "\n", $test);
-
+$mech->content_is(
+    Encode::encode("utf-8", "<p>ებრაული ენა (עברית, ივრით), განეკუთვნება სემიტურ ენათა ქანაანურ ჯგუფს.</p>\n"),
+    $test
+);
 
 #-------------------------------------------------------------------------------
 $test = 'Unicode wikilinks';
 my $unicode_string = 'განეკუთვნება';
 $content = "[[$unicode_string]]";
 $mech->post('/.jsrpc/render', { content => $content });
-$mech->content_is(<<"HTML", $test);
-<p><span class="newWikiWord"><a title="Not found. Click to create this page." href="/$unicode_string.edit">$unicode_string?</a></span></p>
-HTML
+$mech->content_is(
+    Encode::encode("utf-8", qq{<p><span class="newWikiWord"><a title="Not found. Click to create this page." href="/$unicode_string.edit">$unicode_string?</a></span></p>\n}),
+    $test
+);
