@@ -1,6 +1,7 @@
-1.12 2017-04-17 15:16:50
+1.12 2017-05-13 15:46:50
   - Switch syntax highlighting from Kate to prism.js (simonaw)
   - Add missing dependencies, fix for tag deletion (simonaw)
+  - Remove obsolete unicode plugin
 
 1.11 2014-10-25 20:24:00
   - Apply patch from debian downstream to use current PSGI engine
