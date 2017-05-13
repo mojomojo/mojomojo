@@ -12,7 +12,6 @@ use Catalyst qw/
   Session::State::Cookie
   Static::Simple
   SubRequest
-  Unicode
   I18N
   Setenv
   /;
