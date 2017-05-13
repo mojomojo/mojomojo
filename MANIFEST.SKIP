@@ -13,6 +13,7 @@
 \bpm_to_blib$
 \bblibdirs$
 ^MANIFEST\.SKIP$
+MYMETA\.
 ^mojomojo\.db$
 ^mojomojo_local\.conf$
 
