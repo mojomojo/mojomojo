@@ -10,7 +10,7 @@ dab
 
 =head1 DESCRIPTION
 
-DBIx Versionning see on catapulse.org http://www.catapulse.org/articles/view/75
+DBIx Versioning see on catapulse.org http://www.catapulse.org/articles/view/75
 
 =cut
 

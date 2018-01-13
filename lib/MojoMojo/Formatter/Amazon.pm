@@ -25,7 +25,7 @@ This is an url formatter. it takes urls containing amazon and
 in the amazon web store.
 
 It automatically handles books/movies/dvds and formats them as
-apropriate. You can also pass 'small' as a parameter after the
+appropriate. You can also pass 'small' as a parameter after the
 url, and it will make a thumb link instead of a blurb.
 
 =head1 METHODS

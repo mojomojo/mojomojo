@@ -25,8 +25,8 @@ Derived from HTML::Defang version 1.01.
   # Callback for custom handling specific HTML tags
   sub DefangTagsCallback {
     my ($Self, $Defang, $OpenAngle, $lcTag, $IsEndTag, $AttributeHash, $CloseAngle, $HtmlR, $OutR) = @_;
-    return 1 if $lcTag eq 'br';    # Explicitly defang this tag, eventhough safe
-    return 0 if $lcTag eq 'embed'; # Explicitly whitelist this tag, eventhough unsafe
+    return 1 if $lcTag eq 'br';    # Explicitly defang this tag, even though safe
+    return 0 if $lcTag eq 'embed'; # Explicitly whitelist this tag, even though unsafe
     return 2 if $lcTag eq 'img';   # I am not sure what to do with this tag, so process as HTML::Defang normally would
   }
 
@@ -1427,7 +1427,7 @@ Any space after the tag, but before attributes.
 
 =item I<$Attributes>
 
-A reference to an array of the attributes and their values, including any surrouding spaces. Each element of the array is added by 'push' calls like below.
+A reference to an array of the attributes and their values, including any surrounding spaces. Each element of the array is added by 'push' calls like below.
 
   push @$Attributes, [ $AttributeName, $SpaceBeforeEquals, $EqualsAndSubsequentSpace, $QuoteChar, $AttributeValue, $QuoteChar, $SpaceAfterAtributeValue ];
 
@@ -2261,7 +2261,7 @@ Kurian Jose Aerthail E<lt>cpan@kurianja.fastmail.fmE<gt>. Thanks to Rob Mueller 
 
 =head1 COPYRIGHT AND LICENSE
 
-HTML::Declaw is a modifed version of HTML::Defang which has the following license:
+HTML::Declaw is a modified version of HTML::Defang which has the following license:
 
 Copyright (C) 2003-2009 by The FastMail Partnership
 
