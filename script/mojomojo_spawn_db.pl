@@ -20,10 +20,10 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/../lib";
 use MojoMojo::Schema;
-use Config::JFDI;
+use Config::ZOMG;
 use Getopt::Long;
 
-my $jfdi   = Config::JFDI->new(name => "MojoMojo");
+my $jfdi   = Config::ZOMG->new(name => "MojoMojo");
 my $config = $jfdi->get;
 
 my ($dsn, $user, $password, $unicode_option);

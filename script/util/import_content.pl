@@ -82,9 +82,9 @@ Replace the contents of the last version of a page with the content from a file.
 
 if (!$dsn) {
     # no DSN passed via the command line; attempting to read one from the config file
-    require Config::JFDI;
+    require Config::ZOMG;
     
-    my $config = Config::JFDI->new(name => "MojoMojo")->get;
+    my $config = Config::ZOMG->new(name => "MojoMojo")->get;
     die "Couldn't read config file" if not keys %{$config};
     
     eval {
