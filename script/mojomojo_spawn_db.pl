@@ -24,7 +24,7 @@ use Config::ZOMG;
 use Getopt::Long;
 
 my $jfdi   = Config::ZOMG->new(name => "MojoMojo");
-my $config = $jfdi->get;
+my $config = $jfdi->load;
 
 my ($dsn, $user, $password, $unicode_option);
 

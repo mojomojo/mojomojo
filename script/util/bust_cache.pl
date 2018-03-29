@@ -41,7 +41,7 @@ if (!$dsn) {
     # no DSN passed via the command line; attempting to read one from the config file
     require Config::ZOMG;
     
-    my $config = Config::ZOMG->new(name => "MojoMojo")->get;
+    my $config = Config::ZOMG->new(name => "MojoMojo")->load;
     die "Couldn't read config file" if not keys %{$config};
     
     eval {

@@ -23,7 +23,7 @@ use Config::ZOMG;
 use Term::Prompt;
 
 my $jfdi = Config::ZOMG->new(name => "MojoMojo");
-my $config = $jfdi->get;
+my $config = $jfdi->load;
 
 my ($dsn, $user, $pass) = @ARGV;
 eval {
