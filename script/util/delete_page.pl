@@ -8,10 +8,10 @@ use warnings;
 use FindBin;
 use lib "$FindBin::Bin/../../lib";
 use MojoMojo::Schema;
-use Config::JFDI;
+use Config::ZOMG;
 use Term::Prompt;
-my $jfdi = Config::JFDI->new(name => "MojoMojo");
-my $config = $jfdi->get;
+my $jfdi = Config::ZOMG->new(name => "MojoMojo");
+my $config = $jfdi->load;
 my ($dsn, $user, $pass) = @ARGV;
 eval {
     if (!$dsn) {

@@ -33,7 +33,7 @@ requires(
     'Catalyst::View::Email'                        => '0.14',
     'Catalyst::View::Email::Template'              => 0,
     'Config::General'                              => 0,
-    'Config::JFDI'                                 => 0,
+    'Config::ZOMG'                                 => 0,
     'Crypt::CBC'                                   => '2.12',     # FormFu
     'Data::Page'                                   => '2.00',
     'DateTime'                                     => '0.28',
