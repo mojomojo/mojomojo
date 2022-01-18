@@ -6,7 +6,7 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/../../lib";
 use MojoMojo::Schema;
-use Config::JFDI;
+use Config::ZOMG;
 use MojoMojo::Formatter::File;
 use Path::Class ();
 use Getopt::Long;
@@ -37,8 +37,8 @@ $DIR =~ s/~/$ENV{HOME}/;
 #-----------------------------------------------------------------------------#
 # Connect to database
 #-----------------------------------------------------------------------------#
-my $jfdi = Config::JFDI->new(name => "MojoMojo");
-my $config = $jfdi->get;
+my $jfdi = Config::ZOMG->new(name => "MojoMojo");
+my $config = $jfdi->load;
 
 my ($dsn, $user, $pass) = @ARGV;
 eval {
